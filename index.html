@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The SCIM Tax Index: Open dataset of SaaS user-provisioning pricing</title>
+  <meta name="description" content="Open dataset of ~300 SaaS vendors and whether they gate SCIM (automated user provisioning) behind enterprise plans. CC-BY 4.0. Updated annually.">
+  <link rel="canonical" href="https://scimtax.org/">
+  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+  <meta property="og:title" content="The SCIM Tax Index">
+  <meta property="og:description" content="Open dataset of ~300 SaaS vendors and whether they gate SCIM user provisioning behind enterprise plans. CC-BY 4.0.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://scimtax.org/">
+  <meta property="og:image" content="https://scimtax.org/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The SCIM Tax Index">
+  <meta name="twitter:description" content="Open dataset of ~300 SaaS vendors and whether they gate SCIM behind enterprise plans.">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    "name": "The SCIM Tax Index",
+    "alternateName": "SCIM Tax",
+    "description": "Open dataset surveying ~300 SaaS vendors on whether they gate SCIM (System for Cross-domain Identity Management) user provisioning behind enterprise plans, and what it costs.",
+    "url": "https://scimtax.org/",
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "isAccessibleForFree": true,
+    "keywords": ["SCIM", "user provisioning", "SaaS pricing", "identity governance", "SCIM tax", "SSO tax", "lifecycle management"],
+    "creator": {
+      "@type": "Organization",
+      "name": "Iden",
+      "url": "https://idenhq.com"
+    },
+    "distribution": [
+      { "@type": "DataDownload", "encodingFormat": "text/csv", "contentUrl": "https://scimtax.org/data.csv" },
+      { "@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": "https://scimtax.org/data.json" }
+    ],
+    "datePublished": "2026-04",
+    "dateModified": "2026-04"
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ─── Tokens ────────────────────────────── */
+    :root {
+      --black:    #0f0f0f;
+      --n700:     #374151;
+      --n500:     #6b7280;
+      --n400:     #9ca3af;
+      --n300:     #d1d5db;
+      --n200:     #e5e7eb;
+      --n100:     #f3f4f6;
+      --n50:      #f9fafb;
+      --white:    #fff;
+      --green:    #16a34a;
+      --amber:    #b45309;
+      --slate:    #64748b;
+
+      /* Type scale — 3 sizes only */
+      --text-xs:   12px;   /* labels, captions, badges */
+      --text-sm:   14px;   /* body, table, controls    */
+      --text-lg:   26px;   /* page h1                  */
+
+      /* Stat number separate since it's display */
+      --text-stat: 20px;
+    }
+
+    /* ─── Base ──────────────────────────────── */
+    html { font-size: 16px; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: var(--text-sm);
+      font-weight: 400;
+      line-height: 1.5;
+      color: var(--black);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    a:hover { text-decoration: underline; text-decoration-color: var(--n300); }
+
+    /* ─── Layout ────────────────────────────── */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ─── Header ────────────────────────────── */
+    header {
+      border-bottom: 1px solid var(--n200);
+      padding: 16px 0;
+    }
+    header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .site-title {
+      font-size: var(--text-sm);
+      font-weight: 500;
+    }
+    .header-meta {
+      font-size: var(--text-xs);
+      color: var(--n500);
+    }
+
+    /* ─── Hero ──────────────────────────────── */
+    .hero { padding: 36px 0 28px; }
+    .hero h1 {
+      font-size: var(--text-lg);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .hero p {
+      font-size: var(--text-sm);
+      line-height: 1.5;
+      color: var(--n700);
+    }
+    .hero strong { color: var(--black); font-weight: 500; }
+    .hero-sub {
+      font-size: var(--text-xs);
+      color: var(--n500);
+      margin-top: 14px;
+    }
+    .hero-sub a { color: var(--n700); text-decoration: underline; text-decoration-color: var(--n300); }
+    .hero-sub a:hover { color: var(--black); text-decoration-color: var(--black); }
+
+    /* ─── Methodology ───────────────────────── */
+    .methodology { padding: 36px 0 0; }
+    .meth-prose {
+      border: 1px solid var(--n200);
+      padding: 20px 24px;
+      font-size: var(--text-sm);
+      color: var(--n700);
+      line-height: 1.6;
+    }
+    .meth-prose p + p { margin-top: 12px; }
+    .meth-prose strong { color: var(--black); font-weight: 500; }
+    .meth-prose a { color: var(--black); text-decoration: underline; text-decoration-color: var(--n300); }
+    .meth-status { display: inline-flex; align-items: center; gap: 4px; color: var(--black); font-weight: 500; white-space: nowrap; }
+    .meth-status .dot { width: 6px; height: 6px; border-radius: 50%; }
+    .meth-next {
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid var(--n200);
+      font-size: var(--text-xs);
+      color: var(--n500);
+    }
+
+    /* ─── Cite & Download ───────────────────── */
+    .cite-section { padding: 0 0 60px; }
+    .cite-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--n200);
+      border: 1px solid var(--n200);
+    }
+    .cite-card {
+      background: var(--white);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .cite-heading {
+      font-size: var(--text-xs);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--n400);
+    }
+    .cite-card p { font-size: var(--text-xs); color: var(--n700); line-height: 1.5; }
+    .cite-code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+      background: var(--n50);
+      border: 1px solid var(--n200);
+      padding: 10px 12px;
+      color: var(--black);
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .cite-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+    .cite-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      height: 28px;
+      padding: 0 10px;
+      border: 1px solid var(--n300);
+      background: var(--white);
+      font-size: var(--text-xs);
+      font-family: inherit;
+      color: var(--n700);
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .cite-btn:hover { border-color: var(--black); color: var(--black); text-decoration: none; }
+
+    /* ─── Stats ─────────────────────────────── */
+    .stats-wrap { padding: 0; }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border: 1px solid var(--n200);
+      margin-top: 28px;
+    }
+    .stat {
+      padding: 16px 20px;
+      border-right: 1px solid var(--n200);
+    }
+    .stat:last-child { border-right: none; }
+    .stat-n {
+      font-size: var(--text-stat);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+    .stat-l {
+      font-size: var(--text-xs);
+      color: var(--n500);
+      line-height: 1.5;
+      margin-top: 2px;
+    }
+
+    /* ─── Callouts ──────────────────────────── */
+    .callouts { padding: 36px 0; }
+    .callout-label {
+      font-size: var(--text-xs);
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--n400);
+      margin-bottom: 16px;
+    }
+    .callout-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--n200);
+      border: 1px solid var(--n200);
+    }
+    .callout-card {
+      background: var(--white);
+      padding: 20px;
+    }
+    .callout-eyebrow {
+      font-size: var(--text-xs);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--n400);
+      margin-bottom: 8px;
+    }
+    .callout-headline {
+      font-size: var(--text-sm);
+      font-weight: 600;
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+    .callout-body {
+      font-size: var(--text-xs);
+      color: var(--n700);
+      line-height: 1.5;
+    }
+
+    /* ─── Table section ─────────────────────── */
+    .table-section { padding: 36px 0 60px; }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .search-wrap {
+      position: relative;
+      flex: 0 0 200px;
+    }
+    .search-icon {
+      position: absolute;
+      left: 9px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--n400);
+      pointer-events: none;
+    }
+    .search-input {
+      width: 100%;
+      height: 30px;
+      padding: 0 10px 0 30px;
+      border: 1px solid var(--n300);
+      font-size: var(--text-xs);
+      font-family: inherit;
+      color: var(--black);
+      background: var(--white);
+      outline: none;
+      border-radius: 0;
+    }
+    .search-input::placeholder { color: var(--n400); }
+    .search-input:focus { border-color: var(--black); }
+
+    .filter-group { display: flex; gap: 4px; flex-wrap: wrap; }
+
+    .filter-btn {
+      height: 30px;
+      padding: 0 10px;
+      border: 1px solid var(--n300);
+      background: var(--white);
+      font-size: var(--text-xs);
+      font-family: inherit;
+      color: var(--n500);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      border-radius: 0;
+      white-space: nowrap;
+      transition: border-color 0.1s, color 0.1s, background 0.1s;
+    }
+    .filter-btn:hover { border-color: var(--n500); color: var(--black); }
+    .filter-btn.active { background: var(--black); border-color: var(--black); color: var(--white); }
+    .filter-btn .cnt { opacity: 0.6; }
+
+    .btn-export {
+      margin-left: auto;
+      height: 30px;
+      padding: 0 10px;
+      border: 1px solid var(--n300);
+      background: var(--white);
+      font-size: var(--text-xs);
+      font-family: inherit;
+      color: var(--n500);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      border-radius: 0;
+    }
+    .btn-export:hover { border-color: var(--n500); color: var(--black); }
+
+    .results-meta {
+      font-size: var(--text-xs);
+      color: var(--n400);
+      margin-bottom: 10px;
+    }
+
+    /* ─── Table ─────────────────────────────── */
+    .tbl-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--n200);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--text-sm);
+    }
+
+    thead th {
+      text-align: left;
+      padding: 8px 14px;
+      font-size: var(--text-xs);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--n500);
+      background: var(--n50);
+      border-bottom: 1px solid var(--n200);
+      white-space: nowrap;
+      cursor: pointer;
+      user-select: none;
+    }
+    thead th:hover { color: var(--black); }
+    thead th.sort-asc::after  { content: ' ↑'; color: var(--n400); }
+    thead th.sort-desc::after { content: ' ↓'; color: var(--n400); }
+
+    tbody tr { border-bottom: 1px solid var(--n100); }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--n50); }
+    tbody td { padding: 9px 14px; vertical-align: middle; line-height: 1.5; }
+
+    .vendor-cell {
+      white-space: nowrap;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .vendor-cell a:hover { text-decoration: underline; }
+
+    .dot-free    { background: var(--green); }
+    .dot-gated   { background: #f59e0b; }
+    .dot-partial { background: #94a3b8; }
+    .dot-none    { background: var(--n300); }
+    .dot-unknown { background: var(--n200); }
+
+    .row-link {
+      opacity: 0;
+      color: var(--n400);
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none !important;
+      transition: opacity 0.1s;
+      font-size: 13px;
+      line-height: 1;
+    }
+    .row-link:hover { color: var(--black); }
+    tr:hover .row-link { opacity: 1; }
+
+    .plan-cell {
+      max-width: 110px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .base-cell {
+      max-width: 200px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* ─── Multiplier column ─────────────────── */
+    .mult-col {
+      text-align: right;
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+      font-weight: 500;
+      font-size: var(--text-xs);
+      position: sticky;
+      right: 0;
+    }
+    thead .mult-col { background: var(--n50); }
+    tbody td.mult-col { background: var(--white); }
+    tbody tr:hover td.mult-col { background: var(--n50); }
+    .mult-red   { color: #dc2626; }
+    .mult-amber { color: #b45309; }
+    .mult-green { color: var(--green); }
+    .mult-muted { color: var(--n400); }
+
+    /* ─── Status badges ─────────────────────── */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: var(--text-xs);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .badge-free    { color: var(--green); }
+    .badge-free    .dot { background: var(--green); }
+    .badge-gated   { color: var(--amber); }
+    .badge-gated   .dot { background: #f59e0b; }
+    .badge-partial { color: var(--slate); }
+    .badge-partial .dot { background: #94a3b8; }
+    .badge-none    { color: var(--n400); }
+    .badge-none    .dot { background: var(--n300); }
+    .badge-unknown { color: var(--n400); }
+    .badge-unknown .dot { background: var(--n200); }
+
+    .price-cell { white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .price-contact    { color: var(--n400); }
+    .price-free-text  { color: var(--green); font-weight: 500; }
+
+    .ext-link {
+      color: var(--n400);
+      font-size: var(--text-xs);
+      display: inline-flex;
+      align-items: center;
+    }
+    .ext-link:hover { color: var(--black); }
+
+    .empty {
+      padding: 48px 14px;
+      text-align: center;
+      color: var(--n400);
+      font-size: var(--text-sm);
+    }
+
+    /* ─── Footer ────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--n200);
+      padding: 18px 0;
+    }
+    footer .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: var(--text-xs);
+      color: var(--n400);
+    }
+    footer a { color: var(--n500); }
+    footer a:hover { color: var(--black); text-decoration: underline; }
+
+    /* ─── Responsive ────────────────────────── */
+    @media (max-width: 700px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .callout-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 500px) {
+      .hero h1 { font-size: 22px; }
+      .controls { flex-direction: column; align-items: flex-start; }
+      .search-wrap { flex: 0 0 100%; width: 100%; }
+      .btn-export { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <span class="site-title">The SCIM Tax Index</span>
+    <span class="header-meta">An open dataset · Last updated April 2026</span>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="container">
+      <h1>You're paying extra to manage your own users.</h1>
+      <p>
+        <strong>SCIM</strong> is the protocol IT teams use to automate user provisioning and deprovisioning. Most SaaS vendors support it. Most lock it behind an Enterprise plan, and many won't say what it costs until you sit through a sales call. ~300 vendors surveyed below.
+      </p>
+      <p class="hero-sub">
+        Open dataset, CC-BY 4.0. <a href="#methodology">Methodology</a> · <a href="#cite">Cite</a> · <a href="#download">Download CSV / JSON</a>
+      </p>
+    </div>
+  </section>
+
+  <div class="stats-wrap">
+    <div class="container">
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-n" id="total-count">~300</div>
+          <div class="stat-l">vendors surveyed across horizontal and vertical SaaS</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n">~80%</div>
+          <div class="stat-l">of vendors with SCIM gate it behind Enterprise or Contact Sales</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n">79×</div>
+          <div class="stat-l">largest price jump: Shopify Basic ($29) to Plus ($2,300/mo)</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n" id="free-count">11</div>
+          <div class="stat-l">vendors that include SCIM on all plans with no paywall</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="callouts">
+    <div class="container">
+      <p class="callout-label">Notable findings</p>
+      <div class="callout-grid">
+        <div class="callout-card">
+          <div class="callout-eyebrow">The Okta Irony</div>
+          <div class="callout-headline">$4/user/mo extra, from the SSO company</div>
+          <div class="callout-body">Okta sells SSO and user provisioning as its core product. Their base Starter plan ($6/user/mo) does not include SCIM provisioning. Lifecycle Management is a $4/user/mo add-on, charged on top of their own SSO product. Auth0, which Okta also owns, includes SCIM on the Free tier.</div>
+        </div>
+        <div class="callout-card">
+          <div class="callout-eyebrow">The Biggest Jumps</div>
+          <div class="callout-headline">Shopify: $29/mo to $2,300/mo</div>
+          <div class="callout-body">Shopify's Basic plan is $29/mo. SCIM is Plus-only at $2,300/mo, a 79× jump. Amplitude jumps from $49/mo self-serve to $22,000+/yr (37×). Grafana Cloud goes from $19/mo to $299/mo (16×). Salesforce climbs from $25/user to $175/user (7×).</div>
+        </div>
+        <div class="callout-card">
+          <div class="callout-eyebrow">It Doesn't Have To Be This Way</div>
+          <div class="callout-headline">Some vendors just include it</div>
+          <div class="callout-body">Auth0 includes SCIM on the Free tier. PagerDuty and Ramp include it on all plans at no extra charge. BitWarden includes it at $4/user/mo, not Enterprise-gated. JumpCloud includes it as part of its identity-first model. The SCIM tax is a choice, not a technical constraint.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="methodology" id="methodology">
+    <div class="container">
+      <p class="callout-label">Methodology</p>
+      <div class="meth-prose">
+        <p>Vendors are drawn from cross-referenced industry sources: <a href="https://notsosso.com" target="_blank" rel="noopener">notsosso.com</a>, <a href="https://sso.tax" target="_blank" rel="noopener">sso.tax</a>, Okta Business at Work, Zylo SaaS Index, Productiv App Inventory, Ramp Velocity, the Okta Integration Network, and the Rippling App Shop. Coverage prioritises the most-deployed horizontal and vertical SaaS in mid-market and enterprise stacks.</p>
+        <p>For each vendor we record whether SCIM (or equivalent automated provisioning) is offered, the lowest plan it appears on, the price of that plan, the price of the typical team or business tier, and a direct link to the public pricing page used as evidence.</p>
+        <p><strong>Status definitions.</strong>
+          <span class="meth-status"><span class="dot" style="background:#16a34a"></span>No Tax</span>: SCIM included on all plans or on the team tier at no separate upcharge.
+          <span class="meth-status"><span class="dot" style="background:#f59e0b"></span>Gated</span>: SCIM only on an Enterprise / Contact Sales tier or as a paid add-on.
+          <span class="meth-status"><span class="dot" style="background:#94a3b8"></span>Partial</span>: limited or conditional support, often IdP-specific or via a separate product.
+          <span class="meth-status"><span class="dot" style="background:#d4d4d8"></span>No SCIM</span>: not offered at any tier.
+          <span class="meth-status"><span class="dot" style="background:#e4e4e7"></span>Unknown</span>: not disclosed publicly.</p>
+        <p>Prices reflect publicly listed annual billing in US dollars where available. The full <a href="METHODOLOGY.md">methodology document</a> includes source-by-source reconciliation, edge cases, and update rules. Found an issue? <a href="https://github.com/idenhq/scim-tax/issues" target="_blank" rel="noopener">Open an issue</a>.</p>
+        <p class="meth-next">Data timestamp: April 2026. Next scheduled update: Q1 2027.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="table-section">
+    <div class="container">
+
+      <div class="controls">
+        <div class="search-wrap">
+          <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input class="search-input" type="search" id="search" placeholder="Search vendors…" autocomplete="off">
+        </div>
+
+        <div class="filter-group" id="filters">
+          <button class="filter-btn active" data-filter="all">All <span class="cnt" id="cnt-all"></span></button>
+          <button class="filter-btn" data-filter="free">
+            <span class="dot" style="background:#16a34a"></span>
+            No Tax <span class="cnt" id="cnt-free"></span>
+          </button>
+          <button class="filter-btn" data-filter="gated">
+            <span class="dot" style="background:#f59e0b"></span>
+            Gated <span class="cnt" id="cnt-gated"></span>
+          </button>
+          <button class="filter-btn" data-filter="partial">
+            <span class="dot" style="background:#94a3b8"></span>
+            Partial <span class="cnt" id="cnt-partial"></span>
+          </button>
+          <button class="filter-btn" data-filter="none">
+            <span class="dot" style="background:#d4d4d8"></span>
+            No SCIM <span class="cnt" id="cnt-none"></span>
+          </button>
+          <button class="filter-btn" data-filter="unknown">
+            <span class="dot" style="background:#e4e4e7"></span>
+            Unknown <span class="cnt" id="cnt-unknown"></span>
+          </button>
+        </div>
+
+        <button class="btn-export" id="export-csv-btn">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          CSV
+        </button>
+        <button class="btn-export" id="export-json-btn" style="margin-left:4px">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          JSON
+        </button>
+      </div>
+
+      <div class="results-meta" id="results-meta"></div>
+
+      <div class="tbl-wrap">
+        <table id="vendor-table">
+          <thead>
+            <tr>
+              <th data-col="0">Vendor</th>
+              <th data-col="2">Plan Required</th>
+              <th data-col="3">SCIM Price</th>
+              <th data-col="4">Team Plan</th>
+              <th class="mult-col">Jump</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="cite-section" id="cite">
+    <div class="container">
+      <p class="callout-label">Use &amp; cite</p>
+      <div class="cite-grid">
+
+        <div class="cite-card">
+          <div class="cite-heading">Cite this report</div>
+          <p>For articles, blog posts, slides, or analyst reports.</p>
+          <pre class="cite-code" id="cite-text">SCIM Tax Index (Iden, 2026). https://scimtax.org/</pre>
+          <div class="cite-actions">
+            <button class="cite-btn" data-copy="cite-text">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="0"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+              Copy citation
+            </button>
+          </div>
+        </div>
+
+        <div class="cite-card" id="download">
+          <div class="cite-heading">Download the dataset</div>
+          <p>Full raw dataset. Re-use freely under CC-BY 4.0 with attribution to <em>SCIM Tax Index (Iden)</em>.</p>
+          <div class="cite-actions">
+            <a class="cite-btn" href="data.csv" download>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              data.csv
+            </a>
+            <a class="cite-btn" href="data.json" download>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              data.json
+            </a>
+          </div>
+        </div>
+
+        <div class="cite-card">
+          <div class="cite-heading">Correct or contribute</div>
+          <p>Vendor pricing changed? Found a missing app or a wrong status? File an issue or open a pull request.</p>
+          <div class="cite-actions">
+            <a class="cite-btn" href="https://github.com/idenhq/scim-tax/issues" target="_blank" rel="noopener">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Open issue
+            </a>
+            <a class="cite-btn" href="https://github.com/idenhq/scim-tax" target="_blank" rel="noopener">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Repo
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span>Open data, CC-BY 4.0 · <a href="https://github.com/idenhq/scim-tax" target="_blank" rel="noopener">GitHub</a> · <a href="LICENSE" target="_blank" rel="noopener">License</a> · <a href="METHODOLOGY.md" target="_blank" rel="noopener">Methodology</a></span>
+    <span>Maintained by <a href="https://idenhq.com" target="_blank" rel="noopener">Iden</a></span>
+  </div>
+</footer>
+
+<script>
+// ─────────────────────────────────────────────
+// Vendor data
+// [name, status, plan, scimPrice, basePrice, url]
+// status: free | gated | partial | none | unknown
+// ─────────────────────────────────────────────
+const V = [
+  ['1Password','gated','Business','$7.99/user/mo','Teams: $19.95/mo flat','https://1password.com/teams/pricing'],
+  ['15Five','gated','Perform','$11/user/mo','Engage: $4/user/mo','https://www.15five.com/pricing'],
+  ['8x8','gated','X Series','Contact Sales','~$15/user/mo','https://www.8x8.com/pricing'],
+  ['ActiveCampaign','none','—','—','Starter: $15/mo','https://www.activecampaign.com/pricing'],
+  ['Adobe Acrobat','gated','Enterprise','Contact Sales','Standard Teams: $14.99/user/mo','https://www.adobe.com/acrobat/pricing.html'],
+  ['Adobe Creative Cloud','partial','Enterprise','Contact Sales','Teams: ~$89.99/user/mo','https://www.adobe.com/creativecloud/business/enterprise.html'],
+  ['Ahrefs','none','—','—','Lite: $129/mo','https://ahrefs.com/pricing'],
+  ['Airtable','gated','Business / Enterprise Scale','Contact Sales','Team: $20/user/mo','https://airtable.com/pricing'],
+  ['Amplitude','gated','Growth','Contact Sales (~$22K–$254K/yr)','Plus: $49/mo','https://amplitude.com/pricing'],
+  ['Anthology / Blackboard','gated','Enterprise','Contact Sales','Contact Sales','https://www.anthology.com/'],
+  ['AnyDesk','partial','Enterprise/Ultimate Cloud','Contact Sales','Solo: $22.90/mo','https://anydesk.com/en/pricing'],
+  ['AppFolio','unknown','—','—','Core: $1.40/unit/mo','https://www.appfolio.com/pricing'],
+  ['Appsmith','gated','Enterprise','$2,500/mo (~100 users)','Business: $15/user/mo','https://www.appsmith.com/pricing'],
+  ['Asana','gated','Enterprise','Contact Sales','Starter: $10.99/user/mo','https://asana.com/pricing'],
+  ['Ashby','gated','Plus / Enterprise','Contact Sales','Foundations: $400/mo','https://www.ashbyhq.com/pricing'],
+  ['Atlassian','gated','Guard Standard (add-on)','$4.20/user/mo','— (on top of any Atlassian plan)','https://www.atlassian.com/software/access/pricing'],
+  ['Atera','none','—','—','Professional: $149/tech/mo','https://www.atera.com/pricing/'],
+  ['athenahealth','partial','— (no native SCIM)','Contact Sales','~$140/provider/mo','https://www.athenahealth.com/why-choose-us/cost-value'],
+  ['Attio','unknown','—','—','Free','https://attio.com/pricing'],
+  ['Auth0','free','Free and above','Free','Free (7,500 MAU)','https://auth0.com/pricing'],
+  ['Autodesk','unknown','—','—','Varies by product','https://www.autodesk.com/pricing'],
+  ['Backblaze','gated','Enterprise Control (add-on)','+$24/computer/yr','$99/computer/yr','https://www.backblaze.com/business/backup/pricing'],
+  ['Balsamiq','none','—','—','Cloud: $12/mo','https://balsamiq.com/wireframes/pricing/'],
+  ['BambooHR','unknown','—','—','~$10/emp/mo','https://www.bamboohr.com/pricing/'],
+  ['Basecamp','none','—','—','Free','https://basecamp.com/pricing'],
+  ['Baserow','none','—','—','Free','https://baserow.io/pricing'],
+  ['BitWarden','free','Teams','$4/user/mo','Free','https://bitwarden.com/pricing/'],
+  ['Bitly','none','—','—','Free','https://bitly.com/pages/pricing'],
+  ['Bitrise','gated','Enterprise','Contact Sales','Starter: $89/mo','https://bitrise.io/pricing'],
+  ['Blackbaud','partial','— (no confirmed SCIM)','Contact Sales','Contact Sales','https://www.blackbaud.com/pricing'],
+  ['Booqable','none','—','—','Start: $29/mo','https://booqable.com/pricing'],
+  ['Box','gated','Business','$15/user/mo','Business Starter: $5/user/mo','https://www.box.com/pricing'],
+  ['Breezy HR','unknown','—','—','Free','https://breezy.hr/pricing'],
+  ['Brex','gated','Premium','$12/user/mo','Essentials: Free','https://www.brex.com/pricing'],
+  ['BrowserStack','gated','Enterprise','Contact Sales','Individual: $29/mo','https://www.browserstack.com/pricing'],
+  ['Buffer','none','—','—','Free','https://buffer.com/pricing'],
+  ['Bugsnag','gated','Enterprise','Contact Sales','Select: ~$33/mo','https://www.bugsnag.com/pricing/'],
+  ['Bytebase','gated','Enterprise','Contact Sales','Pro: $20/user/mo','https://www.bytebase.com/pricing/'],
+  ['Calendly','gated','Enterprise','$15,000/yr minimum','Standard: $10/user/mo','https://calendly.com/pricing'],
+  ['Canva','gated','Enterprise','Contact Sales','Teams: $10/user/mo','https://www.canva.com/pricing/'],
+  ['Carta','gated','Scale (Okta only)','Contact Sales (~$67K+/yr)','Launch: $280/yr','https://carta.com/pricing'],
+  ['Cascade','unknown','—','—','Free','https://www.cascade.app/pricing'],
+  ['Channel.io','unknown','—','—','Usage-based','https://channel.io/en/pricing'],
+  ['Chargebee','none','—','—','Free','https://www.chargebee.com/pricing/'],
+  ['CircleCI','unknown','—','—','Free','https://circleci.com/pricing/'],
+  ['Clay','unknown','—','—','Free','https://www.clay.com/pricing'],
+  ['ClickTime','gated','Add-on (all tiers)','Contact Sales','$12/user/mo','https://www.clicktime.com/pricing'],
+  ['ClickUp','gated','Enterprise','Contact Sales','Unlimited: $7/user/mo','https://clickup.com/pricing'],
+  ['Clio','partial','Clio Operate (separate product)','Contact Sales','EasyStart: $49/user/mo','https://www.clio.com/pricing/'],
+  ['Clockify','none','—','—','Free','https://clockify.me/pricing'],
+  ['Cloudcraft','none','—','—','Free','https://www.cloudcraft.co/pricing'],
+  ['Coda','unknown','—','—','Free','https://coda.io/pricing'],
+  ['Codeium','none','—','—','Free','https://codeium.com/pricing'],
+  ['CoderPad','gated','Team','$400/mo','Starter: $80–120/mo','https://coderpad.io/pricing/'],
+  ['Contentful','gated','Premium / Enterprise','Contact Sales','Lite: $300/mo','https://www.contentful.com/pricing/'],
+  ['Copper CRM','unknown','—','—','Starter: $9/seat/mo','https://www.copper.com/pricing'],
+  ['Coursera for Business','gated','Enterprise (125+ users)','Contact Sales','Teams: $399/user/yr','https://www.coursera.org/business/pricing'],
+  ['CrowdStrike','gated','Enterprise','~$15.40/device/mo','Go: ~$5/device/mo','https://www.crowdstrike.com/products/endpoint-security/'],
+  ['Crowdin','unknown','—','—','Free','https://crowdin.com/pricing'],
+  ['CubeCoders AMP','unknown','—','—','~$10/mo','https://cubecoders.com/AMP'],
+  ['Culture Amp','none','—','—','Contact Sales','https://www.cultureamp.com/pricing'],
+  ['Cypress','none','—','—','Free','https://www.cypress.io/pricing'],
+  ['Dagster','unknown','—','—','$10/mo','https://dagster.io/pricing'],
+  ['Dashlane','gated','Password Management','$8/user/mo','Credential Protection: $4/user/mo','https://www.dashlane.com/business/pricing'],
+  ['Databricks','gated','Premium','~$0.55/DBU','Standard: ~$0.40/DBU','https://www.databricks.com/product/pricing'],
+  ['Datadog','gated','Enterprise','$23/host/mo','Pro: $15/host/mo','https://www.datadoghq.com/pricing/'],
+  ['DatoCMS','gated','Enterprise','Contact Sales','Professional: €149/mo','https://www.datocms.com/pricing'],
+  ['dbt Labs','none','—','—','Starter: $100/user/mo','https://www.getdbt.com/pricing'],
+  ['DeepL','gated','Pro Ultimate','Not public','Pro Starter: ~$9/mo','https://www.deepl.com/en/pro#plans'],
+  ['Deepnote','gated','Enterprise','Contact Sales','Team: $39/editor/mo','https://deepnote.com/pricing'],
+  ['Deel','unknown','—','—','Contact Sales','https://www.deel.com/pricing'],
+  ['Dialpad','none','—','—','Standard: $15/user/mo','https://www.dialpad.com/pricing/'],
+  ['Dmarcian','unknown','—','—','Free','https://dmarcian.com/pricing/'],
+  ['DMARC Report','unknown','—','—','Contact Sales','https://www.dmarcreport.com/pricing/'],
+  ['DocuSign','unknown','—','—','Personal: $10/mo','https://www.docusign.com/products-and-pricing'],
+  ['Docker','gated','Business','$24/user/mo','Pro: $9/user/mo','https://www.docker.com/pricing/'],
+  ['Doppler','gated','Enterprise','Contact Sales','Team: $21/user/mo','https://www.doppler.com/pricing'],
+  ['Drata','gated','Foundational+','Contact Sales (~$15K/yr)','Essential: ~$7,500/yr','https://drata.com/pricing'],
+  ['Drift / Salesloft','gated','Enterprise','$60K+/yr','Premium: $2,500/mo','https://www.salesloft.com/pricing/'],
+  ['Dropbox','unknown','—','—','Free','https://www.dropbox.com/plans'],
+  ['Dubble','none','—','—','Free','https://dubble.so/pricing'],
+  ['Duo Security','gated','Advantage','~$6/user/mo','Essentials: ~$3/user/mo','https://duo.com/pricing'],
+  ['Dynatrace','gated','Enterprise','Contact Sales','Standard: ~$34/host/mo','https://www.dynatrace.com/pricing/'],
+  ['Ease','none','—','—','Contact Sales','https://ease.com/pricing/'],
+  ['Easy LMS','none','—','—','Dynamic pricing','https://www.easylms.com/pricing'],
+  ['Elastic','unknown','—','—','Free','https://www.elastic.co/pricing/'],
+  ['Envoy','gated','Enterprise','Contact Sales','Visitor: $99/location/mo','https://envoy.com/pricing/'],
+  ['Expensify','partial','Control (implied)','$9/user/mo','Collect: $5/user/mo','https://www.expensify.com/pricing'],
+  ['Figma','gated','Enterprise','$90/seat/mo','Professional: $16/seat/mo','https://www.figma.com/pricing/'],
+  ['Fivetran','gated','Enterprise','Contact Sales','Usage-based','https://www.fivetran.com/pricing'],
+  ['Formstack','none','—','—','$83/mo','https://www.formstack.com/pricing'],
+  ['Frame.io','none','—','—','Free','https://frame.io/pricing'],
+  ['Freshdesk','gated','Pro','$49/agent/mo','Growth: $15/agent/mo','https://www.freshworks.com/freshdesk/pricing/'],
+  ['Freshservice','gated','Pro','$99/agent/mo','Starter: $19/agent/mo','https://www.freshworks.com/freshservice/pricing/'],
+  ['Front','gated','Professional','$65/seat/mo','Starter: $25/seat/mo','https://front.com/pricing'],
+  ['FullStory','gated','Enterprise','Contact Sales','Business: ~$10–25K/yr','https://www.fullstory.com/pricing/'],
+  ['Gainsight','gated','Enterprise','Contact Sales','Contact Sales','https://www.gainsight.com/pricing/'],
+  ['GatherContent / Bynder','unknown','—','—','Contact Sales','https://www.bynder.com/en/pricing/'],
+  ['Genetec Security Center','gated','Premium','Contact Sales','Standard: $149/yr/device','https://www.genetec.com/solutions/resources/security-center-saas'],
+  ['GetResponse','none','—','—','Starter: $15.58/mo','https://www.getresponse.com/pricing'],
+  ['GitHub','gated','Enterprise','$21/user/mo','Team: $4/user/mo','https://github.com/pricing'],
+  ['GitBook','unknown','—','—','Free','https://www.gitbook.com/pricing'],
+  ['GitKraken','none','—','—','Free','https://www.gitkraken.com/pricing'],
+  ['GitLab','gated','Premium','$29/user/mo','Free','https://about.gitlab.com/pricing/'],
+  ['Gong','gated','Enterprise (opaque)','Contact Sales','Contact Sales','https://www.gong.io/pricing/'],
+  ['Google Workspace','free','All plans (acts as IdP)','$7/user/mo','$7/user/mo','https://workspace.google.com/pricing'],
+  ['Grafana Cloud','gated','Advanced','$299/mo','Pro: $19/mo','https://grafana.com/pricing/'],
+  ['Grammarly Business','gated','Enterprise','Contact Sales','Business: $15/user/mo','https://www.grammarly.com/plans'],
+  ['Greenhouse','gated','Plus & Pro','Contact Sales','Contact Sales','https://www.greenhouse.com/pricing'],
+  ['Gusto','none','—','—','Simple: $49+$6/emp','https://gusto.com/pricing'],
+  ['Hatz.ai','unknown','—','—','~$190/mo (MSP)','https://hatz.ai'],
+  ['HelloSign / Dropbox Sign','none','—','—','Essentials: $15/mo','https://sign.dropbox.com/plans-and-pricing'],
+  ['Help Scout','none','—','—','Standard: $25/user/mo','https://www.helpscout.com/pricing/'],
+  ['Heroku','gated','Enterprise','Contact Sales','Eco: $5/mo','https://www.heroku.com/pricing'],
+  ['Hex','unknown','—','—','Free','https://hex.tech/pricing'],
+  ['HiBob','free','All plans','Contact Sales','Contact Sales','https://www.hibob.com/pricing/'],
+  ['Hootsuite','none','—','—','Standard: $199/mo','https://www.hootsuite.com/plans'],
+  ['HubSpot','gated','Professional & Enterprise','$800/mo+ (Marketing Pro)','Starter: $9/seat/mo','https://www.hubspot.com/pricing'],
+  ['iManage','gated','All cloud plans','Contact Sales','Contact Sales','https://imanage.com/product/'],
+  ['Incident.io','gated','Enterprise','Contact Sales','Team: $15/user/mo','https://incident.io/pricing'],
+  ['Inedo ProGet','unknown','—','—','Free','https://inedo.com/proget/pricing'],
+  ['Instructure / Canvas','gated','All institutional plans','Contact Sales (~$36K+/yr)','Contact Sales','https://www.instructure.com/'],
+  ['Intercom','gated','Expert','$132/seat/mo','Essential: $29/seat/mo','https://www.intercom.com/pricing'],
+  ['ISL Online','none','—','—','~$469/yr','https://www.islonline.com/pricing/'],
+  ['Jam','none','—','—','Free','https://jam.dev/pricing'],
+  ['JFrog','gated','Enterprise X','$950/mo (SaaS)','Pro: $150/mo','https://jfrog.com/pricing/'],
+  ['Jobber','unknown','—','—','Core: $39/mo','https://www.getjobber.com/pricing/'],
+  ['JumpCloud','free','All plans','Free (≤10 users)','Device Mgmt: $11/user/mo','https://jumpcloud.com/pricing'],
+  ['JustCall','none','—','—','Team: $29/user/mo','https://justcall.io/pricing.html'],
+  ['Keeper Security','gated','Enterprise','Contact Sales','Contact Sales','https://www.keepersecurity.com/pricing.html'],
+  ['Kiwi TCMS','none','—','—','Self Support: $25/mo','https://kiwitcms.org/pricing/'],
+  ['Klaviyo','gated','Any paid plan','~$20/mo (min)','Email: ~$20/mo','https://www.klaviyo.com/pricing'],
+  ['KnowBe4','free','Silver+','~$1.50–1.90/seat/mo','Per quote','https://www.knowbe4.com/pricing'],
+  ['Kubecost / Apptio','none','—','—','Free','https://www.kubecost.com/pricing/'],
+  ['LastPass','gated','Business','$7/user/mo','Teams: $4/user/mo','https://www.lastpass.com/pricing'],
+  ['Later','unknown','—','—','Starter: $25/mo','https://later.com/pricing/'],
+  ['LaunchDarkly','gated','Enterprise','Contact Sales','Foundation: $12/mo','https://launchdarkly.com/pricing/'],
+  ['Lattice','free','All plans','$11/seat/mo','$11/seat/mo','https://lattice.com/pricing'],
+  ['Leapsome','gated','Unknown tier','Contact Sales','~$3–8/user/mo','https://www.leapsome.com/pricing'],
+  ['Lever','gated','Enterprise','Contact Sales (~$36K+/yr)','LeverTRM: ~$6K/yr','https://www.lever.co/pricing/'],
+  ['Linear','gated','Enterprise','Contact Sales','Basic: $10/user/mo','https://linear.app/pricing'],
+  ['LinearB','gated','Enterprise','$549/contributor/yr','Pro: $420/contributor/yr','https://linearb.io/pricing'],
+  ['Litmus','none','—','—','Basic: $417/mo','https://www.litmus.com/pricing/'],
+  ['LiveAgent','none','—','—','Small Business: $15/agent/mo','https://www.liveagent.com/pricing/'],
+  ['LogRocket','none','—','—','Free','https://logrocket.com/pricing/'],
+  ['Loom','gated','Enterprise','Contact Sales','Business: $18/user/mo','https://www.loom.com/pricing'],
+  ['Lucidchart','gated','Enterprise','Contact Sales','Team: $9/user/mo','https://lucid.app/pricing/lucidchart'],
+  ['MaintainX','none','—','—','Free','https://www.getmaintainx.com/pricing'],
+  ['Mailchimp','partial','Enterprise (Okta only via connector)','Contact Sales','Essentials: $13/mo','https://mailchimp.com/pricing/'],
+  ['Mailgun','none','—','—','Foundation: $35/mo','https://www.mailgun.com/pricing/'],
+  ['Mailjet','none','—','—','Essential: $15.30/mo','https://www.mailjet.com/pricing/'],
+  ['Mailtrap','none','—','—','Basic: $15–30/mo','https://mailtrap.io/pricing/'],
+  ['Mattermost','partial','Professional (AD/LDAP sync)','$10/user/mo','Professional: $10/user/mo','https://mattermost.com/pricing/'],
+  ['Metabase','gated','Pro','$575/mo + $12/user','Starter: $100/mo + $6/user','https://www.metabase.com/pricing'],
+  ['Microsoft 365','free','Business Standard (acts as IdP)','$14/user/mo','Basic: $7/user/mo','https://www.microsoft.com/en-us/microsoft-365/business/compare-all-plans'],
+  ['Miro','gated','Enterprise','Contact Sales','Starter: $8/member/mo','https://miro.com/pricing/'],
+  ['Mixpanel','gated','Enterprise','Contact Sales (~$25K+/yr)','Growth: ~$25/mo','https://mixpanel.com/pricing/'],
+  ['Monday.com','gated','Enterprise','Contact Sales','Basic: $9/seat/mo','https://monday.com/pricing/'],
+  ['Multi','none','—','—','Free','https://multi.app'],
+  ['Mural','gated','Enterprise','Contact Sales','Team+: $9.99/user/mo','https://www.mural.co/pricing'],
+  ['n8n','partial','Enterprise (JIT only)','Contact Sales','Not public','https://n8n.io/pricing/'],
+  ['NationBuilder','unknown','—','—','$34/mo','https://nationbuilder.com/pricing'],
+  ['Netlify','gated','Enterprise','Contact Sales','Pro: $19/mo','https://www.netlify.com/pricing/'],
+  ['NetSuite','gated','Enterprise','Contact Sales','Contact Sales','https://www.netsuite.com/portal/assets/383/contact-us.shtml'],
+  ['New Relic','unknown','—','—','Free','https://newrelic.com/pricing'],
+  ['Notion','gated','Enterprise','Contact Sales','Plus: $10/member/mo','https://www.notion.so/pricing'],
+  ['Okta','gated','Add-on / Essentials','$4/user/mo (add-on)','Starter: $6/user/mo','https://www.okta.com/pricing/'],
+  ['OneSignal','unknown','—','—','Free','https://onesignal.com/pricing'],
+  ['OpenAI / ChatGPT','gated','Enterprise','Contact Sales','Business: $25/user/mo','https://openai.com/chatgpt/pricing'],
+  ['OpsGenie','partial','Atlassian Guard (separate product)','+$4/user/mo','Essentials: $9.45/user/mo','https://www.atlassian.com/software/opsgenie/pricing'],
+  ['OrbStack','none','—','—','Free','https://orbstack.dev/pricing'],
+  ['Otter.ai','gated','Enterprise (100-user min)','Contact Sales','Pro: $8.33/user/mo','https://otter.ai/pricing'],
+  ['Outreach','gated','Enterprise (opaque)','Contact Sales','Contact Sales','https://www.outreach.io/pricing'],
+  ['Overleaf','none','—','—','Group Standard: $179/user/yr','https://www.overleaf.com/org/purchase'],
+  ['PagerDuty','free','All plans','Free','Free','https://www.pagerduty.com/pricing/'],
+  ['PagerTree','unknown','—','—','Free','https://pagertree.com/pricing/'],
+  ['PandaDoc','gated','Enterprise','Contact Sales','Essentials: $19/user/mo','https://www.pandadoc.com/pricing/'],
+  ['Pendo','gated','Pulse / Ultimate','Contact Sales (~$48K+/yr)','Free','https://www.pendo.io/pricing/'],
+  ['Personio','none','—','—','~$3–5/emp/mo','https://www.personio.com/pricing/'],
+  ['Phrase','unknown','—','—','Team: $1,245/mo','https://phrase.com/pricing/'],
+  ['Pingboard','unknown','—','—','~$4/user/mo','https://pingboard.com/pricing'],
+  ['Pipedrive','none','—','—','Lite: $14/seat/mo','https://www.pipedrive.com/en/pricing'],
+  ['Pitch','unknown','—','—','Free','https://pitch.com/pricing'],
+  ['Pivotal Tracker','gated','Enterprise','Contact Sales','Startup: ~$1/user/mo','https://www.pivotaltracker.com/plans'],
+  ['Plane','unknown','—','—','Free','https://plane.so/pricing'],
+  ['Plausible','unknown','—','—','$9/mo (10k PVs)','https://plausible.io/#pricing'],
+  ['Playvox','unknown','—','—','~$15/user/mo','https://www.playvox.com/pricing/'],
+  ['Pluralsight Skills','unknown','—','—','$399/yr','https://www.pluralsight.com/plans'],
+  ['Postman','gated','Enterprise','$49/user/mo','Basic: $14/user/mo','https://www.postman.com/pricing/'],
+  ['Prerender','none','—','—','Free','https://prerender.io/pricing/'],
+  ['Prismic','unknown','—','—','Free','https://prismic.io/pricing'],
+  ['Process Street','gated','Pro','~$15/user/mo','Startup: custom','https://www.process.st/pricing/'],
+  ['Procore','partial','All plans (conflicting signals)','Contact Sales','Contact Sales','https://www.procore.com/pricing'],
+  ['Productboard','gated','Enterprise','Contact Sales','Starter: $19/maker/mo','https://www.productboard.com/pricing/'],
+  ['Pulumi','gated','Enterprise','$400/mo flat','Team: $40/mo','https://www.pulumi.com/pricing/'],
+  ['QuickBooks Online','none','—','—','Simple Start: $38/mo','https://quickbooks.intuit.com/pricing/'],
+  ['Ramp','free','All plans','Free','Free','https://ramp.com/pricing'],
+  ['Raygun','none','—','—','Basic: $40/mo','https://raygun.com/pricing'],
+  ['ReadMe','unknown','—','—','Free','https://readme.com/pricing'],
+  ['Reclaim.ai','gated','Enterprise','$22/seat/mo','Starter: $10/seat/mo','https://reclaim.ai/pricing'],
+  ['Recruitee','unknown','—','—','Contact Sales','https://recruitee.com/pricing'],
+  ['Remote.com','gated','Scale','Contact Sales','~$29/emp/mo','https://remote.com/pricing'],
+  ['Resend','none','—','—','Free','https://resend.com/pricing'],
+  ['Resource Guru','unknown','—','—','$4.16/person/mo','https://resourceguruapp.com/pricing'],
+  ['Retool','unknown','—','—','Free','https://retool.com/pricing'],
+  ['Retrium','gated','Enterprise','Contact Sales','Team: $39/mo/room','https://www.retrium.com/pricing'],
+  ['Riddle','none','—','—','Pro: $129/mo','https://www.riddle.com/pricing/'],
+  ['RingCentral','free','All paid plans','Core: $20/user/mo','Core: $20/user/mo','https://www.ringcentral.com/office/plansandpricing.html'],
+  ['Rippling','gated','IAM module (add-on)','~+$6/user/mo','Unity: ~$8/user/mo','https://www.rippling.com/pricing'],
+  ['Rocket.Chat Cloud','none','—','—','Free','https://www.rocket.chat/pricing'],
+  ['Rollbar','gated','Advanced','$32.50/mo','Essentials: $15.83/mo','https://rollbar.com/pricing/'],
+  ['Row Zero','gated','Enterprise','Contact Sales','Pro: $12/user/mo','https://rowzero.io/pricing'],
+  ['Rows','unknown','—','—','Free','https://rows.com/pricing'],
+  ['Runway','gated','Enterprise','Contact Sales','Free','https://runway.com/pricing'],
+  ['Sage Intacct','none','— (no native SCIM)','—','~$12,000/yr min','https://www.sage.com/en-us/sage-business-cloud/intacct/pricing/'],
+  ['Salesforce','gated','Enterprise','$175/user/mo','Starter: $25/user/mo','https://www.salesforce.com/pricing/'],
+  ['Salesloft','gated','Enterprise','Contact Sales','~$140/user/mo','https://www.salesloft.com/pricing/'],
+  ['Sanity','none','—','—','Free','https://www.sanity.io/pricing'],
+  ['Sauce Labs','none','—','—','Contact Sales','https://saucelabs.com/pricing'],
+  ['ScreenCloud','gated','Enterprise','Contact Sales','Core: $20/screen/mo','https://screencloud.com/pricing'],
+  ['Secureframe','gated','Complete','Contact Sales (~$20K+/yr)','Essential: ~$12K/yr','https://secureframe.com/pricing'],
+  ['Segment','unknown','—','—','Free','https://segment.com/pricing/'],
+  ['Sender.net','unknown','—','—','Free','https://www.sender.net/pricing/'],
+  ['SendGrid','unknown','—','—','Essentials: $19.95/mo','https://sendgrid.com/en-us/pricing'],
+  ['Sendinblue / Brevo','unknown','—','—','Starter: ~$9/mo','https://www.brevo.com/pricing/'],
+  ['SentinelOne','gated','Enterprise','Contact Sales','Core: ~$69/endpoint/yr','https://www.sentinelone.com/pricing/'],
+  ['Sentry','gated','Business','$80/mo','Team: $26/mo','https://sentry.io/pricing/'],
+  ['ServiceNow','gated','Enterprise','Contact Sales','Contact Sales','https://www.servicenow.com/pricing.html'],
+  ['ServiceTitan','unknown','—','Contact Sales','~$245/tech/mo','https://www.servicetitan.com/pricing'],
+  ['Shopify','gated','Plus','$2,300/mo','Basic: $29/mo','https://www.shopify.com/pricing'],
+  ['Short.io','unknown','—','—','Free','https://short.io/pricing'],
+  ['Shortcut','gated','Team (add-on) / Enterprise','$8.50/user/mo','Team: $8.50/user/mo','https://shortcut.com/pricing'],
+  ['Slack','gated','Business+','$15/user/mo','Pro: $7.25/user/mo','https://slack.com/pricing'],
+  ['Slido','gated','Enterprise','$200/mo (3 users)','$60/event','https://www.slido.com/pricing'],
+  ['Smartling','unknown','—','—','Core: free to start','https://www.smartling.com/pricing/'],
+  ['Smartsheet','gated','Enterprise','Contact Sales','Pro: $9/user/mo','https://www.smartsheet.com/pricing'],
+  ['Snyk','none','—','—','Free','https://snyk.io/plans/'],
+  ['Snowflake','free','All editions','~$2/credit (consumption)','~$2/credit','https://www.snowflake.com/pricing/'],
+  ['SocialPilot','unknown','—','—','Essentials: $30/mo','https://www.socialpilot.co/pricing'],
+  ['SonarQube Cloud','gated','Enterprise','Contact Sales','Team: ~€30/mo','https://www.sonarsource.com/plans-and-pricing/sonarcloud/'],
+  ['Spark Hire','none','—','—','$249/mo','https://www.sparkhire.com/pricing'],
+  ['Splashtop','gated','Enterprise','Contact Sales','~$6/user/mo','https://www.splashtop.com/pricing'],
+  ['Splunk','gated','Enterprise','Contact Sales','Workload-based','https://www.splunk.com/en_us/products/pricing.html'],
+  ['StackHawk','unknown','—','—','Free','https://www.stackhawk.com/pricing/'],
+  ['StatusGator','unknown','—','—','Starter: $72/mo','https://statusgator.com/pricing'],
+  ['Stoplight','unknown','—','—','Basic: $44/mo','https://stoplight.io/pricing'],
+  ['StreamYard','unknown','—','—','Free','https://streamyard.com/pricing'],
+  ['SurveyMonkey','gated','Enterprise','Contact Sales','Standard: $39/mo','https://www.surveymonkey.com/pricing/'],
+  ['Tableau','free','All plans (SAML prereq)','$15/user/mo (Viewer)','$15/user/mo','https://www.tableau.com/pricing/individual'],
+  ['TeamViewer','unknown','—','—','Remote Access: $24.90/mo','https://www.teamviewer.com/en/pricing/'],
+  ['Teamwork','none','—','—','Starter: $8.99/user/mo','https://www.teamwork.com/pricing/'],
+  ['Teleport','none','—','—','Free','https://goteleport.com/pricing/'],
+  ['Temporal Cloud','gated','Business (add-on)','+$500/mo add-on','Essentials: $100/mo','https://temporal.io/pricing'],
+  ['TestRail Cloud','unknown','—','—','Professional: $37/seat/mo','https://www.testrail.com/pricing/'],
+  ['TextExpander','gated','Growth','$13.54/user/mo','Business: $10.41/user/mo','https://textexpander.com/pricing'],
+  ['Toast','none','—','—','Starter Kit: Free','https://pos.toasttab.com/pricing'],
+  ['Toggl Plan','none','—','—','Free','https://toggl.com/plan/pricing/'],
+  ['Toggl Track','none','—','—','Free','https://toggl.com/track/pricing/'],
+  ['Transifex','none','—','—','Starter: $135/mo','https://www.transifex.com/pricing/'],
+  ['Trello','gated','Enterprise','$17.50/user/mo','Standard: $5/user/mo','https://trello.com/pricing'],
+  ['Twilio','unknown','—','—','Usage-based','https://www.twilio.com/en-us/pricing'],
+  ['Typeform','gated','Enterprise','Contact Sales','Basic: $29/mo','https://www.typeform.com/pricing/'],
+  ['Usersnap','none','—','—','Starter: $49/mo','https://usersnap.com/pricing'],
+  ['UseWorkshop','unknown','—','—','$250/mo','https://useworkshop.com/pricing'],
+  ['Vanta','gated','Scale / Enterprise','$30,000–$80,000+/yr','Growth: ~$30K/yr','https://www.vanta.com/pricing'],
+  ['Veeva Systems','gated','Enterprise','Contact Sales','Contact Sales','https://www.veeva.com/products/'],
+  ['Vercel','gated','Enterprise','Contact Sales','Pro: $20/user/mo','https://vercel.com/pricing'],
+  ['VictorOps / Splunk On-Call','partial','Not by tier (requires Support)','Contact Support','Starter: $10/user/mo','https://www.splunk.com/en_us/products/on-call.html'],
+  ['Webflow','gated','Enterprise','Contact Sales','Basic: $14/mo','https://webflow.com/pricing'],
+  ['Wedo','gated','Enterprise','CHF 24.90/user/mo','Pro: CHF 19.90/user/mo','https://www.wedo.swiss/pricing'],
+  ['Weights & Biases','gated','Enterprise','Contact Sales','Teams: $50/user/mo','https://wandb.ai/pricing'],
+  ['Wickr (AWS)','none','—','—','Standard: $5/user/mo','https://aws.amazon.com/wickr/pricing/'],
+  ['Wix','gated','Enterprise','Contact Sales','Light: $17/mo','https://www.wix.com/upgrade/website'],
+  ['Workable','gated','Enterprise','$719/mo flat','Standard: $299/mo','https://www.workable.com/pricing'],
+  ['Workday','gated','Enterprise','Contact Sales','Contact Sales','https://www.workday.com/en-us/pricing.html'],
+  ['Wrike','gated','Enterprise','Contact Sales','Team: $9.80/user/mo','https://www.wrike.com/price/'],
+  ['Writesonic','unknown','—','—','Lite: $49/mo','https://writesonic.com/pricing'],
+  ['Xero','none','—','—','Early: ~$15/mo','https://www.xero.com/pricing/'],
+  ['Yardi','partial','Voyager Enterprise (via Okta)','Contact Sales','Breeze: $1/unit/mo','https://www.yardibreeze.com'],
+  ['Yodeck','gated','Enterprise','$15/screen/mo','Basic: $8/screen/mo','https://www.yodeck.com/pricing/'],
+  ['Zapier','gated','Enterprise','Contact Sales','Starter: $19.99/mo','https://zapier.com/pricing'],
+  ['Zendesk','partial','Suite Professional (IdP connector)','$115/agent/mo','Suite Team: $69/agent/mo','https://www.zendesk.com/pricing/'],
+  ['Zeplin','gated','Enterprise','Contact Sales','Starter: $13.75/mo','https://zeplin.io/pricing'],
+  ['zeroheight','none','—','—','Free','https://zeroheight.com/pricing/'],
+  ['Zight','gated','Enterprise','Contact Sales','Free','https://zight.com/pricing/'],
+  ['Zoom','gated','Business','$18.33/user/mo','Free','https://zoom.us/pricing'],
+];
+
+// ─────────────────────────────────────────────
+// Render + Filter logic
+// ─────────────────────────────────────────────
+const STATUS_LABEL = {
+  free:    'No Tax',
+  gated:   'Gated',
+  partial: 'Partial',
+  none:    'No SCIM',
+  unknown: 'Unknown',
+};
+
+let currentFilter = 'all';
+let currentSearch = '';
+let sortCol = 0;
+let sortDir = 1; // 1 = asc, -1 = desc
+
+function badge(status) {
+  return `<span class="badge badge-${status}"><span class="dot"></span>${STATUS_LABEL[status]}</span>`;
+}
+
+function slug(s) {
+  return s.toLowerCase()
+    .replace(/&/g, 'and')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function copyToClipboard(text, btn) {
+  const done = () => {
+    if (!btn) return;
+    const orig = btn.innerHTML;
+    btn.innerHTML = 'Copied';
+    setTimeout(() => { btn.innerHTML = orig; }, 1200);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(done).catch(done);
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+    done();
+  }
+}
+
+function extractMonthly(str) {
+  if (!str || str === '—') return null;
+  const low = str.toLowerCase().replace(/,/g, '');
+  if (low === 'free' || /^free[\s(]/.test(low)) return 0;
+  if (/^(usage|varies|dynamic|not public|custom|chf)/.test(low)) return null;
+  if (/^contact/.test(low) && !low.includes('$')) return null;
+  let val = null;
+  const mK = low.match(/\$([\d.]+)k/);
+  if (mK) { val = parseFloat(mK[1]) * 1000; }
+  else { const m = low.match(/\$([\d.]+)/); if (m) val = parseFloat(m[1]); }
+  if (val === null) return null;
+  if (low.includes('/yr') || low.includes('/year')) val /= 12;
+  return val;
+}
+
+function multCell(scimPrice, basePrice, status) {
+  if (status === 'none' || status === 'unknown') return `<span class="mult-muted">—</span>`;
+  if (status === 'free') return `<span class="mult-green">free</span>`;
+  const s = extractMonthly(scimPrice);
+  const b = extractMonthly(basePrice);
+  if (s === null || b === null) return `<span class="mult-muted">—</span>`;
+  if (b === 0 && s === 0) return `<span class="mult-green">free</span>`;
+  if (b === 0) return `<span class="mult-amber">↑ paid</span>`;
+  const ratio = s / b;
+  const fmt = ratio >= 10 ? Math.round(ratio) + '×' : (Math.round(ratio * 10) / 10) + '×';
+  if (ratio > 5) return `<span class="mult-red">${fmt}</span>`;
+  if (ratio > 2) return `<span class="mult-amber">${fmt}</span>`;
+  return `<span class="mult-green">${fmt}</span>`;
+}
+
+function priceCell(p) {
+  if (!p || p === '—') return `<span class="price-contact">—</span>`;
+  if (p === 'Free') return `<span class="price-free-text">Free</span>`;
+  if (p.toLowerCase().startsWith('contact')) return `<span class="price-contact">Contact Sales</span>`;
+  return `<span class="price-cell">${p}</span>`;
+}
+
+function extLink(url) {
+  if (!url) return '';
+  return `<a class="ext-link" href="${url}" target="_blank" rel="noopener" title="Pricing page">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+      <polyline points="15 3 21 3 21 9"/>
+      <line x1="10" y1="14" x2="21" y2="3"/>
+    </svg>
+  </a>`;
+}
+
+function filtered() {
+  return V.filter(r => {
+    const matchFilter = currentFilter === 'all' || r[1] === currentFilter;
+    const matchSearch = !currentSearch || r[0].toLowerCase().includes(currentSearch.toLowerCase());
+    return matchFilter && matchSearch;
+  });
+}
+
+function sorted(rows) {
+  return [...rows].sort((a, b) => {
+    const av = a[sortCol] || '', bv = b[sortCol] || '';
+    return av.localeCompare(bv) * sortDir;
+  });
+}
+
+function render() {
+  const rows = sorted(filtered());
+  const tbody = document.getElementById('tbody');
+  const meta = document.getElementById('results-meta');
+
+  if (rows.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="5" class="empty">No vendors match your search.</td></tr>`;
+    meta.textContent = '';
+    return;
+  }
+
+  meta.textContent = `${rows.length} vendor${rows.length !== 1 ? 's' : ''}`;
+
+  tbody.innerHTML = rows.map(r => {
+    const s = slug(r[0]);
+    return `
+    <tr id="v-${s}" data-slug="${s}">
+      <td class="vendor-cell">
+        <a href="${r[5]}" target="_blank" rel="noopener">${r[0]}</a>
+        <span class="dot dot-${r[1]}"></span>
+        <a class="row-link" href="#v-${s}" data-permalink="${s}" title="Copy permalink to this vendor">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+        </a>
+      </td>
+      <td class="plan-cell" style="color:var(--n700)">${r[2]}</td>
+      <td>${priceCell(r[3])}</td>
+      <td class="base-cell">${priceCell(r[4])}</td>
+      <td class="mult-col">${multCell(r[3], r[4], r[1])}</td>
+    </tr>
+  `;
+  }).join('');
+
+  if (location.hash && location.hash.startsWith('#v-')) {
+    const el = document.getElementById(location.hash.slice(1));
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+function updateCounts() {
+  const counts = { all: V.length, free: 0, gated: 0, partial: 0, none: 0, unknown: 0 };
+  V.forEach(r => counts[r[1]]++);
+  Object.entries(counts).forEach(([k, n]) => {
+    const el = document.getElementById(`cnt-${k}`);
+    if (el) el.textContent = n;
+  });
+  const freeEl = document.getElementById('free-count');
+  if (freeEl) freeEl.textContent = counts.free;
+  const totalEl = document.getElementById('total-count');
+  if (totalEl) totalEl.textContent = V.length;
+}
+
+// Search
+document.getElementById('search').addEventListener('input', e => {
+  currentSearch = e.target.value.trim();
+  render();
+});
+
+// Filters
+document.getElementById('filters').addEventListener('click', e => {
+  const btn = e.target.closest('.filter-btn');
+  if (!btn) return;
+  currentFilter = btn.dataset.filter;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+});
+
+// Sort
+document.querySelectorAll('thead th[data-col]').forEach(th => {
+  th.addEventListener('click', () => {
+    const col = +th.dataset.col;
+    if (sortCol === col) {
+      sortDir *= -1;
+    } else {
+      sortCol = col;
+      sortDir = 1;
+    }
+    document.querySelectorAll('thead th').forEach(t => t.classList.remove('sort-asc','sort-desc'));
+    th.classList.add(sortDir === 1 ? 'sort-asc' : 'sort-desc');
+    render();
+  });
+});
+
+// Export CSV (current filter + sort)
+document.getElementById('export-csv-btn').addEventListener('click', () => {
+  const rows = sorted(filtered());
+  const header = ['vendor','status','plan_required','scim_price','base_plan_price','pricing_page_url'];
+  const lines = [header, ...rows.map(r => r.map(v => `"${String(v).replace(/"/g,'""')}"`))];
+  const csv = lines.map(l => l.join(',')).join('\n');
+  const a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+  a.download = 'scim-tax.csv';
+  a.click();
+});
+
+// Export JSON (current filter + sort)
+document.getElementById('export-json-btn').addEventListener('click', () => {
+  const rows = sorted(filtered()).map(r => ({
+    vendor: r[0], status: r[1], plan_required: r[2],
+    scim_price: r[3], base_plan_price: r[4], pricing_page_url: r[5],
+    slug: slug(r[0])
+  }));
+  const payload = {
+    name: 'The SCIM Tax Index',
+    source: 'https://scimtax.org/',
+    license: 'CC-BY 4.0',
+    exported: new Date().toISOString().slice(0, 10),
+    filter: currentFilter,
+    count: rows.length,
+    vendors: rows
+  };
+  const a = document.createElement('a');
+  a.href = 'data:application/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(payload, null, 2));
+  a.download = 'scim-tax.json';
+  a.click();
+});
+
+// Copy permalink (delegated on tbody)
+document.getElementById('tbody').addEventListener('click', (e) => {
+  const link = e.target.closest('.row-link');
+  if (!link) return;
+  e.preventDefault();
+  const s = link.dataset.permalink;
+  const url = location.origin + location.pathname + '#v-' + s;
+  copyToClipboard(url, link);
+  history.replaceState(null, '', '#v-' + s);
+});
+
+// Copy citation buttons (any [data-copy="elementId"])
+document.querySelectorAll('[data-copy]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const el = document.getElementById(btn.dataset.copy);
+    if (!el) return;
+    copyToClipboard(el.textContent.trim(), btn);
+  });
+});
+
+// Init
+updateCounts();
+render();
+</script>
+</body>
+</html>
