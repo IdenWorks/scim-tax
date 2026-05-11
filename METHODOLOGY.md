@@ -64,7 +64,7 @@ In between scheduled refreshes, individual entries can be corrected via GitHub i
 
 ## How to suggest a change
 
-- Open an issue at the [GitHub repository](https://github.com/idenhq/scim-tax/issues) with the vendor name, the change, and a link to your source.
+- Open an issue at the [GitHub repository](https://github.com/IdenWorks/scim-tax/issues) with the vendor name, the change, and a link to your source.
 - Or open a pull request directly against `data.json`.
 - All changes are reviewed before merge. We require a public source URL, not a private quote.
 

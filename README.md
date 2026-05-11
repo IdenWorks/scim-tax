@@ -49,7 +49,7 @@ SCIM Tax Index (Iden, 2026). https://scimtax.org/
 
 Found a vendor we missed? Pricing changed? Status wrong?
 
-- Open an issue: https://github.com/idenhq/scim-tax/issues
+- Open an issue: https://github.com/IdenWorks/scim-tax/issues
 - Or open a pull request modifying `index.html` (the `const V = [...]` array) and run `node build.js` to regenerate `data.csv` and `data.json`.
 
 All changes need a public source URL. Private quotes are not accepted.
