@@ -113,19 +113,20 @@
     }
 
     /* ─── Hero ──────────────────────────────── */
-    .hero { padding: 36px 0 28px; }
+    .hero { padding: 64px 0 28px; }
     .hero h1 {
-      font-size: var(--text-lg);
+      font-size: 36px;
       font-weight: 400;
       letter-spacing: -0.02em;
       line-height: 1.2;
-      margin-bottom: 12px;
+      margin-bottom: 24px;
     }
     .hero p {
       font-size: 16px;
       line-height: 1.5;
       color: var(--n700);
     }
+    .hero p + p { margin-top: 16px; }
     .hero strong { color: var(--black); font-weight: 500; }
     .hero-sub {
       font-size: var(--text-xs);
@@ -136,7 +137,7 @@
     .hero-sub a:hover { color: var(--black); text-decoration-color: var(--black); }
 
     /* ─── Methodology ───────────────────────── */
-    .methodology { padding: 36px 0 0; }
+    .methodology { padding: 36px 0; }
     .meth-prose {
       border: 1px solid var(--n200);
       padding: 20px 24px;
@@ -235,8 +236,7 @@
       margin-top: 2px;
     }
 
-    /* ─── Callouts ──────────────────────────── */
-    .callouts { padding: 36px 0; }
+    /* ─── Section labels (eyebrow) ──────────── */
     .callout-label {
       font-size: var(--text-xs);
       font-weight: 500;
@@ -245,39 +245,9 @@
       color: var(--n400);
       margin-bottom: 16px;
     }
-    .callout-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--n200);
-      border: 1px solid var(--n200);
-    }
-    .callout-card {
-      background: var(--white);
-      padding: 20px;
-    }
-    .callout-eyebrow {
-      font-size: var(--text-xs);
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--n400);
-      margin-bottom: 8px;
-    }
-    .callout-headline {
-      font-size: var(--text-sm);
-      font-weight: 500;
-      line-height: 1.4;
-      margin-bottom: 8px;
-    }
-    .callout-body {
-      font-size: var(--text-xs);
-      color: var(--n700);
-      line-height: 1.5;
-    }
 
     /* ─── Table section ─────────────────────── */
-    .table-section { padding: 36px 0 60px; }
+    .table-section { padding: 36px 0; }
 
     .controls {
       display: flex;
@@ -317,6 +287,7 @@
     .filter-group { display: flex; gap: 4px; flex-wrap: wrap; }
 
     .filter-btn {
+      position: relative;
       height: 30px;
       padding: 0 10px;
       border: 1px solid var(--n300);
@@ -335,23 +306,83 @@
     .filter-btn:hover { border-color: var(--n500); color: var(--black); }
     .filter-btn.active { background: var(--black); border-color: var(--black); color: var(--white); }
     .filter-btn .cnt { opacity: 0.6; }
+    .filter-btn[data-tip]:hover::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: calc(100% + 6px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--black);
+      color: var(--white);
+      padding: 5px 8px;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0;
+      line-height: 1.3;
+      white-space: nowrap;
+      z-index: 10;
+      pointer-events: none;
+    }
 
-    .btn-export {
+    .download-wrap {
+      position: relative;
       margin-left: auto;
+    }
+    .download-trigger {
       height: 30px;
-      padding: 0 10px;
+      width: 32px;
+      padding: 0;
       border: 1px solid var(--n300);
       background: var(--white);
-      font-size: var(--text-xs);
-      font-family: inherit;
       color: var(--n500);
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 5px;
+      justify-content: center;
       border-radius: 0;
+      transition: border-color 0.1s, color 0.1s;
     }
-    .btn-export:hover { border-color: var(--n500); color: var(--black); }
+    .download-wrap:hover .download-trigger,
+    .download-wrap:focus-within .download-trigger {
+      border-color: var(--black);
+      color: var(--black);
+    }
+    .download-menu {
+      position: absolute;
+      top: calc(100% + 3px);
+      right: 0;
+      min-width: 100%;
+      background: var(--white);
+      border: 1px solid var(--n300);
+      display: none;
+      flex-direction: column;
+      z-index: 10;
+    }
+    .download-menu::before {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: 0;
+      right: 0;
+      height: 4px;
+    }
+    .download-wrap:hover .download-menu,
+    .download-wrap:focus-within .download-menu {
+      display: flex;
+    }
+    .download-item {
+      height: 28px;
+      padding: 0 12px;
+      border: none;
+      background: var(--white);
+      font-size: var(--text-xs);
+      font-family: inherit;
+      color: var(--n700);
+      cursor: pointer;
+      text-align: left;
+      white-space: nowrap;
+    }
+    .download-item:hover { background: var(--n50); color: var(--black); }
 
     .results-meta {
       font-size: var(--text-xs);
@@ -408,6 +439,25 @@
     .dot-partial { background: #94a3b8; }
     .dot-none    { background: var(--n300); }
     .dot-unknown { background: var(--n200); }
+
+    .vendor-cell .dot[data-tip] { position: relative; cursor: help; }
+    .vendor-cell .dot[data-tip]:hover::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--black);
+      color: var(--white);
+      padding: 5px 8px;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0;
+      line-height: 1.3;
+      white-space: nowrap;
+      z-index: 10;
+      pointer-events: none;
+    }
 
     .row-link {
       opacity: 0;
@@ -483,6 +533,132 @@
     .price-contact    { color: var(--n400); }
     .price-free-text  { color: var(--green); font-weight: 500; }
 
+    /* ─── Calculator column ─────────────────── */
+    .seats-cell {
+      white-space: nowrap;
+      text-align: right;
+      vertical-align: middle;
+      font-variant-numeric: tabular-nums;
+    }
+    .seats-input {
+      width: 60px;
+      height: 24px;
+      padding: 0 6px;
+      border: 1px solid var(--n300);
+      background: var(--white);
+      font-size: var(--text-xs);
+      font-family: inherit;
+      font-variant-numeric: tabular-nums;
+      color: var(--black);
+      outline: none;
+      border-radius: 0;
+      text-align: right;
+      -moz-appearance: textfield;
+      appearance: textfield;
+    }
+    .seats-input::-webkit-inner-spin-button,
+    .seats-input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+    .seats-input::placeholder { color: var(--n400); }
+    .seats-input:focus { border-color: var(--black); }
+    .seats-input.has-value { border-color: var(--black); background: var(--n50); }
+
+    .override-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 4px;
+      font-size: 10px;
+      color: var(--n500);
+      letter-spacing: 0.02em;
+    }
+    .override-wrap.hidden { display: none; }
+    .override-input {
+      width: 54px;
+      height: 22px;
+      padding: 0 5px;
+      border: 1px dashed var(--n300);
+      background: var(--white);
+      font-size: 11px;
+      font-family: inherit;
+      font-variant-numeric: tabular-nums;
+      color: var(--n700);
+      outline: none;
+      border-radius: 0;
+      text-align: right;
+      -moz-appearance: textfield;
+      appearance: textfield;
+    }
+    .override-input::-webkit-inner-spin-button,
+    .override-input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+    .override-input:focus { border-color: var(--black); }
+    .seats-none {
+      color: var(--n400);
+      font-size: var(--text-xs);
+    }
+
+    /* ─── Fixed calculator footer ──────────── */
+    body.has-calc { padding-bottom: 88px; }
+    .calc-footer {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--white);
+      border-top: 1px solid var(--n200);
+      padding: 14px 0;
+      z-index: 100;
+      transform: translateY(100%);
+      transition: transform 0.18s ease;
+      box-shadow: 0 -4px 16px rgba(0,0,0,0.04);
+    }
+    .calc-footer.active { transform: translateY(0); }
+    .calc-footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .calc-summary { display: flex; flex-direction: column; gap: 2px; }
+    .calc-amount-row { display: flex; align-items: baseline; gap: 6px; }
+    .calc-amount {
+      font-size: 22px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      font-variant-numeric: tabular-nums;
+      color: var(--amber);
+    }
+    .calc-amount-unit { font-size: var(--text-xs); color: var(--n500); }
+    .calc-meta { font-size: var(--text-xs); color: var(--n500); }
+    .calc-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+    .calc-btn {
+      height: 32px;
+      padding: 0 12px;
+      border: 1px solid var(--n300);
+      background: var(--white);
+      font-size: var(--text-xs);
+      font-family: inherit;
+      color: var(--n700);
+      cursor: pointer;
+      border-radius: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+    }
+    .calc-btn:hover { border-color: var(--black); color: var(--black); }
+    .calc-btn-primary {
+      background: var(--black);
+      border-color: var(--black);
+      color: var(--white);
+    }
+    .calc-btn-primary:hover { background: #000; color: var(--white); }
+    @media (max-width: 700px) {
+      .calc-footer-inner { flex-direction: column; align-items: stretch; gap: 10px; }
+      .calc-actions { justify-content: flex-end; }
+      body.has-calc { padding-bottom: 148px; }
+    }
+
     .ext-link {
       color: var(--n400);
       font-size: var(--text-xs);
@@ -516,13 +692,12 @@
     /* ─── Responsive ────────────────────────── */
     @media (max-width: 700px) {
       .stats { grid-template-columns: repeat(2, 1fr); }
-      .callout-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 500px) {
-      .hero h1 { font-size: 22px; }
+      .hero h1 { font-size: 28px; }
       .controls { flex-direction: column; align-items: flex-start; }
       .search-wrap { flex: 0 0 100%; width: 100%; }
-      .btn-export { margin-left: 0; }
+      .download-wrap { margin-left: 0; }
     }
   </style>
 </head>
@@ -539,9 +714,12 @@
 
   <section class="hero">
     <div class="container">
-      <h1>You're paying extra to manage your own users.</h1>
+      <h1>SCIM Tax</h1>
       <p>
         <strong>SCIM</strong> is the protocol IT teams use to automate user provisioning and deprovisioning. Most SaaS vendors support it. Most lock it behind an Enterprise plan, and many won't say what it costs until you sit through a sales call. ~300 vendors surveyed below.
+      </p>
+      <p>
+        Simply said, it's the tax (a very expensive one) you're paying to manage your own users.
       </p>
       <p class="hero-sub">
         Open dataset, CC-BY 4.0. <a href="#methodology">Methodology</a> · <a href="#cite">Cite</a> · <a href="#download">Download CSV / JSON</a>
@@ -572,26 +750,69 @@
     </div>
   </div>
 
-  <section class="callouts">
+
+  <section class="table-section">
     <div class="container">
-      <p class="callout-label">Notable findings</p>
-      <div class="callout-grid">
-        <div class="callout-card">
-          <div class="callout-eyebrow">The Okta Irony</div>
-          <div class="callout-headline">$4/user/mo extra, from the SSO company</div>
-          <div class="callout-body">Okta sells SSO and user provisioning as its core product. Their base Starter plan ($6/user/mo) does not include SCIM provisioning. Lifecycle Management is a $4/user/mo add-on, charged on top of their own SSO product. Auth0, which Okta also owns, includes SCIM on the Free tier.</div>
+
+      <div class="controls">
+        <div class="search-wrap">
+          <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input class="search-input" type="search" id="search" placeholder="Search vendors…" autocomplete="off">
         </div>
-        <div class="callout-card">
-          <div class="callout-eyebrow">The Biggest Jumps</div>
-          <div class="callout-headline">Shopify: $29/mo to $2,300/mo</div>
-          <div class="callout-body">Shopify's Basic plan is $29/mo. SCIM is Plus-only at $2,300/mo, a 79× jump. Amplitude jumps from $49/mo self-serve to $22,000+/yr (37×). Grafana Cloud goes from $19/mo to $299/mo (16×). Salesforce climbs from $25/user to $175/user (7×).</div>
+
+        <div class="filter-group" id="filters">
+          <button class="filter-btn active" data-filter="all" data-tip="Show every vendor in the dataset">All <span class="cnt" id="cnt-all"></span></button>
+          <button class="filter-btn" data-filter="free" data-tip="SCIM included on all plans, no upcharge">
+            <span class="dot" style="background:#16a34a"></span>
+            No Tax <span class="cnt" id="cnt-free"></span>
+          </button>
+          <button class="filter-btn" data-filter="gated" data-tip="Full SCIM, but locked behind Enterprise tier or paid add-on">
+            <span class="dot" style="background:#f59e0b"></span>
+            Gated <span class="cnt" id="cnt-gated"></span>
+          </button>
+          <button class="filter-btn" data-filter="partial" data-tip="Limited support: IdP-specific, JIT-only, or missing operations">
+            <span class="dot" style="background:#94a3b8"></span>
+            Partial <span class="cnt" id="cnt-partial"></span>
+          </button>
+          <button class="filter-btn" data-filter="none" data-tip="No SCIM offered at any tier">
+            <span class="dot" style="background:#d4d4d8"></span>
+            No SCIM <span class="cnt" id="cnt-none"></span>
+          </button>
+          <button class="filter-btn" data-filter="unknown" data-tip="Pricing or support status not publicly disclosed">
+            <span class="dot" style="background:#e4e4e7"></span>
+            Unknown <span class="cnt" id="cnt-unknown"></span>
+          </button>
         </div>
-        <div class="callout-card">
-          <div class="callout-eyebrow">It Doesn't Have To Be This Way</div>
-          <div class="callout-headline">Some vendors just include it</div>
-          <div class="callout-body">Auth0 includes SCIM on the Free tier. PagerDuty and Ramp include it on all plans at no extra charge. BitWarden includes it at $4/user/mo, not Enterprise-gated. JumpCloud includes it as part of its identity-first model. The SCIM tax is a choice, not a technical constraint.</div>
+
+        <div class="download-wrap">
+          <button class="download-trigger" type="button" aria-label="Download dataset">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </button>
+          <div class="download-menu" role="menu">
+            <button class="download-item" id="export-csv-btn" type="button" role="menuitem">CSV</button>
+            <button class="download-item" id="export-json-btn" type="button" role="menuitem">JSON</button>
+          </div>
         </div>
       </div>
+
+      <div class="results-meta" id="results-meta"></div>
+
+      <div class="tbl-wrap">
+        <table id="vendor-table">
+          <thead>
+            <tr>
+              <th data-col="0">Vendor</th>
+              <th data-col="2">Plan Required</th>
+              <th data-col="3">SCIM Price</th>
+              <th data-col="4">Team Plan</th>
+              <th style="cursor:default" title="Your seats">Seats</th>
+              <th class="mult-col">Jump</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+
     </div>
   </section>
 
@@ -610,69 +831,6 @@
         <p>Prices reflect publicly listed annual billing in US dollars where available. The full <a href="METHODOLOGY.md">methodology document</a> includes source-by-source reconciliation, edge cases, and update rules. Found an issue? <a href="https://github.com/IdenWorks/scim-tax/issues" target="_blank" rel="noopener">Open an issue</a>.</p>
         <p class="meth-next">Data timestamp: April 2026. Next scheduled update: Q1 2027.</p>
       </div>
-    </div>
-  </section>
-
-  <section class="table-section">
-    <div class="container">
-
-      <div class="controls">
-        <div class="search-wrap">
-          <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input class="search-input" type="search" id="search" placeholder="Search vendors…" autocomplete="off">
-        </div>
-
-        <div class="filter-group" id="filters">
-          <button class="filter-btn active" data-filter="all">All <span class="cnt" id="cnt-all"></span></button>
-          <button class="filter-btn" data-filter="free">
-            <span class="dot" style="background:#16a34a"></span>
-            No Tax <span class="cnt" id="cnt-free"></span>
-          </button>
-          <button class="filter-btn" data-filter="gated">
-            <span class="dot" style="background:#f59e0b"></span>
-            Gated <span class="cnt" id="cnt-gated"></span>
-          </button>
-          <button class="filter-btn" data-filter="partial">
-            <span class="dot" style="background:#94a3b8"></span>
-            Partial <span class="cnt" id="cnt-partial"></span>
-          </button>
-          <button class="filter-btn" data-filter="none">
-            <span class="dot" style="background:#d4d4d8"></span>
-            No SCIM <span class="cnt" id="cnt-none"></span>
-          </button>
-          <button class="filter-btn" data-filter="unknown">
-            <span class="dot" style="background:#e4e4e7"></span>
-            Unknown <span class="cnt" id="cnt-unknown"></span>
-          </button>
-        </div>
-
-        <button class="btn-export" id="export-csv-btn">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          CSV
-        </button>
-        <button class="btn-export" id="export-json-btn" style="margin-left:4px">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          JSON
-        </button>
-      </div>
-
-      <div class="results-meta" id="results-meta"></div>
-
-      <div class="tbl-wrap">
-        <table id="vendor-table">
-          <thead>
-            <tr>
-              <th data-col="0">Vendor</th>
-              <th data-col="2">Plan Required</th>
-              <th data-col="3">SCIM Price</th>
-              <th data-col="4">Team Plan</th>
-              <th class="mult-col">Jump</th>
-            </tr>
-          </thead>
-          <tbody id="tbody"></tbody>
-        </table>
-      </div>
-
     </div>
   </section>
 
@@ -728,6 +886,25 @@
   </section>
 
 </main>
+
+<div class="calc-footer" id="calc-footer" aria-hidden="true">
+  <div class="container calc-footer-inner">
+    <div class="calc-summary">
+      <div class="calc-amount-row">
+        <span class="calc-amount">$<span id="calc-total">0</span></span>
+        <span class="calc-amount-unit">/yr SCIM tax</span>
+      </div>
+      <div class="calc-meta">
+        across <span id="calc-count">0</span> apps · <span id="calc-seats">0</span> seats
+      </div>
+    </div>
+    <div class="calc-actions">
+      <button class="calc-btn" id="calc-clear" type="button">Clear</button>
+      <button class="calc-btn" id="calc-download" type="button">Download CSV</button>
+      <button class="calc-btn calc-btn-primary" id="calc-share" type="button">Copy shareable link</button>
+    </div>
+  </div>
+</div>
 
 <footer>
   <div class="container">
@@ -1141,13 +1318,21 @@ function sorted(rows) {
   });
 }
 
+const STATUS_TIP = {
+  free:    'No SCIM tax',
+  gated:   'Full SCIM but gated',
+  partial: 'Limited SCIM',
+  none:    'No SCIM',
+  unknown: 'Unknown',
+};
+
 function render() {
   const rows = sorted(filtered());
   const tbody = document.getElementById('tbody');
   const meta = document.getElementById('results-meta');
 
   if (rows.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="5" class="empty">No vendors match your search.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="6" class="empty">No vendors match your search.</td></tr>`;
     meta.textContent = '';
     return;
   }
@@ -1160,14 +1345,15 @@ function render() {
     <tr id="v-${s}" data-slug="${s}">
       <td class="vendor-cell">
         <a href="${r[5]}" target="_blank" rel="noopener">${r[0]}</a>
-        <span class="dot dot-${r[1]}"></span>
-        <a class="row-link" href="#v-${s}" data-permalink="${s}" title="Copy permalink to this vendor">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+        <span class="dot dot-${r[1]}" data-tip="${STATUS_TIP[r[1]] || ''}"></span>
+        <a class="row-link" href="${r[5]}" target="_blank" rel="noopener" title="Open pricing page">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
         </a>
       </td>
       <td class="plan-cell" style="color:var(--n700)">${r[2]}</td>
       <td>${priceCell(r[3])}</td>
       <td class="base-cell">${priceCell(r[4])}</td>
+      <td class="seats-cell">${seatsCell(s, r)}</td>
       <td class="mult-col">${multCell(r[3], r[4], r[1])}</td>
     </tr>
   `;
@@ -1258,17 +1444,6 @@ document.getElementById('export-json-btn').addEventListener('click', () => {
   a.click();
 });
 
-// Copy permalink (delegated on tbody)
-document.getElementById('tbody').addEventListener('click', (e) => {
-  const link = e.target.closest('.row-link');
-  if (!link) return;
-  e.preventDefault();
-  const s = link.dataset.permalink;
-  const url = location.origin + location.pathname + '#v-' + s;
-  copyToClipboard(url, link);
-  history.replaceState(null, '', '#v-' + s);
-});
-
 // Copy citation buttons (any [data-copy="elementId"])
 document.querySelectorAll('[data-copy]').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -1278,9 +1453,178 @@ document.querySelectorAll('[data-copy]').forEach(btn => {
   });
 });
 
+// ─── SCIM Tax Calculator ───────────────────────────
+const BY_SLUG = {};
+V.forEach(r => { BY_SLUG[slug(r[0])] = r; });
+
+const DEFAULT_OVERRIDE = 20;
+let SELECTIONS = {};
+
+function parsePriceMonthly(str) {
+  const v = extractMonthly(str);
+  if (v === null) return null;
+  return { amount: v, perUser: /\/\s*user/i.test(str || '') };
+}
+
+function isParsable(r) {
+  if (r[1] === 'free' || r[1] === 'none') return true;
+  return parsePriceMonthly(r[3]) !== null && parsePriceMonthly(r[4]) !== null;
+}
+
+function computeRowMonthly(r, seats, override) {
+  if (!seats || seats <= 0) return 0;
+  if (r[1] === 'free' || r[1] === 'none') return 0;
+  const scim = parsePriceMonthly(r[3]);
+  const team = parsePriceMonthly(r[4]);
+  if (scim === null || team === null) {
+    const o = (override !== undefined && override !== null) ? override : DEFAULT_OVERRIDE;
+    return o * seats;
+  }
+  const scimMo = scim.perUser ? scim.amount * seats : scim.amount;
+  const teamMo = team.perUser ? team.amount * seats : team.amount;
+  return Math.max(0, scimMo - teamMo);
+}
+
+function seatsCell(s, r) {
+  if (r[1] === 'none') return '<span class="seats-none">—</span>';
+  const sel = SELECTIONS[s] || {};
+  const seats = sel.seats || '';
+  const seatsHas = seats > 0 ? ' has-value' : '';
+  let html = `<input type="number" class="seats-input${seatsHas}" min="0" data-slug="${s}" data-role="seats" value="${seats}" placeholder="0">`;
+  if (!isParsable(r)) {
+    const o = (sel.override !== undefined) ? sel.override : DEFAULT_OVERRIDE;
+    const hide = seats > 0 ? '' : ' hidden';
+    html += `<div class="override-wrap${hide}">$<input type="number" class="override-input" min="0" step="0.5" data-slug="${s}" data-role="override" value="${o}">/user/mo</div>`;
+  }
+  return html;
+}
+
+function recomputeCalc() {
+  let total = 0, count = 0, seatsTotal = 0;
+  for (const s in SELECTIONS) {
+    const sel = SELECTIONS[s];
+    if (!sel.seats || sel.seats <= 0) continue;
+    const r = BY_SLUG[s];
+    if (!r) continue;
+    total += computeRowMonthly(r, sel.seats, sel.override) * 12;
+    count++;
+    seatsTotal += sel.seats;
+  }
+  document.getElementById('calc-total').textContent = Math.round(total).toLocaleString('en-US');
+  document.getElementById('calc-count').textContent = count;
+  document.getElementById('calc-seats').textContent = seatsTotal.toLocaleString('en-US');
+  const footer = document.getElementById('calc-footer');
+  footer.classList.toggle('active', count > 0);
+  footer.setAttribute('aria-hidden', count > 0 ? 'false' : 'true');
+  document.body.classList.toggle('has-calc', count > 0);
+  updateHash();
+}
+
+function updateHash() {
+  const parts = [];
+  for (const s in SELECTIONS) {
+    const sel = SELECTIONS[s];
+    if (!sel.seats || sel.seats <= 0) continue;
+    parts.push(sel.override !== undefined
+      ? `${s}:${sel.seats}:${sel.override}`
+      : `${s}:${sel.seats}`);
+  }
+  const newHash = parts.length ? '#calc=' + parts.join(',') : '';
+  const current = location.hash;
+  if (newHash !== current) {
+    history.replaceState(null, '', location.pathname + newHash);
+  }
+}
+
+function parseHash() {
+  const m = location.hash.match(/^#calc=(.+)$/);
+  if (!m) return;
+  m[1].split(',').forEach(p => {
+    const bits = p.split(':');
+    const s = bits[0];
+    const seats = parseInt(bits[1], 10);
+    if (!s || !seats || seats <= 0) return;
+    SELECTIONS[s] = { seats };
+    if (bits[2] !== undefined) {
+      const o = parseFloat(bits[2]);
+      if (!isNaN(o)) SELECTIONS[s].override = o;
+    }
+  });
+}
+
+document.getElementById('tbody').addEventListener('input', (e) => {
+  const inp = e.target;
+  if (!inp.matches || !(inp.matches('.seats-input') || inp.matches('.override-input'))) return;
+  const s = inp.dataset.slug;
+  const role = inp.dataset.role;
+  if (!SELECTIONS[s]) SELECTIONS[s] = {};
+
+  if (role === 'seats') {
+    const v = inp.value === '' ? null : parseInt(inp.value, 10);
+    if (!v || v <= 0 || isNaN(v)) {
+      delete SELECTIONS[s];
+      inp.classList.remove('has-value');
+    } else {
+      SELECTIONS[s].seats = v;
+      inp.classList.add('has-value');
+    }
+    const row = inp.closest('tr');
+    const ow = row && row.querySelector('.override-wrap');
+    if (ow) ow.classList.toggle('hidden', !v || v <= 0);
+  } else if (role === 'override') {
+    const v = inp.value === '' ? null : parseFloat(inp.value);
+    if (v === null || isNaN(v) || v < 0) {
+      delete SELECTIONS[s].override;
+    } else {
+      SELECTIONS[s].override = v;
+    }
+  }
+  recomputeCalc();
+});
+
+document.getElementById('calc-clear').addEventListener('click', () => {
+  SELECTIONS = {};
+  history.replaceState(null, '', location.pathname);
+  render();
+  recomputeCalc();
+});
+
+document.getElementById('calc-download').addEventListener('click', () => {
+  const header = ['vendor', 'status', 'seats', 'tax_per_user_per_mo_usd', 'annual_tax_usd', 'estimated'];
+  const lines = [header];
+  let total = 0;
+  for (const s in SELECTIONS) {
+    const sel = SELECTIONS[s];
+    if (!sel.seats || sel.seats <= 0) continue;
+    const r = BY_SLUG[s];
+    if (!r) continue;
+    const mo = computeRowMonthly(r, sel.seats, sel.override);
+    const perUser = mo / sel.seats;
+    const annual = mo * 12;
+    total += annual;
+    lines.push([r[0], r[1], sel.seats, perUser.toFixed(2), annual.toFixed(2), isParsable(r) ? 'no' : 'yes']);
+  }
+  lines.push(['TOTAL', '', '', '', total.toFixed(2), '']);
+  const csv = lines.map(l => l.map(v =>
+    typeof v === 'string' && /[",\n]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v
+  ).join(',')).join('\n');
+  const a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+  a.download = 'my-scim-tax.csv';
+  a.click();
+});
+
+document.getElementById('calc-share').addEventListener('click', (e) => {
+  updateHash();
+  const url = location.origin + location.pathname + location.hash;
+  copyToClipboard(url, e.currentTarget);
+});
+
 // Init
+parseHash();
 updateCounts();
 render();
+recomputeCalc();
 </script>
 </body>
 </html>
