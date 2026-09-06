@@ -17,13 +17,15 @@ The result is sometimes called the "SCIM tax": the systematic premium paid acros
 
 | File | Purpose |
 |---|---|
-| `index.html` | The published site. Self-contained, no build step required. |
-| `data.csv` | Full dataset as CSV. CC-BY 4.0. |
-| `data.json` | Full dataset as JSON. CC-BY 4.0. |
+| `data.json` | The dataset, schema v3. Source of truth. CC-BY 4.0. |
+| `data.csv` | The same dataset flattened to CSV. Generated. CC-BY 4.0. |
+| `index.html` | The published site. Generated table, otherwise hand-written. |
+| `badge/{slug}.svg` | One embeddable status badge per vendor, plus `badge/index.json`. Generated. |
+| `research/2026-09/` | Schema v3 definition, category list, and the merge script used for the September 2026 refresh. |
 | `METHODOLOGY.md` | How vendors were selected and how each row was recorded. |
 | `LICENSE` | CC-BY 4.0 terms. |
 | `CHANGELOG.md` | Version-to-version changes. |
-| `build.js` | Extracts `data.csv` and `data.json` from `index.html`. Run after editing the vendor list. |
+| `build.js` | Reads `data.json` and regenerates the table in `index.html`, `data.csv` and `badge/`. Run after editing the dataset. |
 | `scim-tax-master.md` | Long-form research notes (raw source). |
 | `notsosso-scim-pricing.md` | Source extract: notsosso.com. |
 | `ssotax-scim-pricing.md` | Source extract: sso.tax. |
@@ -39,6 +41,12 @@ curl -O https://scimtax.org/data.csv
 curl -O https://scimtax.org/data.json
 ```
 
+Embed a vendor badge (one SVG per vendor, rebuilt with every release):
+
+```html
+<a href="https://scimtax.org/#v-notion"><img src="https://scimtax.org/badge/notion.svg" alt="Notion: SCIM gated"></a>
+```
+
 Cite as:
 
 ```
@@ -50,7 +58,7 @@ SCIM Tax Index (Iden, 2026). https://scimtax.org/
 Found a vendor we missed? Pricing changed? Status wrong?
 
 - Open an issue: https://github.com/IdenWorks/scim-tax/issues
-- Or open a pull request modifying `index.html` (the `const V = [...]` array) and run `node build.js` to regenerate `data.csv` and `data.json`.
+- Or open a pull request modifying `data.json` and run `node build.js` to regenerate `index.html`, `data.csv` and `badge/`. Field definitions: `research/2026-09/SCHEMA.md`.
 
 All changes need a public source URL. Private quotes are not accepted.
 
@@ -69,7 +77,7 @@ python3 -m http.server 8000
 # open http://localhost:8000
 ```
 
-To regenerate the raw data files after editing the vendor list:
+To regenerate the site, CSV and badges after editing `data.json`:
 
 ```bash
 node build.js
