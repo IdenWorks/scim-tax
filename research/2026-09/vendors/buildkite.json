@@ -1,0 +1,923 @@
+{
+ "slug": "buildkite",
+ "vendor": "Buildkite",
+ "vendor_url": "https://buildkite.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Buildkite",
+  "slug": "buildkite",
+  "category": "Developer Tools & CI/CD",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Pro",
+  "team_price_text": "Pro: $30 per active user/month",
+  "team_price_per_user_mo": 30,
+  "price_multiplier": null,
+  "sso_plan": "Pro",
+  "sso_price_per_user_mo": 30,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": 30,
+  "scim_ops": {
+   "create": true,
+   "update": null,
+   "deactivate": true,
+   "delete": null,
+   "groups": false
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "via_generic",
+   "google": "sso_only",
+   "onelogin": "sso_only",
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://buildkite.com/pricing/",
+  "docs_url": "https://buildkite.com/docs/platform/sso/okta",
+  "evidence": "Buildkite's pricing page lists \"SCIM, custom SAML & ADFS\" only on the Enterprise plan (Custom, Contact sales), and the Okta guide says \"Buildkite customers on the Enterprise plan can optionally enable automatic deprovisioning for their Buildkite users.\"",
+  "notes": "New row. SSO (Okta, OneLogin, GitHub, Google Workspace OpenID) starts on Pro ($30 per active user/month; the pricing page shows no annual/monthly toggle, so billing basis is unstated); Entra ID, custom SAML, ADFS and SCIM are Enterprise-only, and Enterprise carries a 30 user minimum. SCIM is deprovisioning-focused: an IdP SCIM create only makes a lightweight tracking record, the real account is created by JIT at first SSO login, and SCIM deactivation removes the user from the organization (their personal Buildkite account is untouched). Documented for Okta (OIN app) and Entra (non-gallery app); custom SAML needs a support-enabled 'SCIM for Custom SAML' flag. Group sync is turned off in the Entra setup; team mapping happens through the SAML 'teams' attribute. The REST API (members, invitations, teams) is documented with no plan gate; the audit events API is Enterprise-only.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Free",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "$0",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c4",
+    "c7",
+    "c6",
+    "c8",
+    "c38",
+    "c34"
+   ],
+   "notes": "Up to 5 users."
+  },
+  {
+   "name": "Pro",
+   "price_text": "$30 per active user/month",
+   "price_per_user_mo": 30,
+   "billing": "unknown",
+   "sso": true,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c3",
+    "c7",
+    "c6",
+    "c8",
+    "c9",
+    "c38",
+    "c34"
+   ],
+   "notes": "Up to 50 users. SSO with Okta, OneLogin, GitHub and Google Workspace (OpenID); no annual/monthly toggle on the pricing page."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Custom (Contact sales)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c1",
+    "c2",
+    "c5",
+    "c6",
+    "c10",
+    "c34"
+   ],
+   "notes": "30 user minimum. Adds SCIM, custom SAML, ADFS, Entra ID SSO and the audit log."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c2",
+   "c6",
+   "c13",
+   "c17",
+   "c22"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": "bearer",
+   "token_source": "Organization Settings > Single Sign On > the SSO provider's settings (Base URL and API Token)",
+   "token_expiry": null,
+   "cite": [
+    "c18"
+   ],
+   "notes": "The docs call it an API Token; Entra takes it as the Secret Token. Method is recorded as bearer because Okta/Entra send it as a bearer token; the SCIM base URL pattern is not published (shown per provider in settings)."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c14",
+    "c22"
+   ],
+   "notes": "No SCIM API reference is published; only user create and deactivate are documented."
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": null,
+   "group_push": false,
+   "group_membership": null,
+   "cite": [
+    "c14",
+    "c15",
+    "c16",
+    "c22",
+    "c26"
+   ],
+   "notes": "SCIM create only makes a tracking record (name, email, active); the account and org membership are created by JIT at first SSO login."
+  },
+  "deprovision": {
+   "action": "remove_from_org",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "The user is removed from the Buildkite organization; their personal Buildkite account and other organization memberships are not affected.",
+   "cite": [
+    "c12",
+    "c22"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "active",
+    "name.givenName",
+    "name.familyName"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": [
+    "c15",
+    "c24",
+    "c25"
+   ],
+   "notes": "From the Entra mapping instructions (keep exactly these four mappings); the Okta guide says the tracking record stores name, email and active status."
+  },
+  "roles": {
+   "supported": false,
+   "how": "Not via SCIM. Admin flag and team membership/role (member or maintainer) are set from SAML attributes (admin, teams) at login.",
+   "cite": [
+    "c21"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SCIM create does not create a Buildkite account or org membership; JIT at first SSO login does.",
+    "cite": [
+     "c15",
+     "c16"
+    ]
+   },
+   {
+    "text": "Users created by JIT before SCIM was configured have no SCIM record and cannot be deactivated until re-synced from Okta.",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "text": "SCIM for custom SAML providers needs a feature flag enabled by Buildkite support.",
+    "cite": [
+     "c19"
+    ]
+   },
+   {
+    "text": "Entra group provisioning must be disabled.",
+    "cite": [
+     "c26"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c27",
+   "c36",
+   "c38"
+  ],
+  "plan": "Free",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://api.buildkite.com/v2",
+  "docs_url": "https://buildkite.com/docs/apis/rest-api/organizations/members",
+  "auth": {
+   "methods": [
+    "api_key"
+   ],
+   "scopes": [
+    "read_organizations",
+    "write_organizations",
+    "read_organization_invitations",
+    "write_organization_invitations",
+    "read_teams",
+    "write_teams",
+    "view_teams",
+    "read_audit_events"
+   ],
+   "cite": [
+    "c36",
+    "c30"
+   ],
+   "notes": "API access tokens sent as Bearer; GraphQL API also available."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": false,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c27",
+    "c29",
+    "c42",
+    "c43",
+    "c32",
+    "c33"
+   ],
+   "notes": "Users join by invitation (or JIT); delete_user = remove the member from the organization. Update covers role (admin/member) and sso_mode only."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/v2/organizations/{org.slug}/members",
+    "purpose": "List organization members",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v2/organizations/{org.slug}/members/{user.uuid}",
+    "purpose": "Get an organization member",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/v2/organizations/{org.slug}/members/{user.uuid}",
+    "purpose": "Update a member's role or SSO mode",
+    "cite": [
+     "c28",
+     "c29"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v2/organizations/{org.slug}/members/{user.uuid}",
+    "purpose": "Remove an organization member",
+    "cite": [
+     "c28",
+     "c30"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v2/organizations/{org.slug}/invitations",
+    "purpose": "List invitations",
+    "cite": [
+     "c31",
+     "c43"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v2/organizations/{org.slug}/invitations/{uuid}",
+    "purpose": "Get an invitation",
+    "cite": [
+     "c31",
+     "c43"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v2/organizations/{org.slug}/invitations",
+    "purpose": "Create invitations",
+    "cite": [
+     "c31",
+     "c43"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v2/organizations/{org.slug}/invitations/{uuid}",
+    "purpose": "Revoke an invitation",
+    "cite": [
+     "c31",
+     "c43"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v2/organizations/{org.slug}/teams",
+    "purpose": "List teams",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v2/organizations/{org.slug}/teams/{team.uuid}",
+    "purpose": "Get a team",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v2/organizations/{org.slug}/teams",
+    "purpose": "Create a team",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/v2/organizations/{org.slug}/teams/{team.uuid}",
+    "purpose": "Update a team",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v2/organizations/{org.slug}/teams/{team.uuid}",
+    "purpose": "Delete a team",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v2/organizations/{org.slug}/teams/{team.uuid}/members",
+    "purpose": "List team members",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v2/organizations/{org.slug}/teams/{team.uuid}/members/",
+    "purpose": "Add a team member",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/v2/organizations/{org.slug}/teams/{team.uuid}/members/{user.uuid}",
+    "purpose": "Update a team member's role",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v2/organizations/{org.slug}/teams/{team.uuid}/members/{user.uuid}",
+    "purpose": "Remove a team member",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v2/organizations/{org.slug}/audit_events",
+    "purpose": "List audit events (Enterprise)",
+    "cite": [
+     "c35",
+     "c34"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Enterprise",
+   "cite": [
+    "c34",
+    "c35"
+   ]
+  },
+  "rate_limits": {
+   "text": "Default 200 REST requests per minute per organization and 50 per user; GraphQL 20,000 complexity points per 5 minutes per organization.",
+   "cite": [
+    "c37"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "No API endpoint creates a user directly; members are added by invitation or SSO JIT.",
+    "cite": [
+     "c43",
+     "c11"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/buildkite/",
+   "cite": [
+    "c39",
+    "c13",
+    "c14"
+   ]
+  },
+  "entra": {
+   "listed": false,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c23",
+    "c22"
+   ],
+   "notes": "Set up as a non-gallery enterprise app with custom SAML and generic SCIM; no Microsoft Learn tutorial found."
+  },
+  "google": {
+   "listed": null,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c41"
+   ],
+   "notes": "Google Workspace SSO via OpenID (Pro) or SAML (Enterprise); no provisioning documented."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c40"
+   ],
+   "notes": "Buildkite's OneLogin guide covers SSO only."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "both",
+  "csv_import": null,
+  "other_sync": "SAML 'teams' attribute maps IdP groups to Buildkite teams at login",
+  "docs_public": true,
+  "cite": [
+   "c11",
+   "c21",
+   "c41"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://buildkite.com/pricing/",
+   "title": "Buildkite Pricing",
+   "quote": "Enterprise Plan For organizations that need enterprise-grade security, compliance, and scale Custom Contact sales",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://buildkite.com/pricing/",
+   "title": "Buildkite Pricing",
+   "quote": "SCIM, custom SAML & ADFS",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://buildkite.com/pricing/",
+   "title": "Buildkite Pricing",
+   "quote": "For growing engineering teams $ 30 per active user/month",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://buildkite.com/pricing/",
+   "title": "Buildkite Pricing",
+   "quote": "Free Plan For solo developers and small teams $ 0",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://buildkite.com/pricing/",
+   "title": "Buildkite Pricing",
+   "quote": "Active users Up to 5 Up to 50 Unlimited 30 user minimum",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://buildkite.com/pricing/",
+   "title": "Buildkite Pricing",
+   "quote": "SCIM support for automatic user management, and advanced SSO providers.",
+   "accessed": "2026-10-05",
+   "page_url": null,
+   "interaction": "expand the Security & audit section of the plan details table"
+  },
+  {
+   "id": "c7",
+   "url": "https://buildkite.com/pricing/",
+   "title": "Buildkite Pricing",
+   "quote": "Connect an SSO provider to simplify and protect access to your organization's data.",
+   "accessed": "2026-10-05",
+   "page_url": null,
+   "interaction": "expand the Security & audit section of the plan details table"
+  },
+  {
+   "id": "c8",
+   "url": "https://buildkite.com/docs/platform/sso",
+   "title": "Single sign-on support | Buildkite Documentation",
+   "quote": "SSO capabilities are only available to Buildkite customers on the Pro or Enterprise plan.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://buildkite.com/docs/platform/sso",
+   "title": "Single sign-on support | Buildkite Documentation",
+   "quote": "Okta (Pro and Enterprise plans)",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://buildkite.com/docs/platform/sso",
+   "title": "Single sign-on support | Buildkite Documentation",
+   "quote": "Microsoft Entra ID (Enterprise plan only)",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c11",
+   "url": "https://buildkite.com/docs/platform/sso",
+   "title": "Single sign-on support | Buildkite Documentation",
+   "quote": "Just-in-time user provisioning (JIT provisioning) creates accounts only when needed.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://buildkite.com/docs/platform/sso",
+   "title": "Single sign-on support | Buildkite Documentation",
+   "quote": "You will need to manually remove them from your Buildkite organization. This will not affect access to the user's personal account or any other organizations they are a member of. For Buildkite customers on an Enterprise plan, you can use SCIM deprovisioning to automate this removal.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://buildkite.com/docs/platform/sso/okta",
+   "title": "Single sign-on with Okta | Buildkite Documentation",
+   "quote": "Buildkite customers on the Enterprise plan can optionally enable automatic deprovisioning for their Buildkite users.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c14",
+   "url": "https://buildkite.com/docs/platform/sso/okta",
+   "title": "Single sign-on with Okta | Buildkite Documentation",
+   "quote": "Supported SCIM features Create users Deactivate users (deprovisioning)",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://buildkite.com/docs/platform/sso/okta",
+   "title": "Single sign-on with Okta | Buildkite Documentation",
+   "quote": "This creates a lightweight tracking record storing the user's name, email, and active status. It does not create a Buildkite account, add the user to your organization, or trigger billing.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://buildkite.com/docs/platform/sso/okta",
+   "title": "Single sign-on with Okta | Buildkite Documentation",
+   "quote": "Provisioning is handled by JIT on first login. Deprovisioning is handled by SCIM when a user is unassigned in Okta.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c17",
+   "url": "https://buildkite.com/docs/platform/sso/okta",
+   "title": "Single sign-on with Okta | Buildkite Documentation",
+   "quote": "You need an enabled Okta SSO Provider before you can set up SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c18",
+   "url": "https://buildkite.com/docs/platform/sso/okta",
+   "title": "Single sign-on with Okta | Buildkite Documentation",
+   "quote": "you will need the Base URL and API Token from your Okta SSO Provider Settings",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c19",
+   "url": "https://buildkite.com/docs/platform/sso/okta",
+   "title": "Single sign-on with Okta | Buildkite Documentation",
+   "quote": "if you are using a custom provider, please contact support@buildkite.com to have the 'SCIM for Custom SAML' feature flag enabled.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c20",
+   "url": "https://buildkite.com/docs/platform/sso/okta",
+   "title": "Single sign-on with Okta | Buildkite Documentation",
+   "quote": "If users were already provisioned in Buildkite using JIT before SCIM was configured, Okta has no SCIM tracking record for them and cannot deactivate them.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c21",
+   "url": "https://buildkite.com/docs/platform/sso/okta",
+   "title": "Single sign-on with Okta | Buildkite Documentation",
+   "quote": "teams A comma separated list of team UUIDs.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c22",
+   "url": "https://buildkite.com/docs/platform/sso/azure-ad",
+   "title": "Single sign-on with Microsoft Entra ID | Buildkite Documentation",
+   "quote": "Buildkite customers on the Enterprise plan can automatically add and remove user accounts from their Buildkite organization using the SCIM provisioning settings in Microsoft Entra ID.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c23",
+   "url": "https://buildkite.com/docs/platform/sso/azure-ad",
+   "title": "Single sign-on with Microsoft Entra ID | Buildkite Documentation",
+   "quote": "Integrate any other application you don't find in the gallery (Non-gallery)",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c24",
+   "url": "https://buildkite.com/docs/platform/sso/azure-ad",
+   "title": "Single sign-on with Microsoft Entra ID | Buildkite Documentation",
+   "quote": "Keep the following four mappings, and delete any others: userPrincipalName to userName",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c25",
+   "url": "https://buildkite.com/docs/platform/sso/azure-ad",
+   "title": "Single sign-on with Microsoft Entra ID | Buildkite Documentation",
+   "quote": "givenName to name.givenName surname to name.familyName",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c26",
+   "url": "https://buildkite.com/docs/platform/sso/azure-ad",
+   "title": "Single sign-on with Microsoft Entra ID | Buildkite Documentation",
+   "quote": "Disable group synchronization: Expand Mappings, then click Provision Azure Active Directory Groups. Toggle Enabled to No and click Save.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c27",
+   "url": "https://buildkite.com/docs/apis/rest-api/organizations/members",
+   "title": "Organization members API | Buildkite Documentation",
+   "quote": "The organization members API endpoint allows users to view and manage members of a Buildkite organization.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c28",
+   "url": "https://buildkite.com/docs/apis/rest-api/organizations/members",
+   "title": "Organization members API | Buildkite Documentation",
+   "quote": "https://api.buildkite.com/v2/organizations/{org.slug}/members/{user.uuid}",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c29",
+   "url": "https://buildkite.com/docs/apis/rest-api/organizations/members",
+   "title": "Organization members API | Buildkite Documentation",
+   "quote": "Updates a member's role or SSO mode within the organization.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c30",
+   "url": "https://buildkite.com/docs/apis/rest-api/organizations/members",
+   "title": "Organization members API | Buildkite Documentation",
+   "quote": "Required scope: write_organizations",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c31",
+   "url": "https://buildkite.com/docs/apis/rest-api/organizations/invitations",
+   "title": "Organization invitations API | Buildkite Documentation",
+   "quote": "https://api.buildkite.com/v2/organizations/{org.slug}/invitations",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c32",
+   "url": "https://buildkite.com/docs/apis/rest-api/teams",
+   "title": "Teams API | Buildkite Documentation",
+   "quote": "https://api.buildkite.com/v2/organizations/{org.slug}/teams/{team.uuid}",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c33",
+   "url": "https://buildkite.com/docs/apis/rest-api/teams/members",
+   "title": "Team members API | Buildkite Documentation",
+   "quote": "https://api.buildkite.com/v2/organizations/{org.slug}/teams/{team.uuid}/members/{user.uuid}",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c34",
+   "url": "https://buildkite.com/docs/apis/rest-api/organizations/audit-events",
+   "title": "Audit events API | Buildkite Documentation",
+   "quote": "The audit log is only available to Buildkite customers on the Enterprise plan, and is only accessible to Buildkite organization administrators.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c35",
+   "url": "https://buildkite.com/docs/apis/rest-api/organizations/audit-events",
+   "title": "Audit events API | Buildkite Documentation",
+   "quote": "https://api.buildkite.com/v2/organizations/{org.slug}/audit_events",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c36",
+   "url": "https://buildkite.com/docs/apis/rest-api",
+   "title": "REST API overview | Buildkite Documentation",
+   "quote": "set the Authorization HTTP header to the word Bearer, followed by a space, followed by the access token.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c37",
+   "url": "https://buildkite.com/docs/platform/limits",
+   "title": "Limits | Buildkite Documentation",
+   "quote": "REST API rate limit per organization The number of requests an organization can make to Organization endpoints on the REST API, per minute. Default: 200 requests per minute",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c38",
+   "url": "https://buildkite.com/docs/platform/limits",
+   "title": "Limits | Buildkite Documentation",
+   "quote": "Limits vary across plans and the All Access Trial",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c39",
+   "url": "https://www.okta.com/integrations/buildkite/",
+   "title": "Buildkite | Okta Integration Network",
+   "quote": "Okta's Buildkite SSO integration allows you to setup and configure SSO between Okta and Buildkite, and provides automatic provisioning of users, mapping Okta group access to Buildkite teams, and automatic deprovisioning of users.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c40",
+   "url": "https://buildkite.com/docs/platform/sso",
+   "title": "Single sign-on support | Buildkite Documentation",
+   "quote": "OneLogin (Pro and Enterprise plans)",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c41",
+   "url": "https://buildkite.com/docs/platform/sso",
+   "title": "Single sign-on support | Buildkite Documentation",
+   "quote": "Google Workspace (Pro and Enterprise plans)",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c42",
+   "url": "https://buildkite.com/docs/apis/rest-api/organizations/members",
+   "title": "Organization members API | Buildkite Documentation",
+   "quote": "The user's role within the organization: admin or member",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c43",
+   "url": "https://buildkite.com/docs/apis/rest-api/organizations/invitations",
+   "title": "Organization invitations API | Buildkite Documentation",
+   "quote": "The organization invitations REST API lets authorized users list, retrieve, create, and revoke invitations for a Buildkite organization.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://buildkite.com/pricing/",
+  "https://buildkite.com/llms.txt",
+  "https://buildkite.com/docs/platform/sso",
+  "https://buildkite.com/docs/platform/sso/okta",
+  "https://buildkite.com/docs/platform/sso/azure-ad",
+  "https://buildkite.com/docs/platform/sso/onelogin",
+  "https://buildkite.com/docs/platform/sso/custom-saml",
+  "https://buildkite.com/docs/apis/rest-api",
+  "https://www.okta.com/integrations/buildkite/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/buildkite-tutorial (404)"
+ ],
+ "open_questions": [
+  "SCIM base URL pattern, endpoint list (Groups, ServiceProviderConfig) and token expiry are not published.",
+  "Whether SCIM update (attribute changes) is supported is not documented; only create and deactivate are listed.",
+  "Docs do not say whether a deprovisioned user stops counting as an active user immediately or ends existing sessions.",
+  "No user-event webhooks found; JumpCloud catalogue not checked.",
+  "The REST members API has no plan gate stated; Free-plan availability is inferred from the per-plan limits page."
+ ]
+}

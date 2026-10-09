@@ -1,0 +1,1230 @@
+{
+ "slug": "atlassian",
+ "vendor": "Atlassian",
+ "vendor_url": "https://www.atlassian.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Atlassian",
+  "slug": "atlassian",
+  "category": "Project & Work Management",
+  "status": "gated",
+  "scim_plan": "Add-on (Atlassian Guard Standard)",
+  "scim_price_text": "Guard Standard: $4.20/user/mo (price shown with monthly billing); included at no extra cost in Atlassian Cloud Enterprise",
+  "scim_price_per_user_mo": 4.2,
+  "team_plan": "(N/A - Guard is an add-on)",
+  "team_price_text": "Add-on on top of any Atlassian Cloud Standard or Premium subscription",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Atlassian Guard Standard",
+  "sso_price_per_user_mo": 4.2,
+  "sso_required_for_scim": false,
+  "scim_addon_price_text": "Atlassian Guard Standard $4.20/user/mo",
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": false,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": "native",
+   "onelogin": "native",
+   "jumpcloud": "native",
+   "generic": true
+  },
+  "pricing_page_url": "https://www.atlassian.com/software/guard/pricing",
+  "docs_url": "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+  "evidence": "Atlassian Guard Standard, $4.20 per user / month, includes \"SCIM automated user provisioning\"; Atlassian's provisioning docs list Atlassian Guard Standard as the requirement.",
+  "notes": "SCIM (and SAML SSO) need the Atlassian Guard add-on, billed per user on top of Jira/Confluence/etc.; Cloud Enterprise includes Guard Standard. The pricing page's default price ($4.20 Standard, $8.18 Premium) is the monthly-billing price (schema.org billingDuration P1M); the annual-billing price is not in the static page. SCIM DELETE deactivates rather than deletes; group sync works for Jira, Confluence and Trello only, not Bitbucket. Guard Standard allows one identity provider; multiple IdPs need Enterprise. The free Organizations and User management admin APIs are available on all plans. The June row cited /software/access/pricing; the current Guard pricing URL is /software/guard/pricing.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "All plans (organization admin API key)",
+  "api_tax": false,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Atlassian Guard Standard",
+   "price_text": "$4.20 per user / month (monthly billing shown by default)",
+   "price_per_user_mo": 4.2,
+   "billing": "monthly",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c1",
+    "c2",
+    "c5",
+    "c6",
+    "c44",
+    "c45",
+    "c50"
+   ]
+  },
+  {
+   "name": "Atlassian Guard Premium",
+   "price_text": "$8.18 per user / month (monthly billing shown by default)",
+   "price_per_user_mo": 8.18,
+   "billing": "monthly",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c3",
+    "c5",
+    "c45",
+    "c46",
+    "c50"
+   ]
+  },
+  {
+   "name": "Atlassian Cloud Enterprise",
+   "price_text": "Includes Atlassian Guard Standard at no additional cost (Enterprise price not listed on this page)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c4",
+    "c42",
+    "c47",
+    "c50"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c1",
+   "c2",
+   "c4",
+   "c7",
+   "c8",
+   "c18"
+  ],
+  "plan": "Atlassian Guard Standard (add-on) or Atlassian Cloud Enterprise",
+  "addon_price_text": "Atlassian Guard Standard $4.20 per user / month",
+  "sso_required": false,
+  "version": "2.0",
+  "base_url": "https://api.atlassian.com/scim/directory/{directoryId}",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Atlassian Administration > Security > User security > Identity providers > (directory) > Set up user provisioning / Regenerate API key",
+   "token_expiry": "1 year (auto-set for keys created or regenerated since January 2025)",
+   "cite": [
+    "c19",
+    "c34",
+    "c35"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": true,
+   "Schemas": true,
+   "ResourceTypes": true,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c24",
+    "c29",
+    "c31",
+    "c32",
+    "c33"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": false,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c13",
+    "c14",
+    "c20",
+    "c24",
+    "c29"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": true,
+   "revokes_sessions": null,
+   "data_retained": "Deactivation keeps the account's personal data so it can be reactivated; deleting a user in the IdP, or SCIM DELETE, deactivates the account and unlinks the SCIM record rather than deleting the Atlassian account.",
+   "cite": [
+    "c9",
+    "c20",
+    "c28",
+    "c48"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName",
+    "externalId",
+    "displayName (Groups)"
+   ],
+   "cite": [
+    "c25",
+    "c30"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c23",
+    "c82"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "emails",
+    "name.formatted",
+    "name.givenName",
+    "name.familyName",
+    "name.middleName",
+    "name.honorificPrefix",
+    "name.honorificSuffix",
+    "displayName",
+    "nickName",
+    "title",
+    "preferredLanguage",
+    "timezone",
+    "phoneNumbers",
+    "active",
+    "externalId"
+   ],
+   "enterprise": [
+    "organization",
+    "department",
+    "employeeNumber"
+   ],
+   "custom": {
+    "supported": null,
+    "how": "No arbitrary custom attributes documented; Atlassian defines its own extension urn:ietf:params:scim:schemas:extension:atlassian:2.0:User (basedIn for location)."
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c15",
+    "c26",
+    "c27",
+    "c38",
+    "c39",
+    "c74"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "Group-based: synced groups grant app access (licenses) and admin permissions; no SCIM roles attribute documented.",
+   "cite": [
+    "c11"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SCIM DELETE does not delete the account; it deactivates it (same as active=false) and removes the SCIM record.",
+    "cite": [
+     "c20",
+     "c28"
+    ]
+   },
+   {
+    "text": "Group sync is only available for Jira, Confluence and Trello, not Bitbucket.",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "text": "Group renames are not supported; create a new group, move members, delete the old one.",
+    "cite": [
+     "c22",
+     "c75"
+    ]
+   },
+   {
+    "text": "Developer docs state a 150,000 user limit per directory and 35,000 users per group, while the help centre recommends staying below 1 million users and 290,000 users per group; the two pages disagree.",
+    "cite": [
+     "c12",
+     "c21"
+    ]
+   },
+   {
+    "text": "Guard Standard allows one connected identity provider; multiple IdPs need an Enterprise plan.",
+    "cite": [
+     "c42"
+    ]
+   },
+   {
+    "text": "Requires a verified domain; updates only apply to users from verified domains.",
+    "cite": [
+     "c81",
+     "c74"
+    ]
+   },
+   {
+    "text": "Filtering supports a single eq match on userName or externalId (users) or displayName (groups); sorting is not supported.",
+    "cite": [
+     "c25",
+     "c30",
+     "c82"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c50",
+   "c53",
+   "c54"
+  ],
+  "plan": "All plans (organization admin API key)",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://api.atlassian.com/admin (Organizations API, e.g. /admin/v2/orgs/{orgId}/...); https://api.atlassian.com/users (User management API)",
+  "docs_url": "https://developer.atlassian.com/cloud/admin/organization/rest/intro/",
+  "auth": {
+   "methods": [
+    "api_key"
+   ],
+   "scopes": [
+    "read:directories:admin",
+    "read:accounts:admin",
+    "read:events:admin",
+    "read:groups:admin"
+   ],
+   "cite": [
+    "c52",
+    "c53",
+    "c63"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": null,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": true,
+   "reactivate_user": true,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": true,
+   "cite": [
+    "c57",
+    "c58",
+    "c64",
+    "c65",
+    "c66",
+    "c69",
+    "c71",
+    "c72",
+    "c84"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/v2/orgs/{orgId}/directories/{directoryId}/users/search",
+    "purpose": "Search for users in an organization",
+    "cite": [
+     "c57"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v2/orgs/{orgId}/directories/{directoryId}/users/{userId}",
+    "purpose": "Get details of a user in a directory",
+    "cite": [
+     "c57"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/orgs/{orgId}/users",
+    "purpose": "Get managed accounts in an organization",
+    "cite": [
+     "c57"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v2/orgs/{orgId}/users/invite",
+    "purpose": "Invite users to an organization",
+    "cite": [
+     "c57",
+     "c84"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v2/orgs/{orgId}/directories/{directoryId}/users/{accountId}/suspend",
+    "purpose": "Suspend user access in directory (not billed while suspended)",
+    "cite": [
+     "c58",
+     "c59"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v2/orgs/{orgId}/directories/{directoryId}/users/{accountId}/restore",
+    "purpose": "Restore user access in directory",
+    "cite": [
+     "c60"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v2/orgs/{orgId}/directories/{directoryId}/users/{accountId}",
+    "purpose": "Remove user from directory",
+    "cite": [
+     "c61"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/orgs/{orgId}/users/{userId}/role-assignments/assign",
+    "purpose": "Grant user access (platform roles)",
+    "cite": [
+     "c62"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v2/orgs/{orgId}/directories/{directoryId}/groups/{groupId}/memberships",
+    "purpose": "Add user to group",
+    "cite": [
+     "c64"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v2/orgs/{orgId}/directories/{directoryId}/groups/{groupId}/role-assignments/assign",
+    "purpose": "Grant access (app role) to a group",
+    "cite": [
+     "c65"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/users/{account_id}/manage/lifecycle/disable",
+    "purpose": "Deactivate a managed account (User management API)",
+    "cite": [
+     "c71"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/users/{account_id}/manage/lifecycle/enable",
+    "purpose": "Activate a managed account",
+    "cite": [
+     "c71"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/users/{account_id}/manage/lifecycle/delete",
+    "purpose": "Delete a managed account",
+    "cite": [
+     "c71"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/users/{account_id}/manage/profile",
+    "purpose": "Update a managed account's profile",
+    "cite": [
+     "c72"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/orgs/{orgId}/events",
+    "purpose": "Query audit log events",
+    "cite": [
+     "c67",
+     "c68"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Atlassian Guard Standard (organization admin activity); user-created activity needs Guard Premium or Enterprise",
+   "cite": [
+    "c6",
+    "c45",
+    "c47",
+    "c67",
+    "c68"
+   ]
+  },
+  "rate_limits": {
+   "text": "429 with X-RateLimit headers; last-active-dates 200 req/min per org; events API 10 req/min per user and per path (lowered from 60/50 in May 2025); events-stream 60 req/min per user, 50 per path.",
+   "cite": [
+    "c55",
+    "c56"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Admin API keys last at most one year.",
+    "cite": [
+     "c51"
+    ]
+   },
+   {
+    "text": "Audit log webhook integration (push of events) is a Guard Premium feature; no user-lifecycle webhook is documented for the admin APIs.",
+    "cite": [
+     "c46"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/atlassian-cloud/",
+   "cite": [
+    "c73"
+   ]
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/atlassian-cloud-provisioning-tutorial",
+   "cite": [
+    "c74"
+   ]
+  },
+  "google": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://knowledge.workspace.google.com/admin/users/advanced/configure-atlassian-cloud-user-provisioning?hl=en",
+   "cite": [
+    "c76",
+    "c77"
+   ]
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c16",
+    "c40",
+    "c41"
+   ]
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://jumpcloud.com/support/integrate-with-atlassian-cloud",
+   "cite": [
+    "c78"
+   ]
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": "Google Workspace directory sync (users and groups) and an Azure AD nested-groups sync option, both from Atlassian Administration",
+  "docs_public": true,
+  "cite": [
+   "c37",
+   "c83",
+   "c85"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.atlassian.com/software/guard/pricing",
+   "title": "Atlassian Guard Pricing",
+   "quote": "Standard Everything you need to get started $4.20 per user / month Start free trial Includes: Enforced single sign-on (SSO)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.atlassian.com/software/guard/pricing",
+   "title": "Atlassian Guard Pricing",
+   "quote": "SCIM automated user provisioning Automate user lifecycle management with SCIM provisioning and de-provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.atlassian.com/software/guard/pricing",
+   "title": "Atlassian Guard Pricing",
+   "quote": "Premium Unlock advanced Atlassian cloud security $8.18 per user / month",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.atlassian.com/software/guard/pricing",
+   "title": "Atlassian Guard Pricing",
+   "quote": "Or get started quickly with our Cloud Enterprise plan, which includes Atlassian Guard Standard at no additional cost.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.atlassian.com/software/guard/pricing",
+   "title": "Atlassian Guard Pricing (page source, schema.org offer)",
+   "quote": "\"price\":\"4.20\",\"priceCurrency\":\"USD\",\"billingDuration\":\"P1M\"",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://www.atlassian.com/software/guard/pricing",
+   "title": "Atlassian Guard Pricing",
+   "quote": "A centralized log of admin activity across your Atlassian apps. Gain a full view of the who, what, and when of admin activity to help track and identify any suspicious behavior. Using APIs, integrate with your third party tools, such as a CASB.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+   "title": "Understand user provisioning",
+   "quote": "We support user provisioning using the System for Cross-domain Identity Management (SCIM), and this feature uses the SCIM 2.0 version of the protocol.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+   "title": "Understand user provisioning",
+   "quote": "Role: Organization admin Atlassian Cloud: Atlassian Guard Standard",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+   "title": "Understand user provisioning",
+   "quote": "When you delete a user from your identity provider, we deactivate the user account.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+   "title": "Understand user provisioning",
+   "quote": "Syncing groups is only currently available for Jira app instances, Confluence, Trello and not yet available for Bitbucket.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+   "title": "Understand user provisioning",
+   "quote": "Use groups to manage admin permissions and app access (new licenses) from your identity provider and these updates will sync with your Atlassian organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+   "title": "Understand user provisioning",
+   "quote": "Maximum users: 1 million Maximum users per group: 290,000 Maximum groups: 250,000 Maximum total group memberships: 8M",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+   "title": "Understand user provisioning",
+   "quote": "Activate a user account You can activate a user's Atlassian account from your identity provider. Deactivate a user account You can deactivate the Atlassian account for users from your verified domain in the identity provider.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+   "title": "Understand user provisioning",
+   "quote": "Push an existing group If you try to push a group from your identity provider that has the same name as a group in your organization, you'll get an error. Update group membership",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+   "title": "Understand user provisioning",
+   "quote": "You can update these user attributes from your identity provider: Display name: This is a combination of a user’s first and last name.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+   "title": "Understand user provisioning",
+   "quote": "Okta: Learn how to configure user provisioning with Okta OneLogin: Learn how to configure user provisioning for OneLogin Azure AD: Learn how to configure user provisioning for Azure AD",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+   "title": "Understand user provisioning",
+   "quote": "JumpCloud: Learn how to configure user provisioning for JumpCloud",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/intro/",
+   "title": "The User provisioning REST API",
+   "quote": "For instance, if the Directory base URL is https://api.atlassian.com/scim/directory/abcdeg1234, the directoryId is abcdeg1234.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/intro/",
+   "title": "The User provisioning REST API",
+   "quote": "To authenticate your script and administer your directory, utilize this API key as a Bearer access token.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/intro/",
+   "title": "The User provisioning REST API",
+   "quote": "Deleting a managed user account via the user provisioning API is not supported. The DELETE operation deactivates the managed user account in Adminhub, which is the same as setting the active flag to false.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/intro/",
+   "title": "The User provisioning REST API",
+   "quote": "There is a 150,000 user limit per directory. This limit is enforced for compatibility with products that have an upper bound for total supported users. Also, you can only sync up to 35,000 users for each group.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/intro/",
+   "title": "The User provisioning REST API",
+   "quote": "Changing group names isn't supported. Renaming groups after they've synced to your Atlassian organization isn't supported in this release of User Provisioning API.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/intro/",
+   "title": "The User provisioning REST API",
+   "quote": "If there are more results available after the current page, a link to the next page of results is included in the JSON. You can use the cursor parameter to set a specific starting point for the results.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/api-group-users/",
+   "title": "User provisioning REST API - Users",
+   "quote": "GET/scim/directory/{directoryId}/Users/{userId}PUT/scim/directory/{directoryId}/Users/{userId}DEL/scim/directory/{directoryId}/Users/{userId}PATCH/scim/directory/{directoryId}/Users/{userId}GET/scim/directory/{directoryId}/UsersPOST/scim/directory/{directoryId}/Users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/api-group-users/",
+   "title": "User provisioning REST API - Users",
+   "quote": "Filtering is supported with a single exact match (eq) against the userName and externalId attributes.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/api-group-users/",
+   "title": "User provisioning REST API - Users",
+   "quote": "\"urn:ietf:params:scim:schemas:extension:enterprise:2.0:User\": { \"organization\": \"<string>\", \"department\": \"<string>\" }",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/api-group-users/",
+   "title": "User provisioning REST API - Users",
+   "quote": "\"displayName\": \"<string>\", \"nickName\": \"<string>\", \"title\": \"<string>\", \"preferredLanguage\": \"<string>\", \"department\": \"<string>\", \"organization\": \"<string>\", \"timezone\": \"<string>\", \"phoneNumbers\": [",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/api-group-users/",
+   "title": "User provisioning REST API - Users",
+   "quote": "Deleting a user via the SCIM APIs will unlink the user from your identity provider and deactivate the user within Atlassian if they are managed by your organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/api-group-groups/",
+   "title": "User provisioning REST API - Groups",
+   "quote": "GET/scim/directory/{directoryId}/Groups/{id}PUT/scim/directory/{directoryId}/Groups/{id}DEL/scim/directory/{directoryId}/Groups/{id}PATCH/scim/directory/{directoryId}/Groups/{id}GET/scim/directory/{directoryId}/GroupsPOST/scim/directory/{directoryId}/Groups",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/api-group-groups/",
+   "title": "User provisioning REST API - Groups",
+   "quote": "Filter the groups by name supported with a single exact match (eq) against the displayName attribute.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/api-group-schemas/",
+   "title": "User provisioning REST API - Schemas",
+   "quote": "GET/scim/directory/{directoryId}/ServiceProviderConfig",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/api-group-schemas/",
+   "title": "User provisioning REST API - Schemas",
+   "quote": "GET/scim/directory/{directoryId}/SchemasGET/scim/directory/{directoryId}/Schemas/urn:ietf:params:scim:schemas:core:2.0:User",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/api-group-service-provider-configuration/",
+   "title": "User provisioning REST API - Service Provider Configuration",
+   "quote": "GET/scim/directory/{directoryId}/ResourceTypesGET/scim/directory/{directoryId}/ResourceTypes/UserGET/scim/directory/{directoryId}/ResourceTypes/Group",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://support.atlassian.com/provisioning-users/docs/manage-scim-api-key-expiration/",
+   "title": "Manage API key expiration for SCIM",
+   "quote": "When you set up user provisioning or regenerate an API key, we automatically set it to expire in one year.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c35",
+   "url": "https://support.atlassian.com/provisioning-users/docs/manage-scim-api-key-expiration/",
+   "title": "Manage API key expiration for SCIM",
+   "quote": "Select Security, then User security, then Identity providers. Select your Identity provider from the Directory name column. Select Regenerate API key.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://support.atlassian.com/provisioning-users/docs/what-are-setup-options-for-provisioning-and-single-sign-on/",
+   "title": "What are setup options for provisioning and single sign-on?",
+   "quote": "You can choose to configure both user authentication and provisioning or to configure only one. It doesn’t matter the order you configure them in.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://support.atlassian.com/provisioning-users/docs/what-are-setup-options-for-provisioning-and-single-sign-on/",
+   "title": "What are setup options for provisioning and single sign-on?",
+   "quote": "If you provision users with SAML Just-In-Time, select domains to link to the Directory.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c38",
+   "url": "https://support.atlassian.com/provisioning-users/docs/sync-user-attributes-to-your-organization/",
+   "title": "Sync user attributes to your organization",
+   "quote": "* Variable name: basedIn * External name: basedIn * External namespace: urn:ietf:params:scim:schemas:extension:atlassian:2.0:User",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c39",
+   "url": "https://support.atlassian.com/provisioning-users/docs/sync-user-attributes-to-your-organization/",
+   "title": "Sync user attributes to your organization",
+   "quote": "* From Target attribute, selecturn:ietf:params:scim:schemas:extension:enterprise:2.0:User:employeeNumber",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c40",
+   "url": "https://support.atlassian.com/provisioning-users/docs/sync-user-attributes-to-your-organization/",
+   "title": "Sync user attributes to your organization",
+   "quote": "To map an attribute for OneLogin: Go to Atlassian Cloud app in OneLogin.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c41",
+   "url": "https://support.atlassian.com/provisioning-users/docs/supported-identity-providers/",
+   "title": "Supported identity providers",
+   "quote": "The following identity providers are supported for SCIM user provisioning: Auth0 CyberArk Idaptive (formerly Centrify) Duo Google Workspace JumpCloud Microsoft Azure Active Directory (AD) Okta OneLogin Ping Identity",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c42",
+   "url": "https://support.atlassian.com/provisioning-users/docs/supported-identity-providers/",
+   "title": "Supported identity providers",
+   "quote": "An Atlassian Guard Standard subscription allows you to connect one identity provider. An Enterprise plan allows you to connect multiple identity providers.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c43",
+   "url": "https://support.atlassian.com/provisioning-users/docs/supported-identity-providers/",
+   "title": "Supported identity providers",
+   "quote": "You can’t use OpenID Connect for single sign-on.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c44",
+   "url": "https://support.atlassian.com/security-and-access-policies/docs/atlassian-guard-product-and-plan-availability/",
+   "title": "Atlassian Guard app and plan availability",
+   "quote": "SAML single sign-on Atlassian Cloud: Atlassian Guard Standard",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c45",
+   "url": "https://support.atlassian.com/security-and-access-policies/docs/atlassian-guard-product-and-plan-availability/",
+   "title": "Atlassian Guard app and plan availability",
+   "quote": "Audit logs for organization administration activities Atlassian Cloud: Atlassian Guard Standard",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c46",
+   "url": "https://support.atlassian.com/security-and-access-policies/docs/atlassian-guard-product-and-plan-availability/",
+   "title": "Atlassian Guard app and plan availability",
+   "quote": "Audit log webhook integration Atlassian Cloud: Atlassian Guard Premium",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c47",
+   "url": "https://support.atlassian.com/security-and-access-policies/docs/atlassian-guard-product-and-plan-availability/",
+   "title": "Atlassian Guard app and plan availability",
+   "quote": "Audit logs for user-created activity Atlassian Cloud: Atlassian Guard Premium (also available with an Enterprise plan)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c48",
+   "url": "https://support.atlassian.com/user-management/docs/deactivate-a-managed-account/",
+   "title": "Deactivate a managed account",
+   "quote": "Deactivate an account to temporarily close an Atlassian account. This won’t delete personal data associated with the Atlassian account, since you can reactivate the account at any time. We’ll stop billing your organization for this account.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c49",
+   "url": "https://support.atlassian.com/user-management/docs/deactivate-a-managed-account/",
+   "title": "Deactivate a managed account",
+   "quote": "Once you deactivate an account, the account will lose access to Atlassian account services immediately.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c50",
+   "url": "https://support.atlassian.com/organization-administration/docs/manage-an-organization-with-the-admin-apis/",
+   "title": "Manage an organization with the admin APIs",
+   "quote": "Role: Organization admin Atlassian Cloud: All plans",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c51",
+   "url": "https://support.atlassian.com/organization-administration/docs/manage-an-organization-with-the-admin-apis/",
+   "title": "Manage an organization with the admin APIs",
+   "quote": "An API key can last no longer than a year.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c52",
+   "url": "https://support.atlassian.com/organization-administration/docs/manage-an-organization-with-the-admin-apis/",
+   "title": "Manage an organization with the admin APIs",
+   "quote": "An API key without scopes can access all Atlassian Admin APIs.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c53",
+   "url": "https://developer.atlassian.com/cloud/admin/organization/rest/intro/",
+   "title": "Organizations REST API",
+   "quote": "Authentication is implemented via an API key. Use the API Key as a Bearer access token to authenticate the script and manage your organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c54",
+   "url": "https://developer.atlassian.com/cloud/admin/organization/rest/intro/",
+   "title": "Organizations REST API",
+   "quote": "https://api.atlassian.com/admin/<version>/orgs/<resource-name>",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c55",
+   "url": "https://developer.atlassian.com/cloud/admin/organization/rest/intro/",
+   "title": "Organizations REST API",
+   "quote": "GET '/v1/orgs/{orgId}/directory/users/{accountId}/last-active-dates Rate limit per organization: 200 requests per minute",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c56",
+   "url": "https://developer.atlassian.com/cloud/admin/organization/rest/intro/",
+   "title": "Organizations REST API",
+   "quote": "These rate limits will be lowered effective end of May 2025 as follows: Rate limit per user: 10 requests per minute Rate limit per API path: 10 requests per minute",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c57",
+   "url": "https://developer.atlassian.com/cloud/admin/organization/rest/api-group-users/",
+   "title": "Organizations REST API - Users",
+   "quote": "POST/v2/orgs/{orgId}/directories/{directoryId}/users/searchGET/v2/orgs/{orgId}/directories/{directoryId}/users/{userId}GET/v1/orgs/{orgId}/usersPOST/v2/orgs/{orgId}/users/invite",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c58",
+   "url": "https://developer.atlassian.com/cloud/admin/organization/rest/api-group-users/",
+   "title": "Organizations REST API - Users",
+   "quote": "Suspend a user’s access in a directory to remove their access to apps temporarily. You’re not billed for a user when their access is suspended.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c59",
+   "url": "https://developer.atlassian.com/cloud/admin/organization/rest/api-group-users/",
+   "title": "Organizations REST API - Users",
+   "quote": "POST/v2/orgs/{orgId}/directories/{directoryId}/users/{accountId}/suspend",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c60",
+   "url": "https://developer.atlassian.com/cloud/admin/organization/rest/api-group-users/",
+   "title": "Organizations REST API - Users",
+   "quote": "POST/v2/orgs/{orgId}/directories/{directoryId}/users/{accountId}/restore",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c61",
+   "url": "https://developer.atlassian.com/cloud/admin/organization/rest/api-group-users/",
+   "title": "Organizations REST API - Users",
+   "quote": "DEL/v2/orgs/{orgId}/directories/{directoryId}/users/{accountId}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c62",
+   "url": "https://developer.atlassian.com/cloud/admin/organization/rest/api-group-users/",
+   "title": "Organizations REST API - Users",
+   "quote": "POST/v1/orgs/{orgId}/users/{userId}/role-assignments/assign",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c63",
+   "url": "https://developer.atlassian.com/cloud/admin/organization/rest/api-group-users/",
+   "title": "Organizations REST API - Users",
+   "quote": "Authorization scopes required: read:directories:admin",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c64",
+   "url": "https://developer.atlassian.com/cloud/admin/organization/rest/api-group-groups/",
+   "title": "Organizations REST API - Groups",
+   "quote": "POST/v2/orgs/{orgId}/directories/{directoryId}/groups/{groupId}/memberships",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c65",
+   "url": "https://developer.atlassian.com/cloud/admin/organization/rest/api-group-groups/",
+   "title": "Organizations REST API - Groups",
+   "quote": "POST/v2/orgs/{orgId}/directories/{directoryId}/groups/{groupId}/role-assignments/assign",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c66",
+   "url": "https://developer.atlassian.com/cloud/admin/organization/rest/api-group-groups/",
+   "title": "Organizations REST API - Groups",
+   "quote": "Create a group in a directory to manage app access and permissions for multiple users together.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c67",
+   "url": "https://developer.atlassian.com/cloud/admin/organization/rest/api-group-events/",
+   "title": "Organizations REST API - Events",
+   "quote": "GET/v1/orgs/{orgId}/eventsGET/v1/orgs/{orgId}/events-streamGET/v1/orgs/{orgId}/events/{eventId}GET/v1/orgs/{orgId}/event-actions",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c68",
+   "url": "https://developer.atlassian.com/cloud/admin/organization/rest/api-group-events/",
+   "title": "Organizations REST API - Events",
+   "quote": "Returns a filtered list of audit log events for an organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c69",
+   "url": "https://developer.atlassian.com/cloud/admin/user-management/rest/intro/",
+   "title": "User management REST API",
+   "quote": "The User management REST API provides resources to administer and edit managed accounts. Use this API to: Get user management permissions Get and update profiles Deactivate and delete accounts",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c70",
+   "url": "https://developer.atlassian.com/cloud/admin/user-management/rest/intro/",
+   "title": "User management REST API",
+   "quote": "https://api.atlassian.com/users/<resource-name>",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c71",
+   "url": "https://developer.atlassian.com/cloud/admin/user-management/rest/api-group-lifecycle/",
+   "title": "User management REST API - Lifecycle",
+   "quote": "POST/users/{account_id}/manage/lifecycle/disablePOST/users/{account_id}/manage/lifecycle/enablePOST/users/{account_id}/manage/lifecycle/deletePOST/users/{account_id}/manage/lifecycle/cancel-delete",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c72",
+   "url": "https://developer.atlassian.com/cloud/admin/user-management/rest/api-group-profile/",
+   "title": "User management REST API - Profile",
+   "quote": "GET/users/{account_id}/manage/profilePATCH/users/{account_id}/manage/profile",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c73",
+   "url": "https://www.okta.com/integrations/atlassian-cloud/",
+   "title": "Atlassian Cloud | Okta Integration Network (checked capabilities: SAML, SWA, SCIM, Create, Update, Deactivate, Group Push, Group Linking)",
+   "quote": "Add this integration to enable authentication and provisioning capabilities.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c74",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/atlassian-cloud-provisioning-tutorial",
+   "title": "Configure Atlassian Cloud for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Create users in Atlassian Cloud Remove users in Atlassian Cloud when they don't require access anymore Keep user attributes synchronized between Microsoft Entra ID and Atlassian Cloud Provision groups and group memberships in Atlassian Cloud Single sign-on to Atlassian Cloud (recommended)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c75",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/atlassian-cloud-provisioning-tutorial",
+   "title": "Configure Atlassian Cloud for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Atlassian Cloud doesn't support group renames today.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c76",
+   "url": "https://knowledge.workspace.google.com/admin/users/advanced/configure-atlassian-cloud-user-provisioning?hl=en",
+   "title": "Configure Atlassian Cloud user provisioning | Google Workspace Help",
+   "quote": "You can set up automated user provisioning (autoprovisioning) so that any changes you make to user accounts in Google Workspace are automatically synced with this third-party app.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c77",
+   "url": "https://knowledge.workspace.google.com/admin/users/advanced/configure-atlassian-cloud-user-provisioning?hl=en",
+   "title": "Configure Atlassian Cloud user provisioning | Google Workspace Help",
+   "quote": "Before you can set up automated user provisioning, you need to set up SSO for Atlassian Cloud.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c78",
+   "url": "https://jumpcloud.com/support/integrate-with-atlassian-cloud",
+   "title": "Integrate with Atlassian Cloud | JumpCloud",
+   "quote": "Integrate your JumpCloud account with Atlassian Cloud through a SCIM Connector. After you connect JumpCloud with Atlassian Cloud, you can provision, update, and deprovision users and groups.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c79",
+   "url": "https://jumpcloud.com/support/integrate-with-atlassian-cloud",
+   "title": "Integrate with Atlassian Cloud | JumpCloud",
+   "quote": "SSO is recommended, but not required for SCIM",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c80",
+   "url": "https://support.atlassian.com/provisioning-users/docs/configure-user-provisioning-with-an-identity-provider/",
+   "title": "Configure user provisioning with an identity provider",
+   "quote": "Subscribe to Atlassian Guard Standard from your organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c81",
+   "url": "https://support.atlassian.com/provisioning-users/docs/configure-user-provisioning-with-an-identity-provider/",
+   "title": "Configure user provisioning with an identity provider",
+   "quote": "Verify one or more of your domains in your organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c82",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/api-group-users/",
+   "title": "User provisioning REST API - Users",
+   "quote": "Note: While this API enables pagination, sorting functionality is not supported.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c83",
+   "url": "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+   "title": "Understand user provisioning",
+   "quote": "We don’t send users an invitation when they’re provisioned from an identity provider through SCIM or synced from Google Workspace.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c85",
+   "url": "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+   "title": "Understand user provisioning",
+   "quote": "Provision and sync users from Microsoft Azure AD Choose the right Microsoft Azure AD option for you Connect and sync Azure AD for nested groups",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c84",
+   "url": "https://developer.atlassian.com/cloud/admin/organization/rest/api-group-users/",
+   "title": "Organizations REST API - Users",
+   "quote": "Invite people to your organization.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The help centre's provisioning limits say 'Maximum users: 1 million' while the developer reference says 'There is a 150,000 user limit per directory'.",
+   "cite": [
+    "c12",
+    "c21"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.atlassian.com/software/guard/pricing",
+  "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+  "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/intro/",
+  "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/api-group-users/",
+  "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/api-group-groups/",
+  "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/api-group-schemas/",
+  "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/api-group-service-provider-configuration/",
+  "https://support.atlassian.com/provisioning-users/docs/manage-scim-api-key-expiration/",
+  "https://support.atlassian.com/provisioning-users/docs/what-are-setup-options-for-provisioning-and-single-sign-on/",
+  "https://support.atlassian.com/provisioning-users/docs/sync-user-attributes-to-your-organization/",
+  "https://support.atlassian.com/provisioning-users/docs/supported-identity-providers/",
+  "https://support.atlassian.com/security-and-access-policies/docs/atlassian-guard-product-and-plan-availability/",
+  "https://support.atlassian.com/user-management/docs/deactivate-a-managed-account/",
+  "https://support.atlassian.com/organization-administration/docs/manage-an-organization-with-the-admin-apis/",
+  "https://developer.atlassian.com/cloud/admin/organization/rest/intro/",
+  "https://developer.atlassian.com/cloud/admin/organization/rest/api-group-users/",
+  "https://developer.atlassian.com/cloud/admin/organization/rest/api-group-groups/",
+  "https://developer.atlassian.com/cloud/admin/organization/rest/api-group-events/",
+  "https://developer.atlassian.com/cloud/admin/user-management/rest/intro/",
+  "https://developer.atlassian.com/cloud/admin/user-management/rest/api-group-lifecycle/",
+  "https://developer.atlassian.com/cloud/admin/user-management/rest/api-group-profile/",
+  "https://www.okta.com/integrations/atlassian-cloud/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/atlassian-cloud-provisioning-tutorial",
+  "https://knowledge.workspace.google.com/admin/users/advanced/configure-atlassian-cloud-user-provisioning?hl=en",
+  "https://jumpcloud.com/support/integrate-with-atlassian-cloud",
+  "https://support.atlassian.com/provisioning-users/docs/configure-user-provisioning-with-an-identity-provider/",
+  "OneLogin connector page for Atlassian Cloud (bot protection, not loaded)"
+ ],
+ "open_questions": [
+  "Annual-billing price of Atlassian Guard Standard/Premium is not in the static pricing page (only the monthly-billing $4.20/$8.18 is); the June row's $4.20 may be the monthly price.",
+  "Whether SCIM deactivation revokes active sessions immediately is not stated explicitly (the deactivate page says access is lost 'immediately' but does not mention sessions).",
+  "SCIM rate limits are not documented.",
+  "Bulk and /Me SCIM endpoints are not mentioned in the reference; ServiceProviderConfig response body is not shown, so Bulk support is unconfirmed.",
+  "OneLogin catalogue page (onelogin.com/connector/...) could not be loaded (bot protection); OneLogin facts come from Atlassian's own docs.",
+  "CSV user import for Atlassian Cloud was not researched/verified.",
+  "Max SCIM page size (count) is not documented."
+ ]
+}

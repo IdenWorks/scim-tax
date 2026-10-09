@@ -1,0 +1,721 @@
+{
+ "slug": "render",
+ "vendor": "Render",
+ "vendor_url": "https://render.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Render",
+  "slug": "render",
+  "category": "Cloud, Infrastructure & Observability",
+  "status": "gated",
+  "scim_plan": "Scale",
+  "scim_price_text": "$499/month + compute (flat per workspace)",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Pro",
+  "team_price_text": "Pro: $25/month + compute (flat, unlimited seats)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Scale",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": null,
+   "deactivate": true,
+   "delete": null,
+   "groups": null
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://render.com/pricing",
+  "docs_url": "https://render.com/docs/saml-sso",
+  "evidence": "Render's pricing page lists SAML SSO & SCIM among the Scale features ($499/month + compute); Pro ($25/month + compute) does not include them.",
+  "notes": "Flat workspace pricing plus compute, so per-user fields stay null; prices shown per month (no annual option seen). SCIM jumps from the $25/mo Pro team plan to the $499/mo Scale plan, which also adds SAML SSO and organizations. SCIM base URL https://sso.render.com/scim/v2/ with a bearer token; deprovisioned members are logged out immediately and their API keys invalidated. JIT on SAML login for all SAML orgs. REST API (all plans) lists members, changes roles and removes members, but cannot invite.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Hobby",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Hobby",
+   "price_text": "$0/month + compute",
+   "price_per_user_mo": 0,
+   "billing": "monthly",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c6",
+    "c5",
+    "c8",
+    "c24",
+    "c25"
+   ],
+   "notes": "Single team member only, so not a team plan."
+  },
+  {
+   "name": "Pro",
+   "price_text": "$25/month + compute",
+   "price_per_user_mo": null,
+   "billing": "monthly",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c1",
+    "c5",
+    "c24",
+    "c29"
+   ],
+   "notes": "Flat workspace fee plus usage; unlimited seats. Workspace audit logs."
+  },
+  {
+   "name": "Scale",
+   "price_text": "$499/month + compute",
+   "price_per_user_mo": null,
+   "billing": "monthly",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c2",
+    "c4",
+    "c5",
+    "c30"
+   ],
+   "notes": "Adds organizations, SAML SSO & SCIM, advanced RBAC roles and org audit logs."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Custom pricing",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c3",
+    "c5"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c4",
+   "c5",
+   "c7",
+   "c9",
+   "c10",
+   "c20"
+  ],
+  "plan": "Scale",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://sso.render.com/scim/v2/",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Org Settings > Security > SCIM Provisioning > + Create (Org Owner)",
+   "token_expiry": null,
+   "cite": [
+    "c11",
+    "c12"
+   ]
+  },
+  "endpoints": {
+   "Users": null,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": []
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": null,
+   "group_push": null,
+   "group_membership": null,
+   "cite": [
+    "c9",
+    "c13"
+   ]
+  },
+  "deprovision": {
+   "action": "remove_from_org",
+   "frees_seat": null,
+   "revokes_sessions": true,
+   "data_retained": "Services created by the member remain active; the member's API keys are invalidated.",
+   "cite": [
+    "c13",
+    "c14",
+    "c15"
+   ],
+   "notes": "Docs say deprovisioned members are logged out and cannot log back in; whether the user is removed from the org or kept in a disabled state is not stated, so 'remove_from_org' is the closest reading."
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "email (unique identifier)"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": [
+    "c17"
+   ]
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Each Render organization can connect only one IdP for SSO (and so SCIM).",
+    "cite": [
+     "c18"
+    ]
+   },
+   {
+    "text": "Downgrading from Scale deletes the org and its SSO and SCIM configuration.",
+    "cite": [
+     "c22"
+    ]
+   }
+  ],
+  "notes": "SCIM is configured on the SAML application created for Render after SSO is set up; SCIM manages org members (standard members with IdP-managed email). Docs give no attribute, endpoint or group detail."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c25",
+   "c32",
+   "c26"
+  ],
+  "plan": "Hobby",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://api.render.com/v1",
+  "docs_url": "https://api-docs.render.com/reference/retrieve-owner-members",
+  "auth": {
+   "methods": [
+    "api_key"
+   ],
+   "scopes": [],
+   "cite": [
+    "c25"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": null,
+   "create_user": false,
+   "invite_user": false,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c26",
+    "c27",
+    "c28"
+   ],
+   "notes": "create/invite false by absence from the API reference index (llms.txt); invites are done in the dashboard."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/owners/{ownerId}/members",
+    "purpose": "List workspace members",
+    "cite": [
+     "c26",
+     "c35"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/owners/{ownerId}/members/{userId}",
+    "purpose": "Update workspace member role",
+    "cite": [
+     "c27",
+     "c34"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/owners/{ownerId}/members/{userId}",
+    "purpose": "Remove workspace member",
+    "cite": [
+     "c28",
+     "c34"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/users",
+    "purpose": "Get the authenticated user",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/owners/{ownerId}/audit-logs",
+    "purpose": "List workspace audit logs",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/organizations/{orgId}/audit-logs",
+    "purpose": "List organization audit logs",
+    "cite": [
+     "c30"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Pro",
+   "cite": [
+    "c24",
+    "c29",
+    "c30"
+   ],
+   "notes": "Workspace audit logs from Pro; organization audit logs from Scale."
+  },
+  "rate_limits": {
+   "text": "All other GET: 400/minute; all other POST/PATCH/DELETE: 30/minute (per user).",
+   "cite": [
+    "c31",
+    "c36"
+   ]
+  },
+  "limitations": [],
+  "notes": "The public REST API can list workspace members, change a member's role and remove a member; it has no endpoint to invite or create members. API keys are per user and created in Account Settings; no plan gate is stated for the API."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c21",
+    "c9"
+   ],
+   "notes": "Render's guide uses a custom SAML 2.0 app with SCIM enabled in the IdP; no catalogue app was found or cited."
+  },
+  "entra": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c21",
+    "c9"
+   ],
+   "notes": "Render's guide uses a custom SAML 2.0 app with SCIM enabled in the IdP; no catalogue app was found or cited."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c16"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://render.com/pricing.md",
+   "title": "Render Pricing",
+   "quote": "| Pro | $25/month + compute | For teams deploying production-grade apps and agents. |",
+   "accessed": "2026-10-05",
+   "page_url": "https://render.com/pricing"
+  },
+  {
+   "id": "c2",
+   "url": "https://render.com/pricing.md",
+   "title": "Render Pricing",
+   "quote": "| Scale | $499/month + compute | For teams that need advanced governance and compliance. |",
+   "accessed": "2026-10-05",
+   "page_url": "https://render.com/pricing"
+  },
+  {
+   "id": "c3",
+   "url": "https://render.com/pricing.md",
+   "title": "Render Pricing",
+   "quote": "| Enterprise | Custom pricing | For teams that need dedicated support and uptime SLAs. |",
+   "accessed": "2026-10-05",
+   "page_url": "https://render.com/pricing"
+  },
+  {
+   "id": "c4",
+   "url": "https://render.com/pricing.md",
+   "title": "Render Pricing",
+   "quote": "- HIPAA-compliant workspaces - SAML SSO & SCIM - Advanced RBAC roles - Organization audit logs",
+   "accessed": "2026-10-05",
+   "page_url": "https://render.com/pricing"
+  },
+  {
+   "id": "c5",
+   "url": "https://render.com/pricing.md",
+   "title": "Render Pricing",
+   "quote": "| SCIM | - | - | ✓ | ✓ |",
+   "accessed": "2026-10-05",
+   "page_url": "https://render.com/pricing"
+  },
+  {
+   "id": "c6",
+   "url": "https://render.com/pricing.md",
+   "title": "Render Pricing",
+   "quote": "| Hobby | $0/month + compute | For individuals building personal projects and prototypes. |",
+   "accessed": "2026-10-05",
+   "page_url": "https://render.com/pricing"
+  },
+  {
+   "id": "c7",
+   "url": "https://render.com/docs/platform-features-by-plan.md",
+   "title": "Platform Features by Plan",
+   "quote": "Integrate your identity provider for single sign-on and automated member provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": "https://render.com/docs/platform-features-by-plan"
+  },
+  {
+   "id": "c8",
+   "url": "https://render.com/docs/platform-features-by-plan.md",
+   "title": "Platform Features by Plan",
+   "quote": "Each Hobby workspace is limited to a single team member and 25 total services.",
+   "accessed": "2026-10-05",
+   "page_url": "https://render.com/docs/platform-features-by-plan"
+  },
+  {
+   "id": "c9",
+   "url": "https://render.com/docs/saml-sso.md",
+   "title": "SAML Single Sign-On (SSO)",
+   "quote": "After setting up SSO, you can also manage provisioning and deprovisioning organization members via",
+   "accessed": "2026-10-05",
+   "page_url": "https://render.com/docs/saml-sso"
+  },
+  {
+   "id": "c10",
+   "url": "https://render.com/docs/saml-sso.md",
+   "title": "SAML Single Sign-On (SSO)",
+   "quote": "| SCIM connector base URL           | `https://sso.render.com/scim/v2/`",
+   "accessed": "2026-10-05",
+   "page_url": "https://render.com/docs/saml-sso"
+  },
+  {
+   "id": "c11",
+   "url": "https://render.com/docs/saml-sso.md",
+   "title": "SAML Single Sign-On (SSO)",
+   "quote": "| Authentication method             | HTTP Header",
+   "accessed": "2026-10-05",
+   "page_url": "https://render.com/docs/saml-sso"
+  },
+  {
+   "id": "c12",
+   "url": "https://render.com/docs/saml-sso.md",
+   "title": "SAML Single Sign-On (SSO)",
+   "quote": "Under Security, find the SCIM Provisioning section and click + Create",
+   "accessed": "2026-10-05",
+   "page_url": "https://render.com/docs/saml-sso"
+  },
+  {
+   "id": "c13",
+   "url": "https://render.com/docs/saml-sso.md",
+   "title": "SAML Single Sign-On (SSO)",
+   "quote": "Deprovisioned members are immediately logged out of Render and cannot log back in.",
+   "accessed": "2026-10-05",
+   "page_url": "https://render.com/docs/saml-sso"
+  },
+  {
+   "id": "c14",
+   "url": "https://render.com/docs/saml-sso.md",
+   "title": "SAML Single Sign-On (SSO)",
+   "quote": "All API keys belonging to the deprovisioned member are immediately invalidated.",
+   "accessed": "2026-10-05",
+   "page_url": "https://render.com/docs/saml-sso"
+  },
+  {
+   "id": "c15",
+   "url": "https://render.com/docs/saml-sso.md",
+   "title": "SAML Single Sign-On (SSO)",
+   "quote": "Any services originally created by the member remain active and are not affected.",
+   "accessed": "2026-10-05",
+   "page_url": "https://render.com/docs/saml-sso"
+  },
+  {
+   "id": "c16",
+   "url": "https://render.com/docs/saml-sso.md",
+   "title": "SAML Single Sign-On (SSO)",
+   "quote": "All SAML-enabled organizations support just-in-time (JIT) member provisioning. When a user logs in via SSO for the first time, Render adds them to your org as a member.",
+   "accessed": "2026-10-05",
+   "page_url": "https://render.com/docs/saml-sso"
+  },
+  {
+   "id": "c17",
+   "url": "https://render.com/docs/saml-sso.md",
+   "title": "SAML Single Sign-On (SSO)",
+   "quote": "| Unique identifier field for users | `email`",
+   "accessed": "2026-10-05",
+   "page_url": "https://render.com/docs/saml-sso"
+  },
+  {
+   "id": "c18",
+   "url": "https://render.com/docs/saml-sso.md",
+   "title": "SAML Single Sign-On (SSO)",
+   "quote": "Each Render organization can connect only one IdP for SSO.",
+   "accessed": "2026-10-05",
+   "page_url": "https://render.com/docs/saml-sso"
+  },
+  {
+   "id": "c19",
+   "url": "https://render.com/docs/saml-sso.md",
+   "title": "SAML Single Sign-On (SSO)",
+   "quote": "you can enable single sign-on (SSO) for your",
+   "accessed": "2026-10-05",
+   "page_url": "https://render.com/docs/saml-sso"
+  },
+  {
+   "id": "c20",
+   "url": "https://render.com/docs/saml-sso.md",
+   "title": "SAML Single Sign-On (SSO)",
+   "quote": "In your IdP's admin console, navigate to the SAML application you created for Render.",
+   "accessed": "2026-10-05",
+   "page_url": "https://render.com/docs/saml-sso"
+  },
+  {
+   "id": "c21",
+   "url": "https://render.com/docs/saml-sso.md",
+   "title": "SAML Single Sign-On (SSO)",
+   "quote": "via a SAML 2.0-compatible identity provider (IdP), such as Okta or Microsoft Entra.",
+   "accessed": "2026-10-05",
+   "page_url": "https://render.com/docs/saml-sso"
+  },
+  {
+   "id": "c22",
+   "url": "https://render.com/docs/organizations.md",
+   "title": "Organizations",
+   "quote": "When you downgrade from Scale, Render deletes the org and its configuration, including SSO, SCIM, and domain capture.",
+   "accessed": "2026-10-05",
+   "page_url": "https://render.com/docs/organizations"
+  },
+  {
+   "id": "c23",
+   "url": "https://render.com/docs/team-members.md",
+   "title": "Workspaces, Members, and Roles",
+   "quote": "To remove a team member, open the ••• menu next to that member and click Remove team member.",
+   "accessed": "2026-10-05",
+   "page_url": "https://render.com/docs/team-members"
+  },
+  {
+   "id": "c24",
+   "url": "https://render.com/docs/audit-logs.md",
+   "title": "Audit Logs",
+   "quote": "With a Pro workspace plan or higher, admins can export audit logs of material events performed by team members over a specified time frame.",
+   "accessed": "2026-10-05",
+   "page_url": "https://render.com/docs/audit-logs"
+  },
+  {
+   "id": "c25",
+   "url": "https://render.com/docs/api.md",
+   "title": "The Render API",
+   "quote": "All Render API requests require authentication via API key.",
+   "accessed": "2026-10-05",
+   "page_url": "https://render.com/docs/api"
+  },
+  {
+   "id": "c26",
+   "url": "https://api-docs.render.com/reference/retrieve-owner-members.md",
+   "title": "List workspace members",
+   "quote": "Retrieves the list of users belonging to the workspace with the provided ID.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api-docs.render.com/reference/retrieve-owner-members"
+  },
+  {
+   "id": "c27",
+   "url": "https://api-docs.render.com/reference/update-workspace-member.md",
+   "title": "Update workspace member role",
+   "quote": "Update the role of an existing workspace member.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api-docs.render.com/reference/update-workspace-member"
+  },
+  {
+   "id": "c28",
+   "url": "https://api-docs.render.com/reference/remove-workspace-member.md",
+   "title": "Remove workspace member",
+   "quote": "Remove a user from the specified workspace.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api-docs.render.com/reference/remove-workspace-member"
+  },
+  {
+   "id": "c29",
+   "url": "https://api-docs.render.com/reference/list-owner-audit-logs.md",
+   "title": "List workspace audit logs",
+   "quote": "Retrieve audit logs for a specific workspace with optional filtering and pagination.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api-docs.render.com/reference/list-owner-audit-logs"
+  },
+  {
+   "id": "c30",
+   "url": "https://api-docs.render.com/reference/list-organization-audit-logs.md",
+   "title": "List organization audit logs",
+   "quote": "Retrieve audit logs for a specific organization with optional filtering and pagination.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api-docs.render.com/reference/list-organization-audit-logs"
+  },
+  {
+   "id": "c31",
+   "url": "https://api-docs.render.com/reference/rate-limiting.md",
+   "title": "Rate Limiting",
+   "quote": "| All other `GET`",
+   "accessed": "2026-10-05",
+   "page_url": "https://api-docs.render.com/reference/rate-limiting"
+  },
+  {
+   "id": "c32",
+   "url": "https://api-docs.render.com/reference/retrieve-owner-members.md",
+   "title": "List workspace members",
+   "quote": "\"url\": \"https://api.render.com/v1\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://api-docs.render.com/reference/retrieve-owner-members"
+  },
+  {
+   "id": "c33",
+   "url": "https://api-docs.render.com/reference/get-user.md",
+   "title": "Get the authenticated user",
+   "quote": "Retrieve the user associated with the provided API key.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api-docs.render.com/reference/get-user"
+  },
+  {
+   "id": "c34",
+   "url": "https://api-docs.render.com/reference/remove-workspace-member.md",
+   "title": "Remove workspace member",
+   "quote": "\"/owners/{ownerId}/members/{userId}\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://api-docs.render.com/reference/remove-workspace-member"
+  },
+  {
+   "id": "c35",
+   "url": "https://api-docs.render.com/reference/retrieve-owner-members.md",
+   "title": "List workspace members",
+   "quote": "\"/owners/{ownerId}/members\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://api-docs.render.com/reference/retrieve-owner-members"
+  },
+  {
+   "id": "c36",
+   "url": "https://api-docs.render.com/reference/rate-limiting.md",
+   "title": "Rate Limiting",
+   "quote": "All other `POST` / `PATCH` / `DELETE`",
+   "accessed": "2026-10-05",
+   "page_url": "https://api-docs.render.com/reference/rate-limiting"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://render.com/pricing",
+  "https://render.com/llms.txt",
+  "https://render.com/api/agent/docs-search?query=scim",
+  "https://render.com/docs/saml-sso",
+  "https://render.com/docs/platform-features-by-plan",
+  "https://api-docs.render.com/llms.txt",
+  "https://api-docs.render.com/openapi/render-public-api-1.json",
+  "https://www.okta.com/integrations/render/ (404)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/render-tutorial (404; no Render tutorial in MicrosoftDocs/entra-docs saas-apps)"
+ ],
+ "open_questions": [
+  "Docs do not list SCIM user attributes beyond email as the unique identifier, nor Groups support.",
+  "Whether SCIM deprovisioning deletes the org membership or keeps a disabled member is not stated.",
+  "SCIM token expiry is not documented.",
+  "Okta OIN and Entra gallery listings for Render could not be confirmed (no catalogue page found).",
+  "SCIM rate limits are not documented."
+ ]
+}

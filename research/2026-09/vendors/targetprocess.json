@@ -1,0 +1,848 @@
+{
+ "slug": "targetprocess",
+ "vendor": "IBM Targetprocess",
+ "vendor_url": "https://www.targetprocess.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "IBM Targetprocess",
+  "slug": "targetprocess",
+  "category": "Project & Work Management",
+  "status": "gated",
+  "scim_plan": "Contact Sales (quote-only)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales (no public pricing; free trial)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": false
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": "none",
+   "onelogin": "none",
+   "jumpcloud": "none",
+   "generic": true
+  },
+  "pricing_page_url": "https://www.apptio.com/products/targetprocess/",
+  "docs_url": "https://www.ibm.com/docs/en/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html",
+  "evidence": "IBM's Frontdoor docs (the login and user service for all Apptio products including Targetprocess) say Frontdoor \"now supports provisioning and deprovisioning of Users directly from an Identity Provider via SCIM Provisioning\"; Targetprocess has no public price list.",
+  "notes": "Quote-only: IBM Targetprocess (Apptio) publishes no plans or prices; targetprocess.com/pricing redirects to the Apptio product page, which offers a free trial and Contact Us. SCIM 2.0 arrived on August 11, 2026 through Apptio Frontdoor, which now handles Targetprocess sign-in and users. It supports Users only (create, PUT/PATCH, active=false, DELETE, filter, paging) with OAuth client-credentials auth, documented for Okta and Entra. Group and environment-access management over SCIM is targeted for Q4 2026, so access roles still come from SSO auto-provisioning, the Frontdoor API or manual grants. Deactivating a Frontdoor user deactivates the Targetprocess account within a minute. Legacy Targetprocess SAML with JIT is deprecated in favour of Frontdoor SSO. Okta's 'Targetprocess' OIN app is SWA only; the Entra gallery app is SSO with JIT.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Contact Sales (quote-only)",
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "IBM Targetprocess (quote)",
+   "price_text": "Contact sales; free trial offered",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c3",
+    "c36",
+    "c37"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c2",
+   "c3",
+   "c4",
+   "c30"
+  ],
+  "plan": "Contact Sales (quote-only)",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "Domain-specific SCIM Base URL shown on the Frontdoor Domain's SCIM tab",
+  "auth": {
+   "method": "oauth2",
+   "token_source": "Frontdoor > Domain Management > View Domain Details > SCIM tab > Create SCIM OAuth Client (client ID and secret; token from https://<frontdoor-url>/api/oauth/token)",
+   "token_expiry": null,
+   "cite": [
+    "c5",
+    "c6",
+    "c7"
+   ],
+   "notes": "OAuth 2.0 client credentials only; two client secrets allowed for rotation."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": false,
+   "ServiceProviderConfig": true,
+   "Schemas": true,
+   "ResourceTypes": true,
+   "Bulk": false,
+   "Me": false,
+   "cite": [
+    "c8",
+    "c9",
+    "c10",
+    "c11",
+    "c12",
+    "c13"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": false,
+   "group_membership": false,
+   "cite": [
+    "c13",
+    "c14",
+    "c15",
+    "c16",
+    "c17",
+    "c21",
+    "c22",
+    "c23",
+    "c8"
+   ],
+   "notes": "Deactivation via active=false (Okta 'Deactivate users'); Merge on External ID lets a POST reactivate a deactivated user."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Deactivating the Frontdoor user deactivates the Targetprocess account (within one minute). A SCIM DELETE removes the Frontdoor user and cascades to its environment access and API keys; what happens to the Targetprocess user record after a DELETE is not stated.",
+   "cite": [
+    "c16",
+    "c31",
+    "c32",
+    "c33"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName"
+   ],
+   "cite": [
+    "c19"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c17",
+    "c18"
+   ],
+   "notes": "startIndex/count; default page size 100, maximum not stated."
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "displayName",
+    "emails[type eq \"work\"].value",
+    "externalId",
+    "active"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": false,
+    "how": "Unsupported attributes return 400 per the Okta/Entra notes; unrecognised POST/PUT attributes are ignored."
+   },
+   "group": [],
+   "cite": [
+    "c20",
+    "c13"
+   ]
+  },
+  "roles": {
+   "supported": false,
+   "how": "Not over SCIM yet (access and group management targeted for Q4 2026). Targetprocess user type comes from Frontdoor roles, which can be set manually, by API or by SSO auto-provisioning role mapping.",
+   "cite": [
+    "c26",
+    "c29",
+    "c34",
+    "c35"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SCIM manages Frontdoor user records only; granting a user access to the Targetprocess environment (roles) is not supported over SCIM until Q4 2026, so SCIM must be combined with SSO auto-provisioning or manual/API access grants.",
+    "cite": [
+     "c26",
+     "c29",
+     "c3"
+    ]
+   },
+   {
+    "text": "No Groups resource; IdP group push must be disabled.",
+    "cite": [
+     "c8",
+     "c22"
+    ]
+   },
+   {
+    "text": "Only OAuth 2.0 client-credentials authentication; no static bearer token.",
+    "cite": [
+     "c6"
+    ]
+   },
+   {
+    "text": "Entra provisions on a 40-minute cycle by default and can overwrite manual changes.",
+    "cite": [
+     "c25"
+    ]
+   }
+  ],
+  "notes": "SCIM is provided by Apptio Frontdoor, the shared identity service for all Apptio products including Targetprocess (released August 11, 2026). SCIM creates, updates and deletes Frontdoor users; Targetprocess picks up deactivations and role changes from Frontdoor."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c37",
+   "c49"
+  ],
+  "plan": "Contact Sales (quote-only)",
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://{account}.tpondemand.com/api/v1",
+  "docs_url": "https://www.ibm.com/docs/en/SSNFIB/targetprocess/dev-hub/users-api-ref.html",
+  "auth": {
+   "methods": [
+    "token",
+    "access_token"
+   ],
+   "scopes": [],
+   "cite": [
+    "c42"
+   ],
+   "notes": "Token generated at /api/v1/Authentication or a personal access token; passed as a query parameter."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": true,
+   "reactivate_user": true,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c37",
+    "c38",
+    "c39",
+    "c45",
+    "c44",
+    "c43",
+    "c28"
+   ],
+   "notes": "manage_groups/assign_roles via ProjectMembers (project role assignment); Frontdoor API covers access management."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/api/v1/users",
+    "purpose": "List/query users (where, include, take)",
+    "cite": [
+     "c50"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/users/loggeduser",
+    "purpose": "Get current user",
+    "cite": [
+     "c41"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/users",
+    "purpose": "Create user (or update with Id)",
+    "cite": [
+     "c37"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/users/{id}",
+    "purpose": "Update user, e.g. IsActive=false to deactivate (documented as /api/v1/users/23)",
+    "cite": [
+     "c38"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/users/bulk",
+    "purpose": "Create or update several users",
+    "cite": [
+     "c40"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/users/{id}",
+    "purpose": "Delete user (documented example users/23)",
+    "cite": [
+     "c39"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/undelete",
+    "purpose": "Restore a deleted user",
+    "cite": [
+     "c45"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/Roles",
+    "purpose": "List roles",
+    "cite": [
+     "c43"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/ProjectMembers/bulk",
+    "purpose": "Add users to projects with a role",
+    "cite": [
+     "c44"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "Targetprocess REST API v1 Users resource (plus the separate Frontdoor API for Frontdoor users and environment access). Targetprocess has no public plans, so the API plan is quote-only like everything else."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": false,
+   "provisioning": false,
+   "kind": "swa",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/targetprocess/",
+   "cite": [
+    "c46",
+    "c21"
+   ],
+   "notes": "OIN 'Targetprocess' app (last updated Jul. 2015) ticks only SWA (read from page markup). Frontdoor's SCIM guide enables SCIM on the Okta app used for the Frontdoor SSO connection."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": "idp",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/target-process-tutorial",
+   "cite": [
+    "c47"
+   ],
+   "notes": "Entra gallery tutorial covers SAML SSO with JIT for the legacy Targetprocess SSO; Frontdoor's SCIM guide configures provisioning on the enterprise app against the generic SCIM base URL."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": true,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c35",
+   "c48",
+   "c27"
+  ],
+  "notes": "Frontdoor SSO auto-provisioning creates users and roles at login but cannot deprovision. CSV: Frontdoor 'Bulk Add users' from a Targetprocess export (How to import Targetprocess Users to Frontdoor)."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.apptio.com/products/targetprocess/",
+   "title": "IBM Targetprocess - Strategic Portfolio Management Platform",
+   "quote": "Start Your Free Trial",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html",
+   "title": "SCIM Provisioning - IBM Documentation",
+   "quote": "Frontdoor implements the SCIM 2.0",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSFG2DK/frontdoor/whats-new.html",
+   "title": "Recent releases - IBM Documentation",
+   "quote": "Frontdoor now supports provisioning and deprovisioning of Users directly from an Identity Provider via SCIM Provisioning. This initial release for SCIM supports adding, updating, and deleting Users.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSFG2DK/frontdoor/whats-new.html"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSSXFB/targetprocess/guide/authentication/frontdoor-overview.html",
+   "title": "Frontdoor Overview - IBM Documentation",
+   "quote": "Frontdoor is the unified authentication and authorization solution for all Apptio products (including Targetprocess).",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSSXFB/targetprocess/guide/authentication/frontdoor-overview.html"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html",
+   "title": "SCIM Provisioning - IBM Documentation",
+   "quote": "On the SCIM tab, click Create SCIM OAuth Client and provide a name for this client.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html"
+  },
+  {
+   "id": "c6",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html",
+   "title": "SCIM Provisioning - IBM Documentation",
+   "quote": "Frontdoor supports OAuth client credentials for authentication with the IdP. No other authentication methods are supported.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html"
+  },
+  {
+   "id": "c7",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html",
+   "title": "SCIM Provisioning - IBM Documentation",
+   "quote": "Frontdoor allows the creation of 2 SCIM OAuth Client Secrets so that credentials can be rotated in the IdP without any downtime.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html"
+  },
+  {
+   "id": "c8",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html",
+   "title": "SCIM Provisioning - IBM Documentation",
+   "quote": "Operation Endpoints: The current Frontdoor release only supports the User resource. Support for the Group resource is targeted for Q4 2026.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html"
+  },
+  {
+   "id": "c9",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html",
+   "title": "SCIM Provisioning - IBM Documentation",
+   "quote": "GET {SCIM Base URL}/ServiceProviderConfig: Returns the SCIM service provider's configuration",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html"
+  },
+  {
+   "id": "c10",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html",
+   "title": "SCIM Provisioning - IBM Documentation",
+   "quote": "GET {SCIM Base URL}/Schemas: Returns all schemas supported by this SCIM service provider.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html"
+  },
+  {
+   "id": "c11",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html",
+   "title": "SCIM Provisioning - IBM Documentation",
+   "quote": "GET {SCIM Base URL}/ResourceTypes: Returns all resource types supported by this SCIM service provider. Currently only the 'User' resource type is available.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html"
+  },
+  {
+   "id": "c12",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html",
+   "title": "SCIM Provisioning - IBM Documentation",
+   "quote": "SCIM 2.0 Me: This is not supported. SCIM 2.0 Bulk: This is not supported",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html"
+  },
+  {
+   "id": "c13",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html",
+   "title": "SCIM Provisioning - IBM Documentation",
+   "quote": "POST {SCIM Base URL}/Users: Creates a new user in the specified domain via SCIM provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html"
+  },
+  {
+   "id": "c14",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html",
+   "title": "SCIM Provisioning - IBM Documentation",
+   "quote": "PUT {SCIM Base URL}/Users/{id}: Replaces the specified user's attributes with the provided values.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html"
+  },
+  {
+   "id": "c15",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html",
+   "title": "SCIM Provisioning - IBM Documentation",
+   "quote": "PATCH {SCIM Base URL}/Users/{id}: Applies a set of PATCH operations to the specified user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html"
+  },
+  {
+   "id": "c16",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html",
+   "title": "SCIM Provisioning - IBM Documentation",
+   "quote": "DELETE {SCIM Base URL}/Users/{id}: Deletes the specified user from the domain, cascading to all associated records (environment access, API keys, scim_mapping, etc).",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html"
+  },
+  {
+   "id": "c17",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html",
+   "title": "SCIM Provisioning - IBM Documentation",
+   "quote": "GET {SCIM Base URL}/Users: Returns a paginated list of SCIM users in the domain, optionally filtered.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html"
+  },
+  {
+   "id": "c18",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html",
+   "title": "SCIM Provisioning - IBM Documentation",
+   "quote": "count is optional. Maximum results per page (default 100)",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html"
+  },
+  {
+   "id": "c19",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html",
+   "title": "SCIM Provisioning - IBM Documentation",
+   "quote": "filter is optional. SCIM filter expression (e.g., userName eq \"bob\")",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html"
+  },
+  {
+   "id": "c20",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html",
+   "title": "SCIM Provisioning - IBM Documentation",
+   "quote": "Frontdoor supports the following attributes:userName, displayName, emails[type eq \"work\"].value, externalId, and active.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html"
+  },
+  {
+   "id": "c21",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html",
+   "title": "SCIM Provisioning - IBM Documentation",
+   "quote": "In the Provisioning tab To App section, enable Create Users, Update User Attributes, Deactivate users. Do not enable Sync Password as this is not supported by Frontdoor.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html"
+  },
+  {
+   "id": "c22",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html",
+   "title": "SCIM Provisioning - IBM Documentation",
+   "quote": "Do not enable any Group actions as they are not supported by Frontdoor in this release.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html"
+  },
+  {
+   "id": "c23",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html",
+   "title": "SCIM Provisioning - IBM Documentation",
+   "quote": "Merge on External ID - Applies to SCIM POST requests. When enabled, a POST whose external ID matches a deactivated user is treated as an update to that user rather than returning a 409 conflict.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html"
+  },
+  {
+   "id": "c24",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html",
+   "title": "SCIM Provisioning - IBM Documentation",
+   "quote": "Note: All SCIM User provisioning events are included in the User Management Audit Report.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html"
+  },
+  {
+   "id": "c25",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html",
+   "title": "SCIM Provisioning - IBM Documentation",
+   "quote": "Instead, it provisions on a set cycle of 40 minutes by default.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSFG2DK/frontdoor/admin-guide/eaa-get-started/scim_provisioning.html"
+  },
+  {
+   "id": "c26",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSFG2DK/frontdoor/admin-guide/eaa-user-role-management/user_provisioning_and_deprovisioning.html",
+   "title": "User Provisioning and Deprovisioning - IBM Documentation",
+   "quote": "Access management via SCIM is not currently supported, but is scheduled for release Q4 2026.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSFG2DK/frontdoor/admin-guide/eaa-user-role-management/user_provisioning_and_deprovisioning.html"
+  },
+  {
+   "id": "c27",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSFG2DK/frontdoor/admin-guide/eaa-user-role-management/user_provisioning_and_deprovisioning.html",
+   "title": "User Provisioning and Deprovisioning - IBM Documentation",
+   "quote": "Since this provisioning is triggered when the user logs in, it cannot be used for deprovisioning.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSFG2DK/frontdoor/admin-guide/eaa-user-role-management/user_provisioning_and_deprovisioning.html"
+  },
+  {
+   "id": "c28",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSFG2DK/frontdoor/admin-guide/eaa-user-role-management/user_provisioning_and_deprovisioning.html",
+   "title": "User Provisioning and Deprovisioning - IBM Documentation",
+   "quote": "The Frontdoor API supports automation of user management. The API can be used to automate adding, removing, updating and managing access for users.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSFG2DK/frontdoor/admin-guide/eaa-user-role-management/user_provisioning_and_deprovisioning.html"
+  },
+  {
+   "id": "c29",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSFG2DK/frontdoor/coming_soon.html",
+   "title": "Coming Soon - IBM Documentation",
+   "quote": "Support for SCIM based Group updates and Environment access updates are targeted for release in Q4.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSFG2DK/frontdoor/coming_soon.html"
+  },
+  {
+   "id": "c30",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSFG2DK/frontdoor/admin-guide/eaa-get-started/domain_configuration.html",
+   "title": "Domain Configuration - IBM Documentation",
+   "quote": "Enable SCIM Provisioning - If true, SCIM provisioning is enabled on this Domain and the SCIM configuration options are made available on the SCIM tab.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSFG2DK/frontdoor/admin-guide/eaa-get-started/domain_configuration.html"
+  },
+  {
+   "id": "c31",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSSXFB/targetprocess/guide/authentication/frontdoor-overview.html",
+   "title": "Frontdoor Overview - IBM Documentation",
+   "quote": "If a user is deactivated in Frontdoor, the corresponding Targetprocess account will also be deactivated.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSSXFB/targetprocess/guide/authentication/frontdoor-overview.html"
+  },
+  {
+   "id": "c32",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSSXFB/targetprocess/guide/authentication/frontdoor-overview.html",
+   "title": "Frontdoor Overview - IBM Documentation",
+   "quote": "If a user does not have any roles in Frontdoor that include Targetprocess permissions, their account will be deactivated.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSSXFB/targetprocess/guide/authentication/frontdoor-overview.html"
+  },
+  {
+   "id": "c33",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSSXFB/targetprocess/guide/authentication/frontdoor-overview.html",
+   "title": "Frontdoor Overview - IBM Documentation",
+   "quote": "Targetprocess receives these updates within one minute of the change occurring in Frontdoor.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSSXFB/targetprocess/guide/authentication/frontdoor-overview.html"
+  },
+  {
+   "id": "c34",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSSXFB/targetprocess/guide/authentication/frontdoor-overview.html",
+   "title": "Frontdoor Overview - IBM Documentation",
+   "quote": "These roles use a default permission that map to the user type in Targetprocess, making it easy to manage.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSSXFB/targetprocess/guide/authentication/frontdoor-overview.html"
+  },
+  {
+   "id": "c35",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSSXFB/targetprocess/guide/authentication/sso_configuration.html",
+   "title": "SSO Configuration - IBM Documentation",
+   "quote": "SSO supports auto-provisioning of users. If the Honor SSO Roles property is enabled for the environment, the user will be automatically created and provided with the permissions of the Role selected during the Role Mapping.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSSXFB/targetprocess/guide/authentication/sso_configuration.html"
+  },
+  {
+   "id": "c36",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSSXFB/targetprocess/guide/authentication/sso_configuration.html",
+   "title": "SSO Configuration - IBM Documentation",
+   "quote": "SSO Configuration for IBM Targetprocess is done through Frontdoor Domain Management.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSSXFB/targetprocess/guide/authentication/sso_configuration.html"
+  },
+  {
+   "id": "c37",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSNFIB/targetprocess/dev-hub/users-api-ref.html",
+   "title": "Users API Reference - IBM Documentation",
+   "quote": "Use POST operations to create new Users or update existing ones in Targetprocess.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSNFIB/targetprocess/dev-hub/users-api-ref.html"
+  },
+  {
+   "id": "c38",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSNFIB/targetprocess/dev-hub/users-api-ref.html",
+   "title": "Users API Reference - IBM Documentation",
+   "quote": "POST to /api/v1/users/23 payload {\\\"IsActive\\\":false}",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSNFIB/targetprocess/dev-hub/users-api-ref.html"
+  },
+  {
+   "id": "c39",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSNFIB/targetprocess/dev-hub/users-api-ref.html",
+   "title": "Users API Reference - IBM Documentation",
+   "quote": "Use DELETE operations to remove Users from Targetprocess.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSNFIB/targetprocess/dev-hub/users-api-ref.html"
+  },
+  {
+   "id": "c40",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSNFIB/targetprocess/dev-hub/users-api-ref.html",
+   "title": "Users API Reference - IBM Documentation",
+   "quote": "You can operate with several Users at once by using /api/v1/users/bulk endpoint.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSNFIB/targetprocess/dev-hub/users-api-ref.html"
+  },
+  {
+   "id": "c41",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSNFIB/targetprocess/dev-hub/users-api-ref.html",
+   "title": "Users API Reference - IBM Documentation",
+   "quote": "get current user: /api/v1/users/loggeduser",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSNFIB/targetprocess/dev-hub/users-api-ref.html"
+  },
+  {
+   "id": "c42",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSNFIB/targetprocess/dev-hub/users-api-ref.html",
+   "title": "Users API Reference - IBM Documentation",
+   "quote": "//using a token generated at /api/v1/Authentication",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSNFIB/targetprocess/dev-hub/users-api-ref.html"
+  },
+  {
+   "id": "c43",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSNFIB/targetprocess/dev-hub/api-v1-usecases-users.html",
+   "title": "Users - IBM Documentation",
+   "quote": "GET /api/v1/Roles?include=[Id,Name]&take=1000",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSNFIB/targetprocess/dev-hub/api-v1-usecases-users.html"
+  },
+  {
+   "id": "c44",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSNFIB/targetprocess/dev-hub/api-v1-usecases-users.html",
+   "title": "Users - IBM Documentation",
+   "quote": "POST /api/v1/ProjectMembers/bulk?token=[your token]",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSNFIB/targetprocess/dev-hub/api-v1-usecases-users.html"
+  },
+  {
+   "id": "c45",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSNFIB/targetprocess/dev-hub/users-api-ref.html",
+   "title": "Users API Reference - IBM Documentation",
+   "quote": "POST to /api/v1/undelete payload {\\\"Id\\\":23,\\\"EntityType\\\":\\\"User\\\"}",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSNFIB/targetprocess/dev-hub/users-api-ref.html"
+  },
+  {
+   "id": "c46",
+   "url": "https://www.okta.com/integrations/targetprocess/",
+   "title": "Targetprocess | Okta",
+   "quote": "Targetprocess is visual management software for agile project management",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c47",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/target-process-tutorial",
+   "title": "Configure TargetProcess for Single sign-on with Microsoft Entra ID - Microsoft Entra ID | Microsoft Learn",
+   "quote": "TargetProcess supports Just In Time user provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c48",
+   "url": "https://targetprocess.com/guide/settings/sso/single-sign-on-in-targetprocess/",
+   "title": "Single Sign-On in Targetprocess",
+   "quote": "With Just-in-Time provisioning, you can use a SAML assertion with an email provided by the identity provider to create users on the fly the first time they try to log in.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c49",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSNFIB/targetprocess/dev-hub/users-api-ref.html",
+   "title": "Users API Reference - IBM Documentation",
+   "quote": "client.BaseAddress = new Uri(\"https://restapi.tpondemand.com/api/v1/\");",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSNFIB/targetprocess/dev-hub/users-api-ref.html"
+  },
+  {
+   "id": "c50",
+   "url": "https://www.ibm.com/docs/api/v1/content/SSNFIB/targetprocess/dev-hub/users-api-ref.html",
+   "title": "Users API Reference - IBM Documentation",
+   "quote": "get active users: /api/v1/users?where=(DeleteDate is null)and(IsActive eq 'true')&take=1000",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ibm.com/docs/en/SSNFIB/targetprocess/dev-hub/users-api-ref.html"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.targetprocess.com/pricing/ (redirects to https://www.apptio.com/products/targetprocess/; no prices)",
+  "https://targetprocess.com/sitemap.xml (guide pages: SSO, users; no SCIM)",
+  "IBM Documentation search 'frontdoor scim' and 'targetprocess api v1 users'",
+  "IBM docs Frontdoor SCIM Provisioning, User Provisioning and Deprovisioning, Coming Soon, Recent releases",
+  "https://www.okta.com/integrations/targetprocess/ (SWA)",
+  "Microsoft Learn target-process-tutorial"
+ ],
+ "open_questions": [
+  "No public price list; which Targetprocess/Apptio contracts include Frontdoor SCIM is not stated.",
+  "What a SCIM DELETE does to the Targetprocess user record (deactivate vs delete) is not documented.",
+  "SCIM rate limits and token lifetime are not documented.",
+  "Whether every Targetprocess account has been migrated to Frontdoor (prerequisite for SCIM) is not stated.",
+  "Audit-log API for Targetprocess is not documented (Frontdoor has a User Management Audit Report in the UI)."
+ ]
+}

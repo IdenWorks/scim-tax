@@ -1,0 +1,833 @@
+{
+ "slug": "ninjarmm",
+ "vendor": "NinjaOne",
+ "vendor_url": "https://www.ninjaone.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "NinjaOne",
+  "slug": "ninjarmm",
+  "category": "IT Management & Endpoint",
+  "status": "gated",
+  "scim_plan": "Quote-only (per-device platform)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "NinjaOne (per-device, quote)",
+  "team_price_text": "From $1.50 to $3.75 per endpoint/mo (published range; quote required)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Quote-only (per-device platform)",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "via_generic",
+   "google": "sso_only",
+   "onelogin": "sso_only",
+   "jumpcloud": "sso_only",
+   "generic": true
+  },
+  "pricing_page_url": "https://www.ninjaone.com/pricing/",
+  "docs_url": "https://www.ninjaone.com/docs/new-to-ninjaone/identity-access-management-saml-sso-mfa-scim/system-for-cross-domain-identity-management-scim/cross-domain-identity-management-scim/",
+  "evidence": "NinjaOne's docs describe SCIM to automatically create and delete technicians and end users from an IdP (after SAML SSO is set up), while its pricing page says it does not publicly list full pricing and sells per device by quote.",
+  "notes": "Quote-only: NinjaOne (formerly NinjaRMM) publishes no plan table, only a per-endpoint range ($1.50 at 10,000 endpoints to $3.75 at 50 or fewer, varying by region and products) and asks buyers to request a quote; SCIM is documented as a platform identity-provider feature with no plan named. SAML SSO must be configured first. SCIM token expires after six months. Deprovisioning marks users Inactive (still listed). System administrators cannot be assigned via SCIM. Okta OIN app (SAML + SCIM create/update/deactivate/group push); Entra uses a non-gallery app with the generic SCIM endpoint. Per-user fields null because pricing is per device. The Public API 2.0 (OAuth 2.0) can list, create, update and delete technicians and end users and manage role membership.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "NinjaOne (per-device, quote)",
+   "price_text": "From $1.50 USD per endpoint/month at 10,000 endpoints to $3.75 USD at 50 or fewer endpoints; full pricing by quote",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c3",
+    "c23",
+    "c38"
+   ],
+   "notes": "No public tier table; monthly or annual contracts per the pricing page. SSO/SCIM/API are documented platform features with no plan named."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c3",
+   "c13",
+   "c14",
+   "c8"
+  ],
+  "plan": "Quote-only (per-device platform)",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": null,
+  "auth": {
+   "method": "bearer",
+   "token_source": "Administration → Accounts → Identity Providers → (provider) → Enable SCIM → Generate token",
+   "token_expiry": "6 months",
+   "cite": [
+    "c4",
+    "c8"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c3",
+    "c17"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": null,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c3",
+    "c5",
+    "c16",
+    "c17",
+    "c11"
+   ],
+   "notes": "Okta app enables Create Users, Update User Attributes and Deactivate Users; the activity log lists 'End User Deleted via SCIM' but the docs describe removal as marking users Inactive."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "User marked Inactive and still appears in the users list.",
+   "cite": [
+    "c5"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "active",
+    "name.givenName",
+    "name.familyName",
+    "externalId"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": true,
+    "how": "NinjaOne extension urn:ietf:params:scim:schemas:extension:ninjaone:2.0:User with organizationId (target organization or 'All') and userType ('endUser' or 'technician')"
+   },
+   "group": [],
+   "cite": [
+    "c9",
+    "c10"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "Group mapping in NinjaOne assigns end-user or technician roles to pushed IdP groups; userType attribute picks technician vs end user; system administrator cannot be assigned via SCIM",
+   "cite": [
+    "c11",
+    "c6"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "System administrators cannot be assigned via SCIM, individually or by group.",
+    "cite": [
+     "c6",
+     "c11"
+    ]
+   },
+   {
+    "text": "SCIM-managed users cannot be edited or deleted in NinjaOne unless SCIM is temporarily deactivated.",
+    "cite": [
+     "c7"
+    ]
+   },
+   {
+    "text": "Okta Import Users and Import Profile Updates are not supported.",
+    "cite": [
+     "c15"
+    ]
+   },
+   {
+    "text": "SCIM secret token expires six months after generation and must be replaced in the IdP.",
+    "cite": [
+     "c4"
+    ]
+   }
+  ],
+  "notes": "The SCIM tenant URL is shown in NinjaOne (Administration → Accounts → Identity Providers) per IdP; its pattern is not published. Version 2.0 inferred from the urn:ietf:params:scim:schemas:extension:ninjaone:2.0 schema URN."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c38",
+   "c25"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://app.ninjarmm.com/v2 (regional instance host)",
+  "docs_url": "https://app.ninjarmm.com/apidocs-beta/",
+  "auth": {
+   "methods": [
+    "oauth2",
+    "session_key"
+   ],
+   "scopes": [
+    "monitoring",
+    "management",
+    "control"
+   ],
+   "cite": [
+    "c38",
+    "c39",
+    "c40"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c25",
+    "c26",
+    "c27",
+    "c28",
+    "c29",
+    "c30",
+    "c31",
+    "c32",
+    "c33",
+    "c34",
+    "c35",
+    "c36",
+    "c41",
+    "c42"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/v2/users",
+    "purpose": "List users",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v2/user/end-users",
+    "purpose": "List end users",
+    "cite": [
+     "c26"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v2/user/end-users",
+    "purpose": "Create end user",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v2/user/end-user/{id}",
+    "purpose": "End user details",
+    "cite": [
+     "c41"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/v2/user/end-user/{id}",
+    "purpose": "Update end user",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v2/user/end-user/{id}",
+    "purpose": "Delete end user",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v2/user/technicians",
+    "purpose": "List technicians",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v2/user/technicians",
+    "purpose": "Create technician",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v2/user/technician/{id}",
+    "purpose": "Technician details",
+    "cite": [
+     "c42"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/v2/user/technician/{id}",
+    "purpose": "Update technician",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v2/user/technician/{id}",
+    "purpose": "Delete technician",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v2/user/roles",
+    "purpose": "List user roles",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/v2/user/role/{roleId}/add-members",
+    "purpose": "Add users to a role",
+    "cite": [
+     "c35"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/v2/user/role/{roleId}/remove-members",
+    "purpose": "Remove users from a role",
+    "cite": [
+     "c36"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v2/activities",
+    "purpose": "Activity log (includes SSO/SCIM activity types)",
+    "cite": [
+     "c37",
+     "c12"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": null,
+   "cite": [
+    "c37"
+   ],
+   "notes": "GET /v2/activities returns the activity log; SCIM and SSO events are logged as SSO-type activities."
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "Base host is the customer's regional instance (e.g. app.ninjarmm.com); the /v2 paths are from the published OpenAPI document."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/ninjaone/",
+   "cite": [
+    "c18",
+    "c16",
+    "c17"
+   ],
+   "notes": "OIN 'NinjaOne' (last updated Aug. 21 2025) ticks SAML, SCIM, Create, Update, Deactivate and Group Push (read from page markup)."
+  },
+  "entra": {
+   "listed": false,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c19",
+    "c8"
+   ],
+   "notes": "Vendor guide uses a non-gallery Entra enterprise app with the NinjaOne SCIM tenant URL and token."
+  },
+  "google": {
+   "listed": false,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c20"
+   ],
+   "notes": "Custom SAML app; vendor says it has not tested Google Workspace SAML."
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c21"
+   ],
+   "notes": "Vendor guide points to the 'NinjaRMM' app in the OneLogin catalogue for SAML; no provisioning documented. OneLogin connector page not loaded."
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://jumpcloud.com/support/integrate-with-ninjaone",
+   "cite": [
+    "c22"
+   ],
+   "notes": "JumpCloud guide covers SAML SSO only."
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": true,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c24",
+   "c3"
+  ],
+  "notes": "CSV import covers end users per organization; technicians are created individually."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.ninjaone.com/pricing/",
+   "title": "NinjaOne Pricing",
+   "quote": "NinjaOne starts as low as $1.50 USD per month at 10,000 endpoints, increasing to $3.75 USD at 50 or fewer endpoints; pricing varies by region and products purchased.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://www.ninjaone.com/pricing/",
+   "title": "NinjaOne Pricing",
+   "quote": "like many companies who sell through the channel, we don’t publicly list our full pricing",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://www.ninjaone.com/docs/new-to-ninjaone/identity-access-management-saml-sso-mfa-scim/system-for-cross-domain-identity-management-scim/cross-domain-identity-management-scim/",
+   "title": "NinjaOne Identity Management with SCIM",
+   "quote": "Integrate your Identity Provider (IdP) via SCIM to automatically create and delete technicians and end users within NinjaOne.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://www.ninjaone.com/docs/new-to-ninjaone/identity-access-management-saml-sso-mfa-scim/system-for-cross-domain-identity-management-scim/cross-domain-identity-management-scim/",
+   "title": "NinjaOne Identity Management with SCIM",
+   "quote": "The SCIM secret token expires six months after NinjaOne generates it.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://www.ninjaone.com/docs/new-to-ninjaone/identity-access-management-saml-sso-mfa-scim/system-for-cross-domain-identity-management-scim/cross-domain-identity-management-scim/",
+   "title": "NinjaOne Identity Management with SCIM",
+   "quote": "When users are no longer members of a company, the IdP will automatically mark them as Inactive in NinjaOne. However, they will still appear in the users list.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://www.ninjaone.com/docs/new-to-ninjaone/identity-access-management-saml-sso-mfa-scim/system-for-cross-domain-identity-management-scim/cross-domain-identity-management-scim/",
+   "title": "NinjaOne Identity Management with SCIM",
+   "quote": "You cannot assign system administrators via SCIM. You must assign them manually in NinjaOne.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://www.ninjaone.com/docs/new-to-ninjaone/identity-access-management-saml-sso-mfa-scim/system-for-cross-domain-identity-management-scim/cross-domain-identity-management-scim/",
+   "title": "NinjaOne Identity Management with SCIM",
+   "quote": "Users managed via SCIM cannot be edited or deleted in NinjaOne, unless SCIM is temporarily deactivated.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://www.ninjaone.com/docs/new-to-ninjaone/identity-access-management-saml-sso-mfa-scim/system-for-cross-domain-identity-management-scim/cross-domain-identity-management-scim/",
+   "title": "NinjaOne Identity Management with SCIM",
+   "quote": "copy the SCIM API endpoint URL (tenant URL) and paste it into the Tenant URL field in the Microsoft Entra admin center",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://www.ninjaone.com/docs/new-to-ninjaone/identity-access-management-saml-sso-mfa-scim/system-for-cross-domain-identity-management-scim/cross-domain-identity-management-scim/",
+   "title": "NinjaOne Identity Management with SCIM",
+   "quote": "name.familyName | surname",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://www.ninjaone.com/docs/new-to-ninjaone/identity-access-management-saml-sso-mfa-scim/system-for-cross-domain-identity-management-scim/cross-domain-identity-management-scim/",
+   "title": "NinjaOne Identity Management with SCIM",
+   "quote": "urn:ietf:params:scim:schemas:extension:ninjaone:2.0:User:organizationId",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c11",
+   "url": "https://www.ninjaone.com/docs/new-to-ninjaone/identity-access-management-saml-sso-mfa-scim/system-for-cross-domain-identity-management-scim/cross-domain-identity-management-scim/",
+   "title": "NinjaOne Identity Management with SCIM",
+   "quote": "Group mapping allows you to assign end user or technician roles to an identity group, including global end users; however, you cannot assign the system administrator permission as a group through SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://www.ninjaone.com/docs/new-to-ninjaone/identity-access-management-saml-sso-mfa-scim/system-for-cross-domain-identity-management-scim/cross-domain-identity-management-scim/",
+   "title": "NinjaOne Identity Management with SCIM",
+   "quote": "End User Deleted via SCIM",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://www.ninjaone.com/docs/new-to-ninjaone/identity-access-management-saml-sso-mfa-scim/frequently-asked-questions-faq-about-identity-access-management-iam/system-for-cross-domain-identity-management-scim-frequently-asked-questions-faq/",
+   "title": "SCIM Frequently Asked Questions",
+   "quote": "You do not need to provision System for Cross-domain Identity Management (SCIM) in NinjaOne as a prerequisite to log in as a technician and end user.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c14",
+   "url": "https://www.ninjaone.com/docs/new-to-ninjaone/identity-access-management-saml-sso-mfa-scim/system-for-cross-domain-identity-management-scim/ninjaone-identity-access-management-activate-scim-for-your-identity-provider/",
+   "title": "Activate SCIM for your Identity Provider",
+   "quote": "You must first configure Security Assertion Markup Language (SAML) between your Identity Provider and NinjaOne.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://www.ninjaone.com/docs/new-to-ninjaone/identity-access-management-saml-sso-mfa-scim/system-for-cross-domain-identity-management-scim/ninjaone-integrations-configuring-scim-for-okta/",
+   "title": "Configuring SCIM for Okta",
+   "quote": "NinjaOne SSO and SCIM do not support the Okta Import Users and Import Profile Updates feature.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://www.ninjaone.com/docs/new-to-ninjaone/identity-access-management-saml-sso-mfa-scim/system-for-cross-domain-identity-management-scim/ninjaone-integrations-configuring-scim-for-okta/",
+   "title": "Configuring SCIM for Okta",
+   "quote": "Click Edit and then click Enable for the following options: Create Users Update User Attributes Deactivate Users",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c17",
+   "url": "https://www.ninjaone.com/docs/new-to-ninjaone/identity-access-management-saml-sso-mfa-scim/system-for-cross-domain-identity-management-scim/ninjaone-integrations-configuring-scim-for-okta/",
+   "title": "Configuring SCIM for Okta",
+   "quote": "In Okta, open the Push Groups tab in the Ninja SSO and SCIM application. Click Push Groups to set the target groups.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c18",
+   "url": "https://www.okta.com/integrations/ninjaone/",
+   "title": "Integrate NinjaOne with Okta",
+   "quote": "Integrate Okta with NinjaOne via SCIM to automatically create and delete technicians and end-users within NinjaOne.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c19",
+   "url": "https://www.ninjaone.com/docs/new-to-ninjaone/identity-access-management-saml-sso-mfa-scim/security-assertion-markup-language-saml/ninjaone-identity-access-management-iam-configure-security-assertion-markup-language-for-microsoft-entra-id/",
+   "title": "Configure SAML for Microsoft Entra ID",
+   "quote": "Integrate any other application you don't find in the gallery",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c20",
+   "url": "https://www.ninjaone.com/docs/new-to-ninjaone/identity-access-management-saml-sso-mfa-scim/security-assertion-markup-language-saml/configuring-ninjaone-saml-in-google-workspace/",
+   "title": "Configuring NinjaOne SAML in Google Workspace",
+   "quote": "NinjaOne has not tested or verified using SAML with Google Workspace.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c21",
+   "url": "https://www.ninjaone.com/docs/new-to-ninjaone/identity-access-management-saml-sso-mfa-scim/security-assertion-markup-language-saml/configuring-ninjaone-saml-in-microsoft-onelogin/",
+   "title": "Configuring NinjaOne SAML in OneLogin",
+   "quote": "you can enable the NinjaOne application from the OneLogin catalog.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c22",
+   "url": "https://jumpcloud.com/support/integrate-with-ninjaone",
+   "title": "Integrate with NinjaOne | JumpCloud",
+   "quote": "Read this article to learn how to integrate with NinjaOne.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c23",
+   "url": "https://www.ninjaone.com/docs/new-to-ninjaone/identity-access-management-saml-sso-mfa-scim/ninjaone-identity-access-management-configure-single-sign-on/",
+   "title": "Configure Single Sign-On",
+   "quote": "You may use any IdP that supports SAML 2.0, and we provide user guides for configuring specific IdPs such as Duo, Okta, and Microsoft Azure, to name a few.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c24",
+   "url": "https://www.ninjaone.com/docs/new-to-ninjaone/users-and-permissions/ninjaone-platform-create-or-import-end-user-accounts/",
+   "title": "Create or Import End User Accounts",
+   "quote": "The Import End Users modal on the Organization → End Users page provides an area to paste in tab-delimited, comma-separated values (CSV) data",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c25",
+   "url": "https://app.ninjarmm.com/apidocs-beta/NinjaRMM-API-v2.yaml",
+   "title": "NinjaOne Public API 2.0 (OpenAPI)",
+   "quote": "summary: List users description: Returns list of users",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.ninjarmm.com/apidocs-beta/"
+  },
+  {
+   "id": "c26",
+   "url": "https://app.ninjarmm.com/apidocs-beta/NinjaRMM-API-v2.yaml",
+   "title": "NinjaOne Public API 2.0 (OpenAPI)",
+   "quote": "summary: End user list description: Get all end users",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.ninjarmm.com/apidocs-beta/"
+  },
+  {
+   "id": "c27",
+   "url": "https://app.ninjarmm.com/apidocs-beta/NinjaRMM-API-v2.yaml",
+   "title": "NinjaOne Public API 2.0 (OpenAPI)",
+   "quote": "summary: Create end user description: Create an end user",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.ninjarmm.com/apidocs-beta/"
+  },
+  {
+   "id": "c28",
+   "url": "https://app.ninjarmm.com/apidocs-beta/NinjaRMM-API-v2.yaml",
+   "title": "NinjaOne Public API 2.0 (OpenAPI)",
+   "quote": "summary: Update a specific end user description: Update a specific end user by their ID",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.ninjarmm.com/apidocs-beta/"
+  },
+  {
+   "id": "c29",
+   "url": "https://app.ninjarmm.com/apidocs-beta/NinjaRMM-API-v2.yaml",
+   "title": "NinjaOne Public API 2.0 (OpenAPI)",
+   "quote": "summary: Delete end user description: Delete an end user",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.ninjarmm.com/apidocs-beta/"
+  },
+  {
+   "id": "c30",
+   "url": "https://app.ninjarmm.com/apidocs-beta/NinjaRMM-API-v2.yaml",
+   "title": "NinjaOne Public API 2.0 (OpenAPI)",
+   "quote": "summary: Technicians list description: Get all technicians",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.ninjarmm.com/apidocs-beta/"
+  },
+  {
+   "id": "c31",
+   "url": "https://app.ninjarmm.com/apidocs-beta/NinjaRMM-API-v2.yaml",
+   "title": "NinjaOne Public API 2.0 (OpenAPI)",
+   "quote": "summary: Create a technician description: Create a new technician",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.ninjarmm.com/apidocs-beta/"
+  },
+  {
+   "id": "c32",
+   "url": "https://app.ninjarmm.com/apidocs-beta/NinjaRMM-API-v2.yaml",
+   "title": "NinjaOne Public API 2.0 (OpenAPI)",
+   "quote": "summary: Update a technician description: Update technician by their ID",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.ninjarmm.com/apidocs-beta/"
+  },
+  {
+   "id": "c33",
+   "url": "https://app.ninjarmm.com/apidocs-beta/NinjaRMM-API-v2.yaml",
+   "title": "NinjaOne Public API 2.0 (OpenAPI)",
+   "quote": "summary: Delete a technician description: Delete a technician by their ID",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.ninjarmm.com/apidocs-beta/"
+  },
+  {
+   "id": "c34",
+   "url": "https://app.ninjarmm.com/apidocs-beta/NinjaRMM-API-v2.yaml",
+   "title": "NinjaOne Public API 2.0 (OpenAPI)",
+   "quote": "summary: Get user roles description: Get list of user roles",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.ninjarmm.com/apidocs-beta/"
+  },
+  {
+   "id": "c35",
+   "url": "https://app.ninjarmm.com/apidocs-beta/NinjaRMM-API-v2.yaml",
+   "title": "NinjaOne Public API 2.0 (OpenAPI)",
+   "quote": "summary: Add user role members description: Add members to user role",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.ninjarmm.com/apidocs-beta/"
+  },
+  {
+   "id": "c36",
+   "url": "https://app.ninjarmm.com/apidocs-beta/NinjaRMM-API-v2.yaml",
+   "title": "NinjaOne Public API 2.0 (OpenAPI)",
+   "quote": "summary: Remove users from user role",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.ninjarmm.com/apidocs-beta/"
+  },
+  {
+   "id": "c37",
+   "url": "https://app.ninjarmm.com/apidocs-beta/NinjaRMM-API-v2.yaml",
+   "title": "NinjaOne Public API 2.0 (OpenAPI)",
+   "quote": "summary: List activities description: Returns activity log in reverse chronological order",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.ninjarmm.com/apidocs-beta/"
+  },
+  {
+   "id": "c38",
+   "url": "https://www.ninjaone.com/docs/application-programming-interface-api/oauth-token-configuration/",
+   "title": "API OAuth Token Configuration",
+   "quote": "The NinjaOne Public API uses OAuth 2.0 to authenticate requests.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c39",
+   "url": "https://www.ninjaone.com/docs/application-programming-interface-api/oauth-token-configuration/",
+   "title": "API OAuth Token Configuration",
+   "quote": "Monitoring : Grants read-only access to monitoring data and organization structure.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c40",
+   "url": "https://www.ninjaone.com/docs/application-programming-interface-api/public-api-2-0-authorization/",
+   "title": "Public API 2.0 Authorization",
+   "quote": "The NinjaOne Public API 2.0 requires either an authentication token or an API session key to send the API request.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c41",
+   "url": "https://app.ninjarmm.com/apidocs-beta/NinjaRMM-API-v2.yaml",
+   "title": "NinjaOne Public API 2.0 (OpenAPI)",
+   "quote": "summary: End user details description: Get details for a specific end user identifier",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.ninjarmm.com/apidocs-beta/"
+  },
+  {
+   "id": "c42",
+   "url": "https://app.ninjarmm.com/apidocs-beta/NinjaRMM-API-v2.yaml",
+   "title": "NinjaOne Public API 2.0 (OpenAPI)",
+   "quote": "summary: Technician details description: Get details for a specific technician identifier",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.ninjarmm.com/apidocs-beta/"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.ninjaone.com/pricing/ (per-device range, quote required)",
+  "https://www.ninjaone.com/llms.txt and docs sitemaps (pseudo_docs-sitemap1-5.xml)",
+  "NinjaOne docs: Identity Access Management (SAML, SSO, MFA, SCIM) section incl. SCIM overview, Okta OIN, activate SCIM, FAQ, SAML guides for Entra, Google, OneLogin",
+  "https://app.ninjarmm.com/apidocs-beta/NinjaRMM-API-v2.yaml (Public API 2.0 OpenAPI)",
+  "Okta OIN ninjaone (SAML+SCIM), JumpCloud integrate-with-ninjaone, Entra gallery tutorials ninjarmm/ninjaone (404)",
+  "ninjarmm.zendesk.com help centre (403; content now on ninjaone.com/docs)"
+ ],
+ "open_questions": [
+  "No NinjaOne page states whether SCIM/SSO are included for every customer or tied to particular products or contract terms (quote-only).",
+  "SCIM base URL pattern, filtering, pagination and rate limits are not published.",
+  "Whether SCIM deactivation frees a licence or ends sessions is not documented (licensing is per device, not per user).",
+  "Whether SCIM DELETE hard-deletes users is unclear: the activity log lists 'End User Deleted via SCIM' while the guide says removed users are marked Inactive."
+ ]
+}

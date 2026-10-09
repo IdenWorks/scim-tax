@@ -1,0 +1,504 @@
+{
+ "slug": "jam",
+ "vendor": "Jam",
+ "vendor_url": "https://jam.dev",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Jam",
+  "slug": "jam",
+  "category": "Developer Tools & CI/CD",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Team",
+  "team_price_text": "Team: $14/creator/mo billed yearly",
+  "team_price_per_user_mo": 14,
+  "price_multiplier": null,
+  "sso_plan": "Enterprise",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": false,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": null
+  },
+  "idp": {
+   "okta": "none",
+   "entra": null,
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": null
+  },
+  "pricing_page_url": "https://jam.dev/pricing",
+  "docs_url": "https://jam.dev/docs/sso",
+  "evidence": "Jam's SSO docs say \"SSO and Directory Sync are available on the Enterprise plan only\"; the pricing page lists Enterprise as Custom, yearly billing only, and Team at $14 per creator per month billed yearly.",
+  "notes": "Status unchanged (gated). Price change since June: the Team plan now shows a public price, $14 per creator seat per month billed yearly (June had it as custom); viewer seats are free. Jam calls its provisioning feature Directory Sync and does not name the protocol (SCIM is never mentioned). It is set up through a guided walkthrough in Settings > Access, and the docs list Okta, Azure AD and Google Workspace. Provisioned users get the Creator (paid) role by default. Groups can be selected for sync but cannot be mapped to roles, and Jam's own pages disagree on whether roles are then managed in Jam or in the IdP. Removing a user from the IdP revokes Jam access. Audit logs are Enterprise-only and UI-only. There is no public user-management API, and webhooks only fire jam.created. Jam is not in the Okta Integration Network.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": null,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "$0 Free for everyone",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": false,
+   "cite": [
+    "c1",
+    "c3",
+    "c4",
+    "c6"
+   ],
+   "notes": "5 creator seats, unlimited viewer seats."
+  },
+  {
+   "name": "Team",
+   "price_text": "$14 per creator / month, billed yearly",
+   "price_per_user_mo": 14,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": false,
+   "cite": [
+    "c2",
+    "c3",
+    "c4",
+    "c6"
+   ],
+   "notes": "50 creator seats; viewers are free."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Custom, yearly billing only",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": false,
+   "cite": [
+    "c3",
+    "c5",
+    "c6",
+    "c16"
+   ],
+   "notes": "Audit logs exist on Enterprise but only in the UI; no audit-log API is documented."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c5",
+   "c7",
+   "c18",
+   "c17"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": false,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": null,
+   "token_source": null,
+   "token_expiry": null,
+   "cite": [],
+   "notes": "Set up via a guided walkthrough (Settings > Access > Setup next to Active Directory); no endpoint or token is documented publicly."
+  },
+  "endpoints": {
+   "Users": null,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": []
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": null,
+   "group_push": null,
+   "group_membership": null,
+   "cite": [
+    "c8",
+    "c9",
+    "c10",
+    "c7"
+   ],
+   "notes": "'Directory Sync automatically reflects user changes from your IdP in Jam' covers updates; whether updates arrive as PUT or PATCH is not documented. Group sync scopes which IdP groups are synced; whether groups themselves appear in Jam is not stated."
+  },
+  "deprovision": {
+   "action": "remove_from_org",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c9",
+    "c10"
+   ],
+   "notes": "Docs only say the user loses access to Jam when removed from the IdP."
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": []
+  },
+  "roles": {
+   "supported": false,
+   "how": "Provisioned users default to the Creator role; IdP groups cannot be mapped to Jam roles automatically, so roles are changed by hand in Settings > Members.",
+   "cite": [
+    "c11",
+    "c12"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "User groups cannot be mapped to specific Jam roles automatically; every provisioned user starts as a paid Creator seat.",
+    "cite": [
+     "c11",
+     "c12"
+    ]
+   },
+   {
+    "text": "SSO is configured for a single domain by default; extra domains need Jam support.",
+    "cite": [
+     "c19"
+    ]
+   }
+  ],
+  "notes": "Jam calls this Directory Sync and does not name the protocol; it is recorded as SCIM-equivalent automated provisioning (create, update, removal) from the listed IdPs."
+ },
+ "user_api": {
+  "available": null,
+  "cite": [
+   "c13"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": null,
+  "base_url": null,
+  "docs_url": null,
+  "auth": {
+   "methods": [],
+   "scopes": [],
+   "cite": []
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": []
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": false,
+   "events": [],
+   "cite": [
+    "c13"
+   ],
+   "notes": "The only documented webhook event is jam.created."
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "The docs index (llms.txt) has no REST API for members or workspaces; Jam's developer surface is the MCP server, webhooks and the jam.metadata() capture SDK."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": false,
+   "sso": false,
+   "provisioning": false,
+   "kind": null,
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/?search=jam",
+   "cite": [
+    "c14"
+   ],
+   "notes": "OIN search for 'jam' returns only Jamf, Jama and unrelated apps, with no Jam (jam.dev) integration."
+  },
+  "entra": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "No Microsoft Learn tutorial at the expected jam-tutorial URL (404); gallery listing unverified."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c5"
+  ],
+  "notes": "Without Directory Sync, members are added by hand in Settings > Members."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://jam.dev/pricing",
+   "title": "Jam pricing: Free, Team, and Enterprise plans",
+   "quote": "Free $0 Free for everyone",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://jam.dev/pricing",
+   "title": "Jam pricing: Free, Team, and Enterprise plans",
+   "quote": "Team $14 per creator / month Billed yearly",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://jam.dev/pricing",
+   "title": "Jam pricing: Free, Team, and Enterprise plans",
+   "quote": "Creator seats 5 50 Unlimited Viewer seats Unlimited Unlimited Unlimited",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://jam.dev/pricing",
+   "title": "Jam pricing: Free, Team, and Enterprise plans",
+   "quote": "SAML/SSO Login – – Audit logs – –",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://jam.dev/docs/sso",
+   "title": "SSO - Jam",
+   "quote": "SSO and Directory Sync are available on the Enterprise plan only. Contact sales to upgrade.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://jam.dev/pricing",
+   "title": "Jam pricing: Free, Team, and Enterprise plans",
+   "quote": "Enterprise Custom Yearly billing only",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://jam.dev/docs/sso",
+   "title": "SSO - Jam",
+   "quote": "Directory Sync automatically reflects user changes from your IdP in Jam. Changes to your IdP sync automatically to your Jam workspace with no manual work.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://jam.dev/docs/sso",
+   "title": "SSO - Jam",
+   "quote": "New users added to your IdP automatically join your workspace.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://jam.dev/docs/sso",
+   "title": "SSO - Jam",
+   "quote": "User removal: Remove from IdP to revoke Jam access automatically",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://jam.dev/docs/sso",
+   "title": "SSO - Jam",
+   "quote": "With Directory Sync enabled, the user automatically loses access to Jam when they are removed from your IdP.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c11",
+   "url": "https://jam.dev/docs/sso",
+   "title": "SSO - Jam",
+   "quote": "Provisioned users get the Creator role by default. You'll need to adjust roles manually in Settings → Members.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://jam.dev/docs/sso",
+   "title": "SSO - Jam",
+   "quote": "User groups cannot be mapped to specific Jam roles automatically. Role assignment requires manual configuration.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://jam.dev/docs/webhooks",
+   "title": "Webhooks and events - Jam",
+   "quote": "jam.created : fired when a new Jam is captured from any origin, including the Chrome extension, iOS app, dashboard, Fin (Intercom) integration, or Recording Link.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c14",
+   "url": "https://www.okta.com/integrations/?search=jam",
+   "title": "Okta Integration Network | Okta",
+   "quote": "Results for “jam”",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://jam.dev/docs/members-and-roles",
+   "title": "Members and roles - Jam",
+   "quote": "If your workspace uses Single Sign-On (SSO) and Active Directory sync, you’ll need to manage member roles directly through your Identity Provider (IdP) and Active Directory. You won’t be able to manage these roles directly in Jam.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://jam.dev/docs/audit-logs",
+   "title": "Audit Logs - Jam",
+   "quote": "Audit logs are available on the Enterprise plan only.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c17",
+   "url": "https://jam.dev/docs/sso",
+   "title": "SSO - Jam",
+   "quote": "Jam supports all major identity providers, including Okta, Azure AD, Google Workspace, and any SAML-compatible provider.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c18",
+   "url": "https://jam.dev/docs/sso",
+   "title": "SSO - Jam",
+   "quote": "Yes. SSO handles authentication while Directory Sync manages user provisioning. You can enable either feature independently.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c19",
+   "url": "https://jam.dev/docs/sso",
+   "title": "SSO - Jam",
+   "quote": "SSO is configured for a single domain by default. Need multiple domains?",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The SSO page says provisioned users default to Creator and roles must be adjusted manually in Settings > Members; the Members and roles page says that with SSO and Active Directory sync, roles are managed through the IdP and cannot be managed in Jam. Docs-behaviour rule: the SSO page is more specific to Directory Sync, so roles.supported is recorded as false.",
+   "cite": [
+    "c11",
+    "c15"
+   ]
+  }
+ ],
+ "searched": [
+  "https://jam.dev/pricing",
+  "https://jam.dev/docs/llms.txt and https://jam.dev/docs/llms-full.txt (grep: scim, directory sync, api, okta)",
+  "https://jam.dev/docs/sso",
+  "https://jam.dev/docs/members-and-roles",
+  "https://jam.dev/docs/audit-logs",
+  "https://jam.dev/docs/webhooks",
+  "https://www.okta.com/integrations/?search=jam",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/jam-tutorial (404)"
+ ],
+ "open_questions": [
+  "Whether Directory Sync is SCIM 2.0 (Jam never names the protocol) and whether Google Workspace sync uses the Directory API instead.",
+  "Whether removed users are deactivated or deleted, and whether their paid Creator seat is freed.",
+  "Whether IdP group sync creates groups in Jam or only scopes which users are provisioned.",
+  "Whether Jam supports SAML JIT creation on first sign-in without Directory Sync.",
+  "Entra, Google, OneLogin and JumpCloud catalogue listings were not verified."
+ ]
+}

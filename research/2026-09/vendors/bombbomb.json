@@ -1,0 +1,933 @@
+{
+ "slug": "bombbomb",
+ "vendor": "BombBomb",
+ "vendor_url": "https://bombbomb.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "BombBomb",
+  "slug": "bombbomb",
+  "category": "Sales & CRM",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Core",
+  "team_price_text": "Core: $36/u/mo billed annually ($42 monthly)",
+  "team_price_per_user_mo": 36,
+  "price_multiplier": null,
+  "sso_plan": "Enterprise",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": false
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://bombbomb.com/pricing/",
+  "docs_url": "https://support.bombbomb.com/api/v2/help_center/en-us/articles/41027463923853.json",
+  "evidence": "BombBomb's pricing page lists \"SSO (SCIM / Okta)\" only under Enterprise (\"Custom teams pricing\"), and the Okta SCIM help article says \"Plan Type: Enterprise\".",
+  "notes": "New row. Core $36 and Core + Copilot $56 per user/mo billed annually ($42/$70 monthly); Enterprise is custom-priced and carries SSO and SCIM. SSO is Okta OIDC or SAML 2.0 (Entra, OneLogin, JumpCloud and others), set up by BombBomb support. SCIM: Okta Integration Network app (OAuth 'Authenticate with BombBomb') and an Entra non-gallery app pointed at https://api.bombbomb.com/v2/scim with an admin's OAuth token copied from the BBV2APITOKEN browser cookie. Okta deactivation marks members deactivated and lowers the seat count; group push to subteams is not supported and email changes do not sync. Pricing page and the plan matrix put 'Open API access' on Enterprise only, but the API help articles list Core, Core + Copilot and Enterprise (see conflicts). Category set to Sales & CRM because BombBomb is sold as video messaging for sales and relationship teams.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Enterprise",
+  "api_tax": true,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Core",
+   "price_text": "$36/user/mo billed annually; $42/user/mo monthly",
+   "price_per_user_mo": 36,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c1",
+    "c7"
+   ]
+  },
+  {
+   "name": "Core + Copilot",
+   "price_text": "$56/user/mo billed annually; $70/user/mo monthly",
+   "price_per_user_mo": 56,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": null,
+   "cite": [
+    "c4",
+    "c2",
+    "c7"
+   ]
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Custom teams pricing (Contact Sales)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c5",
+    "c6",
+    "c7",
+    "c8"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c6",
+   "c10",
+   "c23",
+   "c9"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": null,
+  "base_url": "https://api.bombbomb.com/v2/scim",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Entra: the Paid Seat Team Admin's BombBomb OAuth token (BBV2APITOKEN cookie from app.bombbomb.com). Okta OIN app: OAuth consent via 'Authenticate with BombBomb'.",
+   "token_expiry": null,
+   "cite": [
+    "c24",
+    "c25",
+    "c20"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c23"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": null,
+   "group_push": false,
+   "group_membership": false,
+   "cite": [
+    "c11",
+    "c22",
+    "c13",
+    "c15",
+    "c14",
+    "c18",
+    "c27"
+   ],
+   "notes": "Update is documented as a capability (profile fields sync) without saying PUT or PATCH. Read is implied by Okta's 'Import existing users'."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": true,
+   "revokes_sessions": null,
+   "data_retained": "Deactivated member keeps a restricted account: cannot sign in with Okta SSO, and after a password reset only a limited account without emails, videos or contacts. Admin-side deactivation keeps videos and data in the workspace. Self Paid users are removed from the team; invited users have the invitation revoked.",
+   "cite": [
+    "c15",
+    "c16",
+    "c34"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "emails (match key, not updatable)",
+    "name.givenName",
+    "name.familyName",
+    "organization",
+    "title",
+    "phoneNumbers (primary)",
+    "addresses (street, city, state, postal code, country)"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": [
+    "c13",
+    "c28",
+    "c12",
+    "c17"
+   ],
+   "notes": "Docs list friendly field names, not SCIM attribute paths; mapped here to the nearest SCIM core attribute. Entra list says 'Job title' and 'Phone number' and omits Organization."
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Email address changes in the IdP are not synced to BombBomb.",
+    "cite": [
+     "c17"
+    ]
+   },
+   {
+    "text": "Okta groups cannot be synced to BombBomb subteams; Entra group provisioning must be disabled.",
+    "cite": [
+     "c18",
+     "c27"
+    ]
+   },
+   {
+    "text": "Provisioning is queued and can take up to 30 minutes.",
+    "cite": [
+     "c19"
+    ]
+   },
+   {
+    "text": "Only Team Admin or Super Admin can set up Okta provisioning.",
+    "cite": [
+     "c21"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c36",
+   "c7",
+   "c39"
+  ],
+  "plan": "Enterprise",
+  "api_tax": true,
+  "style": "REST",
+  "base_url": "https://api.bombbomb.com/v2",
+  "docs_url": "https://developer.bombbomb.com/api",
+  "auth": {
+   "methods": [
+    "oauth2",
+    "api_key"
+   ],
+   "scopes": [
+    "team:read",
+    "team:manage",
+    "account:read",
+    "account:manage"
+   ],
+   "cite": [
+    "c37",
+    "c50",
+    "c51"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": null,
+   "create_user": true,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c40",
+    "c42",
+    "c43",
+    "c48",
+    "c46",
+    "c41",
+    "c44",
+    "c45",
+    "c52"
+   ],
+   "notes": "Team members can be listed, added, updated and removed from a team; subteams can be created and deleted. GET /user returns only the caller's own info. No documented deactivate endpoint."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/team/{teamId}/members",
+    "purpose": "List team members",
+    "cite": [
+     "c40"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/team/{teamId}/members",
+    "purpose": "Add users to a team",
+    "cite": [
+     "c42"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/team/{teamId}/member",
+    "purpose": "Update a team member",
+    "cite": [
+     "c46"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/team/{teamId}/member/{userId}",
+    "purpose": "Remove a member from a team",
+    "cite": [
+     "c41"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/team/{teamId}/{memberUserId}/rewelcome",
+    "purpose": "Resend invite",
+    "cite": [
+     "c48"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/team/{teamId}/memberCount",
+    "purpose": "Count team members",
+    "cite": [
+     "c49"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/accounts",
+    "purpose": "Create account",
+    "cite": [
+     "c43"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/team/{teamId}/subteam",
+    "purpose": "Add a subteam",
+    "cite": [
+     "c45"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/team/{teamId}/subteam",
+    "purpose": "Delete a subteam",
+    "cite": [
+     "c44"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/user",
+    "purpose": "Get the authenticated user's info",
+    "cite": [
+     "c47"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "One API key per account; only Admins and Application Admins can generate it.",
+    "cite": [
+     "c38"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/bombbomb/",
+   "cite": [
+    "c53",
+    "c9"
+   ],
+   "notes": "OIN page marks OIDC, SWA, SCIM and Create, Update, Deactivate as checked (read from page markup); Group Push not checked. BombBomb's own help article documents the OIN SCIM setup."
+  },
+  "entra": {
+   "listed": false,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c26",
+    "c23",
+    "c30",
+    "c32"
+   ],
+   "notes": "No Microsoft Learn tutorial for BombBomb in the Entra SaaS app index. BombBomb documents a non-gallery Entra app for both SAML and SCIM and says older gallery templates are not supported."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c30"
+   ],
+   "notes": "BombBomb's SAML article names OneLogin as a supported SAML provider; no OneLogin SCIM guide found."
+  },
+  "jumpcloud": {
+   "listed": false,
+   "sso": true,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c30"
+   ],
+   "notes": "jumpcloud.com/support/integrate-with-bombbomb returns AccessDenied (no guide). BombBomb's SAML article names JumpCloud as a SAML provider."
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": true,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c35",
+   "c31"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://bombbomb.com/pricing/",
+   "title": "BombBomb Pricing",
+   "quote": "Core $42 Per user, per month For teams getting started with video",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://bombbomb.com/pricing/",
+   "title": "BombBomb Pricing",
+   "quote": "Core + Copilot $70 Per user, per month For teams that need systematic adoption",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://bombbomb.com/pricing/",
+   "title": "BombBomb Pricing",
+   "quote": "Core $36 Per user, per month For teams getting started with video",
+   "accessed": "2026-10-05",
+   "page_url": null,
+   "interaction": "click Billed Annually"
+  },
+  {
+   "id": "c4",
+   "url": "https://bombbomb.com/pricing/",
+   "title": "BombBomb Pricing",
+   "quote": "Core + Copilot $56 Per user, per month For teams that need systematic adoption",
+   "accessed": "2026-10-05",
+   "page_url": null,
+   "interaction": "click Billed Annually"
+  },
+  {
+   "id": "c5",
+   "url": "https://bombbomb.com/pricing/",
+   "title": "BombBomb Pricing",
+   "quote": "Enterprise Custom Custom teams pricing For teams with security requirements",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://bombbomb.com/pricing/",
+   "title": "BombBomb Pricing",
+   "quote": "Advanced security & compliance controls API access SSO (SCIM / Okta) Role-based access controls",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://bombbomb.com/pricing/",
+   "title": "BombBomb Pricing",
+   "quote": "SSO & SCIM (Okta) Advanced admin governance tools Integrations Core Core + Copilot Enterprise Open API access",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://support.bombbomb.com/api/v2/help_center/en-us/articles/36078323159437.json",
+   "title": "What's Included in Each Plan",
+   "quote": "Enterprise — Everything in Core + Copilot, plus advanced security, compliance controls, SSO, role-based access, API access, and a dedicated Customer Success Manager.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bombbomb.com/hc/en-us/articles/36078323159437-What-s-Included-in-Each-Plan"
+  },
+  {
+   "id": "c9",
+   "url": "https://support.bombbomb.com/api/v2/help_center/en-us/articles/41027463923853.json",
+   "title": "How to Set Up User Provisioning with Okta (SCIM)",
+   "quote": "You can now set up BombBomb user provisioning in Okta from the Okta Integration Network (OIN).",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bombbomb.com/hc/en-us/articles/41027463923853-How-to-Set-Up-User-Provisioning-with-Okta-SCIM"
+  },
+  {
+   "id": "c10",
+   "url": "https://support.bombbomb.com/api/v2/help_center/en-us/articles/41027463923853.json",
+   "title": "How to Set Up User Provisioning with Okta (SCIM)",
+   "quote": "Who This Applies To ✅ Plan Type: Enterprise Prerequisites",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bombbomb.com/hc/en-us/articles/41027463923853-How-to-Set-Up-User-Provisioning-with-Okta-SCIM"
+  },
+  {
+   "id": "c11",
+   "url": "https://support.bombbomb.com/api/v2/help_center/en-us/articles/41027463923853.json",
+   "title": "How to Set Up User Provisioning with Okta (SCIM)",
+   "quote": "If an email address from Okta doesn't match an existing BombBomb account, a new BombBomb account is automatically created for that email address on your team and that user's account is added to your BombBomb paid seat team.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bombbomb.com/hc/en-us/articles/41027463923853-How-to-Set-Up-User-Provisioning-with-Okta-SCIM"
+  },
+  {
+   "id": "c12",
+   "url": "https://support.bombbomb.com/api/v2/help_center/en-us/articles/41027463923853.json",
+   "title": "How to Set Up User Provisioning with Okta (SCIM)",
+   "quote": "We sync user accounts from Okta using their email address to match with a BombBomb account.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bombbomb.com/hc/en-us/articles/41027463923853-How-to-Set-Up-User-Provisioning-with-Okta-SCIM"
+  },
+  {
+   "id": "c13",
+   "url": "https://support.bombbomb.com/api/v2/help_center/en-us/articles/41027463923853.json",
+   "title": "How to Set Up User Provisioning with Okta (SCIM)",
+   "quote": "You can update the following fields from Okta: First name Last name Organization Title Primary phone Street address City State Postal code Country",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bombbomb.com/hc/en-us/articles/41027463923853-How-to-Set-Up-User-Provisioning-with-Okta-SCIM"
+  },
+  {
+   "id": "c14",
+   "url": "https://support.bombbomb.com/api/v2/help_center/en-us/articles/41027463923853.json",
+   "title": "How to Set Up User Provisioning with Okta (SCIM)",
+   "quote": "You can activate accounts that were previously deactivated on the team in BombBomb. When you reactivate a member, your seat count will be increased by one.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bombbomb.com/hc/en-us/articles/41027463923853-How-to-Set-Up-User-Provisioning-with-Okta-SCIM"
+  },
+  {
+   "id": "c15",
+   "url": "https://support.bombbomb.com/api/v2/help_center/en-us/articles/41027463923853.json",
+   "title": "How to Set Up User Provisioning with Okta (SCIM)",
+   "quote": "Active users will be changed to deactivated, and the team seat count will be reduced by one.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bombbomb.com/hc/en-us/articles/41027463923853-How-to-Set-Up-User-Provisioning-with-Okta-SCIM"
+  },
+  {
+   "id": "c16",
+   "url": "https://support.bombbomb.com/api/v2/help_center/en-us/articles/41027463923853.json",
+   "title": "How to Set Up User Provisioning with Okta (SCIM)",
+   "quote": "They will not be able to access emails, videos, or contacts.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bombbomb.com/hc/en-us/articles/41027463923853-How-to-Set-Up-User-Provisioning-with-Okta-SCIM"
+  },
+  {
+   "id": "c17",
+   "url": "https://support.bombbomb.com/api/v2/help_center/en-us/articles/41027463923853.json",
+   "title": "How to Set Up User Provisioning with Okta (SCIM)",
+   "quote": "Changing the email address for a user is not supported using Okta.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bombbomb.com/hc/en-us/articles/41027463923853-How-to-Set-Up-User-Provisioning-with-Okta-SCIM"
+  },
+  {
+   "id": "c18",
+   "url": "https://support.bombbomb.com/api/v2/help_center/en-us/articles/41027463923853.json",
+   "title": "How to Set Up User Provisioning with Okta (SCIM)",
+   "quote": "Note: BombBomb currently doesn’t support syncing Okta groups to BombBomb subteams.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bombbomb.com/hc/en-us/articles/41027463923853-How-to-Set-Up-User-Provisioning-with-Okta-SCIM"
+  },
+  {
+   "id": "c19",
+   "url": "https://support.bombbomb.com/api/v2/help_center/en-us/articles/41027463923853.json",
+   "title": "How to Set Up User Provisioning with Okta (SCIM)",
+   "quote": "Account provisioning uses a queuing system that can take up to 30 minutes to complete.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bombbomb.com/hc/en-us/articles/41027463923853-How-to-Set-Up-User-Provisioning-with-Okta-SCIM"
+  },
+  {
+   "id": "c20",
+   "url": "https://support.bombbomb.com/api/v2/help_center/en-us/articles/41027463923853.json",
+   "title": "How to Set Up User Provisioning with Okta (SCIM)",
+   "quote": "Select the Enable API integration checkmark and then authenticate the app by selecting \"Authenticate with BombBomb.\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bombbomb.com/hc/en-us/articles/41027463923853-How-to-Set-Up-User-Provisioning-with-Okta-SCIM"
+  },
+  {
+   "id": "c21",
+   "url": "https://support.bombbomb.com/api/v2/help_center/en-us/articles/41027463923853.json",
+   "title": "How to Set Up User Provisioning with Okta (SCIM)",
+   "quote": "You must be assigned the Team Admin or Super Admin permission level for your BombBomb team.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bombbomb.com/hc/en-us/articles/41027463923853-How-to-Set-Up-User-Provisioning-with-Okta-SCIM"
+  },
+  {
+   "id": "c22",
+   "url": "https://support.bombbomb.com/api/v2/help_center/en-us/articles/41027463923853.json",
+   "title": "How to Set Up User Provisioning with Okta (SCIM)",
+   "quote": "You can import existing users from BombBomb to Okta to make sure both applications have the same users synced.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bombbomb.com/hc/en-us/articles/41027463923853-How-to-Set-Up-User-Provisioning-with-Okta-SCIM"
+  },
+  {
+   "id": "c23",
+   "url": "https://support.bombbomb.com/api/v2/help_center/en-us/articles/42147280896013.json",
+   "title": "How to Set Up Azure AD User Provisioning (SCIM)",
+   "quote": "For Tenant URL use: https://api.bombbomb.com/v2/scim",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bombbomb.com/hc/en-us/articles/42147280896013-How-to-Set-Up-Azure-AD-User-Provisioning-SCIM"
+  },
+  {
+   "id": "c24",
+   "url": "https://support.bombbomb.com/api/v2/help_center/en-us/articles/42147280896013.json",
+   "title": "How to Set Up Azure AD User Provisioning (SCIM)",
+   "quote": "For Secret Token, use the oAuth Token of the Paid Seat Team Admin’s account",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bombbomb.com/hc/en-us/articles/42147280896013-How-to-Set-Up-Azure-AD-User-Provisioning-SCIM"
+  },
+  {
+   "id": "c25",
+   "url": "https://support.bombbomb.com/api/v2/help_center/en-us/articles/42147280896013.json",
+   "title": "How to Set Up Azure AD User Provisioning (SCIM)",
+   "quote": "In the filter, type BBV2APITOKEN",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bombbomb.com/hc/en-us/articles/42147280896013-How-to-Set-Up-Azure-AD-User-Provisioning-SCIM"
+  },
+  {
+   "id": "c26",
+   "url": "https://support.bombbomb.com/api/v2/help_center/en-us/articles/42147280896013.json",
+   "title": "How to Set Up Azure AD User Provisioning (SCIM)",
+   "quote": "Choose the option \"integrate any other application you don't find in the gallery\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bombbomb.com/hc/en-us/articles/42147280896013-How-to-Set-Up-Azure-AD-User-Provisioning-SCIM"
+  },
+  {
+   "id": "c27",
+   "url": "https://support.bombbomb.com/api/v2/help_center/en-us/articles/42147280896013.json",
+   "title": "How to Set Up Azure AD User Provisioning (SCIM)",
+   "quote": "Note: Ensure 'Provision Azure Active Directory Groups' is disabled here.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bombbomb.com/hc/en-us/articles/42147280896013-How-to-Set-Up-Azure-AD-User-Provisioning-SCIM"
+  },
+  {
+   "id": "c28",
+   "url": "https://support.bombbomb.com/api/v2/help_center/en-us/articles/42147280896013.json",
+   "title": "How to Set Up Azure AD User Provisioning (SCIM)",
+   "quote": "You can update the following fields from Azure: First name Last name Job title Phone number Street address City State Postal code Country",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bombbomb.com/hc/en-us/articles/42147280896013-How-to-Set-Up-Azure-AD-User-Provisioning-SCIM"
+  },
+  {
+   "id": "c29",
+   "url": "https://support.bombbomb.com/api/v2/help_center/en-us/articles/42147280896013.json",
+   "title": "How to Set Up Azure AD User Provisioning (SCIM)",
+   "quote": "Removing a user from the team Select the user and click ‘Remove’.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bombbomb.com/hc/en-us/articles/42147280896013-How-to-Set-Up-Azure-AD-User-Provisioning-SCIM"
+  },
+  {
+   "id": "c30",
+   "url": "https://support.bombbomb.com/api/v2/help_center/en-us/articles/38910395730061.json",
+   "title": "How to Connect SAML SSO Providers",
+   "quote": "This article helps Enterprise teams integrate BombBomb Engage with SSO providers using SAML 2.0 (Azure/Entra, Onelogin, Jumpcloud, etc.).",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bombbomb.com/hc/en-us/articles/38910395730061-How-to-Connect-SAML-SSO-Providers"
+  },
+  {
+   "id": "c31",
+   "url": "https://support.bombbomb.com/api/v2/help_center/en-us/articles/38910395730061.json",
+   "title": "How to Connect SAML SSO Providers",
+   "quote": "Note: Users must exist in both BombBomb and your SSO provider to authenticate successfully.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bombbomb.com/hc/en-us/articles/38910395730061-How-to-Connect-SAML-SSO-Providers"
+  },
+  {
+   "id": "c32",
+   "url": "https://support.bombbomb.com/api/v2/help_center/en-us/articles/38910395730061.json",
+   "title": "How to Connect SAML SSO Providers",
+   "quote": "Be sure to create a new application, do not choose any existing applications as any that may be available are not actively supported.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bombbomb.com/hc/en-us/articles/38910395730061-How-to-Connect-SAML-SSO-Providers"
+  },
+  {
+   "id": "c33",
+   "url": "https://support.bombbomb.com/api/v2/help_center/en-us/articles/36068116941837.json",
+   "title": "How to Set Up SSO with Okta (OIDC)",
+   "quote": "This article walks Account Admins through setting up Single Sign-On (SSO) with Okta using OpenID Connect (OIDC).",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bombbomb.com/hc/en-us/articles/36068116941837-How-to-Set-Up-SSO-with-Okta-OIDC"
+  },
+  {
+   "id": "c34",
+   "url": "https://support.bombbomb.com/api/v2/help_center/en-us/articles/35966586025101.json",
+   "title": "How to Deactivate and Reactivate Users",
+   "quote": "Deactivating a user removes their access to BombBomb immediately and frees up their license for someone else. Their videos and data stay in your workspace — nothing is deleted.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bombbomb.com/hc/en-us/articles/35966586025101-How-to-Deactivate-and-Reactivate-Users"
+  },
+  {
+   "id": "c35",
+   "url": "https://support.bombbomb.com/api/v2/help_center/en-us/articles/36010994023565.json",
+   "title": "How to Add Users and Track Invitations",
+   "quote": "This article covers how to invite users one at a time, upload them in bulk via CSV, and track who still needs to accept.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bombbomb.com/hc/en-us/articles/36010994023565-How-to-Add-Users-and-Track-Invitations"
+  },
+  {
+   "id": "c36",
+   "url": "https://support.bombbomb.com/api/v2/help_center/en-us/articles/39269877765773.json",
+   "title": "How to Get Started with the BombBomb API",
+   "quote": "Who this applies to: Developers and technical users building custom integrations; admins and partners setting up third-party tools that connect to BombBomb Plan requirement: Core, Core + Copilot, Enterprise",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bombbomb.com/hc/en-us/articles/39269877765773-How-to-Get-Started-with-the-BombBomb-API"
+  },
+  {
+   "id": "c37",
+   "url": "https://support.bombbomb.com/api/v2/help_center/en-us/articles/39269877765773.json",
+   "title": "How to Get Started with the BombBomb API",
+   "quote": "Authenticate securely — connect your app or service using OAuth 2.0 or API key authentication.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bombbomb.com/hc/en-us/articles/39269877765773-How-to-Get-Started-with-the-BombBomb-API"
+  },
+  {
+   "id": "c38",
+   "url": "https://support.bombbomb.com/api/v2/help_center/en-us/articles/39269877765773.json",
+   "title": "How to Get Started with the BombBomb API",
+   "quote": "Can I generate multiple API keys? No. BombBomb supports a single API key per account.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bombbomb.com/hc/en-us/articles/39269877765773-How-to-Get-Started-with-the-BombBomb-API"
+  },
+  {
+   "id": "c39",
+   "url": "https://api.bombbomb.com/v2/spec",
+   "title": "BombBomb V2 API (Swagger spec)",
+   "quote": "host: api.bombbomb.com basePath: /v2",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.bombbomb.com/api"
+  },
+  {
+   "id": "c40",
+   "url": "https://api.bombbomb.com/v2/spec",
+   "title": "BombBomb V2 API (Swagger spec)",
+   "quote": "Get a paginated listing of Team members",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.bombbomb.com/api"
+  },
+  {
+   "id": "c41",
+   "url": "https://api.bombbomb.com/v2/spec",
+   "title": "BombBomb V2 API (Swagger spec)",
+   "quote": "Remove Member from Team",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.bombbomb.com/api"
+  },
+  {
+   "id": "c42",
+   "url": "https://api.bombbomb.com/v2/spec",
+   "title": "BombBomb V2 API (Swagger spec)",
+   "quote": "Add a new or existing user to group. You need to be a Super Administrator or a Team Administrator to access this API.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.bombbomb.com/api"
+  },
+  {
+   "id": "c43",
+   "url": "https://api.bombbomb.com/v2/spec",
+   "title": "BombBomb V2 API (Swagger spec)",
+   "quote": "Create Account",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.bombbomb.com/api"
+  },
+  {
+   "id": "c44",
+   "url": "https://api.bombbomb.com/v2/spec",
+   "title": "BombBomb V2 API (Swagger spec)",
+   "quote": "Delete Subteam",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.bombbomb.com/api"
+  },
+  {
+   "id": "c45",
+   "url": "https://api.bombbomb.com/v2/spec",
+   "title": "BombBomb V2 API (Swagger spec)",
+   "quote": "Add a Subteam",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.bombbomb.com/api"
+  },
+  {
+   "id": "c46",
+   "url": "https://api.bombbomb.com/v2/spec",
+   "title": "BombBomb V2 API (Swagger spec)",
+   "quote": "Updates a member of a team. You need to be a Super Administrator or a Team Administrator to access this API.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.bombbomb.com/api"
+  },
+  {
+   "id": "c47",
+   "url": "https://api.bombbomb.com/v2/spec",
+   "title": "BombBomb V2 API (Swagger spec)",
+   "quote": "Get User Info",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.bombbomb.com/api"
+  },
+  {
+   "id": "c48",
+   "url": "https://api.bombbomb.com/v2/spec",
+   "title": "BombBomb V2 API (Swagger spec)",
+   "quote": "Resend invite",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.bombbomb.com/api"
+  },
+  {
+   "id": "c49",
+   "url": "https://api.bombbomb.com/v2/spec",
+   "title": "BombBomb V2 API (Swagger spec)",
+   "quote": "Count Team Members",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.bombbomb.com/api"
+  },
+  {
+   "id": "c50",
+   "url": "https://api.bombbomb.com/v2/spec",
+   "title": "BombBomb V2 API (Swagger spec)",
+   "quote": "team:manage: View & Manage your BombBomb teams",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.bombbomb.com/api"
+  },
+  {
+   "id": "c51",
+   "url": "https://api.bombbomb.com/v2/spec",
+   "title": "BombBomb V2 API (Swagger spec)",
+   "quote": "account:manage: View & Manage your BombBomb account",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.bombbomb.com/api"
+  },
+  {
+   "id": "c52",
+   "url": "https://api.bombbomb.com/v2/spec",
+   "title": "BombBomb V2 API (Swagger spec)",
+   "quote": "The status type to filter by.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.bombbomb.com/api"
+  },
+  {
+   "id": "c53",
+   "url": "https://www.okta.com/integrations/bombbomb/",
+   "title": "Integrate BombBomb with Okta",
+   "quote": "Okta’s Bomb Bomb integration allows users to authenticate securely via single sign-on with OIDC along with the capability of just in time provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The pricing page and the 'What's Included in Each Plan' matrix put 'Open API access' on Enterprise only, while the API help articles say the API applies to Core, Core + Copilot and Enterprise. user_api_plan follows the pricing page.",
+   "cite": [
+    "c7",
+    "c8",
+    "c36"
+   ]
+  },
+  {
+   "text": "Okta's catalogue page says the OIDC app supports just-in-time provisioning, but BombBomb's SAML article says users must exist in both BombBomb and the SSO provider. fallbacks.jit left null.",
+   "cite": [
+    "c53",
+    "c31"
+   ]
+  }
+ ],
+ "searched": [
+  "https://bombbomb.com/pricing/",
+  "support.bombbomb.com help-centre search API: SCIM, SSO, Okta, single sign, Azure, API key, deactivate user, remove user",
+  "https://developer.bombbomb.com/api",
+  "https://api.bombbomb.com/v2/spec (Swagger 2.0; no SCIM or provisioning paths)",
+  "https://www.okta.com/integrations/bombbomb/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/toc.json (no BombBomb entry)",
+  "https://jumpcloud.com/support/integrate-with-bombbomb (AccessDenied)",
+  "support.bombbomb.com article HTML pages return 403 to curl/WebFetch; cited via the Zendesk help-centre JSON API with page_url set"
+ ],
+ "open_questions": [
+  "SCIM version is not stated (the tenant URL is /v2/scim, where v2 is BombBomb's API version).",
+  "Docs do not say whether SCIM deactivation ends active sessions, or whether DELETE is supported.",
+  "Whether PUT or PATCH is used for updates, and whether filtering/pagination are supported, is undocumented.",
+  "SCIM and API rate limits are not published.",
+  "No audit-log API or user-event webhooks are documented (webhooks cover contacts).",
+  "Google Workspace and OneLogin catalogue listings not checked (OneLogin blocks bots)."
+ ]
+}

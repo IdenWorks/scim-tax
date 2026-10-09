@@ -1,0 +1,844 @@
+{
+ "slug": "pleo",
+ "vendor": "Pleo",
+ "vendor_url": "https://www.pleo.io",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Pleo",
+  "slug": "pleo",
+  "category": "Finance, Accounting & Spend",
+  "status": "gated",
+  "scim_plan": "Optimise",
+  "scim_price_text": "Optimise: $18/u/mo billed yearly, 3 users minimum",
+  "scim_price_per_user_mo": 18,
+  "team_plan": "Build",
+  "team_price_text": "Build: $14/u/mo billed yearly, 3 users minimum",
+  "team_price_per_user_mo": 14,
+  "price_multiplier": 1.3,
+  "sso_plan": "Build",
+  "sso_price_per_user_mo": 14,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": 3,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": false
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "via_generic",
+   "google": "directory_sync",
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.pleo.io/us/pricing",
+  "docs_url": "https://developers.pleo.io/guides/scim/okta",
+  "evidence": "Pleo's pricing table marks HRIS integrations 'Not included' on Build and 'Included' on Optimise, and its help centre says user provisioning through SCIM 'availability depends on your plan'.",
+  "notes": "SCIM plan is read from the pricing page's 'HRIS integrations' row (Optimise only): Pleo's help centre treats Okta and Entra SCIM as part of 'User management through your HR system' and says availability depends on plan; Pleo's Okta page also points to the HRIS integration guide. The developer Okta guide and the Entra integration page still name the retired 'Advanced plan' (see conflicts). US prices used; the UK page also offers a monthly-only Start plan at £8/user (max 1 admin), not sold in the US. SAML SSO is on every plan per the pricing table. Okta SCIM supports create, userName-only update and deactivate (reactivation possible; deactivated users deleted after two weeks); Entra uses a non-gallery SCIM app with a tenant URL and secret token. Google Workspace and HR systems sync by Pleo-run pull every 3 hours.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Start (UK only)",
+   "price_text": "£8 per user / month, monthly billing only, max 1 admin",
+   "price_per_user_mo": null,
+   "billing": "monthly",
+   "sso": true,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c5"
+   ],
+   "notes": "Shown on the UK (GBP) pricing page only; HRIS integrations 'Not included' and SAML SSO 'Included' on the UK table too. Price is GBP so per-user USD left null."
+  },
+  {
+   "name": "Build",
+   "price_text": "$14 per user / month, billed yearly, 3 users minimum",
+   "price_per_user_mo": 14,
+   "billing": "annual",
+   "sso": true,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c3",
+    "c4"
+   ]
+  },
+  {
+   "name": "Optimise",
+   "price_text": "$18 per user / month, billed yearly, 3 users minimum",
+   "price_per_user_mo": 18,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c3",
+    "c4",
+    "c14",
+    "c17"
+   ],
+   "notes": "SCIM inferred from the 'HRIS integrations' row plus the help-centre statement that SCIM availability depends on plan."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c6",
+   "c7",
+   "c14",
+   "c17",
+   "c25"
+  ],
+  "plan": "Optimise",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://external.pleo.io/scim/v2",
+  "notes": "Version 2.0 and base URL taken from the Pleo external OpenAPI spec tag ('API available at /scim/v2', server https://external.pleo.io) which cites RFC 7644; the per-tenant Tenant URL is shown in Pleo settings.",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Pleo Settings > Integrations > People management > Microsoft Entra > Allow access (copy Tenant URL and Secret token)",
+   "token_expiry": null,
+   "cite": [
+    "c18"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c6",
+    "c25"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": null,
+   "group_push": false,
+   "group_membership": null,
+   "cite": [
+    "c8",
+    "c10",
+    "c13",
+    "c23"
+   ],
+   "notes": "Only userName updates are supported; Okta OIN page shows Group Push unticked."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Account is deactivated (cards frozen per Pleo's Okta page); deactivated users are deleted within two weeks unless reactivated.",
+   "cite": [
+    "c8",
+    "c9",
+    "c20"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": [
+    "c10",
+    "c13"
+   ],
+   "notes": "userName (email) is the only attribute Pleo documents; updates to other fields are not supported."
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Only userName updates are supported; updates to other fields are not.",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "text": "Okta Import feature is not supported.",
+    "cite": [
+     "c12"
+    ]
+   },
+   {
+    "text": "Provisioned users must still be invited in Pleo before they can spend; they become billable once they accept and sign in.",
+    "cite": [
+     "c11"
+    ]
+   },
+   {
+    "text": "Entra provisioning uses a non-gallery enterprise app, not a gallery SCIM app.",
+    "cite": [
+     "c19"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c25",
+   "c27",
+   "c39"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://external.pleo.io",
+  "docs_url": "https://developers.pleo.io/reference/employees/employees-api-overview",
+  "notes": "The current External API only reads employees and manages teams. Employee create/update/delete exist only in the deprecated legacy API (openapi.pleo.io/v1), which new API keys cannot use. No plan gate for Standalone API Keys is stated; the guide requires Admin or Bookkeeper permissions.",
+  "auth": {
+   "methods": [
+    "api_key",
+    "oauth2"
+   ],
+   "scopes": [
+    "users:read",
+    "team:read",
+    "team:write",
+    "team:delete"
+   ],
+   "cite": [
+    "c29",
+    "c30",
+    "c44"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c27",
+    "c28",
+    "c31",
+    "c32",
+    "c33",
+    "c34"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/v2/employees",
+    "purpose": "Search for employees",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v2/employees/{employeeId}",
+    "purpose": "Get an employee by ID",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/teams",
+    "purpose": "Search for teams",
+    "cite": [
+     "c35"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/teams",
+    "purpose": "Create a team",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/teams/{teamId}",
+    "purpose": "Get a team by ID",
+    "cite": [
+     "c37"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/v1/teams/{teamId}",
+    "purpose": "Update a team's name or code",
+    "cite": [
+     "c36"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v1/teams/{teamId}",
+    "purpose": "Delete a team",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/teams/{teamId}/members",
+    "purpose": "Add employees to a team",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v1/teams/{teamId}/members/{employeeId}",
+    "purpose": "Remove an employee from a team",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/employees",
+    "purpose": "Create an employee (deprecated legacy API, openapi.pleo.io/v1)",
+    "cite": [
+     "c39"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/employees/{employeeId}",
+    "purpose": "Update an employee (deprecated legacy API, openapi.pleo.io/v1)",
+    "cite": [
+     "c40"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/employees/{employeeId}",
+    "purpose": "Delete an employee (deprecated legacy API, openapi.pleo.io/v1)",
+    "cite": [
+     "c41"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": [
+    "c42"
+   ],
+   "notes": "The webhook events page lists export-job and vendor events only."
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "600 requests per minute",
+   "cite": [
+    "c26"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Legacy APIs that could create, update and delete employees are deprecated; new customers only get the new API keys.",
+    "cite": [
+     "c38"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/pleo/",
+   "cite": [
+    "c23",
+    "c6"
+   ],
+   "notes": "OIN page ticks SAML, SCIM, Create, Update and Deactivate (read from page markup); Group Push not ticked."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/pleo-tutorial",
+   "cite": [
+    "c24",
+    "c17",
+    "c19"
+   ],
+   "notes": "Gallery app is SSO only; provisioning uses a non-gallery enterprise app pointed at Pleo's SCIM tenant URL."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": true,
+   "kind": "directory_sync",
+   "built_by": "vendor",
+   "url": null,
+   "cite": [
+    "c14",
+    "c15"
+   ],
+   "notes": "Google Workspace is listed among the HR systems Pleo pulls users from (every 3 hours)."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "jumpcloud.com support pages returned 403."
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": "Pleo-run HRIS sync (Personio, HiBob, BambooHR, Google Workspace, Workday and others), pulled every 3 hours, with optional team sync from the manager hierarchy",
+  "docs_public": true,
+  "cite": [
+   "c14",
+   "c15",
+   "c16"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.pleo.io/us/pricing",
+   "title": "Simple pricing that works for everyone - Pleo (US)",
+   "quote": "Optimise Get full clarity over your spend and profit from every transaction $18 Per user / month Billed yearly 3 users minimum",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.pleo.io/us/pricing",
+   "title": "Simple pricing that works for everyone - Pleo (US)",
+   "quote": "Build Take control of growing spend, with advanced workflows and built-in controls $14 Per user / month Billed yearly 3 users minimum",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.pleo.io/us/pricing",
+   "title": "Simple pricing that works for everyone - Pleo (US)",
+   "quote": "HRIS integrations Not included Included",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.pleo.io/us/pricing",
+   "title": "Simple pricing that works for everyone - Pleo (US)",
+   "quote": "SAML SSO (Single Sign On) Included Included",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.pleo.io/en/pricing",
+   "title": "Simple pricing that works for everyone - Pleo (UK)",
+   "quote": "£8 Per user / month Monthly billing only Max 1 admin",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://developers.pleo.io/guides/scim/okta.md",
+   "title": "Okta - Pleo Docs",
+   "quote": "Pleo supports provisioning users through SCIM with Okta. Managing users through SCIM guarantees security and access control by automating user provisioning and de-provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.pleo.io/guides/scim/okta"
+  },
+  {
+   "id": "c7",
+   "url": "https://developers.pleo.io/guides/scim/okta.md",
+   "title": "Okta - Pleo Docs",
+   "quote": "User Provisioning through SCIM is available on the Advanced plan",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.pleo.io/guides/scim/okta"
+  },
+  {
+   "id": "c8",
+   "url": "https://developers.pleo.io/guides/scim/okta.md",
+   "title": "Okta - Pleo Docs",
+   "quote": "Deactivates a user's Pleo account when it is unassigned in Okta or their Okta account is deactivated. Accounts can be reactivated if the app is reassigned to a user in Okta.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.pleo.io/guides/scim/okta"
+  },
+  {
+   "id": "c9",
+   "url": "https://developers.pleo.io/guides/scim/okta.md",
+   "title": "Okta - Pleo Docs",
+   "quote": "Deactivated users are deleted within two weeks from when they were deactivated unless they are reactivated.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.pleo.io/guides/scim/okta"
+  },
+  {
+   "id": "c10",
+   "url": "https://developers.pleo.io/guides/scim/okta.md",
+   "title": "Okta - Pleo Docs",
+   "quote": "Updates to other fields are not supported.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.pleo.io/guides/scim/okta"
+  },
+  {
+   "id": "c11",
+   "url": "https://developers.pleo.io/guides/scim/okta.md",
+   "title": "Okta - Pleo Docs",
+   "quote": "Users added through SCIM are billable as soon as they accept an invite and sign in for the first time.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.pleo.io/guides/scim/okta"
+  },
+  {
+   "id": "c12",
+   "url": "https://developers.pleo.io/guides/scim/okta.md",
+   "title": "Okta - Pleo Docs",
+   "quote": "Currently we do not support Import Feature.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.pleo.io/guides/scim/okta"
+  },
+  {
+   "id": "c13",
+   "url": "https://developers.pleo.io/guides/scim/okta.md",
+   "title": "Okta - Pleo Docs",
+   "quote": "Creates or links a user in Pleo when assigning the app to a user in Okta. The default `userName` used to create accounts is set to `Email`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.pleo.io/guides/scim/okta"
+  },
+  {
+   "id": "c14",
+   "url": "https://help.pleo.io/en/support/solutions/articles/103000287979-user-management-through-your-hr-system",
+   "title": "User management through your HR system : Help Centre",
+   "quote": "Feature availability depends on your plan. For more information about what’s included in each plan, see the pricing page",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://help.pleo.io/en/support/solutions/articles/103000287979-user-management-through-your-hr-system",
+   "title": "User management through your HR system : Help Centre",
+   "quote": "Pleo pulls new data from your HR system every 3 hours, except for Okta and Entra, which push data based on their own intervals.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://help.pleo.io/en/support/solutions/articles/103000287979-user-management-through-your-hr-system",
+   "title": "User management through your HR system : Help Centre",
+   "quote": "If you remove them from your HR system, their access to Pleo is revoked automatically.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://help.pleo.io/en/support/solutions/articles/103000308139-user-management-through-scim-with-microsoft-entra",
+   "title": "User management through SCIM with Microsoft Entra : Help Centre",
+   "quote": "User provisioning through SCIM availability depends on your plan. For more information about what’s included in each plan, see the pricing page.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://help.pleo.io/en/support/solutions/articles/103000308139-user-management-through-scim-with-microsoft-entra",
+   "title": "User management through SCIM with Microsoft Entra : Help Centre",
+   "quote": "Copy the Tenant URL and Secret token",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://help.pleo.io/en/support/solutions/articles/103000308139-user-management-through-scim-with-microsoft-entra",
+   "title": "User management through SCIM with Microsoft Entra : Help Centre",
+   "quote": "Select Integrate any other application you don’t find in the gallery (Non-gallery)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://www.pleo.io/en/integrations/okta",
+   "title": "Okta integration - Pleo",
+   "quote": "Automatically deactivate users from Pleo and freeze their cards once they’re removed from your HR system.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://www.pleo.io/en/integrations/microsoft-entra",
+   "title": "Microsoft Entra integration - Pleo",
+   "quote": "Only available to customers on the Advanced Plan. Please reach out to your account manager for support.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://help.pleo.io/en/support/solutions/articles/103000293747-set-up-saml-sso-with-okta-microsoft-entra-id-or-a-custom-setup",
+   "title": "Set-up SAML SSO with Okta, Microsoft Entra ID or a custom setup : Help Centre",
+   "quote": "Choose your identity provider (e.g., Okta or Microsoft Entra ID), or select Custom setup if you use another provider that supports SAML 2.0.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://www.okta.com/integrations/pleo/",
+   "title": "Integrate Pleo with Okta",
+   "quote": "Add this integration to enable authentication and provisioning capabilities.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/pleo-tutorial",
+   "title": "Configure Pleo for Single sign-on with Microsoft Entra ID",
+   "quote": "Enable your users to be automatically signed-in to Pleo with their Microsoft Entra accounts.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://developers.pleo.io/reference/employees/search-for-employees.md",
+   "title": "Search for employees - Pleo Docs",
+   "quote": "SCIM-compatible User API. The SCIM (System for Cross-domain Identity Management) specification standardises a schema for user representation",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.pleo.io/reference/employees/search-for-employees"
+  },
+  {
+   "id": "c26",
+   "url": "https://developers.pleo.io/reference/employees/employees-api-overview.md",
+   "title": "Employees API Overview - Pleo Docs",
+   "quote": "The APIs have a rate limit of 600 requests per minute.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.pleo.io/reference/employees/employees-api-overview"
+  },
+  {
+   "id": "c27",
+   "url": "https://developers.pleo.io/reference/employees/search-for-employees.md",
+   "title": "Search for employees - Pleo Docs",
+   "quote": "Use this endpoint to search for multiple employees.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.pleo.io/reference/employees/search-for-employees"
+  },
+  {
+   "id": "c28",
+   "url": "https://developers.pleo.io/reference/employees/search-for-a-specific-employee.md",
+   "title": "Search for a specific employee - Pleo Docs",
+   "quote": "Search for a specific employee by employee ID.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.pleo.io/reference/employees/search-for-a-specific-employee"
+  },
+  {
+   "id": "c29",
+   "url": "https://developers.pleo.io/reference/employees/employees-api-scopes.md",
+   "title": "Employees API Scopes - Pleo Docs",
+   "quote": "Search Employees | users:read",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.pleo.io/reference/employees/employees-api-scopes"
+  },
+  {
+   "id": "c30",
+   "url": "https://developers.pleo.io/reference/teams/teams-api-scopes.md",
+   "title": "Teams API Scopes - Pleo Docs",
+   "quote": "Delete Team by ID | `team:delete`",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.pleo.io/reference/teams/teams-api-scopes"
+  },
+  {
+   "id": "c31",
+   "url": "https://developers.pleo.io/reference/teams/add-team-members.md",
+   "title": "Add members to a Team - Pleo Docs",
+   "quote": "Use this endpoint to add one or more Employees to a Team.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.pleo.io/reference/teams/add-team-members"
+  },
+  {
+   "id": "c32",
+   "url": "https://developers.pleo.io/reference/teams/create-a-team.md",
+   "title": "Create a Team - Pleo Docs",
+   "quote": "Use this endpoint to create a new team for the company or organisation the access token is scoped to.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.pleo.io/reference/teams/create-a-team"
+  },
+  {
+   "id": "c33",
+   "url": "https://developers.pleo.io/reference/teams/delete-a-team.md",
+   "title": "Delete a Team by ID - Pleo Docs",
+   "quote": "Use this endpoint to delete a specific team by its teamId.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.pleo.io/reference/teams/delete-a-team"
+  },
+  {
+   "id": "c34",
+   "url": "https://developers.pleo.io/reference/teams/remove-a-team-member.md",
+   "title": "Remove a member from a Team - Pleo Docs",
+   "quote": "Use this endpoint to remove an Employee from a Team.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.pleo.io/reference/teams/remove-a-team-member"
+  },
+  {
+   "id": "c35",
+   "url": "https://developers.pleo.io/reference/teams/search-for-teams.md",
+   "title": "Search for teams - Pleo Docs",
+   "quote": "Use this endpoint to search for teams belonging to a company or an organisation.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.pleo.io/reference/teams/search-for-teams"
+  },
+  {
+   "id": "c36",
+   "url": "https://developers.pleo.io/reference/teams/update-a-team.md",
+   "title": "Partially update a Team - Pleo Docs",
+   "quote": "Use this endpoint to update a Team's name and/or code.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.pleo.io/reference/teams/update-a-team"
+  },
+  {
+   "id": "c37",
+   "url": "https://developers.pleo.io/reference/teams/get-a-team-by-id.md",
+   "title": "Get a Team by ID - Pleo Docs",
+   "quote": "Use this endpoint to fetch a specific team by teamId.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.pleo.io/reference/teams/get-a-team-by-id"
+  },
+  {
+   "id": "c38",
+   "url": "https://developers.pleo.io/docs/current/getting-started/pleo-customers-quickstart.md",
+   "title": "Pleo Customers: API Quickstart",
+   "quote": "New customers are only given access to the new API Keys.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.pleo.io/docs/current/getting-started/pleo-customers-quickstart"
+  },
+  {
+   "id": "c39",
+   "url": "https://developers.pleo.io/reference/pleo-deprecated/employees/create-an-employee-for-a-company.md",
+   "title": "Create an employee for a company (deprecated) - Pleo Docs",
+   "quote": "Create an employee for a company",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.pleo.io/reference/pleo-deprecated/employees/create-an-employee-for-a-company"
+  },
+  {
+   "id": "c40",
+   "url": "https://developers.pleo.io/reference/pleo-deprecated/employees/update-an-employee-for-a-company.md",
+   "title": "Update an employee for a company (deprecated) - Pleo Docs",
+   "quote": "Update an employee for a company",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.pleo.io/reference/pleo-deprecated/employees/update-an-employee-for-a-company"
+  },
+  {
+   "id": "c41",
+   "url": "https://developers.pleo.io/reference/pleo-deprecated/employees/delete-an-employee-for-a-company.md",
+   "title": "Delete an employee for a company (deprecated) - Pleo Docs",
+   "quote": "Delete an employee for a company",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.pleo.io/reference/pleo-deprecated/employees/delete-an-employee-for-a-company"
+  },
+  {
+   "id": "c42",
+   "url": "https://developers.pleo.io/reference/webhooks/webhook-events.md",
+   "title": "Webhook Events - Pleo Docs",
+   "quote": "This topic lists the webhook events emitted in the Pleo ecosystem",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.pleo.io/reference/webhooks/webhook-events"
+  },
+  {
+   "id": "c43",
+   "url": "https://help.pleo.io/en/support/solutions/articles/103000287979-user-management-through-your-hr-system",
+   "title": "User management through your HR system : Help Centre",
+   "quote": "Users who exist only in Pleo remain active and can only be deleted manually.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c44",
+   "url": "https://developers.pleo.io/docs/current/how-tos/environment-access/how-to-get-access-to-all-env-standalone-api-keys.md",
+   "title": "How to get access to Standalone API Keys - Pleo Docs",
+   "quote": "Admin** or **Bookkeeper** permissions",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.pleo.io/docs/current/how-tos/environment-access/how-to-get-access-to-all-env-standalone-api-keys"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "Pleo's developer Okta guide says SCIM is 'available on the Advanced plan', and its Entra integration page says SSO is 'Only available to customers on the Advanced Plan', but the current pricing pages have no Advanced plan (Start/Build/Optimise) and list SAML SSO on every plan and HRIS integrations on Optimise only.",
+   "cite": [
+    "c7",
+    "c21",
+    "c3",
+    "c4"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.pleo.io/us/pricing",
+  "https://www.pleo.io/en/pricing",
+  "https://developers.pleo.io/llms.txt",
+  "https://developers.pleo.io/sitemap.xml",
+  "https://www.pleo.io/sitemap-en.xml",
+  "https://help.pleo.io (Freshdesk; Cloudflare 403 to curl, articles read via render.cjs)",
+  "https://www.okta.com/integrations/pleo/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/pleo-tutorial",
+  "https://jumpcloud.com/support/integrate-with-pleo (403)"
+ ],
+ "open_questions": [
+  "Which current plan the developer guide's 'Advanced plan' maps to; SCIM plan is inferred as Optimise from the HRIS integrations row.",
+  "Whether SCIM deactivation frees the seat or ends sessions.",
+  "Whether Standalone API keys / the External API are gated by plan.",
+  "Whether Pleo's SCIM endpoint supports Groups, filtering, pagination or PATCH; no SCIM endpoint reference is public.",
+  "Whether an audit-log API exists.",
+  "OneLogin, JumpCloud and Google Workspace catalogue status."
+ ]
+}

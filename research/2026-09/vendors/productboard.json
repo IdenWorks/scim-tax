@@ -1,0 +1,991 @@
+{
+ "slug": "productboard",
+ "vendor": "Productboard",
+ "vendor_url": "https://www.productboard.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Productboard",
+  "slug": "productboard",
+  "category": "Project & Work Management",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Plus",
+  "team_price_text": "Plus: $19/maker/mo (annual)",
+  "team_price_per_user_mo": 19,
+  "price_multiplier": null,
+  "sso_plan": "Enterprise",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": 5,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": false,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "via_generic",
+   "google": "sso_only",
+   "onelogin": null,
+   "jumpcloud": "sso_only",
+   "generic": true
+  },
+  "pricing_page_url": "https://www.productboard.com/pricing/",
+  "docs_url": "https://support.productboard.com/hc/en-us/articles/12796466210323-SCIM-API",
+  "evidence": "Productboard's pricing table lists 'SCIM user provisioning' as Not available on Free, Plus and Business and Included on Enterprise (Custom, 5 makers minimum), and SCIM requires SAML SSO, which is also Enterprise-only.",
+  "notes": "Status unchanged (gated). Pricing changed since June: the single Spark tier at $15/maker/mo is gone; the page now lists Free ($0), Plus ($19/maker/mo annual, $25 monthly), Business ($59/maker/mo annual, $75 monthly) and Enterprise (Custom, 5 makers minimum). June's '~$350/maker/mo est.' for Enterprise has no first-party source and was dropped. SCIM 2.0 at https://api.productboard.com/scim/v2 needs SAML SSO configured first; it creates, updates, deactivates and reactivates members (no deletion) and fully manages teams as groups. Okta's catalog app provisions natively; Entra needs a non-gallery app until Microsoft approves the SCIM gallery app. The public API (all plans) only reads members but manages teams.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Free",
+  "api_tax": false,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "$0",
+   "price_per_user_mo": 0,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c2",
+    "c7",
+    "c8",
+    "c9",
+    "c10"
+   ]
+  },
+  {
+   "name": "Plus",
+   "price_text": "$19/maker/month billed annually ($25 monthly)",
+   "price_per_user_mo": 19,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c1",
+    "c7",
+    "c8",
+    "c9",
+    "c10"
+   ]
+  },
+  {
+   "name": "Business",
+   "price_text": "$59/maker/month billed annually ($75 monthly), 2 makers minimum",
+   "price_per_user_mo": 59,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c3",
+    "c4",
+    "c7",
+    "c8",
+    "c9",
+    "c10"
+   ],
+   "notes": "One pricing view says 2 makers minimum, another says 5 makers minimum (see conflicts)."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Custom, 5 makers minimum, billed annually",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c5",
+    "c6",
+    "c7",
+    "c8",
+    "c9",
+    "c10"
+   ],
+   "notes": "Audit logs included; no audit-log API documented."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c6",
+   "c7",
+   "c11",
+   "c12",
+   "c17"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://api.productboard.com/scim/v2",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Profile menu > Integrations > Public API > generate Access token (or OAuth2; Okta uses 'Authenticate with Productboard' OAuth)",
+   "token_expiry": null,
+   "cite": [
+    "c15",
+    "c16"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": true,
+   "Schemas": true,
+   "ResourceTypes": true,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c13",
+    "c14",
+    "c27"
+   ],
+   "notes": "ServiceProviderConfig and ResourceTypes metadata are returned via GET /Schemas; separate endpoints not documented."
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": false,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c13",
+    "c14",
+    "c18",
+    "c25",
+    "c26",
+    "c35",
+    "c36",
+    "c37"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Member is deactivated (active=false), not deleted; users cannot be deleted via SCIM.",
+   "cite": [
+    "c13",
+    "c18",
+    "c35",
+    "c40"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "id",
+    "externalId",
+    "userName",
+    "displayName",
+    "title",
+    "active",
+    "displayName (Groups)",
+    "id (Groups)"
+   ],
+   "cite": [
+    "c23",
+    "c24"
+   ],
+   "notes": "Operators eq and and only."
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c22"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "displayName",
+    "name.formatted",
+    "name.givenName",
+    "name.familyName",
+    "active",
+    "roles",
+    "title",
+    "id",
+    "externalId"
+   ],
+   "enterprise": [
+    "department"
+   ],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "displayName",
+    "id",
+    "members"
+   ],
+   "cite": [
+    "c29",
+    "c30",
+    "c33",
+    "c34",
+    "c20",
+    "c28"
+   ],
+   "notes": "Productboard stores only full name; name.* and emails in responses are parsed from Name and Email."
+  },
+  "roles": {
+   "supported": true,
+   "how": "Multivalued 'roles' attribute; only the primary (or first) value is used. Values: admin, maker, contributor, viewer; default contributor. Okta maps roles.^[primary==true].value per user or per group.",
+   "cite": [
+    "c20",
+    "c21",
+    "c32",
+    "c43"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Users cannot be deleted via SCIM, only deactivated.",
+    "cite": [
+     "c18"
+    ]
+   },
+   {
+    "text": "Only Okta and Microsoft Entra ID are listed as supported IdPs; Entra needs a non-gallery app because the SCIM gallery app is still awaiting Microsoft approval.",
+    "cite": [
+     "c19",
+     "c41",
+     "c42"
+    ]
+   },
+   {
+    "text": "Name and Email are shared across workspaces, so SCIM updates to them apply in every workspace the user belongs to.",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "text": "Once SCIM-provisioned, members and teams are no longer editable in Productboard.",
+    "cite": [
+     "c39"
+    ]
+   },
+   {
+    "text": "Requires SAML SSO configured first; Okta must use the catalog app, not a custom SAML app.",
+    "cite": [
+     "c11",
+     "c38"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c10",
+   "c48",
+   "c59"
+  ],
+  "plan": "Free",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://api.productboard.com/v2",
+  "docs_url": "https://developer.productboard.com/reference/listmembers",
+  "auth": {
+   "methods": [
+    "access_token",
+    "oauth2"
+   ],
+   "scopes": [
+    "members:read",
+    "members:pii:read",
+    "teams:read",
+    "teams:write",
+    "teams:delete"
+   ],
+   "cite": [
+    "c15",
+    "c16",
+    "c58"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c48",
+    "c50",
+    "c51",
+    "c52",
+    "c53",
+    "c54",
+    "c55",
+    "c56"
+   ],
+   "notes": "API v2 Members endpoints are read-only (list, search, get); member create/deactivate only via SCIM. Teams have full CRUD and membership patch."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/members",
+    "purpose": "List members",
+    "cite": [
+     "c48"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/members/search",
+    "purpose": "Search members (batch by IDs or emails)",
+    "cite": [
+     "c51"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/members/{id}",
+    "purpose": "Get member",
+    "cite": [
+     "c50"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/teams",
+    "purpose": "List teams",
+    "cite": [
+     "c52"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/teams",
+    "purpose": "Create team",
+    "cite": [
+     "c53"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/teams/{id}",
+    "purpose": "Update team fields and members",
+    "cite": [
+     "c54"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/teams/{id}",
+    "purpose": "Delete team",
+    "cite": [
+     "c55"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/teams/{id}/members",
+    "purpose": "List team members",
+    "cite": [
+     "c56"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": false,
+   "events": [],
+   "cite": [
+    "c60"
+   ],
+   "notes": "Webhook event types cover features, components, products, initiatives, objectives, releases, notes and insights; no member events listed."
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": [],
+   "notes": "Audit logs are an Enterprise feature on the pricing page; no audit-log API endpoint found in the v2 reference index."
+  },
+  "rate_limits": {
+   "text": "50 requests per second per access token",
+   "cite": [
+    "c57"
+   ]
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/productboard/",
+   "cite": [
+    "c44",
+    "c35",
+    "c37"
+   ],
+   "notes": "OIN page marks SAML, SCIM, Create, Update, Deactivate, Group Push and Group Linking (read from page markup)."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/productboard-tutorial",
+   "cite": [
+    "c45",
+    "c41",
+    "c42"
+   ],
+   "notes": "Gallery app is SSO with JIT only; SCIM is set up through a non-gallery app pending Microsoft approval."
+  },
+  "google": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c61"
+   ],
+   "notes": "Productboard help centre has 'Enforce SAML single sign-on with Google Workspace'; Google catalogue page not checked."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://jumpcloud.com/support/integrate-with-productboard",
+   "cite": [
+    "c46",
+    "c47"
+   ]
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c45"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.productboard.com/pricing/",
+   "title": "Productboard Pricing",
+   "quote": "Plus Know what to build next, and why, before anyone has to ask. $19 maker/month billed annually (or $25 maker/month, billed monthly )",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.productboard.com/pricing/",
+   "title": "Productboard Pricing",
+   "quote": "Free Move faster, ship sharper specs, show up prepared. Free forever. $0 billed annually",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.productboard.com/pricing/",
+   "title": "Productboard Pricing",
+   "quote": "$59 maker/month 2 makers minimum, billed annually (or $75 maker/month, 2 makers minimum, billed monthly )",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.productboard.com/pricing/",
+   "title": "Productboard Pricing",
+   "quote": "$59 maker/month 5 makers minimum, billed annually (or $75 maker/month, billed monthly )",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.productboard.com/pricing/",
+   "title": "Productboard Pricing",
+   "quote": "Custom 5 makers minimum, billed annually",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://www.productboard.com/pricing/",
+   "title": "Productboard Pricing",
+   "quote": "Unlimited Contributors SAML SSO, SCIM provisioning & enhanced data governance",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://www.productboard.com/pricing/",
+   "title": "Productboard Pricing",
+   "quote": "SCIM user provisioning Free : Not available Plus : Not available Business : Not available Enterprise : Included",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://www.productboard.com/pricing/",
+   "title": "Productboard Pricing",
+   "quote": "SAML SSO Free : Not available Plus : Not available Business : Not available Enterprise : Included",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://www.productboard.com/pricing/",
+   "title": "Productboard Pricing",
+   "quote": "Audit logs Free : Not available Plus : Not available Business : Not available Enterprise : Included",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://www.productboard.com/pricing/",
+   "title": "Productboard Pricing",
+   "quote": "API access Free : Included Plus : Included Business : Included Enterprise : Included",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://support.productboard.com/hc/en-us/articles/12789758783123-Configuring-SCIM-provisioning-in-your-workspace",
+   "title": "Configuring SCIM provisioning in your workspace",
+   "quote": "A Productboard single sign-on (SAML SSO) is configured and working (available on the Enterprise plan).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://support.productboard.com/hc/en-us/articles/12789758783123-Configuring-SCIM-provisioning-in-your-workspace",
+   "title": "Configuring SCIM provisioning in your workspace",
+   "quote": "The base URL for our SCIM API is https://api.productboard.com/scim/v2 .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://support.productboard.com/hc/en-us/articles/12789758783123-Configuring-SCIM-provisioning-in-your-workspace",
+   "title": "Configuring SCIM provisioning in your workspace",
+   "quote": "We support Users (members in Productboard) read, create and update . We don’t support deletion, but you can deactivate members by setting \"active\": false .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://support.productboard.com/hc/en-us/articles/12789758783123-Configuring-SCIM-provisioning-in-your-workspace",
+   "title": "Configuring SCIM provisioning in your workspace",
+   "quote": "We also support Groups (teams in Productboard) read, create, update and delete .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://support.productboard.com/hc/en-us/articles/12789758783123-Configuring-SCIM-provisioning-in-your-workspace",
+   "title": "Configuring SCIM provisioning in your workspace",
+   "quote": "For authentication, you can choose between generating an Access token and using OAuth2 .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://support.productboard.com/hc/en-us/articles/12789758783123-Configuring-SCIM-provisioning-in-your-workspace",
+   "title": "Configuring SCIM provisioning in your workspace",
+   "quote": "Find the Public API section and generate and copy the Access token.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://support.productboard.com/hc/en-us/articles/12796466210323-SCIM-API",
+   "title": "SCIM API",
+   "quote": "Our SCIM implementation uses the 2.0 version of the protocol.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://support.productboard.com/hc/en-us/articles/12796466210323-SCIM-API",
+   "title": "SCIM API",
+   "quote": "You can’t delete users (members). You can only deactivate them.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://support.productboard.com/hc/en-us/articles/12796466210323-SCIM-API",
+   "title": "SCIM API",
+   "quote": "Microsoft Entra ID - Setting up SCIM provisioning with Microsoft Entra ID Okta - Setting up SCIM provisioning with OKTA",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://support.productboard.com/hc/en-us/articles/12796466210323-SCIM-API",
+   "title": "SCIM API",
+   "quote": "Supported values are: admin, maker, contributor, viewer",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://support.productboard.com/hc/en-us/articles/12796466210323-SCIM-API",
+   "title": "SCIM API",
+   "quote": "As a user you can have only one role in Productboard, therefore, we accept only",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://support.productboard.com/hc/en-us/articles/12796466210323-SCIM-API",
+   "title": "SCIM API",
+   "quote": "Use startIndex and count query parameters to receive paginated results.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://support.productboard.com/hc/en-us/articles/12796466210323-SCIM-API",
+   "title": "SCIM API",
+   "quote": "Allowed attribute names for filtering are (case insensitive): id , externalId , userName , displayName , title, and active .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://support.productboard.com/hc/en-us/articles/12796466210323-SCIM-API",
+   "title": "SCIM API",
+   "quote": "Allowed attribute names for filtering are (case insensitive): id , displayName .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://support.productboard.com/hc/en-us/articles/12796466210323-SCIM-API",
+   "title": "SCIM API",
+   "quote": "PUT: https://api.productboard.com/scim/v2/Users/848abbf8-1be7-4832-9f6b-140c00a9ca93",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://support.productboard.com/hc/en-us/articles/12796466210323-SCIM-API",
+   "title": "SCIM API",
+   "quote": "PATCH: https://api.productboard.com/scim/v2/Users/848abbf8-1be7-4832-9f6b-140c00a9ca93",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://support.productboard.com/hc/en-us/articles/12796466210323-SCIM-API",
+   "title": "SCIM API",
+   "quote": "Will return metadata about Users, Resource Types, Service Provider Config, extension attributes that are currently supported.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://support.productboard.com/hc/en-us/articles/12796466210323-SCIM-API",
+   "title": "SCIM API",
+   "quote": "Team members with their id and display name.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://support.productboard.com/hc/en-us/articles/12796466210323-SCIM-API",
+   "title": "SCIM API",
+   "quote": "department urn:ietf:params:scim:schemas:extension:enterprise:2.0:User Job title title",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://support.productboard.com/hc/en-us/articles/12796466210323-SCIM-API",
+   "title": "SCIM API",
+   "quote": "ID that we store when provided in a create or update request.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://support.productboard.com/hc/en-us/articles/12796466210323-SCIM-API",
+   "title": "SCIM API",
+   "quote": "The shared attributes are Name and Email, therefore when you change with update request any of them they’re updated “in every workspace”.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://support.productboard.com/hc/en-us/articles/12796466210323-SCIM-API",
+   "title": "SCIM API",
+   "quote": "If you don’t provide the role, the default role is contributor .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://support.productboard.com/hc/en-us/articles/12796466210323-SCIM-API",
+   "title": "SCIM API",
+   "quote": "Email userName urn:ietf:params:scim:schemas:core:2.0:User User email. Mandatory field. Name displayName",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://support.productboard.com/hc/en-us/articles/12796466210323-SCIM-API",
+   "title": "SCIM API",
+   "quote": "Activated active urn:ietf:params:scim:schemas:core:2.0:User Supported value: true or false",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c35",
+   "url": "https://support.productboard.com/hc/en-us/articles/12791004576403-Setting-up-SCIM-provisioning-with-Okta",
+   "title": "Setting up SCIM provisioning with Okta",
+   "quote": "Push User Deactivation Deactivating the user or disabling the user's access to the application through OKTA will deactivate the user in Productboard.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://support.productboard.com/hc/en-us/articles/12791004576403-Setting-up-SCIM-provisioning-with-Okta",
+   "title": "Setting up SCIM provisioning with Okta",
+   "quote": "Reactivate Users User accounts can be reactivated in the application.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://support.productboard.com/hc/en-us/articles/12791004576403-Setting-up-SCIM-provisioning-with-Okta",
+   "title": "Setting up SCIM provisioning with Okta",
+   "quote": "Push groups and manage members Groups from Okta will be created as teams in Productboard.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c38",
+   "url": "https://support.productboard.com/hc/en-us/articles/12791004576403-Setting-up-SCIM-provisioning-with-Okta",
+   "title": "Setting up SCIM provisioning with Okta",
+   "quote": "Note: If you have SAML SSO set up with custom app integration, please switch to Productboard application from Okta’s catalog .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c39",
+   "url": "https://support.productboard.com/hc/en-us/articles/12791004576403-Setting-up-SCIM-provisioning-with-Okta",
+   "title": "Setting up SCIM provisioning with Okta",
+   "quote": "In Productboard, the existing users are now SCIM provisioned and won’t be editable.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c40",
+   "url": "https://support.productboard.com/hc/en-us/articles/12791004576403-Setting-up-SCIM-provisioning-with-Okta",
+   "title": "Setting up SCIM provisioning with Okta",
+   "quote": "Users that are no longer assigned to Productboard app though group or directly (Assign to People) will be deactivated in Productboard.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c41",
+   "url": "https://support.productboard.com/hc/en-us/articles/12793536064019-Setting-up-SCIM-provisioning-with-Microsoft-Entra-ID",
+   "title": "Setting up SCIM provisioning with Microsoft Entra ID",
+   "quote": "We don’t have SCIM provisioning approved by Microsoft Entra ID just yet so you need to configure SAML SSO with your own application.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c42",
+   "url": "https://support.productboard.com/hc/en-us/articles/12793536064019-Setting-up-SCIM-provisioning-with-Microsoft-Entra-ID",
+   "title": "Setting up SCIM provisioning with Microsoft Entra ID",
+   "quote": "Select the Non-gallery option and fill in the name productboard .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c43",
+   "url": "https://support.productboard.com/hc/en-us/articles/12790439335315-Configuring-Productboard-roles-in-Okta-correctly",
+   "title": "Configuring Productboard roles in Okta correctly",
+   "quote": "External name: roles.^[primary==true].value",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c44",
+   "url": "https://www.okta.com/integrations/productboard/",
+   "title": "Integrate Productboard with Okta",
+   "quote": "Okta’s Productboard integration allows users to authenticate securely through Single Sign-On with SAML along with provisioning capabilities.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c45",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/productboard-tutorial",
+   "title": "Microsoft Entra SSO integration with productboard",
+   "quote": "productboard supports Just In Time user provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c46",
+   "url": "https://jumpcloud.com/support/integrate-with-productboard",
+   "title": "Integrate with ProductBoard | JumpCloud Documentation",
+   "quote": "A ProductBoard user account with administrator permissions on an Enterprise Plan",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c47",
+   "url": "https://jumpcloud.com/support/integrate-with-productboard",
+   "title": "Integrate with ProductBoard | JumpCloud Documentation",
+   "quote": "Use JumpCloud SAML Single Sign On (SSO) to give your users convenient but secure access to all their web applications with a single set of credentials.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c61",
+   "url": "https://support.productboard.com/hc/en-us/articles/1500002066321-Enforce-SAML-single-sign-on-with-Google-Workspace",
+   "title": "Enforce SAML single sign-on with Google Workspace",
+   "quote": "In this article, you'll learn how to set up SAML SSO with Google Workspace , allowing you to:",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c48",
+   "url": "https://developer.productboard.com/reference/listmembers.md",
+   "title": "List members",
+   "quote": "Retrieves a paginated list of members from your workspace.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.productboard.com/reference/listmembers"
+  },
+  {
+   "id": "c49",
+   "url": "https://developer.productboard.com/reference/listmembers.md",
+   "title": "List members",
+   "quote": "Use the `includeDisabled` parameter to include disabled members in the response.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.productboard.com/reference/listmembers"
+  },
+  {
+   "id": "c50",
+   "url": "https://developer.productboard.com/reference/getmember.md",
+   "title": "Get member",
+   "quote": "Retrieves the full details of a specific member by their unique identifier (UUID).",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.productboard.com/reference/getmember"
+  },
+  {
+   "id": "c51",
+   "url": "https://developer.productboard.com/reference/performmemberssearch.md",
+   "title": "Search members",
+   "quote": "Supports batch lookups by IDs or emails, plus all filters from GET /v2/members.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.productboard.com/reference/performmemberssearch"
+  },
+  {
+   "id": "c52",
+   "url": "https://developer.productboard.com/reference/listteams.md",
+   "title": "List teams",
+   "quote": "Retrieves a paginated list of teams from your workspace.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.productboard.com/reference/listteams"
+  },
+  {
+   "id": "c53",
+   "url": "https://developer.productboard.com/reference/createteam.md",
+   "title": "Create team",
+   "quote": "Creates a new team in your workspace.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.productboard.com/reference/createteam"
+  },
+  {
+   "id": "c54",
+   "url": "https://developer.productboard.com/reference/updateteam.md",
+   "title": "Update team",
+   "quote": "Updates the fields and/or members of an existing team.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.productboard.com/reference/updateteam"
+  },
+  {
+   "id": "c55",
+   "url": "https://developer.productboard.com/reference/deleteteam.md",
+   "title": "Delete team",
+   "quote": "Permanently deletes a team from your workspace.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.productboard.com/reference/deleteteam"
+  },
+  {
+   "id": "c56",
+   "url": "https://developer.productboard.com/reference/listteammembers.md",
+   "title": "List team members",
+   "quote": "Returns a paginated list of members belonging to a specific team.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.productboard.com/reference/listteammembers"
+  },
+  {
+   "id": "c57",
+   "url": "https://developer.productboard.com/reference/rate-limits.md",
+   "title": "Rate limits",
+   "quote": "The default rate limit is **50 requests per second**, per access token",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.productboard.com/reference/rate-limits"
+  },
+  {
+   "id": "c58",
+   "url": "https://developer.productboard.com/reference/listmembers.md",
+   "title": "List members",
+   "quote": "Without the `members:pii:read` OAuth scope, PII fields (`name`, `username`, `email`) are returned as `[redacted]`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.productboard.com/reference/listmembers"
+  },
+  {
+   "id": "c59",
+   "url": "https://developer.productboard.com/reference/listmembers.md",
+   "title": "List members",
+   "quote": "\"url\": \"https://api.productboard.com/v2\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.productboard.com/reference/listmembers"
+  },
+  {
+   "id": "c60",
+   "url": "https://developer.productboard.com/reference/createwebhook.md",
+   "title": "Create webhook subscription",
+   "quote": "Creates a new webhook subscription to be actively notified on each change in the specified entities.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.productboard.com/reference/createwebhook"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The pricing page shows Business with '2 makers minimum' in one plan view and '5 makers minimum' in another.",
+   "cite": [
+    "c3",
+    "c4"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.productboard.com/pricing/",
+  "https://support.productboard.com/api/v2/help_center/articles/search.json?query=scim",
+  "https://support.productboard.com/hc/en-us/articles/12789758783123-Configuring-SCIM-provisioning-in-your-workspace",
+  "https://support.productboard.com/hc/en-us/articles/12796466210323-SCIM-API",
+  "https://support.productboard.com/hc/en-us/articles/12791004576403-Setting-up-SCIM-provisioning-with-Okta",
+  "https://support.productboard.com/hc/en-us/articles/12793536064019-Setting-up-SCIM-provisioning-with-Microsoft-Entra-ID",
+  "https://support.productboard.com/hc/en-us/articles/12790439335315-Configuring-Productboard-roles-in-Okta-correctly",
+  "https://developer.productboard.com/llms.txt",
+  "https://www.okta.com/integrations/productboard/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/productboard-tutorial",
+  "https://jumpcloud.com/support/integrate-with-productboard"
+ ],
+ "open_questions": [
+  "Whether SCIM deactivation frees the paid maker seat or ends active sessions is not documented.",
+  "Access-token expiry for SCIM is not documented.",
+  "SCIM rate limits are not documented separately from the 50 req/s API limit.",
+  "Whether an audit-log API exists is not documented."
+ ]
+}

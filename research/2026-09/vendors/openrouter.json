@@ -1,0 +1,764 @@
+{
+ "slug": "openrouter",
+ "vendor": "OpenRouter",
+ "vendor_url": "https://openrouter.ai",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "OpenRouter",
+  "slug": "openrouter",
+  "category": "AI & LLM Tools",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Standard",
+  "team_price_text": "Standard: pay-as-you-go, 5.5% platform fee on credits (usage-priced, no per-seat price)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Enterprise",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": "sso_only",
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://openrouter.ai/pricing",
+  "docs_url": "https://openrouter.ai/docs/guides/features/scim-mappings",
+  "evidence": "OpenRouter's pricing table marks SSO/SAML as Enterprise only, and its docs say 'SCIM group mappings are available for organizations on Enterprise plans and require an active SSO connection.'",
+  "notes": "New row. Usage-priced: Free (no platform fee, 25+ free models), Standard pay-as-you-go with a 5.5% platform fee, Business pay-as-you-go with an 8% fee, Enterprise via sales (fee discounts); no per-seat prices, so per-user fields are null. SSO/SAML is Enterprise only; SCIM provisioning is self-serve for Enterprise admins once one SSO connection is active (choose Okta, Entra ID or Custom SCIM 2.0) and uses a per-organization endpoint URL and bearer key shown once in the UI. IdP deactivation/deletion deactivates the org membership and the API keys the user created in the org; keys are not re-enabled on reactivation. IdP groups map to workspaces with Member or Admin roles. Okta and Entra connect through the admin's own SAML/enterprise app (no catalogue app found). The management API (Standard and above) lists org members and adds/removes workspace members, but has no user create/invite or delete endpoints. confidence is medium because the SCIM plan comes from docs while the pricing page states only the SSO gate.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Standard",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "Free (no platform fee; 25+ free models, 50 requests/day)",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c3",
+    "c4"
+   ]
+  },
+  {
+   "name": "Standard",
+   "price_text": "Pay-as-you-go, 5.5% platform fee",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c3",
+    "c4",
+    "c11"
+   ]
+  },
+  {
+   "name": "Business",
+   "price_text": "Pay-as-you-go, 8% platform fee",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c3",
+    "c4",
+    "c11"
+   ]
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Contact sales (fee discounts available)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "c11"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c11",
+   "c12",
+   "c13",
+   "c14"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": null,
+  "auth": {
+   "method": "bearer",
+   "token_source": "Settings > Members > SCIM Mappings > Enable SCIM provisioning (API key shown once; Rotate API key to replace)",
+   "token_expiry": null,
+   "cite": [
+    "c13",
+    "c14",
+    "c18"
+   ],
+   "notes": "No expiry is stated; after rotation the old key works only for a short grace period."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c14",
+    "c15"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": null,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c15",
+    "c7",
+    "c10",
+    "c19"
+   ],
+   "notes": "Docs describe Create Users, Update User Attributes, Deactivate Users and Push Groups in Okta; PUT vs PATCH support is not stated. Reactivation restores the member but not their deactivated API keys."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Organization membership is deactivated and API keys the user created in the organization are deactivated across its workspaces; the user's personal OpenRouter account, personal keys and other organization memberships are unaffected.",
+   "cite": [
+    "c7",
+    "c8",
+    "c9"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": []
+  },
+  "roles": {
+   "supported": true,
+   "how": "IdP groups pushed over SCIM are mapped to workspaces with a Member or Admin role (highest role wins); an IdP admin group set at activation grants organization admin.",
+   "cite": [
+    "c16",
+    "c17"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Requires Enterprise plus an active SSO connection; self-serve activation needs exactly one active SSO connection.",
+    "cite": [
+     "c11",
+     "c22"
+    ]
+   },
+   {
+    "text": "API keys deactivated by deprovisioning are not re-enabled when the user is reactivated.",
+    "cite": [
+     "c10"
+    ]
+   }
+  ],
+  "notes": "The SCIM endpoint URL is generated per organization and shown in Settings > Members > SCIM Mappings; its pattern is not published."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c4",
+   "c23",
+   "c36"
+  ],
+  "plan": "Standard",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://openrouter.ai/api/v1",
+  "docs_url": "https://openrouter.ai/docs/api/api-reference/organization/list-organization-members",
+  "auth": {
+   "methods": [
+    "management_api_key"
+   ],
+   "scopes": [],
+   "cite": [
+    "c23",
+    "c4"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": null,
+   "create_user": false,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c23",
+    "c26",
+    "c28",
+    "c32"
+   ],
+   "notes": "create_user false by absence: no member create/invite endpoint in the API reference."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/organization/members",
+    "purpose": "List organization members",
+    "cite": [
+     "c24"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/workspaces/{id}/members",
+    "purpose": "List workspace members",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/workspaces/{id}/members/add",
+    "purpose": "Bulk add organization members to a workspace",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/workspaces/{id}/members/remove",
+    "purpose": "Bulk remove members from a workspace",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/scim/groups",
+    "purpose": "List SCIM groups",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/scim/group-mappings",
+    "purpose": "List SCIM group-to-workspace mappings",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/scim/group-mappings",
+    "purpose": "Create a SCIM group-to-workspace role mapping",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/scim/group-mappings/{id}",
+    "purpose": "Get a SCIM group mapping",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/scim/group-mappings/{id}",
+    "purpose": "Delete a SCIM group mapping",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/guardrails/{id}/assignments/members",
+    "purpose": "Bulk assign organization members to a guardrail",
+    "cite": [
+     "c35"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Members with active API keys in a workspace cannot be removed from it.",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "text": "List endpoints return at most 100 records per page.",
+    "cite": [
+     "c37"
+    ]
+   }
+  ],
+  "notes": "Base URL from the OpenAPI servers block."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": false,
+   "sso": true,
+   "provisioning": true,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c6",
+    "c21"
+   ],
+   "notes": "No OIN app found (okta.com/integrations/openrouter/ 404); docs use the admin's own SAML app with SCIM provisioning."
+  },
+  "entra": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c6",
+    "c20"
+   ],
+   "notes": "Docs describe an 'OpenRouter enterprise application' with automatic provisioning; no Microsoft Learn gallery tutorial was found."
+  },
+  "google": {
+   "listed": null,
+   "sso": true,
+   "provisioning": false,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c6",
+    "c12"
+   ],
+   "notes": "Google Workspace is a guided SAML option; SCIM setup offers only Okta, Entra ID or Custom SCIM 2.0."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c11"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://openrouter.ai/pricing",
+   "title": "Pricing | OpenRouter",
+   "quote": "Plans for indie hackers, AI native startups, growing teams, and enterprises",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://openrouter.ai/pricing",
+   "title": "Pricing | OpenRouter",
+   "quote": "Platform fees Free N/A Standard 5.5% Business 8% Enterprise Fee discounts available",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://openrouter.ai/pricing",
+   "title": "Pricing | OpenRouter",
+   "quote": "SSO/SAML Free No Standard No Business No Enterprise Yes",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://openrouter.ai/pricing",
+   "title": "Pricing | OpenRouter",
+   "quote": "Management API key Learn more → Free No Standard Yes Business Yes Enterprise Yes",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://openrouter.ai/docs/guides/features/sso.md",
+   "title": "Single Sign-On (SSO) | OpenRouter Docs",
+   "quote": "SSO is available for organizations on Enterprise plans. Contact our sales team if you'd like to discuss enterprise options.",
+   "accessed": "2026-10-05",
+   "page_url": "https://openrouter.ai/docs/guides/features/sso"
+  },
+  {
+   "id": "c6",
+   "url": "https://openrouter.ai/docs/guides/features/sso.md",
+   "title": "Single Sign-On (SSO) | OpenRouter Docs",
+   "quote": "Follow the guided setup for your provider (Okta, Microsoft Entra ID, Google Workspace, or custom SAML) to exchange SAML metadata between OpenRouter and your IdP.",
+   "accessed": "2026-10-05",
+   "page_url": "https://openrouter.ai/docs/guides/features/sso"
+  },
+  {
+   "id": "c7",
+   "url": "https://openrouter.ai/docs/guides/features/sso.md",
+   "title": "Single Sign-On (SSO) | OpenRouter Docs",
+   "quote": "Their membership in your organization is deactivated, and they can no longer sign in through the connection",
+   "accessed": "2026-10-05",
+   "page_url": "https://openrouter.ai/docs/guides/features/sso"
+  },
+  {
+   "id": "c8",
+   "url": "https://openrouter.ai/docs/guides/features/sso.md",
+   "title": "Single Sign-On (SSO) | OpenRouter Docs",
+   "quote": "API keys they created in your organization are deactivated across all of the organization's workspaces",
+   "accessed": "2026-10-05",
+   "page_url": "https://openrouter.ai/docs/guides/features/sso"
+  },
+  {
+   "id": "c9",
+   "url": "https://openrouter.ai/docs/guides/features/sso.md",
+   "title": "Single Sign-On (SSO) | OpenRouter Docs",
+   "quote": "Deactivation is scoped to your organization: the member's personal OpenRouter account, personal API keys, and memberships in other organizations are not affected.",
+   "accessed": "2026-10-05",
+   "page_url": "https://openrouter.ai/docs/guides/features/sso"
+  },
+  {
+   "id": "c10",
+   "url": "https://openrouter.ai/docs/guides/features/sso.md",
+   "title": "Single Sign-On (SSO) | OpenRouter Docs",
+   "quote": "Deactivated keys are not automatically re-enabled if the user is later reactivated in your identity provider. An organization admin must re-enable the keys manually.",
+   "accessed": "2026-10-05",
+   "page_url": "https://openrouter.ai/docs/guides/features/sso"
+  },
+  {
+   "id": "c11",
+   "url": "https://openrouter.ai/docs/guides/features/scim-mappings.md",
+   "title": "SCIM Group Mappings | OpenRouter Docs",
+   "quote": "SCIM group mappings are available for organizations on Enterprise plans and require an active SSO connection.",
+   "accessed": "2026-10-05",
+   "page_url": "https://openrouter.ai/docs/guides/features/scim-mappings"
+  },
+  {
+   "id": "c12",
+   "url": "https://openrouter.ai/docs/guides/features/scim-mappings.md",
+   "title": "SCIM Group Mappings | OpenRouter Docs",
+   "quote": "Click Enable SCIM provisioning and choose Okta, Microsoft Entra ID, or Custom (SCIM 2.0) for any other SCIM 2.0 client.",
+   "accessed": "2026-10-05",
+   "page_url": "https://openrouter.ai/docs/guides/features/scim-mappings"
+  },
+  {
+   "id": "c13",
+   "url": "https://openrouter.ai/docs/guides/features/scim-mappings.md",
+   "title": "SCIM Group Mappings | OpenRouter Docs",
+   "quote": "After activation, OpenRouter shows the SCIM endpoint URL and a bearer API key. The key is shown only once.",
+   "accessed": "2026-10-05",
+   "page_url": "https://openrouter.ai/docs/guides/features/scim-mappings"
+  },
+  {
+   "id": "c14",
+   "url": "https://openrouter.ai/docs/guides/features/scim-mappings.md",
+   "title": "SCIM Group Mappings | OpenRouter Docs",
+   "quote": "Custom (SCIM 2.0): point your SCIM client at the endpoint URL with Authorization: Bearer <API key> and push users and groups.",
+   "accessed": "2026-10-05",
+   "page_url": "https://openrouter.ai/docs/guides/features/scim-mappings"
+  },
+  {
+   "id": "c15",
+   "url": "https://openrouter.ai/docs/guides/features/scim-mappings.md",
+   "title": "SCIM Group Mappings | OpenRouter Docs",
+   "quote": "Enable Create Users, Update User Attributes, and Deactivate Users, assign users to the app, then use Push Groups to push your groups.",
+   "accessed": "2026-10-05",
+   "page_url": "https://openrouter.ai/docs/guides/features/scim-mappings"
+  },
+  {
+   "id": "c16",
+   "url": "https://openrouter.ai/docs/guides/features/scim-mappings.md",
+   "title": "SCIM Group Mappings | OpenRouter Docs",
+   "quote": "Click Add mapping, then choose a workspace and a role, either Member or Admin.",
+   "accessed": "2026-10-05",
+   "page_url": "https://openrouter.ai/docs/guides/features/scim-mappings"
+  },
+  {
+   "id": "c17",
+   "url": "https://openrouter.ai/docs/guides/features/scim-mappings.md",
+   "title": "SCIM Group Mappings | OpenRouter Docs",
+   "quote": "Enter the ID of the group in your identity provider whose members should be OpenRouter organization admins, and optionally its display name.",
+   "accessed": "2026-10-05",
+   "page_url": "https://openrouter.ai/docs/guides/features/scim-mappings"
+  },
+  {
+   "id": "c18",
+   "url": "https://openrouter.ai/docs/guides/features/scim-mappings.md",
+   "title": "SCIM Group Mappings | OpenRouter Docs",
+   "quote": "The previous key keeps working only for a short grace period, after which provisioning stops until the new key is in place.",
+   "accessed": "2026-10-05",
+   "page_url": "https://openrouter.ai/docs/guides/features/scim-mappings"
+  },
+  {
+   "id": "c19",
+   "url": "https://openrouter.ai/docs/guides/features/scim-mappings.md",
+   "title": "SCIM Group Mappings | OpenRouter Docs",
+   "quote": "Once the deletion syncs (automatically, or via Refresh from IdP), the group is deactivated on OpenRouter and stops granting access through its mappings.",
+   "accessed": "2026-10-05",
+   "page_url": "https://openrouter.ai/docs/guides/features/scim-mappings"
+  },
+  {
+   "id": "c20",
+   "url": "https://openrouter.ai/docs/guides/features/scim-mappings.md",
+   "title": "SCIM Group Mappings | OpenRouter Docs",
+   "quote": "Microsoft Entra ID: in your OpenRouter enterprise application, open Provisioning, set the mode to Automatic, and enter the endpoint URL as the Tenant URL and the API key as the Secret Token.",
+   "accessed": "2026-10-05",
+   "page_url": "https://openrouter.ai/docs/guides/features/scim-mappings"
+  },
+  {
+   "id": "c21",
+   "url": "https://openrouter.ai/docs/guides/features/scim-mappings.md",
+   "title": "SCIM Group Mappings | OpenRouter Docs",
+   "quote": "Okta: in your OpenRouter SAML app, open the Provisioning tab, choose SCIM integration, and enter the endpoint URL as the SCIM connector base URL with HTTP Header authentication using the API key.",
+   "accessed": "2026-10-05",
+   "page_url": "https://openrouter.ai/docs/guides/features/scim-mappings"
+  },
+  {
+   "id": "c22",
+   "url": "https://openrouter.ai/docs/guides/features/scim-mappings.md",
+   "title": "SCIM Group Mappings | OpenRouter Docs",
+   "quote": "Self-serve activation requires a single active SSO connection; contact support to enable provisioning on the right one",
+   "accessed": "2026-10-05",
+   "page_url": "https://openrouter.ai/docs/guides/features/scim-mappings"
+  },
+  {
+   "id": "c23",
+   "url": "https://openrouter.ai/docs/api/api-reference/organization/list-organization-members.md",
+   "title": "List organization members | OpenRouter API Reference",
+   "quote": "List all members of the organization associated with the authenticated management key.",
+   "accessed": "2026-10-05",
+   "page_url": "https://openrouter.ai/docs/api/api-reference/organization/list-organization-members"
+  },
+  {
+   "id": "c24",
+   "url": "https://openrouter.ai/docs/api/api-reference/organization/list-organization-members.md",
+   "title": "List organization members | OpenRouter API Reference",
+   "quote": "get /organization/members",
+   "accessed": "2026-10-05",
+   "page_url": "https://openrouter.ai/docs/api/api-reference/organization/list-organization-members"
+  },
+  {
+   "id": "c25",
+   "url": "https://openrouter.ai/docs/api/api-reference/workspaces/list-workspace-members.md",
+   "title": "List workspace members | OpenRouter API Reference",
+   "quote": "get /workspaces/{id}/members",
+   "accessed": "2026-10-05",
+   "page_url": "https://openrouter.ai/docs/api/api-reference/workspaces/list-workspace-members"
+  },
+  {
+   "id": "c26",
+   "url": "https://openrouter.ai/docs/api/api-reference/workspaces/bulk-add-members-to-a-workspace.md",
+   "title": "Bulk add members to a workspace | OpenRouter API Reference",
+   "quote": "Members are assigned the same role they hold in the organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://openrouter.ai/docs/api/api-reference/workspaces/bulk-add-members-to-a-workspace"
+  },
+  {
+   "id": "c27",
+   "url": "https://openrouter.ai/docs/api/api-reference/workspaces/bulk-add-members-to-a-workspace.md",
+   "title": "Bulk add members to a workspace | OpenRouter API Reference",
+   "quote": "post /workspaces/{id}/members/add",
+   "accessed": "2026-10-05",
+   "page_url": "https://openrouter.ai/docs/api/api-reference/workspaces/bulk-add-members-to-a-workspace"
+  },
+  {
+   "id": "c28",
+   "url": "https://openrouter.ai/docs/api/api-reference/workspaces/bulk-remove-members-from-a-workspace.md",
+   "title": "Bulk remove members from a workspace | OpenRouter API Reference",
+   "quote": "Members with active API keys in the workspace cannot be removed.",
+   "accessed": "2026-10-05",
+   "page_url": "https://openrouter.ai/docs/api/api-reference/workspaces/bulk-remove-members-from-a-workspace"
+  },
+  {
+   "id": "c29",
+   "url": "https://openrouter.ai/docs/api/api-reference/workspaces/bulk-remove-members-from-a-workspace.md",
+   "title": "Bulk remove members from a workspace | OpenRouter API Reference",
+   "quote": "post /workspaces/{id}/members/remove",
+   "accessed": "2026-10-05",
+   "page_url": "https://openrouter.ai/docs/api/api-reference/workspaces/bulk-remove-members-from-a-workspace"
+  },
+  {
+   "id": "c30",
+   "url": "https://openrouter.ai/docs/api/api-reference/scim/list-scim-groups.md",
+   "title": "List SCIM groups | OpenRouter API Reference",
+   "quote": "get /scim/groups",
+   "accessed": "2026-10-05",
+   "page_url": "https://openrouter.ai/docs/api/api-reference/scim/list-scim-groups"
+  },
+  {
+   "id": "c31",
+   "url": "https://openrouter.ai/docs/api/api-reference/scim/list-scim-group-mappings.md",
+   "title": "List SCIM group mappings | OpenRouter API Reference",
+   "quote": "get /scim/group-mappings",
+   "accessed": "2026-10-05",
+   "page_url": "https://openrouter.ai/docs/api/api-reference/scim/list-scim-group-mappings"
+  },
+  {
+   "id": "c32",
+   "url": "https://openrouter.ai/docs/api/api-reference/scim/create-a-scim-group-mapping.md",
+   "title": "Create a SCIM group mapping | OpenRouter API Reference",
+   "quote": "post /scim/group-mappings",
+   "accessed": "2026-10-05",
+   "page_url": "https://openrouter.ai/docs/api/api-reference/scim/create-a-scim-group-mapping"
+  },
+  {
+   "id": "c33",
+   "url": "https://openrouter.ai/docs/api/api-reference/scim/get-a-scim-group-mapping.md",
+   "title": "Get a SCIM group mapping | OpenRouter API Reference",
+   "quote": "get /scim/group-mappings/{id}",
+   "accessed": "2026-10-05",
+   "page_url": "https://openrouter.ai/docs/api/api-reference/scim/get-a-scim-group-mapping"
+  },
+  {
+   "id": "c34",
+   "url": "https://openrouter.ai/docs/api/api-reference/scim/delete-a-scim-group-mapping.md",
+   "title": "Delete a SCIM group mapping | OpenRouter API Reference",
+   "quote": "delete /scim/group-mappings/{id}",
+   "accessed": "2026-10-05",
+   "page_url": "https://openrouter.ai/docs/api/api-reference/scim/delete-a-scim-group-mapping"
+  },
+  {
+   "id": "c35",
+   "url": "https://openrouter.ai/docs/api/api-reference/guardrails/bulk-assign-members-to-a-guardrail.md",
+   "title": "Bulk assign members to a guardrail | OpenRouter API Reference",
+   "quote": "post /guardrails/{id}/assignments/members",
+   "accessed": "2026-10-05",
+   "page_url": "https://openrouter.ai/docs/api/api-reference/guardrails/bulk-assign-members-to-a-guardrail"
+  },
+  {
+   "id": "c36",
+   "url": "https://openrouter.ai/docs/api/api-reference/organization/list-organization-members.md",
+   "title": "List organization members | OpenRouter API Reference",
+   "quote": "url: https://openrouter.ai/api/v1",
+   "accessed": "2026-10-05",
+   "page_url": "https://openrouter.ai/docs/api/api-reference/organization/list-organization-members"
+  },
+  {
+   "id": "c37",
+   "url": "https://openrouter.ai/docs/api/api-reference/organization/list-organization-members.md",
+   "title": "List organization members | OpenRouter API Reference",
+   "quote": "Maximum number of records to return (max 100)",
+   "accessed": "2026-10-05",
+   "page_url": "https://openrouter.ai/docs/api/api-reference/organization/list-organization-members"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://openrouter.ai/pricing (rendered)",
+  "https://openrouter.ai/docs/llms.txt (docs index)",
+  "https://openrouter.ai/docs/guides/features/sso.md",
+  "https://openrouter.ai/docs/guides/features/scim-mappings.md",
+  "openrouter.ai/docs/api/api-reference organization, workspaces, scim, guardrails pages",
+  "okta.com/integrations/openrouter/ (404)"
+ ],
+ "open_questions": [
+  "SCIM endpoint URL pattern, supported user attributes, filtering, pagination and discovery endpoints are not published.",
+  "Whether SCIM DELETE removes the member or only deactivates (docs treat deactivate and delete the same).",
+  "Whether SSO-provisioned users are created just in time without SCIM.",
+  "Whether Business-plan organizations can buy SSO/SCIM without Enterprise."
+ ]
+}

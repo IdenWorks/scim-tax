@@ -1,0 +1,753 @@
+{
+ "slug": "whimsical",
+ "vendor": "Whimsical",
+ "vendor_url": "https://whimsical.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Whimsical",
+  "slug": "whimsical",
+  "category": "Design & Creative",
+  "status": "gated",
+  "scim_plan": "Business",
+  "scim_price_text": "Business: $20/editor/mo billed annually",
+  "scim_price_per_user_mo": 20,
+  "team_plan": "Pro",
+  "team_price_text": "Pro: $10/editor/mo billed annually",
+  "team_price_per_user_mo": 10,
+  "price_multiplier": 2.0,
+  "sso_plan": "Business",
+  "sso_price_per_user_mo": 20,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": false
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": "sso_only",
+   "onelogin": "sso_only",
+   "jumpcloud": "native",
+   "generic": true
+  },
+  "pricing_page_url": "https://whimsical.com/pricing",
+  "docs_url": "https://whimsical.com/learn/security/scim",
+  "evidence": "Whimsical's pricing page lists SAML Single Sign-On and SCIM as included only on Business ($20/editor/mo), not on Free or Pro ($10/editor/mo); the help centre says SCIM is on the Business plan.",
+  "notes": "New row. SCIM and SAML both start at Business ($20 per editor/mo annual) vs Pro $10, so the SCIM tax is 2.0x. Viewers are free; pricing is per editor. SCIM requires SAML to be configured, and disabling SAML disables SCIM. SCIM deprovisioning removes the user from the workspace; with User offboarding enabled their Private files move after 72 hours. No group push; roles limited to editor/viewer via a custom 'editor' attribute, admin cannot be set via SCIM. Provisioned users are only created once they first sign in via SAML ('pending'). The public API is a read-only, invite-only beta. Google Workspace: SAML only, no SCIM; OneLogin SCIM is 'Contact us'.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": false,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "$0 / Month / Editor",
+   "price_per_user_mo": 0,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c4",
+    "c5"
+   ]
+  },
+  {
+   "name": "Pro",
+   "price_text": "$10 / Month / Editor (annual billing)",
+   "price_per_user_mo": 10,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c5"
+   ]
+  },
+  {
+   "name": "Business",
+   "price_text": "$20 / Month / Editor (annual billing); Contact sales",
+   "price_per_user_mo": 20,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c3",
+    "c5",
+    "c6"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c3",
+   "c5",
+   "c6",
+   "c7",
+   "c8"
+  ],
+  "plan": "Business",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://api.whimsical.com/scim-v2/",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Workspace Settings > enable SCIM provisioning > Reveal (OAuth token)",
+   "token_expiry": null,
+   "cite": [
+    "c7",
+    "c15",
+    "c39"
+   ],
+   "notes": "Microsoft's tutorial says long-lived bearer token authentication is supported; Whimsical states no expiry."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": false,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c7",
+    "c16"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": null,
+   "group_push": false,
+   "group_membership": false,
+   "cite": [
+    "c7",
+    "c9",
+    "c40"
+   ]
+  },
+  "deprovision": {
+   "action": "remove_from_org",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Content in shared folders stays accessible to collaborators; with User offboarding (Business) enabled, the user's Private files move to a chosen private team after 72 hours.",
+   "cite": [
+    "c10",
+    "c11",
+    "c25"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName"
+   ],
+   "cite": [
+    "c34"
+   ]
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "externalId",
+    "active",
+    "displayName",
+    "name.givenName",
+    "name.familyName",
+    "emails"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": true,
+    "how": "Custom 'editor' boolean attribute (Okta: 'Workspace Editor') sets editor (true) or viewer (false)"
+   },
+   "group": [],
+   "cite": [
+    "c7",
+    "c17",
+    "c21",
+    "c24",
+    "c34"
+   ],
+   "notes": "Entra tutorial lists userName, externalId, active, displayName; given/family name are set only at creation; email changes sync only within the same or a verified domain."
+  },
+  "roles": {
+   "supported": true,
+   "how": "editor/viewer via custom 'editor' attribute, set per group assignment in Okta; admin role cannot be set via SCIM",
+   "cite": [
+    "c12",
+    "c13",
+    "c21"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Group fetching and group provisioning are not supported.",
+    "cite": [
+     "c7"
+    ]
+   },
+   {
+    "text": "Given and family name can only be updated by the user after creation.",
+    "cite": [
+     "c17"
+    ]
+   },
+   {
+    "text": "Disabling SAML disables SCIM; users must be re-imported after re-enabling.",
+    "cite": [
+     "c18"
+    ]
+   },
+   {
+    "text": "Accounts are created only when the provisioned user first signs in via SAML (pending until then).",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "text": "Email addresses must be sent in lower case (Okta).",
+    "cite": [
+     "c19"
+    ]
+   },
+   {
+    "text": "JumpCloud cannot send the custom editor attribute, so JumpCloud-provisioned users default to editor; JumpCloud group management must be turned off.",
+    "cite": [
+     "c22",
+     "c23"
+    ]
+   },
+   {
+    "text": "Google Workspace is SAML-only (no SCIM); OneLogin and other IdPs SCIM is 'Contact us'.",
+    "cite": [
+     "c20"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": "partner_only",
+  "cite": [
+   "c26",
+   "c27",
+   "c30"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "other",
+  "base_url": null,
+  "docs_url": "https://whimsical.com/learn/integrations/api",
+  "auth": {
+   "methods": [
+    "oauth2"
+   ],
+   "scopes": [],
+   "cite": [
+    "c30"
+   ]
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": true,
+   "create_user": false,
+   "invite_user": false,
+   "update_user": false,
+   "deactivate_user": false,
+   "delete_user": false,
+   "reactivate_user": false,
+   "manage_groups": false,
+   "assign_roles": false,
+   "assign_licenses": false,
+   "cite": [
+    "c27",
+    "c28"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/users.get",
+    "purpose": "Get a user by ID",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/teams.list",
+    "purpose": "List teams in the workspace",
+    "cite": [
+     "c29"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Beta, read-only, access by approval only (no guaranteed acceptance); OAuth 2.1 secrets issued by Whimsical.",
+    "cite": [
+     "c26",
+     "c27",
+     "c30"
+    ]
+   }
+  ],
+  "notes": "Recorded as partner_only because access is by beta approval; RPC-style POST endpoints, base URL not documented."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/whimsical/",
+   "cite": [
+    "c31"
+   ],
+   "notes": "OIN page markup marks SAML, SCIM, Create, Update, Deactivate as checked (not Group Push)."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/whimsical-provisioning-tutorial",
+   "cite": [
+    "c32",
+    "c33"
+   ]
+  },
+  "google": {
+   "listed": null,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c20",
+    "c38"
+   ],
+   "notes": "From Whimsical's own provider table (SAML yes, SCIM no); Google catalogue not checked."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c20",
+    "c37"
+   ],
+   "notes": "Whimsical's OneLogin guide uses the generic SAML Custom Connector (Advanced); SCIM for OneLogin is 'Contact us'."
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://jumpcloud.com/support/integrate-with-whimsical",
+   "cite": [
+    "c35"
+   ]
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c36",
+   "c6"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://whimsical.com/pricing",
+   "title": "Whimsical Pricing",
+   "quote": "Pro $ 10 / Month / Editor For individuals and small teams",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://whimsical.com/pricing",
+   "title": "Whimsical Pricing",
+   "quote": "Business $ 20 / Month / Editor For large teams and entire organizations",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://whimsical.com/pricing",
+   "title": "Whimsical Pricing",
+   "quote": "Everything in Pro, and: Private teams SAML single sign-on SCIM and more security controls",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://whimsical.com/pricing",
+   "title": "Whimsical Pricing",
+   "quote": "Free $ 0 / Month / Editor For evaluating Whimsical",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://whimsical.com/pricing",
+   "title": "Whimsical Pricing",
+   "quote": "SAML Single Sign-On (SSO) Not included Not included Included SCIM Not included Not included Included",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://whimsical.com/learn/security/scim",
+   "title": "SCIM user provisioning in Whimsical",
+   "quote": "Whimsical supports SCIM (System for Cross-domain Identity Management) for automated user provisioning on the Business plan.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://whimsical.com/learn/security/scim",
+   "title": "SCIM user provisioning in Whimsical",
+   "quote": "SCIM Version : 2.0 SCIM Base URL : https://api.whimsical.com/scim-v2/ Authorization method : Bearer token Username : The user's email address in Whimsical Group fetching is not supported. Group provisioning is not supported.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://whimsical.com/learn/security/scim",
+   "title": "SCIM user provisioning in Whimsical",
+   "quote": "Yes, SCIM provisioning is only available for workspaces that have SAML SSO configured.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://whimsical.com/learn/security/scim",
+   "title": "SCIM user provisioning in Whimsical",
+   "quote": "Create : Automatically adds users to your workspace. Deactivate : Automatically removes users from your workspace. Update : Updates user roles (editor/viewer) based on your SCIM configuration.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://whimsical.com/learn/security/scim",
+   "title": "SCIM user provisioning in Whimsical",
+   "quote": "Yes — when a user is deactivated in your identity provider, Whimsical will automatically remove them from your workspace.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c11",
+   "url": "https://whimsical.com/learn/security/scim",
+   "title": "SCIM user provisioning in Whimsical",
+   "quote": "Any content the user created in shared folders or sections will remain accessible to collaborators, but the user will no longer appear in your workspace.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://whimsical.com/learn/security/scim",
+   "title": "SCIM user provisioning in Whimsical",
+   "quote": "No, admin access must be applied to workspace members directly in your Whimsical workspace settings > People.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://whimsical.com/learn/security/scim",
+   "title": "SCIM user provisioning in Whimsical",
+   "quote": "When creating a new user, if editor is undefined or you do not provide a value, the user will have the default role set in your Whimsical workspace settings.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c14",
+   "url": "https://whimsical.com/learn/security/scim",
+   "title": "SCIM user provisioning in Whimsical",
+   "quote": "Note: These accounts are not created proactively before the user has signed in, to avoid any unexpected costs if they've been assigned the editor role.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://whimsical.com/learn/security/okta-scim",
+   "title": "Setting up SCIM with Okta",
+   "quote": "Enable SCIM provisioning and click Reveal to retrieve an OAuth token",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://whimsical.com/learn/security/okta-scim",
+   "title": "Setting up SCIM with Okta",
+   "quote": "Whimsical follows the standard SCIM-v2 endpoints, e.g. https://api.whimsical.com/scim-v2/Users",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c17",
+   "url": "https://whimsical.com/learn/security/okta-scim",
+   "title": "Setting up SCIM with Okta",
+   "quote": "After user creation, given name and family name fields can only be updated by the users themselves in Whimsical.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c18",
+   "url": "https://whimsical.com/learn/security/okta-scim",
+   "title": "Setting up SCIM with Okta",
+   "quote": "If you disable SAML in your Whimsical settings, SCIM will also be disabled. After reenabling SAML and SCIM, you will have to import all users into Okta.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c19",
+   "url": "https://whimsical.com/learn/security/okta-scim",
+   "title": "Setting up SCIM with Okta",
+   "quote": "Email addresses must be sent to Whimsical in lower case",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c20",
+   "url": "https://whimsical.com/learn/security/scim",
+   "title": "SCIM user provisioning in Whimsical",
+   "quote": "Google Workspace (formerly G-Suite) ✅ ❌ OneLogin ✅ Contact us",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c21",
+   "url": "https://whimsical.com/learn/security/scim-provisioning-with-groups-in-okta",
+   "title": "SCIM provisioning with Groups in Okta",
+   "quote": "For the Whimsical editor group, select Workspace Editor = true, and for the Whimsical viewer group, select Workspace Editor = false",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c22",
+   "url": "https://whimsical.com/learn/security/jumpcloud-scim",
+   "title": "Setting up SCIM with JumpCloud",
+   "quote": "JumpCloud does not currently support custom SCIM attributes, so the default user role in Whimsical is editor.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c23",
+   "url": "https://whimsical.com/learn/security/jumpcloud-scim",
+   "title": "Setting up SCIM with JumpCloud",
+   "quote": "scroll down to Group Management and toggle off Enable management of User Groups and Group Membership in this application",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c24",
+   "url": "https://whimsical.com/learn/security/email-scim",
+   "title": "Managing email changes with SAML and SCIM",
+   "quote": "Verified domain changes : If changing to a different domain, the new domain must first be verified by you as the workspace administrator. SCIM will reject email changes to unverified domains.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c25",
+   "url": "https://whimsical.com/learn/workspaces/offboarding",
+   "title": "Offboarding users",
+   "quote": "If a user is removed via SCIM or they select to leave your workspace, their content will be moved after 72 hours.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c26",
+   "url": "https://whimsical.com/learn/integrations/api",
+   "title": "Whimsical API (Beta)",
+   "quote": "The API is currently in beta and under active development. Capabilities are limited, and new features will be added over time. If you'd like access or have feedback, please contact our support team .",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c27",
+   "url": "https://whimsical.com/learn/integrations/api",
+   "title": "Whimsical API (Beta)",
+   "quote": "The current API is read-only and focused on retrieving workspace content.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c28",
+   "url": "https://whimsical.com/learn/integrations/api",
+   "title": "Whimsical API (Beta)",
+   "quote": "POST /users.get Returns information about a user, given their user ID.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c29",
+   "url": "https://whimsical.com/learn/integrations/api",
+   "title": "Whimsical API (Beta)",
+   "quote": "POST /teams.list Returns a list of all teams in the workspace.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c30",
+   "url": "https://whimsical.com/learn/integrations/api",
+   "title": "Whimsical API (Beta)",
+   "quote": "The Whimsical API uses OAuth 2.1 for authentication and authorization.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c31",
+   "url": "https://www.okta.com/integrations/whimsical/",
+   "title": "Whimsical | Okta Integration Network",
+   "quote": "Okta's Whimsical integration provides Single Sign-On (SSO) and user provisioning so you can easily add new members, remove existing members, and change member roles.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c32",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/whimsical-provisioning-tutorial",
+   "title": "Configure Whimsical for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Create users in Whimsical Remove users in Whimsical when they don't require access anymore Keep user attributes synchronized between Microsoft Entra ID and Whimsical Single sign-on to Whimsical (recommended)",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c33",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/whimsical-provisioning-tutorial",
+   "title": "Configure Whimsical for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Add Whimsical from the Microsoft Entra application gallery to start managing provisioning to Whimsical.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c34",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/whimsical-provisioning-tutorial",
+   "title": "Configure Whimsical for automatic user provisioning with Microsoft Entra ID",
+   "quote": "userName String ✓ externalId String active Boolean displayName String",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c35",
+   "url": "https://jumpcloud.com/support/integrate-with-whimsical",
+   "title": "Integrate with Whimsical | JumpCloud Documentation",
+   "quote": "Automatically provision, update and deprovision users and groups in Whimsical from JumpCloud using the SCIM integration.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c36",
+   "url": "https://whimsical.com/learn/security/google",
+   "title": "SAML SSO with Google Workspace",
+   "quote": "Whimsical supports JIT (Just-in-time) account provisioning. That means that Whimsical will create an account for a user authenticating via SAML if necessary.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c37",
+   "url": "https://whimsical.com/learn/security/onelogin",
+   "title": "SAML SSO with OneLogin",
+   "quote": "Search for \"SAML Custom Connector (Advanced)\".",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c38",
+   "url": "https://whimsical.com/learn/security/google",
+   "title": "SAML SSO with Google Workspace",
+   "quote": "Note: SAML SSO is only available on our Business plan. You must be an admin to enable SAML SSO.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c39",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/whimsical-provisioning-tutorial",
+   "title": "Configure Whimsical for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Long lived bearer token authentication supported.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c40",
+   "url": "https://whimsical.com/learn/security/scim",
+   "title": "SCIM user provisioning in Whimsical",
+   "quote": "Import : Optionally pulls existing workspace members into your identity provider for better visibility and management.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://whimsical.com/pricing",
+  "https://whimsical.com/learn/sitemap-0.xml",
+  "https://whimsical.com/learn/security/scim",
+  "https://whimsical.com/learn/integrations/api"
+ ],
+ "open_questions": [
+  "Whether SCIM removal frees the editor seat immediately is not documented.",
+  "Whether SCIM supports PUT vs PATCH, filtering beyond userName, pagination, ServiceProviderConfig/Schemas, or rate limits is not documented.",
+  "Whether removal ends active sessions is not documented.",
+  "No audit-log API or user webhooks are documented.",
+  "CSV/bulk user import is not documented.",
+  "SCIM token expiry is not stated (Entra tutorial says long-lived)."
+ ]
+}

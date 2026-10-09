@@ -1,0 +1,1015 @@
+{
+ "slug": "clickup",
+ "vendor": "ClickUp",
+ "vendor_url": "https://clickup.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "ClickUp",
+  "slug": "clickup",
+  "category": "Project & Work Management",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Unlimited",
+  "team_price_text": "Unlimited: $7/u/mo (annual)",
+  "team_price_per_user_mo": 7,
+  "price_multiplier": null,
+  "sso_plan": "Enterprise",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": "native",
+   "generic": true
+  },
+  "pricing_page_url": "https://clickup.com/pricing",
+  "docs_url": "https://help.clickup.com/api/v2/help_center/en-us/articles/6305052795287.json",
+  "evidence": "ClickUp's pricing page lists 'SAML SSO & SCIM Provisioning' under Enterprise (Contact sales), and the help centre says Okta SSO, Microsoft SSO and custom SAML, which SCIM requires, are Enterprise-only.",
+  "notes": "Status unchanged (gated). Plans on the pricing page: Free Forever, Unlimited $7 (yearly; $10 monthly), Business $12 (yearly; $19 monthly), Enterprise (contact sales). Business Plus no longer appears on the pricing page (the API rate-limit doc still lists it), and June's '~$20-45/u/mo' Enterprise estimate had no first-party source, so it is dropped. Google SSO on Business is Sign in with Google, not SAML, so sso_plan is Enterprise. SCIM needs Okta SSO or custom SAML enabled first; the Okta OIN app provisions (create, update, deactivate, group push as Teams), Entra needs a non-gallery custom SAML app because the gallery app does not support SCIM, JumpCloud's connector provisions users but not groups. Deactivation keeps the user as an 'inactive user'. Workspace user-management endpoints (invite, get, edit, remove user, audit logs) are Enterprise-only; the rest of the API is on every plan.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Enterprise",
+  "api_tax": true,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Free Forever",
+   "price_text": "Free",
+   "price_per_user_mo": 0,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": false,
+   "cite": [
+    "c6",
+    "c3",
+    "c5",
+    "c9"
+   ],
+   "notes": "General API available (100 requests/minute); user-management endpoints Enterprise only."
+  },
+  {
+   "name": "Unlimited",
+   "price_text": "$7 per user/month billed yearly ($10 monthly)",
+   "price_per_user_mo": 7,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": false,
+   "cite": [
+    "c1",
+    "c3",
+    "c5",
+    "c9"
+   ]
+  },
+  {
+   "name": "Business",
+   "price_text": "$12 per user/month billed yearly ($19 monthly)",
+   "price_per_user_mo": 12,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": false,
+   "cite": [
+    "c2",
+    "c3",
+    "c5",
+    "c8",
+    "c9"
+   ],
+   "notes": "Google SSO (Sign in with Google) only; not SAML."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Contact sales",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c4",
+    "c3",
+    "c5",
+    "c9",
+    "c37",
+    "c43"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c3",
+   "c11",
+   "c12",
+   "c21",
+   "c22"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": null,
+   "token_source": "Settings > Security & Permissions: SCIM Base URL and SCIM API Token shown after SSO (Okta or custom SAML) is enabled",
+   "token_expiry": null,
+   "cite": [
+    "c12",
+    "c23"
+   ],
+   "notes": "Entra guide pastes the SCIM API Token into the Secret Token field; the header scheme is not stated."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c20",
+    "c13",
+    "c30"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": null,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c20",
+    "c16",
+    "c14",
+    "c15",
+    "c13",
+    "c30"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "User is removed from the Workspace and can no longer access it, but their data remains as an 'inactive user'; SCIM responses return only the deactivated status.",
+   "cite": [
+    "c14"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "id",
+    "userName",
+    "name",
+    "active",
+    "emails.value",
+    "emails.primary",
+    "title"
+   ],
+   "enterprise": [
+    "manager.value",
+    "department"
+   ],
+   "custom": {
+    "supported": true,
+    "how": "ClickUp extension urn:ietf:params:scim:schemas:extension:ClickUp:2.0:User with role (2 admin, 3 member, 4 guest, 100 limited member, or custom role id), customRoleId, customRoleName; region is also listed (gradual release)."
+   },
+   "group": [
+    "displayName (becomes the Team name)",
+    "members"
+   ],
+   "cite": [
+    "c27",
+    "c32",
+    "c19",
+    "c29",
+    "c24",
+    "c28",
+    "c30"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "ClickUp Role attribute in Okta; urn:ietf:params:scim:schemas:extension:ClickUp:2.0:User:role (constant or expression mapping from Entra app roles); custom roles via customRoleId/customRoleName.",
+   "cite": [
+    "c18",
+    "c24",
+    "c28"
+   ]
+  },
+  "rate_limits": {
+   "text": "Bulk profile pushes can hit rate limiting; Okta retries automatically after 60 seconds. No numeric SCIM limit published.",
+   "cite": [
+    "c17"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Entra gallery app (ClickUp Productivity Platform) does not support SCIM or group provisioning; a custom non-gallery SAML app is required.",
+    "cite": [
+     "c21"
+    ]
+   },
+   {
+    "text": "Group provisioning creates new Teams only; it cannot link to existing Teams, nested groups are not supported, and each user can have only one app role.",
+    "cite": [
+     "c26",
+     "c25",
+     "c31"
+    ]
+   },
+   {
+    "text": "No import of users or groups from ClickUp into Okta.",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "text": "JumpCloud connector does not support SCIM Groups.",
+    "cite": [
+     "c51"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c5",
+   "c33",
+   "c37",
+   "c44"
+  ],
+  "plan": "Enterprise",
+  "api_tax": true,
+  "style": "REST",
+  "base_url": "https://api.clickup.com/api",
+  "docs_url": "https://developer.clickup.com/reference/inviteusertoworkspace",
+  "auth": {
+   "methods": [
+    "personal_token",
+    "oauth2"
+   ],
+   "scopes": [],
+   "cite": [
+    "c44"
+   ]
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": true,
+   "create_user": null,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c33",
+    "c34",
+    "c35",
+    "c36",
+    "c39",
+    "c40",
+    "c41",
+    "c38"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/v2/team/{team_id}/user",
+    "purpose": "Invite User To Workspace (Enterprise)",
+    "cite": [
+     "c33",
+     "c53"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v2/team/{team_id}/user/{user_id}",
+    "purpose": "Get User (Enterprise)",
+    "cite": [
+     "c34",
+     "c47"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/v2/team/{team_id}/user/{user_id}",
+    "purpose": "Edit User On Workspace: name and role (Enterprise)",
+    "cite": [
+     "c35",
+     "c47"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v2/team/{team_id}/user/{user_id}",
+    "purpose": "Remove (deactivate) User From Workspace (Enterprise)",
+    "cite": [
+     "c36",
+     "c37",
+     "c47"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v2/team/{team_id}/customroles",
+    "purpose": "Get Custom Roles",
+    "cite": [
+     "c38",
+     "c55"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v2/team/{team_id}/seats",
+    "purpose": "Get Workspace seats",
+    "cite": [
+     "c42",
+     "c56"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v2/team/{team_id}/group",
+    "purpose": "Create user group",
+    "cite": [
+     "c39",
+     "c54"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v2/group",
+    "purpose": "Get user groups",
+    "cite": [
+     "c40",
+     "c58"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/v2/group/{group_id}",
+    "purpose": "Update user group (members)",
+    "cite": [
+     "c39",
+     "c57"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v2/group/{group_id}",
+    "purpose": "Delete user group",
+    "cite": [
+     "c41",
+     "c57"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v3/workspaces/{workspace_id}/auditlogs",
+    "purpose": "Query Workspace-level audit logs (Enterprise, owner only)",
+    "cite": [
+     "c43",
+     "c46"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Enterprise",
+   "cite": [
+    "c43",
+    "c3"
+   ]
+  },
+  "rate_limits": {
+   "text": "Per token, by Workspace plan: 100 requests/minute on Free Forever, Unlimited and Business; 10,000/minute on Enterprise (pricing page).",
+   "cite": [
+    "c45",
+    "c7"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Invite, get, edit and remove user endpoints are Enterprise-only.",
+    "cite": [
+     "c37"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/clickup/",
+   "cite": [
+    "c48",
+    "c11"
+   ],
+   "notes": "OIN page markup checks SAML, SCIM, Create, Update, Deactivate, Group Push."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/clickup-productivity-platform-tutorial",
+   "cite": [
+    "c49",
+    "c21"
+   ],
+   "notes": "Gallery app is SSO only; SCIM works only through a custom non-gallery SAML app."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://jumpcloud.com/support/integrate-with-clickup",
+   "cite": [
+    "c50",
+    "c51",
+    "c52"
+   ]
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c11",
+   "c33"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://clickup.com/pricing",
+   "title": "ClickUp Pricing",
+   "quote": "unlimited yearly price: $7 Per user/month, billed yearly unlimited monthly price: $10 Per user/month, billed monthly",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://clickup.com/pricing",
+   "title": "ClickUp Pricing",
+   "quote": "business yearly price: $12 Per user/month, billed yearly business monthly price: $19 Per user/month, billed monthly",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://clickup.com/pricing",
+   "title": "ClickUp Pricing",
+   "quote": "SAML SSO & SCIM Provisioning",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://clickup.com/pricing",
+   "title": "ClickUp Pricing",
+   "quote": "Get a custom demo Contact sales Everything in Business, plus:",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://clickup.com/pricing",
+   "title": "ClickUp Pricing",
+   "quote": "Add & Remove Users via API",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://clickup.com/pricing",
+   "title": "ClickUp Pricing",
+   "quote": "free forever yearly price: Free Per user/month, billed yearly",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://clickup.com/pricing",
+   "title": "ClickUp Pricing",
+   "quote": "API Calls 100/minute 100/minute 100/minute 10,000/minute",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://help.clickup.com/api/v2/help_center/en-us/articles/6305043992343.json",
+   "title": "Intro to single sign-on (SSO)",
+   "quote": "SSO using Google is available on the Business Plan and above.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.clickup.com/hc/en-us/articles/6305043992343-Intro-to-single-sign-on-SSO"
+  },
+  {
+   "id": "c9",
+   "url": "https://help.clickup.com/api/v2/help_center/en-us/articles/6305043992343.json",
+   "title": "Intro to single sign-on (SSO)",
+   "quote": "SSO using Microsoft, Okta, and SAML is available on our Enterprise Plan .",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.clickup.com/hc/en-us/articles/6305043992343-Intro-to-single-sign-on-SSO"
+  },
+  {
+   "id": "c10",
+   "url": "https://help.clickup.com/api/v2/help_center/en-us/articles/6305043992343.json",
+   "title": "Intro to single sign-on (SSO)",
+   "quote": "ClickUp does not support user or group imports from ClickUp to Okta.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.clickup.com/hc/en-us/articles/6305043992343-Intro-to-single-sign-on-SSO"
+  },
+  {
+   "id": "c11",
+   "url": "https://help.clickup.com/api/v2/help_center/en-us/articles/6305052795287.json",
+   "title": "Okta SCIM ClickUp configuration guide",
+   "quote": "Before you can set up provisioning, you need to have Okta SSO enabled for your Workspace.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.clickup.com/hc/en-us/articles/6305052795287-Okta-SCIM-ClickUp-configuration-guide"
+  },
+  {
+   "id": "c12",
+   "url": "https://help.clickup.com/api/v2/help_center/en-us/articles/6305052795287.json",
+   "title": "Okta SCIM ClickUp configuration guide",
+   "quote": "After Okta SSO is enabled, you'll see a SCIM Base URL and SCIM API Token.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.clickup.com/hc/en-us/articles/6305052795287-Okta-SCIM-ClickUp-configuration-guide"
+  },
+  {
+   "id": "c13",
+   "url": "https://help.clickup.com/api/v2/help_center/en-us/articles/6305052795287.json",
+   "title": "Okta SCIM ClickUp configuration guide",
+   "quote": "New groups created through Okta are also created as Teams within ClickUp.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.clickup.com/hc/en-us/articles/6305052795287-Okta-SCIM-ClickUp-configuration-guide"
+  },
+  {
+   "id": "c14",
+   "url": "https://help.clickup.com/api/v2/help_center/en-us/articles/6305052795287.json",
+   "title": "Okta SCIM ClickUp configuration guide",
+   "quote": "When users are deactivated in Okta, they are removed from the associated ClickUp Workspace. Users will not be able to access anything in that Workspace, but their data will remain available as an \"inactive user.\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.clickup.com/hc/en-us/articles/6305052795287-Okta-SCIM-ClickUp-configuration-guide"
+  },
+  {
+   "id": "c15",
+   "url": "https://help.clickup.com/api/v2/help_center/en-us/articles/6305052795287.json",
+   "title": "Okta SCIM ClickUp configuration guide",
+   "quote": "User accounts can be reactivated in the application.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.clickup.com/hc/en-us/articles/6305052795287-Okta-SCIM-ClickUp-configuration-guide"
+  },
+  {
+   "id": "c16",
+   "url": "https://help.clickup.com/api/v2/help_center/en-us/articles/6305052795287.json",
+   "title": "Okta SCIM ClickUp configuration guide",
+   "quote": "Updates to the user's profile through Okta are also made in the third-party application.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.clickup.com/hc/en-us/articles/6305052795287-Okta-SCIM-ClickUp-configuration-guide"
+  },
+  {
+   "id": "c17",
+   "url": "https://help.clickup.com/api/v2/help_center/en-us/articles/6305052795287.json",
+   "title": "Okta SCIM ClickUp configuration guide",
+   "quote": "Pushing profile updates for many users at once can trigger rate limiting. These operations retry automatically after 60 seconds.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.clickup.com/hc/en-us/articles/6305052795287-Okta-SCIM-ClickUp-configuration-guide"
+  },
+  {
+   "id": "c18",
+   "url": "https://help.clickup.com/api/v2/help_center/en-us/articles/6305052795287.json",
+   "title": "Okta SCIM ClickUp configuration guide",
+   "quote": "When assigning users or groups, assign the ClickUp Role attribute. If this attribute is unset, everyone will default to the member role.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.clickup.com/hc/en-us/articles/6305052795287-Okta-SCIM-ClickUp-configuration-guide"
+  },
+  {
+   "id": "c19",
+   "url": "https://help.clickup.com/api/v2/help_center/en-us/articles/6305052795287.json",
+   "title": "Okta SCIM ClickUp configuration guide",
+   "quote": "In Okta, open the ClickUp Attribute Mappings table and you'll see the Manager row set to manager.value .",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.clickup.com/hc/en-us/articles/6305052795287-Okta-SCIM-ClickUp-configuration-guide"
+  },
+  {
+   "id": "c20",
+   "url": "https://help.clickup.com/api/v2/help_center/en-us/articles/6305052795287.json",
+   "title": "Okta SCIM ClickUp configuration guide",
+   "quote": "New users created through Okta are also created in the third-party application.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.clickup.com/hc/en-us/articles/6305052795287-Okta-SCIM-ClickUp-configuration-guide"
+  },
+  {
+   "id": "c21",
+   "url": "https://help.clickup.com/api/v2/help_center/en-us/articles/23249507200791.json",
+   "title": "Custom SAML SCIM configuration guide via Entra ID",
+   "quote": "Provisioning requires a custom non-gallery application in Microsoft Entra ID. The gallery application ClickUp Productivity Platform doesn't support SCIM and can't provision groups.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.clickup.com/hc/en-us/articles/23249507200791-Custom-SAML-SCIM-configuration-guide-via-Entra-ID"
+  },
+  {
+   "id": "c22",
+   "url": "https://help.clickup.com/api/v2/help_center/en-us/articles/23249507200791.json",
+   "title": "Custom SAML SCIM configuration guide via Entra ID",
+   "quote": "Custom SAML is only available to Workspaces on the Enterprise Plan .",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.clickup.com/hc/en-us/articles/23249507200791-Custom-SAML-SCIM-configuration-guide-via-Entra-ID"
+  },
+  {
+   "id": "c23",
+   "url": "https://help.clickup.com/api/v2/help_center/en-us/articles/23249507200791.json",
+   "title": "Custom SAML SCIM configuration guide via Entra ID",
+   "quote": "Input the SCIM API Token from your ClickUp Security & Permissions page into the Secret Token field.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.clickup.com/hc/en-us/articles/23249507200791-Custom-SAML-SCIM-configuration-guide-via-Entra-ID"
+  },
+  {
+   "id": "c24",
+   "url": "https://help.clickup.com/api/v2/help_center/en-us/articles/23249507200791.json",
+   "title": "Custom SAML SCIM configuration guide via Entra ID",
+   "quote": "enter this urn attribute for user roles: urn:ietf:params:scim:schemas:extension:ClickUp:2.0:User:role",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.clickup.com/hc/en-us/articles/23249507200791-Custom-SAML-SCIM-configuration-guide-via-Entra-ID"
+  },
+  {
+   "id": "c25",
+   "url": "https://help.clickup.com/api/v2/help_center/en-us/articles/23249507200791.json",
+   "title": "Custom SAML SCIM configuration guide via Entra ID",
+   "quote": "Nested groups aren't supported.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.clickup.com/hc/en-us/articles/23249507200791-Custom-SAML-SCIM-configuration-guide-via-Entra-ID"
+  },
+  {
+   "id": "c26",
+   "url": "https://help.clickup.com/api/v2/help_center/en-us/articles/23249507200791.json",
+   "title": "Custom SAML SCIM configuration guide via Entra ID",
+   "quote": "Provisioning creates new Teams. It can't link a group to a Team that already exists in your Workspace.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.clickup.com/hc/en-us/articles/23249507200791-Custom-SAML-SCIM-configuration-guide-via-Entra-ID"
+  },
+  {
+   "id": "c27",
+   "url": "https://help.clickup.com/api/v2/help_center/en-us/articles/23249507200791.json",
+   "title": "Custom SAML SCIM configuration guide via Entra ID",
+   "quote": "userName: user.userName",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.clickup.com/hc/en-us/articles/23249507200791-Custom-SAML-SCIM-configuration-guide-via-Entra-ID"
+  },
+  {
+   "id": "c28",
+   "url": "https://help.clickup.com/api/v2/help_center/en-us/articles/23249507200791.json",
+   "title": "Custom SAML SCIM configuration guide via Entra ID",
+   "quote": "customRoleName: Enter the name of the ClickUp Custom Role.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.clickup.com/hc/en-us/articles/23249507200791-Custom-SAML-SCIM-configuration-guide-via-Entra-ID"
+  },
+  {
+   "id": "c29",
+   "url": "https://help.clickup.com/api/v2/help_center/en-us/articles/23249507200791.json",
+   "title": "Custom SAML SCIM configuration guide via Entra ID",
+   "quote": "department: user.department",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.clickup.com/hc/en-us/articles/23249507200791-Custom-SAML-SCIM-configuration-guide-via-Entra-ID"
+  },
+  {
+   "id": "c30",
+   "url": "https://help.clickup.com/api/v2/help_center/en-us/articles/23249507200791.json",
+   "title": "Custom SAML SCIM configuration guide via Entra ID",
+   "quote": "Each Microsoft Entra ID group you assign to the app becomes a new ClickUp Team with the same name. New users are created, and existing users are added to the Team.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.clickup.com/hc/en-us/articles/23249507200791-Custom-SAML-SCIM-configuration-guide-via-Entra-ID"
+  },
+  {
+   "id": "c31",
+   "url": "https://help.clickup.com/api/v2/help_center/en-us/articles/23249507200791.json",
+   "title": "Custom SAML SCIM configuration guide via Entra ID",
+   "quote": "Each user can have only one app role.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.clickup.com/hc/en-us/articles/23249507200791-Custom-SAML-SCIM-configuration-guide-via-Entra-ID"
+  },
+  {
+   "id": "c32",
+   "url": "https://help.clickup.com/api/v2/help_center/en-us/articles/23249507200791.json",
+   "title": "Custom SAML SCIM configuration guide via Entra ID",
+   "quote": "title: user.title",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.clickup.com/hc/en-us/articles/23249507200791-Custom-SAML-SCIM-configuration-guide-via-Entra-ID"
+  },
+  {
+   "id": "c33",
+   "url": "https://developer.clickup.com/reference/inviteusertoworkspace.md",
+   "title": "Invite User To Workspace",
+   "quote": "Invite someone to join your Workspace as a member.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.clickup.com/reference/inviteusertoworkspace"
+  },
+  {
+   "id": "c34",
+   "url": "https://developer.clickup.com/reference/getuser.md",
+   "title": "Get User",
+   "quote": "View information about a user in a Workspace.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.clickup.com/reference/getuser"
+  },
+  {
+   "id": "c35",
+   "url": "https://developer.clickup.com/reference/edituseronworkspace.md",
+   "title": "Edit User On Workspace",
+   "quote": "Update a user's name and role.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.clickup.com/reference/edituseronworkspace"
+  },
+  {
+   "id": "c36",
+   "url": "https://developer.clickup.com/reference/removeuserfromworkspace.md",
+   "title": "Remove User From Workspace",
+   "quote": "Deactivate a user from a Workspace.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.clickup.com/reference/removeuserfromworkspace"
+  },
+  {
+   "id": "c37",
+   "url": "https://developer.clickup.com/reference/removeuserfromworkspace.md",
+   "title": "Remove User From Workspace",
+   "quote": "This endpoint is only available to Workspaces on our [Enterprise Plan](https://clickup.com/pricing).",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.clickup.com/reference/removeuserfromworkspace"
+  },
+  {
+   "id": "c38",
+   "url": "https://developer.clickup.com/reference/getcustomroles.md",
+   "title": "Get Custom Roles",
+   "quote": "View the Custom Roles available in a Workspace.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.clickup.com/reference/getcustomroles"
+  },
+  {
+   "id": "c39",
+   "url": "https://developer.clickup.com/reference/createusergroup.md",
+   "title": "Create Group",
+   "quote": "This endpoint creates a [User Group](https://docs.clickup.com/en/articles/4010016-teams-how-to-create-user-groups) within a Workspace.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.clickup.com/reference/createusergroup"
+  },
+  {
+   "id": "c40",
+   "url": "https://developer.clickup.com/reference/getteams1.md",
+   "title": "Get Groups",
+   "quote": "This endpoint is used to view [User Groups]",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.clickup.com/reference/getteams1"
+  },
+  {
+   "id": "c41",
+   "url": "https://developer.clickup.com/reference/deleteteam.md",
+   "title": "Delete Group",
+   "quote": "This endpoint is used to remove a [User Group]",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.clickup.com/reference/deleteteam"
+  },
+  {
+   "id": "c42",
+   "url": "https://developer.clickup.com/reference/getworkspaceseats.md",
+   "title": "Get Workspace seats",
+   "quote": "View the used, total, and available member and guest seats for a Workspace.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.clickup.com/reference/getworkspaceseats"
+  },
+  {
+   "id": "c43",
+   "url": "https://developer.clickup.com/reference/queryauditlog.md",
+   "title": "Create Workspace-level audit logs",
+   "quote": "Create Workspace-level audit logs. Only the Workspace owner can create audit logs.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.clickup.com/reference/queryauditlog"
+  },
+  {
+   "id": "c44",
+   "url": "https://developer.clickup.com/docs/authentication.md",
+   "title": "Authentication",
+   "quote": "Authenticate to the ClickUp API using a personal token or OAuth.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.clickup.com/docs/authentication"
+  },
+  {
+   "id": "c45",
+   "url": "https://developer.clickup.com/docs/rate-limits.md",
+   "title": "Rate Limits",
+   "quote": "The ClickUp API applies rate limits per token.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.clickup.com/docs/rate-limits"
+  },
+  {
+   "id": "c46",
+   "url": "https://developer.clickup.com/reference/queryauditlog.md",
+   "title": "Create Workspace-level audit logs",
+   "quote": "/api/v3/workspaces/{workspace_id}/auditlogs",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.clickup.com/reference/queryauditlog"
+  },
+  {
+   "id": "c47",
+   "url": "https://developer.clickup.com/reference/getuser.md",
+   "title": "Get User",
+   "quote": "/v2/team/{team_id}/user/{user_id}",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.clickup.com/reference/getuser"
+  },
+  {
+   "id": "c48",
+   "url": "https://www.okta.com/integrations/clickup/",
+   "title": "Integrate ClickUp with Okta",
+   "quote": "ClickUp integration makes it easy for any organization to automate access to any Workspace.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c49",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/clickup-productivity-platform-tutorial",
+   "title": "Configure ClickUp Productivity Platform for Single sign-on with Microsoft Entra ID",
+   "quote": "ClickUp Productivity Platform supports SP initiated SSO.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c50",
+   "url": "https://jumpcloud.com/support/integrate-with-clickup",
+   "title": "Integrate with ClickUp | JumpCloud Documentation",
+   "quote": "Automatically provision, update and deprovision users in ClickUp from JumpCloud using the SCIM integration.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c51",
+   "url": "https://jumpcloud.com/support/integrate-with-clickup",
+   "title": "Integrate with ClickUp | JumpCloud Documentation",
+   "quote": "SCIM Groups are not supported",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c52",
+   "url": "https://jumpcloud.com/support/integrate-with-clickup",
+   "title": "Integrate with ClickUp | JumpCloud Documentation",
+   "quote": "SSO is required to use SCIM",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c53",
+   "url": "https://developer.clickup.com/reference/inviteusertoworkspace.md",
+   "title": "Invite User To Workspace",
+   "quote": "/v2/team/{team_id}/user",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.clickup.com/reference/inviteusertoworkspace"
+  },
+  {
+   "id": "c54",
+   "url": "https://developer.clickup.com/reference/createusergroup.md",
+   "title": "Create Group",
+   "quote": "/v2/team/{team_id}/group",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.clickup.com/reference/createusergroup"
+  },
+  {
+   "id": "c55",
+   "url": "https://developer.clickup.com/reference/getcustomroles.md",
+   "title": "Get Custom Roles",
+   "quote": "/v2/team/{team_id}/customroles",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.clickup.com/reference/getcustomroles"
+  },
+  {
+   "id": "c56",
+   "url": "https://developer.clickup.com/reference/getworkspaceseats.md",
+   "title": "Get Workspace seats",
+   "quote": "/v2/team/{team_id}/seats",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.clickup.com/reference/getworkspaceseats"
+  },
+  {
+   "id": "c57",
+   "url": "https://developer.clickup.com/reference/deleteteam.md",
+   "title": "Delete Group",
+   "quote": "/v2/group/{group_id}",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.clickup.com/reference/deleteteam"
+  },
+  {
+   "id": "c58",
+   "url": "https://developer.clickup.com/reference/getteams1.md",
+   "title": "Get Groups",
+   "quote": "/v2/group",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.clickup.com/reference/getteams1"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The API rate-limit page lists a Business Plus plan (1,000 requests/minute) that no longer appears on the pricing page.",
+   "cite": [
+    "c45",
+    "c7"
+   ]
+  }
+ ],
+ "searched": [
+  "https://clickup.com/pricing",
+  "https://help.clickup.com/hc/en-us/articles/6305043992343-Intro-to-single-sign-on-SSO",
+  "https://help.clickup.com/hc/en-us/articles/6305052795287-Okta-SCIM-ClickUp-configuration-guide",
+  "https://help.clickup.com/hc/en-us/articles/23249507200791-Custom-SAML-SCIM-configuration-guide-via-Entra-ID",
+  "https://developer.clickup.com/llms.txt",
+  "help.clickup.com search: scim, provisioning",
+  "https://www.okta.com/integrations/clickup/",
+  "https://jumpcloud.com/support/integrate-with-clickup"
+ ],
+ "open_questions": [
+  "SCIM base URL, version and auth header scheme are not shown publicly (the URL and token appear in Security & Permissions after SSO is set up).",
+  "Whether SCIM deactivation frees the paid seat or ends active sessions is not documented.",
+  "Whether SCIM supports hard delete, filtering or pagination is not documented.",
+  "No list-workspace-users endpoint was found in the user API reference (Get Authorized Workspaces returns members).",
+  "ClickUp webhooks list no user events; not stated explicitly.",
+  "Google Workspace and OneLogin catalogue apps not checked; Google SSO is Sign in with Google.",
+  "CSV user import not checked."
+ ]
+}

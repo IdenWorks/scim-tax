@@ -1,0 +1,870 @@
+{
+ "slug": "intercom",
+ "vendor": "Intercom",
+ "vendor_url": "https://www.intercom.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Intercom",
+  "slug": "intercom",
+  "category": "Customer Support & Success",
+  "status": "gated",
+  "scim_plan": "Expert",
+  "scim_price_text": "Expert: $132/seat/mo (annual)",
+  "scim_price_per_user_mo": 132,
+  "team_plan": "Essential",
+  "team_price_text": "Essential: $29/seat/mo (annual; a live price test also shows $19)",
+  "team_price_per_user_mo": 29,
+  "price_multiplier": 4.6,
+  "sso_plan": "Expert",
+  "sso_price_per_user_mo": 132,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": false,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": "via_generic",
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.intercom.com/pricing",
+  "docs_url": "https://www.intercom.com/help/en/articles/5798401-system-for-cross-domain-identity-management-scim-provisioning",
+  "evidence": "Intercom's pricing page lists \"SSO & identity management\" only under Expert ($132 per seat/mo) and says \"The Expert plan supports SAML SSO ... SCIM provisioning works alongside SAML SSO\"; the SCIM article requires SAML SSO, which \"is only available on Expert Intercom plan.\"",
+  "notes": "Status unchanged (gated, Expert). Prices unchanged from June in one page variant: Essential $29, Advanced $85, Expert $132 per seat/mo billed annually. The pricing page is A/B testing Essential: about half of 18 fetches on 2026-10-05 served $19 instead of $29 (Advanced and Expert identical), so the June $29 is kept and the conflict is recorded. The page's schema.org offers list monthly prices of $39/$99/$139. Fin AI Agent is billed separately at $0.99 per outcome. SCIM requires SAML SSO, which is Expert-only. Intercom has no deactivated state: SCIM deprovisioning (or active=false via Okta) permanently deletes the teammate from that workspace. REST API (Admins, Teams, Activity logs) is read-mostly: it cannot create, invite or remove teammates.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Essential",
+   "price_text": "$29 per seat/mo (billed annually; price-test variant shows $19)",
+   "price_per_user_mo": 29,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": true,
+   "cite": [
+    "c1",
+    "c50",
+    "c51",
+    "c6",
+    "c31",
+    "c48"
+   ],
+   "notes": "Google Sign-On available but SAML is Expert-only."
+  },
+  {
+   "name": "Advanced",
+   "price_text": "$85 per seat/mo (billed annually)",
+   "price_per_user_mo": 85,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": true,
+   "cite": [
+    "c2",
+    "c6",
+    "c31",
+    "c48"
+   ],
+   "notes": "Includes 20 free Lite seats."
+  },
+  {
+   "name": "Expert",
+   "price_text": "$132 per seat/mo (billed annually)",
+   "price_per_user_mo": 132,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": true,
+   "cite": [
+    "c3",
+    "c4",
+    "c5",
+    "c31",
+    "c48"
+   ],
+   "notes": "Includes 50 free Lite seats. Not listed as monthly self-serve."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c5",
+   "c8",
+   "c9",
+   "c10",
+   "c20",
+   "c31"
+  ],
+  "plan": "Expert",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": null,
+  "auth": {
+   "method": "bearer",
+   "token_source": "Settings > Workspace > Security > Authentication methods > Provisioning > Enable SCIM provisioning (Base URL + API Token)",
+   "token_expiry": null,
+   "cite": [
+    "c10",
+    "c11"
+   ],
+   "notes": "Docs call it an 'API Token' entered in the IdP's API integration; the header scheme is not spelled out, recorded as bearer per standard SCIM token use."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c16",
+    "c25",
+    "c30"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": false,
+   "reactivate": true,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c13",
+    "c16",
+    "c17",
+    "c12",
+    "c23",
+    "c24",
+    "c25",
+    "c30"
+   ]
+  },
+  "deprovision": {
+   "action": "delete",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Teammate is permanently deleted from the workspace; their conversations, outbound messages, contacts and articles are reassigned per the Deprovisioning settings (default: first teammate in workspace). Access to other workspaces is retained.",
+   "cite": [
+    "c12",
+    "c13",
+    "c14",
+    "c15"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName (email format)",
+    "name",
+    "displayName"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c21",
+    "c26",
+    "c30"
+   ],
+   "notes": "Only these attributes are mentioned; no full schema is published. Group attribute names are inferred from standard SCIM group push and are not listed by Intercom."
+  },
+  "roles": {
+   "supported": true,
+   "how": "Pushed IdP groups are mapped to Intercom roles, seat type and Copilot access in Settings > Workspace > Teammates > SCIM Provisioning; a default role cannot be set at provisioning time other than via group mapping.",
+   "cite": [
+    "c29",
+    "c19"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "No soft-deactivation: deprovisioning or deactivation in the IdP permanently deletes the teammate.",
+    "cite": [
+     "c13",
+     "c23"
+    ]
+   },
+   {
+    "text": "SCIM cannot add or remove a teammate from an Intercom team.",
+    "cite": [
+     "c18"
+    ]
+   },
+   {
+    "text": "Limit of 100 SCIM groups per workspace and 2,500 users per SCIM group.",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "text": "Each workspace must be a separate app in the IdP.",
+    "cite": [
+     "c22"
+    ]
+   },
+   {
+    "text": "Okta requires the Application username format to be Email (userName must be an email).",
+    "cite": [
+     "c26"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c36",
+   "c42",
+   "c44"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://api.intercom.io",
+  "docs_url": "https://developers.intercom.com/docs/references/rest-api/api.intercom.io/admins/listadmins",
+  "auth": {
+   "methods": [
+    "access_token",
+    "oauth2"
+   ],
+   "scopes": [
+    "Read admins"
+   ],
+   "cite": [
+    "c44",
+    "c49",
+    "c46"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c36",
+    "c37"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/admins",
+    "purpose": "List admins (teammates)",
+    "cite": [
+     "c36"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/admins/{admin_id}",
+    "purpose": "Retrieve an admin",
+    "cite": [
+     "c37"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/admins/{admin_id}/away",
+    "purpose": "Set an admin away",
+    "cite": [
+     "c38"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/me",
+    "purpose": "Current authorised admin and workspace",
+    "cite": [
+     "c43"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/admins/activity_logs",
+    "purpose": "List admin activity logs",
+    "cite": [
+     "c39"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/teams",
+    "purpose": "List teams",
+    "cite": [
+     "c40"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/teams/{team_id}",
+    "purpose": "Retrieve a team and its admins",
+    "cite": [
+     "c41"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": true,
+   "events": [
+    "admin.added_to_workspace",
+    "admin.removed_from_workspace"
+   ],
+   "cite": [
+    "c46",
+    "c47"
+   ]
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Essential",
+   "cite": [
+    "c39",
+    "c48"
+   ]
+  },
+  "rate_limits": {
+   "text": "Private apps: 10,000 API calls/minute per app and 25,000 per workspace, distributed into 10-second windows.",
+   "cite": [
+    "c45"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "The documented Admins API is read-only apart from away mode; there are no endpoints to create, invite or remove teammates.",
+    "cite": [
+     "c36",
+     "c37",
+     "c38"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/intercom/",
+   "cite": [
+    "c34",
+    "c35",
+    "c27",
+    "c23"
+   ],
+   "notes": "OIN search card lists SAML, SWA and SCIM; Intercom's Okta guide configures SCIM through the catalogue app."
+  },
+  "entra": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c5",
+    "c11"
+   ],
+   "notes": "Intercom names Entra ID/Azure AD for SAML and SCIM token entry; no Microsoft Learn tutorial found at the usual URLs, so recorded as via_generic."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "Not documented."
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": true,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c33",
+    "c11"
+   ],
+   "notes": "OneLogin store app 'Intercom SAML 2.0' per Intercom's own guide; OneLogin catalogue page not loaded. SCIM with OneLogin is mentioned only generically."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "JumpCloud support page returned 403."
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c32"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.intercom.com/pricing",
+   "title": "Intercom Pricing",
+   "quote": "Customer support for individuals, startups, and small businesses.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.intercom.com/pricing",
+   "title": "Intercom Pricing",
+   "quote": "$85 per seat/mo",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.intercom.com/pricing",
+   "title": "Intercom Pricing",
+   "quote": "$132 per seat/mo",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.intercom.com/pricing",
+   "title": "Intercom Pricing",
+   "quote": "Every Advanced feature, plus SSO & identity management HIPAA support",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.intercom.com/pricing",
+   "title": "Intercom Pricing (FAQ data)",
+   "quote": "Yes. The Expert plan supports SAML SSO with identity providers including Okta, Microsoft Entra ID, and OneLogin, and you can require SSO for every teammate. SCIM provisioning works alongside SAML SSO to keep teammate access in sync with your identity provider.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://www.intercom.com/pricing",
+   "title": "Intercom Pricing",
+   "quote": "Monthly or annual self-serve plans are available (Essential, Advanced)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://www.intercom.com/pricing",
+   "title": "Intercom Pricing",
+   "quote": "1 Full seat minimum",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://www.intercom.com/help/en/articles/5798401-system-for-cross-domain-identity-management-scim-provisioning",
+   "title": "System for Cross-domain Identity Management (SCIM) Provisioning",
+   "quote": "Before setting up SCIM, SAML SSO must be set up and enabled in your workspace.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://www.intercom.com/help/en/articles/5798401-system-for-cross-domain-identity-management-scim-provisioning",
+   "title": "System for Cross-domain Identity Management (SCIM) Provisioning",
+   "quote": "SCIM Provisioning is only available with certain Intercom plans.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://www.intercom.com/help/en/articles/5798401-system-for-cross-domain-identity-management-scim-provisioning",
+   "title": "System for Cross-domain Identity Management (SCIM) Provisioning",
+   "quote": "A Base URL and API Token will become available after you save the security settings.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://www.intercom.com/help/en/articles/5798401-system-for-cross-domain-identity-management-scim-provisioning",
+   "title": "System for Cross-domain Identity Management (SCIM) Provisioning",
+   "quote": "Copy the Base URL and API Token and add them to the configuration of the Intercom app in your Identity Provider (e.g., Okta, OneLogin, Azure ActiveDirectory).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://www.intercom.com/help/en/articles/5798401-system-for-cross-domain-identity-management-scim-provisioning",
+   "title": "System for Cross-domain Identity Management (SCIM) Provisioning",
+   "quote": "When teammates are deprovisioned by your IdP, their account will be deleted from Intercom.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://www.intercom.com/help/en/articles/5798401-system-for-cross-domain-identity-management-scim-provisioning",
+   "title": "System for Cross-domain Identity Management (SCIM) Provisioning",
+   "quote": "Intercom does not support any soft-deleted, de-activated, or archived state for teammates.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://www.intercom.com/help/en/articles/5798401-system-for-cross-domain-identity-management-scim-provisioning",
+   "title": "System for Cross-domain Identity Management (SCIM) Provisioning",
+   "quote": "When a teammate is not active in your identity provider, their account will be permanently deleted from the Intercom workspace. If the teammate has access to any other workspaces, that access is retained.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://www.intercom.com/help/en/articles/5798401-system-for-cross-domain-identity-management-scim-provisioning",
+   "title": "System for Cross-domain Identity Management (SCIM) Provisioning",
+   "quote": "Intercom automatically reassigns all objects (conversations, outbound messages, contacts, articles) assigned to that teammate according to your Deprovisioning teammates settings.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://www.intercom.com/help/en/articles/5798401-system-for-cross-domain-identity-management-scim-provisioning",
+   "title": "System for Cross-domain Identity Management (SCIM) Provisioning",
+   "quote": "The IdP sends an HTTP request to Intercom, which creates a new teammate in the Intercom workspace.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://www.intercom.com/help/en/articles/5798401-system-for-cross-domain-identity-management-scim-provisioning",
+   "title": "System for Cross-domain Identity Management (SCIM) Provisioning",
+   "quote": "the IdP sends an HTTP request to Intercom to update the teammate's name in Intercom.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://www.intercom.com/help/en/articles/5798401-system-for-cross-domain-identity-management-scim-provisioning",
+   "title": "System for Cross-domain Identity Management (SCIM) Provisioning",
+   "quote": "Adding a teammate to a team or removing them from a team",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://www.intercom.com/help/en/articles/5798401-system-for-cross-domain-identity-management-scim-provisioning",
+   "title": "System for Cross-domain Identity Management (SCIM) Provisioning",
+   "quote": "Giving a default role on provisioning (this must be done via SCIM group mapping)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://www.intercom.com/help/en/articles/5798401-system-for-cross-domain-identity-management-scim-provisioning",
+   "title": "System for Cross-domain Identity Management (SCIM) Provisioning",
+   "quote": "Intercom's provisioning capability is built using version 2.0 of the SCIM protocol .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://www.intercom.com/help/en/articles/5798401-system-for-cross-domain-identity-management-scim-provisioning",
+   "title": "System for Cross-domain Identity Management (SCIM) Provisioning",
+   "quote": "If a \"displayName\" parameter is sent in the request, it will be used instead of the \"name\" parameter.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://www.intercom.com/help/en/articles/5798401-system-for-cross-domain-identity-management-scim-provisioning",
+   "title": "System for Cross-domain Identity Management (SCIM) Provisioning",
+   "quote": "Each Intercom workspace you want to provision to must be set up as a separate app in your Identity Provider.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://www.intercom.com/help/en/articles/6719792-configure-scim-provisioning-with-okta",
+   "title": "Configure SCIM Provisioning with Okta",
+   "quote": "Teammate deactivation: Deactivating a teammate or disabling their access to the application through Okta will delete the teammate from Intercom.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://www.intercom.com/help/en/articles/6719792-configure-scim-provisioning-with-okta",
+   "title": "Configure SCIM Provisioning with Okta",
+   "quote": "Reactivate teammates: Teammate accounts can be reactivated in the application.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://www.intercom.com/help/en/articles/6719792-configure-scim-provisioning-with-okta",
+   "title": "Configure SCIM Provisioning with Okta",
+   "quote": "Push groups: Push groups from Okta into Intercom and map them to Intercom roles.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://www.intercom.com/help/en/articles/6719792-configure-scim-provisioning-with-okta",
+   "title": "Configure SCIM Provisioning with Okta",
+   "quote": "This is because the SCIM userName attribute for this app must follow an email address format.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://www.intercom.com/help/en/articles/6719792-configure-scim-provisioning-with-okta",
+   "title": "Configure SCIM Provisioning with Okta",
+   "quote": "In your Okta dashboard, navigate to Applications and select Browse App Catalog .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://www.intercom.com/help/en/articles/12457965-assign-teammate-roles-automatically-with-scim-groups",
+   "title": "Assign teammate roles automatically with SCIM groups",
+   "quote": "Note: There is a limit of 100 SCIM groups per workspace and 2,500 users per SCIM group.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://www.intercom.com/help/en/articles/12457965-assign-teammate-roles-automatically-with-scim-groups",
+   "title": "Assign teammate roles automatically with SCIM groups",
+   "quote": "You can then map these synced groups to Intercom seats and roles, which automatically assigns the correct permissions to your teammates.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://www.intercom.com/help/en/articles/12457965-assign-teammate-roles-automatically-with-scim-groups",
+   "title": "Assign teammate roles automatically with SCIM groups",
+   "quote": "Adding or removing teammates from a pushed group in your IdP will update their membership in Intercom.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://www.intercom.com/help/en/articles/3974587-integrate-with-an-identity-provider-and-log-in-with-saml-sso",
+   "title": "Integrate with an identity provider and log in with SAML SSO",
+   "quote": "SAML SSO is only available on Expert Intercom plan.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://www.intercom.com/help/en/articles/3974587-integrate-with-an-identity-provider-and-log-in-with-saml-sso",
+   "title": "Integrate with an identity provider and log in with SAML SSO",
+   "quote": "Just-in-Time provisioning will automatically add teammates to your Intercom workspace the first time they sign in with SAML SSO, if they don't already have an Intercom account.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://www.intercom.com/help/en/articles/3974587-integrate-with-an-identity-provider-and-log-in-with-saml-sso",
+   "title": "Integrate with an identity provider and log in with SAML SSO",
+   "quote": "You can use the \"Intercom SAML 2.0\" app in the OneLogin store.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://www.okta.com/integrations/intercom/",
+   "title": "Integrate Intercom with Okta",
+   "quote": "The Okta app allows Intercom customers to enable SAML Single Sign-On, so teammates can log in, create accounts, and accept workspace invites seamlessly and securely.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c35",
+   "url": "https://www.okta.com/integrations/?search=intercom",
+   "title": "Okta Integration Network search",
+   "quote": "Intercom, The Complete AI-First Platform. Improve the customer service experience for customers, sup... SAML SWA Identity Security Posture Management SCIM",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://developers.intercom.com/docs/references/rest-api/api.intercom.io/admins/listadmins.md",
+   "title": "List all admins",
+   "quote": "You can fetch a list of admins for a given workspace.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.intercom.com/docs/references/rest-api/api.intercom.io/admins/listadmins"
+  },
+  {
+   "id": "c37",
+   "url": "https://developers.intercom.com/docs/references/rest-api/api.intercom.io/admins/retrieveadmin.md",
+   "title": "Retrieve an admin",
+   "quote": "You can retrieve the details of a single admin.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.intercom.com/docs/references/rest-api/api.intercom.io/admins/retrieveadmin"
+  },
+  {
+   "id": "c38",
+   "url": "https://developers.intercom.com/docs/references/rest-api/api.intercom.io/admins/setawayadmin.md",
+   "title": "Set an admin to away",
+   "quote": "You can set an Admin as away for the Inbox.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.intercom.com/docs/references/rest-api/api.intercom.io/admins/setawayadmin"
+  },
+  {
+   "id": "c39",
+   "url": "https://developers.intercom.com/docs/references/rest-api/api.intercom.io/admins/listactivitylogs.md",
+   "title": "List all activity logs",
+   "quote": "You can get a log of activities by all admins in an app.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.intercom.com/docs/references/rest-api/api.intercom.io/admins/listactivitylogs"
+  },
+  {
+   "id": "c40",
+   "url": "https://developers.intercom.com/docs/references/rest-api/api.intercom.io.md",
+   "title": "Intercom API (2.16) index",
+   "quote": "This will return a list of team objects for the App.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.intercom.com/docs/references/rest-api/api.intercom.io"
+  },
+  {
+   "id": "c41",
+   "url": "https://developers.intercom.com/docs/references/rest-api/api.intercom.io.md",
+   "title": "Intercom API (2.16) index",
+   "quote": "You can fetch the details of a single team, containing an array of admins that belong to this team.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.intercom.com/docs/references/rest-api/api.intercom.io"
+  },
+  {
+   "id": "c42",
+   "url": "https://developers.intercom.com/docs/references/rest-api/api.intercom.io.md",
+   "title": "Intercom API (2.16) index",
+   "quote": "The production API server https://api.intercom.io",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.intercom.com/docs/references/rest-api/api.intercom.io"
+  },
+  {
+   "id": "c43",
+   "url": "https://developers.intercom.com/docs/references/rest-api/api.intercom.io.md",
+   "title": "Intercom API (2.16) index",
+   "quote": "You can view the currently authorised admin along with the embedded app object",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.intercom.com/docs/references/rest-api/api.intercom.io"
+  },
+  {
+   "id": "c44",
+   "url": "https://developers.intercom.com/docs/build-an-integration/learn-more/authentication.md",
+   "title": "Authentication",
+   "quote": "Access Tokens can be used for the following cases:",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.intercom.com/docs/build-an-integration/learn-more/authentication"
+  },
+  {
+   "id": "c45",
+   "url": "https://developers.intercom.com/docs/references/rest-api/errors/rate-limiting.md",
+   "title": "Rate Limiting",
+   "quote": "Private apps have a default rate limit of 10,000 API calls per minute per app and 25,000 API calls per minute per workspace.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.intercom.com/docs/references/rest-api/errors/rate-limiting"
+  },
+  {
+   "id": "c46",
+   "url": "https://developers.intercom.com/docs/references/webhooks/webhook-models.md",
+   "title": "Webhook models",
+   "quote": "admin.added_to_workspace | Admin | An Admin being added to workspace | Read admins",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.intercom.com/docs/references/webhooks/webhook-models"
+  },
+  {
+   "id": "c47",
+   "url": "https://developers.intercom.com/docs/references/webhooks/webhook-models.md",
+   "title": "Webhook models",
+   "quote": "admin.removed_from_workspace | Admin | An Admin being removed from a workspace | Read admins",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.intercom.com/docs/references/webhooks/webhook-models"
+  },
+  {
+   "id": "c48",
+   "url": "https://www.intercom.com/help/en/articles/4667982-review-actions-taken-in-your-workspace-with-teammate-activity-logs",
+   "title": "Review actions taken in your workspace with teammate activity logs",
+   "quote": "Teammate Activity Logs are available on all Intercom plans and are available for one year.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c49",
+   "url": "https://developers.intercom.com/docs/references/rest-api/api.intercom.io/admins/listadmins.md",
+   "title": "List all admins",
+   "quote": "Security: bearerAuth",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.intercom.com/docs/references/rest-api/api.intercom.io/admins/listadmins"
+  },
+  {
+   "id": "c50",
+   "url": "https://www.intercom.com/pricing",
+   "title": "Intercom Pricing (variant A)",
+   "quote": "$29 per seat/mo",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c51",
+   "url": "https://www.intercom.com/pricing",
+   "title": "Intercom Pricing (variant B)",
+   "quote": "$19 per seat/mo",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The pricing page serves different variants: Essential shows $29 per seat/mo in some loads and $19 in others (annual toggle selected in both); card copy also varies. The page's schema.org offer data separately lists $39, $99 and $139 per seat/month (likely monthly billing).",
+   "cite": [
+    "c50",
+    "c51",
+    "c2",
+    "c3"
+   ]
+  },
+  {
+   "text": "The SCIM article says Intercom has no deactivated state and deletes the teammate, while the Okta guide lists 'Reactivate teammates' as supported.",
+   "cite": [
+    "c13",
+    "c24"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.intercom.com/pricing",
+  "https://www.intercom.com/help/en/?q=scim",
+  "https://developers.intercom.com/llms.txt",
+  "https://developers.intercom.com/docs/references/rest-api/api.intercom.io.md",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/intercom-provisioning-tutorial (404)"
+ ],
+ "open_questions": [
+  "SCIM base URL pattern, supported filters, pagination and full attribute schema are not published.",
+  "Whether a deleted teammate's Full seat is released automatically is not stated.",
+  "Which plans include REST API access is not stated on the pricing page.",
+  "Whether a Microsoft Entra gallery app or Google/JumpCloud catalogue app exists is unconfirmed."
+ ]
+}

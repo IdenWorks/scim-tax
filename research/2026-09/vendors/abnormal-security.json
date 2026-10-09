@@ -1,0 +1,529 @@
+{
+ "slug": "abnormal-security",
+ "vendor": "Abnormal AI",
+ "vendor_url": "https://abnormal.ai",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Abnormal AI",
+  "slug": "abnormal-security",
+  "category": "Security & Identity",
+  "status": "gated",
+  "scim_plan": "Contact Sales (quote-only)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales (no public pricing)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": false,
+   "groups": false
+  },
+  "idp": {
+   "okta": "none",
+   "entra": null,
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://abnormal.ai/demo",
+  "docs_url": "https://api.swaggerhub.com/apis/abnormal-security/abx/1.5.0",
+  "evidence": "Abnormal's public Client API spec documents SCIM 2.0 /scim/v2/Users endpoints for portal admin users (\"POST creates (or idempotently re-provisions) an admin user\", \"DELETE deactivates it\"), but Abnormal publishes no pricing or plan tiers, so whether SCIM costs extra is not disclosed.",
+  "notes": "Quote-only: Abnormal publishes no plans or prices (abnormal.ai/pricing returns 404; sales is demo-request only) and documents SCIM, so under rule 6a the row is gated at low confidence; which packages include SCIM is not public. New row. Abnormal Security now sells as Abnormal AI (abnormal.ai; abnormalsecurity.com redirects). SCIM 2.0 is documented only in the OpenAPI spec of the Abnormal REST API (SwaggerHub): /scim/v2/Users (list, create, get, PUT, PATCH, DELETE = deactivate), ServiceProviderConfig, Schemas, ResourceTypes; no Groups endpoint. It provisions Abnormal portal admin users, with roles and a custom orgUnitIds extension; auth is the REST API bearer token from the portal's Integrations settings plus IP allowlisting. The help centre (Salesforce site) is login-only, so no IdP setup guide could be read. Abnormal's Okta and Entra 'integrations' ingest identity signals for detection, they are not provisioning apps. The REST API also exposes read-only GET /users and GET /roles (RBAC) and GET /auditlogs.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c2",
+   "c3",
+   "c4",
+   "c5",
+   "c6",
+   "c1"
+  ],
+  "plan": "Contact Sales (quote-only)",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://api.abnormalplatform.com/v1/scim/v2 (US); https://eu.rest.abnormalsecurity.com/v1/scim/v2 (EU)",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Abnormal portal > Settings > Integrations > Abnormal REST API",
+   "token_expiry": null,
+   "cite": [
+    "c7",
+    "c8",
+    "c9"
+   ],
+   "notes": "Same REST API token is used for the whole Client API; requests must also come from allowlisted IPs. Token expiry is not documented."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": false,
+   "ServiceProviderConfig": true,
+   "Schemas": true,
+   "ResourceTypes": true,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c2",
+    "c3",
+    "c4",
+    "c5"
+   ],
+   "notes": "Groups=false because ResourceTypes advertises only the User type and the spec has no /scim/v2/Groups path."
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": false,
+   "group_push": false,
+   "group_membership": false,
+   "cite": [
+    "c5",
+    "c6",
+    "c2"
+   ],
+   "notes": "DELETE deactivates rather than deletes; reactivate via PATCH active (PATCH covers active) or POST re-provisioning."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c6"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName"
+   ],
+   "cite": [
+    "c5"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c5"
+   ],
+   "notes": "startIndex/count pagination."
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name",
+    "active",
+    "roles"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": true,
+    "how": "Custom Abnormal extension schema carrying orgUnitIds"
+   },
+   "group": [],
+   "cite": [
+    "c5",
+    "c6",
+    "c3"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "roles attribute on the SCIM User (PATCH active/roles/name/orgUnitIds)",
+   "cite": [
+    "c6"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SCIM provisions Abnormal portal admin users only; ResourceTypes advertises only the User type (no Groups).",
+    "cite": [
+     "c5",
+     "c2"
+    ]
+   }
+  ],
+  "notes": "Base URL is the REST API server list (US, EU or an Abnormal-provided host) plus the /scim/v2 paths; version inferred from the RFC 7643/7644 references. The spec has no request/response schemas for SCIM, so individual attributes beyond those named are not listed."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c10",
+   "c11",
+   "c7",
+   "c8"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://api.abnormalplatform.com/v1",
+  "docs_url": "https://app.swaggerhub.com/apis-docs/abnormal-security/abx/1.5.0",
+  "auth": {
+   "methods": [
+    "api_key"
+   ],
+   "scopes": [],
+   "cite": [
+    "c7",
+    "c8",
+    "c9"
+   ],
+   "notes": "Portal-generated bearer token plus IP allowlist."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": null,
+   "reactivate_user": true,
+   "manage_groups": null,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c10",
+    "c5",
+    "c6"
+   ],
+   "notes": "Writes are only through the SCIM paths of the same API; the non-SCIM /users and /roles endpoints are read-only."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/users",
+    "purpose": "List users from the RBAC user management system",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/roles",
+    "purpose": "List account-specific and global roles",
+    "cite": [
+     "c11"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/scim/v2/Users",
+    "purpose": "SCIM list admin users",
+    "cite": [
+     "c5"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/scim/v2/Users",
+    "purpose": "SCIM create admin user",
+    "cite": [
+     "c5"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/scim/v2/Users/{user_id}",
+    "purpose": "SCIM get admin user",
+    "cite": [
+     "c6"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/scim/v2/Users/{user_id}",
+    "purpose": "SCIM replace admin user",
+    "cite": [
+     "c6"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/scim/v2/Users/{user_id}",
+    "purpose": "SCIM update active/roles/name/orgUnitIds",
+    "cite": [
+     "c6"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/scim/v2/Users/{user_id}",
+    "purpose": "SCIM deactivate admin user",
+    "cite": [
+     "c6"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/auditlogs",
+    "purpose": "Portal audit logs (last 90 days)",
+    "cite": [
+     "c12"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": null,
+   "cite": [
+    "c12"
+   ]
+  },
+  "rate_limits": {
+   "text": "Rate limited (HTTP 429 'Rate limit exceeded'); limits not stated.",
+   "cite": [
+    "c13"
+   ]
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": false,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c14"
+   ],
+   "notes": "OIN search for 'abnormal' returns no results. Abnormal's own 'Okta identity integration' ingests Okta data for detection."
+  },
+  "entra": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "No Abnormal tutorial in the Entra SaaS app tutorial index; gallery listing not confirmed."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": false,
+  "cite": [
+   "c16"
+  ],
+  "notes": "Help-centre articles (SSO, user management) sit behind the support-portal login; only the API spec is public."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://abnormal.ai/demo",
+   "title": "Request a Demo | Abnormal AI",
+   "quote": "Trusted by 5,000 Organizations, Including 30% of the Fortune 500",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://api.swaggerhub.com/apis/abnormal-security/abx/1.5.0",
+   "title": "Abnormal Security Client API 1.5.0 (OpenAPI, Abnormal's SwaggerHub project)",
+   "quote": "RFC 7644 §6 resource types, advertising the User type and Abnormal extension.",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.swaggerhub.com/apis-docs/abnormal-security/abx/1.5.0"
+  },
+  {
+   "id": "c3",
+   "url": "https://api.swaggerhub.com/apis/abnormal-security/abx/1.5.0",
+   "title": "Abnormal Security Client API 1.5.0 (OpenAPI, Abnormal's SwaggerHub project)",
+   "quote": "RFC 7643 §7 schemas: core User schema plus the custom Abnormal orgUnitIds extension.",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.swaggerhub.com/apis-docs/abnormal-security/abx/1.5.0"
+  },
+  {
+   "id": "c4",
+   "url": "https://api.swaggerhub.com/apis/abnormal-security/abx/1.5.0",
+   "title": "Abnormal Security Client API 1.5.0 (OpenAPI, Abnormal's SwaggerHub project)",
+   "quote": "RFC 7644 §5 service provider configuration: supported features and auth schemes.",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.swaggerhub.com/apis-docs/abnormal-security/abx/1.5.0"
+  },
+  {
+   "id": "c5",
+   "url": "https://api.swaggerhub.com/apis/abnormal-security/abx/1.5.0",
+   "title": "Abnormal Security Client API 1.5.0 (OpenAPI, Abnormal's SwaggerHub project)",
+   "quote": "GET lists admin users, with `userName eq` filtering and startIndex/count pagination. POST creates (or idempotently re-provisions) an admin user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.swaggerhub.com/apis-docs/abnormal-security/abx/1.5.0"
+  },
+  {
+   "id": "c6",
+   "url": "https://api.swaggerhub.com/apis/abnormal-security/abx/1.5.0",
+   "title": "Abnormal Security Client API 1.5.0 (OpenAPI, Abnormal's SwaggerHub project)",
+   "quote": "GET a single admin user by SCIM id (404 if outside the token's scope). PUT fully replaces it; PATCH partially updates it (active/roles/name/orgUnitIds); DELETE deactivates it.",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.swaggerhub.com/apis-docs/abnormal-security/abx/1.5.0"
+  },
+  {
+   "id": "c7",
+   "url": "https://api.swaggerhub.com/apis/abnormal-security/abx/1.5.0",
+   "title": "Abnormal Security Client API 1.5.0 (OpenAPI, Abnormal's SwaggerHub project)",
+   "quote": "Retrieve your authentication token via the <a href=\"https://portal.abnormalsecurity.com/home/settings/integrations\">Abnormal portal</a>. You will use this token to view and modify your Abnormal-detected threats and cases.",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.swaggerhub.com/apis-docs/abnormal-security/abx/1.5.0"
+  },
+  {
+   "id": "c8",
+   "url": "https://api.swaggerhub.com/apis/abnormal-security/abx/1.5.0",
+   "title": "Abnormal Security Client API 1.5.0 (OpenAPI, Abnormal's SwaggerHub project)",
+   "quote": "Once obtained, the token can be used in a request from any HTTP client, such as cURL:",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.swaggerhub.com/apis-docs/abnormal-security/abx/1.5.0"
+  },
+  {
+   "id": "c9",
+   "url": "https://api.swaggerhub.com/apis/abnormal-security/abx/1.5.0",
+   "title": "Abnormal Security Client API 1.5.0 (OpenAPI, Abnormal's SwaggerHub project)",
+   "quote": "IP allowlisting ensures that API access is only possible from IP addresses explicitly belonging to your organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.swaggerhub.com/apis-docs/abnormal-security/abx/1.5.0"
+  },
+  {
+   "id": "c10",
+   "url": "https://api.swaggerhub.com/apis/abnormal-security/abx/1.5.0",
+   "title": "Abnormal Security Client API 1.5.0 (OpenAPI, Abnormal's SwaggerHub project)",
+   "quote": "Retrieves users for an account from the RBAC user management system.",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.swaggerhub.com/apis-docs/abnormal-security/abx/1.5.0"
+  },
+  {
+   "id": "c11",
+   "url": "https://api.swaggerhub.com/apis/abnormal-security/abx/1.5.0",
+   "title": "Abnormal Security Client API 1.5.0 (OpenAPI, Abnormal's SwaggerHub project)",
+   "quote": "This endpoint retrieves a union of both account-specific roles and",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.swaggerhub.com/apis-docs/abnormal-security/abx/1.5.0"
+  },
+  {
+   "id": "c12",
+   "url": "https://api.swaggerhub.com/apis/abnormal-security/abx/1.5.0",
+   "title": "Abnormal Security Client API 1.5.0 (OpenAPI, Abnormal's SwaggerHub project)",
+   "quote": "API to retrieve audit logs for Portal",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.swaggerhub.com/apis-docs/abnormal-security/abx/1.5.0"
+  },
+  {
+   "id": "c13",
+   "url": "https://api.swaggerhub.com/apis/abnormal-security/abx/1.5.0",
+   "title": "Abnormal Security Client API 1.5.0 (OpenAPI, Abnormal's SwaggerHub project)",
+   "quote": "Rate limit exceeded, please try again later",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.swaggerhub.com/apis-docs/abnormal-security/abx/1.5.0"
+  },
+  {
+   "id": "c14",
+   "url": "https://www.okta.com/integrations/?search=abnormal",
+   "title": "Okta Integration Network search: abnormal",
+   "quote": "No results found for: “abnormal”",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://abnormal.ai/platform/technology-integrations",
+   "title": "Behavioral AI Platform Integrations | Abnormal AI",
+   "quote": "Okta identity integration for Abnormal Security.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://abnormalsecurity.my.site.com/support/s/login/",
+   "title": "Abnormal Support Portal login",
+   "quote": "Sign in to the Support Portal",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://abnormal.ai/sitemap.xml (3,221 URLs; no pricing, SCIM, SSO or docs pages)",
+  "https://abnormal.ai/pricing (404)",
+  "https://abnormal.ai/llms.txt (404)",
+  "https://abnormal.ai/demo",
+  "https://abnormal.ai/platform/technology-integrations",
+  "https://abnormal.ai/trust-center",
+  "https://abnormalsecurity.my.site.com/support/s/ (login required)",
+  "https://api.swaggerhub.com/apis/abnormal-security/abx (registry, versions 1.4.0-1.5.0)",
+  "https://www.okta.com/integrations/?search=abnormal (no results)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/toc.json (no Abnormal entry); abnormal-security-tutorial and abnormal-security-provisioning-tutorial (404)"
+ ],
+ "open_questions": [
+  "No public pricing: which Abnormal packages include SCIM, and whether it costs extra on top of the quote.",
+  "Whether SCIM requires SSO, and which SSO protocols the portal supports (help centre is login-only).",
+  "Full SCIM user attribute list and ServiceProviderConfig contents (spec has no SCIM schemas).",
+  "Whether deactivation frees a seat or ends portal sessions.",
+  "Whether Okta, Entra or other IdPs have a catalogue provisioning app for the Abnormal portal; Google, OneLogin and JumpCloud not checked.",
+  "API token expiry and numeric rate limits."
+ ]
+}

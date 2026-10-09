@@ -1,0 +1,687 @@
+{
+ "slug": "adroll",
+ "vendor": "AdRoll",
+ "vendor_url": "https://www.adroll.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "AdRoll",
+  "slug": "adroll",
+  "category": "Marketing & Advertising",
+  "status": "free",
+  "scim_plan": "All packages (Ads, Advanced Package)",
+  "scim_price_text": "Included (pay-as-you-go media spend)",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Ads (Self-Service)",
+  "team_price_text": "Ads: pay-as-you-go advertising (no seat fee)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "All packages (Ads, Advanced Package)",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": false
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.adroll.com/pricing",
+  "docs_url": "https://help.adroll.com/api/v2/help_center/en-us/articles/24051768630797.json",
+  "evidence": "AdRoll's Single Sign-On (SSO) Integration article says \"Single Sign-On (SSO) is included for all packages\" (Advanced Package, Ads and legacy plans) and documents SCIM v2 at https://app.adroll.com/api/v1/scim with a Personal Access Token.",
+  "notes": "New row. AdRoll (a NextRoll division) prices on media spend, not seats: Ads (self-service and managed) is pay-as-you-go and the Advanced Package is an annual commitment via Contact Sales; users are unlimited, so all per-user fields are null. The SSO integration (SAML v2 plus SCIM v2) is listed as included for every package, current and legacy, so SCIM is not taxed. SAML must be set up before SCIM, and setup goes through AdRoll's Customer Success team; only one IdP per organization. SCIM uses a generic endpoint (https://app.adroll.com/api/v1/scim, bearer = admin Personal Access Token) with userName, name, active and NextRoll extension attributes for role (user/admin), advertisable access and billing permission; no Groups. Removing or deactivating the user in the IdP deactivates the AdRoll user. JIT is explicitly not supported. Okta's catalogue has only an SWA AdRoll app and a third-party AdRoll connector by Aquera; Entra setup uses a non-gallery app. The public AdRoll API (organization, campaign, audience, ad, geotarget) has no user-management endpoints.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": false,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Ads (Self-Service)",
+   "price_text": "Pay-as-you-go advertising",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": false,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c4",
+    "c5"
+   ],
+   "notes": "The SSO article lists 'Ads' without distinguishing self-service from managed; legacy packages (Marketing and Ads Plus, Starter, Growth, Essential) also include SSO."
+  },
+  {
+   "name": "Ads (Managed Services)",
+   "price_text": "Pay-as-you-go advertising; managed services with qualifying ad spend (Contact Sales)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": false,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c4",
+    "c5"
+   ]
+  },
+  {
+   "name": "Advanced Package",
+   "price_text": "Contact Sales; annual commitment",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": false,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c4",
+    "c5"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c4",
+   "c6",
+   "c11",
+   "c18",
+   "c7"
+  ],
+  "plan": "All packages (Ads, Advanced Package)",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://app.adroll.com/api/v1/scim",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Settings > Personal Access Tokens (created by an administrator of the AdRoll organization)",
+   "token_expiry": null,
+   "cite": [
+    "c19",
+    "c20",
+    "c36"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c18",
+    "c13"
+   ],
+   "notes": "Only the base URL is documented; Groups, ServiceProviderConfig, Schemas etc. are not mentioned (null). No group attributes are listed."
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": null,
+   "group_push": false,
+   "group_membership": false,
+   "cite": [
+    "c13",
+    "c14",
+    "c15",
+    "c27",
+    "c16",
+    "c21"
+   ],
+   "notes": "Update is documented ('update ... email, name, permissions') without saying PUT or PATCH. group_push=false because only user attributes are supported ('Any other attribute is ignored')."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c27",
+    "c14"
+   ],
+   "notes": "Seats are unlimited, so seat freeing does not apply."
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName (email)",
+    "name.givenName (documented as name.giveName)",
+    "name.familyName",
+    "active"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": true,
+    "how": "NextRoll extension urn:ietf:params:scim:schemas:nextroll:User with organizationRole (user|admin), advertisableEIDs (comma-separated) and billingAllowed; must be configured as custom schema extensions in the IdP"
+   },
+   "group": [],
+   "cite": [
+    "c21",
+    "c26",
+    "c22",
+    "c24",
+    "c25",
+    "c12"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "organizationRole extension attribute (user or admin) plus advertisableEIDs and billingAllowed",
+   "cite": [
+    "c22",
+    "c23",
+    "c12"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SAML must be configured (with AdRoll's team) before SCIM.",
+    "cite": [
+     "c7",
+     "c8"
+    ]
+   },
+   {
+    "text": "Only one identity provider per organization.",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "text": "Some IdPs deactivate and recreate the account on email change instead of updating it.",
+    "cite": [
+     "c17"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": false,
+  "cite": [
+   "c38",
+   "c37"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": null,
+  "docs_url": "https://developers.adroll.com/",
+  "auth": {
+   "methods": [
+    "api_key",
+    "oauth2"
+   ],
+   "scopes": [],
+   "cite": [
+    "c36"
+   ],
+   "notes": "Personal Access Tokens, or OAuth for app integrations."
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": []
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "available=false: the developer-portal sitemap lists the Organization (advertisables, pixels, rules), Campaign, Audience, Ad and Geotarget APIs only; users are managed in the UI or via SCIM."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": false,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": "third_party",
+   "url": "https://www.okta.com/integrations/adroll-by-aquera/",
+   "cite": [
+    "c39",
+    "c29"
+   ],
+   "notes": "OIN lists 'AdRoll' (SWA only) and 'AdRoll by Aquera' (SCIM, third party). AdRoll's own docs use Okta as an example IdP for its generic SAML+SCIM setup, so row idp.okta is via_generic."
+  },
+  "entra": {
+   "listed": false,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c31",
+    "c32"
+   ],
+   "notes": "AdRoll's Entra guide creates a non-gallery enterprise app for SAML and SCIM; no gallery app tutorial exists in the Entra SaaS index."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": false,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c10",
+   "c33"
+  ],
+  "notes": "Without SCIM, admins add users manually under Settings > Company > User Permissions."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.adroll.com/pricing",
+   "title": "Pricing | AdRoll",
+   "quote": "Pay-as-you-go advertising. Cross-channel attribution & social ads available as add-ons.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://www.adroll.com/pricing",
+   "title": "Pricing | AdRoll",
+   "quote": "Pay-as-you-go advertising. Managed services with qualifying ad spend.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://www.adroll.com/pricing",
+   "title": "Pricing | AdRoll",
+   "quote": "Get the full AdRoll platform, free ad credits, and guaranteed services; when you commit for a year.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://help.adroll.com/api/v2/help_center/en-us/articles/24051768630797.json",
+   "title": "Single Sign-On (SSO) Integration",
+   "quote": "Single Sign-On (SSO) is included for all packages:",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.adroll.com/hc/en-us/articles/24051768630797-Single-Sign-On-SSO-Integration"
+  },
+  {
+   "id": "c5",
+   "url": "https://help.adroll.com/api/v2/help_center/en-us/articles/24051768630797.json",
+   "title": "Single Sign-On (SSO) Integration",
+   "quote": "Advanced Package Included Ads Included",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.adroll.com/hc/en-us/articles/24051768630797-Single-Sign-On-SSO-Integration"
+  },
+  {
+   "id": "c6",
+   "url": "https://help.adroll.com/api/v2/help_center/en-us/articles/24051768630797.json",
+   "title": "Single Sign-On (SSO) Integration",
+   "quote": "You can enable SSO any identity provider that supports the SAML and SCIM standards.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.adroll.com/hc/en-us/articles/24051768630797-Single-Sign-On-SSO-Integration"
+  },
+  {
+   "id": "c7",
+   "url": "https://help.adroll.com/api/v2/help_center/en-us/articles/24051768630797.json",
+   "title": "Single Sign-On (SSO) Integration",
+   "quote": "You must set up SAML before you set up SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.adroll.com/hc/en-us/articles/24051768630797-Single-Sign-On-SSO-Integration"
+  },
+  {
+   "id": "c8",
+   "url": "https://help.adroll.com/api/v2/help_center/en-us/articles/24051768630797.json",
+   "title": "Single Sign-On (SSO) Integration",
+   "quote": "Reach out to your Customer Success Manager and provide them with the metadata.xml file used for SAML created by your IT team.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.adroll.com/hc/en-us/articles/24051768630797-Single-Sign-On-SSO-Integration"
+  },
+  {
+   "id": "c9",
+   "url": "https://help.adroll.com/api/v2/help_center/en-us/articles/24051768630797.json",
+   "title": "Single Sign-On (SSO) Integration",
+   "quote": "We support SAML v2.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.adroll.com/hc/en-us/articles/24051768630797-Single-Sign-On-SSO-Integration"
+  },
+  {
+   "id": "c10",
+   "url": "https://help.adroll.com/api/v2/help_center/en-us/articles/24051768630797.json",
+   "title": "Single Sign-On (SSO) Integration",
+   "quote": "Just-in-time account provisioning is not supported. You should instead use SCIM to manage accounts. If you don’t configure SCIM, you must create accounts manually using our dashboard.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.adroll.com/hc/en-us/articles/24051768630797-Single-Sign-On-SSO-Integration"
+  },
+  {
+   "id": "c11",
+   "url": "https://help.adroll.com/api/v2/help_center/en-us/articles/24051768630797.json",
+   "title": "Single Sign-On (SSO) Integration",
+   "quote": "We support SCIM v2",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.adroll.com/hc/en-us/articles/24051768630797-Single-Sign-On-SSO-Integration"
+  },
+  {
+   "id": "c12",
+   "url": "https://help.adroll.com/api/v2/help_center/en-us/articles/24051768630797.json",
+   "title": "Single Sign-On (SSO) Integration",
+   "quote": "You must configure custom schema extensions to specify user permissions",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.adroll.com/hc/en-us/articles/24051768630797-Single-Sign-On-SSO-Integration"
+  },
+  {
+   "id": "c13",
+   "url": "https://help.adroll.com/api/v2/help_center/en-us/articles/24051768630797.json",
+   "title": "Single Sign-On (SSO) Integration",
+   "quote": "You can create our accounts from your identity provider.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.adroll.com/hc/en-us/articles/24051768630797-Single-Sign-On-SSO-Integration"
+  },
+  {
+   "id": "c14",
+   "url": "https://help.adroll.com/api/v2/help_center/en-us/articles/24051768630797.json",
+   "title": "Single Sign-On (SSO) Integration",
+   "quote": "You can remove our accounts from your identity provider.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.adroll.com/hc/en-us/articles/24051768630797-Single-Sign-On-SSO-Integration"
+  },
+  {
+   "id": "c15",
+   "url": "https://help.adroll.com/api/v2/help_center/en-us/articles/24051768630797.json",
+   "title": "Single Sign-On (SSO) Integration",
+   "quote": "You can update our accounts from your identity provider (i.e., email, name, permissions, etc.)",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.adroll.com/hc/en-us/articles/24051768630797-Single-Sign-On-SSO-Integration"
+  },
+  {
+   "id": "c16",
+   "url": "https://help.adroll.com/api/v2/help_center/en-us/articles/24051768630797.json",
+   "title": "Single Sign-On (SSO) Integration",
+   "quote": "Some identity providers will attempt to find and reactivate a previous account if the email address is reused.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.adroll.com/hc/en-us/articles/24051768630797-Single-Sign-On-SSO-Integration"
+  },
+  {
+   "id": "c17",
+   "url": "https://help.adroll.com/api/v2/help_center/en-us/articles/24051768630797.json",
+   "title": "Single Sign-On (SSO) Integration",
+   "quote": "Some identity providers do not update the account when you update their username (email address). Instead, they deactivate our account from the previous email before creating a new account with the new email address.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.adroll.com/hc/en-us/articles/24051768630797-Single-Sign-On-SSO-Integration"
+  },
+  {
+   "id": "c18",
+   "url": "https://help.adroll.com/api/v2/help_center/en-us/articles/24051768630797.json",
+   "title": "Single Sign-On (SSO) Integration",
+   "quote": "Base URL: https://app.adroll.com/api/v1/scim",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.adroll.com/hc/en-us/articles/24051768630797-Single-Sign-On-SSO-Integration"
+  },
+  {
+   "id": "c19",
+   "url": "https://help.adroll.com/api/v2/help_center/en-us/articles/24051768630797.json",
+   "title": "Single Sign-On (SSO) Integration",
+   "quote": "Authentication method: Bearer token",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.adroll.com/hc/en-us/articles/24051768630797-Single-Sign-On-SSO-Integration"
+  },
+  {
+   "id": "c20",
+   "url": "https://help.adroll.com/api/v2/help_center/en-us/articles/24051768630797.json",
+   "title": "Single Sign-On (SSO) Integration",
+   "quote": "For your bearer token, you will need to generate a Personal Access Token (PAT) from your settings page. The PAT must be created with an administrator account for your AdRoll organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.adroll.com/hc/en-us/articles/24051768630797-Single-Sign-On-SSO-Integration"
+  },
+  {
+   "id": "c21",
+   "url": "https://help.adroll.com/api/v2/help_center/en-us/articles/24051768630797.json",
+   "title": "Single Sign-On (SSO) Integration",
+   "quote": "We support the following attributes. Any other attribute is ignored.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.adroll.com/hc/en-us/articles/24051768630797-Single-Sign-On-SSO-Integration"
+  },
+  {
+   "id": "c22",
+   "url": "https://help.adroll.com/api/v2/help_center/en-us/articles/24051768630797.json",
+   "title": "Single Sign-On (SSO) Integration",
+   "quote": "urn:ietf:params:scim:schemas:nextroll:User.organizationRole",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.adroll.com/hc/en-us/articles/24051768630797-Single-Sign-On-SSO-Integration"
+  },
+  {
+   "id": "c23",
+   "url": "https://help.adroll.com/api/v2/help_center/en-us/articles/24051768630797.json",
+   "title": "Single Sign-On (SSO) Integration",
+   "quote": "Either user or admin. An admin user will have full access to your organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.adroll.com/hc/en-us/articles/24051768630797-Single-Sign-On-SSO-Integration"
+  },
+  {
+   "id": "c24",
+   "url": "https://help.adroll.com/api/v2/help_center/en-us/articles/24051768630797.json",
+   "title": "Single Sign-On (SSO) Integration",
+   "quote": "urn:ietf:params:scim:schemas:nextroll:User.advertisableEIDs",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.adroll.com/hc/en-us/articles/24051768630797-Single-Sign-On-SSO-Integration"
+  },
+  {
+   "id": "c25",
+   "url": "https://help.adroll.com/api/v2/help_center/en-us/articles/24051768630797.json",
+   "title": "Single Sign-On (SSO) Integration",
+   "quote": "urn:ietf:params:scim:schemas:nextroll:User.billingAllowed",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.adroll.com/hc/en-us/articles/24051768630797-Single-Sign-On-SSO-Integration"
+  },
+  {
+   "id": "c26",
+   "url": "https://help.adroll.com/api/v2/help_center/en-us/articles/24051768630797.json",
+   "title": "Single Sign-On (SSO) Integration",
+   "quote": "name.giveName name.familyName active",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.adroll.com/hc/en-us/articles/24051768630797-Single-Sign-On-SSO-Integration"
+  },
+  {
+   "id": "c27",
+   "url": "https://help.adroll.com/api/v2/help_center/en-us/articles/24051768630797.json",
+   "title": "Single Sign-On (SSO) Integration",
+   "quote": "if a user is removed/deactivated in your Identity Provider, the AdRoll user will be deactivated as well in the AdRoll app.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.adroll.com/hc/en-us/articles/24051768630797-Single-Sign-On-SSO-Integration"
+  },
+  {
+   "id": "c28",
+   "url": "https://help.adroll.com/api/v2/help_center/en-us/articles/24051768630797.json",
+   "title": "Single Sign-On (SSO) Integration",
+   "quote": "We only support configuration with one identity provider at a time.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.adroll.com/hc/en-us/articles/24051768630797-Single-Sign-On-SSO-Integration"
+  },
+  {
+   "id": "c29",
+   "url": "https://help.adroll.com/api/v2/help_center/en-us/articles/24051768630797.json",
+   "title": "Single Sign-On (SSO) Integration",
+   "quote": "Single Sign-On (SSO) enables you to log into your account using your existing company Identity Provider (IdP), for example Okta.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.adroll.com/hc/en-us/articles/24051768630797-Single-Sign-On-SSO-Integration"
+  },
+  {
+   "id": "c30",
+   "url": "https://help.adroll.com/api/v2/help_center/en-us/articles/28104591600653.json",
+   "title": "Single Sign-On (SSO) Integration for Microsoft Entra ID",
+   "quote": "Single Sign-On (SSO) is included with all AdRoll packages:",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.adroll.com/hc/en-us/articles/28104591600653-Single-Sign-On-SSO-Integration-for-Microsoft-Entra-ID"
+  },
+  {
+   "id": "c31",
+   "url": "https://help.adroll.com/api/v2/help_center/en-us/articles/28104591600653.json",
+   "title": "Single Sign-On (SSO) Integration for Microsoft Entra ID",
+   "quote": "Select Integrate any other application you don't find in the gallery (Non-gallery)",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.adroll.com/hc/en-us/articles/28104591600653-Single-Sign-On-SSO-Integration-for-Microsoft-Entra-ID"
+  },
+  {
+   "id": "c32",
+   "url": "https://help.adroll.com/api/v2/help_center/en-us/articles/28104591600653.json",
+   "title": "Single Sign-On (SSO) Integration for Microsoft Entra ID",
+   "quote": "SCIM Configuration For Microsoft Entra ID",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.adroll.com/hc/en-us/articles/28104591600653-Single-Sign-On-SSO-Integration-for-Microsoft-Entra-ID"
+  },
+  {
+   "id": "c33",
+   "url": "https://help.adroll.com/api/v2/help_center/en-us/articles/212675587.json",
+   "title": "Adding and Managing Users",
+   "quote": "Click on Settings > Company > User Permissions.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.adroll.com/hc/en-us/articles/212675587-Adding-and-Managing-Users"
+  },
+  {
+   "id": "c34",
+   "url": "https://help.adroll.com/api/v2/help_center/en-us/articles/212675587.json",
+   "title": "Adding and Managing Users",
+   "quote": "AdRoll offers unlimited user seats, so feel free to add team members from Marketing, Operations, and Sales.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.adroll.com/hc/en-us/articles/212675587-Adding-and-Managing-Users"
+  },
+  {
+   "id": "c35",
+   "url": "https://help.adroll.com/api/v2/help_center/en-us/articles/212675587.json",
+   "title": "Adding and Managing Users",
+   "quote": "Once a user is deleted, they lose access to the AdRoll account.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.adroll.com/hc/en-us/articles/212675587-Adding-and-Managing-Users"
+  },
+  {
+   "id": "c36",
+   "url": "https://help.adroll.com/api/v2/help_center/en-us/articles/4413646006797.json",
+   "title": "Personal Access Tokens",
+   "quote": "Personal Access Tokens (PAT) are a secure and straightforward way for developers to make calls to the AdRoll API.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.adroll.com/hc/en-us/articles/4413646006797-Personal-Access-Tokens"
+  },
+  {
+   "id": "c37",
+   "url": "https://help.adroll.com/api/v2/help_center/en-us/articles/230162907.json",
+   "title": "AdRoll API Overview",
+   "quote": "Most functionality found in the AdRoll platform is available via the API.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.adroll.com/hc/en-us/articles/230162907-AdRoll-API-Overview"
+  },
+  {
+   "id": "c38",
+   "url": "https://developers.adroll.com/sitemap.xml",
+   "title": "AdRoll Developers sitemap",
+   "quote": "https://developers.adroll.com/docs/adroll-organization-api/1/overview",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.adroll.com/"
+  },
+  {
+   "id": "c39",
+   "url": "https://www.okta.com/integrations/adroll-by-aquera/",
+   "title": "Integrate AdRoll by Aquera with Okta",
+   "quote": "The connector creates, updates users and their accounts in AdRoll, and also imports user entitlement data into Okta. This connector is built and is maintained by Aquera.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.adroll.com/pricing",
+  "https://www.adroll.com/llms.txt",
+  "help.adroll.com search API: sso, single sign-on, scim, saml, okta, add user, remove user, api",
+  "https://developers.adroll.com/sitemap.xml (128 URLs; no user endpoints)",
+  "https://www.okta.com/integrations/?search=adroll (AdRoll SWA; AdRoll by Aquera SCIM)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/toc.json (no AdRoll entry)"
+ ],
+ "open_questions": [
+  "Which SCIM endpoints beyond /Users exist (ServiceProviderConfig, Schemas), and whether PUT or PATCH is used.",
+  "Whether SCIM DELETE hard-deletes users or only deactivates them.",
+  "Personal Access Token expiry and SCIM rate limits.",
+  "Whether SAML/SCIM setup has any service fee (docs say 'included' but setup is done with AdRoll's team).",
+  "Google, OneLogin and JumpCloud catalogue apps not checked.",
+  "No audit-log API found."
+ ]
+}

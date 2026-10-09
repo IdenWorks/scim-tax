@@ -1,0 +1,879 @@
+{
+ "slug": "pandadoc",
+ "vendor": "PandaDoc",
+ "vendor_url": "https://www.pandadoc.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "PandaDoc",
+  "slug": "pandadoc",
+  "category": "Sales & CRM",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Starter",
+  "team_price_text": "Starter: $19/u/mo (annual)",
+  "team_price_per_user_mo": 19,
+  "price_multiplier": null,
+  "sso_plan": "Enterprise",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://support.pandadoc.com/en/articles/9715033-compare-subscription-plan-features",
+  "docs_url": "https://support.pandadoc.com/en/articles/9715050-sso-implementation",
+  "evidence": "PandaDoc's SSO implementation article gives availability as the Enterprise plan (Business only via a paid SSO add-on) and says PandaDoc supports both SCIM 1.1 and SCIM 2.0, configured inside the SSO settings.",
+  "notes": "Status unchanged (gated). Changed since June: SCIM is no longer 1.1 only; PandaDoc now supports SCIM 2.0 with group-based provisioning (group to licence, workspace and role), and existing SCIM 1.1 setups keep working. The SSO article lists Business with SSO as a paid add-on ($20/month or $240/year per seat), while the plan comparison article shows SSO on Enterprise only; whether the Business SSO add-on also unlocks SCIM is not stated, so scim_plan stays Enterprise. Prices from PandaDoc's help-centre plan comparison: Starter $19/user/mo annual ($35 monthly), Business $49 annual ($65 monthly), Enterprise Contact Us. The pricing page itself (pandadoc.com/pricing) returned a Vercel security checkpoint (HTTP 429) to every fetch, so it is not cited. PandaDoc has no deactivated-user state: deprovisioning deletes the user and transfers their documents to the workspace owner. The Okta OIN app is SAML/SWA only; PandaDoc's own guides use Okta's generic SCIM 1.1 test app and an Entra non-gallery app. The public REST API (/public/v1/users, workspaces/members) can create and list users and manage workspace membership and roles.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Free",
+  "api_tax": false,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Free eSign",
+   "price_text": "$0",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c3",
+    "c26"
+   ],
+   "notes": "API available on all plans, including Free (25 API-created documents per month)."
+  },
+  {
+   "name": "Starter",
+   "price_text": "$19/user/mo billed annually; $35/user/mo billed monthly",
+   "price_per_user_mo": 19,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c3",
+    "c26"
+   ]
+  },
+  {
+   "name": "Business",
+   "price_text": "$49/user/mo billed annually; $65/user/mo billed monthly",
+   "price_per_user_mo": 49,
+   "billing": "annual",
+   "sso": null,
+   "scim": null,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c3",
+    "c5",
+    "c26"
+   ],
+   "notes": "SSO is a paid add-on on Business ($20/month or $240/year per seat) per the SSO article; the plan comparison shows SSO on Enterprise only. Whether SCIM comes with the add-on is not stated."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Contact Us",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c3",
+    "c5",
+    "c6",
+    "c24",
+    "c26"
+   ],
+   "notes": "Account audit log (CSV download, last 30 days) is Enterprise-only; no audit-log API is documented."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c5",
+   "c6",
+   "c7"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": null,
+  "auth": {
+   "method": "bearer",
+   "token_source": "Customer-generated 256-bit key pasted into Settings > Single Sign On > SCIM API Token (prefixed with 'Bearer'); the SCIM Base URL is generated on save",
+   "token_expiry": null,
+   "cite": [
+    "c11"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c6",
+    "c13"
+   ],
+   "notes": "Endpoints are not listed. SCIM 1.1 and SCIM 2.0 are both offered; SCIM 2.0 adds group-based provisioning."
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c6",
+    "c13",
+    "c14",
+    "c15",
+    "c16",
+    "c18"
+   ],
+   "notes": "Update is documented (role, licence, workspace, name and email sync) but PUT vs PATCH is not stated. 'Deactivate' (active=false) results in deletion because there is no deactivated state."
+  },
+  "deprovision": {
+   "action": "delete",
+   "frees_seat": true,
+   "revokes_sessions": null,
+   "data_retained": "Documents and templates transfer to the workspace owner; a returning user is provisioned as a new user.",
+   "cite": [
+    "c8",
+    "c9",
+    "c22",
+    "c23"
+   ],
+   "notes": "Deleting a user leaves a spare licence for reuse; the paid seat count is only reduced when the account owner lowers it in Billing. Removing a user from one mapped group only removes that workspace."
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "name",
+    "email"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": false,
+    "how": "Custom attributes and group custom attributes are not supported via SCIM."
+   },
+   "group": [
+    "Group ID",
+    "Group Name"
+   ],
+   "cite": [
+    "c14",
+    "c10",
+    "c16",
+    "c20"
+   ],
+   "notes": "No SCIM attribute schema is published; the docs say name and email (plus role, licence and workspace from group rules) are synced. Provisioning rules match on a user field or a group field (Group ID or Group Name). SAML attributes are Email, FirstName and LastName."
+  },
+  "roles": {
+   "supported": true,
+   "how": "Provisioning rules in the SSO settings assign licence, workspaces and role, either the same for all new users or by user/group field value; with SCIM 2.0, group membership controls role, licence and workspace.",
+   "cite": [
+    "c20",
+    "c7",
+    "c14"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "No deactivated-user state: deprovisioning deletes the account; returning users are created as new users.",
+    "cite": [
+     "c8",
+     "c9"
+    ]
+   },
+   {
+    "text": "Custom attributes and group custom attributes are not supported via SCIM.",
+    "cite": [
+     "c10",
+     "c16"
+    ]
+   },
+   {
+    "text": "Removing an employee from the IdP alone blocks SSO but does not delete the PandaDoc profile unless the IdP is mapped to set active false or delete.",
+    "cite": [
+     "c18"
+    ]
+   },
+   {
+    "text": "Accounts downgraded from Enterprise may not be able to remove the SSO configuration from the UI.",
+    "cite": [
+     "c45"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c26",
+   "c27",
+   "c28"
+  ],
+  "plan": "Free",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://api.pandadoc.com/public/v1",
+  "docs_url": "https://developers.pandadoc.com/reference/list-users",
+  "auth": {
+   "methods": [
+    "api_key",
+    "oauth2"
+   ],
+   "scopes": [],
+   "cite": [
+    "c27",
+    "c34"
+   ],
+   "notes": "API keys are issued per workspace and inherit the owner's permissions; organisation-level user operations need an Organization Admin's key. OAuth applications are a paid add-on on Business and Enterprise per the API feature table."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": true,
+   "cite": [
+    "c28",
+    "c29",
+    "c30",
+    "c31",
+    "c32",
+    "c33"
+   ],
+   "notes": "Workspaces act as groups (add/remove member). No organisation-level delete or deactivate user endpoint was found; Remove Member works per workspace."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/public/v1/users",
+    "purpose": "List users in the organisation (org admin)",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/public/v1/users",
+    "purpose": "Create user with licence, workspaces and roles (org admin)",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/public/v1/users/{user_id}",
+    "purpose": "Get user details",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/public/v1/members",
+    "purpose": "List members of the workspace",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/public/v1/members/{id}",
+    "purpose": "Member details",
+    "cite": [
+     "c35"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/public/v1/workspaces/{workspace_id}/members",
+    "purpose": "Add existing user to a workspace",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/public/v1/workspaces/{workspace_id}/members/{member_id}",
+    "purpose": "Remove member from workspace",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/public/v1/workspaces/{workspace_id}/members/{member_id}/role",
+    "purpose": "Change member role in workspace",
+    "cite": [
+     "c33"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": false,
+   "events": [],
+   "cite": [
+    "c37"
+   ],
+   "notes": "The complete webhook events reference lists document, recipient, quote, template and content-library events only."
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": [
+    "c24",
+    "c25"
+   ],
+   "notes": "The account audit log (Enterprise) is a CSV download in Settings; the API offers document audit trails and API logs, not the account audit log."
+  },
+  "rate_limits": {
+   "text": "Per-user limits in requests per minute over a 60-second sliding window, varying by operation (e.g. List, Status, Delete 2000 RPM); sandbox keys 10 RPM; 429 when exceeded.",
+   "cite": [
+    "c36",
+    "c44"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "API keys are scoped to one workspace except an Organization Admin's key for organisation-level operations.",
+    "cite": [
+     "c27"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/pandadoc/",
+   "cite": [
+    "c38",
+    "c12"
+   ],
+   "notes": "The OIN PandaDoc app's functionality marks only SAML and SWA. PandaDoc's own SCIM guide uses Okta's generic 'SCIM 1.1 Test App (Header Auth)'."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/pandadoc-tutorial",
+   "cite": [
+    "c39",
+    "c40",
+    "c17"
+   ],
+   "notes": "Gallery tutorial covers SAML SSO with JIT; PandaDoc's SCIM guide uses a 'Create your own application' non-gallery app with the SCIM base URL."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c41"
+   ],
+   "notes": "PandaDoc's OneLogin guide uses the generic SAML Test Connector (Advanced) with rules mapping users to roles and workspaces via SAML attributes; OneLogin's own catalogue was not checked."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c19",
+   "c39",
+   "c22"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://support.pandadoc.com/en/articles/9715033-compare-subscription-plan-features",
+   "title": "Compare subscription plan features | PandaDoc Help Center",
+   "quote": "Billed annually | $0 | $19 /user/mo | $49 /user/mo | Contact Us",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://support.pandadoc.com/en/articles/9715033-compare-subscription-plan-features",
+   "title": "Compare subscription plan features | PandaDoc Help Center",
+   "quote": "Billed monthly | $0 | $35 /user/mo | $65 /user/mo | Contact Us",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://support.pandadoc.com/en/articles/9715033-compare-subscription-plan-features",
+   "title": "Compare subscription plan features | PandaDoc Help Center",
+   "quote": "Multiple workspaces | | | $ | ✓ | Rooms | | | ✓ | ✓ | SSO | | | | ✓",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://support.pandadoc.com/en/articles/9715033-compare-subscription-plan-features",
+   "title": "Compare subscription plan features | PandaDoc Help Center",
+   "quote": "Compare PandaDoc subscription plans to find the one that best fits your needs.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://support.pandadoc.com/en/articles/9715050-sso-implementation",
+   "title": "SSO implementation | PandaDoc Help Center",
+   "quote": "Availability : Enterprise plan Business plan : available as a paid add-on ($20/month or $240/year per seat).",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://support.pandadoc.com/en/articles/9715050-sso-implementation",
+   "title": "SSO implementation | PandaDoc Help Center",
+   "quote": "SCIM 1.1 — User accounts are created and managed remotely before login. SCIM 2.0 — Full user management via SCIM 2.0, including create, update, and remove operations.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://support.pandadoc.com/en/articles/9715050-sso-implementation",
+   "title": "SSO implementation | PandaDoc Help Center",
+   "quote": "PandaDoc supports both SCIM 1.1 and SCIM 2.0 . SCIM 2.0 adds group-based provisioning",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://support.pandadoc.com/en/articles/9715050-sso-implementation",
+   "title": "SSO implementation | PandaDoc Help Center",
+   "quote": "PandaDoc doesn't have a deactivated-user state. Fully deprovisioning a user deletes their account rather than suspending it.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://support.pandadoc.com/en/articles/9715050-sso-implementation",
+   "title": "SSO implementation | PandaDoc Help Center",
+   "quote": "Their documents and templates transfer to the workspace owner, so nothing is lost — but if they come back later, they're provisioned as a new user.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://support.pandadoc.com/en/articles/9715050-sso-implementation",
+   "title": "SSO implementation | PandaDoc Help Center",
+   "quote": "Limitations: Group custom attributes are not currently supported via SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c11",
+   "url": "https://support.pandadoc.com/en/articles/9715050-sso-implementation",
+   "title": "SSO implementation | PandaDoc Help Center",
+   "quote": "paste the Key in the SCIM API Token field. Make sure to add the word \"Bearer\" in front of the Key.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://support.pandadoc.com/en/articles/9715050-sso-implementation",
+   "title": "SSO implementation | PandaDoc Help Center",
+   "quote": "Search for SCIM 1.1 Test App (Header Auth) and select +Add integration",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://support.pandadoc.com/en/articles/9715050-sso-implementation",
+   "title": "SSO implementation | PandaDoc Help Center",
+   "quote": "Enable Create Users and Deactivate Users",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c14",
+   "url": "https://support.pandadoc.com/en/articles/9715050-sso-implementation",
+   "title": "SSO implementation | PandaDoc Help Center",
+   "quote": "When a user's group membership changes, PandaDoc syncs their role, license, workspace, name, and email to match.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://support.pandadoc.com/en/articles/9715050-sso-implementation",
+   "title": "SSO implementation | PandaDoc Help Center",
+   "quote": "Removing a user from one mapped group removes their access to that workspace only. Deleting the user in your identity provider removes them from PandaDoc entirely.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://support.pandadoc.com/en/articles/9715050-sso-implementation",
+   "title": "SSO implementation | PandaDoc Help Center",
+   "quote": "Group definitions are created in Azure and synced to PandaDoc. Custom attributes are not currently supported.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c17",
+   "url": "https://support.pandadoc.com/en/articles/9715050-sso-implementation",
+   "title": "SSO implementation | PandaDoc Help Center",
+   "quote": "In Azure, paste the provided SCIM base URL into the Tenant URL field",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c18",
+   "url": "https://support.pandadoc.com/en/articles/9715050-sso-implementation",
+   "title": "SSO implementation | PandaDoc Help Center",
+   "quote": "configure the attribute mapping in your IdP to disable a user in one of two ways: Update > active status: \"False\"",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c19",
+   "url": "https://support.pandadoc.com/en/articles/9715050-sso-implementation",
+   "title": "SSO implementation | PandaDoc Help Center",
+   "quote": "Just-in-time — A user account is created the first time a user logs in via SSO.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c20",
+   "url": "https://support.pandadoc.com/en/articles/9715050-sso-implementation",
+   "title": "SSO implementation | PandaDoc Help Center",
+   "quote": "Choose how new users get their license, workspaces, and role",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c21",
+   "url": "https://support.pandadoc.com/en/articles/9715050-sso-implementation",
+   "title": "SSO implementation | PandaDoc Help Center",
+   "quote": "Email Attribute Email First Name Attribute FirstName Last Name Attribute LastName",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c22",
+   "url": "https://support.pandadoc.com/en/articles/9715041-add-and-remove-users",
+   "title": "Add and remove users | PandaDoc Help Center",
+   "quote": "In case you need to transfer a license from an old user to a new one, delete the old user first. After that, you will have a spare license and can invite a new user.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c23",
+   "url": "https://support.pandadoc.com/en/articles/9715041-add-and-remove-users",
+   "title": "Add and remove users | PandaDoc Help Center",
+   "quote": "Deleting a member will not remove the license.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c24",
+   "url": "https://support.pandadoc.com/en/articles/9715049-audit-log",
+   "title": "Audit log | PandaDoc Help Center",
+   "quote": "Availability: Enterprise The audit log allows you to download a record of activity within your account over the previous 30 days.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c25",
+   "url": "https://support.pandadoc.com/en/articles/9715049-audit-log",
+   "title": "Audit log | PandaDoc Help Center",
+   "quote": "The audit log will then be downloaded as a .csv file.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c26",
+   "url": "https://support.pandadoc.com/en/articles/9714958-pandadoc-api",
+   "title": "PandaDoc API | PandaDoc Help Center",
+   "quote": "Availability: Free, Starter, Business, and Enterprise plans Each document created via the API consumes one usage credit.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c27",
+   "url": "https://developers.pandadoc.com/docs/organizations-workspaces-api-keys.md",
+   "title": "Understanding Organizations, Workspaces, and API Keys",
+   "quote": "An **API key is issued at the workspace level** and can only access entities in that workspace.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.pandadoc.com/docs/organizations-workspaces-api-keys"
+  },
+  {
+   "id": "c28",
+   "url": "https://developers.pandadoc.com/reference/list-users.md",
+   "title": "List Users | PandaDoc API",
+   "quote": "Get a list of all users with membership in your organization, with their contact information, license type, and workspace roles.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.pandadoc.com/reference/list-users"
+  },
+  {
+   "id": "c29",
+   "url": "https://developers.pandadoc.com/reference/create-user.md",
+   "title": "Create User | PandaDoc API",
+   "quote": "Create users, and assign them roles, licenses, and workspaces.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.pandadoc.com/reference/create-user"
+  },
+  {
+   "id": "c30",
+   "url": "https://developers.pandadoc.com/reference/detailsuser.md",
+   "title": "Get User Details by ID | PandaDoc API",
+   "quote": "Get detailed information about a specific user by their ID, including contact information, license type, and workspace roles.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.pandadoc.com/reference/detailsuser"
+  },
+  {
+   "id": "c31",
+   "url": "https://developers.pandadoc.com/reference/add-member-to-workspace.md",
+   "title": "Add Member to Workspace | PandaDoc API",
+   "quote": "Add an existing user to a workspace.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.pandadoc.com/reference/add-member-to-workspace"
+  },
+  {
+   "id": "c32",
+   "url": "https://developers.pandadoc.com/reference/remove-member.md",
+   "title": "Remove Member from Workspace | PandaDoc API",
+   "quote": "This operation removes a specified member from a workspace by providing the workspace ID and member ID.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.pandadoc.com/reference/remove-member"
+  },
+  {
+   "id": "c33",
+   "url": "https://developers.pandadoc.com/reference/changememberrole.md",
+   "title": "Change Member Role in Workspace | PandaDoc API",
+   "quote": "The `role` field accepts either a built-in role name (`Admin`, `Manager`, `Member`, `Collaborator`) or the name of a custom role defined for the workspace.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.pandadoc.com/reference/changememberrole"
+  },
+  {
+   "id": "c34",
+   "url": "https://developers.pandadoc.com/reference/list-members.md",
+   "title": "List Members | PandaDoc API",
+   "quote": "Retrieve all members details of the workspace implied by the OAuth token or API key.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.pandadoc.com/reference/list-members"
+  },
+  {
+   "id": "c35",
+   "url": "https://developers.pandadoc.com/reference/member-details.md",
+   "title": "Member Details | PandaDoc API",
+   "quote": "A method to retrieve a member's details by ID.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.pandadoc.com/reference/member-details"
+  },
+  {
+   "id": "c36",
+   "url": "https://developers.pandadoc.com/reference/limits.md",
+   "title": "Limits | PandaDoc API",
+   "quote": "Limits are **per user**, meaning that a single user with multiple keys shares the same limit.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.pandadoc.com/reference/limits"
+  },
+  {
+   "id": "c37",
+   "url": "https://developers.pandadoc.com/docs/webhook-events.md",
+   "title": "Webhook Events Reference | PandaDoc API",
+   "quote": "Complete reference of all webhook events, their payloads, and technical specifications.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.pandadoc.com/docs/webhook-events"
+  },
+  {
+   "id": "c38",
+   "url": "https://www.okta.com/integrations/pandadoc/",
+   "title": "PandaDoc with Okta | Okta",
+   "quote": "Close more deals with PandaDoc sales proposal software.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c39",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/pandadoc-tutorial",
+   "title": "Configure PandaDoc for Single sign-on with Microsoft Entra ID",
+   "quote": "PandaDoc supports Just In Time user provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c40",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/pandadoc-tutorial",
+   "title": "Configure PandaDoc for Single sign-on with Microsoft Entra ID",
+   "quote": "PandaDoc supports SP and IDP initiated SSO.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c41",
+   "url": "https://support.pandadoc.com/en/articles/9715052-set-up-single-sign-on-with-onelogin",
+   "title": "Set up Single Sign-On with OneLogin | PandaDoc Help Center",
+   "quote": "SAML Test Connector (Advanced)",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c42",
+   "url": "https://support.pandadoc.com/en/articles/17236207-compare-api-feature-access-by-plan",
+   "title": "Compare API feature access by plan | PandaDoc Help Center",
+   "quote": "This table shows what you can do when creating and sending documents through the PandaDoc API.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c43",
+   "url": "https://support.pandadoc.com/en/articles/9715033-compare-subscription-plan-features",
+   "title": "Compare subscription plan features | PandaDoc Help Center",
+   "quote": "API | ✓ (learn more) | | | $ |",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c44",
+   "url": "https://developers.pandadoc.com/reference/limits.md",
+   "title": "Limits | PandaDoc API",
+   "quote": "The PandaDoc API returns a **429 Too Many Requests** error when you exceed the request limits.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.pandadoc.com/reference/limits"
+  },
+  {
+   "id": "c45",
+   "url": "https://support.pandadoc.com/en/articles/11186946-troubleshooting-sso-setup-and-errors",
+   "title": "Troubleshooting SSO setup and errors | PandaDoc Help Center",
+   "quote": "If your account was downgraded from Enterprise: You may not be able to remove the SSO configuration from the UI.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The SSO implementation article says SSO is on Enterprise and available on Business as a paid add-on ($20/month or $240/year per seat); the plan comparison article marks SSO on Enterprise only.",
+   "cite": [
+    "c5",
+    "c3"
+   ]
+  },
+  {
+   "text": "The PandaDoc API help article says the API is available on Free, Starter, Business and Enterprise; the plan comparison table marks API with a tick on Free, blank on Starter and Business, and '$' on Enterprise.",
+   "cite": [
+    "c26",
+    "c43"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.pandadoc.com/pricing/ (blocked: Vercel Security Checkpoint, HTTP 429 to curl and WebFetch; renderer ERR_TOO_MANY_RETRIES)",
+  "https://support.pandadoc.com/sitemap.xml (grep: scim, sso, saml, provision, okta, azure, onelogin, audit, users, plans)",
+  "https://support.pandadoc.com/en/articles/9715050-sso-implementation",
+  "https://support.pandadoc.com/en/articles/9715041-add-and-remove-users",
+  "https://support.pandadoc.com/en/articles/9715049-audit-log",
+  "https://support.pandadoc.com/en/articles/9715033-compare-subscription-plan-features",
+  "https://support.pandadoc.com/en/articles/17236207-compare-api-feature-access-by-plan",
+  "https://support.pandadoc.com/en/articles/9714958-pandadoc-api",
+  "https://developers.pandadoc.com/llms.txt (users, members, workspaces, webhooks, logs, limits reference pages)",
+  "https://www.okta.com/integrations/pandadoc/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/pandadoc-tutorial",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/pandadoc-provisioning-tutorial (404)"
+ ],
+ "open_questions": [
+  "Whether the Business-plan SSO add-on ($20/month per seat) also enables SCIM.",
+  "The pricing page could not be loaded (Vercel checkpoint), so prices come from the help-centre plan comparison.",
+  "SCIM base URL pattern, endpoint list, filtering, pagination, PUT vs PATCH and rate limits are not documented.",
+  "Whether SCIM deprovisioning ends active sessions is not documented.",
+  "No organisation-level delete or deactivate user endpoint was found in the REST API reference.",
+  "Google Workspace, OneLogin and JumpCloud catalogue listings were not checked."
+ ]
+}

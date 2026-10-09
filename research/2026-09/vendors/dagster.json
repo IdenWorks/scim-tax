@@ -1,0 +1,667 @@
+{
+ "slug": "dagster",
+ "vendor": "Dagster (Prefect)",
+ "vendor_url": "https://dagster.io",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Dagster (Prefect)",
+  "slug": "dagster",
+  "category": "Data, Analytics & BI",
+  "status": "gated",
+  "scim_plan": "Pro",
+  "scim_price_text": "Pro: Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Solo",
+  "team_price_text": "Solo: $10/mo + $0.040/credit (monthly)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Pro",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": "sso_only",
+   "onelogin": "sso_only",
+   "jumpcloud": null,
+   "generic": false
+  },
+  "pricing_page_url": "https://dagster.io/pricing",
+  "docs_url": "https://dagster.io/docs/deployment/dagster-plus/authentication-and-access-control/scim",
+  "evidence": "Dagster's pricing table marks SSO, SAML and \"SCIM provisioning — Okta, Entra ID\" as unavailable on Solo and Starter, so they are Pro-only (Contact Sales); the SCIM guides list \"A Pro plan\" as a prerequisite.",
+  "notes": "Unchanged from June: gated at Pro (Contact Sales). Solo $10/mo + $0.040/credit (1 user) and Starter $100/mo + $0.035/credit (up to 3 users) are flat, usage-priced and shown monthly only. The pricing page now says \"Dagster is now part of Prefect\". SCIM is documented for Okta and Entra ID only and requires SSO set up first; deprovisioning removes the user from the organization. June's mention of Google/GitHub SCIM is not supported by current docs and was dropped. User/team management outside SCIM is via an early-access Terraform provider; audit logs via GraphQL API on Pro.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Solo",
+   "price_text": "$10 per month + $0.040/credit (1 user)",
+   "price_per_user_mo": null,
+   "billing": "monthly",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": false,
+   "cite": [
+    "c1",
+    "c4"
+   ]
+  },
+  {
+   "name": "Starter",
+   "price_text": "$100 per month + $0.035/credit (up to 3 users)",
+   "price_per_user_mo": null,
+   "billing": "monthly",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": false,
+   "cite": [
+    "c2",
+    "c4"
+   ]
+  },
+  {
+   "name": "Pro",
+   "price_text": "Contact Sales",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": true,
+   "cite": [
+    "c3",
+    "c4",
+    "c20",
+    "c32",
+    "c33"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c4",
+   "c6",
+   "c11",
+   "c19",
+   "c20",
+   "c23"
+  ],
+  "plan": "Pro",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": "bearer",
+   "token_source": "Organization Settings > Provisioning > Enable SCIM provisioning > Create SCIM token",
+   "token_expiry": null,
+   "cite": [
+    "c21"
+   ],
+   "notes": "Okta app uses an API Token field; Entra uses Tenant URL + Secret Token. Exact header scheme not documented by Dagster."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c6",
+    "c10",
+    "c24"
+   ],
+   "notes": "Inferred from Users and Groups provisioning; no SCIM endpoint reference is published."
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c7",
+    "c8",
+    "c9",
+    "c10",
+    "c22",
+    "c24"
+   ],
+   "notes": "Updates are documented but not whether PUT or PATCH is used. Deactivation removes the user from the organization."
+  },
+  "deprovision": {
+   "action": "remove_from_org",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c9",
+    "c30"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName",
+    "displayName (Groups)"
+   ],
+   "cite": [
+    "c25",
+    "c26"
+   ],
+   "notes": "From the Entra tutorial's 'Supported for filtering' column."
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "active",
+    "displayName",
+    "emails[type eq \"work\"].value",
+    "name.givenName",
+    "name.familyName",
+    "externalId"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "displayName",
+    "externalId",
+    "members"
+   ],
+   "cite": [
+    "c18",
+    "c25",
+    "c26"
+   ],
+   "notes": "Okta guide limits sync to firstName, lastName, email (must match Okta username) and displayName."
+  },
+  "roles": {
+   "supported": false,
+   "how": "SCIM does not set roles; sync IdP groups to Dagster+ Teams and assign roles to teams in the Dagster+ UI. New SSO users get sso_default_role (Viewer by default).",
+   "cite": [
+    "c12",
+    "c13",
+    "c16"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SCIM provisioning is documented only for Okta and Microsoft Entra ID.",
+    "cite": [
+     "c11"
+    ]
+   },
+   {
+    "text": "Adding users in Dagster+ is disabled while SCIM is on; only unsynced users can be removed in Dagster+.",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "text": "Okta sync supports only firstName, lastName, email and displayName.",
+    "cite": [
+     "c18"
+    ]
+   },
+   {
+    "text": "Disabling SCIM leaves users and teams as they were.",
+    "cite": [
+     "c15"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c34",
+   "c35"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "other",
+  "base_url": null,
+  "docs_url": "https://dagster.io/docs/deployment/dagster-plus/management/terraform",
+  "auth": {
+   "methods": [
+    "api_key"
+   ],
+   "scopes": [],
+   "cite": [
+    "c34"
+   ],
+   "notes": "Dagster+ user token in DAGSTER_CLOUD_API_TOKEN."
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": true,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c34"
+   ]
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Pro",
+   "cite": [
+    "c32",
+    "c33"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Terraform provider is an early prototype; functionality and APIs may change.",
+    "cite": [
+     "c35"
+    ]
+   }
+  ],
+  "notes": "No public user-management REST/GraphQL reference. The early-access Terraform provider (dagster-io/dagsterplus) manages users and teams with a Dagster+ user token. The GraphQL API is documented for audit logs."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/dagster-cloud/",
+   "cite": [
+    "c28",
+    "c18",
+    "c22"
+   ],
+   "notes": "OIN page marks SAML, SCIM, Create, Update, Deactivate and Group Push as checked (read from page markup)."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/dagster-cloud-provisioning-tutorial",
+   "cite": [
+    "c24",
+    "c27"
+   ]
+  },
+  "google": {
+   "listed": null,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c29",
+    "c11"
+   ],
+   "notes": "Dagster documents Google Workspace SSO; SCIM is not supported for Google and users must be added in Dagster+ first."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c11"
+   ],
+   "notes": "Dagster has a OneLogin SSO guide; OneLogin is not in the SCIM-supported list. OneLogin catalogue not checked (bot-blocked)."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c16",
+   "c17",
+   "c29",
+   "c31"
+  ],
+  "notes": "New SSO users are created on first login with sso_default_role unless it is NO_ACCESS; Google SSO users must be pre-added."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://dagster.io/pricing",
+   "title": "Dagster+ Pricing",
+   "quote": "Solo Plan $10 per month Personal projects and simple pipelines Start free Pay-as-you-go $0.040/credit Serverless compute $0.010/minute 1 User",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://dagster.io/pricing",
+   "title": "Dagster+ Pricing",
+   "quote": "Starter Plan $100 per month Small teams running production pipelines Start free Pay-as-you-go $0.035/credit Serverless compute $0.010/minute Up to 3 Users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://dagster.io/pricing",
+   "title": "Dagster+ Pricing",
+   "quote": "Pro Plan Contact Sales Building and scaling an enterprise data platform Request a Demo",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://dagster.io/pricing",
+   "title": "Dagster+ Pricing",
+   "quote": "SSO — — SAML — — SCIM provisioning — Okta, Entra ID — — Audit logs — —",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://dagster.io/pricing",
+   "title": "Dagster+ Pricing",
+   "quote": "Dagster is now part of Prefect",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://dagster.io/docs/deployment/dagster-plus/authentication-and-access-control/scim",
+   "title": "SCIM provisioning | Dagster Docs",
+   "quote": "When enabled in Dagster+, SCIM allows you to automatically sync user and team information from your identity provider (IdP) to Dagster+ and back again, ensuring user and team data is always up to date.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://dagster.io/docs/deployment/dagster-plus/authentication-and-access-control/scim",
+   "title": "SCIM provisioning | Dagster Docs",
+   "quote": "Create users . Users that are assigned to the Dagster+ application in the IdP will be automatically added to your Dagster+ organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://dagster.io/docs/deployment/dagster-plus/authentication-and-access-control/scim",
+   "title": "SCIM provisioning | Dagster Docs",
+   "quote": "Update user attributes. Updating a user's name or email address in the IdP will automatically sync the change to your user list in Dagster+.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://dagster.io/docs/deployment/dagster-plus/authentication-and-access-control/scim",
+   "title": "SCIM provisioning | Dagster Docs",
+   "quote": "Remove users. Deactivating or unassigning a user from the Dagster+ application in the IdP will remove them from the Dagster+ organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://dagster.io/docs/deployment/dagster-plus/authentication-and-access-control/scim",
+   "title": "SCIM provisioning | Dagster Docs",
+   "quote": "Push user groups. Groups and their members in the IdP can be pushed to Dagster+ as Teams .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://dagster.io/docs/deployment/dagster-plus/authentication-and-access-control/scim",
+   "title": "SCIM provisioning | Dagster Docs",
+   "quote": "Dagster+ currently supports SCIM provisioning for the following identity providers: Okta Microsoft Entra ID (formerly Azure Active Directory)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://dagster.io/docs/deployment/dagster-plus/authentication-and-access-control/scim",
+   "title": "SCIM provisioning | Dagster Docs",
+   "quote": "SCIM controls which users and teams exist in Dagster+, but does not directly control user permissions or roles. Permissions must be managed separately within Dagster+.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://dagster.io/docs/deployment/dagster-plus/authentication-and-access-control/scim",
+   "title": "SCIM provisioning | Dagster Docs",
+   "quote": "In the Dagster+ UI, assign roles to those teams via Organization Settings > Teams . Any user added to an IdP group will inherit the permissions of the corresponding Dagster+ team when synced.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://dagster.io/docs/deployment/dagster-plus/authentication-and-access-control/scim",
+   "title": "SCIM provisioning | Dagster Docs",
+   "quote": "New users must be added in the IdP. The ability to add new users will be disabled in Dagster+ while SCIM is enabled.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://dagster.io/docs/deployment/dagster-plus/authentication-and-access-control/scim",
+   "title": "SCIM provisioning | Dagster Docs",
+   "quote": "If you choose to disable SCIM provisioning in Dagster+, users and teams will remain as-is at the time SCIM is disabled.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://dagster.io/docs/deployment/dagster-plus/authentication-and-access-control/scim",
+   "title": "SCIM provisioning | Dagster Docs",
+   "quote": "When a new user logs into Dagster+ via SSO for the first time, they are automatically granted a default role.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://dagster.io/docs/deployment/dagster-plus/authentication-and-access-control/scim",
+   "title": "SCIM provisioning | Dagster Docs",
+   "quote": "You can also set this to NO_ACCESS to prevent new user accounts from being created automatically on first login.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://dagster.io/docs/deployment/dagster-plus/authentication-and-access-control/scim/okta-scim",
+   "title": "Configuring Okta SCIM provisioning | Dagster Docs",
+   "quote": "Dagster+ currently supports the following attributes for SCIM syncing: user.firstName user.lastName user.email , which must match the user's username in Okta user.displayName",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://dagster.io/docs/deployment/dagster-plus/authentication-and-access-control/scim/okta-scim",
+   "title": "Configuring Okta SCIM provisioning | Dagster Docs",
+   "quote": "To have set up Okta SSO for Dagster+. For more information, see the Okta SSO setup guide .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://dagster.io/docs/deployment/dagster-plus/authentication-and-access-control/scim/okta-scim",
+   "title": "Configuring Okta SCIM provisioning | Dagster Docs",
+   "quote": "A Pro plan Organization Admin permissions in your organization",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://dagster.io/docs/deployment/dagster-plus/authentication-and-access-control/scim/okta-scim",
+   "title": "Configuring Okta SCIM provisioning | Dagster Docs",
+   "quote": "Click Create SCIM token to create an API token. This token will be used to authenticate requests from Okta to Dagster+.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://dagster.io/docs/deployment/dagster-plus/authentication-and-access-control/scim/okta-scim",
+   "title": "Configuring Okta SCIM provisioning | Dagster Docs",
+   "quote": "Optionally, check Enable next to Update User Attributes and Deactivate Users to enable these features.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://dagster.io/docs/deployment/dagster-plus/authentication-and-access-control/scim/entra-id-scim",
+   "title": "Configuring Microsoft Entra ID SCIM provisioning | Dagster Docs",
+   "quote": "To have set up Entra ID SSO for Dagster+. For more information, see the Entra ID setup guide .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/dagster-cloud-provisioning-tutorial",
+   "title": "Configure Dagster Cloud for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Create users in Dagster Cloud. Remove users in Dagster Cloud when they don't require access anymore. Keep user attributes synchronized between Microsoft Entra ID and Dagster Cloud. Provision groups and group memberships in Dagster Cloud.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/dagster-cloud-provisioning-tutorial",
+   "title": "Configure Dagster Cloud for automatic user provisioning with Microsoft Entra ID",
+   "quote": "userName String ✓ ✓ active Boolean displayName String emails[type eq \"work\"].value String name.givenName String name.familyName String externalId String",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/dagster-cloud-provisioning-tutorial",
+   "title": "Configure Dagster Cloud for automatic user provisioning with Microsoft Entra ID",
+   "quote": "displayName String ✓ ✓ externalId String members Reference",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/dagster-cloud-provisioning-tutorial",
+   "title": "Configure Dagster Cloud for automatic user provisioning with Microsoft Entra ID",
+   "quote": "In the Tenant URL field, input your Dagster Cloud Tenant URL and Secret Token.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://www.okta.com/integrations/dagster-cloud/",
+   "title": "Dagster Cloud | Okta Integration Network",
+   "quote": "Dagster Cloud",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://dagster.io/docs/deployment/dagster-plus/authentication-and-access-control/rbac/users",
+   "title": "Managing users | Dagster Docs",
+   "quote": "If using Google for Single sign-on (SSO) , users must be added in Dagster+ before they can log in.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://dagster.io/docs/deployment/dagster-plus/authentication-and-access-control/rbac/users",
+   "title": "Managing users | Dagster Docs",
+   "quote": "Removing a user removes them from the organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://dagster.io/docs/deployment/dagster-plus/authentication-and-access-control/rbac/users",
+   "title": "Managing users | Dagster Docs",
+   "quote": "If you are using a SAML-based SSO solution like Okta, you'll also need to remove the user from the identity provider. Removing the user in Dagster+ doesn't remove them from the identity provider.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://dagster.io/docs/deployment/dagster-plus/authentication-and-access-control/rbac/audit-logs",
+   "title": "Viewing and accessing audit logs | Dagster Docs",
+   "quote": "The Dagster+ audit log enables Dagster+ Pro organizations to track and attribute changes to their Dagster deployment.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://dagster.io/docs/deployment/dagster-plus/authentication-and-access-control/rbac/audit-logs",
+   "title": "Viewing and accessing audit logs | Dagster Docs",
+   "quote": "You can programmatically access audit logs with the Dagster+ GraphQL API .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://dagster.io/docs/deployment/dagster-plus/management/terraform",
+   "title": "Managing Dagster+ with Terraform | Dagster Docs",
+   "quote": "Automate onboarding — provision deployments, invite users, and assign team permissions in a single workflow",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c35",
+   "url": "https://dagster.io/docs/deployment/dagster-plus/management/terraform",
+   "title": "Managing Dagster+ with Terraform | Dagster Docs",
+   "quote": "This feature is currently in an early prototype stage. Functionality and APIs may change as development continues.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://dagster.io/docs/deployment/dagster-plus/authentication-and-access-control/rbac/users",
+   "title": "Managing users | Dagster Docs",
+   "quote": "Teams are a Dagster+ Pro feature.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://dagster.io/pricing",
+  "https://docs.dagster.io/sitemap.xml",
+  "https://dagster.io/docs/deployment/dagster-plus/authentication-and-access-control/scim",
+  "https://dagster.io/docs/deployment/dagster-plus/authentication-and-access-control/scim/okta-scim",
+  "https://dagster.io/docs/deployment/dagster-plus/authentication-and-access-control/scim/entra-id-scim",
+  "https://dagster.io/docs/deployment/dagster-plus/authentication-and-access-control/rbac/users",
+  "https://dagster.io/docs/deployment/dagster-plus/authentication-and-access-control/rbac/audit-logs",
+  "https://dagster.io/docs/deployment/dagster-plus/management/terraform",
+  "https://dagster.io/docs/api/rest-api",
+  "https://dagster.io/docs/api/clis/dagster-cloud-cli/dagster-cloud-cli-reference",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/dagster-cloud-provisioning-tutorial",
+  "https://www.okta.com/integrations/dagster-cloud/"
+ ],
+ "open_questions": [
+  "SCIM base URL, version and PUT vs PATCH are not documented by Dagster.",
+  "Docs do not say whether removing a user via SCIM frees a seat or ends active sessions.",
+  "Which plan can use the Terraform provider for user/team management is not stated; teams are a Pro feature.",
+  "jit_protocol: Okta, OneLogin and PingOne guides are SAML; Entra and Google protocols not confirmed."
+ ]
+}

@@ -1,0 +1,806 @@
+{
+ "slug": "better-uptime",
+ "vendor": "Better Stack",
+ "vendor_url": "https://betterstack.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Better Stack",
+  "slug": "better-uptime",
+  "category": "Cloud, Infrastructure & Observability",
+  "status": "gated",
+  "scim_plan": "Okta or Azure SSO add-on",
+  "scim_price_text": "$5 per user per month (Okta or Azure SSO add-on) on top of Responder licences",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Responder",
+  "team_price_text": "Responder: $29/licence/mo billed annually ($34 monthly); team members $0",
+  "team_price_per_user_mo": 29,
+  "price_multiplier": null,
+  "sso_plan": "Okta or Azure SSO add-on",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": "$5 per user per month (Single Sign-On with Okta or Azure)",
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": "sso_only",
+   "onelogin": "sso_only",
+   "jumpcloud": "sso_only",
+   "generic": true
+  },
+  "pricing_page_url": "https://betterstack.com/pricing",
+  "docs_url": "https://betterstack.com/docs/uptime/okta-sso/scim-setup-instructions/",
+  "evidence": "Better Stack's pricing page sells \"Single Sign-On with Okta\" and \"Single Sign-On with Azure\" at \"$5 per user per month\" (Generic SAML SSO is \"enterprise\"), and its docs say \"User provisioning using SCIM requires a working Single Sign-On (SSO) setup with Okta.\"",
+  "notes": "Better Uptime was renamed Better Stack; the row is named after the product sold today and keeps the slug. SCIM works only behind the Okta or Azure (Entra) SSO integrations, each a $5 per user per month add-on (Google sign-in is included but is not customer-IdP SAML; Generic SAML SSO for OneLogin, JumpCloud, Google SAML and others is Enterprise). The pricing page also lists SCIM among security features without a price. Responders cost $29/licence/mo annually ($34 monthly); non-responder team members are $0, so per-user multipliers are left null. SCIM deprovisioning removes the user from the organisation (account kept if they belong to another org); deprovisioning a pushed group deletes the matching team and all its resources. Audit logs ($208/mo annual) are a push to an HTTP log drain, not a query API.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Responder",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "$0 per month (free for personal projects)",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": false,
+   "cite": [
+    "c6"
+   ],
+   "notes": "Google sign-in is included on all plans but is not customer-IdP SSO."
+  },
+  {
+   "name": "Responder",
+   "price_text": "$29 per license per month annually, $34 monthly; team members $0 per member per month",
+   "price_per_user_mo": 29,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c4",
+    "c5",
+    "c10"
+   ]
+  },
+  {
+   "name": "Okta or Azure SSO add-on",
+   "price_text": "$5 per user per month",
+   "price_per_user_mo": 5,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c11",
+    "c17"
+   ],
+   "notes": "Add-on on top of paid plans; SCIM rides on the Okta or Azure SSO integration."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Reach out for a custom quote",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c9"
+   ],
+   "notes": "Generic SAML SSO is Enterprise. Audit logs are a separate $208/mo (annual) add-on."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c8",
+   "c11",
+   "c17",
+   "c1",
+   "c2"
+  ],
+  "plan": "Okta or Azure SSO add-on",
+  "addon_price_text": "$5 per user per month",
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://betterstack.com/scim/v2",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Single Sign-On settings > Okta or Azure > Provisioning > Enable provisioning (Bearer/Secret token)",
+   "token_expiry": null,
+   "cite": [
+    "c12",
+    "c23"
+   ],
+   "notes": "Microsoft describes it as a long-lived bearer token; no expiry documented."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c24",
+    "c14"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": null,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c40",
+    "c19",
+    "c24",
+    "c14"
+   ],
+   "notes": "Docs do not say which HTTP verbs (PUT/PATCH) the endpoint accepts."
+  },
+  "deprovision": {
+   "action": "remove_from_org",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "If the user belongs to another organisation, the account is kept and only detached from this organisation and its teams; reconnecting via SCIM re-adds them.",
+   "cite": [
+    "c13",
+    "c19"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName",
+    "displayName"
+   ],
+   "cite": [
+    "c26"
+   ],
+   "notes": "From the Entra tutorial attribute tables (userName for users, displayName for groups)."
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "active",
+    "emails[type eq \"work\"].value",
+    "name.givenName",
+    "name.familyName",
+    "phoneNumbers[type eq \"work\"].value",
+    "phoneNumbers[type eq \"mobile\"].value",
+    "externalId",
+    "timezone",
+    "roleName"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": true,
+    "how": "roleName attribute (namespace urn:ietf:params:scim:schemas:core:2.0:User) added in the IdP to set the Better Stack role"
+   },
+   "group": [
+    "displayName",
+    "externalId"
+   ],
+   "cite": [
+    "c25",
+    "c26",
+    "c22",
+    "c18"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "Okta groups named exactly after Better Stack roles (Admin, Billing admin, Team lead, Responder, Member), or a roleName SCIM attribute in Okta or Entra",
+   "cite": [
+    "c20",
+    "c21",
+    "c22"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Deprovisioning a pushed group deletes the matching Better Stack team and all its resources.",
+    "cite": [
+     "c15"
+    ]
+   },
+   {
+    "text": "SCIM cannot remove the organisation's last admin (HTTP 400 \"At least one user must be an admin.\").",
+    "cite": [
+     "c16"
+    ]
+   },
+   {
+    "text": "Entra users must have objectId mapped to externalId or they cannot sign in.",
+    "cite": [
+     "c18"
+    ]
+   },
+   {
+    "text": "SCIM is documented only for Okta and Azure/Entra; OneLogin, JumpCloud and Google SAML guides cover SSO only via Generic SAML (Enterprise).",
+    "cite": [
+     "c37",
+     "c38",
+     "c39",
+     "c3"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c10",
+   "c34",
+   "c28"
+  ],
+  "plan": "Responder",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://betterstack.com/api/v2",
+  "docs_url": "https://betterstack.com/docs/uptime/api/getting-started-with-uptime-api/",
+  "auth": {
+   "methods": [
+    "api_key"
+   ],
+   "scopes": [],
+   "cite": [
+    "c34"
+   ],
+   "notes": "Bearer token: global API token (all teams) or team-scoped Uptime/Incidents API token."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": null,
+   "invite_user": true,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c28",
+    "c29",
+    "c30",
+    "c31",
+    "c32",
+    "c33"
+   ],
+   "notes": "delete_user removes a member from a team; admins cannot be invited, removed or role-changed via the API."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/api/v2/team-members",
+    "purpose": "List team members and pending invitations (email filter)",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v2/team-members/{id}",
+    "purpose": "Get a single team member",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v2/team-members",
+    "purpose": "Invite a team member",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v2/team-members/{id}/change-role/{role_id}",
+    "purpose": "Update team member role",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v2/team-members/{id}",
+    "purpose": "Remove a team member by ID",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v2/team-members",
+    "purpose": "Remove a team member or cancel an invitation by e-mail",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v2/roles",
+    "purpose": "List organisation roles",
+    "cite": [
+     "c33"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": "addon",
+   "plan": "Audit logs add-on ($208/mo annual, $250 monthly)",
+   "cite": [
+    "c7",
+    "c35"
+   ],
+   "notes": "Audit events are pushed to an HTTP log drain (e.g. a Better Stack Telemetry source), not served by a query API."
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Inviting, removing or changing the role of admin users is not permitted via the API.",
+    "cite": [
+     "c31"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/better-stack/",
+   "cite": [
+    "c27"
+   ],
+   "notes": "OIN page (last updated Jan. 24 2025) marks SAML, SCIM, Create, Update, Deactivate, Sync Password and Group Push (read from page markup)."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/better-stack-provisioning-tutorial",
+   "cite": [
+    "c24"
+   ]
+  },
+  "google": {
+   "listed": null,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c39"
+   ],
+   "notes": "Custom SAML app in Google Admin per the vendor guide (Generic SAML, Enterprise); no Marketplace listing checked."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c38"
+   ],
+   "notes": "Vendor guide uses OneLogin SAML Custom Connector (Advanced); no SCIM."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c37"
+   ],
+   "notes": "Vendor guide uses a JumpCloud Custom Application (SAML); no SCIM."
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c36"
+  ],
+  "notes": "JIT via team Pre-approved domains with Okta SSO."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://betterstack.com/pricing",
+   "title": "Pricing | Better Stack",
+   "quote": "Single Sign-On with Okta $5 per user per month",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://betterstack.com/pricing",
+   "title": "Pricing | Better Stack",
+   "quote": "Single Sign-On with Azure $5 per user per month",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://betterstack.com/pricing",
+   "title": "Pricing | Better Stack",
+   "quote": "Generic SAML SSO enterprise",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://betterstack.com/pricing",
+   "title": "Pricing | Better Stack",
+   "quote": "Access to Uptime with incident management, on-call, monitoring and status pages with unlimited phone call and SMS alerts. $34 $29 per license per month",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://betterstack.com/pricing",
+   "title": "Pricing | Better Stack",
+   "quote": "$0 per member per month",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://betterstack.com/pricing",
+   "title": "Pricing | Better Stack",
+   "quote": "Free for personal projects $0 per month Start for free",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://betterstack.com/pricing",
+   "title": "Pricing | Better Stack",
+   "quote": "Audit logs $250 per month $208 per month",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://betterstack.com/pricing",
+   "title": "Pricing | Better Stack",
+   "quote": "SSO enforcement 2FA enforcement GDPR-compliant SCIM",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://betterstack.com/pricing",
+   "title": "Pricing | Better Stack",
+   "quote": "Enterprise-ready Reach out for a custom quote.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://betterstack.com/pricing",
+   "title": "Pricing | Better Stack",
+   "quote": "Unlimited incident history Terraform provider REST API",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c11",
+   "url": "https://betterstack.com/docs/uptime/okta-sso/scim-setup-instructions/",
+   "title": "Okta SCIM setup instructions | Better Stack Documentation",
+   "quote": "User provisioning using SCIM requires a working Single Sign-On (SSO) setup with Okta.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://betterstack.com/docs/uptime/okta-sso/scim-setup-instructions/",
+   "title": "Okta SCIM setup instructions | Better Stack Documentation",
+   "quote": "In your Okta SSO settings in Better Stack, click Enable provisioning in the Provisioning section. Copy the Bearer token.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://betterstack.com/docs/uptime/okta-sso/scim-setup-instructions/",
+   "title": "Okta SCIM setup instructions | Better Stack Documentation",
+   "quote": "When you deactivate or remove a user from the SCIM integration in Okta, we automatically remove them from your Better Stack organization. If the user belongs to another organization, their account is not deleted completely",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c14",
+   "url": "https://betterstack.com/docs/uptime/okta-sso/scim-setup-instructions/",
+   "title": "Okta SCIM setup instructions | Better Stack Documentation",
+   "quote": "We also support pushing user groups from Okta. Each group will create a new team in Better Stack with the assigned users.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://betterstack.com/docs/uptime/okta-sso/scim-setup-instructions/",
+   "title": "Okta SCIM setup instructions | Better Stack Documentation",
+   "quote": "Deprovisioning an Okta group from the Better Stack application will permanently delete the corresponding team and all its resources in Better Stack.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://betterstack.com/docs/uptime/okta-sso/scim-setup-instructions/",
+   "title": "Okta SCIM setup instructions | Better Stack Documentation",
+   "quote": "SCIM requests to remove your organization's last admin return HTTP 400 with the detail \"At least one user must be an admin.\"",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c17",
+   "url": "https://betterstack.com/docs/uptime/azure-sso/",
+   "title": "Microsoft Azure / Entra ID SSO & SCIM provisioning | Better Stack Documentation",
+   "quote": "For Tenant URL, enter https://betterstack.com/scim/v2.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c18",
+   "url": "https://betterstack.com/docs/uptime/azure-sso/",
+   "title": "Microsoft Azure / Entra ID SSO & SCIM provisioning | Better Stack Documentation",
+   "quote": "Better Stack matches this Object ID against each user's Microsoft sign-in identity, so users provisioned without it, or with externalId set to anything else, cannot sign in.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c19",
+   "url": "https://betterstack.com/docs/uptime/azure-sso/",
+   "title": "Microsoft Azure / Entra ID SSO & SCIM provisioning | Better Stack Documentation",
+   "quote": "User removal: Deactivating a user in Azure will remove them from Better Stack. Reactivation: Reactivating a user in Azure will automatically re-add them to Better Stack.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c20",
+   "url": "https://betterstack.com/docs/uptime/azure-sso/",
+   "title": "Microsoft Azure / Entra ID SSO & SCIM provisioning | Better Stack Documentation",
+   "quote": "Better Stack supports provisioning users based on their roles.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c21",
+   "url": "https://betterstack.com/docs/uptime/integrating-with-better-uptime/okta-rbac-setup/",
+   "title": "Dynamic RBAC Assignments | Better Stack Documentation",
+   "quote": "For each role in Better Stack, ensure there is a corresponding group in Okta with the exact same name.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c22",
+   "url": "https://betterstack.com/docs/uptime/integrating-with-better-uptime/okta-rbac-setup/",
+   "title": "Dynamic RBAC Assignments | Better Stack Documentation",
+   "quote": "External name: roleName External namespace: urn:ietf:params:scim:schemas:core:2.0:User",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c23",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/better-stack-provisioning-tutorial",
+   "title": "Configure Better Stack for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Long lived bearer token authentication supported.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c24",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/better-stack-provisioning-tutorial",
+   "title": "Configure Better Stack for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Create users in Better Stack. Remove users in Better Stack when they don't require access anymore. Keep user attributes synchronized between Microsoft Entra ID and Better Stack. Provision groups and group memberships in Better Stack.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c25",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/better-stack-provisioning-tutorial",
+   "title": "Configure Better Stack for automatic user provisioning with Microsoft Entra ID",
+   "quote": "phoneNumbers[type eq \"mobile\"].value String externalId String timezone String",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c26",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/better-stack-provisioning-tutorial",
+   "title": "Configure Better Stack for automatic user provisioning with Microsoft Entra ID",
+   "quote": "userName String ✓ ✓ active Boolean emails[type eq \"work\"].value String name.givenName String name.familyName String phoneNumbers[type eq \"work\"].value",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c27",
+   "url": "https://www.okta.com/integrations/better-stack/",
+   "title": "Integrate Better Stack with Okta",
+   "quote": "enabling provisioning allows you to onboard and offboard users from your Okta organization to the Better Stack platform.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c28",
+   "url": "https://betterstack.com/docs/uptime/api/team-members/list/",
+   "title": "List all team members | Better Stack Documentation",
+   "quote": "List all team members and pending invitations. This endpoint supports pagination.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c29",
+   "url": "https://betterstack.com/docs/uptime/api/team-members/invite/",
+   "title": "Invite a team member | Better Stack Documentation",
+   "quote": "Invites a new user to your organization. Invites existing team members to more teams.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c30",
+   "url": "https://betterstack.com/docs/uptime/api/team-members/delete/",
+   "title": "Remove a team member from team by ID | Better Stack Documentation",
+   "quote": "Removes a member from the team by their ID. This action cannot be undone.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c31",
+   "url": "https://betterstack.com/docs/uptime/api/team-members/change-role/",
+   "title": "Update team member role | Better Stack Documentation",
+   "quote": "Changing a role to or from admin is not permitted via the API.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c32",
+   "url": "https://betterstack.com/docs/uptime/api/team-members/delete-by-email/",
+   "title": "Remove a team member from team by e-mail | Better Stack Documentation",
+   "quote": "Removes a member from the team, or cancels a pending invitation, by their email address.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c33",
+   "url": "https://betterstack.com/docs/uptime/api/roles/list/",
+   "title": "List roles | Better Stack Documentation",
+   "quote": "Lists all roles in your organization",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c34",
+   "url": "https://betterstack.com/docs/uptime/api/getting-started-with-uptime-api/",
+   "title": "Getting started with Uptime API | Better Stack Documentation",
+   "quote": "A global API token is a token valid across all your teams, for managing anything within Better Stack.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c35",
+   "url": "https://betterstack.com/docs/uptime/audit-logs/",
+   "title": "Audit logs | Better Stack Documentation",
+   "quote": "Examine user actions by logging them into an HTTP log drain.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c36",
+   "url": "https://betterstack.com/docs/uptime/integrating-with-better-uptime/okta-scim-setup/",
+   "title": "Okta SSO & SCIM Provisioning | Better Stack Documentation",
+   "quote": "Add your e-mail domain to Pre-approved domains",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c37",
+   "url": "https://betterstack.com/docs/uptime/integrating-with-better-uptime/jumpcloud-sso/",
+   "title": "JumpCloud SSO | Better Stack Documentation",
+   "quote": "Click Connect on the Generic SAML SSO panel and select JumpCloud.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c38",
+   "url": "https://betterstack.com/docs/uptime/integrating-with-better-uptime/onelogin-sso/",
+   "title": "OneLogin SSO | Better Stack Documentation",
+   "quote": "Click Connect on the Generic SAML SSO panel and select OneLogin.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c39",
+   "url": "https://betterstack.com/docs/uptime/integrating-with-better-uptime/google_saml-sso/",
+   "title": "Google SSO using SAML | Better Stack Documentation",
+   "quote": "In the Generic SAML SSO panel, click Connect and select Google (SAML).",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c40",
+   "url": "https://betterstack.com/docs/uptime/okta-sso/scim-setup-instructions/",
+   "title": "Okta SCIM setup instructions | Better Stack Documentation",
+   "quote": "Create users Update user attributes Deactivate users Sync password Group push Import users and groups",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://betterstack.com/pricing",
+  "https://betterstack.com/docs-sitemap.xml (659 URLs; SSO, SCIM, team-members API pages found)",
+  "https://betterstack.com/docs/uptime/okta-sso/scim-setup-instructions/",
+  "https://betterstack.com/docs/uptime/azure-sso/",
+  "https://betterstack.com/docs/uptime/api/team-members/list/",
+  "https://www.okta.com/integrations/better-stack/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/better-stack-provisioning-tutorial"
+ ],
+ "open_questions": [
+  "Whether SCIM is available on the Free plan with the SSO add-on, or needs a paid Responder licence, is not stated.",
+  "Docs do not say whether removing a user frees a responder licence or ends active sessions.",
+  "SCIM HTTP verbs (PUT/PATCH), pagination, discovery endpoints and rate limits are not documented.",
+  "No user-event webhooks or API rate limits documented for the team-members API."
+ ]
+}

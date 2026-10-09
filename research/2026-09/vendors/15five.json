@@ -1,0 +1,1118 @@
+{
+ "slug": "15five",
+ "vendor": "15Five",
+ "vendor_url": "https://www.15five.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "15Five",
+  "slug": "15five",
+  "category": "HR, Payroll & Recruiting",
+  "status": "unknown",
+  "scim_plan": "—",
+  "scim_price_text": "Not disclosed",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Engage",
+  "team_price_text": "Engage: $4/u/mo",
+  "team_price_per_user_mo": 4,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": false,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": "native",
+   "onelogin": "native",
+   "jumpcloud": "native",
+   "generic": true
+  },
+  "pricing_page_url": "https://www.15five.com/pricing",
+  "docs_url": "https://success.15five.com/hc/en-us/articles/50988324323355-SCIM-provisioning-with-Okta-overview-and-capabilities",
+  "evidence": "15Five's help centre documents SCIM 2.0 provisioning for Okta, Azure AD, Google Workspace and OneLogin, but neither the pricing page (Engage $4, Perform $11, Total Platform $16 per user per month billed annually) nor the docs say which plan includes SCIM.",
+  "notes": "Status changed from gated to unknown: the June row's 'SCIM gated to Perform tier and above' has no first-party source; the current pricing page does not mention SCIM or SSO and no help-centre article names a SCIM plan, so the Perform gate was dropped. 15Five's security page says SSO 'is included with some plans or can be purchased as an add-on for others' and that security logs are 'only accessible on some plans'. JumpCloud's integration page still lists a legacy '15Five Plus Plan' plus an SSO add-on as prerequisites, which does not map to today's Engage/Perform/Total Platform tiers. Prices unchanged from June (Engage $4, Perform $11, Total Platform $16 per user/mo billed annually). SSO is recommended before SCIM but the two are configured independently.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Engage",
+   "price_text": "$4 per user per month (billed annually)",
+   "price_per_user_mo": 4,
+   "billing": "annual",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1"
+   ]
+  },
+  {
+   "name": "Perform",
+   "price_text": "$11 per user per month (billed annually)",
+   "price_per_user_mo": 11,
+   "billing": "annual",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c2"
+   ]
+  },
+  {
+   "name": "Total Platform",
+   "price_text": "$16 per user per month (billed annually)",
+   "price_per_user_mo": 16,
+   "billing": "annual",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c3"
+   ],
+   "notes": "Pricing page lists add-ons (manager Content $49/manager/mo, Coaching $399/credit, Kona Meeting Assistant $2/employee/mo, Kona Coach $19/manager/mo, Compensation $9 and $11/u/mo). No tier lists SSO or SCIM."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c5",
+   "c7",
+   "c9",
+   "c19"
+  ],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": false,
+  "version": "2.0",
+  "base_url": "https://{subdomain}.15five.com/scim/v2",
+  "notes": "SSO is recommended to be set up first (c16) but SCIM and SSO are configured independently (c8).",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Settings > Integrations > SCIM 2.0 > Enable > Generate OAuth token (30-character token; Account Admin with Manage integrations)",
+   "token_expiry": null,
+   "cite": [
+    "c9",
+    "c22",
+    "c23",
+    "c38",
+    "c64"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c10",
+    "c19",
+    "c30"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c10",
+    "c11",
+    "c17",
+    "c18",
+    "c20",
+    "c30",
+    "c36",
+    "c63",
+    "c70",
+    "c75"
+   ],
+   "notes": "Updates are documented (profile sync) but the HTTP method (PUT vs PATCH) is not. Delete is configurable in OneLogin and Google Workspace (hard delete); Okta and Azure deactivate."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": true,
+   "revokes_sessions": null,
+   "data_retained": "Deactivated users move to the Deactivated tab and lose access; data is kept on the backend and restores on reactivation, though most of it is no longer visible in the UI. The seat becomes unoccupied and is reused by the next new person, but there is no refund or credit for the rest of the subscription. An optional setting reassigns a deactivated manager's direct reports to their manager.",
+   "cite": [
+    "c11",
+    "c24",
+    "c32",
+    "c33",
+    "c34",
+    "c35",
+    "c74"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "emails[type eq \"work\"].value",
+    "title",
+    "active",
+    "externalId"
+   ],
+   "enterprise": [
+    "employeeNumber",
+    "manager"
+   ],
+   "custom": {
+    "supported": true,
+    "how": "15Five extension schema urn:ietf:params:scim:schemas:extension:15Five:2.0:User carries location, startDate, hireDate, terminationDate and custom attributes (Okta variable names prefixed with custom)."
+   },
+   "group": [
+    "externalId",
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c13",
+    "c28",
+    "c29",
+    "c30",
+    "c65",
+    "c66",
+    "c67",
+    "c68"
+   ]
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Timezone does not sync via SCIM.",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "text": "When SCIM is enabled, manual user creation in Manage People is disabled; CSV import must be re-enabled by 15Five Support.",
+    "cite": [
+     "c15"
+    ]
+   },
+   {
+    "text": "Only group ID, name and members sync; other group attributes do not transfer.",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "text": "Users managed by SCIM must be deactivated or reactivated through the IdP; changes made in 15Five can be reversed by the next sync.",
+    "cite": [
+     "c31",
+     "c36"
+    ]
+   },
+   {
+    "text": "JIT provisioning must stay off when SCIM is used, or duplicate accounts are created.",
+    "cite": [
+     "c41"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c5",
+   "c45",
+   "c47",
+   "c48"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://my.15five.com/api/public",
+  "docs_url": "https://my.15five.com/api/public/",
+  "notes": "Public API is enabled under Settings > Integrations > Public API by an Account Admin; no plan restriction is documented.",
+  "auth": {
+   "methods": [
+    "api_key"
+   ],
+   "scopes": [],
+   "cite": [
+    "c37",
+    "c45",
+    "c48"
+   ],
+   "notes": "API key passed as the HTTP Basic username (also shown as an Authorization header). 32-character keys expire after 1 year; a key can be limited to High Fives only."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": null,
+   "reactivate_user": true,
+   "manage_groups": true,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c50",
+    "c51",
+    "c52",
+    "c53",
+    "c54",
+    "c57",
+    "c58"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/api/public/user/",
+    "purpose": "List users (paginated, default 100)",
+    "cite": [
+     "c50"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/public/user/{id}/",
+    "purpose": "Get user details",
+    "cite": [
+     "c51"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/public/user/{id}/",
+    "purpose": "Edit user (is_active toggles access)",
+    "cite": [
+     "c52",
+     "c53"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/public/user/bulk/",
+    "purpose": "Create or update users in bulk",
+    "cite": [
+     "c54",
+     "c55"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/public/bulk-user-import/",
+    "purpose": "Upload a bulk user import (CSV) file",
+    "cite": [
+     "c56"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/public/group/",
+    "purpose": "List groups",
+    "cite": [
+     "c59"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/public/group/",
+    "purpose": "Create groups",
+    "cite": [
+     "c57"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/public/group/",
+    "purpose": "Update groups",
+    "cite": [
+     "c58"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/public/security-audit/",
+    "purpose": "List security audit events",
+    "cite": [
+     "c60",
+     "c61"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": null,
+   "cite": [
+    "c6",
+    "c60",
+    "c61"
+   ],
+   "notes": "Security page says security logs are only accessible on some plans; which plans is not stated."
+  },
+  "rate_limits": {
+   "text": "5 requests per second; limits are per server per IP address, not per account.",
+   "cite": [
+    "c46",
+    "c49"
+   ]
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/15five/",
+   "cite": [
+    "c62"
+   ],
+   "notes": "OIN page marks SAML, SWA, SCIM and Create, Update, Deactivate, Sync Password, Group Push, Group Linking as checked (read from page markup)."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/15five-provisioning-tutorial",
+   "cite": [
+    "c63",
+    "c69"
+   ]
+  },
+  "google": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://knowledge.workspace.google.com/admin/users/advanced/configure-15five-user-provisioning?hl=en",
+   "cite": [
+    "c70",
+    "c71"
+   ]
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c20",
+    "c21",
+    "c22"
+   ],
+   "notes": "From 15Five's own OneLogin guide (OneLogin connector page not loaded, bots blocked)."
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://jumpcloud.com/support/integrate-with-15five",
+   "cite": [
+    "c72",
+    "c73",
+    "c74"
+   ]
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": true,
+  "other_sync": "HRIS Connector (BambooHR, Rippling, Justworks, ADP and others), Gusto, SFTP, Public API bulk import",
+  "docs_public": true,
+  "cite": [
+   "c40",
+   "c43",
+   "c44",
+   "c56"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.15five.com/pricing",
+   "title": "15Five Pricing",
+   "quote": "Engage $4 per user per month (billed annually)",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://www.15five.com/pricing",
+   "title": "15Five Pricing",
+   "quote": "Perform $11 per user per month (billed annually)",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://www.15five.com/pricing",
+   "title": "15Five Pricing",
+   "quote": "Total Platform $16 per user per month (billed annually)",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://www.15five.com/security",
+   "title": "15Five Security",
+   "quote": "SSO is included with some plans or can be purchased as an add-on for others.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://www.15five.com/security",
+   "title": "15Five Security",
+   "quote": "Users can alternatively be managed by any IdP that supports the SCIM 2.0 protocol (Okta, Azure, OneLogin, G-Suite). Our public API can be used for more complex or obscure systems.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://www.15five.com/security",
+   "title": "15Five Security",
+   "quote": "Security events are logged for all accounts, but these are only accessible on some plans",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://success.15five.com/hc/en-us/articles/50989500899611-Integrations-Identity-Overview",
+   "title": "Integrations & Identity: Overview",
+   "quote": "SCIM provisioning requires generating an access token inside 15Five before connecting an identity provider such as Okta, Azure AD, Google Workspace, or OneLogin.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://success.15five.com/hc/en-us/articles/50989500899611-Integrations-Identity-Overview",
+   "title": "Integrations & Identity: Overview",
+   "quote": "SSO and SCIM are configured independently; enabling one does not automatically enable the other.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://success.15five.com/hc/en-us/articles/50988551645723-Enable-SCIM-in-15Five-and-generate-an-access-token",
+   "title": "Enable SCIM in 15Five and generate an access token",
+   "quote": "Enable SCIM 2.0 in your 15Five account settings and generate the OAuth access token required to complete Okta configuration.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://success.15five.com/hc/en-us/articles/50988324323355-SCIM-provisioning-with-Okta-overview-and-capabilities",
+   "title": "SCIM provisioning with Okta — overview and capabilities",
+   "quote": "The Okta SCIM integration lets Account Admins automate user provisioning, profile updates, deactivation, and group sync between Okta and 15Five.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c11",
+   "url": "https://success.15five.com/hc/en-us/articles/50988324323355-SCIM-provisioning-with-Okta-overview-and-capabilities",
+   "title": "SCIM provisioning with Okta — overview and capabilities",
+   "quote": "Deactivate users — Deactivating a user or removing their 15Five app access in Okta deactivates them in 15Five.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://success.15five.com/hc/en-us/articles/50988324323355-SCIM-provisioning-with-Okta-overview-and-capabilities",
+   "title": "SCIM provisioning with Okta — overview and capabilities",
+   "quote": "Delete groups — Groups removed from the 15Five app in Okta are deleted in 15Five.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://success.15five.com/hc/en-us/articles/50988324323355-SCIM-provisioning-with-Okta-overview-and-capabilities",
+   "title": "SCIM provisioning with Okta — overview and capabilities",
+   "quote": "First name Last name Email Title Employee number Location Manager ID Start date Hire date Termination date Custom attributes Group ID Group name Group members",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c14",
+   "url": "https://success.15five.com/hc/en-us/articles/50988324323355-SCIM-provisioning-with-Okta-overview-and-capabilities",
+   "title": "SCIM provisioning with Okta — overview and capabilities",
+   "quote": "Timezone sync is not supported via SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://success.15five.com/hc/en-us/articles/50988324323355-SCIM-provisioning-with-Okta-overview-and-capabilities",
+   "title": "SCIM provisioning with Okta — overview and capabilities",
+   "quote": "When SCIM is enabled, manual user creation via Manage People is disabled. CSV import can be enabled by contacting",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://success.15five.com/hc/en-us/articles/50988324323355-SCIM-provisioning-with-Okta-overview-and-capabilities",
+   "title": "SCIM provisioning with Okta — overview and capabilities",
+   "quote": "Note: If your organization uses Okta for SSO, set up SSO before configuring SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c17",
+   "url": "https://success.15five.com/hc/en-us/articles/50988324323355-SCIM-provisioning-with-Okta-overview-and-capabilities",
+   "title": "SCIM provisioning with Okta — overview and capabilities",
+   "quote": "Import users to Okta — Users created in 15Five can be pulled into Okta and matched against existing Okta users.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c18",
+   "url": "https://success.15five.com/hc/en-us/articles/50988324323355-SCIM-provisioning-with-Okta-overview-and-capabilities",
+   "title": "SCIM provisioning with Okta — overview and capabilities",
+   "quote": "Sync profile updates — Changes to user data in Okta are pushed to 15Five.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c19",
+   "url": "https://success.15five.com/hc/en-us/articles/50988914923803-Set-up-SCIM-provisioning-with-OneLogin",
+   "title": "Set up SCIM provisioning with OneLogin",
+   "quote": "The SCIM URL follows this format: https://yoursubdomain.15five.com/scim/v2 . Remove any trailing slash.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c20",
+   "url": "https://success.15five.com/hc/en-us/articles/50988914923803-Set-up-SCIM-provisioning-with-OneLogin",
+   "title": "Set up SCIM provisioning with OneLogin",
+   "quote": "Set When individuals are deleted in OneLogin, perform this action in 15Five to Delete",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c21",
+   "url": "https://success.15five.com/hc/en-us/articles/50988914923803-Set-up-SCIM-provisioning-with-OneLogin",
+   "title": "Set up SCIM provisioning with OneLogin",
+   "quote": "connecting OneLogin to 15Five via SCIM so that employees are automatically created, updated, and deactivated in 15Five when changes are made in OneLogin",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c22",
+   "url": "https://success.15five.com/hc/en-us/articles/50988914923803-Set-up-SCIM-provisioning-with-OneLogin",
+   "title": "Set up SCIM provisioning with OneLogin",
+   "quote": "Paste the access token from step 6 into the SCIM Bearer Token field.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c23",
+   "url": "https://success.15five.com/hc/en-us/articles/50988327927067-Configure-SCIM-provisioning-with-Azure-AD",
+   "title": "Configure SCIM provisioning with Azure AD",
+   "quote": "Do not use a 15Five Public API key. Public API keys are 32 characters and will not authenticate.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c24",
+   "url": "https://success.15five.com/hc/en-us/articles/50988327927067-Configure-SCIM-provisioning-with-Azure-AD",
+   "title": "Configure SCIM provisioning with Azure AD",
+   "quote": "Reassign reporters — check to automatically reassign direct reports to their manager's manager when a manager is deactivated.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c25",
+   "url": "https://success.15five.com/hc/en-us/articles/50988327927067-Configure-SCIM-provisioning-with-Azure-AD",
+   "title": "Configure SCIM provisioning with Azure AD",
+   "quote": "After disconnecting, existing user accounts remain active in 15Five but are no longer managed by Azure AD.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c26",
+   "url": "https://success.15five.com/hc/en-us/articles/50988327927067-Configure-SCIM-provisioning-with-Azure-AD",
+   "title": "Configure SCIM provisioning with Azure AD",
+   "quote": "Admins can use SCIM to provision, update, and deactivate employees in 15Five directly from Azure AD.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c27",
+   "url": "https://success.15five.com/hc/en-us/articles/50988324130075-Set-up-SCIM-provisioning-with-Google-Workspace",
+   "title": "Set up SCIM provisioning with Google Workspace",
+   "quote": "Admins can connect Google Workspace to 15Five via SCIM 2.0 to automatically provision, update, and deactivate users.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c28",
+   "url": "https://success.15five.com/hc/en-us/articles/50988910673947-Sync-custom-attributes-from-Okta-to-15Five-via-SCIM",
+   "title": "Sync custom attributes from Okta to 15Five via SCIM",
+   "quote": "Custom attributes let you pass additional employee profile data from Okta into 15Five fields beyond the standard SCIM attribute set.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c29",
+   "url": "https://success.15five.com/hc/en-us/articles/50988910673947-Sync-custom-attributes-from-Okta-to-15Five-via-SCIM",
+   "title": "Sync custom attributes from Okta to 15Five via SCIM",
+   "quote": "Enter the following in the External namespace field exactly as shown: urn:ietf:params:scim:schemas:extension:15Five:2.0:User",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c30",
+   "url": "https://success.15five.com/hc/en-us/articles/50988930664475-Sync-groups-from-Okta-to-15Five",
+   "title": "Sync groups from Okta to 15Five",
+   "quote": "Only group ID, name, and members sync from Okta to 15Five — no other group attributes transfer.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c31",
+   "url": "https://success.15five.com/hc/en-us/articles/50988435686299-Deactivate-a-user-account",
+   "title": "Deactivate a user account",
+   "quote": "If your organization uses SCIM or an HRIS integration to manage 15Five membership, you must remove employees via SCIM or your HRIS — not from within 15Five.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c32",
+   "url": "https://success.15five.com/hc/en-us/articles/50988435686299-Deactivate-a-user-account",
+   "title": "Deactivate a user account",
+   "quote": "the user's account appears on the Deactivated tab in Manage People and the user loses access to 15Five.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c33",
+   "url": "https://success.15five.com/hc/en-us/articles/50989011586971-What-happens-to-a-user-s-data-after-their-account-is-deactivated",
+   "title": "What happens to a user's data after their account is deactivated",
+   "quote": "Data is not permanently deleted at deactivation. All user data is stored on the backend and restores fully if the account is reactivated.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c34",
+   "url": "https://success.15five.com/hc/en-us/articles/53111513179291-How-does-adding-or-removing-people-impact-billing",
+   "title": "How does adding or removing people impact billing?",
+   "quote": "Deactivating or unmarking a seat does not free up money. Your account keeps the unoccupied seats for the remainder of the subscription.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c35",
+   "url": "https://success.15five.com/hc/en-us/articles/53111513179291-How-does-adding-or-removing-people-impact-billing",
+   "title": "How does adding or removing people impact billing?",
+   "quote": "New people fill unoccupied paid seats first. If you have purchased seats that are empty, new billable people fill those seats at no additional charge.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c36",
+   "url": "https://success.15five.com/hc/en-us/articles/50988808685467-Reactivate-a-Deactivated-User-Account",
+   "title": "Reactivate a Deactivated User Account",
+   "quote": "If your organization uses SCIM or an Identity Provider (IdP) to manage user access, reactivate accounts through your SCIM integration or IdP directly.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c37",
+   "url": "https://success.15five.com/hc/en-us/articles/50988716008347-Manage-API-Keys-Expiration-Rotation-and-Security",
+   "title": "Manage API Keys — Expiration, Rotation, and Security",
+   "quote": "15Five Public API keys expire exactly 1 year from creation. After expiration, the key becomes inactive and stops working immediately.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c38",
+   "url": "https://success.15five.com/hc/en-us/articles/50988716008347-Manage-API-Keys-Expiration-Rotation-and-Security",
+   "title": "Manage API Keys — Expiration, Rotation, and Security",
+   "quote": "Key length — SCIM: 30 characters. Do not confuse the two; they are different key types.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c39",
+   "url": "https://success.15five.com/hc/en-us/articles/50988921314331-Set-up-SAML-Single-Sign-On-SSO-in-15Five",
+   "title": "Set up SAML Single Sign-On (SSO) in 15Five",
+   "quote": "If you do not see SAML Single Sign-On in Company Settings, contact 15Five Support to confirm your plan includes SSO.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c40",
+   "url": "https://success.15five.com/hc/en-us/articles/50988921314331-Set-up-SAML-Single-Sign-On-SSO-in-15Five",
+   "title": "Set up SAML Single Sign-On (SSO) in 15Five",
+   "quote": "Allow Creation of New Users (JIT Provisioning) — creates a 15Five account on first login for IdP-authorized users.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c41",
+   "url": "https://success.15five.com/hc/en-us/articles/50988921314331-Set-up-SAML-Single-Sign-On-SSO-in-15Five",
+   "title": "Set up SAML Single Sign-On (SSO) in 15Five",
+   "quote": "If you use SCIM or an HRIS integration, do not enable JIT provisioning — it will create duplicate accounts.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c42",
+   "url": "https://success.15five.com/hc/en-us/articles/50989014908315-View-the-security-audit-log",
+   "title": "View the security audit log",
+   "quote": "Account admins can view a log of account activity — including login events, SCIM changes, group creations, and bulk imports — from the Security Audit tab in Company Settings.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c43",
+   "url": "https://success.15five.com/hc/en-us/articles/50988179910171-Add-Users-via-Bulk-CSV-Import",
+   "title": "Add Users via Bulk CSV Import",
+   "quote": "Account admins can add new users or update existing ones in bulk by uploading a CSV file on the Import tab of the Manage People page.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c44",
+   "url": "https://success.15five.com/hc/en-us/articles/50988210405531-Add-People-to-15Five-Overview-of-Methods",
+   "title": "Add People to 15Five — Overview of Methods",
+   "quote": "An HRIS Connector syncs employee data automatically from your HR system (for example, BambooHR, Rippling, Justworks, or ADP), reducing ongoing manual updates.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c45",
+   "url": "https://success.15five.com/hc/en-us/articles/50988220200091-Generate-an-API-Access-Token-in-15Five",
+   "title": "Generate an API Access Token in 15Five",
+   "quote": "Account Admins can generate a Public API access token to connect 15Five to custom server-side integrations.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c46",
+   "url": "https://success.15five.com/hc/en-us/articles/50988142563483-15Five-Public-API-Supported-Features-Limits-and-Access-Rules",
+   "title": "15Five Public API — Supported Features, Limits, and Access Rules",
+   "quote": "Direct Answer: Yes. Rate limits apply per server per IP address.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c47",
+   "url": "https://my.15five.com/api/public/",
+   "title": "15Five Public API Documentation",
+   "quote": "The 15Five API is organized around REST.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c48",
+   "url": "https://my.15five.com/api/public/",
+   "title": "15Five Public API Documentation",
+   "quote": "Authentication to the API is performed via HTTP Basic Auth. Provide your API key as the basic auth username value.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c49",
+   "url": "https://my.15five.com/api/public/",
+   "title": "15Five Public API Documentation",
+   "quote": "Requests to the 15Five API are limited to 5 per second.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c50",
+   "url": "https://my.15five.com/api/public/",
+   "title": "15Five Public API Documentation",
+   "quote": "Get a list of users. Returns users within the company. Response is paginated, with a default page size of 100 objects.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c51",
+   "url": "https://my.15five.com/api/public/",
+   "title": "15Five Public API Documentation",
+   "quote": "GET /api/public/user/{id}/",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c52",
+   "url": "https://my.15five.com/api/public/",
+   "title": "15Five Public API Documentation",
+   "quote": "PUT /api/public/user/{id}/",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c53",
+   "url": "https://my.15five.com/api/public/",
+   "title": "15Five Public API Documentation",
+   "quote": "Designates whether the user can use this account",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c54",
+   "url": "https://my.15five.com/api/public/",
+   "title": "15Five Public API Documentation",
+   "quote": "Create or update users in bulk Create or update user objects.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c55",
+   "url": "https://my.15five.com/api/public/",
+   "title": "15Five Public API Documentation",
+   "quote": "POST /api/public/user/bulk/",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c56",
+   "url": "https://my.15five.com/api/public/",
+   "title": "15Five Public API Documentation",
+   "quote": "Endpoint for uploading a bulk user import file.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c57",
+   "url": "https://my.15five.com/api/public/",
+   "title": "15Five Public API Documentation",
+   "quote": "Create groups Creates user groups",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c58",
+   "url": "https://my.15five.com/api/public/",
+   "title": "15Five Public API Documentation",
+   "quote": "Update groups Update user groups",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c59",
+   "url": "https://my.15five.com/api/public/",
+   "title": "15Five Public API Documentation",
+   "quote": "GET /api/public/group/",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c60",
+   "url": "https://my.15five.com/api/public/",
+   "title": "15Five Public API Documentation",
+   "quote": "List security audit events Get a list of security audit events.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c61",
+   "url": "https://my.15five.com/api/public/",
+   "title": "15Five Public API Documentation",
+   "quote": "GET /api/public/security-audit/",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c62",
+   "url": "https://www.okta.com/integrations/15five/",
+   "title": "Integrate 15five with Okta",
+   "quote": "With SAML single sign-on and SCIM provisioning, Okta's 15Five integration makes it easy to manage your team in 15Five.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c63",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/15five-provisioning-tutorial",
+   "title": "Configure 15Five for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Create users in 15Five Remove users in 15Five when they don't require access anymore Keep user attributes synchronized between Microsoft Entra ID and 15Five Provision groups and group memberships in 15Five",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c64",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/15five-provisioning-tutorial",
+   "title": "Configure 15Five for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Long lived bearer token authentication supported.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c65",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/15five-provisioning-tutorial",
+   "title": "Configure 15Five for automatic user provisioning with Microsoft Entra ID",
+   "quote": "active Boolean title String emails[type eq \"work\"].value String userName String name.givenName String name.familyName String externalId String",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c66",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/15five-provisioning-tutorial",
+   "title": "Configure 15Five for automatic user provisioning with Microsoft Entra ID",
+   "quote": "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User:manager Reference urn:ietf:params:scim:schemas:extension:enterprise:2.0:User:employeeNumber String",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c67",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/15five-provisioning-tutorial",
+   "title": "Configure 15Five for automatic user provisioning with Microsoft Entra ID",
+   "quote": "urn:ietf:params:scim:schemas:extension:15Five:2.0:User:location String urn:ietf:params:scim:schemas:extension:15Five:2.0:User:startDate String",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c68",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/15five-provisioning-tutorial",
+   "title": "Configure 15Five for automatic user provisioning with Microsoft Entra ID",
+   "quote": "externalId String displayName String members",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c69",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/15five-tutorial",
+   "title": "Configure 15Five for single sign-on with Microsoft Entra ID",
+   "quote": "15Five single sign-on (SSO) enabled subscription.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c70",
+   "url": "https://knowledge.workspace.google.com/admin/users/advanced/configure-15five-user-provisioning?hl=en",
+   "title": "Configure 15Five user provisioning - Google Workspace Help",
+   "quote": "If you suspend the user account in 15Five, it's marked as deactivated. If you hard delete the user account in 15Five, the account is removed from the workspace.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c71",
+   "url": "https://knowledge.workspace.google.com/admin/users/advanced/configure-15five-user-provisioning?hl=en",
+   "title": "Configure 15Five user provisioning - Google Workspace Help",
+   "quote": "Before you can set up automated user provisioning, you need to set up SSO for 15Five.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c72",
+   "url": "https://jumpcloud.com/support/integrate-with-15five",
+   "title": "Integrate with 15Five - JumpCloud",
+   "quote": "Automatically provision, update and deprovision users and groups in 15Five from JumpCloud using the SCIM integration.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c73",
+   "url": "https://jumpcloud.com/support/integrate-with-15five",
+   "title": "Integrate with 15Five - JumpCloud",
+   "quote": "15Five Plus Plan . If using SSO, an SSO add-on is required. Contact 15Five support",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c74",
+   "url": "https://jumpcloud.com/support/integrate-with-15five",
+   "title": "Integrate with 15Five - JumpCloud",
+   "quote": "Users are moved to the inactive state when they’re deprovisioned",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c75",
+   "url": "https://jumpcloud.com/support/integrate-with-15five",
+   "title": "Integrate with 15Five - JumpCloud",
+   "quote": "Users created via SCIM integration should also be deleted via SCIM integration. Otherwise, you need to disable the user before you can delete them",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "JumpCloud's 15Five guide lists '15Five Plus Plan' plus an SSO add-on as prerequisites for SCIM; 15Five's current pricing page has no Plus plan (Engage, Perform, Total Platform) and does not mention SCIM.",
+   "cite": [
+    "c73",
+    "c1",
+    "c2",
+    "c3"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.15five.com/pricing (static and rendered; no SCIM or SSO line in tier cards or comparison table)",
+  "https://www.15five.com/sitemap.xml (integrations, security, trust pages)",
+  "https://www.15five.com/security",
+  "https://www.15five.com/partners/technology-partners/integration-partners/",
+  "success.15five.com help-centre search: scim (59 results), SSO (62 results), public api, billing",
+  "https://my.15five.com/api/public/ (Public API reference and OpenAPI spec)",
+  "Okta, Entra, Google Workspace and JumpCloud catalogue pages for 15Five"
+ ],
+ "open_questions": [
+  "Which current plan (Engage, Perform, Total Platform) includes SCIM, and whether it is an add-on, is not stated on any public 15Five page.",
+  "Which plans include SAML SSO (vs the SSO add-on) is not stated publicly.",
+  "SCIM OAuth token expiry is not documented (the 1-year expiry applies to Public API keys).",
+  "Whether SCIM updates use PUT or PATCH, and whether filtering, pagination, ServiceProviderConfig, Schemas or Bulk are supported, is not documented.",
+  "Whether SCIM deactivation ends active sessions is not documented.",
+  "Role mapping via SCIM is not documented.",
+  "Whether the Public API or the audit-log endpoint is restricted by plan is not documented.",
+  "No user-event webhooks are documented."
+ ]
+}

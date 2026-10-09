@@ -1,0 +1,763 @@
+{
+ "slug": "amazon-business",
+ "vendor": "Amazon Business",
+ "vendor_url": "https://business.amazon.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Amazon Business",
+  "slug": "amazon-business",
+  "category": "Finance, Accounting & Spend",
+  "status": "free",
+  "scim_plan": "Amazon Business account (free; no Prime Business plan required)",
+  "scim_price_text": "Free",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Prime Business Essentials",
+  "team_price_text": "Essentials: $179/year for up to 5 users",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Amazon Business account (free)",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": "sso_only",
+   "onelogin": "sso_only",
+   "jumpcloud": "sso_only",
+   "generic": false
+  },
+  "pricing_page_url": "https://business.amazon.com/en/prime-business",
+  "docs_url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/amazon-business-provisioning-tutorial",
+  "evidence": "Amazon Business says \"SCIM for Amazon Business is now available with Okta and Azure customers globally\", and Microsoft's provisioning tutorial lists only an Amazon Business account and an Admin user as prerequisites; no Prime Business plan gates SSO or SCIM.",
+  "notes": "Amazon Business accounts are free; Prime Business is an optional shipping/analytics membership (Duo free, Essentials $179/yr up to 5 users, Small $499/yr, Medium $1,299/yr, Enterprise $10,099/yr), flat-priced so per-user fields stay null. SSO (SAML 2.0, self-service) and SCIM are configured in Business Settings with no listed charge; SCIM needs SSO active first. SCIM works with Okta and Microsoft Entra only (two IdPs, so not partial), not with Punchout, and for only one Legal Entity per account. No generic SCIM token: IdPs authorise through Amazon's OAuth endpoint. Deprovisioning deactivates users. Separate User Management API (create users only) is granted via the Amazon Business technical contact.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Amazon Business account (no membership)",
+   "price_text": "Free account",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c6",
+    "c12",
+    "c15"
+   ],
+   "notes": "SSO/SCIM availability inferred from setup docs that list only an Amazon Business account as prerequisite."
+  },
+  {
+   "name": "Prime Business Duo",
+   "price_text": "Free (sole proprietors)",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1"
+   ]
+  },
+  {
+   "name": "Prime Business Essentials",
+   "price_text": "$179/year, up to 5 users",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c2"
+   ]
+  },
+  {
+   "name": "Prime Business Small",
+   "price_text": "$499/year, up to 20 users",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c3"
+   ]
+  },
+  {
+   "name": "Prime Business Medium",
+   "price_text": "$1,299/year, up to 200 users",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c4"
+   ]
+  },
+  {
+   "name": "Prime Business Enterprise",
+   "price_text": "$10,099/year, unlimited users",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c5"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c7",
+   "c8",
+   "c10",
+   "c15",
+   "c19",
+   "c25"
+  ],
+  "plan": "Amazon Business account (no Prime Business plan required)",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://na.business-api.amazon.com/scim/v2/ (US, CA, MX); eu.business-api.amazon.com (UK, DE, FR, IT, ES, IN); jp.business-api.amazon.com (JP, AU)",
+  "auth": {
+   "method": "oauth2",
+   "token_source": "IdP authorises through an Amazon Business OAuth endpoint (e.g. https://www.amazon.com/b2b/abws/oauth?...&applicationId=...) entered in the IdP app's Admin Credentials; no static token is shown",
+   "token_expiry": null,
+   "cite": [
+    "c19"
+   ]
+  },
+  "endpoints": {
+   "Users": null,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [],
+   "notes": "Endpoint paths are not published; Entra and Okta push users and groups to the regional /scim/v2/ tenant URL."
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": null,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c13",
+    "c14",
+    "c16",
+    "c24"
+   ],
+   "notes": "Okta OIN marks Create, Update, Deactivate and Group Push; Entra lists create, remove, attribute sync, roles, groups and memberships. Whether PUT or PATCH is used is not documented."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Deactivated users stay in the Default SCIM Users Group (Requisitioner role); order data retention is not documented.",
+   "cite": [
+    "c16",
+    "c24"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName",
+    "displayName (Groups)"
+   ],
+   "cite": [
+    "c20",
+    "c21",
+    "c22"
+   ]
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "active",
+    "emails[type eq \"work\"].value",
+    "name.givenName",
+    "name.familyName",
+    "externalId",
+    "roles"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c20",
+    "c21"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "Entra 'roles' attribute from appRoleAssignments; users without a group land in the Default SCIM Users Group as Requisitioner",
+   "cite": [
+    "c13",
+    "c16",
+    "c20"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SCIM works only with Okta and Microsoft Entra (Azure); not with Punchout.",
+    "cite": [
+     "c8",
+     "c10"
+    ]
+   },
+   {
+    "text": "SCIM can be enabled for only one Legal Entity per Amazon Business account.",
+    "cite": [
+     "c17"
+    ]
+   },
+   {
+    "text": "Okta: SCIM provisioning only works with the default OIN application, not a custom SAML app.",
+    "cite": [
+     "c27"
+    ]
+   }
+  ],
+  "notes": "Prerequisites listed by Microsoft are only an Amazon Business account and an Admin user; neither the Prime Business plan table nor the SSO page ties SSO or SCIM to a paid plan. SCIM is enabled in Business Settings > Identity Management (SCIM) after SSO is active."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c30",
+   "c31",
+   "c32"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://na.business-api.amazon.com",
+  "docs_url": "https://developer-docs.amazon.com/amazon-business/docs/user-management-api-overview",
+  "auth": {
+   "methods": [
+    "oauth2"
+   ],
+   "scopes": [
+    "User Management role"
+   ],
+   "cite": [
+    "c32",
+    "c34"
+   ]
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c30",
+    "c31",
+    "c36"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/businessAccounts/2021-08-30/businessUserAccount",
+    "purpose": "Create a business user account in a group with a role (createBusinessUserAccount)",
+    "cite": [
+     "c31"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "createBusinessUserAccount default usage plan: 1 request/second, burst 5 (per application-customer pair).",
+   "cite": [
+    "c35"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "The API only creates users; no list, update or deactivate operations are documented.",
+    "cite": [
+     "c30",
+     "c31"
+    ]
+   },
+   {
+    "text": "Account Authority must be enabled so the email domain is allow-listed.",
+    "cite": [
+     "c33"
+    ]
+   }
+  ],
+  "notes": "Access to the User Management role is granted by the Amazon Business technical contact after API developer onboarding; no plan gate or fee is published."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/amazon-business/",
+   "cite": [
+    "c24",
+    "c26"
+   ],
+   "notes": "OIN page marks SAML, SCIM, Create, Update, Deactivate and Group Push (read from page markup)."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/amazon-business-provisioning-tutorial",
+   "cite": [
+    "c13",
+    "c14",
+    "c23"
+   ]
+  },
+  "google": {
+   "listed": null,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c10",
+    "c38"
+   ],
+   "notes": "Amazon publishes a Google Workspace SAML guide; SCIM is Okta/Azure only. Google catalogue page not checked."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c10",
+    "c11"
+   ],
+   "notes": "OneLogin connector page not loaded; Amazon lists OneLogin as a SAML IdP and SCIM as Okta/Azure only."
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://jumpcloud.com/support/integrate-with-amazon-business",
+   "cite": [
+    "c10",
+    "c37"
+   ]
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": true,
+  "other_sync": "Punchout from e-procurement systems (Ariba, Coupa, etc.) also creates users",
+  "docs_public": true,
+  "cite": [
+   "c23",
+   "c28",
+   "c29"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://business.amazon.com/en/prime-business",
+   "title": "Prime Business | Amazon Business",
+   "quote": "Duo For sole proprietors Free",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://business.amazon.com/en/prime-business",
+   "title": "Prime Business | Amazon Business",
+   "quote": "Essentials For accounts with up to 5 users $179/year",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://business.amazon.com/en/prime-business",
+   "title": "Prime Business | Amazon Business",
+   "quote": "Small For organizations with up to 20 users $499/year",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://business.amazon.com/en/prime-business",
+   "title": "Prime Business | Amazon Business",
+   "quote": "Medium For large organizations with up to 200 users $1,299/year",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://business.amazon.com/en/prime-business",
+   "title": "Prime Business | Amazon Business",
+   "quote": "Enterprise For complex organizations with a need for unlimited users $10,099/year",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://business.amazon.com/en/prime-business",
+   "title": "Prime Business | Amazon Business",
+   "quote": "Prime Business is a membership program for Amazon Business customers. There are five plan options designed to fit organizations of varying sizes and needs",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://business.amazon.com/en/release-notes/system-for-cross-domain-identity-management",
+   "title": "System for Cross-domain Identity Management Launch with Okta and Azure | Amazon Business",
+   "quote": "SCIM for Amazon Business is now available with Okta and Azure customers globally.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://business.amazon.com/en/release-notes/system-for-cross-domain-identity-management",
+   "title": "System for Cross-domain Identity Management Launch with Okta and Azure | Amazon Business",
+   "quote": "System for Cross-domain Identity Management (SCIM) is available with Okta and Azure Identity Provider (IdP) customers. SCIM is currently not supported for Amazon Business Punchout.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://business.amazon.com/en/release-notes/system-for-cross-domain-identity-management",
+   "title": "System for Cross-domain Identity Management Launch with Okta and Azure | Amazon Business",
+   "quote": "By doing so, companies can automate Amazon Business account user onboarding, offboarding and group management at scale.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://business.amazon.com/en/solutions/systems-integration/single-sign-on",
+   "title": "Single Sign-On (SSO) | Amazon Business",
+   "quote": "SCIM for Amazon Business is currently available with Okta and Azure. SCIM is not supported for Punchout at this time.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c11",
+   "url": "https://business.amazon.com/en/solutions/systems-integration/single-sign-on",
+   "title": "Single Sign-On (SSO) | Amazon Business",
+   "quote": "Amazon Business uses the industry standard Security Assertion Markup Language (SAML) 2.0 and supports identity providers including Okta, Microsoft Azure, Microsoft ADFS, OneLogin, AWS SSO, TrustLogin, Google G Suite, and others.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://business.amazon.com/en/solutions/systems-integration/single-sign-on",
+   "title": "Single Sign-On (SSO) | Amazon Business",
+   "quote": "If you are the Amazon Business account Administrator, you can get started by using the self-service SSO set up.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/amazon-business-provisioning-tutorial",
+   "title": "Configure Amazon Business for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Create users in Amazon Business. Remove users in Amazon Business when they don't require access anymore. Assign Amazon Business roles to user.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c14",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/amazon-business-provisioning-tutorial",
+   "title": "Configure Amazon Business for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Keep user attributes synchronized between Microsoft Entra ID and Amazon Business. Provision groups and group memberships in Amazon Business.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/amazon-business-provisioning-tutorial",
+   "title": "Configure Amazon Business for automatic user provisioning with Microsoft Entra ID",
+   "quote": "A user account in Amazon Business with Admin permissions (Admin on all Legal Entity groups in your Amazon Business account).",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/amazon-business-provisioning-tutorial",
+   "title": "Configure Amazon Business for automatic user provisioning with Microsoft Entra ID",
+   "quote": "If a user is provisioned without a group assignment, they'll be placed into this group by default with a Requisitioner role. Any deactivated user remains in this group.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c17",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/amazon-business-provisioning-tutorial",
+   "title": "Configure Amazon Business for automatic user provisioning with Microsoft Entra ID",
+   "quote": "We currently support enabling SCIM for only one Legal Entity in an Amazon Business account.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c18",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/amazon-business-provisioning-tutorial",
+   "title": "Configure Amazon Business for automatic user provisioning with Microsoft Entra ID",
+   "quote": "go to your Amazon Business account > Business Settings > Identity Management (SCIM) page, enter the details and select Activate.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c19",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/amazon-business-provisioning-tutorial",
+   "title": "Configure Amazon Business for automatic user provisioning with Microsoft Entra ID",
+   "quote": "US https://na.business-api.amazon.com/scim/v2/ https://www.amazon.com/b2b/abws/oauth?state=1&redirect_uri=https://portal.azure.com/TokenAuthorize",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c20",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/amazon-business-provisioning-tutorial",
+   "title": "Configure Amazon Business for automatic user provisioning with Microsoft Entra ID",
+   "quote": "userName String ✓ ✓ active Boolean emails[type eq \"work\"].value String name.givenName String name.familyName String externalId String roles",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c21",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/amazon-business-provisioning-tutorial",
+   "title": "Configure Amazon Business for automatic user provisioning with Microsoft Entra ID",
+   "quote": "displayName String ✓ ✓ members Reference",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c22",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/amazon-business-provisioning-tutorial",
+   "title": "Configure Amazon Business for automatic user provisioning with Microsoft Entra ID",
+   "quote": "If you choose to change the matching target attribute, you need to ensure that the Amazon Business API supports filtering users based on that attribute.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c23",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/amazon-business-tutorial",
+   "title": "Configure Amazon Business for Single sign-on with Microsoft Entra ID",
+   "quote": "Amazon Business supports SP and IDP initiated SSO. Amazon Business supports Just In Time user provisioning. Amazon Business supports Automated user provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c24",
+   "url": "https://www.okta.com/integrations/amazon-business/",
+   "title": "Integrate Amazon Business with Okta",
+   "quote": "Okta’s integration will enable your specific employees’ to authenticate their Amazon Business account and gain access to specific roles using SSO. Also you can automate group management, user creation & deactivation for your Amazon Business account from Okta.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c25",
+   "url": "https://business.amazon.com/assets/marketing-assets/reports/Okta-Amazon-Business-SSO-Integration-Guide_en-US_7.27.pdf",
+   "title": "Okta SSO Integration with Amazon Business (PDF)",
+   "quote": "once SSO is active, you can optionally enable System for Cross-Domain Identity Management (SCIM), which automates user provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c26",
+   "url": "https://business.amazon.com/assets/marketing-assets/reports/Okta-Amazon-Business-SSO-Integration-Guide_en-US_7.27.pdf",
+   "title": "Okta SSO Integration with Amazon Business (PDF)",
+   "quote": "Search for “Amazon Business” and choose the Amazon Business (SCIM, SAML) result.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c27",
+   "url": "https://business.amazon.com/assets/marketing-assets/reports/Okta-Amazon-Business-SSO-Integration-Guide_en-US_7.27.pdf",
+   "title": "Okta SSO Integration with Amazon Business (PDF)",
+   "quote": "Also note: SCIM provisioning is only available with the default application.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c28",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/amazon-business-tutorial",
+   "title": "Configure Amazon Business for Single sign-on with Microsoft Entra ID",
+   "quote": "Amazon Business supports just-in-time user provisioning, which is enabled by default. There's no action item for you in this section. If a user doesn't already exist in Amazon Business, a new one is created after authentication.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c29",
+   "url": "https://business.amazon.com/en/learn/add-users",
+   "title": "Add Users | Amazon Business",
+   "quote": "Add users in bulk via spreadsheet with our provided template in user settings.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c30",
+   "url": "https://developer-docs.amazon.com/amazon-business/docs/user-management-api-overview.md",
+   "title": "User Management API overview | Amazon Business API",
+   "quote": "The User Management API provides your organization the ability to programmatically create user accounts within an existing Amazon Business account.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer-docs.amazon.com/amazon-business/docs/user-management-api-overview"
+  },
+  {
+   "id": "c31",
+   "url": "https://developer-docs.amazon.com/amazon-business/docs/user-management-api-overview.md",
+   "title": "User Management API overview | Amazon Business API",
+   "quote": "POST /businessAccounts/2021-08-30/businessUserAccount Creates a new Amazon Business user account with a specified name and email, and an autogenerated password.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer-docs.amazon.com/amazon-business/docs/user-management-api-overview"
+  },
+  {
+   "id": "c32",
+   "url": "https://developer-docs.amazon.com/amazon-business/docs/user-management-api-overview.md",
+   "title": "User Management API overview | Amazon Business API",
+   "quote": "Reach out to your Amazon Business technical contact to gain access to the User Management role.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer-docs.amazon.com/amazon-business/docs/user-management-api-overview"
+  },
+  {
+   "id": "c33",
+   "url": "https://developer-docs.amazon.com/amazon-business/docs/user-management-api-overview.md",
+   "title": "User Management API overview | Amazon Business API",
+   "quote": "Enable Account Authority to ensure that your email domain is allow-listed for registering users.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer-docs.amazon.com/amazon-business/docs/user-management-api-overview"
+  },
+  {
+   "id": "c34",
+   "url": "https://developer-docs.amazon.com/amazon-business/docs/user-management-api-overview.md",
+   "title": "User Management API overview | Amazon Business API",
+   "quote": "\"x-amz-access-token\": \"<Access token retrieved in Prerequisites Step 1>\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer-docs.amazon.com/amazon-business/docs/user-management-api-overview"
+  },
+  {
+   "id": "c35",
+   "url": "https://developer-docs.amazon.com/amazon-business/docs/user-management-api-v1-reference.md",
+   "title": "User Management API v1 reference | Amazon Business API",
+   "quote": "Usage Plan: Rate (requests per second) Burst 1 5",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer-docs.amazon.com/amazon-business/docs/user-management-api-v1-reference"
+  },
+  {
+   "id": "c36",
+   "url": "https://developer-docs.amazon.com/amazon-business/docs/user-management-api-v1-reference.md",
+   "title": "User Management API v1 reference | Amazon Business API",
+   "quote": "Requisitioner Buyer role. PunchoutUser Punchout catalog user buying role. Administrator Administrator role.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer-docs.amazon.com/amazon-business/docs/user-management-api-v1-reference"
+  },
+  {
+   "id": "c37",
+   "url": "https://jumpcloud.com/support/integrate-with-amazon-business",
+   "title": "Integrate with Amazon Business | JumpCloud Documentation",
+   "quote": "Use JumpCloud SAML Single Sign On (SSO) to give your users convenient but secure access to all their web applications with a single set of credentials. Read this article to learn how to integrate with Amazon Business.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c38",
+   "url": "https://business.amazon.com/assets/marketing-assets/reports/Google-Workspace-Amazon-Business-SSO-Integration-Guide_en-US_7.27.pdf",
+   "title": "Google Workspace SSO Integration with Amazon Business (PDF)",
+   "quote": "Choose Google gSuite from the list of identity providers (IdPs) and click Next.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://business.amazon.com/en/prime-business",
+  "https://business.amazon.com/en/solutions/systems-integration/single-sign-on",
+  "https://business.amazon.com/en/release-notes/system-for-cross-domain-identity-management",
+  "https://business.amazon.com/sitemap.xml",
+  "https://developer-docs.amazon.com/amazon-business/sitemap.xml",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/amazon-business-provisioning-tutorial",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/amazon-business-tutorial",
+  "https://www.okta.com/integrations/amazon-business/",
+  "https://jumpcloud.com/support/integrate-with-amazon-business",
+  "https://business.amazon.com/assets/marketing-assets/reports/Okta-Amazon-Business-SSO-Integration-Guide_en-US_7.27.pdf",
+  "https://business.amazon.com/assets/global/documents/guides/Amazon-Business-SSO-Integration-Guide_2026.pdf",
+  "https://www.amazon.com/ab/sso/files/OktaSCIMIntegrationWithAmazonBusiness.pdf (Amazon bot block; not readable)"
+ ],
+ "open_questions": [
+  "Amazon's own Okta SCIM configuration PDF (amazon.com/ab/sso/files/OktaSCIMIntegrationWithAmazonBusiness.pdf) returned a bot-block page, so SCIM endpoints, PUT/PATCH support, delete behaviour and token lifetime are not confirmed.",
+  "No page states explicitly that SSO/SCIM carry no charge or are independent of Prime Business; this is inferred from the prerequisites and the plan table.",
+  "Whether a deactivated user frees anything (no seat pricing) or keeps order history is not documented.",
+  "No audit-log API or user-event webhooks found in the Amazon Business API docs."
+ ]
+}

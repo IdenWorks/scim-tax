@@ -1,0 +1,801 @@
+{
+ "slug": "dashlane",
+ "vendor": "Dashlane",
+ "vendor_url": "https://www.dashlane.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Dashlane",
+  "slug": "dashlane",
+  "category": "Security & Identity",
+  "status": "free",
+  "scim_plan": "Omnix Password Management",
+  "scim_price_text": "Omnix Password Management: $8/u/mo (annual)",
+  "scim_price_per_user_mo": 8,
+  "team_plan": "Omnix Password Management",
+  "team_price_text": "Omnix Password Management: $8/u/mo (annual)",
+  "team_price_per_user_mo": 8,
+  "price_multiplier": 1.0,
+  "sso_plan": "Omnix Password Management",
+  "sso_price_per_user_mo": 8,
+  "sso_required_for_scim": false,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": false
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": "sso_only",
+   "onelogin": null,
+   "jumpcloud": "native",
+   "generic": true
+  },
+  "pricing_page_url": "https://www.dashlane.com/pricing",
+  "docs_url": "https://support.dashlane.com/hc/en-us/articles/36319937686290-SCIM-Provisioning",
+  "evidence": "Dashlane's pricing page says Omnix Password Management costs $8 per user per month billed annually and lists \"Integrate with SSO, SCIM, & more\"; the plan comparison marks SCIM provisioning as included in Password Management and Enterprise.",
+  "notes": "Status changed gated -> free. Dashlane now sells only Omnix plans (Starter, Team and Standard are no longer sold). Password Management ($8/u/mo annual), the entry password-manager plan, includes SAML SSO and SCIM with no upcharge, so under the price-gate rule this is free (June's own row already had multiplier 1.0). Omnix Credential Protection ($4/u/mo) is a separate phishing/credential-risk product without a vault; the comparison table says it lacks SSO/SCIM while two help articles say otherwise. Enterprise is custom for 50+ users. SCIM no longer needs SSO; documented for Okta, Entra, JumpCloud and PingID; Google Workspace is SSO + JIT only. Group push is off under Confidential SCIM. Public API is read-only.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Omnix Credential Protection",
+  "api_tax": false,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Omnix Credential Protection",
+   "price_text": "$4 per user per month (billed annually)",
+   "price_per_user_mo": 4,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c1",
+    "c5",
+    "c32",
+    "c34"
+   ],
+   "notes": "Separate credential-risk/phishing product without a vault. The plan comparison marks SSO and SCIM as not included, but two help articles say SSO and SCIM are available with Credential Protection (see conflicts)."
+  },
+  {
+   "name": "Omnix Password Management",
+   "price_text": "$8 per user per month (billed annually)",
+   "price_per_user_mo": 8,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c1",
+    "c2",
+    "c5",
+    "c32",
+    "c34"
+   ]
+  },
+  {
+   "name": "Omnix Enterprise",
+   "price_text": "Custom, volume-optimized pricing (Contact Sales); for more than 50 users",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c3",
+    "c4",
+    "c5",
+    "c32",
+    "c34"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c2",
+   "c5",
+   "c8",
+   "c9",
+   "c14",
+   "c45"
+  ],
+  "plan": "Omnix Password Management",
+  "addon_price_text": null,
+  "sso_required": false,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": "bearer",
+   "token_source": "Admin Console > Integrations > Provisioning > Start setup > Generate SCIM API token",
+   "token_expiry": null,
+   "cite": [
+    "c10",
+    "c12",
+    "c13"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c9",
+    "c14"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": null,
+   "group_push": false,
+   "group_membership": null,
+   "cite": [
+    "c11",
+    "c14",
+    "c20",
+    "c21",
+    "c24"
+   ],
+   "notes": "Okta guide: Create Users, Update User Attributes, Deactivate Users; Push Groups off. Groups sync via SAML group attribute instead (Confidential); self-hosted SCIM supported group provisioning."
+  },
+  "deprovision": {
+   "action": "remove_from_org",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "SSO members removed from the plan permanently lose access to their account and personal data; admins can reactivate a removed member, and can re-add within 30 days to reach work logins.",
+   "cite": [
+    "c14",
+    "c28",
+    "c30",
+    "c31"
+   ],
+   "notes": "Manual removal frees the license (c29); docs do not say this explicitly for SCIM deactivation."
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": []
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Group provisioning via Confidential SCIM must be turned off (sharing group creation not supported); groups sync through SAML group attributes instead.",
+    "cite": [
+     "c11",
+     "c24"
+    ]
+   },
+   {
+    "text": "Google Workspace, AD FS and Duo are SSO only; SCIM is not supported for them.",
+    "cite": [
+     "c15",
+     "c25"
+    ]
+   },
+   {
+    "text": "Self-hosted SSO and SCIM can no longer be set up after October 2025.",
+    "cite": [
+     "c16"
+    ]
+   },
+   {
+    "text": "Groups created in Dashlane do not merge or sync with SCIM groups.",
+    "cite": [
+     "c17"
+    ]
+   }
+  ],
+  "notes": "SCIM endpoint URL is shown in the Admin Console (Integrations > Provisioning); its pattern is not published. Confidential SCIM is the only option for new setups; self-hosted (encryption service) SCIM is legacy."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c32",
+   "c33",
+   "c37"
+  ],
+  "plan": "Omnix Credential Protection",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://api.dashlane.com/public",
+  "docs_url": "https://dashlane.github.io/public-api-documentation/",
+  "auth": {
+   "methods": [
+    "api_key"
+   ],
+   "scopes": [],
+   "cite": [
+    "c35",
+    "c36"
+   ],
+   "notes": "Bearer DLP_ token created in Admin Console > Integrations > Developer Access or via the Dashlane CLI; keys do not expire."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": null,
+   "create_user": false,
+   "invite_user": false,
+   "update_user": false,
+   "deactivate_user": false,
+   "delete_user": false,
+   "reactivate_user": false,
+   "manage_groups": false,
+   "assign_roles": false,
+   "assign_licenses": false,
+   "cite": [
+    "c33",
+    "c34",
+    "c38"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/teams/Members",
+    "purpose": "List team members (status, joined date) with paging",
+    "cite": [
+     "c38",
+     "c46"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/teams/MembersDeviceInformation",
+    "purpose": "Members' device information",
+    "cite": [
+     "c39"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/teams/PasswordHealth",
+    "purpose": "Password health metrics",
+    "cite": [
+     "c41"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/teams/Status",
+    "purpose": "Team status: seats, SSO configuration, domains",
+    "cite": [
+     "c40"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": false,
+   "plan": null,
+   "cite": [
+    "c34"
+   ],
+   "notes": "Public API has no log endpoints; activity logs go to SIEM integrations instead."
+  },
+  "rate_limits": {
+   "text": "Members endpoint returns at most 100 results per page.",
+   "cite": [
+    "c46"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Public API is read-only and has no logs, group sharing or vault endpoints.",
+    "cite": [
+     "c33",
+     "c34"
+    ]
+   }
+  ],
+  "notes": "Read-only public API (members, devices, password health, team status). No write endpoints for users or groups."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/dashlane/",
+   "cite": [
+    "c42",
+    "c18",
+    "c19"
+   ],
+   "notes": "OIN page marks only SAML as checked (read from page markup). Dashlane's guide provisions by enabling SCIM on the Dashlane SAML app with the Dashlane SCIM base URL and token."
+  },
+  "entra": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c22",
+    "c23"
+   ],
+   "notes": "Dashlane's guide uses a non-gallery app ('Integrate any other application you don't find in the gallery'); no Entra Learn tutorial found (404)."
+  },
+  "google": {
+   "listed": null,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c25"
+   ],
+   "notes": "Custom SAML app in Google Workspace; SCIM not supported, JIT recommended."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://jumpcloud.com/support/integrate-with-dashlane",
+   "cite": [
+    "c43",
+    "c44"
+   ],
+   "notes": "JumpCloud's guide lists the Dashlane Encryption service as a prerequisite (self-hosted setup)."
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": "SAML group sync (Google Workspace); legacy AD sync discontinued",
+  "docs_public": true,
+  "cite": [
+   "c15",
+   "c25",
+   "c26",
+   "c27"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.dashlane.com/pricing",
+   "title": "Business Password Manager Pricing | Dashlane",
+   "quote": "The Omnix Password Management package costs $8 per user per month (billed annually) and includes a 14-day free trial. Omnix Credential Protection costs $4 per user per month (billed annually).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.dashlane.com/pricing",
+   "title": "Business Password Manager Pricing | Dashlane",
+   "quote": "Secure employee credentials -- Per user/month billed annually Buy now Try free for 14 days Protect employee passwords & passkeys Securely share workforce passwords Manage password policies Integrate with SSO, SCIM, & more",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.dashlane.com/pricing",
+   "title": "Business Password Manager Pricing | Dashlane",
+   "quote": "Enterprise Scale your credential security Custom Volume-optimized pricing Contact Sales Request a demo",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.dashlane.com/pricing",
+   "title": "Business Password Manager Pricing | Dashlane",
+   "quote": "Omnix Enterprise is built for organizations with more than 50 users that require a unified credential security posture. Pricing is customized and volume-optimized based on your user seat count and integration requirements.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://support.dashlane.com/api/v2/help_center/en-us/articles/209420945.json",
+   "title": "Compare Dashlane professional plans",
+   "quote": "Single sign-on (SSO) integration - ✓ ✓ SCIM provisioning - ✓ ✓",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.dashlane.com/hc/en-us/articles/209420945-Compare-Dashlane-professional-plans"
+  },
+  {
+   "id": "c6",
+   "url": "https://support.dashlane.com/api/v2/help_center/en-us/articles/209420945.json",
+   "title": "Compare Dashlane professional plans",
+   "quote": "Dashlane no longer sells Starter, Team, or Standard plans . If you already have one of these plans, you can keep and renew it, or switch to another plan.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.dashlane.com/hc/en-us/articles/209420945-Compare-Dashlane-professional-plans"
+  },
+  {
+   "id": "c7",
+   "url": "https://support.dashlane.com/api/v2/help_center/en-us/articles/10992671925778.json",
+   "title": "Use Dashlane Confidential SSO and SCIM Provisioning to integrate with your IdP",
+   "quote": "SSO and SCIM are only available to organizations with Password Management or Credential Protection .",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.dashlane.com/hc/en-us/articles/10992671925778-Use-Dashlane-Confidential-SSO-and-SCIM-Provisioning-to-integrate-with-your-IdP"
+  },
+  {
+   "id": "c8",
+   "url": "https://support.dashlane.com/api/v2/help_center/en-us/articles/36319937686290.json",
+   "title": "SCIM Provisioning",
+   "quote": "Set up SCIM Provisioning without SSO",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.dashlane.com/hc/en-us/articles/36319937686290-SCIM-Provisioning"
+  },
+  {
+   "id": "c9",
+   "url": "https://support.dashlane.com/api/v2/help_center/en-us/articles/36319937686290.json",
+   "title": "SCIM Provisioning",
+   "quote": "Copy the SCIM Endpoint from the Dashlane Admin Console and enter the value under the SCIM URL field in your Identity Provider.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.dashlane.com/hc/en-us/articles/36319937686290-SCIM-Provisioning"
+  },
+  {
+   "id": "c10",
+   "url": "https://support.dashlane.com/api/v2/help_center/en-us/articles/36319937686290.json",
+   "title": "SCIM Provisioning",
+   "quote": "Ensure you select the Bearer Token option.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.dashlane.com/hc/en-us/articles/36319937686290-SCIM-Provisioning"
+  },
+  {
+   "id": "c11",
+   "url": "https://support.dashlane.com/api/v2/help_center/en-us/articles/36319937686290.json",
+   "title": "SCIM Provisioning",
+   "quote": "Turn off group provisioning via SCIM, as sharing group creation isn’t supported by the Confidential SCIM protocol.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.dashlane.com/hc/en-us/articles/36319937686290-SCIM-Provisioning"
+  },
+  {
+   "id": "c12",
+   "url": "https://support.dashlane.com/api/v2/help_center/en-us/articles/36319937686290.json",
+   "title": "SCIM Provisioning",
+   "quote": "In the Integrations section, select Provisioning and then Start setup .",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.dashlane.com/hc/en-us/articles/36319937686290-SCIM-Provisioning"
+  },
+  {
+   "id": "c13",
+   "url": "https://support.dashlane.com/api/v2/help_center/en-us/articles/36319937686290.json",
+   "title": "SCIM Provisioning",
+   "quote": "Under User Provisioning , go to Step 1: Generate SCIM API token , and select Generate Token .",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.dashlane.com/hc/en-us/articles/36319937686290-SCIM-Provisioning"
+  },
+  {
+   "id": "c14",
+   "url": "https://support.dashlane.com/api/v2/help_center/en-us/articles/360013149040.json",
+   "title": "Integrate Dashlane with your Identity Provider (IdP) for SSO and SCIM",
+   "quote": "System for Cross-domain Identity Management, known as SCIM, allows you to use each member's status in your Identity Provider to provision and deprovision members.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.dashlane.com/hc/en-us/articles/360013149040-Integrate-Dashlane-with-your-Identity-Provider-IdP-for-SSO-and-SCIM"
+  },
+  {
+   "id": "c15",
+   "url": "https://support.dashlane.com/api/v2/help_center/en-us/articles/360013149040.json",
+   "title": "Integrate Dashlane with your Identity Provider (IdP) for SSO and SCIM",
+   "quote": "Azure ✅ ✅ N/A Okta ✅ ✅ N/A JumpCloud ✅ ✅ N/A PingID ✅ ✅ N/A AD FS ✅ ❌ N/A Google Workspace ✅ ❌ ✅",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.dashlane.com/hc/en-us/articles/360013149040-Integrate-Dashlane-with-your-Identity-Provider-IdP-for-SSO-and-SCIM"
+  },
+  {
+   "id": "c16",
+   "url": "https://support.dashlane.com/api/v2/help_center/en-us/articles/360013149040.json",
+   "title": "Integrate Dashlane with your Identity Provider (IdP) for SSO and SCIM",
+   "quote": "Important : Self-hosted SSO and SCIM are no longer available for setup after October 2025.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.dashlane.com/hc/en-us/articles/360013149040-Integrate-Dashlane-with-your-Identity-Provider-IdP-for-SSO-and-SCIM"
+  },
+  {
+   "id": "c17",
+   "url": "https://support.dashlane.com/api/v2/help_center/en-us/articles/360013149040.json",
+   "title": "Integrate Dashlane with your Identity Provider (IdP) for SSO and SCIM",
+   "quote": "Note : You can also create and manage groups with Dashlane, which is totally separate from SCIM. These groups don't merge or sync with SCIM groups.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.dashlane.com/hc/en-us/articles/360013149040-Integrate-Dashlane-with-your-Identity-Provider-IdP-for-SSO-and-SCIM"
+  },
+  {
+   "id": "c18",
+   "url": "https://support.dashlane.com/api/v2/help_center/en-us/articles/23213539871634.json",
+   "title": "Set up Confidential SSO and Provisioning with Okta",
+   "quote": "Dashlane offers deep integration with Okta, with the ability to integrate SSO, SCIM user provisioning for plan members, and group provisioning with SAML.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.dashlane.com/hc/en-us/articles/23213539871634-Set-up-Confidential-SSO-and-Provisioning-with-Okta"
+  },
+  {
+   "id": "c19",
+   "url": "https://support.dashlane.com/api/v2/help_center/en-us/articles/23213539871634.json",
+   "title": "Set up Confidential SSO and Provisioning with Okta",
+   "quote": "In your Dashlane SAML application in Okta, select the General tab, and select Edit . Select the checkbox: Enable SCIM provisioning and select Save .",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.dashlane.com/hc/en-us/articles/23213539871634-Set-up-Confidential-SSO-and-Provisioning-with-Okta"
+  },
+  {
+   "id": "c20",
+   "url": "https://support.dashlane.com/api/v2/help_center/en-us/articles/23213539871634.json",
+   "title": "Set up Confidential SSO and Provisioning with Okta",
+   "quote": "Enable Create Users , Update User Attributes , Deactivate Users , and select Save .",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.dashlane.com/hc/en-us/articles/23213539871634-Set-up-Confidential-SSO-and-Provisioning-with-Okta"
+  },
+  {
+   "id": "c21",
+   "url": "https://support.dashlane.com/api/v2/help_center/en-us/articles/23213539871634.json",
+   "title": "Set up Confidential SSO and Provisioning with Okta",
+   "quote": "Enable all the Supported provisioning actions except Push Groups and Import Groups .",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.dashlane.com/hc/en-us/articles/23213539871634-Set-up-Confidential-SSO-and-Provisioning-with-Okta"
+  },
+  {
+   "id": "c22",
+   "url": "https://support.dashlane.com/api/v2/help_center/en-us/articles/23213014892562.json",
+   "title": "Set up Confidential SSO and Provisioning with Azure (Entra ID)",
+   "quote": "Select Create your own application and name it something relevant to it, like \"Dashlane SSO.\" Then select the option: Integrate any other application you don't find in the gallery .",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.dashlane.com/hc/en-us/articles/23213014892562-Set-up-Confidential-SSO-and-Provisioning-with-Azure-Entra-ID"
+  },
+  {
+   "id": "c23",
+   "url": "https://support.dashlane.com/api/v2/help_center/en-us/articles/23213014892562.json",
+   "title": "Set up Confidential SSO and Provisioning with Azure (Entra ID)",
+   "quote": "Paste the SCIM API token under the Secret Token . Copy the endpoint value from the Admin Console, and paste it under the Tenent URL .",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.dashlane.com/hc/en-us/articles/23213014892562-Set-up-Confidential-SSO-and-Provisioning-with-Azure-Entra-ID"
+  },
+  {
+   "id": "c24",
+   "url": "https://support.dashlane.com/api/v2/help_center/en-us/articles/23213014892562.json",
+   "title": "Set up Confidential SSO and Provisioning with Azure (Entra ID)",
+   "quote": "For Provisioning Azure Active Directory Groups , set No for Enabled and Save .",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.dashlane.com/hc/en-us/articles/23213014892562-Set-up-Confidential-SSO-and-Provisioning-with-Azure-Entra-ID"
+  },
+  {
+   "id": "c25",
+   "url": "https://support.dashlane.com/api/v2/help_center/en-us/articles/23213641915538.json",
+   "title": "Set up Confidential SSO and Provisioning with Google Workspace",
+   "quote": "Dashlane doesn't support syncing Google Workspace provisioning with SCIM. Instead, we recommend turning on Just in Time Provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.dashlane.com/hc/en-us/articles/23213641915538-Set-up-Confidential-SSO-and-Provisioning-with-Google-Workspace"
+  },
+  {
+   "id": "c26",
+   "url": "https://support.dashlane.com/api/v2/help_center/en-us/articles/18128663353362.json",
+   "title": "Just in Time Provisioning",
+   "quote": "Just in Time Provisioning is only available to organizations with Password Management .",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.dashlane.com/hc/en-us/articles/18128663353362-Just-in-Time-Provisioning"
+  },
+  {
+   "id": "c27",
+   "url": "https://support.dashlane.com/api/v2/help_center/en-us/articles/18128663353362.json",
+   "title": "Just in Time Provisioning",
+   "quote": "When a new employee goes to log in to Dashlane with their work email, they’ll automatically be prompted to log in with SSO and added to your plan.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.dashlane.com/hc/en-us/articles/18128663353362-Just-in-Time-Provisioning"
+  },
+  {
+   "id": "c28",
+   "url": "https://support.dashlane.com/api/v2/help_center/en-us/articles/18128663353362.json",
+   "title": "Just in Time Provisioning",
+   "quote": "Otherwise, plan members who aren’t added to synced groups will be removed the next time the directory syncs.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.dashlane.com/hc/en-us/articles/18128663353362-Just-in-Time-Provisioning"
+  },
+  {
+   "id": "c29",
+   "url": "https://support.dashlane.com/api/v2/help_center/en-us/articles/209243845.json",
+   "title": "Offboard employees from your Dashlane plan",
+   "quote": "You'll also free up the license for a new plan member.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.dashlane.com/hc/en-us/articles/209243845-Offboard-employees-from-your-Dashlane-plan"
+  },
+  {
+   "id": "c30",
+   "url": "https://support.dashlane.com/api/v2/help_center/en-us/articles/209243845.json",
+   "title": "Offboard employees from your Dashlane plan",
+   "quote": "If they log in with single sign-on (SSO), they'll permanently lose access to their account and all personal data as soon as you remove them.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.dashlane.com/hc/en-us/articles/209243845-Offboard-employees-from-your-Dashlane-plan"
+  },
+  {
+   "id": "c31",
+   "url": "https://support.dashlane.com/api/v2/help_center/en-us/articles/209243845.json",
+   "title": "Offboard employees from your Dashlane plan",
+   "quote": "After removal, the member's name appears grayed out in the Users tab. To restore them, select the 3-dot menu and select Reactivate .",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.dashlane.com/hc/en-us/articles/209243845-Offboard-employees-from-your-Dashlane-plan"
+  },
+  {
+   "id": "c32",
+   "url": "https://support.dashlane.com/api/v2/help_center/en-us/articles/23955544757266.json",
+   "title": "Dashlane public API",
+   "quote": "The Dashlane public API is available to admins of all Dashlane professional plans.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.dashlane.com/hc/en-us/articles/23955544757266-Dashlane-public-API"
+  },
+  {
+   "id": "c33",
+   "url": "https://support.dashlane.com/api/v2/help_center/en-us/articles/23955544757266.json",
+   "title": "Dashlane public API",
+   "quote": "The public API is read-only",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.dashlane.com/hc/en-us/articles/23955544757266-Dashlane-public-API"
+  },
+  {
+   "id": "c34",
+   "url": "https://support.dashlane.com/api/v2/help_center/en-us/articles/23955544757266.json",
+   "title": "Dashlane public API",
+   "quote": "The public API integration doesn't have logs, group sharing, or vault-related endpoints, so there is no access to plan members' passwords",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.dashlane.com/hc/en-us/articles/23955544757266-Dashlane-public-API"
+  },
+  {
+   "id": "c35",
+   "url": "https://support.dashlane.com/api/v2/help_center/en-us/articles/23955544757266.json",
+   "title": "Dashlane public API",
+   "quote": "The API key doesn’t expire, so there’s no need to generate a new one due to time limits.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.dashlane.com/hc/en-us/articles/23955544757266-Dashlane-public-API"
+  },
+  {
+   "id": "c36",
+   "url": "https://support.dashlane.com/api/v2/help_center/en-us/articles/23955544757266.json",
+   "title": "Dashlane public API",
+   "quote": "Select Developer Access and then Create API key .",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.dashlane.com/hc/en-us/articles/23955544757266-Dashlane-public-API"
+  },
+  {
+   "id": "c37",
+   "url": "https://get.dashlane.com/public-api/openapi.json",
+   "title": "Dashlane public API documentation (OpenAPI)",
+   "quote": "\"url\": \"https://api.dashlane.com/public\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://dashlane.github.io/public-api-documentation/"
+  },
+  {
+   "id": "c38",
+   "url": "https://get.dashlane.com/public-api/openapi.json",
+   "title": "Dashlane public API documentation (OpenAPI)",
+   "quote": "Get members information of the team",
+   "accessed": "2026-10-05",
+   "page_url": "https://dashlane.github.io/public-api-documentation/"
+  },
+  {
+   "id": "c39",
+   "url": "https://get.dashlane.com/public-api/openapi.json",
+   "title": "Dashlane public API documentation (OpenAPI)",
+   "quote": "\"/teams/MembersDeviceInformation\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://dashlane.github.io/public-api-documentation/"
+  },
+  {
+   "id": "c40",
+   "url": "https://get.dashlane.com/public-api/openapi.json",
+   "title": "Dashlane public API documentation (OpenAPI)",
+   "quote": "\"/teams/Status\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://dashlane.github.io/public-api-documentation/"
+  },
+  {
+   "id": "c41",
+   "url": "https://get.dashlane.com/public-api/openapi.json",
+   "title": "Dashlane public API documentation (OpenAPI)",
+   "quote": "\"/teams/PasswordHealth\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://dashlane.github.io/public-api-documentation/"
+  },
+  {
+   "id": "c42",
+   "url": "https://www.okta.com/integrations/dashlane/",
+   "title": "Integrate Dashlane with Okta",
+   "quote": "Integrate Dashlane with Okta",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c43",
+   "url": "https://jumpcloud.com/support/integrate-with-dashlane",
+   "title": "Integrate with Dashlane | JumpCloud Documentation",
+   "quote": "Automatically provision, update and deprovision users and groups in Dashlane from JumpCloud using the SCIM integration.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c44",
+   "url": "https://jumpcloud.com/support/integrate-with-dashlane",
+   "title": "Integrate with Dashlane | JumpCloud Documentation",
+   "quote": "A Dashlane Business plan",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c45",
+   "url": "https://support.dashlane.com/hc/en-us/articles/36319937686290-SCIM-Provisioning",
+   "title": "SCIM Provisioning",
+   "quote": "You can integrate Dashlane with your Identity Provider (IdP) using the Dashlane SCIM Provisioning for plan members.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c46",
+   "url": "https://get.dashlane.com/public-api/openapi.json",
+   "title": "Dashlane public API documentation (OpenAPI)",
+   "quote": "\"description\": \"Maximum number of results per page (default: 100)\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://dashlane.github.io/public-api-documentation/"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The plan comparison marks SSO and SCIM as not included in Credential Protection, but the Confidential SSO and IdP integration articles say SSO and SCIM are available to organizations with Password Management or Credential Protection.",
+   "cite": [
+    "c5",
+    "c7"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.dashlane.com/pricing",
+  "support.dashlane.com help-centre search API: SCIM, public API, offboard, deprovision",
+  "https://get.dashlane.com/public-api/openapi.json",
+  "https://www.okta.com/integrations/dashlane/",
+  "https://jumpcloud.com/support/integrate-with-dashlane",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/dashlane-provisioning-tutorial (404)"
+ ],
+ "open_questions": [
+  "SCIM base URL pattern, version, attribute list, filtering and pagination are not published (endpoint shown only in the Admin Console).",
+  "Docs do not say whether SCIM deactivation frees the seat or whether DELETE is supported.",
+  "Pricing cards render prices by JavaScript; headless render was blocked, so prices come from the pricing-page FAQ text. A '$11' custom price is set but not displayed on the Credential Protection card.",
+  "OneLogin is not covered in Dashlane's IdP table; OneLogin catalogue not checked.",
+  "Whether Credential Protection includes SSO/SCIM (conflicting Dashlane pages)."
+ ]
+}

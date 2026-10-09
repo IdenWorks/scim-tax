@@ -1,0 +1,939 @@
+{
+  "scim": {
+    "available": true,
+    "cite": [
+      "c9",
+      "c6",
+      "c11",
+      "c17"
+    ],
+    "plan": "Enterprise",
+    "addon_price_text": null,
+    "sso_required": false,
+    "version": "2.0",
+    "base_url": "(SCIM base URL shown in Devin settings, ends in /scim/v2)",
+    "auth": {
+      "method": "bearer",
+      "token_source": "Settings > Enterprise > Membership > Members > User and IdP group provisioning > Generate token",
+      "token_expiry": null,
+      "cite": [
+        "c14",
+        "c15",
+        "c16",
+        "c29"
+      ]
+    },
+    "endpoints": {
+      "Users": true,
+      "Groups": true,
+      "ServiceProviderConfig": true,
+      "Schemas": true,
+      "ResourceTypes": true,
+      "Bulk": null,
+      "Me": null,
+      "cite": [
+        "c18"
+      ]
+    },
+    "operations": {
+      "create": true,
+      "read": true,
+      "update_put": null,
+      "update_patch": null,
+      "deactivate": true,
+      "reactivate": true,
+      "delete": true,
+      "group_push": true,
+      "group_membership": true,
+      "cite": [
+        "c12",
+        "c13",
+        "c24",
+        "c31"
+      ]
+    },
+    "deprovision": {
+      "action": "remove_from_org",
+      "frees_seat": null,
+      "revokes_sessions": null,
+      "data_retained": null,
+      "cite": [
+        "c10",
+        "c24"
+      ],
+      "notes": "Deactivation removes the user's enterprise membership immediately; reassigning restores it. On legacy Windsurf Enterprise, removing a user disables access and stops the user taking up a seat (k4)."
+    },
+    "filtering": {
+      "supported": null,
+      "attributes": [],
+      "cite": []
+    },
+    "pagination": {
+      "supported": null,
+      "max_page_size": null,
+      "cite": []
+    },
+    "attributes": {
+      "core": [
+        "userName",
+        "active",
+        "emails",
+        "name.givenName",
+        "name.familyName",
+        "externalId"
+      ],
+      "enterprise": [],
+      "custom": {
+        "supported": false,
+        "how": "Other attributes are ignored (legacy Windsurf Enterprise SCIM accepts custom cliActive and acuCycleLimit attributes)."
+      },
+      "group": [
+        "displayName",
+        "members",
+        "externalId"
+      ],
+      "cite": [
+        "c19",
+        "c20",
+        "c21",
+        "c22",
+        "c38"
+      ]
+    },
+    "roles": {
+      "supported": true,
+      "how": "SCIM users get the default Enterprise Member role; SCIM groups appear as IdP groups mapped to enterprise roles and orgs in Settings > Enterprise > Membership > Groups (IdP).",
+      "cite": [
+        "c23"
+      ]
+    },
+    "rate_limits": {
+      "text": null,
+      "cite": []
+    },
+    "limitations": [
+      {
+        "text": "Only a limited attribute set is supported; other attributes are ignored. userName must be the user's work email.",
+        "cite": [
+          "c21",
+          "c22"
+        ]
+      },
+      {
+        "text": "Login-based JIT provisioning should be turned off when SCIM is used, or groups re-sync on every login.",
+        "cite": [
+          "c28"
+        ]
+      },
+      {
+        "text": "No Okta or Entra catalogue app: Okta uses the generic SCIM 2.0 Test App (OAuth Bearer Token) and Entra a non-gallery app.",
+        "cite": [
+          "c25",
+          "c26"
+        ]
+      }
+    ],
+    "notes": "Legacy Windsurf Enterprise (Devin Desktop) teams use https://server.codeium.com/scim/v2 with a service-key Bearer token; that page says it does not apply to Cognition Platform plans."
+  },
+  "user_api": {
+    "available": true,
+    "cite": [
+      "c42",
+      "c43",
+      "c47"
+    ],
+    "plan": "Enterprise",
+    "api_tax": true,
+    "style": "REST",
+    "base_url": "https://api.devin.ai/v3/enterprise",
+    "docs_url": "https://docs.devin.ai/api-reference/getting-started/enterprise-quickstart",
+    "auth": {
+      "methods": [
+        "api_key"
+      ],
+      "scopes": [
+        "ViewAccountMembership",
+        "ManageAccountMembership",
+        "ViewAccountAuditLogs"
+      ],
+      "cite": [
+        "c44",
+        "c47",
+        "c50"
+      ],
+      "notes": "Service-user or personal access token (cog_ prefix) as a Bearer token; endpoints are gated by RBAC permissions."
+    },
+    "capabilities": {
+      "list_users": true,
+      "get_user": true,
+      "create_user": null,
+      "invite_user": true,
+      "update_user": true,
+      "deactivate_user": null,
+      "delete_user": true,
+      "reactivate_user": null,
+      "manage_groups": true,
+      "assign_roles": true,
+      "assign_licenses": null,
+      "cite": [
+        "c46",
+        "c48",
+        "c49",
+        "c51",
+        "c52",
+        "c56",
+        "c54"
+      ]
+    },
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/v3/enterprise/members/users",
+        "purpose": "List users with direct role assignments",
+        "cite": [
+          "c46"
+        ]
+      },
+      {
+        "method": "GET",
+        "path": "/v3/enterprise/members/users/{user_id}",
+        "purpose": "Get user (direct and IdP-group roles)",
+        "cite": [
+          "c48"
+        ]
+      },
+      {
+        "method": "POST",
+        "path": "/v3/enterprise/members/users",
+        "purpose": "Invite users (bulk) with an enterprise role",
+        "cite": [
+          "c49"
+        ]
+      },
+      {
+        "method": "PATCH",
+        "path": "/v3/enterprise/members/users/{user_id}",
+        "purpose": "Update user (direct role assignments)",
+        "cite": [
+          "c51"
+        ]
+      },
+      {
+        "method": "DELETE",
+        "path": "/v3/enterprise/members/users/{user_id}",
+        "purpose": "Delete user (direct members only)",
+        "cite": [
+          "c52",
+          "c53"
+        ]
+      },
+      {
+        "method": "GET",
+        "path": "/v3/enterprise/members/idp-groups",
+        "purpose": "List IdP groups and their role mappings",
+        "cite": [
+          "c56"
+        ]
+      },
+      {
+        "method": "GET",
+        "path": "/v3/enterprise/roles",
+        "purpose": "List enterprise roles",
+        "cite": [
+          "c54"
+        ]
+      },
+      {
+        "method": "GET",
+        "path": "/v3/enterprise/audit-logs",
+        "purpose": "List enterprise audit logs",
+        "cite": [
+          "c55"
+        ]
+      }
+    ],
+    "webhooks_user_events": {
+      "supported": null,
+      "events": [],
+      "cite": []
+    },
+    "audit_log_api": {
+      "supported": true,
+      "plan": "Enterprise",
+      "cite": [
+        "c55",
+        "c43"
+      ]
+    },
+    "rate_limits": {
+      "text": null,
+      "cite": []
+    },
+    "limitations": [
+      {
+        "text": "Users whose membership comes from IdP groups cannot be removed or edited through the user endpoints; manage them through IdP groups.",
+        "cite": [
+          "c53"
+        ]
+      }
+    ],
+    "notes": "Member management sits under /v3/enterprise/* (Enterprise). An organization-level Users & Membership API is in beta and read-only."
+  },
+  "idp_apps": {
+    "okta": {
+      "listed": false,
+      "sso": null,
+      "provisioning": null,
+      "kind": null,
+      "built_by": null,
+      "url": null,
+      "cite": [
+        "c25"
+      ],
+      "notes": "No Okta catalogue app found; Devin documents the generic SCIM 2.0 Test App (OAuth Bearer Token) plus a separate OIDC/SAML app for SSO."
+    },
+    "entra": {
+      "listed": false,
+      "sso": null,
+      "provisioning": null,
+      "kind": null,
+      "built_by": null,
+      "url": null,
+      "cite": [
+        "c26"
+      ],
+      "notes": "No Entra gallery app found; Devin documents a non-gallery app."
+    },
+    "google": {
+      "listed": null,
+      "sso": null,
+      "provisioning": null,
+      "kind": null,
+      "built_by": null,
+      "url": null,
+      "cite": []
+    },
+    "onelogin": {
+      "listed": null,
+      "sso": null,
+      "provisioning": null,
+      "kind": null,
+      "built_by": null,
+      "url": null,
+      "cite": []
+    },
+    "jumpcloud": {
+      "listed": null,
+      "sso": null,
+      "provisioning": null,
+      "kind": null,
+      "built_by": null,
+      "url": null,
+      "cite": []
+    }
+  },
+  "fallbacks": {
+    "jit": true,
+    "jit_protocol": "both",
+    "csv_import": null,
+    "other_sync": null,
+    "docs_public": true,
+    "cite": [
+      "c40",
+      "c41",
+      "c6"
+    ]
+  },
+  "slug": "codeium",
+  "vendor": "Devin (Windsurf, formerly Codeium)",
+  "vendor_url": "https://devin.ai",
+  "researched_at": "2026-10-05",
+  "row": {
+    "vendor": "Devin (Windsurf, formerly Codeium)",
+    "slug": "codeium",
+    "category": "AI & LLM Tools",
+    "status": "gated",
+    "scim_plan": "Enterprise",
+    "scim_price_text": "Contact Sales",
+    "scim_price_per_user_mo": null,
+    "team_plan": "Teams",
+    "team_price_text": "Teams: $40/full seat/mo, $80/mo minimum (monthly)",
+    "team_price_per_user_mo": 40,
+    "price_multiplier": null,
+    "sso_plan": "Enterprise",
+    "sso_price_per_user_mo": null,
+    "sso_required_for_scim": false,
+    "scim_addon_price_text": null,
+    "min_seats": null,
+    "scim_ops": {
+      "create": true,
+      "update": true,
+      "deactivate": true,
+      "delete": true,
+      "groups": true
+    },
+    "idp": {
+      "okta": "via_generic",
+      "entra": "via_generic",
+      "google": null,
+      "onelogin": null,
+      "jumpcloud": null,
+      "generic": true
+    },
+    "pricing_page_url": "https://devin.ai/pricing",
+    "docs_url": "https://docs.devin.ai/enterprise/security-access/scim",
+    "evidence": "Devin's pricing page lists SAML/OIDC SSO only under the \"Let's talk\" Enterprise plan, and its SCIM docs say \"Devin Enterprise supports SCIM 2.0 for automatic user and group provisioning.\"",
+    "notes": "Windsurf (formerly Codeium) is now sold as part of Devin by Cognition: windsurf.com/pricing redirects to devin.ai/pricing and the Windsurf editor is now Devin Desktop. Plans changed since June: the Teams plan is now $80/month for the team plus $40/month per full seat (free flex seats; $80/month minimum; monthly price, no annual option shown; up to 200 users), replacing Teams at $35/user; the $60/user Enterprise price is gone and Enterprise is now Contact Sales. SSO and SCIM are Enterprise-only. Research covers Devin Enterprise (Cognition Platform) SCIM; legacy Windsurf Enterprise teams use a separate SCIM endpoint at https://server.codeium.com/scim/v2 (Enterprise-only), where removing a user frees the seat.",
+    "confidence": "medium",
+    "last_verified": "2026-10-05",
+    "api_provisioning": false,
+    "user_api_available": true,
+    "user_api_plan": "Enterprise",
+    "api_tax": true,
+    "first_added": null,
+    "status_prev": "gated"
+  },
+  "plans": [
+    {
+      "name": "Free",
+      "price_text": "$0",
+      "price_per_user_mo": 0,
+      "billing": "unknown",
+      "sso": false,
+      "scim": false,
+      "user_api": null,
+      "audit_log_api": null,
+      "cite": [
+        "c1",
+        "c6"
+      ]
+    },
+    {
+      "name": "Pro",
+      "price_text": "$20/month (individual)",
+      "price_per_user_mo": 20,
+      "billing": "monthly",
+      "sso": false,
+      "scim": false,
+      "user_api": null,
+      "audit_log_api": null,
+      "cite": [
+        "c2",
+        "c6"
+      ]
+    },
+    {
+      "name": "Max",
+      "price_text": "$200/month (individual)",
+      "price_per_user_mo": 200,
+      "billing": "monthly",
+      "sso": false,
+      "scim": false,
+      "user_api": null,
+      "audit_log_api": null,
+      "cite": [
+        "c3",
+        "c6"
+      ]
+    },
+    {
+      "name": "Teams",
+      "price_text": "$80/month for team plan + $40/month per full seat ($80/month minimum, up to 200 users)",
+      "price_per_user_mo": 40,
+      "billing": "monthly",
+      "sso": false,
+      "scim": false,
+      "user_api": null,
+      "audit_log_api": null,
+      "cite": [
+        "c4",
+        "c5",
+        "c7",
+        "c6"
+      ]
+    },
+    {
+      "name": "Enterprise",
+      "price_text": "Let's talk (Contact Sales)",
+      "price_per_user_mo": null,
+      "billing": "unknown",
+      "sso": true,
+      "scim": true,
+      "user_api": true,
+      "audit_log_api": true,
+      "cite": [
+        "c6",
+        "c9",
+        "c42",
+        "c43"
+      ]
+    }
+  ],
+  "citations": [
+    {
+      "id": "c1",
+      "url": "https://devin.ai/pricing",
+      "title": "Plans and Pricing | Devin",
+      "quote": "Free $0 Download Light quota to code with agents",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c2",
+      "url": "https://devin.ai/pricing",
+      "title": "Plans and Pricing | Devin",
+      "quote": "Pro POPULAR $20 per month",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c3",
+      "url": "https://devin.ai/pricing",
+      "title": "Plans and Pricing | Devin",
+      "quote": "Max NEW $200 per month",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c4",
+      "url": "https://devin.ai/pricing",
+      "title": "Plans and Pricing | Devin",
+      "quote": "Teams $80 /month for team plan + $40/mo per full dev seat",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c5",
+      "url": "https://devin.ai/pricing",
+      "title": "Plans and Pricing | Devin",
+      "quote": "Up to 200 users Share and collaborate Centralized billing Admin dashboard with analytics Priority support",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c6",
+      "url": "https://devin.ai/pricing",
+      "title": "Plans and Pricing | Devin",
+      "quote": "Enterprise Let's talk Get a Demo Built to scale across your organization: Highest priority support Dedicated account management SAML/OIDC SSO Centralized enterprise admin controls",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c7",
+      "url": "https://docs.devin.ai/admin/billing/self-serve",
+      "title": "Self-serve plans - Devin Docs",
+      "quote": "$80/month minimum: every Teams account pays at least $80/month.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c8",
+      "url": "https://docs.devin.ai/admin/billing/self-serve",
+      "title": "Self-serve plans - Devin Docs",
+      "quote": "Larger teams should contact sales about Enterprise.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c9",
+      "url": "https://docs.devin.ai/enterprise/security-access/scim",
+      "title": "SCIM Setup - Devin Docs",
+      "quote": "Devin Enterprise supports SCIM 2.0 for automatic user and group provisioning.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c10",
+      "url": "https://docs.devin.ai/enterprise/security-access/scim",
+      "title": "SCIM Setup - Devin Docs",
+      "quote": "deprovisioned users lose enterprise membership immediately, and group memberships stay in sync without waiting for the next login.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c11",
+      "url": "https://docs.devin.ai/enterprise/security-access/scim",
+      "title": "SCIM Setup - Devin Docs",
+      "quote": "SSO is not required to use SCIM, but it is highly recommended.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c12",
+      "url": "https://docs.devin.ai/enterprise/security-access/scim",
+      "title": "SCIM Setup - Devin Docs",
+      "quote": "Users Create, read, list, update, deactivate, delete",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c13",
+      "url": "https://docs.devin.ai/enterprise/security-access/scim",
+      "title": "SCIM Setup - Devin Docs",
+      "quote": "Groups Create, read, list, update, delete",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c14",
+      "url": "https://docs.devin.ai/enterprise/security-access/scim",
+      "title": "SCIM Setup - Devin Docs",
+      "quote": "In Devin, go to Settings → Enterprise → Membership and select the Members tab",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c15",
+      "url": "https://docs.devin.ai/enterprise/security-access/scim",
+      "title": "SCIM Setup - Devin Docs",
+      "quote": "Under SCIM bearer token, click Generate token and copy the bearer token",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c16",
+      "url": "https://docs.devin.ai/enterprise/security-access/scim",
+      "title": "SCIM Setup - Devin Docs",
+      "quote": "The bearer token is only shown once. Store it securely. You can rotate or revoke it from the same settings section at any time.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c17",
+      "url": "https://docs.devin.ai/enterprise/security-access/scim",
+      "title": "SCIM Setup - Devin Docs",
+      "quote": "Base URL: the SCIM base URL from Devin (ends in /scim/v2)",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c18",
+      "url": "https://docs.devin.ai/enterprise/security-access/scim",
+      "title": "SCIM Setup - Devin Docs",
+      "quote": "Resources: /Users and /Groups, with standard discovery endpoints (/ServiceProviderConfig, /ResourceTypes, /Schemas)",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c19",
+      "url": "https://docs.devin.ai/enterprise/security-access/scim",
+      "title": "SCIM Setup - Devin Docs",
+      "quote": "Users: userName, active, emails, name.givenName, name.familyName, externalId",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c20",
+      "url": "https://docs.devin.ai/enterprise/security-access/scim",
+      "title": "SCIM Setup - Devin Docs",
+      "quote": "Groups: displayName, members, externalId",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c21",
+      "url": "https://docs.devin.ai/enterprise/security-access/scim",
+      "title": "SCIM Setup - Devin Docs",
+      "quote": "Limited attribute set: other attributes are ignored.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c22",
+      "url": "https://docs.devin.ai/enterprise/security-access/scim",
+      "title": "SCIM Setup - Devin Docs",
+      "quote": "A user's userName must be their email address, and must match the work email that is provisioned.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c23",
+      "url": "https://docs.devin.ai/enterprise/security-access/scim",
+      "title": "SCIM Setup - Devin Docs",
+      "quote": "Assigned users are provisioned into your Devin enterprise with the default Enterprise Member role — before they ever log in. Map provisioned groups to roles and orgs under Settings → Enterprise → Membership, in the Groups (IdP) tab.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c24",
+      "url": "https://docs.devin.ai/enterprise/security-access/scim",
+      "title": "SCIM Setup - Devin Docs",
+      "quote": "Deactivating a user in your IdP removes their enterprise membership right away; reassigning them restores it",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c25",
+      "url": "https://docs.devin.ai/enterprise/security-access/scim",
+      "title": "SCIM Setup - Devin Docs",
+      "quote": "Search for SCIM 2.0 Test App (OAuth Bearer Token)",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c26",
+      "url": "https://docs.devin.ai/enterprise/security-access/scim",
+      "title": "SCIM Setup - Devin Docs",
+      "quote": "keep the non-gallery option selected, and click Create",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c27",
+      "url": "https://docs.devin.ai/enterprise/security-access/scim",
+      "title": "SCIM Setup - Devin Docs",
+      "quote": "Any SCIM 2.0-compliant identity provider can provision users and groups to Devin:",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c28",
+      "url": "https://docs.devin.ai/enterprise/security-access/scim",
+      "title": "SCIM Setup - Devin Docs",
+      "quote": "Login-based just-in-time (JIT) provisioning should be turned off when using SCIM. Otherwise groups re-sync on every login and conflict with the groups SCIM pushes.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c29",
+      "url": "https://docs.devin.ai/enterprise/security-access/scim",
+      "title": "SCIM Setup - Devin Docs",
+      "quote": "Authentication: HTTP Authorization: Bearer <token> header",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c30",
+      "url": "https://docs.devin.ai/enterprise/security-access/scim",
+      "title": "SCIM Setup - Devin Docs",
+      "quote": "enable Create Users, Update User Attributes, and Deactivate Users",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c31",
+      "url": "https://docs.devin.ai/enterprise/security-access/scim",
+      "title": "SCIM Setup - Devin Docs",
+      "quote": "To sync groups to Devin, also push them under the Push Groups tab",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c32",
+      "url": "https://docs.devin.ai/desktop/accounts/sso-scim",
+      "title": "Setting up SSO & SCIM - Devin Desktop Docs",
+      "quote": "This feature is only available to Enterprise users.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c33",
+      "url": "https://docs.devin.ai/desktop/accounts/sso-scim",
+      "title": "Setting up SSO & SCIM - Devin Desktop Docs",
+      "quote": "This feature is not applicable to Cognition Platform plans. For Cognition Platform, SSO should be configured and managed in your Cognition Platform settings instead.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c34",
+      "url": "https://docs.devin.ai/desktop/accounts/sso-scim",
+      "title": "Setting up SSO & SCIM - Devin Desktop Docs",
+      "quote": "SCIM connector base URL: https://server.codeium.com/scim/v2",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c35",
+      "url": "https://docs.devin.ai/desktop/accounts/sso-scim",
+      "title": "Setting up SSO & SCIM - Devin Desktop Docs",
+      "quote": "Note that removing users only disables them access to Devin Desktop (and stops them from taking up a seat) rather than deleting users due to Azure's SCIM design.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c36",
+      "url": "https://docs.devin.ai/desktop/accounts/sso-scim",
+      "title": "Setting up SSO & SCIM - Devin Desktop Docs",
+      "quote": "Devin Desktop only supports SP-initiated SSO; IDP-initiated SSO is NOT currently supported.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c37",
+      "url": "https://docs.devin.ai/desktop/accounts/sso-scim",
+      "title": "Setting up SSO & SCIM - Devin Desktop Docs",
+      "quote": "Now every 40 minutes your users and groups for the Entra ID application will be synced to Devin Desktop.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c38",
+      "url": "https://docs.devin.ai/desktop/accounts/sso-scim",
+      "title": "Setting up SSO & SCIM - Devin Desktop Docs",
+      "quote": "In Okta or Microsoft Entra, acuCycleLimit is configured as a custom SCIM attribute mapping on the user profile.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c39",
+      "url": "https://docs.devin.ai/desktop/accounts/sso-scim",
+      "title": "Setting up SSO & SCIM - Devin Desktop Docs",
+      "quote": "Users who login to Devin Desktop via SSO will be auto-approved into the team.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c40",
+      "url": "https://docs.devin.ai/enterprise/security-access/sso/guide",
+      "title": "SSO Onboarding Guide - Devin Docs",
+      "quote": "Creates the user's account if it's their first login (just-in-time provisioning)",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c41",
+      "url": "https://docs.devin.ai/enterprise/security-access/sso/guide",
+      "title": "SSO Onboarding Guide - Devin Docs",
+      "quote": "Auto-membership on login is enabled — any user who authenticates via SSO is automatically added to your enterprise",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c42",
+      "url": "https://docs.devin.ai/api-reference/getting-started/enterprise-quickstart",
+      "title": "Quick start: Enterprise - Devin Docs",
+      "quote": "This guide walks you through setting up API access for enterprise organizations with custom roles, RBAC, and multi-organization support.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c43",
+      "url": "https://docs.devin.ai/api-reference/getting-started/enterprise-quickstart",
+      "title": "Quick start: Enterprise - Devin Docs",
+      "quote": "Enterprise /v3/enterprise/* Cross-org management, analytics, audit logs, member management",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c44",
+      "url": "https://docs.devin.ai/api-reference/getting-started/enterprise-quickstart",
+      "title": "Quick start: Enterprise - Devin Docs",
+      "quote": "Copy the key immediately — it starts with cog_ and won't be shown again",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c45",
+      "url": "https://docs.devin.ai/api-reference/getting-started/enterprise-quickstart",
+      "title": "Quick start: Enterprise - Devin Docs",
+      "quote": "curl \"https://api.devin.ai/v3/enterprise/organizations\"",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c46",
+      "url": "https://docs.devin.ai/api-reference/v3/users/members-users.md",
+      "title": "List Users - Devin API v3 (Markdown export)",
+      "quote": "v3-openapi.yaml GET /v3/enterprise/members/users",
+      "accessed": "2026-10-05",
+      "page_url": "https://docs.devin.ai/api-reference/v3/users/members-users"
+    },
+    {
+      "id": "c47",
+      "url": "https://docs.devin.ai/api-reference/v3/users/members-users.md",
+      "title": "List Users - Devin API v3 (Markdown export)",
+      "quote": "with the ViewAccountMembership permission at the enterprise level.",
+      "accessed": "2026-10-05",
+      "page_url": "https://docs.devin.ai/api-reference/v3/users/members-users"
+    },
+    {
+      "id": "c48",
+      "url": "https://docs.devin.ai/api-reference/v3/users/get-members-user.md",
+      "title": "Get User - Devin API v3 (Markdown export)",
+      "quote": "v3-openapi.yaml GET /v3/enterprise/members/users/{user_id}",
+      "accessed": "2026-10-05",
+      "page_url": "https://docs.devin.ai/api-reference/v3/users/get-members-user"
+    },
+    {
+      "id": "c49",
+      "url": "https://docs.devin.ai/api-reference/v3/users/post-members-users.md",
+      "title": "Invite Users - Devin API v3 (Markdown export)",
+      "quote": "v3-openapi.yaml POST /v3/enterprise/members/users",
+      "accessed": "2026-10-05",
+      "page_url": "https://docs.devin.ai/api-reference/v3/users/post-members-users"
+    },
+    {
+      "id": "c50",
+      "url": "https://docs.devin.ai/api-reference/v3/users/post-members-users.md",
+      "title": "Invite Users - Devin API v3 (Markdown export)",
+      "quote": "with the ManageAccountMembership permission at the enterprise level.",
+      "accessed": "2026-10-05",
+      "page_url": "https://docs.devin.ai/api-reference/v3/users/post-members-users"
+    },
+    {
+      "id": "c51",
+      "url": "https://docs.devin.ai/api-reference/v3/users/patch-members-users.md",
+      "title": "Update User - Devin API v3 (Markdown export)",
+      "quote": "v3-openapi.yaml PATCH /v3/enterprise/members/users/{user_id}",
+      "accessed": "2026-10-05",
+      "page_url": "https://docs.devin.ai/api-reference/v3/users/patch-members-users"
+    },
+    {
+      "id": "c52",
+      "url": "https://docs.devin.ai/api-reference/v3/users/delete-members-users.md",
+      "title": "Delete User - Devin API v3 (Markdown export)",
+      "quote": "v3-openapi.yaml DELETE /v3/enterprise/members/users/{user_id}",
+      "accessed": "2026-10-05",
+      "page_url": "https://docs.devin.ai/api-reference/v3/users/delete-members-users"
+    },
+    {
+      "id": "c53",
+      "url": "https://docs.devin.ai/api-reference/v3/users/delete-members-users.md",
+      "title": "Delete User - Devin API v3 (Markdown export)",
+      "quote": "Users whose membership is derived from IDP group assignments cannot be removed through this endpoint",
+      "accessed": "2026-10-05",
+      "page_url": "https://docs.devin.ai/api-reference/v3/users/delete-members-users"
+    },
+    {
+      "id": "c54",
+      "url": "https://docs.devin.ai/api-reference/v3/roles/roles.md",
+      "title": "List Roles - Devin API v3 (Markdown export)",
+      "quote": "v3-openapi.yaml GET /v3/enterprise/roles",
+      "accessed": "2026-10-05",
+      "page_url": "https://docs.devin.ai/api-reference/v3/roles/roles"
+    },
+    {
+      "id": "c55",
+      "url": "https://docs.devin.ai/api-reference/v3/audit-logs/enterprise-audit-logs.md",
+      "title": "List Audit Logs - Devin API v3 (Markdown export)",
+      "quote": "v3-openapi.yaml GET /v3/enterprise/audit-logs",
+      "accessed": "2026-10-05",
+      "page_url": "https://docs.devin.ai/api-reference/v3/audit-logs/enterprise-audit-logs"
+    },
+    {
+      "id": "c56",
+      "url": "https://docs.devin.ai/api-reference/v3/idp-groups/members-idp-groups.md",
+      "title": "List IDP Groups - Devin API v3 (Markdown export)",
+      "quote": "v3-openapi.yaml GET /v3/enterprise/members/idp-groups",
+      "accessed": "2026-10-05",
+      "page_url": "https://docs.devin.ai/api-reference/v3/idp-groups/members-idp-groups"
+    }
+  ],
+  "conflicts": [],
+  "searched": [
+    "https://windsurf.com/pricing (redirects to https://devin.ai/pricing)",
+    "https://docs.devin.ai/llms.txt",
+    "https://docs.devin.ai/_llms/en/api.md",
+    "https://www.okta.com/integrations/windsurf/ (404)",
+    "https://www.okta.com/integrations/devin/ (404)",
+    "https://learn.microsoft.com/en-us/entra/identity/saas-apps/windsurf-tutorial (404)",
+    "web search: Windsurf/Devin/Codeium site:okta.com/integrations"
+  ],
+  "open_questions": [
+    "Whether SCIM deactivation on Devin Enterprise frees a billed seat (Enterprise billing is contract/ACU based) is not documented.",
+    "SCIM token expiry, filtering, pagination and rate limits are not documented.",
+    "Whether Devin Enterprise SCIM uses PUT, PATCH or both for updates is not documented.",
+    "JumpCloud catalogue page returned 403; OneLogin and Google catalogue not checked.",
+    "Enterprise price is not published; the old $60/user Enterprise price no longer appears."
+  ]
+}

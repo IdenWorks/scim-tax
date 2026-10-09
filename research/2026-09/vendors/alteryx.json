@@ -1,0 +1,832 @@
+{
+ "slug": "alteryx",
+ "vendor": "Alteryx",
+ "vendor_url": "https://www.alteryx.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Alteryx",
+  "slug": "alteryx",
+  "category": "Data, Analytics & BI",
+  "status": "gated",
+  "scim_plan": "Enterprise Edition",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Starter Edition",
+  "team_price_text": "Starter: $250/user/mo billed annually",
+  "team_price_per_user_mo": 250,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": 10,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.alteryx.com/platform/pricing",
+  "docs_url": "https://help.alteryx.com/aac/en/platform/admin/admin-reference/admin-console/scim-auto-provisioning.html",
+  "evidence": "Alteryx One help: \"SCIM auto-provisioning is available only with the Enterprise Edition\"; the pricing page lists Enterprise Edition as Contact Sales above Starter at $250 USD per user/month billed annually.",
+  "notes": "Alteryx One editions: Starter $250/user/mo annual (1-10 seats, cloud only), Professional and Enterprise Contact Sales; Enterprise starts at 10+ users. SCIM 2.0 with a workspace tenant URL and admin-generated bearer token (lifetime in days); requires SAML SSO on the workspace first. Okta's OIN Alteryx One app is SAML only, so Okta and Entra use the generic endpoint per Alteryx's guides. Deprovisioning disables the user and removes roles; disabled users still count against the workspace limit. SSO tier is not stated on the pricing page or docs. Self-hosted Alteryx Server has separate Entra SCIM and a v3 user API.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Starter Edition",
+   "price_text": "$250 USD user/month, billed annually (1-10 seats)",
+   "price_per_user_mo": 250,
+   "billing": "annual",
+   "sso": null,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c4",
+    "c5",
+    "c45"
+   ]
+  },
+  {
+   "name": "Professional Edition",
+   "price_text": "Contact Sales",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c5",
+    "c31"
+   ]
+  },
+  {
+   "name": "Enterprise Edition",
+   "price_text": "Contact Sales (10+ users)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c4",
+    "c5"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c5",
+   "c6",
+   "c9",
+   "c15",
+   "c21"
+  ],
+  "plan": "Enterprise Edition",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "Workspace-specific Tenant URL shown in Admin Console > User Provisioning (pattern not published)",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Workspace Admin Console > User Provisioning > Automatic User Provisioning > Alteryx Token Authentication > Generate Token",
+   "token_expiry": "Lifetime set in days at generation (setup guides use 365)",
+   "cite": [
+    "c10",
+    "c16",
+    "c22"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c6",
+    "c9",
+    "c16"
+   ],
+   "notes": "Endpoint paths are not listed; Users and Groups are implied by the documented user provisioning and Push Groups against the tenant URL."
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": null,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c6",
+    "c7",
+    "c12",
+    "c16",
+    "c17"
+   ],
+   "notes": "Okta guide enables Create Users, Update User Attributes, Deactivate Users and Push Groups. Removing a pushed group deletes the matching Alteryx user group."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": false,
+   "revokes_sessions": null,
+   "data_retained": "User is disabled and roles removed; a disabled user's assets remain but ownership does not transfer (admin has ownership privileges). Disabled users still count against the workspace limit.",
+   "cite": [
+    "c7",
+    "c23",
+    "c24"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "active",
+    "emails[type eq \"work\"].value",
+    "name.givenName",
+    "name.familyName",
+    "externalId"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": [
+    "c18",
+    "c20"
+   ],
+   "notes": "Attributes are the ones the Okta and Entra guides tell admins to keep; Okta matches users on email."
+  },
+  "roles": {
+   "supported": true,
+   "how": "IdP security groups become Alteryx user groups; roles are assigned to those user groups in Admin Console and inherited by members.",
+   "cite": [
+    "c14"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SCIM is Enterprise Edition only.",
+    "cite": [
+     "c5"
+    ]
+   },
+   {
+    "text": "SAML SSO must be enabled on the workspace before SCIM (Okta and Entra guides).",
+    "cite": [
+     "c15",
+     "c21"
+    ]
+   },
+   {
+    "text": "SCIM overrides manual user and group changes made by workspace admins.",
+    "cite": [
+     "c11"
+    ]
+   },
+   {
+    "text": "SCIM-originated changes carry originating_service CUSTOMER_SCIM in audit events.",
+    "cite": [
+     "c13"
+    ]
+   }
+  ],
+  "notes": "Researched for Alteryx One (cloud). Self-hosted Alteryx Server has its own SCIM integration with Microsoft Entra ID, which needs SAML SSO on the Server."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c27",
+   "c28",
+   "c30",
+   "c31"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://us1.alteryxcloud.com (also EU and APAC regions)",
+  "docs_url": "https://help.alteryx.com/aac/en/developer-help/get-started-with-alteryx-one-apis.html",
+  "auth": {
+   "methods": [
+    "oauth2",
+    "bearer_token"
+   ],
+   "scopes": [],
+   "cite": [
+    "c30",
+    "c31"
+   ]
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": true,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c27",
+    "c28"
+   ],
+   "notes": "Alteryx One help says the API can invite and revoke access for batches of users; the full reference (api-docs.us1.alteryxcloud.com) is a JS app that did not load. Alteryx Server API v3 separately supports create, list, get, update, deactivate and delete users."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/v4/workspaces",
+    "purpose": "List workspaces (Alteryx One)",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v4/workspaces/<id>/people/batch",
+    "purpose": "Invite a batch of users to a workspace (Alteryx One)",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v3/users",
+    "purpose": "Alteryx Server: create user",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v3/users",
+    "purpose": "Alteryx Server: list users",
+    "cite": [
+     "c36"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v3/users/{userId}",
+    "purpose": "Alteryx Server: get user",
+    "cite": [
+     "c37"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/v3/users/{userId}",
+    "purpose": "Alteryx Server: update user (incl. role)",
+    "cite": [
+     "c38"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v3/users/{userId}/deactivate",
+    "purpose": "Alteryx Server: deactivate user",
+    "cite": [
+     "c35"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v3/users/{userId}",
+    "purpose": "Alteryx Server: delete user",
+    "cite": [
+     "c39"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/v3/users/{userId}/assetTransfer",
+    "purpose": "Alteryx Server: transfer a user's assets",
+    "cite": [
+     "c40"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": [],
+   "notes": "Audit Logs page offers CSV download; Enterprise adds scheduled Audit Log Export to customer storage. No audit-log API endpoint found."
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Alteryx Server API v3 user endpoints apply to self-hosted Alteryx Server (part of Enterprise Edition), not the Alteryx One cloud workspace.",
+    "cite": [
+     "c34",
+     "c3"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/alteryx-one/",
+   "cite": [
+    "c43",
+    "c19"
+   ],
+   "notes": "OIN Alteryx One app marks SAML only; Alteryx's guide turns on 'Enable SCIM provisioning' on the workspace's app and enters the generic tenant URL and token."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/alteryx-server-tutorial",
+   "cite": [
+    "c44",
+    "c22"
+   ],
+   "notes": "Gallery tutorial covers Alteryx Server SSO; Alteryx One SCIM is configured on an existing enterprise app with the tenant URL and secret token."
+  },
+  "google": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c26"
+   ],
+   "notes": "Alteryx documents Google Cloud Platform OIDC SSO; no Google provisioning documented."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c6"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.alteryx.com/platform/pricing",
+   "title": "Alteryx One Pricing | Plans & Enterprise Options",
+   "quote": "Starter Edition $250 USD user / month | billed annually",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://www.alteryx.com/platform/pricing",
+   "title": "Alteryx One Pricing | Plans & Enterprise Options",
+   "quote": "Professional Edition Contact Sales Advanced and automated analytics, hybrid deployment, and collaborative workflows for growing data teams.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://www.alteryx.com/platform/pricing",
+   "title": "Alteryx One Pricing | Plans & Enterprise Options",
+   "quote": "Enterprise Edition Contact Sales Full-scale automation, enterprise governance, and private data handling for large organizations.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://www.alteryx.com/platform/pricing",
+   "title": "Alteryx One Pricing | Plans & Enterprise Options",
+   "quote": "Number of Seats 1 - 10 (price per user) 1+ users 10+ users",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://help.alteryx.com/aac/en/platform/admin/admin-reference/admin-console/scim-auto-provisioning.html",
+   "title": "SCIM Auto-Provisioning | Alteryx One",
+   "quote": "SCIM auto-provisioning is available only with the Enterprise Edition.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://help.alteryx.com/aac/en/platform/admin/admin-reference/admin-console/scim-auto-provisioning.html",
+   "title": "SCIM Auto-Provisioning | Alteryx One",
+   "quote": "Alteryx supports the ability to provision, update and deprovision Alteryx One Platform users through the System for Cross-domain Identity Management (SCIM) protocol.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://help.alteryx.com/aac/en/platform/admin/admin-reference/admin-console/scim-auto-provisioning.html",
+   "title": "SCIM Auto-Provisioning | Alteryx One",
+   "quote": "If a user was provided workspace access exclusively through that security group, that user will also be disabled and have their roles removed, preventing access to and within that workspace.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://help.alteryx.com/aac/en/platform/admin/admin-reference/admin-console/scim-auto-provisioning.html",
+   "title": "SCIM Auto-Provisioning | Alteryx One",
+   "quote": "When SCIM is enabled, and a security group is removed from the IdP application, the corresponding user group will be deleted from that workspace.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://help.alteryx.com/aac/en/platform/admin/admin-reference/admin-console/scim-auto-provisioning.html",
+   "title": "SCIM Auto-Provisioning | Alteryx One",
+   "quote": "While you can integrate any IdP that supports the SCIM 2.0 protocol, Alteryx supports setup guides for the most popular SCIM-supporting IdPs",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://help.alteryx.com/aac/en/platform/admin/admin-reference/admin-console/scim-auto-provisioning.html",
+   "title": "SCIM Auto-Provisioning | Alteryx One",
+   "quote": "Note and copy the Tenant URL. You will need this later. Select Generate Token. In the Lifetime (Days) field, enter “365”.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c11",
+   "url": "https://help.alteryx.com/aac/en/platform/admin/admin-reference/admin-console/scim-auto-provisioning.html",
+   "title": "SCIM Auto-Provisioning | Alteryx One",
+   "quote": "When SCIM is enabled, workspace administrators can still manually manage users and user groups, however SCIM will override manual changes.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://help.alteryx.com/aac/en/platform/admin/admin-reference/admin-console/scim-auto-provisioning.html",
+   "title": "SCIM Auto-Provisioning | Alteryx One",
+   "quote": "When SCIM is enabled, and a user’s name has been updated in the Idp or source directory, that user’s name will also be updated in Alteryx One Platform.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://help.alteryx.com/aac/en/platform/admin/admin-reference/admin-console/scim-auto-provisioning.html",
+   "title": "SCIM Auto-Provisioning | Alteryx One",
+   "quote": "System updates caused by SCIM auto-provisioning will contain CUSTOMER_SCIM as the originating_service value in all audit event payloads.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c14",
+   "url": "https://help.alteryx.com/aac/en/platform/admin/admin-reference/admin-console/scim-auto-provisioning.html",
+   "title": "SCIM Auto-Provisioning | Alteryx One",
+   "quote": "If one or more roles have already been assigned to that user group within Alteryx One Platform, those users will also inherit those roles and related permissions.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://help.alteryx.com/aac/en/platform/admin/admin-reference/admin-console/scim-auto-provisioning/configure-scim-for-okta.html",
+   "title": "Configure SCIM for OKTA | Alteryx One",
+   "quote": "You have already enabled SAML SSO for your workspace. For more information, see Okta SSO Setup Guide (SAML).",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://help.alteryx.com/aac/en/platform/admin/admin-reference/admin-console/scim-auto-provisioning/configure-scim-for-okta.html",
+   "title": "Configure SCIM for OKTA | Alteryx One",
+   "quote": "In the Supported provisioning actions section, select the checkbox next to Push New Users, Push Profile Updates, and Push Groups. In the Authentication Mode dropdown, select “HTTP Header”.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c17",
+   "url": "https://help.alteryx.com/aac/en/platform/admin/admin-reference/admin-console/scim-auto-provisioning/configure-scim-for-okta.html",
+   "title": "Configure SCIM for OKTA | Alteryx One",
+   "quote": "Select the checkbox next to Create Users. Select the checkbox next to Update User Attributes. Select the checkbox next to Deactivate Users.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c18",
+   "url": "https://help.alteryx.com/aac/en/platform/admin/admin-reference/admin-console/scim-auto-provisioning/configure-scim-for-okta.html",
+   "title": "Configure SCIM for OKTA | Alteryx One",
+   "quote": "givenName: user.firstName familyName: user.lastName email: user.email",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c19",
+   "url": "https://help.alteryx.com/aac/en/platform/admin/admin-reference/admin-console/scim-auto-provisioning/configure-scim-for-okta.html",
+   "title": "Configure SCIM for OKTA | Alteryx One",
+   "quote": "Under the General tab, in the App Settings section, select Edit. Select the checkbox next to Enable SCIM provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c20",
+   "url": "https://help.alteryx.com/aac/en/platform/admin/admin-reference/admin-console/scim-auto-provisioning/configure-scim-for-entra.html",
+   "title": "Configure SCIM for Entra | Alteryx One",
+   "quote": "userName:userPrincipalName active: Switch([IsSoftDeleted], , \"False\", \"True\", \"True\", \"False\") emails[type eq \"work\"].value: mail name.givenName: givenName name.familyName: surname externalId: mailNickname",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c21",
+   "url": "https://help.alteryx.com/aac/en/platform/admin/admin-reference/admin-console/scim-auto-provisioning/configure-scim-for-entra.html",
+   "title": "Configure SCIM for Entra | Alteryx One",
+   "quote": "You have already enabled SAML SSO for your workspace. For more information, see Azure SSO Setup Guide (SAML)",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c22",
+   "url": "https://help.alteryx.com/aac/en/platform/admin/admin-reference/admin-console/scim-auto-provisioning/configure-scim-for-entra.html",
+   "title": "Configure SCIM for Entra | Alteryx One",
+   "quote": "In the Tenant URL field, paste the Tenant URL value copied from your workspace. In the Secret Token field, paste your SCIM token value copied from your workspace.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c23",
+   "url": "https://help.alteryx.com/aac/en/platform/admin/admin-reference/admin-console/users-page.html",
+   "title": "Users Page | Alteryx One",
+   "quote": "Disable: When an admin disables a user, the user can't access Alteryx One. The disabled user still counts against the project or workspace limit.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c24",
+   "url": "https://help.alteryx.com/aac/en/platform/admin/admin-reference/admin-console/users-page.html",
+   "title": "Users Page | Alteryx One",
+   "quote": "A disabled user's assets remain within Alteryx One. Ownership does not transfer, however, the user can't access the assets.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c25",
+   "url": "https://help.alteryx.com/aac/en/platform/admin/admin-reference/admin-console/single-sign-on.html",
+   "title": "Single Sign-On | Alteryx One",
+   "quote": "You can use any identity provider that supports the OIDC or SAML 2.0 protocols.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c26",
+   "url": "https://help.alteryx.com/aac/en/platform/admin/admin-reference/admin-console/single-sign-on.html",
+   "title": "Single Sign-On | Alteryx One",
+   "quote": "Google Cloud Platform SSO Setup Guide (OIDC) Okta SSO Setup Guide (OIDC)",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c27",
+   "url": "https://help.alteryx.com/aac/en/developer-help/get-started-with-alteryx-one-apis.html",
+   "title": "Get Started with Alteryx One APIs",
+   "quote": "Invite a batch of users to join Alteryx One. Revoke access for a batch of users.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c28",
+   "url": "https://help.alteryx.com/aac/en/developer-help/get-started-with-alteryx-one-apis.html",
+   "title": "Get Started with Alteryx One APIs",
+   "quote": "curl -X POST 'https://us1.alteryxcloud.com/v4/workspaces/<id>/people/batch'",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c29",
+   "url": "https://help.alteryx.com/aac/en/developer-help/get-started-with-alteryx-one-apis.html",
+   "title": "Get Started with Alteryx One APIs",
+   "quote": "curl -X GET 'https://us1.alteryxcloud.com/v4/workspaces'",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c30",
+   "url": "https://help.alteryx.com/aac/en/developer-help/get-started-with-alteryx-one-apis.html",
+   "title": "Get Started with Alteryx One APIs",
+   "quote": "Authentication is by Bearer token. Replace <token> with your own token.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c31",
+   "url": "https://help.alteryx.com/aac/en/editions/professional-edition/professional-edition-capabilities.html",
+   "title": "Professional Edition Capabilities | Alteryx One",
+   "quote": "API Access Determines who can generate and use API tokens.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c32",
+   "url": "https://help.alteryx.com/aac/en/platform/admin/admin-reference/account-management/audit-logs-page.html",
+   "title": "Audit Logs Page | Alteryx One",
+   "quote": "Audit events are downloaded as a CSV file.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c33",
+   "url": "https://help.alteryx.com/aac/en/editions/enterprise-edition/enterprise-edition-capabilities.html",
+   "title": "Enterprise Edition Capabilities | Alteryx One",
+   "quote": "The Audit Log Export capability helps users centralize security monitoring and meet enterprise compliance requirements by exporting audit logs to external customer-owned storage on a regular schedule.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c34",
+   "url": "https://help.alteryx.com/current/en/server/api-overview/alteryx-server-api-v3/server-api-v3-objects/user-endpoints.html",
+   "title": "User Endpoints | Alteryx Server",
+   "quote": "To create a new user record, use the POST {baseURL}/v3/users endpoint.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c35",
+   "url": "https://help.alteryx.com/current/en/server/api-overview/alteryx-server-api-v3/server-api-v3-objects/user-endpoints.html",
+   "title": "User Endpoints | Alteryx Server",
+   "quote": "To deactivate a user in the system, use the POST {baseURL}/v3/users/{userId}/deactivate endpoint.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c36",
+   "url": "https://help.alteryx.com/current/en/server/api-overview/alteryx-server-api-v3/server-api-v3-objects/user-endpoints.html",
+   "title": "User Endpoints | Alteryx Server",
+   "quote": "To retrieve all accessible user records, use the GET {baseURL}/v3/users endpoint.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c37",
+   "url": "https://help.alteryx.com/current/en/server/api-overview/alteryx-server-api-v3/server-api-v3-objects/user-endpoints.html",
+   "title": "User Endpoints | Alteryx Server",
+   "quote": "To retrieve details about an existing user, use the GET {baseURL}/v3/users/{userId} endpoint.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c38",
+   "url": "https://help.alteryx.com/current/en/server/api-overview/alteryx-server-api-v3/server-api-v3-objects/user-endpoints.html",
+   "title": "User Endpoints | Alteryx Server",
+   "quote": "To update details of an existing user, use the PUT {baseURL}/v3/users/{userId} endpoint.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c39",
+   "url": "https://help.alteryx.com/current/en/server/api-overview/alteryx-server-api-v3/server-api-v3-objects/user-endpoints.html",
+   "title": "User Endpoints | Alteryx Server",
+   "quote": "To delete an existing user from the system, use the DELETE {baseURL}/v3/users/{userId} endpoint.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c40",
+   "url": "https://help.alteryx.com/current/en/server/api-overview/alteryx-server-api-v3/server-api-v3-objects/user-endpoints.html",
+   "title": "User Endpoints | Alteryx Server",
+   "quote": "To transfer all assets (workflows, schedules, and collections) owned by one user to another, use the PUT {baseURL}/v3/users/{userId}/assetTransfer endpoint.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c41",
+   "url": "https://help.alteryx.com/current/en/server/configure/configure-alteryx-server-authentication/configure-alteryx-server-for-scim-with-azure-active-directory.html",
+   "title": "Configure Alteryx Server for SCIM with Microsoft Entra ID",
+   "quote": "This document provides instructions for administrators who want to integrate Alteryx Server with Microsoft Entra ID using System for Cross-domain Identity Management (SCIM).",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c42",
+   "url": "https://help.alteryx.com/current/en/server/configure/configure-alteryx-server-authentication/configure-alteryx-server-for-scim-with-azure-active-directory.html",
+   "title": "Configure Alteryx Server for SCIM with Microsoft Entra ID",
+   "quote": "SCIM requires that Alteryx Server is configured to support SAML single sign-on.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c43",
+   "url": "https://www.okta.com/integrations/alteryx-one/",
+   "title": "Integrate Alteryx One with Okta",
+   "quote": "The Okta Alteryx One integration enables secure SAML-based Single Sign-On (SSO), allowing analysts to access their unified workspace and data pipelines using centralized Okta credentials",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c44",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/alteryx-server-tutorial",
+   "title": "Configure Alteryx Server for Single sign-on with Microsoft Entra ID",
+   "quote": "Alteryx Server supports both SP and IDP initiated SSO.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c45",
+   "url": "https://help.alteryx.com/aac/en/editions/starter-edition.html",
+   "title": "Starter Edition | Alteryx One",
+   "quote": "Starter Edition accounts are limited to 10 users. The Starter Edition comes with the Full User role and Workspace Admin.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.alteryx.com/platform/pricing",
+  "https://help.alteryx.com/sitemap.xml (aac and current sitemaps)",
+  "https://help.alteryx.com/aac/en/platform/admin/admin-reference/admin-console/scim-auto-provisioning.html",
+  "https://help.alteryx.com/aac/en/platform/admin/admin-reference/admin-console/scim-auto-provisioning/configure-scim-for-okta.html",
+  "https://help.alteryx.com/aac/en/platform/admin/admin-reference/admin-console/scim-auto-provisioning/configure-scim-for-entra.html",
+  "https://help.alteryx.com/aac/en/platform/admin/admin-reference/admin-console/single-sign-on.html",
+  "https://help.alteryx.com/aac/en/platform/admin/admin-reference/admin-console/users-page.html",
+  "https://help.alteryx.com/aac/en/developer-help/get-started-with-alteryx-one-apis.html",
+  "https://www.okta.com/integrations/alteryx-one/",
+  "https://www.okta.com/integrations/alteryx/ (404)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/alteryx-tutorial (404)",
+  "https://api-docs.us1.alteryxcloud.com/ (JS app; headless render ERR_TOO_MANY_RETRIES)"
+ ],
+ "open_questions": [
+  "Which edition includes SAML/OIDC SSO is not stated on the pricing page or in the docs read.",
+  "SCIM endpoint paths, PUT vs PATCH, delete support, filtering and pagination are not documented in the public setup guides.",
+  "Lowest edition with API access is unclear: the Starter admin guide has an OAuth clients page, while API Access is listed as a Professional/Enterprise capability.",
+  "Full Alteryx One API reference (users, groups, roles endpoints, rate limits) sits on api-docs.us1.alteryxcloud.com, which could not be rendered.",
+  "Whether SCIM deactivation ends active sessions is not documented."
+ ]
+}

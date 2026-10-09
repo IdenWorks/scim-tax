@@ -1,0 +1,733 @@
+{
+ "slug": "splunk",
+ "vendor": "Splunk",
+ "vendor_url": "https://www.splunk.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Splunk",
+  "slug": "splunk",
+  "category": "Cloud, Infrastructure & Observability",
+  "status": "gated",
+  "scim_plan": "Splunk Cloud Platform (quote-only)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Splunk Cloud Platform",
+  "team_price_text": "Get a quote (activity-based, ingest or workload pricing, unlimited users)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Splunk Cloud Platform",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": null,
+   "update": null,
+   "deactivate": null,
+   "delete": true,
+   "groups": null
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "sso_only",
+   "google": null,
+   "onelogin": "sso_only",
+   "jumpcloud": "sso_only",
+   "generic": true
+  },
+  "pricing_page_url": "https://www.splunk.com/en_us/products/pricing.html",
+  "docs_url": "https://help.splunk.com/en/splunk-cloud-platform/administer/manage-users-and-security/10.6/use-saml-as-an-authentication-scheme-for-single-sign-on/configure-sso-with-okta-as-your-identity-provider",
+  "evidence": "Splunk's docs say \"With system for cross-domain identity management (SCIM), you can configure the Splunk platform to sync user deletions from the IdP\"; Splunk Cloud Platform itself is sold only by quote (\"Get a quote\").",
+  "notes": "Status kept gated: Splunk Cloud Platform has no public price (activity-based, ingest or workload pricing via quote, unlimited users), so SCIM needs a sales contract. The June 'Enterprise tier' and '9.1+' qualifiers have no first-party source and were dropped: Splunk Cloud has no tier ladder, and SAML/SCIM are self-service settings on the platform. SCIM is documented only to delete SAML users removed from the IdP (up to one hour, only users added after SCIM is on); SAML users are created on login with group-to-role mapping. Okta's OIN app (updated Apr 2026) now advertises create/update/deactivate for administrative accounts, which Splunk's own docs do not describe. The ACS REST API manages local users and roles but cannot delete SAML users.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Splunk Cloud Platform",
+  "api_tax": false,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Splunk Cloud Platform",
+   "price_text": "Get a quote: activity-based, ingest, or workload pricing for unlimited users",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c16"
+   ],
+   "notes": "Single quote-priced offering; no public tiers."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c4",
+   "c6",
+   "c11",
+   "c14"
+  ],
+  "plan": "Splunk Cloud Platform",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://<splunk-server>/en-US/splunkd/__raw/services/identity/provisioning/v1/scim/v2",
+  "auth": {
+   "method": "other",
+   "token_source": "IdP admin chooses Splunk username/password, a Bearer token, or OAuth 2.0 (Issuer URL and Client ID entered under Settings > Authentication Methods > SAML Configuration > Automated User Management)",
+   "token_expiry": null,
+   "cite": [
+    "c7",
+    "c8",
+    "c9",
+    "c14"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c5",
+    "c6"
+   ]
+  },
+  "operations": {
+   "create": null,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": null,
+   "reactivate": null,
+   "delete": true,
+   "group_push": null,
+   "group_membership": null,
+   "cite": [
+    "c4",
+    "c5",
+    "c17"
+   ],
+   "notes": "Splunk documents SCIM only for syncing user deletions; create/update via SCIM are not described."
+  },
+  "deprovision": {
+   "action": "delete",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c5",
+    "c10"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": []
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": [],
+   "notes": "Roles come from SAML group-to-role mapping at login, not SCIM."
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SCIM only syncs deletions; by default Splunk does not keep users in sync with the IdP.",
+    "cite": [
+     "c4",
+     "c13"
+    ]
+   },
+   {
+    "text": "Deletes can take up to one hour and only apply to users added to the IdP after SCIM was turned on.",
+    "cite": [
+     "c5",
+     "c10"
+    ]
+   },
+   {
+    "text": "Requires SAML SSO and an IdP SAML app that supports SCIM; documented only on the Okta SSO page.",
+    "cite": [
+     "c11",
+     "c12"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c16",
+   "c22"
+  ],
+  "plan": "Splunk Cloud Platform",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://admin.splunk.com/{stack}/adminconfig/v2",
+  "docs_url": "https://help.splunk.com/en/splunk-cloud-platform/administer/admin-config-service-manual/10.6/administer-splunk-cloud-platform-using-the-admin-config-service-acs-api/manage-users-roles-and-capabilities-in-splunk-cloud-platform",
+  "auth": {
+   "methods": [
+    "bearer_token"
+   ],
+   "scopes": [],
+   "cite": [
+    "c29",
+    "c18"
+   ],
+   "notes": "Splunk authentication token; caller's role needs ACS capabilities (sc_admin has all)."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c22",
+    "c23",
+    "c19",
+    "c20",
+    "c21",
+    "c32"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/{stack}/adminconfig/v2/users",
+    "purpose": "List users",
+    "cite": [
+     "c22"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/{stack}/adminconfig/v2/users/{name}",
+    "purpose": "Describe a user",
+    "cite": [
+     "c23"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/{stack}/adminconfig/v2/users",
+    "purpose": "Create a user",
+    "cite": [
+     "c19"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/{stack}/adminconfig/v2/users/{user-name}",
+    "purpose": "Update a user (roles, password)",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/{stack}/adminconfig/v2/users/{user-name}",
+    "purpose": "Delete a user (not SAML users)",
+    "cite": [
+     "c21"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/{stack}/adminconfig/v2/roles",
+    "purpose": "List roles",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/{stack}/adminconfig/v2/roles",
+    "purpose": "Create a role",
+    "cite": [
+     "c24"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/{stack}/adminconfig/v2/roles/{name}",
+    "purpose": "Update a role",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/{stack}/adminconfig/v2/roles/{name}",
+    "purpose": "Delete a role",
+    "cite": [
+     "c26"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/{stack}/adminconfig/v2/capabilities",
+    "purpose": "List capabilities",
+    "cite": [
+     "c28"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "ACS cannot delete SAML users.",
+    "cite": [
+     "c17"
+    ]
+   },
+   {
+    "text": "Users and roles are per search head; ACS does not replicate them across the search tier.",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "text": "List calls return 30 items by default, up to 100 per page.",
+    "cite": [
+     "c31"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/splunk-cloud/",
+   "cite": [
+    "c34",
+    "c4"
+   ],
+   "notes": "OIN markup checks SAML, SCIM, Create, Update, Deactivate, Sync Password, Schema Discovery and Entitlement Management."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/splunkenterpriseandsplunkcloud-tutorial",
+   "cite": [
+    "c35"
+   ],
+   "notes": "Microsoft's tutorial covers SSO only; no provisioning tutorial found."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c33"
+   ],
+   "notes": "Splunk documents OneLogin SAML SSO; OneLogin's own catalogue not checked."
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://jumpcloud.com/support/integrate-with-splunk",
+   "cite": [
+    "c36"
+   ],
+   "notes": "JumpCloud's Splunk article covers SAML SSO only."
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": "LDAP authentication with group-to-role mapping",
+  "docs_public": true,
+  "cite": [
+   "c15",
+   "c13"
+  ],
+  "notes": "SAML users get access through IdP group-to-role mapping at login."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.splunk.com/en_us/products/pricing.html",
+   "title": "Pricing | Splunk",
+   "quote": "Use the Splunk-managed SaaS version of Splunk. Choose from activity-based, ingest, or workload pricing for unlimited users.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://www.splunk.com/en_us/products/pricing.html",
+   "title": "Pricing | Splunk",
+   "quote": "There are no explicit limits regarding the usage or total number of users allowed to use Splunk at one organization.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://help.splunk.com/en/splunk-cloud-platform/get-started/service-terms-and-policies/10.6/information-about-the-service/splunk-cloud-platform-service-details",
+   "title": "Splunk Cloud Platform Service Details",
+   "quote": "Splunk Cloud Platform provides a complete suite of self-service capabilities for you to ingest data, customize data retention settings, customize user roles and centralized authentication",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://help.splunk.com/en/splunk-cloud-platform/administer/manage-users-and-security/10.6/use-saml-as-an-authentication-scheme-for-single-sign-on/configure-sso-with-okta-as-your-identity-provider",
+   "title": "Configure SSO with Okta as your identity provider",
+   "quote": "With system for cross-domain identity management (SCIM), you can configure the Splunk platform to sync user deletions from the IdP.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://help.splunk.com/en/splunk-cloud-platform/administer/manage-users-and-security/10.6/use-saml-as-an-authentication-scheme-for-single-sign-on/configure-sso-with-okta-as-your-identity-provider",
+   "title": "Configure SSO with Okta as your identity provider",
+   "quote": "After you configure SCIM, the Splunk platform deletes its users after you delete them from the IdP. Depending on the authentication type that your IdP administrator uses for SCIM, delete operations can take up to one hour to process.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://help.splunk.com/en/splunk-cloud-platform/administer/manage-users-and-security/10.6/use-saml-as-an-authentication-scheme-for-single-sign-on/configure-sso-with-okta-as-your-identity-provider",
+   "title": "Configure SSO with Okta as your identity provider",
+   "quote": "https://<splunk-server>/en-US/splunkd/__raw/services/identity/provisioning/v1/scim/v2",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://help.splunk.com/en/splunk-cloud-platform/administer/manage-users-and-security/10.6/use-saml-as-an-authentication-scheme-for-single-sign-on/configure-sso-with-okta-as-your-identity-provider",
+   "title": "Configure SSO with Okta as your identity provider",
+   "quote": "HTTP header authentication, using a Bearer authorization token.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://help.splunk.com/en/splunk-cloud-platform/administer/manage-users-and-security/10.6/use-saml-as-an-authentication-scheme-for-single-sign-on/configure-sso-with-okta-as-your-identity-provider",
+   "title": "Configure SSO with Okta as your identity provider",
+   "quote": "Open Authorization (OAuth) v2.0, using the access token endpoint and authorization endpoint URIs, a client ID, and a client secret.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://help.splunk.com/en/splunk-cloud-platform/administer/manage-users-and-security/10.6/use-saml-as-an-authentication-scheme-for-single-sign-on/configure-sso-with-okta-as-your-identity-provider",
+   "title": "Configure SSO with Okta as your identity provider",
+   "quote": "Splunk authentication, using a Splunk username and password.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://help.splunk.com/en/splunk-cloud-platform/administer/manage-users-and-security/10.6/use-saml-as-an-authentication-scheme-for-single-sign-on/configure-sso-with-okta-as-your-identity-provider",
+   "title": "Configure SSO with Okta as your identity provider",
+   "quote": "The Splunk platform only deletes users that you have added to the IdP after you turn on SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c11",
+   "url": "https://help.splunk.com/en/splunk-cloud-platform/administer/manage-users-and-security/10.6/use-saml-as-an-authentication-scheme-for-single-sign-on/configure-sso-with-okta-as-your-identity-provider",
+   "title": "Configure SSO with Okta as your identity provider",
+   "quote": "Before you can use SCIM for automated user management with SAML, your IdP administrator must turn on SCIM in the SAML application on the IdP.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://help.splunk.com/en/splunk-cloud-platform/administer/manage-users-and-security/10.6/use-saml-as-an-authentication-scheme-for-single-sign-on/configure-sso-with-okta-as-your-identity-provider",
+   "title": "Configure SSO with Okta as your identity provider",
+   "quote": "If the Okta SAML application does not support SCIM, then the Splunk platform cannot use the application to perform local user account removal.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://help.splunk.com/en/splunk-cloud-platform/administer/manage-users-and-security/10.6/use-saml-as-an-authentication-scheme-for-single-sign-on/configure-sso-with-okta-as-your-identity-provider",
+   "title": "Configure SSO with Okta as your identity provider",
+   "quote": "By default, the Splunk platform does not automatically keep users in sync with Okta. It does not remove users on the Splunk side that no longer exist on the IdP.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c14",
+   "url": "https://help.splunk.com/en/splunk-cloud-platform/administer/manage-users-and-security/10.6/use-saml-as-an-authentication-scheme-for-single-sign-on/configure-sso-with-okta-as-your-identity-provider",
+   "title": "Configure SSO with Okta as your identity provider",
+   "quote": "Select Enable SCIM and confirm that the box is checked.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://help.splunk.com/en/splunk-cloud-platform/administer/manage-users-and-security/10.6/use-saml-as-an-authentication-scheme-for-single-sign-on/configure-sso-with-okta-as-your-identity-provider",
+   "title": "Configure SSO with Okta as your identity provider",
+   "quote": "After you configure the Splunk platform for SSO, you can map groups from the IdP to those roles so that users can log in.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://help.splunk.com/en/splunk-cloud-platform/administer/admin-config-service-manual/10.6/administer-splunk-cloud-platform-using-the-admin-config-service-acs-api/manage-users-roles-and-capabilities-in-splunk-cloud-platform",
+   "title": "Manage users, roles, and capabilities in Splunk Cloud Platform",
+   "quote": "The Admin Config Service (ACS) API lets you manage users, roles, and capabilities for your Splunk Cloud Platform deployment.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c17",
+   "url": "https://help.splunk.com/en/splunk-cloud-platform/administer/admin-config-service-manual/10.6/administer-splunk-cloud-platform-using-the-admin-config-service-acs-api/manage-users-roles-and-capabilities-in-splunk-cloud-platform",
+   "title": "Manage users, roles, and capabilities in Splunk Cloud Platform",
+   "quote": "ACS does not support deleting SAML users. You can configure your deployment for automated deletion of SAML users using the SCIM protocol.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c18",
+   "url": "https://help.splunk.com/en/splunk-cloud-platform/administer/admin-config-service-manual/10.6/administer-splunk-cloud-platform-using-the-admin-config-service-acs-api/manage-users-roles-and-capabilities-in-splunk-cloud-platform",
+   "title": "Manage users, roles, and capabilities in Splunk Cloud Platform",
+   "quote": "The sc_admin role has all required capabilities by default.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c19",
+   "url": "https://help.splunk.com/en/splunk-cloud-platform/administer/admin-config-service-manual/10.6/administer-splunk-cloud-platform-using-the-admin-config-service-acs-api/manage-users-roles-and-capabilities-in-splunk-cloud-platform",
+   "title": "Manage users, roles, and capabilities in Splunk Cloud Platform",
+   "quote": "To create a new user, send an HTTP POST request to the users endpoint. You must specify user name and password in the request body.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c20",
+   "url": "https://help.splunk.com/en/splunk-cloud-platform/administer/admin-config-service-manual/10.6/administer-splunk-cloud-platform-using-the-admin-config-service-acs-api/manage-users-roles-and-capabilities-in-splunk-cloud-platform",
+   "title": "Manage users, roles, and capabilities in Splunk Cloud Platform",
+   "quote": "To update a user, send an HTTP PATCH request to the users/{user-name} endpoint, specifiying the name of the user.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c21",
+   "url": "https://help.splunk.com/en/splunk-cloud-platform/administer/admin-config-service-manual/10.6/administer-splunk-cloud-platform-using-the-admin-config-service-acs-api/manage-users-roles-and-capabilities-in-splunk-cloud-platform",
+   "title": "Manage users, roles, and capabilities in Splunk Cloud Platform",
+   "quote": "To delete a user, send an HTTP DELETE request to the users/{user-name} endpoint, specifying the name of the user.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c22",
+   "url": "https://help.splunk.com/en/splunk-cloud-platform/administer/admin-config-service-manual/10.6/administer-splunk-cloud-platform-using-the-admin-config-service-acs-api/manage-users-roles-and-capabilities-in-splunk-cloud-platform",
+   "title": "Manage users, roles, and capabilities in Splunk Cloud Platform",
+   "quote": "curl 'https://admin.splunk.com/{stack}/adminconfig/v2/users?offset=0&count=3'",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c23",
+   "url": "https://help.splunk.com/en/splunk-cloud-platform/administer/admin-config-service-manual/10.6/administer-splunk-cloud-platform-using-the-admin-config-service-acs-api/manage-users-roles-and-capabilities-in-splunk-cloud-platform",
+   "title": "Manage users, roles, and capabilities in Splunk Cloud Platform",
+   "quote": "To describe an individual user, send an HTTP GET request to the users/{name} endpoint, specifying the user name.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c24",
+   "url": "https://help.splunk.com/en/splunk-cloud-platform/administer/admin-config-service-manual/10.6/administer-splunk-cloud-platform-using-the-admin-config-service-acs-api/manage-users-roles-and-capabilities-in-splunk-cloud-platform",
+   "title": "Manage users, roles, and capabilities in Splunk Cloud Platform",
+   "quote": "To create a new role, send an HTTP POST request to the roles endpoint.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c25",
+   "url": "https://help.splunk.com/en/splunk-cloud-platform/administer/admin-config-service-manual/10.6/administer-splunk-cloud-platform-using-the-admin-config-service-acs-api/manage-users-roles-and-capabilities-in-splunk-cloud-platform",
+   "title": "Manage users, roles, and capabilities in Splunk Cloud Platform",
+   "quote": "To update a role, send an HTTP PATCH request to the roles/{name} endpoint, specifying the name of the role.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c26",
+   "url": "https://help.splunk.com/en/splunk-cloud-platform/administer/admin-config-service-manual/10.6/administer-splunk-cloud-platform-using-the-admin-config-service-acs-api/manage-users-roles-and-capabilities-in-splunk-cloud-platform",
+   "title": "Manage users, roles, and capabilities in Splunk Cloud Platform",
+   "quote": "To delete a role, send an HTTP DELETE request to the roles/{name} endpoint, specifying the name of the role.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c27",
+   "url": "https://help.splunk.com/en/splunk-cloud-platform/administer/admin-config-service-manual/10.6/administer-splunk-cloud-platform-using-the-admin-config-service-acs-api/manage-users-roles-and-capabilities-in-splunk-cloud-platform",
+   "title": "Manage users, roles, and capabilities in Splunk Cloud Platform",
+   "quote": "To view a list of all existing roles, send an HTTP GET request to the roles endpoint.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c28",
+   "url": "https://help.splunk.com/en/splunk-cloud-platform/administer/admin-config-service-manual/10.6/administer-splunk-cloud-platform-using-the-admin-config-service-acs-api/manage-users-roles-and-capabilities-in-splunk-cloud-platform",
+   "title": "Manage users, roles, and capabilities in Splunk Cloud Platform",
+   "quote": "To view a list of capabilities in Splunk Cloud Platform, send an HTTP GET request to the capabilities endpoint.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c29",
+   "url": "https://help.splunk.com/en/splunk-cloud-platform/administer/admin-config-service-manual/10.6/administer-splunk-cloud-platform-using-the-admin-config-service-acs-api/manage-users-roles-and-capabilities-in-splunk-cloud-platform",
+   "title": "Manage users, roles, and capabilities in Splunk Cloud Platform",
+   "quote": "--header 'Authorization: Bearer eyJraWQiOiJzcGx1bmsu...'",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c30",
+   "url": "https://help.splunk.com/en/splunk-cloud-platform/administer/admin-config-service-manual/10.6/administer-splunk-cloud-platform-using-the-admin-config-service-acs-api/manage-users-roles-and-capabilities-in-splunk-cloud-platform",
+   "title": "Manage users, roles, and capabilities in Splunk Cloud Platform",
+   "quote": "Users and roles apply only on the search head on which you create them. ACS does not replicate users and roles across the search tier.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c31",
+   "url": "https://help.splunk.com/en/splunk-cloud-platform/administer/admin-config-service-manual/10.6/administer-splunk-cloud-platform-using-the-admin-config-service-acs-api/manage-users-roles-and-capabilities-in-splunk-cloud-platform",
+   "title": "Manage users, roles, and capabilities in Splunk Cloud Platform",
+   "quote": "By default, ACS returns a maximum count of 30 roles. To change the count, you can specify a count value up to a maximum of 100.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c32",
+   "url": "https://help.splunk.com/en/splunk-cloud-platform/administer/admin-config-service-manual/10.6/administer-splunk-cloud-platform-using-the-admin-config-service-acs-api/manage-users-roles-and-capabilities-in-splunk-cloud-platform",
+   "title": "Manage users, roles, and capabilities in Splunk Cloud Platform",
+   "quote": "You can use the ACS API to create users and roles, add capabilities to roles, and assign users to roles.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c33",
+   "url": "https://help.splunk.com/en/splunk-cloud-platform/administer/manage-users-and-security/10.6/use-saml-as-an-authentication-scheme-for-single-sign-on/configure-sso-with-onelogin-as-your-identity-provider",
+   "title": "Configure SSO with OneLogin as your identity provider",
+   "quote": "Configure SSO with OneLogin as your identity provider",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c34",
+   "url": "https://www.okta.com/integrations/splunk-cloud/",
+   "title": "Integrate Splunk Cloud with Okta",
+   "quote": "The Okta Splunk Cloud integration automate user lifecycle management, enabling administrative accounts to be provisioned, updated, and deprovisioned seamlessly from Okta.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c35",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/splunkenterpriseandsplunkcloud-tutorial",
+   "title": "Configure Microsoft Entra SSO for Splunk Enterprise and Splunk Cloud",
+   "quote": "Microsoft Entra SSO for Splunk Enterprise and Splunk Cloud supports SP initiated SSO.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c36",
+   "url": "https://jumpcloud.com/support/integrate-with-splunk",
+   "title": "Integrate with Splunk",
+   "quote": "Use JumpCloud SAML Single Sign On (SSO) to give your users convenient but secure access to all their web applications with a single set of credentials.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "Okta's OIN page says the Splunk Cloud app provisions, updates and deprovisions administrative accounts; Splunk's own docs describe SCIM only as syncing user deletions.",
+   "cite": [
+    "c34",
+    "c4"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.splunk.com/en_us/products/pricing.html",
+  "https://help.splunk.com/sitemap.xml (splunk-cloud-platform, splunk-enterprise sitemaps: grep scim/provision)",
+  "https://help.splunk.com/en/splunk-cloud-platform/administer/manage-users-and-security/10.6/use-saml-as-an-authentication-scheme-for-single-sign-on/configure-sso-with-okta-as-your-identity-provider",
+  "https://help.splunk.com/en/splunk-cloud-platform/administer/admin-config-service-manual/10.6/administer-splunk-cloud-platform-using-the-admin-config-service-acs-api/manage-users-roles-and-capabilities-in-splunk-cloud-platform",
+  "https://help.splunk.com/en/splunk-cloud-platform/get-started/service-terms-and-policies/10.6/information-about-the-service/splunk-cloud-platform-service-details"
+ ],
+ "open_questions": [
+  "Whether Splunk's SCIM endpoint accepts create/update (the Okta OIN app claims it does) is not documented by Splunk.",
+  "SCIM attributes, filtering, pagination and rate limits are undocumented.",
+  "Whether deleting a user frees licence capacity is moot (users are unlimited) but data/knowledge-object handling on delete is undocumented.",
+  "No audit-log REST API or user-event webhooks were documented in the pages checked (audit data lives in the _audit index)."
+ ]
+}

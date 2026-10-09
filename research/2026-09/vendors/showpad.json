@@ -1,0 +1,784 @@
+{
+ "slug": "showpad",
+ "vendor": "Showpad",
+ "vendor_url": "https://www.showpad.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Showpad",
+  "slug": "showpad",
+  "category": "Sales & CRM",
+  "status": "gated",
+  "scim_plan": "Professional",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Professional",
+  "team_price_text": "Contact Sales (Request a quote)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Professional",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": "via_generic",
+   "jumpcloud": "native",
+   "generic": true
+  },
+  "pricing_page_url": "https://www.showpad.com/pricing",
+  "docs_url": "https://developer.showpad.com/docs/apis/users/SCIM",
+  "evidence": "Showpad's pricing page lists Professional, Advanced and Expert with 'Request a quote' only; its SCIM 2.0 docs give the base endpoint https://{{subdomain}}.showpad.biz/api/Users/scim/v2, and the Okta SCIM guide lists 'Plan: eOS Expert, eOS Advanced, eOS Professional'.",
+  "notes": "Quote-only: Showpad publishes no prices (all three eOS plans are 'Request a quote', licensed per user), so SCIM is only obtainable through sales. New row. Plan gate conflicts: the help-centre Okta and Entra SCIM guides say eOS Professional, Advanced and Expert, while the developer portal's SCIM page says 'Ultimate with Enterprise add-on | Advanced or Expert'; scim_plan uses the lowest plan the help centre names. SSO ('Single Sign-On for secure and simple access') is included in every plan. SCIM uses an Admin App API token (optional expiry); Okta and JumpCloud have catalogue apps with SCIM, Entra uses a non-gallery enterprise app (the gallery app is SSO with JIT only). Deprovisioning deactivates via PATCH active=false; DELETE permanently removes the user. Other provisioning: SAML JIT auto-provisioning, twice-daily SFTP CSV sync, Salesforce auto-provisioning, and the v3 REST user API, which the developer portal says works on any plan although the pricing page lists the API/SDK Developer Bundle under Advanced.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Professional",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Professional",
+   "price_text": "Request a quote",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c3",
+    "c18",
+    "c25"
+   ],
+   "notes": "SCIM per help centre (developer portal SCIM page names only Advanced/Expert); user API per developer portal 'Any Showpad plan'."
+  },
+  {
+   "name": "Advanced",
+   "price_text": "Request a quote",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c39",
+    "c2",
+    "c3",
+    "c5",
+    "c18"
+   ]
+  },
+  {
+   "name": "Expert",
+   "price_text": "Request a quote",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c40",
+    "c3",
+    "c5",
+    "c18"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c5",
+   "c6",
+   "c18"
+  ],
+  "plan": "Professional",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://{{subdomain}}.showpad.biz/api/Users/scim/v2",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Admin App > Settings > Integrations > API > API Tokens (after toggling SCIM on under Settings > Sign-On)",
+   "token_expiry": "optional expiry date set by the admin",
+   "cite": [
+    "c7",
+    "c20",
+    "c21"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": true,
+   "Schemas": true,
+   "ResourceTypes": true,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c6",
+    "c11",
+    "c15",
+    "c16"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c11",
+    "c12",
+    "c15",
+    "c19"
+   ],
+   "notes": "POST/GET/PUT/PATCH/DELETE documented for /Users and /Groups; reactivation via Okta reassignment."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Deactivated users are kept and can be reactivated; DELETE (e.g. Entra with Delete checked) permanently removes the user and all associated data.",
+   "cite": [
+    "c12",
+    "c19",
+    "c23",
+    "c26"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName"
+   ],
+   "cite": [
+    "c9",
+    "c10"
+   ],
+   "notes": "Only eq on username; group filtering not implemented."
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c8",
+    "c15"
+   ],
+   "notes": "startIndex/count; 100 per page by default."
+  },
+  "attributes": {
+   "core": [
+    "id",
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "emails[0].value",
+    "active",
+    "timezone",
+    "locale",
+    "title",
+    "externalId",
+    "phoneNumbers[0].value",
+    "roles[0].value",
+    "groups",
+    "entitlements"
+   ],
+   "enterprise": [
+    "organization",
+    "manager.value"
+   ],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "id",
+    "displayName",
+    "members",
+    "members.value",
+    "members.display"
+   ],
+   "cite": [
+    "c13",
+    "c14"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "roles attribute (owner, admin, tablet, manager); manager coaching groups via entitlements type coach_for_group",
+   "cite": [
+    "c14"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Filtering supports only eq on username; groups cannot be filtered.",
+    "cite": [
+     "c9",
+     "c10"
+    ]
+   },
+   {
+    "text": "Every new user is placed in the default 'All Users' group, which cannot be removed.",
+    "cite": [
+     "c41"
+    ]
+   }
+  ],
+  "notes": "Okta guide asks admins to set up SSO with Okta first (c22) but the generic SCIM docs do not state SSO as a requirement, so sso_required is left null."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c25",
+   "c27"
+  ],
+  "plan": "Professional",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://{{subdomain}}.showpad.biz/api/v3 (write); https://{{subdomain}}.api.showpad.com/v4 (read)",
+  "docs_url": "https://developer.showpad.com/docs/apis/users/user-management",
+  "auth": {
+   "methods": [
+    "oauth2",
+    "api_key"
+   ],
+   "scopes": [
+    "read_user_management",
+    "write_user_management"
+   ],
+   "cite": [
+    "c28",
+    "c29"
+   ],
+   "notes": "OAuth 2.0 (access tokens last 1 hour) or personal API tokens."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": true,
+   "reactivate_user": true,
+   "manage_groups": true,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c25",
+    "c26",
+    "c27",
+    "c30"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/v4/users",
+    "purpose": "List users (paginated)",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v4/users/{userId}",
+    "purpose": "Get a user",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v3/users.json",
+    "purpose": "Create a user",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/v3/users/{userId}.json",
+    "purpose": "Update a user; isActive false deactivates, true reactivates",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v3/users/{userId}.json",
+    "purpose": "Permanently delete a user",
+    "cite": [
+     "c26"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/usergroups/{id}/users.json",
+    "purpose": "Add users to a user group (v3)",
+    "cite": [
+     "c30"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "User creation, update and deletion require API v3; v4 is read-only for users.",
+    "cite": [
+     "c25"
+    ]
+   }
+  ],
+  "notes": "Pricing page puts the 'Developer Bundle to Build Custom Apps (API/SDK, Webhooks, Reporting API)' in Advanced, and the webhooks docs say Advanced/Expert; the user-management docs say any plan (see conflicts)."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/showpad/",
+   "cite": [
+    "c31",
+    "c18",
+    "c19"
+   ],
+   "notes": "OIN page (updated Jun. 12 2026) marks SAML, SCIM, Create, Update, Deactivate and Group Push."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": "idp",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/showpad-tutorial",
+   "cite": [
+    "c33",
+    "c24"
+   ],
+   "notes": "Gallery app is SAML SSO with JIT; Showpad documents SCIM through a non-gallery enterprise app with the generic endpoint (idp.entra = via_generic)."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": false,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c38"
+   ],
+   "notes": "Google is OAuth sign-in only and Showpad says auto-provisioning is not supported for it."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c37",
+    "c17"
+   ],
+   "notes": "Showpad's OneLogin guide covers a custom SAML connector; the SCIM docs name OneLogin as a supported SCIM IdP but give no OneLogin SCIM guide."
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": "idp",
+   "url": "https://jumpcloud.com/support/integrate-with-showpad",
+   "cite": [
+    "c32"
+   ]
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": true,
+  "other_sync": "SFTP CSV provisioning (twice-daily sync of users and groups); Salesforce user auto-provisioning",
+  "docs_public": true,
+  "cite": [
+   "c33",
+   "c34",
+   "c35"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.showpad.com/pricing",
+   "title": "AI Sales Enablement Platform Pricing | Showpad",
+   "quote": "For teams who rely on solid foundations to grow the bottom line.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.showpad.com/pricing",
+   "title": "AI Sales Enablement Platform Pricing | Showpad",
+   "quote": "Developer Bundle to Build Custom Apps (API/SDK, Webhooks, Reporting API)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.showpad.com/pricing",
+   "title": "AI Sales Enablement Platform Pricing | Showpad",
+   "quote": "Single Sign-On for secure and simple access",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.showpad.com/pricing",
+   "title": "AI Sales Enablement Platform Pricing | Showpad",
+   "quote": "Showpad is licensed on a per-user basis. Our packages are fully customizable",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://developer.showpad.com/docs/apis/users/SCIM",
+   "title": "SCIM 2.0 | Showpad Developer",
+   "quote": "Plan: Ultimate with Enterprise add-on | Advanced or Expert",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://developer.showpad.com/docs/apis/users/SCIM",
+   "title": "SCIM 2.0 | Showpad Developer",
+   "quote": "Base endpoint: https://{{subdomain}}.showpad.biz/api/Users/scim/v2",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://developer.showpad.com/docs/apis/users/SCIM",
+   "title": "SCIM 2.0 | Showpad Developer",
+   "quote": "Authentication: Valid OAuth 2.0 access token",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://developer.showpad.com/docs/apis/users/SCIM",
+   "title": "SCIM 2.0 | Showpad Developer",
+   "quote": "You can paginate through results by using startIndex and count query parameters.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://developer.showpad.com/docs/apis/users/SCIM",
+   "title": "SCIM 2.0 | Showpad Developer",
+   "quote": "Currently, only the EQ operator on username is supported.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://developer.showpad.com/docs/apis/users/SCIM",
+   "title": "SCIM 2.0 | Showpad Developer",
+   "quote": "Filtering for groups has not been implemented in Showpad's SCIM 2.0 version.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://developer.showpad.com/docs/apis/users/SCIM",
+   "title": "SCIM 2.0 | Showpad Developer",
+   "quote": "Delete a user. Returns 204 No Content on success.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://developer.showpad.com/docs/apis/users/SCIM",
+   "title": "SCIM 2.0 | Showpad Developer",
+   "quote": "Deactivating a user is the most common PATCH request.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://developer.showpad.com/docs/apis/users/SCIM",
+   "title": "SCIM 2.0 | Showpad Developer",
+   "quote": "In the table corresponds to enterprise schema urn:ietf:params:scim:schemas:extension:enterprise:2.0:User",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://developer.showpad.com/docs/apis/users/SCIM",
+   "title": "SCIM 2.0 | Showpad Developer",
+   "quote": "When changing this value, be aware that only certain roles are supported:",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://developer.showpad.com/docs/apis/users/SCIM",
+   "title": "SCIM 2.0 | Showpad Developer",
+   "quote": "List users with optional pagination and filtering (100 per page by default).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://developer.showpad.com/docs/apis/users/SCIM",
+   "title": "SCIM 2.0 | Showpad Developer",
+   "quote": "Returns a list of operations supported in the current implementation.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://developer.showpad.com/docs/apis/users/SCIM",
+   "title": "SCIM 2.0 | Showpad Developer",
+   "quote": "Connect Okta, Azure AD, OneLogin, or other SCIM-compatible identity providers.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://help.showpad.com/api/v2/help_center/en-us/articles/24472647236882.json",
+   "title": "Okta user provisioning with SCIM | Showpad Help",
+   "quote": "Plan: eOS Expert, eOS Advanced, eOS Professional",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.showpad.com/hc/en-us/articles/24472647236882-Okta-user-provisioning-with-SCIM"
+  },
+  {
+   "id": "c19",
+   "url": "https://help.showpad.com/api/v2/help_center/en-us/articles/24472647236882.json",
+   "title": "Okta user provisioning with SCIM | Showpad Help",
+   "quote": "Deactivate Users: When enabled, this option will deactivate a user's Showpad account when they are unassigned to the app in Okta, or when their Okta account is deactivated.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.showpad.com/hc/en-us/articles/24472647236882-Okta-user-provisioning-with-SCIM"
+  },
+  {
+   "id": "c20",
+   "url": "https://help.showpad.com/api/v2/help_center/en-us/articles/24472647236882.json",
+   "title": "Okta user provisioning with SCIM | Showpad Help",
+   "quote": "Enter a name for your new API token. You can choose to set an expiration date.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.showpad.com/hc/en-us/articles/24472647236882-Okta-user-provisioning-with-SCIM"
+  },
+  {
+   "id": "c21",
+   "url": "https://help.showpad.com/api/v2/help_center/en-us/articles/24472647236882.json",
+   "title": "Okta user provisioning with SCIM | Showpad Help",
+   "quote": "Ensure that SCIM provisioning is enabled in the sign-on settings.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.showpad.com/hc/en-us/articles/24472647236882-Okta-user-provisioning-with-SCIM"
+  },
+  {
+   "id": "c22",
+   "url": "https://help.showpad.com/api/v2/help_center/en-us/articles/24472647236882.json",
+   "title": "Okta user provisioning with SCIM | Showpad Help",
+   "quote": "If you haven't set up Single Sign-On (SSO) with Okta before, make sure to do so before continuing these steps.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.showpad.com/hc/en-us/articles/24472647236882-Okta-user-provisioning-with-SCIM"
+  },
+  {
+   "id": "c23",
+   "url": "https://help.showpad.com/api/v2/help_center/en-us/articles/22184428680850.json",
+   "title": "Use SCIM 2.0 via Entra ID | Showpad Help",
+   "quote": "Uncheck Delete if you want users deleted in Entra ID to be temporarily deactivated in Showpad.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.showpad.com/hc/en-us/articles/22184428680850-Use-SCIM-2-0-via-Entra-ID"
+  },
+  {
+   "id": "c24",
+   "url": "https://help.showpad.com/api/v2/help_center/en-us/articles/22184428680850.json",
+   "title": "Use SCIM 2.0 via Entra ID | Showpad Help",
+   "quote": "If you do not need automatic provisioning, use the Showpad app from the Microsoft Azure Marketplace.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.showpad.com/hc/en-us/articles/22184428680850-Use-SCIM-2-0-via-Entra-ID"
+  },
+  {
+   "id": "c25",
+   "url": "https://developer.showpad.com/docs/apis/users/user-management",
+   "title": "User Management | Showpad Developer",
+   "quote": "Plan: Any Showpad plan",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://developer.showpad.com/docs/apis/users/user-management",
+   "title": "User Management | Showpad Developer",
+   "quote": "Deleting a user permanently removes the user and all associated data from Showpad.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://developer.showpad.com/docs/apis/users/user-management",
+   "title": "User Management | Showpad Developer",
+   "quote": "Deactivate a user by setting isActive to false using the Update Users endpoint",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://developer.showpad.com/docs/apis/concepts/authentication",
+   "title": "Authentication | Showpad Developer",
+   "quote": "Allows write access for user data (includes users, usergroups and user permissions).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://developer.showpad.com/docs/apis/concepts/authentication",
+   "title": "Authentication | Showpad Developer",
+   "quote": "access tokens last 1 hour",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://developer.showpad.com/openapi/openapi.v3.json",
+   "title": "Showpad API v3 OpenAPI",
+   "quote": "Add an users to a usergroup with ID='id'",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.showpad.com/docs/apis/references"
+  },
+  {
+   "id": "c31",
+   "url": "https://www.okta.com/integrations/showpad/",
+   "title": "Showpad | Okta Integration Network",
+   "quote": "This integration with Okta makes it possible for companies to continuously manage all aspects of their team’s access rights",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://jumpcloud.com/support/integrate-with-showpad",
+   "title": "Integrate with Showpad | JumpCloud",
+   "quote": "Automatically provision, update and deprovision users and groups in Showpad from JumpCloud using the SCIM integration.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/showpad-tutorial",
+   "title": "Configure Showpad for Single sign-on with Microsoft Entra ID",
+   "quote": "Showpad supports Just In Time user provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://help.showpad.com/api/v2/help_center/en-us/articles/22905250702354.json",
+   "title": "General approach for SSO and Showpad | Showpad Help",
+   "quote": "You can also set up auto-provisioning to automatically allow new users to be created when they log in successfully for the first time",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.showpad.com/hc/en-us/articles/22905250702354-General-approach-for-SSO-and-Showpad"
+  },
+  {
+   "id": "c35",
+   "url": "https://help.showpad.com/api/v2/help_center/en-us/articles/22204195278866.json",
+   "title": "Use SFTP Provisioning to add and remove users and groups | Showpad Help",
+   "quote": "allows you to create and remove users and groups as part of a daily sync between your SFTP server and Showpad.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.showpad.com/hc/en-us/articles/22204195278866-Use-SFTP-Provisioning-to-add-and-remove-users-and-groups"
+  },
+  {
+   "id": "c36",
+   "url": "https://developer.showpad.com/docs/webhooks/",
+   "title": "Webhooks | Showpad Developer",
+   "quote": "Plan: Ultimate with Enterprise add-on | Advanced | Expert",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://help.showpad.com/api/v2/help_center/en-us/articles/23759741333138.json",
+   "title": "Set up SSO for Showpad with OneLogin | Showpad Help",
+   "quote": "This article describes how you can set up SSO for Showpad using OneLogin as the Identity Provider (IDP).",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.showpad.com/hc/en-us/articles/23759741333138-Set-up-SSO-for-Showpad-with-OneLogin"
+  },
+  {
+   "id": "c38",
+   "url": "https://help.showpad.com/api/v2/help_center/en-us/articles/23808714093202.json",
+   "title": "Use Google for authentication with Showpad | Showpad Help",
+   "quote": "Auto-provisioning is not supported to prevent other Google users from signing in to Showpad.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.showpad.com/hc/en-us/articles/23808714093202-Use-Google-for-authentication-with-Showpad"
+  },
+  {
+   "id": "c39",
+   "url": "https://www.showpad.com/pricing",
+   "title": "AI Sales Enablement Platform Pricing | Showpad",
+   "quote": "For teams who rely on operational excellence to achieve repeatable revenue results.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c41",
+   "url": "https://developer.showpad.com/docs/apis/users/SCIM",
+   "title": "SCIM 2.0 | Showpad Developer",
+   "quote": "This is a default group that you can't unassign from the user.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c40",
+   "url": "https://www.showpad.com/pricing",
+   "title": "AI Sales Enablement Platform Pricing | Showpad",
+   "quote": "For teams who rely on customized AI workflows to lead their markets.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "SCIM plan: the help-centre Okta guide lists 'eOS Expert, eOS Advanced, eOS Professional', while the developer portal SCIM page lists 'Ultimate with Enterprise add-on | Advanced or Expert'.",
+   "cite": [
+    "c18",
+    "c5"
+   ]
+  },
+  {
+   "text": "User API plan: the developer portal user-management page says 'Any Showpad plan', but the pricing page lists the API/SDK Developer Bundle only from Advanced and the webhooks docs list Advanced/Expert.",
+   "cite": [
+    "c25",
+    "c2",
+    "c36"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.showpad.com/pricing",
+  "https://developer.showpad.com/llms.txt",
+  "https://developer.showpad.com/sitemap.xml",
+  "https://developer.showpad.com/docs/apis/users/SCIM",
+  "https://developer.showpad.com/docs/apis/users/user-management",
+  "https://developer.showpad.com/openapi/openapi.v3.json",
+  "help.showpad.com Zendesk search API: scim, provisioning, single sign-on, okta, audit log"
+ ],
+ "open_questions": [
+  "Is SCIM included in eOS Professional (help centre) or only Advanced/Expert (developer portal)?",
+  "Does SCIM deactivation free the licence seat or end active sessions?",
+  "Is the v3 user API usable on Professional, given the Developer Bundle is listed under Advanced?",
+  "Is there an audit-log API or user-event webhooks for user changes?"
+ ]
+}

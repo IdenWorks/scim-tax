@@ -1,0 +1,915 @@
+{
+ "slug": "airtable",
+ "vendor": "Airtable",
+ "vendor_url": "https://airtable.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Airtable",
+  "slug": "airtable",
+  "category": "Productivity & Docs",
+  "status": "gated",
+  "scim_plan": "Business",
+  "scim_price_text": "Business: $45/user/mo (annual)",
+  "scim_price_per_user_mo": 45,
+  "team_plan": "Team",
+  "team_price_text": "Team: $20/user/mo (annual)",
+  "team_price_per_user_mo": 20,
+  "price_multiplier": 2.3,
+  "sso_plan": "Business",
+  "sso_price_per_user_mo": 45,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": "sso_only",
+   "onelogin": "via_generic",
+   "jumpcloud": "native",
+   "generic": true
+  },
+  "pricing_page_url": "https://airtable.com/pricing",
+  "docs_url": "https://airtable.com/developers/web/api/scim-overview",
+  "evidence": "Airtable's SCIM docs say \"SCIM user management is only available for the Business, Enterprise, and Enterprise Scale plans, while SCIM group management is only available for the Enterprise and Enterprise Scale plans\"; the pricing page prices Business at $45/user/month billed annually.",
+  "notes": "Changed since June: SCIM user provisioning now starts at Business ($45/seat/mo annual), not Enterprise Scale. The SCIM API reference and billing-plans page list Business as a SCIM user-management plan; the client-rendered pricing comparison table also checks 'SCIM user provisioning' and SAML SSO for Business and Enterprise Scale (seen in a headless render, not quotable from the static page). Status stays gated (above the Team tier). SCIM group provisioning ('SCIM-synced user groups') still needs Enterprise Scale. June's 'typically $65+/u/mo' Enterprise Scale figure had no first-party source and is dropped. SSO is a prerequisite for SCIM create/update, and SCIM is limited to ELA and 'claiming' enterprise account types. The Enterprise API (user list/get/manage/delete/logout, admin grants) and the audit log API are Enterprise Scale only. Monthly prices ($24 Team, $54 Business) appear only in the client-rendered cards.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Enterprise Scale",
+  "api_tax": true,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "Free",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": false,
+   "audit_log_api": null,
+   "cite": [
+    "c24"
+   ],
+   "notes": "Free plan cards render client-side; prices not quoted. Web API on Free covers base data only."
+  },
+  {
+   "name": "Team",
+   "price_text": "$20/user/month billed annually",
+   "price_per_user_mo": 20,
+   "billing": "annual",
+   "sso": null,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c24"
+   ]
+  },
+  {
+   "name": "Business",
+   "price_text": "$45/user/month billed annually",
+   "price_per_user_mo": 45,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": false,
+   "audit_log_api": false,
+   "cite": [
+    "c2",
+    "c3",
+    "c6",
+    "c10",
+    "c24",
+    "c33"
+   ],
+   "notes": "SCIM user provisioning only; SCIM group management is Enterprise Scale."
+  },
+  {
+   "name": "Enterprise Scale",
+   "price_text": "Custom pricing (Contact Sales)",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c2",
+    "c6",
+    "c25",
+    "c33"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c6",
+   "c7",
+   "c8",
+   "c9"
+  ],
+  "plan": "Business",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://airtable.com/scim/v2",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Personal access token or OAuth integration with scope enterprise.scim.usersAndGroups:manage, created by an Enterprise admin at https://airtable.com/create/tokens (service account token recommended for admins of multiple enterprises)",
+   "token_expiry": null,
+   "cite": [
+    "c10",
+    "c11",
+    "c12"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c10",
+    "c13",
+    "c14",
+    "c15",
+    "c16"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c10",
+    "c13",
+    "c14",
+    "c16",
+    "c17",
+    "c18",
+    "c19",
+    "c20",
+    "c21"
+   ],
+   "notes": "Deactivate/reactivate via the active attribute (provisioned/deactivated state). Group push and membership need Enterprise Scale."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": true,
+   "revokes_sessions": true,
+   "data_retained": "Deactivated user is no longer associated with the enterprise plan and is greyed out in sharing dialogs; account and owned bases remain until an admin deletes the account in the UI (to transfer bases/workspaces) or via the Enterprise API. SCIM DELETE cannot remove the token owner or the sole owner of a workspace with multiple collaborators.",
+   "cite": [
+    "c17",
+    "c18",
+    "c14"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName"
+   ],
+   "cite": [
+    "c13"
+   ],
+   "notes": "Equality filtering on userName only."
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c13"
+   ],
+   "notes": "startIndex and count; count defaults to all users."
+  },
+  "attributes": {
+   "core": [
+    "id",
+    "userName",
+    "emails[primary].value",
+    "name.givenName",
+    "name.familyName",
+    "active",
+    "externalId",
+    "title"
+   ],
+   "enterprise": [
+    "costCenter",
+    "department",
+    "division",
+    "organization",
+    "manager.displayName",
+    "manager.value"
+   ],
+   "custom": {
+    "supported": true,
+    "how": "Airtable SSO extension urn:airtable:params:scim:schemas:extension:sso:2.0:User with emailDomain, used to route provisioning to a specific IdP and to provision off-domain users. No arbitrary custom attributes."
+   },
+   "group": [
+    "id",
+    "displayName",
+    "members[].value"
+   ],
+   "cite": [
+    "c7",
+    "c22",
+    "c23"
+   ]
+  },
+  "roles": {
+   "supported": false,
+   "how": "SCIM cannot assign licences or seat types; use license-mapped user groups pushed via IdP sync and connected to an org unit or seat type.",
+   "cite": [
+    "c26"
+   ]
+  },
+  "rate_limits": {
+   "text": "No SCIM-specific limit documented. Web API: 5 requests/second per base and 50 requests/second for all traffic using a given user's or service account's personal access tokens; 429 then a 30-second wait.",
+   "cite": [
+    "c27"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "SCIM group management (group push) is unavailable on Business; Business customers using the Entra gallery app must disable group mappings.",
+    "cite": [
+     "c6",
+     "c8"
+    ]
+   },
+   {
+    "text": "SCIM is only available for ELA and CLAIM enterprise account types; it manages only claimed (managed) users and supported SSO-managed external users.",
+    "cite": [
+     "c9",
+     "c7"
+    ]
+   },
+   {
+    "text": "Nested groups are not supported.",
+    "cite": [
+     "c18"
+    ]
+   },
+   {
+    "text": "Provisioning fails with a conflict if an unclaimed Airtable account already exists for the email; the account must be claimed first.",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "text": "Vendor-built SCIM integrations exist for Okta and Entra ID only; other IdPs use the SCIM API directly.",
+    "cite": [
+     "c8"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c24",
+   "c25",
+   "c29"
+  ],
+  "plan": "Enterprise Scale",
+  "api_tax": true,
+  "style": "REST",
+  "base_url": "https://api.airtable.com/v0/meta/enterpriseAccounts/{enterpriseAccountId}",
+  "docs_url": "https://airtable.com/developers/web/api/manage-user",
+  "auth": {
+   "methods": [
+    "personal_access_token",
+    "oauth2",
+    "service_account_token"
+   ],
+   "scopes": [
+    "enterprise.user:read",
+    "enterprise.user:write",
+    "enterprise.groups:read",
+    "enterprise.auditLogs:read",
+    "enterprise.scim.usersAndGroups:manage"
+   ],
+   "cite": [
+    "c29",
+    "c30",
+    "c31",
+    "c32",
+    "c33"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": true,
+   "reactivate_user": true,
+   "manage_groups": null,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c29",
+    "c30",
+    "c31",
+    "c34",
+    "c35",
+    "c36"
+   ],
+   "notes": "User creation is SCIM-only; group read via GET /v0/meta/groups/{groupId}; admin role grant/revoke endpoints."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/v0/meta/enterpriseAccounts/{enterpriseAccountId}/users",
+    "purpose": "Batch get enterprise users by ID or email",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v0/meta/enterpriseAccounts/{enterpriseAccountId}/users/{userId}",
+    "purpose": "Get an enterprise user by ID",
+    "cite": [
+     "c37"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/v0/meta/enterpriseAccounts/{enterpriseAccountId}/users/{userId}",
+    "purpose": "Manage a user (e.g. state provisioned/deactivated)",
+    "cite": [
+     "c29",
+     "c34"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/v0/meta/enterpriseAccounts/{enterpriseAccountId}/users",
+    "purpose": "Batch manage enterprise users",
+    "cite": [
+     "c38"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v0/meta/enterpriseAccounts/{enterpriseAccountId}/users/claim",
+    "purpose": "Batch manage organization memberships (claim users)",
+    "cite": [
+     "c39"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v0/meta/enterpriseAccounts/{enterpriseAccountId}/users/{userId}",
+    "purpose": "Delete an enterprise user by ID",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v0/meta/enterpriseAccounts/{enterpriseAccountId}/users",
+    "purpose": "Batch delete enterprise users by email",
+    "cite": [
+     "c40"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v0/meta/enterpriseAccounts/{enterpriseAccountId}/users/{userId}/remove",
+    "purpose": "Remove a user from all enterprise workspaces, bases, interfaces and user groups",
+    "cite": [
+     "c41"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v0/meta/enterpriseAccounts/{enterpriseAccountId}/users/{userId}/logout",
+    "purpose": "Log out a user",
+    "cite": [
+     "c42"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v0/meta/enterpriseAccounts/{enterpriseAccountId}/users/grantAdminAccess",
+    "purpose": "Grant admin access",
+    "cite": [
+     "c35"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v0/meta/enterpriseAccounts/{enterpriseAccountId}/users/revokeAdminAccess",
+    "purpose": "Revoke admin access",
+    "cite": [
+     "c36"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v0/meta/groups/{groupId}",
+    "purpose": "Get user group metadata",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v0/meta/enterpriseAccounts/{enterpriseAccountId}/auditLogEvents",
+    "purpose": "Retrieve audit log events",
+    "cite": [
+     "c33"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Enterprise Scale",
+   "cite": [
+    "c33"
+   ]
+  },
+  "rate_limits": {
+   "text": "5 requests/second per base; 50 requests/second for all traffic using a given user's or service account's personal access tokens.",
+   "cite": [
+    "c27"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Provisioned/deactivated state changes apply only to ELA and 'claiming' enterprise accounts; FLA users are always provisioned.",
+    "cite": [
+     "c34"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/airtable/",
+   "cite": [
+    "c43",
+    "c8"
+   ],
+   "notes": "OIN page marks SAML, SCIM, Create, Update, Deactivate and Group Push as checked (page markup). Airtable says it built the SCIM integrations with Okta and Entra ID."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/airtable-provisioning-tutorial",
+   "cite": [
+    "c44",
+    "c8"
+   ]
+  },
+  "google": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c45"
+   ],
+   "notes": "Airtable's Google guide uses a custom SAML app in Google Workspace; no Google auto-provisioning documented."
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": true,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c46"
+   ],
+   "notes": "From Airtable's own OneLogin guide (an 'Airtable SAML application in OneLogin'); OneLogin's connector page not loaded. Provisioning only via the generic SCIM API."
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://jumpcloud.com/support/integrate-with-airtable",
+   "cite": [
+    "c47"
+   ]
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c7"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://airtable.com/pricing",
+   "title": "Airtable Pricing | Compare Plans, Features & Costs",
+   "quote": "our Team plan is available for $20/user/month when billed annually. Our Business and Enterprise Scale plans include the additional customization, data scale, flexibility, and administrative features",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://airtable.com/pricing",
+   "title": "Airtable Pricing | Compare Plans, Features & Costs",
+   "quote": "Business is available at $45/user/month when billed annually our Enterprise Scale plan pricing is custom, based on the organization’s needs and scale with Airtable.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://support.airtable.com/articles/2891850232-configuring-sso-with-onelogin",
+   "title": "Configuring SSO with OneLogin | Airtable Help Center",
+   "quote": "Plan availability Business and Enterprise Scale only",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://airtable.com/developers/web/api/scim-overview",
+   "title": "SCIM - Airtable Web API",
+   "quote": "Note: SCIM user management is only available for the Business, Enterprise, and Enterprise Scale plans, while SCIM group management is only available for the Enterprise and Enterprise Scale plans.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://airtable.com/developers/web/api/scim-overview",
+   "title": "SCIM - Airtable Web API",
+   "quote": "SSO is a prerequisite for creating and updating users, since we don't allow setting passwords with SCIM. Only managed users can be retrieved and managed using the SCIM API.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://support.airtable.com/articles/1437991116-managing-users-via-idp-sync",
+   "title": "Managing users via IdP sync | Airtable Help Center",
+   "quote": "We are starting with Okta and Microsoft’s Entra ID, which are two of the more common identity management services. We have created SCIM-capable integrations with Okta and Entra ID IdPs.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://support.airtable.com/articles/1437991116-managing-users-via-idp-sync",
+   "title": "Managing users via IdP sync | Airtable Help Center",
+   "quote": "SCIM is only available for ELA & CLAIM enterprises, and SSO is a prerequisite for creating and updating users since we don't allow setting passwords with SCIM.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://airtable.com/developers/web/api/list-scim-users",
+   "title": "List users - Airtable Web API",
+   "quote": "Authentication Personal access token, OAuth integration Scope enterprise.scim.usersAndGroups:manage User role Enterprise admin Admins of multiple enterprises should use a service account's token when calling this route. Billing plans Business, Enterprise (pre-2023.08 legacy plan), Enterprise Scale",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/airtable-provisioning-tutorial",
+   "title": "Configure Airtable for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Login to Airtable Developer Hub as an Admin user, and then navigate to https://airtable.com/create/tokens.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://airtable.com/developers/web/api/list-scim-users",
+   "title": "List users - Airtable Web API",
+   "quote": "curl \"https://airtable.com/scim/v2/Users\" \\ -H \"Authorization: Bearer YOUR_TOKEN\"",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://airtable.com/developers/web/api/list-scim-users",
+   "title": "List users - Airtable Web API",
+   "quote": "Number of users to return, defaults to all users. filter optional<string> The SCIM spec includes additional filter options, but we only support equality filtering on userName.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://airtable.com/developers/web/api/delete-scim-user",
+   "title": "Delete user - Airtable Web API",
+   "quote": "The endpoint cannot be used to delete the admin that owns the authentication token used to make the request. The endpoint cannot be used to delete the sole owner of a workspace that has multiple collaborators.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://airtable.com/developers/web/api/list-scim-groups.md",
+   "title": "List groups - Airtable Web API",
+   "quote": "GET https://airtable.com/scim/v2/Groups",
+   "accessed": "2026-10-05",
+   "page_url": "https://airtable.com/developers/web/api/list-scim-groups"
+  },
+  {
+   "id": "c16",
+   "url": "https://airtable.com/developers/web/api/put-scim-user.md",
+   "title": "Put user - Airtable Web API",
+   "quote": "PUT https://airtable.com/scim/v2/Users/{userId}",
+   "accessed": "2026-10-05",
+   "page_url": "https://airtable.com/developers/web/api/put-scim-user"
+  },
+  {
+   "id": "c17",
+   "url": "https://support.airtable.com/articles/1437991116-managing-users-via-idp-sync",
+   "title": "Managing users via IdP sync | Airtable Help Center",
+   "quote": "Deactivating a user in Airtable means the user is no longer associated with your Enterprise's Airtable plan. This action will log out all of the user's logged-in sessions.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://support.airtable.com/articles/1437991116-managing-users-via-idp-sync",
+   "title": "Managing users via IdP sync | Airtable Help Center",
+   "quote": "We do not charge for deactivated users. So, if there is a chance the user may need to be re-activated (provisioned) in the future, then leaving them in a deactivated state is likely a good practice to follow.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://airtable.com/developers/web/api/create-scim-group.md",
+   "title": "Create group - Airtable Web API",
+   "quote": "POST https://airtable.com/scim/v2/Groups",
+   "accessed": "2026-10-05",
+   "page_url": "https://airtable.com/developers/web/api/create-scim-group"
+  },
+  {
+   "id": "c20",
+   "url": "https://airtable.com/developers/web/api/patch-scim-group.md",
+   "title": "Patch group - Airtable Web API",
+   "quote": "PATCH https://airtable.com/scim/v2/Groups/{groupId}",
+   "accessed": "2026-10-05",
+   "page_url": "https://airtable.com/developers/web/api/patch-scim-group"
+  },
+  {
+   "id": "c21",
+   "url": "https://airtable.com/developers/web/api/model/scim-user-schema.md",
+   "title": "SCIM user schema - Airtable Web API",
+   "quote": "Indicates if the user is active or deactivated.",
+   "accessed": "2026-10-05",
+   "page_url": "https://airtable.com/developers/web/api/model/scim-user-schema"
+  },
+  {
+   "id": "c22",
+   "url": "https://airtable.com/developers/web/api/scim-overview",
+   "title": "SCIM - Airtable Web API",
+   "quote": "Cost center costCenter False Department department False Division division False Organization organization False Manager display name manager.displayName False Manager manager.value False",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://airtable.com/developers/web/api/scim-overview",
+   "title": "SCIM - Airtable Web API",
+   "quote": "Airtable defines an additional optional extension for routing user provisioning through a particular SSO identity provider when an enterprise has multiple identity providers configured.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://airtable.com/developers/web/api/billing-plans.md",
+   "title": "Billing plans - Airtable Web API",
+   "quote": "Same access as the Free plan, in addition to SCIM user management",
+   "accessed": "2026-10-05",
+   "page_url": "https://airtable.com/developers/web/api/billing-plans"
+  },
+  {
+   "id": "c25",
+   "url": "https://airtable.com/developers/web/api/billing-plans.md",
+   "title": "Billing plans - Airtable Web API",
+   "quote": "Access to all endpoints, including the Enterprise API",
+   "accessed": "2026-10-05",
+   "page_url": "https://airtable.com/developers/web/api/billing-plans"
+  },
+  {
+   "id": "c26",
+   "url": "https://support.airtable.com/articles/1437991116-managing-users-via-idp-sync",
+   "title": "Managing users via IdP sync | Airtable Help Center",
+   "quote": "SCIM and IdP user metadata (cost center, department, division, and similar attributes) can update user details in Airtable, but they can't assign or change a user's license or seat type.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://airtable.com/developers/web/api/rate-limits.md",
+   "title": "Rate limits - Airtable Web API",
+   "quote": "The API is limited to 5 requests per second per base.",
+   "accessed": "2026-10-05",
+   "page_url": "https://airtable.com/developers/web/api/rate-limits"
+  },
+  {
+   "id": "c28",
+   "url": "https://support.airtable.com/articles/1437991116-managing-users-via-idp-sync",
+   "title": "Managing users via IdP sync | Airtable Help Center",
+   "quote": "means the person already has an Airtable account that was created outside your enterprise account, so your identity provider can't create a new one under the same email. The fix is to claim the existing account rather than provision a new one.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://airtable.com/developers/web/api/manage-user.md",
+   "title": "Manage user - Airtable Web API",
+   "quote": "PATCH https://api.airtable.com/v0/meta/enterpriseAccounts/{enterpriseAccountId}/users/{userId}",
+   "accessed": "2026-10-05",
+   "page_url": "https://airtable.com/developers/web/api/manage-user"
+  },
+  {
+   "id": "c30",
+   "url": "https://airtable.com/developers/web/api/get-users-by-id-or-email.md",
+   "title": "Get users by id or email - Airtable Web API",
+   "quote": "GET https://api.airtable.com/v0/meta/enterpriseAccounts/{enterpriseAccountId}/users",
+   "accessed": "2026-10-05",
+   "page_url": "https://airtable.com/developers/web/api/get-users-by-id-or-email"
+  },
+  {
+   "id": "c31",
+   "url": "https://airtable.com/developers/web/api/delete-user-by-id.md",
+   "title": "Delete user by id - Airtable Web API",
+   "quote": "DELETE https://api.airtable.com/v0/meta/enterpriseAccounts/{enterpriseAccountId}/users/{userId}",
+   "accessed": "2026-10-05",
+   "page_url": "https://airtable.com/developers/web/api/delete-user-by-id"
+  },
+  {
+   "id": "c32",
+   "url": "https://airtable.com/developers/web/api/get-user-group.md",
+   "title": "Get user group - Airtable Web API",
+   "quote": "GET https://api.airtable.com/v0/meta/groups/{groupId}",
+   "accessed": "2026-10-05",
+   "page_url": "https://airtable.com/developers/web/api/get-user-group"
+  },
+  {
+   "id": "c33",
+   "url": "https://airtable.com/developers/web/api/audit-log-events.md",
+   "title": "Audit log events - Airtable Web API",
+   "quote": "Retrieve audit log events for an enterprise. By default, this will walk all the data we're currently storing and continue walking data into the future.",
+   "accessed": "2026-10-05",
+   "page_url": "https://airtable.com/developers/web/api/audit-log-events"
+  },
+  {
+   "id": "c34",
+   "url": "https://airtable.com/developers/web/api/manage-user.md",
+   "title": "Manage user - Airtable Web API",
+   "quote": "The provisioned and deactivated states apply only to ELA and \"claiming\" enterprise accounts. FLA users are always provisioned.",
+   "accessed": "2026-10-05",
+   "page_url": "https://airtable.com/developers/web/api/manage-user"
+  },
+  {
+   "id": "c35",
+   "url": "https://airtable.com/developers/web/api/grant-admin-access.md",
+   "title": "Grant admin access - Airtable Web API",
+   "quote": "POST https://api.airtable.com/v0/meta/enterpriseAccounts/{enterpriseAccountId}/users/grantAdminAccess",
+   "accessed": "2026-10-05",
+   "page_url": "https://airtable.com/developers/web/api/grant-admin-access"
+  },
+  {
+   "id": "c36",
+   "url": "https://airtable.com/developers/web/api/revoke-admin-access.md",
+   "title": "Revoke admin access - Airtable Web API",
+   "quote": "POST https://api.airtable.com/v0/meta/enterpriseAccounts/{enterpriseAccountId}/users/revokeAdminAccess",
+   "accessed": "2026-10-05",
+   "page_url": "https://airtable.com/developers/web/api/revoke-admin-access"
+  },
+  {
+   "id": "c37",
+   "url": "https://airtable.com/developers/web/api/get-user-by-id.md",
+   "title": "Get user by id - Airtable Web API",
+   "quote": "GET https://api.airtable.com/v0/meta/enterpriseAccounts/{enterpriseAccountId}/users/{userId}",
+   "accessed": "2026-10-05",
+   "page_url": "https://airtable.com/developers/web/api/get-user-by-id"
+  },
+  {
+   "id": "c38",
+   "url": "https://airtable.com/developers/web/api/manage-user-batched.md",
+   "title": "Manage user batched - Airtable Web API",
+   "quote": "PATCH https://api.airtable.com/v0/meta/enterpriseAccounts/{enterpriseAccountId}/users",
+   "accessed": "2026-10-05",
+   "page_url": "https://airtable.com/developers/web/api/manage-user-batched"
+  },
+  {
+   "id": "c39",
+   "url": "https://airtable.com/developers/web/api/manage-user-membership.md",
+   "title": "Manage user membership - Airtable Web API",
+   "quote": "POST https://api.airtable.com/v0/meta/enterpriseAccounts/{enterpriseAccountId}/users/claim",
+   "accessed": "2026-10-05",
+   "page_url": "https://airtable.com/developers/web/api/manage-user-membership"
+  },
+  {
+   "id": "c40",
+   "url": "https://airtable.com/developers/web/api/delete-users-by-email.md",
+   "title": "Delete users by email - Airtable Web API",
+   "quote": "DELETE https://api.airtable.com/v0/meta/enterpriseAccounts/{enterpriseAccountId}/users",
+   "accessed": "2026-10-05",
+   "page_url": "https://airtable.com/developers/web/api/delete-users-by-email"
+  },
+  {
+   "id": "c41",
+   "url": "https://airtable.com/developers/web/api/remove-user-from-enterprise.md",
+   "title": "Remove user from enterprise - Airtable Web API",
+   "quote": "Unshare a user from all enterprise workspaces, bases, interfaces, and user groups. If applicable, the user will also have their admin access revoked.",
+   "accessed": "2026-10-05",
+   "page_url": "https://airtable.com/developers/web/api/remove-user-from-enterprise"
+  },
+  {
+   "id": "c42",
+   "url": "https://airtable.com/developers/web/api/logout-user.md",
+   "title": "Logout user - Airtable Web API",
+   "quote": "POST https://api.airtable.com/v0/meta/enterpriseAccounts/{enterpriseAccountId}/users/{userId}/logout",
+   "accessed": "2026-10-05",
+   "page_url": "https://airtable.com/developers/web/api/logout-user"
+  },
+  {
+   "id": "c43",
+   "url": "https://www.okta.com/integrations/airtable/",
+   "title": "Integrate Airtable with Okta",
+   "quote": "Airtable's Okta integration enables Airtable enterprise customers to manage their users and groups with single sign-on, provisioning / deprovisioning, and group sync.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c44",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/airtable-provisioning-tutorial",
+   "title": "Configure Airtable for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Create users in Airtable. Remove users in Airtable when they don't require access anymore. Keep user attributes synchronized between Microsoft Entra ID and Airtable. Provision groups and group memberships in Airtable. Single sign-on to Airtable (recommended).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c45",
+   "url": "https://support.airtable.com/articles/9825770327-configuring-sso-with-google",
+   "title": "Configuring SSO with Google | Airtable Help Center",
+   "quote": "In the custom SAML app, add an attribute mapping from Basic Information → Primary Email (or the field containing the intended Airtable email) to the app attribute mail.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c46",
+   "url": "https://support.airtable.com/articles/2891850232-configuring-sso-with-onelogin",
+   "title": "Configuring SSO with OneLogin | Airtable Help Center",
+   "quote": "Open the Airtable SAML application in OneLogin. You’ll need access to its SAML settings and your organization’s Airtable SSO settings, including a verified domain for the configuration.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c47",
+   "url": "https://jumpcloud.com/support/integrate-with-airtable",
+   "title": "Integrate with Airtable - JumpCloud",
+   "quote": "Automatically provision, update and deprovision users and groups in Airtable from JumpCloud using the SCIM integration.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The help-centre IdP sync article says SCIM plan availability is 'Business and Enterprise Scale plans only' but also that 'SCIM is only available for ELA & CLAIM enterprises' (enterprise account types), so a Business customer without a claiming enterprise account may not get SCIM. The API reference lists Business as a supported billing plan.",
+   "cite": [
+    "c9",
+    "c10"
+   ]
+  }
+ ],
+ "searched": [
+  "https://airtable.com/pricing",
+  "https://support.airtable.com/sitemap.xml",
+  "https://support.airtable.com/articles/1437991116-managing-users-via-idp-sync",
+  "https://airtable.com/developers/web/llms.txt",
+  "https://airtable.com/developers/web/api/scim-overview"
+ ],
+ "open_questions": [
+  "SCIM token expiry is not documented (personal access tokens).",
+  "ServiceProviderConfig, Schemas, ResourceTypes, Bulk and /Me SCIM endpoints are not documented.",
+  "Maximum SCIM page size is not stated (count defaults to all users).",
+  "Whether SAML sign-in creates accounts just-in-time is not documented in the pages read.",
+  "Who built the Okta and Entra catalogue apps (Airtable or the IdP) is not stated on the IdP pages.",
+  "No user-event webhooks found; Airtable webhooks cover base data changes.",
+  "CSV user import was not found in the pages read.",
+  "Pricing page plan cards and comparison table render client-side, so per-tier SSO/SCIM/audit-log checkmarks could not be quoted; tier flags come from the API docs."
+ ]
+}

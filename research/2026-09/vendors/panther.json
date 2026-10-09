@@ -1,0 +1,775 @@
+{
+ "slug": "panther",
+ "vendor": "Panther (Databricks Lakewatch)",
+ "vendor_url": "https://panther.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Panther (Databricks Lakewatch)",
+  "slug": "panther",
+  "category": "Security & Identity",
+  "status": "gated",
+  "scim_plan": "Contact Sales",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": false,
+   "update": true,
+   "deactivate": true,
+   "delete": false,
+   "groups": false
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "sso_only",
+   "google": "sso_only",
+   "onelogin": "sso_only",
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://panther.com/pricing",
+  "docs_url": "https://docs.panther.com/system-configuration/saml/okta/okta-scim",
+  "evidence": "Panther's docs say it \"supports managing users via System for Cross-domain Identity Management (SCIM) with Okta\", but \"does not support creating new users via SCIM\"; there is no public price list (panther.com/pricing redirects to the product overview).",
+  "notes": "Quote-only: Panther publishes no plans or prices; /pricing redirects to the overview page and the site offers demo requests only. SCIM is documented for Okta only and covers profile updates, role (PantherRole attribute) and deactivate/reactivate of users already created by SAML JIT; it cannot create or delete users and has no /Groups endpoint, so it would be partial if it were not quote-only. Panther's own SAML overview page still lists SCIM as unsupported (see conflicts). SAML SSO (Okta, Entra, Google, OneLogin, Duo, generic) with JIT auto-provisioning; plan placement of SSO is not published. Panther is now part of Databricks and is being folded into Databricks Lakewatch. REST and GraphQL user/role APIs are available with an API token holding Manage Users.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Panther (quote-only)",
+   "price_text": "Contact Sales (no public price list)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c23",
+    "c3",
+    "c28"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c3",
+   "c7",
+   "c13",
+   "c14",
+   "c16"
+  ],
+  "plan": "Contact Sales",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "Tenant URL shown in Panther Console > General Settings > Identity & Access > SCIM Provisioning Setup",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Panther Console > Settings > Developer Tools > API Tokens (token with Manage Users / UserModify), sent as the Authorization HTTP header",
+   "token_expiry": null,
+   "cite": [
+    "c12",
+    "c18",
+    "c20"
+   ],
+   "notes": "Okta 'HTTP Header' auth mode with the Panther API token pasted as Authorization; docs do not state the prefix or expiry."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": false,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c3",
+    "c10"
+   ]
+  },
+  "operations": {
+   "create": false,
+   "read": true,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": false,
+   "group_push": false,
+   "group_membership": false,
+   "cite": [
+    "c5",
+    "c6",
+    "c7",
+    "c8",
+    "c9",
+    "c10"
+   ],
+   "notes": "Update is documented as Okta 'Push Profile Updates'; the HTTP method (PUT vs PATCH) is not stated. 'read' inferred from documented eq queries."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c6",
+    "c8"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [],
+   "cite": [
+    "c9"
+   ],
+   "notes": "Only the eq operator; filterable attributes not listed."
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "name.givenName",
+    "name.familyName",
+    "emails (email)",
+    "pantherRole (custom, core 2.0 namespace)",
+    "active"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": true,
+    "how": "Add an Okta profile attribute pantherRole (external namespace urn:ietf:params:scim:schemas:core:2.0:User) carrying a Panther role name"
+   },
+   "group": [],
+   "cite": [
+    "c5",
+    "c6",
+    "c15",
+    "c16"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "pantherRole attribute on the Okta app user; applies at the user's next Okta login",
+   "cite": [
+    "c15",
+    "c17"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Okta only; users must first be created by SAML JIT on their first login, and existing users cannot be imported.",
+    "cite": [
+     "c3",
+     "c7",
+     "c19"
+    ]
+   },
+   {
+    "text": "No user deletion and no /Groups endpoint; only eq filters.",
+    "cite": [
+     "c8",
+     "c9",
+     "c10"
+    ]
+   },
+   {
+    "text": "Console edits to users are overwritten on the next Okta sync once SCIM is enabled.",
+    "cite": [
+     "c11"
+    ]
+   },
+   {
+    "text": "Role changes pushed by SCIM take effect only after the user re-authenticates via Okta.",
+    "cite": [
+     "c17"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c28",
+   "c40",
+   "c41"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "Per-instance API URL shown in Panther Console > Settings > Developer Tools > API Tokens",
+  "docs_url": "https://docs.panther.com/panther-developer-workflows/api/rest/users",
+  "auth": {
+   "methods": [
+    "api_key (X-API-Key header)"
+   ],
+   "scopes": [
+    "UserRead (Read User Info)",
+    "UserModify (Manage Users)"
+   ],
+   "cite": [
+    "c28",
+    "c42"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c29",
+    "c30",
+    "c31",
+    "c32",
+    "c33",
+    "c39",
+    "c42"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/users",
+    "purpose": "Create a user",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/users/{id}",
+    "purpose": "Get a user",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/users/{id}",
+    "purpose": "Update a user",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/users/{id}",
+    "purpose": "Delete a user",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/users",
+    "purpose": "List users",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/roles",
+    "purpose": "Create a role",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/roles/{id}",
+    "purpose": "Get a role",
+    "cite": [
+     "c38"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/roles/{id}",
+    "purpose": "Update a role",
+    "cite": [
+     "c37"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/roles/{id}",
+    "purpose": "Delete a role",
+    "cite": [
+     "c36"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/roles",
+    "purpose": "List roles",
+    "cite": [
+     "c35"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Only an Admin can delete other Admin users; self-deletion is not supported.",
+    "cite": [
+     "c43"
+    ]
+   }
+  ],
+  "notes": "Also a GraphQL API (GraphQL-over-HTTP or the Console API Playground) with the same user and role operations."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c3",
+    "c24"
+   ],
+   "notes": "Panther's docs use a custom 'Create App Integration' SAML 2.0 app with SCIM enabled, not an OIN catalogue app; okta.com/integrations/panther returned 404."
+  },
+  "entra": {
+   "listed": false,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c25"
+   ],
+   "notes": "Entra setup uses a non-gallery app; SSO only."
+  },
+  "google": {
+   "listed": false,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c27"
+   ],
+   "notes": "Custom SAML app; SSO only."
+  },
+  "onelogin": {
+   "listed": false,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c26"
+   ],
+   "notes": "SAML Custom Connector (Advanced); SSO only."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c21",
+   "c4"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://panther.com/pricing",
+   "title": "Panther (pricing URL redirects to /overview)",
+   "quote": "Your data, your warehouse. Snowflake or Databricks. No vendor lock-in. Petabyte scale, predictable pricing.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://panther.com/request-a-demo",
+   "title": "Panther: request a demo",
+   "quote": "Panther will remain fully supported for existing customers. Our focus is on integrating Panther's capabilities natively into Databricks Lakewatch.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://docs.panther.com/system-configuration/saml/okta/okta-scim",
+   "title": "Okta SCIM | Panther Docs",
+   "quote": "Panther supports managing users via System for Cross-domain Identity Management (SCIM) with Okta.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://docs.panther.com/system-configuration/saml/okta/okta-scim",
+   "title": "Okta SCIM | Panther Docs",
+   "quote": "While Panther does not support user provisioning via SCIM, users can be automatically created using the Okta SSO integration via Just-In-Time (JIT) provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://docs.panther.com/system-configuration/saml/okta/okta-scim",
+   "title": "Okta SCIM | Panther Docs",
+   "quote": "Profile updates: A user's given name, family name, email, and custom Panther role",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://docs.panther.com/system-configuration/saml/okta/okta-scim",
+   "title": "Okta SCIM | Panther Docs",
+   "quote": "User status: Deactivate and reactivate existing users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://docs.panther.com/system-configuration/saml/okta/okta-scim",
+   "title": "Okta SCIM | Panther Docs",
+   "quote": "Panther does not support creating new users via SCIM.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.panther.com/system-configuration/saml/okta/okta-scim",
+   "title": "Okta SCIM | Panther Docs",
+   "quote": "Users can only be deactivated, not deleted. Okta does not perform DELETE operations on SCIM user objects.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.panther.com/system-configuration/saml/okta/okta-scim",
+   "title": "Okta SCIM | Panther Docs",
+   "quote": "Only the eq operator is supported for SCIM queries.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.panther.com/system-configuration/saml/okta/okta-scim",
+   "title": "Okta SCIM | Panther Docs",
+   "quote": "The /Groups SCIM endpoint is not supported.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.panther.com/system-configuration/saml/okta/okta-scim",
+   "title": "Okta SCIM | Panther Docs",
+   "quote": "When SCIM is enabled, changes made to users directly in Panther Console will be overwritten during the next Okta sync.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.panther.com/system-configuration/saml/okta/okta-scim",
+   "title": "Okta SCIM | Panther Docs",
+   "quote": "Grant the token the ability to Manage Users (or UserModify if creating the token via API).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.panther.com/system-configuration/saml/okta/okta-scim",
+   "title": "Okta SCIM | Panther Docs",
+   "quote": "SCIM connector base URL: Enter the Tenant URL from your Panther Console.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.panther.com/system-configuration/saml/okta/okta-scim",
+   "title": "Okta SCIM | Panther Docs",
+   "quote": "Note: Okta SSO must already be configured and enabled.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.panther.com/system-configuration/saml/okta/okta-scim",
+   "title": "Okta SCIM | Panther Docs",
+   "quote": "To manage Panther role assignments (e.g., Admin, ReadOnlyAnalyst, or one of your custom roles) in Okta, create a new attribute in the Panther User Profile in Okta with the name PantherRole.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.panther.com/system-configuration/saml/okta/okta-scim",
+   "title": "Okta SCIM | Panther Docs",
+   "quote": "External namespace: urn:ietf:params:scim:schemas:core:2.0:User",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.panther.com/system-configuration/saml/okta/okta-scim",
+   "title": "Okta SCIM | Panther Docs",
+   "quote": "Panther role assignments made via SCIM will not be reflected in Panther until the affected user(s) re-authenticate to Panther Console via Okta.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.panther.com/system-configuration/saml/okta/okta-scim",
+   "title": "Okta SCIM | Panther Docs",
+   "quote": "Authentication Mode: In the drop-down, select HTTP Header. After you select this, an HTTP Header section appears below.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.panther.com/system-configuration/saml/okta/okta-scim",
+   "title": "Okta SCIM | Panther Docs",
+   "quote": "Importing existing users is not supported.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.panther.com/system-configuration/saml/okta/okta-scim",
+   "title": "Okta SCIM | Panther Docs",
+   "quote": "You will not be shown this token again after closing this page.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.panther.com/system-configuration/saml",
+   "title": "Identity & Access Integrations | Panther Docs",
+   "quote": "Auto-provisioning: Panther SAML accounts are created on the first login; they do not need to be created in advance",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://docs.panther.com/system-configuration/saml",
+   "title": "Identity & Access Integrations | Panther Docs",
+   "quote": "SCIM: Users deleted from the IdP are not automatically deleted from Panther (they just cannot login anymore)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://docs.panther.com/system-configuration/saml",
+   "title": "Identity & Access Integrations | Panther Docs",
+   "quote": "Follow these step-by-step guides to configure a SAML integration with one of the following identity providers (IdP):",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://docs.panther.com/system-configuration/saml/okta",
+   "title": "Okta SSO | Panther Docs",
+   "quote": "In the left-hand navigation bar, click on Applications, and then click Create App Integration.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://docs.panther.com/system-configuration/saml/azure",
+   "title": "Azure Active Directory SSO | Panther Docs",
+   "quote": "Integrate any other application you don’t find in the gallery (Non-gallery): Select this radio button.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://docs.panther.com/system-configuration/saml/onelogin",
+   "title": "OneLogin SSO | Panther Docs",
+   "quote": "Search for and select SAML Custom Connector (Advanced).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://docs.panther.com/system-configuration/saml/gsuite",
+   "title": "G Suite SSO | Panther Docs",
+   "quote": "Follow the GSuite guide for SAML-based SSO to add a custom SAML app.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://docs.panther.com/panther-developer-workflows/api/rest/users",
+   "title": "Users | Panther Docs",
+   "quote": "For POST and DELETE operations, your API token must have the Manage Users permission.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://docs.panther.com/panther-developer-workflows/api/rest/users.md",
+   "title": "Users | Panther Docs (Markdown)",
+   "quote": "## POST /users > Create a user",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.panther.com/panther-developer-workflows/api/rest/users"
+  },
+  {
+   "id": "c30",
+   "url": "https://docs.panther.com/panther-developer-workflows/api/rest/users.md",
+   "title": "Users | Panther Docs (Markdown)",
+   "quote": "## GET /users/{id} > Get a user",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.panther.com/panther-developer-workflows/api/rest/users"
+  },
+  {
+   "id": "c31",
+   "url": "https://docs.panther.com/panther-developer-workflows/api/rest/users.md",
+   "title": "Users | Panther Docs (Markdown)",
+   "quote": "## POST /users/{id} > Update a user",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.panther.com/panther-developer-workflows/api/rest/users"
+  },
+  {
+   "id": "c32",
+   "url": "https://docs.panther.com/panther-developer-workflows/api/rest/users.md",
+   "title": "Users | Panther Docs (Markdown)",
+   "quote": "## DELETE /users/{id} > Delete a user",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.panther.com/panther-developer-workflows/api/rest/users"
+  },
+  {
+   "id": "c33",
+   "url": "https://docs.panther.com/panther-developer-workflows/api/rest/users.md",
+   "title": "Users | Panther Docs (Markdown)",
+   "quote": "## GET /users > List users",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.panther.com/panther-developer-workflows/api/rest/users"
+  },
+  {
+   "id": "c34",
+   "url": "https://docs.panther.com/panther-developer-workflows/api/rest/roles.md",
+   "title": "Roles | Panther Docs (Markdown)",
+   "quote": "## POST /roles > Create a role",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.panther.com/panther-developer-workflows/api/rest/roles"
+  },
+  {
+   "id": "c35",
+   "url": "https://docs.panther.com/panther-developer-workflows/api/rest/roles.md",
+   "title": "Roles | Panther Docs (Markdown)",
+   "quote": "## GET /roles > List roles",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.panther.com/panther-developer-workflows/api/rest/roles"
+  },
+  {
+   "id": "c36",
+   "url": "https://docs.panther.com/panther-developer-workflows/api/rest/roles.md",
+   "title": "Roles | Panther Docs (Markdown)",
+   "quote": "## DELETE /roles/{id} > Delete a role",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.panther.com/panther-developer-workflows/api/rest/roles"
+  },
+  {
+   "id": "c37",
+   "url": "https://docs.panther.com/panther-developer-workflows/api/rest/roles.md",
+   "title": "Roles | Panther Docs (Markdown)",
+   "quote": "## POST /roles/{id} > Update a role",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.panther.com/panther-developer-workflows/api/rest/roles"
+  },
+  {
+   "id": "c38",
+   "url": "https://docs.panther.com/panther-developer-workflows/api/rest/roles.md",
+   "title": "Roles | Panther Docs (Markdown)",
+   "quote": "## GET /roles/{id} > Get a role",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.panther.com/panther-developer-workflows/api/rest/roles"
+  },
+  {
+   "id": "c39",
+   "url": "https://docs.panther.com/panther-developer-workflows/api/graphql/user-management",
+   "title": "User & Role Management | Panther Docs",
+   "quote": "Invite new users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c40",
+   "url": "https://docs.panther.com/panther-developer-workflows/api/graphql/user-management",
+   "title": "User & Role Management | Panther Docs",
+   "quote": "You can invoke Panther's API by using your Console's API Playground, or the GraphQL-over-HTTP API.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c41",
+   "url": "https://docs.panther.com/panther-developer-workflows/api/rest",
+   "title": "REST API | Panther Docs",
+   "quote": "At the bottom of the left-hand navigation bar in your Panther Console, click Settings, then navigate to Developer Tools > API Tokens. At the top of the page, see the API URL.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c42",
+   "url": "https://docs.panther.com/system-configuration/rbac",
+   "title": "Role-Based Access Control | Panther Docs",
+   "quote": "List + invite, delete, and modify users & their roles",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c43",
+   "url": "https://docs.panther.com/system-configuration/rbac",
+   "title": "Role-Based Access Control | Panther Docs",
+   "quote": "Only a user with the Admin role can delete other users with the Admin role. Self-deletions are not supported.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "Panther's SAML overview lists SCIM under 'Panther does not support the following', while the Okta SCIM page documents SCIM profile updates and deactivation via Okta. The more specific Okta SCIM page is used.",
+   "cite": [
+    "c22",
+    "c3"
+   ]
+  }
+ ],
+ "searched": [
+  "https://panther.com/pricing (redirects to /overview)",
+  "https://panther.com/sitemap.xml",
+  "https://docs.panther.com/llms.txt",
+  "https://www.okta.com/integrations/panther/ (404)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/panther-tutorial (404)"
+ ],
+ "open_questions": [
+  "No public pricing or plan list; which contracts include SSO and SCIM is not published.",
+  "SCIM token expiry and Authorization header format (Bearer prefix or raw key) are not documented.",
+  "Whether SCIM deactivation ends active Panther sessions or frees a seat is not documented.",
+  "REST API rate limits are not documented on the pages read.",
+  "Whether Panther is listed in the Okta OIN, JumpCloud or Entra gallery could not be confirmed."
+ ]
+}

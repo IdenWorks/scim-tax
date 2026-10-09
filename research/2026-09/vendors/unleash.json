@@ -1,0 +1,778 @@
+{
+ "slug": "unleash",
+ "vendor": "Unleash",
+ "vendor_url": "https://www.getunleash.io",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Unleash",
+  "slug": "unleash",
+  "category": "Developer Tools & CI/CD",
+  "status": "free",
+  "scim_plan": "Pay-As-You-Go",
+  "scim_price_text": "Pay-As-You-Go: $75/seat/mo (billed monthly)",
+  "scim_price_per_user_mo": 75,
+  "team_plan": "Pay-As-You-Go",
+  "team_price_text": "Pay-As-You-Go: $75/seat/mo (billed monthly)",
+  "team_price_per_user_mo": 75,
+  "price_multiplier": 1.0,
+  "sso_plan": "Pay-As-You-Go",
+  "sso_price_per_user_mo": 75,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.getunleash.io/pricing",
+  "docs_url": "https://docs.getunleash.io/concepts/scim",
+  "evidence": "Unleash's pricing FAQ says the free Open Source edition \"does not include single sign-on, SCIM provisioning\" and that \"Pay-As-You-Go starts at $75 per seat per month\"; Pay-As-You-Go and Enterprise \"both give you the full Enterprise feature set\".",
+  "notes": "The cheapest paid plan, Pay-As-You-Go ($75 per seat per month, billed monthly by card, no annual price listed), carries the full Enterprise feature set including SAML/OIDC SSO and SCIM, so there is no SCIM upcharge over the team plan. The free self-hosted Open Source edition has no SSO or SCIM. Enterprise is an annual contract (Contact Sales). Self-hosted Pay-As-You-Go has a 5-seat minimum. SCIM (v6.1+) covers users and groups but not role mapping: synced users default to Viewer and deprovisioned users are soft-deleted. Okta and Entra are set up as custom apps with the SCIM URL and token from the Unleash UI. Monthly price recorded because no annual price is published.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Pay-As-You-Go",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Open Source",
+   "price_text": "Free, self-hosted, no seat limit",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c3"
+   ],
+   "notes": "Limited to 1 project, 2 environments and 5,000 flags."
+  },
+  {
+   "name": "Pay-As-You-Go",
+   "price_text": "$75 per seat per month, billed monthly by credit card",
+   "price_per_user_mo": 75,
+   "billing": "monthly",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c1",
+    "c2",
+    "c4",
+    "c5",
+    "c6",
+    "c7",
+    "c8"
+   ],
+   "notes": "5-seat minimum for self-hosted."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Custom annual contract (Contact Sales)",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c4",
+    "c6",
+    "c7",
+    "c8",
+    "c9"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c2",
+   "c4",
+   "c11",
+   "c12",
+   "c19"
+  ],
+  "plan": "Pay-As-You-Go",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": "bearer",
+   "token_source": "Admin settings > Single sign-on > SCIM tab (toggle on; token shown); can be regenerated via POST /api/admin/scim-settings/generate-new-token",
+   "token_expiry": null,
+   "cite": [
+    "c13",
+    "c37"
+   ],
+   "notes": "Okta uses HTTP Header auth with the token; Entra uses it as the Secret Token."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c10",
+    "c16"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c10",
+    "c15",
+    "c16",
+    "c18"
+   ],
+   "notes": "Okta: Create Users, Update User Attributes, Deactivate Users, Push Groups. Whether updates use PUT or PATCH is not documented."
+  },
+  "deprovision": {
+   "action": "delete",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Users are soft-deleted so audit logs are preserved",
+   "cite": [
+    "c10"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "emails",
+    "displayName",
+    "externalId"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": [
+    "c17",
+    "c20"
+   ],
+   "notes": "Attributes the Okta and Entra guides say to keep; all others should be removed from the mapping."
+  },
+  "roles": {
+   "supported": false,
+   "how": "No role mapping; SCIM users default to Viewer. Admin rights come from assigning a role to a synced group in Unleash.",
+   "cite": [
+    "c10",
+    "c21"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "No role mapping or password sync; SCIM-synced users default to the Viewer root role and manual role changes are reset on the next sync.",
+    "cite": [
+     "c10",
+     "c21"
+    ]
+   },
+   {
+    "text": "Entra deprovisioning needs the aadOptscim062020 SCIM compliance flag on the tenant URL.",
+    "cite": [
+     "c18"
+    ]
+   },
+   {
+    "text": "Okta has no catalogue app: SCIM is enabled on a custom SWA (or existing SAML) app.",
+    "cite": [
+     "c14"
+    ]
+   }
+  ],
+  "notes": "SCIM is an Enterprise feature (v6.1+); both paid plans (Pay-As-You-Go and Enterprise) carry the full Enterprise feature set. Not in Unleash Open Source. The SCIM URL is shown in Admin > Single Sign-On > SCIM; its path pattern is not documented. Version 2.0 is implied by the generic SCIM setup rather than stated."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c7",
+   "c23"
+  ],
+  "plan": "Pay-As-You-Go",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "<your-unleash-url>/api/admin",
+  "docs_url": "https://docs.getunleash.io/api/admin-api-overview",
+  "auth": {
+   "methods": [
+    "api_key"
+   ],
+   "scopes": [],
+   "cite": [
+    "c23"
+   ],
+   "notes": "Service-account tokens or personal access tokens in the Authorization header; permissions follow the token owner's role."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c24",
+    "c25",
+    "c26",
+    "c27",
+    "c28",
+    "c30",
+    "c31",
+    "c32",
+    "c33",
+    "c36"
+   ],
+   "notes": "Create user takes a rootRole and an optional welcome email (sendEmail)."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/api/admin/user-admin",
+    "purpose": "Get all users and root roles",
+    "cite": [
+     "c24"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/admin/user-admin",
+    "purpose": "Create a new user",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/admin/user-admin/{id}",
+    "purpose": "Get user",
+    "cite": [
+     "c26"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/admin/user-admin/{id}",
+    "purpose": "Update a user",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/admin/user-admin/{id}",
+    "purpose": "Delete a user",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/admin/user-admin/search",
+    "purpose": "Search users",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/admin/groups",
+    "purpose": "List groups",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/admin/groups",
+    "purpose": "Create a group",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/admin/groups/{groupId}",
+    "purpose": "Update a group",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/admin/groups/{groupId}",
+    "purpose": "Delete a group",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/admin/roles",
+    "purpose": "List roles",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/admin/events",
+    "purpose": "Get recent events (event log)",
+    "cite": [
+     "c35"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Pay-As-You-Go",
+   "cite": [
+    "c8",
+    "c35"
+   ],
+   "notes": "Event log is readable via GET /api/admin/events."
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c14",
+    "c15",
+    "c22"
+   ],
+   "notes": "No catalogue app is used: the guide creates a custom SWA app (or reuses a custom SAML app) and adds SCIM."
+  },
+  "entra": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c19",
+    "c18"
+   ],
+   "notes": "Uses the customer's own Entra SSO app (non-gallery) with the Unleash SCIM URL and token."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": "SSO group syncing (OIDC/SAML group claims mapped to Unleash groups)",
+  "docs_public": true,
+  "cite": [
+   "c22"
+  ],
+  "notes": "Docs list user group SSO syncing guides; JIT account creation on SSO login is not quoted here."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.getunleash.io/pricing",
+   "title": "Unleash Enterprise Pricing & Plans",
+   "quote": "Unleash Enterprise Pay-As-You-Go costs $75 per seat per month, billed monthly by credit card, with no contract.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://www.getunleash.io/pricing",
+   "title": "Unleash Enterprise Pricing & Plans",
+   "quote": "It does not include single sign-on, SCIM provisioning, granular role-based access control, change request approvals, or a support SLA. If you need those, or you would rather not operate the service yourself, Pay-As-You-Go starts at $75 per seat per month with a 14-day free trial.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://www.getunleash.io/pricing",
+   "title": "Unleash Enterprise Pricing & Plans",
+   "quote": "Unleash Open Source is free, self-hosted, and has no limit on seats.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://www.getunleash.io/pricing",
+   "title": "Unleash Enterprise Pricing & Plans",
+   "quote": "Both give you the full Enterprise feature set. The differences are commercial and operational.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://www.getunleash.io/pricing",
+   "title": "Unleash Enterprise Pricing & Plans",
+   "quote": "$75/seat/month. Billed via credit card. 5 seat minimum for self-hosted.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://www.getunleash.io/pricing",
+   "title": "Unleash Enterprise Pricing & Plans",
+   "quote": "Single Sign-On (SSO) with SAML 2.0 or OpenID Connect (Azure AD, Okta) Included Included",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://www.getunleash.io/pricing",
+   "title": "Unleash Enterprise Pricing & Plans",
+   "quote": "Admin, Frontend, and Client APIs Included Included",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://www.getunleash.io/pricing",
+   "title": "Unleash Enterprise Pricing & Plans",
+   "quote": "Audit logs with up to 2 years retention Included Included",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://www.getunleash.io/pricing",
+   "title": "Unleash Enterprise Pricing & Plans",
+   "quote": "Enterprise is an annual contract, invoiced, with a 99.99% uptime commitment",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.getunleash.io/concepts/scim.md",
+   "title": "Provisioning",
+   "quote": "Our implementation supports user and group provisioning, but not password syncing or role mapping. It uses soft-deletes to preserve audit logs when you deprovision users.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.getunleash.io/concepts/scim"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.getunleash.io/concepts/scim.md",
+   "title": "Provisioning",
+   "quote": "SCIM automates user and group provisioning between an identity provider (IdP) and Unleash. This makes it easy to manage users and groups directly through your SSO provider. v6.1 Enterprise",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.getunleash.io/concepts/scim"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.getunleash.io/provisioning/how-to-setup-provisioning-with-okta.md",
+   "title": "Set up Okta provisioning",
+   "quote": "Navigate to the Single Sign-On section and select the \"SCIM\" tab. The SCIM API URL will be shown in this section",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.getunleash.io/provisioning/how-to-setup-provisioning-with-okta"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.getunleash.io/provisioning/how-to-setup-provisioning-with-okta.md",
+   "title": "Set up Okta provisioning",
+   "quote": "Enable SCIM by turning on the toggle and keep the token Unleash provides you for the Okta setup below.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.getunleash.io/provisioning/how-to-setup-provisioning-with-okta"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.getunleash.io/provisioning/how-to-setup-provisioning-with-okta.md",
+   "title": "Set up Okta provisioning",
+   "quote": "Select SWA - Secure Web Authentication",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.getunleash.io/provisioning/how-to-setup-provisioning-with-okta"
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.getunleash.io/provisioning/how-to-setup-provisioning-with-okta.md",
+   "title": "Set up Okta provisioning",
+   "quote": "Turn on \"Create Users\", \"Update User Attributes\" and \"Deactivate Users\". Save your configuration.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.getunleash.io/provisioning/how-to-setup-provisioning-with-okta"
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.getunleash.io/provisioning/how-to-setup-provisioning-with-okta.md",
+   "title": "Set up Okta provisioning",
+   "quote": "Turn on \"Push New Users\", \"Push Groups\" and \"Push Profile Updates\".",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.getunleash.io/provisioning/how-to-setup-provisioning-with-okta"
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.getunleash.io/provisioning/how-to-setup-provisioning-with-okta.md",
+   "title": "Set up Okta provisioning",
+   "quote": "Username Given name Family name Email Primary email type Display name",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.getunleash.io/provisioning/how-to-setup-provisioning-with-okta"
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.getunleash.io/provisioning/how-to-setup-provisioning-with-entra.md",
+   "title": "Set up Entra provisioning",
+   "quote": "If you plan on deprovisioning users at any point with SCIM, you'll also need to enable the",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.getunleash.io/provisioning/how-to-setup-provisioning-with-entra"
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.getunleash.io/provisioning/how-to-setup-provisioning-with-entra.md",
+   "title": "Set up Entra provisioning",
+   "quote": "This guide assumes you already have an SSO application setup for Unleash.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.getunleash.io/provisioning/how-to-setup-provisioning-with-entra"
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.getunleash.io/provisioning/how-to-setup-provisioning-with-entra.md",
+   "title": "Set up Entra provisioning",
+   "quote": "userName displayName emails externalId",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.getunleash.io/provisioning/how-to-setup-provisioning-with-entra"
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.getunleash.io/support/troubleshooting.md",
+   "title": "Troubleshooting",
+   "quote": "If role information isn't specified, Unleash defaults the user to the Viewer role for security reasons.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.getunleash.io/support/troubleshooting"
+  },
+  {
+   "id": "c22",
+   "url": "https://docs.getunleash.io/concepts/sso.md",
+   "title": "Single sign-on",
+   "quote": "Unleash provides single sign-on (SSO) support through SAML 2.0, OpenID Connect, and username/password authentication.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.getunleash.io/concepts/sso"
+  },
+  {
+   "id": "c23",
+   "url": "https://docs.getunleash.io/api/admin-api-overview.md",
+   "title": "Admin API overview",
+   "quote": "or personal access tokens for authentication. Service accounts are preferred for production integrations as they're not tied to individual users.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.getunleash.io/api/admin-api-overview"
+  },
+  {
+   "id": "c24",
+   "url": "https://docs.getunleash.io/api/get-users.md",
+   "title": "Get all users and root roles",
+   "quote": "GET https://app.unleash-instance.example.com/api/admin/user-admin",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.getunleash.io/api/get-users"
+  },
+  {
+   "id": "c25",
+   "url": "https://docs.getunleash.io/api/create-user.md",
+   "title": "Create a new user",
+   "quote": "POST https://app.unleash-instance.example.com/api/admin/user-admin",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.getunleash.io/api/create-user"
+  },
+  {
+   "id": "c26",
+   "url": "https://docs.getunleash.io/api/get-user.md",
+   "title": "Get user",
+   "quote": "GET https://app.unleash-instance.example.com/api/admin/user-admin/{id}",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.getunleash.io/api/get-user"
+  },
+  {
+   "id": "c27",
+   "url": "https://docs.getunleash.io/api/update-user.md",
+   "title": "Update a user",
+   "quote": "PUT https://app.unleash-instance.example.com/api/admin/user-admin/{id}",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.getunleash.io/api/update-user"
+  },
+  {
+   "id": "c28",
+   "url": "https://docs.getunleash.io/api/delete-user.md",
+   "title": "Delete a user",
+   "quote": "DELETE https://app.unleash-instance.example.com/api/admin/user-admin/{id}",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.getunleash.io/api/delete-user"
+  },
+  {
+   "id": "c29",
+   "url": "https://docs.getunleash.io/api/search-users.md",
+   "title": "Search users",
+   "quote": "GET https://app.unleash-instance.example.com/api/admin/user-admin/search",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.getunleash.io/api/search-users"
+  },
+  {
+   "id": "c30",
+   "url": "https://docs.getunleash.io/api/get-groups.md",
+   "title": "Get a list of groups",
+   "quote": "GET https://app.unleash-instance.example.com/api/admin/groups",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.getunleash.io/api/get-groups"
+  },
+  {
+   "id": "c31",
+   "url": "https://docs.getunleash.io/api/create-group.md",
+   "title": "Create a new group",
+   "quote": "POST https://app.unleash-instance.example.com/api/admin/groups",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.getunleash.io/api/create-group"
+  },
+  {
+   "id": "c32",
+   "url": "https://docs.getunleash.io/api/update-group.md",
+   "title": "Update a group",
+   "quote": "PUT https://app.unleash-instance.example.com/api/admin/groups/{groupId}",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.getunleash.io/api/update-group"
+  },
+  {
+   "id": "c33",
+   "url": "https://docs.getunleash.io/api/delete-group.md",
+   "title": "Delete a single group",
+   "quote": "DELETE https://app.unleash-instance.example.com/api/admin/groups/{groupId}",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.getunleash.io/api/delete-group"
+  },
+  {
+   "id": "c34",
+   "url": "https://docs.getunleash.io/api/get-roles.md",
+   "title": "Get a list of roles",
+   "quote": "GET https://app.unleash-instance.example.com/api/admin/roles",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.getunleash.io/api/get-roles"
+  },
+  {
+   "id": "c35",
+   "url": "https://docs.getunleash.io/api/get-events.md",
+   "title": "Get the most recent events",
+   "quote": "GET https://app.unleash-instance.example.com/api/admin/events",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.getunleash.io/api/get-events"
+  },
+  {
+   "id": "c36",
+   "url": "https://docs.getunleash.io/api/create-user.md",
+   "title": "Create a new user",
+   "quote": "rootRole (CreateUserSchemaRootRole, required) — The role to assign to the user. Can be either the role's ID or its unique name.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.getunleash.io/api/create-user"
+  },
+  {
+   "id": "c37",
+   "url": "https://docs.getunleash.io/api/generate-new-token.md",
+   "title": "Generates a new SCIM API token",
+   "quote": "POST https://app.unleash-instance.example.com/api/admin/scim-settings/generate-new-token",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.getunleash.io/api/generate-new-token"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.getunleash.io/pricing",
+  "https://docs.getunleash.io/llms.txt",
+  "https://docs.getunleash.io/concepts/scim",
+  "https://docs.getunleash.io/api/admin-api-overview"
+ ],
+ "open_questions": [
+  "SCIM base URL path, version statement, filtering and pagination are not documented.",
+  "Whether a soft-deleted SCIM user stops counting as a paid seat is not stated.",
+  "Okta OIN, Google, OneLogin and JumpCloud catalogue entries were not checked.",
+  "Whether the Admin API user endpoints work in Unleash Open Source is not stated on the pricing page."
+ ]
+}

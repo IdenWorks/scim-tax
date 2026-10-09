@@ -1,0 +1,764 @@
+{
+ "slug": "workfront",
+ "vendor": "Adobe Workfront",
+ "vendor_url": "https://business.adobe.com/products/workfront.html",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Adobe Workfront",
+  "slug": "workfront",
+  "category": "Project & Work Management",
+  "status": "gated",
+  "scim_plan": "Contact Sales (via Adobe Admin Console Entra ID Sync)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Select",
+  "team_price_text": "Select: Contact Sales",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": true
+  },
+  "idp": {
+   "okta": null,
+   "entra": "native",
+   "google": "directory_sync",
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": null
+  },
+  "pricing_page_url": "https://business.adobe.com/products/workfront/pricing.html",
+  "docs_url": "https://experienceleague.adobe.com/en/docs/workfront/using/administration-and-setup/add-users/create-manage-users/admin-console",
+  "evidence": "Adobe's Workfront pricing page sells Select, Prime and Ultimate only through 'Get pricing' / 'Get customized Workfront pricing', and Workfront users are now managed in the Adobe Admin Console, whose Microsoft Entra ID Sync 'uses the SCIM protocol'.",
+  "notes": "Quote-only: Select, Prime and Ultimate have no public prices. All Workfront organisations are now on the Adobe Admin Console (Adobe Business Platform). Users get Workfront by being added to the Workfront product profile there, and the legacy Workfront SAML 2.0 setup, including its auto-provisioning (JIT), is no longer available. There is no Workfront-specific SCIM endpoint. SCIM provisioning reaches Workfront only through Adobe Admin Console Microsoft Entra ID Sync, which needs a federated directory. Google is a separate Adobe-run Google Sync, and the User Sync Tool and User Management API are other options. So SCIM works with Entra only. The pricing table's 'Enterprise administration, security, and compliance' row (which includes single sign-on) shows 'some features' for Select and 'all features' for Prime and Ultimate (read from the icon alt text). The Workfront REST API (/attask/api) can search and deactivate users and has event subscriptions for USER objects.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Select",
+   "price_text": "Get pricing (Contact Sales)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c2",
+    "c6"
+   ],
+   "notes": "Security/SSO row shows the 'some features' icon for Select."
+  },
+  {
+   "name": "Prime",
+   "price_text": "Get pricing (Contact Sales)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c4",
+    "c2",
+    "c6"
+   ],
+   "notes": "Security/SSO row shows 'all features'; SSO itself is configured in the Adobe Admin Console."
+  },
+  {
+   "name": "Ultimate",
+   "price_text": "Get pricing (Contact Sales)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c5",
+    "c2",
+    "c6"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c35",
+   "c37",
+   "c12",
+   "c8"
+  ],
+  "plan": "Contact Sales",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": "bearer",
+   "token_source": "Adobe Admin Console > Settings > Directory Details > Sync > Add Sync > Sync users from Microsoft Azure (Tenant URL + Secret token)",
+   "token_expiry": null,
+   "cite": [
+    "c43",
+    "c35"
+   ],
+   "notes": "This is Adobe Admin Console's SCIM, not a Workfront endpoint; it requires a federated (SSO) directory with verified domains."
+  },
+  "endpoints": {
+   "Users": null,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": []
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": null,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c40",
+    "c41",
+    "c42",
+    "c35"
+   ],
+   "notes": "From Microsoft's Adobe Identity Management (SAML) provisioning tutorial; users reach Workfront when their Admin Console group carries the Workfront product profile."
+  },
+  "deprovision": {
+   "action": "remove_from_org",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Entra removes the user from Adobe Identity Management; Workfront access ends when the user leaves the Admin Console user group or product profile. A Workfront-side deactivation keeps all data and frees the Workfront licence, but does not remove the Admin Console assignment.",
+   "cite": [
+    "c41",
+    "c17",
+    "c16",
+    "c15",
+    "c9"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": [
+    "c44"
+   ],
+   "notes": "Microsoft's tutorial lists an Adobe extension (urn:ietf:params:scim:schemas:extension:Adobe:2.0:User, e.g. emailAliases, eduRole); Workfront-specific attributes (access level, home group) are not set by SCIM."
+  },
+  "roles": {
+   "supported": null,
+   "how": "Product access via Admin Console user groups mapped to the Workfront product profile; Workfront access levels are set inside Workfront, and System Administrator only from the Admin Console.",
+   "cite": [
+    "c11",
+    "c10",
+    "c17"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SCIM is only available through Adobe Admin Console Microsoft Entra ID Sync; Google uses Adobe's own Google Sync and other IdPs need the User Sync Tool or User Management API.",
+    "cite": [
+     "c35",
+     "c38",
+     "c39"
+    ]
+   },
+   {
+    "text": "Once Entra ID Sync is set up, users in that directory cannot be managed manually or with other sync methods.",
+    "cite": [
+     "c36"
+    ]
+   },
+   {
+    "text": "Deactivating a user inside Workfront does not deactivate them in the Admin Console or remove their product-profile group membership.",
+    "cite": [
+     "c9",
+     "c17"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c21",
+   "c28",
+   "c7"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://<domain>.my.workfront.com/attask/api/<version>",
+  "docs_url": "https://experienceleague.adobe.com/en/docs/workfront/using/adobe-workfront-api/api-general-information/api-basics",
+  "auth": {
+   "methods": [
+    "oauth2",
+    "api_key"
+   ],
+   "scopes": [],
+   "cite": [
+    "c23",
+    "c24",
+    "c25"
+   ],
+   "notes": "OAuth2 (server JWT flow or user authorization-code flow) is recommended; the /login endpoint and API keys are no longer recommended."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c29",
+    "c30",
+    "c31",
+    "c27"
+   ],
+   "notes": "Generic object CRUD (search/get/put/delete via method=) applies to USER objects; the deactivation guide documents USER search and the isActive update. Deleting users must happen in the Admin Console."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/attask/api/v15.0/USER/search?fields=isActive",
+    "purpose": "List/search users (example from the deactivate-user guide)",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/attask/api/v15.0/USER/<user's GUID>?updates={\"isActive\":\"false\"}",
+    "purpose": "Deactivate a user by setting isActive to false",
+    "cite": [
+     "c30",
+     "c31"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/attask/api/<supported-version>/user?action=generateApiKey",
+    "purpose": "Generate an API key for a user (no longer recommended)",
+    "cite": [
+     "c25"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": true,
+   "events": [
+    "USER CREATE",
+    "USER UPDATE",
+    "USER DELETE"
+   ],
+   "cite": [
+    "c32",
+    "c33",
+    "c34"
+   ],
+   "notes": "Event subscriptions support objCode USER; event types are CREATE, DELETE and UPDATE."
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "Concurrent API threads are limited per environment (number not stated in the quoted text).",
+   "cite": [
+    "c22"
+   ]
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "okta.com/integrations/workfront/ and /adobe-workfront/ return 404; no Workfront OIN page found."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/workfront-tutorial",
+   "cite": [
+    "c45",
+    "c46"
+   ],
+   "notes": "The Workfront gallery app is SSO-only (users are created manually). Provisioning instead goes through the separate 'Adobe Identity Management (SAML/OIDC)' gallery app into the Adobe Admin Console."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": true,
+   "kind": "directory_sync",
+   "built_by": "vendor",
+   "url": null,
+   "cite": [
+    "c38"
+   ],
+   "notes": "Adobe Admin Console offers Google Sync (Adobe-run directory sync); the Google Workspace catalogue was not checked."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": false,
+  "jit_protocol": null,
+  "csv_import": true,
+  "other_sync": "Adobe Admin Console Google Sync, User Sync Tool and User Management API; automatic product assignment rules",
+  "docs_public": true,
+  "cite": [
+   "c19",
+   "c20",
+   "c18",
+   "c38",
+   "c39",
+   "c10"
+  ],
+  "notes": "Legacy Workfront SAML 2.0 'Auto-Provision Users' (JIT) is no longer available now that every organisation is on the Admin Console."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://business.adobe.com/products/workfront/pricing.html",
+   "title": "Workfront - Product Pricing & Plans | Adobe for Business",
+   "quote": "With three offerings — Select, Prime, and Ultimate — as well as targeted add-ons, Adobe has a plan for any size business",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://business.adobe.com/products/workfront/pricing.html",
+   "title": "Workfront - Product Pricing & Plans | Adobe for Business",
+   "quote": "Get customized Workfront pricing.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://business.adobe.com/products/workfront/pricing.html",
+   "title": "Workfront - Product Pricing & Plans | Adobe for Business",
+   "quote": "Select offers the essential features to collaborate, execute, and accelerate work.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://business.adobe.com/products/workfront/pricing.html",
+   "title": "Workfront - Product Pricing & Plans | Adobe for Business",
+   "quote": "Prime includes all the Select package features plus advanced work management and security capabilities.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://business.adobe.com/products/workfront/pricing.html",
+   "title": "Workfront - Product Pricing & Plans | Adobe for Business",
+   "quote": "Ultimate offers all Prime features plus enhanced automation and data management.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://business.adobe.com/products/workfront/pricing.html",
+   "title": "Workfront - Product Pricing & Plans | Adobe for Business",
+   "quote": "Protect data and ensure compliance with encryption at rest, single sign-on, and admin controls to maintain access, policy, and compliance management.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://business.adobe.com/products/workfront/pricing.html",
+   "title": "Workfront - Product Pricing & Plans | Adobe for Business",
+   "quote": "Scale enterprise workflows by integrating Adobe and third-party apps into one connected work management solution.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://experienceleague.adobe.com/en/docs/workfront/using/administration-and-setup/add-users/create-manage-users/admin-console.md",
+   "title": "Manage users in the Adobe Admin Console",
+   "quote": "we recommend creating users and assigning them to Workfront in the Adobe Admin Console",
+   "accessed": "2026-10-05",
+   "page_url": "https://experienceleague.adobe.com/en/docs/workfront/using/administration-and-setup/add-users/create-manage-users/admin-console"
+  },
+  {
+   "id": "c9",
+   "url": "https://experienceleague.adobe.com/en/docs/workfront/using/administration-and-setup/add-users/create-manage-users/admin-console.md",
+   "title": "Manage users in the Adobe Admin Console",
+   "quote": "Workfront System Administrators can deactivate a Workfront user from within Workfront, but this does not deactivate the user in the Admin Console.",
+   "accessed": "2026-10-05",
+   "page_url": "https://experienceleague.adobe.com/en/docs/workfront/using/administration-and-setup/add-users/create-manage-users/admin-console"
+  },
+  {
+   "id": "c10",
+   "url": "https://experienceleague.adobe.com/en/docs/workfront/using/administration-and-setup/add-users/create-manage-users/admin-console.md",
+   "title": "Manage users in the Adobe Admin Console",
+   "quote": "Adobe Admin Console administrators can set up automatic assignment rules to automate the process of assigning Adobe products to users in their organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://experienceleague.adobe.com/en/docs/workfront/using/administration-and-setup/add-users/create-manage-users/admin-console"
+  },
+  {
+   "id": "c11",
+   "url": "https://experienceleague.adobe.com/en/docs/workfront/using/administration-and-setup/add-users/create-manage-users/admin-console.md",
+   "title": "Manage users in the Adobe Admin Console",
+   "quote": "The System Administrator access level is granted only on the Adobe Admin Console. You cannot grant or remove admin access from within Workfront.",
+   "accessed": "2026-10-05",
+   "page_url": "https://experienceleague.adobe.com/en/docs/workfront/using/administration-and-setup/add-users/create-manage-users/admin-console"
+  },
+  {
+   "id": "c12",
+   "url": "https://experienceleague.adobe.com/en/docs/workfront/using/administration-and-setup/add-users/create-manage-users/add-users.md",
+   "title": "Add users",
+   "quote": "you can add users in Adobe Workfront by adding them to your Workfront product profile in the Adobe Admin Console",
+   "accessed": "2026-10-05",
+   "page_url": "https://experienceleague.adobe.com/en/docs/workfront/using/administration-and-setup/add-users/create-manage-users/add-users"
+  },
+  {
+   "id": "c13",
+   "url": "https://experienceleague.adobe.com/en/docs/workfront/using/administration-and-setup/add-users/create-manage-users/delete-a-user.md",
+   "title": "Delete users",
+   "quote": "Because all organizations have now been onboarded to the Adobe Admin Console, the information on this page will be removed in the near future.",
+   "accessed": "2026-10-05",
+   "page_url": "https://experienceleague.adobe.com/en/docs/workfront/using/administration-and-setup/add-users/create-manage-users/delete-a-user"
+  },
+  {
+   "id": "c14",
+   "url": "https://experienceleague.adobe.com/en/docs/workfront/using/administration-and-setup/add-users/create-manage-users/delete-a-user.md",
+   "title": "Delete users",
+   "quote": "If you have been onboarded to the Adobe Business Platform, you must delete users in the Adobe Admin Console.",
+   "accessed": "2026-10-05",
+   "page_url": "https://experienceleague.adobe.com/en/docs/workfront/using/administration-and-setup/add-users/create-manage-users/delete-a-user"
+  },
+  {
+   "id": "c15",
+   "url": "https://experienceleague.adobe.com/en/docs/workfront/using/administration-and-setup/add-users/create-manage-users/deactivate-a-user.md",
+   "title": "Deactivate or reactivate a user",
+   "quote": "When a user is deactivated, that user’s Workfront license and proofing license become available to be used by another user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://experienceleague.adobe.com/en/docs/workfront/using/administration-and-setup/add-users/create-manage-users/deactivate-a-user"
+  },
+  {
+   "id": "c16",
+   "url": "https://experienceleague.adobe.com/en/docs/workfront/using/administration-and-setup/add-users/create-manage-users/deactivate-a-user.md",
+   "title": "Deactivate or reactivate a user",
+   "quote": "All data associated with the user will be retained.",
+   "accessed": "2026-10-05",
+   "page_url": "https://experienceleague.adobe.com/en/docs/workfront/using/administration-and-setup/add-users/create-manage-users/deactivate-a-user"
+  },
+  {
+   "id": "c17",
+   "url": "https://experienceleague.adobe.com/en/docs/workfront/using/administration-and-setup/add-users/create-manage-users/deactivate-a-user.md",
+   "title": "Deactivate or reactivate a user",
+   "quote": "deactivating the user from Workfront will not actually remove them from the product. The user must be removed from the User Group(s) in Admin Console.",
+   "accessed": "2026-10-05",
+   "page_url": "https://experienceleague.adobe.com/en/docs/workfront/using/administration-and-setup/add-users/create-manage-users/deactivate-a-user"
+  },
+  {
+   "id": "c18",
+   "url": "https://experienceleague.adobe.com/en/docs/workfront/using/administration-and-setup/add-users/create-manage-users/import-users.md",
+   "title": "Import users",
+   "quote": "You can import users using a spreadsheet import file.",
+   "accessed": "2026-10-05",
+   "page_url": "https://experienceleague.adobe.com/en/docs/workfront/using/administration-and-setup/add-users/create-manage-users/import-users"
+  },
+  {
+   "id": "c19",
+   "url": "https://experienceleague.adobe.com/en/docs/workfront/using/administration-and-setup/add-users/sso/configure-workfront-saml-2.md",
+   "title": "Configure Adobe Workfront with SAML 2.0",
+   "quote": "Because all organizations are now onboarded to the Adobe Admin Console, the procedure is no longer available.",
+   "accessed": "2026-10-05",
+   "page_url": "https://experienceleague.adobe.com/en/docs/workfront/using/administration-and-setup/add-users/sso/configure-workfront-saml-2"
+  },
+  {
+   "id": "c20",
+   "url": "https://experienceleague.adobe.com/en/docs/workfront/using/administration-and-setup/add-users/sso/configure-workfront-saml-2.md",
+   "title": "Configure Adobe Workfront with SAML 2.0",
+   "quote": "This option automatically creates a user in the system when a new user with a directory username and password attempts to log in to Workfront for the first time.",
+   "accessed": "2026-10-05",
+   "page_url": "https://experienceleague.adobe.com/en/docs/workfront/using/administration-and-setup/add-users/sso/configure-workfront-saml-2"
+  },
+  {
+   "id": "c21",
+   "url": "https://experienceleague.adobe.com/en/docs/workfront/using/adobe-workfront-api/api-general-information/api-basics.md",
+   "title": "API basics",
+   "quote": "The goal for the Adobe Workfront API is to simplify building integrations with Workfront by introducing a REST-ful architecture that operates over HTTP.",
+   "accessed": "2026-10-05",
+   "page_url": "https://experienceleague.adobe.com/en/docs/workfront/using/adobe-workfront-api/api-general-information/api-basics"
+  },
+  {
+   "id": "c22",
+   "url": "https://experienceleague.adobe.com/en/docs/workfront/using/adobe-workfront-api/api-general-information/api-basics.md",
+   "title": "API basics",
+   "quote": "the Workfront API limits concurrent API threads",
+   "accessed": "2026-10-05",
+   "page_url": "https://experienceleague.adobe.com/en/docs/workfront/using/adobe-workfront-api/api-general-information/api-basics"
+  },
+  {
+   "id": "c23",
+   "url": "https://experienceleague.adobe.com/en/docs/workfront/using/adobe-workfront-api/api-general-information/api-basics.md",
+   "title": "API basics",
+   "quote": "Workfront no longer recommends the use of the `/login` endpoint or API keys. Instead, use one of the following authentication methods:",
+   "accessed": "2026-10-05",
+   "page_url": "https://experienceleague.adobe.com/en/docs/workfront/using/adobe-workfront-api/api-general-information/api-basics"
+  },
+  {
+   "id": "c24",
+   "url": "https://experienceleague.adobe.com/en/docs/workfront/using/adobe-workfront-api/api-general-information/api-basics.md",
+   "title": "API basics",
+   "quote": "User authentication with OAuth2",
+   "accessed": "2026-10-05",
+   "page_url": "https://experienceleague.adobe.com/en/docs/workfront/using/adobe-workfront-api/api-general-information/api-basics"
+  },
+  {
+   "id": "c25",
+   "url": "https://experienceleague.adobe.com/en/docs/workfront/using/adobe-workfront-api/api-general-information/api-basics.md",
+   "title": "API basics",
+   "quote": "PUT /attask/api/<supported-version>/user?action=generateApiKey&username= username&password=password&method=put",
+   "accessed": "2026-10-05",
+   "page_url": "https://experienceleague.adobe.com/en/docs/workfront/using/adobe-workfront-api/api-general-information/api-basics"
+  },
+  {
+   "id": "c26",
+   "url": "https://experienceleague.adobe.com/en/docs/workfront/using/adobe-workfront-api/api-general-information/api-basics.md",
+   "title": "API basics",
+   "quote": "GET /attask/api/<supported-version>/project/4c78...54d0?method=delete&sessionID=abc123",
+   "accessed": "2026-10-05",
+   "page_url": "https://experienceleague.adobe.com/en/docs/workfront/using/adobe-workfront-api/api-general-information/api-basics"
+  },
+  {
+   "id": "c27",
+   "url": "https://experienceleague.adobe.com/en/docs/workfront/using/adobe-workfront-api/api-general-information/api-basics.md",
+   "title": "API basics",
+   "quote": "GET /attask/api/<supported-version>/project/search",
+   "accessed": "2026-10-05",
+   "page_url": "https://experienceleague.adobe.com/en/docs/workfront/using/adobe-workfront-api/api-general-information/api-basics"
+  },
+  {
+   "id": "c28",
+   "url": "https://experienceleague.adobe.com/en/docs/workfront/using/adobe-workfront-api/api-general-information/deactivate-user-api.md",
+   "title": "Deactivate a User via the API",
+   "quote": "When a user leaves your organization, you can deactivate the user, making their Adobe Workfront license available for another user and preventing them from being inadvertently assigned work.",
+   "accessed": "2026-10-05",
+   "page_url": "https://experienceleague.adobe.com/en/docs/workfront/using/adobe-workfront-api/api-general-information/deactivate-user-api"
+  },
+  {
+   "id": "c29",
+   "url": "https://experienceleague.adobe.com/en/docs/workfront/using/adobe-workfront-api/api-general-information/deactivate-user-api.md",
+   "title": "Deactivate a User via the API",
+   "quote": "<domain>`.my.workfront.com/attask/api/v15.0/USER/search?fields=isActive",
+   "accessed": "2026-10-05",
+   "page_url": "https://experienceleague.adobe.com/en/docs/workfront/using/adobe-workfront-api/api-general-information/deactivate-user-api"
+  },
+  {
+   "id": "c30",
+   "url": "https://experienceleague.adobe.com/en/docs/workfront/using/adobe-workfront-api/api-general-information/deactivate-user-api.md",
+   "title": "Deactivate a User via the API",
+   "quote": "Use the following **PUT** request to change the user’s **isActive** field value to **false**:",
+   "accessed": "2026-10-05",
+   "page_url": "https://experienceleague.adobe.com/en/docs/workfront/using/adobe-workfront-api/api-general-information/deactivate-user-api"
+  },
+  {
+   "id": "c31",
+   "url": "https://experienceleague.adobe.com/en/docs/workfront/using/adobe-workfront-api/api-general-information/deactivate-user-api.md",
+   "title": "Deactivate a User via the API",
+   "quote": "<domain>`.my.workfront.com/attask/api/v15.0/USER/`<user's GUID>`?updates={\"isActive\":\"false\"}&method=put&apiKey=`<apiKey>`&fields=isActive",
+   "accessed": "2026-10-05",
+   "page_url": "https://experienceleague.adobe.com/en/docs/workfront/using/adobe-workfront-api/api-general-information/deactivate-user-api"
+  },
+  {
+   "id": "c32",
+   "url": "https://experienceleague.adobe.com/en/docs/workfront/using/adobe-workfront-api/event-subscriptions/event-subs-api.md",
+   "title": "Event Subscription API",
+   "quote": "Timesheet TSHET User USER Workspace WORKSPACE",
+   "accessed": "2026-10-05",
+   "page_url": "https://experienceleague.adobe.com/en/docs/workfront/using/adobe-workfront-api/event-subscriptions/event-subs-api"
+  },
+  {
+   "id": "c33",
+   "url": "https://experienceleague.adobe.com/en/docs/workfront/using/adobe-workfront-api/event-subscriptions/event-subs-api.md",
+   "title": "Event Subscription API",
+   "quote": "A value that represents the type of event to which the object is subscribed. The available event types include: - CREATE - DELETE - UPDATE",
+   "accessed": "2026-10-05",
+   "page_url": "https://experienceleague.adobe.com/en/docs/workfront/using/adobe-workfront-api/event-subscriptions/event-subs-api"
+  },
+  {
+   "id": "c34",
+   "url": "https://experienceleague.adobe.com/en/docs/workfront/using/adobe-workfront-api/event-subscriptions/event-subs-api.md",
+   "title": "Event Subscription API",
+   "quote": "When an action occurs on a Adobe Workfront object that is supported by event subscriptions, you can configure Workfront to send a response to your desired endpoint.",
+   "accessed": "2026-10-05",
+   "page_url": "https://experienceleague.adobe.com/en/docs/workfront/using/adobe-workfront-api/event-subscriptions/event-subs-api"
+  },
+  {
+   "id": "c35",
+   "url": "https://helpx.adobe.com/business/enterprise/identity-sso/integrate-with-microsoft-entra/add-microsoft-entra-id-sync.html",
+   "title": "Add Microsoft Entra ID Sync to Adobe Admin Console | Enterprise",
+   "quote": "Add Microsoft Entra ID Sync (formerly Azure Sync) to any directory in the Adobe Admin Console to automate user management. It uses the SCIM protocol and gives you control over the users and groups sent to Adobe.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://helpx.adobe.com/business/enterprise/identity-sso/integrate-with-microsoft-entra/add-microsoft-entra-id-sync.html",
+   "title": "Add Microsoft Entra ID Sync to Adobe Admin Console | Enterprise",
+   "quote": "You cannot manage users manually or with other sync methods once you set up Microsoft Entra ID Sync for a directory.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://helpx.adobe.com/business/enterprise/identity-sso/integrate-with-microsoft-entra/add-microsoft-entra-id-sync.html",
+   "title": "Add Microsoft Entra ID Sync to Adobe Admin Console | Enterprise",
+   "quote": "A federated directory in the Adobe Admin Console with verified domains.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c38",
+   "url": "https://helpx.adobe.com/business/enterprise/identity-sso/integrate-with-microsoft-entra/add-microsoft-entra-id-sync.html",
+   "title": "Add Microsoft Entra ID Sync to Adobe Admin Console | Enterprise",
+   "quote": "Integrate with Google Sync",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c39",
+   "url": "https://helpx.adobe.com/business/enterprise/identity-sso/integrate-with-microsoft-entra/add-microsoft-entra-id-sync.html",
+   "title": "Add Microsoft Entra ID Sync to Adobe Admin Console | Enterprise",
+   "quote": "If your organization uses the User Sync Tool or a User Management API integration, first pause the integration.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c40",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/adobe-identity-management-provisioning-saml-tutorial",
+   "title": "Configure Adobe Identity Management (SAML) for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Create users in Adobe Identity Management (SAML).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c41",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/adobe-identity-management-provisioning-saml-tutorial",
+   "title": "Configure Adobe Identity Management (SAML) for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Remove users in Adobe Identity Management (SAML) when they don't require access anymore.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c42",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/adobe-identity-management-provisioning-saml-tutorial",
+   "title": "Configure Adobe Identity Management (SAML) for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Keep user attributes synchronized between Microsoft Entra ID and Adobe Identity Management (SAML).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c43",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/adobe-identity-management-provisioning-saml-tutorial",
+   "title": "Configure Adobe Identity Management (SAML) for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Copy and save the Tenant URL and the Secret token.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c44",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/adobe-identity-management-provisioning-saml-tutorial",
+   "title": "Configure Adobe Identity Management (SAML) for automatic user provisioning with Microsoft Entra ID",
+   "quote": "urn:ietf:params:scim:schemas:extension:Adobe:2.0:User:emailAliases",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c45",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/workfront-tutorial",
+   "title": "Configure Workfront for Single sign-on with Microsoft Entra ID",
+   "quote": "Workfront single sign-on enabled subscription.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c46",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/workfront-tutorial",
+   "title": "Configure Workfront for Single sign-on with Microsoft Entra ID",
+   "quote": "The objective of this section is to create a user called Britta Simon in Workfront.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://business.adobe.com/products/workfront/pricing.html",
+  "https://business.adobe.com/resources/sdk/workfront-package-features.html (PDF download timed out)",
+  "https://experienceleague.adobe.com/en/sitemap-1.xml and sitemap-2.xml (Workfront SSO/SCIM/user pages)",
+  "https://experienceleague.adobe.com/en/docs/workfront/using/adobe-workfront-api/api-general-information/api-basics",
+  "https://helpx.adobe.com/business/enterprise/identity-sso/integrate-with-microsoft-entra/add-microsoft-entra-id-sync.html",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/adobe-identity-management-provisioning-saml-tutorial",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/workfront-tutorial",
+  "https://www.okta.com/integrations/workfront/ (404)",
+  "https://www.okta.com/integrations/adobe-workfront/ (404)"
+ ],
+ "open_questions": [
+  "Which Workfront package (Select/Prime/Ultimate) includes Admin Console SSO and Entra ID Sync is not published; the pricing table only shows 'some features' vs 'all features' for the security row.",
+  "Whether removing a user via Entra ID Sync deactivates the Workfront user record (and frees the Workfront licence) is not documented.",
+  "Adobe Admin Console SCIM endpoint details (base URL, PUT/PATCH, filtering, attributes) are not published by Adobe.",
+  "Workfront API rate limit numbers and an audit-log API were not found.",
+  "Okta, OneLogin and JumpCloud catalogue entries for Workfront or Adobe Admin Console were not verified."
+ ]
+}

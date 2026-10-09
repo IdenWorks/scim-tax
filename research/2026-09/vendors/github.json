@@ -1,0 +1,965 @@
+{
+ "slug": "github",
+ "vendor": "GitHub",
+ "vendor_url": "https://github.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "GitHub",
+  "slug": "github",
+  "category": "Developer Tools & CI/CD",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Enterprise: from $21/u/mo",
+  "scim_price_per_user_mo": 21,
+  "team_plan": "Team",
+  "team_price_text": "Team: $4/u/mo",
+  "team_price_per_user_mo": 4,
+  "price_multiplier": 5.3,
+  "sso_plan": "Enterprise",
+  "sso_price_per_user_mo": 21,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": null,
+   "onelogin": "native",
+   "jumpcloud": "native",
+   "generic": true
+  },
+  "pricing_page_url": "https://github.com/pricing",
+  "docs_url": "https://docs.github.com/en/enterprise-cloud@latest/organizations/managing-saml-single-sign-on-for-your-organization/about-scim-for-organizations",
+  "evidence": "GitHub's pricing page lists \"User provisioning through SCIM\" and \"SAML single sign-on\" only under Enterprise (starting at $21 per user/month); the docs say SCIM for organizations needs SAML SSO, which requires GitHub Enterprise Cloud.",
+  "notes": "Unchanged from June: Free $0, Team $4, Enterprise from $21 per user/month (the pricing page shows per user/month with no separate annual price). Two SCIM implementations, both on Enterprise Cloud: (1) organization SCIM for SAML-SSO orgs with personal accounts (Users only, Entra/Okta/OneLogin, needs an OAuth-app token from an org owner who consumes a seat); (2) Enterprise Managed Users (EMU) SCIM with Users and Groups, via partner IdP apps (Entra, Okta, PingFederate) or the open SCIM REST API with a non-expiring scim:enterprise PAT. EMU deprovisioning suspends (soft) or permanently suspends and scrubs (hard, DELETE); suspended managed users do not consume a licence. Okta + Entra mixed SSO/SCIM is explicitly unsupported. Org member, team and role REST APIs are available on all plans; Audit Log API is Enterprise.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Free",
+  "api_tax": false,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "$0 USD per user/month",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c2",
+    "c3",
+    "c4",
+    "c31"
+   ]
+  },
+  {
+   "name": "Team",
+   "price_text": "$4 USD per user/month",
+   "price_per_user_mo": 4,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c2",
+    "c3",
+    "c4",
+    "c31"
+   ]
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Starting at $21 USD per user/month",
+   "price_per_user_mo": 21,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c2",
+    "c3",
+    "c4",
+    "c6",
+    "c31"
+   ],
+   "notes": "Enterprise Cloud; includes Enterprise Managed Users. Enterprise Server is also offered at the same tier."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c1",
+   "c3",
+   "c5",
+   "c6",
+   "c12",
+   "c19",
+   "c20"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://api.github.com/scim/v2/enterprises/{enterprise}/ (EMU); https://api.github.com/scim/v2/organizations/{org}/ (organization SCIM)",
+  "auth": {
+   "method": "bearer",
+   "token_source": "EMU: personal access token (classic) with scim:enterprise scope created by the SHORTCODE_admin setup user. Organization SCIM: OAuth 2.0 bearer token of an organization owner (PAT classic needs admin:org and SAML SSO authorization).",
+   "token_expiry": "never",
+   "cite": [
+    "c13",
+    "c30",
+    "c8",
+    "c48"
+   ],
+   "notes": "EMU docs say the token must have no expiration. Organization SCIM stops working if the authorizing user leaves the org."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c12",
+    "c47",
+    "c19"
+   ],
+   "notes": "Groups are documented only for the EMU (enterprise) implementation; organization SCIM documents Users only."
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c23",
+    "c24",
+    "c25",
+    "c16",
+    "c47",
+    "c9"
+   ]
+  },
+  "deprovision": {
+   "action": "suspend",
+   "frees_seat": true,
+   "revokes_sessions": true,
+   "data_retained": "EMU soft-deprovision (active=false): account suspended, username hashed, email obfuscated (except with Entra), SCIM identity kept, reversible. Hard-deprovision (DELETE): permanent suspension, user's repos, PATs, SSH/GPG keys and SCIM attributes deleted; comments and other resources created by the user are retained. A deprovisioned account is never deleted from the enterprise. Organization SCIM removes the member from the organization.",
+   "cite": [
+    "c9",
+    "c16",
+    "c24",
+    "c27",
+    "c28",
+    "c29",
+    "c1"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName",
+    "externalId",
+    "id",
+    "displayName",
+    "emails (organization SCIM)"
+   ],
+   "cite": [
+    "c14",
+    "c21"
+   ],
+   "notes": "eq only; multiple filters not supported."
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c15"
+   ],
+   "notes": "startIndex and count; count defaults to 30."
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "displayName",
+    "name.formatted",
+    "name.givenName",
+    "name.familyName",
+    "emails",
+    "roles",
+    "externalId",
+    "id",
+    "active",
+    "profileUrl (organization SCIM, read-only)"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "displayName",
+    "members",
+    "externalId"
+   ],
+   "cite": [
+    "c18",
+    "c22",
+    "c47"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "EMU: SCIM roles attribute (set via the IdP app's Roles attribute) maps to enterprise roles; IdP groups map to teams and organization membership.",
+   "cite": [
+    "c11",
+    "c18"
+   ]
+  },
+  "rate_limits": {
+   "text": "Do not assign more than 1,000 users per hour to the SCIM integration (or add more than 1,000 users per group per hour); otherwise provisioning may fail with rate-limit errors.",
+   "cite": [
+    "c23"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Okta and Entra ID combined for SSO and SCIM (either order) is explicitly not supported.",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "text": "REST API SCIM provisioning is not supported for enterprises enabled for OIDC.",
+    "cite": [
+     "c26"
+    ]
+   },
+   {
+    "text": "PATCH path selectors containing filters (e.g. emails[type eq \"work\"]) are not supported.",
+    "cite": [
+     "c17"
+    ]
+   },
+   {
+    "text": "Organization SCIM cannot be used with an enterprise account or an organization with managed users; it needs an OAuth app authorized by an org owner who consumes a licence.",
+    "cite": [
+     "c8",
+     "c20"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c31",
+   "c33"
+  ],
+  "plan": "Free",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://api.github.com",
+  "docs_url": "https://docs.github.com/en/rest/orgs/members",
+  "auth": {
+   "methods": [
+    "oauth2",
+    "personal_access_token",
+    "github_app"
+   ],
+   "scopes": [
+    "admin:org",
+    "read:audit_log"
+   ],
+   "cite": [
+    "c35",
+    "c37"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": false,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c31",
+    "c32",
+    "c33",
+    "c34",
+    "c35"
+   ],
+   "notes": "Non-SCIM APIs manage organization membership of existing GitHub accounts; they do not create accounts. delete_user = remove from organization."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/orgs/{org}/members",
+    "purpose": "List organization members",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/orgs/{org}/memberships/{username}",
+    "purpose": "Get organization membership for a user",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/orgs/{org}/memberships/{username}",
+    "purpose": "Set organization membership / role for a user",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/orgs/{org}/members/{username}",
+    "purpose": "Remove an organization member",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/orgs/{org}/memberships/{username}",
+    "purpose": "Remove organization membership for a user",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/orgs/{org}/invitations",
+    "purpose": "Create an organization invitation",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/orgs/{org}/invitations",
+    "purpose": "List pending organization invitations",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/orgs/{org}/invitations/{invitation_id}",
+    "purpose": "Cancel an organization invitation",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/orgs/{org}/teams/{team_slug}/members",
+    "purpose": "List team members",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/orgs/{org}/teams/{team_slug}/memberships/{username}",
+    "purpose": "Add or update team membership for a user",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/orgs/{org}/teams/{team_slug}/memberships/{username}",
+    "purpose": "Remove team membership for a user",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/orgs/{org}/organization-roles",
+    "purpose": "List organization roles",
+    "cite": [
+     "c35"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/orgs/{org}/organization-roles/users/{username}/{role_id}",
+    "purpose": "Assign an organization role to a user",
+    "cite": [
+     "c35"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/orgs/{org}/organization-roles/users/{username}/{role_id}",
+    "purpose": "Remove an organization role from a user",
+    "cite": [
+     "c35"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/orgs/{org}/audit-log",
+    "purpose": "Get the audit log for an organization (Enterprise Cloud)",
+    "cite": [
+     "c36"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": true,
+   "events": [
+    "organization.member_added",
+    "organization.member_invited",
+    "organization.member_removed"
+   ],
+   "cite": [
+    "c39"
+   ]
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Enterprise",
+   "cite": [
+    "c4",
+    "c36",
+    "c37"
+   ]
+  },
+  "rate_limits": {
+   "text": "5,000 requests per hour per user (15,000 for apps owned by an Enterprise Cloud org); org audit-log endpoint 1,750 queries per hour per user and IP; 50 invitations per 24h for new free orgs, 500 otherwise.",
+   "cite": [
+    "c38",
+    "c36",
+    "c31"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Team membership changes via API error when team synchronization with an IdP is set up for the team.",
+    "cite": [
+     "c34"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": "idp",
+   "url": "https://www.okta.com/integrations/github-enterprise-managed-user/",
+   "cite": [
+    "c40",
+    "c44"
+   ],
+   "notes": "GitHub Enterprise Managed User app: SAML, SCIM, Create, Update, Deactivate, Group Push, Group Linking. Okta is also listed for organization SCIM."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": "idp",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/github-enterprise-managed-user-provisioning-tutorial",
+   "cite": [
+    "c41",
+    "c42",
+    "c44"
+   ],
+   "notes": "Microsoft's tutorial says provisioning is only for EMU, not standard enterprise accounts; GitHub lists Entra as compatible with organization SCIM (see conflicts)."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "Google Workspace is not among GitHub's tested SAML IdPs or SCIM-compatible IdPs; no Google catalogue page was checked."
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c7",
+    "c46"
+   ],
+   "notes": "From GitHub's own docs (organization SCIM compatible IdPs, tested SAML IdPs); OneLogin connector page not loaded."
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": "idp",
+   "url": "https://jumpcloud.com/support/integrate-with-github-enterprise-cloud-organization",
+   "cite": [
+    "c43"
+   ],
+   "notes": "JumpCloud also documents a separate GitHub Enterprise Cloud - Enterprise Accounts connector."
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": "Team synchronization with IdP groups (Enterprise Cloud)",
+  "docs_public": true,
+  "cite": [
+   "c45",
+   "c34"
+  ],
+  "notes": "With org-level SAML SSO, users can join without an invitation via https://github.com/orgs/ORGANIZATION/sso/sign_up."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://github.com/pricing",
+   "title": "Pricing · Plans for every developer · GitHub",
+   "quote": "If you remove a member's access to your GitHub organization on your SAML IdP, the member will be automatically removed from the GitHub organization.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://github.com/pricing",
+   "title": "Pricing · Plans for every developer · GitHub",
+   "quote": "$0 USD per user/month $4 USD per user/month $21 USD per user/month",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://github.com/pricing",
+   "title": "Pricing · Plans for every developer · GitHub",
+   "quote": "Everything included in Team, plus... Data residency Enterprise Managed Users User provisioning through SCIM",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://github.com/pricing",
+   "title": "Pricing · Plans for every developer · GitHub",
+   "quote": "Audit Log API SOC1, SOC2, type 2 reports annually FedRAMP Tailored Authority to Operate (ATO) SAML single sign-on",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://docs.github.com/en/enterprise-cloud@latest/organizations/managing-saml-single-sign-on-for-your-organization/about-scim-for-organizations",
+   "title": "About SCIM for organizations - GitHub Enterprise Cloud Docs",
+   "quote": "If your organization uses SAML SSO, you can implement SCIM to add, manage, and remove organization members' access to GitHub.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://docs.github.com/en/enterprise-cloud@latest/organizations/managing-saml-single-sign-on-for-your-organization/about-scim-for-organizations",
+   "title": "About SCIM for organizations - GitHub Enterprise Cloud Docs",
+   "quote": "To use SAML single sign-on, your organization must use GitHub Enterprise Cloud.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://docs.github.com/en/enterprise-cloud@latest/organizations/managing-saml-single-sign-on-for-your-organization/about-scim-for-organizations",
+   "title": "About SCIM for organizations - GitHub Enterprise Cloud Docs",
+   "quote": "These identity providers (IdPs) are compatible with the GitHub SCIM API for organizations.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.github.com/en/enterprise-cloud@latest/organizations/managing-saml-single-sign-on-for-your-organization/about-scim-for-organizations",
+   "title": "About SCIM for organizations - GitHub Enterprise Cloud Docs",
+   "quote": "To use SCIM with your organization, you must use a third-party-owned OAuth app. The OAuth app must be authorized by, and subsequently acts on behalf of, a specific GitHub user.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.github.com/en/enterprise-cloud@latest/admin/managing-iam/provisioning-user-accounts-with-scim/configuring-scim-provisioning-for-users",
+   "title": "Configuring SCIM provisioning for Enterprise Managed Users - GitHub Enterprise Cloud Docs",
+   "quote": "When you unassign the user from the IdP application or deactivate a user's account on your IdP, your IdP will communicate with GitHub to invalidate any sessions and disable the member's account.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.github.com/en/enterprise-cloud@latest/admin/managing-iam/provisioning-user-accounts-with-scim/configuring-scim-provisioning-for-users",
+   "title": "Configuring SCIM provisioning for Enterprise Managed Users - GitHub Enterprise Cloud Docs",
+   "quote": "The combination of Okta and Entra ID for SSO and SCIM (in either order) is explicitly not supported.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.github.com/en/enterprise-cloud@latest/admin/managing-iam/provisioning-user-accounts-with-scim/configuring-scim-provisioning-for-users",
+   "title": "Configuring SCIM provisioning for Enterprise Managed Users - GitHub Enterprise Cloud Docs",
+   "quote": "When assigning users, you can use the \"Roles\" attribute in the application on your IdP to set a user's role in your enterprise.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.github.com/en/enterprise-cloud@latest/rest/enterprise-admin/scim",
+   "title": "REST API endpoints for SCIM - GitHub Enterprise Cloud Docs",
+   "quote": "To manage your enterprise's users and groups using SCIM, use the following base URL to communicate with the endpoints in this category.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.github.com/en/enterprise-cloud@latest/rest/enterprise-admin/scim",
+   "title": "REST API endpoints for SCIM - GitHub Enterprise Cloud Docs",
+   "quote": "the person who configures SCIM on the IdP must use a personal access token (classic) with scim:enterprise scope",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.github.com/en/enterprise-cloud@latest/rest/enterprise-admin/scim",
+   "title": "REST API endpoints for SCIM - GitHub Enterprise Cloud Docs",
+   "quote": "Multiple filters are not supported. Possible filters are userName, externalId, id, and displayName.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.github.com/en/enterprise-cloud@latest/rest/enterprise-admin/scim",
+   "title": "REST API endpoints for SCIM - GitHub Enterprise Cloud Docs",
+   "quote": "Used for pagination: the number of results to return per page.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.github.com/en/enterprise-cloud@latest/rest/enterprise-admin/scim",
+   "title": "REST API endpoints for SCIM - GitHub Enterprise Cloud Docs",
+   "quote": "Suspends a SCIM user permanently from an enterprise. This action will: remove all the user's data, anonymize their login, email, and display name, erase all external identity SCIM attributes",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.github.com/en/enterprise-cloud@latest/rest/enterprise-admin/scim",
+   "title": "REST API endpoints for SCIM - GitHub Enterprise Cloud Docs",
+   "quote": "Complex SCIM path selectors that include filters are not supported.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.github.com/en/enterprise-cloud@latest/rest/enterprise-admin/scim",
+   "title": "REST API endpoints for SCIM - GitHub Enterprise Cloud Docs",
+   "quote": "endpoints in this category support the following attributes within a request's parameters.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.github.com/en/enterprise-cloud@latest/rest/scim/scim",
+   "title": "REST API endpoints for SCIM - GitHub Enterprise Cloud Docs",
+   "quote": "These endpoints are used by SCIM-enabled Identity Providers (IdPs) to automate provisioning of GitHub organization membership and are based on version 2.0 of the SCIM standard.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.github.com/en/enterprise-cloud@latest/rest/scim/scim",
+   "title": "REST API endpoints for SCIM - GitHub Enterprise Cloud Docs",
+   "quote": "These endpoints are only available for individual organizations that use GitHub Enterprise Cloud with SAML SSO enabled.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.github.com/en/enterprise-cloud@latest/rest/scim/scim",
+   "title": "REST API endpoints for SCIM - GitHub Enterprise Cloud Docs",
+   "quote": "You can filter results that are equal to id, userName, emails, and externalId.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c22",
+   "url": "https://docs.github.com/en/enterprise-cloud@latest/rest/scim/scim",
+   "title": "REST API endpoints for SCIM - GitHub Enterprise Cloud Docs",
+   "quote": "The URL of the GitHub account linked to the SCIM identity.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c23",
+   "url": "https://docs.github.com/en/enterprise-cloud@latest/admin/managing-iam/provisioning-user-accounts-with-scim/provisioning-users-and-groups-with-scim-using-the-rest-api",
+   "title": "Provisioning users and groups with SCIM using the REST API - GitHub Enterprise Cloud Docs",
+   "quote": "To avoid exceeding GitHub's rate limit, do not assign more than 1,000 users per hour to the SCIM integration on your IdP.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c24",
+   "url": "https://docs.github.com/en/enterprise-cloud@latest/admin/managing-iam/provisioning-user-accounts-with-scim/provisioning-users-and-groups-with-scim-using-the-rest-api",
+   "title": "Provisioning users and groups with SCIM using the REST API - GitHub Enterprise Cloud Docs",
+   "quote": "When you soft-deprovision a user, GitHub obfuscates the user record's login and email fields, and the user is suspended.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c25",
+   "url": "https://docs.github.com/en/enterprise-cloud@latest/admin/managing-iam/provisioning-user-accounts-with-scim/provisioning-users-and-groups-with-scim-using-the-rest-api",
+   "title": "Provisioning users and groups with SCIM using the REST API - GitHub Enterprise Cloud Docs",
+   "quote": "To allow a soft-deprovisioned user to sign in to access your enterprise, unsuspend the user by sending a PUT or PATCH request",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c26",
+   "url": "https://docs.github.com/en/enterprise-cloud@latest/admin/managing-iam/provisioning-user-accounts-with-scim/configuring-scim-provisioning-for-users",
+   "title": "Configuring SCIM provisioning for Enterprise Managed Users - GitHub Enterprise Cloud Docs",
+   "quote": "Use of the REST API for SCIM provisioning is not supported with enterprises enabled for OIDC.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c27",
+   "url": "https://docs.github.com/en/enterprise-cloud@latest/admin/managing-iam/provisioning-user-accounts-with-scim/deprovisioning-and-reinstating-users",
+   "title": "Deprovisioning and reinstating users with SCIM - GitHub Enterprise Cloud Docs",
+   "quote": "Regardless of the type of deprovisioning, a deprovisioned account is never deleted from an enterprise.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c28",
+   "url": "https://docs.github.com/en/enterprise-cloud@latest/admin/managing-iam/provisioning-user-accounts-with-scim/deprovisioning-and-reinstating-users",
+   "title": "Deprovisioning and reinstating users with SCIM - GitHub Enterprise Cloud Docs",
+   "quote": "Resources created by the user, such as comments, are retained.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c29",
+   "url": "https://docs.github.com/en/enterprise-cloud@latest/billing/reference/github-license-users",
+   "title": "People who consume a license in an organization - GitHub Enterprise Cloud Docs",
+   "quote": "Suspended Managed user accounts",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c30",
+   "url": "https://docs.github.com/en/enterprise-cloud@latest/admin/managing-iam/understanding-iam-for-enterprises/getting-started-with-enterprise-managed-users",
+   "title": "Getting started with Enterprise Managed Users - GitHub Enterprise Cloud Docs",
+   "quote": "The token must have no expiration.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c31",
+   "url": "https://docs.github.com/en/rest/orgs/members",
+   "title": "REST API endpoints for organization members - GitHub Docs",
+   "quote": "Only authenticated organization owners can add a member to the organization or update the member's role.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c32",
+   "url": "https://docs.github.com/en/rest/orgs/members",
+   "title": "REST API endpoints for organization members - GitHub Docs",
+   "quote": "Removing a user from this list will remove them from all teams and they will no longer have any access to the organization's repositories.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c33",
+   "url": "https://docs.github.com/en/rest/orgs/members",
+   "title": "REST API endpoints for organization members - GitHub Docs",
+   "quote": "Invite people to an organization by using their GitHub user ID or their email address.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c34",
+   "url": "https://docs.github.com/en/rest/teams/members",
+   "title": "REST API endpoints for team members - GitHub Docs",
+   "quote": "Adds an organization member to a team. An authenticated organization owner or team maintainer can add organization members to a team.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c35",
+   "url": "https://docs.github.com/en/rest/orgs/organization-roles",
+   "title": "REST API endpoints for organization roles - GitHub Docs",
+   "quote": "Assigns an organization role to a member of an organization.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c36",
+   "url": "https://docs.github.com/en/enterprise-cloud@latest/rest/orgs/orgs",
+   "title": "REST API endpoints for organizations - GitHub Enterprise Cloud Docs",
+   "quote": "This endpoint has a rate limit of 1,750 queries per hour per user and IP address.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c37",
+   "url": "https://docs.github.com/en/enterprise-cloud@latest/rest/orgs/orgs",
+   "title": "REST API endpoints for organizations - GitHub Enterprise Cloud Docs",
+   "quote": "OAuth app tokens and personal access tokens (classic) need the read:audit_log scope to use this endpoint.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c38",
+   "url": "https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api",
+   "title": "Rate limits for the REST API - GitHub Docs",
+   "quote": "All of these requests count towards your personal rate limit of 5,000 requests per hour.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c39",
+   "url": "https://docs.github.com/en/webhooks/webhook-events-and-payloads",
+   "title": "Webhook events and payloads - GitHub Docs",
+   "quote": "This event occurs when there is activity relating to an organization and its members.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c40",
+   "url": "https://www.okta.com/integrations/github-enterprise-managed-user/",
+   "title": "GitHub Enterprise Managed User | Okta",
+   "quote": "Okta application to configure SAML authentication and SCIM provisioning to GitHub Enterprise Cloud EMU-enabled Enterprise accounts.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c41",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/github-enterprise-managed-user-provisioning-tutorial",
+   "title": "Configure GitHub Enterprise Managed User for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Microsoft Entra ID automatically provisions and deprovisions users and groups to GitHub Enterprise Managed User using the Microsoft Entra provisioning service.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c42",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/github-enterprise-managed-user-provisioning-tutorial",
+   "title": "Configure GitHub Enterprise Managed User for automatic user provisioning with Microsoft Entra ID",
+   "quote": "User provisioning isn't supported for standard GitHub Enterprise Accounts",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c43",
+   "url": "https://jumpcloud.com/support/integrate-with-github-enterprise-cloud-organization",
+   "title": "Integrate with GitHub Enterprise Cloud – Organization | JumpCloud Documentation",
+   "quote": "Automatically provision, update and deprovision users in GitHub Enterprise Cloud - Organization from JumpCloud using the SCIM integration.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c44",
+   "url": "https://docs.github.com/en/enterprise-cloud@latest/admin/managing-iam/provisioning-user-accounts-with-scim/provisioning-users-and-groups-with-scim-using-the-rest-api",
+   "title": "Provisioning users and groups with SCIM using the REST API - GitHub Enterprise Cloud Docs",
+   "quote": "Each partner IdP provides a \"paved-path\" application, which implements both SSO and user lifecycle management.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c45",
+   "url": "https://docs.github.com/en/enterprise-cloud@latest/organizations/managing-saml-single-sign-on-for-your-organization/about-identity-and-access-management-with-saml-single-sign-on",
+   "title": "About identity and access management with SAML single sign-on - GitHub Enterprise Cloud Docs",
+   "quote": "To provision new users without an invitation from an organization owner, you can use the URL",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c46",
+   "url": "https://docs.github.com/en/enterprise-cloud@latest/organizations/managing-saml-single-sign-on-for-your-organization/about-identity-and-access-management-with-saml-single-sign-on",
+   "title": "About identity and access management with SAML single sign-on - GitHub Enterprise Cloud Docs",
+   "quote": "GitHub officially supports and internally tests the following IdPs for SAML.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c47",
+   "url": "https://docs.github.com/en/enterprise-cloud@latest/rest/enterprise-admin/scim",
+   "title": "REST API endpoints for SCIM - GitHub Enterprise Cloud Docs",
+   "quote": "When members are part of the group provisioning payload, they're designated as external group members.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c48",
+   "url": "https://docs.github.com/en/enterprise-cloud@latest/rest/scim/scim",
+   "title": "REST API endpoints for SCIM - GitHub Enterprise Cloud Docs",
+   "quote": "You must authenticate as an owner of a GitHub organization to use these endpoints. The REST API expects an OAuth 2.0 Bearer token",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "GitHub lists Microsoft Entra ID as compatible with organization SCIM (non-EMU), while Microsoft's EMU provisioning tutorial says user provisioning isn't supported for standard GitHub Enterprise accounts, only EMU. Docs (GitHub) used for behaviour; Microsoft's note may refer to the enterprise-account level only.",
+   "cite": [
+    "c7",
+    "c42"
+   ]
+  }
+ ],
+ "searched": [
+  "https://github.com/pricing",
+  "https://docs.github.com/en/enterprise-cloud@latest/rest/enterprise-admin/scim",
+  "https://docs.github.com/en/enterprise-cloud@latest/rest/scim/scim",
+  "https://docs.github.com/en/enterprise-cloud@latest/admin/managing-iam/provisioning-user-accounts-with-scim/"
+ ],
+ "open_questions": [
+  "SCIM discovery endpoints (ServiceProviderConfig, Schemas, ResourceTypes) and Bulk are not documented in GitHub's SCIM REST reference.",
+  "Maximum SCIM page size (count) is not documented; default is 30.",
+  "Whether organization-SCIM deprovisioning (removal from org) frees the seat immediately under usage-based billing; docs say a user is billable for the cycle in which they held a licence.",
+  "No documented SCIM support for custom or enterprise-extension attributes.",
+  "Whether Google Workspace's SAML app catalogue or auto-provisioning list includes GitHub was not checked on a Google page."
+ ]
+}

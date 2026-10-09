@@ -1,0 +1,973 @@
+{
+ "slug": "tines",
+ "vendor": "Tines",
+ "vendor_url": "https://www.tines.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Tines",
+  "slug": "tines",
+  "category": "Security & Identity",
+  "status": "gated",
+  "scim_plan": "Enterprise Edition",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Business Edition",
+  "team_price_text": "Contact Sales (Get pricing)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Community Edition (free)",
+  "sso_price_per_user_mo": 0,
+  "sso_required_for_scim": false,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": false,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": null,
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.tines.com/pricing/",
+  "docs_url": "https://www.tines.com/stories/docs/admin/user-administration/scim/",
+  "evidence": "Tines' pricing and packaging article lists SCIM Provisioning in the Enterprise Tenant Management feature set, which is ticked only for the Enterprise Edition; the SCIM docs say SCIM support is not available in all plans.",
+  "notes": "Free Community Edition (1 user) plus quote-only Business and Enterprise Editions; the public pricing page shows only 'Free edition' and 'Paid editions: Get pricing'. SSO (SAML/OIDC) is on all tenants including Community Edition; JIT is in Team Essentials (Business); SCIM, custom roles (RBAC) are in Enterprise Tenant Management (Enterprise only). SCIM DELETE disables the user; full deletion needs the UI or DELETE /api/v1/admin/users/{id}. Enabling SCIM disables UI/API invites and edits. Customers on pre-June-2025 packaging may differ.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Community Edition",
+   "price_text": "Free (Free edition)",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": true,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": false,
+   "cite": [
+    "c2",
+    "c8",
+    "c5",
+    "c4",
+    "c9"
+   ],
+   "notes": "1 user, 3 flows; Security Essentials is 'SSO only' (no audit logs)."
+  },
+  {
+   "name": "Business Edition",
+   "price_text": "Contact Sales (Get pricing)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c1",
+    "c7",
+    "c5",
+    "c6",
+    "c4",
+    "c9",
+    "c54"
+   ],
+   "notes": "User limit 100; JIT provisioning via Team Essentials."
+  },
+  {
+   "name": "Enterprise Edition",
+   "price_text": "Contact Sales (Get pricing)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c1",
+    "c3",
+    "c4",
+    "c54"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c10",
+   "c19",
+   "c4",
+   "c20",
+   "c26",
+   "c11"
+  ],
+  "plan": "Enterprise Edition",
+  "addon_price_text": null,
+  "sso_required": false,
+  "version": "2.0",
+  "base_url": "https://<tenant-domain>/api/scim/v2",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Tenant owner API key (Tines connect flow)",
+   "token_expiry": null,
+   "cite": [
+    "c13",
+    "c22",
+    "c32"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": true,
+   "Schemas": true,
+   "ResourceTypes": true,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c25",
+    "c21"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": false,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c14",
+    "c21",
+    "c25"
+   ],
+   "notes": "Endpoint table lists GET/POST/PUT/PATCH/DELETE on Users and Groups; DELETE on a user disables rather than deletes."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Deactivated users can no longer access the tenant; their data stays until a Tenant Owner deletes them via the UI or the admin users API.",
+   "cite": [
+    "c21",
+    "c15"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "externalId",
+    "id",
+    "active",
+    "userType",
+    "groups"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "displayName",
+    "externalId",
+    "id",
+    "members"
+   ],
+   "cite": [
+    "c27",
+    "c23",
+    "c24"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "userType attribute (TENANT_OWNER or USER) for tenant owner; or IdP group to team/role/tenant-permission mapping (scim_user_group_mapping), applied on each SCIM operation.",
+   "cite": [
+    "c16",
+    "c17",
+    "c50"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "With SCIM enabled, UI and API invites and user edits are disabled; users are managed only by the IdP.",
+    "cite": [
+     "c12"
+    ]
+   },
+   {
+    "text": "SCIM is not compatible with just-in-time provisioning.",
+    "cite": [
+     "c18"
+    ]
+   },
+   {
+    "text": "userName must be the user's email.",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "text": "The user's groups attribute is immutable; membership changes go through each Group's members.",
+    "cite": [
+     "c23"
+    ]
+   },
+   {
+    "text": "SCIM DELETE disables the user; full deletion requires the UI or the admin users API.",
+    "cite": [
+     "c21",
+     "c15"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c37",
+   "c38",
+   "c33"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://<tenant-domain>/api/v1",
+  "docs_url": "https://www.tines.com/stories/docs/api/welcome/",
+  "auth": {
+   "methods": [
+    "api_key",
+    "bearer"
+   ],
+   "scopes": [],
+   "cite": [
+    "c33",
+    "c34",
+    "c32"
+   ],
+   "notes": "Admin users API needs a tenant owner key; USER_READ/USER_MANAGE tenant permissions do not grant /admin/users access."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": true,
+   "reactivate_user": true,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c37",
+    "c39",
+    "c41",
+    "c42",
+    "c46",
+    "c47",
+    "c50"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/api/v1/admin/users",
+    "purpose": "List users",
+    "cite": [
+     "c38"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/admin/users/<<user_id>>",
+    "purpose": "Get user",
+    "cite": [
+     "c45"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/admin/users",
+    "purpose": "Create user",
+    "cite": [
+     "c39",
+     "c38"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/v1/admin/users/<<user_id>>",
+    "purpose": "Update user (incl. is_active, admin, tenant_permissions)",
+    "cite": [
+     "c40",
+     "c41"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/admin/users/<<user_id>>",
+    "purpose": "Delete user",
+    "cite": [
+     "c42"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/admin/users/<<user_id>>/expire_session",
+    "purpose": "Sign user out on all devices",
+    "cite": [
+     "c43",
+     "c44"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/teams",
+    "purpose": "List teams",
+    "cite": [
+     "c48"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/teams/<<team_id>>/members",
+    "purpose": "List team members",
+    "cite": [
+     "c49"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/teams/<<team_id>>/invite_member",
+    "purpose": "Invite user to team with role",
+    "cite": [
+     "c46"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/teams/<<team_id>>/remove_member",
+    "purpose": "Remove user from team",
+    "cite": [
+     "c47"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/v1/admin/scim_user_group_mapping",
+    "purpose": "Update SCIM IdP group to team/role mapping",
+    "cite": [
+     "c50",
+     "c51"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/audit_logs",
+    "purpose": "List audit logs",
+    "cite": [
+     "c53"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Business Edition",
+   "cite": [
+    "c52",
+    "c53",
+    "c54",
+    "c5"
+   ]
+  },
+  "rate_limits": {
+   "text": "Most APIs 5000 per minute; admin/users 500 and audit_logs 1000 (per IP and API token).",
+   "cite": [
+    "c35",
+    "c36"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Only tenant owners can completely remove a user from a tenant.",
+    "cite": [
+     "c56"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/tines/",
+   "cite": [
+    "c55"
+   ],
+   "notes": "OIN page ticks SAML, OIDC, SCIM, Create, Update, Deactivate, Group Push, Schema Discovery."
+  },
+  "entra": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "both",
+  "csv_import": null,
+  "other_sync": "Enhanced just-in-time syncing updates team and role assignments from IdP groups on every login (Business Edition and up).",
+  "docs_public": true,
+  "cite": [
+   "c31",
+   "c29",
+   "c6"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.tines.com/pricing/",
+   "title": "Pricing | Tines",
+   "quote": "For intelligent workflows across your entire organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.tines.com/pricing/",
+   "title": "Pricing | Tines",
+   "quote": "For experimenting with intelligent workflows.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.tines.com/llm/explained/9620399-understanding-tines-stories-pricing-and-packaging.md",
+   "title": "Understanding Tines Stories pricing and packaging",
+   "quote": "Our enterprise edition includes our complete suite of enterprise-grade features, expanded usage limits, and a dedicated environment.",
+   "accessed": "2026-10-05",
+   "page_url": "https://explained.tines.com/en/articles/9620399-understanding-tines-stories-pricing-and-packaging"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.tines.com/llm/explained/9620399-understanding-tines-stories-pricing-and-packaging.md",
+   "title": "Understanding Tines Stories pricing and packaging",
+   "quote": "Custom Roles (RBAC) Custom Email Senders (5) Priority Processing SCIM Provisioning",
+   "accessed": "2026-10-05",
+   "page_url": "https://explained.tines.com/en/articles/9620399-understanding-tines-stories-pricing-and-packaging"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.tines.com/llm/explained/9620399-understanding-tines-stories-pricing-and-packaging.md",
+   "title": "Understanding Tines Stories pricing and packaging",
+   "quote": "SSO, all plans Audit logs Tines Stories Roles",
+   "accessed": "2026-10-05",
+   "page_url": "https://explained.tines.com/en/articles/9620399-understanding-tines-stories-pricing-and-packaging"
+  },
+  {
+   "id": "c6",
+   "url": "https://www.tines.com/llm/explained/9620399-understanding-tines-stories-pricing-and-packaging.md",
+   "title": "Understanding Tines Stories pricing and packaging",
+   "quote": "JIT Provisioning Custom Object Sharing Change Control Private Templates Saved story runs",
+   "accessed": "2026-10-05",
+   "page_url": "https://explained.tines.com/en/articles/9620399-understanding-tines-stories-pricing-and-packaging"
+  },
+  {
+   "id": "c7",
+   "url": "https://www.tines.com/llm/explained/9620399-understanding-tines-stories-pricing-and-packaging.md",
+   "title": "Understanding Tines Stories pricing and packaging",
+   "quote": "Everything ambitious teams need to transform their operations through intelligent workflows.",
+   "accessed": "2026-10-05",
+   "page_url": "https://explained.tines.com/en/articles/9620399-understanding-tines-stories-pricing-and-packaging"
+  },
+  {
+   "id": "c8",
+   "url": "https://www.tines.com/llm/explained/9620399-understanding-tines-stories-pricing-and-packaging.md",
+   "title": "Understanding Tines Stories pricing and packaging",
+   "quote": "Our forever-free version gives you hands-on experience with Tines Stories' powerful capabilities.",
+   "accessed": "2026-10-05",
+   "page_url": "https://explained.tines.com/en/articles/9620399-understanding-tines-stories-pricing-and-packaging"
+  },
+  {
+   "id": "c9",
+   "url": "https://www.tines.com/llm/explained/9620399-understanding-tines-stories-pricing-and-packaging.md",
+   "title": "Understanding Tines Stories pricing and packaging",
+   "quote": "User limits | 1 | 100 | Contact Tines",
+   "accessed": "2026-10-05",
+   "page_url": "https://explained.tines.com/en/articles/9620399-understanding-tines-stories-pricing-and-packaging"
+  },
+  {
+   "id": "c10",
+   "url": "https://www.tines.com/llm/stories/docs/admin/user-administration/scim.md",
+   "title": "SCIM | Tines",
+   "quote": "SCIM support is not available in all plans, please reach out to your Tines point of contact or",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/admin/user-administration/scim/"
+  },
+  {
+   "id": "c11",
+   "url": "https://www.tines.com/llm/stories/docs/admin/user-administration/scim.md",
+   "title": "SCIM | Tines",
+   "quote": "Note that SCIM is independent from",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/admin/user-administration/scim/"
+  },
+  {
+   "id": "c12",
+   "url": "https://www.tines.com/llm/stories/docs/admin/user-administration/scim.md",
+   "title": "SCIM | Tines",
+   "quote": "If you enable SCIM for your tenant, users can only be added and modified via SCIM. Regular methods of inviting and modifying users (via the UI or the API) will be disabled and users can only be managed by the Identity Provider.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/admin/user-administration/scim/"
+  },
+  {
+   "id": "c13",
+   "url": "https://www.tines.com/llm/stories/docs/admin/user-administration/scim.md",
+   "title": "SCIM | Tines",
+   "quote": "Authorization: Bearer token, with a tenant-level API key",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/admin/user-administration/scim/"
+  },
+  {
+   "id": "c14",
+   "url": "https://www.tines.com/llm/stories/docs/admin/user-administration/scim.md",
+   "title": "SCIM | Tines",
+   "quote": "Provisioning Users and Groups. Pushing Profile Updates. Adding/removing Users from Groups Deprovisioning Users.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/admin/user-administration/scim/"
+  },
+  {
+   "id": "c15",
+   "url": "https://www.tines.com/llm/stories/docs/admin/user-administration/scim.md",
+   "title": "SCIM | Tines",
+   "quote": "While these users will no longer be able to access the Tines tenant, a Tenant Owner must delete them via the Tines UI or API to remove their data from the system.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/admin/user-administration/scim/"
+  },
+  {
+   "id": "c16",
+   "url": "https://www.tines.com/llm/stories/docs/admin/user-administration/scim.md",
+   "title": "SCIM | Tines",
+   "quote": "In order to grant users the \"Tenant Owner\" role in Tines, you can map a field in your user profile to the `userType` field in the Tines application in your IdP.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/admin/user-administration/scim/"
+  },
+  {
+   "id": "c17",
+   "url": "https://www.tines.com/llm/stories/docs/admin/user-administration/scim.md",
+   "title": "SCIM | Tines",
+   "quote": "users will be assigned to the teams, roles and permissions as configure in the mapping rules, and updated any time there is a SCIM operation invoked by the IdP or a change is made to the mappings.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/admin/user-administration/scim/"
+  },
+  {
+   "id": "c18",
+   "url": "https://www.tines.com/llm/stories/docs/admin/user-administration/scim.md",
+   "title": "SCIM | Tines",
+   "quote": "and is not compatible with",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/admin/user-administration/scim/"
+  },
+  {
+   "id": "c19",
+   "url": "https://www.tines.com/llm/stories/docs/api/scim.md",
+   "title": "SCIM | Tines API",
+   "quote": "These endpoints are only available for tenants with plans that include the SCIM feature and have enabled SCIM (in the tenant's Authentication settings).",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/api/scim/"
+  },
+  {
+   "id": "c20",
+   "url": "https://www.tines.com/llm/stories/docs/api/scim.md",
+   "title": "SCIM | Tines API",
+   "quote": "The base endpoint for SCIM operations (this is what needs to be configured in most IdPs) is `https://<tenant-domain>/api/scim/v2`",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/api/scim/"
+  },
+  {
+   "id": "c21",
+   "url": "https://www.tines.com/llm/stories/docs/api/scim.md",
+   "title": "SCIM | Tines API",
+   "quote": "Disable User. Use the UI or [this API endpoint](/api/admin/users/delete) to completely delete a user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/api/scim/"
+  },
+  {
+   "id": "c22",
+   "url": "https://www.tines.com/llm/stories/docs/api/scim.md",
+   "title": "SCIM | Tines API",
+   "quote": "Only API keys with tenant owner access can be used for SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/api/scim/"
+  },
+  {
+   "id": "c23",
+   "url": "https://www.tines.com/llm/stories/docs/api/scim.md",
+   "title": "SCIM | Tines API",
+   "quote": "Array of groups this user belongs to. This field is immutable and must be changed by updating each Group's `members`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/api/scim/"
+  },
+  {
+   "id": "c24",
+   "url": "https://www.tines.com/llm/stories/docs/api/scim.md",
+   "title": "SCIM | Tines API",
+   "quote": "Array of Users and Groups that belong to this Group.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/api/scim/"
+  },
+  {
+   "id": "c25",
+   "url": "https://www.tines.com/llm/stories/docs/api/scim.md",
+   "title": "SCIM | Tines API",
+   "quote": "`/api/scim/v2/ServiceProviderConfig` | Show Configurations",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/api/scim/"
+  },
+  {
+   "id": "c26",
+   "url": "https://www.tines.com/llm/stories/docs/api/scim.md",
+   "title": "SCIM | Tines API",
+   "quote": "Tines provides [SCIM v2.0](https://simplecloud.info/)-compliant endpoints to enable synchronization with Identity Providers (IdPs) that support this standard.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/api/scim/"
+  },
+  {
+   "id": "c27",
+   "url": "https://www.tines.com/llm/stories/docs/api/scim.md",
+   "title": "SCIM | Tines API",
+   "quote": "The username for the user. It must be the user's email.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/api/scim/"
+  },
+  {
+   "id": "c28",
+   "url": "https://www.tines.com/llm/stories/docs/admin/user-administration/user-provisioning.md",
+   "title": "Automated user provisioning | Tines",
+   "quote": "SCIM provisioning**: Automatically sync users and groups from your identity provider.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/admin/user-administration/user-provisioning/"
+  },
+  {
+   "id": "c29",
+   "url": "https://www.tines.com/llm/stories/docs/admin/user-administration/user-provisioning.md",
+   "title": "Automated user provisioning | Tines",
+   "quote": "Create user accounts automatically the first time someone signs in with SSO.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/admin/user-administration/user-provisioning/"
+  },
+  {
+   "id": "c30",
+   "url": "https://www.tines.com/llm/stories/docs/admin/single-sign-on.md",
+   "title": "Single sign-on | Tines",
+   "quote": "We optionally support single sign-on (SSO) on all Tines Stories tenants, paid and [Community Edition]",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/admin/single-sign-on/"
+  },
+  {
+   "id": "c31",
+   "url": "https://www.tines.com/llm/stories/docs/admin/user-administration/jit.md",
+   "title": "JIT | Tines",
+   "quote": "With SSO enabled via SAML or OIDC, administrators can optionally enable just-in-time user provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/admin/user-administration/jit/"
+  },
+  {
+   "id": "c32",
+   "url": "https://www.tines.com/llm/stories/docs/api/authentication.md",
+   "title": "Authentication and Authorization | Tines API",
+   "quote": "Tenant owner API keys are linked to separate service account users, and have full Owner access to the entire tenant.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/api/authentication/"
+  },
+  {
+   "id": "c33",
+   "url": "https://www.tines.com/llm/stories/docs/api/authentication.md",
+   "title": "Authentication and Authorization | Tines API",
+   "quote": "To authenticate using this method, simply include your API token in the `Authorization` header of your requests, prefixed with \"Bearer\" and a single space.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/api/authentication/"
+  },
+  {
+   "id": "c34",
+   "url": "https://www.tines.com/llm/stories/docs/api/authentication.md",
+   "title": "Authentication and Authorization | Tines API",
+   "quote": "Each request sent to the REST API must be authenticated using an API key, included in the `X-User-Token` header.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/api/authentication/"
+  },
+  {
+   "id": "c35",
+   "url": "https://www.tines.com/llm/stories/docs/api/api-rate-limits.md",
+   "title": "API rate limits | Tines API",
+   "quote": "Most APIs have a limit of 5000 per minute.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/api/api-rate-limits/"
+  },
+  {
+   "id": "c36",
+   "url": "https://www.tines.com/llm/stories/docs/api/api-rate-limits.md",
+   "title": "API rate limits | Tines API",
+   "quote": "These limits are enforced per IP address and API token combination.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/api/api-rate-limits/"
+  },
+  {
+   "id": "c37",
+   "url": "https://www.tines.com/llm/stories/docs/api/admin/users/list.md",
+   "title": "List | Tines API",
+   "quote": "Retrieve a list of users from the Tines tenant.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/api/admin/users/list/"
+  },
+  {
+   "id": "c38",
+   "url": "https://www.tines.com/llm/stories/docs/api/admin/users/list.md",
+   "title": "List | Tines API",
+   "quote": "https://<tenant-domain>/api/v1/admin/users",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/api/admin/users/list/"
+  },
+  {
+   "id": "c39",
+   "url": "https://www.tines.com/llm/stories/docs/api/admin/users/create.md",
+   "title": "Create | Tines API",
+   "quote": "Create a user in a Tines tenant.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/api/admin/users/create/"
+  },
+  {
+   "id": "c40",
+   "url": "https://www.tines.com/llm/stories/docs/api/admin/users/update.md",
+   "title": "Update | Tines API",
+   "quote": "https://<tenant-domain>/api/v1/admin/users/<<user_id>>",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/api/admin/users/update/"
+  },
+  {
+   "id": "c41",
+   "url": "https://www.tines.com/llm/stories/docs/api/admin/users/update.md",
+   "title": "Update | Tines API",
+   "quote": "Boolean flag indicating whether user should be active. Default is true.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/api/admin/users/update/"
+  },
+  {
+   "id": "c42",
+   "url": "https://www.tines.com/llm/stories/docs/api/admin/users/delete.md",
+   "title": "Delete | Tines API",
+   "quote": "Delete a specific user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/api/admin/users/delete/"
+  },
+  {
+   "id": "c43",
+   "url": "https://www.tines.com/llm/stories/docs/api/admin/users/expire-session.md",
+   "title": "Expire session | Tines API",
+   "quote": "Expires a user’s session, signing them out of the Tines tenant on all devices.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/api/admin/users/expire-session/"
+  },
+  {
+   "id": "c44",
+   "url": "https://www.tines.com/llm/stories/docs/api/admin/users/expire-session.md",
+   "title": "Expire session | Tines API",
+   "quote": "https://<tenant-domain>/api/v1/admin/users/<<user_id>>/expire_session",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/api/admin/users/expire-session/"
+  },
+  {
+   "id": "c45",
+   "url": "https://www.tines.com/llm/stories/docs/api/admin/users/get.md",
+   "title": "Get | Tines API",
+   "quote": "https://<tenant-domain>/api/v1/admin/users/<<user_id>>",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/api/admin/users/get/"
+  },
+  {
+   "id": "c46",
+   "url": "https://www.tines.com/llm/stories/docs/api/teams/invite-member.md",
+   "title": "Invite member | Tines API",
+   "quote": "https://<tenant-domain>/api/v1/teams/<<team_id>>/invite_member",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/api/teams/invite-member/"
+  },
+  {
+   "id": "c47",
+   "url": "https://www.tines.com/llm/stories/docs/api/teams/remove-member.md",
+   "title": "Remove member | Tines API",
+   "quote": "https://<tenant-domain>/api/v1/teams/<<team_id>>/remove_member",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/api/teams/remove-member/"
+  },
+  {
+   "id": "c48",
+   "url": "https://www.tines.com/llm/stories/docs/api/teams/list.md",
+   "title": "List | Tines API",
+   "quote": "https://<tenant-domain>/api/v1/teams",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/api/teams/list/"
+  },
+  {
+   "id": "c49",
+   "url": "https://www.tines.com/llm/stories/docs/api/teams/list-members.md",
+   "title": "List members | Tines API",
+   "quote": "https://<tenant-domain>/api/v1/teams/<<team_id>>/members",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/api/teams/list-members/"
+  },
+  {
+   "id": "c50",
+   "url": "https://www.tines.com/llm/stories/docs/api/admin/scim_user_group_mapping/update.md",
+   "title": "Update | Tines API",
+   "quote": "Update the SCIM user group mapping for the tenant.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/api/admin/scim_user_group_mapping/update/"
+  },
+  {
+   "id": "c51",
+   "url": "https://www.tines.com/llm/stories/docs/api/admin/scim_user_group_mapping/update.md",
+   "title": "Update | Tines API",
+   "quote": "https://<tenant-domain>/api/v1/admin/scim_user_group_mapping",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/api/admin/scim_user_group_mapping/update/"
+  },
+  {
+   "id": "c52",
+   "url": "https://www.tines.com/llm/stories/docs/api/audit-logs/list.md",
+   "title": "List | Tines API",
+   "quote": "Returns a list of audit logs gathered from the Tines tenant.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/api/audit-logs/list/"
+  },
+  {
+   "id": "c53",
+   "url": "https://www.tines.com/llm/stories/docs/api/audit-logs/list.md",
+   "title": "List | Tines API",
+   "quote": "https://<tenant-domain>/api/v1/audit_logs",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/api/audit-logs/list/"
+  },
+  {
+   "id": "c54",
+   "url": "https://www.tines.com/llm/stories/docs/api/audit-logs.md",
+   "title": "Audit logs | Tines API",
+   "quote": "These audit logs are available to tenant admins via our API, and are typically drained to a log analysis or SIEM tool for further investigation.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/api/audit-logs/"
+  },
+  {
+   "id": "c55",
+   "url": "https://www.okta.com/integrations/tines/",
+   "title": "Tines | Okta",
+   "quote": "Add this integration to enable authentication and provisioning capabilities.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c56",
+   "url": "https://www.tines.com/llm/stories/docs/admin/user-administration.md",
+   "title": "User administration | Tines",
+   "quote": "Only tenant owners have permission to: 1. Completely remove a user from a tenant.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.tines.com/stories/docs/admin/user-administration/"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.tines.com/pricing/",
+  "https://www.tines.com/llms.txt",
+  "https://explained.tines.com/en/articles/9620399-understanding-tines-stories-pricing-and-packaging",
+  "https://www.tines.com/stories/docs/admin/user-administration/scim/",
+  "https://www.tines.com/stories/docs/api/scim/",
+  "https://www.tines.com/stories/docs/admin/user-administration/user-provisioning/",
+  "https://www.tines.com/stories/docs/admin/user-administration/jit/",
+  "https://www.tines.com/stories/docs/admin/single-sign-on/",
+  "https://www.tines.com/stories/docs/admin/user-administration/",
+  "https://www.tines.com/stories/docs/api/authentication/",
+  "https://www.tines.com/stories/docs/api/api-rate-limits/",
+  "https://www.tines.com/stories/docs/api/admin/users/list/",
+  "https://www.tines.com/stories/docs/api/audit-logs/",
+  "https://www.okta.com/integrations/tines/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/toc.json (no Tines tutorial)",
+  "https://jumpcloud.com/support/integrate-with-tines (403 to curl and WebFetch)"
+ ],
+ "open_questions": [
+  "Whether deactivating a user via SCIM frees a licensed seat or ends active sessions is not documented (sessions can be expired via the admin API).",
+  "SCIM filtering, pagination, Bulk and /Me support and SCIM-specific rate limits are not documented.",
+  "Reactivation (active: true) over SCIM is not explicitly documented.",
+  "Which edition includes the admin users REST API is not stated.",
+  "Entra gallery, Google, OneLogin and JumpCloud catalogue listings could not be confirmed (no Entra Learn tutorial; JumpCloud 403).",
+  "SCIM token expiry depends on the tenant owner API key settings; not documented for SCIM."
+ ]
+}

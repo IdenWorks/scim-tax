@@ -1,0 +1,684 @@
+{
+ "slug": "expensify",
+ "vendor": "Expensify",
+ "vendor_url": "https://www.expensify.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Expensify",
+  "slug": "expensify",
+  "category": "Finance, Accounting & Spend",
+  "status": "gated",
+  "scim_plan": "Control",
+  "scim_price_text": "Control: $18/member/mo (annual), as low as $9 with Expensify Card; Custom pricing",
+  "scim_price_per_user_mo": 18,
+  "team_plan": "Collect",
+  "team_price_text": "Collect: $5/member/mo (pay-per-use)",
+  "team_price_per_user_mo": 5,
+  "price_multiplier": 3.6,
+  "sso_plan": "Control",
+  "sso_price_per_user_mo": 18,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": null,
+   "update": null,
+   "deactivate": true,
+   "delete": null,
+   "groups": null
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "sso_only",
+   "google": "directory_sync",
+   "onelogin": "sso_only",
+   "jumpcloud": "sso_only",
+   "generic": false
+  },
+  "pricing_page_url": "https://www.expensify.com/pricing",
+  "docs_url": "https://help.expensify.com/articles/expensify-classic/domains/Set-Up-SAML-SSO",
+  "evidence": "Expensify's pricing page lists SAML/SSO only under Control (\"Custom pricing as low as $9 per active member/month\"), and the help centre says the Okta SCIM API for account deprovisioning is set up \"Once SAML is configured\" by requesting SCIM API access via concierge@expensify.com.",
+  "notes": "Status unchanged (gated). Pricing page now shows Control as 'Custom pricing, as low as $9 per active member/month'; the help-centre pricing table gives Control annual $18/member/mo standard ($9 with Expensify Card), pay-per-use $36 ($18 with Card), and Collect $5 per unique member/mo pay-per-use. Numeric SCIM price now uses the $18 annual standard price instead of June's Card-discounted $9, so the multiplier moves from 1.8 to 3.6 without a price change. SCIM is Okta-only, needs SAML first and manual activation via Concierge, and Expensify describes it as for account deprovisioning; its Okta Workflows article says the native Okta integration does not provision or update users (Okta's OIN page shows Create/Update/Deactivate). Provisioning beyond that is via the Advanced Employee Updater API.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": true,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Submit (Free)",
+   "price_text": "Free for all members",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c7"
+   ]
+  },
+  {
+   "name": "Collect",
+   "price_text": "$5 per unique member/month (pay-per-use)",
+   "price_per_user_mo": 5,
+   "billing": "monthly",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c4",
+    "c7"
+   ]
+  },
+  {
+   "name": "Control",
+   "price_text": "Annual: $18 per member/month (as low as $9 with Expensify Card); pay-per-use $36 per active member/month",
+   "price_per_user_mo": 18,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c5",
+    "c6",
+    "c7",
+    "c8"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c8",
+   "c11",
+   "c31"
+  ],
+  "plan": "Control",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": "bearer",
+   "token_source": "SCIM token issued by Expensify on request via concierge@expensify.com, pasted into Okta provisioning settings",
+   "token_expiry": null,
+   "cite": [
+    "c8"
+   ],
+   "notes": "Expensify calls it a 'SCIM token'; method assumed bearer-style token entered in Okta."
+  },
+  "endpoints": {
+   "Users": null,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": []
+  },
+  "operations": {
+   "create": null,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": null,
+   "group_push": null,
+   "group_membership": null,
+   "cite": [
+    "c8",
+    "c12",
+    "c31"
+   ],
+   "notes": "Expensify documents the SCIM API 'for account deprovisioning' and says the native Okta integration does not provision or update users; Okta's OIN markup checks Create, Update and Deactivate."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Closed domain accounts can be reopened by reinviting the user (manual close behaviour; SCIM-specific behaviour not documented).",
+   "cite": [
+    "c8",
+    "c26"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": []
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Okta only; requires SAML to be configured first and SCIM API access requested from Concierge.",
+    "cite": [
+     "c8",
+     "c11"
+    ]
+   },
+   {
+    "text": "Expensify says its native Okta integration does not provision or update users; user creation/updates go through Okta Workflows plus the Advanced Employee Updater API.",
+    "cite": [
+     "c12"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c19",
+   "c18",
+   "c25",
+   "c14"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "other",
+  "base_url": "https://integrations.expensify.com/Integration-Server/ExpensifyIntegrations",
+  "docs_url": "https://integrations.expensify.com/Integration-Server/doc/employeeUpdater/",
+  "auth": {
+   "methods": [
+    "partner_credentials",
+    "oauth2"
+   ],
+   "scopes": [
+    "integrations:api"
+   ],
+   "cite": [
+    "c20",
+    "c13",
+    "c22"
+   ],
+   "notes": "partnerUserID + partnerUserSecret generated in the Integrations Center; OAuth2 partner auth is private beta."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": null,
+   "create_user": true,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c14",
+    "c15",
+    "c16",
+    "c17",
+    "c23",
+    "c24"
+   ],
+   "notes": "Users are provisioned into workspaces (policies); isTerminated removes them from the policy. Domain groups can be assigned but not created. Policy getter returns policy employees."
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/Integration-Server/ExpensifyIntegrations",
+    "purpose": "Single RPC endpoint; requestJobDescription type 'update' with inputSettings.type 'employees' runs the Advanced Employee Updater (provision, update, isTerminated de-provision, role, domain group)",
+    "cite": [
+     "c18",
+     "c19",
+     "c14"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/Integration-Server/ExpensifyIntegrations",
+    "purpose": "type 'get' with inputSettings.type 'policyList' / 'policy' returns policies and their employees",
+    "cite": [
+     "c23",
+     "c19"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "Up to 5 requests every 10 seconds and 20 requests every 60 seconds; 429 when exceeded",
+   "cite": [
+    "c21"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Domain groups cannot be created via the API, only assigned.",
+    "cite": [
+     "c24"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/expensify/",
+   "cite": [
+    "c31",
+    "c8"
+   ],
+   "notes": "OIN markup checks SAML, SWA, SCIM and Create/Update/Deactivate; Expensify says SCIM is for deprovisioning and must be requested."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/expensify-tutorial",
+   "cite": [
+    "c32"
+   ],
+   "notes": "Entra gallery SSO tutorial only; no Expensify provisioning tutorial (404)."
+  },
+  "google": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "directory_sync",
+   "built_by": "vendor",
+   "url": null,
+   "cite": [
+    "c28",
+    "c29",
+    "c10"
+   ],
+   "notes": "Expensify Google Workspace Marketplace app with manual 'Sync G Suite Now' to add users to a workspace."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c10"
+   ],
+   "notes": "Expensify's SAML guide lists OneLogin; OneLogin catalogue not loaded."
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://jumpcloud.com/support/integrate-with-expensify",
+   "cite": [
+    "c33"
+   ]
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": true,
+  "other_sync": "Google Apps manual sync; Advanced Employee Updater API (HRIS feeds, Okta Workflows); Workday/Certinia HR integrations on Control",
+  "docs_public": true,
+  "cite": [
+   "c27",
+   "c28",
+   "c14"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.expensify.com/pricing",
+   "title": "Expensify - Pricing",
+   "quote": "Most businesses start with our Collect plan at $5 per member per month, which includes core expense, travel, and chat features. For more advanced functionality, our Control plan is available at a custom price.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://www.expensify.com/pricing",
+   "title": "Expensify - Pricing",
+   "quote": "as low as $9 per active member/month",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://www.expensify.com/pricing",
+   "title": "Expensify - Pricing",
+   "quote": "The free plan for employees, no company approval needed.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://help.expensify.com/articles/new-expensify/billing-and-subscriptions/explore-plans-subscriptions-and-pricing/Understand-Expensify-Pricing",
+   "title": "Understand Expensify Pricing",
+   "quote": "Collect Pay-per-use $5 per unique member/month",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://help.expensify.com/articles/new-expensify/billing-and-subscriptions/explore-plans-subscriptions-and-pricing/Understand-Expensify-Pricing",
+   "title": "Understand Expensify Pricing",
+   "quote": "Control Annual $18 per member included in your subscription size/month, plus $36 per active member above your subscription size/month As low as $9 per member included in your subscription size/month",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://help.expensify.com/articles/new-expensify/billing-and-subscriptions/explore-plans-subscriptions-and-pricing/Understand-Expensify-Pricing",
+   "title": "Understand Expensify Pricing",
+   "quote": "Control Pay-per-use $36 per active member/month As low as $18 per active member/month",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://help.expensify.com/articles/new-expensify/billing-and-subscriptions/explore-plans-subscriptions-and-pricing/Compare-Collect-and-Control-Plans",
+   "title": "Compare Collect and Control Plans",
+   "quote": "SAML/SSO ❌ ✅",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://help.expensify.com/articles/expensify-classic/domains/Set-Up-SAML-SSO",
+   "title": "Set Up SAML SSO",
+   "quote": "Okta SCIM API for account deprovisioning Once SAML is configured: In Okta, add Expensify as an app and configure attribute mappings. Request SCIM API access via concierge@expensify.com . Add the SCIM token in your Okta provisioning settings.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://help.expensify.com/articles/expensify-classic/domains/Set-Up-SAML-SSO",
+   "title": "Set Up SAML SSO",
+   "quote": "Only Domain Admins can configure SAML for verified domains.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://help.expensify.com/articles/expensify-classic/domains/Set-Up-SAML-SSO",
+   "title": "Set Up SAML SSO",
+   "quote": "Amazon Web Services (AWS SSO) Google Workspace / SAML (Gsuite) Microsoft Entra ID (formerly Azure AD) Okta OneLogin Oracle Identity Cloud Service SAASPASS",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c11",
+   "url": "https://help.expensify.com/articles/new-expensify/domains/Set-Up-SAML-SSO",
+   "title": "Set Up SAML SSO (New Expensify)",
+   "quote": "Okta SCIM API and SAML provisioning Once SAML is configured: In Okta, add Expensify as an app and configure attribute mappings. Request SCIM API access via concierge@expensify.com .",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://help.expensify.com/articles/Unlisted/Automate-User-Provisioning-in-Expensify-with-Okta-Workflows",
+   "title": "Automate User Provisioning in Expensify with Okta Workflows",
+   "quote": "Expensify’s native Okta integration handles authentication and SSO, but does not provision or update users. Use Okta Workflows with the Advanced Employee Updater API for user provisioning and updates.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://help.expensify.com/articles/Unlisted/Automate-User-Provisioning-in-Expensify-with-Okta-Workflows",
+   "title": "Automate User Provisioning in Expensify with Okta Workflows",
+   "quote": "While logged into your Expensify account, visit the Integrations Center . Click Generate API credentials . Copy your partnerUserID and partnerUserSecret .",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c14",
+   "url": "https://integrations.expensify.com/Integration-Server/doc/employeeUpdater/",
+   "title": "Advanced employee updater",
+   "quote": "The advanced employee updater is designed to allow dynamic and customizable employee provisioning and de-provisioning in Expensify.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://integrations.expensify.com/Integration-Server/doc/employeeUpdater/",
+   "title": "Advanced employee updater",
+   "quote": "Assign employees to Expensify domain groups based on customizable fields, such as employee department, country, job code, etc.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://integrations.expensify.com/Integration-Server/doc/employeeUpdater/",
+   "title": "Advanced employee updater",
+   "quote": "If set to true, the employee will be removed from the policyID",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c17",
+   "url": "https://integrations.expensify.com/Integration-Server/doc/employeeUpdater/",
+   "title": "Advanced employee updater",
+   "quote": "One of user , auditor , admin . If passed, specifies the role of the account in the policy in Expensify.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c18",
+   "url": "https://integrations.expensify.com/Integration-Server/doc/employeeUpdater/",
+   "title": "Advanced employee updater",
+   "quote": "The API call should be made to the regular endpoint https://integrations.expensify.com/Integration-Server/ExpensifyIntegrations .",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c19",
+   "url": "https://integrations.expensify.com/Integration-Server/doc/",
+   "title": "Expensify Integration Server",
+   "quote": "Every request to the Expensify API follows the same pattern: a JSON payload that identifies the job to execute is passed as a parameter called requestJobDescription .",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c20",
+   "url": "https://integrations.expensify.com/Integration-Server/doc/",
+   "title": "Expensify Integration Server",
+   "quote": "An object with either partnerUserID + partnerUserSecret (partner credentials) or a single authToken (OAuth2 access token).",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c21",
+   "url": "https://integrations.expensify.com/Integration-Server/doc/",
+   "title": "Expensify Integration Server",
+   "quote": "Up to 5 requests every 10 seconds Up to 20 requests every 60 seconds Sending more requests than allowed may result in an error with status code 429 .",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c22",
+   "url": "https://integrations.expensify.com/Integration-Server/doc/",
+   "title": "Expensify Integration Server",
+   "quote": "OAuth2 partner authentication is currently in private beta.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c23",
+   "url": "https://integrations.expensify.com/Integration-Server/doc/",
+   "title": "Expensify Integration Server",
+   "quote": "Lets you get specific information about listed policies.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c24",
+   "url": "https://help.expensify.com/articles/expensify-classic/connections/Expensify-API",
+   "title": "Expensify API",
+   "quote": "No, you cannot create domain groups. You can only assign users to them.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c25",
+   "url": "https://help.expensify.com/articles/expensify-classic/connections/Expensify-API",
+   "title": "Expensify API",
+   "quote": "The API is a self-serve tool.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c26",
+   "url": "https://help.expensify.com/articles/expensify-classic/domains/Domain-Members",
+   "title": "Domain Members",
+   "quote": "Click Close to deactivate the account. Closed accounts can be reopened anytime by reinviting the user via the Domain Member page.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c27",
+   "url": "https://help.expensify.com/articles/expensify-classic/workspaces/Invite-members-and-assign-roles",
+   "title": "Invite members and assign roles",
+   "quote": "You can add multiple members to your workspace at once by importing a .csv , .txt , .xls , or .xlsx list.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c28",
+   "url": "https://help.expensify.com/articles/expensify-classic/connections/Google-Apps-SSO",
+   "title": "Google Apps SSO",
+   "quote": "Click Sync G Suite Now . Expensify will detect users in your domain who are not yet in the Workspace and add them.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c29",
+   "url": "https://help.expensify.com/articles/expensify-classic/connections/Google-Apps-SSO",
+   "title": "Google Apps SSO",
+   "quote": "The connection does not auto-refresh. You must manually click Sync G Suite Now whenever you want to update users.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c30",
+   "url": "https://help.expensify.com/articles/expensify-classic/connections/Google-Apps-SSO",
+   "title": "Google Apps SSO",
+   "quote": "You must be an admin of a Group Workspace with a Collect or Control subscription.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c31",
+   "url": "https://www.okta.com/integrations/expensify/",
+   "title": "Integrate Expensify with Okta",
+   "quote": "Add this integration to enable authentication and provisioning capabilities.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c32",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/expensify-tutorial",
+   "title": "Microsoft Entra SSO integration with Expensify",
+   "quote": "Expensify supports SP initiated SSO.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c33",
+   "url": "https://jumpcloud.com/support/integrate-with-expensify",
+   "title": "Integrate with Expensify | JumpCloud",
+   "quote": "Use JumpCloud SAML Single Sign On (SSO) to give your users convenient but secure access to all their web applications with a single set of credentials. Read this article to learn how to integrate with Expensify.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "Expensify's Okta Workflows article says the native Okta integration does not provision or update users, while its SAML article documents an Okta SCIM API and Okta's OIN page checks SCIM Create/Update/Deactivate.",
+   "cite": [
+    "c12",
+    "c8",
+    "c31"
+   ]
+  },
+  {
+   "text": "Pricing page: Control 'as low as $9 per active member/month'; help-centre table: Control annual $18 per member standard, as low as $9 only with the Expensify Card.",
+   "cite": [
+    "c2",
+    "c5"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.expensify.com/pricing",
+  "https://help.expensify.com/sitemap.xml",
+  "https://help.expensify.com/articles/expensify-classic/domains/Set-Up-SAML-SSO",
+  "https://help.expensify.com/articles/new-expensify/domains/Set-Up-SAML-SSO",
+  "https://help.expensify.com/articles/Unlisted/Automate-User-Provisioning-in-Expensify-with-Okta-Workflows",
+  "https://help.expensify.com/articles/new-expensify/billing-and-subscriptions/explore-plans-subscriptions-and-pricing/Understand-Expensify-Pricing",
+  "https://help.expensify.com/articles/new-expensify/billing-and-subscriptions/explore-plans-subscriptions-and-pricing/Compare-Collect-and-Control-Plans",
+  "https://integrations.expensify.com/Integration-Server/doc/",
+  "https://integrations.expensify.com/Integration-Server/doc/employeeUpdater/",
+  "https://help.expensify.com/articles/expensify-classic/connections/Expensify-API",
+  "https://help.expensify.com/articles/expensify-classic/domains/Domain-Members",
+  "https://help.expensify.com/articles/expensify-classic/connections/Google-Apps-SSO",
+  "https://www.okta.com/integrations/expensify/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/expensify-tutorial",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/expensify-provisioning-tutorial (404)",
+  "https://jumpcloud.com/support/integrate-with-expensify"
+ ],
+ "open_questions": [
+  "SCIM version, base URL, endpoints, attributes, filtering, pagination and rate limits are not published.",
+  "Whether SCIM creates/updates users or only deprovisions is contradictory across Expensify and Okta pages.",
+  "What SCIM deprovisioning does exactly (close account vs remove from workspace) and whether it stops billing is not documented.",
+  "Which plan is needed to generate API credentials / use the Advanced Employee Updater is not stated.",
+  "Whether SAML sign-in creates accounts just-in-time is not documented.",
+  "No audit-log API or user-event webhooks found.",
+  "OneLogin catalogue page not loaded."
+ ]
+}

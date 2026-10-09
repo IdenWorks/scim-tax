@@ -1,0 +1,952 @@
+{
+ "slug": "lucidchart",
+ "vendor": "Lucidchart",
+ "vendor_url": "https://lucid.co",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Lucidchart",
+  "slug": "lucidchart",
+  "category": "Design & Creative",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Team",
+  "team_price_text": "Team: $10/u/mo (billed annually)",
+  "team_price_per_user_mo": 10,
+  "price_multiplier": null,
+  "sso_plan": "Enterprise",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": "directory_sync",
+   "onelogin": "via_generic",
+   "jumpcloud": "via_generic",
+   "generic": true
+  },
+  "pricing_page_url": "https://lucid.app/pricing/lucidchart",
+  "docs_url": "https://lucid.readme.io/reference/overview-scim.md",
+  "evidence": "Lucid's SCIM overview says 'Plan availability: Enterprise only', and the pricing page lists Enterprise as Contact sales with SAML authentication; Team is $10/user per month billed annually.",
+  "notes": "Status unchanged (gated). Team price rose from $9 to $10/user/mo billed annually. June's '~$199/u/yr list' Enterprise figure has no first-party source and is dropped; Enterprise is Contact sales. SCIM 2.0 at https://users.lucid.app/scim/v2 with bearer tokens from two separate apps (SCIM for admin management = org groups and licensing; SCIM for content access = teams). Deactivate = active:false (user cannot log in); DELETE is a hard delete. Okta and Entra gallery apps are first-class; other IdPs use the generic API. Google Workspace provisioning is a Lucid-run sync, Enterprise only. REST API (api.lucid.co) lists users and manages licenses and teams; user creation via REST is Enterprise only; audit-log API needs Enterprise Shield.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Team",
+  "api_tax": false,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "$0",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": false,
+   "cite": [
+    "c31",
+    "c6"
+   ]
+  },
+  {
+   "name": "Individual",
+   "price_text": "$9/month billed annually",
+   "price_per_user_mo": 9,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": false,
+   "cite": [
+    "c1",
+    "c31",
+    "c6"
+   ],
+   "notes": "Single-user plan."
+  },
+  {
+   "name": "Team",
+   "price_text": "$10/user/month billed annually",
+   "price_per_user_mo": 10,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c1",
+    "c2",
+    "c5",
+    "c31",
+    "c6"
+   ]
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Contact sales",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c4",
+    "c6",
+    "c9",
+    "c44"
+   ],
+   "notes": "Audit-log API requires the Enterprise Shield add-on."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c6",
+   "c9",
+   "c10",
+   "c52"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://users.lucid.app/scim/v2",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Admin > App integration > SCIM for admin management (or SCIM for content access); auto-upgrade licensing must be enabled to generate a token",
+   "token_expiry": null,
+   "cite": [
+    "c11",
+    "c12",
+    "c30"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": true,
+   "Schemas": true,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c13",
+    "c14",
+    "c15",
+    "c16",
+    "c51"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c13",
+    "c14",
+    "c17",
+    "c52",
+    "c34"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "active:false keeps the account but the user cannot log in; DELETE is a hard delete (account owners and default document owners cannot be deleted). Removing a user from a licensing org group delicenses them and frees the license.",
+   "cite": [
+    "c13",
+    "c17",
+    "c18",
+    "c27",
+    "c28"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "emails.value",
+    "userName",
+    "displayName",
+    "externalId",
+    "urn:ietf:params:scim:schemas:extension:lucid:1.0:User.productLicenses.<name>"
+   ],
+   "cite": [
+    "c19",
+    "c20",
+    "c21",
+    "c26"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c20"
+   ],
+   "notes": "startIndex/count parameters; filtered requests return at most 10,000 users."
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.formatted",
+    "name.givenName",
+    "name.familyName",
+    "displayName",
+    "emails.value",
+    "emails.type",
+    "emails.primary",
+    "active",
+    "externalId",
+    "title",
+    "phoneNumbers.value (work only)",
+    "roles.value",
+    "password (create only)"
+   ],
+   "enterprise": [
+    "costCenter",
+    "organization",
+    "division",
+    "department",
+    "manager"
+   ],
+   "custom": {
+    "supported": true,
+    "how": "Lucid extension urn:ietf:params:scim:schemas:extension:lucid:1.0:User (productLicenses.<name>) for license assignment."
+   },
+   "group": [
+    "displayName",
+    "members.value",
+    "members.display"
+   ],
+   "cite": [
+    "c22",
+    "c23",
+    "c24",
+    "c25",
+    "c26"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "SCIM roles attribute with administrative role values (AccountAdmin, BillingAdmin, Developer, DocumentAdmin, EnterpriseShieldAdmin, TemplateAdmin); licenses via org-group push.",
+   "cite": [
+    "c23",
+    "c27"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Two SCIM apps (admin management and content access) both provision users; a leaver must be removed from both.",
+    "cite": [
+     "c8"
+    ]
+   },
+   {
+    "text": "Filtering supports only the eq operator and returns at most 10,000 users.",
+    "cite": [
+     "c19",
+     "c20"
+    ]
+   },
+   {
+    "text": "Only Okta and Entra ID have supported apps; other IdPs must call the SCIM API directly.",
+    "cite": [
+     "c7"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c5",
+   "c36",
+   "c39"
+  ],
+  "plan": "Team",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://api.lucid.co",
+  "docs_url": "https://developer.lucid.co/reference/overview",
+  "auth": {
+   "methods": [
+    "api_key",
+    "oauth2"
+   ],
+   "scopes": [
+    "account.user:readonly",
+    "API key grant: AccountAdmin"
+   ],
+   "cite": [
+    "c37"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": null,
+   "assign_licenses": true,
+   "cite": [
+    "c36",
+    "c38",
+    "c42",
+    "c47",
+    "c48",
+    "c49"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/v1/users",
+    "purpose": "List users",
+    "cite": [
+     "c36"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/users/{id}",
+    "purpose": "Get user",
+    "cite": [
+     "c50"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/users",
+    "purpose": "Create user (Enterprise only)",
+    "cite": [
+     "c38",
+     "c49"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/users/searchByEmail",
+    "purpose": "Search users by email",
+    "cite": [
+     "c40"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/users/{id}/licenses",
+    "purpose": "List user licenses",
+    "cite": [
+     "c41"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/users/{id}/licenses",
+    "purpose": "Grant user license",
+    "cite": [
+     "c42"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/subscriptions/{id}/licenses",
+    "purpose": "List licenses for subscription",
+    "cite": [
+     "c43"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v2/teams",
+    "purpose": "List teams",
+    "cite": [
+     "c46"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v2/teams/{teamId}/users/add",
+    "purpose": "Add users to team",
+    "cite": [
+     "c47"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v2/teams/{teamId}/users/remove",
+    "purpose": "Remove users from team",
+    "cite": [
+     "c48"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v2/auditLogs",
+    "purpose": "Get audit logs (Enterprise Shield)",
+    "cite": [
+     "c44"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v2/auditLogs/query",
+    "purpose": "Query audit logs (Enterprise Shield)",
+    "cite": [
+     "c45"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": "addon",
+   "plan": "Enterprise Shield",
+   "cite": [
+    "c44"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "Plan inferred from 'Developer platform' listed under Team on the pricing page; Create User is Enterprise only."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": "vendor",
+   "url": "https://www.okta.com/integrations/lucid/",
+   "cite": [
+    "c34"
+   ]
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/lucid-all-products-provisioning-tutorial",
+   "cite": [
+    "c35"
+   ],
+   "notes": "Gallery app 'Lucid (All Products)'."
+  },
+  "google": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "directory_sync",
+   "built_by": "vendor",
+   "url": null,
+   "cite": [
+    "c32",
+    "c33"
+   ],
+   "notes": "Lucidchart Google Marketplace app plus Lucid-run Google Workspace sync (Enterprise only); Google sign-in is OAuth, not SAML."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "No Lucid guide for OneLogin; Lucid says other IdPs use the SCIM API directly."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "No Lucid guide for JumpCloud; Lucid says other IdPs use the SCIM API directly."
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": "Google Workspace directory sync (Enterprise)",
+  "docs_public": true,
+  "cite": [
+   "c29",
+   "c33"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://lucid.app/pricing/lucidchart",
+   "title": "Lucidchart Pricing",
+   "quote": "per month when billed annually",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://lucid.app/pricing/lucidchart",
+   "title": "Lucidchart Pricing",
+   "quote": "$10 / user",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://lucid.app/pricing/lucidchart",
+   "title": "Lucidchart Pricing",
+   "quote": "Everything on Team, plus:",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://lucid.app/pricing/lucidchart",
+   "title": "Lucidchart Pricing",
+   "quote": "SAML authentication",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://lucid.app/pricing/lucidchart",
+   "title": "Lucidchart Pricing",
+   "quote": "Developer platform",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://help.lucid.co/api/v2/help_center/en-us/articles/360049427352.json",
+   "title": "SCIM overview for Lucid",
+   "quote": "Plan availability: Enterprise only.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.lucid.co/hc/en-us/articles/360049427352-SCIM-overview-for-Lucid"
+  },
+  {
+   "id": "c7",
+   "url": "https://help.lucid.co/api/v2/help_center/en-us/articles/360049427352.json",
+   "title": "SCIM overview for Lucid",
+   "quote": "If you are using an IdP other than those listed above you will need to either manually manage the users in the Lucid admin panel or refer to the SCIM API Developer Docs to walk through the steps to set up these calls on your own.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.lucid.co/hc/en-us/articles/360049427352-SCIM-overview-for-Lucid"
+  },
+  {
+   "id": "c8",
+   "url": "https://help.lucid.co/api/v2/help_center/en-us/articles/360049427352.json",
+   "title": "SCIM overview for Lucid",
+   "quote": "Specifically, when removing a user they must be removed from both groups.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.lucid.co/hc/en-us/articles/360049427352-SCIM-overview-for-Lucid"
+  },
+  {
+   "id": "c9",
+   "url": "https://lucid.readme.io/reference/overview-scim.md",
+   "title": "Lucid SCIM API",
+   "quote": "This feature is only available to users on Enterprise accounts.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.lucid.co/reference/overview-scim"
+  },
+  {
+   "id": "c10",
+   "url": "https://lucid.readme.io/reference/overview-scim.md",
+   "title": "Lucid SCIM API",
+   "quote": "**Lucid SCIM base URL**: `https://users.lucid.app/scim/v2`",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.lucid.co/reference/overview-scim"
+  },
+  {
+   "id": "c11",
+   "url": "https://lucid.readme.io/reference/overview-scim.md",
+   "title": "Lucid SCIM API",
+   "quote": "Authorize your API requests using the HTTP `Authorization` header.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.lucid.co/reference/overview-scim"
+  },
+  {
+   "id": "c12",
+   "url": "https://lucid.readme.io/reference/overview-scim.md",
+   "title": "Lucid SCIM API",
+   "quote": "Admin > App integration > SCIM for admin management",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.lucid.co/reference/overview-scim"
+  },
+  {
+   "id": "c13",
+   "url": "https://lucid.readme.io/reference/lucid-scim-api/llms.txt",
+   "title": "Lucid SCIM API index",
+   "quote": "Modify an existing user. To deactivate a user, set the `active` field to `false`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.lucid.co/reference/overview-scim"
+  },
+  {
+   "id": "c14",
+   "url": "https://lucid.readme.io/reference/lucid-scim-api/llms.txt",
+   "title": "Lucid SCIM API index",
+   "quote": "Delete an existing org group or archive an existing team.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.lucid.co/reference/overview-scim"
+  },
+  {
+   "id": "c15",
+   "url": "https://lucid.readme.io/reference/lucid-scim-api/llms.txt",
+   "title": "Lucid SCIM API index",
+   "quote": "Get the service provider configuration.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.lucid.co/reference/overview-scim"
+  },
+  {
+   "id": "c16",
+   "url": "https://lucid.readme.io/reference/lucid-scim-api/llms.txt",
+   "title": "Lucid SCIM API index",
+   "quote": "Gets all Lucid resource schemas.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.lucid.co/reference/overview-scim"
+  },
+  {
+   "id": "c17",
+   "url": "https://lucid.readme.io/reference/deleteuser.md",
+   "title": "Delete User",
+   "quote": "This is a hard delete. We recommend deactivating users instead of deleting them.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.lucid.co/reference/deleteuser"
+  },
+  {
+   "id": "c18",
+   "url": "https://lucid.readme.io/reference/deleteuser.md",
+   "title": "Delete User",
+   "quote": "Note that certain users cannot be deleted, such as account owners and default document owners.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.lucid.co/reference/deleteuser"
+  },
+  {
+   "id": "c19",
+   "url": "https://lucid.readme.io/reference/getallusers.md",
+   "title": "Get All Users",
+   "quote": "The only operator currently supported is eq",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.lucid.co/reference/getallusers"
+  },
+  {
+   "id": "c20",
+   "url": "https://lucid.readme.io/reference/getallusers.md",
+   "title": "Get All Users",
+   "quote": "Filtered requests will result in a maximum of 10,000 users",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.lucid.co/reference/getallusers"
+  },
+  {
+   "id": "c21",
+   "url": "https://lucid.readme.io/reference/getallusers.md",
+   "title": "Get All Users",
+   "quote": "email / emails.value / workemail",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.lucid.co/reference/getallusers"
+  },
+  {
+   "id": "c22",
+   "url": "https://lucid.readme.io/reference/createuser-1.md",
+   "title": "Create User (SCIM)",
+   "quote": "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.lucid.co/reference/createuser-1"
+  },
+  {
+   "id": "c23",
+   "url": "https://lucid.readme.io/reference/createuser-1.md",
+   "title": "Create User (SCIM)",
+   "quote": "A list of administrative roles assigned to the user. Assigning a role to a user allows that user to perform administrative actions associated with that role.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.lucid.co/reference/createuser-1"
+  },
+  {
+   "id": "c24",
+   "url": "https://lucid.readme.io/reference/createuser-1.md",
+   "title": "Create User (SCIM)",
+   "quote": "The cost center associated with the user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.lucid.co/reference/createuser-1"
+  },
+  {
+   "id": "c25",
+   "url": "https://lucid.readme.io/reference/createuser-1.md",
+   "title": "Create User (SCIM)",
+   "quote": "A list of phone numbers for the user. Currently only \\\"work\\\" type phone numbers are supported.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.lucid.co/reference/createuser-1"
+  },
+  {
+   "id": "c26",
+   "url": "https://lucid.readme.io/reference/getallusers.md",
+   "title": "Get All Users",
+   "quote": "urn:ietf:params:scim:schemas:extension:lucid:1.0:User.productLicenses.<name>",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.lucid.co/reference/getallusers"
+  },
+  {
+   "id": "c27",
+   "url": "https://help.lucid.co/api/v2/help_center/en-us/articles/360049430652.json",
+   "title": "Enable Okta SAML and SCIM in Lucid",
+   "quote": "Removing users from a licensing group will delicense them to free up licenses for others to use.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.lucid.co/hc/en-us/articles/360049430652-Enable-Okta-SAML-and-SCIM-in-Lucid"
+  },
+  {
+   "id": "c28",
+   "url": "https://help.lucid.co/api/v2/help_center/en-us/articles/360049832931.json",
+   "title": "Lucid admin panel: User management",
+   "quote": "If a user is inactive, they will not be able to login to their Lucid account.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.lucid.co/hc/en-us/articles/360049832931-Lucid-admin-panel-User-management"
+  },
+  {
+   "id": "c29",
+   "url": "https://help.lucid.co/api/v2/help_center/en-us/articles/360049430652.json",
+   "title": "Enable Okta SAML and SCIM in Lucid",
+   "quote": "Once you have configured SAML with Okta for your Lucid account, you can set up Just-In-Time (JIT) provisioning",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.lucid.co/hc/en-us/articles/360049430652-Enable-Okta-SAML-and-SCIM-in-Lucid"
+  },
+  {
+   "id": "c30",
+   "url": "https://help.lucid.co/api/v2/help_center/en-us/articles/360049432052.json",
+   "title": "Enable Microsoft Entra ID SAML and SCIM in Lucid",
+   "quote": "You will be unable to generate bearer tokens to configure SCIM if this setting is not enabled.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.lucid.co/hc/en-us/articles/360049432052-Enable-Microsoft-Entra-ID-SAML-and-SCIM-in-Lucid"
+  },
+  {
+   "id": "c31",
+   "url": "https://help.lucid.co/api/v2/help_center/en-us/articles/360056903132.json",
+   "title": "Lucid Plans",
+   "quote": "SCIM 2.0 is available, but not with preconfigured applications.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.lucid.co/hc/en-us/articles/360056903132-Lucid-Plans"
+  },
+  {
+   "id": "c32",
+   "url": "https://help.lucid.co/api/v2/help_center/en-us/articles/360049898731.json",
+   "title": "Integrate Lucid with Google Workspace",
+   "quote": "Google Workspace provisioning is only available to Enterprise accounts.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.lucid.co/hc/en-us/articles/360049898731-Integrate-Lucid-with-Google-Workspace"
+  },
+  {
+   "id": "c33",
+   "url": "https://help.lucid.co/api/v2/help_center/en-us/articles/360049898731.json",
+   "title": "Integrate Lucid with Google Workspace",
+   "quote": "Lucid can sync with your Google Workspace domain to automatically provision or delete users when you add or remove them from your Google Workspace administration portal.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.lucid.co/hc/en-us/articles/360049898731-Integrate-Lucid-with-Google-Workspace"
+  },
+  {
+   "id": "c34",
+   "url": "https://www.okta.com/integrations/lucid/",
+   "title": "Lucid | Okta",
+   "quote": "Okta integrates seamlessly with Lucid to offer enterprise-grade security and to simplify user management through features including SCIM provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c35",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/lucid-all-products-provisioning-tutorial",
+   "title": "Configure Lucid (All Products) for automatic user provisioning",
+   "quote": "Provision groups and group memberships in Lucid (All Products).",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c36",
+   "url": "https://lucid.readme.io/reference/listusers.md",
+   "title": "List Users",
+   "quote": "Retrieves information about all users on the authenticated account.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.lucid.co/reference/listusers"
+  },
+  {
+   "id": "c37",
+   "url": "https://lucid.readme.io/reference/listusers.md",
+   "title": "List Users",
+   "quote": "account.user:readonly",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.lucid.co/reference/listusers"
+  },
+  {
+   "id": "c38",
+   "url": "https://lucid.readme.io/reference/createuser.md",
+   "title": "Create User",
+   "quote": "Use of this endpoint can only be authorized by administrators on accounts with Enterprise licenses.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.lucid.co/reference/createuser"
+  },
+  {
+   "id": "c39",
+   "url": "https://lucid.readme.io/reference/getuser.md",
+   "title": "Get User",
+   "quote": "\"url\": \"https://api.lucid.co\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.lucid.co/reference/getuser"
+  },
+  {
+   "id": "c40",
+   "url": "https://lucid.readme.io/reference/useremailsearch.md",
+   "title": "Search Users By Email",
+   "quote": "\"/v1/users/searchByEmail\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.lucid.co/reference/useremailsearch"
+  },
+  {
+   "id": "c41",
+   "url": "https://lucid.readme.io/reference/listuserlicenses.md",
+   "title": "List User Licenses",
+   "quote": "\"/v1/users/{id}/licenses\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.lucid.co/reference/listuserlicenses"
+  },
+  {
+   "id": "c42",
+   "url": "https://lucid.readme.io/reference/grantuserlicense.md",
+   "title": "Grant User License",
+   "quote": "Grants a license to a user from a specified subscription.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.lucid.co/reference/grantuserlicense"
+  },
+  {
+   "id": "c43",
+   "url": "https://lucid.readme.io/reference/listsubscriptionlicenses.md",
+   "title": "List Licenses for Subscription",
+   "quote": "\"/v1/subscriptions/{id}/licenses\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.lucid.co/reference/listsubscriptionlicenses"
+  },
+  {
+   "id": "c44",
+   "url": "https://lucid.readme.io/reference/getauditlogs.md",
+   "title": "Get Audit Logs",
+   "quote": "This API is exclusive to Enterprise Shield accounts.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.lucid.co/reference/getauditlogs"
+  },
+  {
+   "id": "c45",
+   "url": "https://lucid.readme.io/reference/queryauditlogs.md",
+   "title": "Query Audit Logs",
+   "quote": "\"/v2/auditLogs/query\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.lucid.co/reference/queryauditlogs"
+  },
+  {
+   "id": "c46",
+   "url": "https://lucid.readme.io/reference/listteams.md",
+   "title": "List Teams",
+   "quote": "\"/v2/teams\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.lucid.co/reference/listteams"
+  },
+  {
+   "id": "c47",
+   "url": "https://lucid.readme.io/reference/adduserstoteam.md",
+   "title": "Add Users to Team",
+   "quote": "\"/v2/teams/{teamId}/users/add\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.lucid.co/reference/adduserstoteam"
+  },
+  {
+   "id": "c48",
+   "url": "https://lucid.readme.io/reference/removeusersfromteam.md",
+   "title": "Remove Users from Team",
+   "quote": "\"/v2/teams/{teamId}/users/remove\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.lucid.co/reference/removeusersfromteam"
+  },
+  {
+   "id": "c49",
+   "url": "https://lucid.readme.io/reference/lucid-rest-api/llms.txt",
+   "title": "Lucid REST API index",
+   "quote": "Creates a new user and adds them to the authenticated account. Licenses are automatically assigned to the new user based on the account's auto-licensing configuration.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.lucid.co/reference/overview"
+  },
+  {
+   "id": "c50",
+   "url": "https://lucid.readme.io/reference/getuser.md",
+   "title": "Get User",
+   "quote": "\"/v1/users/{id}\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.lucid.co/reference/getuser"
+  },
+  {
+   "id": "c51",
+   "url": "https://lucid.readme.io/reference/creategroup.md",
+   "title": "Create Group or Team",
+   "quote": "\"/Groups\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.lucid.co/reference/creategroup"
+  },
+  {
+   "id": "c52",
+   "url": "https://help.lucid.co/api/v2/help_center/en-us/articles/360049427352.json",
+   "title": "SCIM overview for Lucid",
+   "quote": "Lucid offers user provisioning and de-provisioning and group management via CRUD operations against the users and groups on an enterprise account via our SCIM REST API.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.lucid.co/hc/en-us/articles/360049427352-SCIM-overview-for-Lucid"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://lucid.app/pricing/lucidchart",
+  "help.lucid.co search API: scim",
+  "https://developer.lucid.co/llms.txt",
+  "https://lucid.readme.io/reference/lucid-scim-api/llms.txt",
+  "https://lucid.readme.io/reference/lucid-rest-api/llms.txt"
+ ],
+ "open_questions": [
+  "Whether SCIM deactivation (active:false) frees the paid license or only blocks login.",
+  "SCIM token expiry and rate limits are not documented.",
+  "Whether Team accounts can use the user/licence REST endpoints (AccountAdmin grant) or only Enterprise; pricing lists 'Developer platform' under Team.",
+  "Team plan seat minimum not shown on the pricing page."
+ ]
+}

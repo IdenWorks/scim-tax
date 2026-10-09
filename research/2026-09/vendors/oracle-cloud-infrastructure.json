@@ -1,0 +1,723 @@
+{
+ "slug": "oracle-cloud-infrastructure",
+ "vendor": "Oracle Cloud Infrastructure",
+ "vendor_url": "https://www.oracle.com/cloud/",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Oracle Cloud Infrastructure",
+  "slug": "oracle-cloud-infrastructure",
+  "category": "Cloud, Infrastructure & Observability",
+  "status": "free",
+  "scim_plan": "Free identity domain",
+  "scim_price_text": "$0 (included with every OCI tenancy)",
+  "scim_price_per_user_mo": 0,
+  "team_plan": "Free identity domain",
+  "team_price_text": "$0 identity domain; OCI services usage-billed",
+  "team_price_per_user_mo": 0,
+  "price_multiplier": null,
+  "sso_plan": "Free identity domain",
+  "sso_price_per_user_mo": 0,
+  "sso_required_for_scim": false,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.oracle.com/cloud/price-list/",
+  "docs_url": "https://docs.oracle.com/en/cloud/paas/iam-domains-rest-api/index.html",
+  "evidence": "Every OCI tenancy gets a Free identity domain, whose feature table includes user and group management, and the identity domains REST API 'supports SCIM 2.0 compliant endpoints with standard SCIM 2.0 core schemas'.",
+  "notes": "New row. OCI is usage-priced; identity is managed in OCI IAM identity domains. The Free identity domain (auto-provisioned with each tenancy, up to 2,000 users) already exposes the SCIM 2.0 identity domains API at /admin/v1 with OAuth2 client-credentials tokens (default 3600 s), and Entra and Okta both ship provisioning apps for it, so status is free. Paid Oracle Apps Premium ($0.25/user/mo) and Premium ($3.20/user/mo) identity domains raise limits and add features; they are not needed for SCIM. sso_required_for_scim false: SCIM uses its own OAuth client. price_multiplier null because team price is $0.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Free identity domain",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Free identity domain (included with every OCI tenancy)",
+   "price_text": "$0; OCI services billed by usage",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c3",
+    "c4",
+    "c5",
+    "c7",
+    "c18"
+   ],
+   "notes": "Feature table (c5) shows a checkmark for every domain type, Free included, on: User and group management, Generic SCIM app template, External IdPs and social login (Federation / Inbound SSO), Just in time provisioning, Schema extension, Auditing and reporting (read from the table's checkmark images). Free domain is capped at 2,000 users and lower API rate limits."
+  },
+  {
+   "name": "Oracle Apps Premium identity domain",
+   "price_text": "$0.25 user per month",
+   "price_per_user_mo": 0.25,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c2",
+    "c5",
+    "c7"
+   ]
+  },
+  {
+   "name": "Premium identity domain",
+   "price_text": "$3.20 user per month",
+   "price_per_user_mo": 3.2,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c1",
+    "c5",
+    "c7"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c3",
+   "c5",
+   "c7",
+   "c19",
+   "c22"
+  ],
+  "plan": "Free identity domain",
+  "addon_price_text": null,
+  "sso_required": false,
+  "version": "2.0",
+  "base_url": "https://{domain}.identity.oraclecloud.com/admin/v1",
+  "auth": {
+   "method": "oauth2",
+   "token_source": "Identity domain > Integrated applications > confidential application (client credentials) with an admin app role such as Identity Domain Administrator or User Administrator",
+   "token_expiry": "3600 seconds (access token default)",
+   "cite": [
+    "c8",
+    "c9",
+    "c16"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": true,
+   "Schemas": true,
+   "ResourceTypes": true,
+   "Bulk": true,
+   "Me": true,
+   "cite": [
+    "c7",
+    "c17",
+    "c27",
+    "c28",
+    "c29",
+    "c30",
+    "c31",
+    "c32"
+   ],
+   "notes": "Me is the self-service endpoint (Get User Info, Self Register, password flows)."
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c13",
+    "c12",
+    "c20",
+    "c21",
+    "c25",
+    "c27"
+   ]
+  },
+  "deprovision": {
+   "action": "delete",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c12",
+    "c20"
+   ],
+   "notes": "Entra's connector removes users; Okta's Oracle IAM connector deactivates. The API has DELETE /admin/v1/Users/{id} (optional forceDelete) and a UserStatusChanger to disable."
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [],
+   "cite": [
+    "c11"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": 1000,
+   "cite": [
+    "c10"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.familyName",
+    "name.givenName",
+    "name.middleName",
+    "name.formatted",
+    "name.honorificPrefix",
+    "name.honorificSuffix",
+    "displayName",
+    "nickName",
+    "emails",
+    "phoneNumbers",
+    "addresses",
+    "active",
+    "title",
+    "userType",
+    "preferredLanguage",
+    "locale",
+    "timezone",
+    "profileUrl",
+    "photos",
+    "ims",
+    "entitlements",
+    "roles",
+    "x509Certificates",
+    "externalId",
+    "groups (read-only)",
+    "password",
+    "description"
+   ],
+   "enterprise": [
+    "employeeNumber",
+    "costCenter",
+    "organization",
+    "division",
+    "department",
+    "manager"
+   ],
+   "custom": {
+    "supported": true,
+    "how": "urn:ietf:params:scim:schemas:idcs:extension:custom:User extension; schema extension is on every domain type"
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c14",
+    "c15",
+    "c5",
+    "c17"
+   ],
+   "notes": "Plus many Oracle extensions (urn:ietf:params:scim:schemas:oracle:idcs:extension:user, capabilities, mfa, posix, dbUser, OCITags, and others) listed on the Create a User page."
+  },
+  "roles": {
+   "supported": true,
+   "how": "Groups (used with OCI policies) and AppRoles/Grants endpoints; Okta's OCI IAM app also handles role assignments",
+   "cite": [
+    "c17",
+    "c23"
+   ]
+  },
+  "rate_limits": {
+   "text": "Per identity-domain-type limits; Free: 10/s and 150/min for AuthN, 20/s and 150/min for other APIs, Bulk 5/s and 200/min; exceeding returns HTTP 429.",
+   "cite": [
+    "c6"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Free identity domain is limited to 2,000 users and 250 groups.",
+    "cite": [
+     "c5"
+    ]
+   },
+   {
+    "text": "Entra: custom/BYOA SCIM apps against OCI are not supported; use the gallery app.",
+    "cite": [
+     "c19"
+    ]
+   }
+  ],
+  "notes": "Identity domains (OCI IAM) are the SCIM service provider; Entra's gallery app notes custom/BYOA SCIM apps are not supported against it. Feature table (c5) shows a checkmark for every domain type, Free included, on: User and group management, Generic SCIM app template, External IdPs and social login (Federation / Inbound SSO), Just in time provisioning, Schema extension, Auditing and reporting (read from the table's checkmark images)."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c7",
+   "c8",
+   "c16"
+  ],
+  "plan": "Free identity domain",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://{domain}.identity.oraclecloud.com/admin/v1",
+  "docs_url": "https://docs.oracle.com/en/cloud/paas/iam-domains-rest-api/index.html",
+  "auth": {
+   "methods": [
+    "oauth2"
+   ],
+   "scopes": [
+    "urn:opc:idm:__myscopes__"
+   ],
+   "cite": [
+    "c8"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": true,
+   "reactivate_user": true,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c27",
+    "c13",
+    "c17"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/admin/v1/Users",
+    "purpose": "Create a User",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/admin/v1/Users",
+    "purpose": "Search Users",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/admin/v1/Users/.search",
+    "purpose": "Search Users Using POST",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/admin/v1/Users/{id}",
+    "purpose": "Get a User",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/admin/v1/Users/{id}",
+    "purpose": "Replace a User",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/admin/v1/Users/{id}",
+    "purpose": "Update a User",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/admin/v1/Users/{id}",
+    "purpose": "Delete a User",
+    "cite": [
+     "c27",
+     "c12"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/admin/v1/UserStatusChanger/{id}",
+    "purpose": "Change User Status (activate/deactivate)",
+    "cite": [
+     "c13"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/admin/v1/AuditEvents",
+    "purpose": "Search Audit Events",
+    "cite": [
+     "c18"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Free identity domain",
+   "cite": [
+    "c18",
+    "c5"
+   ]
+  },
+  "rate_limits": {
+   "text": "Same identity-domain-type rate limits as SCIM (HTTP 429 when exceeded).",
+   "cite": [
+    "c6"
+   ]
+  },
+  "limitations": [],
+  "notes": "The identity domains REST API is itself the SCIM 2.0 API; the separate OCI IAM control-plane API is not researched here."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/oracle-cloud-infrastructure-iam/",
+   "cite": [
+    "c23"
+   ],
+   "notes": "Okta lists 'Oracle Cloud Infrastructure IAM' (ticks SAML, SCIM, Create, Update, Deactivate, Group Push), 'Oracle Cloud Infrastructure' (ticks SAML, SWA, SCIM, Create, Deactivate, Group Push) and 'Oracle IAM' (SCIM, entitlements; c25), read from page markup. Builder not stated."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/oracle-cloud-infrastructure-console-provisioning-tutorial",
+   "cite": [
+    "c19",
+    "c20",
+    "c21",
+    "c22"
+   ],
+   "notes": "Gallery app 'Oracle Cloud Infrastructure Console' provisions users and groups to the identity domain /admin/v1 SCIM endpoint with an OAuth client id/secret."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": "Uni-directional Active Directory sync into the identity domain (AD bridge) on Free, Oracle Apps and Premium types; outbound provisioning to third-party apps via App Catalog",
+  "docs_public": true,
+  "cite": [
+   "c26",
+   "c5"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.oracle.com/cloud/price-list/",
+   "title": "Cloud Price List | Oracle",
+   "quote": "Oracle Cloud Infrastructure Identity and Access Management - Premium $3.20 User per month",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.oracle.com/cloud/price-list/",
+   "title": "Cloud Price List | Oracle",
+   "quote": "Oracle Cloud Infrastructure Identity and Access Management - Oracle Apps Premium $0.25 User per month",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://docs.oracle.com/en-us/iaas/Content/Identity/sku/overview.htm",
+   "title": "IAM Identity Domain Types",
+   "quote": "When you create an OCI tenancy, you're automatically provisioned with a Free identity domain.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://docs.oracle.com/en-us/iaas/Content/Identity/sku/overview.htm",
+   "title": "IAM Identity Domain Types",
+   "quote": "This domain type should include everything you need to manage OCI.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://docs.oracle.com/en-us/iaas/Content/Identity/sku/overview.htm",
+   "title": "IAM Identity Domain Types",
+   "quote": "This table shows the features available to each domain type.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://docs.oracle.com/en-us/iaas/Content/Identity/sku/overview.htm",
+   "title": "IAM Identity Domain Types",
+   "quote": "If you reach the API limit for the identity domain type, then IAM returns a 429 error code.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://docs.oracle.com/en/cloud/paas/iam-domains-rest-api/index.html",
+   "title": "IAM Identity Domains API - About the REST APIs",
+   "quote": "The REST API supports SCIM 2.0 compliant endpoints with standard SCIM 2.0 core schemas and Oracle schema extensions to:",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.oracle.com/en-us/iaas/Content/Identity/api-getstarted/OATOAuthClientWebApp.htm",
+   "title": "Using OAuth 2 to Access the REST API",
+   "quote": "To make REST API calls to your identity domain, you need an OAuth2 access token to use for authorization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.oracle.com/en-us/iaas/Content/Identity/api-getstarted/OATOAuthClientWebApp.htm",
+   "title": "Using OAuth 2 to Access the REST API",
+   "quote": "Just remember that the default expiration of the token is 3600 seconds from the time of the request.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.oracle.com/en/cloud/paas/iam-domains-rest-api/op-admin-v1-users-get.html",
+   "title": "Search Users - IAM Identity Domains API",
+   "quote": "1000 is the largest value that you can use.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.oracle.com/en/cloud/paas/iam-domains-rest-api/op-admin-v1-users-get.html",
+   "title": "Search Users - IAM Identity Domains API",
+   "quote": "The filter string that is used to request a subset of resources.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.oracle.com/en/cloud/paas/iam-domains-rest-api/op-admin-v1-users-id-delete.html",
+   "title": "Delete a User - IAM Identity Domains API",
+   "quote": "To force delete the resource and all its references (if any).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.oracle.com/en/cloud/paas/iam-domains-rest-api/op-admin-v1-userstatuschanger-id-put.html",
+   "title": "Change User Status - IAM Identity Domains API",
+   "quote": "put /admin/v1/UserStatusChanger/{id}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.oracle.com/en/cloud/paas/iam-domains-rest-api/op-admin-v1-users-post.html",
+   "title": "Create a User - IAM Identity Domains API",
+   "quote": "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.oracle.com/en/cloud/paas/iam-domains-rest-api/op-admin-v1-users-post.html",
+   "title": "Create a User - IAM Identity Domains API",
+   "quote": "urn:ietf:params:scim:schemas:idcs:extension:custom:User",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.oracle.com/en/cloud/paas/iam-domains-rest-api/api-identity-users.html",
+   "title": "Users REST Endpoints - IAM Identity Domains API",
+   "quote": "You can create user accounts only if you are granted access to the Identity Domain Administrator or User Administrator role.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.oracle.com/en/cloud/paas/iam-domains-rest-api/api-identity-groups.html",
+   "title": "Groups REST Endpoints - IAM Identity Domains API",
+   "quote": "A group contains one or more users and works as a role for the enterprise to apply security features. This REST API is SCIM compliant.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.oracle.com/en/cloud/paas/iam-domains-rest-api/op-admin-v1-auditevents-get.html",
+   "title": "Search Audit Events - IAM Identity Domains API",
+   "quote": "get /admin/v1/AuditEvents",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/oracle-cloud-infrastructure-console-provisioning-tutorial",
+   "title": "Configure Oracle Cloud Infrastructure Console for automatic user provisioning with Microsoft Entra ID",
+   "quote": "The gallery application has been customized to work with the Oracle SCIM server.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/oracle-cloud-infrastructure-console-provisioning-tutorial",
+   "title": "Configure Oracle Cloud Infrastructure Console for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Remove users in Oracle Cloud Infrastructure Console when they don't require access anymore",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/oracle-cloud-infrastructure-console-provisioning-tutorial",
+   "title": "Configure Oracle Cloud Infrastructure Console for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Provision groups and group memberships in Oracle Cloud Infrastructure Console",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/oracle-cloud-infrastructure-console-provisioning-tutorial",
+   "title": "Configure Oracle Cloud Infrastructure Console for automatic user provisioning with Microsoft Entra ID",
+   "quote": "https://<IdP ID>.identity.oraclecloud.com/admin/v1",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://www.okta.com/integrations/oracle-cloud-infrastructure-iam/",
+   "title": "Integrate Oracle Cloud Infrastructure IAM with Okta",
+   "quote": "The integration also supports on-boarding, and off-boarding Oracle Cloud uses from within Okta, including role assignments.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://www.okta.com/integrations/oracle-cloud-infrastructure/",
+   "title": "Integrate Oracle Cloud Infrastructure with Okta",
+   "quote": "Oracle Cloud Infrastructure combines the elasticity and utility of public cloud with the granular control, security, and predictability of on-premises infrastructure",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://www.okta.com/integrations/oracle-iam/",
+   "title": "Integrate Oracle IAM with Okta",
+   "quote": "This allows you to provision and manage users and groups directly from Okta into Oracle IAM automatically creating, updating, and deactivating accounts as needed.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://docs.oracle.com/en-us/iaas/Content/Identity/sku/overview.htm",
+   "title": "IAM Identity Domain Types",
+   "quote": "Just in time provisioning",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://docs.oracle.com/en/cloud/paas/iam-domains-rest-api/api-identity-users.html",
+   "title": "Users REST Endpoints - IAM Identity Domains API",
+   "quote": "Search Users Using POST",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://docs.oracle.com/en/cloud/paas/iam-domains-rest-api/toc.htm",
+   "title": "IAM Identity Domains API - Table of Contents",
+   "quote": "Create a Bulk Request",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://docs.oracle.com/en/cloud/paas/iam-domains-rest-api/toc.htm",
+   "title": "IAM Identity Domains API - Table of Contents",
+   "quote": "Search Service Provider Configs",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://docs.oracle.com/en/cloud/paas/iam-domains-rest-api/toc.htm",
+   "title": "IAM Identity Domains API - Table of Contents",
+   "quote": "Search Resource Types",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://docs.oracle.com/en/cloud/paas/iam-domains-rest-api/toc.htm",
+   "title": "IAM Identity Domains API - Table of Contents",
+   "quote": "Get User Info",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://docs.oracle.com/en/cloud/paas/iam-domains-rest-api/toc.htm",
+   "title": "IAM Identity Domains API - Table of Contents",
+   "quote": "Search Schemas",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.oracle.com/cloud/price-list/",
+  "https://docs.oracle.com/en-us/iaas/Content/Identity/sku/overview.htm",
+  "https://docs.oracle.com/en/cloud/paas/iam-domains-rest-api/index.html",
+  "https://docs.oracle.com/en/cloud/paas/iam-domains-rest-api/toc.htm",
+  "https://docs.oracle.com/en-us/iaas/Content/Identity/api-getstarted/OATOAuthClientWebApp.htm",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/oracle-cloud-infrastructure-console-provisioning-tutorial",
+  "https://www.okta.com/integrations/oracle-cloud-infrastructure/",
+  "https://www.okta.com/integrations/oracle-cloud-infrastructure-iam/",
+  "https://www.okta.com/integrations/oracle-iam/",
+  "https://www.okta.com/integrations/?search=oracle"
+ ],
+ "open_questions": [
+  "Docs do not say whether deleting or deactivating a user via SCIM ends active sessions.",
+  "Google Workspace, OneLogin and JumpCloud catalogue apps for OCI provisioning were not checked.",
+  "Prices on the price list are not labelled monthly vs annual commitment; billing left unknown."
+ ]
+}

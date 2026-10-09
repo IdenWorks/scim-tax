@@ -1,0 +1,828 @@
+{
+ "slug": "document360",
+ "vendor": "Document360",
+ "vendor_url": "https://document360.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Document360",
+  "slug": "document360",
+  "category": "Productivity & Docs",
+  "status": "gated",
+  "scim_plan": "Contact Sales",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": false,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": "via_generic",
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://document360.com/pricing/",
+  "docs_url": "https://docs.document360.com/docs/scim-provisioning",
+  "evidence": "Document360's pricing page shows no plans (\"We quote what fits\") and lists SSO and SCIM as security features; its docs say SCIM lets your Identity Provider automatically sync users, readers, and groups.",
+  "notes": "Quote-only: the pricing page publishes no tiers or prices, and SSO and security needs are named as one of the six price drivers, so the SCIM plan is not public. SCIM is set up inside an SAML/OIDC SSO configuration (SSO required). Okta and Entra (non-gallery custom app; the Entra gallery app is SSO only) provision users, readers and groups; OneLogin provisions readers only. SCIM deactivate and delete both leave the profile Inactive in Document360. API docs say API access is on Business, Enterprise and Trial plans, and user create/delete/role/group write endpoints are a premium API add-on.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Business",
+  "api_tax": true,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Custom quote",
+   "price_text": "Customized pricing built around your needs (no public tiers)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c3"
+   ],
+   "notes": "No tier table is published. API docs name Business, Enterprise and Trial plans (API access on those), but their prices and feature split are not public."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c5",
+   "c4",
+   "c6",
+   "c30",
+   "c3"
+  ],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": null,
+  "auth": {
+   "method": "bearer",
+   "token_source": "Settings > Users & permissions > SSO Configuration > (SSO setup) > SCIM provisioning: Enable SCIM Provisioning shows SCIM Base URL plus primary and secondary secret tokens",
+   "token_expiry": null,
+   "cite": [
+    "c19",
+    "c20",
+    "c21",
+    "c10"
+   ],
+   "notes": "Okta enters the token in 'HTTP Header Authorization'; two tokens allow rotation; tokens shown once."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c4"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": false,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c11",
+    "c12",
+    "c13",
+    "c16",
+    "c17",
+    "c24"
+   ],
+   "notes": "Okta guide enables Create Users, Update User Attributes and Deactivate Users; whether updates arrive as PUT or PATCH is not documented. An IdP delete only sets the profile Inactive."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": true,
+   "revokes_sessions": null,
+   "data_retained": "Profile is kept with Inactive status (also after an IdP delete); per the deactivation article, content, analytics and audit data are retained and the account can be reactivated.",
+   "cite": [
+    "c11",
+    "c12",
+    "c24",
+    "c26"
+   ],
+   "notes": "frees_seat comes from the general 'Deactivate or delete user' article, which applies to inactive users; SCIM pages do not restate it."
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": true,
+    "how": "Extension urn:ietf:params:scim:schemas:extension:document360:2.0:User with userType (string: user, reviewer, reader) and legacy isTeamAccount (boolean)"
+   },
+   "group": [],
+   "cite": [
+    "c8",
+    "c9"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "userType attribute (user / reviewer / reader) or legacy isTeamAccount boolean, often set via IdP expressions; portal role for Users comes from the 'Default role' set on the SCIM provisioning page.",
+   "cite": [
+    "c9",
+    "c17"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "OneLogin SCIM provisions readers only; users and groups are not supported.",
+    "cite": [
+     "c7",
+     "c25"
+    ]
+   },
+   {
+    "text": "Entra SCIM requires a non-gallery (custom) enterprise app and SAML; OIDC with Entra does not support SCIM.",
+    "cite": [
+     "c22",
+     "c23"
+    ]
+   },
+   {
+    "text": "SCIM-pushed groups always create a new Document360 group rather than linking an existing one.",
+    "cite": [
+     "c18"
+    ]
+   },
+   {
+    "text": "Once SCIM is enabled, user names cannot be edited and users cannot be deleted inside Document360.",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "text": "SCIM fails to provision once the plan's User limit is reached.",
+    "cite": [
+     "c15"
+    ]
+   },
+   {
+    "text": "Auto assign reader group (JIT for SSO readers) and SCIM cannot both be active on one SSO configuration.",
+    "cite": [
+     "c29"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c32",
+   "c34",
+   "c35",
+   "c37"
+  ],
+  "plan": "Business",
+  "api_tax": true,
+  "style": "REST",
+  "base_url": "https://apihub.document360.io/v3/projects/{project_id} (US: apihub.us.document360.io, Canada: apihub.ca.document360.io)",
+  "docs_url": "https://apidocs.document360.com/apidocs/introduction",
+  "auth": {
+   "methods": [
+    "api_key"
+   ],
+   "scopes": [],
+   "cite": [
+    "c32",
+    "c33"
+   ],
+   "notes": "API keys carry a portal role, content role and content-access scope rather than OAuth scopes."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": true,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c39",
+    "c40",
+    "c42",
+    "c43",
+    "c46",
+    "c38"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/v3/projects/{project_id}/users",
+    "purpose": "List users (team accounts)",
+    "cite": [
+     "c39"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v3/projects/{project_id}/users",
+    "purpose": "Create (invite) a user [premium]",
+    "cite": [
+     "c40"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v3/projects/{project_id}/users/{user_id}",
+    "purpose": "Get a user",
+    "cite": [
+     "c41"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v3/projects/{project_id}/users/{user_id}",
+    "purpose": "Delete a user [premium]",
+    "cite": [
+     "c42"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/v3/projects/{project_id}/users/{user_id}/portal-role",
+    "purpose": "Update a user's portal role [premium]",
+    "cite": [
+     "c43"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/v3/projects/{project_id}/users/{user_id}/groups",
+    "purpose": "Update a user's groups [premium]",
+    "cite": [
+     "c44"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v3/projects/{project_id}/users/groups",
+    "purpose": "List user groups",
+    "cite": [
+     "c45"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v3/projects/{project_id}/users/groups",
+    "purpose": "Create a user group [premium]",
+    "cite": [
+     "c46"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v3/projects/{project_id}/roles",
+    "purpose": "List roles",
+    "cite": [
+     "c47"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "Per API key per project: Business 120 read / 60 write requests per minute; Enterprise and Trial 200 / 100.",
+   "cite": [
+    "c35",
+    "c36"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "User create/delete, role and group write endpoints are premium API endpoints, a paid add-on enabled via the Customer Success Manager.",
+    "cite": [
+     "c37",
+     "c38"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c10",
+    "c19"
+   ],
+   "notes": "Document360's Okta guide uses an Okta app with SCIM Provisioning enabled in App Settings; okta.com/integrations/document360/ returned 404, so no OIN listing was confirmed."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/document360-tutorial",
+   "cite": [
+    "c31",
+    "c22"
+   ],
+   "notes": "Gallery app is SSO only; SCIM works only with a non-gallery custom app."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c25",
+    "c7"
+   ],
+   "notes": "Uses OneLogin's generic 'SCIM Provisioner with SAML' app; readers only."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "both",
+  "csv_import": true,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c28",
+   "c27"
+  ],
+  "notes": "JIT applies to readers (Auto assign reader group, enabled by support) not to team accounts."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://document360.com/pricing/",
+   "title": "Document360 Pricing",
+   "quote": "Document360 prices around your specific configuration. The number of workspaces, languages, team accounts, and AI usage all affect the right plan for you. A flat tier would either overcharge small teams or undercharge enterprises. We quote what fits.",
+   "accessed": "2026-10-05",
+   "interaction": "expand the FAQ 'Why don't you show flat pricing?'"
+  },
+  {
+   "id": "c2",
+   "url": "https://document360.com/pricing/",
+   "title": "Document360 Pricing",
+   "quote": "Team accounts (editors and reviewers), workspaces, languages, SSO and security needs, knowledge base privacy model (public, private, or mixed), and AI Premium Suite usage.",
+   "accessed": "2026-10-05",
+   "interaction": "expand the FAQ 'What changes the price?'"
+  },
+  {
+   "id": "c3",
+   "url": "https://document360.com/pricing/",
+   "title": "Document360 Pricing",
+   "quote": "Roles and Permissions IP restriction SSO SCIM User Management JWT",
+   "accessed": "2026-10-05",
+   "interaction": "click the Security tab in the feature list"
+  },
+  {
+   "id": "c4",
+   "url": "https://docs.document360.com/docs/scim-provisioning.md",
+   "title": "SCIM provisioning",
+   "quote": "When integrated with Document360, SCIM allows your Identity Provider to automatically sync users, readers, and groups — eliminating the need for manual account management.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.document360.com/docs/scim-provisioning"
+  },
+  {
+   "id": "c5",
+   "url": "https://docs.document360.com/docs/scim-provisioning",
+   "title": "SCIM provisioning",
+   "quote": "Depending on your IdP, SCIM provisioning in Document360 lets you manage the following directly from your IdP:",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://docs.document360.com/docs/scim-provisioning.md",
+   "title": "SCIM provisioning",
+   "quote": "SCIM provisioning in Document360 is set up as part of your SSO configuration. The capabilities available depend on your Identity Provider.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.document360.com/docs/scim-provisioning"
+  },
+  {
+   "id": "c7",
+   "url": "https://docs.document360.com/docs/scim-provisioning.md",
+   "title": "SCIM provisioning",
+   "quote": "OneLogin | SAML | No | Yes | No",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.document360.com/docs/scim-provisioning"
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.document360.com/docs/scim-provisioning.md",
+   "title": "SCIM provisioning",
+   "quote": "Both attributes are defined in the same extension namespace: `urn:ietf:params:scim:schemas:extension:document360:2.0:User`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.document360.com/docs/scim-provisioning"
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.document360.com/docs/scim-provisioning.md",
+   "title": "SCIM provisioning",
+   "quote": "SCIM uses the `userType` attribute to determine the role assigned to a person when they are provisioned in Document360: **User**, **Reviewer**, or **Reader**.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.document360.com/docs/scim-provisioning"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.document360.com/docs/scim-with-okta.md",
+   "title": "Managing Users and Readers with SCIM in Okta",
+   "quote": "SSO must be fully configured and working between Okta and Document360. Set up SSO first using one of the guides below.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.document360.com/docs/scim-with-okta"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.document360.com/docs/scim-with-okta.md",
+   "title": "Managing Users and Readers with SCIM in Okta",
+   "quote": "Deactivating a user in Okta does not remove their profile from Document360. The user will be marked as inactive and will lose the ability to sign in to Okta and access their applications.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.document360.com/docs/scim-with-okta"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.document360.com/docs/scim-with-okta.md",
+   "title": "Managing Users and Readers with SCIM in Okta",
+   "quote": "Deleting a profile in Okta does not remove it from Document360. The profile will remain with an **Inactive** status.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.document360.com/docs/scim-with-okta"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.document360.com/docs/scim-with-okta.md",
+   "title": "Managing Users and Readers with SCIM in Okta",
+   "quote": "Unlike users, groups are not automatically synced to Document360 and must be pushed manually.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.document360.com/docs/scim-with-okta"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.document360.com/docs/scim-with-okta.md",
+   "title": "Managing Users and Readers with SCIM in Okta",
+   "quote": "When SCIM is enabled, editing a user's name or deleting a user directly in Document360 is disabled.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.document360.com/docs/scim-with-okta"
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.document360.com/docs/scim-with-okta.md",
+   "title": "Managing Users and Readers with SCIM in Okta",
+   "quote": "If the User limit is reached, SCIM cannot provision additional users. Convert users to Reviewers in Document360 where needed to free up User slots.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.document360.com/docs/scim-with-okta"
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.document360.com/docs/scim-with-okta.md",
+   "title": "Managing Users and Readers with SCIM in Okta",
+   "quote": "To link user creation, changes, and deactivation in Okta with Document360:",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.document360.com/docs/scim-with-okta"
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.document360.com/docs/scim-with-okta.md",
+   "title": "Managing Users and Readers with SCIM in Okta",
+   "quote": "Once provisioned, users are automatically added to the respective User groups or Reader groups in Document360.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.document360.com/docs/scim-with-okta"
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.document360.com/docs/scim-with-okta.md",
+   "title": "Managing Users and Readers with SCIM in Okta",
+   "quote": "When Okta pushes a group through SCIM, Document360 always creates a new group instead of linking it to an existing group.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.document360.com/docs/scim-with-okta"
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.document360.com/docs/saml-sso-with-okta.md",
+   "title": "SAML SSO with Okta",
+   "quote": "Enter the **SCIM Base URL** from Document360 into Okta's **SCIM connector base URL** field using the mapping below.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.document360.com/docs/saml-sso-with-okta"
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.document360.com/docs/saml-sso-with-okta.md",
+   "title": "SAML SSO with Okta",
+   "quote": "Paste the primary secret token into the **HTTP Header Authorization** field.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.document360.com/docs/saml-sso-with-okta"
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.document360.com/docs/saml-sso-with-okta.md",
+   "title": "SAML SSO with Okta",
+   "quote": "The primary and secondary tokens are generated once and displayed only at the time of creation.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.document360.com/docs/saml-sso-with-okta"
+  },
+  {
+   "id": "c22",
+   "url": "https://docs.document360.com/docs/scim-with-entra.md",
+   "title": "Managing Users and Readers with SCIM in Entra",
+   "quote": "If you use a Gallery app, SCIM provisioning will not be available.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.document360.com/docs/scim-with-entra"
+  },
+  {
+   "id": "c23",
+   "url": "https://docs.document360.com/docs/scim-with-entra.md",
+   "title": "Managing Users and Readers with SCIM in Entra",
+   "quote": "SCIM provisioning with Microsoft Entra is only supported through SAML. OpenID Connect with Entra does not support SCIM provisioning in Document360.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.document360.com/docs/scim-with-entra"
+  },
+  {
+   "id": "c24",
+   "url": "https://docs.document360.com/docs/scim-with-entra.md",
+   "title": "Managing Users and Readers with SCIM in Entra",
+   "quote": "Deleting a user in Entra does not remove the user profile from Document360. Instead, the status of the user will change from **Active** to **Inactive**.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.document360.com/docs/scim-with-entra"
+  },
+  {
+   "id": "c25",
+   "url": "https://docs.document360.com/docs/saml-sso-with-onelogin.md",
+   "title": "OneLogin with SAML SSO",
+   "quote": "Manage only readers through OneLogin SCIM.** User attributes and group mapping are not supported.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.document360.com/docs/saml-sso-with-onelogin"
+  },
+  {
+   "id": "c26",
+   "url": "https://docs.document360.com/docs/deactivate-delete-user.md",
+   "title": "Deactivate or delete user",
+   "quote": "A deactivated user no longer counts against your plan's active user limit, freeing up a seat that can be used to add a new user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.document360.com/docs/deactivate-delete-user"
+  },
+  {
+   "id": "c27",
+   "url": "https://docs.document360.com/docs/import-users.md",
+   "title": "Import users",
+   "quote": "Users are added by uploading a CSV file containing their email addresses and names, with roles and access assigned before the import is confirmed.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.document360.com/docs/import-users"
+  },
+  {
+   "id": "c28",
+   "url": "https://docs.document360.com/docs/auto-assign-reader-group.md",
+   "title": "Managing SSO readers and reader groups",
+   "quote": "automatically grants knowledge base access to readers who sign in through an Identity Provider (IdP), without requiring you to invite them manually.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.document360.com/docs/auto-assign-reader-group"
+  },
+  {
+   "id": "c29",
+   "url": "https://docs.document360.com/docs/auto-assign-reader-group.md",
+   "title": "Managing SSO readers and reader groups",
+   "quote": "Auto assign reader group and SCIM provisioning cannot both be active on the same SSO configuration.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.document360.com/docs/auto-assign-reader-group"
+  },
+  {
+   "id": "c30",
+   "url": "https://docs.document360.com/docs/single-sign-on-sso.md",
+   "title": "Single Sign-On (SSO)",
+   "quote": "SCIM must be configured after your SSO setup is complete. It is available for SAML and OpenID Connect configurations with supported providers.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.document360.com/docs/single-sign-on-sso"
+  },
+  {
+   "id": "c31",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/document360-tutorial",
+   "title": "Configure Document360 for Single sign-on with Microsoft Entra ID",
+   "quote": "Document360 supports Service Provider (SP) and Identity Provider (IdP) initiated SSO.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://apidocs.document360.com/apidocs/introduction.md",
+   "title": "Introduction (Document360 API)",
+   "quote": "The v3 Customer API is a project-scoped REST API. Every request is made against a specific project and is authenticated with an API key.",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.document360.com/apidocs/introduction"
+  },
+  {
+   "id": "c33",
+   "url": "https://apidocs.document360.com/apidocs/introduction.md",
+   "title": "Introduction (Document360 API)",
+   "quote": "Send your API key in the `X-API-Key` header:",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.document360.com/apidocs/introduction"
+  },
+  {
+   "id": "c34",
+   "url": "https://apidocs.document360.com/apidocs/introduction.md",
+   "title": "Introduction (Document360 API)",
+   "quote": "Europe (default) | `https://apihub.document360.io`",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.document360.com/apidocs/introduction"
+  },
+  {
+   "id": "c35",
+   "url": "https://apidocs.document360.com/apidocs/understanding-rate-limiting.md",
+   "title": "Understanding rate limiting",
+   "quote": "API access is available on the Business, Enterprise, and Trial plans.",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.document360.com/apidocs/understanding-rate-limiting"
+  },
+  {
+   "id": "c36",
+   "url": "https://apidocs.document360.com/apidocs/understanding-rate-limiting.md",
+   "title": "Understanding rate limiting",
+   "quote": "Business | 120 | 60",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.document360.com/apidocs/understanding-rate-limiting"
+  },
+  {
+   "id": "c37",
+   "url": "https://apidocs.document360.com/apidocs/premium-api-endpoints.md",
+   "title": "Premium API endpoints",
+   "quote": "Premium API endpoints are advanced API endpoints available on top of your existing plan. Any endpoint not listed on this page is included in API v3 by default, at no additional cost.",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.document360.com/apidocs/premium-api-endpoints"
+  },
+  {
+   "id": "c38",
+   "url": "https://apidocs.document360.com/apidocs/premium-api-endpoints.md",
+   "title": "Premium API endpoints",
+   "quote": "This category covers content access and eligibility, roles, users and user groups, and readers and reader groups.",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.document360.com/apidocs/premium-api-endpoints"
+  },
+  {
+   "id": "c39",
+   "url": "https://apidocs.document360.com/apidocs/list-users.md",
+   "title": "Document360 API reference: List users (team accounts)",
+   "quote": "GET /v3/projects/{project_id}/users",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.document360.com/apidocs/list-users"
+  },
+  {
+   "id": "c40",
+   "url": "https://apidocs.document360.com/apidocs/create-a-user.md",
+   "title": "Document360 API reference: Create (invite) a user",
+   "quote": "POST /v3/projects/{project_id}/users",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.document360.com/apidocs/create-a-user"
+  },
+  {
+   "id": "c41",
+   "url": "https://apidocs.document360.com/apidocs/get-a-user.md",
+   "title": "Document360 API reference: Get a user",
+   "quote": "GET /v3/projects/{project_id}/users/{user_id}",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.document360.com/apidocs/get-a-user"
+  },
+  {
+   "id": "c42",
+   "url": "https://apidocs.document360.com/apidocs/delete-a-user-1.md",
+   "title": "Document360 API reference: Delete a user",
+   "quote": "DELETE /v3/projects/{project_id}/users/{user_id}",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.document360.com/apidocs/delete-a-user-1"
+  },
+  {
+   "id": "c43",
+   "url": "https://apidocs.document360.com/apidocs/update-a-user-s-portal-role.md",
+   "title": "Document360 API reference: Update a user's portal role",
+   "quote": "PUT /v3/projects/{project_id}/users/{user_id}/portal-role",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.document360.com/apidocs/update-a-user-s-portal-role"
+  },
+  {
+   "id": "c44",
+   "url": "https://apidocs.document360.com/apidocs/update-a-user-s-groups.md",
+   "title": "Document360 API reference: Update a user's groups",
+   "quote": "PUT /v3/projects/{project_id}/users/{user_id}/groups",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.document360.com/apidocs/update-a-user-s-groups"
+  },
+  {
+   "id": "c45",
+   "url": "https://apidocs.document360.com/apidocs/list-user-groups.md",
+   "title": "Document360 API reference: List user groups",
+   "quote": "GET /v3/projects/{project_id}/users/groups",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.document360.com/apidocs/list-user-groups"
+  },
+  {
+   "id": "c46",
+   "url": "https://apidocs.document360.com/apidocs/create-a-user-group.md",
+   "title": "Document360 API reference: Create a user group",
+   "quote": "POST /v3/projects/{project_id}/users/groups",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.document360.com/apidocs/create-a-user-group"
+  },
+  {
+   "id": "c47",
+   "url": "https://apidocs.document360.com/apidocs/list-roles.md",
+   "title": "Document360 API reference: List roles",
+   "quote": "GET /v3/projects/{project_id}/roles",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.document360.com/apidocs/list-roles"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://document360.com/pricing/",
+  "https://docs.document360.com/llms.txt",
+  "https://apidocs.document360.com/llms.txt",
+  "https://www.okta.com/integrations/document360/ (404)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/document360-tutorial",
+  "https://jumpcloud.com/support/integrate-with-document360 (403)"
+ ],
+ "open_questions": [
+  "Which plan includes SSO and SCIM is not public (quote-only pricing).",
+  "SCIM base URL pattern is shown only in the product, not in docs.",
+  "Token expiry is not documented.",
+  "Supported SCIM core attributes, filtering, pagination and discovery endpoints are not documented.",
+  "Whether updates use PUT or PATCH is not documented.",
+  "Whether SCIM deactivation ends active sessions is not documented.",
+  "No audit-log API or user-event webhooks were found.",
+  "Google Workspace and JumpCloud catalogue apps not confirmed; jumpcloud.com returned 403."
+ ]
+}

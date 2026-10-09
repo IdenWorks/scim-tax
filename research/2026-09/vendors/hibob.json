@@ -1,0 +1,583 @@
+{
+ "slug": "hibob",
+ "vendor": "HiBob",
+ "vendor_url": "https://www.hibob.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "HiBob",
+  "slug": "hibob",
+  "category": "HR, Payroll & Recruiting",
+  "status": "unknown",
+  "scim_plan": "—",
+  "scim_price_text": "—",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Core",
+  "team_price_text": "Core: Contact Sales (per-employee quote)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": null,
+  "idp": {
+   "okta": "native",
+   "entra": null,
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": "sso_only",
+   "generic": null
+  },
+  "pricing_page_url": "https://www.hibob.com/pricing-plans/",
+  "docs_url": null,
+  "evidence": "HiBob's pricing page says pricing 'is customized based on your company’s size, needs, and the modules you choose', and no public HiBob page documents an inbound SCIM endpoint; only Okta's catalogue shows a 'bob' app tagged SCIM with Create and Update.",
+  "notes": "Status changed from June 'free' to 'unknown'. June's 'native SCIM 2.0 on all plans, SSO required first' has no public first-party source: help.hibob.com (where HiBob's setup guides live) returns 403/401 to anonymous visitors, the public developer docs (apidocs.hibob.com, llms.txt indexes and sitemap) contain no SCIM resources, and the pricing page names no plans or SCIM. HiBob is an HR source of truth: its JumpCloud integration is an outbound sync configured in Bob that creates and deprovisions users in JumpCloud, and Aquera's Okta connectors import users from Bob. Okta's own 'bob' OIN app has SAML, SCIM, Create, Update and Attribute Sourcing checked but not Deactivate (read from page markup); the direction of that SCIM connection is not documented publicly, so it is recorded but not used for status. June's '~$10-15/emp/mo typical' figure has no first-party source and was dropped; HiBob only says pricing is per employee and quote-based, with Core included in every plan. The June pricing URL /pricing/ now redirects to a demo-request form, so pricing_page_url moved to /pricing-plans/. The Public API (service users, per-endpoint permission groups) can create, update, terminate, invite and revoke Bob access for employees; no plan gate is published for it.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": null,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": null,
+  "status_prev": "free"
+ },
+ "plans": [
+  {
+   "name": "Core (custom quote)",
+   "price_text": "Customized quote, generally per employee",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c3",
+    "c4"
+   ],
+   "notes": "HiBob publishes no tier names or prices; every plan includes Core HR, with modules added on top."
+  }
+ ],
+ "scim": {
+  "available": null,
+  "cite": [
+   "c9",
+   "c10"
+  ],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": null,
+   "token_source": null,
+   "token_expiry": null,
+   "cite": []
+  },
+  "endpoints": {
+   "Users": null,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": []
+  },
+  "operations": {
+   "create": null,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": null,
+   "reactivate": null,
+   "delete": null,
+   "group_push": null,
+   "group_membership": null,
+   "cite": []
+  },
+  "deprovision": {
+   "action": null,
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": []
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": []
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "HiBob's outbound JumpCloud integration is called a 'SCIM Integration' but is configured in Bob and pushes users into JumpCloud; it is not an inbound SCIM endpoint on Bob.",
+    "cite": [
+     "c9",
+     "c10"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c13",
+   "c14",
+   "c25"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://api.hibob.com/v1",
+  "docs_url": "https://apidocs.hibob.com/docs/api-service-users",
+  "auth": {
+   "methods": [
+    "service_user_id_and_token"
+   ],
+   "scopes": [],
+   "cite": [
+    "c13",
+    "c26"
+   ],
+   "notes": "Access is controlled by permission groups assigned to the service user rather than OAuth scopes."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c14",
+    "c15",
+    "c16",
+    "c17",
+    "c18",
+    "c19",
+    "c20"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/people",
+    "purpose": "Create company employee",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/people/search",
+    "purpose": "Search for employees",
+    "cite": [
+     "c19"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/people/{identifier}",
+    "purpose": "Read company employee fields by employee ID",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/people/{identifier}",
+    "purpose": "Update company employee (behaves like PATCH)",
+    "cite": [
+     "c15"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/people/{id}/email",
+    "purpose": "Update an employee's email address",
+    "cite": [
+     "c21"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/employees/{employeeId}/invitations",
+    "purpose": "Invite an employee with a welcome wizard ID",
+    "cite": [
+     "c18"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/employees/{identifier}/uninvite",
+    "purpose": "Revoke access to Bob for an employee",
+    "cite": [
+     "c17"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/employees/{identifier}/terminate",
+    "purpose": "Terminate company employee",
+    "cite": [
+     "c16"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": true,
+   "events": [
+    "employee.created",
+    "employee.updated",
+    "employee.deleted",
+    "employee.joined",
+    "employee.left",
+    "employee.activated",
+    "employee.inactivated",
+    "employee.temporaryLeave"
+   ],
+   "cite": [
+    "c23",
+    "c24"
+   ]
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "Per-endpoint limits per minute, e.g. /v1/people/search allows 50 requests per minute; 429 when exceeded.",
+   "cite": [
+    "c22"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "A new service-user permission group has no permissions by default; each data category must be granted.",
+    "cite": [
+     "c26"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/bob/",
+   "cite": [
+    "c5",
+    "c6"
+   ],
+   "notes": "OIN 'bob' app: SAML, SCIM, Create, Update and Attribute Sourcing checked; Deactivate, Group Push and SWA not checked (read from page markup). Whether Create/Update writes into Bob or sources from Bob is not documented publicly. Aquera also lists two third-party connectors that import users from Bob into Okta."
+  },
+  "entra": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "learn.microsoft.com hibob-tutorial, bob-tutorial and the provisioning variants return 404."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": "vendor",
+   "url": "https://jumpcloud.com/support/integrate-with-bob",
+   "cite": [
+    "c9",
+    "c10",
+    "c11",
+    "c12"
+   ],
+   "notes": "Provisioning runs from Bob into JumpCloud (HR-driven), configured and supported by HiBob; nothing is provisioned into Bob."
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": "HR source of truth: outbound provisioning from Bob to JumpCloud (configured in Bob); third-party Aquera connectors import Bob users into Okta",
+  "docs_public": false,
+  "cite": [
+   "c9",
+   "c7",
+   "c8"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.hibob.com/pricing-plans/",
+   "title": "HiBob pricing: HR software that scales with your team",
+   "quote": "HiBob pricing is customized based on your company’s size, needs, and the modules you choose. To get an accurate quote, simply submit a pricing request and speak with our team.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.hibob.com/pricing-plans/",
+   "title": "HiBob pricing: HR software that scales with your team",
+   "quote": "HiBob pricing is generally calculated on a per-employee basis, making it easy to scale as your organization grows.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.hibob.com/pricing-plans/",
+   "title": "HiBob pricing: HR software that scales with your team",
+   "quote": "Every plan includes access to Bob’s Core HR platform, with the option to add modules and integrations based on your needs.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.hibob.com/pricing-plans/",
+   "title": "HiBob pricing: HR software that scales with your team",
+   "quote": "Core includes: Bob AI Companion Employee database Document management Time off Lifecycle workflows Integrations Analytics and reporting Mobile App",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.okta.com/integrations/bob/",
+   "title": "bob | Okta",
+   "quote": "Okta integration allow companies to automate their entire employee lifecycle between bob and OKTA.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://www.okta.com/integrations/bob/",
+   "title": "bob | Okta",
+   "quote": "Meet bob. The world’s leading people management platform is on a mission to improve the employee experience and solve HR’s biggest problems.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://www.okta.com/integrations/bob-by-aquera/",
+   "title": "Bob by Aquera | Okta",
+   "quote": "The Bob HR-as-a-Master Connector by Aquera is a pre-built, out-of-the-box, bi-directional connector for Okta, syncing all joiner, mover, and leaver events on a continuous basis from Bob.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://www.okta.com/integrations/hibob-user-mastering-connector-by-aquera/",
+   "title": "Hibob User Mastering Connector by Aquera | Okta",
+   "quote": "The Hibob User Mastering Connector by Aquera provides the integration to Okta required to import users and their attributes on an ongoing basis from Hibob, which acts as the user system of record.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://jumpcloud.com/support/integrate-with-bob",
+   "title": "Integrate with Bob | JumpCloud Documentation",
+   "quote": "The Bob (HiBob) integration automates user creation, updates, and deprovisioning in JumpCloud based on events that occur in Bob.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://jumpcloud.com/support/integrate-with-bob",
+   "title": "Integrate with Bob | JumpCloud Documentation",
+   "quote": "The SCIM Integration is solely configured in Bob.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://jumpcloud.com/support/integrate-with-bob",
+   "title": "Integrate with Bob | JumpCloud Documentation",
+   "quote": "If you will be configuring SSO, request your company ID from HiBob support",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://jumpcloud.com/support/integrate-with-bob",
+   "title": "Integrate with Bob | JumpCloud Documentation",
+   "quote": "The Bob integration is managed and supported by the HiBob team.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://apidocs.hibob.com/docs/api-service-users.md",
+   "title": "API Service users | HiBob Developer Docs",
+   "quote": "Include the service user’s ID and token in the Authorization header of your API calls.",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.hibob.com/docs/api-service-users"
+  },
+  {
+   "id": "c14",
+   "url": "https://apidocs.hibob.com/reference/post_people.md",
+   "title": "Create company employee. | HiBob Developer Docs",
+   "quote": "This endpoint allows you to create a new employee in the system.",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.hibob.com/reference/post_people"
+  },
+  {
+   "id": "c15",
+   "url": "https://apidocs.hibob.com/reference/put_people-identifier.md",
+   "title": "Update company employee. | HiBob Developer Docs",
+   "quote": "Although this is a PUT method, it behaves like a PATCH request",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.hibob.com/reference/put_people-identifier"
+  },
+  {
+   "id": "c16",
+   "url": "https://apidocs.hibob.com/reference/post_employees-identifier-terminate.md",
+   "title": "Terminate company employee. | HiBob Developer Docs",
+   "quote": "This changes the employee’s status to Terminated according to specified termination date.",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.hibob.com/reference/post_employees-identifier-terminate"
+  },
+  {
+   "id": "c17",
+   "url": "https://apidocs.hibob.com/reference/post_employees-identifier-uninvite.md",
+   "title": "Revoke access to Bob for an employee. | HiBob Developer Docs",
+   "quote": "Revoke access to Bob for an employee.",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.hibob.com/reference/post_employees-identifier-uninvite"
+  },
+  {
+   "id": "c18",
+   "url": "https://apidocs.hibob.com/reference/post_employees-employeeid-invitations.md",
+   "title": "Invite an employee with a welcome wizard ID. | HiBob Developer Docs",
+   "quote": "Invite an employee with a welcome wizard ID.",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.hibob.com/reference/post_employees-employeeid-invitations"
+  },
+  {
+   "id": "c19",
+   "url": "https://apidocs.hibob.com/reference/post_people-search.md",
+   "title": "Search for employees | HiBob Developer Docs",
+   "quote": "Search employee fields for many employees in one call.",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.hibob.com/reference/post_people-search"
+  },
+  {
+   "id": "c20",
+   "url": "https://apidocs.hibob.com/reference/post_people-identifier.md",
+   "title": "Read company employee fields by employee ID. | HiBob Developer Docs",
+   "quote": "Read company employee fields by employee ID.",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.hibob.com/reference/post_people-identifier"
+  },
+  {
+   "id": "c21",
+   "url": "https://apidocs.hibob.com/reference/put_people-id-email.md",
+   "title": "Update an employee's email address. | HiBob Developer Docs",
+   "quote": "Change an employee's email address.",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.hibob.com/reference/put_people-id-email"
+  },
+  {
+   "id": "c22",
+   "url": "https://apidocs.hibob.com/reference/rate-limiting.md",
+   "title": "Rate limiting | HiBob Developer Docs",
+   "quote": "Bob's API rate limit determines how many API calls can be made per minute. For example, the v1/people/search endpoint allows 50 requests per minute.",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.hibob.com/reference/rate-limiting"
+  },
+  {
+   "id": "c23",
+   "url": "https://apidocs.hibob.com/reference/employee-data-webhooks.md",
+   "title": "Employee data webhooks | HiBob Developer Docs",
+   "quote": "Triggered when an employee is set to on leave or terminated, once the entry is effective.",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.hibob.com/reference/employee-data-webhooks"
+  },
+  {
+   "id": "c24",
+   "url": "https://apidocs.hibob.com/reference/employee-data-webhooks.md",
+   "title": "Employee data webhooks | HiBob Developer Docs",
+   "quote": "There are three types of employee update events: Update event, table events and lifecycle events.",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.hibob.com/reference/employee-data-webhooks"
+  },
+  {
+   "id": "c25",
+   "url": "https://apidocs.hibob.com/reference/post_people.md",
+   "title": "Create company employee. | HiBob Developer Docs",
+   "quote": "\"url\": \"https://api.hibob.com/v1\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.hibob.com/reference/post_people"
+  },
+  {
+   "id": "c26",
+   "url": "https://apidocs.hibob.com/docs/api-service-users.md",
+   "title": "API Service users | HiBob Developer Docs",
+   "quote": "A new permission group does not have any permissions enabled by default.",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.hibob.com/docs/api-service-users"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.hibob.com/pricing/ (redirects to /hi/pricing-flow-test/, a demo-request form)",
+  "https://www.hibob.com/pricing-plans/ (no plan names, no SCIM or SSO)",
+  "https://www.hibob.com/integrations/ (mentions SSO and provisioning workflows, no SCIM)",
+  "https://www.hibob.com/sitemap.xml (page, features and one-pager sitemaps: no SCIM, SSO or Okta page)",
+  "https://apidocs.hibob.com/sitemap.xml and llms.txt indexes for docs, reference, pages and changelog (no SCIM)",
+  "https://help.hibob.com/hc/en-us/search?query=scim (403; help-centre API 401, login required; renderer ERR_TOO_MANY_RETRIES)",
+  "https://www.okta.com/integrations/?search=bob and ?search=hibob",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/hibob-tutorial and bob-tutorial (404)",
+  "https://jumpcloud.com/support/integrate-with-bob"
+ ],
+ "open_questions": [
+  "Does Bob expose an inbound SCIM endpoint (as Okta's 'bob' app suggests), and on which plans? HiBob's help centre is not publicly reachable.",
+  "Which HiBob plans include SAML SSO is not published.",
+  "Whether the Public API is included in every plan is not stated.",
+  "No audit-log API is documented publicly."
+ ]
+}

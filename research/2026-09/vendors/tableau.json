@@ -1,0 +1,946 @@
+{
+ "slug": "tableau",
+ "vendor": "Tableau",
+ "vendor_url": "https://www.tableau.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Tableau",
+  "slug": "tableau",
+  "category": "Data, Analytics & BI",
+  "status": "free",
+  "scim_plan": "All Tableau Cloud plans (SAML/OIDC/Google SSO prereq)",
+  "scim_price_text": "$15/u/mo (Viewer)",
+  "scim_price_per_user_mo": 15,
+  "team_plan": "Viewer (Tableau Cloud)",
+  "team_price_text": "Viewer: $15/u/mo (annual)",
+  "team_price_per_user_mo": 15,
+  "price_multiplier": 1.0,
+  "sso_plan": "Viewer (Tableau Cloud)",
+  "sso_price_per_user_mo": 15,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": null,
+   "onelogin": "native",
+   "jumpcloud": "native",
+   "generic": true
+  },
+  "pricing_page_url": "https://www.salesforce.com/analytics/tableau/",
+  "docs_url": "https://help.tableau.com/current/online/en-us/scim_config_online.htm",
+  "evidence": "Tableau Cloud Help says Tableau Cloud supports SCIM for IdPs once the site is configured for SAML or OIDC (or Google) SSO, with no edition restriction; Salesforce lists Viewer at $15, Explorer $42 and Creator $75 per user/month billed annually.",
+  "notes": "Unchanged from June: SCIM is documented for any Tableau Cloud site with SAML, OIDC or Google SSO; neither the help docs nor Salesforce's Tableau pricing page tie it to an edition. tableau.com/pricing returns Access Denied to automated requests, so prices come from salesforce.com (Creator $75, Explorer $42, Viewer $15 per user/month billed annually; Tableau Cloud from $15). Edition (Standard/Enterprise/Tableau+) gating could not be checked on tableau.com. Deprovisioning sets users to Unlicensed; deletion is manual or via SCIM DELETE only if the user owns no content. Since December 2025 a public Tableau SCIM API (scim.online.tableau.com) is documented. Multiplier 1.0 because SCIM rides on the Viewer licence.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "All Tableau Cloud plans",
+  "api_tax": false,
+  "first_added": null,
+  "status_prev": "free"
+ },
+ "plans": [
+  {
+   "name": "Tableau Viewer",
+   "price_text": "$15 USD/User/Month (Billed annually)",
+   "price_per_user_mo": 15,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c4",
+    "c5",
+    "c6",
+    "c38"
+   ],
+   "notes": "Licence role, not a tier; SSO/SCIM are site-level capabilities documented for Tableau Cloud with no edition restriction."
+  },
+  {
+   "name": "Tableau Explorer",
+   "price_text": "$42 USD/User/Month (Billed annually)",
+   "price_per_user_mo": 42,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c5",
+    "c6",
+    "c38"
+   ]
+  },
+  {
+   "name": "Tableau Creator",
+   "price_text": "$75 USD/User/Month (Billed annually)",
+   "price_per_user_mo": 75,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c5",
+    "c6",
+    "c38"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c5",
+   "c6",
+   "c11",
+   "c13"
+  ],
+  "plan": "All Tableau Cloud plans",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://scim.online.tableau.com/pods/{pod-id}/sites/{site-id}/scim/v2",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Settings > Authentication > SCIM > New Configuration > New Secret (site administrator); or an external JWT from a Tableau connected app",
+   "token_expiry": null,
+   "cite": [
+    "c8",
+    "c9",
+    "c10",
+    "c12",
+    "c47"
+   ],
+   "notes": "The secret becomes invalid if the creating site admin's role changes or they leave the site."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c13",
+    "c25"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c14",
+    "c16",
+    "c18",
+    "c21",
+    "c22",
+    "c24",
+    "c25",
+    "c36"
+   ]
+  },
+  "deprovision": {
+   "action": "other",
+   "frees_seat": true,
+   "revokes_sessions": null,
+   "data_retained": "User is set to the Unlicensed site role and kept with their content; deletion requires the user to own no content (otherwise SCIM DELETE also just sets Unlicensed).",
+   "cite": [
+    "c16",
+    "c18",
+    "c27",
+    "c28"
+   ],
+   "notes": "action 'other' = licence removed (site role Unlicensed). frees_seat true because Unlicensed users do not hold a licence (active=false means unlicensed)."
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName",
+    "displayName (Groups)"
+   ],
+   "cite": [
+    "c19",
+    "c26"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c20"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "active",
+    "entitlements.value",
+    "emails.value"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": true,
+    "how": "Tableau extension urn:ietf:params:scim:schemas:extension:tableau:3.0 with siteRoles; other attributes are ignored."
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c15",
+    "c16",
+    "c17",
+    "c23",
+    "c24",
+    "c26",
+    "c36"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "Site role via the Tableau extension siteRoles or entitlements value (Creator, Explorer, ExplorerCanPublish, SiteAdministratorExplorer, SiteAdministratorCreator, Viewer, Unlicensed); IdP group assignments map to site roles, most permissive wins.",
+   "cite": [
+    "c17",
+    "c23",
+    "c30",
+    "c31"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Okta does not sync first and last name to Tableau Cloud on user creation.",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "text": "User Name and Primary email cannot be updated via Okta SCIM; remove and re-add the user.",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "text": "A separate Okta app is needed per Tableau Cloud site.",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "text": "Deprovisioning only sets Unlicensed; users who own content must have ownership reassigned before manual deletion.",
+    "cite": [
+     "c27",
+     "c28",
+     "c18"
+    ]
+   },
+   {
+    "text": "SCIM token is tied to the site admin who created the configuration.",
+    "cite": [
+     "c8"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c38",
+   "c39"
+  ],
+  "plan": "All Tableau Cloud plans",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://{pod}.online.tableau.com/api/{api-version}",
+  "docs_url": "https://help.tableau.com/current/api/rest_api/en-us/REST/rest_api_ref_users_and_groups.htm",
+  "auth": {
+   "methods": [],
+   "scopes": [],
+   "cite": []
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": true,
+   "reactivate_user": true,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": true,
+   "cite": [
+    "c38",
+    "c39",
+    "c40",
+    "c41",
+    "c44",
+    "c45",
+    "c49"
+   ],
+   "notes": "Licences in Tableau are site roles, so assign_roles/assign_licenses/deactivate (set Unlicensed) all go through Update User's siteRole."
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/api/{api-version}/sites/{site-id}/users",
+    "purpose": "Add user to site",
+    "cite": [
+     "c38"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/{api-version}/sites/{site-id}/users",
+    "purpose": "Get users on site (filter, sort, paging)",
+    "cite": [
+     "c39"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/{api-version}/sites/{site-id}/users/{user-id}",
+    "purpose": "Query user on site",
+    "cite": [
+     "c39"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/{api-version}/sites/{site-id}/users/{user-id}",
+    "purpose": "Update user (site role on Tableau Cloud)",
+    "cite": [
+     "c40"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/{api-version}/sites/{site-id}/users/{user-id}",
+    "purpose": "Remove user from site (optional mapAssetsTo)",
+    "cite": [
+     "c41"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/{api-version}/sites/{site-id}/users/import",
+    "purpose": "Import users to site from CSV",
+    "cite": [
+     "c42"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/{api-version}/sites/{site-id}/users/delete",
+    "purpose": "Delete users from site with CSV",
+    "cite": [
+     "c43"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/{api-version}/sites/{site-id}/users/{user-id}/groups",
+    "purpose": "Get groups for a user",
+    "cite": [
+     "c46"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/{api-version}/sites/{site-id}/groups",
+    "purpose": "List groups on site",
+    "cite": [
+     "c49"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/{api-version}/sites/{site-id}/groups",
+    "purpose": "Create group",
+    "cite": [
+     "c52"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/{api-version}/sites/{site-id}/groups/{group-id}",
+    "purpose": "Update group",
+    "cite": [
+     "c53"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/{api-version}/sites/{site-id}/groups/{group-id}",
+    "purpose": "Delete group",
+    "cite": [
+     "c50"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/{api-version}/sites/{site-id}/groups/{group-id}/users",
+    "purpose": "Get users in group",
+    "cite": [
+     "c45"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/{api-version}/sites/{site-id}/groups/{group-id}/users",
+    "purpose": "Add user(s) to group",
+    "cite": [
+     "c45"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/{api-version}/sites/{site-id}/groups/{group-id}/users/{user-id}",
+    "purpose": "Remove user from group",
+    "cite": [
+     "c44"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/{api-version}/sites/{site-id}/groups/{group-id}/users/remove",
+    "purpose": "Bulk remove users from group",
+    "cite": [
+     "c44"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/{api-version}/sites/{site-luid}/scimConfigurations",
+    "purpose": "Create SCIM configuration",
+    "cite": [
+     "c51"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "On Tableau Cloud the REST API cannot change a user's password, user name (email) or full name.",
+    "cite": [
+     "c40"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/tableau-cloud/",
+   "cite": [
+    "c35",
+    "c27"
+   ],
+   "notes": "OIN page markup marks SAML, SCIM, Create, Update, Deactivate, Group Push and Group Linking as checked."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/tableau-online-provisioning-tutorial",
+   "cite": [
+    "c36",
+    "c47",
+    "c33"
+   ]
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "SCIM can be tied to Google authentication, but no Google Workspace provisioning app for Tableau was verified."
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c7",
+    "c34"
+   ],
+   "notes": "From Tableau's own OneLogin SCIM guide; OneLogin connector page not loaded."
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://jumpcloud.com/support/integrate-with-tableau",
+   "cite": [
+    "c37"
+   ]
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": true,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c42",
+   "c43"
+  ],
+  "notes": "REST API and site UI support CSV import of users; Grant License on Sign In exists for groups."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.salesforce.com/analytics/tableau/",
+   "title": "Tableau: Data Visualization Software | Salesforce",
+   "quote": "Tableau Creator Discover insights with a powerful suite of products that support your end-to-end analytics workflow. $ 75 USD/User/Month (Billed annually)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.salesforce.com/analytics/tableau/",
+   "title": "Tableau: Data Visualization Software | Salesforce",
+   "quote": "Tableau Explorer Explore trusted data and answer your own questions faster with full self-service analytics. $ 42 USD/User/Month (Billed annually)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.salesforce.com/analytics/tableau/",
+   "title": "Tableau: Data Visualization Software | Salesforce",
+   "quote": "Tableau Viewer View and interact with dashboards and data visualizations in a secure, easy-to-use platform. $ 15 USD/User/Month (Billed annually)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.salesforce.com/analytics/pricing/",
+   "title": "Salesforce Analytics Pricing",
+   "quote": "Tableau Cloud Empower every team with intelligent insights delivered when they need them. Starting at: $ 15 USD/User/Month (Billed annually)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://help.tableau.com/current/online/en-us/scim_config_online.htm",
+   "title": "SCIM - Tableau",
+   "quote": "Tableau Cloud supports SCIM, enabling identity providers (IdPs) to centrally manage user identities while streamlining the process of managing users and group membership in Tableau Cloud.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://help.tableau.com/current/online/en-us/scim_config_online.htm",
+   "title": "SCIM - Tableau",
+   "quote": "Your site is already configured to support SAML or OIDC (or Google) single sign-on (SSO).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://help.tableau.com/current/online/en-us/scim_config_online.htm",
+   "title": "SCIM - Tableau",
+   "quote": "You can get IdP-specific configuration steps for the following IdPs we support: Configure SCIM with Microsoft Entra ID Configure SCIM with Okta Configure SCIM with OneLogin Configure SCIM with PingFederate",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://help.tableau.com/current/online/en-us/scim_config_online.htm",
+   "title": "SCIM - Tableau",
+   "quote": "The secret is tied to the Tableau site administrator user who created the SCIM configuration. If that user's site role changes or the user is no longer a member of the site, the secret becomes invalid.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://help.tableau.com/current/online/en-us/scim_config_online.htm",
+   "title": "SCIM - Tableau",
+   "quote": "You can bypass the SCIM token that Tableau generates and instead use an externally generated JWT (using a Tableau connected app) to support SCIM requests in Tableau Cloud.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://help.tableau.com/current/online/en-us/scim_config_online.htm",
+   "title": "SCIM - Tableau",
+   "quote": "Sign in to your Tableau Cloud site as a site administrator, and select Settings > Authentication .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://help.tableau.com/current/api/scim-api/en-us/index.html",
+   "title": "Tableau SCIM API",
+   "quote": "The methods described in this documentation have been developed using SCIM 2.0 and follow the SCIM standard defined in RFC 7644.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://help.tableau.com/current/api/scim-api/en-us/docs/authentication.html",
+   "title": "Tableau SCIM API - Authentication",
+   "quote": "All requests against the SCIM API require the SCIM secret as the bearer token.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://help.tableau.com/current/api/scim-api/en-us/docs/users.html",
+   "title": "SCIM API Users Methods",
+   "quote": "POST https://scim.online.tableau.com/pods/pod-id/sites/site-id/scim/v2/Users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://help.tableau.com/current/api/scim-api/en-us/docs/users.html",
+   "title": "SCIM API Users Methods",
+   "quote": "Add a user to a site Get a user and list all users on the site Update a user, change the site role and license status of a user Remove a user from the site",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://help.tableau.com/current/api/scim-api/en-us/docs/users.html",
+   "title": "SCIM API Users Methods",
+   "quote": "Note: The SCIM API only processes attributes that are required by Tableau Cloud to create, modify, and remove users. If other attributes are passed, they will be ignored.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://help.tableau.com/current/api/scim-api/en-us/docs/users.html",
+   "title": "SCIM API Users Methods",
+   "quote": "active License status of the user. Specify true for a licensed user and false for an unlicensed user.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://help.tableau.com/current/api/scim-api/en-us/docs/users.html",
+   "title": "SCIM API Users Methods",
+   "quote": "Creator Explorer ExplorerCanPublish SiteAdministratorExplorer SiteAdministratorCreator Unlicensed Viewer",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://help.tableau.com/current/api/scim-api/en-us/docs/users.html",
+   "title": "SCIM API Users Methods",
+   "quote": "You can only remove the user if they do not own any content (projects, workbooks, views, data sources, collections, or data alerts for example). If you attempt to remove a user who owns content, the user's site role is set to “unlicensed” and is not removed.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://help.tableau.com/current/api/scim-api/en-us/docs/users.html",
+   "title": "SCIM API Users Methods",
+   "quote": "GET https://scim.online.tableau.com/pods/pod-id/sites/site-id/scim/v2/Users?filter=userName eq 'user-name'",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://help.tableau.com/current/api/scim-api/en-us/docs/users.html",
+   "title": "SCIM API Users Methods",
+   "quote": "GET https://scim.online.tableau.com/pods/pod-id/sites/site-id/scim/v2/Users?startIndex=index&count=count",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://help.tableau.com/current/api/scim-api/en-us/docs/users.html",
+   "title": "SCIM API Users Methods",
+   "quote": "PATCH https://scim.online.tableau.com/pods/pod-id/sites/site-id/scim/v2/Users/user-id",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://help.tableau.com/current/api/scim-api/en-us/docs/users.html",
+   "title": "SCIM API Users Methods",
+   "quote": "PUT https://scim.online.tableau.com/pods/pod-id/sites/site-id/scim/v2/Users/user-id",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://help.tableau.com/current/api/scim-api/en-us/docs/users.html",
+   "title": "SCIM API Users Methods",
+   "quote": "\"urn:ietf:params:scim:schemas:extension:tableau:3.0\" : { \"siteRoles\" : [ \"site-role\" ] }",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://help.tableau.com/current/api/scim-api/en-us/docs/groups.html",
+   "title": "SCIM API Groups Methods",
+   "quote": "Update a group or change a group name on the site, add or remove members from a group",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://help.tableau.com/current/api/scim-api/en-us/docs/groups.html",
+   "title": "SCIM API Groups Methods",
+   "quote": "POST https://scim.online.tableau.com/pods/pod-id/sites/site-id/scim/v2/Groups",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://help.tableau.com/current/api/scim-api/en-us/docs/groups.html",
+   "title": "SCIM API Groups Methods",
+   "quote": "GET https://scim.online.tableau.com/pods/*pod-id*/sites/*site-id*/scim/v2/Groups?filter=displayName eq 'group-name'&excludedAttributes=members",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://help.tableau.com/current/online/en-us/scim_config_okta.htm",
+   "title": "Configure SCIM with Okta - Tableau",
+   "quote": "When a user is unassigned from the Tableau Cloud app in Okta or the user is deactivated or deleted from Okta entirely, the user is converted to an \"Unlicensed\" site role in Tableau Cloud.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://help.tableau.com/current/online/en-us/scim_config_okta.htm",
+   "title": "Configure SCIM with Okta - Tableau",
+   "quote": "If the user owns any content, you must first reassign ownership of those content assets before you can manually delete the user in Tableau Cloud.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://help.tableau.com/current/online/en-us/scim_config_okta.htm",
+   "title": "Configure SCIM with Okta - Tableau",
+   "quote": "When provisioning new users, first name and last name attributes in Okta are not synced to Tableau Cloud.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://help.tableau.com/current/online/en-us/scim_config_okta.htm",
+   "title": "Configure SCIM with Okta - Tableau",
+   "quote": "You can update the site role attribute for a user in Okta and this change will propagate to Tableau Cloud. Other attributes, such as User Name and Primary email, cannot be updated.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://help.tableau.com/current/online/en-us/scim_config_okta.htm",
+   "title": "Configure SCIM with Okta - Tableau",
+   "quote": "If a user is assigned groups with different site roles, the user will receive the most permissive site role in Tableau Cloud.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://help.tableau.com/current/online/en-us/scim_config_okta.htm",
+   "title": "Configure SCIM with Okta - Tableau",
+   "quote": "You must add a separate Tableau Cloud Okta app for each site you want to manage using SCIM.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://help.tableau.com/current/online/en-us/scim_config_azure_ad.htm",
+   "title": "Configure SCIM with Microsoft Entra ID - Tableau",
+   "quote": "You can configure user management through Microsoft Entra ID (also known as Azure Active Directory (AD)), provision groups, and assign Tableau Cloud site roles.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://help.tableau.com/current/online/en-us/scim_config_onelogin.htm",
+   "title": "Configure SCIM with OneLogin - Tableau",
+   "quote": "The SCIM functionality requires that you configure your site to support SAML, OIDC, or Google single sign-on (SSO).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c35",
+   "url": "https://www.okta.com/integrations/tableau-cloud/",
+   "title": "Integrate Tableau Cloud with Okta",
+   "quote": "By utilizing Okta's Tableau Cloud app, you can ensure appropriate and secured access via user provisioning and SAML single sign on",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/tableau-online-provisioning-tutorial",
+   "title": "Configure Tableau Cloud for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Create users in Tableau Cloud. Remove users in Tableau Cloud when they don't require access anymore. Keep user attributes synchronized between Microsoft Entra ID and Tableau Cloud. Provision groups and group memberships in Tableau Cloud.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://jumpcloud.com/support/integrate-with-tableau",
+   "title": "Integrate with Tableau Online | JumpCloud",
+   "quote": "Integrate your JumpCloud account with Tableau Online (Tableau) through a SCIM connector. After you connect JumpCloud with Tableau, you can provision, update, and deprovision users in Tableau through your JumpCloud Administrator Portal.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c38",
+   "url": "https://help.tableau.com/current/api/rest_api/en-us/REST/rest_api_ref_users_and_groups.htm",
+   "title": "Users and Groups Methods - Tableau REST API",
+   "quote": "Adds a user to Tableau Server or Tableau and assigns the user to the specified site.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c39",
+   "url": "https://help.tableau.com/current/api/rest_api/en-us/REST/rest_api_ref_users_and_groups.htm",
+   "title": "Users and Groups Methods - Tableau REST API",
+   "quote": "Get Users on Site Returns the users associated with the specified site.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c40",
+   "url": "https://help.tableau.com/current/api/rest_api/en-us/REST/rest_api_ref_users_and_groups.htm",
+   "title": "Users and Groups Methods - Tableau REST API",
+   "quote": "For Tableau Cloud, you can update the site role for a user, but you cannot update or change a user's password, user name (email address), or full name.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c41",
+   "url": "https://help.tableau.com/current/api/rest_api/en-us/REST/rest_api_ref_users_and_groups.htm",
+   "title": "Users and Groups Methods - Tableau REST API",
+   "quote": "Removes a user from the specified site. The user will be deleted if they do not own any other assets other than subscriptions.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c42",
+   "url": "https://help.tableau.com/current/api/rest_api/en-us/REST/rest_api_ref_users_and_groups.htm",
+   "title": "Users and Groups Methods - Tableau REST API",
+   "quote": "Creates a job to import the users listed in a specified .csv file to a site, and assign their roles and authorization settings.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c43",
+   "url": "https://help.tableau.com/current/api/rest_api/en-us/REST/rest_api_ref_users_and_groups.htm",
+   "title": "Users and Groups Methods - Tableau REST API",
+   "quote": "Creates a job to remove a list of users, specified in a .csv file, from a site.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c44",
+   "url": "https://help.tableau.com/current/api/rest_api/en-us/REST/rest_api_ref_users_and_groups.htm",
+   "title": "Users and Groups Methods - Tableau REST API",
+   "quote": "Removes a user from the specified group. Beginning in API 3.21, you can bulk remove users from a group by specifying multiple user IDs.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c45",
+   "url": "https://help.tableau.com/current/api/rest_api/en-us/REST/rest_api_ref_users_and_groups.htm",
+   "title": "Users and Groups Methods - Tableau REST API",
+   "quote": "Beginning in API 3.21, you can bulk add users to a group by specifying multiple user IDs.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c46",
+   "url": "https://help.tableau.com/current/api/rest_api/en-us/REST/rest_api_ref_users_and_groups.htm",
+   "title": "Users and Groups Methods - Tableau REST API",
+   "quote": "Gets a list of groups of which the specified user is a member.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c47",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/tableau-online-provisioning-tutorial",
+   "title": "Configure Tableau Cloud for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Long lived bearer token authentication supported.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c48",
+   "url": "https://help.tableau.com/current/online/en-us/scim_config_online.htm",
+   "title": "SCIM - Tableau",
+   "quote": "Beginning in June 2025 (Tableau 2025.2): You can configure one or more SCIM configurations on a site.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c49",
+   "url": "https://help.tableau.com/current/api/rest_api/en-us/REST/rest_api_ref_users_and_groups.htm",
+   "title": "Users and Groups Methods - Tableau REST API",
+   "quote": "Returns a list of groups on the specified site, with optional parameters for specifying the paging of large results.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c50",
+   "url": "https://help.tableau.com/current/api/rest_api/en-us/REST/rest_api_ref_users_and_groups.htm",
+   "title": "Users and Groups Methods - Tableau REST API",
+   "quote": "Deletes the group on a specific site. Deleting a group does not delete the users in group, but users are no longer members of the group.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c51",
+   "url": "https://help.tableau.com/current/api/rest_api/en-us/REST/rest_api_ref_users_and_groups.htm",
+   "title": "Users and Groups Methods - Tableau REST API",
+   "quote": "POST /api/ api-version /sites/ site-luid /scimConfigurations",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c52",
+   "url": "https://help.tableau.com/current/api/rest_api/en-us/REST/rest_api_ref_users_and_groups.htm",
+   "title": "Users and Groups Methods - Tableau REST API",
+   "quote": "Creates a group on a Tableau Cloud site or Tableau Server.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c53",
+   "url": "https://help.tableau.com/current/api/rest_api/en-us/REST/rest_api_ref_users_and_groups.htm",
+   "title": "Users and Groups Methods - Tableau REST API",
+   "quote": "Updates a group on a Tableau Cloud site or Tableau Server.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.tableau.com/pricing (Access Denied)",
+  "https://www.tableau.com/pricing/teams-orgs (Access Denied)",
+  "https://www.salesforce.com/analytics/tableau/",
+  "https://www.salesforce.com/analytics/pricing/",
+  "https://help.tableau.com/current/online/en-us/scim_config_online.htm",
+  "https://help.tableau.com/current/online/en-us/scim_config_okta.htm",
+  "https://help.tableau.com/current/online/en-us/scim_config_azure_ad.htm",
+  "https://help.tableau.com/current/online/en-us/scim_config_onelogin.htm",
+  "https://help.tableau.com/current/api/scim-api/en-us/index.html",
+  "https://help.tableau.com/current/api/scim-api/en-us/docs/users.html",
+  "https://help.tableau.com/current/api/scim-api/en-us/docs/groups.html",
+  "https://help.tableau.com/current/api/scim-api/en-us/docs/authentication.html",
+  "https://help.tableau.com/current/api/rest_api/en-us/REST/rest_api_ref_users_and_groups.htm",
+  "https://www.okta.com/integrations/tableau-cloud/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/tableau-online-provisioning-tutorial",
+  "https://jumpcloud.com/support/integrate-with-tableau"
+ ],
+ "open_questions": [
+  "tableau.com pricing pages are blocked to automated requests; whether SCIM is restricted to particular Tableau Cloud editions (Standard, Enterprise, Tableau+) is not stated in the help docs.",
+  "SCIM token expiry is not documented.",
+  "Whether ServiceProviderConfig/Schemas/ResourceTypes endpoints exist is not documented.",
+  "SCIM and REST rate limits not found.",
+  "Whether deprovisioning ends active sessions is not documented.",
+  "REST API auth (PAT/connected-app JWT) scopes not captured.",
+  "Activity Log / audit API plan not checked."
+ ]
+}

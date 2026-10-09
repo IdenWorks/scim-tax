@@ -1,0 +1,808 @@
+{
+ "slug": "favro",
+ "vendor": "Favro",
+ "vendor_url": "https://www.favro.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Favro",
+  "slug": "favro",
+  "category": "Project & Work Management",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Lite",
+  "team_price_text": "Lite: $5.1/user/mo billed annually ($51/mo for a 10-user bucket)",
+  "team_price_per_user_mo": 5.1,
+  "price_multiplier": null,
+  "sso_plan": "Enterprise",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": false,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "via_generic",
+   "google": "sso_only",
+   "onelogin": "native",
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.favro.com/pricing",
+  "docs_url": "https://favro.com/developer/",
+  "evidence": "Favro's pricing page lists SAML-based SSO and SCIM user provisioning only on the Enterprise plan (Talk to Sales), and its Okta SCIM guide says the organization must be on the Enterprise plan.",
+  "notes": "Lite $5.1 and Standard $6.8 per user/mo billed annually, sold in user buckets (2, 5, 10, 25, 50+); Enterprise is tailored pricing. SCIM 2.0 (and legacy 1.1) at https://favro.com/api/scim/v2 with a per-domain bearer token that only exists once SAML SSO is configured on a verified domain. SCIM DELETE disables the user rather than deleting it; roles are set with the favroRole attribute. Entra uses a non-gallery app with the ?aadOptscim062020 flag; Google Workspace is a custom SAML app (SSO only). The REST API (basic auth with API tokens) gets 0 calls/hour on Lite, so user API needs Standard. No user-event webhooks or audit-log API documented.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Standard",
+  "api_tax": true,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Lite",
+   "price_text": "$5.1/user, $51 per month billed annually (10-user bucket)",
+   "price_per_user_mo": 5.1,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c3",
+    "c4",
+    "c6",
+    "c42"
+   ],
+   "notes": "API calls/hour: 0 on Lite. OAuth via Google & GitHub only."
+  },
+  {
+   "name": "Standard",
+   "price_text": "$6.8/user, $68 per month billed annually (10-user bucket)",
+   "price_per_user_mo": 6.8,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c3",
+    "c4",
+    "c7",
+    "c42"
+   ],
+   "notes": "1,000 API calls/hour."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Tailored pricing (Talk to Sales)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c4",
+    "c8",
+    "c9",
+    "c10",
+    "c42"
+   ],
+   "notes": "10,000 API calls/hour."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c4",
+   "c10",
+   "c14",
+   "c15",
+   "c19"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://favro.com/api/scim/v2",
+  "notes": "SCIM v1.1 is also served at https://favro.com/api/scim/v1; Favro recommends v2.0.",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Administration > Authentication methods > (verified SAML domain) > SCIM API token",
+   "token_expiry": null,
+   "cite": [
+    "c13",
+    "c19"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c20",
+    "c21",
+    "c23"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": false,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c11",
+    "c16",
+    "c20",
+    "c21",
+    "c22",
+    "c23",
+    "c26",
+    "c49"
+   ],
+   "notes": "DELETE /Users/:userId is documented as 'Disables a user'; no SCIM hard delete. Reactivation via active=true on PUT."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Disabled members are frozen: their data stays available and they stay on assigned cards; the account can be re-enabled.",
+   "cite": [
+    "c16",
+    "c35",
+    "c49"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName"
+   ],
+   "cite": [
+    "c20"
+   ],
+   "notes": "Documented filter example: userName eq email@domain.com."
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c20"
+   ],
+   "notes": "count and startIndex query parameters."
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "emails",
+    "name.givenName",
+    "name.familyName",
+    "name.formatted",
+    "active",
+    "entitlements"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": true,
+    "how": "favroRole (or FavroRole in entitlements) sets the workspace role: Administrator (must be enabled per domain), Full Member, External Member, Guest; default Full Member."
+   },
+   "group": [
+    "displayName",
+    "members.value"
+   ],
+   "cite": [
+    "c22",
+    "c24",
+    "c26",
+    "c17"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "favroRole attribute / entitlements on the SCIM user; Administrator role needs 'Provision users with administrator role' enabled on the domain",
+   "cite": [
+    "c12",
+    "c24"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Admin users cannot be provisioned by default; enable 'Provision users with administrator role' on the domain.",
+    "cite": [
+     "c12"
+    ]
+   },
+   {
+    "text": "Entra tenant URL must end in ?aadOptscim062020 (non-gallery app).",
+    "cite": [
+     "c17",
+     "c18"
+    ]
+   },
+   {
+    "text": "Okta integration supports create, update attributes, deactivate and group push.",
+    "cite": [
+     "c11"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c27",
+   "c29",
+   "c42"
+  ],
+  "plan": "Standard",
+  "api_tax": true,
+  "style": "REST",
+  "base_url": "https://favro.com/api/v1",
+  "docs_url": "https://favro.com/developer/",
+  "auth": {
+   "methods": [
+    "basic (email + password or API token)"
+   ],
+   "scopes": [],
+   "cite": [
+    "c29"
+   ],
+   "notes": "API tokens can be restricted to read-only endpoints."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": null,
+   "invite_user": true,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c30",
+    "c31",
+    "c32",
+    "c33",
+    "c45"
+   ],
+   "notes": "Invites, role changes and removals go through PUT /organizations/:organizationId (shareToUsers / members with delete:true)."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/api/v1/users",
+    "purpose": "List users in the organization",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/users/:userId",
+    "purpose": "Get a user",
+    "cite": [
+     "c43"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/v1/organizations/:organizationId",
+    "purpose": "Invite users, change roles or remove users from the organization",
+    "cite": [
+     "c31",
+     "c32",
+     "c33",
+     "c44"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/groups",
+    "purpose": "List groups",
+    "cite": [
+     "c45"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/groups/:groupId",
+    "purpose": "Delete a group",
+    "cite": [
+     "c46"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": [],
+   "notes": "Outgoing webhooks documented only for card and comment events (c47)."
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "Organization routes: Trial 100, Lite 0, Standard 1,000, Enterprise 10,000 calls/hour per user; user-level routes 50 calls/hour; token-bucket throttling, 429 when delay exceeds 10 s.",
+   "cite": [
+    "c27",
+    "c28",
+    "c42"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Lite plan gets 0 API calls per hour.",
+    "cite": [
+     "c42"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/favro/",
+   "cite": [
+    "c37",
+    "c10",
+    "c11"
+   ],
+   "notes": "OIN page marks SAML and SCIM; Favro's guide lists create, update, deactivate, group push."
+  },
+  "entra": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "Favro's Entra guide uses 'Create your own application' (non-gallery) with the generic SCIM endpoint; no Learn tutorial found (404)."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "Favro documents a custom SAML app in Google Workspace (SSO only, no provisioning)."
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c38",
+    "c14"
+   ],
+   "notes": "From Favro's own OneLogin guides (Favro SAML 2.0 app with SCIM Base URL/Bearer token)."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "jumpcloud.com/integrations/favro returns 404."
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c25",
+   "c39",
+   "c41"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.favro.com/pricing",
+   "title": "Favro pricing",
+   "quote": "$51 per month, billed annually",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.favro.com/pricing",
+   "title": "Favro pricing",
+   "quote": "$68 per month, billed annually",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.favro.com/pricing",
+   "title": "Favro pricing",
+   "quote": "SAML-based single sign-on (SSO)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.favro.com/pricing",
+   "title": "Favro pricing",
+   "quote": "SCIM user provisioning",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.favro.com/pricing",
+   "title": "Favro pricing",
+   "quote": "Our user buckets go up in 2, 5, 10, 25, and 50+.",
+   "accessed": "2026-10-05",
+   "interaction": "click the 'How do user buckets work?' FAQ"
+  },
+  {
+   "id": "c6",
+   "url": "https://help.favro.com/en/articles/3650040-the-difference-between-favro-lite-standard-and-enterprise-plans",
+   "title": "The difference between Favro Lite, Standard and Enterprise plans",
+   "quote": "Pricing for the Lite plan starts at only $5.1 per user.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://help.favro.com/en/articles/3650040-the-difference-between-favro-lite-standard-and-enterprise-plans",
+   "title": "The difference between Favro Lite, Standard and Enterprise plans",
+   "quote": "Pricing for our Standard plan starts at $6.8 per user.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://help.favro.com/en/articles/3650040-the-difference-between-favro-lite-standard-and-enterprise-plans",
+   "title": "The difference between Favro Lite, Standard and Enterprise plans",
+   "quote": "To get more information about the Enterprise plan pricing, please check in with our sales team.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://help.favro.com/en/articles/3650040-the-difference-between-favro-lite-standard-and-enterprise-plans",
+   "title": "The difference between Favro Lite, Standard and Enterprise plans",
+   "quote": "Favo's Enterprise plan is suitable for big teams, enterprise-level companies or teams that want all the possible security options.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://help.favro.com/en/articles/9154214-setting-up-scim-2-0-with-okta-favro-integration-app",
+   "title": "Setting up SCIM 2.0 with Okta (Favro integration app)",
+   "quote": "Favro organization must be on the Enterprise plan.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://help.favro.com/en/articles/9154214-setting-up-scim-2-0-with-okta-favro-integration-app",
+   "title": "Setting up SCIM 2.0 with Okta (Favro integration app)",
+   "quote": "SCIM 2.0 integration between Okta and Favro currently supports the following features:",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://help.favro.com/en/articles/9154214-setting-up-scim-2-0-with-okta-favro-integration-app",
+   "title": "Setting up SCIM 2.0 with Okta (Favro integration app)",
+   "quote": "Admin users cannot be provisioned by default. Make sure to enable the option in Favro > Administration > Authentication methods > your domain > Provision users with administrator role.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://help.favro.com/en/articles/9154214-setting-up-scim-2-0-with-okta-favro-integration-app",
+   "title": "Setting up SCIM 2.0 with Okta (Favro integration app)",
+   "quote": "API Token: Copy SCIM API token from the domain settings page in Favro.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://help.favro.com/en/articles/1019943-setting-up-scim-provisioning-with-onelogin",
+   "title": "Setting up SCIM provisioning with OneLogin",
+   "quote": "You also need to enter https://favro.com/api/scim/v2 in the SCIM Base URL field and enable the API and click SAVE.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://help.favro.com/en/articles/1019943-setting-up-scim-provisioning-with-onelogin",
+   "title": "Setting up SCIM provisioning with OneLogin",
+   "quote": "Although Favro officially supports both SCIM v1.1 (https://favro.com/api/scim/v1) and SCIM v2.0 (https://favro.com/api/scim/v2), we strongly encourage users to use the SCIM v2.0 API.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://help.favro.com/en/articles/1019943-setting-up-scim-provisioning-with-onelogin",
+   "title": "Setting up SCIM provisioning with OneLogin",
+   "quote": "With SCIM provisioning enabled, it is possible to create and disable users automatically in Favro.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://help.favro.com/en/articles/8985510-setting-up-saml-2-0-and-scim-2-0-with-microsoft-entra",
+   "title": "Setting up SAML 2.0 and SCIM 2.0 with Microsoft Entra",
+   "quote": "Tenant URL: https://favro.com/api/scim/v2?aadOptscim062020",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://help.favro.com/en/articles/8985510-setting-up-saml-2-0-and-scim-2-0-with-microsoft-entra",
+   "title": "Setting up SAML 2.0 and SCIM 2.0 with Microsoft Entra",
+   "quote": "Click Create your own application.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://favro.com/developer/",
+   "title": "Favro API Reference",
+   "quote": "To use these endpoints your organization must have SAML-based Single Sign-On configured as a bearer-token is required per domain.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://favro.com/developer/",
+   "title": "Favro API Reference",
+   "quote": "Retrieves all user resources. Supports pagination and filtering on email.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://favro.com/developer/",
+   "title": "Favro API Reference",
+   "quote": "DELETE https://favro.com/api/scim/v2/Users/:userId",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://favro.com/developer/",
+   "title": "Favro API Reference",
+   "quote": "Activates or disables the user. Defaults to false.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://favro.com/developer/",
+   "title": "Favro API Reference",
+   "quote": "Adds and removes users from a group or changes display name.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://favro.com/developer/",
+   "title": "Favro API Reference",
+   "quote": "The workspace role to provision user with. Default is full member.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://favro.com/developer/",
+   "title": "Favro API Reference",
+   "quote": "For just-in-time provisioning we support the following attributes in the SAML assertion:",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://favro.com/developer/",
+   "title": "Favro API Reference",
+   "quote": "Creates a user and adds it to the organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://favro.com/developer/",
+   "title": "Favro API Reference",
+   "quote": "For organization routes, the number of calls per hour depends on the payment plan of the organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://favro.com/developer/",
+   "title": "Favro API Reference",
+   "quote": "User level routes are rated limited at 50 calls per hour.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://favro.com/developer/",
+   "title": "Favro API Reference",
+   "quote": "The Favro API currently supports basic authentication with password or API tokens.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://favro.com/developer/",
+   "title": "Favro API Reference",
+   "quote": "This endpoint retrieves a paginated list of all users in the organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://favro.com/developer/",
+   "title": "Favro API Reference",
+   "quote": "Update user roles in the organization, or remove users from the organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://favro.com/developer/",
+   "title": "Favro API Reference",
+   "quote": "Removes the user from the organization if the value is set to true.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://favro.com/developer/",
+   "title": "Favro API Reference",
+   "quote": "The users who will be invited to the organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://favro.com/developer/",
+   "title": "Favro API Reference",
+   "quote": "Requests that return multiple items will be paginated to 100 items by default.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c35",
+   "url": "https://help.favro.com/en/articles/1142222-inviting-and-managing-your-team-members",
+   "title": "Inviting and managing your team members",
+   "quote": "This option prevents members from accessing Favro by freezing their accounts and leaving all the data available.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://help.favro.com/en/articles/3702337-adding-and-removing-users",
+   "title": "Adding and removing users",
+   "quote": "When removing users, leading to a downgrade of plan, you are given a credit for the time left on that payment period, not a refund.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://www.okta.com/integrations/favro/",
+   "title": "Favro with Okta",
+   "quote": "Simplifies and manages an organization's identity and access lifecycles between Okta and Favro",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c38",
+   "url": "https://help.favro.com/en/articles/1019946-setting-up-saml-authentication-with-onelogin",
+   "title": "Setting up SAML authentication with OneLogin",
+   "quote": "Search for Favro and select Favro SAML 2.0",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c39",
+   "url": "https://help.favro.com/en/articles/1019946-setting-up-saml-authentication-with-onelogin",
+   "title": "Setting up SAML authentication with OneLogin",
+   "quote": "New users will be created on first sign in to Favro.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c40",
+   "url": "https://help.favro.com/en/articles/8111905-setting-up-saml-authentication-with-google-workspace",
+   "title": "Setting up SAML authentication with Google Workspace",
+   "quote": "In Google Workspace, navigate to Apps > Web and mobile apps > Add app > Add custom SAML app.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c41",
+   "url": "https://favro.com/developer/",
+   "title": "Favro API Reference",
+   "quote": "Favro supports user login and provisioning via SAML.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c42",
+   "url": "https://favro.com/developer/",
+   "title": "Favro API Reference",
+   "quote": "Trial 100 Lite 0 Standard 1000 Enterprise 10000",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c43",
+   "url": "https://favro.com/developer/",
+   "title": "Favro API Reference",
+   "quote": "GET https://favro.com/api/v1/users/:userId",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c44",
+   "url": "https://favro.com/developer/",
+   "title": "Favro API Reference",
+   "quote": "PUT https://favro.com/api/v1/organizations/:organizationId",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c45",
+   "url": "https://favro.com/developer/",
+   "title": "Favro API Reference",
+   "quote": "GET https://favro.com/api/v1/groups",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c46",
+   "url": "https://favro.com/developer/",
+   "title": "Favro API Reference",
+   "quote": "DELETE https://favro.com/api/v1/groups/:groupId",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c47",
+   "url": "https://favro.com/developer/",
+   "title": "Favro API Reference",
+   "quote": "Ping event Card created event Card committed event Card moved event Card updated event Card deleted event Comment created event Comment updated event Comment deleted event",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c48",
+   "url": "https://help.favro.com/en/articles/1142222-inviting-and-managing-your-team-members",
+   "title": "Inviting and managing your team members",
+   "quote": "Administrators can also remove members from the organization by fully deleting their accounts.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c49",
+   "url": "https://favro.com/developer/",
+   "title": "Favro API Reference",
+   "quote": "Disables a user",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.favro.com/pricing (rendered)",
+  "https://help.favro.com/sitemap.xml",
+  "https://favro.com/developer/ (full API reference)",
+  "https://www.okta.com/integrations/favro/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/favro-tutorial (404)",
+  "https://www.jumpcloud.com/integrations/favro (404)"
+ ],
+ "open_questions": [
+  "Does SCIM deactivation free the seat / lower the user bucket?",
+  "Does deactivation end active sessions?",
+  "SCIM token expiry not documented.",
+  "ServiceProviderConfig/Schemas endpoints not documented.",
+  "No audit-log API documented.",
+  "Whether the user-level REST API can disable (role 'disabled') users is not stated.",
+  "Whether the Entra app is in the gallery is not documented by Favro."
+ ]
+}

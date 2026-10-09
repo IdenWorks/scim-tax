@@ -1,0 +1,810 @@
+{
+ "slug": "anecdotes",
+ "vendor": "Anecdotes",
+ "vendor_url": "https://www.anecdotes.ai",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Anecdotes",
+  "slug": "anecdotes",
+  "category": "Legal, Contracts & Compliance",
+  "status": "gated",
+  "scim_plan": "Applicable packages (Contact Sales)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales (Request Pricing; single platform, no public tiers)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Anecdotes platform (Contact Sales)",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": false,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": false
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": "sso_only",
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.anecdotes.ai/pricing",
+  "docs_url": "https://help.anecdotes.ai/technical-setup/identity-and-access/scim",
+  "evidence": "Anecdotes' pricing page is quote-only (\"Request Pricing\"), and its Okta SCIM guide says \"This feature is only available with applicable packages.\"",
+  "notes": "New row. Anecdotes (GRC platform, anecdotes.ai) sells one quote-only platform; the pricing page claims 'No feature gates', but the help centre's Okta SCIM guide says SCIM is only available with applicable packages and the SCIM-key API needs SCIM enabled for the tenant, so it is recorded as gated behind Contact Sales (see conflicts). SCIM 2.0-style endpoint https://gateway.anecdotes.ai/identity/v1/scim with a never-expiring provisioning token from Settings > SCIM; works with the Okta catalogue app (Create, Update, Deactivate) and a non-gallery Entra app; groups are not supported; unassigning deactivates the user. Roles go through the SCIM roles attribute (built-in values or custom role IDs). SAML SSO with any SAML 2.0 IdP is configured separately. A REST Identity API (api.anecdotes.ai) can list, create/invite, update and delete users and manage roles; an Audit Logs API exists. Plan for the API is not stated.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Anecdotes platform",
+   "price_text": "Request Pricing (Contact Sales)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c1",
+    "c2",
+    "c20",
+    "c5",
+    "c26",
+    "c35"
+   ],
+   "notes": "Single quote-only platform. SCIM docs say 'only available with applicable packages'; package names are not public."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c3",
+   "c4",
+   "c5",
+   "c13",
+   "c23"
+  ],
+  "plan": "Applicable packages (Contact Sales)",
+  "addon_price_text": null,
+  "sso_required": false,
+  "version": null,
+  "base_url": "https://gateway.anecdotes.ai/identity/v1/scim",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Settings > SCIM > Generate (provisioning token and URL)",
+   "token_expiry": "never",
+   "cite": [
+    "c4",
+    "c24"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": false,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c3",
+    "c14"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": null,
+   "group_push": false,
+   "group_membership": false,
+   "cite": [
+    "c3",
+    "c10",
+    "c14",
+    "c7"
+   ],
+   "notes": "Okta app supports Create Users, Update User Attributes and Deactivate Users. PUT vs PATCH not documented."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "User stays in deactivated status on the Anecdotes platform.",
+   "cite": [
+    "c6",
+    "c7"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "active",
+    "displayName",
+    "title",
+    "emails[type eq \"work\"].value",
+    "name.givenName",
+    "name.familyName",
+    "name.formatted",
+    "roles[primary eq \"True\"].value"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": true,
+    "how": "email_login_disabled (boolean) in the core User namespace, added as a custom attribute in Okta or Entra"
+   },
+   "group": [],
+   "cite": [
+    "c15",
+    "c11",
+    "c18"
+   ],
+   "notes": "Entra guide says to keep only these attributes. Okta guide: updating email and title is not available."
+  },
+  "roles": {
+   "supported": true,
+   "how": "roles attribute with built-in values (anecdotes:admin, anecdotes:manager, anecdotes:it, anecdotes:auditor, stakeholder_role, contributor_role, viewer_role, anecdotes:trustcenter_access_manager) or a custom role ID; Entra maps app roles via SingleAppRoleAssignment",
+   "cite": [
+    "c18",
+    "c19"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Groups provisioning is not supported.",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "text": "Updating user email and title via SCIM is not available.",
+    "cite": [
+     "c8"
+    ]
+   },
+   {
+    "text": "SCIM is only available with applicable packages and must be enabled for the tenant.",
+    "cite": [
+     "c5",
+     "c23"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c26",
+   "c40"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://api.anecdotes.ai",
+  "docs_url": "https://help.anecdotes.ai/api/users",
+  "auth": {
+   "methods": [
+    "api_key_exchanged_for_jwt"
+   ],
+   "scopes": [
+    "user.read",
+    "user.write",
+    "user.update",
+    "user.delete",
+    "role.read",
+    "role.write",
+    "role.update",
+    "role.delete"
+   ],
+   "cite": [
+    "c25",
+    "c27",
+    "c28",
+    "c29",
+    "c30",
+    "c33",
+    "c34"
+   ],
+   "notes": "API token (Administration > API tokens, with expiry and role) is exchanged for a 60-minute JWT."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": null,
+   "create_user": true,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": true,
+   "manage_groups": null,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c27",
+    "c28",
+    "c29",
+    "c30",
+    "c31",
+    "c33"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/identity/v1/user/list",
+    "purpose": "List users (email and id only)",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/identity/v1/user",
+    "purpose": "List users (full objects, not paginated)",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/identity/v1/user",
+    "purpose": "Create and invite a user",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/identity/v1/user/{email}",
+    "purpose": "Resend invitation / reactivate user",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/identity/v1/user/{email}",
+    "purpose": "Update user",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/identity/v1/user/{email}",
+    "purpose": "Delete user",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/identity/v1/roles/{user_id}",
+    "purpose": "Get a user's role assignments",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/identity/v1/roles",
+    "purpose": "List roles",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/identity/v1/roles",
+    "purpose": "Create custom role",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/identity/v1/roles",
+    "purpose": "Update custom role",
+    "cite": [
+     "c38"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/identity/v1/roles",
+    "purpose": "Delete custom role",
+    "cite": [
+     "c39"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/identity/v1/scim/apikey",
+    "purpose": "List SCIM API keys",
+    "cite": [
+     "c23"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/identity/v1/scim/apikey",
+    "purpose": "Create SCIM API key (never expires)",
+    "cite": [
+     "c24"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/identity/v1/scim/apikey",
+    "purpose": "Delete SCIM API key",
+    "cite": [
+     "c23"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": null,
+   "cite": [
+    "c35"
+   ],
+   "notes": "GET /auditing/logs"
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/anecdotes/",
+   "cite": [
+    "c36",
+    "c9",
+    "c10"
+   ],
+   "notes": "OIN page marks SAML, SCIM, Create, Update and Deactivate as checked (read from page markup)."
+  },
+  "entra": {
+   "listed": false,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c17",
+    "c12"
+   ],
+   "notes": "No gallery app: Anecdotes' guide uses a non-gallery app against the generic SCIM endpoint (learn.microsoft.com anecdotes tutorial URLs return 404)."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c21"
+   ],
+   "notes": "OneLogin connector page not loaded (bot challenge); Anecdotes' OneLogin guide adds the Anecdotes catalogue app for SAML only."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c22"
+   ],
+   "notes": "Anecdotes' JumpCloud guide uses a Custom Application for SAML; no provisioning guide."
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c3"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.anecdotes.ai/pricing",
+   "title": "Pricing Plans for Data Oriented GRC | Anecdotes",
+   "quote": "No feature gates, no compromises.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.anecdotes.ai/pricing",
+   "title": "Pricing Plans for Data Oriented GRC | Anecdotes",
+   "quote": "Request Pricing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://help.anecdotes.ai/technical-setup/identity-and-access/scim",
+   "title": "SCIM",
+   "quote": "It creates users, updates supported attributes, assigns roles, and deactivates users when access ends.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://help.anecdotes.ai/technical-setup/identity-and-access/scim.md",
+   "title": "SCIM",
+   "quote": "Before configuring a provider, generate a provisioning token in Settings → SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.anecdotes.ai/technical-setup/identity-and-access/scim"
+  },
+  {
+   "id": "c5",
+   "url": "https://help.anecdotes.ai/technical-setup/identity-and-access/scim/scim-provisioning-of-users-with-okta.md",
+   "title": "Okta SCIM Setup",
+   "quote": "This feature is only available with applicable packages.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.anecdotes.ai/technical-setup/identity-and-access/scim/scim-provisioning-of-users-with-okta"
+  },
+  {
+   "id": "c6",
+   "url": "https://help.anecdotes.ai/technical-setup/identity-and-access/scim/scim-provisioning-of-users-with-okta.md",
+   "title": "Okta SCIM Setup",
+   "quote": "In the SCIM application Assignments tab, click the X icon next to the user to deactivate them and revoke access to the Anecdotes platform.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.anecdotes.ai/technical-setup/identity-and-access/scim/scim-provisioning-of-users-with-okta"
+  },
+  {
+   "id": "c7",
+   "url": "https://help.anecdotes.ai/technical-setup/identity-and-access/scim/scim-provisioning-of-users-with-okta.md",
+   "title": "Okta SCIM Setup",
+   "quote": "The user will be in deactivated status on the Anecdotes platform.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.anecdotes.ai/technical-setup/identity-and-access/scim/scim-provisioning-of-users-with-okta"
+  },
+  {
+   "id": "c8",
+   "url": "https://help.anecdotes.ai/technical-setup/identity-and-access/scim/scim-provisioning-of-users-with-okta.md",
+   "title": "Okta SCIM Setup",
+   "quote": "Updating user email and title are not available.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.anecdotes.ai/technical-setup/identity-and-access/scim/scim-provisioning-of-users-with-okta"
+  },
+  {
+   "id": "c9",
+   "url": "https://help.anecdotes.ai/technical-setup/identity-and-access/scim/scim-provisioning-of-users-with-okta.md",
+   "title": "Okta SCIM Setup",
+   "quote": "Use the search bar to search for Anecdotes and click Add Integration.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.anecdotes.ai/technical-setup/identity-and-access/scim/scim-provisioning-of-users-with-okta"
+  },
+  {
+   "id": "c10",
+   "url": "https://help.anecdotes.ai/technical-setup/identity-and-access/scim/scim-provisioning-of-users-with-okta.md",
+   "title": "Okta SCIM Setup",
+   "quote": "verify the 3 first options: (1) Create Users (2) Update User Attributes (3) Deactivate Users are enabled.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.anecdotes.ai/technical-setup/identity-and-access/scim/scim-provisioning-of-users-with-okta"
+  },
+  {
+   "id": "c11",
+   "url": "https://help.anecdotes.ai/technical-setup/identity-and-access/scim/scim-provisioning-of-users-with-okta.md",
+   "title": "Okta SCIM Setup",
+   "quote": "The email_login_disabled attribute controls whether a specific user can sign in to Anecdotes using their email and password.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.anecdotes.ai/technical-setup/identity-and-access/scim/scim-provisioning-of-users-with-okta"
+  },
+  {
+   "id": "c12",
+   "url": "https://help.anecdotes.ai/technical-setup/identity-and-access/scim/scim-with-microsoft-entraid.md",
+   "title": "Microsoft Entra ID SCIM Setup",
+   "quote": "Microsoft Entra ID is an available SCIM provider for Anecdotes.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.anecdotes.ai/technical-setup/identity-and-access/scim/scim-with-microsoft-entraid"
+  },
+  {
+   "id": "c13",
+   "url": "https://help.anecdotes.ai/technical-setup/identity-and-access/scim/scim-with-microsoft-entraid",
+   "title": "Microsoft Entra ID SCIM Setup",
+   "quote": "Tenant URL: Anecdotes Provisioning URL (https://gateway.anecdotes.ai/identity/v1/scim)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://help.anecdotes.ai/technical-setup/identity-and-access/scim/scim-with-microsoft-entraid.md",
+   "title": "Microsoft Entra ID SCIM Setup",
+   "quote": "Disable Groups provisioning, as this is not currently supported by the Anecdotes SCIM service",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.anecdotes.ai/technical-setup/identity-and-access/scim/scim-with-microsoft-entraid"
+  },
+  {
+   "id": "c15",
+   "url": "https://help.anecdotes.ai/technical-setup/identity-and-access/scim/scim-with-microsoft-entraid.md",
+   "title": "Microsoft Entra ID SCIM Setup",
+   "quote": "Delete fields that cannot be synced with Anecdotes SCIM. Keep only the following fields:",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.anecdotes.ai/technical-setup/identity-and-access/scim/scim-with-microsoft-entraid"
+  },
+  {
+   "id": "c16",
+   "url": "https://help.anecdotes.ai/technical-setup/identity-and-access/scim/scim-with-microsoft-entraid.md",
+   "title": "Microsoft Entra ID SCIM Setup",
+   "quote": "SCIM creates users when provisioning runs. SAML SSO is configured separately.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.anecdotes.ai/technical-setup/identity-and-access/scim/scim-with-microsoft-entraid"
+  },
+  {
+   "id": "c17",
+   "url": "https://help.anecdotes.ai/technical-setup/identity-and-access/scim/scim-with-microsoft-entraid.md",
+   "title": "Microsoft Entra ID SCIM Setup",
+   "quote": "Integrate any other application you don’t find in the gallery (non-gallery)",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.anecdotes.ai/technical-setup/identity-and-access/scim/scim-with-microsoft-entraid"
+  },
+  {
+   "id": "c18",
+   "url": "https://help.anecdotes.ai/technical-setup/identity-and-access/scim/anecdotes-roles-with-scim.md",
+   "title": "Anecdotes Roles and SCIM",
+   "quote": "Anecdotes Roles can be configured by passing the following values through SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.anecdotes.ai/technical-setup/identity-and-access/scim/anecdotes-roles-with-scim"
+  },
+  {
+   "id": "c19",
+   "url": "https://help.anecdotes.ai/technical-setup/identity-and-access/scim/anecdotes-roles-with-scim.md",
+   "title": "Anecdotes Roles and SCIM",
+   "quote": "Custom roles are supported by passing the custom role’s ID (SCIM key) through SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.anecdotes.ai/technical-setup/identity-and-access/scim/anecdotes-roles-with-scim"
+  },
+  {
+   "id": "c20",
+   "url": "https://help.anecdotes.ai/technical-setup/identity-and-access/sso.md",
+   "title": "Single Sign-On (SSO) with SAML 2.0",
+   "quote": "Configure one or more SAML 2.0 identity providers for your tenant.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.anecdotes.ai/technical-setup/identity-and-access/sso"
+  },
+  {
+   "id": "c21",
+   "url": "https://help.anecdotes.ai/technical-setup/identity-and-access/sso/how-to-configure-onelogin-saml-2.0-for-anecdotes.md",
+   "title": "OneLogin SSO Setup",
+   "quote": "Search for the Anecdotes app and click on it",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.anecdotes.ai/technical-setup/identity-and-access/sso/how-to-configure-onelogin-saml-2.0-for-anecdotes"
+  },
+  {
+   "id": "c22",
+   "url": "https://help.anecdotes.ai/technical-setup/identity-and-access/sso/how-to-configure-jumpcloud-saml-2.0-for-anecdotes.md",
+   "title": "Jumpcloud SSO Setup",
+   "quote": "Select the \"Custom Application\" option",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.anecdotes.ai/technical-setup/identity-and-access/sso/how-to-configure-jumpcloud-saml-2.0-for-anecdotes"
+  },
+  {
+   "id": "c23",
+   "url": "https://help.anecdotes.ai/api/scim-api-keys.md",
+   "title": "SCIM API Keys",
+   "quote": "API keys scoped to SCIM-based user provisioning (e.g. Okta, Azure AD). Requires SCIM to be enabled for the tenant.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.anecdotes.ai/api/scim-api-keys"
+  },
+  {
+   "id": "c24",
+   "url": "https://help.anecdotes.ai/api/scim-api-keys.md",
+   "title": "SCIM API Keys",
+   "quote": "`api_key_role` is always `sciminvoker` and the key never expires",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.anecdotes.ai/api/scim-api-keys"
+  },
+  {
+   "id": "c25",
+   "url": "https://help.anecdotes.ai/technical-setup/api/using-the-anecdotes-api.md",
+   "title": "Using the Anecdotes API",
+   "quote": "Note: JWTs are valid for 60 minutes, at which time a new token will need to be provided.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.anecdotes.ai/technical-setup/api/using-the-anecdotes-api"
+  },
+  {
+   "id": "c26",
+   "url": "https://help.anecdotes.ai/technical-setup/api.md",
+   "title": "API",
+   "quote": "The Anecdotes API provides programmatic access to the Anecdotes GRC platform.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.anecdotes.ai/technical-setup/api"
+  },
+  {
+   "id": "c27",
+   "url": "https://help.anecdotes.ai/api/users.md",
+   "title": "Users",
+   "quote": "Returns full user objects for every user in the tenant. Requires the `user.read` scope. Not paginated",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.anecdotes.ai/api/users"
+  },
+  {
+   "id": "c28",
+   "url": "https://help.anecdotes.ai/api/users.md",
+   "title": "Users",
+   "quote": "Creates and invites a new user. Requires the `user.write` scope.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.anecdotes.ai/api/users"
+  },
+  {
+   "id": "c29",
+   "url": "https://help.anecdotes.ai/api/users.md",
+   "title": "Users",
+   "quote": "Removes a user. Requires the `user.delete` scope.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.anecdotes.ai/api/users"
+  },
+  {
+   "id": "c30",
+   "url": "https://help.anecdotes.ai/api/users.md",
+   "title": "Users",
+   "quote": "Partially updates a user. Only the fields present in the request body are changed. Requires the `user.update` scope.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.anecdotes.ai/api/users"
+  },
+  {
+   "id": "c31",
+   "url": "https://help.anecdotes.ai/api/users.md",
+   "title": "Users",
+   "quote": "Resends the invitation email / reactivates the user with the identity provider.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.anecdotes.ai/api/users"
+  },
+  {
+   "id": "c32",
+   "url": "https://help.anecdotes.ai/api/users.md",
+   "title": "Users",
+   "quote": "Returns every user's email and internal id only.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.anecdotes.ai/api/users"
+  },
+  {
+   "id": "c33",
+   "url": "https://help.anecdotes.ai/api/roles.md",
+   "title": "Roles",
+   "quote": "Returns the resolved role assignment(s) for a user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.anecdotes.ai/api/roles"
+  },
+  {
+   "id": "c34",
+   "url": "https://help.anecdotes.ai/api/roles.md",
+   "title": "Roles",
+   "quote": "Creates a tenant-scoped custom role.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.anecdotes.ai/api/roles"
+  },
+  {
+   "id": "c35",
+   "url": "https://help.anecdotes.ai/api/audit-logs.md",
+   "title": "Audit Logs",
+   "quote": "Returns audit log entries for your tenant, newest first.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.anecdotes.ai/api/audit-logs"
+  },
+  {
+   "id": "c36",
+   "url": "https://www.okta.com/integrations/anecdotes/",
+   "title": "Integrate anecdotes with Okta",
+   "quote": "anecdotes builds a compliance platform which automates the InfoSec compliance process, lifting the burden off your organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://help.anecdotes.ai/product-tour/users/users-page.md",
+   "title": "Users Page",
+   "quote": "Guest users are free-of-charge users who are license-exempt accounts intended for occasional or narrowly scoped access.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.anecdotes.ai/product-tour/users/users-page"
+  },
+  {
+   "id": "c38",
+   "url": "https://help.anecdotes.ai/api/roles.md",
+   "title": "Roles",
+   "quote": "Full-object replace of a custom role",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.anecdotes.ai/api/roles"
+  },
+  {
+   "id": "c39",
+   "url": "https://help.anecdotes.ai/api/roles.md",
+   "title": "Roles",
+   "quote": "Deletes a tenant-scoped custom role.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.anecdotes.ai/api/roles"
+  },
+  {
+   "id": "c40",
+   "url": "https://help.anecdotes.ai/api/users.md",
+   "title": "Users",
+   "quote": "Create, list, update, and remove users. Includes resending an invitation",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.anecdotes.ai/api/users"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The pricing page says the platform comes with 'No feature gates, no compromises', but the Okta SCIM guide says SCIM is 'only available with applicable packages' and the SCIM-key API requires SCIM to be enabled for the tenant; the docs are more specific about this feature, so SCIM is recorded as package-gated.",
+   "cite": [
+    "c1",
+    "c5",
+    "c23"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.anecdotes.ai/pricing",
+  "https://www.anecdotes.ai/sitemap.xml",
+  "https://help.anecdotes.ai/sitemap.xml (657 pages)",
+  "https://help.anecdotes.ai/llms-full.txt (searched for JIT, CSV user import)",
+  "https://help.anecdotes.ai/api/ (API reference)",
+  "https://www.okta.com/integrations/anecdotes/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/anecdotes-tutorial (404)"
+ ],
+ "open_questions": [
+  "Which packages include SCIM is not public.",
+  "SCIM version, discovery endpoints, filtering and pagination are not documented.",
+  "Whether SCIM deactivation frees a licence or ends sessions is not documented.",
+  "Whether SAML sign-in creates users just in time is not documented.",
+  "Plan for the REST Identity API is not stated."
+ ]
+}

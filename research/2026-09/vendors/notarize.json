@@ -1,0 +1,594 @@
+{
+ "slug": "notarize",
+ "vendor": "Proof (formerly Notarize)",
+ "vendor_url": "https://www.proof.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Proof (formerly Notarize)",
+  "slug": "notarize",
+  "category": "Legal, Contracts & Compliance",
+  "status": "gated",
+  "scim_plan": "Premium & Enterprise",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Pro+",
+  "team_price_text": "Pro+: $199/mo + transaction fees",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Premium & Enterprise",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": null
+  },
+  "idp": {
+   "okta": null,
+   "entra": null,
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.proof.com/pricing",
+  "docs_url": "https://dev.proof.com/docs/scim-api-quick-start-guide",
+  "evidence": "Proof's pricing page lists \"Proof Command Center (Admin, SSO, SCIM)\" only under Premium & Enterprise (custom pricing), and its developer docs describe SCIM 2.0 endpoints at https://api.proof.com/scim/v1/organizations/{organization}/ for IdP provisioning.",
+  "notes": "Notarize now trades as Proof (Notarize, Inc. dba Proof.com); row named for the product sold today, slug kept. Plans: Pro $0/mo + transaction fees, Pro+ $199/mo + fees (API access), Premium & Enterprise custom pricing with Command Center (Admin, SSO, SCIM). Flat platform fee plus per-transaction pricing, so per-user fields are null. SCIM covers Users only (create, get, list with userName filter, PUT, PATCH, DELETE, active=false deprovision, roles owner/admin/employee) and authenticates with an ApiKey header, not a bearer token; no Groups endpoint documented. SAML SSO also offers JIT provisioning with role and child-organization attributes. Security events (audit) API requires Command Center. No Proof app found in the Okta or Entra catalogues.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": false,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Pro",
+   "price_text": "$0 / month + transaction fees",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": false,
+   "cite": [
+    "c3",
+    "c1",
+    "c5"
+   ],
+   "notes": "API access starts at Pro+."
+  },
+  {
+   "name": "Pro+",
+   "price_text": "$199 / month + transaction fees",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": false,
+   "cite": [
+    "c2",
+    "c5",
+    "c1"
+   ],
+   "notes": "Flat platform fee; billing period not stated on the page. Includes API access (transactions), not Command Center."
+  },
+  {
+   "name": "Premium & Enterprise",
+   "price_text": "Custom pricing",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": true,
+   "cite": [
+    "c4",
+    "c1",
+    "c20"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c1",
+   "c6",
+   "c7",
+   "c8",
+   "c29"
+  ],
+  "plan": "Premium & Enterprise",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://api.proof.com/scim/v1/organizations/{organization}/",
+  "auth": {
+   "method": "other",
+   "token_source": "Proof API key (Settings >> API Keys, admin role) sent in the ApiKey header; a parent-organization key can manage child organizations",
+   "token_expiry": null,
+   "cite": [
+    "c9",
+    "c21"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": true,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c27",
+    "c16"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": true,
+   "group_push": null,
+   "group_membership": null,
+   "cite": [
+    "c27",
+    "c25",
+    "c26",
+    "c15",
+    "c11",
+    "c14"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c11",
+    "c14"
+   ],
+   "notes": "active=false marks the identity deprovisioned; DELETE also exists."
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName"
+   ],
+   "cite": [
+    "c24"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c13"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "emails[primary].value",
+    "roles",
+    "externalId",
+    "active"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": [
+    "c11",
+    "c12"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "roles attribute, primary only: owner, admin or employee",
+   "cite": [
+    "c12"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Auth is a Proof API key in an ApiKey header rather than a bearer token.",
+    "cite": [
+     "c9"
+    ]
+   },
+   {
+    "text": "SAML NameID and SCIM userName must match for each user.",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "text": "Only a primary email and a primary role are supported.",
+    "cite": [
+     "c12"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": false,
+  "cite": [
+   "c27"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": null,
+  "base_url": null,
+  "docs_url": null,
+  "auth": {
+   "methods": [],
+   "scopes": [],
+   "cite": []
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": []
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Premium & Enterprise",
+   "cite": [
+    "c20",
+    "c1"
+   ],
+   "notes": "List Security Events (OCSF) requires Command Center."
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "By absence: the developer docs' only user-management endpoints are the SCIM API; the rest of the API covers transactions, documents, organizations and webhooks."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "entra": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c17",
+   "c18",
+   "c28",
+   "c7"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.proof.com/pricing",
+   "title": "Proof Platform Pricing | Proof",
+   "quote": "Proof Command Center (Admin, SSO, SCIM)",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://www.proof.com/pricing",
+   "title": "Proof Platform Pricing | Proof",
+   "quote": "$199 / month + transaction fees",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://www.proof.com/pricing",
+   "title": "Proof Platform Pricing | Proof",
+   "quote": "$0 / month + transaction fees",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://www.proof.com/pricing",
+   "title": "Proof Platform Pricing | Proof",
+   "quote": "Custom pricing For mid- and large-sized businesses",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://www.proof.com/pricing",
+   "title": "Proof Platform Pricing | Proof",
+   "quote": "Everything in Pro, and: API access Custom branding",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://www.proof.com/product/command-center",
+   "title": "Command Center | Proof",
+   "quote": "Automate user provisioning and permission management via SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://dev.proof.com/docs/scim-api-quick-start-guide.md",
+   "title": "SCIM API Quick Start Guide",
+   "quote": "are based on version 2.0 of the SCIM standard",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.proof.com/docs/scim-api-quick-start-guide"
+  },
+  {
+   "id": "c8",
+   "url": "https://dev.proof.com/docs/scim-api-quick-start-guide.md",
+   "title": "SCIM API Quick Start Guide",
+   "quote": "IdPs should use the base URL",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.proof.com/docs/scim-api-quick-start-guide"
+  },
+  {
+   "id": "c9",
+   "url": "https://dev.proof.com/docs/scim-api-quick-start-guide.md",
+   "title": "SCIM API Quick Start Guide",
+   "quote": "The REST API expects an API key to be included in the ApiKey header.",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.proof.com/docs/scim-api-quick-start-guide"
+  },
+  {
+   "id": "c10",
+   "url": "https://dev.proof.com/docs/scim-api-quick-start-guide.md",
+   "title": "SCIM API Quick Start Guide",
+   "quote": "The SAML IdP and the SCIM client must use matching NameID and userName values for each user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.proof.com/docs/scim-api-quick-start-guide"
+  },
+  {
+   "id": "c11",
+   "url": "https://dev.proof.com/reference/createuser.md",
+   "title": "Create User",
+   "quote": "Used to indicate whether the identity is active (true) or deprovisioned (false).",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.proof.com/reference/createuser"
+  },
+  {
+   "id": "c12",
+   "url": "https://dev.proof.com/reference/createuser.md",
+   "title": "Create User",
+   "quote": "List of user roles, only primary supported. One of “owner”, “admin” or “employee”",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.proof.com/reference/createuser"
+  },
+  {
+   "id": "c13",
+   "url": "https://dev.proof.com/reference/listuser.md",
+   "title": "List Users",
+   "quote": "Non-negative integer. Specifies the desired maximum number of query results per page",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.proof.com/reference/listuser"
+  },
+  {
+   "id": "c14",
+   "url": "https://dev.proof.com/reference/deleteuser.md",
+   "title": "Delete User",
+   "quote": "\"summary\": \"Delete User\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.proof.com/reference/deleteuser"
+  },
+  {
+   "id": "c15",
+   "url": "https://dev.proof.com/reference/updateuser.md",
+   "title": "Update User",
+   "quote": "Can be one of: add, remove, replace",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.proof.com/reference/updateuser"
+  },
+  {
+   "id": "c16",
+   "url": "https://dev.proof.com/reference/userschema.md",
+   "title": "Retrieve Users Schema",
+   "quote": "SCIM /Users provisioning endpoints",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.proof.com/reference/userschema"
+  },
+  {
+   "id": "c17",
+   "url": "https://support.proof.com/api/v2/help_center/en-us/articles/30150402514711.json",
+   "title": "Set up single sign-on in your Proof account",
+   "quote": "Review the configuration details, including JIT provisioning, routing logic for new users, and whether users will retain password access.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.proof.com/hc/en-us/articles/30150402514711-Set-up-single-sign-on-in-your-Proof-account"
+  },
+  {
+   "id": "c18",
+   "url": "https://support.proof.com/api/v2/help_center/en-us/articles/30148194263959.json",
+   "title": "Set Up SAML Configurations with Your Identity Provider for SSO",
+   "quote": "These attributes sent from the IDP to SP help Proof provision accounts, assign specific roles (organization admin, organization notary), and create users in the desired child organizations.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.proof.com/hc/en-us/articles/30148194263959-Set-Up-SAML-Configurations-with-Your-Identity-Provider-for-SSO"
+  },
+  {
+   "id": "c19",
+   "url": "https://support.proof.com/api/v2/help_center/en-us/articles/26641973835543.json",
+   "title": "Command Center Overview",
+   "quote": "Contact your Customer Success Manager (CSM) or our sales team if you're interested in Command Center.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.proof.com/hc/en-us/articles/26641973835543-Command-Center-Overview"
+  },
+  {
+   "id": "c20",
+   "url": "https://dev.proof.com/reference/listsecurityevents.md",
+   "title": "List Security Events",
+   "quote": "Returns a paginated list of security events in OCSF format for the authenticated organization. Requires Command Center access.",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.proof.com/reference/listsecurityevents"
+  },
+  {
+   "id": "c21",
+   "url": "https://dev.proof.com/docs/api-keys.md",
+   "title": "API Keys and Authentication",
+   "quote": "If you're unable to find API key settings in your account, you may need to upgrade your plan.",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.proof.com/docs/api-keys"
+  },
+  {
+   "id": "c22",
+   "url": "https://support.proof.com/api/v2/help_center/en-us/articles/30150402514711.json",
+   "title": "Set up single sign-on in your Proof account",
+   "quote": "Download a metadata file (.xml) from your Identity Provider (IDP). Common guides:",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.proof.com/hc/en-us/articles/30150402514711-Set-up-single-sign-on-in-your-Proof-account"
+  },
+  {
+   "id": "c23",
+   "url": "https://www.proof.com/pricing",
+   "title": "Proof Platform Pricing | Proof",
+   "quote": "© 2026. Notarize, Inc. dba Proof.com.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c24",
+   "url": "https://dev.proof.com/reference/listuser.md",
+   "title": "List Users",
+   "quote": "Filter by userName. e.g. userName eq",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.proof.com/reference/listuser"
+  },
+  {
+   "id": "c25",
+   "url": "https://dev.proof.com/reference/replaceuser.md",
+   "title": "Replace User",
+   "quote": "\"summary\": \"Replace User\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.proof.com/reference/replaceuser"
+  },
+  {
+   "id": "c26",
+   "url": "https://dev.proof.com/reference/retrieveuser.md",
+   "title": "Retrieve User",
+   "quote": "\"summary\": \"Retrieve User\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.proof.com/reference/retrieveuser"
+  },
+  {
+   "id": "c27",
+   "url": "https://dev.proof.com/llms.txt",
+   "title": "Proof Documentation (llms.txt)",
+   "quote": "API Endpoint Reference: SCIM API Specification",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.proof.com/reference/createuser"
+  },
+  {
+   "id": "c28",
+   "url": "https://support.proof.com/api/v2/help_center/en-us/articles/30148194263959.json",
+   "title": "Set Up SAML Configurations with Your Identity Provider for SSO",
+   "quote": "If omitted for new users, the role defaults to employee .",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.proof.com/hc/en-us/articles/30148194263959-Set-Up-SAML-Configurations-with-Your-Identity-Provider-for-SSO"
+  },
+  {
+   "id": "c29",
+   "url": "https://dev.proof.com/reference/createuser.md",
+   "title": "Create User",
+   "quote": "\"/scim/v1/organizations/{organization_id}/Users/\": {",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.proof.com/reference/createuser"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.proof.com/pricing (business plans)",
+  "https://www.proof.com/sitemap.xml, https://www.proof.com/product/command-center",
+  "https://dev.proof.com/llms.txt and SCIM API Specification reference (.md exports)",
+  "support.proof.com help-centre search API: scim, single sign-on, provisioning",
+  "Okta OIN slugs notarize, proof, proofcom, proof-com, notarize-inc, proof-platform (404); Entra gallery proof/notarize tutorials (404)"
+ ],
+ "open_questions": [
+  "No Groups endpoint or group push is documented for SCIM.",
+  "Whether SCIM deactivation frees a seat or ends sessions is not documented (pricing is per platform plus per transaction).",
+  "Which IdP catalogue apps (if any) provision Proof is not documented; the ApiKey-header auth may not fit IdPs that only send bearer tokens.",
+  "Whether Pro+ API keys can call the SCIM endpoints without Command Center is not stated."
+ ]
+}

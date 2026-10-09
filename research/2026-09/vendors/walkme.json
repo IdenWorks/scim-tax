@@ -1,0 +1,596 @@
+{
+ "slug": "walkme",
+ "vendor": "WalkMe (SAP)",
+ "vendor_url": "https://www.walkme.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "WalkMe (SAP)",
+  "slug": "walkme",
+  "category": "Learning & Development",
+  "status": "gated",
+  "scim_plan": "WalkMe Digital Adoption Platform",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "WalkMe Digital Adoption Platform",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": null,
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.walkme.com/pricing/",
+  "docs_url": "https://support.walkme.com/knowledge-base/scim-api-for-walkme/",
+  "evidence": "WalkMe's help centre documents \"a SCIM 2.0 compliant endpoint\" for managing users and groups, while the pricing page offers only \"Request a quote\".",
+  "notes": "Quote-only: WalkMe (an SAP company) publishes no plans or prices, so SCIM can only be bought through sales. The SCIM 2.0 API is documented in full (Users, Groups, ServiceProviderConfig, Schemas; filter and pagination up to 1000; Basic or bearer auth; separate base URLs for US, EU, Canada, FedRAMP and SAP-hosted tenants). Okta has a WalkMe OIN app with Create/Update/Deactivate/Group Push; other IdPs can use the generic endpoint. No plan gate within the product is documented.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "WalkMe Digital Adoption Platform",
+   "price_text": "Request a quote",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c3",
+    "c28"
+   ],
+   "notes": "No public tiers or prices; the pricing page offers only 'Request a quote' / 'Get a quote'."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c3",
+   "c1",
+   "c5",
+   "c25"
+  ],
+  "plan": "WalkMe Digital Adoption Platform",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://papi.walkme.com/deepui/api/scim/v2",
+  "auth": {
+   "method": "bearer",
+   "token_source": "WalkMe Admin Center > Security & Audit > SCIM Integration > + Create SCIM Integration (Basic or Bearer credentials)",
+   "token_expiry": null,
+   "cite": [
+    "c6",
+    "c7",
+    "c21"
+   ],
+   "notes": "Basic auth (generated username/password) or a bearer token; the Okta app uses Basic credentials in the API Token field."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": true,
+   "Schemas": true,
+   "ResourceTypes": true,
+   "Bulk": false,
+   "Me": null,
+   "cite": [
+    "c8",
+    "c13",
+    "c15",
+    "c4",
+    "c19"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c8",
+    "c13",
+    "c14",
+    "c22"
+   ]
+  },
+  "deprovision": {
+   "action": "delete",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c12",
+    "c22"
+   ],
+   "notes": "DELETE /Users/{id} deletes the user and removes it from all groups; Okta's 'Deactivate users' feature is supported, but what deactivation does inside WalkMe (seat, sessions, content) is not documented."
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [],
+   "cite": [
+    "c10"
+   ],
+   "notes": "Operators eq, ne, co, sw, ew, gt, ge, lt, le, pr; filterable attributes are not listed."
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": 1000,
+   "cite": [
+    "c9"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "name.formatted",
+    "displayName",
+    "active",
+    "emails",
+    "groups"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": true,
+    "how": "SAP extension schema urn:ietf:params:scim:schemas:extension:sap:2.0:User (userUuid, auto-generated if absent)"
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c16",
+    "c17",
+    "c18",
+    "c14"
+   ],
+   "notes": "The enterprise extension schema is listed as supported but its attributes are not enumerated."
+  },
+  "roles": {
+   "supported": null,
+   "how": "Okta groups can be pushed or linked to WalkMe groups; no SCIM role attribute is documented.",
+   "cite": [
+    "c24"
+   ]
+  },
+  "rate_limits": {
+   "text": "Rate limited (429 Too Many Requests); limits not published",
+   "cite": [
+    "c20"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Sorting is not supported; sortBy and sortOrder are ignored.",
+    "cite": [
+     "c11"
+    ]
+   },
+   {
+    "text": "Bulk operations are not supported.",
+    "cite": [
+     "c19"
+    ]
+   },
+   {
+    "text": "The SCIM password is shown only once; a lost password means deleting and recreating the integration.",
+    "cite": [
+     "c7"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c28",
+   "c29",
+   "c30"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://api.walkme.com/public",
+  "docs_url": "https://developer.walkme.com/reference/get-single-user-1",
+  "auth": {
+   "methods": [
+    "oauth2_jwt",
+    "personal_access_token"
+   ],
+   "scopes": [],
+   "cite": [
+    "c30"
+   ],
+   "notes": "Short-lived JWTs (24 h) from accounts/connect/token, or Personal Access Tokens valid for one year."
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": true,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c28",
+    "c29"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/v1/scim/Users/:user_id",
+    "purpose": "Get a single user by user ID",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/scim/Users/byEmail/:userEmail",
+    "purpose": "Get a single user by email",
+    "cite": [
+     "c29"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/walkme/",
+   "cite": [
+    "c27",
+    "c21",
+    "c22"
+   ],
+   "notes": "OIN page marks SAML, OIDC, SCIM and Create/Update/Deactivate/Group Push as checked (read from page markup)."
+  },
+  "entra": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c31"
+   ],
+   "notes": "WalkMe links a Microsoft tutorial for Azure AD SSO; learn.microsoft.com walkme-tutorial and walkme-provisioning-tutorial URLs returned 404, so the gallery listing could not be confirmed."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "jumpcloud.com/support/integrate-with-walkme returned 403."
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c3"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.walkme.com/pricing/",
+   "title": "Digital Adoption Platform Pricing - WalkMe",
+   "quote": "A digital adoption platform fit for you. Our pricing plans are designed for any organization to benefit from digital adoption. Request a quote",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.walkme.com/pricing/",
+   "title": "Digital Adoption Platform Pricing - WalkMe",
+   "quote": "Streamline access to WalkMe products via SSO, enabling users to log in with their existing organizational credentials.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://support.walkme.com/knowledge-base/scim-api-for-walkme/",
+   "title": "SCIM API for WalkMe",
+   "quote": "WalkMe SCIM Service Provider allows you to programmatically manage users and groups using a SCIM 2.0 compliant endpoint.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://support.walkme.com/knowledge-base/scim-api-for-walkme/",
+   "title": "SCIM API for WalkMe",
+   "quote": "Create, read, update, patch, and delete users and groups. Search for users and groups with filtering and pagination. Get information on the WalkMe service provider, available schemas, and resource types",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://support.walkme.com/knowledge-base/scim-api-for-walkme/",
+   "title": "SCIM API for WalkMe",
+   "quote": "US : https://papi.walkme.com/deepui/api/scim/v2 EU : https://eu-papi.walkme.com/deepui/api/scim/v2",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://support.walkme.com/knowledge-base/scim-api-for-walkme/",
+   "title": "SCIM API for WalkMe",
+   "quote": "All requests require either HTTP Basic Authentication or Bearer Token authentication",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://support.walkme.com/knowledge-base/scim-api-for-walkme/",
+   "title": "SCIM API for WalkMe",
+   "quote": "The password is shown only once, after closing the popup, it can't be retrieved",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://support.walkme.com/knowledge-base/scim-api-for-walkme/",
+   "title": "SCIM API for WalkMe",
+   "quote": "/Users : Create a user (POST) or get a list of users (GET) /Users/{id} : Get (GET), update (PUT), patch (PATCH), or delete (DELETE) a user",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://support.walkme.com/knowledge-base/scim-api-for-walkme/",
+   "title": "SCIM API for WalkMe",
+   "quote": "count: (Optional) Number of users to return per page (max 1000). Default is 1000.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://support.walkme.com/knowledge-base/scim-api-for-walkme/",
+   "title": "SCIM API for WalkMe",
+   "quote": "Supported operators: eq, ne, co, sw, ew, gt, ge, lt, le, pr",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://support.walkme.com/knowledge-base/scim-api-for-walkme/",
+   "title": "SCIM API for WalkMe",
+   "quote": "Sorting is not supported (sortBy and sortOrder parameters are ignored).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://support.walkme.com/knowledge-base/scim-api-for-walkme/",
+   "title": "SCIM API for WalkMe",
+   "quote": "When a user is deleted, they are automatically removed from all groups they were assigned to.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://support.walkme.com/knowledge-base/scim-api-for-walkme/",
+   "title": "SCIM API for WalkMe",
+   "quote": "/Groups/{id} : Get (GET), update (PUT), patch (PATCH), or delete (DELETE) a group",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://support.walkme.com/knowledge-base/scim-api-for-walkme/",
+   "title": "SCIM API for WalkMe",
+   "quote": "Partially updates a group. Commonly used to add/remove members.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://support.walkme.com/knowledge-base/scim-api-for-walkme/",
+   "title": "SCIM API for WalkMe",
+   "quote": "/ServiceProviderConfig: Get information about the Service Provider /Schemas: Get information on the schemas used for user and group management",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://support.walkme.com/knowledge-base/scim-api-for-walkme/",
+   "title": "SCIM API for WalkMe",
+   "quote": "urn:ietf:params:scim:schemas:core:2.0:User urn:ietf:params:scim:schemas:extension:enterprise:2.0:User urn:ietf:params:scim:schemas:extension:sap:2.0:User urn:ietf:params:scim:schemas:core:2.0:Group",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://support.walkme.com/knowledge-base/scim-api-for-walkme/",
+   "title": "SCIM API for WalkMe",
+   "quote": "\"userName\": \"john.doe@example.com\", \"name\": { \"formatted\": \"John Doe\", \"familyName\": \"Doe\", \"givenName\": \"John\" }, \"displayName\": \"John Doe\", \"active\": true,",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://support.walkme.com/knowledge-base/scim-api-for-walkme/",
+   "title": "SCIM API for WalkMe",
+   "quote": "userName : Must be unique (case-insensitive) emails : Must include at least one email with primary: true",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://support.walkme.com/knowledge-base/scim-api-for-walkme/",
+   "title": "SCIM API for WalkMe",
+   "quote": "\"bulk\": { \"supported\": false },",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://support.walkme.com/knowledge-base/scim-api-for-walkme/",
+   "title": "SCIM API for WalkMe",
+   "quote": "429 Too Many Requests: Rate limit exceeded",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://support.walkme.com/knowledge-base/configure-scim-with-okta/",
+   "title": "Configure SCIM with Okta",
+   "quote": "You can use either the WalkMe Okta App or the SCIM 2.0 Test App (Header Auth) to automatically add and remove users in your organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://support.walkme.com/knowledge-base/configure-scim-with-okta/",
+   "title": "Configure SCIM with Okta",
+   "quote": "The following features are supported: Create users Update user attributes Deactivate users Group push",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://support.walkme.com/knowledge-base/configure-scim-with-okta/",
+   "title": "Configure SCIM with Okta",
+   "quote": "Set up Okta SSO for your WalkMe account",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://support.walkme.com/knowledge-base/configure-scim-with-okta/",
+   "title": "Configure SCIM with Okta",
+   "quote": "You can link an existing WalkMe group to an AD or Okta group.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://support.walkme.com/knowledge-base/scim-integration-for-sap/",
+   "title": "SCIM Integration for SAP",
+   "quote": "US: https://papi-us01.walkme.cloud.sap/deepui/api/scim/v2 EU: https://papi-eu01.walkme.cloud.sap/deepui/api/scim/v2",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://support.walkme.com/knowledge-base/single-sign-on-sso/",
+   "title": "Single Sign-On (SSO)",
+   "quote": "By integrating your Identity Provider (IDP) with the new authentication infrastructure, you can automate user onboarding, enhance security compliance, and provide a frictionless login experience for your entire organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://www.okta.com/integrations/walkme/",
+   "title": "WalkMe | Okta Integration Network",
+   "quote": "Use the Okta IDP Integration to easily validate end-user identities, enhance WalkMe content segmentation, and extend user behavior monitoring capabilities.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://developer.walkme.com/reference/get-single-user-1.md",
+   "title": "Get Single User by User ID",
+   "quote": "https://api.walkme.com/public/v1/scim/Users/:user_id",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.walkme.com/reference/get-single-user-1"
+  },
+  {
+   "id": "c29",
+   "url": "https://developer.walkme.com/reference/get-single-user-by-email.md",
+   "title": "Get Single User by Email",
+   "quote": "https://api.walkme.com/public/v1/scim/Users/byEmail/:userEmail",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.walkme.com/reference/get-single-user-by-email"
+  },
+  {
+   "id": "c30",
+   "url": "https://developer.walkme.com/reference/personal-access-tokens.md",
+   "title": "Personal Access Tokens",
+   "quote": "Unlike short-lived tokens — which generate JWTs valid for 24 hours — PATs authenticate directly and remain valid for one year.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.walkme.com/reference/personal-access-tokens"
+  },
+  {
+   "id": "c31",
+   "url": "https://support.walkme.com/knowledge-base/single-sign-on-sso/",
+   "title": "Single Sign-On (SSO)",
+   "quote": "For more information on configuring SSO for Azure AD, please refer to the following article: Microsoft Tutorial",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.walkme.com/pricing/",
+  "https://support.walkme.com/sitemap_index.xml",
+  "https://support.walkme.com/knowledge-base/scim-api-for-walkme/",
+  "https://support.walkme.com/knowledge-base/configure-scim-with-okta/",
+  "https://support.walkme.com/knowledge-base/scim-integration-for-sap/",
+  "https://support.walkme.com/knowledge-base/single-sign-on-sso/",
+  "https://www.okta.com/integrations/walkme/",
+  "https://developer.walkme.com/llms.txt"
+ ],
+ "open_questions": [
+  "Whether SCIM is limited to particular WalkMe editions or contract tiers is not public.",
+  "What Okta 'Deactivate users' does inside WalkMe (seat freed, sessions ended) is not documented.",
+  "Enterprise-extension attributes accepted are not enumerated.",
+  "SCIM token expiry and rate-limit values are not published.",
+  "Whether SAML sign-in creates users just-in-time is not stated.",
+  "Entra, Google, OneLogin and JumpCloud catalogue apps could not be confirmed."
+ ]
+}

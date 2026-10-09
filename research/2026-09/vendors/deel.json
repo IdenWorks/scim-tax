@@ -1,0 +1,1083 @@
+{
+ "slug": "deel",
+ "vendor": "Deel",
+ "vendor_url": "https://www.deel.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Deel",
+  "slug": "deel",
+  "category": "HR, Payroll & Recruiting",
+  "status": "unknown",
+  "scim_plan": null,
+  "scim_price_text": "Not disclosed",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Deel HR Core",
+  "team_price_text": "Deel HR Core: $5/employee/mo",
+  "team_price_per_user_mo": 5,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": null,
+   "delete": true,
+   "groups": false
+  },
+  "idp": {
+   "okta": "directory_sync",
+   "entra": "directory_sync",
+   "google": "directory_sync",
+   "onelogin": "sso_only",
+   "jumpcloud": "directory_sync",
+   "generic": true
+  },
+  "pricing_page_url": "https://www.deel.com/pricing",
+  "docs_url": "https://developer.deel.com/api/scim-api/overview",
+  "evidence": "Deel documents a SCIM 2.0 API ('The SCIM API is available exclusively to Deel clients and partners with appropriate authorization') but neither the pricing page nor the docs say which plan includes it.",
+  "notes": "Status changed gated -> unknown: June's 'Enterprise only' SCIM gate has no first-party source (Deel's pricing page lists no Enterprise tier and no SCIM or SSO line), so it was dropped. Deel documents a SCIM 2.0 Users API at https://api.letsdeel.com/scim/v2 (Organization token, Users:read/Users:write; create, PUT/PATCH, delete; no Groups), mainly used to sync Deel HR data out to Okta, JumpCloud and others. Inbound provisioning into Deel (PWAC profiles for Deel IT/Engage/HRIS) comes from Deel-run syncs: Okta API Service (daily pull) and Merge.dev for Entra ID, Google Workspace and JumpCloud. Team plan changed from June's Contractor $49/contractor/mo to Deel HR Core $5/employee/mo, the HR admin product the SCIM integrations belong to; Deel bills month-to-month.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Deel HR Core",
+   "price_text": "$5 per employee per month",
+   "price_per_user_mo": 5,
+   "billing": "monthly",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c2"
+   ],
+   "notes": "Advanced and Elite levels sit above Core; their prices appear only in a JS pricing tab and are not recorded here."
+  },
+  {
+   "name": "Deel HR Advanced / Elite",
+   "price_text": null,
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c4"
+   ]
+  },
+  {
+   "name": "Contractor management",
+   "price_text": "$49 per contractor per month",
+   "price_per_user_mo": 49,
+   "billing": "monthly",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2"
+   ],
+   "notes": "June's team plan."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c19",
+   "c5",
+   "c6",
+   "c20",
+   "c27"
+  ],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://api.letsdeel.com/scim/v2",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Deel dashboard > More > Developer > Access Tokens > Organization token (or Apps > Okta > Generate the SCIM API Base URL and Organization token)",
+   "token_expiry": null,
+   "cite": [
+    "c21",
+    "c22",
+    "c50",
+    "c51",
+    "c30"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": false,
+   "ServiceProviderConfig": true,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c7",
+    "c11",
+    "c27"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": null,
+   "reactivate": null,
+   "delete": true,
+   "group_push": false,
+   "group_membership": false,
+   "cite": [
+    "c8",
+    "c9",
+    "c10",
+    "c23",
+    "c24",
+    "c28",
+    "c7"
+   ]
+  },
+  "deprovision": {
+   "action": "delete",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c10"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "email (eq only)"
+   ],
+   "cite": [
+    "c17"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": 100,
+   "cite": [
+    "c18"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "emails",
+    "active",
+    "title",
+    "userType",
+    "addresses"
+   ],
+   "enterprise": [
+    "department",
+    "manager",
+    "costCenter",
+    "organization"
+   ],
+   "custom": {
+    "supported": true,
+    "how": "Deel extension (urn:ietf:params:scim:schemas:extension:2.0:User): startDate, endDate, hiringStatus, employments, customFields, organizationalStructures, isManager; profile-level custom fields can be mapped in Okta."
+   },
+   "group": [],
+   "cite": [
+    "c12",
+    "c13",
+    "c14",
+    "c15",
+    "c16",
+    "c32"
+   ]
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "Organization-wide API limit of 5 requests per second (429 on excess); SCIM docs advise retry with backoff on 429.",
+   "cite": [
+    "c52",
+    "c26"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Only the SCIM User resource is supported (no Groups).",
+    "cite": [
+     "c7"
+    ]
+   },
+   {
+    "text": "Filtering supports only eq on email.",
+    "cite": [
+     "c17"
+    ]
+   },
+   {
+    "text": "Main documented use is Deel as the source, syncing users out to identity providers (Okta, Azure AD, OneLogin).",
+    "cite": [
+     "c25",
+     "c29"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c49",
+   "c27",
+   "c53"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://api.letsdeel.com/rest",
+  "docs_url": "https://developer.deel.com/api/hris-endpoints/people",
+  "auth": {
+   "methods": [
+    "api_key",
+    "oauth2"
+   ],
+   "scopes": [
+    "Users:read",
+    "Users:write",
+    "people:read",
+    "people:write",
+    "groups:read",
+    "groups:write",
+    "organizations:read",
+    "organizations:write"
+   ],
+   "cite": [
+    "c49",
+    "c22",
+    "c53",
+    "c58",
+    "c63"
+   ],
+   "notes": "Organization, personal and worker API tokens, used as Bearer tokens; OAuth2 for partner apps."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c27",
+    "c28",
+    "c55",
+    "c58",
+    "c60"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/scim/v2/Users",
+    "purpose": "SCIM: list users",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/scim/v2/Users/{hris_profile_id}",
+    "purpose": "SCIM: retrieve a user",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/rest/people",
+    "purpose": "List people",
+    "cite": [
+     "c53"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/rest/people/{hris_profile_id}",
+    "purpose": "Retrieve a person",
+    "cite": [
+     "c54"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/rest/pwac",
+    "purpose": "Create a person without a contract (PWAC)",
+    "cite": [
+     "c55"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/rest/people",
+    "purpose": "Create a direct employee",
+    "cite": [
+     "c56"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/rest/groups",
+    "purpose": "List groups",
+    "cite": [
+     "c57"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/rest/groups",
+    "purpose": "Create a group",
+    "cite": [
+     "c58"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/rest/groups/{id}",
+    "purpose": "Edit a group",
+    "cite": [
+     "c59"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/rest/groups/{id}",
+    "purpose": "Delete a group",
+    "cite": [
+     "c60"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/rest/groups/{id}/clone",
+    "purpose": "Clone a group",
+    "cite": [
+     "c61"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/rest/managers",
+    "purpose": "List managers (organization admins/managers)",
+    "cite": [
+     "c62"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/rest/managers",
+    "purpose": "Create a manager",
+    "cite": [
+     "c63"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": true,
+   "events": [
+    "Worker V2 Created",
+    "Worker V2 Updated",
+    "Worker V2 Deleted"
+   ],
+   "cite": [
+    "c64",
+    "c65",
+    "c66"
+   ]
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "5 API requests per second per organization across all tokens; 429 Too Many Requests on excess.",
+   "cite": [
+    "c52"
+   ]
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/deel/",
+   "cite": [
+    "c48",
+    "c43",
+    "c29",
+    "c31"
+   ],
+   "notes": "OIN page marks OIDC, SCIM, Create, Update and Deactivate (from --checked classes in page markup). Deel's own docs describe this Okta SCIM app as syncing Deel HR data into Okta; inbound user creation in Deel from Okta is Deel's separate Okta API Service sync (row idp.okta = directory_sync)."
+  },
+  "entra": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": "directory_sync",
+   "built_by": "vendor",
+   "url": null,
+   "cite": [
+    "c41",
+    "c47",
+    "c39"
+   ],
+   "notes": "Deel's Microsoft integration provisions accounts out to Entra; inbound into Deel is via Merge.dev, set up by Deel. No Entra gallery page checked."
+  },
+  "google": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": "directory_sync",
+   "built_by": "vendor",
+   "url": null,
+   "cite": [
+    "c41",
+    "c38"
+   ],
+   "notes": "Inbound user provisioning from Google Workspace via Merge.dev."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c44",
+    "c41"
+   ]
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": "directory_sync",
+   "built_by": "vendor",
+   "url": null,
+   "cite": [
+    "c45",
+    "c46",
+    "c38"
+   ],
+   "notes": "Deel pushes workers to JumpCloud over SCIM (Deel as source); inbound via Merge.dev."
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": "Third-party user provisioning (PWAC profiles) from HRIS and IdPs: native BambooHR, HiBob, Personio, SAP SuccessFactors, Okta API Service; Merge.dev for Entra ID, Google Workspace, JumpCloud and others.",
+  "docs_public": true,
+  "cite": [
+   "c35",
+   "c37",
+   "c40",
+   "c33",
+   "c34"
+  ]
+ },
+ "conflicts": [
+  {
+   "text": "Okta's OIN page marks the Deel app with SCIM Create/Update/Deactivate, but Deel's help centre describes the Okta SCIM integration as syncing employee data from Deel into Okta, and says SSO integrations such as Okta or Entra ID do not create or update worker profiles in Deel.",
+   "cite": [
+    "c48",
+    "c29",
+    "c36"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.deel.com/pricing",
+  "https://www.deel.com/hr/",
+  "https://developer.deel.com/api/scim-api/overview",
+  "https://developer.deel.com/sitemap.xml",
+  "https://developer.deel.com/llms.txt",
+  "https://developer.deel.com/api/hris-endpoints/users/get-users.md",
+  "https://developer.deel.com/api/hris-endpoints/users/get-user-by-id.md",
+  "https://developer.deel.com/api/authentication.md",
+  "https://developer.deel.com/api/rate-limits.md",
+  "https://help.letsdeel.com/hc/en-gb/articles/13423483873041-Enabling-the-Okta-SCIM-integration-for-Deel-HR",
+  "https://help.letsdeel.com/hc/en-gb/articles/39848984312209-Okta-API-Service-integration-guide",
+  "https://help.letsdeel.com/hc/en-gb/articles/39786946896017-Getting-started-with-third-party-user-provisioning",
+  "https://help.letsdeel.com/hc/en-gb/articles/20955980375313-How-to-Configure-Single-Sign-On",
+  "https://help.letsdeel.com/hc/en-gb/articles/48554350739729-How-to-setup-Deel-SSO-with-Okta-wsing-the-Okta-Integration-Network-OIN-app",
+  "https://help.letsdeel.com/hc/en-gb/articles/22183285399057-How-to-setup-SAML-2-0-Integration-with-OneLogin-for-Single-Sign-On",
+  "https://help.letsdeel.com/hc/en-gb/articles/14868325814801-JumpCloud-Integration-Guide",
+  "https://help.letsdeel.com/hc/en-gb/articles/31065946108561-Microsoft-Entra-integration-guide",
+  "https://www.okta.com/integrations/deel/",
+  "help-centre search: scim (help.letsdeel.com/hc/en-gb/search?query=scim)",
+  "help-centre API search: SCIM, SAML SSO"
+ ],
+ "open_questions": [
+  "No Deel page states which plan includes the SCIM API or SSO; the Enterprise gate recorded in June has no first-party source.",
+  "SCIM deactivation (active=false) behaviour and whether delete frees a seat are not documented.",
+  "Create, PUT, PATCH and DELETE SCIM calls appear only as examples on the overview page; the API reference lists only the two GET /scim/v2/Users endpoints.",
+  "No audit-log API was found in the developer sitemap.",
+  "Whether SAML/OIDC sign-in creates users just-in-time is not documented.",
+  "Entra gallery, Google Workspace Marketplace, OneLogin and JumpCloud catalogue pages were not checked.",
+  "Deel HR Advanced and Elite prices are shown only in a JavaScript pricing tab."
+ ],
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.deel.com/pricing",
+   "title": "Pricing | Deel",
+   "quote": "Hire, manage, and pay global contractors. Classify them yourself, or shift liability to Deel with Contractor of Record. $49 per contractor per month",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.deel.com/pricing",
+   "title": "Pricing | Deel",
+   "quote": "No, Deel offers flexible month-to-month pricing with no long-term commitments required.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.deel.com/hr/",
+   "title": "Deel HR",
+   "quote": "Deel HR comes in three levels. Core starts at $5 per employee per month and covers worker profiles, org chart, time off, job architecture, workflows, approvals, anonymous reporting and people analytics.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.deel.com/hr/",
+   "title": "Deel HR",
+   "quote": "Advanced adds performance, goals, learning and surveys. Elite adds workforce planning and compensation management.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://developer.deel.com/api/scim-api/overview.md",
+   "title": "SCIM API | Deel Developer Docs",
+   "quote": "The Deel SCIM API provides user provisioning capabilities based on the System for Cross-domain Identity Management (SCIM) 2.0 standard. The API enables identity providers and partner applications to manage user lifecycle operations including creation, updates, and de-provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/scim-api/overview"
+  },
+  {
+   "id": "c6",
+   "url": "https://developer.deel.com/api/scim-api/overview.md",
+   "title": "SCIM API | Deel Developer Docs",
+   "quote": "The SCIM API is available exclusively to Deel clients and partners with appropriate authorization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/scim-api/overview"
+  },
+  {
+   "id": "c7",
+   "url": "https://developer.deel.com/api/scim-api/overview.md",
+   "title": "SCIM API | Deel Developer Docs",
+   "quote": "The SCIM API currently supports the User resource with the following operations:",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/scim-api/overview"
+  },
+  {
+   "id": "c8",
+   "url": "https://developer.deel.com/api/scim-api/overview.md",
+   "title": "SCIM API | Deel Developer Docs",
+   "quote": "**Create user**: Provision new client users in Deel HRIS",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/scim-api/overview"
+  },
+  {
+   "id": "c9",
+   "url": "https://developer.deel.com/api/scim-api/overview.md",
+   "title": "SCIM API | Deel Developer Docs",
+   "quote": "**Update user**: Modify user profile information using full replacement (PUT) or partial updates (PATCH)",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/scim-api/overview"
+  },
+  {
+   "id": "c10",
+   "url": "https://developer.deel.com/api/scim-api/overview.md",
+   "title": "SCIM API | Deel Developer Docs",
+   "quote": "**Delete user**: De-provision users and remove them from the system",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/scim-api/overview"
+  },
+  {
+   "id": "c11",
+   "url": "https://developer.deel.com/api/scim-api/overview.md",
+   "title": "SCIM API | Deel Developer Docs",
+   "quote": "**Service provider config**: Retrieve SCIM implementation capabilities and supported features",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/scim-api/overview"
+  },
+  {
+   "id": "c12",
+   "url": "https://developer.deel.com/api/scim-api/overview.md",
+   "title": "SCIM API | Deel Developer Docs",
+   "quote": "**userName**: User's work email (required) * **name**: Given name and family name (required) * **emails**: Work email addresses with type and primary indicators * **active**: Employment status indicator",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/scim-api/overview"
+  },
+  {
+   "id": "c13",
+   "url": "https://developer.deel.com/api/scim-api/overview.md",
+   "title": "SCIM API | Deel Developer Docs",
+   "quote": "**title**: Job title * **userType**: User classification (employee, contractor, client) * **addresses**: Physical addresses with country and region codes",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/scim-api/overview"
+  },
+  {
+   "id": "c14",
+   "url": "https://developer.deel.com/api/scim-api/overview.md",
+   "title": "SCIM API | Deel Developer Docs",
+   "quote": "**department**: Department name in Deel HRIS * **manager**: Manager information including ID and display name * **costCenter**: Legal entity identifier * **organization**: Organization name",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/scim-api/overview"
+  },
+  {
+   "id": "c15",
+   "url": "https://developer.deel.com/api/scim-api/overview.md",
+   "title": "SCIM API | Deel Developer Docs",
+   "quote": "**startDate**: Employment start date * **endDate**: Employment end date * **hiringStatus**: Current hiring status * **employments**: Array of employment contracts with details * **customFields**: Organization-defined custom attributes",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/scim-api/overview"
+  },
+  {
+   "id": "c16",
+   "url": "https://developer.deel.com/api/scim-api/overview.md",
+   "title": "SCIM API | Deel Developer Docs",
+   "quote": "**organizationalStructures**: Team and department hierarchy * **isManager**: Manager role indicator",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/scim-api/overview"
+  },
+  {
+   "id": "c17",
+   "url": "https://developer.deel.com/api/scim-api/overview.md",
+   "title": "SCIM API | Deel Developer Docs",
+   "quote": "Currently supports the `eq` (equals) operator for email filtering",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/scim-api/overview"
+  },
+  {
+   "id": "c18",
+   "url": "https://developer.deel.com/api/scim-api/overview.md",
+   "title": "SCIM API | Deel Developer Docs",
+   "quote": "**count**: Maximum number of results per page (1-100, defaults to 50)",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/scim-api/overview"
+  },
+  {
+   "id": "c19",
+   "url": "https://developer.deel.com/api/scim-api/overview",
+   "title": "SCIM API | Deel Developer Docs",
+   "quote": "The SCIM API is available exclusively to Deel clients and partners with appropriate authorization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://developer.deel.com/api/scim-api/overview.md",
+   "title": "SCIM API | Deel Developer Docs",
+   "quote": "**Production**: `https://api.letsdeel.com/scim`",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/scim-api/overview"
+  },
+  {
+   "id": "c21",
+   "url": "https://developer.deel.com/api/scim-api/overview.md",
+   "title": "SCIM API | Deel Developer Docs",
+   "quote": "-H 'Authorization: Bearer YOUR-TOKEN-HERE'",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/scim-api/overview"
+  },
+  {
+   "id": "c22",
+   "url": "https://developer.deel.com/api/scim-api/overview.md",
+   "title": "SCIM API | Deel Developer Docs",
+   "quote": "Only request Users:read and Users:write scopes as needed",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/scim-api/overview"
+  },
+  {
+   "id": "c23",
+   "url": "https://developer.deel.com/api/scim-api/overview.md",
+   "title": "SCIM API | Deel Developer Docs",
+   "quote": "curl -X POST 'https://api.letsdeel.com/scim/v2/Users'",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/scim-api/overview"
+  },
+  {
+   "id": "c24",
+   "url": "https://developer.deel.com/api/scim-api/overview.md",
+   "title": "SCIM API | Deel Developer Docs",
+   "quote": "curl -X PATCH 'https://api.letsdeel.com/scim/v2/Users/{hrisProfileOid}'",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/scim-api/overview"
+  },
+  {
+   "id": "c25",
+   "url": "https://developer.deel.com/api/scim-api/overview.md",
+   "title": "SCIM API | Deel Developer Docs",
+   "quote": "Automatically sync user accounts from Deel HRIS to identity providers such as Okta, Azure AD, or OneLogin",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/scim-api/overview"
+  },
+  {
+   "id": "c26",
+   "url": "https://developer.deel.com/api/scim-api/overview.md",
+   "title": "SCIM API | Deel Developer Docs",
+   "quote": "Implement retry logic for 429 and 500 errors with exponential backoff",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/scim-api/overview"
+  },
+  {
+   "id": "c27",
+   "url": "https://developer.deel.com/api/hris-endpoints/users/get-users.md",
+   "title": "List users | Deel API Reference",
+   "quote": "GET https://api.letsdeel.com/scim/v2/Users",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/hris-endpoints/users/get-users"
+  },
+  {
+   "id": "c28",
+   "url": "https://developer.deel.com/api/hris-endpoints/users/get-user-by-id.md",
+   "title": "Retrieve a single User | Deel API Reference",
+   "quote": "GET https://api.letsdeel.com/scim/v2/Users/{hris_profile_id}",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/hris-endpoints/users/get-user-by-id"
+  },
+  {
+   "id": "c29",
+   "url": "https://help.letsdeel.com/api/v2/help_center/en-gb/articles/13423483873041.json",
+   "title": "Enabling the Okta SCIM integration for Deel HR",
+   "quote": "The Okta SCIM provisioning integration enables Deel HR clients to automatically sync employee data from Deel into Okta, allowing IT teams to provision users into other applications such as Zendesk, Salesforce, and more.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.letsdeel.com/hc/en-gb/articles/13423483873041-Enabling-the-Okta-SCIM-integration-for-Deel-HR"
+  },
+  {
+   "id": "c30",
+   "url": "https://help.letsdeel.com/api/v2/help_center/en-gb/articles/13423483873041.json",
+   "title": "Enabling the Okta SCIM integration for Deel HR",
+   "quote": "Generate the SCIM API Base URL and Organization token",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.letsdeel.com/hc/en-gb/articles/13423483873041-Enabling-the-Okta-SCIM-integration-for-Deel-HR"
+  },
+  {
+   "id": "c31",
+   "url": "https://help.letsdeel.com/api/v2/help_center/en-gb/articles/13423483873041.json",
+   "title": "Enabling the Okta SCIM integration for Deel HR",
+   "quote": "Search for the Deel application in the Okta Integration Network and add it to your dashboard.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.letsdeel.com/hc/en-gb/articles/13423483873041-Enabling-the-Okta-SCIM-integration-for-Deel-HR"
+  },
+  {
+   "id": "c32",
+   "url": "https://help.letsdeel.com/api/v2/help_center/en-gb/articles/13423483873041.json",
+   "title": "Enabling the Okta SCIM integration for Deel HR",
+   "quote": "You can sync these to Okta by manually configuring your SCIM API",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.letsdeel.com/hc/en-gb/articles/13423483873041-Enabling-the-Okta-SCIM-integration-for-Deel-HR"
+  },
+  {
+   "id": "c33",
+   "url": "https://help.letsdeel.com/api/v2/help_center/en-gb/articles/39848984312209.json",
+   "title": "Okta API Service integration guide",
+   "quote": "Okta API Service is an integration that allows you to import users from Okta into Deel and use them for",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.letsdeel.com/hc/en-gb/articles/39848984312209-Okta-API-Service-integration-guide"
+  },
+  {
+   "id": "c34",
+   "url": "https://help.letsdeel.com/api/v2/help_center/en-gb/articles/39848984312209.json",
+   "title": "Okta API Service integration guide",
+   "quote": "Automatic syncs occur daily, one way from Okta API Service to Deel",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.letsdeel.com/hc/en-gb/articles/39848984312209-Okta-API-Service-integration-guide"
+  },
+  {
+   "id": "c35",
+   "url": "https://help.letsdeel.com/api/v2/help_center/en-gb/articles/39786946896017.json",
+   "title": "Getting started with third-party user provisioning",
+   "quote": "To manage workers' access to these products, you can automatically create and update user accounts in Deel by syncing their data from your third-party system.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.letsdeel.com/hc/en-gb/articles/39786946896017-Getting-started-with-third-party-user-provisioning"
+  },
+  {
+   "id": "c36",
+   "url": "https://help.letsdeel.com/api/v2/help_center/en-gb/articles/39786946896017.json",
+   "title": "Getting started with third-party user provisioning",
+   "quote": "manages user access but does not create or update worker profiles.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.letsdeel.com/hc/en-gb/articles/39786946896017-Getting-started-with-third-party-user-provisioning"
+  },
+  {
+   "id": "c37",
+   "url": "https://help.letsdeel.com/api/v2/help_center/en-gb/articles/39786946896017.json",
+   "title": "Getting started with third-party user provisioning",
+   "quote": "Merge.dev integrations",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.letsdeel.com/hc/en-gb/articles/39786946896017-Getting-started-with-third-party-user-provisioning"
+  },
+  {
+   "id": "c38",
+   "url": "https://help.letsdeel.com/api/v2/help_center/en-gb/articles/39786946896017.json",
+   "title": "Getting started with third-party user provisioning",
+   "quote": "Google Workspace\nHow-to guide\nHumans\nHow-to guide\nJumpCloud\nHow-to guide",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.letsdeel.com/hc/en-gb/articles/39786946896017-Getting-started-with-third-party-user-provisioning"
+  },
+  {
+   "id": "c39",
+   "url": "https://help.letsdeel.com/api/v2/help_center/en-gb/articles/39786946896017.json",
+   "title": "Getting started with third-party user provisioning",
+   "quote": "Microsoft Entra ID\nHow-to guide",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.letsdeel.com/hc/en-gb/articles/39786946896017-Getting-started-with-third-party-user-provisioning"
+  },
+  {
+   "id": "c40",
+   "url": "https://help.letsdeel.com/api/v2/help_center/en-gb/articles/39786946896017.json",
+   "title": "Getting started with third-party user provisioning",
+   "quote": "PWACs are designed for non-payroll use cases only and cannot be used with Deel’s Contractor, EOR, or Payroll products.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.letsdeel.com/hc/en-gb/articles/39786946896017-Getting-started-with-third-party-user-provisioning"
+  },
+  {
+   "id": "c41",
+   "url": "https://help.letsdeel.com/api/v2/help_center/en-gb/articles/20955980375313.json",
+   "title": "How to Configure Single Sign-On",
+   "quote": "Deel allows customers to choose from a wide range of SSO providers like Okta, Azure, OneLogin, Google, and PingFederate.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.letsdeel.com/hc/en-gb/articles/20955980375313-How-to-Configure-Single-Sign-On"
+  },
+  {
+   "id": "c42",
+   "url": "https://help.letsdeel.com/api/v2/help_center/en-gb/articles/20955980375313.json",
+   "title": "How to Configure Single Sign-On",
+   "quote": "Organization admin profiles are allowed to use password logins",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.letsdeel.com/hc/en-gb/articles/20955980375313-How-to-Configure-Single-Sign-On"
+  },
+  {
+   "id": "c43",
+   "url": "https://help.letsdeel.com/api/v2/help_center/en-gb/articles/48554350739729.json",
+   "title": "How to setup Deel SSO with Okta using the OIN app",
+   "quote": "Okta's app catalog. This is the simplest way to set up SSO with Deel and requires no custom configuration.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.letsdeel.com/hc/en-gb/articles/48554350739729-How-to-setup-Deel-SSO-with-Okta-wsing-the-Okta-Integration-Network-OIN-app"
+  },
+  {
+   "id": "c44",
+   "url": "https://help.letsdeel.com/api/v2/help_center/en-gb/articles/22183285399057.json",
+   "title": "How to setup SAML 2.0 Integration with OneLogin for Single Sign On",
+   "quote": "integration so your organization can use Single Sign-On (SSO) with OneLogin as the identity provider.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.letsdeel.com/hc/en-gb/articles/22183285399057-How-to-setup-SAML-2-0-Integration-with-OneLogin-for-Single-Sign-On"
+  },
+  {
+   "id": "c45",
+   "url": "https://help.letsdeel.com/api/v2/help_center/en-gb/articles/14868325814801.json",
+   "title": "JumpCloud Integration Guide",
+   "quote": "Deel's JumpCloud integration uses a robust SCIM API infrastructure to sync EOR employees, direct employees, independent contractors, and Worker Profiles without a Contract (PWACs).",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.letsdeel.com/hc/en-gb/articles/14868325814801-JumpCloud-Integration-Guide"
+  },
+  {
+   "id": "c46",
+   "url": "https://help.letsdeel.com/api/v2/help_center/en-gb/articles/14868325814801.json",
+   "title": "JumpCloud Integration Guide",
+   "quote": "Deprovision (suspend) users when offboarded in Deel",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.letsdeel.com/hc/en-gb/articles/14868325814801-JumpCloud-Integration-Guide"
+  },
+  {
+   "id": "c47",
+   "url": "https://help.letsdeel.com/api/v2/help_center/en-gb/articles/31065946108561.json",
+   "title": "Microsoft Entra integration guide",
+   "quote": "This plugin is used to automatically create Microsoft accounts for new hires and suspend accounts upon termination.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.letsdeel.com/hc/en-gb/articles/31065946108561-Microsoft-Entra-integration-guide"
+  },
+  {
+   "id": "c48",
+   "url": "https://www.okta.com/integrations/deel/",
+   "title": "Integrate Deel with Okta",
+   "quote": "Okta's Deel integration lets your team use single sign-on to log into the Deel application.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c49",
+   "url": "https://developer.deel.com/api/authentication.md",
+   "title": "Authentication | Deel Developer Docs",
+   "quote": "Deel supports two authentication methods",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/authentication"
+  },
+  {
+   "id": "c50",
+   "url": "https://developer.deel.com/api/authentication.md",
+   "title": "Authentication | Deel Developer Docs",
+   "quote": "Go to **More** → **Developer** in your Deel dashboard",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/authentication"
+  },
+  {
+   "id": "c51",
+   "url": "https://developer.deel.com/api/authentication.md",
+   "title": "Authentication | Deel Developer Docs",
+   "quote": "* Invoice adjustments * Accounting data * SCIM API access",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/authentication"
+  },
+  {
+   "id": "c52",
+   "url": "https://developer.deel.com/api/rate-limits.md",
+   "title": "Rate Limits | Deel Developer Docs",
+   "quote": "Each organization can make up to **5 API requests per second** across all tokens.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/rate-limits"
+  },
+  {
+   "id": "c53",
+   "url": "https://developer.deel.com/api/hris-endpoints/people/get-people.md",
+   "title": "List people | Deel API Reference",
+   "quote": "GET https://api.letsdeel.com/rest/people",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/hris-endpoints/people/get-people"
+  },
+  {
+   "id": "c54",
+   "url": "https://developer.deel.com/api/hris-endpoints/people/get-person-by-id.md",
+   "title": "Retrieve a person | Deel API Reference",
+   "quote": "GET https://api.letsdeel.com/rest/people/{hris_profile_id}",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/hris-endpoints/people/get-person-by-id"
+  },
+  {
+   "id": "c55",
+   "url": "https://developer.deel.com/api/hris-endpoints/people/create-person-without-contract.md",
+   "title": "Create a person without a contract (PWAC) | Deel API Reference",
+   "quote": "POST https://api.letsdeel.com/rest/pwac",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/hris-endpoints/people/create-person-without-contract"
+  },
+  {
+   "id": "c56",
+   "url": "https://developer.deel.com/api/reference/endpoints/people/create-a-direct-employee-v-2026-01-01.md",
+   "title": "Create a direct employee | Deel API Reference",
+   "quote": "POST https://api.letsdeel.com/rest/people",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/reference/endpoints/people/create-a-direct-employee-v-2026-01-01"
+  },
+  {
+   "id": "c57",
+   "url": "https://developer.deel.com/api/endpoints/groups/get-groups.md",
+   "title": "List groups | Deel API Reference",
+   "quote": "GET https://api.letsdeel.com/rest/groups",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/endpoints/groups/get-groups"
+  },
+  {
+   "id": "c58",
+   "url": "https://developer.deel.com/api/endpoints/groups/create-group.md",
+   "title": "Create a group | Deel API Reference",
+   "quote": "POST https://api.letsdeel.com/rest/groups",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/endpoints/groups/create-group"
+  },
+  {
+   "id": "c59",
+   "url": "https://developer.deel.com/api/endpoints/groups/update-group.md",
+   "title": "Edit a group | Deel API Reference",
+   "quote": "PATCH https://api.letsdeel.com/rest/groups/{id}",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/endpoints/groups/update-group"
+  },
+  {
+   "id": "c60",
+   "url": "https://developer.deel.com/api/endpoints/groups/delete-group.md",
+   "title": "Delete a group | Deel API Reference",
+   "quote": "DELETE https://api.letsdeel.com/rest/groups/{id}",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/endpoints/groups/delete-group"
+  },
+  {
+   "id": "c61",
+   "url": "https://developer.deel.com/api/endpoints/groups/clone-group.md",
+   "title": "Clone a group | Deel API Reference",
+   "quote": "POST https://api.letsdeel.com/rest/groups/{id}/clone",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/endpoints/groups/clone-group"
+  },
+  {
+   "id": "c62",
+   "url": "https://developer.deel.com/api/endpoints/managers/get-managers.md",
+   "title": "List managers (organization admins/managers) | Deel API Reference",
+   "quote": "GET https://api.letsdeel.com/rest/managers",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/endpoints/managers/get-managers"
+  },
+  {
+   "id": "c63",
+   "url": "https://developer.deel.com/api/endpoints/managers/create-manager.md",
+   "title": "Create a manager | Deel API Reference",
+   "quote": "POST https://api.letsdeel.com/rest/managers",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/endpoints/managers/create-manager"
+  },
+  {
+   "id": "c64",
+   "url": "https://developer.deel.com/api/hris-endpoints/hris/webhook-worker-v-2-created.md",
+   "title": "Webhook event | Deel API Reference",
+   "quote": "Triggered when a worker profile is created.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/hris-endpoints/hris/webhook-worker-v-2-created"
+  },
+  {
+   "id": "c65",
+   "url": "https://developer.deel.com/api/hris-endpoints/hris/webhook-worker-v-2-updated.md",
+   "title": "Webhook event | Deel API Reference",
+   "quote": "Triggered when a worker profile's data changes",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/hris-endpoints/hris/webhook-worker-v-2-updated"
+  },
+  {
+   "id": "c66",
+   "url": "https://developer.deel.com/api/hris-endpoints/hris/webhook-worker-v-2-deleted.md",
+   "title": "Webhook event | Deel API Reference",
+   "quote": "Triggered when a worker profile is deleted.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.deel.com/api/hris-endpoints/hris/webhook-worker-v-2-deleted"
+  }
+ ]
+}

@@ -1,0 +1,884 @@
+{
+ "slug": "gitlab",
+ "vendor": "GitLab",
+ "vendor_url": "https://about.gitlab.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "GitLab",
+  "slug": "gitlab",
+  "category": "Developer Tools & CI/CD",
+  "status": "free",
+  "scim_plan": "Premium",
+  "scim_price_text": "Premium: $29/u/mo (annual)",
+  "scim_price_per_user_mo": 29,
+  "team_plan": "Premium",
+  "team_price_text": "Premium: $29/u/mo (annual)",
+  "team_price_per_user_mo": 29,
+  "price_multiplier": 1.0,
+  "sso_plan": "Premium",
+  "sso_price_per_user_mo": 29,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": false,
+   "groups": false
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "via_generic",
+   "google": "sso_only",
+   "onelogin": null,
+   "jumpcloud": "native",
+   "generic": true
+  },
+  "pricing_page_url": "https://about.gitlab.com/pricing/",
+  "docs_url": "https://docs.gitlab.com/user/group/saml_sso/scim_setup/",
+  "evidence": "GitLab's SCIM docs for GitLab.com groups and for Self-Managed are both marked \"Tier: Premium, Ultimate\", and Premium, the lowest paid plan, is $29 per user/month billed annually on the pricing page.",
+  "notes": "Status changed from gated (June) to free by classification, not by a price change: Premium ($29/u/mo annual) is both GitLab's lowest paid tier and the lowest SCIM tier, so under the price-gate rule there is no SCIM upcharge over the team plan. Free (5 users per top-level group) has no SCIM. The pricing page itself does not mention SCIM or SAML; the tier comes from the docs. GitLab.com group SCIM requires group SAML SSO, supports create, deactivate (removes group membership; the GitLab.com account is kept) and reactivate; the docs say it doesn't support updating users, and SCIM group provisioning is not supported on GitLab.com. Self-Managed/Dedicated instance SCIM (Premium) blocks users on deprovision and supports SCIM Groups via SAML group links (GitLab 18.0+). Okta needs Okta Lifecycle Management. Members API is on all tiers; Audit events API, group member webhooks and the Enterprise users API are Premium+.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Free",
+  "api_tax": false,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "$0 per user/month; 5 users per top-level group",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c1",
+    "c2",
+    "c5",
+    "c26",
+    "c28",
+    "c33"
+   ]
+  },
+  {
+   "name": "Premium",
+   "price_text": "$29 per user/month, billed annually",
+   "price_per_user_mo": 29,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c3",
+    "c5",
+    "c17",
+    "c26",
+    "c28",
+    "c33"
+   ]
+  },
+  {
+   "name": "Ultimate",
+   "price_text": "Contact us for custom pricing",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c4",
+    "c5",
+    "c17",
+    "c26",
+    "c28",
+    "c33"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c5",
+   "c17",
+   "c8",
+   "c18"
+  ],
+  "plan": "Premium",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://gitlab.com/api/scim/v2/groups/{group_path} (GitLab.com); <http|https>://<GitLab host>/api/scim/v2/application (Self-Managed)",
+  "auth": {
+   "method": "bearer",
+   "token_source": "GitLab.com: top-level group > Settings > SAML SSO > Generate a SCIM token (shown with the SCIM API endpoint URL). Self-Managed: Admin area SCIM token.",
+   "token_expiry": null,
+   "cite": [
+    "c9",
+    "c24"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c18",
+    "c22",
+    "c10"
+   ],
+   "notes": "Groups endpoints exist only on the Self-Managed/Dedicated instance SCIM API (SAML group links); GitLab.com group SCIM has Users only and SCIM group provisioning is not supported."
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": false,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": false,
+   "group_push": false,
+   "group_membership": null,
+   "cite": [
+    "c6",
+    "c7",
+    "c18",
+    "c20",
+    "c10",
+    "c11"
+   ],
+   "notes": "PATCH updates id/externalId, name.formatted, emails, active and userName per the internal API reference, although the setup page says SCIM doesn't support updating users (see conflicts). DELETE on the group SCIM API removes the SCIM identity/membership, not the GitLab account. Instance SCIM supports group create/replace/patch/delete for SAML-group-linked groups (group_push true on Self-Managed only)."
+  },
+  "deprovision": {
+   "action": "remove_from_org",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "GitLab.com: user is removed from the top-level group, subgroups and projects; the GitLab.com account is not deleted and the linked SAML identity remains. Removal is processed asynchronously. Self-Managed: the user is blocked (identity active: false) and the SCIM identity stays linked.",
+   "cite": [
+    "c11",
+    "c12",
+    "c20",
+    "c16"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "id",
+    "displayName (Groups, Self-Managed)"
+   ],
+   "cite": [
+    "c21",
+    "c18"
+   ],
+   "notes": "eq operator only."
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c19"
+   ],
+   "notes": "startIndex and count, per the SCIM spec."
+  },
+  "attributes": {
+   "core": [
+    "externalId",
+    "userName",
+    "emails[type eq \"work\"].value",
+    "name.formatted",
+    "active",
+    "id"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "displayName"
+   ],
+   "cite": [
+    "c18",
+    "c23",
+    "c25"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "SCIM-provisioned users get the group's default membership role from SAML SSO settings; when restricted access applies and no seats are free, users get the Minimal Access role, reflected in the roles attribute. Self-Managed maps IdP groups to GitLab groups via SAML group links.",
+   "cite": [
+    "c14",
+    "c22"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "GitLab.com group SCIM does not support SCIM group provisioning; disable group provisioning in Entra.",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "text": "Okta SCIM requires the Okta Lifecycle Management product.",
+    "cite": [
+     "c13"
+    ]
+   },
+   {
+    "text": "Only tested identity providers are supported; others may work but are unsupported.",
+    "cite": [
+     "c15"
+    ]
+   },
+   {
+    "text": "The SCIM API is an internal API for SCIM provider integration and may change without notice.",
+    "cite": [
+     "c23"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c28",
+   "c29",
+   "c31"
+  ],
+  "plan": "Free",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://gitlab.com/api/v4",
+  "docs_url": "https://docs.gitlab.com/api/members/",
+  "auth": {
+   "methods": [
+    "oauth2",
+    "personal_access_token",
+    "project_access_token",
+    "group_access_token"
+   ],
+   "scopes": [],
+   "cite": [
+    "c41"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c28",
+    "c29",
+    "c30",
+    "c31",
+    "c32"
+   ],
+   "notes": "Creating users (POST /users) is administrator-only on Self-Managed/Dedicated. On GitLab.com, group owners manage membership (and, on Premium+, enterprise users)."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/groups/:id/members",
+    "purpose": "List group members",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/groups/:id/members/:user_id",
+    "purpose": "Get a group member",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/groups/:id/members",
+    "purpose": "Add a group member",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/groups/:id/members/:user_id",
+    "purpose": "Update a group member (access level)",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/groups/:id/members/:user_id",
+    "purpose": "Remove a group member",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/groups/:id/billable_members",
+    "purpose": "List billable members",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/groups/:id/billable_members/:user_id",
+    "purpose": "Remove a billable member from a group",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/groups/:id/members/:user_id/state",
+    "purpose": "Change membership state (awaiting/active)",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/users",
+    "purpose": "Create a user (administrator, Self-Managed/Dedicated)",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/users/:id",
+    "purpose": "Modify a user",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/users/:id",
+    "purpose": "Delete a user",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/groups/:id/enterprise_users",
+    "purpose": "List enterprise users (GitLab.com, Premium+)",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/groups/:id/enterprise_users/:user_id",
+    "purpose": "Modify an enterprise user",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/groups/:id/enterprise_users/:user_id",
+    "purpose": "Delete an enterprise user",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/groups/:id/audit_events",
+    "purpose": "List group audit events (Premium+)",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/audit_events",
+    "purpose": "List instance audit events (Self-Managed, admin)",
+    "cite": [
+     "c33"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": true,
+   "events": [
+    "Group member events: member added, access level changed, access expiry updated, member removed (Premium+)"
+   ],
+   "cite": [
+    "c34"
+   ]
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Premium",
+   "cite": [
+    "c33"
+   ]
+  },
+  "rate_limits": {
+   "text": "Instance audit events API is subject to a configurable per-user rate limit.",
+   "cite": [
+    "c33"
+   ]
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": false,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/gitlab/",
+   "cite": [
+    "c35",
+    "c37",
+    "c13"
+   ],
+   "notes": "OIN GitLab app lists SCIM, Create, Deactivate; GitLab's docs say the catalogue app does not support SAML, so SSO uses a separate SAML app."
+  },
+  "entra": {
+   "listed": false,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c27"
+   ],
+   "notes": "GitLab's docs set Entra up as a non-gallery application for SAML and point its provisioning at the GitLab SCIM endpoint (generic SCIM)."
+  },
+  "google": {
+   "listed": null,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c38",
+    "c15"
+   ],
+   "notes": "GitLab documents Google Workspace for group SAML SSO only; Google Workspace is not among the SCIM providers configured in GitLab's SCIM docs. Google's own catalogue was not checked."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": "idp",
+   "url": "https://jumpcloud.com/support/integrate-with-gitlab",
+   "cite": [
+    "c36",
+    "c39"
+   ]
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": "LDAP group sync and SAML Group Sync (Self-Managed / group SAML)",
+  "docs_public": true,
+  "cite": [
+   "c40"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://about.gitlab.com/pricing/",
+   "title": "GitLab Pricing",
+   "quote": "For individuals working on personal projects and open source contributions",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://about.gitlab.com/pricing/",
+   "title": "GitLab Pricing",
+   "quote": "5 users per top-level group",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://about.gitlab.com/pricing/",
+   "title": "GitLab Pricing",
+   "quote": "For scaling organizations seeking enhanced productivity and collaboration $ 29 per user/month, billed annually",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://about.gitlab.com/pricing/",
+   "title": "GitLab Pricing",
+   "quote": "For enterprises requiring advanced security and compliance capabilities Contact us for custom pricing",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://docs.gitlab.com/user/group/saml_sso/scim_setup/",
+   "title": "Configure SCIM for GitLab.com groups | GitLab Docs",
+   "quote": "Tier: Premium, Ultimate Offering: GitLab.com You can use the open standard System for Cross-domain Identity Management (SCIM) to automatically:",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://docs.gitlab.com/user/group/saml_sso/scim_setup/",
+   "title": "Configure SCIM for GitLab.com groups | GitLab Docs",
+   "quote": "Create users. Remove users (deactivate SCIM identity). Re-add users (reactivate SCIM identity).",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://docs.gitlab.com/user/group/saml_sso/scim_setup/",
+   "title": "Configure SCIM for GitLab.com groups | GitLab Docs",
+   "quote": "GitLab SAML SSO SCIM doesn't support updating users.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.gitlab.com/user/group/saml_sso/scim_setup/",
+   "title": "Configure SCIM for GitLab.com groups | GitLab Docs",
+   "quote": "Group single sign-on must be configured.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.gitlab.com/user/group/saml_sso/scim_setup/",
+   "title": "Configure SCIM for GitLab.com groups | GitLab Docs",
+   "quote": "For configuration of your identity provider, save the: Token from the Your SCIM token field.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.gitlab.com/user/group/saml_sso/scim_setup/",
+   "title": "Configure SCIM for GitLab.com groups | GitLab Docs",
+   "quote": "SCIM group provisioning is not supported in GitLab.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.gitlab.com/user/group/saml_sso/scim_setup/",
+   "title": "Configure SCIM for GitLab.com groups | GitLab Docs",
+   "quote": "The user's GitLab account is not deleted, it continues to exist on GitLab.com.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.gitlab.com/user/group/saml_sso/scim_setup/",
+   "title": "Configure SCIM for GitLab.com groups | GitLab Docs",
+   "quote": "Deprovisioning a user through SCIM does not remove the linked SAML identity.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.gitlab.com/user/group/saml_sso/scim_setup/",
+   "title": "Configure SCIM for GitLab.com groups | GitLab Docs",
+   "quote": "You must use the Okta Lifecycle Management product. This product tier is required to use SCIM on Okta.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.gitlab.com/user/group/saml_sso/scim_setup/",
+   "title": "Configure SCIM for GitLab.com groups | GitLab Docs",
+   "quote": "When restricted access is enabled and no subscription seats are available, users provisioned through SCIM are assigned the Minimal Access role.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.gitlab.com/user/group/saml_sso/scim_setup/",
+   "title": "Configure SCIM for GitLab.com groups | GitLab Docs",
+   "quote": "GitLab supports SCIM with several identity providers. Other identity providers might still work with GitLab, but they have not been tested and are not supported.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.gitlab.com/administration/settings/scim_setup/",
+   "title": "Configure SCIM for GitLab Self-Managed | GitLab Docs",
+   "quote": "Removing or deactivating a user on the identity provider blocks the user on GitLab by marking the identity with active: false , while the SCIM identity remains linked to the GitLab user account.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.gitlab.com/administration/settings/scim_setup/",
+   "title": "Configure SCIM for GitLab Self-Managed | GitLab Docs",
+   "quote": "Tier: Premium, Ultimate Offering: GitLab Self-Managed, GitLab Dedicated",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.gitlab.com/development/internal_api/",
+   "title": "Internal API | GitLab Docs",
+   "quote": "This API provides the /groups/:group_path/Users and /groups/:group_path/Users/:id endpoints.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.gitlab.com/development/internal_api/",
+   "title": "Internal API | GitLab Docs",
+   "quote": "Pagination follows the SCIM spec rather than GitLab pagination as used elsewhere.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.gitlab.com/development/internal_api/",
+   "title": "Internal API | GitLab Docs",
+   "quote": "User deprovisioning is processed asynchronously.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.gitlab.com/development/internal_api/",
+   "title": "Internal API | GitLab Docs",
+   "quote": "The attribute matches exactly the specified value.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c22",
+   "url": "https://docs.gitlab.com/development/internal_api/",
+   "title": "Internal API | GitLab Docs",
+   "quote": "This API uses SAML group links to connect IdP groups with GitLab groups.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c23",
+   "url": "https://docs.gitlab.com/development/internal_api/",
+   "title": "Internal API | GitLab Docs",
+   "quote": "Because this API is for system use for SCIM provider integration, it is subject to change without notice.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c24",
+   "url": "https://docs.gitlab.com/user/group/saml_sso/scim_setup/",
+   "title": "Configure SCIM for GitLab.com groups | GitLab Docs",
+   "quote": "For API Token , paste the SCIM token you copied from Your SCIM token on the GitLab SCIM configuration page.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c25",
+   "url": "https://docs.gitlab.com/user/group/saml_sso/scim_setup/",
+   "title": "Configure SCIM for GitLab.com groups | GitLab Docs",
+   "quote": "The following table provides attribute mappings that are required for GitLab.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c26",
+   "url": "https://docs.gitlab.com/user/group/saml_sso/",
+   "title": "SAML SSO for GitLab.com groups | GitLab Docs",
+   "quote": "Tier: Premium, Ultimate Offering: GitLab.com For GitLab Self-Managed, see SAML SSO for GitLab Self-Managed",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c27",
+   "url": "https://docs.gitlab.com/user/group/saml_sso/",
+   "title": "SAML SSO for GitLab.com groups | GitLab Docs",
+   "quote": "Go to Azure, create a non-gallery application , and configure SSO for an application .",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c28",
+   "url": "https://docs.gitlab.com/api/members/",
+   "title": "Group and project members API | GitLab Docs",
+   "quote": "Tier: Free, Premium, Ultimate Offering: GitLab.com, GitLab Self-Managed, GitLab Dedicated",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c29",
+   "url": "https://docs.gitlab.com/api/members/",
+   "title": "Group and project members API | GitLab Docs",
+   "quote": "Adds a member to a specified group.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c30",
+   "url": "https://docs.gitlab.com/api/members/",
+   "title": "Group and project members API | GitLab Docs",
+   "quote": "Member removal is handled asynchronously, so the changes complete in a few minutes.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c31",
+   "url": "https://docs.gitlab.com/api/users/",
+   "title": "Users API | GitLab Docs",
+   "quote": "Creates a user. Prerequisites: You must be an administrator.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c32",
+   "url": "https://docs.gitlab.com/api/group_enterprise_users/",
+   "title": "Group enterprise users API | GitLab Docs",
+   "quote": "Use these API endpoints to interact with enterprise users.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c33",
+   "url": "https://docs.gitlab.com/api/audit_events/",
+   "title": "Audit events API | GitLab Docs",
+   "quote": "Audit events API Tier: Premium, Ultimate Offering: GitLab.com, GitLab Self-Managed, GitLab Dedicated",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c34",
+   "url": "https://docs.gitlab.com/user/project/integrations/webhook_events/",
+   "title": "Webhook events | GitLab Docs",
+   "quote": "These events are triggered for group webhooks only. Member events are triggered when: A user is added as a group member.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c35",
+   "url": "https://www.okta.com/integrations/gitlab/",
+   "title": "Integrate GitLab with Okta",
+   "quote": "With the Okta GitLab integration users are automatically managed so your team always has the appropriate access in GitLab.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c36",
+   "url": "https://jumpcloud.com/support/integrate-with-gitlab",
+   "title": "Integrate with GitLab | JumpCloud Documentation",
+   "quote": "Group synchronization is not supported, but JumpCloud automatically adds users to the specific group where you enabled SCIM when you authorize their access to the application",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c37",
+   "url": "https://docs.gitlab.com/user/group/saml_sso/scim_setup/",
+   "title": "Configure SCIM for GitLab.com groups | GitLab Docs",
+   "quote": "Currently the GitLab application does not support SAML authentication so the icon should not be shown to users.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c38",
+   "url": "https://docs.gitlab.com/user/group/saml_sso/",
+   "title": "SAML SSO for GitLab.com groups | GitLab Docs",
+   "quote": "To set up Google Workspace as your identity provider:",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c39",
+   "url": "https://jumpcloud.com/support/integrate-with-gitlab",
+   "title": "Integrate with GitLab | JumpCloud Documentation",
+   "quote": "Integrate JumpCloud and GitLab to provide your users with secure, seamless access while automating user identity management.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c40",
+   "url": "https://docs.gitlab.com/user/group/saml_sso/",
+   "title": "SAML SSO for GitLab.com groups | GitLab Docs",
+   "quote": "If an account does not already exist with the same email address, create a new account automatically.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c41",
+   "url": "https://docs.gitlab.com/api/rest/authentication/",
+   "title": "REST API authentication | GitLab Docs",
+   "quote": "You can authenticate with the GitLab REST API in several ways: OAuth 2.0 tokens Personal access tokens Project access tokens Group access tokens",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The GitLab.com SCIM setup page says 'GitLab SAML SSO SCIM doesn't support updating users', while the internal group SCIM API reference documents PATCH updates to id/externalId, name.formatted, emails, active and userName. Docs differ on scope; update recorded as PATCH-supported for the API, with the setup page's limitation noted.",
+   "cite": [
+    "c7",
+    "c18"
+   ]
+  }
+ ],
+ "searched": [
+  "https://about.gitlab.com/pricing/ (rendered; no SCIM or SAML on the page)",
+  "https://about.gitlab.com/features/",
+  "https://docs.gitlab.com/user/group/saml_sso/scim_setup/",
+  "https://docs.gitlab.com/administration/settings/scim_setup/",
+  "https://docs.gitlab.com/development/internal_api/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/gitlab-tutorial (404) and gitlab-provisioning-tutorial (404)"
+ ],
+ "open_questions": [
+  "Whether SCIM deprovisioning on GitLab.com frees the seat immediately (removal from group is asynchronous; seat effect not stated on the SCIM page).",
+  "Whether deprovisioning ends active sessions.",
+  "SCIM token expiry is not documented.",
+  "ServiceProviderConfig, Schemas and ResourceTypes discovery endpoints are not documented.",
+  "SCIM and REST rate limits for GitLab.com were not captured.",
+  "OneLogin catalogue status for GitLab not checked (OneLogin pages block bots)."
+ ]
+}

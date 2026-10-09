@@ -1,0 +1,588 @@
+{
+ "slug": "cisco-meraki",
+ "vendor": "Cisco Meraki",
+ "vendor_url": "https://meraki.cisco.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Cisco Meraki",
+  "slug": "cisco-meraki",
+  "category": "Cloud, Infrastructure & Observability",
+  "status": "none",
+  "scim_plan": "—",
+  "scim_price_text": "—",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Per-device licences via Meraki partners/resellers (no public price list)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": null,
+  "idp": {
+   "okta": "none",
+   "entra": "sso_only",
+   "google": null,
+   "onelogin": "sso_only",
+   "jumpcloud": null,
+   "generic": false
+  },
+  "pricing_page_url": "https://documentation.meraki.com/Platform_Management/Product_Information/Meraki_Licensing/General_Licensing_Information/General_Licensing_FAQs",
+  "docs_url": "https://documentation.meraki.com/Platform_Management/Dashboard_Administration/Operate_and_Maintain/Managing_Dashboard_Access/Configuring_SAML_Single_Sign-on_for_Dashboard",
+  "evidence": "Meraki's SAML guide says SAML users \"will be granted whatever permissions have been assigned to the 'role' attribute included in the SAML token\"; no SCIM endpoint for dashboard administrators appears in the Meraki documentation or the Dashboard API spec.",
+  "notes": "New row. Scored the Meraki Dashboard (administrator access) as the provisioning target. No SCIM: Dashboard admin access is role-based IdP-initiated SAML (SP-initiated also documented), with no pre-created accounts (SAML users form a separate 'SAML user list'), so access is effectively just-in-time from the IdP's role attribute; Dashboard cannot receive SAML LogoutRequests. The Okta OIN app is SWA only; Entra's gallery app and the OneLogin catalogue app are SAML only. The Entra ID 'Organization Users' sync (Graph-based, every ~6 hours) caches end users for network access (Access Manager, splash, VPN), not dashboard admins, and is recorded in other_sync. Cisco Secure Connect (a separate SASE product) documents Okta and Azure SCIM for its remote-access identities; not scored here. Licensing is per device (Subscription, Co-Term or PDL) through partners/resellers, so no per-user prices exist. The Dashboard API creates, updates and revokes admins and manages SAML roles; SAML admins cannot use the API.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Meraki licensing (Subscription, Co-Term or Per-Device)",
+   "price_text": "No public price; purchased through Meraki partners/resellers",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": null,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c1",
+    "c2",
+    "c3",
+    "c13",
+    "c23"
+   ],
+   "notes": "Per-device licensing, not per user. The Entra tutorial lists a 'Meraki Dashboard single sign-on (SSO) enabled subscription' as a prerequisite without naming a tier."
+  }
+ ],
+ "scim": {
+  "available": null,
+  "cite": [],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": null,
+   "token_source": null,
+   "token_expiry": null,
+   "cite": []
+  },
+  "endpoints": {
+   "Users": null,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": []
+  },
+  "operations": {
+   "create": null,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": null,
+   "reactivate": null,
+   "delete": null,
+   "group_push": null,
+   "group_membership": null,
+   "cite": []
+  },
+  "deprovision": {
+   "action": null,
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": []
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": []
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "No SCIM for Meraki Dashboard found in the documentation sitemap (2,431 URLs; only Cisco Secure Connect SCIM pages) or in the Dashboard API OpenAPI spec."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c13",
+   "c9",
+   "c10",
+   "c11"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://api.meraki.com/api/v1",
+  "docs_url": "https://developer.cisco.com/meraki/api-v1/",
+  "auth": {
+   "methods": [
+    "api_key",
+    "oauth2"
+   ],
+   "scopes": [],
+   "cite": [
+    "c14",
+    "c15"
+   ],
+   "notes": "Admin-scoped API keys (X-Cisco-Meraki-API-Key or Bearer) or app-scoped OAuth 2.0 grants."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": null,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c9",
+    "c10",
+    "c11",
+    "c12",
+    "c25"
+   ],
+   "notes": "Users here are dashboard administrators; 'groups' are SAML roles. Role/scope is set via orgAccess, networks and tags on the admin record."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/organizations/{organizationId}/admins",
+    "purpose": "List the dashboard administrators in this organization",
+    "cite": [
+     "c9"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/organizations/{organizationId}/admins",
+    "purpose": "Create a new dashboard administrator",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/organizations/{organizationId}/admins/{adminId}",
+    "purpose": "Update an administrator",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/organizations/{organizationId}/admins/{adminId}",
+    "purpose": "Revoke all access for a dashboard administrator within this organization",
+    "cite": [
+     "c11"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/organizations/{organizationId}/samlRoles",
+    "purpose": "List the SAML roles for this organization",
+    "cite": [
+     "c12"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/organizations/{organizationId}/samlRoles",
+    "purpose": "Create a SAML role",
+    "cite": [
+     "c12"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/organizations/{organizationId}/samlRoles/{samlRoleId}",
+    "purpose": "Update a SAML role",
+    "cite": [
+     "c12"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/organizations/{organizationId}/samlRoles/{samlRoleId}",
+    "purpose": "Remove a SAML role",
+    "cite": [
+     "c12"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/organizations/{organizationId}/configurationChanges",
+    "purpose": "View the Change Log for your organization",
+    "cite": [
+     "c23"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": null,
+   "cite": [
+    "c23"
+   ],
+   "notes": "Organization change log via GET /organizations/{organizationId}/configurationChanges."
+  },
+  "rate_limits": {
+   "text": "Up to 10 requests per second per organization, across all applications.",
+   "cite": [
+    "c16"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "SAML admins cannot use the Dashboard API.",
+    "cite": [
+     "c5"
+    ]
+   },
+   {
+    "text": "At least one non-SAML org admin must remain on the account.",
+    "cite": [
+     "c24"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": false,
+   "provisioning": false,
+   "kind": "swa",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/meraki-dashboard/",
+   "cite": [
+    "c19"
+   ],
+   "notes": "OIN page markup marks only SWA as checked."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/meraki-dashboard-tutorial",
+   "cite": [
+    "c17",
+    "c18"
+   ]
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c20"
+   ],
+   "notes": "From Meraki's own OneLogin guide (SAML2.0 connector); OneLogin's page not loaded."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": "Microsoft Entra ID sync of end users and groups into the Organization Users page (network access, not dashboard admins)",
+  "docs_public": true,
+  "cite": [
+   "c4",
+   "c6",
+   "c21"
+  ],
+  "notes": "SAML admins are granted access from the IdP's role attribute on login without a pre-created Dashboard account."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://documentation.meraki.com/Platform_Management/Product_Information/Meraki_Licensing/General_Licensing_Information/General_Licensing_FAQs",
+   "title": "General Licensing FAQs",
+   "quote": "Cisco Meraki supports three licensing models: Subscription Licensing, Co-Termination (Co-Term), and Per-Device Licensing (PDL).",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://documentation.meraki.com/Platform_Management/Product_Information/Meraki_Licensing/General_Licensing_Information/General_Licensing_FAQs",
+   "title": "General Licensing FAQs",
+   "quote": "Contact your Meraki partner/reseller to opt into Subscription licensing.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://documentation.meraki.com/Platform_Management/Dashboard_Administration/Operate_and_Maintain/Managing_Dashboard_Access/Configuring_SAML_Single_Sign-on_for_Dashboard",
+   "title": "Configuring SAML Single Sign-on for Dashboard",
+   "quote": "When using SAML with Dashboard, the user must first authenticate with the IdP. This is referred to as IdP-initiated SAML.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://documentation.meraki.com/Platform_Management/Dashboard_Administration/Operate_and_Maintain/Managing_Dashboard_Access/Configuring_SAML_Single_Sign-on_for_Dashboard",
+   "title": "Configuring SAML Single Sign-on for Dashboard",
+   "quote": "When SAML users log-in, they will be granted whatever permissions have been assigned to the 'role' attribute included in the SAML token provided by the IdP.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://documentation.meraki.com/Platform_Management/Dashboard_Administration/Operate_and_Maintain/Managing_Dashboard_Access/Configuring_SAML_Single_Sign-on_for_Dashboard",
+   "title": "Configuring SAML Single Sign-on for Dashboard",
+   "quote": "SAML admins cannot use the Dashboard API.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://documentation.meraki.com/Platform_Management/Dashboard_Administration/Operate_and_Maintain/Managing_Dashboard_Access/Configuring_SAML_Single_Sign-on_for_Dashboard",
+   "title": "Configuring SAML Single Sign-on for Dashboard",
+   "quote": "To create a user (including Client VPN and Splash users) using an email address already claimed by a SAML user, disable SAML to purge the SAML user list.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://documentation.meraki.com/Platform_Management/Dashboard_Administration/Operate_and_Maintain/Managing_Dashboard_Access/Configuring_SAML_Single_Sign-on_for_Dashboard",
+   "title": "Configuring SAML Single Sign-on for Dashboard",
+   "quote": "Dashboard does not support receiving SAML LogoutRequests from the IdP.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://documentation.meraki.com/Platform_Management/Dashboard_Administration/Operate_and_Maintain/Managing_Dashboard_Access/Configuring_SAML_Single_Sign-on_for_Dashboard",
+   "title": "Configuring SAML Single Sign-on for Dashboard",
+   "quote": "Only SAML 2.0 is supported.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://api.meraki.com/api/v1/openapiSpec",
+   "title": "Meraki Dashboard API (OpenAPI spec)",
+   "quote": "List the dashboard administrators in this organization",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.cisco.com/meraki/api-v1/"
+  },
+  {
+   "id": "c10",
+   "url": "https://api.meraki.com/api/v1/openapiSpec",
+   "title": "Meraki Dashboard API (OpenAPI spec)",
+   "quote": "Create a new dashboard administrator",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.cisco.com/meraki/api-v1/"
+  },
+  {
+   "id": "c11",
+   "url": "https://api.meraki.com/api/v1/openapiSpec",
+   "title": "Meraki Dashboard API (OpenAPI spec)",
+   "quote": "Revoke all access for a dashboard administrator within this organization",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.cisco.com/meraki/api-v1/"
+  },
+  {
+   "id": "c12",
+   "url": "https://api.meraki.com/api/v1/openapiSpec",
+   "title": "Meraki Dashboard API (OpenAPI spec)",
+   "quote": "List the SAML roles for this organization",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.cisco.com/meraki/api-v1/"
+  },
+  {
+   "id": "c13",
+   "url": "https://api.meraki.com/api/v1/openapiSpec",
+   "title": "Meraki Dashboard API (OpenAPI spec)",
+   "quote": "The Cisco Meraki Dashboard API is a modern REST API based on the OpenAPI specification.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.cisco.com/meraki/api-v1/"
+  },
+  {
+   "id": "c14",
+   "url": "https://developer.cisco.com/meraki/api-v1/authorization/",
+   "title": "Authorization - Meraki Dashboard API v1",
+   "quote": "API keys operate on behalf of the identity that owns them, and are often used when API permissions should be determined by the admin's role in a given organization.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://developer.cisco.com/meraki/api-v1/authorization/",
+   "title": "Authorization - Meraki Dashboard API v1",
+   "quote": "Developers can register their applications to enable OAuth-powered auth grants.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://developer.cisco.com/meraki/api-v1/rate-limit/",
+   "title": "Rate Limit - Meraki Dashboard API v1",
+   "quote": "You can make up to 10 requests per second per organization, regardless of the number of applications interacting with that organization.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c17",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/meraki-dashboard-tutorial",
+   "title": "Microsoft Entra SSO integration with Meraki Dashboard",
+   "quote": "Meraki Dashboard supports IDP initiated SSO.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c18",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/meraki-dashboard-tutorial",
+   "title": "Microsoft Entra SSO integration with Meraki Dashboard",
+   "quote": "Meraki Dashboard single sign-on (SSO) enabled subscription.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c19",
+   "url": "https://www.okta.com/integrations/meraki-dashboard/",
+   "title": "Integrate Meraki Dashboard with Okta",
+   "quote": "Cisco Meraki is the leader in cloud controlled WiFi, routing, and security.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c20",
+   "url": "https://documentation.meraki.com/Platform_Management/Dashboard_Administration/Operate_and_Maintain/Managing_Dashboard_Access/Configuring_SAML_SSO_with_OneLogin",
+   "title": "Configuring SAML SSO with OneLogin",
+   "quote": "Search for meraki and select the Meraki app.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c21",
+   "url": "https://documentation.meraki.com/Platform_Management/Dashboard_Administration/Design_and_Configure/Organizations_and_Networks/Integrating_Microsoft_EntraID_as_an_External_IdP_on_the_Organization_Users_Page",
+   "title": "Integrating Microsoft EntraID as an External IdP on the Organization Users Page",
+   "quote": "When using Microsoft Entra ID the master records of user accounts can remain on Microsoft Entra ID portal and synced (cached) into Meraki Dashboard.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c22",
+   "url": "https://documentation.meraki.com/Platform_Management/Dashboard_Administration/Operate_and_Maintain/Managing_Dashboard_Access/Managing_Dashboard_Administrators_and_Permissions_(Modernized_View)",
+   "title": "Managing Dashboard Administrators and Permissions (Modernized View)",
+   "quote": "They can modify role and scope assignments, unlock the account, force a logout, or remove the administrator.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c23",
+   "url": "https://api.meraki.com/api/v1/openapiSpec",
+   "title": "Meraki Dashboard API (OpenAPI spec)",
+   "quote": "View the Change Log for your organization",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.cisco.com/meraki/api-v1/"
+  },
+  {
+   "id": "c24",
+   "url": "https://documentation.meraki.com/Platform_Management/Dashboard_Administration/Operate_and_Maintain/Managing_Dashboard_Access/Configuring_SAML_Single_Sign-on_for_Dashboard",
+   "title": "Configuring SAML Single Sign-on for Dashboard",
+   "quote": "There must be at least one non-SAML Dashboard org admin remaining on the account",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c25",
+   "url": "https://api.meraki.com/api/v1/openapiSpec",
+   "title": "Meraki Dashboard API (OpenAPI spec)",
+   "quote": "Update an administrator",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.cisco.com/meraki/api-v1/"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://documentation.meraki.com/Platform_Management/Product_Information/Meraki_Licensing/General_Licensing_Information/General_Licensing_FAQs",
+  "https://meraki.cisco.com/pricing/ (504)",
+  "https://meraki.cisco.com/products/licensing/ (404)",
+  "https://documentation.meraki.com/sitemap.xml (2,431 URLs; SCIM only under Cisco Secure Connect)",
+  "https://documentation.meraki.com/Platform_Management/Dashboard_Administration/Operate_and_Maintain/Managing_Dashboard_Access/Configuring_SAML_Single_Sign-on_for_Dashboard",
+  "https://documentation.meraki.com/Platform_Management/Dashboard_Administration/Operate_and_Maintain/Managing_Dashboard_Access/Managing_Dashboard_Administrators_and_Permissions_(Modernized_View)",
+  "https://documentation.meraki.com/Platform_Management/Dashboard_Administration/Design_and_Configure/Organizations_and_Networks/Integrating_Microsoft_EntraID_as_an_External_IdP_on_the_Organization_Users_Page",
+  "https://documentation.meraki.com/Platform_Management/Dashboard_Administration/Operate_and_Maintain/Managing_Dashboard_Access/Configuring_SAML_SSO_with_OneLogin",
+  "https://documentation.meraki.com/Platform_Management/Dashboard_Administration/Operate_and_Maintain/Managing_Dashboard_Access/Configuring_SAML_SSO_with_Microsoft_Entra_ID",
+  "https://api.meraki.com/api/v1/openapiSpec (no SCIM paths)",
+  "https://developer.cisco.com/meraki/api-v1/authorization/",
+  "https://developer.cisco.com/meraki/api-v1/rate-limit/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/meraki-dashboard-tutorial",
+  "https://www.okta.com/integrations/meraki-dashboard/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/meraki-dashboard-provisioning-tutorial (404)"
+ ],
+ "open_questions": [
+  "Which Meraki licence or subscription tier is required for Dashboard SAML SSO (Entra tutorial only says an 'SSO enabled subscription').",
+  "Whether any Meraki licence tier gates Dashboard API access is not stated on the pages loaded.",
+  "Is Meraki Dashboard in the Google Workspace or JumpCloud catalogues? Not checked successfully."
+ ]
+}

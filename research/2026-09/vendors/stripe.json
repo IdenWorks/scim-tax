@@ -1,0 +1,662 @@
+{
+ "slug": "stripe",
+ "vendor": "Stripe",
+ "vendor_url": "https://stripe.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Stripe",
+  "slug": "stripe",
+  "category": "E-commerce & Payments",
+  "status": "free",
+  "scim_plan": "Standard (all accounts)",
+  "scim_price_text": "No additional fee (pay-as-you-go, no monthly fees)",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Standard",
+  "team_price_text": "Standard: 2.9% + 30¢ per successful domestic card transaction; no setup or monthly fees",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Standard (all accounts)",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "via_generic",
+   "google": "sso_only",
+   "onelogin": "sso_only",
+   "jumpcloud": "none",
+   "generic": true
+  },
+  "pricing_page_url": "https://stripe.com/pricing",
+  "docs_url": "https://docs.stripe.com/get-started/account/sso/scim",
+  "evidence": "Stripe's docs let any live-mode account or organization with SAML SSO enable SCIM 2.0 provisioning of Dashboard team members and groups, and the pricing page says Stripe charges no setup or monthly fees and lists every fee on standard pricing, with no fee for SSO or SCIM.",
+  "notes": "New in 2026-09. Stripe has no seat tiers: Standard is pay-as-you-go (2.9% + 30¢ per successful domestic card transaction, no setup or monthly fees) and Custom is a volume-pricing package via sales, not a feature tier. SAML SSO and SCIM are documented for any live-mode account or organization with no plan named, and the pricing page says all standard-pricing fees are listed with no SSO/SCIM fee, so this is treated as a single-plan product (status free; per-user fields null). SCIM needs SSO configured, an Administrator or Super Administrator, and live mode; organizations configure SSO/SCIM at org level. SCIM handles only id, userName (email), displayName, active and meta; email and group-name updates are not supported. Deactivate and delete both delete the user from the account and sign them out immediately. Roles are not synced over SCIM; SCIM groups are mapped to roles in the Dashboard. Okta OIN app supports SSO and SCIM; Entra uses a non-gallery app with the generic SCIM endpoint; Google Workspace is a custom SAML app; OneLogin has only a password-based Stripe app, so SAML uses the SAML Test Connector. No Stripe API for managing Dashboard team members is documented.",
+  "confidence": "medium",
+  "api_provisioning": false,
+  "user_api_available": false,
+  "user_api_plan": null,
+  "api_tax": null,
+  "last_verified": "2026-10-05",
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Standard",
+   "price_text": "2.9% + 30¢ per successful transaction for domestic cards; no setup, monthly or hidden fees",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": false,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c3",
+    "c4",
+    "c6"
+   ],
+   "notes": "Usage-priced, no seats. SSO and SCIM are documented for any live-mode account with no fee listed."
+  },
+  {
+   "name": "Custom",
+   "price_text": "Contact sales (IC+ pricing, volume discounts)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": false,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c4",
+    "c6"
+   ],
+   "notes": "Pricing package for large volume, not a feature tier."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c6",
+   "c7",
+   "c13",
+   "c14",
+   "c15",
+   "c16"
+  ],
+  "plan": "Standard (all accounts)",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://access.stripe.com/scim/v2",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Settings > Team and security > SCIM provisioning > Enable (SCIM API key; rotate under Developers > API keys)",
+   "token_expiry": null,
+   "cite": [
+    "c15",
+    "c17",
+    "c26"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": false,
+   "Schemas": false,
+   "ResourceTypes": false,
+   "Bulk": false,
+   "Me": false,
+   "cite": [
+    "c7",
+    "c8",
+    "c11"
+   ],
+   "notes": "Docs say Stripe 'only supports' the listed Users and Groups operations; discovery endpoints, Bulk and Me are not listed."
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c7",
+    "c8",
+    "c9",
+    "c11",
+    "c20"
+   ]
+  },
+  "deprovision": {
+   "action": "delete",
+   "frees_seat": null,
+   "revokes_sessions": true,
+   "data_retained": null,
+   "cite": [
+    "c9",
+    "c12",
+    "c34"
+   ],
+   "notes": "Deactivation (active=false) and DELETE both delete the user from the Stripe account. Stripe is not priced per seat."
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "id",
+    "userName",
+    "displayName",
+    "active",
+    "meta"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": false,
+    "how": "Stripe doesn't handle attributes other than id, userName, displayName, active and meta"
+   },
+   "group": [],
+   "cite": [
+    "c10",
+    "c35"
+   ],
+   "notes": "userName is the email and is the unique identifier; only displayName and active can be updated. Group attributes are not listed; group names cannot be updated."
+  },
+  "roles": {
+   "supported": true,
+   "how": "Roles are not synced over SCIM; SCIM-synced groups are assigned roles in the Dashboard (group-based role assignment), or roles come from SAML attributes.",
+   "cite": [
+    "c20"
+   ]
+  },
+  "rate_limits": {
+   "text": "No more than 100 group-membership modifications per second per account or organization (bursts up to 500/s, sustained 500/s returns 429); normal Stripe API request rate limits also apply. 250 groups can be synced per organization.",
+   "cite": [
+    "c18",
+    "c19"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Email (userName) updates are not supported; re-provision the user with the new email.",
+    "cite": [
+     "c21"
+    ]
+   },
+   {
+    "text": "Group name updates are not supported; re-provision the group with a new name.",
+    "cite": [
+     "c22"
+    ]
+   },
+   {
+    "text": "Deactivation is a delete: there is no suspended state.",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "text": "SCIM can only be enabled in live mode, and only after SSO is configured; organizations must configure SSO and SCIM at the organization level.",
+    "cite": [
+     "c13",
+     "c14",
+     "c36"
+    ]
+   },
+   {
+    "text": "Entra ID provisions on its fixed 40-minute interval.",
+    "cite": [
+     "c25"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": false,
+  "cite": [
+   "c33"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": null,
+  "base_url": null,
+  "docs_url": null,
+  "auth": {
+   "methods": [],
+   "scopes": [],
+   "cite": []
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": []
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": [
+    "c32"
+   ],
+   "notes": "Security history is a Dashboard view; no API documented."
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "available=false by absence: Dashboard team members are invited by email from Settings > Team; the Stripe API reference and docs index (llms.txt) have no endpoints for team members or roles. Team activity is in the Dashboard Security history (180 days); no audit-log API is documented."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/stripe/",
+   "cite": [
+    "c23",
+    "c30",
+    "c31"
+   ]
+  },
+  "entra": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c24",
+    "c27"
+   ],
+   "notes": "Stripe's guide uses a non-gallery Entra app ('Integrate any other application you don't find in the gallery') with the generic SCIM endpoint. learn.microsoft.com stripe tutorial URLs return 404."
+  },
+  "google": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c28"
+   ],
+   "notes": "Google Workspace is configured as a custom SAML app; no Google provisioning documented."
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": false,
+   "provisioning": null,
+   "kind": "swa",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c29"
+   ],
+   "notes": "Per Stripe, OneLogin only has a password-based Stripe app; SAML SSO uses OneLogin's SAML Test Connector. SCIM with OneLogin not documented."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "jumpcloud.com/integrations/stripe returns 404."
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c5",
+   "c33"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://stripe.com/pricing",
+   "title": "Stripe pricing",
+   "quote": "Access a complete payments platform with simple, pay-as-you-go pricing. No setup fees, monthly fees, or hidden fees.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://stripe.com/pricing",
+   "title": "Stripe pricing",
+   "quote": "Design a custom package— available for businesses with large payments volume or unique business models.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://stripe.com/pricing",
+   "title": "Stripe pricing",
+   "quote": "Stripe does not charge setup fees, monthly fees, or any other hidden fees like closure fees. All fees for businesses on standard pricing are listed on our website.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://docs.stripe.com/get-started/account/sso.md",
+   "title": "Single sign-on (SSO) | Stripe Documentation",
+   "quote": "Stripe supports Security Assertion Markup Language (SAML) 2.0, so your IdP can manage the creation of user accounts (team members), as well as authentication and authorization during sign-in. Any identity provider that supports SAML 2.0 works with Stripe.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.stripe.com/get-started/account/sso"
+  },
+  {
+   "id": "c5",
+   "url": "https://docs.stripe.com/get-started/account/sso.md",
+   "title": "Single sign-on (SSO) | Stripe Documentation",
+   "quote": "**Just-in-time account creation**: Automatically create new Stripe accounts for users without existing access upon their first SSO sign-in.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.stripe.com/get-started/account/sso"
+  },
+  {
+   "id": "c6",
+   "url": "https://docs.stripe.com/get-started/account/sso/scim.md",
+   "title": "Set up SCIM provisioning | Stripe Documentation",
+   "quote": "With SCIM, you can automatically provision team members in Stripe even before they sign in, and deprovision them on demand when they should no longer have access to Stripe.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.stripe.com/get-started/account/sso/scim"
+  },
+  {
+   "id": "c7",
+   "url": "https://docs.stripe.com/get-started/account/sso/scim.md",
+   "title": "Set up SCIM provisioning | Stripe Documentation",
+   "quote": "Stripe adheres to the SCIM 2.0 protocol and only supports the following capabilities:",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.stripe.com/get-started/account/sso/scim"
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.stripe.com/get-started/account/sso/scim.md",
+   "title": "Set up SCIM provisioning | Stripe Documentation",
+   "quote": "Update a user in Stripe (`PUT /scim/v2/Users/<user_id>` or `PATCH /scim/v2/Users/<user_id>`)",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.stripe.com/get-started/account/sso/scim"
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.stripe.com/get-started/account/sso/scim.md",
+   "title": "Set up SCIM provisioning | Stripe Documentation",
+   "quote": "Both user deactivation (`PATCH` to set `active` to `false`) and deletion (`DELETE`) result in deleting the user from the Stripe account.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.stripe.com/get-started/account/sso/scim"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.stripe.com/get-started/account/sso/scim.md",
+   "title": "Set up SCIM provisioning | Stripe Documentation",
+   "quote": "Stripe handles the following user attributes: `id`, `userName`, `displayName`, `active`, `meta`. Stripe doesn’t handle other user attributes, so you don’t need to pass them in SCIM requests.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.stripe.com/get-started/account/sso/scim"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.stripe.com/get-started/account/sso/scim.md",
+   "title": "Set up SCIM provisioning | Stripe Documentation",
+   "quote": "Provision a group to Stripe (`POST /scim/v2/Groups`)",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.stripe.com/get-started/account/sso/scim"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.stripe.com/get-started/account/sso/scim.md",
+   "title": "Set up SCIM provisioning | Stripe Documentation",
+   "quote": "When your IdP or SCIM client deprovisions team members, we immediately revoke their access and remove them from your list of team members. Deprovisioned team members are automatically signed out of the Dashboard and can’t access Stripe.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.stripe.com/get-started/account/sso/scim"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.stripe.com/get-started/account/sso/scim.md",
+   "title": "Set up SCIM provisioning | Stripe Documentation",
+   "quote": "You must have [single sign-on (SSO)](https://docs.stripe.com/get-started/account/sso.md) configured.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.stripe.com/get-started/account/sso/scim"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.stripe.com/get-started/account/sso/scim.md",
+   "title": "Set up SCIM provisioning | Stripe Documentation",
+   "quote": "You can only enable SCIM provisioning in live mode accounts or organizations.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.stripe.com/get-started/account/sso/scim"
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.stripe.com/get-started/account/sso/scim.md",
+   "title": "Set up SCIM provisioning | Stripe Documentation",
+   "quote": "From the Team and security settings page, go to [SCIM provisioning](https://dashboard.stripe.com/settings/security/scim-provisioning) and click **Enable**.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.stripe.com/get-started/account/sso/scim"
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.stripe.com/get-started/account/sso/scim.md",
+   "title": "Set up SCIM provisioning | Stripe Documentation",
+   "quote": "For **SCIM connector base URL**, enter `https://access.stripe.com/scim/v2`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.stripe.com/get-started/account/sso/scim"
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.stripe.com/get-started/account/sso/scim.md",
+   "title": "Set up SCIM provisioning | Stripe Documentation",
+   "quote": "For **Authorization**, enter your SCIM API key as the bearer token.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.stripe.com/get-started/account/sso/scim"
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.stripe.com/get-started/account/sso/scim.md",
+   "title": "Set up SCIM provisioning | Stripe Documentation",
+   "quote": "Don’t modify more than 100 group memberships per second, per account or organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.stripe.com/get-started/account/sso/scim"
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.stripe.com/get-started/account/sso/scim.md",
+   "title": "Set up SCIM provisioning | Stripe Documentation",
+   "quote": "250 groups can be synced per organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.stripe.com/get-started/account/sso/scim"
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.stripe.com/get-started/account/sso/scim.md",
+   "title": "Set up SCIM provisioning | Stripe Documentation",
+   "quote": "Stripe supports role assignments only in the Dashboard or SAML. You can’t synchronize roles with SCIM. However, you can synchronize groups with SCIM and then assign roles to these groups in the Dashboard.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.stripe.com/get-started/account/sso/scim"
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.stripe.com/get-started/account/sso/scim.md",
+   "title": "Set up SCIM provisioning | Stripe Documentation",
+   "quote": "Stripe doesn’t support email updates. If you need to update the user’s email, you must re-provision the user with a new email.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.stripe.com/get-started/account/sso/scim"
+  },
+  {
+   "id": "c22",
+   "url": "https://docs.stripe.com/get-started/account/sso/scim.md",
+   "title": "Set up SCIM provisioning | Stripe Documentation",
+   "quote": "We don’t support group name updates. If you need to rename a group, you must re-provision it with a new name.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.stripe.com/get-started/account/sso/scim"
+  },
+  {
+   "id": "c23",
+   "url": "https://docs.stripe.com/get-started/account/sso/scim.md",
+   "title": "Set up SCIM provisioning | Stripe Documentation",
+   "quote": "Using an Okta Integration Network (OIN) application for Stripe (recommended if your organization manages apps through the App Integration Catalog).",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.stripe.com/get-started/account/sso/scim"
+  },
+  {
+   "id": "c24",
+   "url": "https://docs.stripe.com/get-started/account/sso/scim.md",
+   "title": "Set up SCIM provisioning | Stripe Documentation",
+   "quote": "Open your Stripe application under **Enterprise applications**.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.stripe.com/get-started/account/sso/scim"
+  },
+  {
+   "id": "c25",
+   "url": "https://docs.stripe.com/get-started/account/sso/scim.md",
+   "title": "Set up SCIM provisioning | Stripe Documentation",
+   "quote": "Entra ID has a fixed automatic provisioning interval of 40 minutes.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.stripe.com/get-started/account/sso/scim"
+  },
+  {
+   "id": "c26",
+   "url": "https://docs.stripe.com/get-started/account/sso/scim.md",
+   "title": "Set up SCIM provisioning | Stripe Documentation",
+   "quote": "Next to your SCIM API key, click the overflow menu (⋯) and select **Rotate key**.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.stripe.com/get-started/account/sso/scim"
+  },
+  {
+   "id": "c27",
+   "url": "https://docs.stripe.com/get-started/account/sso/entra-id.md",
+   "title": "Entra ID SSO | Stripe Documentation",
+   "quote": "Click **Create your own application**, enter the name of your application, select **Integrate any other application you don’t find in the gallery**, and click **Create**.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.stripe.com/get-started/account/sso/entra-id"
+  },
+  {
+   "id": "c28",
+   "url": "https://docs.stripe.com/get-started/account/sso/google-workspace.md",
+   "title": "Google Workspace SSO | Stripe Documentation",
+   "quote": "Click the **Add app** menu and select **Add custom SAML app**.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.stripe.com/get-started/account/sso/google-workspace"
+  },
+  {
+   "id": "c29",
+   "url": "https://docs.stripe.com/get-started/account/sso/onelogin.md",
+   "title": "OneLogin SSO | Stripe Documentation",
+   "quote": "There isn’t an official Stripe SAML connector in OneLogin yet. The only available Stripe app is for password-based authentication. Don’t use the password-based authentication for SAML.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.stripe.com/get-started/account/sso/onelogin"
+  },
+  {
+   "id": "c30",
+   "url": "https://docs.stripe.com/get-started/account/sso/okta.md",
+   "title": "Okta SSO | Stripe Documentation",
+   "quote": "The Okta Integration Network (OIN) includes a pre-built Stripe app with SAML settings configured for the Stripe Dashboard.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.stripe.com/get-started/account/sso/okta"
+  },
+  {
+   "id": "c31",
+   "url": "https://www.okta.com/integrations/stripe/",
+   "title": "Stripe | Okta Integration Network",
+   "quote": "The Okta Stripe integration allows customers to securely access Stripe using Single Sign-On and supports SCIM user and group provisioning",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c32",
+   "url": "https://docs.stripe.com/get-started/account/teams.md",
+   "title": "Start a team | Stripe Documentation",
+   "quote": "Stripe logs the account activity of team members during the past 180 days. To review account activity information, go to [Security history](https://dashboard.stripe.com/settings/security_history) in the Dashboard.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.stripe.com/get-started/account/teams"
+  },
+  {
+   "id": "c33",
+   "url": "https://docs.stripe.com/get-started/account/teams.md",
+   "title": "Start a team | Stripe Documentation",
+   "quote": "Add one or more email addresses, separated by a space or comma.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.stripe.com/get-started/account/teams"
+  },
+  {
+   "id": "c34",
+   "url": "https://docs.stripe.com/get-started/account/sso/scim.md",
+   "title": "Set up SCIM provisioning | Stripe Documentation",
+   "quote": "Stripe doesn’t differentiate between user deactivation and deletion with SCIM. Both operations result in deleting the user from the Stripe account.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.stripe.com/get-started/account/sso/scim"
+  },
+  {
+   "id": "c35",
+   "url": "https://docs.stripe.com/get-started/account/sso/scim.md",
+   "title": "Set up SCIM provisioning | Stripe Documentation",
+   "quote": "Only `displayName` and `active` attributes can be updated. Other attributes are either not handled by Stripe or considered immutable.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.stripe.com/get-started/account/sso/scim"
+  },
+  {
+   "id": "c36",
+   "url": "https://docs.stripe.com/get-started/account/sso/scim.md",
+   "title": "Set up SCIM provisioning | Stripe Documentation",
+   "quote": "If your accounts belong to an organization, you must configure both SSO and SCIM provisioning from your organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.stripe.com/get-started/account/sso/scim"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://stripe.com/pricing (no SSO, SCIM or seat fees listed)",
+  "https://docs.stripe.com/llms.txt (docs index)",
+  "docs.stripe.com SSO, SCIM, Okta, Entra ID, Google Workspace, OneLogin, group-role-assignment, teams and roles pages (.md exports)",
+  "Okta OIN https://www.okta.com/integrations/stripe/ (SSO + SCIM)",
+  "Entra tutorial URLs (404), JumpCloud integration page (404)"
+ ],
+ "open_questions": [
+  "Stripe never states SSO/SCIM pricing explicitly; status free rests on usage-only pricing with all fees listed and no SSO/SCIM fee.",
+  "SCIM filtering and pagination support are not documented.",
+  "Whether a deleted user can be reactivated other than by re-provisioning is not documented.",
+  "Whether Security history (audit log) is available through an API is not documented."
+ ]
+}

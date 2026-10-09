@@ -1,0 +1,163 @@
+{
+ "slug": "sap-commerce",
+ "vendor": "SAP Commerce Cloud",
+ "vendor_url": "https://www.sap.com/products/crm/commerce-cloud.html",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "SAP Commerce Cloud",
+  "slug": "sap-commerce",
+  "category": "E-commerce & Payments",
+  "status": "gated",
+  "scim_plan": "SAP Commerce Cloud (any edition, quote-only)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "SAP Commerce Cloud, composable edition",
+  "team_price_text": "Price upon request (blocks of 50,000 orders per year)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": null,
+   "entra": null,
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.sap.com/products/crm/commerce-cloud/pricing.html",
+  "docs_url": "https://help.sap.com/docs/SAP_COMMERCE_CLOUD_PUBLIC_CLOUD/452dcbb0e00f47e88a69cdaeb87a925d/baaa605b6a6f4907a2fc1cc917d8c6c7.html",
+  "evidence": "SAP Commerce Cloud's editions are all \"Price upon request\", and SAP Help documents SCIM 2.0 Users and Groups APIs (cloudscimwebservices extension) for creating, reading, updating and disabling employees.",
+  "notes": "Quote-only: every SAP Commerce Cloud edition (composable, premier, cloud ERP) is 'Price upon request', priced on annual orders or GMV rather than per user. SCIM covers Backoffice/ASM employees, not shoppers: the customer must add the cloudscimwebservices extension to manifest.json (context path /scim, Swagger at /scim/v3), and calls need an OAuth token with ROLE_SCIM_CLIENT. SAP's documented client is SAP Cloud Identity Services (Identity Authentication as source, Identity Provisioning job pushing employees and groups periodically); SSO to Backoffice/ASM uses Identity Authentication. No Okta OIN or Entra gallery app found for SAP Commerce Cloud.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": null,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  { "name": "SAP Commerce Cloud, composable edition, orders, access", "price_text": "Price upon request; in blocks of 50000 orders per year", "price_per_user_mo": null, "billing": "unknown", "sso": null, "scim": null, "user_api": null, "audit_log_api": null, "cite": ["c1"] },
+  { "name": "SAP Commerce Cloud, premier edition, orders, access", "price_text": "Price upon request; in blocks of 50000 orders per year", "price_per_user_mo": null, "billing": "unknown", "sso": null, "scim": null, "user_api": null, "audit_log_api": null, "cite": ["c2"] },
+  { "name": "SAP Commerce Cloud, cloud ERP edition", "price_text": "Price upon request; in blocks of 10000 orders per year", "price_per_user_mo": null, "billing": "unknown", "sso": null, "scim": null, "user_api": null, "audit_log_api": null, "cite": ["c3"] }
+ ],
+ "scim": {
+  "available": true,
+  "cite": ["c4", "c5", "c6"],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://{url}/scim",
+  "notes": "The extension must be added to manifest.json; the generated server URL in SAP's OpenAPI sample ends in /scim/v3.",
+  "auth": { "method": "oauth2", "token_source": "OAuth client (client credentials) in SAP Commerce Cloud with authority ROLE_SCIM_CLIENT; token URL /authorizationserver/oauth/token", "token_expiry": null, "cite": ["c7", "c8"] },
+  "endpoints": { "Users": true, "Groups": true, "ServiceProviderConfig": null, "Schemas": null, "ResourceTypes": null, "Bulk": null, "Me": null, "cite": ["c4", "c9"] },
+  "operations": {
+   "create": true, "read": true, "update_put": true, "update_patch": true, "deactivate": true, "reactivate": null,
+   "delete": true, "group_push": true, "group_membership": true,
+   "cite": ["c9", "c10", "c11", "c12"]
+  },
+  "deprovision": {
+   "action": null,
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [],
+   "notes": "The extension supports disabling employees and also exposes DELETE /Users/{userId}; which one the Identity Provisioning job uses on removal is not stated."
+  },
+  "filtering": { "supported": true, "attributes": [], "cite": ["c9"], "notes": "GET /Users and GET /Groups take filter, attributes, excludedAttributes, count, startIndex and startId parameters." },
+  "pagination": { "supported": true, "max_page_size": null, "cite": ["c9"] },
+  "attributes": {
+   "core": ["id", "externalId", "userName", "name", "displayName", "nickName", "userType", "active", "emails", "addresses", "groups"],
+   "enterprise": [],
+   "custom": { "supported": true, "how": "ScimExtensions object for extended schema attributes specified by the resource type." },
+   "group": ["id", "externalId", "displayName", "members"],
+   "cite": ["c13", "c14"],
+   "notes": "Read from the ScimUser and ScimGroup schemas in SAP's OpenAPI specification on the help page."
+  },
+  "roles": { "supported": true, "how": "SCIM groups become ScimUserGroupModel entries; a Backoffice admin assigns Commerce user groups to them, so members get those authorizations.", "cite": ["c15"] },
+  "rate_limits": { "text": null, "cite": [] },
+  "limitations": [
+   { "text": "Only available when the customer adds the cloudscimwebservices extension to manifest.json.", "cite": ["c4"] },
+   { "text": "Users endpoint returns users of type Employee only (Backoffice/ASM staff, not customers).", "cite": ["c10"] },
+   { "text": "On group creation only the group name is stored; members must already exist as users.", "cite": ["c6"] }
+  ]
+ },
+ "user_api": {
+  "available": null,
+  "cite": [],
+  "plan": null,
+  "api_tax": null,
+  "style": null,
+  "base_url": null,
+  "docs_url": null,
+  "auth": { "methods": [], "scopes": [], "cite": [] },
+  "capabilities": { "list_users": null, "get_user": null, "create_user": null, "invite_user": null, "update_user": null, "deactivate_user": null, "delete_user": null, "reactivate_user": null, "manage_groups": null, "assign_roles": null, "assign_licenses": null, "cite": [] },
+  "endpoints": [],
+  "webhooks_user_events": { "supported": null, "events": [], "cite": [] },
+  "audit_log_api": { "supported": null, "plan": null, "cite": [] },
+  "rate_limits": { "text": null, "cite": [] },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": { "listed": null, "sso": null, "provisioning": null, "kind": null, "built_by": null, "url": null, "cite": [], "notes": "okta.com/integrations/sap-commerce-cloud/ returns 404." },
+  "entra": { "listed": null, "sso": null, "provisioning": null, "kind": null, "built_by": null, "url": null, "cite": [], "notes": "learn.microsoft.com .../sap-commerce-cloud-tutorial returns 404." },
+  "google": { "listed": null, "sso": null, "provisioning": null, "kind": null, "built_by": null, "url": null, "cite": [] },
+  "onelogin": { "listed": null, "sso": null, "provisioning": null, "kind": null, "built_by": null, "url": null, "cite": [] },
+  "jumpcloud": { "listed": null, "sso": null, "provisioning": null, "kind": null, "built_by": null, "url": null, "cite": [] }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": "SAP Cloud Identity Services: Identity Provisioning job periodically provisions Identity Authentication employees and groups into SAP Commerce Cloud.",
+  "docs_public": true,
+  "cite": ["c15", "c16"]
+ },
+ "citations": [
+  { "id": "c1", "url": "https://www.sap.com/products/crm/commerce-cloud/pricing.html", "title": "SAP Commerce Cloud | Plans and Pricing | SAP", "quote": "SAP Commerce Cloud, composable edition, orders, access Price upon request In blocks of 50000 Orders per year", "accessed": "2026-10-05" },
+  { "id": "c2", "url": "https://www.sap.com/products/crm/commerce-cloud/pricing.html", "title": "SAP Commerce Cloud | Plans and Pricing | SAP", "quote": "SAP Commerce Cloud, premier edition, orders, access Price upon request In blocks of 50000 Orders per year", "accessed": "2026-10-05" },
+  { "id": "c3", "url": "https://www.sap.com/products/crm/commerce-cloud/pricing.html", "title": "SAP Commerce Cloud | Plans and Pricing | SAP", "quote": "SAP Commerce Cloud, cloud ERP edition Price upon request In blocks of 10000 Orders per year", "accessed": "2026-10-05" },
+  { "id": "c4", "url": "https://help.sap.com/docs/SAP_COMMERCE_CLOUD_PUBLIC_CLOUD/452dcbb0e00f47e88a69cdaeb87a925d/baaa605b6a6f4907a2fc1cc917d8c6c7.html", "title": "SAP Commerce Cloud SCIM APIs | SAP Help Portal", "quote": "This API will be available only when customers add the cloudscimwebservices extension as a part of the manifest.json file.", "accessed": "2026-10-05" },
+  { "id": "c5", "url": "https://help.sap.com/docs/SAP_COMMERCE_CLOUD_PUBLIC_CLOUD/403d43bf9c564f5a985913d1fbfbf8d7/e328e37a72924a50a12329a93949d286.html", "title": "cloudscimwebservices extension | SAP Help Portal", "quote": "The cloudscimwebservices extension provides REST APIs for creating, reading, updating, and disabling of employee.", "accessed": "2026-10-05" },
+  { "id": "c6", "url": "https://help.sap.com/docs/SAP_COMMERCE_CLOUD_PUBLIC_CLOUD/403d43bf9c564f5a985913d1fbfbf8d7/e328e37a72924a50a12329a93949d286.html", "title": "cloudscimwebservices extension | SAP Help Portal", "quote": "This integration is based on the implementation of SCIM 2.0 protocol, and both User and Group resources are supported. During the creation of a group, only the group name is stored.", "accessed": "2026-10-05" },
+  { "id": "c7", "url": "https://help.sap.com/docs/SAP_COMMERCE_CLOUD_PUBLIC_CLOUD/403d43bf9c564f5a985913d1fbfbf8d7/e328e37a72924a50a12329a93949d286.html", "title": "cloudscimwebservices extension | SAP Help Portal", "quote": "All calls are restricted to a valid OAuth token with authority 'ROLE_SCIM_CLIENT'.", "accessed": "2026-10-05" },
+  { "id": "c8", "url": "https://help.sap.com/docs/SAP_COMMERCE_CLOUD_PUBLIC_CLOUD/452dcbb0e00f47e88a69cdaeb87a925d/baaa605b6a6f4907a2fc1cc917d8c6c7.html", "title": "SAP Commerce Cloud SCIM APIs | SAP Help Portal", "quote": "\"tokenUrl\": \"/authorizationserver/oauth/token\"", "accessed": "2026-10-05" },
+  { "id": "c9", "url": "https://help.sap.com/docs/SAP_COMMERCE_CLOUD_PUBLIC_CLOUD/452dcbb0e00f47e88a69cdaeb87a925d/baaa605b6a6f4907a2fc1cc917d8c6c7.html", "title": "SAP Commerce Cloud SCIM APIs | SAP Help Portal", "quote": "Endpoint to retrieve all existing scim groups along with their members from Commerce.", "accessed": "2026-10-05" },
+  { "id": "c10", "url": "https://help.sap.com/docs/SAP_COMMERCE_CLOUD_PUBLIC_CLOUD/452dcbb0e00f47e88a69cdaeb87a925d/baaa605b6a6f4907a2fc1cc917d8c6c7.html", "title": "SAP Commerce Cloud SCIM APIs | SAP Help Portal", "quote": "Endpoint to retrive all users of type Employee from Commerce", "accessed": "2026-10-05" },
+  { "id": "c11", "url": "https://help.sap.com/docs/SAP_COMMERCE_CLOUD_PUBLIC_CLOUD/452dcbb0e00f47e88a69cdaeb87a925d/baaa605b6a6f4907a2fc1cc917d8c6c7.html", "title": "SAP Commerce Cloud SCIM APIs | SAP Help Portal", "quote": "Delete user from the system", "accessed": "2026-10-05" },
+  { "id": "c12", "url": "https://help.sap.com/docs/SAP_COMMERCE_CLOUD_PUBLIC_CLOUD/452dcbb0e00f47e88a69cdaeb87a925d/baaa605b6a6f4907a2fc1cc917d8c6c7.html", "title": "SAP Commerce Cloud SCIM APIs | SAP Help Portal", "quote": "Endpoint to update scim group in Commerce with the details provided", "accessed": "2026-10-05" },
+  { "id": "c13", "url": "https://help.sap.com/docs/SAP_COMMERCE_CLOUD_PUBLIC_CLOUD/452dcbb0e00f47e88a69cdaeb87a925d/baaa605b6a6f4907a2fc1cc917d8c6c7.html", "title": "SAP Commerce Cloud SCIM APIs | SAP Help Portal", "quote": "Extended schema attributes are specified by the resource's resource type", "accessed": "2026-10-05" },
+  { "id": "c14", "url": "https://help.sap.com/docs/SAP_COMMERCE_CLOUD_PUBLIC_CLOUD/452dcbb0e00f47e88a69cdaeb87a925d/baaa605b6a6f4907a2fc1cc917d8c6c7.html", "title": "SAP Commerce Cloud SCIM APIs | SAP Help Portal", "quote": "The SCIM User Group Name (ScimUserGroup) attribute must match the ID (UserGroup) attribute of the current group.", "accessed": "2026-10-05" },
+  { "id": "c15", "url": "https://help.sap.com/docs/SAP_COMMERCE_CLOUD_PUBLIC_CLOUD/403d43bf9c564f5a985913d1fbfbf8d7/cf9a0c38a6274f51b359278cae2dcc98.html", "title": "SAP Cloud Identity Services Integration Features | SAP Help Portal", "quote": "After the user groups are provisioned to a ScimUserGroupModel in SAP Commerce Cloud, the Backoffice administrator can assign SAP Commerce Cloud relevant user groups to the newly created ScimUserGroupModel.", "accessed": "2026-10-05" },
+  { "id": "c16", "url": "https://help.sap.com/docs/SAP_COMMERCE_CLOUD_PUBLIC_CLOUD/403d43bf9c564f5a985913d1fbfbf8d7/cf9a0c38a6274f51b359278cae2dcc98.html", "title": "SAP Cloud Identity Services Integration Features | SAP Help Portal", "quote": "The users or user groups that exist or are newly created in Identity Authentication of type Employee are provisioned to SAP Commerce Cloud as Employees using Identity Provisioning.", "accessed": "2026-10-05" }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.sap.com/products/crm/commerce-cloud/pricing.html",
+  "help.sap.com search API: 'SAP Commerce Cloud SCIM', 'SAP Commerce Cloud user provisioning Identity Provisioning'",
+  "https://help.sap.com/docs/SAP_COMMERCE_CLOUD_PUBLIC_CLOUD/452dcbb0e00f47e88a69cdaeb87a925d/baaa605b6a6f4907a2fc1cc917d8c6c7.html",
+  "https://help.sap.com/docs/SAP_COMMERCE_CLOUD_PUBLIC_CLOUD/403d43bf9c564f5a985913d1fbfbf8d7/e328e37a72924a50a12329a93949d286.html",
+  "https://help.sap.com/docs/SAP_COMMERCE_CLOUD_PUBLIC_CLOUD/403d43bf9c564f5a985913d1fbfbf8d7/cf9a0c38a6274f51b359278cae2dcc98.html",
+  "https://www.okta.com/integrations/sap-commerce-cloud/ (404)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/sap-commerce-cloud-tutorial (404)"
+ ],
+ "open_questions": [
+  "What removal from Identity Provisioning does in Commerce (disable vs DELETE), and whether sessions end.",
+  "Whether the SCIM extension or SAP Cloud Identity Services tenants carry extra cost; pricing is quote-only.",
+  "Non-SCIM Backoffice user-management API (OCC/Integration API) was not researched; user_api left null.",
+  "Google Workspace, OneLogin and JumpCloud catalogues not checked (WebSearch budget exhausted)."
+ ]
+}

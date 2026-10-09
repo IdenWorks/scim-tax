@@ -1,0 +1,755 @@
+{
+ "slug": "reclaim-ai",
+ "vendor": "Reclaim.ai",
+ "vendor_url": "https://reclaim.ai",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Reclaim.ai",
+  "slug": "reclaim-ai",
+  "category": "Productivity & Docs",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Enterprise: $22/seat/mo (annual only, 100-seat minimum)",
+  "scim_price_per_user_mo": 22,
+  "team_plan": "Starter",
+  "team_price_text": "Starter: $10/seat/mo (annual), $12 monthly",
+  "team_price_per_user_mo": 10,
+  "price_multiplier": 2.2,
+  "sso_plan": "Enterprise",
+  "sso_price_per_user_mo": 22,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": 100,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": null
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": "native",
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://reclaim.ai/pricing",
+  "docs_url": "https://help.reclaim.ai/en/articles/8218878-okta-scim-initial-setup-guide.md",
+  "evidence": "Reclaim's pricing page lists 'SSO & SCIM user provisioning' only under Enterprise ($22 per seat/month, unavailable on monthly plans), and the Okta SCIM guide requires a Reclaim.ai Enterprise Plan or a Business Trial.",
+  "notes": "Status unchanged (gated). Prices changed since June: the pricing page now shows Starter $10, Business $15 and Enterprise $22 per seat/month on yearly billing (Starter $12 and Business $18 monthly; Enterprise unavailable monthly), replacing June's 'Starter $10 monthly / $8 annual, Enterprise $22 monthly / $18 annual'. Enterprise needs 100 seats. SSO is OIDC only (SAML not supported) and must be set up before SCIM. SCIM base https://api.app.reclaim.ai/scim/v2 with a Reclaim API key as bearer token. Okta uses the generic SCIM 2.0 Test App (the OIN app is OIDC only); Entra uses a non-gallery app; OneLogin has a 'Reclaim AI (SCIM provisioning only)' catalogue app. Deprovisioning deletes (no suspend). June note about Dropbox acquisition not re-verified on a first-party page and dropped.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": null,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "scim": {
+  "available": true,
+  "cite": [
+   "c9",
+   "c18",
+   "c19",
+   "c20",
+   "c41"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://api.app.reclaim.ai/scim/v2",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Reclaim API key from app.reclaim.ai/settings/developer",
+   "token_expiry": "configurable (can be Never)",
+   "cite": [
+    "c21",
+    "c29",
+    "c38"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c20",
+    "c34"
+   ],
+   "notes": "Users endpoint implied by create/update/deactivate and Okta import; other endpoints not documented."
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": true,
+   "group_push": null,
+   "group_membership": null,
+   "cite": [
+    "c24",
+    "c34",
+    "c37",
+    "c39",
+    "c42"
+   ],
+   "notes": "Okta: Create Users, Update User Attributes, Deactivate Users. OneLogin: deletion only, suspension not supported. Group assignment in Okta is supported for provisioning; Group Push is not documented."
+  },
+  "deprovision": {
+   "action": "delete",
+   "frees_seat": true,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c37",
+    "c43"
+   ],
+   "notes": "OneLogin guide says Reclaim supports delete, not suspend. Removing a team member frees the paid seat (manual-removal article; not stated specifically for SCIM)."
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "externalId"
+   ],
+   "enterprise": [
+    "manager"
+   ],
+   "custom": {
+    "supported": true,
+    "how": "Reclaim extension urn:ietf:params:scim:schemas:extension:reclaimai:2.0:User (location, hireDate, jobCategory, orgRole, team) plus arbitrary camelCase attributes under urn:ietf:params:scim:schemas:extension:reclaimai:attributes:2.0:User"
+   },
+   "group": [],
+   "cite": [
+    "c25",
+    "c26",
+    "c27",
+    "c30",
+    "c31",
+    "c32",
+    "c33",
+    "c41"
+   ],
+   "notes": "Default Okta mappings are not listed in text; Entra guide maps userName and externalId. Manager is sent via Okta's managerValue (manager email)."
+  },
+  "roles": {
+   "supported": false,
+   "how": "orgRole is an informational org-chart attribute, not a Reclaim permission role; no role mapping documented",
+   "cite": [
+    "c32"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Okta's catalogue app is SSO (OIDC) only; SCIM uses the generic SCIM 2.0 Test App (Header Auth).",
+    "cite": [
+     "c22",
+     "c23"
+    ]
+   },
+   {
+    "text": "No suspend/deactivate support from OneLogin; delete only.",
+    "cite": [
+     "c37"
+    ]
+   },
+   {
+    "text": "Requires Enterprise (minimum 100 seats, annual) or a Business Trial, plus SSO configured.",
+    "cite": [
+     "c18",
+     "c19",
+     "c13"
+    ]
+   }
+  ],
+  "notes": "Prerequisites also include Auto Capture on the team, a Google service account or Microsoft service principal, and a Reclaim Team Admin. Entra uses https://api.app.reclaim.ai/scim/v2?aadOptscim062020."
+ },
+ "user_api": {
+  "available": null,
+  "cite": [],
+  "plan": null,
+  "api_tax": null,
+  "style": null,
+  "base_url": null,
+  "docs_url": null,
+  "auth": {
+   "methods": [],
+   "scopes": [],
+   "cite": []
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": []
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "Reclaim issues API keys (used as SCIM bearer tokens) but no public user-management REST API reference was found; webhooks documented are for Scheduling Links only."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/reclaim-ai/",
+   "cite": [
+    "c44",
+    "c17",
+    "c22",
+    "c23"
+   ],
+   "notes": "OIN page marks only OIDC. SCIM is set up through Okta's generic SCIM 2.0 Test App (Header Auth)."
+  },
+  "entra": {
+   "listed": false,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c40",
+    "c41",
+    "c15"
+   ],
+   "notes": "Non-gallery 'Create your own application' with Reclaim's SCIM tenant URL; Entra SSO via custom app guide."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "Google sign-in is OAuth (social); no Google Workspace provisioning documented."
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c35",
+    "c36",
+    "c15"
+   ],
+   "notes": "From Reclaim's guide: 'Reclaim AI (SCIM provisioning only)' app in the OneLogin catalogue, separate from the OIDC SSO app. OneLogin page not loaded."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": "Enterprise Domain Capture / Auto Capture adds users from your domains to the team; Google Workspace service account or Microsoft service principal rollout",
+  "docs_public": true,
+  "cite": [
+   "c10",
+   "c18"
+  ]
+ },
+ "plans": [
+  {
+   "name": "Lite",
+   "price_text": "Free forever",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c9"
+   ]
+  },
+  {
+   "name": "Starter",
+   "price_text": "$10 per seat/month (yearly); $12 monthly",
+   "price_per_user_mo": 10,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c3",
+    "c6",
+    "c9"
+   ],
+   "notes": "Up to 10 seats."
+  },
+  {
+   "name": "Business",
+   "price_text": "$15 per seat/month (yearly); $18 monthly",
+   "price_per_user_mo": 15,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c4",
+    "c7",
+    "c9"
+   ],
+   "notes": "Up to 100 seats. Okta SCIM guide also allows a Business Trial."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "$22 per seat/month (annual only), Contact us",
+   "price_per_user_mo": 22,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c5",
+    "c8",
+    "c9",
+    "c13",
+    "c14"
+   ],
+   "notes": "Minimum 100 seats. SSO is OIDC only."
+  }
+ ],
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://reclaim.ai/pricing",
+   "title": "Reclaim.ai Pricing",
+   "quote": "Yearly - SAVE 20%",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://reclaim.ai/pricing",
+   "title": "Reclaim.ai Pricing",
+   "quote": "Lite For calendar basics. Free Free forever",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://reclaim.ai/pricing",
+   "title": "Reclaim.ai Pricing",
+   "quote": "Starter For small teams. $10 per seat/month",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://reclaim.ai/pricing",
+   "title": "Reclaim.ai Pricing",
+   "quote": "Business For large teams. $15 per seat/month",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://reclaim.ai/pricing",
+   "title": "Reclaim.ai Pricing",
+   "quote": "Enterprise For enterprise-grade support. $22 per seat/month Contact us",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://reclaim.ai/pricing",
+   "title": "Reclaim.ai Pricing",
+   "quote": "Starter For small teams. $12 per seat/month",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://reclaim.ai/pricing",
+   "title": "Reclaim.ai Pricing",
+   "quote": "Business For large teams. $18 per seat/month",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://reclaim.ai/pricing",
+   "title": "Reclaim.ai Pricing",
+   "quote": "Enterprise For enterprise-grade support. Unavailable on monthly plans",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://reclaim.ai/pricing",
+   "title": "Reclaim.ai Pricing",
+   "quote": "SSO & SCIM user provisioning Automatically provision & deprovision Reclaim users via SCIM as well as dedicated SSO support.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://reclaim.ai/pricing",
+   "title": "Reclaim.ai Pricing",
+   "quote": "Domain Capture Automatically add users from your domains to your Reclaim team.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c11",
+   "url": "https://reclaim.ai/pricing",
+   "title": "Reclaim.ai Pricing",
+   "quote": "We offer a 29% discount for annual billing vs. monthly.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://help.reclaim.ai/en/articles/6405975-how-reclaim-s-pricing-and-plans-work.md",
+   "title": "How Reclaim's pricing and plans work",
+   "quote": "Enterprise is for teams of more than 100 seats, for organizations who need enterprise-grade support & security.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.reclaim.ai/en/articles/6405975-how-reclaim-s-pricing-and-plans-work"
+  },
+  {
+   "id": "c13",
+   "url": "https://help.reclaim.ai/en/articles/6405975-how-reclaim-s-pricing-and-plans-work.md",
+   "title": "How Reclaim's pricing and plans work",
+   "quote": "Enterprise requires a minimum purchase of 100 seats.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.reclaim.ai/en/articles/6405975-how-reclaim-s-pricing-and-plans-work"
+  },
+  {
+   "id": "c14",
+   "url": "https://help.reclaim.ai/en/articles/6405975-how-reclaim-s-pricing-and-plans-work.md",
+   "title": "How Reclaim's pricing and plans work",
+   "quote": "Our Enterprise plans are annual only.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.reclaim.ai/en/articles/6405975-how-reclaim-s-pricing-and-plans-work"
+  },
+  {
+   "id": "c15",
+   "url": "https://help.reclaim.ai/en/articles/7065692-sso-support-ie-okta.md",
+   "title": "SSO Support (ie: Okta)",
+   "quote": "For companies who use Okta, Onelogin or another identity provider, Reclaim supports SSO via OIDC for accounts on an Enterprise plan.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.reclaim.ai/en/articles/7065692-sso-support-ie-okta"
+  },
+  {
+   "id": "c16",
+   "url": "https://help.reclaim.ai/en/articles/7065692-sso-support-ie-okta.md",
+   "title": "SSO Support (ie: Okta)",
+   "quote": "SSO implementation is via OIDC (SAML is not currently supported)",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.reclaim.ai/en/articles/7065692-sso-support-ie-okta"
+  },
+  {
+   "id": "c17",
+   "url": "https://help.reclaim.ai/en/articles/7065692-sso-support-ie-okta.md",
+   "title": "SSO Support (ie: Okta)",
+   "quote": "Is Reclaim available as an App in Okta's App Catalog? Yes, find it here: https://www.okta.com/integrations/reclaim-ai/",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.reclaim.ai/en/articles/7065692-sso-support-ie-okta"
+  },
+  {
+   "id": "c18",
+   "url": "https://help.reclaim.ai/en/articles/8218878-okta-scim-initial-setup-guide.md",
+   "title": "Okta SCIM - Initial Setup Guide",
+   "quote": "Setup on a Reclaim.ai Enterprise Plan (see: https://reclaim.ai/pricing) or a Business Trial",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.reclaim.ai/en/articles/8218878-okta-scim-initial-setup-guide"
+  },
+  {
+   "id": "c19",
+   "url": "https://help.reclaim.ai/en/articles/8218878-okta-scim-initial-setup-guide.md",
+   "title": "Okta SCIM - Initial Setup Guide",
+   "quote": "Have your domain enabled/configured for SSO in Reclaim.ai",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.reclaim.ai/en/articles/8218878-okta-scim-initial-setup-guide"
+  },
+  {
+   "id": "c20",
+   "url": "https://help.reclaim.ai/en/articles/8218878-okta-scim-initial-setup-guide.md",
+   "title": "Okta SCIM - Initial Setup Guide",
+   "quote": "For \"Base URL\" enter: https://api.app.reclaim.ai/scim/v2",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.reclaim.ai/en/articles/8218878-okta-scim-initial-setup-guide"
+  },
+  {
+   "id": "c21",
+   "url": "https://help.reclaim.ai/en/articles/8218878-okta-scim-initial-setup-guide.md",
+   "title": "Okta SCIM - Initial Setup Guide",
+   "quote": "Set Expiration to \"Never\" (or whatever is appropriate for your security policy)",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.reclaim.ai/en/articles/8218878-okta-scim-initial-setup-guide"
+  },
+  {
+   "id": "c22",
+   "url": "https://help.reclaim.ai/en/articles/8218878-okta-scim-initial-setup-guide.md",
+   "title": "Okta SCIM - Initial Setup Guide",
+   "quote": "The current Reclaim.ai App in the Okta App Catalog is currently only for SSO",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.reclaim.ai/en/articles/8218878-okta-scim-initial-setup-guide"
+  },
+  {
+   "id": "c23",
+   "url": "https://help.reclaim.ai/en/articles/8218878-okta-scim-initial-setup-guide.md",
+   "title": "Okta SCIM - Initial Setup Guide",
+   "quote": "Type in \"SCIM\" and select \"SCIM 2.0 Test App (Header Auth)\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.reclaim.ai/en/articles/8218878-okta-scim-initial-setup-guide"
+  },
+  {
+   "id": "c24",
+   "url": "https://help.reclaim.ai/en/articles/8218878-okta-scim-initial-setup-guide.md",
+   "title": "Okta SCIM - Initial Setup Guide",
+   "quote": "Create Users 2. Update User Attributes 3. Deactivate Users",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.reclaim.ai/en/articles/8218878-okta-scim-initial-setup-guide"
+  },
+  {
+   "id": "c25",
+   "url": "https://help.reclaim.ai/en/articles/8218878-okta-scim-initial-setup-guide.md",
+   "title": "Okta SCIM - Initial Setup Guide",
+   "quote": "In order to make Reclaim aware of your org chart using Okta, make sure the “ManagerValue” field uses the email address of the manager.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.reclaim.ai/en/articles/8218878-okta-scim-initial-setup-guide"
+  },
+  {
+   "id": "c26",
+   "url": "https://help.reclaim.ai/en/articles/8218878-okta-scim-initial-setup-guide.md",
+   "title": "Okta SCIM - Initial Setup Guide",
+   "quote": "External namespace: urn:ietf:params:scim:schemas:extension:reclaimai:2.0:User",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.reclaim.ai/en/articles/8218878-okta-scim-initial-setup-guide"
+  },
+  {
+   "id": "c27",
+   "url": "https://help.reclaim.ai/en/articles/8218878-okta-scim-initial-setup-guide.md",
+   "title": "Okta SCIM - Initial Setup Guide",
+   "quote": "Custom attributes can be sent to Reclaim via Okta SCIM, where they're stored on the user. You don't need to create the attribute in Reclaim first",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.reclaim.ai/en/articles/8218878-okta-scim-initial-setup-guide"
+  },
+  {
+   "id": "c28",
+   "url": "https://help.reclaim.ai/en/articles/8218878-okta-scim-initial-setup-guide.md",
+   "title": "Okta SCIM - Initial Setup Guide",
+   "quote": "You can assign via using an Okta Group",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.reclaim.ai/en/articles/8218878-okta-scim-initial-setup-guide"
+  },
+  {
+   "id": "c29",
+   "url": "https://help.reclaim.ai/en/articles/8218878-okta-scim-initial-setup-guide.md",
+   "title": "Okta SCIM - Initial Setup Guide",
+   "quote": "For \"API Token\" enter \"Bearer RECLAIM_API_KEY\" you created at the start of this guide.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.reclaim.ai/en/articles/8218878-okta-scim-initial-setup-guide"
+  },
+  {
+   "id": "c30",
+   "url": "https://help.reclaim.ai/en/articles/8218878-okta-scim-initial-setup-guide.md",
+   "title": "Okta SCIM - Initial Setup Guide",
+   "quote": "Variable name: hireDate",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.reclaim.ai/en/articles/8218878-okta-scim-initial-setup-guide"
+  },
+  {
+   "id": "c31",
+   "url": "https://help.reclaim.ai/en/articles/8218878-okta-scim-initial-setup-guide.md",
+   "title": "Okta SCIM - Initial Setup Guide",
+   "quote": "Variable name: jobCategory",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.reclaim.ai/en/articles/8218878-okta-scim-initial-setup-guide"
+  },
+  {
+   "id": "c32",
+   "url": "https://help.reclaim.ai/en/articles/8218878-okta-scim-initial-setup-guide.md",
+   "title": "Okta SCIM - Initial Setup Guide",
+   "quote": "Variable name: orgRole",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.reclaim.ai/en/articles/8218878-okta-scim-initial-setup-guide"
+  },
+  {
+   "id": "c33",
+   "url": "https://help.reclaim.ai/en/articles/8218878-okta-scim-initial-setup-guide.md",
+   "title": "Okta SCIM - Initial Setup Guide",
+   "quote": "External namespace: urn:ietf:params:scim:schemas:extension:reclaimai:attributes:2.0:User",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.reclaim.ai/en/articles/8218878-okta-scim-initial-setup-guide"
+  },
+  {
+   "id": "c34",
+   "url": "https://help.reclaim.ai/en/articles/9333658-okta-scim-import-sync-existing-users.md",
+   "title": "Okta SCIM - Import/Sync Existing Users",
+   "quote": "Click on the \"Import Now\" button (this should query Reclaim via SCIM and give a list of all users)",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.reclaim.ai/en/articles/9333658-okta-scim-import-sync-existing-users"
+  },
+  {
+   "id": "c35",
+   "url": "https://help.reclaim.ai/en/articles/8265086-onelogin-scim-setup-guide.md",
+   "title": "OneLogin SCIM Setup Guide",
+   "quote": "This step will install the Reclaim SCIM Application from the OneLogin App Catalog.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.reclaim.ai/en/articles/8265086-onelogin-scim-setup-guide"
+  },
+  {
+   "id": "c36",
+   "url": "https://help.reclaim.ai/en/articles/8265086-onelogin-scim-setup-guide.md",
+   "title": "OneLogin SCIM Setup Guide",
+   "quote": "Click on the \"Reclaim AI (SCIM provisioning only)\" App",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.reclaim.ai/en/articles/8265086-onelogin-scim-setup-guide"
+  },
+  {
+   "id": "c37",
+   "url": "https://help.reclaim.ai/en/articles/8265086-onelogin-scim-setup-guide.md",
+   "title": "OneLogin SCIM Setup Guide",
+   "quote": "Set \"When user accounts are suspended in OneLogin\" to \"Do Nothing\" (Reclaim does not support suspending, only delete.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.reclaim.ai/en/articles/8265086-onelogin-scim-setup-guide"
+  },
+  {
+   "id": "c38",
+   "url": "https://help.reclaim.ai/en/articles/8265086-onelogin-scim-setup-guide.md",
+   "title": "OneLogin SCIM Setup Guide",
+   "quote": "For \"SCIM Bearer Token\" enter the API Key you created in the earlier step",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.reclaim.ai/en/articles/8265086-onelogin-scim-setup-guide"
+  },
+  {
+   "id": "c39",
+   "url": "https://help.reclaim.ai/en/articles/8265086-onelogin-scim-setup-guide.md",
+   "title": "OneLogin SCIM Setup Guide",
+   "quote": "Set \"When users are deleted in OneLogin\" to \"Delete\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.reclaim.ai/en/articles/8265086-onelogin-scim-setup-guide"
+  },
+  {
+   "id": "c40",
+   "url": "https://help.reclaim.ai/en/articles/13604712-enabling-service-principal-and-scim-at-microsoft-entra-id-to-use-reclaim-ai.md",
+   "title": "Enabling Service Principal and SCIM at Microsoft Entra ID to use Reclaim.ai",
+   "quote": "Select + New application > + Create your own application.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.reclaim.ai/en/articles/13604712-enabling-service-principal-and-scim-at-microsoft-entra-id-to-use-reclaim-ai"
+  },
+  {
+   "id": "c41",
+   "url": "https://help.reclaim.ai/en/articles/13604712-enabling-service-principal-and-scim-at-microsoft-entra-id-to-use-reclaim-ai.md",
+   "title": "Enabling Service Principal and SCIM at Microsoft Entra ID to use Reclaim.ai",
+   "quote": "(use the exact url provided, including the query parameter)",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.reclaim.ai/en/articles/13604712-enabling-service-principal-and-scim-at-microsoft-entra-id-to-use-reclaim-ai"
+  },
+  {
+   "id": "c42",
+   "url": "https://help.reclaim.ai/en/articles/13604712-enabling-service-principal-and-scim-at-microsoft-entra-id-to-use-reclaim-ai.md",
+   "title": "Enabling Service Principal and SCIM at Microsoft Entra ID to use Reclaim.ai",
+   "quote": "SCIM Provisioning: Once the service principal is active, you can leverage SCIM (System for Cross-domain Identity Management) to automate user creation and deprovisioning directly from Entra ID.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.reclaim.ai/en/articles/13604712-enabling-service-principal-and-scim-at-microsoft-entra-id-to-use-reclaim-ai"
+  },
+  {
+   "id": "c43",
+   "url": "https://help.reclaim.ai/en/articles/6211148-managing-and-removing-team-members.md",
+   "title": "Managing and removing team members",
+   "quote": "Removing a team member will remove them from the team and also free up their paid seat. You can always re-invite the team member later.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.reclaim.ai/en/articles/6211148-managing-and-removing-team-members"
+  },
+  {
+   "id": "c44",
+   "url": "https://www.okta.com/integrations/reclaim-ai/",
+   "title": "Reclaim.ai | Okta Integration Network",
+   "quote": "The Okta integration enables customers to authenticate log into Reclaim.ai using Okta as a single sign-on provider.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The pricing toggle says 'Yearly - SAVE 20%' while the pricing-page FAQ and help centre say annual billing saves 29%.",
+   "cite": [
+    "c1",
+    "c11"
+   ]
+  }
+ ],
+ "searched": [
+  "https://reclaim.ai/pricing",
+  "https://help.reclaim.ai/llms.txt",
+  "https://help.reclaim.ai/sitemap.xml",
+  "https://www.okta.com/integrations/reclaim-ai/",
+  "https://api.app.reclaim.ai/swagger-ui/index.html (403)",
+  "https://reclaim.ai/developers (404)"
+ ],
+ "open_questions": [
+  "SCIM Groups endpoint, PATCH vs PUT, filtering, pagination and rate limits are not documented.",
+  "Whether SCIM deletion frees the seat is stated only for manual removal.",
+  "No public user-management or audit-log API reference found.",
+  "JumpCloud and Google Workspace provisioning not documented."
+ ]
+}

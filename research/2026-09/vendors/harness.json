@@ -1,0 +1,769 @@
+{
+ "slug": "harness",
+ "vendor": "Harness",
+ "vendor_url": "https://www.harness.io",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Harness",
+  "slug": "harness",
+  "category": "Developer Tools & CI/CD",
+  "status": "unknown",
+  "scim_plan": "Not disclosed",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Essentials",
+  "team_price_text": "Contact Sales",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": null,
+   "onelogin": "native",
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.harness.io/pricing",
+  "docs_url": "https://developer.harness.io/harness-platform/use-harness-platform/platform-access-control/provision-users-with-okta-scim",
+  "evidence": "Harness documents SCIM provisioning of users and groups from Okta, Microsoft Entra ID and OneLogin (\"so you create, update, and remove them in Okta instead of in Harness\"), but neither the pricing page (Free, Essentials and Enterprise, the paid plans Contact Sales) nor the docs say which plan includes SCIM or SSO.",
+  "notes": "New in 2026-09. SCIM exists but its plan gate is not public, so status is unknown rather than gated: the pricing page lists a Free plan and two Contact Sales plans (Essentials bundle, up to 500 users; modular Enterprise) and has no SSO or SCIM line, and no developer.harness.io page ties SAML or SCIM to a plan. SCIM base URL is per cluster (https://app.harness.io/gateway/ng/api/scim/account/{accountId}, plus Prod2/Prod3/Prod0-4/EU and self-managed variants), authenticated with a Harness API key token (bearer; optional expiry) or JWT. Catalogue apps provision in Okta (OIN: SAML, SCIM, Create, Update, Deactivate, Group Push, Group Linking), Entra (gallery app with Microsoft provisioning tutorial) and OneLogin; Entra syncs about every 40 minutes. Only names, email and display name sync; roles and resource groups are assigned in Harness. SAML JIT and LDAP group linking are alternatives. A REST API (x-api-key) can add, list, update and remove users and manage user groups, and an audit-events API exists.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "Free",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c4"
+   ]
+  },
+  {
+   "name": "Essentials",
+   "price_text": "Contact Sales",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c2"
+   ],
+   "notes": "All-in-one DevOps bundle (CI, CD, IaC, security); up to 500 users per the comparison table."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Contact Sales",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c3"
+   ],
+   "notes": "Modular, unlimited users."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c6",
+   "c7",
+   "c23"
+  ],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": null,
+  "base_url": "https://app.harness.io/gateway/ng/api/scim/account/{accountId}",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Harness API key token (personal or service account) with Users and User Groups permissions; JWT optional",
+   "token_expiry": "optional expiration date set per token",
+   "cite": [
+    "c8",
+    "c14",
+    "c39"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c6",
+    "c23"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c9",
+    "c10",
+    "c13",
+    "c21",
+    "c26"
+   ],
+   "notes": "Okta Deactivate Users and OneLogin 'When users are deleted: Delete' remove the user from Harness; PUT vs PATCH not documented."
+  },
+  "deprovision": {
+   "action": "delete",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c10",
+    "c21"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "emails (primary email and type)",
+    "displayName"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": false,
+    "how": "Only the listed fields sync; OneLogin accepts first name, last name and email only."
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c11",
+    "c18",
+    "c13"
+   ],
+   "notes": "Okta docs name the synced profile fields (given name, family name, primary email, primary email type, display name) rather than SCIM paths; userName is the unique identifier."
+  },
+  "roles": {
+   "supported": false,
+   "how": "Roles and resource groups are assigned to provisioned groups in Harness, not by the IdP.",
+   "cite": [
+    "c12"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Entra changes sync about every 40 minutes.",
+    "cite": [
+     "c15"
+    ]
+   },
+   {
+    "text": "OneLogin role-based groups are not removed automatically; Harness Support must delete them.",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "text": "OneLogin accepts only first name, last name and email.",
+    "cite": [
+     "c18"
+    ]
+   }
+  ],
+  "notes": "Base URL differs by cluster (Prod2 /gateway/gratis/, Prod3 app3.harness.io, Prod0/Prod4 accounts.harness.io, EU accounts.eu.harness.io without /gateway) and self-managed installs."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c28",
+   "c30"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://app.harness.io",
+  "docs_url": "https://apidocs.harness.io/",
+  "auth": {
+   "methods": [
+    "api_key"
+   ],
+   "scopes": [],
+   "cite": [
+    "c28"
+   ],
+   "notes": "x-api-key header; tokens inherit the permissions of their user or service account."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": null,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c30",
+    "c38",
+    "c34",
+    "c29",
+    "c32",
+    "c31"
+   ],
+   "notes": "'Add user(s) to scope' adds/invites users; 'Remove user' removes the collaborator from a scope; role assignments have their own endpoints."
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/ng/api/user/aggregate",
+    "purpose": "List users with role assignments",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/ng/api/user/users",
+    "purpose": "Add user(s) to scope",
+    "cite": [
+     "c38"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/ng/api/user/{userId}",
+    "purpose": "Update user",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/ng/api/user/{userId}",
+    "purpose": "Remove user from scope",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/ng/api/user/add-user-to-groups/{userId}",
+    "purpose": "Set a user's groups",
+    "cite": [
+     "c35"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/ng/api/user-groups",
+    "purpose": "Create user group",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/ng/api/user-groups/{identifier}/member/{userIdentifier}",
+    "purpose": "Add user to user group",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/ng/api/user-groups/{identifier}/member/{userIdentifier}",
+    "purpose": "Remove user from user group",
+    "cite": [
+     "c40"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/audit/api/audits/list",
+    "purpose": "List audit events",
+    "cite": [
+     "c33"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": null,
+   "cite": [
+    "c33",
+    "c37"
+   ],
+   "notes": "Audit trail kept up to 2 years; audit streaming is also available."
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/harness/",
+   "cite": [
+    "c25"
+   ],
+   "notes": "OIN page marks SAML, SCIM, Create, Update, Deactivate, Group Push and Group Linking; Harness's own Okta SCIM guide uses a custom SAML app with SCIM instead."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/harness-provisioning-tutorial",
+   "cite": [
+    "c16",
+    "c26",
+    "c27"
+   ]
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c19"
+   ],
+   "notes": "Per Harness's OneLogin guide; OneLogin catalogue page not loaded."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": "LDAP group linking to Harness user groups",
+  "docs_public": true,
+  "cite": [
+   "c22",
+   "c24",
+   "c36"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.harness.io/pricing",
+   "title": "Pricing | Harness",
+   "quote": "One free tier, one all-in-one bundle, and one fully modular plan.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://www.harness.io/pricing",
+   "title": "Pricing | Harness",
+   "quote": "For growing organizations with small to mid-size teams",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://www.harness.io/pricing",
+   "title": "Pricing | Harness",
+   "quote": "For teams that want to pick exactly the capabilities they need",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://www.harness.io/pricing",
+   "title": "Pricing | Harness",
+   "quote": "For individual developers and small teams",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://www.harness.io/pricing",
+   "title": "Pricing | Harness",
+   "quote": "A User is an individual who has been granted direct access to the Harness platform.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://developer.harness.io/harness-platform/use-harness-platform/platform-access-control/provision-users-with-okta-scim.md",
+   "title": "Provision users and groups with Okta (SCIM)",
+   "quote": "a SCIM integration lets Okta serve as the single source of truth for Harness users and user groups, so you create, update, and remove them in Okta instead of in Harness.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.harness.io/harness-platform/use-harness-platform/platform-access-control/provision-users-with-okta-scim"
+  },
+  {
+   "id": "c7",
+   "url": "https://developer.harness.io/harness-platform/use-harness-platform/platform-access-control/provision-users-with-okta-scim.md",
+   "title": "Provision users and groups with Okta (SCIM)",
+   "quote": "The base URL follows this format: `https://app.harness.io/gateway/ng/api/scim/account/[YOUR_ACCOUNT_ID]`",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.harness.io/harness-platform/use-harness-platform/platform-access-control/provision-users-with-okta-scim"
+  },
+  {
+   "id": "c8",
+   "url": "https://developer.harness.io/harness-platform/use-harness-platform/platform-access-control/provision-users-with-okta-scim.md",
+   "title": "Provision users and groups with Okta (SCIM)",
+   "quote": "select HTTP Header, and then enter your Harness API token in the Bearer field.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.harness.io/harness-platform/use-harness-platform/platform-access-control/provision-users-with-okta-scim"
+  },
+  {
+   "id": "c9",
+   "url": "https://developer.harness.io/harness-platform/use-harness-platform/platform-access-control/provision-users-with-okta-scim.md",
+   "title": "Provision users and groups with Okta (SCIM)",
+   "quote": "enable Create Users, Update User Attributes, and Deactivate Users.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.harness.io/harness-platform/use-harness-platform/platform-access-control/provision-users-with-okta-scim"
+  },
+  {
+   "id": "c10",
+   "url": "https://developer.harness.io/harness-platform/use-harness-platform/platform-access-control/provision-users-with-okta-scim.md",
+   "title": "Provision users and groups with Okta (SCIM)",
+   "quote": "Delete Okta-provisioned users from Harness by removing them from the corresponding Okta app or group.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.harness.io/harness-platform/use-harness-platform/platform-access-control/provision-users-with-okta-scim"
+  },
+  {
+   "id": "c11",
+   "url": "https://developer.harness.io/harness-platform/use-harness-platform/platform-access-control/provision-users-with-okta-scim.md",
+   "title": "Provision users and groups with Okta (SCIM)",
+   "quote": "Display name, which becomes the user's Harness user name. These are the only fields that sync.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.harness.io/harness-platform/use-harness-platform/platform-access-control/provision-users-with-okta-scim"
+  },
+  {
+   "id": "c12",
+   "url": "https://developer.harness.io/harness-platform/use-harness-platform/platform-access-control/provision-users-with-okta-scim.md",
+   "title": "Provision users and groups with Okta (SCIM)",
+   "quote": "Roles and resource groups are the exception. Okta does not control them",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.harness.io/harness-platform/use-harness-platform/platform-access-control/provision-users-with-okta-scim"
+  },
+  {
+   "id": "c13",
+   "url": "https://developer.harness.io/harness-platform/use-harness-platform/platform-access-control/provision-users-with-okta-scim.md",
+   "title": "Provision users and groups with Okta (SCIM)",
+   "quote": "Harness derives a user group ID from the group name in Okta.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.harness.io/harness-platform/use-harness-platform/platform-access-control/provision-users-with-okta-scim"
+  },
+  {
+   "id": "c14",
+   "url": "https://developer.harness.io/harness-platform/use-harness-platform/automation/api/add-and-manage-api-keys.md",
+   "title": "Manage API keys",
+   "quote": "To set an expiration date for the token, select Set Expiration Date and enter the date in mm/dd/yyyy format.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.harness.io/harness-platform/use-harness-platform/automation/api/add-and-manage-api-keys"
+  },
+  {
+   "id": "c15",
+   "url": "https://developer.harness.io/harness-platform/use-harness-platform/platform-access-control/provision-users-and-groups-using-azure-ad-scim.md",
+   "title": "Provision users and groups using Microsoft Entra (SCIM)",
+   "quote": "Changes are synced from Microsoft Entra ID to Harness approximately every 40 minutes.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.harness.io/harness-platform/use-harness-platform/platform-access-control/provision-users-and-groups-using-azure-ad-scim"
+  },
+  {
+   "id": "c16",
+   "url": "https://developer.harness.io/harness-platform/use-harness-platform/platform-access-control/provision-users-and-groups-using-azure-ad-scim.md",
+   "title": "Provision users and groups using Microsoft Entra (SCIM)",
+   "quote": "select Harness in the results list, and then select Add to add the application to your list of managed SaaS apps in Microsoft Entra ID.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.harness.io/harness-platform/use-harness-platform/platform-access-control/provision-users-and-groups-using-azure-ad-scim"
+  },
+  {
+   "id": "c17",
+   "url": "https://developer.harness.io/harness-platform/use-harness-platform/platform-access-control/provision-users-and-groups-using-azure-ad-scim.md",
+   "title": "Provision users and groups using Microsoft Entra (SCIM)",
+   "quote": "as the SCIM Authentication Token value.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.harness.io/harness-platform/use-harness-platform/platform-access-control/provision-users-and-groups-using-azure-ad-scim"
+  },
+  {
+   "id": "c18",
+   "url": "https://developer.harness.io/harness-platform/use-harness-platform/platform-access-control/provision-users-and-groups-with-one-login-scim.md",
+   "title": "Provision users and groups with OneLogin (SCIM)",
+   "quote": "The Harness OneLogin SCIM integration only accepts the First name, Last name, and Email attributes for users.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.harness.io/harness-platform/use-harness-platform/platform-access-control/provision-users-and-groups-with-one-login-scim"
+  },
+  {
+   "id": "c19",
+   "url": "https://developer.harness.io/harness-platform/use-harness-platform/platform-access-control/provision-users-and-groups-with-one-login-scim.md",
+   "title": "Provision users and groups with OneLogin (SCIM)",
+   "quote": "Search for `Harness`, and select the Harness app.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.harness.io/harness-platform/use-harness-platform/platform-access-control/provision-users-and-groups-with-one-login-scim"
+  },
+  {
+   "id": "c20",
+   "url": "https://developer.harness.io/harness-platform/use-harness-platform/platform-access-control/provision-users-and-groups-with-one-login-scim.md",
+   "title": "Provision users and groups with OneLogin (SCIM)",
+   "quote": "The OneLogin SCIM integration does not currently automatically remove of user groups created from OneLogin roles.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.harness.io/harness-platform/use-harness-platform/platform-access-control/provision-users-and-groups-with-one-login-scim"
+  },
+  {
+   "id": "c21",
+   "url": "https://developer.harness.io/harness-platform/use-harness-platform/platform-access-control/provision-users-and-groups-with-one-login-scim.md",
+   "title": "Provision users and groups with OneLogin (SCIM)",
+   "quote": "When users are deleted, select Delete.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.harness.io/harness-platform/use-harness-platform/platform-access-control/provision-users-and-groups-with-one-login-scim"
+  },
+  {
+   "id": "c22",
+   "url": "https://developer.harness.io/harness-platform/use-harness-platform/authentication/single-sign-on-saml.md",
+   "title": "Single sign-on with SAML",
+   "quote": "Harness supports SAML configuration with or without JIT user provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.harness.io/harness-platform/use-harness-platform/authentication/single-sign-on-saml"
+  },
+  {
+   "id": "c23",
+   "url": "https://developer.harness.io/harness-platform/use-harness-platform/authentication/single-sign-on-saml.md",
+   "title": "Single sign-on with SAML",
+   "quote": "If you provision users and groups via SCIM API, use the following settings for your SAML integration.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.harness.io/harness-platform/use-harness-platform/authentication/single-sign-on-saml"
+  },
+  {
+   "id": "c24",
+   "url": "https://developer.harness.io/harness-platform/use-harness-platform/platform-access-control/just-in-time-user-provisioning.md",
+   "title": "Just-In-Time (JIT) user provisioning",
+   "quote": "The key principle is that JIT provisioning only handles user creation automatically.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.harness.io/harness-platform/use-harness-platform/platform-access-control/just-in-time-user-provisioning"
+  },
+  {
+   "id": "c25",
+   "url": "https://www.okta.com/integrations/harness/",
+   "title": "Integrate Harness with Okta",
+   "quote": "Integration with Okta allows organisations to automate the entire lifecycle of users and groups within their Harness account, including provisioning, group assignments, and de-provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c26",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/harness-provisioning-tutorial",
+   "title": "Configure Harness for automatic user provisioning with Microsoft Entra ID",
+   "quote": "configure the Microsoft Entra provisioning service to create, update, and disable users or groups in Harness based on user or group assignments in Microsoft Entra ID.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c27",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/harness-tutorial",
+   "title": "Configure Harness for Single sign-on with Microsoft Entra ID",
+   "quote": "Harness single sign-on (SSO) enabled subscription.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c28",
+   "url": "https://apidocs.harness.io/index.html.md",
+   "title": "Harness APIs",
+   "quote": "Send the token you created in the Harness Platform in the x-api-key header.",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.harness.io/"
+  },
+  {
+   "id": "c29",
+   "url": "https://apidocs.harness.io/index.html.md",
+   "title": "Harness APIs",
+   "quote": "Remove user as the collaborator from the scope",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.harness.io/"
+  },
+  {
+   "id": "c30",
+   "url": "https://apidocs.harness.io/index.html.md",
+   "title": "Harness APIs",
+   "quote": "List of all the user's metadata along with rolesAssignments who have access to given scope",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.harness.io/"
+  },
+  {
+   "id": "c31",
+   "url": "https://apidocs.harness.io/index.html.md",
+   "title": "Harness APIs",
+   "quote": "Add a user to the user group in an account/org/project",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.harness.io/"
+  },
+  {
+   "id": "c32",
+   "url": "https://apidocs.harness.io/index.html.md",
+   "title": "Harness APIs",
+   "quote": "Create a User Group in an account/org/project",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.harness.io/"
+  },
+  {
+   "id": "c33",
+   "url": "https://apidocs.harness.io/index.html.md",
+   "title": "Harness APIs",
+   "quote": "POST /audit/api/audits/list",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.harness.io/"
+  },
+  {
+   "id": "c34",
+   "url": "https://apidocs.harness.io/index.html.md",
+   "title": "Harness APIs",
+   "quote": "Updates the User information",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.harness.io/"
+  },
+  {
+   "id": "c35",
+   "url": "https://apidocs.harness.io/index.html.md",
+   "title": "Harness APIs",
+   "quote": "Adds the user to the specified user group IDs passed in the body",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.harness.io/"
+  },
+  {
+   "id": "c36",
+   "url": "https://apidocs.harness.io/index.html.md",
+   "title": "Harness APIs",
+   "quote": "Link LDAP Group to the User Group to an account/org/project",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.harness.io/"
+  },
+  {
+   "id": "c37",
+   "url": "https://developer.harness.io/harness-platform/use-harness-platform/governance/audit-trail/audit-trail.md",
+   "title": "Audit trail overview",
+   "quote": "Audit trail are stored for up to 2 years.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.harness.io/harness-platform/use-harness-platform/governance/audit-trail/audit-trail"
+  },
+  {
+   "id": "c38",
+   "url": "https://apidocs.harness.io/index.html.md",
+   "title": "Harness APIs",
+   "quote": "Add user(s) to scope",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.harness.io/"
+  },
+  {
+   "id": "c39",
+   "url": "https://developer.harness.io/harness-platform/use-harness-platform/automation/api/default-settings-for-jwt-token.md",
+   "title": "Use the Setting API to enable SCIM API authentication through JWT",
+   "quote": "You can use JSON Web Tokens (JWT) for authentication with Harness SCIM APIs.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.harness.io/harness-platform/use-harness-platform/automation/api/default-settings-for-jwt-token"
+  },
+  {
+   "id": "c40",
+   "url": "https://apidocs.harness.io/index.html.md",
+   "title": "Harness APIs",
+   "quote": "Remove a user from the user group in an account/org/project",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.harness.io/"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.harness.io/pricing (curl; render.cjs ERR_TOO_MANY_RETRIES)",
+  "https://www.harness.io/sitemap.xml and products/sitemap.xml",
+  "https://developer.harness.io/llms.txt (SSO, SCIM, JIT, licence-limit and subscription pages read)",
+  "https://apidocs.harness.io/index.html.md (API reference index)",
+  "Okta OIN and Microsoft Learn Harness tutorials"
+ ],
+ "open_questions": [
+  "Which plan (Free, Essentials or Enterprise) includes SAML SSO and SCIM is not published.",
+  "Whether removing a user frees a licensed seat or ends sessions is not documented.",
+  "SCIM filtering, pagination, PATCH support and rate limits are not documented.",
+  "Google Workspace and JumpCloud provisioning are not documented.",
+  "API rate limits and plan gating of the REST and audit APIs are not documented."
+ ]
+}

@@ -1,0 +1,968 @@
+{
+ "slug": "segment",
+ "vendor": "Twilio Segment",
+ "vendor_url": "https://segment.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Twilio Segment",
+  "slug": "segment",
+  "category": "Data, Analytics & BI",
+  "status": "gated",
+  "scim_plan": "Business",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Team",
+  "team_price_text": "Team: starts at $120/month (10,000 MTUs, 10 seats)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Business",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": false,
+   "deactivate": true,
+   "delete": false,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": "sso_only",
+   "onelogin": "native",
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://segment.com/pricing/",
+  "docs_url": "https://www.twilio.com/docs/segment/segment-app/iam/scim",
+  "evidence": "Segment's SCIM guide is marked Business-only (Free x, Team x, Business ✓, Add-on x) and says SSO, a prerequisite for SCIM, \"is only available to Business Tier customers\".",
+  "notes": "Status unchanged (gated), but the plan changed: June recorded 'Business + SSO Edition add-on'; current Segment docs mark SSO and SCIM as Business tier with no add-on, so the SSO Edition add-on is dropped (no first-party source). segment.com/pricing now redirects to twilio.com/en-us/pricing/customer-data; Connections Team starts at $120/month (10,000 MTUs, 10 seats), Business is custom. Pricing is per MTU, not per seat, so per-user fields are null. SCIM needs an SSO connection first. SCIM cannot update userName/displayName after creation; deactivate or delete removes the user from the workspace (accounts are never deleted). June's 'Twilio Console SCIM still in beta' concerns the Twilio console, not Segment, and was not re-verified.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Team",
+  "api_tax": false,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "$0/month (1,000 visitors/mo)",
+   "price_per_user_mo": 0,
+   "billing": "monthly",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": false,
+   "cite": [
+    "c5",
+    "c3",
+    "c49",
+    "c50",
+    "c36"
+   ],
+   "notes": "Public API access is listed as a Team feature."
+  },
+  {
+   "name": "Team",
+   "price_text": "Starts at $120/month (10,000 MTUs, 10 seats)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c2",
+    "c3",
+    "c5",
+    "c49",
+    "c50",
+    "c36"
+   ],
+   "notes": "Annual or monthly billing (save up to 20% annually); +$10-12 per extra 1,000 MTUs."
+  },
+  {
+   "name": "Business",
+   "price_text": "Custom Pricing, contact sales",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c4",
+    "c24",
+    "c7",
+    "c50",
+    "c36",
+    "c37"
+   ],
+   "notes": "Customer Data Platform (Connections + Unify + Engage) is also contact-sales."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c50",
+   "c7",
+   "c8",
+   "c10"
+  ],
+  "plan": "Business",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://scim.segmentapis.com/scim/v2",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Settings > Advanced Settings > SSO Sync > Generate SSO Token",
+   "token_expiry": "never",
+   "cite": [
+    "c11",
+    "c42"
+   ],
+   "notes": "Entra tutorial: 'Long lived bearer token authentication supported.' Exact expiry not stated by Segment."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c10",
+    "c14",
+    "c19"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": false,
+   "update_patch": false,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": false,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c12",
+    "c13",
+    "c14",
+    "c15",
+    "c17",
+    "c19",
+    "c20"
+   ],
+   "notes": "User attributes cannot be updated via SCIM; active:false and DELETE both remove the user from the workspace (no account deletion); active:true re-adds. PATCH is used for active and group membership but verbs are not listed."
+  },
+  "deprovision": {
+   "action": "remove_from_org",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Segment account is kept (only the user can delete it); group memberships are lost and must be reassigned on re-add.",
+   "cite": [
+    "c13",
+    "c14",
+    "c16"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName",
+    "displayName (Groups)"
+   ],
+   "cite": [
+    "c45"
+   ],
+   "notes": "From Microsoft's Entra tutorial attribute table."
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "displayName"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": false,
+    "how": null
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c21",
+    "c12",
+    "c19"
+   ],
+   "notes": "Entra's mapping table also lists emails[type eq \"work\"].value, but Segment says only userName and displayName are supported."
+  },
+  "roles": {
+   "supported": false,
+   "how": "Groups created via SCIM get Minimal Workspace Access; permissions must be assigned to groups in the Segment web app.",
+   "cite": [
+    "c17",
+    "c18"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "userName and displayName cannot be updated via SCIM after creation.",
+    "cite": [
+     "c12"
+    ]
+   },
+   {
+    "text": "Users cannot be deleted; deprovisioning only removes them from the workspace.",
+    "cite": [
+     "c13",
+     "c14"
+    ]
+   },
+   {
+    "text": "Entra needs the ?aadOptscim062020 flag on the tenant URL.",
+    "cite": [
+     "c22"
+    ]
+   },
+   {
+    "text": "SSO connection must exist before SCIM; only workspace owners can configure SSO.",
+    "cite": [
+     "c7",
+     "c8"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c3",
+   "c39",
+   "c40"
+  ],
+  "plan": "Team",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://api.segmentapis.com",
+  "docs_url": "https://docs.segmentapis.com/",
+  "auth": {
+   "methods": [
+    "bearer_token"
+   ],
+   "scopes": [],
+   "cite": [
+    "c39"
+   ],
+   "notes": "Workspace-scoped Public API tokens created under Settings > Access Management > Tokens."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": false,
+   "invite_user": true,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c28",
+    "c47",
+    "c48",
+    "c32",
+    "c34",
+    "c35",
+    "c13"
+   ],
+   "notes": "delete_user means removing users from the workspace (DELETE /users), consistent with SCIM behaviour."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/users",
+    "purpose": "List users",
+    "cite": [
+     "c48"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/users/{userId}",
+    "purpose": "Get user",
+    "cite": [
+     "c48"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/users",
+    "purpose": "Remove one or multiple users (60 req/min)",
+    "cite": [
+     "c28",
+     "c30",
+     "c29"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/users/{userId}/groups",
+    "purpose": "List user groups for a user",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/users/{userId}/permissions",
+    "purpose": "Add permissions to user",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/users/{userId}/permissions",
+    "purpose": "Replace permissions for user",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/invites",
+    "purpose": "List invites",
+    "cite": [
+     "c47"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/invites",
+    "purpose": "Create invites",
+    "cite": [
+     "c47"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/invites",
+    "purpose": "Delete invites",
+    "cite": [
+     "c47"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/groups",
+    "purpose": "List user groups",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/groups",
+    "purpose": "Create user group",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/groups/{userGroupId}",
+    "purpose": "Get user group",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/groups/{userGroupId}",
+    "purpose": "Update user group",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/groups/{userGroupId}",
+    "purpose": "Delete user group",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/groups/{userGroupId}/users",
+    "purpose": "List users from user group",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/groups/{userGroupId}/users",
+    "purpose": "Add users to user group",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/group/{userGroupId}/users",
+    "purpose": "Replace users in user group (path as documented)",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/group/{userGroupId}/users",
+    "purpose": "Remove users from user group (path as documented)",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/groups/{userGroupId}/invites",
+    "purpose": "List invites from user group",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/groups/{userGroupId}/permissions",
+    "purpose": "Add permissions to user group",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/groups/{userGroupId}/permissions",
+    "purpose": "Replace permissions for user group",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/roles",
+    "purpose": "List roles",
+    "cite": [
+     "c35"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/audit-events",
+    "purpose": "List audit events",
+    "cite": [
+     "c37"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Business",
+   "cite": [
+    "c36",
+    "c37"
+   ]
+  },
+  "rate_limits": {
+   "text": "Limits based on IP, token and request complexity, reported via X-RateLimit headers; DELETE /users is 60 requests per minute.",
+   "cite": [
+    "c38",
+    "c29"
+   ]
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/segment/",
+   "cite": [
+    "c41",
+    "c9"
+   ],
+   "notes": "OIN page marks SAML, SWA, SCIM and Create/Update/Deactivate/Group Push/Group Linking as checked (read from page markup)."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/segment-provisioning-tutorial",
+   "cite": [
+    "c42",
+    "c43",
+    "c44"
+   ]
+  },
+  "google": {
+   "listed": null,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c27"
+   ],
+   "notes": "Segment supports Google Apps For Work as an SSO connection; no Google provisioning documented. Google catalogue not checked."
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c9",
+    "c23"
+   ],
+   "notes": "From Segment's docs; OneLogin connector page not loaded (bot challenge)."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c25",
+   "c10"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.twilio.com/en-us/pricing/customer-data",
+   "title": "Customer Data pricing | Twilio Segment",
+   "quote": "Both plans are priced based on monthly tracked users (MTUs) — the number of users you actively collect data on each month — so cost scales with real reach, not seat count.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.twilio.com/en-us/products/connections/pricing",
+   "title": "Connections pricing | Twilio Segment",
+   "quote": "Starts at $120/month",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.twilio.com/en-us/products/connections/pricing",
+   "title": "Connections pricing | Twilio Segment",
+   "quote": "Team: Up 10,000 visitors, unlimited sources, public API access.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.twilio.com/en-us/products/connections/pricing",
+   "title": "Connections pricing | Twilio Segment",
+   "quote": "Business is custom volume — contact sales for a quote.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.twilio.com/en-us/products/connections/pricing",
+   "title": "Connections pricing | Twilio Segment",
+   "quote": "Free covers 1,000 visitors at $0. Team starts at $120/month for 10,000, then adds $10 per 1,000 visitors beyond that.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://www.twilio.com/en-us/products/connections/pricing",
+   "title": "Connections pricing | Twilio Segment",
+   "quote": "Advanced Roles & Permissions",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://www.twilio.com/docs/segment/segment-app/iam/scim",
+   "title": "SCIM configuration guide | Twilio Segment",
+   "quote": "Before you start, remember that SSO is only available to Business Tier customers, and that only workspace owners may configure SSO connections.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://www.twilio.com/docs/segment/segment-app/iam/scim",
+   "title": "SCIM configuration guide | Twilio Segment",
+   "quote": "To set up SCIM, you must first create an SSO connection. Once you create your SSO connection , log back in to Segment using SSO.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://www.twilio.com/docs/segment/segment-app/iam/scim",
+   "title": "SCIM configuration guide | Twilio Segment",
+   "quote": "Segment officially supports Okta , Microsoft Entra ID , and OneLogin . Each link includes specific setup instructions for that IdP.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://www.twilio.com/docs/segment/segment-app/iam/scim",
+   "title": "SCIM configuration guide | Twilio Segment",
+   "quote": "The Segment base URL is: https://scim.segmentapis.com/scim/v2",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://www.twilio.com/docs/segment/segment-app/iam/scim",
+   "title": "SCIM configuration guide | Twilio Segment",
+   "quote": "To generate one, go to Settings > Advanced Settings in the Segment app, and find the SSO Sync section. Click Generate SSO Token and copy the generated token.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://www.twilio.com/docs/segment/segment-app/iam/scim",
+   "title": "SCIM configuration guide | Twilio Segment",
+   "quote": "Segment user profiles only contain a userName (email) and displayName . Once you create a user, you cannot update these attributes using SCIM.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://www.twilio.com/docs/segment/segment-app/iam/scim",
+   "title": "SCIM configuration guide | Twilio Segment",
+   "quote": "Segment workspace owners cannot delete Segment workspace member accounts using SCIM, the web UI, or the Segment API.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://www.twilio.com/docs/segment/segment-app/iam/scim",
+   "title": "SCIM configuration guide | Twilio Segment",
+   "quote": "When your IdP updates a user to set active: false , or attempts to delete a user, Segment removes the user from your Segment workspace.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://www.twilio.com/docs/segment/segment-app/iam/scim",
+   "title": "SCIM configuration guide | Twilio Segment",
+   "quote": "If your IdP attempts to create a user with an existing email, or set active: true on an existing user, Segment adds that existing user account to your workspace.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://www.twilio.com/docs/segment/segment-app/iam/scim",
+   "title": "SCIM configuration guide | Twilio Segment",
+   "quote": "Any Segment group memberships must be reassigned when a user is removed and re-added from your workspace.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://www.twilio.com/docs/segment/segment-app/iam/scim",
+   "title": "SCIM configuration guide | Twilio Segment",
+   "quote": "All groups created using SCIM start with \"Minimal Workspace Access.\"",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://www.twilio.com/docs/segment/segment-app/iam/scim",
+   "title": "SCIM configuration guide | Twilio Segment",
+   "quote": "To add more permissions to a group you must use the Segment web app.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://www.twilio.com/docs/segment/segment-app/iam/scim",
+   "title": "SCIM configuration guide | Twilio Segment",
+   "quote": "Your IdP can add or remove workspace members from existing groups using SCIM. Your IdP can also update Segment group names.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://www.twilio.com/docs/segment/segment-app/iam/scim",
+   "title": "SCIM configuration guide | Twilio Segment",
+   "quote": "Your IdP can use SCIM to delete groups from your Segment workspace. Deleting a group in Segment does not remove its members from your workspace.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://www.twilio.com/docs/segment/segment-app/iam/scim",
+   "title": "SCIM configuration guide | Twilio Segment",
+   "quote": "The only attributes that Segment SCIM supports are userName and displayName .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://www.twilio.com/docs/segment/segment-app/iam/scim",
+   "title": "SCIM configuration guide | Twilio Segment",
+   "quote": "append the flag ?aadOptscim062020 to the tenant URL",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://www.twilio.com/docs/segment/segment-app/iam/scim",
+   "title": "SCIM configuration guide | Twilio Segment",
+   "quote": "Add and configure the Segment SSO integration from within the OneLogin application.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://www.twilio.com/docs/segment/segment-app/iam/sso",
+   "title": "Single Sign On team management | Twilio Segment",
+   "quote": "Segment supports Single Sign-On (SSO) for Business Tier accounts.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://www.twilio.com/docs/segment/segment-app/iam/sso",
+   "title": "Single Sign On team management | Twilio Segment",
+   "quote": "Segment supports \"just in time\" user permissioning; new users who authenticate using your IdP are automatically created in Segment as minimal-access (read-only) members.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://www.twilio.com/docs/segment/segment-app/iam/sso",
+   "title": "Single Sign On team management | Twilio Segment",
+   "quote": "Yes, users can be automatically de-provisioned if you use SCIM .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://www.twilio.com/docs/segment/segment-app/iam/sso",
+   "title": "Single Sign On team management | Twilio Segment",
+   "quote": "Follow the steps to create a \"Google Apps For Work\" connection.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://docs.segmentapis.com/tag/IAM-Users",
+   "title": "IAM Users | Segment Public API",
+   "quote": "Removes one or multiple users.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://docs.segmentapis.com/tag/IAM-Users",
+   "title": "IAM Users | Segment Public API",
+   "quote": "The rate limit for this endpoint is 60 requests per minute, which is lower than the default due to access pattern restrictions.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://docs.segmentapis.com/tag/IAM-Users",
+   "title": "IAM Users | Segment Public API",
+   "quote": "delete /users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://docs.segmentapis.com/tag/IAM-Users",
+   "title": "IAM Users | Segment Public API",
+   "quote": "get /users/{userId}/groups",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://docs.segmentapis.com/tag/IAM-Users",
+   "title": "IAM Users | Segment Public API",
+   "quote": "put /users/{userId}/permissions",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://docs.segmentapis.com/tag/IAM-Groups",
+   "title": "IAM Groups | Segment Public API",
+   "quote": "delete /groups/{userGroupId}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://docs.segmentapis.com/tag/IAM-Groups",
+   "title": "IAM Groups | Segment Public API",
+   "quote": "post /groups/{userGroupId}/users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c35",
+   "url": "https://docs.segmentapis.com/tag/IAM-Roles",
+   "title": "IAM Roles | Segment Public API",
+   "quote": "get /roles",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://docs.segmentapis.com/tag/Audit-Trail",
+   "title": "Audit Trail | Segment Public API",
+   "quote": "Segment offers an in-app 90 day Audit Trail for Business Tier accounts.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://docs.segmentapis.com/tag/Audit-Trail",
+   "title": "Audit Trail | Segment Public API",
+   "quote": "The Segment Public API lets you automate consuming these Audit Trail events.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c38",
+   "url": "https://docs.segmentapis.com/tag/Rate-Limits",
+   "title": "Rate Limits | Segment Public API",
+   "quote": "Segment has limits on the number of requests you can issue to the Public API at one time",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c39",
+   "url": "https://docs.segmentapis.com/tag/Authentication",
+   "title": "Authentication | Segment Public API",
+   "quote": "API Tokens are unique and scoped to the Segment Workspace in which you create them.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c40",
+   "url": "https://docs.segmentapis.com/tag/Getting-Started",
+   "title": "Getting Started | Segment Public API",
+   "quote": "for US-based Workspaces, use api.segmentapis.com . For EU-based Workspaces, eu1.api.segmentapis.com .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c41",
+   "url": "https://www.okta.com/integrations/segment/",
+   "title": "Segment | Okta Integration Network",
+   "quote": "Segment is a customer data platform that helps your teams access clean and reliable data to make real-time decisions",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c42",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/segment-provisioning-tutorial",
+   "title": "Configure Segment for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Long lived bearer token authentication supported.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c43",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/segment-provisioning-tutorial",
+   "title": "Configure Segment for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Remove users in Segment when they don't require access anymore",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c44",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/segment-provisioning-tutorial",
+   "title": "Configure Segment for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Provision groups and group memberships in Segment",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c45",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/segment-provisioning-tutorial",
+   "title": "Configure Segment for automatic user provisioning with Microsoft Entra ID",
+   "quote": "If you choose to change the matching target attribute , you need to ensure that the Segment API supports filtering users based on that attribute.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c46",
+   "url": "https://segment.com/pricing/",
+   "title": "Customer Data pricing | Twilio Segment",
+   "quote": "Get a custom price quote",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twilio.com/en-us/pricing/customer-data"
+  },
+  {
+   "id": "c47",
+   "url": "https://docs.segmentapis.com/tag/IAM-Users",
+   "title": "IAM Users | Segment Public API",
+   "quote": "post /invites",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c48",
+   "url": "https://docs.segmentapis.com/tag/IAM-Users",
+   "title": "IAM Users | Segment Public API",
+   "quote": "get /users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c49",
+   "url": "https://www.twilio.com/en-us/products/connections/pricing",
+   "title": "Connections pricing | Twilio Segment",
+   "quote": "Single Sign-on",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c50",
+   "url": "https://www.twilio.com/docs/segment/segment-app/iam/scim",
+   "title": "SCIM configuration guide | Twilio Segment",
+   "quote": "BUSINESS ✓",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "Microsoft's Entra tutorial maps emails[type eq \"work\"].value, while Segment's own SCIM guide says only userName and displayName are supported.",
+   "cite": [
+    "c21",
+    "c45"
+   ]
+  }
+ ],
+ "searched": [
+  "https://segment.com/pricing/",
+  "https://www.twilio.com/en-us/pricing/customer-data",
+  "https://www.twilio.com/en-us/products/connections/pricing",
+  "https://www.twilio.com/docs/segment/segment-app/iam/scim",
+  "https://www.twilio.com/docs/segment/segment-app/iam/sso",
+  "https://docs.segmentapis.com/",
+  "https://docs.segmentapis.com/tag/IAM-Users",
+  "https://docs.segmentapis.com/tag/IAM-Groups",
+  "https://docs.segmentapis.com/tag/IAM-Roles",
+  "https://docs.segmentapis.com/tag/Audit-Trail",
+  "https://www.okta.com/integrations/segment/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/segment-provisioning-tutorial"
+ ],
+ "open_questions": [
+  "Business tier price is not public.",
+  "SCIM pagination, filtering (per Segment docs) and SCIM rate limits are not documented.",
+  "Whether SCIM removal frees a seat or ends active sessions is not documented.",
+  "JumpCloud catalogue entry for Segment not checked (jumpcloud.com blocks automated fetches).",
+  "No user-event webhooks documented for the Public API.",
+  "Whether the June 'Twilio Console SCIM beta' still applies was not checked (separate Twilio product)."
+ ]
+}

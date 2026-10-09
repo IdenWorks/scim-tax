@@ -1,0 +1,172 @@
+{
+ "slug": "monte-carlo",
+ "vendor": "Monte Carlo",
+ "vendor_url": "https://www.montecarlodata.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Monte Carlo",
+  "slug": "monte-carlo",
+  "category": "Data, Analytics & BI",
+  "status": "gated",
+  "scim_plan": "Scale",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Start",
+  "team_price_text": "Contact Sales (credit-based)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Scale",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": false,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": "sso_only",
+   "onelogin": "sso_only",
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.montecarlodata.com/pricing/",
+  "docs_url": "https://docs.getmontecarlo.com/docs/auth-provisioning-with-scim",
+  "evidence": "Monte Carlo's pricing page lists \"Advanced Security: SSO, SCIM, Self-Hosted Storage, PII Filtering, Audit Logging\" on the Scale tier, not on the entry Start tier (up to 10 users); all tiers are \"Request pricing\".",
+  "notes": "Credit-based pricing with no public prices (\"Request pricing\"); tiers are Start (up to 10 users), Scale, Enterprise and Business Critical. SSO (SAML 2.0) and SCIM both start at Scale, one tier above Start, so SCIM is gated above the team plan. SCIM docs name Okta and Microsoft Entra ID as the supported IdPs, both set up as custom apps with the account's SCIM v2 endpoint URL and bearer token; SSO is not required for SCIM. Only email/userName, active, givenName and familyName are read; other attributes are ignored. The GraphQL API (users, invites, authorization groups, roles, audit logs) is on every tier with daily call caps of 10,000 (Start), 50,000 (Scale) and 100,000 (Enterprise).",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Start",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  { "name": "Start", "price_text": "Request pricing (credits)", "price_per_user_mo": null, "billing": "unknown", "sso": false, "scim": false, "user_api": true, "audit_log_api": null, "cite": ["c1", "c2", "c3"], "notes": "Up to 10 users; 10,000 API calls / day." },
+  { "name": "Scale", "price_text": "Request pricing (credits)", "price_per_user_mo": null, "billing": "unknown", "sso": true, "scim": true, "user_api": true, "audit_log_api": true, "cite": ["c1", "c3"], "notes": "Unlimited users; 50,000 API calls / day." },
+  { "name": "Enterprise", "price_text": "Request pricing (credits)", "price_per_user_mo": null, "billing": "unknown", "sso": true, "scim": true, "user_api": true, "audit_log_api": true, "cite": ["c1", "c4"], "notes": "Everything in Scale; 100,000 API calls / day." },
+  { "name": "Business Critical", "price_text": "Request pricing (credits)", "price_per_user_mo": null, "billing": "unknown", "sso": true, "scim": true, "user_api": true, "audit_log_api": true, "cite": ["c1", "c4"], "notes": "Everything in Enterprise plus dedicated instance." }
+ ],
+ "scim": {
+  "available": true,
+  "cite": ["c3", "c5", "c6", "c7"],
+  "plan": "Scale",
+  "addon_price_text": null,
+  "sso_required": false,
+  "version": "2.0",
+  "base_url": "https://integrations.getmontecarlo.com/scim/v2/<key_id>",
+  "auth": { "method": "bearer", "token_source": "Settings -> Users -> SCIM -> Add (Account Owner); endpoint URL and bearer token shown after Continue", "token_expiry": null, "cite": ["c5", "c8"] },
+  "endpoints": { "Users": true, "Groups": true, "ServiceProviderConfig": null, "Schemas": null, "ResourceTypes": null, "Bulk": null, "Me": null, "cite": ["c5", "c6"] },
+  "operations": { "create": true, "read": null, "update_put": null, "update_patch": null, "deactivate": true, "reactivate": null, "delete": true, "group_push": true, "group_membership": true, "cite": ["c5", "c6", "c9", "c10"], "notes": "PUT vs PATCH is not documented. Okta Deactivate Users and Entra Delete actions are both recommended; docs say Monte Carlo will 'create, update or destroy users and groups' on receipt." },
+  "deprovision": { "action": "delete", "frees_seat": null, "revokes_sessions": null, "data_retained": null, "cite": ["c5", "c10"], "notes": "Docs say SCIM removes users who no longer have access in the IdP; whether the user record is soft-disabled or hard-deleted is not spelled out." },
+  "filtering": { "supported": null, "attributes": [], "cite": [] },
+  "pagination": { "supported": null, "max_page_size": null, "cite": [] },
+  "attributes": {
+   "core": ["userName", "emails[type eq \"work\"].value", "active", "name.givenName", "name.familyName"],
+   "enterprise": [],
+   "custom": { "supported": false, "how": "Docs say all other attributes are ignored." },
+   "group": ["displayName", "members"],
+   "cite": ["c6", "c9", "c11"]
+  },
+  "roles": { "supported": true, "how": "Groups pushed by the IdP become authorization groups that get the Default Role chosen at SCIM setup; roles are then edited per group in Monte Carlo.", "cite": ["c12"] },
+  "rate_limits": { "text": null, "cite": [] },
+  "limitations": [
+   { "text": "Only Okta and Microsoft Entra ID are listed as supported SCIM IdPs.", "cite": ["c7"] },
+   { "text": "Okta Sync Password is not supported.", "cite": ["c9"] },
+   { "text": "userName must be mapped to the user's email; user uniqueness is by email and group matching is by authorization group name.", "cite": ["c6", "c9"] }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": ["c2", "c13", "c14"],
+  "plan": "Start",
+  "api_tax": false,
+  "style": "GraphQL",
+  "base_url": "https://api.getmontecarlo.com/graphql",
+  "docs_url": "https://apidocs.getmontecarlo.com/",
+  "auth": { "methods": ["api_key", "oauth2"], "scopes": ["https://api.getmontecarlo.com/access"], "cite": ["c13"], "notes": "API keys via x-mcd-id / x-mcd-token headers, or OAuth 2.0 client credentials (personal or service clients) returning a short-lived JWT bearer token." },
+  "capabilities": { "list_users": true, "get_user": true, "create_user": null, "invite_user": true, "update_user": null, "deactivate_user": true, "delete_user": null, "reactivate_user": null, "manage_groups": true, "assign_roles": true, "assign_licenses": null, "cite": ["c14", "c15", "c16", "c17", "c18"] },
+  "endpoints": [
+   { "method": "POST", "path": "/graphql (query getUsersInAccount)", "purpose": "List users in the account, filterable by authorization group and email", "cite": ["c14"] },
+   { "method": "POST", "path": "/graphql (query getUser)", "purpose": "Get the current user", "cite": ["c13"] },
+   { "method": "POST", "path": "/graphql (mutation inviteUsersV2)", "purpose": "Invite users to the account", "cite": ["c15"] },
+   { "method": "POST", "path": "/graphql (mutation disableUser)", "purpose": "Disable a user by email", "cite": ["c16"] },
+   { "method": "POST", "path": "/graphql (mutation deleteUserInvite)", "purpose": "Delete user invites", "cite": ["c14"] },
+   { "method": "POST", "path": "/graphql (query getInvitesInAccount)", "purpose": "List pending invites", "cite": ["c14"] },
+   { "method": "POST", "path": "/graphql (mutation updateUserAuthorizationGroupMembership)", "purpose": "Update a user's authorization group membership", "cite": ["c17"] },
+   { "method": "POST", "path": "/graphql (mutation createOrUpdateAuthorizationGroup)", "purpose": "Create or update a customer-managed authorization group", "cite": ["c18"] },
+   { "method": "POST", "path": "/graphql (mutation deleteAuthorizationGroup)", "purpose": "Delete an authorization group", "cite": ["c18"] },
+   { "method": "POST", "path": "/graphql (query getAuthorizationGroupsPaginated)", "purpose": "List authorization groups", "cite": ["c14"] },
+   { "method": "POST", "path": "/graphql (query getAccountRoles)", "purpose": "List roles available in the account", "cite": ["c14"] },
+   { "method": "POST", "path": "/graphql (mutation createOrUpdateAccountRole)", "purpose": "Create or update a custom role", "cite": ["c14"] },
+   { "method": "POST", "path": "/graphql (query getAccountAuditLogs)", "purpose": "Get audit logs for an account", "cite": ["c19"] }
+  ],
+  "webhooks_user_events": { "supported": null, "events": [], "cite": [] },
+  "audit_log_api": { "supported": true, "plan": "Scale", "cite": ["c3", "c19"], "notes": "getAccountAuditLogs GraphQL query; data may lag up to 10 hours. Pricing lists Audit Logging under Scale." },
+  "rate_limits": { "text": "Daily API call caps by tier: 10,000 (Start), 50,000 (Scale), 100,000 (Enterprise and Business Critical).", "cite": ["c2", "c4"] },
+  "limitations": [
+   { "text": "Changing a user's group membership expires their existing API keys.", "cite": ["c20"] }
+  ]
+ },
+ "idp_apps": {
+  "okta": { "listed": false, "sso": true, "provisioning": true, "kind": "scim", "built_by": "vendor", "url": "https://www.okta.com/integrations/?search=monte%20carlo", "cite": ["c21", "c9"], "notes": "No OIN app; Monte Carlo documents a custom Okta app integration with SCIM enabled against its generic endpoint." },
+  "entra": { "listed": false, "sso": true, "provisioning": true, "kind": "scim", "built_by": "vendor", "url": null, "cite": ["c6"], "notes": "Monte Carlo documents a custom (non-gallery) Entra enterprise application for SSO and SCIM; Entra gallery listing not checked beyond the vendor doc." },
+  "google": { "listed": null, "sso": true, "provisioning": false, "kind": "sso_only", "built_by": null, "url": null, "cite": ["c22", "c7"], "notes": "Custom SAML app in Google Admin per Monte Carlo's SSO doc; Google is not a supported SCIM IdP." },
+  "onelogin": { "listed": null, "sso": true, "provisioning": false, "kind": "sso_only", "built_by": null, "url": null, "cite": ["c23", "c7"], "notes": "OneLogin 'SAML Custom Connector (Advanced)' per Monte Carlo's SSO doc." },
+  "jumpcloud": { "listed": null, "sso": null, "provisioning": null, "kind": null, "built_by": null, "url": null, "cite": [] }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": ["c24", "c22"]
+ },
+ "citations": [
+  { "id": "c1", "url": "https://www.montecarlodata.com/pricing/", "title": "Monte Carlo Pricing | Agent & Data Observability Plans", "quote": "Request pricing", "accessed": "2026-10-05", "page_url": null },
+  { "id": "c2", "url": "https://www.montecarlodata.com/pricing/", "title": "Monte Carlo Pricing | Agent & Data Observability Plans", "quote": "✓ Up to 10 users", "accessed": "2026-10-05", "page_url": null },
+  { "id": "c3", "url": "https://www.montecarlodata.com/pricing/", "title": "Monte Carlo Pricing | Agent & Data Observability Plans", "quote": "Advanced Security: SSO, SCIM, Self-Hosted Storage, PII Filtering, Audit Logging", "accessed": "2026-10-05", "page_url": null },
+  { "id": "c4", "url": "https://www.montecarlodata.com/pricing/", "title": "Monte Carlo Pricing | Agent & Data Observability Plans", "quote": "100,000 API calls / day", "accessed": "2026-10-05", "page_url": null },
+  { "id": "c5", "url": "https://docs.getmontecarlo.com/docs/auth-provisioning-with-scim.md", "title": "SCIM", "quote": "Monte Carlo will create, update or destroy users and groups as soon as the SCIM request is received.", "accessed": "2026-10-05", "page_url": "https://docs.getmontecarlo.com/docs/auth-provisioning-with-scim" },
+  { "id": "c6", "url": "https://docs.getmontecarlo.com/docs/setting-up-scim-provisioning-with-microsoft-entra-id.md", "title": "SCIM Provision with Microsoft Entra ID", "quote": "Set the Target Object Actions. By default ‘Create’, ‘Update’ and ‘Delete’ are enabled. This is recommended.", "accessed": "2026-10-05", "page_url": "https://docs.getmontecarlo.com/docs/setting-up-scim-provisioning-with-microsoft-entra-id" },
+  { "id": "c7", "url": "https://docs.getmontecarlo.com/docs/auth-provisioning-with-scim.md", "title": "SCIM", "quote": "Currently Monte Carlo supports SCIM provisioning with the following IdPs:", "accessed": "2026-10-05", "page_url": "https://docs.getmontecarlo.com/docs/auth-provisioning-with-scim" },
+  { "id": "c8", "url": "https://docs.getmontecarlo.com/docs/auth-provisioning-with-scim.md", "title": "SCIM", "quote": "After selecting 'Continue' you will be presented with an Endpoint URL and bearer token.", "accessed": "2026-10-05", "page_url": "https://docs.getmontecarlo.com/docs/auth-provisioning-with-scim" },
+  { "id": "c9", "url": "https://docs.getmontecarlo.com/docs/setting-up-scim-provisioning-with-okta.md", "title": "SCIM Provision with Okta", "quote": "Base URL that was provided during MC SCIM setup. It will have the following format: `https://integrations.getmontecarlo.com/scim/v2/<key_id>`", "accessed": "2026-10-05", "page_url": "https://docs.getmontecarlo.com/docs/setting-up-scim-provisioning-with-okta" },
+  { "id": "c10", "url": "https://docs.getmontecarlo.com/docs/auth-provisioning-with-scim.md", "title": "SCIM", "quote": "Remove users in Monte Carlo when they no longer have access to Monte Carlo in your IdP", "accessed": "2026-10-05", "page_url": "https://docs.getmontecarlo.com/docs/auth-provisioning-with-scim" },
+  { "id": "c11", "url": "https://docs.getmontecarlo.com/docs/setting-up-scim-provisioning-with-microsoft-entra-id.md", "title": "SCIM Provision with Microsoft Entra ID", "quote": "The displayName attribute of the group SCIM request will be used to look for an existing group already in your Monte Carlo account.", "accessed": "2026-10-05", "page_url": "https://docs.getmontecarlo.com/docs/setting-up-scim-provisioning-with-microsoft-entra-id" },
+  { "id": "c12", "url": "https://docs.getmontecarlo.com/docs/auth-provisioning-with-scim.md", "title": "SCIM", "quote": "If you enabled group sync, this will be the role assigned to any new authorization groups created from SCIM requests.", "accessed": "2026-10-05", "page_url": "https://docs.getmontecarlo.com/docs/auth-provisioning-with-scim" },
+  { "id": "c13", "url": "https://docs.getmontecarlo.com/docs/api-authentication.md", "title": "API Authentication", "quote": "As an alternative to API keys, Monte Carlo supports **OAuth 2.0 client credentials**.", "accessed": "2026-10-05", "page_url": "https://docs.getmontecarlo.com/docs/api-authentication" },
+  { "id": "c14", "url": "https://apidocs.getmontecarlo.com/", "title": "Monte Carlo API Reference", "quote": "getUsersInAccount", "accessed": "2026-10-05", "page_url": null },
+  { "id": "c15", "url": "https://apidocs.getmontecarlo.com/", "title": "Monte Carlo API Reference", "quote": "Invite users to the account", "accessed": "2026-10-05", "page_url": null },
+  { "id": "c16", "url": "https://apidocs.getmontecarlo.com/", "title": "Monte Carlo API Reference", "quote": "Disable a user", "accessed": "2026-10-05", "page_url": null },
+  { "id": "c17", "url": "https://apidocs.getmontecarlo.com/", "title": "Monte Carlo API Reference", "quote": "Update a user's authorization group membership.", "accessed": "2026-10-05", "page_url": null },
+  { "id": "c18", "url": "https://apidocs.getmontecarlo.com/", "title": "Monte Carlo API Reference", "quote": "Create or update a customer-managed authorization group.", "accessed": "2026-10-05", "page_url": null },
+  { "id": "c19", "url": "https://docs.getmontecarlo.com/docs/audit-logging.md", "title": "Audit Logging", "quote": "We offer a GraphQL query named **getAccountAuditLogs** for the purpose of **retrieving account activity information** for audit logging.", "accessed": "2026-10-05", "page_url": "https://docs.getmontecarlo.com/docs/audit-logging" },
+  { "id": "c20", "url": "https://docs.getmontecarlo.com/docs/managing-users.md", "title": "Managing Users", "quote": "Changing a user's group membership causes their existing API keys to expire.", "accessed": "2026-10-05", "page_url": "https://docs.getmontecarlo.com/docs/managing-users" },
+  { "id": "c21", "url": "https://www.okta.com/integrations/?search=monte%20carlo", "title": "Okta Integration Network | Okta", "quote": "No results found for: “monte carlo”", "accessed": "2026-10-05", "page_url": null },
+  { "id": "c22", "url": "https://docs.getmontecarlo.com/docs/setting-up-single-sign-on-sso.md", "title": "Single Sign On (SSO)", "quote": "Monte Carlo supports Single Sign On (SSO) authentication via SAML 2.0.", "accessed": "2026-10-05", "page_url": "https://docs.getmontecarlo.com/docs/setting-up-single-sign-on-sso" },
+  { "id": "c23", "url": "https://docs.getmontecarlo.com/docs/setting-up-single-sign-on-sso.md", "title": "Single Sign On (SSO)", "quote": "Use the \"SAML Custom Connector (Advanced)\" to create the application.", "accessed": "2026-10-05", "page_url": "https://docs.getmontecarlo.com/docs/setting-up-single-sign-on-sso" },
+  { "id": "c24", "url": "https://docs.getmontecarlo.com/docs/managing-users.md", "title": "Managing Users", "quote": "If there are no custom groups and the user has not been invited, new SSO users are added to the Editors (All) group by default.", "accessed": "2026-10-05", "page_url": "https://docs.getmontecarlo.com/docs/managing-users" }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.montecarlodata.com/pricing/",
+  "https://docs.getmontecarlo.com/llms.txt",
+  "https://apidocs.getmontecarlo.com/",
+  "https://www.okta.com/integrations/?search=monte%20carlo"
+ ],
+ "open_questions": [
+  "Whether SCIM deprovisioning hard-deletes the user or disables it (the GraphQL API has disableUser), and whether it frees a seat or ends sessions, is not documented.",
+  "SCIM token expiry, filtering, pagination and rate limits are not documented.",
+  "Whether the Entra gallery or JumpCloud catalogue lists Monte Carlo was not confirmed; docs describe custom apps only.",
+  "Credit prices per tier are not public."
+ ]
+}

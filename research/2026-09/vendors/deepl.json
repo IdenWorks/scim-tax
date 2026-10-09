@@ -1,0 +1,812 @@
+{
+ "slug": "deepl",
+ "vendor": "DeepL",
+ "vendor_url": "https://www.deepl.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "DeepL",
+  "slug": "deepl",
+  "category": "AI & LLM Tools",
+  "status": "gated",
+  "scim_plan": "Business",
+  "scim_price_text": "Business: €49.99/user/mo (annual), 50-user minimum for SCIM",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Team",
+  "team_price_text": "Team: €24.99/user/mo (annual)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Team",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": 50,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": "via_generic",
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.deepl.com/en/pro",
+  "docs_url": "https://support.deepl.com/hc/en-us/articles/22997808358172-SCIM-Technical-reference",
+  "evidence": "DeepL's pricing page lists 'User provisioning (SCIM)' first in the Business plan (€49.99 per user/month, billed annually), while Team (€24.99) gets SSO; the help centre says SCIM is for those subscriptions 'with 50 users or more'.",
+  "notes": "Status unchanged (gated): SCIM is a higher-tier feature (Business, plus legacy Ultimate, Enterprise and Voice plans) and needs at least 50 users; SSO starts on Team. Plans were renamed since June (Starter/Advanced/Ultimate -> Individual/Team/Business/Enterprise). The pricing page served EUR prices (Germany) from our location and no USD price could be loaded, so per-user USD fields are null and June's USD figures ($8.74 / $57.49, 6.6x) were dropped; in EUR, Business is 2.0x Team. SCIM base URL https://scim.deepl.com with the SCIM admin API key as bearer token; Okta (SAML custom app only), Entra (non-gallery app) and OneLogin (generic SCIM Provisioner) are documented. Disabling a user unassigns the license; deleting in the IdP deletes the DeepL account and transfers glossaries to the admin. Admins cannot be managed via SCIM. DeepL's Admin API manages API keys and usage, not users.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": false,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Individual",
+   "price_text": "€7.49 per month, billed annually",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c48",
+    "c8"
+   ],
+   "notes": "Single-user plan; EUR as served for Germany."
+  },
+  {
+   "name": "Team",
+   "price_text": "€24.99 per user/month, billed annually",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c4",
+    "c48",
+    "c8"
+   ],
+   "notes": "EUR as served for Germany; USD not loaded."
+  },
+  {
+   "name": "Business",
+   "price_text": "€49.99 per user/month, billed annually",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": false,
+   "audit_log_api": null,
+   "cite": [
+    "c5",
+    "c6",
+    "c8",
+    "c9"
+   ],
+   "notes": "SCIM requires 50 or more users."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Custom pricing",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": false,
+   "audit_log_api": null,
+   "cite": [
+    "c7",
+    "c8",
+    "c48"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c6",
+   "c8",
+   "c9",
+   "c17",
+   "c50",
+   "c15"
+  ],
+  "plan": "Business",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://scim.deepl.com",
+  "auth": {
+   "method": "bearer",
+   "token_source": "DeepL account Settings > Team > User provisioning configuration > Manage user provisioning > Enable SCIM provisioning (creates a SCIM admin API key, also under Admin keys)",
+   "token_expiry": null,
+   "cite": [
+    "c19",
+    "c18",
+    "c44",
+    "c43"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c20",
+    "c21"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c20",
+    "c21",
+    "c23",
+    "c35",
+    "c36",
+    "c12"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": true,
+   "revokes_sessions": null,
+   "data_retained": "Disabled users stay in the team (default group) with status 'License unassigned'. A user deleted in the IdP is fully deleted in DeepL and their glossaries move to the organisation's admin.",
+   "cite": [
+    "c23",
+    "c29",
+    "c11",
+    "c28",
+    "c12",
+    "c31",
+    "c32"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "active",
+    "externalId",
+    "name.formatted",
+    "locale"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "externalId",
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c26",
+    "c23",
+    "c24",
+    "c25",
+    "c27",
+    "c21"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "IdP groups pushed via SCIM become DeepL product groups (Translator, Write, Voice) that drive license and product assignment; admins cannot be managed via SCIM.",
+   "cite": [
+    "c13",
+    "c22"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SCIM requires 50 or more users on an eligible subscription.",
+    "cite": [
+     "c9"
+    ]
+   },
+   {
+    "text": "Admins cannot be managed via SCIM; a SCIM user promoted to Admin can no longer be managed by SCIM.",
+    "cite": [
+     "c22"
+    ]
+   },
+   {
+    "text": "Okta SCIM works only with a SAML (not OIDC) integration.",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "text": "Existing accounts outside the organisation cannot be imported; email updates fail with SAML Email NameID format.",
+    "cite": [
+     "c37",
+     "c38"
+    ]
+   },
+   {
+    "text": "Users or groups existing before SCIM that are not assigned in the IdP are not deleted automatically.",
+    "cite": [
+     "c30"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": false,
+  "cite": [
+   "c49",
+   "c44"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": null,
+  "base_url": null,
+  "docs_url": null,
+  "auth": {
+   "methods": [],
+   "scopes": [],
+   "cite": []
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": []
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "The Admin API covers developer API keys and usage analytics only (and supplies the SCIM key); no user-management endpoints were found in the developer docs index."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c39",
+    "c33",
+    "c34"
+   ],
+   "notes": "DeepL's guide uses a custom SAML 2.0 app integration with SCIM; okta.com/integrations/deepl/ returned 404."
+  },
+  "entra": {
+   "listed": false,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c41",
+    "c40"
+   ],
+   "notes": "Non-gallery enterprise application per DeepL's SSO guide."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c42",
+    "c43"
+   ],
+   "notes": "Uses OneLogin's generic 'SCIM Provisioner with SAML (SCIM v2 Core)' app."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "both",
+  "csv_import": null,
+  "other_sync": "JIT group synchronization over SAML or OIDC (Okta, Entra ID, OneLogin)",
+  "docs_public": true,
+  "cite": [
+   "c46",
+   "c47",
+   "c48"
+  ]
+ },
+ "conflicts": [],
+ "searched": [
+  "https://www.deepl.com/en/pro",
+  "https://support.deepl.com/hc/en-us/articles/21329445441180-About-user-provisioning-with-SCIM",
+  "https://support.deepl.com/hc/en-us/articles/22997808358172-SCIM-Technical-reference",
+  "https://support.deepl.com/hc/en-us/articles/23646385609244-Set-up-SCIM-user-provisioning-Okta",
+  "https://support.deepl.com/hc/en-us/articles/21329358809756-Set-up-SCIM-user-provisioning-Microsoft-Entra-ID",
+  "https://support.deepl.com/hc/en-us/articles/28303434131868-Set-up-SCIM-user-provisioning-OneLogin",
+  "https://support.deepl.com/hc/en-us/articles/22989567651228-SCIM-Operations-performed-in-Entra-ID-and-their-effect-in-DeepL",
+  "https://support.deepl.com/hc/en-us/articles/22436472826140-Admin-API-keys",
+  "https://developers.deepl.com/llms.txt",
+  "https://developers.deepl.com/docs/admin/overview",
+  "https://www.okta.com/integrations/deepl/ (404)",
+  "help-centre API search: scim, user provisioning, sso"
+ ],
+ "open_questions": [
+  "USD prices could not be loaded (the pricing page geolocates to EUR and the headless render was blocked); per-user USD values are null.",
+  "Whether 'Team' or 'Individual' should be the team plan: Individual (€7.49/month) is single-user, so Team was used.",
+  "SCIM filtering, pagination, GET endpoints, ServiceProviderConfig/Schemas and rate limits are not documented.",
+  "SCIM admin API key expiry is not documented.",
+  "Whether disabling a user via SCIM ends active DeepL sessions is not stated (docs say the IdP denies access at next login).",
+  "No Okta OIN, Entra gallery, Google Workspace or JumpCloud catalogue app found.",
+  "No audit-log API or user-event webhooks documented."
+ ],
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.deepl.com/en/pro",
+   "title": "DeepL Pro pricing",
+   "quote": "Save 16 % with annual billing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.deepl.com/en/pro",
+   "title": "DeepL Pro pricing",
+   "quote": "Individual Professional-grade translations for single users €7.49 per month, billed annually",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.deepl.com/en/pro",
+   "title": "DeepL Pro pricing",
+   "quote": "Team Increased translation productivity and control for teams €24.99 per user/month, billed annually",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.deepl.com/en/pro",
+   "title": "DeepL Pro pricing",
+   "quote": "Team administration Analytics and reporting Single sign-on (SSO)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.deepl.com/en/pro",
+   "title": "DeepL Pro pricing",
+   "quote": "Business Multilingual communication management for businesses €49.99 per user/month, billed annually",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://www.deepl.com/en/pro",
+   "title": "DeepL Pro pricing",
+   "quote": "Translation memory 2 Unlimited saved translations 2 User provisioning (SCIM) Domain capture",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://www.deepl.com/en/pro",
+   "title": "DeepL Pro pricing",
+   "quote": "Enterprise Scalability, control, and security for organizations Custom pricing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/21329445441180.json",
+   "title": "About user provisioning with SCIM",
+   "quote": "DeepL Pro Ultimate, Business, Enterprise, Voice for Conversations, or Voice for Meetings",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/21329445441180-About-user-provisioning-with-SCIM"
+  },
+  {
+   "id": "c9",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/21329445441180.json",
+   "title": "About user provisioning with SCIM",
+   "quote": "subscriptions listed above with 50 users or more,",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/21329445441180-About-user-provisioning-with-SCIM"
+  },
+  {
+   "id": "c10",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/21329445441180.json",
+   "title": "About user provisioning with SCIM",
+   "quote": "works in combination with SSO",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/21329445441180-About-user-provisioning-with-SCIM"
+  },
+  {
+   "id": "c11",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/21329445441180.json",
+   "title": "About user provisioning with SCIM",
+   "quote": "If you remove a user from the DeepL application or disable them in your identity provider, they will remain in the team and will be visible under the",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/21329445441180-About-user-provisioning-with-SCIM"
+  },
+  {
+   "id": "c12",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/21329445441180.json",
+   "title": "About user provisioning with SCIM",
+   "quote": "If you delete a user from the directory of your identity provider, their DeepL team member account is deleted",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/21329445441180-About-user-provisioning-with-SCIM"
+  },
+  {
+   "id": "c13",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/21329445441180.json",
+   "title": "About user provisioning with SCIM",
+   "quote": "Assign users to specific product groups, such as Translator, Write, or Voice",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/21329445441180-About-user-provisioning-with-SCIM"
+  },
+  {
+   "id": "c14",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/21329445441180.json",
+   "title": "About user provisioning with SCIM",
+   "quote": "We currently provide detailed setup instructions for the following identity providers:",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/21329445441180-About-user-provisioning-with-SCIM"
+  },
+  {
+   "id": "c15",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/22997808358172.json",
+   "title": "SCIM: Technical reference",
+   "quote": "after setting up single sign-on (SSO) with any identity provider that supports the SCIM 2.0 protocol",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/22997808358172-SCIM-Technical-reference"
+  },
+  {
+   "id": "c16",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/22997808358172.json",
+   "title": "SCIM: Technical reference",
+   "quote": "Single sign on (SSO) is setup for DeepL.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/22997808358172-SCIM-Technical-reference"
+  },
+  {
+   "id": "c17",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/22997808358172.json",
+   "title": "SCIM: Technical reference",
+   "quote": "Base URL (Tenant URL) : https://scim.deepl.com",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/22997808358172-SCIM-Technical-reference"
+  },
+  {
+   "id": "c18",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/22997808358172.json",
+   "title": "SCIM: Technical reference",
+   "quote": "Use the admin API key which is automatically created when enabling SCIM for your team.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/22997808358172-SCIM-Technical-reference"
+  },
+  {
+   "id": "c19",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/22997808358172.json",
+   "title": "SCIM: Technical reference",
+   "quote": "Select Enable SCIM provisioning",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/22997808358172-SCIM-Technical-reference"
+  },
+  {
+   "id": "c20",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/22997808358172.json",
+   "title": "SCIM: Technical reference",
+   "quote": "POST /Users create PATCH /Users/{id} update (including active) DELETE /Users/{id} delete (if used by your identity provider)",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/22997808358172-SCIM-Technical-reference"
+  },
+  {
+   "id": "c21",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/22997808358172.json",
+   "title": "SCIM: Technical reference",
+   "quote": "POST /Groups create PATCH /Groups/{id} update (e.g., membership) DELETE /Groups/{id} delete",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/22997808358172-SCIM-Technical-reference"
+  },
+  {
+   "id": "c22",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/22997808358172.json",
+   "title": "SCIM: Technical reference",
+   "quote": "Admins cannot be managed via SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/22997808358172-SCIM-Technical-reference"
+  },
+  {
+   "id": "c23",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/22997808358172.json",
+   "title": "SCIM: Technical reference",
+   "quote": "When set to false , DeepL disables the account and the license is unassigned.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/22997808358172-SCIM-Technical-reference"
+  },
+  {
+   "id": "c24",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/22997808358172.json",
+   "title": "SCIM: Technical reference",
+   "quote": "externalId DeepL stores a stable identity provider-side correlation identifier.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/22997808358172-SCIM-Technical-reference"
+  },
+  {
+   "id": "c25",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/22997808358172.json",
+   "title": "SCIM: Technical reference",
+   "quote": "name.formatted This is the display name used in the DeepL UI. locale Optional language preference",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/22997808358172-SCIM-Technical-reference"
+  },
+  {
+   "id": "c26",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/22997808358172.json",
+   "title": "SCIM: Technical reference",
+   "quote": "userName The user's login identifier is required by SCIM and used by DeepL.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/22997808358172-SCIM-Technical-reference"
+  },
+  {
+   "id": "c27",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/22997808358172.json",
+   "title": "SCIM: Technical reference",
+   "quote": "externalId Primary group correlation key in DeepL. displayName Secondary match key: name.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/22997808358172-SCIM-Technical-reference"
+  },
+  {
+   "id": "c28",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/22997808358172.json",
+   "title": "SCIM: Technical reference",
+   "quote": "User account is fully deleted in DeepL Any glossaries owned by the user are transferred to the organization’s admin.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/22997808358172-SCIM-Technical-reference"
+  },
+  {
+   "id": "c29",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/22997808358172.json",
+   "title": "SCIM: Technical reference",
+   "quote": "Account gets its license unassigned User remains visible in the default group",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/22997808358172-SCIM-Technical-reference"
+  },
+  {
+   "id": "c30",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/22997808358172.json",
+   "title": "SCIM: Technical reference",
+   "quote": "Existing users who are not assigned the DeepL app in the identity provider are not automatically deleted by SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/22997808358172-SCIM-Technical-reference"
+  },
+  {
+   "id": "c31",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/22989567651228.json",
+   "title": "SCIM: Operations performed in Entra ID and their effect in DeepL",
+   "quote": "SCIM PATCH request to /Users/{id} updating the “active” attribute to “False” and the “userName” attribute to Guid+email",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/22989567651228-SCIM-Operations-performed-in-Entra-ID-and-their-effect-in-DeepL"
+  },
+  {
+   "id": "c32",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/22989567651228.json",
+   "title": "SCIM: Operations performed in Entra ID and their effect in DeepL",
+   "quote": "The identity provider will deny access to the SSO application during the next login or session refresh.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/22989567651228-SCIM-Operations-performed-in-Entra-ID-and-their-effect-in-DeepL"
+  },
+  {
+   "id": "c33",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/23646385609244.json",
+   "title": "Set up SCIM user provisioning: Okta",
+   "quote": "SCIM provisioning with Okta is only available for SAML integrations.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/23646385609244-Set-up-SCIM-user-provisioning-Okta"
+  },
+  {
+   "id": "c34",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/23646385609244.json",
+   "title": "Set up SCIM user provisioning: Okta",
+   "quote": "SCIM connector base URL: https://scim.deepl.com",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/23646385609244-Set-up-SCIM-user-provisioning-Okta"
+  },
+  {
+   "id": "c35",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/23646385609244.json",
+   "title": "Set up SCIM user provisioning: Okta",
+   "quote": "Select Push New Users , Push Profile Updates , and Push Groups",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/23646385609244-Set-up-SCIM-user-provisioning-Okta"
+  },
+  {
+   "id": "c36",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/23646385609244.json",
+   "title": "Set up SCIM user provisioning: Okta",
+   "quote": "Deactivate users in DeepL when they are unassigned from the application or deactivated in Okta",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/23646385609244-Set-up-SCIM-user-provisioning-Okta"
+  },
+  {
+   "id": "c37",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/23646385609244.json",
+   "title": "Set up SCIM user provisioning: Okta",
+   "quote": "Existing accounts not associated with your organization cannot be imported into your organization during SCIM provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/23646385609244-Set-up-SCIM-user-provisioning-Okta"
+  },
+  {
+   "id": "c38",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/23646385609244.json",
+   "title": "Set up SCIM user provisioning: Okta",
+   "quote": "Email update operations cannot be completed if used in conjunction with Email NameID policy format.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/23646385609244-Set-up-SCIM-user-provisioning-Okta"
+  },
+  {
+   "id": "c39",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/22110493204636.json",
+   "title": "Set up SSO: SAML and Okta",
+   "quote": "Create App Integration in the top panel Select SAML 2.0",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/22110493204636-Set-up-SSO-SAML-and-Okta"
+  },
+  {
+   "id": "c40",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/21329358809756.json",
+   "title": "Set up SCIM user provisioning: Microsoft Entra ID",
+   "quote": "Tenant URL : https://scim.deepl.com Secret token : SCIM API key",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/21329358809756-Set-up-SCIM-user-provisioning-Microsoft-Entra-ID"
+  },
+  {
+   "id": "c41",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/18558514980764.json",
+   "title": "Set up SSO: SAML and Microsoft Entra ID",
+   "quote": "Integrate any other application you don't find in the gallery (Non-gallery)",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/18558514980764-Set-up-SSO-SAML-and-Microsoft-Entra-ID"
+  },
+  {
+   "id": "c42",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/28303434131868.json",
+   "title": "Set up SCIM user provisioning: OneLogin",
+   "quote": "Search for and select the application named SCIM Provisioner with SAML (SCIM v2 Core)",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/28303434131868-Set-up-SCIM-user-provisioning-OneLogin"
+  },
+  {
+   "id": "c43",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/28303434131868.json",
+   "title": "Set up SCIM user provisioning: OneLogin",
+   "quote": "field, enter your SCIM API key.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/28303434131868-Set-up-SCIM-user-provisioning-OneLogin"
+  },
+  {
+   "id": "c44",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/22436472826140.json",
+   "title": "Admin API keys",
+   "quote": "The DeepL Admin API can be used to automate API key management and for SCIM user provisioning setup.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/22436472826140-Admin-API-keys"
+  },
+  {
+   "id": "c45",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/22436472826140.json",
+   "title": "Admin API keys",
+   "quote": "If you don't have access to the API keys tab, the admin API hasn't been enabled for your team yet.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/22436472826140-Admin-API-keys"
+  },
+  {
+   "id": "c46",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/21956561066140.json",
+   "title": "About user provisioning with JIT",
+   "quote": "DeepL Pro Advanced, Team, Ultimate, Business, Enterprise, Voice for Conversations, Voice for Meetings or Write Pro",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/21956561066140-About-user-provisioning-with-JIT"
+  },
+  {
+   "id": "c47",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/21956561066140.json",
+   "title": "About user provisioning with JIT",
+   "quote": "JIT provisioning is used by default when SSO is enabled for your team.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/21956561066140-About-user-provisioning-with-JIT"
+  },
+  {
+   "id": "c48",
+   "url": "https://support.deepl.com/api/v2/help_center/en-us/articles/4402035491730.json",
+   "title": "About DeepL SSO",
+   "quote": "DeepL Pro Advanced, Team, Ultimate, Business, Enterprise, Voice for Conversations, Voice for Meetings or Write Pro",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.deepl.com/hc/en-us/articles/4402035491730-About-DeepL-SSO"
+  },
+  {
+   "id": "c49",
+   "url": "https://developers.deepl.com/docs/admin/overview.md",
+   "title": "Admin | DeepL Developer Docs",
+   "quote": "Manage API keys, control what each key can access, and monitor usage across your organization, from the account UI or programmatically with the Admin API.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.deepl.com/docs/admin/overview"
+  },
+  {
+   "id": "c50",
+   "url": "https://support.deepl.com/hc/en-us/articles/22997808358172-SCIM-Technical-reference",
+   "title": "SCIM: Technical reference",
+   "quote": "Base URL (Tenant URL) : https://scim.deepl.com",
+   "accessed": "2026-10-05"
+  }
+ ]
+}

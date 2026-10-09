@@ -1,0 +1,970 @@
+{
+ "slug": "greenhouse",
+ "vendor": "Greenhouse",
+ "vendor_url": "https://www.greenhouse.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Greenhouse",
+  "slug": "greenhouse",
+  "category": "HR, Payroll & Recruiting",
+  "status": "gated",
+  "scim_plan": "Plus",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Core",
+  "team_price_text": "Core: Contact Sales (custom pricing)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Core",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": false,
+   "groups": false
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "via_generic",
+   "google": "sso_only",
+   "onelogin": "sso_only",
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.greenhouse.com/pricing",
+  "docs_url": "https://support.greenhouse.io/hc/en-us/articles/9825388563483-Configure-SCIM-for-Okta",
+  "evidence": "Greenhouse's 'Configure SCIM for Okta' article says \"Product tier: Available for Plus and Pro subscription tiers\", and the pricing page's feature table lists Automated user management for Plus and Pro but not Core.",
+  "notes": "Unchanged status (gated). All three plans (Core, Plus, Pro) are quote-only. The pricing page's feature table marks 'Automated user management' as not in Core and included in Plus and Pro, and Greenhouse's Okta SCIM article says 'Available for Plus and Pro subscription tiers'; the Entra article still uses the old tier names (Advanced and Expert). SSO is on all plans (Core). SCIM creates, updates and deactivates users only: no group provisioning and no delete (users can never be deleted in Greenhouse). June's '~$6,500/yr starting' Core figure is not on any Greenhouse page and is dropped. Harvest API v3 (OAuth client credentials) is on all plans; v1/v2 retired 31 Aug 2026. Audit log API is Pro-only.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Core",
+  "api_tax": false,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Core",
+   "price_text": "Custom pricing (Get a demo)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c1",
+    "c2",
+    "c5",
+    "c7",
+    "c8",
+    "c32",
+    "c36"
+   ]
+  },
+  {
+   "name": "Plus",
+   "price_text": "Custom pricing (Get a demo)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c1",
+    "c3",
+    "c7",
+    "c8",
+    "c32",
+    "c36"
+   ]
+  },
+  {
+   "name": "Pro",
+   "price_text": "Custom pricing (Get a demo)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c1",
+    "c4",
+    "c6",
+    "c8",
+    "c32",
+    "c36"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c8",
+   "c9",
+   "c10",
+   "c15",
+   "c7"
+  ],
+  "plan": "Plus",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": null,
+  "auth": {
+   "method": "bearer",
+   "token_source": "Configure > Dev Center > SCIM Configuration > enable SCIM > Generate token",
+   "token_expiry": null,
+   "cite": [
+    "c12",
+    "c13",
+    "c14",
+    "c31"
+   ],
+   "notes": "Method inferred from Okta 'API Token' and Entra 'Secret Token' fields; base URL is shown in the SCIM Configuration page but its pattern is not documented."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": false,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c24",
+    "c9"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": false,
+   "group_push": false,
+   "group_membership": false,
+   "cite": [
+    "c9",
+    "c25",
+    "c24",
+    "c28"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Users are deactivated, never deleted; their historical responsibilities are preserved and shown struck through.",
+   "cite": [
+    "c25",
+    "c42"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "active",
+    "name.givenName",
+    "name.familyName",
+    "employeeNumber",
+    "department_ids",
+    "external_department_ids",
+    "office_ids",
+    "external_office_ids"
+   ],
+   "enterprise": [
+    "employeeNumber"
+   ],
+   "custom": {
+    "supported": true,
+    "how": "urn:ietf:params:scim:schemas:extension:greenhouse:2.0:CustomField:<field_key> (single select, multi-select in Okta, yes/no, user fields)"
+   },
+   "group": [],
+   "cite": [
+    "c15",
+    "c16",
+    "c17",
+    "c20",
+    "c18",
+    "c21",
+    "c19",
+    "c26",
+    "c27",
+    "c29"
+   ],
+   "notes": "Okta guide puts firstName/lastName/employeeNumber and the department/office ID arrays in the core 2.0 User namespace; Entra guide uses name.givenName/name.familyName and the enterprise employeeNumber."
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SSO with the same IdP must already be configured before SCIM.",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "text": "Users only, no Groups; delete is not supported (deactivate only).",
+    "cite": [
+     "c24",
+     "c25"
+    ]
+   },
+   {
+    "text": "Users deactivated in the IdP before SCIM was set up are not automatically deactivated.",
+    "cite": [
+     "c11"
+    ]
+   },
+   {
+    "text": "Entra ID uses a custom (non-gallery) app; users are matched on email (userPrincipalName).",
+    "cite": [
+     "c23",
+     "c30"
+    ]
+   },
+   {
+    "text": "Generating a new token replaces the old one and SCIM stops until the IdP is updated.",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "text": "Custom fields via Entra are single-valued only.",
+    "cite": [
+     "c29"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c32",
+   "c35",
+   "c34"
+  ],
+  "plan": "Core",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://harvest.greenhouse.io/v3",
+  "docs_url": "https://harvestdocs.greenhouse.io/",
+  "auth": {
+   "methods": [
+    "oauth2_client_credentials"
+   ],
+   "scopes": [],
+   "cite": [
+    "c34",
+    "c57",
+    "c58"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": null,
+   "create_user": true,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": false,
+   "reactivate_user": true,
+   "manage_groups": null,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c47",
+    "c48",
+    "c49",
+    "c50",
+    "c52",
+    "c54",
+    "c42"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/v3/users",
+    "purpose": "List users",
+    "cite": [
+     "c47"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v3/users",
+    "purpose": "Create user (optional email invite)",
+    "cite": [
+     "c48"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/v3/users/{id}",
+    "purpose": "Update user",
+    "cite": [
+     "c49"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v3/users/{id}/deactivate",
+    "purpose": "Deactivate a user",
+    "cite": [
+     "c50"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v3/users/{id}/activate",
+    "purpose": "Reactivate a user",
+    "cite": [
+     "c52"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v3/user_roles",
+    "purpose": "List user roles",
+    "cite": [
+     "c53"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v3/user_job_permissions",
+    "purpose": "Grant a Job Admin role on a job",
+    "cite": [
+     "c54"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Pro",
+   "cite": [
+    "c36",
+    "c37",
+    "c38",
+    "c6"
+   ]
+  },
+  "rate_limits": {
+   "text": "Fixed 30-second windows (X-RateLimit-* headers, 429 with Retry-After); the per-window number is not stated in the guide.",
+   "cite": [
+    "c59"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Harvest v1/v2 (API key) retired after 31 Aug 2026; v3 uses OAuth client credentials with expiring JWTs.",
+    "cite": [
+     "c33",
+     "c58"
+    ]
+   },
+   {
+    "text": "Users cannot be deleted, only deactivated.",
+    "cite": [
+     "c42",
+     "c51"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/greenhouse-recruiting/",
+   "cite": [
+    "c60",
+    "c9"
+   ],
+   "notes": "OIN page ticks SAML, SCIM, Create, Update, Deactivate (no Group Push), read from page markup."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/greenhouse-tutorial",
+   "cite": [
+    "c61",
+    "c62",
+    "c23"
+   ],
+   "notes": "Gallery app is SSO only (Microsoft: provisioning is manual); Greenhouse's SCIM guide uses a custom app with the Greenhouse base URL and token."
+  },
+  "google": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c44",
+    "c41"
+   ],
+   "notes": "Greenhouse documents Google SSO with JIT account creation; no Google provisioning documented."
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": true,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c41"
+   ],
+   "notes": "Greenhouse says OneLogin offers a preconfigured integration; OneLogin page not loaded and no OneLogin SCIM guide found."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": true,
+  "other_sync": "HRIS Link user sync (Workday, UKG Pro) on Pro with the HRIS Link add-on",
+  "docs_public": true,
+  "cite": [
+   "c39",
+   "c44",
+   "c43",
+   "c45",
+   "c46"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.greenhouse.com/pricing",
+   "title": "Greenhouse Plans & Pricing | Core, Plus & Pro",
+   "quote": "Greenhouse pricing is customized based on your company’s hiring needs. You choose a plan – Core, Plus or Pro – based on the level of structure, automation and governance your hiring organization requires.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.greenhouse.com/pricing",
+   "title": "Greenhouse Plans & Pricing | Core, Plus & Pro",
+   "quote": "Core Bring structure to hiring Get a demo",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.greenhouse.com/pricing",
+   "title": "Greenhouse Plans & Pricing | Core, Plus & Pro",
+   "quote": "Plus Optimize your operation Get a demo",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.greenhouse.com/pricing",
+   "title": "Greenhouse Plans & Pricing | Core, Plus & Pro",
+   "quote": "Pro Manage hiring complexity Get a demo",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.greenhouse.com/pricing",
+   "title": "Greenhouse Plans & Pricing | Core, Plus & Pro",
+   "quote": "Reporting & analytics SSO Real Talent™: Talent Matching",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://www.greenhouse.com/pricing",
+   "title": "Greenhouse Plans & Pricing | Core, Plus & Pro",
+   "quote": "Enterprise-level data configuration and security Audit log Developer sandbox & sync",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://www.greenhouse.com/pricing",
+   "title": "Greenhouse Plans & Pricing | Core, Plus & Pro",
+   "quote": "Granular user permissions Create & manage interviewer groups SSO Custom fields Bulk edit jobs & fields Dependent custom fields Automated user management API-only job custom fields",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://support.greenhouse.io/hc/en-us/articles/9825388563483-Configure-SCIM-for-Okta",
+   "title": "Configure SCIM for Okta – Greenhouse Support",
+   "quote": "Product tier: Available for Plus and Pro subscription tiers",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://support.greenhouse.io/hc/en-us/articles/9825388563483-Configure-SCIM-for-Okta",
+   "title": "Configure SCIM for Okta – Greenhouse Support",
+   "quote": "SCIM: Automatically creates, updates, and removes user accounts based on when they're added in your identity provider.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://support.greenhouse.io/hc/en-us/articles/9825388563483-Configure-SCIM-for-Okta",
+   "title": "Configure SCIM for Okta – Greenhouse Support",
+   "quote": "Your organization must already be using Okta SSO to set up SCIM using the Okta identity provider.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://support.greenhouse.io/hc/en-us/articles/9825388563483-Configure-SCIM-for-Okta",
+   "title": "Configure SCIM for Okta – Greenhouse Support",
+   "quote": "Users that were deactivated in Okta prior to SCIM set up will not automatically be deactivated in Greenhouse Recruiting.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://support.greenhouse.io/hc/en-us/articles/9825388563483-Configure-SCIM-for-Okta",
+   "title": "Configure SCIM for Okta – Greenhouse Support",
+   "quote": "Go to the SCIM Configuration page. (Configure icon  > Dev Center > SCIM Configuration)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://support.greenhouse.io/hc/en-us/articles/9825388563483-Configure-SCIM-for-Okta",
+   "title": "Configure SCIM for Okta – Greenhouse Support",
+   "quote": "In the SCIM token section, click Generate token. Then, click Copy.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://support.greenhouse.io/hc/en-us/articles/9825388563483-Configure-SCIM-for-Okta",
+   "title": "Configure SCIM for Okta – Greenhouse Support",
+   "quote": "If you lose or forget your token, click Generate new token to create another. This will replace your existing token, and you will need to add the new token to your Identity Provider.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://support.greenhouse.io/hc/en-us/articles/9825388563483-Configure-SCIM-for-Okta",
+   "title": "Configure SCIM for Okta – Greenhouse Support",
+   "quote": "External namespace urn:ietf:params:scim:schemas:core:2.0:User",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://support.greenhouse.io/hc/en-us/articles/9825388563483-Configure-SCIM-for-Okta",
+   "title": "Configure SCIM for Okta – Greenhouse Support",
+   "quote": "Employee number attribute Display name Employee number Variable name employeeNumber Data type string",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://support.greenhouse.io/hc/en-us/articles/9825388563483-Configure-SCIM-for-Okta",
+   "title": "Configure SCIM for Okta – Greenhouse Support",
+   "quote": "You can choose anything, but we recommend something like department_ids",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://support.greenhouse.io/hc/en-us/articles/9825388563483-Configure-SCIM-for-Okta",
+   "title": "Configure SCIM for Okta – Greenhouse Support",
+   "quote": "You can choose anything, but we recommend something like office_ids",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://support.greenhouse.io/hc/en-us/articles/9825388563483-Configure-SCIM-for-Okta",
+   "title": "Configure SCIM for Okta – Greenhouse Support",
+   "quote": "urn:ietf:params:scim:schemas:extension:greenhouse:2.0:CustomField",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://support.greenhouse.io/hc/en-us/articles/9825388563483-Configure-SCIM-for-Okta",
+   "title": "Configure SCIM for Okta – Greenhouse Support",
+   "quote": "You can choose anything, but we recommend something like external_department_ids",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://support.greenhouse.io/hc/en-us/articles/9825388563483-Configure-SCIM-for-Okta",
+   "title": "Configure SCIM for Okta – Greenhouse Support",
+   "quote": "You can choose anything, but we recommend something like external_office_ids",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://support.greenhouse.io/hc/en-us/articles/35654588835867-Configure-SCIM-for-Microsoft-Entra-ID",
+   "title": "Configure SCIM for Microsoft Entra ID – Greenhouse Support",
+   "quote": "Product tier: Available for Advanced and Expert subscription tiers",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://support.greenhouse.io/hc/en-us/articles/35654588835867-Configure-SCIM-for-Microsoft-Entra-ID",
+   "title": "Configure SCIM for Microsoft Entra ID – Greenhouse Support",
+   "quote": "The Microsoft Entra ID connection is set up by creating a custom app in your Microsoft Entra ID workspace.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://support.greenhouse.io/hc/en-us/articles/35654588835867-Configure-SCIM-for-Microsoft-Entra-ID",
+   "title": "Configure SCIM for Microsoft Entra ID – Greenhouse Support",
+   "quote": "Greenhouse only supports provisioning Users via SCIM, not Groups.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://support.greenhouse.io/hc/en-us/articles/35654588835867-Configure-SCIM-for-Microsoft-Entra-ID",
+   "title": "Configure SCIM for Microsoft Entra ID – Greenhouse Support",
+   "quote": "Greenhouse does not support deleting users via SCIM, but users can be deactivated in Greenhouse via Entra or by removing their access from the application.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://support.greenhouse.io/hc/en-us/articles/35654588835867-Configure-SCIM-for-Microsoft-Entra-ID",
+   "title": "Configure SCIM for Microsoft Entra ID – Greenhouse Support",
+   "quote": "The Attribute Mappings section will include these default attributes: User name Active Given name Family name Employee ID",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://support.greenhouse.io/hc/en-us/articles/35654588835867-Configure-SCIM-for-Microsoft-Entra-ID",
+   "title": "Configure SCIM for Microsoft Entra ID – Greenhouse Support",
+   "quote": "enterprise:2.0:User:employeeNumber User’s employee ID",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://support.greenhouse.io/hc/en-us/articles/35654588835867-Configure-SCIM-for-Microsoft-Entra-ID",
+   "title": "Configure SCIM for Microsoft Entra ID – Greenhouse Support",
+   "quote": "When \"active\" is \"false,\" the user account is disabled.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://support.greenhouse.io/hc/en-us/articles/35654588835867-Configure-SCIM-for-Microsoft-Entra-ID",
+   "title": "Configure SCIM for Microsoft Entra ID – Greenhouse Support",
+   "quote": "Greenhouse only supports single-valued custom fields: Yes/No, Single-Select, and User.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://support.greenhouse.io/hc/en-us/articles/35654588835867-Configure-SCIM-for-Microsoft-Entra-ID",
+   "title": "Configure SCIM for Microsoft Entra ID – Greenhouse Support",
+   "quote": "Always set to “No.” Greenhouse matches users based on email address (userPrincipalName).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://support.greenhouse.io/hc/en-us/articles/35654588835867-Configure-SCIM-for-Microsoft-Entra-ID",
+   "title": "Configure SCIM for Microsoft Entra ID – Greenhouse Support",
+   "quote": "Under Admin Credentials, enter Base URL from the Greenhouse Recruiting SCIM configuration page in the Tenant URL field. Then, enter the token you generated in the Token field.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://support.greenhouse.io/hc/en-us/articles/360029266032-Harvest-API-overview",
+   "title": "Harvest API overview – Greenhouse Support",
+   "quote": "Product tier: Available for new subscription tiers (Core, Plus, and Pro)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://support.greenhouse.io/hc/en-us/articles/360029266032-Harvest-API-overview",
+   "title": "Harvest API overview – Greenhouse Support",
+   "quote": "Harvest API v1 and v2 will be deprecated and unavailable after August 31, 2026.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://support.greenhouse.io/hc/en-us/articles/360029266032-Harvest-API-overview",
+   "title": "Harvest API overview – Greenhouse Support",
+   "quote": "Harvest v3: Uses OAuth 2.0 client credentials (client ID and client secret)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c35",
+   "url": "https://support.greenhouse.io/hc/en-us/articles/4407711530139-User-management-with-Harvest-API",
+   "title": "User management with Harvest API – Greenhouse Support",
+   "quote": "You can use Harvest API to programmatically add Greenhouse Recruiting users and manage their names, emails, or employment statuses to achieve parity with an outside system like an HRIS.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://support.greenhouse.io/hc/en-us/articles/15114161286043-Use-audit-log-with-API",
+   "title": "Use audit log with API – Greenhouse Support",
+   "quote": "Product tier: Available to Pro subscription tier",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://support.greenhouse.io/hc/en-us/articles/15114161286043-Use-audit-log-with-API",
+   "title": "Use audit log with API – Greenhouse Support",
+   "quote": "To access audit log with API, you need Harvest v3 OAuth credentials with permission to audit log data.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c38",
+   "url": "https://support.greenhouse.io/hc/en-us/articles/15114161286043-Use-audit-log-with-API",
+   "title": "Use audit log with API – Greenhouse Support",
+   "quote": "Audit log offers a record of important events in your Greenhouse Recruiting environment from the previous 30 days.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c39",
+   "url": "https://support.greenhouse.io/hc/en-us/articles/360001531451-Provisioning-Greenhouse-Recruiting-user-accounts-automatically-with-SSO",
+   "title": "Provisioning Greenhouse Recruiting user accounts automatically with SSO – Greenhouse Support",
+   "quote": "Any user at your organization who launches Greenhouse Recruiting from their SSO dashboard will be automatically provisioned with Basic user permissions, which an admin can then update.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c40",
+   "url": "https://support.greenhouse.io/hc/en-us/articles/210259723-Single-sign-on-SSO-overview",
+   "title": "Single sign-on (SSO) overview – Greenhouse Support",
+   "quote": "Product tier: Available for new subscription tiers (Core, Plus, and Pro)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c41",
+   "url": "https://support.greenhouse.io/hc/en-us/articles/210259723-Single-sign-on-SSO-overview",
+   "title": "Single sign-on (SSO) overview – Greenhouse Support",
+   "quote": "Some IdPs, such as Okta, Onelogin, Google, and Microsoft Entra ID offer preconfigured integration options with Greenhouse.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c42",
+   "url": "https://support.greenhouse.io/hc/en-us/articles/115004791523-Deactivate-a-user",
+   "title": "Deactivate a user – Greenhouse Support",
+   "quote": "In order to preserve your organization's historical data, you are unable to completely delete users from your Greenhouse Recruiting account.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c43",
+   "url": "https://support.greenhouse.io/hc/en-us/articles/204569115-Add-new-users-in-bulk",
+   "title": "Add new users in bulk – Greenhouse Support",
+   "quote": "use the bulk import tool to save time and energy.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c44",
+   "url": "https://support.greenhouse.io/hc/en-us/articles/115000410566-Google-Apps-for-SSO",
+   "title": "Google Apps for SSO – Greenhouse Support",
+   "quote": "If a new user has a Google Apps account, but not a Greenhouse Recruiting account, Greenhouse Recruiting will automatically create a Greenhouse user account the first time they sign in using Google Apps.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c45",
+   "url": "https://support.greenhouse.io/hc/en-us/articles/360058975731-HRIS-Link-Workday-User-sync",
+   "title": "HRIS Link Workday®️: User sync – Greenhouse Support",
+   "quote": "Product tier: Available for Pro subscription tier with the HRIS Link add-on",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c46",
+   "url": "https://support.greenhouse.io/hc/en-us/articles/360058975731-HRIS-Link-Workday-User-sync",
+   "title": "HRIS Link Workday®️: User sync – Greenhouse Support",
+   "quote": "HRIS Link for users shouldn't be utilized with SSO with SCIM, as they both perform the same function.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c47",
+   "url": "https://harvestdocs.greenhouse.io/reference/get_v3-users.md",
+   "title": "List users | Greenhouse Harvest",
+   "quote": "\"/v3/users\": { \"get\": { \"summary\": \"List users\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://harvestdocs.greenhouse.io/reference/get_v3-users"
+  },
+  {
+   "id": "c48",
+   "url": "https://harvestdocs.greenhouse.io/reference/post_v3-users.md",
+   "title": "Create user | Greenhouse Harvest",
+   "quote": "\"/v3/users\": { \"post\": { \"summary\": \"Create user\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://harvestdocs.greenhouse.io/reference/post_v3-users"
+  },
+  {
+   "id": "c49",
+   "url": "https://harvestdocs.greenhouse.io/reference/patch_v3-users-id.md",
+   "title": "Update user | Greenhouse Harvest",
+   "quote": "\"/v3/users/{id}\": { \"patch\": { \"summary\": \"Update user\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://harvestdocs.greenhouse.io/reference/patch_v3-users-id"
+  },
+  {
+   "id": "c50",
+   "url": "https://harvestdocs.greenhouse.io/reference/post_v3-users-id-deactivate.md",
+   "title": "Deactivate a user | Greenhouse Harvest",
+   "quote": "\"/v3/users/{id}/deactivate\": { \"post\": { \"summary\": \"Deactivate a user\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://harvestdocs.greenhouse.io/reference/post_v3-users-id-deactivate"
+  },
+  {
+   "id": "c51",
+   "url": "https://harvestdocs.greenhouse.io/reference/post_v3-users-id-deactivate.md",
+   "title": "Deactivate a user | Greenhouse Harvest",
+   "quote": "Deactivate a Greenhouse user. The user can no longer sign in or be assigned to new jobs, but all of their historical activity (notes, scorecards, emails, applications they own) is preserved.",
+   "accessed": "2026-10-05",
+   "page_url": "https://harvestdocs.greenhouse.io/reference/post_v3-users-id-deactivate"
+  },
+  {
+   "id": "c52",
+   "url": "https://harvestdocs.greenhouse.io/reference/post_v3-users-id-activate.md",
+   "title": "Activate a user | Greenhouse Harvest",
+   "quote": "\"/v3/users/{id}/activate\": { \"post\": { \"summary\": \"Activate a user\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://harvestdocs.greenhouse.io/reference/post_v3-users-id-activate"
+  },
+  {
+   "id": "c53",
+   "url": "https://harvestdocs.greenhouse.io/reference/get_v3-user-roles.md",
+   "title": "List user roles | Greenhouse Harvest",
+   "quote": "\"/v3/user_roles\": { \"get\": { \"summary\": \"List user roles\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://harvestdocs.greenhouse.io/reference/get_v3-user-roles"
+  },
+  {
+   "id": "c54",
+   "url": "https://harvestdocs.greenhouse.io/reference/post_v3-user-job-permissions.md",
+   "title": "Create user job permission | Greenhouse Harvest",
+   "quote": "\"/v3/user_job_permissions\": { \"post\": { \"summary\": \"Create user job permission\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://harvestdocs.greenhouse.io/reference/post_v3-user-job-permissions"
+  },
+  {
+   "id": "c55",
+   "url": "https://harvestdocs.greenhouse.io/reference/get_v3-users.md",
+   "title": "List users | Greenhouse Harvest",
+   "quote": "\"url\": \"https://harvest.greenhouse.io\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://harvestdocs.greenhouse.io/reference/get_v3-users"
+  },
+  {
+   "id": "c56",
+   "url": "https://harvestdocs.greenhouse.io/reference/get_v3-users.md",
+   "title": "List users | Greenhouse Harvest",
+   "quote": "Cursor link for pagination from previous page response header.",
+   "accessed": "2026-10-05",
+   "page_url": "https://harvestdocs.greenhouse.io/reference/get_v3-users"
+  },
+  {
+   "id": "c57",
+   "url": "https://harvestdocs.greenhouse.io/docs/authentication.md",
+   "title": "Authentication | Greenhouse Harvest",
+   "quote": "Make a server-to-server `POST` request to the token endpoint.",
+   "accessed": "2026-10-05",
+   "page_url": "https://harvestdocs.greenhouse.io/docs/authentication"
+  },
+  {
+   "id": "c58",
+   "url": "https://harvestdocs.greenhouse.io/docs/authentication.md",
+   "title": "Authentication | Greenhouse Harvest",
+   "quote": "Access tokens expire. When you receive `401 Unauthorized` (or before expiration), request a new token by repeating Step 2.",
+   "accessed": "2026-10-05",
+   "page_url": "https://harvestdocs.greenhouse.io/docs/authentication"
+  },
+  {
+   "id": "c59",
+   "url": "https://harvestdocs.greenhouse.io/docs/api-rate-limiting.md",
+   "title": "Rate Limiting | Greenhouse Harvest",
+   "quote": "This limit is applied on a fixed-window basis, meaning the counter resets at the end of each 30-second interval.",
+   "accessed": "2026-10-05",
+   "page_url": "https://harvestdocs.greenhouse.io/docs/api-rate-limiting"
+  },
+  {
+   "id": "c60",
+   "url": "https://www.okta.com/integrations/greenhouse-recruiting/",
+   "title": "Integrate Greenhouse Recruiting with Okta",
+   "quote": "Okta's Greenhouse integration enables single sign-on and just-in-time user provisioning",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c61",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/greenhouse-tutorial",
+   "title": "Microsoft Entra SSO integration with Greenhouse - Microsoft Entra ID | Microsoft Learn",
+   "quote": "In the case of Greenhouse, provisioning is a manual task.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c62",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/greenhouse-tutorial",
+   "title": "Microsoft Entra SSO integration with Greenhouse - Microsoft Entra ID | Microsoft Learn",
+   "quote": "Greenhouse supports SP and IDP initiated SSO.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "Okta SCIM article says 'Available for Plus and Pro subscription tiers'; the Entra SCIM article says 'Available for Advanced and Expert subscription tiers' (legacy tier names).",
+   "cite": [
+    "c8",
+    "c22"
+   ]
+  },
+  {
+   "text": "Okta's OIN description mentions only 'single sign-on and just-in-time user provisioning', while its functionality list ticks SCIM, Create, Update and Deactivate and Greenhouse documents Okta SCIM.",
+   "cite": [
+    "c60",
+    "c9"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.greenhouse.com/pricing",
+  "support.greenhouse.io help-centre search: scim, harvest api, audit log, SSO, deactivate user, bulk import users, webhooks",
+  "https://support.greenhouse.io/hc/en-us/articles/9825388563483-Configure-SCIM-for-Okta",
+  "https://support.greenhouse.io/hc/en-us/articles/35654588835867-Configure-SCIM-for-Microsoft-Entra-ID",
+  "https://support.greenhouse.io/hc/en-us/articles/360029266032-Harvest-API-overview",
+  "https://support.greenhouse.io/hc/en-us/articles/4407711530139-User-management-with-Harvest-API",
+  "https://support.greenhouse.io/hc/en-us/articles/15114161286043-Use-audit-log-with-API",
+  "https://harvestdocs.greenhouse.io/llms.txt",
+  "https://www.okta.com/integrations/greenhouse-recruiting/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/greenhouse-tutorial"
+ ],
+ "open_questions": [
+  "SCIM base URL pattern, filtering, pagination and PUT vs PATCH are not documented publicly.",
+  "Whether SCIM roles/permissions can be set (beyond custom fields) is not documented.",
+  "Numeric Harvest v3 rate limit per 30-second window is not stated.",
+  "No user-event webhooks documented for users.",
+  "OneLogin and JumpCloud provisioning support not confirmed."
+ ]
+}

@@ -1,0 +1,684 @@
+{
+ "slug": "spekit",
+ "vendor": "Spekit",
+ "vendor_url": "https://www.spekit.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Spekit",
+  "slug": "spekit",
+  "category": "Sales & CRM",
+  "status": "gated",
+  "scim_plan": "Contact Sales (SSO/SCIM enabled on request)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales (Book a demo)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": "sso_only",
+   "onelogin": "via_generic",
+   "jumpcloud": "via_generic",
+   "generic": true
+  },
+  "pricing_page_url": "https://www.spekit.com/pricing",
+  "docs_url": "https://help.spekit.com/hc/en-us/articles/9923374365723-Single-Sign-On-SSO-in-Spekit-Overview-Setup",
+  "evidence": "Spekit's help centre documents SCIM (\"automates user management tasks such as account creation, updates, and deactivation within Spekit\") that must be enabled by a Customer Success Manager, and the pricing page only offers \"Book a demo\".",
+  "notes": "Quote-only: the pricing page lists no plans or prices, only a demo request, so status is gated under rule 6a. SSO/SCIM must be enabled in the instance by the CSM or support before setup; SCIM is added to an existing SAML app (Okta) and set up through an in-app walkthrough that supplies the endpoint URL and bearer token. Okta, Entra ID, OneLogin, JumpCloud, PingFederate and PingOne support SCIM; Google Workspace is SAML only. SCIM creates/updates/deactivates users and pushes groups as Spekit Teams; all provisioned users start as Viewer and roles are changed in Spekit only; teams cannot be deleted from the IdP. JIT on SAML is supported but cannot remove users. The public REST API (api.spekit.co) is GET-only, with GET /v1/users/ for read-only user listing.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Spekit (quote-only)",
+   "price_text": "Contact Sales (Book a demo)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c4",
+    "c5",
+    "c31"
+   ],
+   "notes": "No public tiers; SSO/SCIM is enabled per instance by the Customer Success Manager or support."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c2",
+   "c3",
+   "c4",
+   "c5",
+   "c9"
+  ],
+  "plan": "Contact Sales (enabled on request)",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": null,
+  "auth": {
+   "method": "bearer",
+   "token_source": "Spekit Web App > Settings > Connect > Connect with SSO/SCIM in-app walkthrough (endpoint URL, unique identifier and bearer token)",
+   "token_expiry": null,
+   "cite": [
+    "c4",
+    "c10",
+    "c11",
+    "c15"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c12",
+    "c24"
+   ],
+   "notes": "Endpoint paths are not published; Users/Groups inferred from documented user and group push. Version 2.0 inferred from the OneLogin 'SCIM V2 Enterprise' connector (c18)."
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": null,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c3",
+    "c12",
+    "c13",
+    "c24",
+    "c27"
+   ],
+   "notes": "Update supported (Push Profile Updates / Update User Attributes) but PUT vs PATCH is not documented. Team deletion from the IdP is not supported (c26)."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c3",
+    "c13",
+    "c19"
+   ],
+   "notes": "Deactivated users can be reactivated in Spekit by adding them back to a team (c30)."
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "externalId (Entra objectId)"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": [
+    "c16",
+    "c17"
+   ],
+   "notes": "Spekit does not publish its SCIM attribute list; the in-app walkthrough supplies attribute statements."
+  },
+  "roles": {
+   "supported": false,
+   "how": "All provisioned users start as Viewer in the All Spekit Users team; only a Spekit Account Admin can change roles in Spekit.",
+   "cite": [
+    "c22",
+    "c25"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SSO/SCIM must be enabled in the Spekit instance by the Customer Success Manager or support before setup.",
+    "cite": [
+     "c4",
+     "c5"
+    ]
+   },
+   {
+    "text": "Only one Spekit production org can be connected; sandbox or additional accounts are not supported.",
+    "cite": [
+     "c21",
+     "c28"
+    ]
+   },
+   {
+    "text": "Teams cannot be deleted via the IdP; they are removed only in the Spekit app.",
+    "cite": [
+     "c26"
+    ]
+   },
+   {
+    "text": "Google Workspace supports SAML but not SCIM.",
+    "cite": [
+     "c8"
+    ]
+   },
+   {
+    "text": "Entra's default objectId to externalId mapping must be fixed manually or users will not sync.",
+    "cite": [
+     "c16"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c31",
+   "c32",
+   "c35"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": null,
+  "docs_url": "https://api.spekit.co/docs/",
+  "auth": {
+   "methods": [
+    "api_key"
+   ],
+   "scopes": [],
+   "cite": [
+    "c34",
+    "c36"
+   ],
+   "notes": "Token generated under Settings > API Tokens by Account Admins, expiry configurable from 1 week to never; header 'Authorization: Token <token>'."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": null,
+   "create_user": false,
+   "invite_user": false,
+   "update_user": false,
+   "deactivate_user": false,
+   "delete_user": false,
+   "reactivate_user": false,
+   "manage_groups": false,
+   "assign_roles": false,
+   "assign_licenses": false,
+   "cite": [
+    "c31",
+    "c35"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/v1/users/",
+    "purpose": "List all users with account details including team memberships",
+    "cite": [
+     "c35"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/analytics/user-activities/",
+    "purpose": "List users who performed a given activity",
+    "cite": [
+     "c31"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "30 requests / 10 seconds; HTTP 429 above that",
+   "cite": [
+    "c33"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "The API supports only GET (read-only); users cannot be created, changed or removed through it.",
+    "cite": [
+     "c31"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c9",
+    "c37"
+   ],
+   "notes": "Spekit's guides create a custom Okta SAML app (Create App Integration) and add SCIM to it; no OIN listing found (okta.com/integrations/spekit/ 404)."
+  },
+  "entra": {
+   "listed": false,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c14"
+   ],
+   "notes": "Spekit's guide uses a non-gallery app."
+  },
+  "google": {
+   "listed": null,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c8"
+   ]
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": "idp",
+   "url": null,
+   "cite": [
+    "c18"
+   ],
+   "notes": "Uses OneLogin's generic 'SCIM Provisioner with SAML (SCIM V2 Enterprise)' connector, not a Spekit-specific app."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c8",
+    "c20"
+   ],
+   "notes": "Spekit's IdP table marks JumpCloud as SAML and SCIM supported; no JumpCloud guide published."
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": false,
+  "other_sync": "Salesforce user sync (disabled once SSO is connected)",
+  "docs_public": true,
+  "cite": [
+   "c6",
+   "c7"
+  ],
+  "notes": "The bulk XLSX import covers content (Speks), not users; an XLSX user-mapping sheet is used only during SSO setup."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.spekit.com/pricing",
+   "title": "Pricing - Spekit",
+   "quote": "Book a demo to see how Spekit delivers just-in-time enablement with AI built for speed, adoption, and revenue impact.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.spekit.com/okta",
+   "title": "Okta SCIM Integration for Spekit",
+   "quote": "Okta SCIM for Spekit enables admins to seamlessly manage user access, provisioning, and de-provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://help.spekit.com/api/v2/help_center/en-us/articles/9923374365723.json",
+   "title": "Single Sign-On (SSO) in Spekit: Overview & Setup",
+   "quote": "SCIM (System for Cross-domain Identity Management): An alternative user provisioning method that automates user management tasks such as account creation, updates, and deactivation within Spekit.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.spekit.com/hc/en-us/articles/9923374365723-Single-Sign-On-SSO-in-Spekit-Overview-Setup"
+  },
+  {
+   "id": "c4",
+   "url": "https://help.spekit.com/api/v2/help_center/en-us/articles/9923374365723.json",
+   "title": "Single Sign-On (SSO) in Spekit: Overview & Setup",
+   "quote": "You must have Spekit Account Admin permissions and have SSO/SCIM enabled in your Spekit instance before proceeding. If the Connect with SSO/SCIM button isn't visible under Settings",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.spekit.com/hc/en-us/articles/9923374365723-Single-Sign-On-SSO-in-Spekit-Overview-Setup"
+  },
+  {
+   "id": "c5",
+   "url": "https://help.spekit.com/api/v2/help_center/en-us/articles/9923374365723.json",
+   "title": "Single Sign-On (SSO) in Spekit: Overview & Setup",
+   "quote": "contact your Customer Success Manager or support@spekit.co to have it enabled.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.spekit.com/hc/en-us/articles/9923374365723-Single-Sign-On-SSO-in-Spekit-Overview-Setup"
+  },
+  {
+   "id": "c6",
+   "url": "https://help.spekit.com/api/v2/help_center/en-us/articles/9923374365723.json",
+   "title": "Single Sign-On (SSO) in Spekit: Overview & Setup",
+   "quote": "Spekit supports Just-in-Time (JIT) provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.spekit.com/hc/en-us/articles/9923374365723-Single-Sign-On-SSO-in-Spekit-Overview-Setup"
+  },
+  {
+   "id": "c7",
+   "url": "https://help.spekit.com/api/v2/help_center/en-us/articles/9923374365723.json",
+   "title": "Single Sign-On (SSO) in Spekit: Overview & Setup",
+   "quote": "their Spekit account must be manually disabled - JIT cannot automatically remove users.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.spekit.com/hc/en-us/articles/9923374365723-Single-Sign-On-SSO-in-Spekit-Overview-Setup"
+  },
+  {
+   "id": "c8",
+   "url": "https://help.spekit.com/api/v2/help_center/en-us/articles/9923374365723.json",
+   "title": "Single Sign-On (SSO) in Spekit: Overview & Setup",
+   "quote": "SSO Provider SAML 2.0 Supported SCIM Supported",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.spekit.com/hc/en-us/articles/9923374365723-Single-Sign-On-SSO-in-Spekit-Overview-Setup"
+  },
+  {
+   "id": "c9",
+   "url": "https://help.spekit.com/api/v2/help_center/en-us/articles/16160357800859.json",
+   "title": "Okta SCIM Connection Overview",
+   "quote": "This guide provides a general overview of how to add SCIM provisioning to an existing Okta SAML application and configure the provisioning actions needed to sync users into Spekit.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.spekit.com/hc/en-us/articles/16160357800859-Okta-SCIM-Connection-Overview"
+  },
+  {
+   "id": "c10",
+   "url": "https://help.spekit.com/api/v2/help_center/en-us/articles/16160357800859.json",
+   "title": "Okta SCIM Connection Overview",
+   "quote": "Set the Authentication Mode to HTTP Header.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.spekit.com/hc/en-us/articles/16160357800859-Okta-SCIM-Connection-Overview"
+  },
+  {
+   "id": "c11",
+   "url": "https://help.spekit.com/api/v2/help_center/en-us/articles/16160357800859.json",
+   "title": "Okta SCIM Connection Overview",
+   "quote": "Copy the Bearer Token from your Spekit in-app walkthrough and paste it into the Authorization field.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.spekit.com/hc/en-us/articles/16160357800859-Okta-SCIM-Connection-Overview"
+  },
+  {
+   "id": "c12",
+   "url": "https://help.spekit.com/api/v2/help_center/en-us/articles/16160357800859.json",
+   "title": "Okta SCIM Connection Overview",
+   "quote": "Push New Users Push Profile Updates Push Groups",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.spekit.com/hc/en-us/articles/16160357800859-Okta-SCIM-Connection-Overview"
+  },
+  {
+   "id": "c13",
+   "url": "https://help.spekit.com/api/v2/help_center/en-us/articles/16160357800859.json",
+   "title": "Okta SCIM Connection Overview",
+   "quote": "Create Users Update User Attributes Deactivate Users",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.spekit.com/hc/en-us/articles/16160357800859-Okta-SCIM-Connection-Overview"
+  },
+  {
+   "id": "c14",
+   "url": "https://help.spekit.com/api/v2/help_center/en-us/articles/16126954733979.json",
+   "title": "Entra ID (Azure) SCIM Connection Overview",
+   "quote": "Select Integrate any other application you don't find in the gallery (Non-gallery).",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.spekit.com/hc/en-us/articles/16126954733979-Entra-ID-Azure-SCIM-Connection-Overview"
+  },
+  {
+   "id": "c15",
+   "url": "https://help.spekit.com/api/v2/help_center/en-us/articles/16126954733979.json",
+   "title": "Entra ID (Azure) SCIM Connection Overview",
+   "quote": "Copy the Tenant URL from your Spekit in-app walkthrough and paste it into the corresponding field.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.spekit.com/hc/en-us/articles/16126954733979-Entra-ID-Azure-SCIM-Connection-Overview"
+  },
+  {
+   "id": "c16",
+   "url": "https://help.spekit.com/api/v2/help_center/en-us/articles/16126954733979.json",
+   "title": "Entra ID (Azure) SCIM Connection Overview",
+   "quote": "Open the user attribute mapping section and confirm that objectId is mapped to externalId.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.spekit.com/hc/en-us/articles/16126954733979-Entra-ID-Azure-SCIM-Connection-Overview"
+  },
+  {
+   "id": "c17",
+   "url": "https://help.spekit.com/api/v2/help_center/en-us/articles/16126954733979.json",
+   "title": "Entra ID (Azure) SCIM Connection Overview",
+   "quote": "Confirm that both the group and user attribute mappings are enabled and mapping the correct fields.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.spekit.com/hc/en-us/articles/16126954733979-Entra-ID-Azure-SCIM-Connection-Overview"
+  },
+  {
+   "id": "c18",
+   "url": "https://help.spekit.com/api/v2/help_center/en-us/articles/16161615650459.json",
+   "title": "OneLogin SCIM Connection Overview",
+   "quote": "select the application named SCIM Provisioner with SAML (SCIM V2 Enterprise).",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.spekit.com/hc/en-us/articles/16161615650459-OneLogin-SCIM-Connection-Overview"
+  },
+  {
+   "id": "c19",
+   "url": "https://help.spekit.com/api/v2/help_center/en-us/articles/16161615650459.json",
+   "title": "OneLogin SCIM Connection Overview",
+   "quote": "Ensure both dropdowns are set to Suspend.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.spekit.com/hc/en-us/articles/16161615650459-OneLogin-SCIM-Connection-Overview"
+  },
+  {
+   "id": "c20",
+   "url": "https://help.spekit.com/api/v2/help_center/en-us/articles/9923420400795.json",
+   "title": "Single Sign-On FAQs",
+   "quote": "Spekit officially supports Okta, OneLogin, Azure AD, PingFederate, PingOne, JumpCloud, and more in beta.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.spekit.com/hc/en-us/articles/9923420400795-Single-Sign-On-FAQs"
+  },
+  {
+   "id": "c21",
+   "url": "https://help.spekit.com/api/v2/help_center/en-us/articles/9923420400795.json",
+   "title": "Single Sign-On FAQs",
+   "quote": "No. You can only connect to one Spekit production org.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.spekit.com/hc/en-us/articles/9923420400795-Single-Sign-On-FAQs"
+  },
+  {
+   "id": "c22",
+   "url": "https://help.spekit.com/api/v2/help_center/en-us/articles/9923420400795.json",
+   "title": "Single Sign-On FAQs",
+   "quote": "All new users are added to the All Spekit Users team with viewer permissions.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.spekit.com/hc/en-us/articles/9923420400795-Single-Sign-On-FAQs"
+  },
+  {
+   "id": "c23",
+   "url": "https://help.spekit.com/api/v2/help_center/en-us/articles/9923420400795.json",
+   "title": "Single Sign-On FAQs",
+   "quote": "Azure uses a 40-minute provisioning interval with SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.spekit.com/hc/en-us/articles/9923420400795-Single-Sign-On-FAQs"
+  },
+  {
+   "id": "c24",
+   "url": "https://help.spekit.com/api/v2/help_center/en-us/articles/9923422820891.json",
+   "title": "Okta User & Teams Management and FAQs",
+   "quote": "Pushing users and groups from your IdP will automatically create a user and Team in Spekit.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.spekit.com/hc/en-us/articles/9923422820891-Okta-User-Teams-Management-and-FAQs"
+  },
+  {
+   "id": "c25",
+   "url": "https://help.spekit.com/api/v2/help_center/en-us/articles/9923422820891.json",
+   "title": "Okta User & Teams Management and FAQs",
+   "quote": "Only Spekit Account Admin can change roles from the Manage Teams page by selecting an individual user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.spekit.com/hc/en-us/articles/9923422820891-Okta-User-Teams-Management-and-FAQs"
+  },
+  {
+   "id": "c26",
+   "url": "https://help.spekit.com/api/v2/help_center/en-us/articles/9923422820891.json",
+   "title": "Okta User & Teams Management and FAQs",
+   "quote": "Teams can only be removed via the Spekit app. Deleting a team via the IdP is not currently supported.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.spekit.com/hc/en-us/articles/9923422820891-Okta-User-Teams-Management-and-FAQs"
+  },
+  {
+   "id": "c27",
+   "url": "https://help.spekit.com/api/v2/help_center/en-us/articles/9923422820891.json",
+   "title": "Okta User & Teams Management and FAQs",
+   "quote": "Renaming a team in your IdP will reflect in Spekit.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.spekit.com/hc/en-us/articles/9923422820891-Okta-User-Teams-Management-and-FAQs"
+  },
+  {
+   "id": "c28",
+   "url": "https://help.spekit.com/api/v2/help_center/en-us/articles/9923422820891.json",
+   "title": "Okta User & Teams Management and FAQs",
+   "quote": "SSO/SCIM can only be connected to your production account. Sandbox or additional accounts are not supported for SSO/SCIM connection.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.spekit.com/hc/en-us/articles/9923422820891-Okta-User-Teams-Management-and-FAQs"
+  },
+  {
+   "id": "c29",
+   "url": "https://help.spekit.com/api/v2/help_center/en-us/articles/9922994572059.json",
+   "title": "How do I manage Users in Spekit?",
+   "quote": "Teams and Users added via SSO can only be added and removed via SSO.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.spekit.com/hc/en-us/articles/9922994572059-How-do-I-manage-Users-in-Spekit"
+  },
+  {
+   "id": "c30",
+   "url": "https://help.spekit.com/api/v2/help_center/en-us/articles/9922994572059.json",
+   "title": "How do I manage Users in Spekit?",
+   "quote": "Add that user back to any team via the \"Add to Team\" option. This will reactivate their account.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.spekit.com/hc/en-us/articles/9922994572059-How-do-I-manage-Users-in-Spekit"
+  },
+  {
+   "id": "c31",
+   "url": "https://help.spekit.com/api/v2/help_center/en-us/articles/31041891807643.json",
+   "title": "Spekit API Overview",
+   "quote": "Spekit APIs currently support the GET method, allowing you to securely retrieve data across these four core pillars:",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.spekit.com/hc/en-us/articles/31041891807643-Spekit-API-Overview"
+  },
+  {
+   "id": "c32",
+   "url": "https://help.spekit.com/api/v2/help_center/en-us/articles/31041891807643.json",
+   "title": "Spekit API Overview",
+   "quote": "Retrieve details about your organization's users, including account creation date, team membership, and roles.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.spekit.com/hc/en-us/articles/31041891807643-Spekit-API-Overview"
+  },
+  {
+   "id": "c33",
+   "url": "https://help.spekit.com/api/v2/help_center/en-us/articles/31041891807643.json",
+   "title": "Spekit API Overview",
+   "quote": "Rate Limit: 30 Requests / 10 Seconds",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.spekit.com/hc/en-us/articles/31041891807643-Spekit-API-Overview"
+  },
+  {
+   "id": "c34",
+   "url": "https://help.spekit.com/api/v2/help_center/en-us/articles/31041891807643.json",
+   "title": "Spekit API Overview",
+   "quote": "Only Spekit Account Admins can generate tokens.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.spekit.com/hc/en-us/articles/31041891807643-Spekit-API-Overview"
+  },
+  {
+   "id": "c35",
+   "url": "https://api.spekit.co/api-schema/",
+   "title": "Spekit API (OpenAPI schema)",
+   "quote": "Returns a list of all users for an organization, with account details including team memberships.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.spekit.co/docs/"
+  },
+  {
+   "id": "c36",
+   "url": "https://api.spekit.co/api-schema/",
+   "title": "Spekit API (OpenAPI schema)",
+   "quote": "Token-based authentication with required prefix",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.spekit.co/docs/"
+  },
+  {
+   "id": "c37",
+   "url": "https://help.spekit.com/api/v2/help_center/en-us/articles/16013294512027.json",
+   "title": "Okta SAML Connection Overview",
+   "quote": "Click Create App Integration.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.spekit.com/hc/en-us/articles/16013294512027-Okta-SAML-Connection-Overview"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.spekit.com/pricing",
+  "https://www.spekit.com/sitemap.xml",
+  "https://www.spekit.com/okta",
+  "help-centre search API: scim, api, public api, csv import, deactivate user, audit, pricing plan, webhook",
+  "https://api.spekit.co/docs/ and /api-schema/",
+  "https://www.okta.com/integrations/spekit/ (404)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/spekit-tutorial (404)"
+ ],
+ "open_questions": [
+  "Which Spekit packages include SSO/SCIM and whether it costs extra is not public (enabled by the CSM).",
+  "SCIM base URL pattern, endpoint paths, supported attributes, filtering and pagination are not published (supplied in the in-app walkthrough).",
+  "Whether SCIM deactivation frees a seat or ends sessions is not documented.",
+  "Whether SCIM DELETE is supported is not documented.",
+  "No audit-log API or user-event webhooks found."
+ ]
+}

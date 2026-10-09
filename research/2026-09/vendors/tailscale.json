@@ -1,0 +1,1182 @@
+{
+ "slug": "tailscale",
+ "vendor": "Tailscale",
+ "vendor_url": "https://tailscale.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Tailscale",
+  "slug": "tailscale",
+  "category": "Security & Identity",
+  "status": "free",
+  "scim_plan": "Standard",
+  "scim_price_text": "Standard: $8/user/mo",
+  "scim_price_per_user_mo": 8,
+  "team_plan": "Standard",
+  "team_price_text": "Standard: $8/user/mo",
+  "team_price_per_user_mo": 8,
+  "price_multiplier": 1.0,
+  "sso_plan": "Personal",
+  "sso_price_per_user_mo": 0,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": "directory_sync",
+   "onelogin": "sso_only",
+   "jumpcloud": "sso_only",
+   "generic": false
+  },
+  "pricing_page_url": "https://tailscale.com/pricing",
+  "docs_url": "https://tailscale.com/docs/features/user-group-provisioning",
+  "evidence": "The Standard plan ($8 per user, per month) lists \"Deploy users and groups with SCIM\", and the provisioning docs say \"This feature is available for the Standard, Premium, and Enterprise plans.\"",
+  "notes": "SCIM sits on the cheapest paid tier, so No Tax. Provisioning is IdP-specific: SCIM for Okta and Microsoft Entra ID, plus a Google Workspace sync that pulls users and groups over Google APIs (not SCIM). The tailnet's sign-in IdP must be the same IdP, and provisioning is not supported for custom OIDC setups (for example JumpCloud), so there is no documented generic SCIM endpoint for other IdPs. OneLogin is a supported sign-in IdP, but the provisioning docs cover only Google, Entra and Okta. SCIM-provisioned users take no seat until first login; deprovisioning (suspend) frees the seat. Okta deletions do not sync; Entra hard-deletes after about 30 days. No SCIM Enterprise User extension. SSO (OIDC, no SAML), the user-management API, webhooks and configuration audit logs are on every plan, including free Personal (up to 6 users); the per-tier checkmarks were read from the pricing comparison table icons. The pricing page does not say whether $8 is the annual or monthly rate. No status change: new row. Under the post-pilot rules SCIM with two IdPs (Okta and Entra) is not partial, and SCIM is on the cheapest paid tier, so status stays free. Row idp.google is directory_sync (Tailscale-run Google Workspace sync, not SCIM). Users who sign in through the tailnet's OIDC identity provider for the first time join the tailnet (jit true, OIDC), optionally held for user approval.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Personal",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Personal",
+   "price_text": "$0, free forever, up to 6 users",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": true,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c1",
+    "c8",
+    "c6",
+    "c36",
+    "c9",
+    "c43",
+    "c67"
+   ]
+  },
+  {
+   "name": "Standard",
+   "price_text": "$8 per user, per month",
+   "price_per_user_mo": 8,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c2",
+    "c3",
+    "c6",
+    "c9",
+    "c43",
+    "c67"
+   ]
+  },
+  {
+   "name": "Premium",
+   "price_text": "$18 per user, per month",
+   "price_per_user_mo": 18,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c4",
+    "c6",
+    "c9",
+    "c43",
+    "c67"
+   ]
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Custom (Contact sales)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c5",
+    "c6",
+    "c9",
+    "c43",
+    "c67"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "plan": "Standard",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://controlplane.tailscale.com/scim/v2/ (Entra ID tenant URL adds ?aadOptscim062020)",
+  "cite": [
+   "c3",
+   "c9",
+   "c16",
+   "c17",
+   "c25",
+   "c29"
+  ],
+  "auth": {
+   "method": null,
+   "token_source": "Admin console > User management > SCIM Provisioning > Enable Provisioning (Owner, Admin or IT admin); one SCIM API key per tailnet, pasted into the IdP as Secret Token (Entra) or API Token (Okta)",
+   "token_expiry": "never",
+   "cite": [
+    "c18",
+    "c32",
+    "c33"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c19"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c15",
+    "c23",
+    "c24",
+    "c11",
+    "c12"
+   ]
+  },
+  "deprovision": {
+   "action": "suspend",
+   "frees_seat": true,
+   "revokes_sessions": true,
+   "data_retained": "Suspended users' machines are suspended and can be deleted or reassigned; when Entra ID hard-deletes the user (about 30 days later) the user and their machines are deleted. Okta deactivation only suspends; deletion is manual in Tailscale.",
+   "cite": [
+    "c24",
+    "c15",
+    "c39",
+    "c40",
+    "c41",
+    "c42",
+    "c11"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "externalId",
+    "userName",
+    "emails",
+    "name.givenName",
+    "name.familyName",
+    "name.formatted",
+    "displayName",
+    "active",
+    "preferredLanguage"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": "Attributes outside the listed set are stored without being used; Enterprise User extension attributes make the request fail."
+   },
+   "group": [],
+   "cite": [
+    "c19",
+    "c20",
+    "c21"
+   ]
+  },
+  "roles": {
+   "supported": false,
+   "how": "Synced groups cannot assign Tailscale roles; roles are set in the admin console or with POST /users/{userId}/role.",
+   "cite": [
+    "c13",
+    "c27",
+    "c54"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Provisioning works only with Okta, Microsoft Entra ID (SCIM) and Google Workspace (Google API sync); not supported for custom OIDC IdPs.",
+    "cite": [
+     "c10",
+     "c34"
+    ]
+   },
+   {
+    "text": "The tailnet's sign-in identity provider must be the same IdP that provisions (Entra ID, Google, or the Okta OIN app).",
+    "cite": [
+     "c16",
+     "c29",
+     "c25"
+    ]
+   },
+   {
+    "text": "SCIM Enterprise User Schema Extension is not supported; requests containing its attributes fail.",
+    "cite": [
+     "c21"
+    ]
+   },
+   {
+    "text": "Deletions cannot be synced from Okta; Okta deactivation suspends the user.",
+    "cite": [
+     "c11",
+     "c24"
+    ]
+   },
+   {
+    "text": "A user only suspended (not deactivated) in the IdP stays logged in until device keys expire.",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "text": "Synced groups cannot be used to assign user roles.",
+    "cite": [
+     "c13",
+     "c27"
+    ]
+   },
+   {
+    "text": "Okta must use Email as the Application username format.",
+    "cite": [
+     "c26"
+    ]
+   },
+   {
+    "text": "Entra ID syncs every 40 minutes; Google sync every 40 minutes and at most 100 groups.",
+    "cite": [
+     "c22",
+     "c30",
+     "c31"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "plan": "Personal",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://api.tailscale.com/api/v2",
+  "docs_url": "https://tailscale.com/docs/reference/tailscale-api",
+  "cite": [
+   "c43",
+   "c46",
+   "c6"
+  ],
+  "auth": {
+   "methods": [
+    "api_key",
+    "oauth2"
+   ],
+   "scopes": [
+    "users:read",
+    "users"
+   ],
+   "cite": [
+    "c44",
+    "c45",
+    "c47",
+    "c49",
+    "c54"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": null,
+   "invite_user": true,
+   "update_user": null,
+   "deactivate_user": true,
+   "delete_user": true,
+   "reactivate_user": true,
+   "manage_groups": null,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c49",
+    "c60",
+    "c55",
+    "c51",
+    "c52",
+    "c53",
+    "c54"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/tailnet/{tailnet}/users",
+    "purpose": "List users",
+    "cite": [
+     "c49"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/users/{userId}",
+    "purpose": "Get a user",
+    "cite": [
+     "c60"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/users/{userId}/role",
+    "purpose": "Update user role",
+    "cite": [
+     "c54"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/users/{userId}/approve",
+    "purpose": "Approve a user",
+    "cite": [
+     "c59"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/users/{userId}/suspend",
+    "purpose": "Suspend a user",
+    "cite": [
+     "c50",
+     "c51"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/users/{userId}/restore",
+    "purpose": "Restore a user",
+    "cite": [
+     "c52"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/users/{userId}/delete",
+    "purpose": "Delete a user",
+    "cite": [
+     "c53"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/tailnet/{tailnet}/user-invites",
+    "purpose": "List user invites",
+    "cite": [
+     "c61"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/tailnet/{tailnet}/user-invites",
+    "purpose": "Create user invites",
+    "cite": [
+     "c75",
+     "c55"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/user-invites/{userInviteId}",
+    "purpose": "Delete a user invite",
+    "cite": [
+     "c62"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/user-invites/{userInviteId}/resend",
+    "purpose": "Resend a user invite",
+    "cite": [
+     "c63"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/tailnet/{tailnet}/logging/configuration",
+    "purpose": "List configuration audit logs",
+    "cite": [
+     "c57"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/tailnet/{tailnet}/webhooks",
+    "purpose": "Create a webhook",
+    "cite": [
+     "c64"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": true,
+   "events": [
+    "userApproved",
+    "userCreated",
+    "userNeedsApproval",
+    "userRoleUpdated"
+   ],
+   "cite": [
+    "c65",
+    "c66"
+   ]
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Personal (all plans)",
+   "cite": [
+    "c67",
+    "c68",
+    "c57"
+   ]
+  },
+  "rate_limits": {
+   "text": "No numeric limits published; the API documents a 429 Too Many Requests response, and invite resends are limited to one per minute.",
+   "cite": [
+    "c58",
+    "c56"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "No pagination: all results are returned at once.",
+    "cite": [
+     "c48"
+    ]
+   },
+   {
+    "text": "API access tokens expire after 1 to 90 days; trust credentials (OAuth) give scoped, delegated access.",
+    "cite": [
+     "c44",
+     "c45"
+    ]
+   },
+   {
+    "text": "No endpoint creates a user directly; users are invited (POST /tailnet/{tailnet}/user-invites) or provisioned from the IdP.",
+    "cite": [
+     "c55"
+    ]
+   },
+   {
+    "text": "Advanced roles (IT admin, Billing admin, Auditor, Network admin) need Standard or above.",
+    "cite": [
+     "c69"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/tailscale/",
+   "cite": [
+    "c70",
+    "c71",
+    "c25"
+   ]
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/tailscale-provisioning-tutorial",
+   "cite": [
+    "c72"
+   ]
+  },
+  "google": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "directory_sync",
+   "built_by": "vendor",
+   "url": null,
+   "cite": [
+    "c74",
+    "c28"
+   ]
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c73"
+   ]
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c35",
+    "c34"
+   ]
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "oidc",
+  "csv_import": null,
+  "other_sync": "Google Workspace user & group sync (Tailscale pulls users and groups via Google APIs every 40 minutes; not SCIM). Without provisioning, users join on first OIDC sign-in through the tailnet's IdP (optionally gated by user approval) or by invite.",
+  "docs_public": true,
+  "cite": [
+   "c37",
+   "c38",
+   "c28",
+   "c30",
+   "c76"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://tailscale.com/pricing",
+   "title": "Tailscale pricing",
+   "quote": "Personal For individuals who want to securely connect devices, servers, or software. Access nearly all of Tailscale's offerings and products for free, indefinitely. $0Free forever",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://tailscale.com/pricing",
+   "title": "Tailscale pricing",
+   "quote": "Standard For teams adopting the Tailscale platform as a secure connectivity solution and more. $8Per user, per month",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://tailscale.com/pricing",
+   "title": "Tailscale pricing",
+   "quote": "Unlimited users Deploy users and groups with SCIM",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://tailscale.com/pricing",
+   "title": "Tailscale pricing",
+   "quote": "$18Per user, per month",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://tailscale.com/pricing",
+   "title": "Tailscale pricing",
+   "quote": "Custom Contact sales Everything in Premium, plus",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://tailscale.com/pricing",
+   "title": "Tailscale pricing",
+   "quote": "SSO with any IdP User approval Device approval Custom authentication periods Custom admin console session timers Basic user roles Advanced user roles User & group provisioning (SCIM) User management APIs",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://tailscale.com/pricing",
+   "title": "Tailscale pricing",
+   "quote": "Users provisioned by SCIM do not occupy a seat until they log in.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://tailscale.com/pricing",
+   "title": "Tailscale pricing",
+   "quote": "Up to 6 users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://tailscale.com/docs/features/user-group-provisioning",
+   "title": "User & group provisioning",
+   "quote": "This feature is available for the Standard, Premium, and Enterprise plans.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://tailscale.com/docs/features/user-group-provisioning",
+   "title": "User & group provisioning",
+   "quote": "Tailscale supports System for Cross-domain Identity Management (SCIM) to integrate with several identity providers, as described in the following topics: User & group provisioning for Google Workspace User & group provisioning for Microsoft Entra ID User & group provisioning for Okta",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://tailscale.com/docs/features/user-group-provisioning",
+   "title": "User & group provisioning",
+   "quote": "For Okta, you cannot sync deletions from Okta to Tailscale. For Microsoft Entra ID, when you delete a user, they are first soft deleted (suspended in Tailscale), then 30 days later they are hard deleted (deleted in Tailscale).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://tailscale.com/docs/features/user-group-provisioning",
+   "title": "User & group provisioning",
+   "quote": "Tailscale syncs group membership from SCIM-integrated identity providers to Tailscale.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://tailscale.com/docs/features/user-group-provisioning",
+   "title": "User & group provisioning",
+   "quote": "Synced groups cannot be used to assign user roles.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://tailscale.com/docs/features/user-group-provisioning",
+   "title": "User & group provisioning",
+   "quote": "A user suspended in a SCIM-integrated identity provider will remain logged into Tailscale, and maintain access to all of their nodes and permissions granted by access control policies.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://tailscale.com/docs/integrations/identity/entra/entra-id-scim",
+   "title": "User & group provisioning for Microsoft Entra ID",
+   "quote": "Create users in Tailscale from Microsoft Entra ID Update user attributes in Tailscale from Microsoft Entra ID Delete users in Microsoft Entra ID to first suspend them in Tailscale; after approximately 30 days they are automatically deleted in Tailscale",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://tailscale.com/docs/integrations/identity/entra/entra-id-scim",
+   "title": "User & group provisioning for Microsoft Entra ID",
+   "quote": "Your tailnet's identity provider needs to be Microsoft Entra ID.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://tailscale.com/docs/integrations/identity/entra/entra-id-scim",
+   "title": "User & group provisioning for Microsoft Entra ID",
+   "quote": "https://controlplane.tailscale.com/scim/v2/?aadOptscim062020.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://tailscale.com/docs/integrations/identity/entra/entra-id-scim",
+   "title": "User & group provisioning for Microsoft Entra ID",
+   "quote": "In the User management page of the admin console, under SCIM Provisioning, select Enable Provisioning. Copy the generated key to the clipboard.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://tailscale.com/docs/integrations/identity/entra/entra-id-scim",
+   "title": "User & group provisioning for Microsoft Entra ID",
+   "quote": "Tailscale supports SCIM attributes from the core \"User\" and \"Group\" SCIM resources. Tailscale only uses the following attributes for Tailscale's functionality; other attributes are stored without being used:",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://tailscale.com/docs/integrations/identity/entra/entra-id-scim",
+   "title": "User & group provisioning for Microsoft Entra ID",
+   "quote": "externalId Common Required userName Core user Required emails Core user Optional name.givenName Core user Optional name.familyName Core user Optional name.formatted Core user Optional displayName Core user Optional active Core user Optional preferredLanguage Core user Optional",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://tailscale.com/docs/integrations/identity/entra/entra-id-scim",
+   "title": "User & group provisioning for Microsoft Entra ID",
+   "quote": "Tailscale does not support the SCIM Enterprise User Schema Extension. If any additional user attribute from these extensions is specified, the request will fail.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://tailscale.com/docs/integrations/identity/entra/entra-id-scim",
+   "title": "User & group provisioning for Microsoft Entra ID",
+   "quote": "Microsoft Entra ID syncs with Tailscale every 40 minutes. This is a limitation from Microsoft Entra ID and you cannot change this interval.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://tailscale.com/docs/integrations/identity/entra/entra-id-scim",
+   "title": "User & group provisioning for Microsoft Entra ID",
+   "quote": "Group push from Microsoft Entra ID to Tailscale",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://tailscale.com/docs/integrations/identity/okta/okta-scim",
+   "title": "User & group provisioning for Okta",
+   "quote": "Create users in Tailscale from Okta Update user attributes in Tailscale from Okta Deactivate users in Okta to suspend them in Tailscale Group push from Okta to Tailscale",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://tailscale.com/docs/integrations/identity/okta/okta-scim",
+   "title": "User & group provisioning for Okta",
+   "quote": "Install the Tailscale app from the Okta Integration Network and configure it to activate Okta for your domain.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://tailscale.com/docs/integrations/identity/okta/okta-scim",
+   "title": "User & group provisioning for Okta",
+   "quote": "You must use Email as the Application username format for Tailscale in Okta.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://tailscale.com/docs/integrations/identity/okta/okta-scim",
+   "title": "User & group provisioning for Okta",
+   "quote": "You cannot use group sync to assign Tailscale admins or other user roles, only manage permissions in access control policies.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://tailscale.com/docs/integrations/google-sync",
+   "title": "User & group provisioning for Google Workspace",
+   "quote": "Tailscale supports synchronizing Google Workspace users and groups for use in Tailscale access controls.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://tailscale.com/docs/integrations/google-sync",
+   "title": "User & group provisioning for Google Workspace",
+   "quote": "Your tailnet's identity provider needs to be Google.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://tailscale.com/docs/integrations/google-sync",
+   "title": "User & group provisioning for Google Workspace",
+   "quote": "Changes to group membership and users within the Google Admin Console are synced to Tailscale every 40 minutes.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://tailscale.com/docs/integrations/google-sync",
+   "title": "User & group provisioning for Google Workspace",
+   "quote": "The maximum number of groups that can be synced is 100.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://tailscale.com/docs/reference/key-secret-management",
+   "title": "Key and secret management",
+   "quote": "System for Cross-domain Identity Management (SCIM) API keys and webhook endpoint secrets do not expire.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://tailscale.com/docs/reference/key-secret-management",
+   "title": "Key and secret management",
+   "quote": "A single SCIM API key is used for an entire tailnet and is administered in the User management page of the admin console.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://tailscale.com/docs/integrations/identity/custom-oidc",
+   "title": "Custom OIDC providers",
+   "quote": "User and group provisioning is not supported for custom OIDC provider setups.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c35",
+   "url": "https://tailscale.com/docs/integrations/identity/custom-oidc",
+   "title": "Custom OIDC providers",
+   "quote": "fullname as a JumpCloud Attribute Name, and Client Authentication Type set to Client Secret Basic.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://tailscale.com/docs/integrations/identity",
+   "title": "Supported SSO identity providers",
+   "quote": "Tailscale works on top of the identity provider (IdP) or single sign-on (SSO) provider that you already use.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://tailscale.com/docs/integrations/identity",
+   "title": "Supported SSO identity providers",
+   "quote": "Tailscale uses OpenID Connect (OIDC) for authentication.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c38",
+   "url": "https://tailscale.com/docs/integrations/identity",
+   "title": "Supported SSO identity providers",
+   "quote": "Tailscale does not support sign-up with email addresses.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c39",
+   "url": "https://tailscale.com/docs/features/sharing/how-to/remove-team-members",
+   "title": "Deleting and suspending users",
+   "quote": "Deleting, suspending, or deprovisioning a user vacates their seat for reuse.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c40",
+   "url": "https://tailscale.com/docs/features/sharing/how-to/remove-team-members",
+   "title": "Deleting and suspending users",
+   "quote": "Their devices are not able to connect to other devices in the tailnet, including other devices they own",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c41",
+   "url": "https://tailscale.com/docs/features/sharing/how-to/remove-team-members",
+   "title": "Deleting and suspending users",
+   "quote": "Machines for suspended users are suspended, and can be deleted or reassigned. Machines for deleted users are deleted.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c42",
+   "url": "https://tailscale.com/docs/features/sharing/how-to/remove-team-members",
+   "title": "Deleting and suspending users",
+   "quote": "If using Okta, deactivate the user in Okta. This will automatically suspend the user in Tailscale. Then, you can delete the suspended user in Tailscale.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c43",
+   "url": "https://tailscale.com/docs/reference/tailscale-api",
+   "title": "Tailscale API",
+   "quote": "The Tailscale API is available for all plans.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c44",
+   "url": "https://tailscale.com/docs/reference/tailscale-api",
+   "title": "Tailscale API",
+   "quote": "You can choose the number of days, between 1 and 90 inclusive, for the key expiry.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c45",
+   "url": "https://tailscale.com/docs/reference/tailscale-api",
+   "title": "Tailscale API",
+   "quote": "As an alternative to an access token that has full permission to the Tailscale API, use trust credentials to provide delegated fine-grained control to the Tailscale API.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c46",
+   "url": "https://api.tailscale.com/api/v2?outputOpenapiSchema=true",
+   "title": "Tailscale API (OpenAPI spec)",
+   "quote": "The base URL for the Tailscale API is https://api.tailscale.com/api/v2/.",
+   "accessed": "2026-10-05",
+   "page_url": "https://tailscale.com/api"
+  },
+  {
+   "id": "c47",
+   "url": "https://api.tailscale.com/api/v2?outputOpenapiSchema=true",
+   "title": "Tailscale API (OpenAPI spec)",
+   "quote": "Access tokens can be supplied as the username portion of HTTP Basic authentication",
+   "accessed": "2026-10-05",
+   "page_url": "https://tailscale.com/api"
+  },
+  {
+   "id": "c48",
+   "url": "https://api.tailscale.com/api/v2?outputOpenapiSchema=true",
+   "title": "Tailscale API (OpenAPI spec)",
+   "quote": "The Tailscale API does not currently support pagination. All results are returned at once.",
+   "accessed": "2026-10-05",
+   "page_url": "https://tailscale.com/api"
+  },
+  {
+   "id": "c49",
+   "url": "https://api.tailscale.com/api/v2?outputOpenapiSchema=true",
+   "title": "Tailscale API (OpenAPI spec)",
+   "quote": "List all users of a tailnet. OAuth Scope: `users:read`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://tailscale.com/api"
+  },
+  {
+   "id": "c50",
+   "url": "https://api.tailscale.com/api/v2?outputOpenapiSchema=true",
+   "title": "Tailscale API (OpenAPI spec)",
+   "quote": "/users/{userId}/suspend:",
+   "accessed": "2026-10-05",
+   "page_url": "https://tailscale.com/api"
+  },
+  {
+   "id": "c51",
+   "url": "https://api.tailscale.com/api/v2?outputOpenapiSchema=true",
+   "title": "Tailscale API (OpenAPI spec)",
+   "quote": "summary: Suspend a user",
+   "accessed": "2026-10-05",
+   "page_url": "https://tailscale.com/api"
+  },
+  {
+   "id": "c52",
+   "url": "https://api.tailscale.com/api/v2?outputOpenapiSchema=true",
+   "title": "Tailscale API (OpenAPI spec)",
+   "quote": "summary: Restore a user",
+   "accessed": "2026-10-05",
+   "page_url": "https://tailscale.com/api"
+  },
+  {
+   "id": "c53",
+   "url": "https://api.tailscale.com/api/v2?outputOpenapiSchema=true",
+   "title": "Tailscale API (OpenAPI spec)",
+   "quote": "summary: Delete a user",
+   "accessed": "2026-10-05",
+   "page_url": "https://tailscale.com/api"
+  },
+  {
+   "id": "c54",
+   "url": "https://api.tailscale.com/api/v2?outputOpenapiSchema=true",
+   "title": "Tailscale API (OpenAPI spec)",
+   "quote": "summary: Update user role",
+   "accessed": "2026-10-05",
+   "page_url": "https://tailscale.com/api"
+  },
+  {
+   "id": "c55",
+   "url": "https://api.tailscale.com/api/v2?outputOpenapiSchema=true",
+   "title": "Tailscale API (OpenAPI spec)",
+   "quote": "Create, and optionally email out, new user invites to join the tailnet.",
+   "accessed": "2026-10-05",
+   "page_url": "https://tailscale.com/api"
+  },
+  {
+   "id": "c56",
+   "url": "https://api.tailscale.com/api/v2?outputOpenapiSchema=true",
+   "title": "Tailscale API (OpenAPI spec)",
+   "quote": "Note: Invite resends are rate limited to one per minute.",
+   "accessed": "2026-10-05",
+   "page_url": "https://tailscale.com/api"
+  },
+  {
+   "id": "c57",
+   "url": "https://api.tailscale.com/api/v2?outputOpenapiSchema=true",
+   "title": "Tailscale API (OpenAPI spec)",
+   "quote": "summary: List configuration audit logs",
+   "accessed": "2026-10-05",
+   "page_url": "https://tailscale.com/api"
+  },
+  {
+   "id": "c58",
+   "url": "https://api.tailscale.com/api/v2?outputOpenapiSchema=true",
+   "title": "Tailscale API (OpenAPI spec)",
+   "quote": "description: Too Many Requests.",
+   "accessed": "2026-10-05",
+   "page_url": "https://tailscale.com/api"
+  },
+  {
+   "id": "c59",
+   "url": "https://api.tailscale.com/api/v2?outputOpenapiSchema=true",
+   "title": "Tailscale API (OpenAPI spec)",
+   "quote": "summary: Approve a user",
+   "accessed": "2026-10-05",
+   "page_url": "https://tailscale.com/api"
+  },
+  {
+   "id": "c60",
+   "url": "https://api.tailscale.com/api/v2?outputOpenapiSchema=true",
+   "title": "Tailscale API (OpenAPI spec)",
+   "quote": "summary: Get a user",
+   "accessed": "2026-10-05",
+   "page_url": "https://tailscale.com/api"
+  },
+  {
+   "id": "c61",
+   "url": "https://api.tailscale.com/api/v2?outputOpenapiSchema=true",
+   "title": "Tailscale API (OpenAPI spec)",
+   "quote": "summary: List user invites",
+   "accessed": "2026-10-05",
+   "page_url": "https://tailscale.com/api"
+  },
+  {
+   "id": "c62",
+   "url": "https://api.tailscale.com/api/v2?outputOpenapiSchema=true",
+   "title": "Tailscale API (OpenAPI spec)",
+   "quote": "summary: Delete a user invite",
+   "accessed": "2026-10-05",
+   "page_url": "https://tailscale.com/api"
+  },
+  {
+   "id": "c63",
+   "url": "https://api.tailscale.com/api/v2?outputOpenapiSchema=true",
+   "title": "Tailscale API (OpenAPI spec)",
+   "quote": "summary: Resend a user invite",
+   "accessed": "2026-10-05",
+   "page_url": "https://tailscale.com/api"
+  },
+  {
+   "id": "c64",
+   "url": "https://api.tailscale.com/api/v2?outputOpenapiSchema=true",
+   "title": "Tailscale API (OpenAPI spec)",
+   "quote": "summary: Create a webhook",
+   "accessed": "2026-10-05",
+   "page_url": "https://tailscale.com/api"
+  },
+  {
+   "id": "c65",
+   "url": "https://tailscale.com/docs/features/webhooks",
+   "title": "Webhooks",
+   "quote": "userApproved User was approved. Tailnet management userCreated User was created. Tailnet management userNeedsApproval User needs approval. Tailnet management userRoleUpdated User role was changed.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c66",
+   "url": "https://tailscale.com/docs/features/webhooks",
+   "title": "Webhooks",
+   "quote": "This feature is available for all plans.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c67",
+   "url": "https://tailscale.com/docs/features/logging/audit-logging",
+   "title": "Configuration audit logs",
+   "quote": "Configuration audit logs are available for all plans.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c68",
+   "url": "https://tailscale.com/docs/features/logging/audit-logging",
+   "title": "Configuration audit logs",
+   "quote": "Configuration audit logs can be accessed in the Logs page of admin console or by using the API.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c69",
+   "url": "https://tailscale.com/docs/reference/user-roles",
+   "title": "User roles",
+   "quote": "Advanced roles are available for the Standard, Premium, and Enterprise pricing plans.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c70",
+   "url": "https://www.okta.com/integrations/tailscale/",
+   "title": "Integrate Tailscale with Okta",
+   "quote": "With Okta's Tailscale integration, users can easily access their Tailscale network with Okta single sign-on.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c71",
+   "url": "https://www.okta.com/integrations/tailscale/",
+   "title": "Integrate Tailscale with Okta",
+   "quote": "Add this integration to enable authentication and provisioning capabilities.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c72",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/tailscale-provisioning-tutorial",
+   "title": "Configure Tailscale for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Create users in Tailscale. Remove users in Tailscale when they don't require access anymore. Keep user attributes synchronized between Microsoft Entra ID and Tailscale. Provision groups and group memberships in Tailscale. Single sign-on to Tailscale (recommended).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c73",
+   "url": "https://tailscale.com/docs/integrations/identity/onelogin",
+   "title": "Setting up OneLogin to work with Tailscale",
+   "quote": "Search for \"OIDC\" and select OpenID Connect (OIDC). Set the Display Name to \"Tailscale.\"",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c74",
+   "url": "https://tailscale.com/docs/integrations/identity/google-sso",
+   "title": "Setting up Google to work with Tailscale",
+   "quote": "You should be able to use your Google identity to log into Tailscale without additional configuration.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c75",
+   "url": "https://api.tailscale.com/api/v2?outputOpenapiSchema=true",
+   "title": "Tailscale API (OpenAPI spec)",
+   "quote": "summary: Create user invites",
+   "accessed": "2026-10-05",
+   "page_url": "https://tailscale.com/api"
+  },
+  {
+   "id": "c76",
+   "url": "https://tailscale.com/docs/features/access-control/user-approval",
+   "title": "User approval · Tailscale Docs",
+   "quote": "When user approval is enabled, the first time a new user logs in to a tailnet, the user's status is set to needs approval.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://tailscale.com/pricing",
+  "https://tailscale.com/docs/features/user-group-provisioning",
+  "https://tailscale.com/docs/integrations/identity/entra/entra-id-scim",
+  "https://tailscale.com/docs/integrations/identity/okta/okta-scim",
+  "https://tailscale.com/docs/integrations/google-sync",
+  "https://tailscale.com/docs/reference/key-secret-management",
+  "https://tailscale.com/docs/integrations/identity/custom-oidc",
+  "https://tailscale.com/docs/integrations/identity",
+  "https://tailscale.com/docs/features/sharing/how-to/remove-team-members",
+  "https://tailscale.com/docs/reference/tailscale-api",
+  "https://api.tailscale.com/api/v2?outputOpenapiSchema=true",
+  "https://tailscale.com/docs/features/webhooks",
+  "https://tailscale.com/docs/features/logging/audit-logging",
+  "https://tailscale.com/docs/reference/user-roles",
+  "https://www.okta.com/integrations/tailscale/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/tailscale-provisioning-tutorial",
+  "https://tailscale.com/docs/integrations/identity/onelogin",
+  "https://tailscale.com/docs/integrations/identity/google-sso",
+  "https://tailscale.com/docs/features/access-control/user-approval",
+  "OneLogin connector page for Tailscale (empty 202, not loaded)",
+  "JumpCloud Tailscale page (HTTP 403, not loaded)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/tailscale-tutorial (404)"
+ ],
+ "open_questions": [
+  "SCIM auth scheme is not stated by Tailscale (the key is entered as Entra 'Secret Token' / Okta 'API Token'); bearer is likely but undocumented.",
+  "Tailscale does not document SCIM filtering, pagination, PUT vs PATCH, or ServiceProviderConfig/Schemas/ResourceTypes/Bulk/Me endpoints. Microsoft's Learn tutorial (an IdP source, not cited for scim facts) marks all listed user attributes as supported for filtering.",
+  "SCIM group attributes are not listed in Tailscale's docs (Microsoft Learn lists displayName, externalId, members).",
+  "Reactivation through SCIM (active=true after deactivation) is not documented.",
+  "SCIM rate limits are not documented.",
+  "Pricing page does not say whether $8 and $18 per user per month are annual or monthly rates.",
+  "CSV user import is not documented.",
+  "OneLogin and JumpCloud catalogue pages could not be loaded (OneLogin returned an empty 202, JumpCloud 403); Tailscale documents OneLogin via a generic OIDC app and JumpCloud as a custom OIDC provider. Google Workspace Marketplace listing not checked.",
+  "OneLogin provisioning: not documented either way; the provisioning docs list only Google Workspace, Microsoft Entra ID and Okta.",
+  "Microsoft Learn SSO tutorial (tailscale-tutorial) returned 404; Entra SSO is taken from the provisioning tutorial's capability list.",
+  "No endpoint for managing groups; groups live in the tailnet policy file or are synced from the IdP."
+ ]
+}

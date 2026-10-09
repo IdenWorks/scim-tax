@@ -1,0 +1,677 @@
+{
+ "slug": "rapid7",
+ "vendor": "Rapid7",
+ "vendor_url": "https://www.rapid7.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Rapid7",
+  "slug": "rapid7",
+  "category": "Security & Identity",
+  "status": "unknown",
+  "scim_plan": null,
+  "scim_price_text": "Not stated",
+  "scim_price_per_user_mo": null,
+  "team_plan": "InsightVM (cheapest listed product)",
+  "team_price_text": "From $1.62/asset/mo for 500 assets",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "All plans (every Insight product)",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": null,
+   "delete": null,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": null,
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.rapid7.com/pricing/",
+  "docs_url": "https://docs.rapid7.com/insight/scim/",
+  "evidence": "Rapid7's 'Enable SCIM on the Command Platform' guide documents a SCIM 2.0 endpoint (https://{region}.api.insight.rapid7.com/scim/v2, bearer Platform Admin API key) for IdPs such as Okta, but neither it nor the pricing page (which lists SSO under 'Everything that comes with your plan') names a plan for SCIM.",
+  "notes": "New row. Rapid7 sells products (InsightVM from $1.62/asset/mo for 500 assets, InsightAppSec from $175/mo per app, InsightCloudSec from $5,775/mo for 500 instances) and quote-only packages (Exposure Command, Incident Command, Managed Threat Complete); none is per user, so per-user fields are null. The pricing page says every plan includes unlimited user accounts and single sign-on. SCIM is a Command Platform setting (Administration > SSO Settings) documented without a plan or price, so status is unknown under rule 1a; it may well be included with any product, like SSO. SCIM supports GET/POST/PUT/PATCH on /Users (no DELETE /Users listed) and full CRUD on /Groups; email is the unique identifier. JIT via SAML with a default access profile and rbacGroups group sync. Insight Account REST API (Platform Admin API key) creates, updates, deletes users and manages groups, roles and product access. Audit logs (Platform and SIEM events) can be retrieved through several product APIs.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "All products (Command Platform)",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "InsightVM",
+   "price_text": "From $1.62/asset/mo for 500 assets",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": null,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c4"
+   ]
+  },
+  {
+   "name": "InsightAppSec",
+   "price_text": "From $175/mo per app",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": null,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c4"
+   ]
+  },
+  {
+   "name": "InsightCloudSec",
+   "price_text": "From $5,775/mo for up to 500 instances",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": null,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c4"
+   ]
+  },
+  {
+   "name": "Exposure Command / Incident Command / Managed Threat Complete",
+   "price_text": "Contact Sales",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": null,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c5",
+    "c4"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c6",
+   "c7",
+   "c13"
+  ],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://{region}.api.insight.rapid7.com/scim/v2",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Platform Admin user API key (use a local Platform Admin service account)",
+   "token_expiry": null,
+   "cite": [
+    "c8",
+    "c9"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c10",
+    "c11"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": null,
+   "reactivate": null,
+   "delete": null,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c10",
+    "c11"
+   ],
+   "notes": "DELETE /Users is not in the supported-endpoint list; deactivation via PATCH active is not described."
+  },
+  "deprovision": {
+   "action": null,
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": []
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": [
+    "c14"
+   ],
+   "notes": "Only states that Email is the unique identifier field."
+  },
+  "roles": {
+   "supported": true,
+   "how": "Users are provisioned based on the roles you define; group membership maps to Command Platform User Groups (products, roles, resources).",
+   "cite": [
+    "c6",
+    "c11"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Some IdPs need endpoints the Command Platform does not support; contact Rapid7 Support.",
+    "cite": [
+     "c12"
+    ]
+   },
+   {
+    "text": "SCIM is enabled from SSO Settings ('Submit and turn on SSO'); docs do not say whether SAML must be configured first.",
+    "cite": [
+     "c13"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c18",
+   "c19",
+   "c20"
+  ],
+  "plan": "All products (Command Platform)",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://{region}.api.insight.rapid7.com/account",
+  "docs_url": "https://help.rapid7.com/insightAccount/en-us/api/v1/docs.html",
+  "auth": {
+   "methods": [
+    "api_key"
+   ],
+   "scopes": [],
+   "cite": [
+    "c20"
+   ],
+   "notes": "Command Platform API key (organization or Platform Admin user key)."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": true,
+   "cite": [
+    "c18",
+    "c21",
+    "c22",
+    "c23",
+    "c25",
+    "c27"
+   ],
+   "notes": "'Licences' here means product access per organization."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/api/1/users",
+    "purpose": "Get users",
+    "cite": [
+     "c24"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/1/users",
+    "purpose": "Create user",
+    "cite": [
+     "c21"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/1/users/{user-id}",
+    "purpose": "Get user",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/1/users/{user-id}",
+    "purpose": "Update user profile attributes",
+    "cite": [
+     "c23"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/1/users/{user-id}",
+    "purpose": "Delete user and their resource access",
+    "cite": [
+     "c22"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/1/users/{user-id}/organizations/{organization-id}/roles",
+    "purpose": "Get user roles for organization",
+    "cite": [
+     "c26"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/1/users/{user-id}/organizations/{organization-id}/product-and-roles",
+    "purpose": "Update user product access and roles",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/1/user-groups",
+    "purpose": "Create a user group",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/1/user-groups/{user-group-id}/users",
+    "purpose": "Add users to a user group",
+    "cite": [
+     "c25"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": null,
+   "cite": [
+    "c29",
+    "c30"
+   ],
+   "notes": "Product API table lists 'Retrieve Command Platform audit logs' for InsightAppSec, InsightIDR and InsightOps APIs; audit logging not available on InsightGovCloud."
+  },
+  "rate_limits": {
+   "text": "Rate limited per API with RateLimit-* headers; window typically 15 or 60 minutes.",
+   "cite": [
+    "c28"
+   ]
+  },
+  "limitations": [
+   "GET /api/1/users does not support pagination."
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "No Rapid7 OIN page found at tried slugs (rapid7, rapid7-insight, rapid7-insightidr, insightvm); Rapid7's SCIM guide names Okta as an example IdP."
+  },
+  "entra": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "learn.microsoft.com rapid7-tutorial and rapid7-insight-tutorial return 404."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "jumpcloud.com/support/integrate-with-rapid7 returned 403 to curl."
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": "SAML group sync via rbacGroups attribute",
+  "docs_public": true,
+  "cite": [
+   "c15",
+   "c16",
+   "c17"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.rapid7.com/pricing/",
+   "title": "Rapid7 Pricing",
+   "quote": "starts at $1.62/mo for 500 assets, per asset",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.rapid7.com/pricing/",
+   "title": "Rapid7 Pricing",
+   "quote": "starts at $175/mo per app",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.rapid7.com/pricing/",
+   "title": "Rapid7 Pricing",
+   "quote": "starts at $5,775/mo for up to 500 Instances",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.rapid7.com/pricing/",
+   "title": "Rapid7 Pricing",
+   "quote": "Everything that comes with your plan: Unlimited user accounts Shared data across tools Instant visibility across modern networks Single sign-on",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.rapid7.com/pricing/",
+   "title": "Rapid7 Pricing",
+   "quote": "Pick your product or solution - explore pricing - contact us - confirm your plan.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://docs.rapid7.com/insight/scim/",
+   "title": "Enable SCIM on the Command Platform",
+   "quote": "Use SCIM with the Command Platform to connect your identity provider (IdP), such as Okta, as the primary source for user account data. The Command Platform provisions your employees based on the roles you define.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://docs.rapid7.com/insight/scim/",
+   "title": "Enable SCIM on the Command Platform",
+   "quote": "SCIM connector base URL https://eu.api.insight.rapid7.com/scim/v2",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.rapid7.com/insight/scim/",
+   "title": "Enable SCIM on the Command Platform",
+   "quote": "Authentication type Bearer token (API key) Bearer token Your Platform Admin user API key.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.rapid7.com/insight/scim/",
+   "title": "Enable SCIM on the Command Platform",
+   "quote": "Use a local user account for your Platform Admin Service Account rather than an SSO-based account to prevent lockout.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.rapid7.com/insight/scim/",
+   "title": "Enable SCIM on the Command Platform",
+   "quote": "Supported endpoints for users: GET /Users POST /Users GET /Users/{id} PUT /Users/{id} PATCH /Users/{id}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.rapid7.com/insight/scim/",
+   "title": "Enable SCIM on the Command Platform",
+   "quote": "Supported endpoints for user groups: GET /Groups POST /Groups GET /Groups/{id} PUT /Groups/{id} PATCH /Groups/{id} DELETE /Groups/{id}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.rapid7.com/insight/scim/",
+   "title": "Enable SCIM on the Command Platform",
+   "quote": "SCIM implementation differs across IdPs, and some vendors require additional endpoints that the Command Platform doesn't support.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.rapid7.com/insight/scim/",
+   "title": "Enable SCIM on the Command Platform",
+   "quote": "Select the SCIM provisioning is active radio button. This enables the SCIM endpoints so your IdP can communicate with the Command Platform. Select Submit and turn on SSO .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.rapid7.com/insight/scim/",
+   "title": "Enable SCIM on the Command Platform",
+   "quote": "Unique identifier field Email",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.rapid7.com/insight/single-sign-on/",
+   "title": "Configure single sign-on access to the Command Platform",
+   "quote": "A default access profile allows you to define the products and roles that are automatically assigned to new users provisioned by your IdP.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.rapid7.com/insight/single-sign-on/",
+   "title": "Configure single sign-on access to the Command Platform",
+   "quote": "This capability is made possible by including an attribute in your SAML response labelled rbacGroups that contains the name(s) of the Command Platform User Groups for each user.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.rapid7.com/insight/single-sign-on/",
+   "title": "Configure single sign-on access to the Command Platform",
+   "quote": "The Command Platform requires a user's first name, last name, and email address be included in the SAML assertion for authentication to be successful.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.rapid7.com/insight/product-apis/",
+   "title": "Available product APIs",
+   "quote": "Rapid7 account controls Create, update, delete, get users Get products Assign, remove user product access Get roles Assign user roles Get, generate and delete API keys",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.rapid7.com/insight/product-apis/",
+   "title": "Available product APIs",
+   "quote": "https://us.api.insight.rapid7.com/account",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://help.rapid7.com/insightAccount/en-us/api/v1/insightAccount-api-v1.json",
+   "title": "Insight Account API",
+   "quote": "With these REST APIs you can programmatically manage users within your Insight Account and their access to Capabilities.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.rapid7.com/insightAccount/en-us/api/v1/docs.html"
+  },
+  {
+   "id": "c21",
+   "url": "https://help.rapid7.com/insightAccount/en-us/api/v1/insightAccount-api-v1.json",
+   "title": "Insight Account API",
+   "quote": "Creates a User within your Insight Account.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.rapid7.com/insightAccount/en-us/api/v1/docs.html"
+  },
+  {
+   "id": "c22",
+   "url": "https://help.rapid7.com/insightAccount/en-us/api/v1/insightAccount-api-v1.json",
+   "title": "Insight Account API",
+   "quote": "Deletes a User from your Insight Account including any resource access they have.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.rapid7.com/insightAccount/en-us/api/v1/docs.html"
+  },
+  {
+   "id": "c23",
+   "url": "https://help.rapid7.com/insightAccount/en-us/api/v1/insightAccount-api-v1.json",
+   "title": "Insight Account API",
+   "quote": "Partial request to update a User's profile attributes such as first name, last name and timezone.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.rapid7.com/insightAccount/en-us/api/v1/docs.html"
+  },
+  {
+   "id": "c24",
+   "url": "https://help.rapid7.com/insightAccount/en-us/api/v1/insightAccount-api-v1.json",
+   "title": "Insight Account API",
+   "quote": "Pagination is not supported on this API because of the underlying data sources.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.rapid7.com/insightAccount/en-us/api/v1/docs.html"
+  },
+  {
+   "id": "c25",
+   "url": "https://help.rapid7.com/insightAccount/en-us/api/v1/insightAccount-api-v1.json",
+   "title": "Insight Account API",
+   "quote": "Add one or more Users to a User Group by User's unique identifier. The response is all Users in the User Group.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.rapid7.com/insightAccount/en-us/api/v1/docs.html"
+  },
+  {
+   "id": "c26",
+   "url": "https://help.rapid7.com/insightAccount/en-us/api/v1/insightAccount-api-v1.json",
+   "title": "Insight Account API",
+   "quote": "Get User Roles for Organization",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.rapid7.com/insightAccount/en-us/api/v1/docs.html"
+  },
+  {
+   "id": "c27",
+   "url": "https://help.rapid7.com/insightAccount/en-us/api/v1/insightAccount-api-v1.json",
+   "title": "Insight Account API",
+   "quote": "Update User Product Access",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.rapid7.com/insightAccount/en-us/api/v1/docs.html"
+  },
+  {
+   "id": "c28",
+   "url": "https://docs.rapid7.com/insight/api-overview/",
+   "title": "Command Platform API overview",
+   "quote": "API requests may be rate limited. When rate limiting is in effect, the response will return headers to show your current rate limit status.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://docs.rapid7.com/insight/product-apis/",
+   "title": "Available product APIs",
+   "quote": "Retrieve Command Platform audit logs",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://docs.rapid7.com/insight/audit-logging/",
+   "title": "Audit logging",
+   "quote": "Once you turn on audit logging, the Command Platform will immediately begin collecting all Platform and SIEM (InsightIDR) events.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://docs.rapid7.com/insight/manage-users/",
+   "title": "Manage Command Platform users with role-based access control (RBAC)",
+   "quote": "In this section, we explain how to add, edit, and delete users, as well as how to view user access and troubleshoot some user account issues.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://help.rapid7.com/insightAccount/en-us/api/v1/insightAccount-api-v1.json",
+   "title": "Insight Account API",
+   "quote": "Create a User Group",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.rapid7.com/insightAccount/en-us/api/v1/docs.html"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.rapid7.com/pricing/",
+  "https://docs.rapid7.com/sitemap.xml",
+  "https://docs.rapid7.com/insight/scim/",
+  "https://docs.rapid7.com/insight/single-sign-on/",
+  "https://docs.rapid7.com/insight/manage-users/",
+  "https://docs.rapid7.com/insight/api-overview/",
+  "https://docs.rapid7.com/insight/product-apis/",
+  "https://docs.rapid7.com/insight/audit-logging/",
+  "https://help.rapid7.com/insightAccount/en-us/api/v1/docs.html",
+  "https://docs.rapid7.com/insight/release-notes-2026-september/",
+  "https://www.okta.com/integrations/rapid7/ (404)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/rapid7-tutorial (404)"
+ ],
+ "open_questions": [
+  "Is SCIM included with every Rapid7 product subscription (like SSO), or gated to certain packages?",
+  "How does SCIM deprovision users (no DELETE /Users; PATCH active not described)?",
+  "Which user attributes, filters and pagination does the SCIM endpoint support?",
+  "Does SCIM require SAML SSO to be configured?",
+  "Is Rapid7 in the Okta, Entra, OneLogin or JumpCloud catalogues with provisioning?"
+ ]
+}

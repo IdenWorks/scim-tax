@@ -1,0 +1,695 @@
+{
+ "slug": "shopify",
+ "vendor": "Shopify",
+ "vendor_url": "https://www.shopify.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Shopify",
+  "slug": "shopify",
+  "category": "E-commerce & Payments",
+  "status": "gated",
+  "scim_plan": "Plus",
+  "scim_price_text": "Plus: from $2,300/mo",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Grow",
+  "team_price_text": "Grow: $79/mo (yearly) or $105/mo (monthly)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Plus",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": false
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": null,
+   "onelogin": "native",
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.shopify.com/pricing",
+  "docs_url": "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/scim.md",
+  "evidence": "Shopify's help centre says 'SCIM user management is available only for organizations on the Shopify Plus plan', and the pricing page lists Plus from $2,300/mo.",
+  "notes": "Status unchanged from June (gated, Plus). Team plan changed from Basic to Grow: Shopify's help centre says users are available only on Grow and higher (Basic and Starter allow 0 staff accounts), so Basic is effectively single-user. Pricing is per store, not per user, so per-user fields and the multiplier are null (June stored $29 and $2,300 as per-user values and a 79.3x multiplier). Grow is $79/mo yearly or $105/mo monthly; Plus is listed only as 'from $2,300/mo' (the page shows no separate yearly Plus price). SAML is also Plus-only and must be set up, with a verified domain, before generating the SCIM token. SCIM removal suspends the user; group assignment uses a roles attribute that must match an existing Shopify group; Okta Group Push is not supported. Docs are cited as the help centre's .md exports because the HTML pages block automated requests.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Advanced",
+  "api_tax": true,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Basic",
+   "price_text": "$29/mo yearly, $39/mo monthly",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": null,
+   "cite": [
+    "c4",
+    "c5",
+    "c26",
+    "c24",
+    "c7",
+    "c28"
+   ],
+   "notes": "0 staff accounts (help centre)."
+  },
+  {
+   "name": "Grow",
+   "price_text": "$79/mo yearly, $105/mo monthly",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c5",
+    "c24",
+    "c7",
+    "c28"
+   ],
+   "notes": "Up to 5 staff accounts."
+  },
+  {
+   "name": "Advanced",
+   "price_text": "$299/mo yearly, $399/mo monthly",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c5",
+    "c24",
+    "c7",
+    "c28"
+   ],
+   "notes": "Up to 15 staff accounts; read-only StaffMember API."
+  },
+  {
+   "name": "Plus",
+   "price_text": "from $2,300/mo",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c5",
+    "c24",
+    "c7",
+    "c28"
+   ],
+   "notes": "Unlimited staff accounts; custom user groups."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c7",
+   "c8",
+   "c13"
+  ],
+  "plan": "Plus",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://shopifyscim.com/scim/v2/",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Shopify admin > Settings > Users > Security > SCIM integration > Generate API token",
+   "token_expiry": null,
+   "cite": [
+    "c12",
+    "c20",
+    "c23"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c13",
+    "c18"
+   ],
+   "notes": "Only the base URL and user request bodies are documented; no endpoint reference."
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": null,
+   "group_push": false,
+   "group_membership": true,
+   "cite": [
+    "c9",
+    "c18",
+    "c14",
+    "c15",
+    "c16",
+    "c17"
+   ],
+   "notes": "Group push is not supported for Okta; group membership is set through the roles attribute on the user. Permanent deletion in the IdP \"might\" delete the user depending on IdP setup."
+  },
+  "deprovision": {
+   "action": "suspend",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c14",
+    "c11"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName (email)",
+    "name.givenName",
+    "name.familyName",
+    "roles[].value (Shopify group name)"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": [
+    "c19",
+    "c17"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "roles attribute (labelled Role Name in the Okta/OneLogin apps, an app role in Entra) carries a Shopify group name; only the last value is used; the group must already exist in Shopify",
+   "cite": [
+    "c17",
+    "c16",
+    "c22"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Requires a verified domain and a SAML configuration; only users on a verified domain can be managed.",
+    "cite": [
+     "c8",
+     "c21"
+    ]
+   },
+   {
+    "text": "Store and organization owners can't be removed through the IdP.",
+    "cite": [
+     "c11"
+    ]
+   },
+   {
+    "text": "Okta Group Push is not supported.",
+    "cite": [
+     "c15"
+    ]
+   },
+   {
+    "text": "SCIM-created users get no invitation email and stay Pending until they sign in through the IdP.",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "text": "Deleting the SCIM token cannot be undone; reconnecting needs a new token.",
+    "cite": [
+     "c23"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c28",
+   "c29"
+  ],
+  "plan": "Advanced",
+  "api_tax": true,
+  "style": "GraphQL",
+  "base_url": null,
+  "docs_url": "https://shopify.dev/docs/api/admin-graphql/latest/objects/StaffMember",
+  "auth": {
+   "methods": [
+    "oauth2 (app access token)"
+   ],
+   "scopes": [
+    "read_users"
+   ],
+   "cite": [
+    "c28"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c29",
+    "c30"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "staffMembers (GraphQL Admin API query)",
+    "purpose": "List staff members with filtering and cursor pagination",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "staffMember (GraphQL Admin API query)",
+    "purpose": "Get a staff member by ID, or the requesting staff member",
+    "cite": [
+     "c30"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "Most Admin API rate limits use a leaky-bucket algorithm; Plus advertises up to 500% higher API call limits.",
+   "cite": [
+    "c31",
+    "c6"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "StaffMember access needs the read_users scope, which Shopify Support must enable, and the app must be a finance embedded app or installed on a Plus or Advanced store. No staff-member mutations were found (staffMemberCreate/staffMemberUpdate pages 404).",
+    "cite": [
+     "c28"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/shopify-plus/",
+   "cite": [
+    "c32",
+    "c15"
+   ],
+   "notes": "App is \"Shopify Plus\". OIN page markup marks SAML, SCIM, Create, Update and Deactivate as checked; Group Push is not."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/shopify-plus-provisioning-tutorial",
+   "cite": [
+    "c33"
+   ]
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c25",
+    "c20"
+   ],
+   "notes": "From Shopify's help centre; OneLogin's connector page not loaded."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "jumpcloud.com/support/integrate-with-shopify-plus returned 403."
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": true,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c27",
+   "c7"
+  ]
+ },
+ "conflicts": [],
+ "searched": [
+  "https://www.shopify.com/pricing",
+  "https://help.shopify.com/sitemap-en.xml (saml, scim, provision, users)",
+  "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/scim.md",
+  "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/saml.md",
+  "https://help.shopify.com/en/manual/your-account/users/users-plan-requirements.md",
+  "https://shopify.dev/docs/api/admin-graphql/latest/objects/StaffMember.md",
+  "https://jumpcloud.com/support/integrate-with-shopify-plus (403)"
+ ],
+ "open_questions": [
+  "No SCIM endpoint reference: Groups, discovery endpoints, filtering and pagination are undocumented.",
+  "Whether IdP deletion deletes the user is described only as \"might be deleted ... depending on your identity provider setup\".",
+  "Whether SCIM suspension frees a staff seat or ends sessions is not documented.",
+  "SCIM token expiry not documented (Entra calls it a long-lived bearer token).",
+  "No public audit-log API or staff webhooks found; the user management activity log is admin-UI only.",
+  "Google Workspace and JumpCloud catalogue status not verified."
+ ],
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.shopify.com/pricing",
+   "title": "Shopify Pricing",
+   "quote": "Grow $79 /mo For small teams Start for free Everything in Basic Card rates from 2.7% + 30¢ USD Up to 5 staff accounts",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.shopify.com/pricing",
+   "title": "Shopify Pricing",
+   "quote": "Plus from $2,300 /mo For complex businesses Try for $399 Everything in Advanced Card rates from 2.25% + 30¢ USD Unlimited staff accounts",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.shopify.com/pricing",
+   "title": "Shopify Pricing",
+   "quote": "Advanced $299 /mo For global reach Start for free Everything in Grow Card rates from 2.5% + 30¢ USD Up to 15 staff accounts",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.shopify.com/pricing",
+   "title": "Shopify Pricing",
+   "quote": "Basic $29 /mo For solo entrepreneurs",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.shopify.com/pricing",
+   "title": "Shopify Pricing",
+   "quote": "Pay monthly $39 USD/mo $105 USD/mo $399 USD/mo Starts at $2,300 USD/mo Pay yearly $29 USD/mo $79 USD/mo $299 USD/mo",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://www.shopify.com/pricing",
+   "title": "Shopify Pricing",
+   "quote": "Up to 500% higher API call limits Test new features before launch Personalize store with custom functions Custom user groups Plus Certified apps",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/scim.md",
+   "title": "SCIM user management - Shopify Help Center",
+   "quote": "SCIM user management is available only for organizations on the Shopify Plus plan.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/scim"
+  },
+  {
+   "id": "c8",
+   "url": "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/scim.md",
+   "title": "SCIM user management - Shopify Help Center",
+   "quote": "Before you set up SCIM user management, you need to [verify your domain](/manual/your-account/users/security/advanced-security-features/verify-domain) and [create a SAML configuration]",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/scim"
+  },
+  {
+   "id": "c9",
+   "url": "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/scim.md",
+   "title": "SCIM user management - Shopify Help Center",
+   "quote": "Providing the SCIM API token to your identity service provider allows you to take the following actions through your identity provider: * Create users * Assign or update [groups](/manual/your-account/users/groups) * Deactivate users",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/scim"
+  },
+  {
+   "id": "c10",
+   "url": "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/scim.md",
+   "title": "SCIM user management - Shopify Help Center",
+   "quote": "Users created through SCIM don't receive an [invitation email](/manual/your-account/users/invite-users). The user must log in through the identity service provider to activate their account.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/scim"
+  },
+  {
+   "id": "c11",
+   "url": "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/scim.md",
+   "title": "SCIM user management - Shopify Help Center",
+   "quote": "Store owners and organization owners can't be removed through an identity service provider.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/scim"
+  },
+  {
+   "id": "c12",
+   "url": "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/scim.md",
+   "title": "SCIM user management - Shopify Help Center",
+   "quote": "In the **SCIM integration** section, click **Generate API token**.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/scim"
+  },
+  {
+   "id": "c13",
+   "url": "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/scim.md",
+   "title": "SCIM user management - Shopify Help Center",
+   "quote": "If your identity service provider requests a base URL, then use <code>https://shopifyscim.com/scim/v2/</code>.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/scim"
+  },
+  {
+   "id": "c14",
+   "url": "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/scim.md",
+   "title": "SCIM user management - Shopify Help Center",
+   "quote": "If you remove an active user's access to Shopify using your identity service provider, then they're suspended in your organization. If you permanently delete a user using your identity service provider, then they might be deleted from your organization, depending on your identity provider setup.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/scim"
+  },
+  {
+   "id": "c15",
+   "url": "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/scim.md",
+   "title": "SCIM user management - Shopify Help Center",
+   "quote": "Okta Group Push isn't supported with Shopify Plus.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/scim"
+  },
+  {
+   "id": "c16",
+   "url": "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/scim.md",
+   "title": "SCIM user management - Shopify Help Center",
+   "quote": "Group assignment is supported in the Entra, OneLogin, and Okta apps.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/scim"
+  },
+  {
+   "id": "c17",
+   "url": "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/scim.md",
+   "title": "SCIM user management - Shopify Help Center",
+   "quote": "The SCIM JSON body must include a key called `roles`. The `roles` key must be an array which includes a hash that stores the role name.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/scim"
+  },
+  {
+   "id": "c18",
+   "url": "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/scim.md",
+   "title": "SCIM user management - Shopify Help Center",
+   "quote": "To assign or update a SCIM group, the JSON body in `POST`,`PUT`, and `PATCH` requests must include the following:",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/scim"
+  },
+  {
+   "id": "c19",
+   "url": "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/scim.md",
+   "title": "SCIM user management - Shopify Help Center",
+   "quote": "\"givenName\": \"given_name\" \"familyName\": \"family_name\" }, \"userName\": \"email\", \"roles\": [{\"value\": \"role_name\"}]",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/scim"
+  },
+  {
+   "id": "c20",
+   "url": "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/scim.md",
+   "title": "SCIM user management - Shopify Help Center",
+   "quote": "In the <strong>SCIM Bearer Token</strong> field, paste the API token.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/scim"
+  },
+  {
+   "id": "c21",
+   "url": "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/scim.md",
+   "title": "SCIM user management - Shopify Help Center",
+   "quote": "You can only manage users who are associated with a domain that you've verified for your organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/scim"
+  },
+  {
+   "id": "c22",
+   "url": "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/scim.md",
+   "title": "SCIM user management - Shopify Help Center",
+   "quote": "The group name in your identity service provider and the group name in your Shopify admin must be identical.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/scim"
+  },
+  {
+   "id": "c23",
+   "url": "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/scim.md",
+   "title": "SCIM user management - Shopify Help Center",
+   "quote": "If you need to reactivate your integration, then you need to generate a new API token.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/scim"
+  },
+  {
+   "id": "c24",
+   "url": "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/saml.md",
+   "title": "SAML authentication - Shopify Help Center",
+   "quote": "SAML authentication is available only for organizations on the Shopify Plus plan.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/saml"
+  },
+  {
+   "id": "c25",
+   "url": "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/saml.md",
+   "title": "SAML authentication - Shopify Help Center",
+   "quote": "Configurations are currently available for [Okta](https://www.okta.com/integrations/shopify-plus/), [OneLogin](https://www.onelogin.com/connector/shopify_plus), and [Entra]",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.shopify.com/en/manual/your-account/users/security/advanced-security-features/saml"
+  },
+  {
+   "id": "c26",
+   "url": "https://help.shopify.com/en/manual/your-account/users/users-plan-requirements.md",
+   "title": "Maximum number of users for each pricing plan - Shopify Help Center",
+   "quote": "Users are available only on the Grow plan and higher.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.shopify.com/en/manual/your-account/users/users-plan-requirements"
+  },
+  {
+   "id": "c27",
+   "url": "https://help.shopify.com/en/manual/your-account/users/import-users.md",
+   "title": "Importing users in bulk using a CSV file - Shopify Help Center",
+   "quote": "You can import a CSV file from your Shopify admin to create new admin users or Point of sale (POS) users for Shopify POS, and manage their store access in bulk.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.shopify.com/en/manual/your-account/users/import-users"
+  },
+  {
+   "id": "c28",
+   "url": "https://shopify.dev/docs/api/admin-graphql/latest/objects/StaffMember.md",
+   "title": "StaffMember - GraphQL Admin",
+   "quote": "Requires `read_users` access scope. Also: The app must be a finance embedded app or installed on a Shopify Plus or Advanced store. Contact Shopify Support to enable this scope for your app.",
+   "accessed": "2026-10-05",
+   "page_url": "https://shopify.dev/docs/api/admin-graphql/latest/objects/StaffMember"
+  },
+  {
+   "id": "c29",
+   "url": "https://shopify.dev/docs/api/admin-graphql/latest/queries/staffMembers.md",
+   "title": "staffMembers - GraphQL Admin",
+   "quote": "Returns a paginated list of [`StaffMember`](https://shopify.dev/docs/api/admin-graphql/latest/objects/StaffMember) objects for the shop.",
+   "accessed": "2026-10-05",
+   "page_url": "https://shopify.dev/docs/api/admin-graphql/latest/queries/staffMembers"
+  },
+  {
+   "id": "c30",
+   "url": "https://shopify.dev/docs/api/admin-graphql/latest/queries/staffMember.md",
+   "title": "staffMember - GraphQL Admin",
+   "quote": "Retrieves a [staff member](https://shopify.dev/docs/api/admin-graphql/latest/objects/StaffMember) by ID. If no ID is provided, the query returns the staff member that's making the request.",
+   "accessed": "2026-10-05",
+   "page_url": "https://shopify.dev/docs/api/admin-graphql/latest/queries/staffMember"
+  },
+  {
+   "id": "c31",
+   "url": "https://shopify.dev/docs/api/usage/limits.md",
+   "title": "API limits - Shopify Dev",
+   "quote": "Most Shopify rate limits are enforced with a [leaky bucket algorithm]",
+   "accessed": "2026-10-05",
+   "page_url": "https://shopify.dev/docs/api/usage/limits"
+  },
+  {
+   "id": "c32",
+   "url": "https://www.okta.com/integrations/shopify-plus/",
+   "title": "Integrate Shopify Plus with Okta",
+   "quote": "From single sign-on to user role provisioning, Okta lets organizations automate their entire onboarding and offboarding process on Shopify.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/shopify-plus-provisioning-tutorial",
+   "title": "Configure Shopify Plus for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Create users in Shopify Plus Remove users in Shopify Plus when they don't require access anymore Keep user attributes synchronized between Microsoft Entra ID and Shopify Plus Single sign-on to Shopify Plus (recommended) Long lived bearer token authentication supported.",
+   "accessed": "2026-10-05"
+  }
+ ]
+}

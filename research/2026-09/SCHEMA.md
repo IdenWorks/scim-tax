@@ -17,7 +17,7 @@ Fields marked (v2) existed before this release. Everything else is new in v3.
 | `team_price_text` (v2) | string | Human-readable price of the team plan |
 | `team_price_per_user_mo` (v2) | number or null | Normalised USD per user per month |
 | `price_multiplier` (v2) | number or null | `scim_price_per_user_mo / team_price_per_user_mo`, one decimal. Null when either side is null |
-| `sso_plan` | string or null | Lowest plan that includes SAML or OIDC SSO. Lets readers see the "SSO yes, SCIM no" middle tier |
+| `sso_plan` | string or null | Lowest plan that includes SAML or OIDC SSO with the customer's own IdP. Social sign-in ("Sign in with Google/Microsoft") does not count. Lets readers see the "SSO yes, SCIM no" middle tier |
 | `sso_price_per_user_mo` | number or null | Normalised price of the SSO plan |
 | `sso_required_for_scim` | bool or null | Vendor docs say SSO must be configured before SCIM |
 | `scim_addon_price_text` | string or null | When SCIM is sold as a separate add-on, its price (for example Vercel Directory Sync $150/mo) |

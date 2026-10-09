@@ -1,0 +1,446 @@
+{
+ "slug": "netsuite",
+ "vendor": "NetSuite",
+ "vendor_url": "https://www.netsuite.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "NetSuite",
+  "slug": "netsuite",
+  "category": "Finance, Accounting & Spend",
+  "status": "none",
+  "scim_plan": "—",
+  "scim_price_text": "—",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": null,
+  "idp": {
+   "okta": "api_connector",
+   "entra": "sso_only",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": false
+  },
+  "pricing_page_url": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_N896195.html",
+  "docs_url": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/chapter_N3825119.html",
+  "evidence": "NetSuite's Help Center documents SAML and OIDC SSO where admins create roles and assign users to them in NetSuite; it documents no SCIM endpoint, and Okta's NetSuite provisioning runs over NetSuite's SOAP web services.",
+  "notes": "Status unchanged (none). netsuite.com (pricing.shtml, products.shtml, home) returned HTTP 403 to curl, the headless renderer (ERR_TOO_MANY_RETRIES) and WebFetch, so June's pricing URL could not be re-cited; pricing_page_url points to the Help Center page on licensing instead (licences are counted against the Full User Count purchased; no public price list). June's 'All pricing Contact Sales' is kept as Contact Sales without a fresh first-party quote. No SCIM: the Oracle NetSuite Help Center table of contents (24,795 entries) has no SCIM topic. Provisioning is through NetSuite's own SOAP/REST web services (employee record: add, update, delete, give access, roles): Okta's own NetSuite app provisions over SOAP web services with token-based auth (api_connector, Okta-built), and an Aquera-built OIN connector also exists (third party). SAML and OIDC SSO are features enabled per account; plan or edition gating is not stated.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": true,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": null,
+  "status_prev": "none"
+ },
+ "plans": [],
+ "scim": {
+  "available": false,
+  "cite": [
+   "c2",
+   "c16"
+  ],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": null,
+   "token_source": null,
+   "token_expiry": null,
+   "cite": []
+  },
+  "endpoints": {
+   "Users": null,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": []
+  },
+  "operations": {
+   "create": null,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": null,
+   "reactivate": null,
+   "delete": null,
+   "group_push": null,
+   "group_membership": null,
+   "cite": []
+  },
+  "deprovision": {
+   "action": null,
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": []
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": []
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "False by absence (no SCIM topic anywhere in the Help Center); IdP provisioning uses NetSuite web services instead. Manual deprovisioning: inactivating the employee record removes access but keeps employment history, and inactive users stop counting against the Full User Count (c1, c4, c5)."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c8",
+   "c11",
+   "c12"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://<account ID>.suitetalk.api.netsuite.com/services/rest/record/v1",
+  "docs_url": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_161886175135.html",
+  "auth": {
+   "methods": [
+    "token_based_authentication",
+    "oauth2"
+   ],
+   "scopes": [],
+   "cite": [
+    "c13",
+    "c16"
+   ]
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c9",
+    "c10",
+    "c11"
+   ],
+   "notes": "Users are employee records; SOAP also offers get/search/upsert on employee. Giving access and assigning roles are fields/sublists on the employee record in the UI; API coverage of those was not confirmed."
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/services/rest/record/v1/employee",
+    "purpose": "Create an employee record (REST)",
+    "cite": [
+     "c9"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/services/rest/record/v1/employee/{id}",
+    "purpose": "Update an employee record (REST)",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "method": "SOAP",
+    "path": "add / update / delete / get / search (employee)",
+    "purpose": "SOAP web services operations on the employee record",
+    "cite": [
+     "c11"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "Concurrency limits based on service tier plus 10 per SuiteCloud Plus licence (e.g. shared service with one licence = 15).",
+   "cite": [
+    "c14"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Okta notes that with token-based authentication it cannot create or update users with Administrator or Full Access roles (NetSuite security restriction).",
+    "cite": [
+     "c16"
+    ]
+   }
+  ],
+  "notes": "Also a SOAP API (SuiteTalk SOAP Web Services) with the same employee record; RESTlets (custom scripts) are a third option."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "api_connector",
+   "built_by": "idp",
+   "url": "https://www.okta.com/integrations/netsuite/",
+   "cite": [
+    "c15",
+    "c16"
+   ],
+   "notes": "OIN page ticks SAML, SWA, SCIM and Create/Update/Deactivate/Group Push (read from page markup), but Okta's provisioning guide requires NetSuite SOAP web services and token-based auth; NetSuite has no SCIM endpoint. A separate 'Netsuite Provisioning Connector by Aquera' is third-party built (c17)."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/netsuite-tutorial",
+   "cite": [
+    "c18"
+   ],
+   "notes": "Gallery SSO tutorial only (no provisioning tutorial; saas-apps/netsuite-provisioning-tutorial 404). Microsoft claims JIT provisioning; see conflicts."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c2",
+   "c8"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_N896195.html",
+   "title": "Giving an Employee Access to NetSuite | Oracle NetSuite Help Center",
+   "quote": "Only active users with access count against the Full User Count purchased for your account. Inactive users that have access don't count.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/chapter_N3825119.html",
+   "title": "SAML Single Sign-on | Oracle NetSuite Help Center",
+   "quote": "In the NetSuite application, perform preliminary setup: enable the feature, create roles and assign SSO permissions, and assign users to the roles.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/chapter_N3825119.html",
+   "title": "SAML Single Sign-on | Oracle NetSuite Help Center",
+   "quote": "The NetSuite SAML Single Sign-on feature is based on the SAML v2.0 specifications.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_N3827717.html",
+   "title": "Remove SAML Access to NetSuite | Oracle NetSuite Help Center",
+   "quote": "Removing the SAML Single Sign-on permission from the users' roles. In extreme cases, editing the users' employee records in NetSuite to make them inactive.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_1504014571.html",
+   "title": "Inactivating Employee Records | Oracle NetSuite Help Center",
+   "quote": "You can inactivate employee records for employees who no longer actively work for your company. This lets you remove their access to NetSuite, while retaining the history of their employment with your company.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_N896195.html",
+   "title": "Giving an Employee Access to NetSuite | Oracle NetSuite Help Center",
+   "quote": "To give an employee access to your NetSuite account, you must ensure the employee record includes an email address. The email address serves as the user ID.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/chapter_156399873235.html",
+   "title": "OpenID Connect (OIDC) Single Sign-on | Oracle NetSuite Help Center",
+   "quote": "The following tasks must be completed to implement OpenID Connect (OIDC) Single Sign-on access to a NetSuite account.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_161886175135.html",
+   "title": "Employee (REST Web Services Records Guide) | Oracle NetSuite Help Center",
+   "quote": "The record ID for the employee REST record is employee .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_161886175135.html",
+   "title": "Employee (REST Web Services Records Guide) | Oracle NetSuite Help Center",
+   "quote": "POST https://123456.suitetalk.api.netsuite.com/services/rest/record/v1/employee",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_161886175135.html",
+   "title": "Employee (REST Web Services Records Guide) | Oracle NetSuite Help Center",
+   "quote": "PATCH https://123456.suitetalk.api.netsuite.com/services/rest/record/v1/employee/{id}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_N3643925.html",
+   "title": "Employee (SOAP Web Services Records Guide) | Oracle NetSuite Help Center",
+   "quote": "add | addList | attach / detach | delete | deleteList | get | getDeleted | getList | getSavedSearch | getSelectValue | search | searchMoreWithId | update | updateList | upsert | upsertList",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_1546938065.html",
+   "title": "REST Web Services URL Schema and Account-Specific URLs | Oracle NetSuite Help Center",
+   "quote": "The format of an account-specific domain name is <account ID>.<service>.netsuite.com. For example, if your account ID is 123456, your account-specific domain for REST web services is 123456.suitetalk.api.netsuite.com",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_1544786256.html",
+   "title": "REST Web Services and Other Integration Options | Oracle NetSuite Help Center",
+   "quote": "Yes (token-based authentication, OAuth 2.0)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/bridgehead_1500275603.html",
+   "title": "Concurrency Governance Limits Based on Service Tiers and SuiteCloud Plus Licenses | Oracle NetSuite Help Center",
+   "quote": "The governance limit for concurrent requests is based on the service tier and the number of SuiteCloud Plus licenses available for your each production, sandbox, and release preview accounts.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://www.okta.com/integrations/netsuite/",
+   "title": "Integrate NetSuite with Okta",
+   "quote": "From single sign-on to enhanced user provisioning, Okta’s NetSuite integration handles user access, roles, and groups throughout the user’s lifecycle.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://saml-doc.okta.com/Provisioning_Docs/NetSuite_Provisioning.html",
+   "title": "Configuring Provisioning for NetSuite | Okta",
+   "quote": "Enable the Web Services feature (the NetSuite web services feature needs to be enabled prior to submitting web services requests):",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://www.okta.com/integrations/netsuite-provisioning-connector-by-aquera/",
+   "title": "Netsuite Provisioning Connector by Aquera | Okta",
+   "quote": "This connector was built and is maintained by Aquera, which builds new Okta connectors in 1 to 5 days with an on-demand model.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/netsuite-tutorial",
+   "title": "Configure NetSuite for Single sign-on in Microsoft Entra ID | Microsoft Learn",
+   "quote": "NetSuite supports just-in-time user provisioning, which is enabled by default. There's no action item for you in this section.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_1520981877.html",
+   "title": "Interactions with NetSuite Using SAML | Oracle NetSuite Help Center",
+   "quote": "There are two single sign-on flows in the SAML 2.0 standard: SP-initiated and IdP-initiated. NetSuite supports both types of flows.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "Microsoft's Entra tutorial says NetSuite supports just-in-time user provisioning enabled by default, while NetSuite's own SAML guide requires admins to assign users to SAML roles in NetSuite before sign-in and never mentions JIT.",
+   "cite": [
+    "c18",
+    "c2"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.netsuite.com/portal/pricing.shtml (403)",
+  "https://www.netsuite.com/portal/products.shtml (403)",
+  "https://www.netsuite.co.uk/sitemap.xml (no pricing page)",
+  "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/toc.htm (full Help Center ToC, 24,795 entries; grep 'scim': 0)",
+  "NetSuite Help Center: SAML Single Sign-on, OIDC Single Sign-on, Giving an Employee Access, Inactivating Employee Records, REST and SOAP employee record",
+  "https://www.okta.com/integrations/?search=netsuite",
+  "https://saml-doc.okta.com/Provisioning_Docs/NetSuite_Provisioning.html",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/netsuite-tutorial",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/netsuite-provisioning-tutorial (404)"
+ ],
+ "open_questions": [
+  "No public price list; netsuite.com blocked every automated request (403), so the edition/tier table could not be re-checked.",
+  "Whether SAML/OIDC SSO or web services are gated by edition or add-on is not stated in the Help Center.",
+  "Whether SAML sign-in creates users just-in-time (Microsoft says yes, NetSuite docs imply no).",
+  "Whether REST/SOAP can set giveAccess, roles and isInactive on the employee record was not confirmed from the field reference (REST API Browser not loaded).",
+  "Google Workspace, OneLogin and JumpCloud catalogue entries not checked.",
+  "No audit-log API beyond Login Audit Trail saved searches was identified."
+ ]
+}

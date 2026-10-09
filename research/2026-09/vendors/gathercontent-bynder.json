@@ -1,0 +1,801 @@
+{
+ "slug": "gathercontent-bynder",
+ "vendor": "Bynder (Content Workflow, formerly GatherContent)",
+ "vendor_url": "https://www.bynder.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Bynder (Content Workflow, formerly GatherContent)",
+  "slug": "gathercontent-bynder",
+  "category": "Marketing & Advertising",
+  "status": "gated",
+  "scim_plan": "Custom package (Contact Sales)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Custom quote (no public tiers)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "All packages (custom quote)",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": false,
+   "groups": false
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.bynder.com/en/pricing/",
+  "docs_url": "https://support.bynder.com/hc/en-us/articles/29068712565010-How-To-Enable-And-Use-Azure-SCIM-With-Bynder",
+  "evidence": "Bynder's pricing page says its modular plans are customized and quote-only ('Get a quote'), with Single Sign-on in all packages; its help centre says 'Bynder supports SCIM functionality, including creating, updating and deactivating user accounts with Azure' (and Okta).",
+  "notes": "GatherContent now redirects to Bynder Content Workflow; Content Workflow is enabled as a Bynder module (contact Customer Success, 'any associated costs') and its users come from Bynder permission profiles, so the row covers the Bynder portal. The Stand Alone Content Workflow plan has its own SAML SSO ('may not be available in your current plan') and no documented SCIM. Bynder has no public tiers or prices; every package is a custom quote, so SCIM is only obtainable through sales. The June '~$450/mo starter (500 GB)' price and 'Small Business' plan name had no first-party source and were dropped; scim_plan 'Enterprise' also dropped (no tier names published). SCIM works with Entra (bearer permanent token, non-gallery app) and Okta (OAuth2, custom app integration); not partial. SCIM needs SSO and only manages SSO users; deprovisioning deactivates, no deletion, no group/profile mapping.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Custom package",
+   "price_text": "Get a quote",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": null,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c3"
+   ],
+   "notes": "Bynder publishes no tiers; all packages include Single Sign-on and API access ('APIs')."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c4",
+   "c15",
+   "c20",
+   "c5",
+   "c42",
+   "c45"
+  ],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": null,
+  "base_url": "https://<your-bynder-domain>.bynder.com/api/2/scim",
+  "auth": {
+   "method": "other",
+   "token_source": "Entra: Advanced Settings > Portal Settings > Permanent tokens (integration 'SCIM -> Entra ID (Azure AD)'), used as bearer token. Okta: Advanced Settings > Portal Settings > OAuth Apps (integration 'SCIM: Okta'), OAuth2.",
+   "token_expiry": null,
+   "cite": [
+    "c7",
+    "c8",
+    "c16"
+   ],
+   "notes": "Bearer permanent token for Entra; OAuth2 client for Okta."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c4",
+    "c15"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": false,
+   "group_push": false,
+   "group_membership": false,
+   "cite": [
+    "c4",
+    "c9",
+    "c17",
+    "c12"
+   ],
+   "notes": "Docs list create, update and deactivate; permanent deletion is not supported via SCIM; group/profile mapping is not possible through SCIM. Reactivation is blocked for users deactivated less than 180 days."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "User is deactivated, not deleted; permanent deletion only in Bynder User Management UI.",
+   "cite": [
+    "c9"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "emails[type eq \"work\"].value",
+    "active"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": false,
+    "how": null
+   },
+   "group": [],
+   "cite": [
+    "c10",
+    "c11"
+   ]
+  },
+  "roles": {
+   "supported": false,
+   "how": "Not via SCIM; new SCIM users get the default permission profile, and SSO JIT profile/group mappings apply on next login.",
+   "cite": [
+    "c17"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SCIM creates only SSO users; SSO must already be configured.",
+    "cite": [
+     "c5",
+     "c14"
+    ]
+   },
+   {
+    "text": "Only username, email, first name, last name and active status sync; group and profile mapping is not supported.",
+    "cite": [
+     "c10",
+     "c17"
+    ]
+   },
+   {
+    "text": "Entra's Bynder gallery app does not support SCIM; a non-gallery custom app is required.",
+    "cite": [
+     "c13",
+     "c24"
+    ]
+   },
+   {
+    "text": "Changing a username in Okta creates a new Bynder user.",
+    "cite": [
+     "c18"
+    ]
+   },
+   {
+    "text": "Users deactivated less than 180 days ago cannot be reactivated through SCIM.",
+    "cite": [
+     "c12"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c30",
+   "c31",
+   "c40"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://{your-bynder-domain}/",
+  "docs_url": "https://api.bynder.com/reference/users",
+  "auth": {
+   "methods": [
+    "permanent_token",
+    "oauth2"
+   ],
+   "scopes": [
+    "USERMANAGEMENT",
+    "GROUPMANAGEMENT"
+   ],
+   "cite": [
+    "c40",
+    "c36"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c30",
+    "c31",
+    "c32",
+    "c33",
+    "c34",
+    "c35",
+    "c38",
+    "c41"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/api/v4/users/",
+    "purpose": "Retrieve users",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v4/users/",
+    "purpose": "Create user",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v4/users/{id}",
+    "purpose": "Retrieve specific user",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v4/users/{id}",
+    "purpose": "Modify user",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v4/users/{id}",
+    "purpose": "Delete user",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/1/groups",
+    "purpose": "List groups",
+    "cite": [
+     "c35"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/1/groups",
+    "purpose": "Create a group",
+    "cite": [
+     "c43"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/1/groups/{groupId}",
+    "purpose": "Delete a group",
+    "cite": [
+     "c44"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/1/groups/{groupId}/add-users",
+    "purpose": "Add users to a group",
+    "cite": [
+     "c38"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/1/groups/{groupId}/remove-users",
+    "purpose": "Remove users from a group",
+    "cite": [
+     "c39"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": false,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/?search=bynder",
+   "cite": [
+    "c25",
+    "c19"
+   ],
+   "notes": "OIN search for 'bynder' returns no results; Bynder's guide uses a custom Okta app integration with SCIM provisioning."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": "idp",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/bynder-tutorial",
+   "cite": [
+    "c23",
+    "c24",
+    "c13"
+   ],
+   "notes": "Gallery app is SSO (with JIT); SCIM needs a non-gallery custom app pointing at the generic endpoint."
+  },
+  "google": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c22"
+   ],
+   "notes": "Google SSO login method is supported; no Google catalogue provisioning found."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c21",
+   "c23"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.bynder.com/en/pricing/",
+   "title": "Bynder Digital Asset Management Pricing",
+   "quote": "Every business is unique, and so our modular plans are customized for your specific use cases while remaining rooted in our core AI-powered DAM platform.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.bynder.com/en/pricing/",
+   "title": "Bynder Digital Asset Management Pricing",
+   "quote": "All packages include these powerful features",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.bynder.com/en/pricing/",
+   "title": "Bynder Digital Asset Management Pricing",
+   "quote": "24/7 support Custom URL Single Sign-on",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://support.bynder.com/api/v2/help_center/en-us/articles/29068712565010.json",
+   "title": "How To Enable And Use Azure SCIM With Bynder",
+   "quote": "Bynder supports SCIM functionality, including creating, updating and deactivating user accounts with Azure.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bynder.com/hc/en-us/articles/29068712565010-How-To-Enable-And-Use-Azure-SCIM-With-Bynder"
+  },
+  {
+   "id": "c5",
+   "url": "https://support.bynder.com/api/v2/help_center/en-us/articles/29068712565010.json",
+   "title": "How To Enable And Use Azure SCIM With Bynder",
+   "quote": "Note: SCIM functionality can only be set up correctly when Single Sign-On is already configured.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bynder.com/hc/en-us/articles/29068712565010-How-To-Enable-And-Use-Azure-SCIM-With-Bynder"
+  },
+  {
+   "id": "c6",
+   "url": "https://support.bynder.com/api/v2/help_center/en-us/articles/29068712565010.json",
+   "title": "How To Enable And Use Azure SCIM With Bynder",
+   "quote": "In Tenant Url type https://<your-bynder-domain>.bynder.com/api/2/scim",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bynder.com/hc/en-us/articles/29068712565010-How-To-Enable-And-Use-Azure-SCIM-With-Bynder"
+  },
+  {
+   "id": "c7",
+   "url": "https://support.bynder.com/api/v2/help_center/en-us/articles/29068712565010.json",
+   "title": "How To Enable And Use Azure SCIM With Bynder",
+   "quote": "For Authentication Method, Choose Bearer Token and paste.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bynder.com/hc/en-us/articles/29068712565010-How-To-Enable-And-Use-Azure-SCIM-With-Bynder"
+  },
+  {
+   "id": "c8",
+   "url": "https://support.bynder.com/api/v2/help_center/en-us/articles/29068712565010.json",
+   "title": "How To Enable And Use Azure SCIM With Bynder",
+   "quote": "Advanced Settings → Portal Settings → Permanent tokens. Click Add new token.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bynder.com/hc/en-us/articles/29068712565010-How-To-Enable-And-Use-Azure-SCIM-With-Bynder"
+  },
+  {
+   "id": "c9",
+   "url": "https://support.bynder.com/api/v2/help_center/en-us/articles/29068712565010.json",
+   "title": "How To Enable And Use Azure SCIM With Bynder",
+   "quote": "Users who are either deactivated or deleted in IdP will get deactivated in Bynder. We do not support permanent deletion via SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bynder.com/hc/en-us/articles/29068712565010-How-To-Enable-And-Use-Azure-SCIM-With-Bynder"
+  },
+  {
+   "id": "c10",
+   "url": "https://support.bynder.com/api/v2/help_center/en-us/articles/29068712565010.json",
+   "title": "How To Enable And Use Azure SCIM With Bynder",
+   "quote": "Bynder supports updating username, email, first name, last name, and active status (Active/Inactive) via SCIM. Any other user attributes cannot be updated via SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bynder.com/hc/en-us/articles/29068712565010-How-To-Enable-And-Use-Azure-SCIM-With-Bynder"
+  },
+  {
+   "id": "c11",
+   "url": "https://support.bynder.com/api/v2/help_center/en-us/articles/29068712565010.json",
+   "title": "How To Enable And Use Azure SCIM With Bynder",
+   "quote": "Note: mail, givenName, and surname are required fields for Bynder SCIM provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bynder.com/hc/en-us/articles/29068712565010-How-To-Enable-And-Use-Azure-SCIM-With-Bynder"
+  },
+  {
+   "id": "c12",
+   "url": "https://support.bynder.com/api/v2/help_center/en-us/articles/29068712565010.json",
+   "title": "How To Enable And Use Azure SCIM With Bynder",
+   "quote": "Users who have been deactivated for less than 180 days will not be eligible for reactivation through SCIM, even if they are reactivated in the IdP.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bynder.com/hc/en-us/articles/29068712565010-How-To-Enable-And-Use-Azure-SCIM-With-Bynder"
+  },
+  {
+   "id": "c13",
+   "url": "https://support.bynder.com/api/v2/help_center/en-us/articles/29068712565010.json",
+   "title": "How To Enable And Use Azure SCIM With Bynder",
+   "quote": "Note: Do not use the Bynder gallery application that is recommended by Azure. This app does not support SCIM provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bynder.com/hc/en-us/articles/29068712565010-How-To-Enable-And-Use-Azure-SCIM-With-Bynder"
+  },
+  {
+   "id": "c14",
+   "url": "https://support.bynder.com/api/v2/help_center/en-us/articles/29068712565010.json",
+   "title": "How To Enable And Use Azure SCIM With Bynder",
+   "quote": "No, Bynder supports user creation via SCIM only for users who will be logging in through SSO.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bynder.com/hc/en-us/articles/29068712565010-How-To-Enable-And-Use-Azure-SCIM-With-Bynder"
+  },
+  {
+   "id": "c15",
+   "url": "https://support.bynder.com/api/v2/help_center/en-us/articles/27929897102866.json",
+   "title": "How To Enable And Use Okta SCIM With Bynder",
+   "quote": "Base URL: Specify the SCIM service URL for your targeted Bynder portal https://yourportaldomain.com/api/2/scim",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bynder.com/hc/en-us/articles/27929897102866-How-To-Enable-And-Use-Okta-SCIM-With-Bynder"
+  },
+  {
+   "id": "c16",
+   "url": "https://support.bynder.com/api/v2/help_center/en-us/articles/27929897102866.json",
+   "title": "How To Enable And Use Okta SCIM With Bynder",
+   "quote": "Authentication Mode: OAuth2",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bynder.com/hc/en-us/articles/27929897102866-How-To-Enable-And-Use-Okta-SCIM-With-Bynder"
+  },
+  {
+   "id": "c17",
+   "url": "https://support.bynder.com/api/v2/help_center/en-us/articles/27929897102866.json",
+   "title": "How To Enable And Use Okta SCIM With Bynder",
+   "quote": "No, group and profile mapping cannot be configured directly through the SCIM protocol.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bynder.com/hc/en-us/articles/27929897102866-How-To-Enable-And-Use-Okta-SCIM-With-Bynder"
+  },
+  {
+   "id": "c18",
+   "url": "https://support.bynder.com/api/v2/help_center/en-us/articles/27929897102866.json",
+   "title": "How To Enable And Use Okta SCIM With Bynder",
+   "quote": "When a username is changed in Okta, this will trigger the creation of a new user in Bynder portal.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bynder.com/hc/en-us/articles/27929897102866-How-To-Enable-And-Use-Okta-SCIM-With-Bynder"
+  },
+  {
+   "id": "c19",
+   "url": "https://support.bynder.com/api/v2/help_center/en-us/articles/27929897102866.json",
+   "title": "How To Enable And Use Okta SCIM With Bynder",
+   "quote": "Ensure you have an App Integration for Bynder in Okta with the provisioning type set to SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bynder.com/hc/en-us/articles/27929897102866-How-To-Enable-And-Use-Okta-SCIM-With-Bynder"
+  },
+  {
+   "id": "c20",
+   "url": "https://support.bynder.com/api/v2/help_center/en-us/articles/6614562131474.json",
+   "title": "How To Configure SAML, EntraID, OpenID, And Google Single Sign-on (SSO)",
+   "quote": "Bynder supports automated user de-provisioning via SCIM with Okta and Azure.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bynder.com/hc/en-us/articles/6614562131474-How-To-Configure-SAML-EntraID-OpenID-And-Google-Single-Sign-on-SSO"
+  },
+  {
+   "id": "c21",
+   "url": "https://support.bynder.com/api/v2/help_center/en-us/articles/6614562131474.json",
+   "title": "How To Configure SAML, EntraID, OpenID, And Google Single Sign-on (SSO)",
+   "quote": "Enable JIT if you want Bynder to automatically create users in the portal when they log in with SSO for the first time.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bynder.com/hc/en-us/articles/6614562131474-How-To-Configure-SAML-EntraID-OpenID-And-Google-Single-Sign-on-SSO"
+  },
+  {
+   "id": "c22",
+   "url": "https://support.bynder.com/api/v2/help_center/en-us/articles/6614562131474.json",
+   "title": "How To Configure SAML, EntraID, OpenID, And Google Single Sign-on (SSO)",
+   "quote": "Click New login method, then select SAML, Google, or OpenID SSO.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bynder.com/hc/en-us/articles/6614562131474-How-To-Configure-SAML-EntraID-OpenID-And-Google-Single-Sign-on-SSO"
+  },
+  {
+   "id": "c23",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/bynder-tutorial",
+   "title": "Microsoft Entra SSO integration with Bynder",
+   "quote": "Bynder supports Just In Time user provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/bynder-tutorial",
+   "title": "Microsoft Entra SSO integration with Bynder",
+   "quote": "Bynder now supports SCIM provisioning, which is available only for custom applications.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://www.okta.com/integrations/?search=bynder",
+   "title": "Okta Integration Network",
+   "quote": "No results found for: “bynder”",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://support.bynder.com/api/v2/help_center/en-us/articles/22605853760658.json",
+   "title": "How To Configure SAML Single Sign-On For Content Workflow",
+   "quote": "This article applies to customers on the Stand Alone Content Workflow plan.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bynder.com/hc/en-us/articles/22605853760658-How-To-Configure-SAML-Single-Sign-On-For-Content-Workflow"
+  },
+  {
+   "id": "c27",
+   "url": "https://support.bynder.com/api/v2/help_center/en-us/articles/22605853760658.json",
+   "title": "How To Configure SAML Single Sign-On For Content Workflow",
+   "quote": "If you don’t see the SSO tab, this feature may not be available in your current plan. Contact customer support for assistance.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bynder.com/hc/en-us/articles/22605853760658-How-To-Configure-SAML-Single-Sign-On-For-Content-Workflow"
+  },
+  {
+   "id": "c28",
+   "url": "https://support.bynder.com/api/v2/help_center/en-us/articles/6697856495506.json",
+   "title": "Manage Access to Content Workflow in Bynder",
+   "quote": "If Content Workflow does not appear in your Permission Management, contact your Customer Success Contact to learn how to enable this feature and any associated costs.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bynder.com/hc/en-us/articles/6697856495506-Manage-Access-to-Content-Workflow-in-Bynder"
+  },
+  {
+   "id": "c29",
+   "url": "https://support.bynder.com/api/v2/help_center/en-us/articles/6697856495506.json",
+   "title": "Manage Access to Content Workflow in Bynder",
+   "quote": "The Bynder users associated with the permission profile will automatically be added to People & Groups in Content Workflow.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bynder.com/hc/en-us/articles/6697856495506-Manage-Access-to-Content-Workflow-in-Bynder"
+  },
+  {
+   "id": "c30",
+   "url": "https://api.bynder.com/reference/get_api-v4-users.md",
+   "title": "Retrieve users",
+   "quote": "\"/api/v4/users/\": { \"get\": { \"summary\": \"Retrieve users\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.bynder.com/reference/get_api-v4-users"
+  },
+  {
+   "id": "c31",
+   "url": "https://api.bynder.com/reference/post_api-v4-users.md",
+   "title": "Create user",
+   "quote": "\"/api/v4/users/\": { \"post\": { \"summary\": \"Create user\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.bynder.com/reference/post_api-v4-users"
+  },
+  {
+   "id": "c32",
+   "url": "https://api.bynder.com/reference/get_api-v4-users-id.md",
+   "title": "Retrieve specific user",
+   "quote": "\"/api/v4/users/{id}\": { \"get\": { \"summary\": \"Retrieve specific user\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.bynder.com/reference/get_api-v4-users-id"
+  },
+  {
+   "id": "c33",
+   "url": "https://api.bynder.com/reference/post_api-v4-users-id.md",
+   "title": "Modify user",
+   "quote": "\"/api/v4/users/{id}\": { \"post\": { \"summary\": \"Modify user\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.bynder.com/reference/post_api-v4-users-id"
+  },
+  {
+   "id": "c34",
+   "url": "https://api.bynder.com/reference/delete_api-v4-users-id.md",
+   "title": "Delete user",
+   "quote": "\"/api/v4/users/{id}\": { \"delete\": { \"summary\": \"Delete user\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.bynder.com/reference/delete_api-v4-users-id"
+  },
+  {
+   "id": "c35",
+   "url": "https://api.bynder.com/reference/listgroups.md",
+   "title": "List groups",
+   "quote": "\"/api/1/groups\": { \"get\": { \"operationId\": \"listGroups\", \"summary\": \"List groups\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.bynder.com/reference/listgroups"
+  },
+  {
+   "id": "c36",
+   "url": "https://api.bynder.com/reference/creategroup.md",
+   "title": "Create a group",
+   "quote": "Creates a new group.  Requires the **GROUPMANAGEMENT** security role.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.bynder.com/reference/creategroup"
+  },
+  {
+   "id": "c37",
+   "url": "https://api.bynder.com/reference/deletegroup.md",
+   "title": "Delete a group",
+   "quote": "Deletes a group and removes all its members from it.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.bynder.com/reference/deletegroup"
+  },
+  {
+   "id": "c38",
+   "url": "https://api.bynder.com/reference/adduserstogroup.md",
+   "title": "Add users to a group",
+   "quote": "\"/api/1/groups/{groupId}/add-users\": { \"post\": { \"operationId\": \"addUsersToGroup\", \"summary\": \"Add users to a group\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.bynder.com/reference/adduserstogroup"
+  },
+  {
+   "id": "c39",
+   "url": "https://api.bynder.com/reference/removeusersfromgroup.md",
+   "title": "Remove users from a group",
+   "quote": "\"/api/1/groups/{groupId}/remove-users\": { \"post\": { \"operationId\": \"removeUsersFromGroup\", \"summary\": \"Remove users from a group\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.bynder.com/reference/removeusersfromgroup"
+  },
+  {
+   "id": "c40",
+   "url": "https://api.bynder.com/reference/post_api-v4-users.md",
+   "title": "Create user",
+   "quote": "\"USERMANAGEMENT\": \"Grants permission to manage users\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.bynder.com/reference/post_api-v4-users"
+  },
+  {
+   "id": "c41",
+   "url": "https://api.bynder.com/reference/post_api-v4-users.md",
+   "title": "Create user",
+   "quote": "\"profileId\": { \"type\": \"string\" }",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.bynder.com/reference/post_api-v4-users"
+  },
+  {
+   "id": "c42",
+   "url": "https://support.bynder.com/api/v2/help_center/en-us/articles/31468792200722.json",
+   "title": "2025 New Features And Release Notes",
+   "quote": "Introducing Okta And Azure SCIM Functionality In Bynder",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.bynder.com/hc/en-us/articles/31468792200722-2025-New-Features-And-Release-Notes"
+  },
+  {
+   "id": "c43",
+   "url": "https://api.bynder.com/reference/creategroup.md",
+   "title": "Create a group",
+   "quote": "\"/api/1/groups\": { \"post\": { \"operationId\": \"createGroup\", \"summary\": \"Create a group\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.bynder.com/reference/creategroup"
+  },
+  {
+   "id": "c44",
+   "url": "https://api.bynder.com/reference/deletegroup.md",
+   "title": "Delete a group",
+   "quote": "\"/api/1/groups/{groupId}\": { \"delete\": { \"operationId\": \"deleteGroup\", \"summary\": \"Delete a group\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.bynder.com/reference/deletegroup"
+  },
+  {
+   "id": "c45",
+   "url": "https://support.bynder.com/hc/en-us/articles/29068712565010-How-To-Enable-And-Use-Azure-SCIM-With-Bynder",
+   "title": "How To Enable And Use Azure SCIM With Bynder",
+   "quote": "Bynder supports SCIM functionality, including creating, updating and deactivating user accounts with Azure.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.bynder.com/en/pricing/",
+  "https://support.bynder.com/api/v2/help_center/articles/search.json?query=scim",
+  "https://api.bynder.com/llms.txt",
+  "https://www.okta.com/integrations/?search=bynder",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/bynder-tutorial",
+  "https://www.bynder.com/en/products/content-workflow/"
+ ],
+ "open_questions": [
+  "Whether SCIM is included in every Bynder package or sold separately is not stated.",
+  "SCIM version, PUT/PATCH support, filtering, pagination and Groups endpoint are not documented.",
+  "Whether deactivation frees a seat or ends sessions is not documented.",
+  "Plan required for the user API, audit-log API and user webhooks are not documented.",
+  "Standalone Content Workflow (GatherContent) has no documented SCIM or user API.",
+  "JIT protocol: JIT is described for SSO generally (SAML, Google, OpenID); not stated per protocol.",
+  "OneLogin and JumpCloud catalogue entries not checked."
+ ]
+}

@@ -1,0 +1,715 @@
+{
+ "slug": "gainsight",
+ "vendor": "Gainsight",
+ "vendor_url": "https://www.gainsight.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Gainsight",
+  "slug": "gainsight",
+  "category": "Customer Support & Success",
+  "status": "gated",
+  "scim_plan": "Contact Sales (plan not stated)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Essentials",
+  "team_price_text": "Essentials: Request Pricing",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": "sso_only",
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.gainsight.com/pricing/",
+  "docs_url": "https://support.gainsight.com/gainsight_nxt/API_and_Developer_Docs/User_Management_APIs/SCIM_API",
+  "evidence": "Gainsight's SCIM API article documents a SCIM base URL (https://<<tenant-url>>/v1/users/services/scim), while every Gainsight Customer Success plan on the pricing page (Essentials, Enterprise) is 'Request Pricing'.",
+  "notes": "Gainsight CS has no self-serve or listed price: Essentials and Enterprise both say 'Request Pricing', so SCIM can only be bought through sales; no first-party page says which plan includes SCIM. June values dropped for lack of a first-party source: scim_plan 'Enterprise', the ~$150 and ~$300/u/mo figures (third-party), and 'SCIM requires SAML SSO'. SCIM shipped in the July 2025 CS release as an 'Automatic Update'; the SCIM docs return 401 when 'the SCIM feature was not enabled'. Okta setup uses a custom SAML+SCIM app (no Gainsight CS app in OIN; only Gainsight PX is listed). Entra gallery app is SSO-only. Deprovisioning sets active=false and removes the license. Status kept at gated on the Contact Sales rule, at low confidence.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Essentials",
+   "price_text": "Request Pricing",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1"
+   ],
+   "notes": "Gainsight Customer Success plan; 10 included full users."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Request Pricing",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1"
+   ],
+   "notes": "20 included full users."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c2",
+   "c22",
+   "c18"
+  ],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://<<tenant-url>>/v1/users/services/scim",
+  "auth": {
+   "method": "oauth2",
+   "token_source": "Gainsight M2M OAuth client ID/secret (POST /v1/users/m2m/oauth/token) or an OAuth app created in Gainsight",
+   "token_expiry": "86400 seconds (24 hours) per sample token response",
+   "cite": [
+    "c3",
+    "c4",
+    "c14"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c2",
+    "c11"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": null,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c13",
+    "c5",
+    "c11",
+    "c12",
+    "c23",
+    "c19"
+   ],
+   "notes": "Docs show POST/GET/PUT/PATCH on /Users and POST/GET/PUT/PATCH on /Groups; no DELETE operation is documented for users or groups. Group PUT changes displayName only."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": true,
+   "revokes_sessions": null,
+   "data_retained": "User record stays as inactive; permission bundle, license type and login credentials are removed.",
+   "cite": [
+    "c5",
+    "c33"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName",
+    "emails.value",
+    "externalId",
+    "displayName (Groups)"
+   ],
+   "cite": [
+    "c6"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c7"
+   ],
+   "notes": "startIndex/count; default count is 100, no maximum stated."
+  },
+  "attributes": {
+   "core": [
+    "id",
+    "externalId",
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "displayName",
+    "title",
+    "locale",
+    "timezone",
+    "active",
+    "emails.value",
+    "emails.primary",
+    "groups",
+    "roles"
+   ],
+   "enterprise": [
+    "manager.value"
+   ],
+   "custom": {
+    "supported": true,
+    "how": "urn:ietf:params:scim:schemas:extension:gainsight:2.0:User namespace (IsSuperAdmin, LicenseType, custom_roles, plus Boolean/String/Picklist/Multi-Picklist custom fields); mappings must be pre-configured by Gainsight Support."
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c8",
+    "c9",
+    "c15",
+    "c16"
+   ],
+   "notes": "Default mapping table marks nickName, preferredLanguage, profileUrl, userType, phoneNumbers, password, ims, photos, addresses, entitlements and x509Certificates as Not Supporting."
+  },
+  "roles": {
+   "supported": true,
+   "how": "SCIM roles attribute (mapped to roles_gc), custom_roles and IsSuperAdmin in the Gainsight extension; LicenseType sets the license; SCIM user groups can apply Super Admin/License Type to members.",
+   "cite": [
+    "c16",
+    "c17",
+    "c23"
+   ]
+  },
+  "rate_limits": {
+   "text": "Overall recommended limit: 100 synchronous API calls per minute / 100,000 per day.",
+   "cite": [
+    "c10"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Create, update and PATCH calls require a super admin; GET is available to non-super admins.",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "text": "Custom attribute mappings must be pre-configured by Gainsight Support before use.",
+    "cite": [
+     "c9"
+    ]
+   },
+   {
+    "text": "Roles and groups must always be sent on PUT; groups sent in PATCH replace all existing groups.",
+    "cite": [
+     "c17"
+    ]
+   },
+   {
+    "text": "Many core SCIM attributes (phoneNumbers, addresses, preferredLanguage, entitlements and others) are not supported.",
+    "cite": [
+     "c15"
+    ]
+   },
+   {
+    "text": "401 is returned when the SCIM feature is not enabled for the tenant, implying per-tenant enablement.",
+    "cite": [
+     "c18"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c24",
+   "c26"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://<customer domain>/v1/users/services",
+  "docs_url": "https://support.gainsight.com/gainsight_nxt/API_and_Developer_Docs/User_Management_APIs/User_Management_APIs",
+  "auth": {
+   "methods": [
+    "api_key"
+   ],
+   "scopes": [],
+   "cite": [
+    "c26"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": null,
+   "reactivate_user": true,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": true,
+   "cite": [
+    "c24",
+    "c29",
+    "c30",
+    "c27"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/v1/users/services?notify=true/false",
+    "purpose": "Create users (up to 50)",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/v1/users/services?key=[FieldName]",
+    "purpose": "Update users",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/v1/users/services/status?status=true/false",
+    "purpose": "Update user status (active/inactive)",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/users/services/list",
+    "purpose": "Fetch user details",
+    "cite": [
+     "c30"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "External User Management APIs: 100 requests per hour / 1000 requests per day.",
+   "cite": [
+    "c25"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Super admin field cannot be created or updated through the User Management APIs.",
+    "cite": [
+     "c39"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": false,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/?search=gainsight",
+   "cite": [
+    "c36",
+    "c19",
+    "c21"
+   ],
+   "notes": "OIN search for 'gainsight' returns only GainsightPX (a separate product). Gainsight's Okta guide builds a custom SAML 2.0 app with SCIM provisioning against the generic endpoint."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": "idp",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/gainsight-tutorial",
+   "cite": [
+    "c34",
+    "c35"
+   ],
+   "notes": "Gallery app 'Gainsight SAML' tutorial covers SSO only; the SCIM docs mention M2M OAuth is ideal for systems like Azure (c38)."
+  },
+  "google": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c31"
+   ],
+   "notes": "Gainsight supports G Suite authentication; no Google catalogue provisioning app found."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "jumpcloud.com/support/integrate-with-gainsight returned 403 to curl."
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": true,
+  "other_sync": "Add users from external systems (Salesforce, Dynamics, Zendesk, HubSpot, Slack)",
+  "docs_public": true,
+  "cite": [
+   "c32",
+   "c37"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.gainsight.com/pricing/",
+   "title": "Gainsight Pricing",
+   "quote": "Request Pricing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://support.gainsight.com/gainsight_nxt/API_and_Developer_Docs/User_Management_APIs/SCIM_API",
+   "title": "SCIM API - Gainsight Inc.",
+   "quote": "SCIM Base URL: https://<<tenant-url>>/v1/users/services/scim",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://support.gainsight.com/gainsight_nxt/API_and_Developer_Docs/User_Management_APIs/SCIM_API",
+   "title": "SCIM API - Gainsight Inc.",
+   "quote": "Two authentication methods are supported to securely access SCIM APIs in Gainsight: M2M and OAuth.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://support.gainsight.com/gainsight_nxt/API_and_Developer_Docs/User_Management_APIs/SCIM_API",
+   "title": "SCIM API - Gainsight Inc.",
+   "quote": "\"token_type\": \"Bearer\", \"expires_in\": 86400",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://support.gainsight.com/gainsight_nxt/API_and_Developer_Docs/User_Management_APIs/SCIM_API",
+   "title": "SCIM API - Gainsight Inc.",
+   "quote": "Setting this field to false will deactivate the user, removing their permission bundle, license type, and login credentials.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://support.gainsight.com/gainsight_nxt/API_and_Developer_Docs/User_Management_APIs/SCIM_API",
+   "title": "SCIM API - Gainsight Inc.",
+   "quote": "Supported filter attribute names: userName, emails. value,externalId",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://support.gainsight.com/gainsight_nxt/API_and_Developer_Docs/User_Management_APIs/SCIM_API",
+   "title": "SCIM API - Gainsight Inc.",
+   "quote": "The maximum number of results to return. The default is 100.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://support.gainsight.com/gainsight_nxt/API_and_Developer_Docs/User_Management_APIs/SCIM_API",
+   "title": "SCIM API - Gainsight Inc.",
+   "quote": "To add custom user attributes, ensure that all custom fields are included under the urn:ietf:params:scim:schemas:extension:gainsight:2.0:User namespace",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://support.gainsight.com/gainsight_nxt/API_and_Developer_Docs/User_Management_APIs/SCIM_API",
+   "title": "SCIM API - Gainsight Inc.",
+   "quote": "Please note that custom user attribute mappings must be pre-configured in Gainsight as part of the SCIM setup before they can be used in any of the User APIs. Kindly contact the Gainsight Support team to configure this mapping.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://support.gainsight.com/gainsight_nxt/API_and_Developer_Docs/User_Management_APIs/SCIM_API",
+   "title": "SCIM API - Gainsight Inc.",
+   "quote": "Synchronous API Calls: 100 API calls per min / 100,000 API call per day.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://support.gainsight.com/gainsight_nxt/API_and_Developer_Docs/User_Management_APIs/SCIM_API",
+   "title": "SCIM API - Gainsight Inc.",
+   "quote": "The SCIM Create Group API creates a new group in Gainsight.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://support.gainsight.com/gainsight_nxt/API_and_Developer_Docs/User_Management_APIs/SCIM_API",
+   "title": "SCIM API - Gainsight Inc.",
+   "quote": "Only the displayName field can be modified using this API.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://support.gainsight.com/gainsight_nxt/API_and_Developer_Docs/User_Management_APIs/SCIM_API",
+   "title": "SCIM API - Gainsight Inc.",
+   "quote": "These APIs let you add, replace, or remove user attributes, and toggle a user’s status between active and inactive.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://support.gainsight.com/gainsight_nxt/API_and_Developer_Docs/User_Management_APIs/SCIM_API",
+   "title": "SCIM API - Gainsight Inc.",
+   "quote": "Create, Update, and Patch APIs: Available only to super admins.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://support.gainsight.com/gainsight_nxt/API_and_Developer_Docs/User_Management_APIs/SCIM_API",
+   "title": "SCIM API - Gainsight Inc.",
+   "quote": "nickName Not Supporting preferredLanguage Not Supporting profileUrl Not Supporting userType Not Supporting phoneNumbers Not Supporting",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://support.gainsight.com/gainsight_nxt/API_and_Developer_Docs/User_Management_APIs/SCIM_API",
+   "title": "SCIM API - Gainsight Inc.",
+   "quote": "For IsSuperAdmin attribute can have true or false boolean value and LicenseType can have any of these Full, Viewer_Analytics, Viewer, Internal_Collaborator values.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://support.gainsight.com/gainsight_nxt/API_and_Developer_Docs/User_Management_APIs/SCIM_API",
+   "title": "SCIM API - Gainsight Inc.",
+   "quote": "Roles and Groups should always be included in the payload when updating.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://support.gainsight.com/gainsight_nxt/API_and_Developer_Docs/User_Management_APIs/SCIM_API",
+   "title": "SCIM API - Gainsight Inc.",
+   "quote": "Authentication credentials were missing or incorrect or the SCIM feature was not enabled.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://support.gainsight.com/gainsight_nxt/01Onboarding_and_Implementation/Onboarding_for_Gainsight_NXT/Login_and_Permissions/Okta_Gainsight_SCIM_Setup",
+   "title": "Okta Gainsight SCIM Setup",
+   "quote": "Automatically create, update, and deactivate users in Gainsight based on Okta assignments.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://support.gainsight.com/gainsight_nxt/01Onboarding_and_Implementation/Onboarding_for_Gainsight_NXT/Login_and_Permissions/Okta_Gainsight_SCIM_Setup",
+   "title": "Okta Gainsight SCIM Setup",
+   "quote": "Gainsight recommends using separate Okta applications for SAML authentication and SCIM provisioning to avoid configuration conflicts and ensure reliable user authentication and provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://support.gainsight.com/gainsight_nxt/01Onboarding_and_Implementation/Onboarding_for_Gainsight_NXT/Login_and_Permissions/Okta_Gainsight_SCIM_Setup",
+   "title": "Okta Gainsight SCIM Setup",
+   "quote": "Under the Provisioning option, select SCIM.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://support.gainsight.com/gainsight_nxt/Release_Notes/2025/02_Gainsight_CS_Release_Notes_July_2025",
+   "title": "Gainsight CS Release Notes July 2025",
+   "quote": "Gainsight now supports System for Cross-domain Identity Management (SCIM) APIs to automate user provisioning and deprovisioning directly from enterprise identity systems.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://support.gainsight.com/gainsight_nxt/01Onboarding_and_Implementation/Onboarding_for_Gainsight_NXT/Login_and_Permissions/Create_User_Group",
+   "title": "Create User Group",
+   "quote": "SCIM: Enables real-time user assignment management through SCIM APIs, including additions, updates, and removals of users from user groups.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://support.gainsight.com/gainsight_nxt/API_and_Developer_Docs/User_Management_APIs/User_Management_APIs",
+   "title": "User Management APIs",
+   "quote": "Admins can use these APIs to create users, update users, update user status, and fetch user status.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://support.gainsight.com/gainsight_nxt/API_and_Developer_Docs/User_Management_APIs/User_Management_APIs",
+   "title": "User Management APIs",
+   "quote": "The external User Management APIs limit is 100 requests per hour / 1000 requests per day.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://support.gainsight.com/gainsight_nxt/API_and_Developer_Docs/User_Management_APIs/User_Management_APIs",
+   "title": "User Management APIs",
+   "quote": "you must pass the access key as part of the request header “accesskey” for all of your API requests into Gainsight. The Access Key does not expire.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://support.gainsight.com/gainsight_nxt/API_and_Developer_Docs/User_Management_APIs/User_Management_APIs",
+   "title": "User Management APIs",
+   "quote": "https://<customer domain>/v1/users/services?notify=true/false",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://support.gainsight.com/gainsight_nxt/API_and_Developer_Docs/User_Management_APIs/User_Management_APIs",
+   "title": "User Management APIs",
+   "quote": "https://<customer domain>/v1/users/services?key=[FieldName]",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://support.gainsight.com/gainsight_nxt/API_and_Developer_Docs/User_Management_APIs/User_Management_APIs",
+   "title": "User Management APIs",
+   "quote": "https://<customer domain>/v1/users/services/status?status=true/false",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://support.gainsight.com/gainsight_nxt/API_and_Developer_Docs/User_Management_APIs/User_Management_APIs",
+   "title": "User Management APIs",
+   "quote": "https://<customer domain>/v1/users/services/list",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://support.gainsight.com/gainsight_nxt/01Onboarding_and_Implementation/Onboarding_for_Gainsight_NXT/Login_and_Permissions/03Gainsight_Authentication",
+   "title": "Gainsight Authentication",
+   "quote": "By default, Gainsight provides DB Authentication to all the users added to the Users List. You can opt for additional authentication, that is SAML 2.0 or G Suite to increase the level of security.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://support.gainsight.com/gainsight_nxt/01Onboarding_and_Implementation/Onboarding_for_Gainsight_NXT/Login_and_Permissions/01Gainsight_User_Management",
+   "title": "Gainsight User Management",
+   "quote": "Admins can add users to Gainsight manually, through CSV file, and through external systems.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://support.gainsight.com/gainsight_nxt/01Onboarding_and_Implementation/Onboarding_for_Gainsight_NXT/Login_and_Permissions/01Gainsight_User_Management",
+   "title": "Gainsight User Management",
+   "quote": "Once users are inactive, the assigned license type is removed.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/gainsight-tutorial",
+   "title": "Microsoft Entra SSO integration with Gainsight",
+   "quote": "Gainsight single sign-on (SSO) enabled subscription.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c35",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/gainsight-tutorial",
+   "title": "Microsoft Entra SSO integration with Gainsight",
+   "quote": "Add Gainsight SAML from the Microsoft Entra gallery",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://www.okta.com/integrations/?search=gainsight",
+   "title": "Okta Integration Network",
+   "quote": "Gainsight PX's Product Experience Platform empowers product owners with the tools to deeply understa",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://support.gainsight.com/gainsight_nxt/01Onboarding_and_Implementation/Onboarding_for_Gainsight_NXT/Login_and_Permissions/01Gainsight_User_Management",
+   "title": "Gainsight User Management",
+   "quote": "When users are pulled from the external systems, all active users are assigned an Internal Collaborator license.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c38",
+   "url": "https://support.gainsight.com/gainsight_nxt/API_and_Developer_Docs/User_Management_APIs/SCIM_API",
+   "title": "SCIM API - Gainsight Inc.",
+   "quote": "This method is ideal for backend systems like Azure that support client credentials flow.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c39",
+   "url": "https://support.gainsight.com/gainsight_nxt/API_and_Developer_Docs/User_Management_APIs/User_Management_APIs",
+   "title": "User Management APIs",
+   "quote": "You cannot create and update the Super admin field through User Management APIs.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.gainsight.com/pricing/",
+  "https://support.gainsight.com/@api/deki/site/query?q=scim",
+  "https://support.gainsight.com/gainsight_nxt/API_and_Developer_Docs/User_Management_APIs/SCIM_API",
+  "https://support.gainsight.com/gainsight_nxt/01Onboarding_and_Implementation/Onboarding_for_Gainsight_NXT/Login_and_Permissions/Okta_Gainsight_SCIM_Setup",
+  "https://support.gainsight.com/gainsight_nxt/API_and_Developer_Docs/User_Management_APIs/User_Management_APIs",
+  "https://support.gainsight.com/gainsight_nxt/Release_Notes/2025/02_Gainsight_CS_Release_Notes_July_2025",
+  "https://www.okta.com/integrations/?search=gainsight",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/gainsight-tutorial"
+ ],
+ "open_questions": [
+  "Which Gainsight CS plan (Essentials or Enterprise) includes SCIM is not stated on any first-party page.",
+  "Whether SAML SSO is plan-gated is not stated (Entra tutorial requires an 'SSO enabled subscription').",
+  "Whether SAML sign-in creates users just-in-time is not documented.",
+  "No SCIM DELETE operation, ServiceProviderConfig, Schemas or Bulk endpoints are documented.",
+  "Whether SCIM deactivation ends active sessions is not documented.",
+  "Plan required for the User Management REST API is not stated.",
+  "No audit-log API or user-event webhooks found.",
+  "JumpCloud and OneLogin catalogue pages could not be checked (403 / bot challenge)."
+ ]
+}

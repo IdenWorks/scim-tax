@@ -1,0 +1,695 @@
+{
+ "slug": "pigment",
+ "vendor": "Pigment",
+ "vendor_url": "https://www.pigment.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Pigment",
+  "slug": "pigment",
+  "category": "Finance, Accounting & Spend",
+  "status": "gated",
+  "scim_plan": "SCIM-eligible tier (Contact Sales)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "All tiers",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": false,
+   "groups": false
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": "via_generic",
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://kb.pigment.com/docs/pigment-license-types",
+  "docs_url": "https://kb.pigment.com/docs/manage-scim-domain-restriction",
+  "evidence": "Pigment's SSO documentation says \"SSO is available on all Pigment tiers\" but \"You will need the correct Pigment tier for SCIM\"; plans are only available from a Customer Success Manager.",
+  "notes": "Quote-only: Pigment publishes no plans or prices (pigment.com/pricing is 404; licence docs say to contact your Customer Success Manager), and SCIM needs \"the correct Pigment tier\", so SCIM is gated at an unnamed tier. SAML SSO is on all tiers (set up with Pigment Support) and is a prerequisite for SCIM. SCIM 2.0 Users only: create, read by email/id, PUT and limited PATCH, deactivate/reactivate; DELETE suspends rather than removes; no groups or app roles; accountType extension sets the workspace account type. No Okta OIN app; Okta, Entra and OneLogin are configured as custom SCIM apps with a workspace token (admin-chosen expiry). Read-only Audit Logs API available to Security Admins.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": null,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Pigment plans (not published)",
+   "price_text": "Contact your Customer Success Manager",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c3"
+   ],
+   "notes": "SSO on all tiers; SCIM only on an unnamed eligible tier."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c3",
+   "c5",
+   "c12",
+   "c16"
+  ],
+  "plan": "SCIM-eligible Pigment tier (plans not published; Contact Sales)",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": null,
+  "auth": {
+   "method": "bearer",
+   "token_source": "Workspace Settings > Members management > More options > Identity & provisioning settings > SCIM Provisioning > + Add token",
+   "token_expiry": "chosen by admin at creation",
+   "cite": [
+    "c14",
+    "c15",
+    "c16",
+    "c17"
+   ],
+   "notes": "Okta set-up uses an HTTP Header authorization with the token; OneLogin and Entra use it as a bearer/secret token. Tokens belong to the workspace and survive the creator's deactivation; several can be active for rotation."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": false,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c30",
+    "c10"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": false,
+   "group_push": false,
+   "group_membership": false,
+   "cite": [
+    "c6",
+    "c8",
+    "c22",
+    "c7",
+    "c18",
+    "c10"
+   ],
+   "notes": "DELETE is accepted but suspends the user instead of removing them."
+  },
+  "deprovision": {
+   "action": "suspend",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "User is suspended, not removed, and can be restored; deactivated Members' contributions stay in the history log.",
+   "cite": [
+    "c18",
+    "c32"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName"
+   ],
+   "cite": [
+    "c8",
+    "c31"
+   ]
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "active",
+    "displayName",
+    "name.formatted",
+    "name.givenName",
+    "name.familyName",
+    "emails.value"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": true,
+    "how": "accountType (Standard Member, Builder, Workspace Admin, Security Admin) in urn:ietf:params:scim:schemas:extension:pigment:2.0:User"
+   },
+   "group": [],
+   "cite": [
+    "c18",
+    "c20",
+    "c21",
+    "c23",
+    "c24"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "accountType extension attribute sets the workspace account type; application roles and Pigment groups are not provisioned.",
+   "cite": [
+    "c9",
+    "c23",
+    "c10"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "No provisioning of Pigment user groups or application roles.",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "text": "With SCIM on, members can no longer be invited or deactivated manually in Pigment.",
+    "cite": [
+     "c11"
+    ]
+   },
+   {
+    "text": "Primary Owner cannot be deactivated or assigned via SCIM.",
+    "cite": [
+     "c19"
+    ]
+   },
+   {
+    "text": "Email changes only via full PUT; PATCH on emails (as Entra sends) is not supported.",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "text": "No Okta Integration Network app; Okta, OneLogin and Entra are configured manually as custom SCIM apps.",
+    "cite": [
+     "c25",
+     "c27",
+     "c28"
+    ]
+   },
+   {
+    "text": "SAML SSO must already be configured (set up with Pigment Support) before SCIM.",
+    "cite": [
+     "c12",
+     "c4"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": null,
+  "cite": [
+   "c38"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": null,
+  "base_url": null,
+  "docs_url": null,
+  "auth": {
+   "methods": [],
+   "scopes": [],
+   "cite": []
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": []
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "https://pigment.app/api/audit/v1/events",
+    "purpose": "List audit log events (read-only)",
+    "cite": [
+     "c35"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": null,
+   "cite": [
+    "c34",
+    "c35",
+    "c37"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Pigment's public API covers imports, exports, metadata, files and audit logs; no user-management endpoints are documented outside SCIM.",
+    "cite": [
+     "c38"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": false,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c25",
+    "c26"
+   ],
+   "notes": "No OIN app; SCIM enabled manually on the customer's own Pigment SAML 2.0 app."
+  },
+  "entra": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c28",
+    "c29"
+   ],
+   "notes": "Configured as a non-gallery \"Create your own application\" enterprise app."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c27"
+   ],
+   "notes": "Configured with the generic \"SCIM Provisioner with SAML (SCIM v2 Core)\" app."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": true,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c13",
+   "c33"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://kb.pigment.com/docs/pigment-license-types.md",
+   "title": "Pigment License Types",
+   "quote": "For detailed information about our available plans and the specific features included in each pricing plan, contact your Customer Success Manager.",
+   "accessed": "2026-10-05",
+   "page_url": "https://kb.pigment.com/docs/pigment-license-types"
+  },
+  {
+   "id": "c2",
+   "url": "https://kb.pigment.com/docs/configure-single-sign-on-sso-pigment.md",
+   "title": "Configure Single Sign-On (SSO) with Pigment",
+   "quote": "SSO is available on all Pigment tiers. All you need is a SAML 2.0 compatible identity provider.",
+   "accessed": "2026-10-05",
+   "page_url": "https://kb.pigment.com/docs/configure-single-sign-on-sso-pigment"
+  },
+  {
+   "id": "c3",
+   "url": "https://kb.pigment.com/docs/configure-single-sign-on-sso-pigment.md",
+   "title": "Configure Single Sign-On (SSO) with Pigment",
+   "quote": "You will need the correct Pigment tier for SCIM and the set-up is self-serve.",
+   "accessed": "2026-10-05",
+   "page_url": "https://kb.pigment.com/docs/configure-single-sign-on-sso-pigment"
+  },
+  {
+   "id": "c4",
+   "url": "https://kb.pigment.com/docs/configure-single-sign-on-sso-pigment.md",
+   "title": "Configure Single Sign-On (SSO) with Pigment",
+   "quote": "To enable SSO for your Workspace, contact the Pigment Support Team.",
+   "accessed": "2026-10-05",
+   "page_url": "https://kb.pigment.com/docs/configure-single-sign-on-sso-pigment"
+  },
+  {
+   "id": "c5",
+   "url": "https://kb.pigment.com/docs/manage-scim-domain-restriction.md",
+   "title": "Set Up SCIM and Domain Restriction in Pigment for Identity Management",
+   "quote": "Pigment leverages SCIM to enable our customers' IT teams to manage Member access directly through their identity provider solution",
+   "accessed": "2026-10-05",
+   "page_url": "https://kb.pigment.com/docs/manage-scim-domain-restriction"
+  },
+  {
+   "id": "c6",
+   "url": "https://kb.pigment.com/docs/manage-scim-domain-restriction.md",
+   "title": "Set Up SCIM and Domain Restriction in Pigment for Identity Management",
+   "quote": "Create or invite new Members in Pigment",
+   "accessed": "2026-10-05",
+   "page_url": "https://kb.pigment.com/docs/manage-scim-domain-restriction"
+  },
+  {
+   "id": "c7",
+   "url": "https://kb.pigment.com/docs/manage-scim-domain-restriction.md",
+   "title": "Set Up SCIM and Domain Restriction in Pigment for Identity Management",
+   "quote": "Reactivate a deactivated Member",
+   "accessed": "2026-10-05",
+   "page_url": "https://kb.pigment.com/docs/manage-scim-domain-restriction"
+  },
+  {
+   "id": "c8",
+   "url": "https://kb.pigment.com/docs/manage-scim-domain-restriction.md",
+   "title": "Set Up SCIM and Domain Restriction in Pigment for Identity Management",
+   "quote": "Find and list Members in Pigment using their email address",
+   "accessed": "2026-10-05",
+   "page_url": "https://kb.pigment.com/docs/manage-scim-domain-restriction"
+  },
+  {
+   "id": "c9",
+   "url": "https://kb.pigment.com/docs/manage-scim-domain-restriction.md",
+   "title": "Set Up SCIM and Domain Restriction in Pigment for Identity Management",
+   "quote": "Assign/update a Member’s account type",
+   "accessed": "2026-10-05",
+   "page_url": "https://kb.pigment.com/docs/manage-scim-domain-restriction"
+  },
+  {
+   "id": "c10",
+   "url": "https://kb.pigment.com/docs/manage-scim-domain-restriction.md",
+   "title": "Set Up SCIM and Domain Restriction in Pigment for Identity Management",
+   "quote": "We do not support provisioning of Pigment user-groups, nor any specific Role attribution for users yet.",
+   "accessed": "2026-10-05",
+   "page_url": "https://kb.pigment.com/docs/manage-scim-domain-restriction"
+  },
+  {
+   "id": "c11",
+   "url": "https://kb.pigment.com/docs/manage-scim-domain-restriction.md",
+   "title": "Set Up SCIM and Domain Restriction in Pigment for Identity Management",
+   "quote": "When SCIM is enabled, Member management moves entirely to your identity provider. This means you can no longer manually invite or deactivate Members directly within Pigment.",
+   "accessed": "2026-10-05",
+   "page_url": "https://kb.pigment.com/docs/manage-scim-domain-restriction"
+  },
+  {
+   "id": "c12",
+   "url": "https://kb.pigment.com/docs/manage-scim-domain-restriction.md",
+   "title": "Set Up SCIM and Domain Restriction in Pigment for Identity Management",
+   "quote": "You have already configured SAML SSO with your identity provider for Pigment.",
+   "accessed": "2026-10-05",
+   "page_url": "https://kb.pigment.com/docs/manage-scim-domain-restriction"
+  },
+  {
+   "id": "c13",
+   "url": "https://kb.pigment.com/docs/manage-scim-domain-restriction.md",
+   "title": "Set Up SCIM and Domain Restriction in Pigment for Identity Management",
+   "quote": "Pigment’s automatic provisioning can be used with any identity provider which supports SCIM for user management.",
+   "accessed": "2026-10-05",
+   "page_url": "https://kb.pigment.com/docs/manage-scim-domain-restriction"
+  },
+  {
+   "id": "c14",
+   "url": "https://kb.pigment.com/docs/manage-scim-domain-restriction.md",
+   "title": "Set Up SCIM and Domain Restriction in Pigment for Identity Management",
+   "quote": "Toggle on SCIM Provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": "https://kb.pigment.com/docs/manage-scim-domain-restriction"
+  },
+  {
+   "id": "c15",
+   "url": "https://kb.pigment.com/docs/manage-scim-domain-restriction.md",
+   "title": "Set Up SCIM and Domain Restriction in Pigment for Identity Management",
+   "quote": "Choose an expiration based on your security policies",
+   "accessed": "2026-10-05",
+   "page_url": "https://kb.pigment.com/docs/manage-scim-domain-restriction"
+  },
+  {
+   "id": "c16",
+   "url": "https://kb.pigment.com/docs/manage-scim-domain-restriction.md",
+   "title": "Set Up SCIM and Domain Restriction in Pigment for Identity Management",
+   "quote": "Make a note of the generated URL and API token. These are both required by your identity provider.",
+   "accessed": "2026-10-05",
+   "page_url": "https://kb.pigment.com/docs/manage-scim-domain-restriction"
+  },
+  {
+   "id": "c17",
+   "url": "https://kb.pigment.com/docs/manage-scim-domain-restriction.md",
+   "title": "Set Up SCIM and Domain Restriction in Pigment for Identity Management",
+   "quote": "API Tokens are private to the Workspace rather than the Member who created them.",
+   "accessed": "2026-10-05",
+   "page_url": "https://kb.pigment.com/docs/manage-scim-domain-restriction"
+  },
+  {
+   "id": "c18",
+   "url": "https://kb.pigment.com/docs/manage-scim-domain-restriction.md",
+   "title": "Set Up SCIM and Domain Restriction in Pigment for Identity Management",
+   "quote": "Setting `active` to `false` suspends the user, and a `DELETE` request is treated the same way",
+   "accessed": "2026-10-05",
+   "page_url": "https://kb.pigment.com/docs/manage-scim-domain-restriction"
+  },
+  {
+   "id": "c19",
+   "url": "https://kb.pigment.com/docs/manage-scim-domain-restriction.md",
+   "title": "Set Up SCIM and Domain Restriction in Pigment for Identity Management",
+   "quote": "The organization’s Primary Owner cannot be deactivated via SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://kb.pigment.com/docs/manage-scim-domain-restriction"
+  },
+  {
+   "id": "c20",
+   "url": "https://kb.pigment.com/docs/manage-scim-domain-restriction.md",
+   "title": "Set Up SCIM and Domain Restriction in Pigment for Identity Management",
+   "quote": "If not provided, Pigment uses the first of the following that it finds defined: `name.formatted`, then the combination of `name.givenName` and `name.familyName`",
+   "accessed": "2026-10-05",
+   "page_url": "https://kb.pigment.com/docs/manage-scim-domain-restriction"
+  },
+  {
+   "id": "c21",
+   "url": "https://kb.pigment.com/docs/manage-scim-domain-restriction.md",
+   "title": "Set Up SCIM and Domain Restriction in Pigment for Identity Management",
+   "quote": "A Pigment user has a single login email. Pigment uses the first entry’s `value` and ignores the `type` and `primary` sub-attributes.",
+   "accessed": "2026-10-05",
+   "page_url": "https://kb.pigment.com/docs/manage-scim-domain-restriction"
+  },
+  {
+   "id": "c22",
+   "url": "https://kb.pigment.com/docs/manage-scim-domain-restriction.md",
+   "title": "Set Up SCIM and Domain Restriction in Pigment for Identity Management",
+   "quote": "Both full replacements (`PUT`) and partial updates (`PATCH` with `replace` operations) are supported for these attributes.",
+   "accessed": "2026-10-05",
+   "page_url": "https://kb.pigment.com/docs/manage-scim-domain-restriction"
+  },
+  {
+   "id": "c23",
+   "url": "https://kb.pigment.com/docs/manage-scim-domain-restriction.md",
+   "title": "Set Up SCIM and Domain Restriction in Pigment for Identity Management",
+   "quote": "Maps to the user’s **account type** in Pigment.",
+   "accessed": "2026-10-05",
+   "page_url": "https://kb.pigment.com/docs/manage-scim-domain-restriction"
+  },
+  {
+   "id": "c24",
+   "url": "https://kb.pigment.com/docs/manage-scim-domain-restriction.md",
+   "title": "Set Up SCIM and Domain Restriction in Pigment for Identity Management",
+   "quote": "urn:ietf:params:scim:schemas:extension:pigment:2.0:User",
+   "accessed": "2026-10-05",
+   "page_url": "https://kb.pigment.com/docs/manage-scim-domain-restriction"
+  },
+  {
+   "id": "c25",
+   "url": "https://kb.pigment.com/docs/manage-scim-domain-restriction.md",
+   "title": "Set Up SCIM and Domain Restriction in Pigment for Identity Management",
+   "quote": "There is no preconfigured Pigment integration in the Okta Integration Network at the moment.",
+   "accessed": "2026-10-05",
+   "page_url": "https://kb.pigment.com/docs/manage-scim-domain-restriction"
+  },
+  {
+   "id": "c26",
+   "url": "https://kb.pigment.com/docs/manage-scim-domain-restriction.md",
+   "title": "Set Up SCIM and Domain Restriction in Pigment for Identity Management",
+   "quote": "In the **General** tab, select the **Enable SCIM Provisioning** checkbox.",
+   "accessed": "2026-10-05",
+   "page_url": "https://kb.pigment.com/docs/manage-scim-domain-restriction"
+  },
+  {
+   "id": "c27",
+   "url": "https://kb.pigment.com/docs/manage-scim-domain-restriction.md",
+   "title": "Set Up SCIM and Domain Restriction in Pigment for Identity Management",
+   "quote": "SCIM Provisioner with SAML (SCIM v2 Core)",
+   "accessed": "2026-10-05",
+   "page_url": "https://kb.pigment.com/docs/manage-scim-domain-restriction"
+  },
+  {
+   "id": "c28",
+   "url": "https://kb.pigment.com/docs/manage-scim-domain-restriction.md",
+   "title": "Set Up SCIM and Domain Restriction in Pigment for Identity Management",
+   "quote": "Select **New Application** and then **Create your own application**.",
+   "accessed": "2026-10-05",
+   "page_url": "https://kb.pigment.com/docs/manage-scim-domain-restriction"
+  },
+  {
+   "id": "c29",
+   "url": "https://kb.pigment.com/docs/manage-scim-domain-restriction.md",
+   "title": "Set Up SCIM and Domain Restriction in Pigment for Identity Management",
+   "quote": "Entra ID manages user creation, updates, and deactivations within Pigment based on changes in the app assignment scope inside Entra ID.",
+   "accessed": "2026-10-05",
+   "page_url": "https://kb.pigment.com/docs/manage-scim-domain-restriction"
+  },
+  {
+   "id": "c30",
+   "url": "https://kb.pigment.com/docs/manage-scim-domain-restriction.md",
+   "title": "Set Up SCIM and Domain Restriction in Pigment for Identity Management",
+   "quote": "Email changes must be sent as a full SCIM user update, using `PUT /Users/{id}`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://kb.pigment.com/docs/manage-scim-domain-restriction"
+  },
+  {
+   "id": "c31",
+   "url": "https://kb.pigment.com/docs/manage-scim-domain-restriction.md",
+   "title": "Set Up SCIM and Domain Restriction in Pigment for Identity Management",
+   "quote": "Update requests can target a user either by this `id` or by their `userName`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://kb.pigment.com/docs/manage-scim-domain-restriction"
+  },
+  {
+   "id": "c32",
+   "url": "https://kb.pigment.com/docs/manage-member-accounts-pigment.md",
+   "title": "Manage Member Accounts in Pigment",
+   "quote": "Deactivated Members' contributions remain part of your history log.",
+   "accessed": "2026-10-05",
+   "page_url": "https://kb.pigment.com/docs/manage-member-accounts-pigment"
+  },
+  {
+   "id": "c33",
+   "url": "https://kb.pigment.com/docs/manage-member-accounts-pigment.md",
+   "title": "Manage Member Accounts in Pigment",
+   "quote": "Format your CSV file with **Name**, **Email**, and **Account Type** headers.",
+   "accessed": "2026-10-05",
+   "page_url": "https://kb.pigment.com/docs/manage-member-accounts-pigment"
+  },
+  {
+   "id": "c34",
+   "url": "https://kb.pigment.com/docs/pigment-workspace-audit-logs-api.md",
+   "title": "Monitor your Pigment Workspace with Audit Logs API",
+   "quote": "The API is read-only, and there is no write functionality available.",
+   "accessed": "2026-10-05",
+   "page_url": "https://kb.pigment.com/docs/pigment-workspace-audit-logs-api"
+  },
+  {
+   "id": "c35",
+   "url": "https://kb.pigment.com/docs/call-audit-logs-api.md",
+   "title": "Call the Audit Logs API",
+   "quote": "GET https://pigment.app/api/audit/v1/events?ingestedSince=2023-11-27",
+   "accessed": "2026-10-05",
+   "page_url": "https://kb.pigment.com/docs/call-audit-logs-api"
+  },
+  {
+   "id": "c36",
+   "url": "https://kb.pigment.com/docs/call-audit-logs-api.md",
+   "title": "Call the Audit Logs API",
+   "quote": "If any events were executed through Pigment API (e.g. Export or User Provisioning)",
+   "accessed": "2026-10-05",
+   "page_url": "https://kb.pigment.com/docs/call-audit-logs-api"
+  },
+  {
+   "id": "c37",
+   "url": "https://kb.pigment.com/docs/pigment-workspace-audit-logs-api.md",
+   "title": "Monitor your Pigment Workspace with Audit Logs API",
+   "quote": "Only Pigment members with the Account type Security Admin can access the API Keys page",
+   "accessed": "2026-10-05",
+   "page_url": "https://kb.pigment.com/docs/pigment-workspace-audit-logs-api"
+  },
+  {
+   "id": "c38",
+   "url": "https://kb.pigment.com/llms.txt",
+   "title": "Pigment Documentation index (llms.txt)",
+   "quote": "This documentation section includes information on how to use APIs to trigger imports, retrieve metadata, and check status, as well as rate limits for the Pigment Public API",
+   "accessed": "2026-10-05",
+   "page_url": "https://kb.pigment.com/docs/api-management"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.pigment.com/pricing (404)",
+  "https://www.pigment.com/llms.txt",
+  "https://www.pigment.com/sitemap.xml (no pricing page)",
+  "https://kb.pigment.com/llms.txt",
+  "https://kb.pigment.com/docs/manage-scim-domain-restriction",
+  "https://kb.pigment.com/docs/configure-single-sign-on-sso-pigment",
+  "https://kb.pigment.com/docs/pigment-license-types",
+  "https://kb.pigment.com/docs/manage-member-accounts-pigment",
+  "https://kb.pigment.com/docs/pigment-workspace-audit-logs-api",
+  "https://kb.pigment.com/docs/call-audit-logs-api",
+  "https://kb.pigment.com/docs/manage-api-keys",
+  "https://www.okta.com/integrations/pigment/ (404)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/pigment-tutorial (404)"
+ ],
+ "open_questions": [
+  "Which Pigment tier includes SCIM and its price are not published.",
+  "SCIM base URL is generated in-app and not documented; ServiceProviderConfig/Schemas endpoints and pagination are not documented.",
+  "Whether SCIM suspension frees a licence is not documented.",
+  "Whether SAML sign-in provisions users JIT is not documented.",
+  "Audit Logs API plan availability not stated; Google Workspace and JumpCloud not checked."
+ ]
+}

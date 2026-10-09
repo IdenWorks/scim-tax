@@ -1,0 +1,451 @@
+{
+ "slug": "gladly",
+ "vendor": "Gladly",
+ "vendor_url": "https://www.gladly.ai",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Gladly",
+  "slug": "gladly",
+  "category": "Customer Support & Success",
+  "status": "none",
+  "scim_plan": "—",
+  "scim_price_text": "—",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales (no public pricing)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": null,
+  "idp": {
+   "okta": "none",
+   "entra": "sso_only",
+   "google": "sso_only",
+   "onelogin": "sso_only",
+   "jumpcloud": null,
+   "generic": false
+  },
+  "pricing_page_url": "https://www.gladly.ai/contact/",
+  "docs_url": "https://help.gladly.com/docs/activate-and-manage-single-sign-on",
+  "evidence": "Gladly's SSO docs offer SAML 2.0 with JIT user creation (\"JIT provisioning is currently only available through Okta and PingOne\"); no SCIM endpoint is documented in the help centre or the REST API reference.",
+  "notes": "New in 2026-09. Quote-only: no public plans (gladly.ai/pricing redirects to the homepage; sales via the contact form); billing is by contracted seats or user months with usage-based true-ups, so price fields stay null and sso_plan is null (SAML is documented with no plan gate). No SCIM; SAML JIT creates users on first login for Okta and PingOne only, with role and inbox mapping from SAML attributes; deactivation is manual (users cannot be deleted). CSV bulk import/edit exists. The REST API only reads agents and teams. Okta OIN search returns no Gladly app; vendor guides use custom SAML apps for Okta, Entra, Google and OneLogin.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [],
+ "scim": {
+  "available": false,
+  "cite": [
+   "c3",
+   "c4",
+   "c5"
+  ],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": null,
+   "token_source": null,
+   "token_expiry": null,
+   "cite": []
+  },
+  "endpoints": {
+   "Users": null,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": []
+  },
+  "operations": {
+   "create": null,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": null,
+   "reactivate": null,
+   "delete": null,
+   "group_push": null,
+   "group_membership": null,
+   "cite": []
+  },
+  "deprovision": {
+   "action": null,
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": []
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": []
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "No SCIM endpoint is documented in the help-centre index (llms.txt), the SSO guides or the REST API reference; SAML JIT (Okta and PingOne only) is the only automated provisioning. 'false' is by absence (rule 5)."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c8",
+   "c9",
+   "c11"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://{organization}.gladly.com/api/v1",
+  "docs_url": "https://developer.gladly.com/rest/",
+  "auth": {
+   "methods": [
+    "api_key"
+   ],
+   "scopes": [],
+   "cite": [
+    "c9"
+   ],
+   "notes": "Token-based Basic Authentication: agent email as user name, API token as password; requires the API User permission."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c8",
+    "c10"
+   ],
+   "notes": "The Agents and Teams resources are read-only lookups (plus a call-recorder setting per agent); no create, update or deactivate endpoint for users is documented."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/api/v1/agents",
+    "purpose": "List agents",
+    "cite": [
+     "c8"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/agents/{agentId}",
+    "purpose": "Get agent",
+    "cite": [
+     "c8"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/teams",
+    "purpose": "List teams",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/teams/{teamId}",
+    "purpose": "Get team",
+    "cite": [
+     "c10"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": [],
+   "notes": "An Audit Log report exists in the UI; no audit-log API endpoint was found in the REST reference."
+  },
+  "rate_limits": {
+   "text": "Default 10 requests per second per method (GET/POST/PUT/PATCH/DELETE); 429 when exceeded.",
+   "cite": [
+    "c12"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "No user create, update or deactivate endpoints in the REST API; users are managed in the UI or by CSV.",
+    "cite": [
+     "c8",
+     "c7"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": false,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c13",
+    "c3"
+   ],
+   "notes": "No OIN app; vendor guide creates a custom Okta SAML 2.0 app (JIT supported for Okta)."
+  },
+  "entra": {
+   "listed": false,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c3"
+   ],
+   "notes": "Vendor guide adds a non-gallery Entra application for SAML."
+  },
+  "google": {
+   "listed": false,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c3"
+   ],
+   "notes": "Custom SAML app per vendor guide."
+  },
+  "onelogin": {
+   "listed": false,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c3",
+    "c14"
+   ],
+   "notes": "SAML Custom Connector per vendor guide; OneLogin catalogue not loaded."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": true,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c4",
+   "c5",
+   "c7"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.gladly.ai/contact/",
+   "title": "Contact Gladly: schedule a demo or talk to sales | Gladly",
+   "quote": "Our Gladly team is excited to learn more about you, your company, and the potential opportunity to partner together.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://help.gladly.com/docs/managing-users-and-roles.md",
+   "title": "Add and Deactivate Users",
+   "quote": "Gladly charges usage fees based on user activities rather than solely by role.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.gladly.com/docs/managing-users-and-roles"
+  },
+  {
+   "id": "c3",
+   "url": "https://help.gladly.com/docs/single-sign-on-setup.md",
+   "title": "Single Sign-On Setup",
+   "quote": "Gladly supports standard Secure Assertion Markup Language (SAML) 2.0 integration with any enterprise Identity Provider to provide Gladly single sign-on (SSO) access.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.gladly.com/docs/single-sign-on-setup"
+  },
+  {
+   "id": "c4",
+   "url": "https://help.gladly.com/docs/activate-and-manage-single-sign-on.md",
+   "title": "Activate and Manage Single Sign-On",
+   "quote": "Automatically create Gladly user accounts once they are provisioned through your SSO provider.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.gladly.com/docs/activate-and-manage-single-sign-on"
+  },
+  {
+   "id": "c5",
+   "url": "https://help.gladly.com/docs/activate-and-manage-single-sign-on.md",
+   "title": "Activate and Manage Single Sign-On",
+   "quote": "JIT provisioning is currently only available through Okta and PingOne (Ping Identity).",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.gladly.com/docs/activate-and-manage-single-sign-on"
+  },
+  {
+   "id": "c6",
+   "url": "https://help.gladly.com/docs/managing-users-and-roles.md",
+   "title": "Add and Deactivate Users",
+   "quote": "You cannot delete users in Gladly, even if their account is deactivated.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.gladly.com/docs/managing-users-and-roles"
+  },
+  {
+   "id": "c7",
+   "url": "https://help.gladly.com/docs/bulk-user-upload.md",
+   "title": "Bulk User Upload/Edit",
+   "quote": "Users not in the CSV are not added.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.gladly.com/docs/bulk-user-upload"
+  },
+  {
+   "id": "c8",
+   "url": "https://developer.gladly.com/rest/",
+   "title": "Gladly API",
+   "quote": "The API allows you to lookup Agents who participated in conversations with customers.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://developer.gladly.com/rest/",
+   "title": "Gladly API",
+   "quote": "API tokens are associated with designated Gladly users. To create and use an API token, your user must have the API User permission.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://developer.gladly.com/rest/",
+   "title": "Gladly API",
+   "quote": "A Team represents a group of Agents.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c11",
+   "url": "https://developer.gladly.com/rest/",
+   "title": "Gladly API",
+   "quote": "Clients can access the REST API via HTTPS at your organization's Gladly domain",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://developer.gladly.com/rest/",
+   "title": "Gladly API",
+   "quote": "Organizations that send many requests in quick succession may see error responses that show up as status code",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://www.okta.com/integrations/?search=gladly",
+   "title": "Okta Integration Network | Okta",
+   "quote": "No results found for: “gladly”",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c14",
+   "url": "https://help.gladly.com/docs/single-sign-on-setup.md",
+   "title": "Single Sign-On Setup",
+   "quote": "Add the appropriate users who need SSO access to Gladly.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.gladly.com/docs/single-sign-on-setup"
+  },
+  {
+   "id": "c15",
+   "url": "https://help.gladly.com/docs/single-sign-on-setup.md",
+   "title": "Single Sign-On Setup",
+   "quote": "Users you need to add in the future must be added to Gladly first, then given SSO access via your provider.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.gladly.com/docs/single-sign-on-setup"
+  },
+  {
+   "id": "c16",
+   "url": "https://help.gladly.com/docs/audit-log.md",
+   "title": "Audit Log",
+   "quote": "The Audit Log report shows configuration changes made in your Gladly organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.gladly.com/docs/audit-log"
+  },
+  {
+   "id": "c17",
+   "url": "https://help.gladly.com/implementation/docs/invoice-and-billing-overview.md",
+   "title": "Invoice and Billing Overview",
+   "quote": "Upon renewal, you will receive a new invoice for your contracted seats or user months, as negotiated in your agreement.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.gladly.com/implementation/docs/invoice-and-billing-overview"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.gladly.ai/pricing/ (redirects to homepage; no pricing page) and https://www.gladly.ai/llms.txt, gladly.com sitemap.xml",
+  "https://help.gladly.com/llms.txt (full help-centre index: no SCIM page; SSO, JIT, user management, bulk upload, audit log pages read)",
+  "https://developer.gladly.com/rest/ (full REST API reference: Agents and Teams are read-only; no SCIM)",
+  "https://www.gladly.ai/rfp-hub/ (no SCIM/SSO mention)",
+  "Okta OIN search 'gladly' (0 results); Entra gallery tutorial URL gladly-tutorial (404)"
+ ],
+ "open_questions": [
+  "Which contract tiers include SSO is not public (no pricing page).",
+  "Whether deactivating a user frees a contracted seat is not stated; billing is by activity-based user months.",
+  "No audit-log API or user-lifecycle webhooks are documented (webhook/event entities cover agent status and availability only).",
+  "JumpCloud catalogue entry not checked."
+ ]
+}

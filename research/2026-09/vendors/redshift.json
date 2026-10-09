@@ -1,0 +1,431 @@
+{
+ "slug": "redshift",
+ "vendor": "Amazon Redshift",
+ "vendor_url": "https://aws.amazon.com/redshift/",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Amazon Redshift",
+  "slug": "redshift",
+  "category": "Data, Analytics & BI",
+  "status": "none",
+  "scim_plan": "—",
+  "scim_price_text": "—",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Usage-priced: Provisioned from $0.543/hour, Serverless from $1.50/hour",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "All deployments (usage-priced)",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": null,
+  "idp": {
+   "okta": null,
+   "entra": "sso_only",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": false
+  },
+  "pricing_page_url": "https://aws.amazon.com/redshift/pricing/",
+  "docs_url": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-idp-connect.html",
+  "evidence": "Amazon Redshift manages workforce access \"through trusted-identity propagation\" from AWS IAM Identity Center and creates users on first login, but \"the user is not automatically deleted from the Amazon Redshift catalog\" when removed from the IdP; there is no SCIM endpoint.",
+  "notes": "Amazon Redshift is usage-priced (Provisioned from $0.543/hour, Serverless from $1.50/hour), so seat and SCIM price fields are empty. There is no SCIM endpoint into Redshift: identities come from AWS IAM Identity Center (which itself accepts SCIM from Okta, Entra ID and others) via trusted identity propagation, from native IdP federation (Entra ID, users created on first login with groups mapped to roles), or from IAM federation with GetClusterCredentials AutoCreate. Deleting a user in Identity Center or the IdP does not remove the Redshift user; admins must run DROP USER. Database users are otherwise managed with SQL (CREATE/ALTER/DROP USER). Identity Center's own SCIM belongs to the AWS row, not this one. 'None' is by absence (rule 5).",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "All deployments (Provisioned and Serverless)",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Redshift Provisioned",
+   "price_text": "From $0.543 per hour (on-demand)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c5",
+    "c9"
+   ],
+   "notes": "Hourly node pricing; reserved instances available."
+  },
+  {
+   "name": "Redshift Serverless",
+   "price_text": "From $1.50 per hour (RPU-hours, per-second billing)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c5",
+    "c9"
+   ]
+  }
+ ],
+ "scim": {
+  "available": false,
+  "cite": [
+   "c2",
+   "c4"
+  ],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": null,
+   "token_source": null,
+   "token_expiry": null,
+   "cite": []
+  },
+  "endpoints": {
+   "Users": null,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": []
+  },
+  "operations": {
+   "create": null,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": null,
+   "reactivate": null,
+   "delete": null,
+   "group_push": null,
+   "group_membership": null,
+   "cite": []
+  },
+  "deprovision": {
+   "action": null,
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": []
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": []
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Users removed from IAM Identity Center or the connected IdP are not deleted from the Redshift catalog; an admin must run DROP USER.",
+    "cite": [
+     "c3"
+    ]
+   }
+  ],
+  "notes": "Redshift has no SCIM endpoint. Workforce identities reach it through AWS IAM Identity Center (which an IdP can provision over SCIM) and trusted identity propagation, through native IdP federation (Entra ID), or through IAM federation with auto-created database users. 'false' is by absence (rule 5): the Redshift Management Guide and Database Developer Guide document no SCIM service."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c9",
+   "c10",
+   "c11",
+   "c13"
+  ],
+  "plan": "All deployments (Provisioned and Serverless)",
+  "api_tax": false,
+  "style": "other",
+  "base_url": null,
+  "docs_url": "https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html",
+  "auth": {
+   "methods": [
+    "database_credentials",
+    "iam"
+   ],
+   "scopes": [],
+   "cite": [
+    "c12",
+    "c13"
+   ]
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": true,
+   "invite_user": false,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": false,
+   "cite": [
+    "c9",
+    "c10",
+    "c11"
+   ],
+   "notes": "invite_user and assign_licenses false: Redshift has database users, no invitations or licences."
+  },
+  "endpoints": [
+   {
+    "method": "SQL",
+    "path": "CREATE USER name [ WITH ] PASSWORD { 'password' | 'md5hash' | 'sha256hash' | DISABLE } [ option [ ... ] ]",
+    "purpose": "Create a database user",
+    "cite": [
+     "c9"
+    ]
+   },
+   {
+    "method": "SQL",
+    "path": "ALTER USER",
+    "purpose": "Change a database user (rename, password, expiry, connection limit, session timeout)",
+    "cite": [
+     "c11"
+    ]
+   },
+   {
+    "method": "SQL",
+    "path": "DROP USER [ IF EXISTS ] name [, ... ]",
+    "purpose": "Drop one or more database users",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "https://redshift.{region}.amazonaws.com/?Action=GetClusterCredentials",
+    "purpose": "Issue temporary database credentials; AutoCreate=true creates the user (sample request is a query-string call)",
+    "cite": [
+     "c8",
+     "c12"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "Database users are managed with SQL DDL (CREATE USER, ALTER USER, DROP USER), run by a superuser or a user with the matching privilege; the Redshift Data API can run these statements over HTTPS. The management API action GetClusterCredentials can auto-create a database user (AutoCreate=true) and issue temporary credentials."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "No Redshift app in the Okta OIN (okta.com/integrations/amazon-redshift/ and /aws-redshift/ return 404); Okta reaches Redshift through IAM Identity Center or AWS IAM federation."
+  },
+  "entra": {
+   "listed": null,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c6",
+    "c7"
+   ],
+   "notes": "Native IdP federation supports Entra ID (Azure AD) tokens with JIT users and group-to-role mapping; no Entra gallery provisioning app checked."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "both",
+  "csv_import": false,
+  "other_sync": "AWS IAM Identity Center trusted identity propagation (Identity Center holds the users and groups, e.g. provisioned from Okta or Entra ID)",
+  "docs_public": true,
+  "cite": [
+   "c2",
+   "c4",
+   "c7",
+   "c8"
+  ],
+  "notes": "JIT: native IdP federation (OAuth tokens from Entra ID) creates the user and maps groups to roles on login; IAM/SAML federation via GetClusterCredentials AutoCreate creates the database user. csv_import false: not applicable to a database."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://aws.amazon.com/redshift/pricing/",
+   "title": "Amazon Redshift Pricing",
+   "quote": "Redshift Provisioned starts at $0.543 per hour, while Redshift Serverless begins at $1.50 per hour.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-idp-connect.html",
+   "title": "Connect Redshift with AWS IAM Identity Center for a single sign-on experience - Amazon Redshift",
+   "quote": "You can manage user and group access to Amazon Redshift data warehouses through trusted-identity propagation.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-idp-connect.html",
+   "title": "Connect Redshift with AWS IAM Identity Center for a single sign-on experience - Amazon Redshift",
+   "quote": "When you delete a user from an AWS IAM Identity Center or a connected identity provider (IdP) directory, the user is not automatically deleted from the Amazon Redshift catalog.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-idp-connect.html",
+   "title": "Connect Redshift with AWS IAM Identity Center for a single sign-on experience - Amazon Redshift",
+   "quote": "You can create users and groups directly in AWS IAM Identity Center or connect existing users and groups that you manage in a standards-based identity provider like Okta, PingOne, or Microsoft Entra ID (Azure AD).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-idp-connect.html",
+   "title": "Connect Redshift with AWS IAM Identity Center for a single sign-on experience - Amazon Redshift",
+   "quote": "You can share one AWS IAM Identity Center instance with multiple Redshift clusters and workgroups with a simple auto-discovery and connect capability.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-native-idp.html",
+   "title": "Native identity provider (IdP) federation for Amazon Redshift - Amazon Redshift",
+   "quote": "the supported identity provider is Microsoft Azure Active Directory (Azure AD)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-native-idp.html",
+   "title": "Native identity provider (IdP) federation for Amazon Redshift - Amazon Redshift",
+   "quote": "If the user doesn't already exist in Amazon Redshift, a new user is created. Redshift maps the user's identity provider groups to Redshift roles.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.aws.amazon.com/redshift/latest/mgmt/options-for-providing-iam-credentials.html",
+   "title": "Options for providing IAM credentials - Amazon Redshift",
+   "quote": "If DbUser doesn't exist in the database and AutoCreate is true, a new user named DbUser is created.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html",
+   "title": "CREATE USER - Amazon Redshift",
+   "quote": "Creates a new database user. Database users can retrieve data, run commands, and perform other actions in a database, depending on their privileges and roles.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.aws.amazon.com/redshift/latest/dg/r_DROP_USER.html",
+   "title": "DROP USER - Amazon Redshift",
+   "quote": "Drops a user from a database. Multiple users can be dropped with a single DROP USER command.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.aws.amazon.com/redshift/latest/dg/r_ALTER_USER.html",
+   "title": "ALTER USER - Amazon Redshift",
+   "quote": "Changes a database user.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html",
+   "title": "GetClusterCredentials - Amazon Redshift",
+   "quote": "Returns a database user name and temporary password with temporary authorization to log on to an Amazon Redshift database.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html",
+   "title": "CREATE USER - Amazon Redshift",
+   "quote": "You must be a database superuser to run this command.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://aws.amazon.com/redshift/pricing/ (rendered)",
+  "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-idp-connect.html",
+  "https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-native-idp.html",
+  "https://docs.aws.amazon.com/redshift/latest/mgmt/options-for-providing-iam-credentials.html",
+  "Redshift Database Developer Guide: CREATE USER, ALTER USER, DROP USER",
+  "Redshift API Reference: GetClusterCredentials",
+  "https://www.okta.com/integrations/amazon-redshift/ and /aws-redshift/ (404)"
+ ],
+ "open_questions": [
+  "Is there an audit-log API for Redshift user activity beyond system tables and CloudTrail? Not checked.",
+  "Does Redshift remove or disable Identity Center users automatically in any configuration?"
+ ]
+}

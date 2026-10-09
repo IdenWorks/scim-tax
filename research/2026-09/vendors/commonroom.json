@@ -1,0 +1,638 @@
+{
+  "slug": "commonroom",
+  "vendor": "Common Room",
+  "vendor_url": "https://www.commonroom.io",
+  "researched_at": "2026-10-05",
+  "row": {
+    "vendor": "Common Room",
+    "slug": "commonroom",
+    "category": "Sales & CRM",
+    "status": "free",
+    "scim_plan": "Essential",
+    "scim_price_text": "$2,500/mo billed annually (5 seats included)",
+    "scim_price_per_user_mo": null,
+    "team_plan": "Essential",
+    "team_price_text": "$2,500/mo billed annually (5 seats included)",
+    "team_price_per_user_mo": null,
+    "price_multiplier": null,
+    "sso_plan": "Essential",
+    "sso_price_per_user_mo": null,
+    "sso_required_for_scim": null,
+    "scim_addon_price_text": null,
+    "min_seats": null,
+    "scim_ops": {
+      "create": true,
+      "update": true,
+      "deactivate": true,
+      "delete": null,
+      "groups": true
+    },
+    "idp": {
+      "okta": "native",
+      "entra": null,
+      "google": null,
+      "onelogin": null,
+      "jumpcloud": null,
+      "generic": false
+    },
+    "pricing_page_url": "https://www.commonroom.io/pricing/",
+    "docs_url": "https://www.commonroom.io/docs/signals/business-integrations/okta/scim/",
+    "evidence": "Common Room's pricing table checks \"SAML/SCIM Security\" on Essential, Advanced and Enterprise, and its SCIM guide says \"You can provision user accounts in the Common Room application through SCIM.\"",
+    "notes": "No free plan; the cheapest plan, Essential, is $2,500/mo billed annually with 5 seats, so per-seat fields stay null (flat pricing). SAML/SCIM Security is checked on all three plans. The SCIM and SAML docs still say 'Team and Enterprise plans' (older plan names), see conflicts. SCIM is documented only as an Okta OIN app (create, update, deactivate, Group Push to roles); the security page says SCIM also works with Azure AD but no Entra guide or generic base URL is published. Deactivation turns the user into a Contact. The public API covers Contacts, not teammates. Audit events stream to S3 on Enterprise.",
+    "confidence": "high",
+    "last_verified": "2026-10-05",
+    "api_provisioning": false,
+    "user_api_available": null,
+    "user_api_plan": null,
+    "api_tax": null,
+    "first_added": "2026-09",
+    "status_prev": null
+  },
+  "plans": [
+    {
+      "name": "Essential",
+      "price_text": "$2,500/mo billed annually, 5 seats included",
+      "price_per_user_mo": null,
+      "billing": "annual",
+      "sso": true,
+      "scim": true,
+      "user_api": null,
+      "audit_log_api": null,
+      "cite": [
+        "c1",
+        "c4",
+        "c5"
+      ],
+      "notes": "SAML/SCIM Security and SSO (GSuite, GitHub) rows carry a checkmark icon in all three plan columns of the comparison table."
+    },
+    {
+      "name": "Advanced",
+      "price_text": "Custom, 15 seats included",
+      "price_per_user_mo": null,
+      "billing": "unknown",
+      "sso": true,
+      "scim": true,
+      "user_api": null,
+      "audit_log_api": null,
+      "cite": [
+        "c2",
+        "c4"
+      ]
+    },
+    {
+      "name": "Enterprise",
+      "price_text": "Custom, 30 seats included",
+      "price_per_user_mo": null,
+      "billing": "unknown",
+      "sso": true,
+      "scim": true,
+      "user_api": null,
+      "audit_log_api": null,
+      "cite": [
+        "c3",
+        "c4",
+        "c28"
+      ]
+    }
+  ],
+  "scim": {
+    "available": true,
+    "cite": [
+      "c6",
+      "c7",
+      "c4",
+      "c23"
+    ],
+    "plan": "Essential",
+    "addon_price_text": null,
+    "sso_required": null,
+    "version": null,
+    "base_url": null,
+    "auth": {
+      "method": null,
+      "token_source": "Settings > API Tokens > Add another account > create a new token (Admin profile required)",
+      "token_expiry": null,
+      "cite": [
+        "c8",
+        "c9"
+      ],
+      "notes": "The token is an ordinary Common Room API token pasted into Okta's API Token field; the auth scheme and expiry are not documented."
+    },
+    "endpoints": {
+      "Users": true,
+      "Groups": true,
+      "ServiceProviderConfig": null,
+      "Schemas": null,
+      "ResourceTypes": null,
+      "Bulk": null,
+      "Me": null,
+      "cite": [
+        "c6",
+        "c12"
+      ]
+    },
+    "operations": {
+      "create": true,
+      "read": null,
+      "update_put": null,
+      "update_patch": null,
+      "deactivate": true,
+      "reactivate": null,
+      "delete": null,
+      "group_push": true,
+      "group_membership": true,
+      "cite": [
+        "c6",
+        "c10",
+        "c12"
+      ],
+      "notes": "Docs list Creating Users, Updating User Attributes, Deactivating Users, permission assignment and role management via SCIM Groups (Okta Group Push). PUT vs PATCH not stated."
+    },
+    "deprovision": {
+      "action": "deactivate",
+      "frees_seat": null,
+      "revokes_sessions": null,
+      "data_retained": "The user is converted to a Contact in the room (record kept).",
+      "cite": [
+        "c10",
+        "c11"
+      ]
+    },
+    "filtering": {
+      "supported": null,
+      "attributes": [],
+      "cite": []
+    },
+    "pagination": {
+      "supported": null,
+      "max_page_size": null,
+      "cite": []
+    },
+    "attributes": {
+      "core": [
+        "userName (email)"
+      ],
+      "enterprise": [],
+      "custom": {
+        "supported": true,
+        "how": "Okta app custom attribute 'Common Room Role' (Admin, Editor or Viewer permission) set on assignment"
+      },
+      "group": [
+        "displayName",
+        "members"
+      ],
+      "cite": [
+        "c13",
+        "c14",
+        "c17",
+        "c20"
+      ],
+      "notes": "Only the email username, the Common Room Role custom attribute and group displayName are named; no full attribute list is published."
+    },
+    "roles": {
+      "supported": true,
+      "how": "Permission level (Admin/Editor/Viewer) via the Common Room Role attribute; in-app roles via SCIM Groups whose displayName matches an existing Common Room role",
+      "cite": [
+        "c12",
+        "c13",
+        "c14",
+        "c16",
+        "c17"
+      ]
+    },
+    "rate_limits": {
+      "text": null,
+      "cite": []
+    },
+    "limitations": [
+      {
+        "text": "Changing a user's email creates a new Common Room account instead of updating the existing one.",
+        "cite": [
+          "c15"
+        ]
+      },
+      {
+        "text": "Group Push does not create roles; a role with the same name must already exist in Common Room.",
+        "cite": [
+          "c16"
+        ]
+      },
+      {
+        "text": "Roles assigned manually in the UI are not tracked or reconciled by SCIM groups.",
+        "cite": [
+          "c19"
+        ]
+      },
+      {
+        "text": "Only an Okta setup guide is published; the security page says SCIM works via multiple IdPs including Azure AD, but no Entra guide or base URL is documented.",
+        "cite": [
+          "c23",
+          "c6"
+        ]
+      }
+    ],
+    "notes": "SCIM is set up through Okta's OIN app; no generic SCIM base URL is published. Common Room does not write attributes back to Okta."
+  },
+  "user_api": {
+    "available": null,
+    "cite": [
+      "c26",
+      "c27"
+    ],
+    "plan": null,
+    "api_tax": null,
+    "style": "REST",
+    "base_url": "https://api.commonroom.io/community/v1 (v1); https://api.commonroom.io/api/v2 (v2)",
+    "docs_url": "https://api.commonroom.io/docs/api-v2.html",
+    "auth": {
+      "methods": [
+        "api_key"
+      ],
+      "scopes": [],
+      "cite": [
+        "c26"
+      ]
+    },
+    "capabilities": {
+      "list_users": null,
+      "get_user": null,
+      "create_user": null,
+      "invite_user": null,
+      "update_user": null,
+      "deactivate_user": null,
+      "delete_user": null,
+      "reactivate_user": null,
+      "manage_groups": null,
+      "assign_roles": null,
+      "assign_licenses": null,
+      "cite": []
+    },
+    "endpoints": [],
+    "webhooks_user_events": {
+      "supported": null,
+      "events": [],
+      "cite": []
+    },
+    "audit_log_api": {
+      "supported": null,
+      "plan": "Enterprise (SIEM streaming)",
+      "cite": [
+        "c28",
+        "c29"
+      ],
+      "notes": "Security audit events (sign-in, role assigned/revoked, seat added/removed, API token created/revoked) are streamed in OCSF format to a customer S3 bucket on Enterprise; this is a push export, not a query API."
+    },
+    "rate_limits": {
+      "text": null,
+      "cite": []
+    },
+    "limitations": [
+      {
+        "text": "Teammates are invited and assigned permissions in Settings > Team Access in the UI.",
+        "cite": [
+          "c30"
+        ]
+      }
+    ],
+    "notes": "The Common Room API manages Contacts, activities, organizations, segments and tags (GET /contacts, POST /contacts/bulk and similar) plus GET /me for the token's user. No endpoint for workspace users (teammates), permissions or roles was found in the v2 reference, so no user-management API is recorded."
+  },
+  "idp_apps": {
+    "okta": {
+      "listed": true,
+      "sso": true,
+      "provisioning": true,
+      "kind": "scim",
+      "built_by": null,
+      "url": "https://www.okta.com/integrations/common-room/",
+      "cite": [
+        "c24",
+        "c25",
+        "c6"
+      ],
+      "notes": "OIN page marks SAML, SCIM, Create, Update, Deactivate and Group Push as supported (checkmark classes in the page markup)."
+    },
+    "entra": {
+      "listed": null,
+      "sso": null,
+      "provisioning": null,
+      "kind": null,
+      "built_by": null,
+      "url": null,
+      "cite": [],
+      "notes": "Common Room's security page names Azure AD for SAML and SCIM, but no Entra gallery tutorial was found (learn.microsoft.com common-room tutorial URLs 404)."
+    },
+    "google": {
+      "listed": null,
+      "sso": null,
+      "provisioning": null,
+      "kind": null,
+      "built_by": null,
+      "url": null,
+      "cite": []
+    },
+    "onelogin": {
+      "listed": null,
+      "sso": null,
+      "provisioning": null,
+      "kind": null,
+      "built_by": null,
+      "url": null,
+      "cite": []
+    },
+    "jumpcloud": {
+      "listed": null,
+      "sso": null,
+      "provisioning": null,
+      "kind": null,
+      "built_by": null,
+      "url": null,
+      "cite": [],
+      "notes": "jumpcloud.com/support/integrate-with-common-room returned 403 to curl."
+    }
+  },
+  "fallbacks": {
+    "jit": null,
+    "jit_protocol": null,
+    "csv_import": null,
+    "other_sync": null,
+    "docs_public": true,
+    "cite": [
+      "c6",
+      "c22",
+      "c5"
+    ],
+    "notes": "SAML SSO is configured by sending the IdP metadata URL to Common Room support. Docs also offer Google Workspace and GitHub sign-in. JIT and CSV import of teammates not documented."
+  },
+  "citations": [
+    {
+      "id": "c1",
+      "url": "https://www.commonroom.io/pricing/",
+      "title": "Pricing | Common Room",
+      "quote": "Essential $2,500/mo Billed annually 5 seats included Up to 100k contacts",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c2",
+      "url": "https://www.commonroom.io/pricing/",
+      "title": "Pricing | Common Room",
+      "quote": "Advanced Custom 15 seats included Up to 250k contacts",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c3",
+      "url": "https://www.commonroom.io/pricing/",
+      "title": "Pricing | Common Room",
+      "quote": "Enterprise Custom 30 seats included Up to 750k contacts",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c4",
+      "url": "https://www.commonroom.io/pricing/",
+      "title": "Pricing | Common Room",
+      "quote": "SAML/SCIM Security",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c5",
+      "url": "https://www.commonroom.io/pricing/",
+      "title": "Pricing | Common Room",
+      "quote": "SSO (GSuite, GitHub)",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c6",
+      "url": "https://www.commonroom.io/docs/signals/business-integrations/okta/scim/",
+      "title": "SCIM Setup Guide | Common Room (Docs)",
+      "quote": "You can provision user accounts in the Common Room application through SCIM. SCIM supports the following features:",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c7",
+      "url": "https://www.commonroom.io/docs/signals/business-integrations/okta/scim/",
+      "title": "SCIM Setup Guide | Common Room (Docs)",
+      "quote": "SCIM is included on Team and Enterprise plans",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c8",
+      "url": "https://www.commonroom.io/docs/signals/business-integrations/okta/scim/",
+      "title": "SCIM Setup Guide | Common Room (Docs)",
+      "quote": "To obtain the Authorization token, a user who is assigned a Common Room Admin profile will need to follow the steps below:",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c9",
+      "url": "https://www.commonroom.io/docs/signals/business-integrations/okta/scim/",
+      "title": "SCIM Setup Guide | Common Room (Docs)",
+      "quote": "Choose Add another account and select create a new token. Copy the token that is created.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c10",
+      "url": "https://www.commonroom.io/docs/signals/business-integrations/okta/scim/",
+      "title": "SCIM Setup Guide | Common Room (Docs)",
+      "quote": "Deactivating Users — User will not be able to log into Common Room",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c11",
+      "url": "https://www.commonroom.io/docs/signals/business-integrations/okta/scim/",
+      "title": "SCIM Setup Guide | Common Room (Docs)",
+      "quote": "Unassigning a user will cause them to lose access to the Common Room application. The user's role will be updated to a Contact in the room.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c12",
+      "url": "https://www.commonroom.io/docs/signals/business-integrations/okta/scim/",
+      "title": "SCIM Setup Guide | Common Room (Docs)",
+      "quote": "A Group maps directly to a Common Room role — pushing a group assigns its members to that role; removing a member from the group revokes the assignment and leaves the user without any role.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c13",
+      "url": "https://www.commonroom.io/docs/signals/business-integrations/okta/scim/",
+      "title": "SCIM Setup Guide | Common Room (Docs)",
+      "quote": "Custom Permission Assignment — Users can be assigned Admin, Editor, or Viewer permissions",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c14",
+      "url": "https://www.commonroom.io/docs/signals/business-integrations/okta/scim/",
+      "title": "SCIM Setup Guide | Common Room (Docs)",
+      "quote": "The custom attribute Common Room Role is available when assigning any user to the application.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c15",
+      "url": "https://www.commonroom.io/docs/signals/business-integrations/okta/scim/",
+      "title": "SCIM Setup Guide | Common Room (Docs)",
+      "quote": "Is updating a user's email attribute currently supported? No, this will result in the creation of a new account for the user in Common Room.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c16",
+      "url": "https://www.commonroom.io/docs/signals/business-integrations/okta/scim/",
+      "title": "SCIM Setup Guide | Common Room (Docs)",
+      "quote": "A role with a matching name must already exist in Common Room before a group can be pushed.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c17",
+      "url": "https://www.commonroom.io/docs/signals/business-integrations/okta/scim/",
+      "title": "SCIM Setup Guide | Common Room (Docs)",
+      "quote": "The group's displayName must match the role name.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c18",
+      "url": "https://www.commonroom.io/docs/signals/business-integrations/okta/scim/",
+      "title": "SCIM Setup Guide | Common Room (Docs)",
+      "quote": "Common Room does not update any user attributes in Okta.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c19",
+      "url": "https://www.commonroom.io/docs/signals/business-integrations/okta/scim/",
+      "title": "SCIM Setup Guide | Common Room (Docs)",
+      "quote": "Manual role assignments are not managed by SCIM.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c20",
+      "url": "https://www.commonroom.io/docs/signals/business-integrations/okta/scim/",
+      "title": "SCIM Setup Guide | Common Room (Docs)",
+      "quote": "In the Sign On tab, ensure that Email is selected for the Application Username Format field.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c21",
+      "url": "https://www.commonroom.io/docs/signals/business-integrations/okta/",
+      "title": "Okta - SAML Integration Guide | Common Room (Docs)",
+      "quote": "SAML/Okta sign-in is included on Team and Enterprise plans",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c22",
+      "url": "https://www.commonroom.io/docs/signals/business-integrations/okta/",
+      "title": "Okta - SAML Integration Guide | Common Room (Docs)",
+      "quote": "Reach out to support@commonroom.io with the Identity Provider Metadata URL you located in step 2 and the Connection Name you created in step 3.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c23",
+      "url": "https://www.commonroom.io/security/",
+      "title": "Security | Common Room",
+      "quote": "We support single sign-on and role-based access control, as well as SAML and SCIM via multiple identity providers, such as Okta, Microsoft Azure Active Directory, and more.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c24",
+      "url": "https://www.okta.com/integrations/common-room/",
+      "title": "Integrate Common Room with Okta | Okta Integration Network",
+      "quote": "The Okta app allows for SSO via SAML for our mutual customers.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c25",
+      "url": "https://www.okta.com/integrations/common-room/",
+      "title": "Integrate Common Room with Okta | Okta Integration Network",
+      "quote": "Add this integration to enable authentication and provisioning capabilities.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c26",
+      "url": "https://www.commonroom.io/docs/set-preferences/api-tokens/",
+      "title": "API Tokens | Common Room (Docs)",
+      "quote": "Create new API tokens to use with the Common Room API. You can use our API to:",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c27",
+      "url": "https://api.commonroom.io/docs/api-v2.html",
+      "title": "Common Room API v2 reference",
+      "quote": "Retrieve information about the authenticated user, including their profile,",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c28",
+      "url": "https://www.commonroom.io/docs/using-common-room/streaming-audit-logs-to-your-siem/",
+      "title": "Streaming audit logs to your SIEM | Common Room (Docs)",
+      "quote": "Common Room can continuously stream security audit events to infrastructure you own, so admin and sign-in activity lands in your SIEM alongside your other sources.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c29",
+      "url": "https://www.commonroom.io/docs/using-common-room/streaming-audit-logs-to-your-siem/",
+      "title": "Streaming audit logs to your SIEM | Common Room (Docs)",
+      "quote": "We support stream delivery to a customer-owned AWS S3 bucket.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c30",
+      "url": "https://www.commonroom.io/docs/set-preferences/team-access/",
+      "title": "Team Access | Common Room (Docs)",
+      "quote": "After selecting the teammate's permissions, add their email addresses to finish inviting them to Common Room.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    }
+  ],
+  "conflicts": [
+    {
+      "text": "The SCIM and SAML docs say SCIM and SAML are included on 'Team and Enterprise plans', older plan names; the current pricing page has Essential, Advanced and Enterprise and checks SAML/SCIM Security on all three.",
+      "cite": [
+        "c7",
+        "c21",
+        "c4"
+      ]
+    }
+  ],
+  "searched": [
+    "https://www.commonroom.io/pricing/",
+    "https://www.commonroom.io/sitemap/sitemap-0.xml",
+    "https://www.commonroom.io/llms.txt",
+    "https://www.commonroom.io/docs/signals/business-integrations/okta/scim/",
+    "https://www.commonroom.io/docs/signals/business-integrations/okta/",
+    "https://www.commonroom.io/security/",
+    "https://www.commonroom.io/docs/set-preferences/api-tokens/",
+    "https://api.commonroom.io/docs/api-v2.html",
+    "https://www.commonroom.io/docs/using-common-room/streaming-audit-logs-to-your-siem/",
+    "https://www.commonroom.io/docs/set-preferences/team-access/",
+    "https://learn.microsoft.com/en-us/entra/identity/saas-apps/common-room-tutorial (404)",
+    "https://jumpcloud.com/support/integrate-with-common-room (403)"
+  ],
+  "open_questions": [
+    "SCIM base URL, auth scheme and token expiry are not documented (setup is through Okta's OIN app).",
+    "No Entra, Google, OneLogin or JumpCloud SCIM guide found, although the security page names Azure AD.",
+    "Docs do not say whether deactivation frees the seat or ends active sessions, or whether delete is supported.",
+    "Whether any plan name 'Team' still exists (docs) versus Essential/Advanced/Enterprise (pricing)."
+  ]
+}

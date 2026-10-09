@@ -1,0 +1,782 @@
+{
+ "slug": "new-relic",
+ "vendor": "New Relic",
+ "vendor_url": "https://newrelic.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "New Relic",
+  "slug": "new-relic",
+  "category": "Cloud, Infrastructure & Observability",
+  "status": "gated",
+  "scim_plan": "Pro or Enterprise",
+  "scim_price_text": "Pro: $349/full platform user/mo (annual commitment)",
+  "scim_price_per_user_mo": 349,
+  "team_plan": "Standard",
+  "team_price_text": "Standard: $10 first full platform user, $99/additional user per month (max 5)",
+  "team_price_per_user_mo": 99,
+  "price_multiplier": 3.5,
+  "sso_plan": "Standard",
+  "sso_price_per_user_mo": 99,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": null,
+   "onelogin": "native",
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://newrelic.com/pricing",
+  "docs_url": "https://docs.newrelic.com/docs/accounts/accounts/automated-user-management/automated-user-provisioning-single-sign/",
+  "evidence": "New Relic's automated user management (SCIM) docs say it 'Requires Pro or Enterprise edition', while the pricing page lists SAML single sign-on on Standard; Pro full platform users are $349/user (for annual commitments).",
+  "notes": "Status unchanged (gated). Usage-based pricing (data ingest plus users); SCIM needs Pro ($349 per full platform user/month on annual commitment, $418.80 pay-as-you-go) or Enterprise (Contact Sales), and requires SAML SSO on the authentication domain. SAML SSO alone is on Standard (paid edition, max 5 full platform users: $10 first user, $99 each additional, monthly pay-as-you-go), so the team and SSO per-user price uses the $99 additional-user price (monthly; Standard has no annual price), giving a 3.5x multiplier that June left null. Basic users are free and core users $49 on every paid edition. SCIM 2.0 endpoint at https://scim-provisioning.service.newrelic.com/scim/v2 with a per-authentication-domain bearer token; dedicated New Relic by organization apps exist for Okta, Entra ID and OneLogin.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Free",
+  "api_tax": false,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "$0 (one free full platform user, unlimited basic users, 100 GB ingest)",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c13",
+    "c7",
+    "c37"
+   ]
+  },
+  {
+   "name": "Standard",
+   "price_text": "$10/first full platform user, $99/additional user (maximum of 5)",
+   "price_per_user_mo": 99,
+   "billing": "monthly",
+   "sso": true,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c3",
+    "c4",
+    "c7",
+    "c37"
+   ]
+  },
+  {
+   "name": "Pro",
+   "price_text": "$349/full platform user (for annual commitments); $418.80/user monthly pay as you go",
+   "price_per_user_mo": 349,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c5",
+    "c6",
+    "c7",
+    "c37"
+   ]
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Contact Sales",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c42",
+    "c7",
+    "c37"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c7",
+   "c8",
+   "c9",
+   "c12",
+   "c21"
+  ],
+  "plan": "Pro",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://scim-provisioning.service.newrelic.com/scim/v2",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Administration > Authentication domains: token shown once when SCIM is enabled for the authentication domain",
+   "token_expiry": null,
+   "cite": [
+    "c14",
+    "c21",
+    "c22"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": true,
+   "Schemas": true,
+   "ResourceTypes": true,
+   "Bulk": false,
+   "Me": null,
+   "cite": [
+    "c15",
+    "c21"
+   ],
+   "notes": "Docs list Group, User, Service provider config, Resource type and Schema; Bulk and Search are not supported."
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c20",
+    "c23",
+    "c24",
+    "c26"
+   ],
+   "notes": "Deactivate/reactivate via the required 'active' boolean; PUT is partial."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c24",
+    "c26"
+   ],
+   "notes": "IdP apps deactivate (active=false); DELETE /scim/v2/Users/{id} removes the user from the authentication domain. IdP 'suspended' state is unsupported and stays billable (c11)."
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName",
+    "displayName (Groups)"
+   ],
+   "cite": [
+    "c16"
+   ],
+   "notes": "eq operator only."
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "externalId",
+    "userName",
+    "name.familyName",
+    "name.givenName",
+    "title",
+    "emails.value",
+    "timezone",
+    "active",
+    "groups"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": true,
+    "how": "urn:ietf:params:scim:schemas:extension:newrelic:2.0:User with nrUserType (Full User, Core User, Basic User); other fields are ignored"
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c17",
+    "c18",
+    "c19"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "IdP groups are synced; roles and account access are granted to those groups on the New Relic side. User type (basic/core/full) can be set via the nrUserType extension.",
+   "cite": [
+    "c19",
+    "c25"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Once an authentication domain is set to SCIM, users and groups can't be managed in the UI and the domain can't be changed back.",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "text": "IdP 'suspended' state is not supported; such users stay billable and keep their user API key.",
+    "cite": [
+     "c11"
+    ]
+   },
+   {
+    "text": "Bulk and Search endpoints are not supported; filtering is eq-only.",
+    "cite": [
+     "c15",
+     "c16"
+    ]
+   },
+   {
+    "text": "OneLogin cannot delete groups already sent to New Relic.",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "text": "Users provisioned via SCIM start as basic users unless nrUserType is sent.",
+    "cite": [
+     "c19"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c31",
+   "c36",
+   "c37"
+  ],
+  "plan": "Free",
+  "api_tax": false,
+  "style": "GraphQL",
+  "base_url": "https://api.newrelic.com/graphql",
+  "docs_url": "https://docs.newrelic.com/docs/apis/nerdgraph/examples/nerdgraph-manage-users/",
+  "auth": {
+   "methods": [
+    "user_api_key"
+   ],
+   "scopes": [],
+   "cite": [
+    "c28",
+    "c37"
+   ],
+   "notes": "Caller must be a core or full platform user with the Authentication Domain Manager role."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": true,
+   "cite": [
+    "c30",
+    "c31",
+    "c32",
+    "c33",
+    "c34",
+    "c35"
+   ],
+   "notes": "assign_licenses = user type (FULL_USER_TIER/CORE_USER_TIER/BASIC_USER_TIER) on create/update; assign_roles via authorizationManagementGrantAccess on groups. Delete works only in manually provisioned authentication domains."
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/graphql mutation userManagementCreateUser",
+    "purpose": "Create a user",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/graphql mutation userManagementUpdateUser",
+    "purpose": "Update a user (incl. user type)",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/graphql mutation userManagementDeleteUser",
+    "purpose": "Delete a user (manual auth domains only)",
+    "cite": [
+     "c33",
+     "c29"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/graphql mutation userManagementCreateGroup",
+    "purpose": "Create a group",
+    "cite": [
+     "c41"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/graphql mutation userManagementAddUsersToGroups",
+    "purpose": "Add users to groups",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/graphql mutation authorizationManagementGrantAccess",
+    "purpose": "Grant a group a role on accounts",
+    "cite": [
+     "c35"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "User queries return at most 500 users per page (cursor pagination).",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "text": "userManagementDeleteUser only works in authentication domains set for manually provisioned users.",
+    "cite": [
+     "c29"
+    ]
+   }
+  ],
+  "notes": "Editable authentication domains themselves require Pro or Enterprise (c12 page); NerdGraph is reachable from any account with a user key."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/new-relic-by-organization/",
+   "cite": [
+    "c38",
+    "c26"
+   ],
+   "notes": "OIN 'New Relic by organization' ticks SAML, SCIM, Create, Update, Deactivate, Group Push, Group Linking (page markup). A separate 'New Relic by account' app is the legacy model, and an Aquera-built provisioning connector is also listed."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/new-relic-limited-release-tutorial",
+   "cite": [
+    "c39",
+    "c40"
+   ],
+   "notes": "Gallery app 'New Relic by Organization'."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c9",
+    "c27"
+   ],
+   "notes": "From New Relic's OneLogin guide; OneLogin connector page not loaded."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c21"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://newrelic.com/pricing",
+   "title": "New Relic Pricing",
+   "quote": "One free full platform user",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://newrelic.com/pricing",
+   "title": "New Relic Pricing",
+   "quote": "Limited to 5 full platform users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://newrelic.com/pricing",
+   "title": "New Relic Pricing",
+   "quote": "SAML single sign-on",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://newrelic.com/pricing",
+   "title": "New Relic Pricing",
+   "quote": "$10/first user $99/additional user (maximum of 5)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://newrelic.com/pricing",
+   "title": "New Relic Pricing",
+   "quote": "$349/user (for annual commitments)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://newrelic.com/pricing",
+   "title": "New Relic Pricing",
+   "quote": "Unlimited full platform users.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://docs.newrelic.com/docs/accounts/accounts/automated-user-management/automated-user-provisioning-single-sign/",
+   "title": "Introduction to automated user management (SCIM provisioning) | New Relic Documentation",
+   "quote": "Requires Pro or Enterprise edition.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.newrelic.com/docs/accounts/accounts/automated-user-management/automated-user-provisioning-single-sign/",
+   "title": "Introduction to automated user management (SCIM provisioning) | New Relic Documentation",
+   "quote": "Use of this feature requires SAML SSO, so once your users are added to New Relic, they can log in using your identity provider.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.newrelic.com/docs/accounts/accounts/automated-user-management/automated-user-provisioning-single-sign/",
+   "title": "Introduction to automated user management (SCIM provisioning) | New Relic Documentation",
+   "quote": "We support the SCIM 2.0 standard. Three identity providers have a New Relic app: Azure AD, Okta, and OneLogin.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.newrelic.com/docs/accounts/accounts/automated-user-management/automated-user-provisioning-single-sign/",
+   "title": "Introduction to automated user management (SCIM provisioning) | New Relic Documentation",
+   "quote": "Once an authentication domain is set to SCIM, you must use SCIM to manage your groups and users, and you can't manage them via our UI.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.newrelic.com/docs/accounts/accounts/automated-user-management/automated-user-provisioning-single-sign/",
+   "title": "Introduction to automated user management (SCIM provisioning) | New Relic Documentation",
+   "quote": "Some identity providers have a suspended state for users. We don't support that. A user in that state won't be visible or manageable from our UI, but will still be billable and will still have access to their user API key.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.newrelic.com/docs/accounts/accounts-billing/new-relic-one-user-management/authentication-domains-saml-sso-scim-more/",
+   "title": "Authentication domains: Manage how users log in (SAML), get added (SCIM), and more | New Relic Documentation",
+   "quote": "SCIM provisioning, also known as automated user management, requires Pro or Enterprise edition.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.newrelic.com/docs/accounts/accounts-billing/new-relic-one-user-management/authentication-domains-saml-sso-scim-more/",
+   "title": "Authentication domains: Manage how users log in (SAML), get added (SCIM), and more | New Relic Documentation",
+   "quote": "SAML SSO requires a paid edition.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.newrelic.com/docs/accounts/accounts/automated-user-management/scim-support-automated-user-management/",
+   "title": "SCIM API for automated user management | New Relic Documentation",
+   "quote": "Authentication requires a bearer token.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.newrelic.com/docs/accounts/accounts/automated-user-management/scim-support-automated-user-management/",
+   "title": "SCIM API for automated user management | New Relic Documentation",
+   "quote": "Bulk and Search are not supported.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.newrelic.com/docs/accounts/accounts/automated-user-management/scim-support-automated-user-management/",
+   "title": "SCIM API for automated user management | New Relic Documentation",
+   "quote": "Only simple filtering is supported. The eq operator may be used with a basic filter expression.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.newrelic.com/docs/accounts/accounts/automated-user-management/scim-support-automated-user-management/",
+   "title": "SCIM API for automated user management | New Relic Documentation",
+   "quote": "New Relic uses a subset of the available fields in the SCIM core schema. Other SCIM fields are ignored if they are included in incoming requests.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.newrelic.com/docs/accounts/accounts/automated-user-management/scim-support-automated-user-management/",
+   "title": "SCIM API for automated user management | New Relic Documentation",
+   "quote": "Time zone of the user in IANA Time Zone database format",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.newrelic.com/docs/accounts/accounts/automated-user-management/scim-support-automated-user-management/",
+   "title": "SCIM API for automated user management | New Relic Documentation",
+   "quote": "Currently this provides control only over a user's user type.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.newrelic.com/docs/accounts/accounts/automated-user-management/scim-support-automated-user-management/",
+   "title": "SCIM API for automated user management | New Relic Documentation",
+   "quote": "PUT updates do not require that all fields be included. Fields that are not included will not be changed.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.newrelic.com/docs/accounts/accounts/automated-user-management/tutorial-manage-users-groups-scim/",
+   "title": "Tutorial: Use our SCIM API to manage users and groups | New Relic Documentation",
+   "quote": "The SCIM API is available at https://scim-provisioning.service.newrelic.com/scim/v2 and this URL is viewable in the authentication domain settings page.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://docs.newrelic.com/docs/accounts/accounts/automated-user-management/tutorial-manage-users-groups-scim/",
+   "title": "Tutorial: Use our SCIM API to manage users and groups | New Relic Documentation",
+   "quote": "If you need to view a bearer token later, the only way to do this is to generate a new one, and that will invalidate the old one and any integrations using the old token.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://docs.newrelic.com/docs/accounts/accounts/automated-user-management/tutorial-manage-users-groups-scim/",
+   "title": "Tutorial: Use our SCIM API to manage users and groups | New Relic Documentation",
+   "quote": "To remove a user from an authentication domain, send a DELETE request to /scim/v2/Users/${ID}.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://docs.newrelic.com/docs/accounts/accounts/automated-user-management/tutorial-manage-users-groups-scim/",
+   "title": "Tutorial: Use our SCIM API to manage users and groups | New Relic Documentation",
+   "quote": "Boolean indicating whether or not the user should be active or inactive within New Relic.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://docs.newrelic.com/docs/accounts/accounts/automated-user-management/roles-permissions-automated-user-management/",
+   "title": "How identity provider groups map to New Relic groups | New Relic Documentation",
+   "quote": "Later, on the New Relic side, you'll assign groups access to roles and accounts",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://docs.newrelic.com/docs/accounts/accounts/automated-user-management/okta-scimsso-application-configuration/",
+   "title": "Okta SCIM/SSO application configuration | New Relic Documentation",
+   "quote": "Check the Enable checkbox in the Create users, Update user attributes, and Deactivate users sections.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://docs.newrelic.com/docs/accounts/accounts/automated-user-management/onelogin-scimsso-application-configuration/",
+   "title": "OneLogin SCIM/SSO application configuration | New Relic Documentation",
+   "quote": "Note that at the moment, there is no way to delete a group from the OneLogin side. This is a known limitation from OneLogin.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://docs.newrelic.com/docs/apis/nerdgraph/examples/nerdgraph-manage-users/",
+   "title": "NerdGraph tutorial: Manage users | New Relic Documentation",
+   "quote": "To view and make changes to users requires Authentication Domain Manager role.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://docs.newrelic.com/docs/apis/nerdgraph/examples/nerdgraph-manage-users/",
+   "title": "NerdGraph tutorial: Manage users | New Relic Documentation",
+   "quote": "This API can only be used to delete users within Authentication Domains set for manually provisioned users.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://docs.newrelic.com/docs/apis/nerdgraph/examples/nerdgraph-manage-users/",
+   "title": "NerdGraph tutorial: Manage users | New Relic Documentation",
+   "quote": "By default, the API only returns at most 500 users or 10 authentication domains.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://docs.newrelic.com/docs/apis/nerdgraph/examples/nerdgraph-manage-users/",
+   "title": "NerdGraph tutorial: Manage users | New Relic Documentation",
+   "quote": "userManagementCreateUser(",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://docs.newrelic.com/docs/apis/nerdgraph/examples/nerdgraph-manage-users/",
+   "title": "NerdGraph tutorial: Manage users | New Relic Documentation",
+   "quote": "userManagementUpdateUser(",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://docs.newrelic.com/docs/apis/nerdgraph/examples/nerdgraph-manage-users/",
+   "title": "NerdGraph tutorial: Manage users | New Relic Documentation",
+   "quote": "userManagementDeleteUser(",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://docs.newrelic.com/docs/apis/nerdgraph/examples/nerdgraph-manage-groups/",
+   "title": "NerdGraph tutorial: Manage groups | New Relic Documentation",
+   "quote": "userManagementAddUsersToGroups",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c35",
+   "url": "https://docs.newrelic.com/docs/apis/nerdgraph/examples/nerdgraph-manage-groups/",
+   "title": "NerdGraph tutorial: Manage groups | New Relic Documentation",
+   "quote": "authorizationManagementGrantAccess",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://docs.newrelic.com/docs/apis/nerdgraph/get-started/introduction-new-relic-nerdgraph/",
+   "title": "Introduction to NerdGraph | New Relic Documentation",
+   "quote": "US region (default): https://api.newrelic.com/graphql",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://docs.newrelic.com/docs/apis/nerdgraph/get-started/introduction-new-relic-nerdgraph/",
+   "title": "Introduction to NerdGraph | New Relic Documentation",
+   "quote": "You need a New Relic account, and with that account, you can access your API user key that you need to include with queries and mutations.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c38",
+   "url": "https://www.okta.com/integrations/new-relic-by-organization/",
+   "title": "Integrate New Relic by organization with Okta",
+   "quote": "For access to New Relic, this app provides user provisioning via SCIM and login via SAML.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c39",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/new-relic-limited-release-tutorial",
+   "title": "Configure New Relic by Organization for Single sign-on with Microsoft Entra ID | Microsoft Learn",
+   "quote": "New Relic supports Automated user provisioning .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c40",
+   "url": "https://docs.newrelic.com/docs/accounts/accounts/automated-user-management/azure-ad-scimsso-application-configuration/",
+   "title": "Azure AD SCIM/SSO application configuration | New Relic Documentation",
+   "quote": "click on the application New Relic by organization (not New Relic by account).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c41",
+   "url": "https://docs.newrelic.com/docs/apis/nerdgraph/examples/nerdgraph-manage-groups/",
+   "title": "NerdGraph tutorial: Manage groups | New Relic Documentation",
+   "quote": "userManagementCreateGroup",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c42",
+   "url": "https://newrelic.com/pricing",
+   "title": "New Relic Pricing",
+   "quote": "Enterprise For at-scale organizations with advanced security and support needs.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://newrelic.com/pricing",
+  "https://docs.newrelic.com/llms.txt",
+  "docs.newrelic.com automated user management, authentication domains, SCIM API, SCIM tutorial, Okta/Azure/OneLogin guides",
+  "NerdGraph manage users / manage groups",
+  "https://www.okta.com/integrations/?search=new%20relic",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/new-relic-limited-release-tutorial"
+ ],
+ "open_questions": [
+  "Whether deactivating a user via SCIM stops full platform user billing is not stated (only that 'suspended' users remain billable).",
+  "SCIM pagination and page size are not documented.",
+  "SCIM token expiry is not documented (regenerating invalidates the old token).",
+  "SCIM and NerdGraph rate limits not documented on the pages read.",
+  "Whether NerdGraph user management works on Free/Standard (non-editable default authentication domain) is not stated explicitly.",
+  "Audit-log API (NrAuditEvent via NRQL) page could not be loaded (404 on .md export).",
+  "Google Workspace and JumpCloud catalogue listings not checked; whether SAML JIT creates users is not documented."
+ ]
+}

@@ -1,0 +1,1193 @@
+{
+ "slug": "hive",
+ "vendor": "Hive",
+ "vendor_url": "https://hive.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Hive",
+  "slug": "hive",
+  "category": "Project & Work Management",
+  "status": "gated",
+  "scim_plan": "Teams + SSO, enterprise security & control add-on (included on Enterprise)",
+  "scim_price_text": "Teams $12/user/mo + add-on $5/user/mo (billed yearly) = $17/user/mo; Enterprise: Contact Sales",
+  "scim_price_per_user_mo": 17,
+  "team_plan": "Starter",
+  "team_price_text": "Starter: $5/user/mo billed yearly (up to 10 workspace members)",
+  "team_price_per_user_mo": 5,
+  "price_multiplier": 3.4,
+  "sso_plan": "Teams + SSO, enterprise security & control add-on (included on Enterprise)",
+  "sso_price_per_user_mo": 17,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": "SSO, enterprise security & control (Enterprise Security add-on): +$5/user/mo",
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "via_generic",
+   "google": "third_party",
+   "onelogin": "via_generic",
+   "jumpcloud": "via_generic",
+   "generic": true
+  },
+  "pricing_page_url": "https://hive.com/pricing/",
+  "docs_url": "https://help.hive.com/en/articles/11036412-setting-up-scim-provisioning-with-okta",
+  "evidence": "Hive's SCIM guide says \"You must have an existing Hive workspace with the Enterprise Security Add-on\", which the pricing page sells as the \"SSO, enterprise security & control\" flexible add-on at +$5 each per user on Teams (included on Enterprise).",
+  "notes": "New row. Pricing page (yearly view, 'save 33%'): Free $0 (up to 10 members), Starter $5, Teams $12 per user/mo, Enterprise Contact Sales ('Flexible add-ons included'). SCIM and SAML need the Enterprise Security add-on, sold in the Teams calculator as 'SSO, enterprise security & control' at +$5 per user per month (the calculator adds each add-on to the per-user price), so the SCIM price is $12 + $5 = $17/user/mo on yearly billing; whether Starter can buy the add-on is not stated. One help article (custom SAML) still says a Hive Enterprise plan is required (see conflicts). Hive documents a public SCIM 2.0 API (https://scim.hive.com/v2/{workspaceId}, bearer = Hive API key of a system admin) for Okta, Entra ID, OneLogin, JumpCloud and Ping; Google Workspace only via third-party SCIM bridges. Okta OIN app is SCIM (create, update, deactivate, group push); Entra gallery app is SSO + JIT only. SCIM DELETE or active=false removes the user from the workspace (account kept, re-provisionable). REST API v2 (same API key or OAuth2) lists, invites, updates and removes members and manages teams; 1000 requests/min per user; the plan that includes it is not stated (pricing lists 'Enterprise API' on Enterprise).",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "$0 / free forever (up to 10 workspace members)",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2"
+   ]
+  },
+  {
+   "name": "Starter",
+   "price_text": "$5 / month per user (yearly billing view)",
+   "price_per_user_mo": 5,
+   "billing": "annual",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c7"
+   ],
+   "notes": "Up to 10 workspace members. Static pricing render is the 'Desktop - Yearly' variant."
+  },
+  {
+   "name": "Teams",
+   "price_text": "$12 / month per user (yearly billing view); SSO, enterprise security & control add-on +$5/user/mo",
+   "price_per_user_mo": 12,
+   "billing": "annual",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c4",
+    "c7",
+    "c8",
+    "c10",
+    "c11"
+   ],
+   "notes": "SAML SSO and SCIM need the Enterprise Security add-on (+$5/user/mo in the Teams calculator), so 'false' is not accurate; left null."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Contact Sales for Pricing",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c5",
+    "c6",
+    "c9",
+    "c12"
+   ],
+   "notes": "Flexible add-ons included (so the Enterprise Security add-on is included); card lists 'Enterprise API'."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c12",
+   "c13",
+   "c21",
+   "c30",
+   "c47",
+   "c8",
+   "c9"
+  ],
+  "plan": "Teams + Enterprise Security add-on, or Enterprise",
+  "addon_price_text": "+$5/user/mo (SSO, enterprise security & control)",
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://scim.hive.com/v2/{workspaceId}",
+  "auth": {
+   "method": "bearer",
+   "token_source": "My Settings (Edit profile) > API Info > Generate API Key; the key owner must be a system admin; same key as the REST API",
+   "token_expiry": null,
+   "cite": [
+    "c23",
+    "c24",
+    "c25",
+    "c15"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c28",
+    "c41"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c28",
+    "c34",
+    "c35",
+    "c38",
+    "c36",
+    "c40",
+    "c42",
+    "c44",
+    "c46",
+    "c16"
+   ]
+  },
+  "deprovision": {
+   "action": "remove_from_org",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "SCIM DELETE or active=false removes the user from the workspace but keeps the Hive account; the user goes to the removed-users list and can be re-provisioned. Hive's manual-removal article says direct messages with the user are deleted and projects private to the user are deleted; assigned actions and comments remain.",
+   "cite": [
+    "c26",
+    "c40",
+    "c36",
+    "c75",
+    "c76"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName (Users)",
+    "displayName (Groups)"
+   ],
+   "cite": [
+    "c31",
+    "c41",
+    "c27"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": 100,
+   "cite": [
+    "c32",
+    "c31"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "displayName",
+    "emails.value",
+    "emails.type",
+    "emails.primary",
+    "emails.display",
+    "externalId",
+    "active",
+    "groups (read-only)"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": false,
+    "how": "Okta mappings beyond userName, givenName, familyName and email are ignored and not persisted."
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c28",
+    "c29",
+    "c33",
+    "c35",
+    "c17",
+    "c18",
+    "c42",
+    "c45"
+   ]
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Only the eq filter operator is supported.",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "text": "PATCH /Users only supports replace on active and externalId (password is a no-op); name and email updates need PUT and apply only to active members.",
+    "cite": [
+     "c38",
+     "c39",
+     "c37"
+    ]
+   },
+   {
+    "text": "Okta app maps only userName (must be an email), first name, last name and email; passwords are not synced.",
+    "cite": [
+     "c17",
+     "c18",
+     "c19"
+    ]
+   },
+   {
+    "text": "Creating a group whose displayName already exists updates that group; all group members must be active workspace members.",
+    "cite": [
+     "c42",
+     "c43",
+     "c20"
+    ]
+   },
+   {
+    "text": "Google Workspace is supported only via third-party SCIM bridges.",
+    "cite": [
+     "c22"
+    ]
+   }
+  ],
+  "notes": "ServiceProviderConfig, Schemas and ResourceTypes endpoints are not listed in the SCIM reference. The Okta guide assumes SAML SSO is set up, but does not say SCIM fails without it."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c48",
+   "c68",
+   "c6"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://app.hive.com/api/v2",
+  "docs_url": "https://developers.hive.com/reference",
+  "auth": {
+   "methods": [
+    "api_key",
+    "oauth2"
+   ],
+   "scopes": [],
+   "cite": [
+    "c49",
+    "c50",
+    "c51",
+    "c68"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": null,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c54",
+    "c55",
+    "c53",
+    "c56",
+    "c58",
+    "c61",
+    "c62"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/users",
+    "purpose": "List users who share a workspace with the caller",
+    "cite": [
+     "c54"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/users/{userId}",
+    "purpose": "Get a user",
+    "cite": [
+     "c55"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/users/{userId}",
+    "purpose": "Update a user profile (org admins can update users)",
+    "cite": [
+     "c56"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/workspaces/{workspaceId}/users",
+    "purpose": "List workspace members",
+    "cite": [
+     "c57"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/workspaces/{workspaceId}/users",
+    "purpose": "Invite a workspace member by email",
+    "cite": [
+     "c53"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/workspaces/{workspaceId}/users",
+    "purpose": "Remove a workspace member (userId in body)",
+    "cite": [
+     "c58"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/workspaces/{workspaceId}/removed-users",
+    "purpose": "List removed members",
+    "cite": [
+     "c59"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/workspaces/{workspaceId}/teams",
+    "purpose": "List teams",
+    "cite": [
+     "c60"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/teams",
+    "purpose": "Create a team",
+    "cite": [
+     "c61"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/teams/{teamId}",
+    "purpose": "Rename a team or replace its members",
+    "cite": [
+     "c62"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/teams/{teamId}",
+    "purpose": "Delete a team",
+    "cite": [
+     "c63"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/teams/{teamId}/members",
+    "purpose": "Add team members",
+    "cite": [
+     "c64"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/teams/{teamId}/members",
+    "purpose": "Remove team members",
+    "cite": [
+     "c65"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/workspaces/{workspaceId}/users/{userId}/role-tags/{roleTagId}",
+    "purpose": "Assign a user role tag (resourcing label, not a permission role)",
+    "cite": [
+     "c66"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": [],
+   "notes": "POST /webhooks exists but the reference does not enumerate trigger values, so user-event triggers are unconfirmed."
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "1000 requests per minute per user; 429 beyond that.",
+   "cite": [
+    "c52"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Every endpoint acts with the permissions of the API key or token owner.",
+    "cite": [
+     "c51"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": "vendor",
+   "url": "https://www.okta.com/integrations/hive/",
+   "cite": [
+    "c77",
+    "c13",
+    "c16"
+   ],
+   "notes": "OIN app capabilities checked: SAML, SCIM, Create, Update, Deactivate, Group Push, Group Linking."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/hive-tutorial",
+   "cite": [
+    "c78",
+    "c79",
+    "c21"
+   ],
+   "notes": "Gallery tutorial covers SAML SSO and JIT; no Entra provisioning tutorial (hive-provisioning-tutorial 404). Hive's SCIM reference names Azure AD (Entra ID) as compatible with the generic endpoint."
+  },
+  "google": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c74",
+    "c22"
+   ],
+   "notes": "Custom SAML app in Google Workspace; SCIM only via third-party bridges."
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c72",
+    "c21"
+   ],
+   "notes": "Hive's security article cites a 'Hive' SAML 2.0 app in the OneLogin store; OneLogin catalogue page not checked (blocks bots). SCIM reference lists OneLogin as compatible."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c21"
+   ],
+   "notes": "SCIM reference lists JumpCloud as compatible with the generic endpoint; jumpcloud.com/support returned 403."
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c69",
+   "c78",
+   "c28"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://hive.com/pricing/",
+   "title": "Hive Pricing | #1 Rated Project Management Tool",
+   "quote": "$0 / free forever Best for light project management.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://hive.com/pricing/",
+   "title": "Hive Pricing | #1 Rated Project Management Tool",
+   "quote": "Up to 10 workspace members",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://hive.com/pricing/",
+   "title": "Hive Pricing | #1 Rated Project Management Tool",
+   "quote": "Starter $5 / month per user Entry-level plan for project management.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://hive.com/pricing/",
+   "title": "Hive Pricing | #1 Rated Project Management Tool",
+   "quote": "Teams $12 / month per user Work with no limits and customize your experience.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://hive.com/pricing/",
+   "title": "Hive Pricing | #1 Rated Project Management Tool",
+   "quote": "Contact Sales for Pricing Everything in Teams plus: Custom AI credits Flexible add-ons included",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://hive.com/pricing/",
+   "title": "Hive Pricing | #1 Rated Project Management Tool",
+   "quote": "Enterprise API",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://hive.com/pricing/",
+   "title": "Hive Pricing | #1 Rated Project Management Tool",
+   "quote": "Monthly Yearly (save 33%)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://hive.com/pricing/",
+   "title": "Hive Pricing | #1 Rated Project Management Tool",
+   "quote": "Flexible add-ons (+$5 each) :",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://hive.com/pricing/",
+   "title": "Hive Pricing | #1 Rated Project Management Tool",
+   "quote": "SSO, enterprise security & control Enterprise teams have access to SSO authentication.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://hive.com/pricing/",
+   "title": "Hive Pricing | #1 Rated Project Management Tool",
+   "quote": "Calculate your Hive Teams plan",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://hive.com/pricing/",
+   "title": "Hive Pricing | #1 Rated Project Management Tool",
+   "quote": "Price per user per month:",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://help.hive.com/en/articles/11036412-setting-up-scim-provisioning-with-okta",
+   "title": "Setting up SCIM Provisioning with Okta | Hive Help",
+   "quote": "You must have an existing Hive workspace with the Enterprise Security Add-on. You must also be a system-level administrator in that Hive workspace.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://help.hive.com/en/articles/11036412-setting-up-scim-provisioning-with-okta",
+   "title": "Setting up SCIM Provisioning with Okta | Hive Help",
+   "quote": "Enable user provisioning between Okta and Hive with our SCIM 2.0 OIN integration.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://help.hive.com/en/articles/11036412-setting-up-scim-provisioning-with-okta",
+   "title": "Setting up SCIM Provisioning with Okta | Hive Help",
+   "quote": "It is also assumed you have (or in the process of) setting up SAML SSO with the Hive Okta integration as well.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://help.hive.com/en/articles/11036412-setting-up-scim-provisioning-with-okta",
+   "title": "Setting up SCIM Provisioning with Okta | Hive Help",
+   "quote": "The ‘API Token’ field needs to be filled in with the ‘API Key’ value you have visible on the Hive API Info page",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://help.hive.com/en/articles/11036412-setting-up-scim-provisioning-with-okta",
+   "title": "Setting up SCIM Provisioning with Okta | Hive Help",
+   "quote": "Supported Features Create users Update user attributes Deactivate users Import users Import groups Group push",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://help.hive.com/en/articles/11036412-setting-up-scim-provisioning-with-okta",
+   "title": "Setting up SCIM Provisioning with Okta | Hive Help",
+   "quote": "We currently support only the following field mappings for users:",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://help.hive.com/en/articles/11036412-setting-up-scim-provisioning-with-okta",
+   "title": "Setting up SCIM Provisioning with Okta | Hive Help",
+   "quote": "Any other field mappings from Okta to Hive will just be ignored and not persisted within Hive.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://help.hive.com/en/articles/11036412-setting-up-scim-provisioning-with-okta",
+   "title": "Setting up SCIM Provisioning with Okta | Hive Help",
+   "quote": "Please note that we do not support syncing passwords, or setting them on your user in Hive through this integration.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://help.hive.com/en/articles/11036412-setting-up-scim-provisioning-with-okta",
+   "title": "Setting up SCIM Provisioning with Okta | Hive Help",
+   "quote": "a note on Group push, we will use whatever is sent from the Okta push for group membership in the event the group is being created",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://developers.hive.com/reference/createuser.md",
+   "title": "Create user | Hive API reference",
+   "quote": "Hive's SCIM API is compatible with any IdP that supports the SCIM 2.0 standard, including:",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/createuser"
+  },
+  {
+   "id": "c22",
+   "url": "https://developers.hive.com/reference/createuser.md",
+   "title": "Create user | Hive API reference",
+   "quote": "Google Workspace (via third-party SCIM bridges)",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/createuser"
+  },
+  {
+   "id": "c23",
+   "url": "https://developers.hive.com/reference/createuser.md",
+   "title": "Create user | Hive API reference",
+   "quote": "All requests must include a Bearer token in the Authorization header. The token is a Hive API key.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/createuser"
+  },
+  {
+   "id": "c24",
+   "url": "https://developers.hive.com/reference/createuser.md",
+   "title": "Create user | Hive API reference",
+   "quote": "The API key owner must be a system admin in the target workspace.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/createuser"
+  },
+  {
+   "id": "c25",
+   "url": "https://developers.hive.com/reference/createuser.md",
+   "title": "Create user | Hive API reference",
+   "quote": "The same API key is used for both the Hive REST API and the SCIM API.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/createuser"
+  },
+  {
+   "id": "c26",
+   "url": "https://developers.hive.com/reference/createuser.md",
+   "title": "Create user | Hive API reference",
+   "quote": "does not permanently delete a user. It removes the user from the workspace (deactivation). The user can be re-provisioned later.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/createuser"
+  },
+  {
+   "id": "c27",
+   "url": "https://developers.hive.com/reference/createuser.md",
+   "title": "Create user | Hive API reference",
+   "quote": "Only the eq filter operator is supported for filter query parameters.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/createuser"
+  },
+  {
+   "id": "c28",
+   "url": "https://developers.hive.com/reference/createuser.md",
+   "title": "Create user | Hive API reference",
+   "quote": "Provision a new user into the workspace. The user will be added as a workspace member.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/createuser"
+  },
+  {
+   "id": "c29",
+   "url": "https://developers.hive.com/reference/createuser.md",
+   "title": "Create user | Hive API reference",
+   "quote": "An identifier from the IdP. Optional but recommended for reliable user matching across email changes.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/createuser"
+  },
+  {
+   "id": "c30",
+   "url": "https://developers.hive.com/reference/createuser.md",
+   "title": "Create user | Hive API reference",
+   "quote": "Hive SCIM 2.0 Production",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/createuser"
+  },
+  {
+   "id": "c31",
+   "url": "https://developers.hive.com/reference/listusers.md",
+   "title": "List users | Hive API reference",
+   "quote": "Retrieve a paginated list of users in the workspace. Supports filtering by userName (email address).",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/listusers"
+  },
+  {
+   "id": "c32",
+   "url": "https://developers.hive.com/reference/listusers.md",
+   "title": "List users | Hive API reference",
+   "quote": "Maximum number of results to return per page. Defaults to 20, maximum 100.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/listusers"
+  },
+  {
+   "id": "c33",
+   "url": "https://developers.hive.com/reference/listusers.md",
+   "title": "List users | Hive API reference",
+   "quote": "Teams the user belongs to in this workspace.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/listusers"
+  },
+  {
+   "id": "c34",
+   "url": "https://developers.hive.com/reference/getuser.md",
+   "title": "Get user | Hive API reference",
+   "quote": "Retrieve a single user by their Hive user ID. The user must be a current or former member of the workspace.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/getuser"
+  },
+  {
+   "id": "c35",
+   "url": "https://developers.hive.com/reference/replaceuser.md",
+   "title": "Replace user | Hive API reference",
+   "quote": "Full replacement of a user's attributes. This operation can update the user's name, email, active status, and external ID.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/replaceuser"
+  },
+  {
+   "id": "c36",
+   "url": "https://developers.hive.com/reference/replaceuser.md",
+   "title": "Replace user | Hive API reference",
+   "quote": "Setting active to false removes the user from the workspace. Setting active to true restores a previously removed user's membership.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/replaceuser"
+  },
+  {
+   "id": "c37",
+   "url": "https://developers.hive.com/reference/replaceuser.md",
+   "title": "Replace user | Hive API reference",
+   "quote": "Name and email updates are applied only when the user is an active workspace member.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/replaceuser"
+  },
+  {
+   "id": "c38",
+   "url": "https://developers.hive.com/reference/patchuser.md",
+   "title": "Update user | Hive API reference",
+   "quote": "replace on active (boolean) to activate or deactivate the user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/patchuser"
+  },
+  {
+   "id": "c39",
+   "url": "https://developers.hive.com/reference/patchuser.md",
+   "title": "Update user | Hive API reference",
+   "quote": "replace on password is accepted but results in a no-op (Hive does not store IdP passwords).",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/patchuser"
+  },
+  {
+   "id": "c40",
+   "url": "https://developers.hive.com/reference/deleteuser.md",
+   "title": "Delete user | Hive API reference",
+   "quote": "Remove a user from the workspace. This does not permanently delete the user's Hive account. The user is moved to the workspace's removed users list",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/deleteuser"
+  },
+  {
+   "id": "c41",
+   "url": "https://developers.hive.com/reference/listgroups.md",
+   "title": "List groups | Hive API reference",
+   "quote": "Retrieve a paginated list of groups (teams) in the workspace. Supports filtering by displayName (team name).",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/listgroups"
+  },
+  {
+   "id": "c42",
+   "url": "https://developers.hive.com/reference/creategroup.md",
+   "title": "Create group | Hive API reference",
+   "quote": "If a group with the same displayName already exists in the workspace, the existing group will be updated with the provided members instead of creating a duplicate.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/creategroup"
+  },
+  {
+   "id": "c43",
+   "url": "https://developers.hive.com/reference/creategroup.md",
+   "title": "Create group | Hive API reference",
+   "quote": "All members referenced in the request must be active members of the workspace.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/creategroup"
+  },
+  {
+   "id": "c44",
+   "url": "https://developers.hive.com/reference/patchgroup.md",
+   "title": "Update group | Hive API reference",
+   "quote": "add on members to add new members to the group.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/patchgroup"
+  },
+  {
+   "id": "c45",
+   "url": "https://developers.hive.com/reference/patchgroup.md",
+   "title": "Update group | Hive API reference",
+   "quote": "replace on displayName to rename the group.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/patchgroup"
+  },
+  {
+   "id": "c46",
+   "url": "https://developers.hive.com/reference/deletegroup.md",
+   "title": "Delete group | Hive API reference",
+   "quote": "Delete a group (team) from the workspace. This is a soft delete.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/deletegroup"
+  },
+  {
+   "id": "c47",
+   "url": "https://developers.hive.com/reference/post_workspaces_workspaceid_users-1.md",
+   "title": "Invite a workspace member | Hive API reference",
+   "quote": "The SCIM 2.0 endpoints at the end of this reference are served from their own base URL, https://scim.hive.com/v2/{workspaceId}.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/post_workspaces_workspaceid_users-1"
+  },
+  {
+   "id": "c48",
+   "url": "https://developers.hive.com/reference/post_workspaces_workspaceid_users-1.md",
+   "title": "Invite a workspace member | Hive API reference",
+   "quote": "The Hive REST API lets you read and change the data in your Hive workspaces from your own tools.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/post_workspaces_workspaceid_users-1"
+  },
+  {
+   "id": "c49",
+   "url": "https://developers.hive.com/reference/post_workspaces_workspaceid_users-1.md",
+   "title": "Invite a workspace member | Hive API reference",
+   "quote": "An api_key request header.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/post_workspaces_workspaceid_users-1"
+  },
+  {
+   "id": "c50",
+   "url": "https://developers.hive.com/reference/post_workspaces_workspaceid_users-1.md",
+   "title": "Invite a workspace member | Hive API reference",
+   "quote": "header (OAuth2 access token)",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/post_workspaces_workspaceid_users-1"
+  },
+  {
+   "id": "c51",
+   "url": "https://developers.hive.com/reference/post_workspaces_workspaceid_users-1.md",
+   "title": "Invite a workspace member | Hive API reference",
+   "quote": "The acting user is the owner of the key or the token, and every endpoint applies that user's permissions.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/post_workspaces_workspaceid_users-1"
+  },
+  {
+   "id": "c52",
+   "url": "https://developers.hive.com/reference/post_workspaces_workspaceid_users-1.md",
+   "title": "Invite a workspace member | Hive API reference",
+   "quote": "Requests are limited to 1000 per minute per user; beyond that the API answers",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/post_workspaces_workspaceid_users-1"
+  },
+  {
+   "id": "c53",
+   "url": "https://developers.hive.com/reference/post_workspaces_workspaceid_users-1.md",
+   "title": "Invite a workspace member | Hive API reference",
+   "quote": "Invites a user by email. External members cannot invite.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/post_workspaces_workspaceid_users-1"
+  },
+  {
+   "id": "c54",
+   "url": "https://developers.hive.com/reference/get_users-1.md",
+   "title": "List users | Hive API reference",
+   "quote": "Lists users who share a workspace with the authenticated user, cursor paginated. Sort by createdAt.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/get_users-1"
+  },
+  {
+   "id": "c55",
+   "url": "https://developers.hive.com/reference/get_users_userid-1.md",
+   "title": "Get a user | Hive API reference",
+   "quote": "Returns a user who shares a workspace with the authenticated user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/get_users_userid-1"
+  },
+  {
+   "id": "c56",
+   "url": "https://developers.hive.com/reference/put_users_userid-1.md",
+   "title": "Update a user | Hive API reference",
+   "quote": "Updates a user profile. Users may update themselves; an organization admin may update users in the organization's workspaces.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/put_users_userid-1"
+  },
+  {
+   "id": "c57",
+   "url": "https://developers.hive.com/reference/get_workspaces_workspaceid_users-1.md",
+   "title": "List workspace members | Hive API reference",
+   "quote": "Lists the members of a workspace, cursor paginated. Sort by createdAt.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/get_workspaces_workspaceid_users-1"
+  },
+  {
+   "id": "c58",
+   "url": "https://developers.hive.com/reference/delete_workspaces_workspaceid_users-1.md",
+   "title": "Remove a workspace member | Hive API reference",
+   "quote": "Removes a member from the workspace. Requires the workspace.edit permission.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/delete_workspaces_workspaceid_users-1"
+  },
+  {
+   "id": "c59",
+   "url": "https://developers.hive.com/reference/get_workspaces_workspaceid_removed-users.md",
+   "title": "List removed members | Hive API reference",
+   "quote": "Lists users removed from the workspace, newest removal first (removedAt).",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/get_workspaces_workspaceid_removed-users"
+  },
+  {
+   "id": "c60",
+   "url": "https://developers.hive.com/reference/get_workspaces_workspaceid_teams-1.md",
+   "title": "List teams | Hive API reference",
+   "quote": "Lists the workspace's teams, cursor paginated.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/get_workspaces_workspaceid_teams-1"
+  },
+  {
+   "id": "c61",
+   "url": "https://developers.hive.com/reference/post_teams-1.md",
+   "title": "Create a team | Hive API reference",
+   "quote": "Creates a team.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/post_teams-1"
+  },
+  {
+   "id": "c62",
+   "url": "https://developers.hive.com/reference/put_teams_teamid-1.md",
+   "title": "Update a team | Hive API reference",
+   "quote": "Renames a team or replaces its members.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/put_teams_teamid-1"
+  },
+  {
+   "id": "c63",
+   "url": "https://developers.hive.com/reference/delete_teams_teamid-1.md",
+   "title": "Delete a team | Hive API reference",
+   "quote": "Deletes a team. Answers 204 with no body.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/delete_teams_teamid-1"
+  },
+  {
+   "id": "c64",
+   "url": "https://developers.hive.com/reference/post_teams_teamid_members-1.md",
+   "title": "Add team members | Hive API reference",
+   "quote": "Adds users to a team and returns the team.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/post_teams_teamid_members-1"
+  },
+  {
+   "id": "c65",
+   "url": "https://developers.hive.com/reference/delete_teams_teamid_members-1.md",
+   "title": "Remove team members | Hive API reference",
+   "quote": "Removes users from a team and returns the team.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/delete_teams_teamid_members-1"
+  },
+  {
+   "id": "c66",
+   "url": "https://developers.hive.com/reference/put_workspaces_workspaceid_users_userid_role_tags_roletagid-1.md",
+   "title": "Update user role tag | Hive API reference",
+   "quote": "Assigns or changes a user role tag.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/put_workspaces_workspaceid_users_userid_role_tags_roletagid-1"
+  },
+  {
+   "id": "c67",
+   "url": "https://developers.hive.com/reference/post_webhooks-1.md",
+   "title": "Create webhook | Hive API reference",
+   "quote": "Creates a webhook endpoint.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hive.com/reference/post_webhooks-1"
+  },
+  {
+   "id": "c68",
+   "url": "https://help.hive.com/en/articles/5407965-getting-started-with-the-hive-api",
+   "title": "Getting started with the Hive API | Hive Help",
+   "quote": "You can locate your API credentials here, from Edit Profile > API Info",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c69",
+   "url": "https://help.hive.com/en/articles/11114987-setting-up-saml-2-0-with-okta",
+   "title": "Setting up SAML 2.0 with Okta | Hive Help",
+   "quote": "IdP-initiated SSO SP-initiated SSO JIT (Just in Time) Provisioning",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c70",
+   "url": "https://help.hive.com/en/articles/2788435-how-to-set-up-a-custom-saml-single-sign-on-sso",
+   "title": "How to set-up a custom SAML single sign-on (SSO) | Hive Help",
+   "quote": "SAML SSO is only supported if you have the Enterprise Security Add-on.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c71",
+   "url": "https://help.hive.com/en/articles/2788435-how-to-set-up-a-custom-saml-single-sign-on-sso",
+   "title": "How to set-up a custom SAML single sign-on (SSO) | Hive Help",
+   "quote": "Be a workspace or organization admin Have a Hive Enterprise plan",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c72",
+   "url": "https://help.hive.com/en/articles/4123714-security-in-hive",
+   "title": "Security in Hive | Hive Help",
+   "quote": "One Login (Add the \"Hive\" SAML 2.0 app from One Login app store)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c73",
+   "url": "https://help.hive.com/en/articles/4123714-security-in-hive",
+   "title": "Security in Hive | Hive Help",
+   "quote": "Hive's Enterprise Security package includes the following:",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c74",
+   "url": "https://help.hive.com/en/articles/3082647-how-to-set-up-gsuite-saml-sso",
+   "title": "How to set-up GSuite SAML SSO | Hive Help",
+   "quote": "Hive Enterprise accounts support SAML SSO via GSuite. To configure your workspace for this, visit the Google Workspace Admin Help documentation for setting up a custom SAML app.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c75",
+   "url": "https://help.hive.com/en/articles/3160341-removing-a-user-from-your-workspace",
+   "title": "Removing a user from your workspace | Hive Help",
+   "quote": "Projects that are private to the removed user will be deleted from the workspace.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c76",
+   "url": "https://help.hive.com/en/articles/3160341-removing-a-user-from-your-workspace",
+   "title": "Removing a user from your workspace | Hive Help",
+   "quote": "Direct messages between you and that user will be deleted.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c77",
+   "url": "https://www.okta.com/integrations/hive/",
+   "title": "Integrate Hive with Okta | Okta",
+   "quote": "Add this integration to enable authentication and provisioning capabilities.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c78",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/hive-tutorial",
+   "title": "Configure Hive for Single sign-on with Microsoft Entra ID | Microsoft Learn",
+   "quote": "Hive supports Just In Time user provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c79",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/hive-tutorial",
+   "title": "Configure Hive for Single sign-on with Microsoft Entra ID | Microsoft Learn",
+   "quote": "Hive single sign-on (SSO) enabled subscription.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "Most Hive help articles and the pricing calculator make SAML/SCIM an Enterprise Security add-on (+$5/user/mo, available on Teams); the custom SAML article says you must 'Have a Hive Enterprise plan' and the GSuite article says 'Hive Enterprise accounts support SAML SSO'.",
+   "cite": [
+    "c70",
+    "c71",
+    "c74",
+    "c12",
+    "c8"
+   ]
+  }
+ ],
+ "searched": [
+  "https://hive.com/pricing/",
+  "https://hive.com/llms.txt",
+  "https://help.hive.com/sitemap.xml (314 articles)",
+  "https://developers.hive.com/llms.txt (REST v2 + SCIM 2.0 reference)",
+  "https://www.okta.com/integrations/hive/",
+  "learn.microsoft.com hive-tutorial (200), hive-provisioning-tutorial (404)",
+  "jumpcloud.com/support/integrate-with-hive (403)"
+ ],
+ "open_questions": [
+  "Can the Enterprise Security add-on be bought on Starter, or only on Teams?",
+  "Does SCIM removal free the paid seat, and does it end active sessions?",
+  "Which plans include the REST API ('Enterprise API' is listed only on Enterprise)?",
+  "Is there an audit-log API, and which webhook triggers exist?",
+  "SCIM API token expiry is not documented."
+ ]
+}

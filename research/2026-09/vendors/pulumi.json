@@ -1,0 +1,951 @@
+{
+ "slug": "pulumi",
+ "vendor": "Pulumi",
+ "vendor_url": "https://www.pulumi.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Pulumi",
+  "slug": "pulumi",
+  "category": "Developer Tools & CI/CD",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "$2,000/month (includes 2,000 Credits)",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Essentials",
+  "team_price_text": "Essentials: $40/mo flat (unlimited users, includes 40 Credits)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Pro",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": false,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": "via_generic",
+   "jumpcloud": "native",
+   "generic": true
+  },
+  "pricing_page_url": "https://www.pulumi.com/pricing/",
+  "docs_url": "https://www.pulumi.com/docs/administration/concepts/scim/",
+  "evidence": "Pulumi's pricing page lists 'Automatic group & user sync (SCIM)' under Enterprise ($2,000/month, 'Everything in Pro, plus'), and the SCIM docs say \"This Pulumi Cloud feature is available in the Enterprise edition.\"",
+  "notes": "Status unchanged (gated), but plans were renamed and repriced since June: tiers are now Free ($0, 1 user), Essentials ($40/mo, unlimited users), Pro ($400/mo, adds SAML/SSO and audit logs) and Enterprise ($2,000/mo, adds SCIM), each including usage Credits with overage billed at $1/Credit. June's Team ($40), Enterprise ($400) and Business Critical (SCIM) map to Essentials, Pro and Enterprise. June's '~$50K+ annual min' and '~$4/u/mo' normalisation have no first-party source and were dropped; prices are flat, so per-user fields are null. Prices shown are monthly; no annual price is listed. SCIM 2.0 requires SAML SSO, deactivates rather than deletes users, syncs groups to teams, and does not set roles. The REST API reference still uses the old edition names.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Free",
+  "api_tax": false,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "$0, 1 user",
+   "price_per_user_mo": 0,
+   "billing": "monthly",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c1",
+    "c5",
+    "c7",
+    "c9",
+    "c10"
+   ]
+  },
+  {
+   "name": "Essentials",
+   "price_text": "$40/month (includes 40 Credits), unlimited users",
+   "price_per_user_mo": null,
+   "billing": "monthly",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c2",
+    "c3",
+    "c9"
+   ],
+   "notes": "Flat monthly price plus usage billed in Credits."
+  },
+  {
+   "name": "Pro",
+   "price_text": "$400/month (includes 400 Credits)",
+   "price_per_user_mo": null,
+   "billing": "monthly",
+   "sso": true,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c4",
+    "c5",
+    "c9",
+    "c10",
+    "c49"
+   ]
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "$2,000/month (includes 2,000 Credits); Contact sales",
+   "price_per_user_mo": null,
+   "billing": "monthly",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c6",
+    "c7",
+    "c9",
+    "c11",
+    "c49"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c7",
+   "c11",
+   "c13",
+   "c29"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://api.pulumi.com/scim/v2/{orgName}",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Pulumi Cloud > organization Settings > Access Management > SCIM section > generate token",
+   "token_expiry": null,
+   "cite": [
+    "c30",
+    "c31",
+    "c34",
+    "c27"
+   ],
+   "notes": "One token per organization; regenerating invalidates the old one; switching away from SAML revokes it."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": false,
+   "Me": null,
+   "cite": [
+    "c14",
+    "c15",
+    "c21"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": null,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": false,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c14",
+    "c15",
+    "c22",
+    "c23"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Account and its history are preserved; active=false removes access to the organization and is reversible by reactivation. Deleting a group deletes the team and its granted access, but not its members.",
+   "cite": [
+    "c22",
+    "c23"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName (eq)",
+    "displayName (Groups, eq)"
+   ],
+   "cite": [
+    "c16"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": 100,
+   "cite": [
+    "c17"
+   ],
+   "notes": "Users only; group search is unpaginated."
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "displayName",
+    "name.givenName",
+    "name.familyName",
+    "emails[type eq \"work\"].value",
+    "active"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": false,
+    "how": "Only the core SCIM 2.0 schemas are implemented; other attributes fail with 400 invalidPath."
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c18",
+    "c20",
+    "c25"
+   ],
+   "notes": "externalId accepted on users but never stored."
+  },
+  "roles": {
+   "supported": false,
+   "how": "roles/entitlements not implemented; users are created as members and roles are changed in the Pulumi Cloud console.",
+   "cite": [
+    "c19"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Requires SAML SSO; one Pulumi organization per SCIM application.",
+    "cite": [
+     "c12",
+     "c13"
+    ]
+   },
+   {
+    "text": "No user deletion, no roles, no Enterprise User extension, no bulk, no sorting; userName is immutable.",
+    "cite": [
+     "c19",
+     "c20",
+     "c21",
+     "c22"
+    ]
+   },
+   {
+    "text": "Group pushes fail entirely if any member is not yet provisioned or is deactivated; SCIM team deletions are not recorded in the audit log.",
+    "cite": [
+     "c24",
+     "c26"
+    ]
+   },
+   {
+    "text": "SCIM-created accounts are organization-managed and cannot join other Pulumi organizations.",
+    "cite": [
+     "c28"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c9",
+   "c39",
+   "c52"
+  ],
+  "plan": "Free",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://api.pulumi.com/api",
+  "docs_url": "https://www.pulumi.com/docs/reference/cloud-rest-api/organizations/",
+  "auth": {
+   "methods": [
+    "access_token"
+   ],
+   "scopes": [],
+   "cite": [
+    "c52"
+   ],
+   "notes": "Personal, organization or team access tokens sent as 'Authorization: token {token}'."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": null,
+   "create_user": false,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c39",
+    "c40",
+    "c41",
+    "c42",
+    "c44",
+    "c45",
+    "c46",
+    "c47",
+    "c50"
+   ],
+   "notes": "Users must already have a Pulumi account to be added; DELETE removes the member from the organization. create_user false because the add-member endpoint requires an existing account."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/api/orgs/{orgName}/members",
+    "purpose": "List organization members",
+    "cite": [
+     "c39"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/orgs/{orgName}/members/{userLogin}",
+    "purpose": "Add an existing Pulumi user with a built-in role",
+    "cite": [
+     "c40"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/orgs/{orgName}/members/{userLogin}",
+    "purpose": "Change member role (built-in or custom)",
+    "cite": [
+     "c41"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/orgs/{orgName}/members/{userLogin}",
+    "purpose": "Remove member from organization",
+    "cite": [
+     "c42"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/orgs/{orgName}/members/{user}/teams",
+    "purpose": "List a member's teams",
+    "cite": [
+     "c48"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/orgs/{orgName}/teams",
+    "purpose": "List teams",
+    "cite": [
+     "c53"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/orgs/{orgName}/teams/pulumi",
+    "purpose": "Create Pulumi-managed team",
+    "cite": [
+     "c44"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/orgs/{orgName}/teams/{teamName}",
+    "purpose": "Update team membership and configuration",
+    "cite": [
+     "c45"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/orgs/{orgName}/teams/{teamName}",
+    "purpose": "Delete team",
+    "cite": [
+     "c46"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/orgs/{orgName}/roles",
+    "purpose": "Create custom role",
+    "cite": [
+     "c47"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/orgs/{orgName}/teams/{teamName}/roles/{roleID}",
+    "purpose": "Remove custom role from team",
+    "cite": [
+     "c55"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/orgs/{orgName}/invites",
+    "purpose": "List pending invites",
+    "cite": [
+     "c51"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/orgs/{orgName}/invites/batch",
+    "purpose": "Batch-create email invites with role and teams",
+    "cite": [
+     "c50"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/orgs/{orgName}/auditlogs",
+    "purpose": "List audit log events",
+    "cite": [
+     "c49"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": [],
+   "notes": "Webhook event filters reviewed cover stack, preview, update and deployment events; no member events seen."
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Pro",
+   "cite": [
+    "c49",
+    "c10"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "REST API reference still uses retired edition names (Enterprise and Business Critical; Team Starter and Team Growth).",
+    "cite": [
+     "c43",
+     "c54"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": false,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c32",
+    "c29",
+    "c33"
+   ],
+   "notes": "https://www.okta.com/integrations/pulumi/ returns 404; Pulumi's guide enables SCIM on the customer's own Pulumi SAML app in Okta."
+  },
+  "entra": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c35",
+    "c34"
+   ],
+   "notes": "No Microsoft Learn tutorial found (pulumi-tutorial 404); guide uses the enterprise app configured for SSO."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c36"
+   ],
+   "notes": "Pulumi's guide uses OneLogin's generic 'SCIM Provisioner with SAML (SCIM v2 Core)' app."
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://jumpcloud.com/support/integrate-with-pulumi",
+   "cite": [
+    "c37",
+    "c38"
+   ]
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": "GitHub/GitLab-backed teams (VCS identity providers)",
+  "docs_public": true,
+  "cite": [
+   "c53"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.pulumi.com/pricing/",
+   "title": "Pulumi Pricing",
+   "quote": "Free Get started with Pulumi-managed infrastructure at no cost. $0 No credit card required Get started Includes: 1 user",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.pulumi.com/pricing/",
+   "title": "Pulumi Pricing",
+   "quote": "Essentials Managed infrastructure fundamentals for your whole team. $40 /month Includes 40 Credits",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.pulumi.com/pricing/",
+   "title": "Pulumi Pricing",
+   "quote": "Everything in Free , plus: Unlimited users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.pulumi.com/pricing/",
+   "title": "Pulumi Pricing",
+   "quote": "Pro Popular Automation and built-in governance for growing organizations. $400 /month Includes 400 Credits",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.pulumi.com/pricing/",
+   "title": "Pulumi Pricing",
+   "quote": "Everything in Essentials , plus: SAML/SSO and advanced RBAC",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://www.pulumi.com/pricing/",
+   "title": "Pulumi Pricing",
+   "quote": "Enterprise Compliance, control, and governance for at-scale operations. $2,000 /month Includes 2,000 Credits",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://www.pulumi.com/pricing/",
+   "title": "Pulumi Pricing",
+   "quote": "Automatic group & user sync (SCIM) Automated audit log export",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://www.pulumi.com/pricing/",
+   "title": "Pulumi Pricing",
+   "quote": "Credits cover usage across Pulumi services. Additional usage is billed on demand (1 Credit = $1).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://www.pulumi.com/pricing/",
+   "title": "Pulumi Pricing",
+   "quote": "Restore deleted stacks Update history REST API Automation API Pulumi-service provider",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://www.pulumi.com/pricing/",
+   "title": "Pulumi Pricing",
+   "quote": "Internal developer platform (IDP) Audit logs Drift detection and remediation",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://www.pulumi.com/docs/administration/guides/scim/",
+   "title": "Pulumi Cloud & SCIM",
+   "quote": "This Pulumi Cloud feature is available in the Enterprise edition .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://www.pulumi.com/docs/administration/guides/scim/",
+   "title": "Pulumi Cloud & SCIM",
+   "quote": "Pulumi supports only one Pulumi Cloud organization per SCIM application.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://www.pulumi.com/docs/administration/concepts/scim/",
+   "title": "SCIM provisioning",
+   "quote": "SCIM is available only for organizations that use SAML single sign-on as their identity provider.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://www.pulumi.com/docs/administration/concepts/scim/",
+   "title": "SCIM provisioning",
+   "quote": "User provisioning Yes (create, read, update, and search) User deprovisioning Yes, but soft only",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://www.pulumi.com/docs/administration/concepts/scim/",
+   "title": "SCIM provisioning",
+   "quote": "Group-to-team synchronization Yes (create, read, update, delete, and membership changes) PATCH Yes, for both users and groups",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://www.pulumi.com/docs/administration/concepts/scim/",
+   "title": "SCIM provisioning",
+   "quote": "userName eq for users and displayName eq for groups, and nothing else.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://www.pulumi.com/docs/administration/concepts/scim/",
+   "title": "SCIM provisioning",
+   "quote": "Users only, at most 100 per page.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://www.pulumi.com/docs/administration/concepts/scim/",
+   "title": "SCIM provisioning",
+   "quote": "userName (immutable after creation, see Usernames cannot change ) displayName name.givenName name.familyName emails[type eq \"work\"].value active For groups: displayName members",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://www.pulumi.com/docs/administration/concepts/scim/",
+   "title": "SCIM provisioning",
+   "quote": "Pulumi does not implement the roles or entitlements attributes, so no SCIM request can set one.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://www.pulumi.com/docs/administration/concepts/scim/",
+   "title": "SCIM provisioning",
+   "quote": "Enterprise User extension Not supported. Only the core SCIM 2.0 user and group schemas are implemented",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://www.pulumi.com/docs/administration/concepts/scim/",
+   "title": "SCIM provisioning",
+   "quote": "Bulk operations Not supported. Provision resources one request at a time",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://www.pulumi.com/docs/administration/concepts/scim/",
+   "title": "SCIM provisioning",
+   "quote": "Pulumi has no endpoint for deleting a user through SCIM. Deprovisioning sets active to false , which removes the user’s access to the organization while preserving their account and its history, so the change is reversible by reactivating the user in your IdP.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://www.pulumi.com/docs/administration/concepts/scim/",
+   "title": "SCIM provisioning",
+   "quote": "Deleting a group in your identity provider deletes the corresponding Pulumi team, and the access you granted that team goes with it",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://www.pulumi.com/docs/administration/concepts/scim/",
+   "title": "SCIM provisioning",
+   "quote": "The deletion is not recorded in your organization’s audit log, because a SCIM request has no acting user to attribute it to.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://www.pulumi.com/docs/administration/concepts/scim/",
+   "title": "SCIM provisioning",
+   "quote": "Accepted on users but never stored, and not part of the group schema at all.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://www.pulumi.com/docs/administration/concepts/scim/",
+   "title": "SCIM provisioning",
+   "quote": "If any member has not yet been provisioned into your organization, or has been deactivated, the entire request fails with a 400 response and no membership changes are applied.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://www.pulumi.com/docs/administration/concepts/scim/",
+   "title": "SCIM provisioning",
+   "quote": "Your organization’s SCIM access token is tied to its SAML configuration.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://www.pulumi.com/docs/administration/concepts/scim/",
+   "title": "SCIM provisioning",
+   "quote": "An account SCIM creates belongs to your organization, not to the person using it.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://www.pulumi.com/docs/administration/guides/scim/okta/",
+   "title": "Okta SCIM",
+   "quote": "SCIM connector base URL: https://api.pulumi.com/scim/v2/<orgName> , where <orgName> must be replaced with your organization’s login name (not display name).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://www.pulumi.com/docs/administration/guides/scim/okta/",
+   "title": "Okta SCIM",
+   "quote": "To generate a token, navigate to your org in the Pulumi Cloud, click on the Settings tab, and then click Access Management .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://www.pulumi.com/docs/administration/guides/scim/okta/",
+   "title": "Okta SCIM",
+   "quote": "If you lose and need the SCIM token again, you’ll have to generate a new token, invalidating any previous tokens for your Pulumi organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://www.pulumi.com/docs/administration/guides/scim/okta/",
+   "title": "Okta SCIM",
+   "quote": "In order to enable SCIM provisioning in Okta, navigate to the Pulumi application configured in your Okta org.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://www.pulumi.com/docs/administration/guides/scim/okta/",
+   "title": "Okta SCIM",
+   "quote": "Create Users Update User Attributes Deactivate Users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://www.pulumi.com/docs/administration/guides/scim/entra/",
+   "title": "Microsoft Entra ID SCIM",
+   "quote": "Secret Token : You will use a token from the Pulumi Cloud as the authorization bearer token.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c35",
+   "url": "https://www.pulumi.com/docs/administration/guides/scim/entra/",
+   "title": "Microsoft Entra ID SCIM",
+   "quote": "Select Enterprise Applications and select the app in which you configured Single Sign On with Pulumi earlier.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://www.pulumi.com/docs/administration/guides/scim/onelogin/",
+   "title": "OneLogin SCIM",
+   "quote": "Search for SCIM Provisioner with SAML (SCIM v2 Core) and select it.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://jumpcloud.com/support/integrate-with-pulumi",
+   "title": "Integrate with Pulumi | JumpCloud Documentation",
+   "quote": "Automatically provision, update and deprovision users and groups in Pulumi from JumpCloud using the SCIM integration.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c38",
+   "url": "https://jumpcloud.com/support/integrate-with-pulumi",
+   "title": "Integrate with Pulumi | JumpCloud Documentation",
+   "quote": "Create Users Update Users Deactivate Users Create Groups",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c39",
+   "url": "https://www.pulumi.com/docs/reference/cloud-rest-api/organizations/",
+   "title": "Organizations - Pulumi Cloud REST API",
+   "quote": "ListOrganizationMembers lists the members of an organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c40",
+   "url": "https://www.pulumi.com/docs/reference/cloud-rest-api/organizations/",
+   "title": "Organizations - Pulumi Cloud REST API",
+   "quote": "Adds an existing Pulumi user to an organization with a built-in role.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c41",
+   "url": "https://www.pulumi.com/docs/reference/cloud-rest-api/organizations/",
+   "title": "Organizations - Pulumi Cloud REST API",
+   "quote": "Modifies a user’s role within an organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c42",
+   "url": "https://www.pulumi.com/docs/reference/cloud-rest-api/organizations/",
+   "title": "Organizations - Pulumi Cloud REST API",
+   "quote": "Removes a user from an organization. The removed user loses access to all organization resources including stacks, teams, and projects.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c43",
+   "url": "https://www.pulumi.com/docs/reference/cloud-rest-api/organizations/",
+   "title": "Organizations - Pulumi Cloud REST API",
+   "quote": "Teams are available to organizations on Enterprise and Business Critical editions.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c44",
+   "url": "https://www.pulumi.com/docs/reference/cloud-rest-api/organizations/",
+   "title": "Organizations - Pulumi Cloud REST API",
+   "quote": "CreatePulumiTeam creates a “Pulumi” team, i.e. one whose membership is managed by Pulumi.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c45",
+   "url": "https://www.pulumi.com/docs/reference/cloud-rest-api/organizations/",
+   "title": "Organizations - Pulumi Cloud REST API",
+   "quote": "Updates a team’s membership and configuration.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c46",
+   "url": "https://www.pulumi.com/docs/reference/cloud-rest-api/organizations/",
+   "title": "Organizations - Pulumi Cloud REST API",
+   "quote": "Permanently removes a team from an organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c47",
+   "url": "https://www.pulumi.com/docs/reference/cloud-rest-api/organizations/",
+   "title": "Organizations - Pulumi Cloud REST API",
+   "quote": "Creates a new custom role for an organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c48",
+   "url": "https://www.pulumi.com/docs/reference/cloud-rest-api/organizations/",
+   "title": "Organizations - Pulumi Cloud REST API",
+   "quote": "Lists the teams a user belongs to within an organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c49",
+   "url": "https://www.pulumi.com/docs/reference/cloud-rest-api/audit-logs/",
+   "title": "Audit Logs - Pulumi Cloud REST API",
+   "quote": "Lists audit log events for an organization. Either continuationToken or startTime is required.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c50",
+   "url": "https://www.pulumi.com/docs/reference/cloud-rest-api/invites/",
+   "title": "Invites - Pulumi Cloud REST API",
+   "quote": "Creates multiple organization invitations in a single request and sends email notifications to each invitee.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c51",
+   "url": "https://www.pulumi.com/docs/reference/cloud-rest-api/invites/",
+   "title": "Invites - Pulumi Cloud REST API",
+   "quote": "Lists all pending invitations for an organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c52",
+   "url": "https://www.pulumi.com/docs/reference/cloud-rest-api/api-basics/",
+   "title": "API Basics - Pulumi Cloud REST API",
+   "quote": "The Authorization header must be in the form below with the literal string token , then a space, then your access token value.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c53",
+   "url": "https://www.pulumi.com/docs/reference/cloud-rest-api/organizations/",
+   "title": "Organizations - Pulumi Cloud REST API",
+   "quote": "Retrieves all teams within an organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c54",
+   "url": "https://www.pulumi.com/docs/reference/cloud-rest-api/organizations/",
+   "title": "Organizations - Pulumi Cloud REST API",
+   "quote": "This endpoint is only valid for Team subscriptions (Team Starter and Team Growth)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c55",
+   "url": "https://www.pulumi.com/docs/reference/cloud-rest-api/organizations/",
+   "title": "Organizations - Pulumi Cloud REST API",
+   "quote": "Removes a custom role assignment from a team.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The pricing page names the tiers Free, Essentials, Pro and Enterprise, while the REST API reference still says teams are available on 'Enterprise and Business Critical editions' and refers to 'Team Starter and Team Growth' subscriptions.",
+   "cite": [
+    "c6",
+    "c43",
+    "c54"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.pulumi.com/pricing/",
+  "https://www.pulumi.com/docs/administration/guides/scim/",
+  "https://www.pulumi.com/docs/administration/concepts/scim/",
+  "https://www.pulumi.com/docs/administration/guides/scim/okta/",
+  "https://www.pulumi.com/docs/administration/guides/scim/entra/",
+  "https://www.pulumi.com/docs/administration/guides/scim/onelogin/",
+  "https://www.pulumi.com/docs/reference/cloud-rest-api/organizations/",
+  "https://www.pulumi.com/docs/reference/cloud-rest-api/audit-logs/",
+  "https://www.pulumi.com/docs/reference/cloud-rest-api/invites/",
+  "https://www.pulumi.com/docs/reference/cloud-rest-api/api-basics/",
+  "https://www.okta.com/integrations/pulumi/ (404)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/pulumi-tutorial (404)",
+  "https://jumpcloud.com/support/integrate-with-pulumi"
+ ],
+ "open_questions": [
+  "Whether SCIM deactivation frees a seat or ends sessions is not documented.",
+  "Whether Enterprise has an annual price or seat minimum is not published.",
+  "SCIM token expiry and SCIM rate limits are not documented.",
+  "Whether SAML JIT creates members on first sign-in was not checked."
+ ]
+}

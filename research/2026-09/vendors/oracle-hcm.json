@@ -1,0 +1,741 @@
+{
+ "slug": "oracle-hcm",
+ "vendor": "Oracle Fusion Cloud HCM",
+ "vendor_url": "https://www.oracle.com/human-capital-management/",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Oracle Fusion Cloud HCM",
+  "slug": "oracle-hcm",
+  "category": "HR, Payroll & Recruiting",
+  "status": "free",
+  "scim_plan": "Fusion Human Capital Management Base Cloud Service",
+  "scim_price_text": "$15.00 per hosted employee/mo (min 500, 3-year term)",
+  "scim_price_per_user_mo": 15.0,
+  "team_plan": "Fusion Human Capital Management Base Cloud Service",
+  "team_price_text": "$15.00 per hosted employee/mo (min 500)",
+  "team_price_per_user_mo": 15.0,
+  "price_multiplier": 1.0,
+  "sso_plan": "Fusion Human Capital Management Base Cloud Service",
+  "sso_price_per_user_mo": 15.0,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": 500,
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.oracle.com/corporate/pricing/",
+  "docs_url": "https://docs.oracle.com/en/cloud/saas/applications-common/26d/farca/api-users.html",
+  "evidence": "Oracle's REST API for Common Features documents a SCIM Users resource 'used to create, update, delete, or view users in Oracle Fusion Cloud Applications' (/hcmRestApi/scim/Users), and the Fusion price list sells HCM as a single base at $15.00 per hosted employee with no separate SCIM SKU.",
+  "notes": "New row. Pricing from Oracle's public Fusion Cloud Service Global Price List (Sept 10, 2026), linked from oracle.com/corporate/pricing: HCM Base $15.00 per hosted employee per month, minimum 500, standard 3-year term (billing cadence not stated, so per-month list price used). SCIM is part of Fusion's common REST APIs (Users, Roles, Schemas, ResourceTypes, Bulk) with basic auth; it is not sold separately, so status is free with medium confidence (price list does not mention SCIM). Deprovisioning sets active=false (account suspended) or deletes. No SCIM Groups resource (Roles instead), so groups=false. Scored as a provisioning target per rule 3b; HCM is usually the HR source that IdPs import from (outbound recorded in fallbacks.other_sync). SAML SSO is configured in the Security Console or the Fusion OCI IAM identity domain (Oracle Apps type, included with SaaS). Entra 'native' rests on the 'Oracle Fusion ERP' gallery app, which provisions to the same Fusion SCIM endpoint.",
+  "confidence": "medium",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Fusion Human Capital Management Base Cloud Service",
+  "api_tax": false,
+  "last_verified": "2026-10-05",
+  "first_added": "2026-09",
+  "status_prev": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": false
+  }
+ },
+ "plans": [
+  {
+   "name": "Fusion Human Capital Management Base Cloud Service",
+   "price_text": "$15.00 per Hosted Employee per month (minimum 500; standard 3-year term)",
+   "price_per_user_mo": 15.0,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c34",
+    "c32",
+    "c1",
+    "c21",
+    "c25",
+    "c35"
+   ],
+   "notes": "Metric is per hosted employee, not per named user. Options (Talent, Recruiting, Payroll, etc.) are add-ons to this base."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c1",
+   "c13",
+   "c2",
+   "c34"
+  ],
+  "plan": "Fusion Human Capital Management Base Cloud Service",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://{pod}.fa.{region}.oraclecloud.com/hcmRestApi/scim",
+  "auth": {
+   "method": "basic",
+   "token_source": "Fusion user account with security administration privileges (Security Console)",
+   "token_expiry": null,
+   "cite": [
+    "c14"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": false,
+   "ServiceProviderConfig": null,
+   "Schemas": true,
+   "ResourceTypes": true,
+   "Bulk": true,
+   "Me": null,
+   "cite": [
+    "c2",
+    "c8",
+    "c18",
+    "c19",
+    "c17"
+   ],
+   "notes": "No Groups resource: Fusion exposes /hcmRestApi/scim/Roles instead, with PATCH on members."
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": false,
+   "group_membership": true,
+   "cite": [
+    "c2",
+    "c4",
+    "c6",
+    "c7",
+    "c11",
+    "c3",
+    "c8",
+    "c9"
+   ]
+  },
+  "deprovision": {
+   "action": "suspend",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Setting active=false suspends the user account (it remains, can be re-activated); DELETE /Users/{id} removes the user account.",
+   "cite": [
+    "c11",
+    "c3"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [],
+   "cite": [
+    "c16"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c15"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.familyName",
+    "name.givenName",
+    "displayName",
+    "emails.value",
+    "emails.type",
+    "emails.primary",
+    "active",
+    "password",
+    "roles",
+    "externalId"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": "Oracle extension urn:scim:schemas:extension:fa:2.0:faUser: userCategory, accountType, partyInformation (partyNumber, PartyUsage), workerInformation (personNumber, manager, job, businessUnit, department), assignServiceAdminRoles. Customer-defined attributes are not documented."
+   },
+   "group": [
+    "Roles: id, name, displayName, description, category, members"
+   ],
+   "cite": [
+    "c13",
+    "c12",
+    "c8"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "roles attribute on Users, and PATCH /hcmRestApi/scim/Roles/{id} members to add or remove role membership",
+   "cite": [
+    "c8",
+    "c9"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "No SCIM Groups resource; role membership is managed through the Roles resource.",
+    "cite": [
+     "c8"
+    ]
+   },
+   {
+    "text": "Authentication shown is HTTP Basic with a Fusion user name and password.",
+    "cite": [
+     "c14"
+    ]
+   }
+  ],
+  "notes": "SCIM API is part of the REST API for Common Features shared by all Oracle Fusion Cloud Applications (HCM, ERP, SCM, CX Sales) on the same pod. Its core schema URN is written urn:scim:schemas:core:2.0:User in Oracle's example (not the RFC 7643 urn:ietf:params form). No separate SCIM or identity SKU appears on the Fusion Cloud price list."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c35",
+   "c36"
+  ],
+  "plan": "Fusion Human Capital Management Base Cloud Service",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://{pod}.fa.{region}.oraclecloud.com/hcmRestApi/resources/11.13.18.05",
+  "docs_url": "https://docs.oracle.com/en/cloud/saas/human-resources/farws/api-user-accounts.html",
+  "auth": {
+   "methods": [
+    "basic"
+   ],
+   "scopes": [],
+   "cite": [
+    "c14"
+   ],
+   "notes": "Basic auth as shown in the common Fusion REST examples; OAuth options were not checked."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": true,
+   "reactivate_user": true,
+   "manage_groups": null,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c38",
+    "c41",
+    "c36",
+    "c39",
+    "c37",
+    "c40",
+    "c11"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/hcmRestApi/resources/11.13.18.05/userAccounts",
+    "purpose": "Create a user account",
+    "cite": [
+     "c36"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/hcmRestApi/resources/11.13.18.05/userAccounts",
+    "purpose": "Get all user accounts",
+    "cite": [
+     "c38"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/hcmRestApi/resources/11.13.18.05/userAccounts/{GUID}",
+    "purpose": "Get a user account",
+    "cite": [
+     "c41"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/hcmRestApi/resources/11.13.18.05/userAccounts/{GUID}",
+    "purpose": "Update a user account",
+    "cite": [
+     "c39"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/hcmRestApi/resources/11.13.18.05/userAccounts/{GUID}",
+    "purpose": "Delete a user account",
+    "cite": [
+     "c37"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/hcmRestApi/resources/11.13.18.05/userAccounts/{GUID}/action/autoprovisionRoles",
+    "purpose": "Trigger roles autoprovisioning process",
+    "cite": [
+     "c40"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/hcmRestApi/scim/Roles/{id}",
+    "purpose": "Add/remove role membership (common SCIM API)",
+    "cite": [
+     "c9"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": false,
+   "events": [
+    "user created",
+    "updated",
+    "activated",
+    "disabled",
+    "deleted (Atom feed, polled)"
+   ],
+   "cite": [
+    "c20"
+   ],
+   "notes": "No push webhooks; the User Requests Atom feed (/hcmRestApi/atomservlet/user/userRequests) publishes user lifecycle entries."
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "api_tax false: the only HCM base SKU carries the REST APIs; no separate API SKU appears on the price list (inferred from the price list, not stated)."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/oracle-human-capital-management/",
+   "cite": [
+    "c42"
+   ],
+   "notes": "OIN 'Oracle Human Capital Management' (updated May 2026) ticks SWA, SCIM, Create, Update, Deactivate, Sync Password, Schema Discovery and Entitlement Management in page markup; builder not stated. Aquera's 'Oracle HCM Cloud Connector' and 'User Mastering Connector' import users from HCM into Okta (HR-as-master, third party; c43)."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/oracle-fusion-erp-provisioning-tutorial",
+   "cite": [
+    "c30",
+    "c26",
+    "c27",
+    "c28",
+    "c29"
+   ],
+   "notes": "Gallery app is named 'Oracle Fusion ERP' but targets the shared Fusion SCIM endpoint (/hcmRestApi/scim/) used by HCM on the same pod. No HCM-specific Entra tutorial (oracle-hcm-tutorial, oracle-fusion-hcm-tutorial 404). Basic auth only; no group provisioning; roles via Entra groups named after Fusion roles."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": "Oracle HCM is usually the HR system of record: worker hires create user accounts in Fusion, and IdPs can import users from it (Okta HR-as-master connectors by Aquera). Outbound feed: User Requests Atom feed.",
+  "docs_public": true,
+  "cite": [
+   "c21",
+   "c22",
+   "c44",
+   "c43",
+   "c20"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://docs.oracle.com/en/cloud/saas/applications-common/26d/farca/api-users.html",
+   "title": "Users REST Endpoints - REST API for Common Features in Oracle Fusion Cloud Applications",
+   "quote": "The users resource is used to create, update, delete, or view users in Oracle Fusion Cloud Applications.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://docs.oracle.com/en/cloud/saas/applications-common/26d/farca/api-users.html",
+   "title": "Users REST Endpoints - REST API for Common Features in Oracle Fusion Cloud Applications",
+   "quote": "Create a user Method: post Path: /hcmRestApi/scim/Users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://docs.oracle.com/en/cloud/saas/applications-common/26d/farca/api-users.html",
+   "title": "Users REST Endpoints - REST API for Common Features in Oracle Fusion Cloud Applications",
+   "quote": "Delete a user Method: delete Path: /hcmRestApi/scim/Users/{id}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://docs.oracle.com/en/cloud/saas/applications-common/26d/farca/api-users.html",
+   "title": "Users REST Endpoints - REST API for Common Features in Oracle Fusion Cloud Applications",
+   "quote": "Get a user Method: get Path: /hcmRestApi/scim/Users/{id}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://docs.oracle.com/en/cloud/saas/applications-common/26d/farca/api-users.html",
+   "title": "Users REST Endpoints - REST API for Common Features in Oracle Fusion Cloud Applications",
+   "quote": "Get all users Method: get Path: /hcmRestApi/scim/Users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://docs.oracle.com/en/cloud/saas/applications-common/26d/farca/api-users.html",
+   "title": "Users REST Endpoints - REST API for Common Features in Oracle Fusion Cloud Applications",
+   "quote": "Replace a user Method: put Path: /hcmRestApi/scim/Users/{id}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://docs.oracle.com/en/cloud/saas/applications-common/26d/farca/api-users.html",
+   "title": "Users REST Endpoints - REST API for Common Features in Oracle Fusion Cloud Applications",
+   "quote": "Update a user Method: patch Path: /hcmRestApi/scim/Users/{id}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.oracle.com/en/cloud/saas/applications-common/26d/farca/api-roles.html",
+   "title": "Roles REST Endpoints - REST API for Common Features in Oracle Fusion Cloud Applications",
+   "quote": "The roles resource is used to add, view, or delete membership to roles in Oracle Applications Cloud.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.oracle.com/en/cloud/saas/applications-common/26d/farca/api-roles.html",
+   "title": "Roles REST Endpoints - REST API for Common Features in Oracle Fusion Cloud Applications",
+   "quote": "Update a role Method: patch Path: /hcmRestApi/scim/Roles/{id}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.oracle.com/en/cloud/saas/applications-common/26d/farca/api-roles.html",
+   "title": "Roles REST Endpoints - REST API for Common Features in Oracle Fusion Cloud Applications",
+   "quote": "Get all roles Method: get Path: /hcmRestApi/scim/Roles",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.oracle.com/en/cloud/saas/applications-common/26d/farca/op-hcmrestapi-scim-users-id-patch.html",
+   "title": "Update a user - REST API for Common Features in Oracle Fusion Cloud Applications",
+   "quote": "true indicates that the user is able to login, and false indicates that the user account is suspended.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.oracle.com/en/cloud/saas/applications-common/26d/farca/op-hcmrestapi-scim-users-post.html",
+   "title": "Create a user - REST API for Common Features in Oracle Fusion Cloud Applications",
+   "quote": "urn:scim:schemas:extension:fa:2.0:faUser",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.oracle.com/en/cloud/saas/applications-common/26d/farca/op-hcmrestapi-scim-users-post.html",
+   "title": "Create a user - REST API for Common Features in Oracle Fusion Cloud Applications",
+   "quote": "urn:scim:schemas:core:2.0:User",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.oracle.com/en/cloud/saas/applications-common/26d/farca/op-hcmrestapi-scim-users-post.html",
+   "title": "Create a user - REST API for Common Features in Oracle Fusion Cloud Applications",
+   "quote": "curl -i -u \"<username>:<password>\" -H \"Content-Type: application/json\" -X POST",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.oracle.com/en/cloud/saas/applications-common/26d/farca/op-hcmrestapi-scim-users-get.html",
+   "title": "Get all users - REST API for Common Features in Oracle Fusion Cloud Applications",
+   "quote": "This parameter specifies use of 1-based index for the first result included in the response. Specify this query parameter to use pagination.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.oracle.com/en/cloud/saas/applications-common/26d/farca/op-hcmrestapi-scim-users-get.html",
+   "title": "Get all users - REST API for Common Features in Oracle Fusion Cloud Applications",
+   "quote": "This parameter specifies the query expression to retrieve a subset of user resource instances.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.oracle.com/en/cloud/saas/applications-common/26d/farca/op-hcmrestapi-scim-bulk-post.html",
+   "title": "Bulk operation - REST API for Common Features in Oracle Fusion Cloud Applications",
+   "quote": "Bulk operation post /hcmRestApi/scim/Bulk",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.oracle.com/en/cloud/saas/applications-common/26d/farca/toc.htm",
+   "title": "REST API for Common Features in Oracle Fusion Cloud Applications - Table of Contents",
+   "quote": "Get all schemas",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.oracle.com/en/cloud/saas/applications-common/26d/farca/toc.htm",
+   "title": "REST API for Common Features in Oracle Fusion Cloud Applications - Table of Contents",
+   "quote": "Get all resource types",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.oracle.com/en/cloud/saas/applications-common/26d/farca/api-user-requests.html",
+   "title": "User Requests REST Endpoints - REST API for Common Features in Oracle Fusion Cloud Applications",
+   "quote": "The userRequest resource publishes an atom entry when a user is created, updated, activated, disabled, or deleted in Oracle Applications Cloud.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.oracle.com/en/cloud/saas/applications-common/26d/facsa/oracle-applications-cloud-as-the-single-sign-on-sso-service.html",
+   "title": "Oracle Applications Cloud as the Single Sign-On (SSO) Service Provider",
+   "quote": "You can provide your users with a seamless single sign-on experience, when you set up Oracle Applications Cloud as a single sign-on service provider.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://docs.oracle.com/en/cloud/saas/applications-common/26d/facsa/oracle-applications-cloud-as-the-single-sign-on-sso-service.html",
+   "title": "Oracle Applications Cloud as the Single Sign-On (SSO) Service Provider",
+   "quote": "The identity service associated with your Oracle Fusion Cloud Applications is getting upgraded to the Oracle Cloud Infrastructure (OCI) Identity and Access Management (IAM) identity domain.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://docs.oracle.com/en/cloud/saas/applications-common/26d/facsa/delete-user-accounts.html",
+   "title": "Delete User Accounts",
+   "quote": "An administrator may use the Security Console to delete users' accounts.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://docs.oracle.com/en/cloud/saas/applications-common/26d/facsa/how-user-accounts-are-suspended.html",
+   "title": "How User Accounts Are Suspended",
+   "quote": "By default, user accounts are suspended automatically when a user has no roles.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://docs.oracle.com/en-us/iaas/Content/Identity/sku/overview.htm",
+   "title": "IAM Identity Domain Types",
+   "quote": "Your organization subscribes to an Oracle PaaS or SaaS service that provides an Oracle Apps identity domain with their service.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/oracle-fusion-erp-provisioning-tutorial",
+   "title": "Configure Oracle Fusion ERP for automatic user provisioning with Microsoft Entra ID",
+   "quote": "https://ejlv.fa.em2.oraclecloud.com/hcmRestApi/scim/",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/oracle-fusion-erp-provisioning-tutorial",
+   "title": "Configure Oracle Fusion ERP for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Oracle Fusion ERP only supports Basic Authentication for their SCIM endpoint.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/oracle-fusion-erp-provisioning-tutorial",
+   "title": "Configure Oracle Fusion ERP for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Oracle Fusion ERP doesn't support group provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/oracle-fusion-erp-provisioning-tutorial",
+   "title": "Configure Oracle Fusion ERP for automatic user provisioning with Microsoft Entra ID",
+   "quote": "To assign roles to users in Oracle Fusion ERP from Microsoft Entra ID, you need to assign users to the desired Microsoft Entra groups that are named after roles in Oracle Fusion ERP.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/oracle-fusion-erp-provisioning-tutorial",
+   "title": "Configure Oracle Fusion ERP for automatic user provisioning with Microsoft Entra ID",
+   "quote": "configure Microsoft Entra ID to automatically provision and de-provision users and/or groups to Oracle Fusion ERP",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://www.oracle.com/corporate/pricing/",
+   "title": "Global Pricing and Licensing | Oracle",
+   "quote": "The downloadable price list will help you familiarize yourself with Oracle’s product offerings and pricing.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://www.oracle.com/a/ocom/docs/corporate/pricing/oracle-fusion-cloud-global-price-list.pdf",
+   "title": "Oracle Fusion Cloud Service Global Price List",
+   "quote": "Note: Standard term length for Oracle Cloud Service subscription services is three (3) years.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.oracle.com/corporate/pricing/"
+  },
+  {
+   "id": "c33",
+   "url": "https://www.okta.com/integrations/?search=oracle",
+   "title": "Okta Integration Network | Okta",
+   "quote": "Results for “oracle”",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://www.oracle.com/a/ocom/docs/corporate/pricing/oracle-fusion-cloud-global-price-list.pdf",
+   "title": "Oracle Fusion Cloud Service Global Price List",
+   "quote": "Fusion Human Capital Management Base Cloud Service 15.00 Hosted Employee 500 B85800",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.oracle.com/corporate/pricing/"
+  },
+  {
+   "id": "c35",
+   "url": "https://docs.oracle.com/en/cloud/saas/human-resources/farws/api-user-accounts.html",
+   "title": "User Accounts REST Endpoints - REST API for Oracle Fusion Cloud HCM",
+   "quote": "The userAccounts resource includes all the user accounts as of the specified date.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://docs.oracle.com/en/cloud/saas/human-resources/farws/api-user-accounts.html",
+   "title": "User Accounts REST Endpoints - REST API for Oracle Fusion Cloud HCM",
+   "quote": "Create a user account Method: post Path: /hcmRestApi/resources/11.13.18.05/userAccounts",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://docs.oracle.com/en/cloud/saas/human-resources/farws/api-user-accounts.html",
+   "title": "User Accounts REST Endpoints - REST API for Oracle Fusion Cloud HCM",
+   "quote": "Delete a user account Method: delete Path: /hcmRestApi/resources/11.13.18.05/userAccounts/{GUID}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c38",
+   "url": "https://docs.oracle.com/en/cloud/saas/human-resources/farws/api-user-accounts.html",
+   "title": "User Accounts REST Endpoints - REST API for Oracle Fusion Cloud HCM",
+   "quote": "Get all user accounts Method: get Path: /hcmRestApi/resources/11.13.18.05/userAccounts",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c39",
+   "url": "https://docs.oracle.com/en/cloud/saas/human-resources/farws/api-user-accounts.html",
+   "title": "User Accounts REST Endpoints - REST API for Oracle Fusion Cloud HCM",
+   "quote": "Update a user account Method: patch Path: /hcmRestApi/resources/11.13.18.05/userAccounts/{GUID}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c40",
+   "url": "https://docs.oracle.com/en/cloud/saas/human-resources/farws/api-user-accounts.html",
+   "title": "User Accounts REST Endpoints - REST API for Oracle Fusion Cloud HCM",
+   "quote": "Trigger roles autoprovisioning process Method: post Path: /hcmRestApi/resources/11.13.18.05/userAccounts/{GUID}/action/autoprovisionRoles",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c41",
+   "url": "https://docs.oracle.com/en/cloud/saas/human-resources/farws/api-user-accounts.html",
+   "title": "User Accounts REST Endpoints - REST API for Oracle Fusion Cloud HCM",
+   "quote": "Get a user account Method: get Path: /hcmRestApi/resources/11.13.18.05/userAccounts/{GUID}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c42",
+   "url": "https://www.okta.com/integrations/oracle-human-capital-management/",
+   "title": "Integrate Oracle Human Capital Management with Okta",
+   "quote": "Modern HR differentiates the business with a talent centric and consumer based strategy",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c43",
+   "url": "https://www.okta.com/integrations/oracle-hcm-cloud-connector-by-aquera/",
+   "title": "Integrate Oracle HCM Cloud Connector by Aquera with Okta",
+   "quote": "import users and their attributes on an ongoing basis from Oracle HCM Cloud, which acts as the user system of record",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c44",
+   "url": "https://docs.oracle.com/en/cloud/saas/applications-common/26d/facsa/add-user-accounts.html",
+   "title": "Add User Accounts",
+   "quote": "Usually, an implementation user sets up Oracle Fusion Cloud Human Capital Management Cloud (HCM). Then, you can use HCM to create accounts for application users.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.oracle.com/corporate/pricing/",
+  "https://www.oracle.com/a/ocom/docs/corporate/pricing/oracle-fusion-cloud-global-price-list.pdf",
+  "https://docs.oracle.com/en/cloud/saas/applications-common/26d/farca/toc.htm",
+  "https://docs.oracle.com/en/cloud/saas/applications-common/26d/farca/openapi.json",
+  "https://docs.oracle.com/en/cloud/saas/applications-common/26d/facsa/toc.htm",
+  "https://docs.oracle.com/en/cloud/saas/human-resources/farws/api-user-accounts.html",
+  "https://www.okta.com/integrations/?search=oracle",
+  "https://www.okta.com/integrations/oracle-human-capital-management/",
+  "https://www.okta.com/integrations/oracle-hcm-cloud-connector-by-aquera/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/oracle-fusion-erp-provisioning-tutorial",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/oracle-hcm-tutorial (404)"
+ ],
+ "open_questions": [
+  "Docs do not say whether suspending or deleting a user via SCIM ends active sessions or frees a subscription unit (HCM is metered per hosted employee, not per user).",
+  "SCIM rate limits and maximum page size are not documented.",
+  "Whether OAuth/JWT bearer tokens are accepted on /hcmRestApi/scim is not stated on the SCIM pages (examples use basic auth).",
+  "Builder of the Okta 'Oracle Human Capital Management' app is not stated."
+ ]
+}

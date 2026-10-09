@@ -1,0 +1,629 @@
+{
+ "slug": "gong",
+ "vendor": "Gong",
+ "vendor_url": "https://www.gong.io",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Gong",
+  "slug": "gong",
+  "category": "Sales & CRM",
+  "status": "free",
+  "scim_plan": "Any Gong plan",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales (per-user licences plus a platform fee)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Any Gong plan",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": null,
+   "onelogin": "native",
+   "jumpcloud": "native",
+   "generic": true
+  },
+  "pricing_page_url": "https://www.gong.io/pricing/",
+  "docs_url": "https://help.gong.io/docs/about-provisioning-team-members",
+  "evidence": "Gong's help centre marks team member provisioning, including its generic SCIM endpoint (provisioning.gong.io), as \"Available on: Any Gong plan\"; the pricing page gives no tiers, only per-user licences plus a platform fee.",
+  "notes": "Status changed from gated (June) to free: the June row said SCIM is Enterprise-only and requires SAML SSO, and gave Foundation ~$108-119/u/mo and a $5K-$50K platform fee; none of that is on a current first-party page and it is dropped. Gong's pricing page lists no plans or prices (quote-based: 'Licenses are priced per user' plus 'a platform fee based on the number of users supported'). Every provisioning and SAML SSO help article says 'Available on: Any Gong plan', so there is no SCIM upcharge. Provisioning sources: Okta (OIN app, SAML + SCIM), Entra ID (gallery app), OneLogin, Rippling, Salesforce, and a custom SCIM 2.0 source authenticated with an OAuth bearer token. Deprovisioning deactivates the user (cannot sign in, data capture off). Gong's public API is read-only for users (list/get users, permission profiles) plus an audit logs endpoint; rate limit 3 calls/second and 10,000/day.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Any Gong plan",
+  "api_tax": false,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Gong (quote-based)",
+   "price_text": "Licenses are priced per user; platform fee based on the number of users supported",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c1",
+    "c2",
+    "c3",
+    "c17",
+    "c18",
+    "c22"
+   ],
+   "notes": "No named tiers on the pricing page; SCIM, SAML SSO and the API are documented as available on any Gong plan."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c3",
+   "c5",
+   "c6"
+  ],
+  "plan": "Any Gong plan",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://provisioning.gong.io/scim/v2",
+  "auth": {
+   "method": "oauth2",
+   "token_source": "Admin center > Settings > People > Team Member Provisioning > Custom source; OAuth bearer token acquired through the standard Gong app OAuth flow (Okta uses 'Authenticate with Gong').",
+   "token_expiry": null,
+   "cite": [
+    "c7",
+    "c8",
+    "c13"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c6",
+    "c9"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": true,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": null,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c4",
+    "c5",
+    "c9",
+    "c10"
+   ],
+   "notes": "Documented: POST /Users, PUT /Users/{id} (update and active=false), POST /Groups, PATCH /Groups/{id} (add/remove members), DELETE /Groups/{id}. User DELETE and GET are not documented."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Deactivated users can't sign in and their data capture settings are turned off.",
+   "cite": [
+    "c4",
+    "c11"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "externalId",
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "displayName",
+    "title",
+    "locale",
+    "active",
+    "emails",
+    "phoneNumbers",
+    "groups"
+   ],
+   "enterprise": [
+    "manager.email"
+   ],
+   "custom": {
+    "supported": true,
+    "how": "urn:ietf:params:scim:schemas:extension:Gong:2.0:User extension (e.g. spokenLanguages with BCP-47 codes)"
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c6",
+    "c12"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "IdP groups map to Gong 'assignments' that set Gong seats, permission profile per workspace, data capture and consent profile.",
+   "cite": [
+    "c14"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Users whose primary email domain differs from the company's primary domain are not imported.",
+    "cite": [
+     "c15"
+    ]
+   },
+   {
+    "text": "Provisioned fields (first name, last name, manager, emails, title) can't be edited manually in Gong.",
+    "cite": [
+     "c16"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c17",
+   "c19"
+  ],
+  "plan": "Any Gong plan",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": null,
+  "docs_url": "https://help.gong.io/apidocs/list-all-users-v2users",
+  "auth": {
+   "methods": [
+    "api_key",
+    "oauth2"
+   ],
+   "scopes": [
+    "api:users:read",
+    "api:logs:read"
+   ],
+   "cite": [
+    "c17",
+    "c19",
+    "c22"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c19",
+    "c20",
+    "c21",
+    "c23"
+   ],
+   "notes": "No user create/update/deactivate endpoints in the public API reference; user lifecycle is via SCIM. assign_roles = create/update permission profiles."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/v2/users",
+    "purpose": "List all users",
+    "cite": [
+     "c19"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v2/users/{id}",
+    "purpose": "Retrieve user",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v2/users/extensive",
+    "purpose": "List users by filter",
+    "cite": [
+     "c21"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v2/permission-profile/users",
+    "purpose": "List users attached to a permission profile",
+    "cite": [
+     "c23"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v2/logs",
+    "purpose": "Retrieve logs data by type and time range (e.g. AccessLog, UserActivityLog)",
+    "cite": [
+     "c22"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Any Gong plan",
+   "cite": [
+    "c22",
+    "c17"
+   ]
+  },
+  "rate_limits": {
+   "text": "3 API calls per second and 10,000 API calls per day; HTTP 429 with Retry-After when exceeded.",
+   "cite": [
+    "c24"
+   ]
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/gong/",
+   "cite": [
+    "c25",
+    "c13"
+   ],
+   "notes": "OIN capabilities: SAML, SWA, SCIM, Create, Update, Deactivate, Group Push, Group Linking."
+  },
+  "entra": {
+   "listed": true,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/gong-provisioning-tutorial",
+   "cite": [
+    "c26",
+    "c27"
+   ]
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "Gong documents no Google Workspace provisioning; Google's catalogue was not checked."
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c28"
+   ],
+   "notes": "From Gong's own OneLogin provisioning guide; OneLogin catalogue page not loaded. Gong also documents OneLogin SAML and OIDC sign-in."
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": "idp",
+   "url": "https://jumpcloud.com/support/integrate-with-gong",
+   "cite": [
+    "c29"
+   ]
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": "Salesforce and Rippling provisioning sources",
+  "docs_public": true,
+  "cite": [
+   "c3"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.gong.io/pricing/",
+   "title": "Gong Revenue AI Pricing",
+   "quote": "Licenses are priced per user",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://www.gong.io/pricing/",
+   "title": "Gong Revenue AI Pricing",
+   "quote": "There is a platform fee based on the number of users supported",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://help.gong.io/docs/about-provisioning-team-members",
+   "title": "About provisioning team members",
+   "quote": "Gong supports provisioning from the following providers:",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://help.gong.io/docs/about-provisioning-team-members",
+   "title": "About provisioning team members",
+   "quote": "Deactivating the user or disabling the user's access to the application through the IdP will deactivate the user in Gong",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://help.gong.io/docs/provision-team-members-from-a-custom-source-scim",
+   "title": "Provision team members from a custom source (SCIM)",
+   "quote": "This article explains how to set up automatic provisioning by creating an integration with Gong and your IDP using standard OAuth and SCIM protocols.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://help.gong.io/docs/provision-team-members-from-a-custom-source-scim",
+   "title": "Provision team members from a custom source (SCIM)",
+   "quote": "\"schemas\" : [ \"urn:ietf:params:scim:schemas:core:2.0:User\",",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://help.gong.io/docs/provision-team-members-from-a-custom-source-scim",
+   "title": "Provision team members from a custom source (SCIM)",
+   "quote": "SCIM clients (i.e., you!) acquire the token through a standard OAuth exchange.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://help.gong.io/docs/provision-team-members-from-a-custom-source-scim",
+   "title": "Provision team members from a custom source (SCIM)",
+   "quote": "Generate an OAuth bearer token to send with each SCIM provisioning request.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://help.gong.io/docs/provision-team-members-from-a-custom-source-scim",
+   "title": "Provision team members from a custom source (SCIM)",
+   "quote": "New groups created in the custom source will be mastered by the custom source.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://help.gong.io/docs/provision-team-members-from-a-custom-source-scim",
+   "title": "Provision team members from a custom source (SCIM)",
+   "quote": "In this example, the \"active\" attribute is set to false.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c11",
+   "url": "https://help.gong.io/docs/faqs-provisioning",
+   "title": "FAQs: Provisioning",
+   "quote": "Deactivated users won't be able to sign in to Gong, and their data capture settings are turned off.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://help.gong.io/docs/provision-team-members-from-a-custom-source-scim",
+   "title": "Provision team members from a custom source (SCIM)",
+   "quote": "This example shows how to use custom SCIM attributes to specify a user's spoken languages.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://help.gong.io/docs/okta-provisioning-setup",
+   "title": "Okta provisioning setup",
+   "quote": "In Okta, you must define the groups and users you want to provision to Gong. This is done by installing the Gong for Okta app and configuring the relevant settings in Okta.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c14",
+   "url": "https://help.gong.io/docs/about-provisioning-team-members",
+   "title": "About provisioning team members",
+   "quote": "Assignments in Gong let you automatically apply Gong settings to users included in that assignment. Each assignment has a corresponding group in the IdP.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://help.gong.io/docs/faqs-provisioning",
+   "title": "FAQs: Provisioning",
+   "quote": "Gong doesn't import users that have a primary email domain that is different to the primary company domain.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://help.gong.io/docs/faqs-provisioning",
+   "title": "FAQs: Provisioning",
+   "quote": "When you select an automatic provisioning source, you won't be able to change any of the following fields in Gong:",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c17",
+   "url": "https://help.gong.io/docs/receive-access-to-the-api",
+   "title": "Manage API keys",
+   "quote": "API keys give external systems access to your company's Gong data through the public API.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c18",
+   "url": "https://help.gong.io/docs/set-up-saml-sso-authentication-generic",
+   "title": "Set up SAML SSO authentication (generic)",
+   "quote": "Available on: Any Gong plan",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c19",
+   "url": "https://help.gong.io/apidocs/list-all-users-v2users",
+   "title": "List all users (/v2/users)",
+   "quote": "Required authorizaton scope: 'api:users:read'.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c20",
+   "url": "https://help.gong.io/apidocs/retrieve-user-v2usersid",
+   "title": "Retrieve user (/v2/users/{id})",
+   "quote": "Retrieve user (/v2/users/{id})",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c21",
+   "url": "https://help.gong.io/apidocs/list-users-by-filter-v2usersextensive",
+   "title": "List users by filter (/v2/users/extensive)",
+   "quote": "List users by filter (/v2/users/extensive)",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c22",
+   "url": "https://help.gong.io/apidocs/retrieve-logs-data-by-type-and-time-range-v2logs",
+   "title": "Retrieve logs data by type and time range (/v2/logs)",
+   "quote": "Required authorizaton scope: 'api:logs:read'.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c23",
+   "url": "https://help.gong.io/apidocs/list-all-users-attached-to-a-given-permission-profile-v2permission-profileusers",
+   "title": "List all users attached to a given permission profile (/v2/permission-profile/users)",
+   "quote": "List all users attached to a given permission profile (/v2/permission-profile/users)",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c24",
+   "url": "https://help.gong.io/docs/what-the-gong-api-provides",
+   "title": "What the Gong API provides",
+   "quote": "3 API calls per second, and 10,000 API calls per day.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c25",
+   "url": "https://www.okta.com/integrations/gong/",
+   "title": "Integrate Gong with Okta",
+   "quote": "Okta's Gong enables users to access Gong via single sign-on and provision new users on the Gong platform.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c26",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/gong-provisioning-tutorial",
+   "title": "Configure Gong for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Provision groups and group memberships in Gong.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c27",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/gong-provisioning-tutorial",
+   "title": "Configure Gong for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Remove users in Gong when they don't require access anymore.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c28",
+   "url": "https://help.gong.io/docs/onelogin-provisioning-setup",
+   "title": "OneLogin provisioning setup",
+   "quote": "In OneLogin, enable SCIM provisioning from OneLogin to Gong.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c29",
+   "url": "https://jumpcloud.com/support/integrate-with-gong",
+   "title": "Integrate with Gong | JumpCloud Documentation",
+   "quote": "Automatically provision, update and deprovision users and groups in Gong from JumpCloud using the SCIM integration.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.gong.io/pricing/ (rendered; no tiers or prices listed)",
+  "https://help.gong.io/llms.txt (full help-centre and API reference index)",
+  "help.gong.io provisioning articles: about, custom SCIM, FAQs, Okta, Entra ID, OneLogin",
+  "help.gong.io/apidocs Users, Auditing and Permissions sections"
+ ],
+ "open_questions": [
+  "Gong publishes no plan names or prices; per-user and platform-fee amounts are not public.",
+  "Whether SCIM deprovisioning (deactivate) frees the Gong seat; seats are assigned via assignments but the docs do not say they are released.",
+  "Whether SSO must be configured before SCIM is not stated (Okta provisioning authenticates via OAuth).",
+  "SCIM GET/DELETE on Users, filtering, pagination, discovery endpoints and SCIM rate limits are not documented.",
+  "OAuth token expiry for the custom SCIM source is not documented.",
+  "Public API base URL is region-specific and not stated in the reference pages loaded; no user-event webhooks documented."
+ ]
+}

@@ -1,0 +1,566 @@
+{
+ "slug": "sketch",
+ "vendor": "Sketch",
+ "vendor_url": "https://www.sketch.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Sketch",
+  "slug": "sketch",
+  "category": "Design & Creative",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "$44 per editor/month, billed yearly",
+  "scim_price_per_user_mo": 44,
+  "team_plan": "Standard",
+  "team_price_text": "$12 per editor/month, billed yearly",
+  "team_price_per_user_mo": 12,
+  "price_multiplier": 3.7,
+  "sso_plan": "Professional",
+  "sso_price_per_user_mo": 24,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": false
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": "sso_only",
+   "onelogin": "sso_only",
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.sketch.com/pricing/",
+  "docs_url": "https://www.sketch.com/docs/getting-started/single-sign-on/scim-provisioning/",
+  "evidence": "Sketch's pricing page lists SCIM provisioning under Enterprise ($44 per editor/month, billed yearly, 'Everything in Professional SCIM provisioning'), while SSO starts on Professional ($24).",
+  "notes": "SCIM on Enterprise ($44/editor/mo annual) and Private Cloud (contact); SSO on Professional ($24); Standard $12. Okta and Entra gallery apps are SSO/JIT only, so SCIM needs a custom app pointed at Sketch's SCIM base URL with a bearer token (guides for Okta, Entra ID, Ping). Users only, no group push; access level (editor/viewer) via a Sketch SCIM extension. Disabling a user deletes them; drafts move to a restricted admin folder. Google Workspace and OneLogin documented for SAML only.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": null,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Standard",
+   "price_text": "$12 per editor/month, billed yearly",
+   "price_per_user_mo": 12,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c3"
+   ]
+  },
+  {
+   "name": "Professional",
+   "price_text": "$24 per editor/month, billed yearly",
+   "price_per_user_mo": 24,
+   "billing": "annual",
+   "sso": true,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c3",
+    "c5"
+   ]
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "$44 per editor/month, billed yearly",
+   "price_per_user_mo": 44,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c5"
+   ]
+  },
+  {
+   "name": "Private Cloud",
+   "price_text": "Contact for pricing",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c4",
+    "c5"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c3",
+   "c5",
+   "c6",
+   "c7"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": "bearer",
+   "token_source": "Workspace Settings > Single Sign-on > Enable SCIM (copy SCIM Base URL and SCIM token)",
+   "token_expiry": null,
+   "cite": [
+    "c7",
+    "c9",
+    "c16"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": false,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c8",
+    "c17"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": null,
+   "group_push": false,
+   "group_membership": null,
+   "cite": [
+    "c8",
+    "c12",
+    "c13",
+    "c17"
+   ],
+   "notes": "Okta actions enabled: Create Users, Update User Attributes, Deactivate Users. PUT vs PATCH not documented."
+  },
+  "deprovision": {
+   "action": "delete",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "User is deleted from the Workspace; documents in their My Drafts folder move to a restricted folder Workspace Admins can access.",
+   "cite": [
+    "c13",
+    "c21"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "emails[type eq \"work\"].value"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": true,
+    "how": "Sketch extension urn:ietf:params:scim:schemas:extension:sketch:1.0:User with accessLevel (editor | viewer)"
+   },
+   "group": [],
+   "cite": [
+    "c10",
+    "c11",
+    "c18",
+    "c19"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "accessLevel extension attribute (editor or viewer), mapped from Okta group assignment or Entra app roles",
+   "cite": [
+    "c11",
+    "c19"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "The Okta and Entra gallery apps do not support SCIM; a custom SAML + SCIM app is required (existing gallery app must be deleted).",
+    "cite": [
+     "c15",
+     "c20"
+    ]
+   },
+   {
+    "text": "Groups cannot be created over SCIM; Entra must use group expansion to provision users individually.",
+    "cite": [
+     "c17"
+    ]
+   },
+   {
+    "text": "When the Editor seat limit is reached, users are provisioned as Viewers instead.",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "text": "Disabling a user deletes them from the Workspace rather than suspending them.",
+    "cite": [
+     "c13",
+     "c21"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": null,
+  "cite": [],
+  "plan": null,
+  "api_tax": null,
+  "style": null,
+  "base_url": null,
+  "docs_url": null,
+  "auth": {
+   "methods": [],
+   "scopes": [],
+   "cite": []
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": []
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/sketch/",
+   "cite": [
+    "c24",
+    "c15"
+   ],
+   "notes": "OIN gallery app is SAML + JIT only; Sketch's docs say SCIM needs a custom Okta app with the generic SCIM connector."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/sketch-tutorial",
+   "cite": [
+    "c25",
+    "c20"
+   ],
+   "notes": "Gallery app is SSO + JIT; SCIM uses a non-gallery custom app."
+  },
+  "google": {
+   "listed": null,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c26"
+   ],
+   "notes": "Sketch's guide uses a custom SAML app in Google Workspace; no Marketplace/catalogue listing checked."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c27"
+   ],
+   "notes": "Sketch's guide uses OneLogin's generic SAML Test Connector; OneLogin's own catalogue not checked (blocks bots)."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c22",
+   "c23",
+   "c25"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.sketch.com/pricing/",
+   "title": "Pricing · Sketch",
+   "quote": "Standard For individuals and small teams $ 12 Monthly / per Editor, billed yearly",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.sketch.com/pricing/",
+   "title": "Pricing · Sketch",
+   "quote": "Professional For growing teams and agencies $ 24 Monthly / per Editor, billed yearly Everything in Standard Single Sign-On (SSO)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.sketch.com/pricing/",
+   "title": "Pricing · Sketch",
+   "quote": "Enterprise For medium to large organizations $ 44 Monthly / per Editor, billed yearly Everything in Professional SCIM provisioning",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.sketch.com/pricing/",
+   "title": "Pricing · Sketch",
+   "quote": "Private Cloud For high-security environments Everything in Professional Private cloud environment Choice of hosting locations Unlimited Workspaces SCIM provisioning BYOK encryption Contact for pricing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.sketch.com/docs/getting-started/single-sign-on/",
+   "title": "Single Sign-On (SSO) & SCIM · Sketch",
+   "quote": "If you need to automate user management through your identity provider, SCIM provisioning is available on our Enterprise and Private Cloud plans.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://www.sketch.com/docs/getting-started/single-sign-on/scim-provisioning/",
+   "title": "Setting up SCIM provisioning · Sketch",
+   "quote": "You’ll need to be on an Enterprise or Private Cloud plan.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://www.sketch.com/docs/getting-started/single-sign-on/scim-provisioning/",
+   "title": "Setting up SCIM provisioning · Sketch",
+   "quote": "Head to your Workspace settings, then look for the Single Sign-on tab. Copy the Base URL and SCIM Token that appear.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://www.sketch.com/docs/getting-started/single-sign-on/scim-provisioning/",
+   "title": "Setting up SCIM provisioning · Sketch",
+   "quote": "It lets your identity provider create, update, and deactivate user accounts in external services without any manual work from Workspace admins.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://www.sketch.com/docs/getting-started/single-sign-on/scim-provisioning/okta/",
+   "title": "Setting up SCIM provisioning with Okta · Sketch",
+   "quote": "Select HTTP header in Authentication Mode and paste the SCIM token in the Bearer field.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://www.sketch.com/docs/getting-started/single-sign-on/scim-provisioning/okta/",
+   "title": "Setting up SCIM provisioning with Okta · Sketch",
+   "quote": "Type userName in the Unique identifier field for users .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://www.sketch.com/docs/getting-started/single-sign-on/scim-provisioning/okta/",
+   "title": "Setting up SCIM provisioning with Okta · Sketch",
+   "quote": "External namespace: urn:ietf:params:scim:schemas:extension:sketch:1.0:User",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://www.sketch.com/docs/getting-started/single-sign-on/scim-provisioning/okta/",
+   "title": "Setting up SCIM provisioning with Okta · Sketch",
+   "quote": "Enable the following actions: Create Users Update User Attributes Deactivate Users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://www.sketch.com/docs/getting-started/single-sign-on/scim-provisioning/okta/",
+   "title": "Setting up SCIM provisioning with Okta · Sketch",
+   "quote": "If you disable a user in Okta, they’ll be deleted from the Workspace. Any documents in their My Drafts folder will move to a restricted folder that Workspace Admins can access.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://www.sketch.com/docs/getting-started/single-sign-on/scim-provisioning/okta/",
+   "title": "Setting up SCIM provisioning with Okta · Sketch",
+   "quote": "If you reach your Editor seat limit, Okta will still provision the user, but we’ll add them as a Viewer to avoid unwanted extra charges.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://www.sketch.com/docs/getting-started/single-sign-on/scim-provisioning/okta/",
+   "title": "Setting up SCIM provisioning with Okta · Sketch",
+   "quote": "Already use Okta for SSO? You’ll need to create a new custom app to enable SCIM. The Gallery app doesn’t support SCIM provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://www.sketch.com/docs/getting-started/single-sign-on/scim-provisioning/microsoft-entra/",
+   "title": "Setting up SCIM provisioning with Microsoft Entra ID · Sketch",
+   "quote": "Authentication method: Bearer authentication Tenant URL: SCIM endpoint URL from Sketch Secret token: SCIM token from Sketch",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://www.sketch.com/docs/getting-started/single-sign-on/scim-provisioning/microsoft-entra/",
+   "title": "Setting up SCIM provisioning with Microsoft Entra ID · Sketch",
+   "quote": "Sketch doesn’t support creating groups through the API — only users.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://www.sketch.com/docs/getting-started/single-sign-on/scim-provisioning/microsoft-entra/",
+   "title": "Setting up SCIM provisioning with Microsoft Entra ID · Sketch",
+   "quote": "Update emails[type eq \"work\"].value by changing the source attribute to userPrincipalName .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://www.sketch.com/docs/getting-started/single-sign-on/scim-provisioning/microsoft-entra/",
+   "title": "Setting up SCIM provisioning with Microsoft Entra ID · Sketch",
+   "quote": "urn:ietf:params:scim:schemas:extension:sketch:1.0:User:accessLevel",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://www.sketch.com/docs/getting-started/single-sign-on/scim-provisioning/microsoft-entra/",
+   "title": "Setting up SCIM provisioning with Microsoft Entra ID · Sketch",
+   "quote": "If you already have SSO configured with Entra ID, you’ll need to delete the Gallery app and create a new custom app to enable SCIM. The Gallery app doesn’t support SCIM provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://www.sketch.com/docs/getting-started/single-sign-on/scim-provisioning/ping-identity/",
+   "title": "Setting up SCIM provisioning with Ping Identity · Sketch",
+   "quote": "If you disable a user, we’ll remove them from the Workspace.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://www.sketch.com/docs/getting-started/single-sign-on/sso-and-provisioning/",
+   "title": "SSO and provisioning · Sketch",
+   "quote": "our current SSO implementation is compliant with SAML 2.0, including JIT provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://www.sketch.com/docs/getting-started/single-sign-on/sso-and-provisioning/",
+   "title": "SSO and provisioning · Sketch",
+   "quote": "When someone signs in for the first time using your preferred IdP, we’ll create a new, free Viewer Seat in your Workspace.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://www.okta.com/integrations/sketch/",
+   "title": "Sketch | Okta Integration Network",
+   "quote": "you get secure Single Sign-On (SSO) and Just-In-Time user account provisioning",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/sketch-tutorial",
+   "title": "Configure Sketch for Single sign-on with Microsoft Entra ID",
+   "quote": "Sketch supports SP initiated SSO. Sketch supports Just In Time user provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://www.sketch.com/docs/getting-started/single-sign-on/setting-up-saml-sso/setup-identity-provider/google-workspaces/",
+   "title": "Google Workspace SSO setup · Sketch",
+   "quote": "Click on Add app > Add custom SAML app .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://www.sketch.com/docs/getting-started/single-sign-on/setting-up-saml-sso/setup-identity-provider/onelogin-setup/",
+   "title": "OneLogin SSO setup · Sketch",
+   "quote": "In the search box, type SAML Test Connector (IdP) and click on the matching search result.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.sketch.com/pricing/",
+  "https://www.sketch.com/sitemap.xml and https://www.sketch.com/llms.txt (no admin/user REST API documented)",
+  "https://www.sketch.com/docs/getting-started/single-sign-on/ (SSO and SCIM guides)",
+  "https://www.okta.com/integrations/sketch/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/sketch-tutorial"
+ ],
+ "open_questions": [
+  "SCIM base URL pattern, SCIM version, token expiry, filtering and pagination are not documented publicly.",
+  "Whether deletion via SCIM frees the Editor seat immediately is not stated.",
+  "No public admin or user-management API (non-SCIM) was found.",
+  "Google Workspace and OneLogin are documented for SAML only; SCIM guides exist only for Okta, Entra ID and Ping Identity."
+ ]
+}

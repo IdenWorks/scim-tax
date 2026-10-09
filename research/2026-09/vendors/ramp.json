@@ -1,0 +1,997 @@
+{
+ "slug": "ramp",
+ "vendor": "Ramp",
+ "vendor_url": "https://ramp.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Ramp",
+  "slug": "ramp",
+  "category": "Finance, Accounting & Spend",
+  "status": "free",
+  "scim_plan": "Free",
+  "scim_price_text": "Included on Free ($0/mo/user)",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Plus",
+  "team_price_text": "Plus: $15/mo/user + platform fee (monthly list price)",
+  "team_price_per_user_mo": 15,
+  "price_multiplier": null,
+  "sso_plan": "Free",
+  "sso_price_per_user_mo": 0,
+  "sso_required_for_scim": false,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": false,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "via_generic",
+   "google": "sso_only",
+   "onelogin": "sso_only",
+   "jumpcloud": "sso_only",
+   "generic": null
+  },
+  "pricing_page_url": "https://ramp.com/pricing",
+  "docs_url": "https://support.ramp.com/setting-up-scim-and-managing-user-provisioning.md",
+  "evidence": "Ramp's pricing comparison ticks 'Secure logins with SCIM, SSO, and SAML' for Free, Plus and Enterprise, and the help centre says Ramp supports SCIM integrations with Okta, Microsoft Entra and Rippling.",
+  "notes": "Status unchanged (free). SCIM and SAML are on every plan including Free ($0/mo/user, unlimited users). Team plan is now Plus ($15/mo/user plus a platform fee based on team size; the card says annual billing saves 20% but shows no annual figure), so per-user SCIM price is left null because SCIM costs nothing extra on any tier. June recorded Free as the team plan; Free is free so Plus is used per the paid-team-tier rule. SCIM deprovisioning deactivates (cards suspended, data kept); it never deletes non-draft users, with optional auto-termination after 45 days. Entra uses a custom non-gallery app; Google, OneLogin and JumpCloud are SAML only. The Developer API (OAuth 2.0, users:read/users:write) covers list, create (deferred), update, deactivate and reactivate users, plus an audit-log events endpoint; no plan gate stated.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": null,
+  "status_prev": "free"
+ },
+ "scim": {
+  "available": true,
+  "cite": [
+   "c4",
+   "c7",
+   "c8",
+   "c18",
+   "c26"
+  ],
+  "plan": "Free",
+  "addon_price_text": null,
+  "sso_required": false,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": "bearer",
+   "token_source": "Ramp dashboard: Company > Integrations > Okta/Microsoft Entra setup wizard (provided URL and API token)",
+   "token_expiry": null,
+   "cite": [
+    "c18",
+    "c26"
+   ],
+   "notes": "Docs say 'API token'; bearer scheme inferred from Okta/Entra SCIM token fields, expiry not documented."
+  },
+  "endpoints": {
+   "Users": null,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": []
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": false,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c19",
+    "c10",
+    "c27",
+    "c21",
+    "c28",
+    "c12"
+   ],
+   "notes": "Updates are documented (Name, Department, Location, Manager, role); the HTTP verb Ramp accepts is not documented, so update_put/update_patch are null. Draft users are deleted on deprovision; non-draft users are only deactivated."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Account kept; cards and funds suspended, not terminated; user stays in workflows and approval chains. Optional auto-termination after a configurable wait (default 45 days, 0-365).",
+   "cite": [
+    "c10",
+    "c11",
+    "c16",
+    "c32",
+    "c33"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "emails[primary eq true].value (Okta) / emails[type eq \"work\"].value (Entra)",
+    "addresses.locality",
+    "phoneNumbers[type eq \"mobile\"].value",
+    "externalId",
+    "active",
+    "roles"
+   ],
+   "enterprise": [
+    "department",
+    "manager",
+    "employeeNumber"
+   ],
+   "custom": {
+    "supported": true,
+    "how": "Custom user fields mapped via urn:ietf:params:scim:schemas:extension:ramp:2.0:User attributes, then linked in Ramp SCIM settings > Custom field mappings"
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c20",
+    "c27",
+    "c30",
+    "c31",
+    "c34",
+    "c21"
+   ],
+   "notes": "Attribute list taken from the Okta and Entra mapping tables. Group attribute names are not documented; group push/assignment creates groups and memberships."
+  },
+  "roles": {
+   "supported": true,
+   "how": "Okta: roles.^[type=='rampUserRole'].value enum (BUSINESS_OWNER, BUSINESS_ADMIN, BUSINESS_USER, BUSINESS_BOOKKEEPER, GUEST_USER, IT_ADMIN) or Ramp Role ID 'roles' string array (Early Access, Custom Roles need Plus). Default: Manager role from manager assignment.",
+   "cite": [
+    "c34",
+    "c35",
+    "c36",
+    "c13"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Cannot run SCIM and an HRIS integration at the same time.",
+    "cite": [
+     "c23"
+    ]
+   },
+   {
+    "text": "SCIM never deletes non-draft users; termination is manual or via the optional auto-termination setting.",
+    "cite": [
+     "c12",
+     "c32"
+    ]
+   },
+   {
+    "text": "Role assignment from Okta only for businesses with the full Ramp suite including card issuing.",
+    "cite": [
+     "c35"
+    ]
+   },
+   {
+    "text": "Sync latency: about 5-10 minutes for Okta, up to 40 minutes for Entra.",
+    "cite": [
+     "c15",
+     "c24"
+    ]
+   },
+   {
+    "text": "Entra group-based assignment needs Entra ID P1 or P2.",
+    "cite": [
+     "c29"
+    ]
+   }
+  ],
+  "notes": "Pricing compare table ticks 'Secure logins with SCIM, SSO, and SAML' on Free, Plus and Enterprise. Help centre says SCIM is separate from SSO. Base URL and token are shown in the Ramp dashboard (not published). Supported IdPs named: Okta, Microsoft Entra, Rippling."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c42",
+   "c43",
+   "c44"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://api.ramp.com",
+  "docs_url": "https://docs.ramp.com/developer-api/v1/users",
+  "auth": {
+   "methods": [
+    "oauth2"
+   ],
+   "scopes": [
+    "users:read",
+    "users:write"
+   ],
+   "cite": [
+    "c58",
+    "c59",
+    "c47"
+   ],
+   "notes": "OAuth 2.0 client credentials (10-day tokens) or authorization code."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": null,
+   "reactivate_user": true,
+   "manage_groups": null,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c45",
+    "c46",
+    "c48",
+    "c49",
+    "c50",
+    "c51",
+    "c52"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/developer/v1/users",
+    "purpose": "List users (filter by role, status, department_id, location_id, entity_id, email, employee_id)",
+    "cite": [
+     "c52"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/developer/v1/users/{user_id}",
+    "purpose": "Fetch a user",
+    "cite": [
+     "c53"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/developer/v1/users/deferred",
+    "purpose": "Create a user invite (asynchronous)",
+    "cite": [
+     "c45"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/developer/v1/users/deferred/status/{task_id}",
+    "purpose": "Fetch deferred task status",
+    "cite": [
+     "c45"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/developer/v1/users/{user_id}",
+    "purpose": "Update a user (role, department, location, manager, scheduled deactivation)",
+    "cite": [
+     "c48"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/developer/v1/users/{user_id}/deactivate",
+    "purpose": "Deactivate a user",
+    "cite": [
+     "c49"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/developer/v1/users/{user_id}/reactivate",
+    "purpose": "Reactivate a user",
+    "cite": [
+     "c50"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/developer/v1/users/{user_id}/invite",
+    "purpose": "Manage a user's invite lifecycle (schedule, etc.)",
+    "cite": [
+     "c51"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/developer/v1/roles",
+    "purpose": "List custom roles",
+    "cite": [
+     "c55"
+    ],
+    "notes": "Method not shown in llms-api.txt; GET inferred from the 'List' title."
+   },
+   {
+    "method": "GET",
+    "path": "/developer/v1/audit-logs/events",
+    "purpose": "Get audit log events",
+    "cite": [
+     "c54"
+    ],
+    "notes": "Method not shown in llms-api.txt; GET inferred from the 'Get' title."
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": true,
+   "events": [
+    "users.invite_accepted"
+   ],
+   "cite": [
+    "c56"
+   ]
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": null,
+   "cite": [
+    "c54",
+    "c5"
+   ],
+   "notes": "Audit log is listed as a Plus feature; the API docs do not state a plan gate."
+  },
+  "rate_limits": {
+   "text": "200 requests per 10-second rolling window, per source IP; 60-second request timeout.",
+   "cite": [
+    "c57"
+   ]
+  },
+  "limitations": [],
+  "notes": "No plan gate stated on the help-centre API overview or the pricing page; admin access is required to create a developer app."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c17",
+    "c22",
+    "c37"
+   ],
+   "notes": "Ramp's guide says to install the Ramp app in Okta with preconfigured SCIM attributes. The OIN listing page for Ramp could not be located (okta.com/integrations/ramp/ is a different product, Tessitura RAMP)."
+  },
+  "entra": {
+   "listed": false,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c25",
+    "c26",
+    "c37"
+   ],
+   "notes": "Ramp's Entra SCIM guide uses a custom (non-gallery) application with Ramp's URL and token; no Microsoft Learn tutorial found (ramp-tutorial and ramp-provisioning-tutorial return 404)."
+  },
+  "google": {
+   "listed": false,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c38",
+    "c8"
+   ],
+   "notes": "Google Workspace SAML via 'Other identity provider' custom SAML app; Google SCIM not among supported SCIM IdPs. 'Sign in with Google' is social login."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c37",
+    "c8"
+   ],
+   "notes": "Ramp offers a guided OneLogin SAML setup; OneLogin is not in Ramp's list of SCIM IdPs. OneLogin catalogue not checked (blocks bots)."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c37",
+    "c8"
+   ],
+   "notes": "Ramp offers a guided JumpCloud SAML setup; JumpCloud is not in Ramp's list of SCIM IdPs. jumpcloud.com/support/integrate-with-ramp returned 403."
+  }
+ },
+ "fallbacks": {
+  "jit": false,
+  "jit_protocol": null,
+  "csv_import": true,
+  "other_sync": "HRIS integrations (continuous HRIS sync; Workday on Plus/Enterprise); Rippling SCIM",
+  "docs_public": true,
+  "cite": [
+   "c40",
+   "c41",
+   "c6",
+   "c23"
+  ],
+  "notes": "SAML domains require an existing active Ramp user; no JIT creation documented."
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "$0/mo/user",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": false,
+   "cite": [
+    "c1",
+    "c4",
+    "c5"
+   ]
+  },
+  {
+   "name": "Plus",
+   "price_text": "$15/mo/user + Platform fee based on team size (save 20% with annual billing)",
+   "price_per_user_mo": 15,
+   "billing": "monthly",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c4",
+    "c5"
+   ],
+   "notes": "Audit log is a Plus feature on the pricing page; whether the audit-log API endpoint is plan-gated is not stated. $15 appears to be the monthly list price (the card says annual billing saves 20%; no annual figure shown)."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Custom (annual billing)",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c4",
+    "c5"
+   ]
+  }
+ ],
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://ramp.com/pricing",
+   "title": "Ramp Pricing",
+   "quote": "Free $0/mo/user Best for smaller teams who want to simplify finances.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://ramp.com/pricing",
+   "title": "Ramp Pricing",
+   "quote": "Plus $15/mo/user + Platform fee based on team size Save 20% with annual billing",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://ramp.com/pricing",
+   "title": "Ramp Pricing",
+   "quote": "Enterprise Custom Annual billing Specifically made for teams who need full customization.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://ramp.com/pricing",
+   "title": "Ramp Pricing",
+   "quote": "Secure logins with SCIM, SSO, and SAML",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://ramp.com/pricing",
+   "title": "Ramp Pricing",
+   "quote": "User management Custom user roles Multi-entity visibility restrictions Audit log",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://ramp.com/pricing",
+   "title": "Ramp Pricing",
+   "quote": "HRIS integrations + Workday + Workday Continuous HRIS sync",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://support.ramp.com/setting-up-scim-and-managing-user-provisioning.md",
+   "title": "Setting up SCIM and managing user provisioning",
+   "quote": "Ramp supports user management via the system for cross-domain identity management (SCIM) protocol. Ramp admins can manage all user provisioning from their identity provider (IdP) as a single source of truth.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ramp.com/setting-up-scim-and-managing-user-provisioning"
+  },
+  {
+   "id": "c8",
+   "url": "https://support.ramp.com/setting-up-scim-and-managing-user-provisioning",
+   "title": "Setting up SCIM and managing user provisioning",
+   "quote": "Today, we support SCIM integrations with Okta, Microsoft Entra, and Rippling.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://support.ramp.com/setting-up-scim-and-managing-user-provisioning.md",
+   "title": "Setting up SCIM and managing user provisioning",
+   "quote": "SCIM integrations for user management are separate from SSO integrations for user sign-in.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ramp.com/setting-up-scim-and-managing-user-provisioning"
+  },
+  {
+   "id": "c10",
+   "url": "https://support.ramp.com/setting-up-scim-and-managing-user-provisioning.md",
+   "title": "Setting up SCIM and managing user provisioning",
+   "quote": "When a user is de-provisioned from your IdP, Ramp automatically deactivates their account unless they are still in draft, in which case Ramp deletes them. Deactivation is reversible — the user can be reactivated later if needed.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ramp.com/setting-up-scim-and-managing-user-provisioning"
+  },
+  {
+   "id": "c11",
+   "url": "https://support.ramp.com/setting-up-scim-and-managing-user-provisioning.md",
+   "title": "Setting up SCIM and managing user provisioning",
+   "quote": "The user's Ramp account will not be deleted, their cards and funds will not be terminated, and they will remain listed in workflows.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ramp.com/setting-up-scim-and-managing-user-provisioning"
+  },
+  {
+   "id": "c12",
+   "url": "https://support.ramp.com/setting-up-scim-and-managing-user-provisioning.md",
+   "title": "Setting up SCIM and managing user provisioning",
+   "quote": "Ramp will no longer automatically delete non-draft users or terminate their cards and funds based on a SCIM instruction.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ramp.com/setting-up-scim-and-managing-user-provisioning"
+  },
+  {
+   "id": "c13",
+   "url": "https://support.ramp.com/setting-up-scim-and-managing-user-provisioning.md",
+   "title": "Setting up SCIM and managing user provisioning",
+   "quote": "When SCIM is enabled, your identity provider becomes the source of truth for the following fields: first name, last name, email, department, location, manager, and role.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ramp.com/setting-up-scim-and-managing-user-provisioning"
+  },
+  {
+   "id": "c14",
+   "url": "https://support.ramp.com/setting-up-scim-and-managing-user-provisioning.md",
+   "title": "Setting up SCIM and managing user provisioning",
+   "quote": "Note that you can provision users individually and via groups.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ramp.com/setting-up-scim-and-managing-user-provisioning"
+  },
+  {
+   "id": "c15",
+   "url": "https://support.ramp.com/setting-up-scim-and-managing-user-provisioning.md",
+   "title": "Setting up SCIM and managing user provisioning",
+   "quote": "SCIM sync is not instant. Changes from your identity provider may take up to 5-10 minutes to appear in Ramp (Okta) or up to 40 minutes (Entra, which syncs approximately every 40 minutes).",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ramp.com/setting-up-scim-and-managing-user-provisioning"
+  },
+  {
+   "id": "c16",
+   "url": "https://support.ramp.com/setting-up-scim-and-managing-user-provisioning.md",
+   "title": "Setting up SCIM and managing user provisioning",
+   "quote": "Cannot sign in",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ramp.com/setting-up-scim-and-managing-user-provisioning"
+  },
+  {
+   "id": "c17",
+   "url": "https://support.ramp.com/set-up-ramps-scim-integration-with-okta.md",
+   "title": "Okta integration: Set up SCIM provisioning",
+   "quote": "Install the Ramp app in your Okta tenant",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ramp.com/set-up-ramps-scim-integration-with-okta"
+  },
+  {
+   "id": "c18",
+   "url": "https://support.ramp.com/set-up-ramps-scim-integration-with-okta.md",
+   "title": "Okta integration: Set up SCIM provisioning",
+   "quote": "Use the provided URL and API token from your Ramp dashboard to configure the app in Okta",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ramp.com/set-up-ramps-scim-integration-with-okta"
+  },
+  {
+   "id": "c19",
+   "url": "https://support.ramp.com/set-up-ramps-scim-integration-with-okta.md",
+   "title": "Okta integration: Set up SCIM provisioning",
+   "quote": "Create users (Invite to Ramp) - Update user attributes (Name, Department, Location, Manager) - Deactivate users",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ramp.com/set-up-ramps-scim-integration-with-okta"
+  },
+  {
+   "id": "c20",
+   "url": "https://support.ramp.com/set-up-ramps-scim-integration-with-okta.md",
+   "title": "Okta integration: Set up SCIM provisioning",
+   "quote": "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User (for department and managerValue attributes)",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ramp.com/set-up-ramps-scim-integration-with-okta"
+  },
+  {
+   "id": "c21",
+   "url": "https://support.ramp.com/set-up-ramps-scim-integration-with-okta.md",
+   "title": "Okta integration: Set up SCIM provisioning",
+   "quote": "Use Okta Group Push to create or update groups in Ramp. Pushing a group from Okta does not invite every user in that group to Ramp.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ramp.com/set-up-ramps-scim-integration-with-okta"
+  },
+  {
+   "id": "c22",
+   "url": "https://support.ramp.com/set-up-ramps-scim-integration-with-okta.md",
+   "title": "Okta integration: Set up SCIM provisioning",
+   "quote": "Ramp's Okta SCIM integration comes with all attributes below except mobilePhone already available in the Profile Editor",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ramp.com/set-up-ramps-scim-integration-with-okta"
+  },
+  {
+   "id": "c23",
+   "url": "https://support.ramp.com/set-up-ramps-scim-integration-with-okta.md",
+   "title": "Okta integration: Set up SCIM provisioning",
+   "quote": "You cannot integrate with both SCIM and HRIS at the same time.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ramp.com/set-up-ramps-scim-integration-with-okta"
+  },
+  {
+   "id": "c24",
+   "url": "https://support.ramp.com/set-up-ramps-scim-integration-with-okta.md",
+   "title": "Okta integration: Set up SCIM provisioning",
+   "quote": "Changes made via SCIM may take up to 5 minutes to be reflected in Ramp, and in rare cases, slightly longer.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ramp.com/set-up-ramps-scim-integration-with-okta"
+  },
+  {
+   "id": "c25",
+   "url": "https://support.ramp.com/set-up-ramps-scim-integration-with-microsoft-entra.md",
+   "title": "Microsoft Entra integration: Set up SCIM provisioning",
+   "quote": "Ramp setup flow for adding Ramp as a custom application in Microsoft Entra",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ramp.com/set-up-ramps-scim-integration-with-microsoft-entra"
+  },
+  {
+   "id": "c26",
+   "url": "https://support.ramp.com/set-up-ramps-scim-integration-with-microsoft-entra.md",
+   "title": "Microsoft Entra integration: Set up SCIM provisioning",
+   "quote": "Use the provided URL and API token from your Ramp dashboard to configure the app in Microsoft Entra.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ramp.com/set-up-ramps-scim-integration-with-microsoft-entra"
+  },
+  {
+   "id": "c27",
+   "url": "https://support.ramp.com/set-up-ramps-scim-integration-with-microsoft-entra.md",
+   "title": "Microsoft Entra integration: Set up SCIM provisioning",
+   "quote": "Activation/deactivation state for Ramp user. We do not handle full account deletion through SCIM (see below).",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ramp.com/set-up-ramps-scim-integration-with-microsoft-entra"
+  },
+  {
+   "id": "c28",
+   "url": "https://support.ramp.com/set-up-ramps-scim-integration-with-microsoft-entra.md",
+   "title": "Microsoft Entra integration: Set up SCIM provisioning",
+   "quote": "Assign a Microsoft Entra group to the Ramp app to create the group in Ramp and provision its users.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ramp.com/set-up-ramps-scim-integration-with-microsoft-entra"
+  },
+  {
+   "id": "c29",
+   "url": "https://support.ramp.com/set-up-ramps-scim-integration-with-microsoft-entra.md",
+   "title": "Microsoft Entra integration: Set up SCIM provisioning",
+   "quote": "Group-based application assignment requires Microsoft Entra ID P1 or P2.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ramp.com/set-up-ramps-scim-integration-with-microsoft-entra"
+  },
+  {
+   "id": "c30",
+   "url": "https://support.ramp.com/set-up-scim-mappings-for-custom-user-fields.md",
+   "title": "Set up SCIM mappings for custom user fields",
+   "quote": "Use SCIM custom field mappings to sync additional user attributes from your identity provider (IdP) to custom user fields in Ramp.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ramp.com/set-up-scim-mappings-for-custom-user-fields"
+  },
+  {
+   "id": "c31",
+   "url": "https://support.ramp.com/set-up-scim-mappings-for-custom-user-fields.md",
+   "title": "Set up SCIM mappings for custom user fields",
+   "quote": "External namespace: urn:ietf:params:scim:schemas:extension:ramp:2.0:User",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ramp.com/set-up-scim-mappings-for-custom-user-fields"
+  },
+  {
+   "id": "c32",
+   "url": "https://support.ramp.com/auto-termination-with-scim.md",
+   "title": "Auto-termination with SCIM",
+   "quote": "When enabled, Ramp will schedule eligible SCIM-deactivated users for termination after a configurable waiting period, reducing manual admin work while maintaining safeguards for in-flight financial activity.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ramp.com/auto-termination-with-scim"
+  },
+  {
+   "id": "c33",
+   "url": "https://support.ramp.com/auto-termination-with-scim.md",
+   "title": "Auto-termination with SCIM",
+   "quote": "When auto-termination is enabled for the first time, the default timeline is 45 days.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ramp.com/auto-termination-with-scim"
+  },
+  {
+   "id": "c34",
+   "url": "https://support.ramp.com/setting-up-okta-role-assignments.md",
+   "title": "Okta integration: Set up role assignments",
+   "quote": "Set the External name to roles.^[type=='rampUserRole'].value",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ramp.com/setting-up-okta-role-assignments"
+  },
+  {
+   "id": "c35",
+   "url": "https://support.ramp.com/setting-up-okta-role-assignments.md",
+   "title": "Okta integration: Set up role assignments",
+   "quote": "Role assignments from Okta are currently only supported for businesses with access to the full Ramp suite, including card issuing.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ramp.com/setting-up-okta-role-assignments"
+  },
+  {
+   "id": "c36",
+   "url": "https://support.ramp.com/setting-up-okta-role-assignments.md",
+   "title": "Okta integration: Set up role assignments",
+   "quote": "The roles attribute assigns roles using stable Ramp Role IDs as a direct string array. This supports both built-in roles and Custom Roles, and allows assigning multiple roles at once. Custom Roles require Ramp Plus.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ramp.com/setting-up-okta-role-assignments"
+  },
+  {
+   "id": "c37",
+   "url": "https://support.ramp.com/setting-up-single-sign-on-sso-and-login-controls-in-ramp.md",
+   "title": "Setting up single sign-on (SSO) and login controls in Ramp",
+   "quote": "Ramp supports Google SSO and SAML-based authentication with providers like Okta, Microsoft Entra ID, JumpCloud, and OneLogin.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ramp.com/setting-up-single-sign-on-sso-and-login-controls-in-ramp"
+  },
+  {
+   "id": "c38",
+   "url": "https://support.ramp.com/setting-up-single-sign-on-sso-and-login-controls-in-ramp.md",
+   "title": "Setting up single sign-on (SSO) and login controls in Ramp",
+   "quote": "For any SAML provider not listed above — including Google Workspace SAML — select Other identity provider and follow the in-app instructions.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ramp.com/setting-up-single-sign-on-sso-and-login-controls-in-ramp"
+  },
+  {
+   "id": "c39",
+   "url": "https://support.ramp.com/setting-up-single-sign-on-sso-and-login-controls-in-ramp.md",
+   "title": "Setting up single sign-on (SSO) and login controls in Ramp",
+   "quote": "Only users who exist in your identity provider will be able to sign in to Ramp using SAML.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ramp.com/setting-up-single-sign-on-sso-and-login-controls-in-ramp"
+  },
+  {
+   "id": "c40",
+   "url": "https://support.ramp.com/setting-up-single-sign-on-sso-and-login-controls-in-ramp.md",
+   "title": "Setting up single sign-on (SSO) and login controls in Ramp",
+   "quote": "A user with that email domain has an active Ramp account.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ramp.com/setting-up-single-sign-on-sso-and-login-controls-in-ramp"
+  },
+  {
+   "id": "c41",
+   "url": "https://support.ramp.com/inviting-users-to-ramp.md",
+   "title": "Inviting users to Ramp",
+   "quote": "If you need to invite several users at once, you can send out invites using a CSV. Note that your Ramp account can have unlimited users.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ramp.com/inviting-users-to-ramp"
+  },
+  {
+   "id": "c42",
+   "url": "https://support.ramp.com/accessing-the-developer-api.md",
+   "title": "Ramp Developer API overview",
+   "quote": "Ramp’s Developer API allows teams to programmatically access Ramp data and build automations or integrations tailored to their workflows. It provides secure, scoped access to objects like transactions, cards, users, and more.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ramp.com/accessing-the-developer-api"
+  },
+  {
+   "id": "c43",
+   "url": "https://support.ramp.com/accessing-the-developer-api.md",
+   "title": "Ramp Developer API overview",
+   "quote": "Production API base URL: https://api.ramp.com",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ramp.com/accessing-the-developer-api"
+  },
+  {
+   "id": "c44",
+   "url": "https://support.ramp.com/accessing-the-developer-api.md",
+   "title": "Ramp Developer API overview",
+   "quote": "To begin using the Ramp Developer API, you must first create a developer app to obtain your API credentials. Admin access is required.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ramp.com/accessing-the-developer-api"
+  },
+  {
+   "id": "c45",
+   "url": "https://docs.ramp.com/llms-guides/users.txt",
+   "title": "Ramp Developer API: Users",
+   "quote": "User creation is asynchronous. POST /developer/v1/users/deferred returns a task id; poll GET /developer/v1/users/deferred/status/{task_id} every 1–2 seconds until status is SUCCESS",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ramp.com/developer-api/v1/users"
+  },
+  {
+   "id": "c46",
+   "url": "https://docs.ramp.com/llms-guides/users.txt",
+   "title": "Ramp Developer API: Users",
+   "quote": "Roles are BUSINESS_USER, BUSINESS_ADMIN, BUSINESS_BOOKKEEPER, IT_ADMIN, AUDITOR, GUEST_USER. BUSINESS_OWNER exists but cannot be invited via the API.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ramp.com/developer-api/v1/users"
+  },
+  {
+   "id": "c47",
+   "url": "https://docs.ramp.com/llms-guides/users.txt",
+   "title": "Ramp Developer API: Users",
+   "quote": "Authorization — users:read / users:write scopes.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ramp.com/developer-api/v1/users"
+  },
+  {
+   "id": "c48",
+   "url": "https://docs.ramp.com/llms-guides/user-lifecycle.txt",
+   "title": "Ramp Developer API: User lifecycle",
+   "quote": "Role changes, reorgs, moves between locations or entities, and manager changes all go through PATCH /developer/v1/users/{user_id}.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ramp.com/developer-api/v1/user-lifecycle"
+  },
+  {
+   "id": "c49",
+   "url": "https://docs.ramp.com/llms-guides/user-lifecycle.txt",
+   "title": "Ramp Developer API: User lifecycle",
+   "quote": "PATCH /developer/v1/users/{user_id}/deactivate with no body returns 200 OK and an empty body. The user becomes USER_INACTIVE; cards freeze and logins stop working. Historical data stays visible to admins.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ramp.com/developer-api/v1/user-lifecycle"
+  },
+  {
+   "id": "c50",
+   "url": "https://docs.ramp.com/llms-guides/user-lifecycle.txt",
+   "title": "Ramp Developer API: User lifecycle",
+   "quote": "PATCH /developer/v1/users/{user_id}/reactivate with no body returns 200 OK and an empty body.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ramp.com/developer-api/v1/user-lifecycle"
+  },
+  {
+   "id": "c51",
+   "url": "https://docs.ramp.com/llms-guides/user-lifecycle.txt",
+   "title": "Ramp Developer API: User lifecycle",
+   "quote": "POST /developer/v1/users/{user_id}/invite takes three actions:",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ramp.com/developer-api/v1/user-lifecycle"
+  },
+  {
+   "id": "c52",
+   "url": "https://docs.ramp.com/llms-guides/user-lifecycle.txt",
+   "title": "Ramp Developer API: User lifecycle",
+   "quote": "GET /developer/v1/users supports filtering by role, status, department_id, location_id, entity_id, email, and employee_id.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ramp.com/developer-api/v1/user-lifecycle"
+  },
+  {
+   "id": "c53",
+   "url": "https://docs.ramp.com/llms-guides/user-lifecycle.txt",
+   "title": "Ramp Developer API: User lifecycle",
+   "quote": "Poll the deferred task until it reports SUCCESS, then GET /developer/v1/users/{user_id} to fetch the user:",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ramp.com/developer-api/v1/user-lifecycle"
+  },
+  {
+   "id": "c54",
+   "url": "https://docs.ramp.com/llms-api.txt",
+   "title": "Ramp Developer API reference (llms-api.txt)",
+   "quote": "title: Get audit log events path: /developer/v1/audit-logs/events",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ramp.com/developer-api/v1/api/users"
+  },
+  {
+   "id": "c55",
+   "url": "https://docs.ramp.com/llms-api.txt",
+   "title": "Ramp Developer API reference (llms-api.txt)",
+   "quote": "title: List custom roles path: /developer/v1/roles",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ramp.com/developer-api/v1/api/users"
+  },
+  {
+   "id": "c56",
+   "url": "https://docs.ramp.com/llms-guides/webhooks.txt",
+   "title": "Ramp Developer API: Webhooks",
+   "quote": "users.invite_accepted User has accepted an invitation.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ramp.com/developer-api/v1/webhooks"
+  },
+  {
+   "id": "c57",
+   "url": "https://docs.ramp.com/llms-guides/rate-limiting.txt",
+   "title": "Ramp Developer API: Rate Limits and Timeouts",
+   "quote": "Limit: 200 requests per 10-second rolling window.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ramp.com/developer-api/v1/rate-limiting"
+  },
+  {
+   "id": "c58",
+   "url": "https://docs.ramp.com/llms-guides/authorization.txt",
+   "title": "Ramp Developer API: Authorization",
+   "quote": "Ramp uses OAuth 2.0 for secure API access, providing granular permission control through scopes and supporting multiple authorization flows for different use cases.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ramp.com/developer-api/v1/authorization"
+  },
+  {
+   "id": "c59",
+   "url": "https://docs.ramp.com/llms-guides/authorization.txt",
+   "title": "Ramp Developer API: Authorization",
+   "quote": "Lifetime: Client Credentials access tokens normally last 10 days (864,000 seconds).",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ramp.com/developer-api/v1/authorization"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://ramp.com/pricing",
+  "https://support.ramp.com/llms.txt",
+  "https://support.ramp.com/sitemap.xml",
+  "https://docs.ramp.com/llms.txt",
+  "https://docs.ramp.com/llms-api.txt",
+  "https://www.okta.com/integrations/ramp/ (Tessitura RAMP, wrong product)",
+  "https://www.okta.com/integrations/?search=ramp (results not rendered)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/ramp-tutorial (404)",
+  "https://jumpcloud.com/support/integrate-with-ramp (403)"
+ ],
+ "open_questions": [
+  "Ramp's SCIM base URL, token expiry and the list of SCIM endpoints (Groups, ServiceProviderConfig) are not published.",
+  "Whether SCIM deactivation frees a paid Plus seat is not documented.",
+  "Whether the Developer API and audit-log API endpoint are available on the Free plan is not stated.",
+  "OIN listing page for Ramp's Okta app not found.",
+  "Whether Ramp's SCIM endpoint works with IdPs other than Okta, Entra and Rippling (generic SCIM) is not stated."
+ ]
+}

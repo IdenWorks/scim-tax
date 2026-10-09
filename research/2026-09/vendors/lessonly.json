@@ -1,0 +1,769 @@
+{
+ "slug": "lessonly",
+ "vendor": "Seismic Learning (Lessonly)",
+ "vendor_url": "https://www.seismic.com/platform/learning/",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Seismic Learning (Lessonly)",
+  "slug": "lessonly",
+  "category": "Learning & Development",
+  "status": "gated",
+  "scim_plan": "Contact Sales (quote-only)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales (no public pricing; lessonly.com/pricing redirects to a demo request)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "sso_only",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.lessonly.com/pricing",
+  "docs_url": "https://developer.seismic.com/seismicsoftware/reference/user-roles-across-seismic-content-and-learning",
+  "evidence": "Seismic's developer portal says \"Seismic Platform SCIM APIs can be used to manage both Seismic Content and Seismic Learning users\", and lessonly.com/pricing redirects to a Lessonly by Seismic demo request with no public prices.",
+  "notes": "Quote-only: Lessonly is now sold as Seismic Learning ('Lessonly by Seismic'); lessonly.com/pricing redirects to a demo-request form and seismic.com/pricing is 404. Since the FY24 Winter release, upgraded tenants manage Learning users as Seismic Platform users through Seismic's SCIM 2.0 API (https://api.seismic.com/scim/v2, JWT bearer with seismic.user.manage scope): Users and Groups CRUD, PATCH replace only, active=false to deactivate, DELETE is permanent; Learning roles Admin/Creator/Manager/Learner/custom. The Okta OIN 'Seismic Learning' app supports SAML and SCIM create/update/deactivate. Entra gallery app (Lessonly) is SSO with JIT. The legacy Lessonly REST API (api.lessonly.com, Basic auth with API key) is losing user/group write support in favour of the Seismic Public API. No plan gate for SCIM is published.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Lessonly by Seismic (quote)",
+   "price_text": "Request a demo; no public pricing",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c2",
+   "c4",
+   "c8"
+  ],
+  "plan": "Contact Sales (quote-only)",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://api.seismic.com/scim/v2",
+  "auth": {
+   "method": "oauth2",
+   "token_source": "Seismic OAuth JWT access token with seismic.user.manage scope",
+   "token_expiry": null,
+   "cite": [
+    "c7"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": true,
+   "Schemas": true,
+   "ResourceTypes": true,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c4",
+    "c6",
+    "c15",
+    "c17"
+   ],
+   "notes": "ResourceTypes from the reference navigation ('Get resource types')."
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c4",
+    "c5",
+    "c9",
+    "c10",
+    "c11",
+    "c15",
+    "c16"
+   ],
+   "notes": "PATCH supports only the replace op; reactivation by setting active back to true is implied, not explicit."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c9",
+    "c10"
+   ],
+   "notes": "Inactive users are locked and cannot log in; DELETE is permanent. For joint Content+Learning users, Seismic says to remove the Learning role by PATCH instead."
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName",
+    "name.givenName",
+    "userType"
+   ],
+   "cite": [
+    "c12"
+   ],
+   "notes": "Operators eq, ne, co, gt, ge, lt, le with and/or; no sorting."
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": 100,
+   "cite": [
+    "c13"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "emails",
+    "active",
+    "userType",
+    "title",
+    "timezone",
+    "preferredLanguage",
+    "phoneNumbers",
+    "addresses",
+    "ims",
+    "roles",
+    "externalId"
+   ],
+   "enterprise": [
+    "costCenter",
+    "department",
+    "employeeNumber",
+    "organization"
+   ],
+   "custom": {
+    "supported": true,
+    "how": "Tenant-specific custom properties via urn:ietf:params:scim:schemas:extension:seismic:2.0:User (definitions from GET /scim/v2/Schemas); extended properties include ssoId, seismicRoles, location, managerName, biography"
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c6",
+    "c18",
+    "c19",
+    "c33",
+    "c15"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "roles attribute: Learning roles Admin, Creator, Manager, Learner or custom; Content roles Premium, Business, Partner (case sensitive). roles override userType.",
+   "cite": [
+    "c3",
+    "c2"
+   ]
+  },
+  "rate_limits": {
+   "text": "429 Too Many Requests when a rate-limit policy is hit; SCIM falls in the default tier of 600 calls per 60 seconds.",
+   "cite": [
+    "c20",
+    "c21"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "PATCH supports only the replace operation.",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "text": "No sorting on list queries.",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "text": "Applies to tenants upgraded to Seismic Platform user management.",
+    "cite": [
+     "c2"
+    ]
+   }
+  ],
+  "notes": "Paths seen: POST/GET /scim/v2/Users, PUT/PATCH/DELETE /scim/v2/Users/{userId}, POST /scim/v2/Groups, POST /scim/v2/Users/{userId}/Groups/{groupId}, GET /scim/v2/ServiceProviderConfig, GET /scim/v2/Schemas."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c23",
+   "c24",
+   "c25"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://api.lessonly.com/api/v1",
+  "docs_url": "https://docs.lessonly.com/",
+  "auth": {
+   "methods": [
+    "basic",
+    "api_key"
+   ],
+   "scopes": [],
+   "cite": [
+    "c24"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": true,
+   "reactivate_user": true,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c26",
+    "c27",
+    "c28",
+    "c29"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/api/v1/users",
+    "purpose": "List users (filters email, ext_uid, sso_id)",
+    "cite": [
+     "c24"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/users/:user_id",
+    "purpose": "Get a user",
+    "cite": [
+     "c24"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/users/",
+    "purpose": "Create a user",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/v1/users/:user_id",
+    "purpose": "Update a user (role or role_id)",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/v1/users/:user_id/archive",
+    "purpose": "Archive a user",
+    "cite": [
+     "c26"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/v1/users/:user_id/restore",
+    "purpose": "Restore an archived user",
+    "cite": [
+     "c26"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/users/:user_id",
+    "purpose": "Delete a user",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/users/:user_id/groups",
+    "purpose": "List a user's groups",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/v1/users/:user_id/groups",
+    "purpose": "Update a user's group memberships",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/groups",
+    "purpose": "List groups",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/groups/",
+    "purpose": "Create a group",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/v1/groups/:group_id/",
+    "purpose": "Update a group",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/groups/:group_id",
+    "purpose": "Delete a group",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/audits/records",
+    "purpose": "Seismic: query audit records",
+    "cite": [
+     "c22"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": true,
+   "events": [
+    "UserCreatedV1",
+    "UserUpdatedV1",
+    "UserDeletedV1",
+    "UserGroupMemberChangeV1"
+   ],
+   "cite": [
+    "c32"
+   ],
+   "notes": "Seismic platform event names from the developer-portal navigation."
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": null,
+   "cite": [
+    "c22"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Seismic is limiting Lessonly Public API write endpoints for users and groups for upgraded tenants; use the Seismic Public API instead.",
+    "cite": [
+     "c23",
+     "c34"
+    ]
+   },
+   {
+    "text": "API key access may need to be activated on request.",
+    "cite": [
+     "c25"
+    ]
+   }
+  ],
+  "notes": "Lessonly legacy API paths are relative to https://api.lessonly.com. The audit endpoint is on the Seismic API (api.seismic.com)."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/seismic-learning/",
+   "cite": [
+    "c30"
+   ],
+   "notes": "OIN 'Seismic Learning' app (internal name lessonly) marks SAML, SCIM, Create, Update, Deactivate (read from page markup); builder not stated."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/lessonly-tutorial",
+   "cite": [
+    "c31"
+   ],
+   "notes": "Gallery tutorial covers SP-initiated SSO with JIT; no provisioning tutorial (lessonly-provisioning-tutorial 404)."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c31",
+   "c2"
+  ],
+  "notes": "JIT is stated on Microsoft's Entra tutorial."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://learn.seismic.com/lessonly-request-a-demo.html",
+   "title": "Training & Coaching - Get a Demo of Lessonly by Seismic | Seismic",
+   "quote": "With Lessonly by Seismic, training and coaching at scale is simple. Request a demo if you’re ready to drive revenue and results faster than you can say “closed won.\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.lessonly.com/pricing"
+  },
+  {
+   "id": "c2",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/user-roles-across-seismic-content-and-learning.md",
+   "title": "User Roles across Seismic Content and Learning | Seismic Developer Portal",
+   "quote": "Seismic Platform SCIM APIs can be used to manage both Seismic Content and Seismic Learning users.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/user-roles-across-seismic-content-and-learning"
+  },
+  {
+   "id": "c3",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/user-roles-across-seismic-content-and-learning.md",
+   "title": "User Roles across Seismic Content and Learning | Seismic Developer Portal",
+   "quote": "A user can have a Content role and a Learning role",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/user-roles-across-seismic-content-and-learning"
+  },
+  {
+   "id": "c4",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementcreateanewuser.md",
+   "title": "Create a new user | Seismic Developer Portal",
+   "quote": "Creates a new user within the Seismic tenant using SCIM 2.0 (System for Cross-domain Identity Management) protocol.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementcreateanewuser"
+  },
+  {
+   "id": "c5",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementcreateanewuser.md",
+   "title": "Create a new user | Seismic Developer Portal",
+   "quote": "When the active field is set to false, the newly created user is locked and cannot log in until an administrator activates them.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementcreateanewuser"
+  },
+  {
+   "id": "c6",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementcreateanewuser.md",
+   "title": "Create a new user | Seismic Developer Portal",
+   "quote": "Custom properties are supported via urn:ietf:params:scim:schemas:extension:seismic:2.0:User; retrieve tenant-specific definitions from GET /scim/v2/Schemas.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementcreateanewuser"
+  },
+  {
+   "id": "c7",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementcreateanewuser.md",
+   "title": "Create a new user | Seismic Developer Portal",
+   "quote": "JSON Web Token bearer token required in the Authorization header (seismic.user.manage scope)",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementcreateanewuser"
+  },
+  {
+   "id": "c8",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementcreateanewuser.md",
+   "title": "Create a new user | Seismic Developer Portal",
+   "quote": "\"url\": \"https://api.seismic.com\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementcreateanewuser"
+  },
+  {
+   "id": "c9",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementdeleteauserbyguid.md",
+   "title": "Delete a user by GUID | Seismic Developer Portal",
+   "quote": "This operation is not revertible and removes the user from the tenant. To disable a user without deletion, update the active flag to false via PATCH instead.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementdeleteauserbyguid"
+  },
+  {
+   "id": "c10",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementupdatecertainattributeswithinauser.md",
+   "title": "Update certain attributes within a user | Seismic Developer Portal",
+   "quote": "For example, to deactivate a user, send a PATCH request with op \"replace\", path \"active\", and value false. Only the replace operation is supported.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementupdatecertainattributeswithinauser"
+  },
+  {
+   "id": "c11",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementupdateauserwithafullpayload.md",
+   "title": "Update a user with a full payload | Seismic Developer Portal",
+   "quote": "Replaces a specific user by supplying the complete SCIM User resource payload.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementupdateauserwithafullpayload"
+  },
+  {
+   "id": "c12",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementretrieveallusersretrieveusersmatchingcertaincriteria.md",
+   "title": "Retrieve all users | Seismic Developer Portal",
+   "quote": "Supports operators: eq, ne, co, gt, ge, lt, le, and logical operators: and, or.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementretrieveallusersretrieveusersmatchingcertaincriteria"
+  },
+  {
+   "id": "c13",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementretrieveallusersretrieveusersmatchingcertaincriteria.md",
+   "title": "Retrieve all users | Seismic Developer Portal",
+   "quote": "Default number is 10, Maximum number is 100",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementretrieveallusersretrieveusersmatchingcertaincriteria"
+  },
+  {
+   "id": "c14",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementretrieveallusersretrieveusersmatchingcertaincriteria.md",
+   "title": "Retrieve all users | Seismic Developer Portal",
+   "quote": "there's currently no support for sorting operators.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementretrieveallusersretrieveusersmatchingcertaincriteria"
+  },
+  {
+   "id": "c15",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementcreateanewgroup.md",
+   "title": "Create a new group | Seismic Developer Portal",
+   "quote": "Creates a new group within the Seismic tenant using SCIM 2.0 (System for Cross-domain Identity Management) protocol.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementcreateanewgroup"
+  },
+  {
+   "id": "c16",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementaddausertoagroup.md",
+   "title": "Add a user to a group | Seismic Developer Portal",
+   "quote": "Adds a specified user to a particular group.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementaddausertoagroup"
+  },
+  {
+   "id": "c17",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementgetserviceproviderconfiguration.md",
+   "title": "Get service provider configuration | Seismic Developer Portal",
+   "quote": "Retrieves the SCIM service provider configuration to discover service capabilities, supported features, and authentication schemes.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementgetserviceproviderconfiguration"
+  },
+  {
+   "id": "c18",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementretrieveallusersretrieveusersmatchingcertaincriteria.md",
+   "title": "Retrieve all users | Seismic Developer Portal",
+   "quote": "\"costCenter\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementretrieveallusersretrieveusersmatchingcertaincriteria"
+  },
+  {
+   "id": "c19",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementretrieveallusersretrieveusersmatchingcertaincriteria.md",
+   "title": "Retrieve all users | Seismic Developer Portal",
+   "quote": "\"preferredLanguage\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementretrieveallusersretrieveusersmatchingcertaincriteria"
+  },
+  {
+   "id": "c20",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/rate-limiting.md",
+   "title": "Rate Limiting | Seismic Developer Portal",
+   "quote": "In the event that a rate limiting policy has been reached, a standard 429 Too Many Requests error will be returned, with an indication of when to retry the request.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/rate-limiting"
+  },
+  {
+   "id": "c21",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/rate-limiting.md",
+   "title": "Rate Limiting | Seismic Developer Portal",
+   "quote": "600 calls per 60 seconds",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/rate-limiting"
+  },
+  {
+   "id": "c22",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/queryauditrecords.md",
+   "title": "Query audit records | Seismic Developer Portal",
+   "quote": "Returns audit records for the authenticated user's tenant, ordered latest",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/queryauditrecords"
+  },
+  {
+   "id": "c23",
+   "url": "https://docs.lessonly.com/",
+   "title": "API Reference | Lessonly",
+   "quote": "Seismic is limiting support for Lessonly Public API",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://docs.lessonly.com/",
+   "title": "API Reference | Lessonly",
+   "quote": "Lessonly uses API keys and basic HTTP authorization to allow access to the API.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://docs.lessonly.com/",
+   "title": "API Reference | Lessonly",
+   "quote": "If you do not see the API key link, you may need to request for the feature to be activated",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://docs.lessonly.com/",
+   "title": "API Reference | Lessonly",
+   "quote": "This endpoint allows the archiving of a single user.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://docs.lessonly.com/",
+   "title": "API Reference | Lessonly",
+   "quote": "This endpoint allows you to delete a user in the API.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://docs.lessonly.com/",
+   "title": "API Reference | Lessonly",
+   "quote": "This endpoint allows you to list out a user’s group memberships and groups they are managing.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://docs.lessonly.com/",
+   "title": "API Reference | Lessonly",
+   "quote": "User role to change user to. Options: admin, manager, creator, learner.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://www.okta.com/integrations/seismic-learning/",
+   "title": "Seismic Learning | Okta",
+   "quote": "This app integration supports Single Sign-On and Provisioning. See Capabilities for more details.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/lessonly-tutorial",
+   "title": "Configure Lessonly for Single sign-on with Microsoft Entra ID",
+   "quote": "Lessonly supports Just In Time user provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://developer.seismic.com/seismicsoftware/",
+   "title": "Seismic Developer Portal",
+   "quote": "UserCreatedV1",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementretrieveallusersretrieveusersmatchingcertaincriteria.md",
+   "title": "Retrieve all users | Seismic Developer Portal",
+   "quote": "\"ssoId\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementretrieveallusersretrieveusersmatchingcertaincriteria"
+  },
+  {
+   "id": "c34",
+   "url": "https://docs.lessonly.com/",
+   "title": "API Reference | Lessonly",
+   "quote": "write endpoints for users, groups, lessons, and paths as customers transition to the upgraded platform.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.lessonly.com/pricing (redirects to learn.seismic.com demo request)",
+  "https://www.seismic.com/pricing/ (404)",
+  "https://docs.lessonly.com/ (legacy Lessonly API)",
+  "https://developer.seismic.com/seismicsoftware/ (SCIM User and Group Management, user roles, rate limiting, audit)",
+  "help.lessonly.com (404)",
+  "okta.com/integrations/seismic-learning/ and /lessonly/ (404)",
+  "learn.microsoft.com lessonly-tutorial (provisioning tutorial 404)"
+ ],
+ "open_questions": [
+  "Which Seismic Learning packages include SCIM and SSO? No public pricing or plan matrix.",
+  "Does the Okta Seismic Learning app use the Seismic platform SCIM API or a legacy Lessonly endpoint, and who built it?",
+  "Does SCIM deactivation free a Learning licence and end sessions?",
+  "Token lifetime for the seismic.user.manage JWT."
+ ]
+}

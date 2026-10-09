@@ -1,0 +1,580 @@
+{
+ "slug": "braintree",
+ "vendor": "Braintree (PayPal Braintree)",
+ "vendor_url": "https://www.paypal.com/us/braintree",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Braintree (PayPal Braintree)",
+  "slug": "braintree",
+  "category": "E-commerce & Payments",
+  "status": "gated",
+  "scim_plan": "Managed merchant (dedicated CSM/TAM)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Standard",
+  "team_price_text": "2.89% + $0.29 per transaction (standard rate)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Standard",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": "via_generic",
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.paypal.com/us/enterprise/paypal-braintree-fees",
+  "docs_url": "https://developer.paypal.com/braintree/articles/control-panel/users-roles/scim/scim-integration",
+  "evidence": "Braintree's SCIM guide says onboarding requires that \"You are a managed merchant (ie, you have a dedicated CSM or TAM). We are not currently onboarding unmanaged merchants to SCIM.\"",
+  "notes": "New row. Braintree is priced per transaction (standard rate 2.89% + $0.29; custom and interchange-plus pricing for established businesses), with no per-user tiers, so all per-user fields are null. SCIM (Okta via the Braintree OIN app, Entra ID via a non-gallery app with tenant URL https://id.braintreegateway.com/scim and a Braintree-issued bearer token) is only for managed merchants with a dedicated CSM/TAM, so it sits behind a sales relationship (gated). Prerequisites: SSO onboarded on both sandbox and production merchants, users converted to SSO; only SSO users are SCIM-managed and, once on SCIM, SSO users can no longer be created or edited in the Control Panel. Supports user create/get/update/delete and group (role, merchant-account, grant-all, API-access) membership updates; groups/roles cannot be created or deleted over SCIM. Okta deactivation suspends the user; deleting SSO users is not possible through Okta. SAML SSO is set up on request via CSM/TAM or Braintree support (plan gate not stated). No user-management API in the Braintree payments API.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": false,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Standard",
+   "price_text": "2.89% + 0.29 USD per transaction",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1"
+   ],
+   "notes": "Transaction pricing; SSO is set up on request (c21), plan gate not stated. SCIM needs a managed merchant (dedicated CSM/TAM)."
+  },
+  {
+   "name": "Custom pricing",
+   "price_text": "Custom flat rate / interchange plus (Contact Sales)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c2"
+   ],
+   "notes": "Managed-merchant status (dedicated CSM/TAM) is the SCIM gate, not a named plan."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c3",
+   "c4",
+   "c6",
+   "c8"
+  ],
+  "plan": "Managed merchant (dedicated CSM/TAM)",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": null,
+  "base_url": "https://id.braintreegateway.com/scim (sandbox: https://id.sandbox.braintreegateway.com/scim)",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Issued by Braintree (CSM/TAM / Braintree Identity team) during SCIM onboarding",
+   "token_expiry": null,
+   "cite": [
+    "c7",
+    "c8"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c5",
+    "c10"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c5",
+    "c11",
+    "c12",
+    "c14"
+   ],
+   "notes": "Groups (roles, merchant accounts, grant-all, API access) are imported to Okta and linked as push groups; only membership is updated. Delete is not possible from Okta. HTTP verbs are not documented."
+  },
+  "deprovision": {
+   "action": "suspend",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c11",
+    "c16"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "name.formatted"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": false,
+    "how": "Other attributes break provisioning and must be removed (Entra guide)"
+   },
+   "group": [
+    "displayName",
+    "externalId",
+    "members"
+   ],
+   "cite": [
+    "c9",
+    "c10"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "Group membership: each Braintree role and merchant account is an Okta app group linked as a push group",
+   "cite": [
+    "c14",
+    "c26"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Only managed merchants (dedicated CSM/TAM) are onboarded to SCIM; a sandbox merchant must be onboarded first.",
+    "cite": [
+     "c4"
+    ]
+   },
+   {
+    "text": "Only SSO users can be SCIM users; non-SSO users stay managed in the Control Panel, and SSO users cannot be created or edited there once on SCIM.",
+    "cite": [
+     "c17",
+     "c18",
+     "c12"
+    ]
+   },
+   {
+    "text": "Roles and merchant accounts cannot be created, deleted or renamed over SCIM; SSO users cannot be deleted via Okta.",
+    "cite": [
+     "c5",
+     "c12"
+    ]
+   },
+   {
+    "text": "Role / merchant-account group management is documented for Okta only; Entra guide covers users only.",
+    "cite": [
+     "c15"
+    ]
+   },
+   {
+    "text": "Okta setup requires the Braintree OIN app instance for SSO.",
+    "cite": [
+     "c6"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": false,
+  "cite": [
+   "c24"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": null,
+  "base_url": null,
+  "docs_url": null,
+  "auth": {
+   "methods": [],
+   "scopes": [],
+   "cite": []
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": []
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": [
+    "c25"
+   ],
+   "notes": "Audit Webhooks (API key, tokenization key, IP restriction and 2FA changes) are only available to select partners."
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "Control Panel users are created in Team settings; no user-management endpoints in the Braintree payments API reference. 'false' is by absence."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": "vendor",
+   "url": "https://www.okta.com/integrations/braintree/",
+   "cite": [
+    "c23",
+    "c6"
+   ],
+   "notes": "OIN page ticks SAML, SCIM, Create, Update, Deactivate, Group Push; Braintree calls it 'our OIN application'."
+  },
+  "entra": {
+   "listed": false,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c22",
+    "c8"
+   ],
+   "notes": "No gallery tutorial (braintree-tutorial 404); Braintree documents a non-gallery app with SAML and SCIM."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c13"
+   ],
+   "notes": "Braintree says to build a custom SCIM app per the IdP's own guide."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": false,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c27",
+   "c20"
+  ],
+  "notes": "Without SCIM, SSO users must still be created in the Control Panel (no JIT)."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.paypal.com/us/enterprise/paypal-braintree-fees",
+   "title": "PayPal Braintree Fees & Pricing",
+   "quote": "Cards and third-party digital wallet transactions For standard merchants1 2.89% + 0.29 USD",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://www.paypal.com/us/enterprise/paypal-braintree-fees",
+   "title": "PayPal Braintree Fees & Pricing",
+   "quote": "Custom flat rates, interchange plus pricing, and discounted rates are available for established businesses based on business model and processing volume.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://developer.paypal.com/braintree/articles/control-panel/users-roles/scim/scim-integration",
+   "title": "SCIM integration (Braintree)",
+   "quote": "This enables automated user provisioning, de-provisioning, and user role and merchant account access management through these Identity providers.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://developer.paypal.com/braintree/articles/control-panel/users-roles/scim/scim-integration",
+   "title": "SCIM integration (Braintree)",
+   "quote": "You are a managed merchant (ie, you have a dedicated CSM or TAM). We are not currently onboarding unmanaged merchants to SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://developer.paypal.com/braintree/articles/control-panel/users-roles/scim/scim-integration",
+   "title": "SCIM integration (Braintree)",
+   "quote": "Braintree's SCIM integration supports User Create, Get, Update, and Delete. We also support Group Update. We do not support creating or deleting groups for roles and merchant accounts through SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://developer.paypal.com/braintree/articles/control-panel/users-roles/scim/scim-integration",
+   "title": "SCIM integration (Braintree)",
+   "quote": "Your sandbox and production merchants are onboarded to SSO and use a Braintree OIN app instance for each merchant to establish the SSO connection.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://developer.paypal.com/braintree/articles/control-panel/users-roles/scim/scim-integration",
+   "title": "SCIM integration (Braintree)",
+   "quote": "We will also provide you with a SCIM access token. This is what is used by Okta/Entra to access your Braintree merchant account and take actions upon it on your behalf.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://developer.paypal.com/braintree/articles/control-panel/users-roles/scim/scim-integration",
+   "title": "SCIM integration (Braintree)",
+   "quote": "Select the \"Bearer Authentication\" authentication method Enter the following Tenant URL: Production: https://id.braintreegateway.com/scim",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://developer.paypal.com/braintree/articles/control-panel/users-roles/scim/scim-integration",
+   "title": "SCIM integration (Braintree)",
+   "quote": "For Users: Confirm userName, givenName, familyName, and nameFormatted attributes are mapped. Remove all other attributes, as these will break the user provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://developer.paypal.com/braintree/articles/control-panel/users-roles/scim/scim-integration",
+   "title": "SCIM integration (Braintree)",
+   "quote": "For Groups: Confirm that displayName, externalId, and members attributes are mapped.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c11",
+   "url": "https://developer.paypal.com/braintree/articles/control-panel/users-roles/scim/scim-integration",
+   "title": "SCIM integration (Braintree)",
+   "quote": "Deactivate the test user in Okta and confirm that the user is suspended in Braintree.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://developer.paypal.com/braintree/articles/control-panel/users-roles/scim/scim-integration",
+   "title": "SCIM integration (Braintree)",
+   "quote": "(Okta only) Deleting an SSO Braintree user through SCIM / your IdP Any management of non-SSO users through SCIM / your IdP",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://developer.paypal.com/braintree/articles/control-panel/users-roles/scim/scim-integration",
+   "title": "SCIM integration (Braintree)",
+   "quote": "If you are looking to integrate through SCIM with Braintree using OneLogin or another IdP solution, we are currently working on guides for these options. For now, refer to the IdP's own guide on creating a custom SCIM app or integration.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c14",
+   "url": "https://developer.paypal.com/braintree/articles/control-panel/users-roles/scim/scim-integration",
+   "title": "SCIM integration (Braintree)",
+   "quote": "Every role on your merchant will have its own group. In order to add or remove a user from a role in Braintree, you will add or remove the user from the associated role group in Okta.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://developer.paypal.com/braintree/articles/control-panel/users-roles/scim/scim-integration",
+   "title": "SCIM integration (Braintree)",
+   "quote": "We are still working on a guide for setting up automatic role/merchant account access management for Entra.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://developer.paypal.com/braintree/articles/control-panel/users-roles/scim/scim-integration",
+   "title": "SCIM integration (Braintree)",
+   "quote": "if you remove a user from this group, it will suspend the user on the Braintree portal",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c17",
+   "url": "https://developer.paypal.com/braintree/articles/control-panel/users-roles/scim/scim-faq",
+   "title": "SCIM FAQ (Braintree)",
+   "quote": "after you're on SCIM, you won't be able to edit/create/delete SSO users on the BT control panel.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c18",
+   "url": "https://developer.paypal.com/braintree/articles/control-panel/users-roles/scim/scim-faq",
+   "title": "SCIM FAQ (Braintree)",
+   "quote": "Only SSO users can be SCIM users.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c19",
+   "url": "https://developer.paypal.com/braintree/articles/guides/single-sign-on-sso",
+   "title": "Single Sign-On (SSO) (Braintree)",
+   "quote": "Braintree supports SAML 2.0-based Single Sign-On (SSO), allowing users to log in through your organization's identity provider.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c20",
+   "url": "https://developer.paypal.com/braintree/articles/guides/single-sign-on-sso",
+   "title": "Single Sign-On (SSO) (Braintree)",
+   "quote": "Users suspended in the IdP will be denied access to Braintree but will still appear active in the Control Panel unless manually suspended or deleted",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c21",
+   "url": "https://developer.paypal.com/braintree/articles/guides/single-sign-on-sso",
+   "title": "Single Sign-On (SSO) (Braintree)",
+   "quote": "Submit a request to your CSM/TAM or via Braintree support with:",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c22",
+   "url": "https://developer.paypal.com/braintree/articles/guides/single-sign-on-sso",
+   "title": "Single Sign-On (SSO) (Braintree)",
+   "quote": "Name the app, for example “Braintree SSO”, select “Integrate any other application…” (Non‑gallery), and click Create",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c23",
+   "url": "https://www.okta.com/integrations/braintree/",
+   "title": "Integrate Braintree with Okta",
+   "quote": "Use this integration to manage your users and their privileges within the Braintree platform.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c24",
+   "url": "https://developer.paypal.com/braintree/articles/control-panel/users-roles/managing-users-roles",
+   "title": "Managing Users and Roles (Braintree)",
+   "quote": "requires that you create a separate user for every person who needs access to the Control Panel.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c25",
+   "url": "https://developer.paypal.com/braintree/articles/control-panel/audit-webhooks",
+   "title": "Audit Webhooks (Braintree)",
+   "quote": "Audit Webhooks are currently only available to select partners.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c26",
+   "url": "https://developer.paypal.com/braintree/articles/control-panel/users-roles/scim/scim-integration",
+   "title": "SCIM integration (Braintree)",
+   "quote": "Braintree users require at least one role to log in to Braintree, so you'll want to assign this user to a push group as well.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c27",
+   "url": "https://developer.paypal.com/braintree/articles/guides/single-sign-on-sso",
+   "title": "Single Sign-On (SSO) (Braintree)",
+   "quote": "Users are created, edited, suspended, and managed in the Braintree Control Panel",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.paypal.com/us/enterprise/paypal-braintree-fees",
+  "https://developer.paypal.com/braintree/sitemap.xml",
+  "https://developer.paypal.com/braintree/llms.txt",
+  "https://developer.paypal.com/braintree/articles/control-panel/users-roles/scim/scim-integration",
+  "https://developer.paypal.com/braintree/articles/control-panel/users-roles/scim/scim-faq",
+  "https://developer.paypal.com/braintree/articles/guides/single-sign-on-sso",
+  "https://developer.paypal.com/braintree/articles/control-panel/users-roles/managing-users-roles",
+  "https://developer.paypal.com/braintree/articles/control-panel/audit-webhooks",
+  "https://www.okta.com/integrations/braintree/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/braintree-tutorial (404)"
+ ],
+ "open_questions": [
+  "SCIM version, endpoint paths, PATCH vs PUT and token expiry are not documented.",
+  "Whether SAML SSO is available to unmanaged (standard) merchants is not stated; the guide only says to request it via CSM/TAM or support.",
+  "Google Workspace and JumpCloud are not documented."
+ ]
+}

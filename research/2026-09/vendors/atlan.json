@@ -1,0 +1,839 @@
+{
+ "slug": "atlan",
+ "vendor": "Atlan",
+ "vendor_url": "https://atlan.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Atlan",
+  "slug": "atlan",
+  "category": "Data, Analytics & BI",
+  "status": "unknown",
+  "scim_plan": "Not disclosed",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales (no public pricing)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": "sso_only",
+   "onelogin": "sso_only",
+   "jumpcloud": "sso_only",
+   "generic": true
+  },
+  "pricing_page_url": "https://atlan.com/pricing/",
+  "docs_url": "https://docs.atlan.com/product/integrations/identity-management/scim/how-tos/configure-scim-provisioning",
+  "evidence": "Atlan's docs say 'Atlan supports SCIM 2.0 with Azure AD / Entra and Okta. SSO must be configured first', but atlan.com/pricing redirects to a talk-to-sales form, so no plan or price for SCIM is public.",
+  "notes": "New row. SCIM 2.0 exists (bearer token generated under Settings > SSO, base URL https://{tenant-dns}/api/service/scim, token never expires) and is documented for Entra ID and Okta via the customer's own SAML app; SSO is required first. Status is unknown, not gated, because Atlan publishes no plans or prices: atlan.com/pricing redirects to a sales contact form and no docs page names a plan for SCIM or SSO. Deprovisioning sets the user to Disabled, and deactivated users do not count toward licences. Google Workspace, OneLogin and JumpCloud are documented for SAML SSO only. JIT account creation on first SSO sign-in is on by default. A REST user/group API (invite, list, role change, group membership, delete) is documented through the SDK guides; deactivation is UI-only.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Custom (Contact Sales)",
+   "price_text": "No public pricing; atlan.com/pricing redirects to a talk-to-sales form",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c2",
+   "c5",
+   "c8",
+   "c36"
+  ],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://{tenant-dns}/api/service/scim",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Settings > SSO > (Azure AD or Okta provider) > Overview > Automate Provisioning with SCIM > + Generate token",
+   "token_expiry": "never",
+   "cite": [
+    "c8",
+    "c11"
+   ],
+   "notes": "Token is shown once. Removing the Atlan user who created a SCIM token deletes that token."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c5",
+    "c10"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": null,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c5",
+    "c9",
+    "c10"
+   ],
+   "notes": "Docs describe attribute updates (Entra and Okta 'Push Profile Updates') but do not say whether PUT or PATCH is used. No SCIM user delete is documented: removal in the IdP deactivates; permanent removal is a manual admin action. Group push links to existing Atlan groups that are already mapped in SSO settings."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": true,
+   "revokes_sessions": null,
+   "data_retained": "User is set to Disabled and keeps assets; an admin can later remove (hard-delete) the user and transfer ownership of assets.",
+   "cite": [
+    "c13",
+    "c16",
+    "c3"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "emails[type eq \"work\"].value",
+    "displayName",
+    "active",
+    "externalId"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "displayName",
+    "externalId",
+    "members"
+   ],
+   "cite": [
+    "c6",
+    "c7",
+    "c12",
+    "c14",
+    "c46"
+   ],
+   "notes": "Attribute list from the Entra default mappings; the Okta guide maps firstName, lastName and email. Group displayName mapping is 'currently unsupported in Atlan'."
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SCIM is documented only for Microsoft Entra ID (Azure AD) and Okta.",
+    "cite": [
+     "c2",
+     "c36"
+    ]
+   },
+   {
+    "text": "Username and email are synced only once at provisioning; username changes in the IdP do not propagate and need Atlan support.",
+    "cite": [
+     "c15",
+     "c45"
+    ]
+   },
+   {
+    "text": "Deactivation fails silently if the IdP does not send externalId.",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "text": "With SCIM on, admins cannot disable or reactivate SCIM-managed users inside Atlan.",
+    "cite": [
+     "c17",
+     "c4"
+    ]
+   },
+   {
+    "text": "Entra syncs on its ~40-minute provisioning cycle.",
+    "cite": [
+     "c35"
+    ]
+   }
+  ],
+  "notes": "No public pricing or plan list exists (atlan.com/pricing redirects to a talk-to-sales form), so the plan that includes SCIM is not public. Base URL as given in the Entra and Okta guides (Okta guide adds a trailing slash)."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c19",
+   "c21",
+   "c27"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://{tenant}.atlan.com/api/service",
+  "docs_url": "https://docs.atlan.com/product/capabilities/build-apps/sdks/python/users-groups/how-tos/create-users-groups",
+  "auth": {
+   "methods": [
+    "api_token (bearer)",
+    "admin user bearer token"
+   ],
+   "scopes": [],
+   "cite": [
+    "c28",
+    "c26"
+   ],
+   "notes": "API tokens are scoped by personas; deleting a user requires an admin user's bearer token, not an API token."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": false,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": false,
+   "delete_user": true,
+   "reactivate_user": false,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c19",
+    "c21",
+    "c23",
+    "c24",
+    "c26",
+    "c43"
+   ],
+   "notes": "Creating a user sends an invitation. Deactivate/reactivate are UI-only for admins. Delete is a permanent hard-delete with asset transfer (SDK RemoveUser). Roles: $admin, $member, $guest set by role GUID."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/api/service/users",
+    "purpose": "List users (sort, limit, offset, filter)",
+    "cite": [
+     "c21",
+     "c39"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/service/users",
+    "purpose": "Invite users (email + role)",
+    "cite": [
+     "c42"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/service/users/{guid}/update",
+    "purpose": "Change a user's role (roleId)",
+    "cite": [
+     "c23"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/service/users/{guid}/groups",
+    "purpose": "Add a user to groups",
+    "cite": [
+     "c40"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/service/users/{guid}/groups",
+    "purpose": "List a user's groups",
+    "cite": [
+     "c44"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/service/roles",
+    "purpose": "List roles (to find role GUIDs)",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/service/groups",
+    "purpose": "Create a group",
+    "cite": [
+     "c43"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/service/groups/{guid}/members",
+    "purpose": "List group members",
+    "cite": [
+     "c22"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/service/groups/{guid}/members/remove",
+    "purpose": "Remove members from a group",
+    "cite": [
+     "c41"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/service/groups/{guid}/delete",
+    "purpose": "Delete a group",
+    "cite": [
+     "c25"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": null,
+   "cite": [
+    "c27"
+   ],
+   "notes": "Asset audit search (POST /api/meta/entity/auditSearch) covers asset write/mutation events; authentication events are streamed via OTLP to a customer bucket rather than a query API."
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "API tokens cannot deactivate or reactivate users; user deletion needs an admin user's bearer token.",
+    "cite": [
+     "c24",
+     "c26"
+    ]
+   }
+  ],
+  "notes": "Documented as the 'Raw REST API' tab of the Atlan SDK users-and-groups guides (Java, Python, Kotlin, Go SDKs wrap the same calls). No public plan list, so the plan with API access is not public."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c8",
+    "c33",
+    "c9"
+   ],
+   "notes": "Atlan's guides build a custom SAML 2.0 app in Okta and switch its Provisioning to SCIM; okta.com/integrations/atlan/ returned 404, so no OIN catalogue app was found."
+  },
+  "entra": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c5",
+    "c34"
+   ],
+   "notes": "Configured on the customer's own Atlan SAML enterprise application; Microsoft Learn atlan-tutorial and atlan-provisioning-tutorial returned 404."
+  },
+  "google": {
+   "listed": null,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c30",
+    "c36"
+   ],
+   "notes": "Atlan documents a custom Google Workspace SAML app for SSO only; SCIM is documented for Azure AD and Okta only."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c32",
+    "c36"
+   ],
+   "notes": "Atlan's own OneLogin SAML guide; no provisioning documented. OneLogin catalogue not loaded."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c31",
+    "c36"
+   ],
+   "notes": "Atlan's own JumpCloud SAML guide; no provisioning documented. jumpcloud.com/support/integrate-with-atlan returned 403."
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": "Group sync from the IdP at SSO login (group mapping) without SCIM.",
+  "docs_public": true,
+  "cite": [
+   "c29",
+   "c33"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://atlan.com/pricing/",
+   "title": "Talk To Our Sales Team Contact | Atlan",
+   "quote": "An honest conversation about your AI context gap.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://docs.atlan.com/product/integrations/identity-management/scim/how-tos/configure-scim-provisioning",
+   "title": "SCIM provisioning | Atlan Documentation",
+   "quote": "Atlan supports SCIM 2.0 with Azure AD / Entra and Okta. SSO must be configured first. SCIM adds to it, not replaces it.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://docs.atlan.com/product/integrations/identity-management/scim/how-tos/configure-scim-provisioning",
+   "title": "SCIM provisioning | Atlan Documentation",
+   "quote": "Removed or disabled in the IdP → auto-deactivated on next sync.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://docs.atlan.com/product/integrations/identity-management/scim/how-tos/configure-scim-provisioning",
+   "title": "SCIM provisioning | Atlan Documentation",
+   "quote": "Once SCIM is on, user profile edits, enables, and disables for SCIM-managed users flow through the IdP, not from within Atlan.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://docs.atlan.com/product/integrations/identity-management/scim/how-tos/enable-azure-ad-for-scim-provisioning",
+   "title": "Enable Azure AD for SCIM provisioning | Atlan Documentation",
+   "quote": "Microsoft Entra ID (Azure AD) SCIM provisioning automatically creates, updates, and deactivates users and groups in Atlan as they change in your directory.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://docs.atlan.com/product/integrations/identity-management/scim/how-tos/enable-azure-ad-for-scim-provisioning",
+   "title": "Enable Azure AD for SCIM provisioning | Atlan Documentation",
+   "quote": "mailNickname → userName (if absent, Entra defaults to UserPrincipalName / UPN)",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://docs.atlan.com/product/integrations/identity-management/scim/how-tos/enable-azure-ad-for-scim-provisioning",
+   "title": "Enable Azure AD for SCIM provisioning | Atlan Documentation",
+   "quote": "displayName → displayName (currently unsupported in Atlan, but keep the mapping in place)",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.atlan.com/product/integrations/identity-management/scim/how-tos/enable-okta-for-scim-provisioning",
+   "title": "Enable Okta for SCIM provisioning | Atlan Documentation",
+   "quote": "Atlan issues a bearer token that Okta uses to authenticate its SCIM requests. Generate this first, before touching Okta.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.atlan.com/product/integrations/identity-management/scim/how-tos/enable-okta-for-scim-provisioning",
+   "title": "Enable Okta for SCIM provisioning | Atlan Documentation",
+   "quote": "Deactivate Users: deactivates Atlan accounts when users are unassigned in Okta or their Okta accounts are deactivated. Accounts are reactivated if the user is reassigned.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.atlan.com/product/integrations/identity-management/scim/how-tos/enable-okta-for-scim-provisioning",
+   "title": "Enable Okta for SCIM provisioning | Atlan Documentation",
+   "quote": "Group push syncs Okta group membership to Atlan so users land in the right teams automatically.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.atlan.com/product/integrations/identity-management/scim/troubleshooting/troubleshooting-scim-provisioning",
+   "title": "Troubleshooting SCIM provisioning | Atlan Documentation",
+   "quote": "The SCIM token does not expire by default and can only be revoked by deleting it.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.atlan.com/product/integrations/identity-management/scim/troubleshooting/troubleshooting-scim-provisioning",
+   "title": "Troubleshooting SCIM provisioning | Atlan Documentation",
+   "quote": "Atlan syncs the user's first name, last name, username, email address, group information, and user status through group mapping.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.atlan.com/product/integrations/identity-management/scim/troubleshooting/troubleshooting-scim-provisioning",
+   "title": "Troubleshooting SCIM provisioning | Atlan Documentation",
+   "quote": "If a user is removed from your SSO provider, the same user is deactivated in Atlan and their status is shown as Disabled.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.atlan.com/product/integrations/identity-management/scim/troubleshooting/troubleshooting-scim-provisioning",
+   "title": "Troubleshooting SCIM provisioning | Atlan Documentation",
+   "quote": "Atlan matches incoming SCIM updates to existing users by externalId, so without it, a deactivation cannot be applied to the right user.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.atlan.com/product/integrations/identity-management/scim/troubleshooting/troubleshooting-scim-provisioning",
+   "title": "Troubleshooting SCIM provisioning | Atlan Documentation",
+   "quote": "If a username changes in your SSO provider (for example, due to a migration or automation), the updated username does not propagate to Atlan.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.atlan.com/product/capabilities/governance/users-and-groups/how-tos/manage-users",
+   "title": "Manage users | Atlan Documentation",
+   "quote": "Deactivated user accounts do not count towards the total number of Atlan licenses procured by your organization.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.atlan.com/product/capabilities/governance/users-and-groups/how-tos/manage-users",
+   "title": "Manage users | Atlan Documentation",
+   "quote": "Note that if you're using SCIM provisioning, disabling or reactivating users in Atlan is not allowed.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.atlan.com/faq/user-management-and-access-control",
+   "title": "User management and access control | Atlan Documentation",
+   "quote": "No, it is not possible to reactivate a removed user. Since the user will be hard-deleted from Atlan, there will be no trace of the user in the identity system.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.atlan.com/product/capabilities/build-apps/sdks/python/users-groups/how-tos/create-users-groups",
+   "title": "AtlanUser: create users and groups | Atlan Documentation",
+   "quote": "To create a user, what you're really doing is inviting them.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.atlan.com/product/capabilities/build-apps/sdks/python/users-groups/how-tos/create-users-groups",
+   "title": "AtlanUser: create users and groups | Atlan Documentation",
+   "quote": "When using the raw API, you will need to lookup the role GUID yourself. You can GET /api/service/roles, and the GUID will be the id field in the response for each role.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.atlan.com/product/capabilities/build-apps/sdks/python/users-groups/how-tos/retrieve-users-groups",
+   "title": "AtlanUser: retrieve users and groups | Atlan Documentation",
+   "quote": "GET /api/service/users?sort=username&limit=100&offset=0",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c22",
+   "url": "https://docs.atlan.com/product/capabilities/build-apps/sdks/python/users-groups/how-tos/retrieve-users-groups",
+   "title": "AtlanUser: retrieve users and groups | Atlan Documentation",
+   "quote": "GET /api/service/groups/e79cb8eb-2bb6-4821-914c-f8dfd21fedc7/members",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c23",
+   "url": "https://docs.atlan.com/product/capabilities/build-apps/sdks/python/users-groups/how-tos/update-users-groups",
+   "title": "AtlanUser: update users and groups | Atlan Documentation",
+   "quote": "POST /api/service/users/da213751-95de-4f96-8bee-a2c73e2ef8c8/update",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c24",
+   "url": "https://docs.atlan.com/product/capabilities/build-apps/sdks/python/users-groups/how-tos/update-users-groups",
+   "title": "AtlanUser: update users and groups | Atlan Documentation",
+   "quote": "You can only deactivate users as an Admin user (via the UI), API tokens don't have access to deactivate users.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c25",
+   "url": "https://docs.atlan.com/product/capabilities/build-apps/sdks/python/users-groups/how-tos/delete-users-groups",
+   "title": "AtlanUser: delete users and groups | Atlan Documentation",
+   "quote": "POST /api/service/groups/e79cb8eb-2bb6-4821-914c-f8dfd21fedc7/delete",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c26",
+   "url": "https://docs.atlan.com/product/capabilities/build-apps/sdks/python/users-groups/how-tos/delete-users-groups",
+   "title": "AtlanUser: delete users and groups | Atlan Documentation",
+   "quote": "This operation can only be done using an admin user's bearer token, not an API token.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c27",
+   "url": "https://docs.atlan.com/platform/references/api-audit-usage",
+   "title": "API audit usage | Atlan Documentation",
+   "quote": "Atlan exposes four customer-accessible surfaces for auditing API and workflow usage in your tenant.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c28",
+   "url": "https://docs.atlan.com/platform/references/api-audit-usage",
+   "title": "API audit usage | Atlan Documentation",
+   "quote": "Include a bearer token in the Authorization header:",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c29",
+   "url": "https://docs.atlan.com/product/integrations/identity-management/sso/how-tos/limit-sso-automatically-creating-users-when-they-log-in",
+   "title": "Limit SSO automatically creating users | Atlan Documentation",
+   "quote": "By default, any user who can authenticate against your identity provider and reach Atlan's login page is automatically given an Atlan account on their first sign-in.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c30",
+   "url": "https://docs.atlan.com/product/integrations/identity-management/sso/how-tos/enable-google-for-sso",
+   "title": "Enable Google for SSO | Atlan Documentation",
+   "quote": "Configure SAML 2.0 single sign-on so your users sign in to Atlan with their existing Google Workspace credentials.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c31",
+   "url": "https://docs.atlan.com/product/integrations/identity-management/sso/how-tos/enable-jumpcloud-for-sso",
+   "title": "Enable JumpCloud for SSO | Atlan Documentation",
+   "quote": "Configure SAML 2.0 single sign-on so your users sign in to Atlan with their existing JumpCloud credentials.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c32",
+   "url": "https://docs.atlan.com/product/integrations/identity-management/sso/how-tos/enable-onelogin-for-sso",
+   "title": "Enable OneLogin for SSO | Atlan Documentation",
+   "quote": "Configure SAML 2.0 single sign-on so your users sign in to Atlan with their existing OneLogin credentials.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c33",
+   "url": "https://docs.atlan.com/product/integrations/identity-management/sso/how-tos/enable-okta-for-sso",
+   "title": "Enable Okta for SSO | Atlan Documentation",
+   "quote": "you copy Atlan's service provider details into a new SAML app in Okta, then import Okta's identity provider metadata back into Atlan.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c34",
+   "url": "https://docs.atlan.com/product/integrations/identity-management/scim/how-tos/enable-azure-ad-for-scim-provisioning",
+   "title": "Enable Azure AD for SCIM provisioning | Atlan Documentation",
+   "quote": "Go to Identity > Enterprise apps > All applications and open your Atlan SAML application.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c35",
+   "url": "https://docs.atlan.com/product/integrations/identity-management/scim/how-tos/configure-scim-provisioning",
+   "title": "SCIM provisioning | Atlan Documentation",
+   "quote": "Azure AD's default provisioning cycle runs approximately every 40 minutes.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c36",
+   "url": "https://docs.atlan.com/product/integrations/identity-management/scim/troubleshooting/troubleshooting-scim-provisioning",
+   "title": "Troubleshooting SCIM provisioning | Atlan Documentation",
+   "quote": "Atlan supports SCIM provisioning for Azure AD and Okta.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c37",
+   "url": "https://docs.atlan.com/product/integrations/identity-management/scim/how-tos/enable-okta-for-scim-provisioning",
+   "title": "Enable Okta for SCIM provisioning | Atlan Documentation",
+   "quote": "Unique identifier field for users: userName",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c38",
+   "url": "https://docs.atlan.com/faq/user-management-and-access-control",
+   "title": "User management and access control | Atlan Documentation",
+   "quote": "Yes, you can remove users irrespective of whether you're using basic authentication, SSO, or SCIM provisioning in Atlan.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c39",
+   "url": "https://docs.atlan.com/product/capabilities/build-apps/sdks/python/users-groups/how-tos/retrieve-users-groups",
+   "title": "AtlanUser: retrieve users and groups | Atlan Documentation",
+   "quote": "You can also set the limit (default is 20), offset (default is 0) and sort (default is by username).",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c40",
+   "url": "https://docs.atlan.com/product/capabilities/build-apps/sdks/python/users-groups/how-tos/update-users-groups",
+   "title": "AtlanUser: update users and groups | Atlan Documentation",
+   "quote": "POST /api/service/users/da213751-95de-4f96-8bee-a2c73e2ef8c8/groups",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c41",
+   "url": "https://docs.atlan.com/product/capabilities/build-apps/sdks/python/users-groups/how-tos/update-users-groups",
+   "title": "AtlanUser: update users and groups | Atlan Documentation",
+   "quote": "POST /api/service/groups/e79cb8eb-2bb6-4821-914c-f8dfd21fedc7/members/remove",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c42",
+   "url": "https://docs.atlan.com/product/capabilities/build-apps/sdks/python/users-groups/how-tos/create-users-groups",
+   "title": "AtlanUser: create users and groups | Atlan Documentation",
+   "quote": "POST /api/service/users",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c43",
+   "url": "https://docs.atlan.com/product/capabilities/build-apps/sdks/python/users-groups/how-tos/create-users-groups",
+   "title": "AtlanUser: create users and groups | Atlan Documentation",
+   "quote": "POST /api/service/groups",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c44",
+   "url": "https://docs.atlan.com/product/capabilities/build-apps/sdks/python/users-groups/how-tos/retrieve-users-groups",
+   "title": "AtlanUser: retrieve users and groups | Atlan Documentation",
+   "quote": "GET /api/service/users/f06122f4-7279-4e42-b9e0-46f9b470e659/groups",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c45",
+   "url": "https://docs.atlan.com/product/integrations/identity-management/scim/troubleshooting/troubleshooting-scim-provisioning",
+   "title": "Troubleshooting SCIM provisioning | Atlan Documentation",
+   "quote": "The username and email address are synced only once, when the user is provisioned in Atlan for the first time.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c46",
+   "url": "https://docs.atlan.com/product/integrations/identity-management/scim/how-tos/enable-okta-for-scim-provisioning",
+   "title": "Enable Okta for SCIM provisioning | Atlan Documentation",
+   "quote": "user.firstName → givenName",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://atlan.com/pricing/ (redirects to https://atlan.com/forms/talk-to-sales-contact/)",
+  "https://atlan.com/sitemap.xml (no pricing or plans page)",
+  "https://docs.atlan.com/sitemap.xml (SCIM, SSO, users-and-groups and API pages)",
+  "https://docs.atlan.com/llms.txt",
+  "https://www.okta.com/integrations/atlan/ (404)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/atlan-tutorial (404)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/atlan-provisioning-tutorial (404)",
+  "https://jumpcloud.com/support/integrate-with-atlan (403)"
+ ],
+ "open_questions": [
+  "Which Atlan plan or contract includes SCIM and SSO, and at what price? No public pricing.",
+  "Whether SCIM updates use PUT or PATCH, and whether filtering, pagination, ServiceProviderConfig or Schemas endpoints exist.",
+  "Whether SCIM deactivation ends active sessions.",
+  "Whether SCIM accepts role attributes or only group membership (default role comes from SSO settings).",
+  "User-event webhooks and API rate limits were not found in the docs."
+ ]
+}

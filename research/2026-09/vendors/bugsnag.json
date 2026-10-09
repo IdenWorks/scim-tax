@@ -1,0 +1,1166 @@
+{
+ "slug": "bugsnag",
+ "vendor": "BugSnag (SmartBear)",
+ "vendor_url": "https://www.bugsnag.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "BugSnag (SmartBear)",
+  "slug": "bugsnag",
+  "category": "Cloud, Infrastructure & Observability",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Select",
+  "team_price_text": "Select: from $20/mo (billed yearly, event-volume priced)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Preferred",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "sso_only",
+   "google": null,
+   "onelogin": "native",
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.bugsnag.com/pricing/",
+  "docs_url": "https://docs.bugsnag.com/product/single-sign-on/other/",
+  "evidence": "BugSnag's pricing page lists \"Automatic user provisioning via SSO\" only under Enterprise (\"Contact Us\"), with SAML single sign-on from Preferred, and the SSO docs say \"Provisioning and deprovisioning is available on Enterprise plans.\"",
+  "notes": "Status unchanged from June (gated). Prices changed: the pricing page (Billed Yearly toggle selected) now shows Select from $20/month and Preferred from $33/month, versus June's ~$23 and ~$39 (June's billing basis is unrecorded). Plans are priced by event and span volume with unlimited users, so per-user fields stay null. SAML SSO (with JIT 'Auto-provision collaborators') is on Preferred; SCIM 2.0 user and group provisioning is Enterprise-only. SCIM deactivation removes the collaborator from the organization but keeps their BugSnag user record so they can be re-added. SCIM is not supported for the BugSnag for Enterprise instance via the OneLogin app. The Data Access API (collaborators, teams) is on all paid plans (low volume on Select).",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Select",
+  "api_tax": false,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "$0 /month",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": false,
+   "cite": [
+    "c1",
+    "c2",
+    "c13",
+    "c16"
+   ],
+   "notes": "1 user, 7.5K events and 1M spans per month."
+  },
+  {
+   "name": "Select",
+   "price_text": "STARTING AT $20 /month (billed yearly)",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c3",
+    "c11",
+    "c12",
+    "c10",
+    "c13",
+    "c16",
+    "c9"
+   ],
+   "notes": "Event-volume priced (50k to 3M monthly events), unlimited users; Data export API at low volume. Price is rendered client-side (static HTML shows a $0 placeholder); quote verified in the headless render."
+  },
+  {
+   "name": "Preferred",
+   "price_text": "STARTING AT $33 /month (billed yearly)",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c4",
+    "c11",
+    "c6",
+    "c13",
+    "c16",
+    "c10",
+    "c9"
+   ],
+   "notes": "SAML SSO with JIT auto-provisioning; no SCIM. Price is rendered client-side (static HTML shows a $0 placeholder); quote verified in the headless render."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Contact Us",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c5",
+    "c7",
+    "c8",
+    "c16",
+    "c9"
+   ],
+   "notes": "User audit logs are Enterprise-only in the UI; no audit-log endpoint was found in the Data Access API."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c7",
+   "c16",
+   "c26"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://api.bugsnag.com/organizations/{org-name}/scim/v2",
+  "auth": {
+   "method": "bearer",
+   "token_source": "User settings > Personal auth tokens of an organization administrator; SCIM Base URL from Organization settings > Single sign-on",
+   "token_expiry": null,
+   "cite": [
+    "c18",
+    "c19",
+    "c20",
+    "c32"
+   ],
+   "notes": "The SCIM credential is an admin's personal auth token; the Data Access API spec documents the 'token' Authorization prefix."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c47",
+    "c53"
+   ],
+   "notes": "Only /Users and /Groups appear in the published API spec."
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c48",
+    "c49",
+    "c50",
+    "c51",
+    "c52",
+    "c36",
+    "c37",
+    "c39",
+    "c54",
+    "c56",
+    "c57",
+    "c24"
+   ]
+  },
+  "deprovision": {
+   "action": "remove_from_org",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "The collaborator is removed from the organization but their BugSnag user record is kept, so they can be re-added with the same ID.",
+   "cite": [
+    "c36",
+    "c38",
+    "c28"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName (eq only)",
+    "displayName (Groups, eq only)"
+   ],
+   "cite": [
+    "c33",
+    "c34"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": 100,
+   "cite": [
+    "c35"
+   ],
+   "notes": "startIndex (1-indexed) and itemsPerPage, default 30."
+  },
+  "attributes": {
+   "core": [
+    "id",
+    "userName",
+    "name.formatted",
+    "name.givenName",
+    "name.familyName",
+    "emails.value",
+    "active"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "id",
+    "displayName",
+    "members.value",
+    "members.display"
+   ],
+   "cite": [
+    "c41",
+    "c42",
+    "c43",
+    "c44",
+    "c21"
+   ]
+  },
+  "roles": {
+   "supported": null,
+   "how": "Not via SCIM attributes; SCIM groups map to BugSnag teams, which carry project access.",
+   "cite": [
+    "c14"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "PATCH /Users only supports replacing 'active'; name and email changes need PUT.",
+    "cite": [
+     "c39",
+     "c40"
+    ]
+   },
+   {
+    "text": "Filtering supports only userName eq (Users) and displayName eq (Groups).",
+    "cite": [
+     "c33",
+     "c34"
+    ]
+   },
+   {
+    "text": "Creating a group does not add members; membership must be added with a group PATCH.",
+    "cite": [
+     "c45"
+    ]
+   },
+   {
+    "text": "SCIM is not supported for organizations on the BugSnag for Enterprise instance using the OneLogin app.",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "text": "SCIM calls return 403 'SCIM not enabled' when the organization does not have SCIM.",
+    "cite": [
+     "c46"
+    ]
+   },
+   {
+    "text": "JIT/SSO provisioning only adds users up to the plan's collaborator limit.",
+    "cite": [
+     "c23"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c30",
+   "c31",
+   "c10"
+  ],
+  "plan": "Select",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://api.bugsnag.com",
+  "docs_url": "https://developer.smartbear.com/bugsnag/docs/data-access",
+  "auth": {
+   "methods": [
+    "personal_auth_token"
+   ],
+   "scopes": [],
+   "cite": [
+    "c32"
+   ],
+   "notes": "Organization-level auth tokens are deprecated in favour of user-level personal auth tokens."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": null,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c59",
+    "c62",
+    "c60",
+    "c63",
+    "c64",
+    "c66",
+    "c71"
+   ],
+   "notes": "Update sets project access, project roles (project_owner/project_member) and the admin flag. 'Groups' are BugSnag teams."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/user/organizations",
+    "purpose": "List the Current User's Organizations",
+    "cite": [
+     "c58"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/organizations/{organization_id}/collaborators",
+    "purpose": "List all collaborators that are members of your organization",
+    "cite": [
+     "c59"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/organizations/{organization_id}/collaborators",
+    "purpose": "Invite a collaborator to your organization",
+    "cite": [
+     "c60"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/organizations/{organization_id}/collaborators/bulk_invite",
+    "purpose": "Bulk invite collaborators to your organization",
+    "cite": [
+     "c61"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/organizations/{organization_id}/collaborators/{id}",
+    "purpose": "Show a Collaborator on an Organization",
+    "cite": [
+     "c62"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/organizations/{organization_id}/collaborators/{id}",
+    "purpose": "Update a Collaborator's permissions",
+    "cite": [
+     "c63"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/organizations/{organization_id}/collaborators/{id}",
+    "purpose": "Delete a Collaborator",
+    "cite": [
+     "c64"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/organizations/{organization_id}/teams",
+    "purpose": "List Teams from a query",
+    "cite": [
+     "c65"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/organizations/{organization_id}/teams",
+    "purpose": "Create a Team",
+    "cite": [
+     "c66"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/organizations/{organization_id}/teams/{id}",
+    "purpose": "Show the details of a team",
+    "cite": [
+     "c67"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/organizations/{organization_id}/teams/{id}",
+    "purpose": "Update a team name",
+    "cite": [
+     "c68"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/organizations/{organization_id}/teams/{id}",
+    "purpose": "Delete a team",
+    "cite": [
+     "c69"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/organizations/{organization_id}/teams/{id}/collaborators",
+    "purpose": "List the Collaborators in a Team",
+    "cite": [
+     "c70"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/organizations/{organization_id}/teams/{id}/team_memberships",
+    "purpose": "Add Collaborators to a Team",
+    "cite": [
+     "c71"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/organizations/{organization_id}/teams/{id}/team_memberships",
+    "purpose": "Remove Collaborators from a Team",
+    "cite": [
+     "c72"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": [],
+   "notes": "User audit logs are an Enterprise UI feature; the Data Access API spec has no audit-log endpoint."
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "The pricing page rates the Data export API 'Low volume' on Select and 'High volume' on Preferred and Enterprise.",
+    "cite": [
+     "c10"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/bugsnag-saml/",
+   "cite": [
+    "c73",
+    "c74",
+    "c25",
+    "c24"
+   ],
+   "notes": "The 'Bugsnag SAML' OIN app has SAML, SCIM, Create, Update, Deactivate and Group Push checked (read from page markup). A separate older 'Bugsnag' OIN app is SWA-only."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/bugsnag-tutorial",
+   "cite": [
+    "c76",
+    "c77"
+   ],
+   "notes": "Microsoft's tutorial covers SAML SSO and JIT only; no Entra provisioning tutorial found."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "BugSnag documents a Google Cloud Identity SAML setup; catalogue not checked."
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c29",
+    "c26",
+    "c28"
+   ],
+   "notes": "From BugSnag's own OneLogin guide; OneLogin's connector page was not loaded."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "jumpcloud.com/support/integrate-with-bugsnag returned 403."
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c22",
+   "c77",
+   "c13"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.bugsnag.com/pricing/",
+   "title": "BugSnag Pricing",
+   "quote": "Free Solo users and their passion projects $0 /month",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.bugsnag.com/pricing/",
+   "title": "BugSnag Pricing",
+   "quote": "Includes: 1 user Error and performance monitoring 7.5K events and 1M spans per month",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.bugsnag.com/pricing/",
+   "title": "BugSnag Pricing",
+   "quote": "Select Smaller teams starting to monitor their apps STARTING AT $20 /month",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.bugsnag.com/pricing/",
+   "title": "BugSnag Pricing",
+   "quote": "Preferred Larger teams that need deeper insights STARTING AT $33 /month",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.bugsnag.com/pricing/",
+   "title": "BugSnag Pricing",
+   "quote": "Enterprise Custom plans for enterprises that need to scale Contact Us",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://www.bugsnag.com/pricing/",
+   "title": "BugSnag Pricing",
+   "quote": "Select plan features, plus: Automatic error prioritization Stability benchmarks Advanced segmentation Custom notifications SAML single sign-on",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://www.bugsnag.com/pricing/",
+   "title": "BugSnag Pricing",
+   "quote": "Preferred plan features, plus: Automatic error assignment Premium support Dedicated Customer Success Manager Automatic user provisioning via SSO",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://www.bugsnag.com/pricing/",
+   "title": "BugSnag Pricing",
+   "quote": "Automatic user provisioning via SSO Securely manage provisioning and deprovisioning of users via your SSO provider and automatically sync all user attribute changes to BugSnag.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://www.bugsnag.com/pricing/",
+   "title": "BugSnag Pricing",
+   "quote": "User audit logs Stay abreast of key actions taken by collaborators in BugSnag and ensure the security of your data.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://www.bugsnag.com/pricing/",
+   "title": "BugSnag Pricing",
+   "quote": "Data export API Access information about your organization, projects, errors, and more to build custom integrations with data visualization systems. Low volume High volume High volume",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://www.bugsnag.com/pricing/",
+   "title": "BugSnag Pricing",
+   "quote": "Billed Monthly Billed Yearly",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://www.bugsnag.com/pricing/",
+   "title": "BugSnag Pricing",
+   "quote": "Free plan features, plus: Unlimited users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.bugsnag.com/product/single-sign-on/",
+   "title": "Single sign-on (SSO) | BugSnag Docs",
+   "quote": "SSO integration is available on Preferred and Enterprise plans.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.bugsnag.com/product/single-sign-on/",
+   "title": "Single sign-on (SSO) | BugSnag Docs",
+   "quote": "Group provisioning: Sync teams and team membership to BugSnag so authorized users automatically have access to projects relevant to their Group.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.bugsnag.com/product/single-sign-on/",
+   "title": "Single sign-on (SSO) | BugSnag Docs",
+   "quote": "Any provider that supports SAML can be integrated.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.bugsnag.com/product/single-sign-on/other/",
+   "title": "Other provider | BugSnag Docs (SSO)",
+   "quote": "Provisioning and deprovisioning is available on Enterprise plans.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.bugsnag.com/product/single-sign-on/other/",
+   "title": "Other provider | BugSnag Docs (SSO)",
+   "quote": "The following provisioning and deprovisioning features are supported: Create users Update user names and email addresses Deactivate users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.bugsnag.com/product/single-sign-on/other/",
+   "title": "Other provider | BugSnag Docs (SSO)",
+   "quote": "Generate a new auth token which will be used for SCIM.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.bugsnag.com/product/single-sign-on/other/",
+   "title": "Other provider | BugSnag Docs (SSO)",
+   "quote": "Copy the SCIM Base URL.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.bugsnag.com/product/single-sign-on/other/",
+   "title": "Other provider | BugSnag Docs (SSO)",
+   "quote": "In the SSO provider create a SAML app: Enable provisioning and enter the SCIM Base URL and auth token.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.bugsnag.com/product/single-sign-on/other/",
+   "title": "Other provider | BugSnag Docs (SSO)",
+   "quote": "Email address is used as the SCIM username.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://docs.bugsnag.com/product/single-sign-on/other/",
+   "title": "Other provider | BugSnag Docs (SSO)",
+   "quote": "if you would like accounts to be automatically created for new users when they first log in (see SCIM for full provisioning and deprovisioning support).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://docs.bugsnag.com/product/single-sign-on/other/",
+   "title": "Other provider | BugSnag Docs (SSO)",
+   "quote": "Users will only be added up to your plan’s collaborator limit.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://docs.bugsnag.com/product/single-sign-on/okta/",
+   "title": "Okta setup | BugSnag Docs",
+   "quote": "Create users Update user names and email addresses Deactivate users Push groups",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://docs.bugsnag.com/product/single-sign-on/okta/",
+   "title": "Okta setup | BugSnag Docs",
+   "quote": "open the configuration for the “Bugsnag SAML” application and in the Provisioning tab.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://docs.bugsnag.com/product/single-sign-on/onelogin/",
+   "title": "OneLogin setup | BugSnag Docs",
+   "quote": "The organization name is found in the SCIM Base URL: https://api.bugsnag.com/organizations/ org-name /scim/v2",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://docs.bugsnag.com/product/single-sign-on/onelogin/",
+   "title": "OneLogin setup | BugSnag Docs",
+   "quote": "SCIM is not currently supported for organizations on the BugSnag for Enterprise instance using the OneLogin Bugsnag application described below.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://docs.bugsnag.com/product/single-sign-on/onelogin/",
+   "title": "OneLogin setup | BugSnag Docs",
+   "quote": "To deprovision users when their access is removed in OneLogin, select Delete in the dropdown.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://docs.bugsnag.com/product/single-sign-on/onelogin/",
+   "title": "OneLogin setup | BugSnag Docs",
+   "quote": "and search for “Bugsnag”. Select the SAML2.0 version and then",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "Allows you to access information about your BugSnag errors, projects, organization and more to build custom integrations using your data.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c31",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "\"description\":\"For organizations with projects on app.bugsnag.com\",\"url\":\"https://api.bugsnag.com\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c32",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "Authorize using a Personal Auth Token with the `token` prefix",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c33",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "The request may be filtered by `userName` equality by passing a filter of the form `userName eq",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c34",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "The request may be filtered by `displayName` equality by passing a filter of the form `displayName eq",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c35",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "the number of results returned in this response, defaults to 30, maximum of 100",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c36",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "If the `active` flag is set to `false` for an existing collaborator then they are removed from the organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c37",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "If the `active` flag is set to `true` for a user who is not currently a collaborator, but for whom the ID is known, then they are added to the organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c38",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "This approach is used by Okta and OneLogin to remove and re-add users to a Bugsnag organization without removing them entirely from their record",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c39",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "Setting the `active` flag is the only operation we support for this method.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c40",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "Update the basic details of a collaborator. This includes the email address and name of the collaborator.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c41",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "\"ScimUser\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\",\"example\":\"515fb9337c1074f6fd000007\"},\"userName\":{\"type\":\"string\",\"example\":\"james.smith@example.com\"},\"name\":{\"$ref\":\"#/components/schemas/ScimName\"},\"emails\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c42",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "\"ScimName\":{\"type\":\"object\",\"properties\":{\"formatted\":{\"type\":\"string\",\"example\":\"James Smith\"},\"givenName\":{\"type\":\"string\",\"example\":\"James\"},\"familyName\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c43",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "\"active\":{\"type\":\"boolean\",\"description\":\"Whether the user is part of the organization.\"}",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c44",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "\"ScimGroup\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\",\"example\":\"515fb9337c1074f6fd000007\"},\"displayName\":{\"type\":\"string\",\"example\":\"Development Group\"},\"members\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c45",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "Collaborators are not added when creating a group, so these must be added using the Update Group on an",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c46",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "\"SCIM not enabled\",\"status\":\"403\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c47",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "\"summary\":\"List Collaborators on an Organization\",\"operationId\":\"listScimCollaborators\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c48",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "\"summary\":\"Create a Collaborator\",\"operationId\":\"createScimCollaborator\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c49",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "\"summary\":\"Show a Collaborator on an Organization\",\"operationId\":\"getScimCollaborator\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c50",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "\"summary\":\"Update a Collaborator\",\"operationId\":\"updateScimCollaborator\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c51",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "\"summary\":\"Add or Remove Previously Added Collaborators\",\"operationId\":\"patchScimCollaborator\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c52",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "\"summary\":\"Remove a Collaborator\",\"operationId\":\"deleteScimCollaborator\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c53",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "\"summary\":\"List Groups on an Organization\",\"operationId\":\"listScimGroups\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c54",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "\"summary\":\"Create Group on an Organization\",\"operationId\":\"createScimGroup\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c55",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "\"summary\":\"Show Group on an Organization\",\"operationId\":\"getScimGroup\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c56",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "\"summary\":\"Update Group on an Organization\",\"operationId\":\"updateScimGroup\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c57",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "\"summary\":\"Delete Group on an Organization\",\"operationId\":\"deleteScimGroup\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c58",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "\"summary\":\"List the Current User's Organizations\",\"operationId\":\"listUserOrganizations\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c59",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "\"summary\":\"List all collaborators that are members of your organization\",\"operationId\":\"listOrganizationCollaborators\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c60",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "\"summary\":\"Invite a collaborator to your organization\",\"operationId\":\"inviteOrganizationCollaborator\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c61",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "\"summary\":\"Bulk invite collaborators to your organization\",\"operationId\":\"bulkInviteOrganizationCollaborators\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c62",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "\"summary\":\"Show a Collaborator on an Organization\",\"operationId\":\"getOrganizationCollaborator\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c63",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "\"summary\":\"Update a Collaborator's permissions\",\"operationId\":\"updateOrganizationCollaborator\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c64",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "\"summary\":\"Delete a Collaborator\",\"operationId\":\"deleteOrganizationCollaborator\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c65",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "\"summary\":\"List Teams from a query\",\"operationId\":\"listOrganizationTeams\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c66",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "\"summary\":\"Create a Team\",\"operationId\":\"createOrganizationTeam\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c67",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "\"summary\":\"Show the details of a team\",\"operationId\":\"getOrganizationTeam\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c68",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "\"summary\":\"Update a team name\",\"operationId\":\"updateOrganizationTeam\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c69",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "\"summary\":\"Delete a team\",\"operationId\":\"deleteOrganizationTeam\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c70",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "\"summary\":\"List the Collaborators in a Team\",\"operationId\":\"listOrganizationTeamCollaborators\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c71",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "\"summary\":\"Add Collaborators to a Team\",\"operationId\":\"addOrganizationTeamMemberships\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c72",
+   "url": "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json",
+   "title": "BugSnag Data Access API (OpenAPI)",
+   "quote": "\"summary\":\"Remove Collaborators from a Team\",\"operationId\":\"deleteOrganizationTeamMemberships\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.smartbear.com/bugsnag/docs/data-access"
+  },
+  {
+   "id": "c73",
+   "url": "https://www.okta.com/integrations/bugsnag-saml/",
+   "title": "Integrate Bugsnag SAML with Okta",
+   "quote": "Use Okta's Bugsnag integration to manage access to your Bugsnag account using single sign-on and user provisioning & deprovisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c74",
+   "url": "https://www.okta.com/integrations/bugsnag-saml/",
+   "title": "Integrate Bugsnag SAML with Okta",
+   "quote": "SAML SWA WS-Federation OIDC SCIM Brokered Consent Cross App Access Privileged Access Management Provisioning Create Update Attribute Sourcing Deactivate Sync Password Group Push",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c75",
+   "url": "https://www.okta.com/integrations/bugsnag/",
+   "title": "Integrate Bugsnag with Okta",
+   "quote": "This app integration supports Single Sign-On. See Capabilities for more details.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c76",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/bugsnag-tutorial",
+   "title": "Configure Bugsnag for Single sign-on with Microsoft Entra ID",
+   "quote": "Bugsnag supports SP and IDP initiated SSO.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c77",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/bugsnag-tutorial",
+   "title": "Configure Bugsnag for Single sign-on with Microsoft Entra ID",
+   "quote": "Bugsnag supports Just In Time user provisioning.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.bugsnag.com/pricing/",
+  "https://docs.bugsnag.com/product/single-sign-on/",
+  "https://api.swaggerhub.com/apis/smartbear-public/bugsnag-data-access-api/2/swagger.json"
+ ],
+ "open_questions": [
+  "Whether SCIM removal frees the seat or ends active sessions is not documented.",
+  "Whether SSO must be enabled before SCIM is not stated explicitly.",
+  "SCIM token expiry is not documented (it is an admin's personal auth token).",
+  "Data Access API rate limits are not documented in the spec.",
+  "Whether the Free plan can use the Data Access API is not stated."
+ ]
+}

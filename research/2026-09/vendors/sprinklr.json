@@ -1,0 +1,726 @@
+{
+ "slug": "sprinklr",
+ "vendor": "Sprinklr",
+ "vendor_url": "https://www.sprinklr.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Sprinklr",
+  "slug": "sprinklr",
+  "category": "Customer Support & Success",
+  "status": "gated",
+  "scim_plan": "Enterprise (Contact Sales)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": null
+  },
+  "idp": {
+   "okta": "sso_only",
+   "entra": "sso_only",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.sprinklr.com/free-trial-to-demo/",
+  "docs_url": "https://dev.sprinklr.com/scim-user-apis",
+  "evidence": "Sprinklr's developer portal documents SCIM (User) APIs to create, read, update and delete/disable users at /api/v2/scim/Users; Sprinklr publishes no prices and routes buyers to 'Get Pricing & Personalized Demo'.",
+  "notes": "Quote-only: sprinklr.com/pricing/ returns 404 and the site offers only 'Get Pricing & Personalized Demo'. SCIM 2.0-style Users API (no Groups endpoint) on api3.sprinklr.com/{env}/api/v2/scim/Users, but every call needs a Sprinklr OAuth 2.0 bearer token plus an api-key header from a developer app, and only one token can exist per API key, so standard IdP SCIM clients are not documented as supported. Okta OIN app is SAML only and Microsoft's Entra tutorial is SSO only and says to provision with Sprinklr's own tools or APIs. SAML SSO (set up via support) can auto-provision users on first login. The non-SCIM 'User APIs' (/api/v2/scim/{userId}) and an Audit API also exist. Default API limits: 1000 requests/hour and 10/second per key.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c2",
+   "c3",
+   "c5",
+   "c17"
+  ],
+  "plan": "Enterprise (Contact Sales)",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://api3.sprinklr.com/{env}/api/v2/scim",
+  "auth": {
+   "method": "oauth2",
+   "token_source": "Sprinklr developer app API key + OAuth 2.0 access token (code grant or client credentials); user needs the Generate Token permission",
+   "token_expiry": null,
+   "cite": [
+    "c6",
+    "c7",
+    "c20",
+    "c21",
+    "c22"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c5",
+    "c19"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": null,
+   "group_membership": true,
+   "cite": [
+    "c4",
+    "c18",
+    "c17",
+    "c12",
+    "c10",
+    "c3"
+   ]
+  },
+  "deprovision": {
+   "action": "delete",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c12",
+    "c13",
+    "c3"
+   ],
+   "notes": "DELETE /Users/{userId} deletes/deprovisions; the overview also describes disabling, and PATCH can set active status."
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "id (eq, le, ge)",
+    "userName (eq)",
+    "meta.lastModified (le, ge)"
+   ],
+   "cite": [
+    "c14",
+    "c15"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c16"
+   ],
+   "notes": "startIndex and count (default 100)."
+  },
+  "attributes": {
+   "core": [
+    "userName (email)",
+    "name.familyName",
+    "name.givenName",
+    "photos.value (first only)",
+    "active",
+    "locale",
+    "emails"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": true,
+    "how": "Sprinklr extensions urn:scim:schemas:extension:sprinklrGlobalAttributes:2.0:User (partnerCustomProperties, productSeat, federationId, passwordLoginDisabled) and sprinklrClientAttributes:2.0:User (clientId, userType, phoneNumbers, clientCustomProperties, businessCategory, designation, department, managerId, persona, personaViewEnabled, personaApp, userGroupIds, primaryUserGroupId); isSpaceUser."
+   },
+   "group": [],
+   "cite": [
+    "c4",
+    "c8",
+    "c9",
+    "c10",
+    "c11",
+    "c17"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "clientAttributes.userType (PARTNER_ADMIN, PARTNER_USER, CLIENT_ADMIN, CLIENT_USER), persona, userGroupIds; globalAttributes.productSeat assigns the product seat.",
+   "cite": [
+    "c8",
+    "c9",
+    "c10"
+   ]
+  },
+  "rate_limits": {
+   "text": "Default 1000 requests per hour and 10 requests per second per API key.",
+   "cite": [
+    "c23",
+    "c24"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Calls need an OAuth bearer token plus a Sprinklr api-key header, and only one token can exist per API key; Okta's and Entra's catalogue apps do not provision.",
+    "cite": [
+     "c6",
+     "c7",
+     "c21",
+     "c34",
+     "c35"
+    ]
+   },
+   {
+    "text": "No SCIM Groups endpoint is documented; group membership is set through the userGroupIds attribute.",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "text": "Search filters can only be combined with 'and'.",
+    "cite": [
+     "c15"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c25",
+   "c26"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://api3.sprinklr.com/{env}/api/v2",
+  "docs_url": "https://dev.sprinklr.com/user-apis",
+  "auth": {
+   "methods": [
+    "oauth2",
+    "api_key"
+   ],
+   "scopes": [],
+   "cite": [
+    "c20",
+    "c7"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": true,
+   "reactivate_user": true,
+   "manage_groups": null,
+   "assign_roles": true,
+   "assign_licenses": true,
+   "cite": [
+    "c25",
+    "c26",
+    "c27",
+    "c28",
+    "c29",
+    "c14",
+    "c17",
+    "c8",
+    "c9"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/{env}/api/v2/scim",
+    "purpose": "Create User",
+    "cite": [
+     "c37",
+     "c26"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/{env}/api/v2/scim/{userId}",
+    "purpose": "Read User",
+    "cite": [
+     "c39",
+     "c28"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/{env}/api/v2/scim/{userId}",
+    "purpose": "User Update",
+    "cite": [
+     "c40",
+     "c29"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/{env}/api/v2/scim/{userId}",
+    "purpose": "Delete User from all clients",
+    "cite": [
+     "c38",
+     "c27"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/{env}/api/v1/audit/fetch",
+    "purpose": "Audit API V1 (change history of assets)",
+    "cite": [
+     "c31",
+     "c30"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": null,
+   "cite": [
+    "c30",
+    "c31"
+   ],
+   "notes": "Audit API covers asset classes (cases, messages, profiles, media, outbound messages), not user/admin events."
+  },
+  "rate_limits": {
+   "text": "Default 1000 requests per hour and 10 requests per second per API key.",
+   "cite": [
+    "c23",
+    "c24"
+   ]
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/sprinklr/",
+   "cite": [
+    "c34"
+   ],
+   "notes": "OIN functionality ticks SAML only; no SCIM or provisioning ticks."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/sprinklr-tutorial",
+   "cite": [
+    "c35",
+    "c36"
+   ]
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c32",
+   "c33"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.sprinklr.com/free-trial-to-demo/",
+   "title": "Get Pricing & Personalized Demo | Sprinklr",
+   "quote": "Get Pricing & Personalized Demo",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://dev.sprinklr.com/portals/api/sites/spr-apigee-prod-apiprodportal/liveportal/page/scim-user-apis",
+   "title": "Sprinklr Developer Portal - scim-user-apis",
+   "quote": "The goal of SCIM APIs is to help provision users access to Sprinklr platform to enable them to access the application.",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.sprinklr.com/scim-user-apis"
+  },
+  {
+   "id": "c3",
+   "url": "https://dev.sprinklr.com/portals/api/sites/spr-apigee-prod-apiprodportal/liveportal/page/scim-user-apis",
+   "title": "Sprinklr Developer Portal - scim-user-apis",
+   "quote": "You can perform the basic CRUD operations using these APIs, such as adding a user, fetching user details, updating a user, or deleting/disabling a user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.sprinklr.com/scim-user-apis"
+  },
+  {
+   "id": "c4",
+   "url": "https://dev.sprinklr.com/portals/api/sites/spr-apigee-prod-apiprodportal/liveportal/page/create-user-scim",
+   "title": "Sprinklr Developer Portal - create-user-scim",
+   "quote": "Using this API, you can create/add a user within the Sprinklr platform.",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.sprinklr.com/create-user-scim"
+  },
+  {
+   "id": "c5",
+   "url": "https://dev.sprinklr.com/portals/api/sites/spr-apigee-prod-apiprodportal/liveportal/page/create-user-scim",
+   "title": "Sprinklr Developer Portal - create-user-scim",
+   "quote": "https://api3.sprinklr.com /{env}/ api/v2/scim/Users",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.sprinklr.com/create-user-scim"
+  },
+  {
+   "id": "c6",
+   "url": "https://dev.sprinklr.com/portals/api/sites/spr-apigee-prod-apiprodportal/liveportal/page/create-user-scim",
+   "title": "Sprinklr Developer Portal - create-user-scim",
+   "quote": "Credential used by the API to authenticate a user with the server",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.sprinklr.com/create-user-scim"
+  },
+  {
+   "id": "c7",
+   "url": "https://dev.sprinklr.com/portals/api/sites/spr-apigee-prod-apiprodportal/liveportal/page/create-user-scim",
+   "title": "Sprinklr Developer Portal - create-user-scim",
+   "quote": "API key helps authenticate the application with the server",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.sprinklr.com/create-user-scim"
+  },
+  {
+   "id": "c8",
+   "url": "https://dev.sprinklr.com/portals/api/sites/spr-apigee-prod-apiprodportal/liveportal/page/create-user-scim",
+   "title": "Sprinklr Developer Portal - create-user-scim",
+   "quote": "Supported Product Seats :\nModern Engagement, Modern Marketing, Modern Care, Modern Marketing Lite, Distributed",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.sprinklr.com/create-user-scim"
+  },
+  {
+   "id": "c9",
+   "url": "https://dev.sprinklr.com/portals/api/sites/spr-apigee-prod-apiprodportal/liveportal/page/create-user-scim",
+   "title": "Sprinklr Developer Portal - create-user-scim",
+   "quote": "Supported user types : PARTNER_ADMIN, PARTNER_USER, \nCLIENT_ADMIN, CLIENT_USER",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.sprinklr.com/create-user-scim"
+  },
+  {
+   "id": "c10",
+   "url": "https://dev.sprinklr.com/portals/api/sites/spr-apigee-prod-apiprodportal/liveportal/page/create-user-scim",
+   "title": "Sprinklr Developer Portal - create-user-scim",
+   "quote": "The user group Ids where you want to add the user",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.sprinklr.com/create-user-scim"
+  },
+  {
+   "id": "c11",
+   "url": "https://dev.sprinklr.com/portals/api/sites/spr-apigee-prod-apiprodportal/liveportal/page/create-user-scim",
+   "title": "Sprinklr Developer Portal - create-user-scim",
+   "quote": "urn:scim:schemas:extension:sprinklrClientAttributes:2.0:User",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.sprinklr.com/create-user-scim"
+  },
+  {
+   "id": "c12",
+   "url": "https://dev.sprinklr.com/portals/api/sites/spr-apigee-prod-apiprodportal/liveportal/page/delete-user-scim",
+   "title": "Sprinklr Developer Portal - delete-user-scim",
+   "quote": "Using this API, you can delete/deprovision a user from the Sprinklr platform.",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.sprinklr.com/delete-user-scim"
+  },
+  {
+   "id": "c13",
+   "url": "https://dev.sprinklr.com/portals/api/sites/spr-apigee-prod-apiprodportal/liveportal/page/delete-user-scim",
+   "title": "Sprinklr Developer Portal - delete-user-scim",
+   "quote": "204 No Content implies that the user has been successfully deleted.",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.sprinklr.com/delete-user-scim"
+  },
+  {
+   "id": "c14",
+   "url": "https://dev.sprinklr.com/portals/api/sites/spr-apigee-prod-apiprodportal/liveportal/page/search-user-scim",
+   "title": "Sprinklr Developer Portal - search-user-scim",
+   "quote": "Using this API, you can search user by passing filters and sorting details",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.sprinklr.com/search-user-scim"
+  },
+  {
+   "id": "c15",
+   "url": "https://dev.sprinklr.com/portals/api/sites/spr-apigee-prod-apiprodportal/liveportal/page/search-user-scim",
+   "title": "Sprinklr Developer Portal - search-user-scim",
+   "quote": "The filters can only be combined by \"and\" operator. Any other operator will throw an error.",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.sprinklr.com/search-user-scim"
+  },
+  {
+   "id": "c16",
+   "url": "https://dev.sprinklr.com/portals/api/sites/spr-apigee-prod-apiprodportal/liveportal/page/search-user-scim",
+   "title": "Sprinklr Developer Portal - search-user-scim",
+   "quote": "Refers to the number of results you want to fetch in the response.",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.sprinklr.com/search-user-scim"
+  },
+  {
+   "id": "c17",
+   "url": "https://dev.sprinklr.com/portals/api/sites/spr-apigee-prod-apiprodportal/liveportal/page/partial-update-user-scim",
+   "title": "Sprinklr Developer Portal - partial-update-user-scim",
+   "quote": "The API follows the SCIM 2.0 PATCH standard and supports operations such as add and replace for user attributes like name, active status, locale, emails, client attributes, and custom properties.",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.sprinklr.com/partial-update-user-scim"
+  },
+  {
+   "id": "c18",
+   "url": "https://dev.sprinklr.com/portals/api/sites/spr-apigee-prod-apiprodportal/liveportal/page/update-user-scim",
+   "title": "Sprinklr Developer Portal - update-user-scim",
+   "quote": "Using this API, you can update the details for the user existing within the Sprinklr platform.",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.sprinklr.com/update-user-scim"
+  },
+  {
+   "id": "c19",
+   "url": "https://dev.sprinklr.com/portals/api/sites/spr-apigee-prod-apiprodportal/liveportal/page/read-user-scim",
+   "title": "Sprinklr Developer Portal - read-user-scim",
+   "quote": "Using this API, you can fetch a user for the given user Id",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.sprinklr.com/read-user-scim"
+  },
+  {
+   "id": "c20",
+   "url": "https://dev.sprinklr.com/portals/api/sites/spr-apigee-prod-apiprodportal/liveportal/page/authorize",
+   "title": "Sprinklr Developer Portal - authorize",
+   "quote": "Sprinklr currently supports OAuth 2.0 with Code Grant and client credentials.",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.sprinklr.com/authorize"
+  },
+  {
+   "id": "c21",
+   "url": "https://dev.sprinklr.com/portals/api/sites/spr-apigee-prod-apiprodportal/liveportal/page/authorize",
+   "title": "Sprinklr Developer Portal - authorize",
+   "quote": "Only one token can exist per API key.",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.sprinklr.com/authorize"
+  },
+  {
+   "id": "c22",
+   "url": "https://dev.sprinklr.com/portals/api/sites/spr-apigee-prod-apiprodportal/liveportal/page/authorize",
+   "title": "Sprinklr Developer Portal - authorize",
+   "quote": "To generate authorization token, you need to be assigned the Generate Token permission from within the Sprinklr Platform.",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.sprinklr.com/authorize"
+  },
+  {
+   "id": "c23",
+   "url": "https://dev.sprinklr.com/portals/api/sites/spr-apigee-prod-apiprodportal/liveportal/page/sprinklr-api-rate-limiting",
+   "title": "Sprinklr Developer Portal - sprinklr-api-rate-limiting",
+   "quote": "The default limit is 1000 requests per hour.",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.sprinklr.com/sprinklr-api-rate-limiting"
+  },
+  {
+   "id": "c24",
+   "url": "https://dev.sprinklr.com/portals/api/sites/spr-apigee-prod-apiprodportal/liveportal/page/sprinklr-api-rate-limiting",
+   "title": "Sprinklr Developer Portal - sprinklr-api-rate-limiting",
+   "quote": "The default limit is 10 requests per second.",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.sprinklr.com/sprinklr-api-rate-limiting"
+  },
+  {
+   "id": "c25",
+   "url": "https://dev.sprinklr.com/portals/api/sites/spr-apigee-prod-apiprodportal/liveportal/page/user-apis",
+   "title": "Sprinklr Developer Portal - user-apis",
+   "quote": "Using these APIs, you can create, fetch user details, define roles and permissions, update, and even delete a user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.sprinklr.com/user-apis"
+  },
+  {
+   "id": "c26",
+   "url": "https://dev.sprinklr.com/portals/api/sites/spr-apigee-prod-apiprodportal/liveportal/page/create-user",
+   "title": "Sprinklr Developer Portal - create-user",
+   "quote": "To create a user, you must be an admin of the Customer or Workspace environment in which you want to create a user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.sprinklr.com/create-user"
+  },
+  {
+   "id": "c27",
+   "url": "https://dev.sprinklr.com/portals/api/sites/spr-apigee-prod-apiprodportal/liveportal/page/delete-user",
+   "title": "Sprinklr Developer Portal - delete-user",
+   "quote": "You can delete a user of a given userId from all clients via this API call",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.sprinklr.com/delete-user"
+  },
+  {
+   "id": "c28",
+   "url": "https://dev.sprinklr.com/portals/api/sites/spr-apigee-prod-apiprodportal/liveportal/page/read-user",
+   "title": "Sprinklr Developer Portal - read-user",
+   "quote": "You can fetch a user through user Id via this API call.",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.sprinklr.com/read-user"
+  },
+  {
+   "id": "c29",
+   "url": "https://dev.sprinklr.com/portals/api/sites/spr-apigee-prod-apiprodportal/liveportal/page/user-update",
+   "title": "Sprinklr Developer Portal - user-update",
+   "quote": "You can update a User via this API call and you will get the updated details in Response after making the Request.",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.sprinklr.com/user-update"
+  },
+  {
+   "id": "c30",
+   "url": "https://dev.sprinklr.com/portals/api/sites/spr-apigee-prod-apiprodportal/liveportal/page/audit-api-v1",
+   "title": "Sprinklr Developer Portal - audit-api-v1",
+   "quote": "The Audit API gives a full history of what/who has changed the object over time.",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.sprinklr.com/audit-api-v1"
+  },
+  {
+   "id": "c31",
+   "url": "https://dev.sprinklr.com/portals/api/sites/spr-apigee-prod-apiprodportal/liveportal/page/audit-api-v1",
+   "title": "Sprinklr Developer Portal - audit-api-v1",
+   "quote": "api/v1/audit/fetch",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.sprinklr.com/audit-api-v1"
+  },
+  {
+   "id": "c32",
+   "url": "https://www.sprinklr.com/help/articles/user-auto-provisioning/how-does-user-auto-provisioning-work/645651170104980882a56ddb",
+   "title": "How Does User Auto Provisioning Work | Sprinklr Help Center",
+   "quote": "The first time an employee logs into the Sprinklr app via SSO, an account is automatically created, with the appropriate Sprinklr permissions granted.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c33",
+   "url": "https://www.sprinklr.com/help/articles/sso/single-signon/6405cfb77a695d65a1606a79",
+   "title": "Single Sign-On | Sprinklr Help Center",
+   "quote": "To get it configured for a customer, please reach out to ​ support@sprinklr.com .",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c34",
+   "url": "https://www.okta.com/integrations/sprinklr/",
+   "title": "Integrate Sprinklr with Okta",
+   "quote": "Add this integration to enable authentication and provisioning capabilities.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c35",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/sprinklr-tutorial",
+   "title": "Configure Sprinklr for Single sign-on with Microsoft Entra ID",
+   "quote": "You can use any other Sprinklr user account creation tools or APIs provided by Sprinklr to provision Microsoft Entra user accounts.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c36",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/sprinklr-tutorial",
+   "title": "Configure Sprinklr for Single sign-on with Microsoft Entra ID",
+   "quote": "Sprinklr single sign-on (SSO) enabled subscription.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c37",
+   "url": "https://dev.sprinklr.com/portals/api/sites/spr-apigee-prod-apiprodportal/liveportal/page/create-user",
+   "title": "Sprinklr Developer Portal - create-user",
+   "quote": "api/v2/scim",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.sprinklr.com/create-user"
+  },
+  {
+   "id": "c38",
+   "url": "https://dev.sprinklr.com/portals/api/sites/spr-apigee-prod-apiprodportal/liveportal/page/delete-user",
+   "title": "Sprinklr Developer Portal - delete-user",
+   "quote": "api/v2/scim/{userId}",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.sprinklr.com/delete-user"
+  },
+  {
+   "id": "c39",
+   "url": "https://dev.sprinklr.com/portals/api/sites/spr-apigee-prod-apiprodportal/liveportal/page/read-user",
+   "title": "Sprinklr Developer Portal - read-user",
+   "quote": "GET - Read User",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.sprinklr.com/read-user"
+  },
+  {
+   "id": "c40",
+   "url": "https://dev.sprinklr.com/portals/api/sites/spr-apigee-prod-apiprodportal/liveportal/page/user-update",
+   "title": "Sprinklr Developer Portal - user-update",
+   "quote": "PUT - User Update",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.sprinklr.com/user-update"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.sprinklr.com/pricing/ (404)",
+  "https://www.sprinklr.com/sitemap.xml",
+  "https://www.sprinklr.com/help/sitemap.xml",
+  "https://dev.sprinklr.com/sitemap.xml",
+  "https://www.okta.com/integrations/sprinklr/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/sprinklr-tutorial",
+  "learn.microsoft.com sprinklr-provisioning-tutorial (404)"
+ ],
+ "open_questions": [
+  "No public prices or plan names; which Sprinklr contracts include API/SCIM access is not stated.",
+  "Access token lifetime is not stated on the pages read.",
+  "Whether DELETE frees the product seat or whether deactivation (active=false) is the recommended deprovisioning path.",
+  "Google, OneLogin and JumpCloud catalogue status not checked.",
+  "Whether a SAML-only plan tier exists (SSO is enabled via support)."
+ ]
+}

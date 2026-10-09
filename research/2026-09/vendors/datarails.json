@@ -1,0 +1,452 @@
+{
+ "slug": "datarails",
+ "vendor": "Datarails",
+ "vendor_url": "https://www.datarails.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Datarails",
+  "slug": "datarails",
+  "category": "Finance, Accounting & Spend",
+  "status": "gated",
+  "scim_plan": "Contact Sales (quote-only)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Professional",
+  "team_price_text": "Professional: Request Quote (2 users)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": null,
+  "idp": {
+   "okta": "via_generic",
+   "entra": "sso_only",
+   "google": "sso_only",
+   "onelogin": null,
+   "jumpcloud": "sso_only",
+   "generic": true
+  },
+  "pricing_page_url": "https://www.datarails.com/pricing/",
+  "docs_url": "https://support.datarails.com/hc/en-us/articles/19754261303324-SAML-and-OKTA-SSO-Configuration",
+  "evidence": "Datarails' SAML and Okta guide says 'To enable SCIM-based provisioning, you must generate an authentication token' and copy the SCIM token and base URL into the identity provider, while every plan on the pricing page is 'Request Quote'.",
+  "notes": "Quote-only: Professional (2 users, 1 integration), Premium (5 users) and Expert (15 users + 50 viewers) are all 'Request Quote'. SCIM exists (admin-generated SCIM token and base URL, Members & Groups > SCIM Token, operations run as that admin) but is only documented as a step in the Okta SAML guide; no plan gate, SCIM version, endpoints, attributes or deprovisioning behaviour is published. SAML 2.0 SSO works with any SAML IdP (Okta, Duo, Google Workspace, JumpCloud named), one SAML config per org; the plan that includes SSO is not stated. The Microsoft sign-in app is OAuth/OIDC only and 'does not support provisioning'. Okta OIN 'DataRails' app (2019) is SAML only in markup although its blurb mentions provisioning. No user-management API is documented (the public API uploads files).",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": null,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Professional",
+   "price_text": "Request Quote (2 users, 1 integration)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1"
+   ]
+  },
+  {
+   "name": "Premium",
+   "price_text": "Request Quote (5 users, 2 integrations)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2"
+   ]
+  },
+  {
+   "name": "Expert",
+   "price_text": "Request Quote (15 users + 50 viewers, 3 integrations)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c14"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c3",
+   "c4"
+  ],
+  "plan": "Contact Sales (quote-only)",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": "bearer",
+   "token_source": "Datarails Admin > Members & Groups > (your user) three-dot menu > SCIM Token; the page also shows the SCIM base URL. SCIM operations run as that user.",
+   "token_expiry": null,
+   "cite": [
+    "c3",
+    "c4",
+    "c5"
+   ],
+   "notes": "Method inferred as a token; the article calls it a 'SCIM token' / 'authentication token' without naming the header scheme."
+  },
+  "endpoints": {
+   "Users": null,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": []
+  },
+  "operations": {
+   "create": null,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": null,
+   "reactivate": null,
+   "delete": null,
+   "group_push": null,
+   "group_membership": null,
+   "cite": []
+  },
+  "deprovision": {
+   "action": null,
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [],
+   "notes": "In-product, Deactivate keeps permissions and data and can be reversed; Remove permanently removes the user (c10, c11). Which one SCIM triggers is not documented."
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": []
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SCIM operations execute under the admin user who generated the token.",
+    "cite": [
+     "c5"
+    ]
+   },
+   {
+    "text": "The Microsoft (Entra) sign-in app is OAuth/OpenID only and does not support SAML or provisioning.",
+    "cite": [
+     "c9"
+    ]
+   },
+   {
+    "text": "Only one active SAML configuration per organization.",
+    "cite": [
+     "c8"
+    ]
+   }
+  ],
+  "notes": "The only public SCIM documentation is the token-generation step inside the 'SAML and OKTA SSO Configuration' article (updated 2026-01-22). Version, base URL pattern, endpoints, attributes and deprovisioning behaviour are not documented. No plan gate is stated; pricing is quote-only."
+ },
+ "user_api": {
+  "available": null,
+  "cite": [],
+  "plan": null,
+  "api_tax": null,
+  "style": null,
+  "base_url": null,
+  "docs_url": null,
+  "auth": {
+   "methods": [],
+   "scopes": [],
+   "cite": []
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": []
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "The public Datarails API (Data Gateway Service, POST https://app.datarails.com/api/v1/fileboxes/upload_file with basic auth) uploads files to Fileboxes; no user-management API is documented in the 260 public help-centre articles."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/datarails/",
+   "cite": [
+    "c12"
+   ],
+   "notes": "OIN 'DataRails' (last updated Oct. 7 2019) marks only SAML (page markup), although the blurb says it 'handles user access, single sign-on and provisioning'. Datarails' own guide uses a custom SAML 2.0 app plus the SCIM token, so row idp.okta is via_generic."
+  },
+  "entra": {
+   "listed": null,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c9"
+   ],
+   "notes": "Not in the Entra SaaS tutorial index; Datarails' own guide adds its multi-tenant app (ID d57a5c0f-...) by consent; OAuth/OIDC only, no provisioning."
+  },
+  "google": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c7"
+   ],
+   "notes": "Datarails names Google Workspace as a SAML provider; Google catalogue not checked."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c7"
+   ],
+   "notes": "JumpCloud named as a SAML provider; SCIM with JumpCloud not documented."
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c3",
+   "c6"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.datarails.com/pricing/",
+   "title": "Pricing | Datarails",
+   "quote": "Get a custom quote tailored to your needs. Complete cost transparency, with no consultant fees—ever.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://www.datarails.com/pricing/",
+   "title": "Pricing | Datarails",
+   "quote": "Everything in Professional Spend (Cards, Bill Pay, Contracts) 5 Users 2 Integrations Premium support",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://support.datarails.com/api/v2/help_center/en-us/articles/19754261303324.json",
+   "title": "SAML and OKTA SSO Configuration",
+   "quote": "To enable SCIM-based provisioning, you must generate an authentication token associated with your user account.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.datarails.com/hc/en-us/articles/19754261303324-SAML-and-OKTA-SSO-Configuration"
+  },
+  {
+   "id": "c4",
+   "url": "https://support.datarails.com/api/v2/help_center/en-us/articles/19754261303324.json",
+   "title": "SAML and OKTA SSO Configuration",
+   "quote": "These will be required when configuring SCIM in your identity provider (e.g., Okta).",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.datarails.com/hc/en-us/articles/19754261303324-SAML-and-OKTA-SSO-Configuration"
+  },
+  {
+   "id": "c5",
+   "url": "https://support.datarails.com/api/v2/help_center/en-us/articles/19754261303324.json",
+   "title": "SAML and OKTA SSO Configuration",
+   "quote": "Locate your user account (SCIM operations will be executed under this user).",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.datarails.com/hc/en-us/articles/19754261303324-SAML-and-OKTA-SSO-Configuration"
+  },
+  {
+   "id": "c6",
+   "url": "https://support.datarails.com/api/v2/help_center/en-us/articles/20069618929820.json",
+   "title": "Configuring SAML-Based SSO in Datarails",
+   "quote": "Datarails supports Single Sign-On (SSO) using the SAML 2.0 protocol, enabling organizations to authenticate their users via enterprise-grade identity providers.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.datarails.com/hc/en-us/articles/20069618929820-Configuring-SAML-Based-SSO-in-Datarails"
+  },
+  {
+   "id": "c7",
+   "url": "https://support.datarails.com/api/v2/help_center/en-us/articles/20069618929820.json",
+   "title": "Configuring SAML-Based SSO in Datarails",
+   "quote": "The expansion of SAML support allows for integration with providers such as DUO, Google Workspace, JumpCloud, and more",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.datarails.com/hc/en-us/articles/20069618929820-Configuring-SAML-Based-SSO-in-Datarails"
+  },
+  {
+   "id": "c8",
+   "url": "https://support.datarails.com/api/v2/help_center/en-us/articles/20069618929820.json",
+   "title": "Configuring SAML-Based SSO in Datarails",
+   "quote": "Only one active SAML configuration is supported per organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.datarails.com/hc/en-us/articles/20069618929820-Configuring-SAML-Based-SSO-in-Datarails"
+  },
+  {
+   "id": "c9",
+   "url": "https://support.datarails.com/api/v2/help_center/en-us/articles/13816977103772.json",
+   "title": "Microsoft Azure SSO Configuration",
+   "quote": "Application does not support the SAML protocol. Application does not support provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.datarails.com/hc/en-us/articles/13816977103772-Microsoft-Azure-SSO-Configuration"
+  },
+  {
+   "id": "c10",
+   "url": "https://support.datarails.com/api/v2/help_center/en-us/articles/28171245433372.json",
+   "title": "New Permissions: User Management in Datarails",
+   "quote": "the user immediately loses access to Datarails. Their permissions and data are preserved and can be restored if they are reactivated.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.datarails.com/hc/en-us/articles/28171245433372-New-Permissions-User-Management-in-Datarails"
+  },
+  {
+   "id": "c11",
+   "url": "https://support.datarails.com/api/v2/help_center/en-us/articles/28171245433372.json",
+   "title": "New Permissions: User Management in Datarails",
+   "quote": "permanently removes the user from the workspace.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.datarails.com/hc/en-us/articles/28171245433372-New-Permissions-User-Management-in-Datarails"
+  },
+  {
+   "id": "c12",
+   "url": "https://www.okta.com/integrations/datarails/",
+   "title": "Integrate DataRails with Okta",
+   "quote": "Okta's DataRails integration handles user access, single sign-on and provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://support.datarails.com/api/v2/help_center/en-us/articles/5227882290065.json",
+   "title": "License Management",
+   "quote": "The license agreement affects the number of:",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.datarails.com/hc/en-us/articles/5227882290065-License-Management"
+  },
+  {
+   "id": "c14",
+   "url": "https://www.datarails.com/pricing/",
+   "title": "Pricing | Datarails",
+   "quote": "Everything in Premium Cash Management Month-End Close Receivables Desk 15 Users + 50 Viewers 3 Integrations Premium support",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://support.datarails.com/api/v2/help_center/en-us/articles/28171245433372.json",
+   "title": "New Permissions: User Management in Datarails",
+   "quote": "From here, Admins and Super Admins can invite new users, update roles, deactivate users, and organize members into groups.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.datarails.com/hc/en-us/articles/28171245433372-New-Permissions-User-Management-in-Datarails"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "Okta's DataRails OIN blurb says the integration 'handles user access, single sign-on and provisioning', but the page's functionality markup lists only SAML.",
+   "cite": [
+    "c12"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.datarails.com/pricing/",
+  "https://www.datarails.com/llms.txt",
+  "https://www.datarails.com/sitemap_index.xml",
+  "support.datarails.com (403 to plain requests; Zendesk help-centre API used)",
+  "support.datarails.com help-centre search API: scim (1), sso (11), okta (2), provisioning (3), azure (5), jumpcloud (1), onelogin (0), api (16)",
+  "All 260 public en-us help-centre articles scanned for 'scim' and 'provision'",
+  "https://www.okta.com/integrations/?search=datarails",
+  "entra-docs saas-apps toc.yml (no Datarails tutorial)"
+ ],
+ "open_questions": [
+  "Which plan includes SCIM and SAML SSO (quote-only pricing)?",
+  "SCIM version, base URL pattern, endpoints, supported attributes and group support are undocumented.",
+  "Does SCIM deprovisioning deactivate (data kept) or remove the user, and does it free a licence seat?",
+  "Is there an Okta OIN app with SCIM, or is SCIM only via a custom app?"
+ ]
+}

@@ -1,0 +1,556 @@
+{
+ "slug": "kyriba",
+ "vendor": "Kyriba",
+ "vendor_url": "https://www.kyriba.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Kyriba",
+  "slug": "kyriba",
+  "category": "Finance, Accounting & Spend",
+  "status": "none",
+  "scim_plan": "—",
+  "scim_price_text": "—",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales (no public pricing)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": null,
+  "idp": {
+   "okta": "third_party",
+   "entra": null,
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": false
+  },
+  "pricing_page_url": "https://www.kyriba.com/company/contact-us/",
+  "docs_url": "https://developer.kyriba.com/",
+  "evidence": "Kyriba publishes no SCIM endpoint: its developer portal lists 44 REST APIs including a Users API to \"create, read, update, and delete users\", and Okta provisioning exists only through a connector \"built and is maintained by Aquera\".",
+  "notes": "Quote-only treasury platform with no public pricing page (kyriba.com/pricing is a 404). None by absence: no SCIM in the developer portal (llms.txt and all 44 API skill files), and the help centre (community.kyriba.com) is login-only. Okta lists a Kyriba SWA app and a third-party 'Kyriba By Aquera' SCIM connector (Create, Update), which does not change status. Kyriba's own REST Users API (OAuth2 client credentials) can create, update and permanently delete users and manage user-group membership; no IdP connector by Kyriba was found.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": null,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Kyriba platform (quote-only)",
+   "price_text": "Contact Sales",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1"
+   ],
+   "notes": "scim false by absence from the public developer portal."
+  }
+ ],
+ "scim": {
+  "available": false,
+  "cite": [
+   "c2",
+   "c20"
+  ],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": null,
+   "token_source": null,
+   "token_expiry": null,
+   "cite": []
+  },
+  "endpoints": {
+   "Users": null,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": []
+  },
+  "operations": {
+   "create": null,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": null,
+   "reactivate": null,
+   "delete": null,
+   "group_push": null,
+   "group_membership": null,
+   "cite": []
+  },
+  "deprovision": {
+   "action": null,
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": []
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": []
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "No SCIM endpoint documented; the only SCIM in a catalogue is Aquera's third-party Okta connector."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c2",
+   "c4",
+   "c18"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://api.demo.kyriba.com/api (demo; production URL provided by your Kyriba administrator)",
+  "docs_url": "https://developer.kyriba.com/",
+  "auth": {
+   "methods": [
+    "oauth2"
+   ],
+   "scopes": [
+    "user-scope (Kyriba access permission on the API client)"
+   ],
+   "cite": [
+    "c3",
+    "c12"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c4",
+    "c5",
+    "c6",
+    "c7",
+    "c8",
+    "c9",
+    "c13",
+    "c14"
+   ],
+   "notes": "Users carry an 'active' flag and an accessProfile, but the docs do not describe deactivation or profile assignment as separate operations."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/v1/users",
+    "purpose": "List users",
+    "cite": [
+     "c5"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/users",
+    "purpose": "Create a new user",
+    "cite": [
+     "c6"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/users/{ref}",
+    "purpose": "Get a specific user",
+    "cite": [
+     "c7"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/v1/users/{ref}",
+    "purpose": "Update a specific user (full replace)",
+    "cite": [
+     "c8"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v1/users/{ref}",
+    "purpose": "Delete a user permanently",
+    "cite": [
+     "c9",
+     "c11"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/users/documented-fields",
+    "purpose": "List user fields",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/user-groups",
+    "purpose": "List user groups",
+    "cite": [
+     "c15"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/user-groups/{ref}/members",
+    "purpose": "Add users to a group",
+    "cite": [
+     "c13"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/user-groups/{ref}/members",
+    "purpose": "Remove users from a group",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/platform/referential/audit-trails/v1/audit-trails/{entityType}/{ref}",
+    "purpose": "List audit trail entries for an entity",
+    "cite": [
+     "c22"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": null,
+   "cite": [
+    "c16",
+    "c22"
+   ],
+   "notes": "Entity change-history (audit trail) API, not a sign-in log."
+  },
+  "rate_limits": {
+   "text": "50 calls per 30 seconds, one active request at a time; daily quota shared per customer environment.",
+   "cite": [
+    "c17"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "DELETE permanently removes the user and all associated settings.",
+    "cite": [
+     "c11"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": false,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": "third_party",
+   "url": "https://www.okta.com/integrations/kyriba-by-aquera/",
+   "cite": [
+    "c19",
+    "c20"
+   ],
+   "notes": "Two OIN entries: 'Kyriba' (SWA only) and 'Kyriba By Aquera' (SCIM, Create and Update checked), built and maintained by Aquera."
+  },
+  "entra": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "No Kyriba tutorial in the Microsoft Learn SaaS app index."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c2"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.kyriba.com/company/contact-us/",
+   "title": "Contact Us to Transform Your Liquidity Performance — Kyriba",
+   "quote": "Get in touch. Sales U.S.: +1 858 210 3560",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://developer.kyriba.com/llms.txt",
+   "title": "Kyriba developer portal (llms.txt)",
+   "quote": "Kyriba is a cloud-native treasury and finance platform. It provides REST APIs for cash and liquidity management, payments, FX risk, working capital finance (SCF/early payment), ERP connectivity, and event-driven webhooks.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.kyriba.com/"
+  },
+  {
+   "id": "c3",
+   "url": "https://developer.kyriba.com/llms.txt",
+   "title": "Kyriba developer portal (llms.txt)",
+   "quote": "Authentication: OAuth2 client credentials",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.kyriba.com/"
+  },
+  {
+   "id": "c4",
+   "url": "https://developer.kyriba.com/static/llm/skills/users/SKILL.md",
+   "title": "Kyriba API Skill: Users",
+   "quote": "Instructs AI agents how to create, read, update, and delete users in Kyriba.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.kyriba.com/"
+  },
+  {
+   "id": "c5",
+   "url": "https://developer.kyriba.com/static/llm/skills/users/SKILL.md",
+   "title": "Kyriba API Skill: Users",
+   "quote": "GET /v1/users List users",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.kyriba.com/"
+  },
+  {
+   "id": "c6",
+   "url": "https://developer.kyriba.com/static/llm/skills/users/SKILL.md",
+   "title": "Kyriba API Skill: Users",
+   "quote": "POST /v1/users Create a new user",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.kyriba.com/"
+  },
+  {
+   "id": "c7",
+   "url": "https://developer.kyriba.com/static/llm/skills/users/SKILL.md",
+   "title": "Kyriba API Skill: Users",
+   "quote": "GET /v1/users/{ref} Get a specific user",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.kyriba.com/"
+  },
+  {
+   "id": "c8",
+   "url": "https://developer.kyriba.com/static/llm/skills/users/SKILL.md",
+   "title": "Kyriba API Skill: Users",
+   "quote": "PUT /v1/users/{ref} Update a specific user",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.kyriba.com/"
+  },
+  {
+   "id": "c9",
+   "url": "https://developer.kyriba.com/static/llm/skills/users/SKILL.md",
+   "title": "Kyriba API Skill: Users",
+   "quote": "DELETE /v1/users/{ref} Delete a specific user",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.kyriba.com/"
+  },
+  {
+   "id": "c10",
+   "url": "https://developer.kyriba.com/static/llm/skills/users/SKILL.md",
+   "title": "Kyriba API Skill: Users",
+   "quote": "GET /v1/users/documented-fields List fields available for data import",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.kyriba.com/"
+  },
+  {
+   "id": "c11",
+   "url": "https://developer.kyriba.com/static/llm/skills/users/SKILL.md",
+   "title": "Kyriba API Skill: Users",
+   "quote": "DELETE permanently removes the user and all associated settings",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.kyriba.com/"
+  },
+  {
+   "id": "c12",
+   "url": "https://developer.kyriba.com/static/llm/skills/users/SKILL.md",
+   "title": "Kyriba API Skill: Users",
+   "quote": "This is a Kyriba access permission — not an OAuth scope parameter.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.kyriba.com/"
+  },
+  {
+   "id": "c13",
+   "url": "https://developer.kyriba.com/static/llm/skills/user-groups/SKILL.md",
+   "title": "Kyriba API Skill: User Groups",
+   "quote": "POST /api/v1/user-groups/{ref}/members Add user(s) to a group",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.kyriba.com/"
+  },
+  {
+   "id": "c14",
+   "url": "https://developer.kyriba.com/static/llm/skills/user-groups/SKILL.md",
+   "title": "Kyriba API Skill: User Groups",
+   "quote": "DELETE /api/v1/user-groups/{ref}/members Remove user(s) from a group",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.kyriba.com/"
+  },
+  {
+   "id": "c15",
+   "url": "https://developer.kyriba.com/static/llm/skills/user-groups/SKILL.md",
+   "title": "Kyriba API Skill: User Groups",
+   "quote": "GET /api/v1/user-groups List user groups",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.kyriba.com/"
+  },
+  {
+   "id": "c16",
+   "url": "https://developer.kyriba.com/static/llm/skills/audit-trail/SKILL.md",
+   "title": "Kyriba API Skill: Audit Trail",
+   "quote": "Instructs AI agents how to read the Kyriba audit trail. Provides full change history for any Kyriba entity",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.kyriba.com/"
+  },
+  {
+   "id": "c17",
+   "url": "https://developer.kyriba.com/static/llm/skills/kyriba-guide/SKILL.md",
+   "title": "Kyriba Integration Guide — Rate Limits, Best Practices & Patterns",
+   "quote": "Rate 50 calls / 30 seconds",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.kyriba.com/"
+  },
+  {
+   "id": "c18",
+   "url": "https://developer.kyriba.com/static/llm/skills/kyriba/SKILL.md",
+   "title": "Kyriba Meta Skill",
+   "quote": "Demo: auth https://auth.demo.kyriba.com · API https://api.demo.kyriba.com/api. Production: both provided by your Kyriba administrator.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.kyriba.com/"
+  },
+  {
+   "id": "c19",
+   "url": "https://www.okta.com/integrations/kyriba/",
+   "title": "Kyriba | Okta",
+   "quote": "Kyriba treasury management is a cloud-based software system. Provides scalable SaaS solutions for hassle-free financial operations",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c20",
+   "url": "https://www.okta.com/integrations/kyriba-by-aquera/",
+   "title": "Kyriba By Aquera | Okta",
+   "quote": "This connector is built and is maintained by Aquera.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c21",
+   "url": "https://developer.kyriba.com/static/llm/skills/users/SKILL.md",
+   "title": "Kyriba API Skill: Users",
+   "quote": "active true if the user account is active",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.kyriba.com/"
+  },
+  {
+   "id": "c22",
+   "url": "https://developer.kyriba.com/static/llm/skills/audit-trail/SKILL.md",
+   "title": "Kyriba API Skill: Audit Trail",
+   "quote": "GET /api/platform/referential/audit-trails/v1/audit-trails/{entityType}/{ref} List audit trail entries",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.kyriba.com/"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.kyriba.com/pricing/ (404)",
+  "https://www.kyriba.com/sitemap.xml (1,240 URLs; no SSO/SCIM pages)",
+  "https://www.kyriba.com/company/trust-center/",
+  "https://developer.kyriba.com/sitemap.xml",
+  "https://developer.kyriba.com/llms.txt and all 44 API skill files (no SCIM)",
+  "https://community.kyriba.com/ (help centre, login-only)",
+  "https://www.okta.com/integrations/?search=kyriba",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/toc.json"
+ ],
+ "open_questions": [
+  "Kyriba's SSO support and plan are not documented publicly (Okta lists only an SWA app).",
+  "Whether the Users API is included with every subscription is not stated.",
+  "Whether deactivating (active=false) via PUT frees a licence is not documented.",
+  "The help centre is login-only, so a private SCIM guide cannot be ruled out."
+ ]
+}

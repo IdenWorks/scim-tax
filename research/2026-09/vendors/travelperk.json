@@ -1,0 +1,752 @@
+{
+ "slug": "travelperk",
+ "vendor": "Perk (TravelPerk)",
+ "vendor_url": "https://www.perk.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Perk (TravelPerk)",
+  "slug": "travelperk",
+  "category": "Finance, Accounting & Spend",
+  "status": "free",
+  "scim_plan": "Premium",
+  "scim_price_text": "Premium: from $6/active user/mo + 3%/booking (Travel and Spend); $99/mo platform fee + 3%/booking (Travel only)",
+  "scim_price_per_user_mo": 6,
+  "team_plan": "Premium",
+  "team_price_text": "Premium: from $6/active user/mo + 3%/booking (Travel and Spend)",
+  "team_price_per_user_mo": 6,
+  "price_multiplier": 1.0,
+  "sso_plan": "Premium",
+  "sso_price_per_user_mo": 6,
+  "sso_required_for_scim": false,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": false
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.perk.com/pricing/",
+  "docs_url": "https://developers.perk.com/docs/using-the-scim-api",
+  "evidence": "Perk's developer docs say \"SCIM user provisioning is a Premium or Pro feature\", and the pricing page lists Premium (from $6 per active user/month) as the first paid tier, with SSO included.",
+  "notes": "TravelPerk rebranded to Perk; travelperk.com redirects to perk.com and the Okta/Entra gallery apps are still named TravelPerk. Starter ($0 platform fee, 5% per booking) is a travel-only free tier, so Premium is the team plan and SCIM has no upcharge over it. Pricing is per active user (anyone submitting or reviewing expenses in a month) plus booking fees, shown as 'Starting at'; billing period not stated. Travel-only plans use a flat platform fee (Premium $99/mo, Pro $299/mo). SCIM API is called with an admin API key; only one provisioning system (SCIM or an HR integration such as BambooHR) can run at a time; roles cannot be provisioned (everyone lands as traveler) and groups are not supported. Docs only document Okta and Azure/Entra apps; the generic SCIM API works for any client. Open API (REST) is Pro-only on the pricing page.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": null,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Starter (Travel only)",
+   "price_text": "No platform fee, $0/month + 5%/booking",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c4",
+    "c3",
+    "c10"
+   ],
+   "notes": "Only on the Travel tab. SSO absent from Starter feature list; SCIM is Premium or Pro."
+  },
+  {
+   "name": "Premium",
+   "price_text": "Starting at $6/month per active user + 3%/booking (Travel and Spend); Travel only: $99/month platform fee + 3%/booking",
+   "price_per_user_mo": 6,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": false,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c5",
+    "c3",
+    "c10",
+    "c7",
+    "c9"
+   ],
+   "notes": "Spend-only Premium is listed from $11/active user/month (Spend tab). user_api false refers to the Open API, which the pricing page excludes from Premium."
+  },
+  {
+   "name": "Pro",
+   "price_text": "Starting at $8/month per active user + 3%/booking (Travel and Spend); Travel only: $299/month platform fee + 3%/booking",
+   "price_per_user_mo": 8,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c6",
+    "c8",
+    "c10"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c10",
+   "c11",
+   "c12",
+   "c16",
+   "c27"
+  ],
+  "plan": "Premium",
+  "addon_price_text": null,
+  "sso_required": false,
+  "version": "2.0",
+  "base_url": "https://app.perk.com/api/v2/scim",
+  "auth": {
+   "method": "other",
+   "token_source": "Admin API key (Settings > Developer > Travel tools), sent as 'Authorization: apikey <key>'; Okta/Entra apps use an OAuth authorize flow signed in as an account admin or developer",
+   "token_expiry": null,
+   "cite": [
+    "c12",
+    "c16",
+    "c30",
+    "c39"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": false,
+   "ServiceProviderConfig": true,
+   "Schemas": true,
+   "ResourceTypes": true,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c12",
+    "c25"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": null,
+   "group_push": false,
+   "group_membership": false,
+   "cite": [
+    "c21",
+    "c22",
+    "c23",
+    "c24",
+    "c17",
+    "c25"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Inactive user disappears from the platform until reactivated; users with pending trips cannot be deactivated.",
+   "cite": [
+    "c17"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName",
+    "externalId"
+   ],
+   "cite": [
+    "c19"
+   ],
+   "notes": "Only the eq operator."
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": 100,
+   "cite": [
+    "c20"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "externalId",
+    "name.givenName",
+    "name.familyName",
+    "name.middleName",
+    "name.honorificPrefix",
+    "preferredLanguage",
+    "locale",
+    "active",
+    "title",
+    "emails",
+    "phoneNumbers[type eq \"work\"].value",
+    "groups (always empty)"
+   ],
+   "enterprise": [
+    "costCenter",
+    "manager",
+    "employeeNumber",
+    "company"
+   ],
+   "custom": {
+    "supported": true,
+    "how": "travelperk extension (gender, dateOfBirth, travelPolicy, invoiceProfiles, emergencyContact, approvers, countryOfResidence, travelDocuments, company, lineManagerEmail, uniqueId, costCenterCode); expense extension (policyId, creditor, legalEntityId, approvalThreshold, ignoreManagerInRequests); perkcustomfields extension for account-specific custom fields"
+   },
+   "group": [],
+   "cite": [
+    "c14",
+    "c25",
+    "c26",
+    "c35"
+   ],
+   "notes": "Full list from the developer User object model page; Entra tutorial lists the default mapped subset."
+  },
+  "roles": {
+   "supported": false,
+   "how": "All users are provisioned as travelers; role changes are manual or via CSV.",
+   "cite": [
+    "c13"
+   ]
+  },
+  "rate_limits": {
+   "text": "Throttled; docs advise exponential backoff on 429 responses. No numeric limit stated in the pages read.",
+   "cite": [
+    "c18"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Only one user provisioning system can run at a time: an HR integration such as BambooHR must be removed before SCIM runs.",
+    "cite": [
+     "c15",
+     "c28"
+    ]
+   },
+   {
+    "text": "Groups are not supported; the groups attribute is always empty.",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "text": "Users with pending trips cannot be deactivated.",
+    "cite": [
+     "c17"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": null,
+  "cite": [
+   "c41",
+   "c8"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": null,
+  "base_url": null,
+  "docs_url": null,
+  "auth": {
+   "methods": [],
+   "scopes": [],
+   "cite": []
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": []
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": false,
+   "events": [],
+   "cite": [
+    "c38"
+   ],
+   "notes": "Webhook events listed are invoice.issued and trip.created/updated only."
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "User management is done through the SCIM API (documented above). A changelog announces a read-only Users API for trip travellers, and the pricing page puts the 'Open API' on Pro only, but no current non-SCIM user endpoint reference was found."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/travelperk/",
+   "cite": [
+    "c32",
+    "c29",
+    "c31",
+    "c42"
+   ],
+   "notes": "OIN page marks SAML, SWA, SCIM, Create, Update and Deactivate as checked (read from page markup); Group Push not checked."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/travelperk-provisioning-tutorial",
+   "cite": [
+    "c33",
+    "c34",
+    "c36"
+   ]
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": true,
+  "other_sync": "HR integrations (e.g. BambooHR) can provision users instead of SCIM; only one provisioning system at a time",
+  "docs_public": true,
+  "cite": [
+   "c40",
+   "c28",
+   "c15"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.perk.com/pricing/",
+   "title": "Perk Plans & Pricing",
+   "quote": "Premium Starting at $6 /month per active user* + 3% / booking**",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://www.perk.com/pricing/",
+   "title": "Perk Plans & Pricing",
+   "quote": "Pro Starting at $8 /month per active user* + 3% / booking**",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://www.perk.com/pricing/",
+   "title": "Perk Plans & Pricing",
+   "quote": "With Premium, you get: 10 travel policies and approval processes Standard expense approval workflow Standard per diems 4 legal entities Spend Export File and ERP connectors Single sign-on (SSO)",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://www.perk.com/pricing/",
+   "title": "Perk Plans & Pricing",
+   "quote": "Starter No platform fee $0 /month +5% /booking*",
+   "accessed": "2026-10-05",
+   "page_url": null,
+   "interaction": "click the Travel tab"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.perk.com/pricing/",
+   "title": "Perk Plans & Pricing",
+   "quote": "Premium Platform fee $99 /month +3% /booking*",
+   "accessed": "2026-10-05",
+   "page_url": null,
+   "interaction": "click the Travel tab"
+  },
+  {
+   "id": "c6",
+   "url": "https://www.perk.com/pricing/",
+   "title": "Perk Plans & Pricing",
+   "quote": "Pro Platform fee $299 /month +3% /booking*",
+   "accessed": "2026-10-05",
+   "page_url": null,
+   "interaction": "click the Travel tab"
+  },
+  {
+   "id": "c7",
+   "url": "https://www.perk.com/pricing/",
+   "title": "Perk Plans & Pricing",
+   "quote": "All ERP connectors except SAP & Open API",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://www.perk.com/pricing/",
+   "title": "Perk Plans & Pricing",
+   "quote": "SAP connector and Open API",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://www.perk.com/pricing/",
+   "title": "Perk Plans & Pricing",
+   "quote": "*Active user = anyone submitting or reviewing one or more expenses in a given month.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://developers.perk.com/docs/using-the-scim-api.md",
+   "title": "Perk SCIM for user provisioning",
+   "quote": "SCIM user provisioning is a Premium or Pro feature.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.perk.com/docs/using-the-scim-api"
+  },
+  {
+   "id": "c11",
+   "url": "https://developers.perk.com/docs/using-the-scim-api.md",
+   "title": "Perk SCIM for user provisioning",
+   "quote": "Perk supports SCIM 2.0. This guide doesn't repeat the full specification",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.perk.com/docs/using-the-scim-api"
+  },
+  {
+   "id": "c12",
+   "url": "https://developers.perk.com/docs/using-the-scim-api.md",
+   "title": "Perk SCIM for user provisioning",
+   "quote": "All SCIM endpoints — `/Users`, `/Schemas`, `/ResourceTypes`, and `/ServiceProviderConfig` — are paths under this base URL. Authenticate each request with your API key in the `Authorization` header",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.perk.com/docs/using-the-scim-api"
+  },
+  {
+   "id": "c13",
+   "url": "https://developers.perk.com/docs/using-the-scim-api.md",
+   "title": "Perk SCIM for user provisioning",
+   "quote": "User roles cannot be provisioned automatically. All users are provisioned as travelers.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.perk.com/docs/using-the-scim-api"
+  },
+  {
+   "id": "c14",
+   "url": "https://developers.perk.com/docs/using-the-scim-api.md",
+   "title": "Perk SCIM for user provisioning",
+   "quote": "Perk carries the extra information that travel and spend need by adding three schema extensions on top of the core schema",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.perk.com/docs/using-the-scim-api"
+  },
+  {
+   "id": "c15",
+   "url": "https://developers.perk.com/docs/using-the-scim-api.md",
+   "title": "Perk SCIM for user provisioning",
+   "quote": "Only one user provisioning system can run at a time.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.perk.com/docs/using-the-scim-api"
+  },
+  {
+   "id": "c16",
+   "url": "https://developers.perk.com/page/creating-a-custom-app-to-manage-your-travelperk-user-base.md",
+   "title": "Building a custom SCIM integration to manage Perk users",
+   "quote": "To switch to production, change the base URL to `https://app.perk.com/api/v2/scim`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.perk.com/page/creating-a-custom-app-to-manage-your-travelperk-user-base"
+  },
+  {
+   "id": "c17",
+   "url": "https://developers.perk.com/page/creating-a-custom-app-to-manage-your-travelperk-user-base.md",
+   "title": "Building a custom SCIM integration to manage Perk users",
+   "quote": "An inactive user disappears from the platform until reactivated. You can't deactivate a user who has pending trips.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.perk.com/page/creating-a-custom-app-to-manage-your-travelperk-user-base"
+  },
+  {
+   "id": "c18",
+   "url": "https://developers.perk.com/page/creating-a-custom-app-to-manage-your-travelperk-user-base",
+   "title": "Building a custom SCIM integration to manage Perk users",
+   "quote": "so we recommend implementing exponential backoff. Trigger a retry when the API returns a 429 or 500 response.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c19",
+   "url": "https://developers.perk.com/reference/list-all-users.md",
+   "title": "List users (with filtering)",
+   "quote": "The attribute names must be either `userName` or `externalId`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.perk.com/reference/list-all-users"
+  },
+  {
+   "id": "c20",
+   "url": "https://developers.perk.com/reference/list-all-users.md",
+   "title": "List users (with filtering)",
+   "quote": "`count` — the maximum number of users to return per page. The default is 10 and the maximum is 100.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.perk.com/reference/list-all-users"
+  },
+  {
+   "id": "c21",
+   "url": "https://developers.perk.com/reference/create-a-new-user.md",
+   "title": "Create a new user",
+   "quote": "Creates a new user in Perk.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.perk.com/reference/create-a-new-user"
+  },
+  {
+   "id": "c22",
+   "url": "https://developers.perk.com/reference/update-a-user.md",
+   "title": "Update a user",
+   "quote": "Updates attributes for an existing user in Perk, overwriting values for specified attributes. Attributes that are not provided in the request remain unchanged.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.perk.com/reference/update-a-user"
+  },
+  {
+   "id": "c23",
+   "url": "https://developers.perk.com/reference/replace-a-user.md",
+   "title": "Replace a user",
+   "quote": "Replaces all of a user's attributes.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.perk.com/reference/replace-a-user"
+  },
+  {
+   "id": "c24",
+   "url": "https://developers.perk.com/reference/retrieve-a-user-1.md",
+   "title": "Get a user",
+   "quote": "Retrieves a user from Perk.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.perk.com/reference/retrieve-a-user-1"
+  },
+  {
+   "id": "c25",
+   "url": "https://developers.perk.com/reference/user-schema.md",
+   "title": "User object model",
+   "quote": "Perk doesn't currently support groups. Expect an empty list (`[]`) in the response.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.perk.com/reference/user-schema"
+  },
+  {
+   "id": "c26",
+   "url": "https://developers.perk.com/docs/provision-custom-fields.md",
+   "title": "Provision custom fields via SCIM",
+   "quote": "Custom fields are sent inside a dedicated SCIM schema extension:",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.perk.com/docs/provision-custom-fields"
+  },
+  {
+   "id": "c27",
+   "url": "https://developers.perk.com/docs/introduction-1.md",
+   "title": "Getting started with SCIM user provisioning",
+   "quote": "A Perk account with Premium plan",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.perk.com/docs/introduction-1"
+  },
+  {
+   "id": "c28",
+   "url": "https://developers.perk.com/docs/introduction-1.md",
+   "title": "Getting started with SCIM user provisioning",
+   "quote": "Perk supports other HR systems for user provisioning (for example, BambooHR).",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.perk.com/docs/introduction-1"
+  },
+  {
+   "id": "c29",
+   "url": "https://developers.perk.com/docs/okta-provisioning-with-scim.md",
+   "title": "Set up Okta SCIM provisioning",
+   "quote": "While the Okta app for Perk is still named TravelPerk, you use this app for user provisioning in Perk.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.perk.com/docs/okta-provisioning-with-scim"
+  },
+  {
+   "id": "c30",
+   "url": "https://developers.perk.com/docs/okta-provisioning-with-scim.md",
+   "title": "Set up Okta SCIM provisioning",
+   "quote": "Sign in to Perk as an account admin or developer user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.perk.com/docs/okta-provisioning-with-scim"
+  },
+  {
+   "id": "c31",
+   "url": "https://developers.perk.com/docs/okta-provisioning-with-scim.md",
+   "title": "Set up Okta SCIM provisioning",
+   "quote": "enable **Create Users**, **Update User Attributes**, and **Deactivate Users**",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.perk.com/docs/okta-provisioning-with-scim"
+  },
+  {
+   "id": "c32",
+   "url": "https://www.okta.com/integrations/travelperk/",
+   "title": "Integrate Perk with Okta",
+   "quote": "This app will help the administrator of OKTA users to auto provision user accounts to Travel Perk.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c33",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/travelperk-provisioning-tutorial",
+   "title": "Configure TravelPerk for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Remove users in TravelPerk when they don't require access anymore",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c34",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/travelperk-provisioning-tutorial",
+   "title": "Configure TravelPerk for automatic user provisioning with Microsoft Entra ID",
+   "quote": "A Premium/Pro plan",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c35",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/travelperk-provisioning-tutorial",
+   "title": "Configure TravelPerk for automatic user provisioning with Microsoft Entra ID",
+   "quote": "urn:ietf:params:scim:schemas:extension:travelperk:2.0:User:emergencyContact.phone",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c36",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/travelperk-tutorial",
+   "title": "Configure TravelPerk for Single sign-on with Microsoft Entra ID",
+   "quote": "In this article, you learn how to integrate TravelPerk with Microsoft Entra ID.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c37",
+   "url": "https://developers.perk.com/changelog/new-scim-user-provisioning-api-is-live.md",
+   "title": "SCIM User Provisioning API is now live!",
+   "quote": "Create Users * Update Users * Delete Users * (De)Activate Users",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.perk.com/changelog/new-scim-user-provisioning-api-is-live"
+  },
+  {
+   "id": "c38",
+   "url": "https://developers.perk.com/docs/topics-and-events.md",
+   "title": "Events and payloads",
+   "quote": "Webhooks are available for the following events:",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.perk.com/docs/topics-and-events"
+  },
+  {
+   "id": "c39",
+   "url": "https://developers.perk.com/reference/api-keys-1.md",
+   "title": "API keys",
+   "quote": "API keys have the same access rights as an admin user in your company.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.perk.com/reference/api-keys-1"
+  },
+  {
+   "id": "c40",
+   "url": "https://developers.perk.com/docs/using-the-scim-api.md",
+   "title": "Perk SCIM for user provisioning",
+   "quote": "must be done manually in Perk by",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.perk.com/docs/using-the-scim-api"
+  },
+  {
+   "id": "c41",
+   "url": "https://developers.perk.com/changelog/trips-api-and-users-api-is-now-available.md",
+   "title": "Trips API and Users API are now available!",
+   "quote": "you may use the Users API to obtain details of the travelers on your trips.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.perk.com/changelog/trips-api-and-users-api-is-now-available"
+  },
+  {
+   "id": "c42",
+   "url": "https://developers.perk.com/docs/okta-provisioning-with-scim.md",
+   "title": "Set up Okta SCIM provisioning",
+   "quote": "Option 1 — SAML 2.0** turns on single sign-on (SSO)",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.perk.com/docs/okta-provisioning-with-scim"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The 2019-era SCIM launch changelog lists 'Delete Users', but the current SCIM reference documents create, get, list, PUT and PATCH only, with deactivation via active=false; delete is recorded as null.",
+   "cite": [
+    "c37",
+    "c22",
+    "c17"
+   ]
+  },
+  {
+   "text": "The getting-started guide lists 'A Perk account with Premium plan' as the prerequisite while the SCIM overview and the Entra tutorial say Premium or Pro; consistent with Premium being the lowest SCIM tier.",
+   "cite": [
+    "c27",
+    "c10",
+    "c34"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.perk.com/pricing/ (curl; render.cjs ERR_TOO_MANY_RETRIES)",
+  "https://developers.perk.com/llms.txt",
+  "https://developers.perk.com/sitemap.xml",
+  "https://support.perk.com/hc/en-us (403 to curl)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/toc.json",
+  "https://www.okta.com/integrations/travelperk/"
+ ],
+ "open_questions": [
+  "Docs do not say whether deactivation frees a paid seat (pricing is per active user, i.e. anyone submitting or reviewing expenses in a month).",
+  "Whether SCIM DELETE is still supported (old changelog) is not in the current reference.",
+  "Google Workspace, OneLogin and JumpCloud catalogue apps not checked (support.perk.com and jumpcloud.com block plain requests).",
+  "No numeric SCIM rate limit or token expiry documented.",
+  "Pricing page does not state annual vs monthly billing."
+ ]
+}

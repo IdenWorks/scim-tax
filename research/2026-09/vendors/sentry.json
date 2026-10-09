@@ -1,0 +1,1075 @@
+{
+ "slug": "sentry",
+ "vendor": "Sentry",
+ "vendor_url": "https://sentry.io",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Sentry",
+  "slug": "sentry",
+  "category": "Developer Tools & CI/CD",
+  "status": "gated",
+  "scim_plan": "Business",
+  "scim_price_text": "Business: $80/mo (annual, org-level base price with default pre-paid data)",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Team",
+  "team_price_text": "Team: $26/mo (annual, org-level base price with default pre-paid data)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Business",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": "none",
+   "onelogin": "sso_only",
+   "jumpcloud": "native",
+   "generic": true
+  },
+  "pricing_page_url": "https://sentry.io/pricing/",
+  "docs_url": "https://docs.sentry.io/api/scim/",
+  "evidence": "Sentry's pricing page lists 'SAML + SCIM support' on the Business plan ($80/mo billed annually) and not on Team ($26/mo); the SCIM API docs say customers 'must be on a Business Plan with SAML2 Enabled'.",
+  "notes": "Status unchanged from June (gated, Business). Prices are org-level base subscriptions with usage-based data on top, not per user (Team includes unlimited users), so per-user fields and the multiplier are now null; June had stored $26 and $80 as per-user values and a 3.1x multiplier. June's monthly-billing Business price ($89/mo) was not re-verified (the page text shows the annual price). SAML SSO is also Business+; Google and GitHub sign-in on Team are not SAML. SCIM can only set `active` (false permanently deletes the org member) plus the custom sentryOrgRole; name fields are returned as N/A. Okta, Entra and JumpCloud catalogue apps provision; OneLogin is documented for SAML only.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Team",
+  "api_tax": false,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Developer",
+   "price_text": "Free, $0, limited to one user",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c8",
+    "c7"
+   ],
+   "notes": "Single-user plan."
+  },
+  {
+   "name": "Team",
+   "price_text": "$26/mo when billed annually with default pre-paid data",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c8",
+    "c7"
+   ],
+   "notes": "Org-level base price, unlimited users; Google and GitHub sign-in available (not SAML)."
+  },
+  {
+   "name": "Business",
+   "price_text": "$80/mo when billed annually with default pre-paid data",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c8",
+    "c7"
+   ],
+   "notes": "Org-level base price plus usage."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Custom (Let's talk)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c4",
+    "c8",
+    "c7"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c5",
+   "c7",
+   "c2",
+   "c35",
+   "c27"
+  ],
+  "plan": "Business",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://sentry.io/api/0/organizations/{organization_id_or_slug}/scim/v2",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Settings > Auth > General Settings > Enable SCIM; the SCIM Information panel shows the Auth Token and SCIM Base URL",
+   "token_expiry": null,
+   "cite": [
+    "c5",
+    "c16",
+    "c35"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c27",
+    "c37"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": null,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c29",
+    "c31",
+    "c34",
+    "c33",
+    "c36",
+    "c39",
+    "c40",
+    "c41",
+    "c42",
+    "c43",
+    "c15"
+   ],
+   "notes": "Deactivate (active=false) permanently deletes the org member. Only PATCH is documented; JumpCloud's Sentry page says PUT is not supported."
+  },
+  "deprovision": {
+   "action": "remove_from_org",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c33",
+    "c20",
+    "c17",
+    "c26"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [],
+   "cite": [
+    "c21"
+   ],
+   "notes": "Only the eq operator; filterable attributes not listed."
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": 100,
+   "cite": [
+    "c28"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "emails (primary, single; secondary emails not supported)",
+    "active",
+    "name.givenName (returned as N/A, not supported)",
+    "name.familyName (returned as N/A, not supported)"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": true,
+    "how": "sentryOrgRole (core-schema extension attribute) sets the organization-level role: billing, member, manager or admin"
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c29",
+    "c30",
+    "c32",
+    "c6",
+    "c18",
+    "c39",
+    "c41"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "sentryOrgRole attribute (Okta group attribute) maps to org-level roles; Owner cannot be provisioned; changing role requires deprovision and reprovision",
+   "cite": [
+    "c18",
+    "c19",
+    "c24",
+    "c30"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SCIM cannot set any user attribute other than active (and sentryOrgRole); passwords are not synced.",
+    "cite": [
+     "c6"
+    ]
+   },
+   {
+    "text": "name.givenName/familyName are not supported and returned as N/A; Okta Import Users is not supported.",
+    "cite": [
+     "c32",
+     "c22"
+    ]
+   },
+   {
+    "text": "Filtering supports only eq.",
+    "cite": [
+     "c21"
+    ]
+   },
+   {
+    "text": "GET Groups returns at most 10,000 members per group.",
+    "cite": [
+     "c38"
+    ]
+   },
+   {
+    "text": "Owner role cannot be provisioned through SCIM.",
+    "cite": [
+     "c19"
+    ]
+   },
+   {
+    "text": "Members and team memberships assigned by the IdP can only be changed through the IdP.",
+    "cite": [
+     "c23"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c1",
+   "c44",
+   "c51"
+  ],
+  "plan": "Team",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://sentry.io/api/0/",
+  "docs_url": "https://docs.sentry.io/api/",
+  "auth": {
+   "methods": [
+    "bearer_auth_token (internal integration)",
+    "user_auth_token",
+    "oauth2"
+   ],
+   "scopes": [
+    "member:read",
+    "member:write",
+    "member:admin",
+    "team:read",
+    "team:write",
+    "team:admin"
+   ],
+   "cite": [
+    "c44",
+    "c45",
+    "c46",
+    "c49",
+    "c27",
+    "c37"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": null,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c51",
+    "c52",
+    "c49",
+    "c53",
+    "c50",
+    "c55",
+    "c54",
+    "c60"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/api/0/organizations/{organization_id_or_slug}/members/",
+    "purpose": "List an organization's members",
+    "cite": [
+     "c51"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/0/organizations/{organization_id_or_slug}/members/{member_id}/",
+    "purpose": "Retrieve an organization member",
+    "cite": [
+     "c52"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/0/organizations/{organization_id_or_slug}/members/",
+    "purpose": "Add or invite a member (orgRole, teamRoles)",
+    "cite": [
+     "c49"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/0/organizations/{organization_id_or_slug}/members/{member_id}/",
+    "purpose": "Update a member's org-level and team-level roles",
+    "cite": [
+     "c53"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/0/organizations/{organization_id_or_slug}/members/{member_id}/",
+    "purpose": "Delete an organization member",
+    "cite": [
+     "c50"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/0/organizations/{organization_id_or_slug}/teams/",
+    "purpose": "List an organization's teams",
+    "cite": [
+     "c59"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/0/organizations/{organization_id_or_slug}/teams/",
+    "purpose": "Create a team",
+    "cite": [
+     "c55"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/0/teams/{organization_id_or_slug}/{team_id_or_slug}/",
+    "purpose": "Delete a team",
+    "cite": [
+     "c56"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/0/teams/{organization_id_or_slug}/{team_id_or_slug}/members/",
+    "purpose": "List a team's members",
+    "cite": [
+     "c58"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/0/organizations/{organization_id_or_slug}/members/{member_id}/teams/{team_id_or_slug}/",
+    "purpose": "Add a member to a team",
+    "cite": [
+     "c54"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/0/organizations/{organization_id_or_slug}/members/{member_id}/teams/{team_id_or_slug}/",
+    "purpose": "Remove a member from a team",
+    "cite": [
+     "c57"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/0/organizations/{organization_id_or_slug}/members/{member_id}/teams/{team_id_or_slug}/",
+    "purpose": "Update a member's team role",
+    "cite": [
+     "c60"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": false,
+   "events": [],
+   "cite": [
+    "c48"
+   ],
+   "notes": "Integration-platform webhook resources are installation, event_alert, issue, metric_alert, error, comment, seer and preprod_artifact; no member events."
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "Per caller and endpoint fixed-window requests-per-second limit plus a concurrent-request limit; exposed in X-Sentry-Rate-Limit-* headers. Numbers vary per endpoint.",
+   "cite": [
+    "c47"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Changing organization roles via the member PUT endpoint is restricted to user auth tokens.",
+    "cite": [
+     "c53"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/sentry/",
+   "cite": [
+    "c61",
+    "c15"
+   ],
+   "notes": "OIN page markup marks SAML, SWA, SCIM, Create, Update, Deactivate, Group Push and Group Linking as checked."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/sentry-provisioning-tutorial",
+   "cite": [
+    "c62",
+    "c63",
+    "c25"
+   ]
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "Sentry's 'Google Business App' is Google OAuth sign-in with domain restriction (Team+), not a Google Workspace SAML/provisioning app; no Google catalogue page checked."
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c12"
+   ],
+   "notes": "From Sentry's SSO docs (OneLogin catalogue page not loaded); Sentry documents SCIM setup only for Okta and Azure AD."
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://jumpcloud.com/support/integrate-with-sentry",
+   "cite": [
+    "c64",
+    "c65"
+   ]
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": "Google Workspace domain-restricted sign-in and GitHub Organizations sign-in (Team+)",
+  "docs_public": true,
+  "cite": [
+   "c11",
+   "c13",
+   "c5"
+  ]
+ },
+ "conflicts": [],
+ "searched": [
+  "https://sentry.io/pricing/",
+  "https://docs.sentry.io/llms.txt",
+  "https://docs.sentry.io/api/scim/",
+  "https://docs.sentry.io/organization/authentication/sso/",
+  "https://docs.sentry.io/api/organizations/",
+  "https://docs.sentry.io/api/teams/",
+  "https://docs.sentry.io/llms-full.txt (searched: audit log)"
+ ],
+ "open_questions": [
+  "Docs do not say whether a public audit-log API exists or which plan has audit logs.",
+  "SCIM token expiry is not documented (Entra calls it a long-lived bearer token).",
+  "Whether SCIM deprovisioning ends active sessions is not documented.",
+  "No ServiceProviderConfig/Schemas/ResourceTypes endpoints are documented.",
+  "OneLogin provisioning support not documented; OneLogin catalogue page not loaded.",
+  "Monthly-billing prices not captured from the page text."
+ ],
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://sentry.io/pricing/",
+   "title": "Plans and Pricing | Sentry",
+   "quote": "team Everything to monitor your application as it scales $26/mo $26/mo When billed annually with default pre-paid data Developer features + Unlimited users API & third-party integrations",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://sentry.io/pricing/",
+   "title": "Plans and Pricing | Sentry",
+   "quote": "business For teams that need more powerful debugging $80/mo $80/mo When billed annually with default pre-paid data Team features + Unlimited custom dashboards Advanced quota management SAML + SCIM support",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://sentry.io/pricing/",
+   "title": "Plans and Pricing | Sentry",
+   "quote": "developer For solo devs working on small projects Free $0 Limited to one user",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://sentry.io/pricing/",
+   "title": "Plans and Pricing | Sentry",
+   "quote": "enterprise For organizations with advanced needs Custom $0 Let's talk and see how we can serve you best. Business features +",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://docs.sentry.io/api/scim/",
+   "title": "SCIM | Sentry Docs",
+   "quote": "Sentry SaaS customers must be on a Business Plan with SAML2 Enabled. SCIM uses a bearer token for authentication that is created when SCIM is enabled.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://docs.sentry.io/api/scim.md",
+   "title": "SCIM | Sentry Docs",
+   "quote": "Sentry's SCIM API does not currently support syncing passwords, or setting any User attributes other than `active`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/api/scim/"
+  },
+  {
+   "id": "c7",
+   "url": "https://docs.sentry.io/organization/authentication/sso.md",
+   "title": "Single Sign-On (SSO) | Sentry Docs",
+   "quote": "This feature is available only if your organization is on a [Business or Enterprise plan](https://sentry.io/pricing/). This feature is not available on Trial plans.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/organization/authentication/sso/"
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.sentry.io/organization/authentication/sso.md",
+   "title": "Single Sign-On (SSO) | Sentry Docs",
+   "quote": "Sentry provides [SAML2 based authentication](https://en.wikipedia.org/wiki/SAML_2.0) which may be configured manually using the generic SAML2 provider",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/organization/authentication/sso/"
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.sentry.io/organization/authentication/sso.md",
+   "title": "Single Sign-On (SSO) | Sentry Docs",
+   "quote": "Sentry supports a subset of the specification for provisioning organization members and teams.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/organization/authentication/sso/"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.sentry.io/organization/authentication/sso.md",
+   "title": "Single Sign-On (SSO) | Sentry Docs",
+   "quote": "If your Provider is not listed here, SCIM may be supported as it is a common standard.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/organization/authentication/sso/"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.sentry.io/organization/authentication/sso.md",
+   "title": "Single Sign-On (SSO) | Sentry Docs",
+   "quote": "Every member who creates a new account via SSO will be given global organization access with a member role.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/organization/authentication/sso/"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.sentry.io/organization/authentication/sso.md",
+   "title": "Single Sign-On (SSO) | Sentry Docs",
+   "quote": "In your OneLogin dashboard, locate the Sentry app in the app catalog and add it to your organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/organization/authentication/sso/"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.sentry.io/organization/authentication/sso.md",
+   "title": "Single Sign-On (SSO) | Sentry Docs",
+   "quote": "Enabling the Google integration will ask you to authenticate against a Google Apps account. Once done, membership will be restricted to only members of the given Apps domain",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/organization/authentication/sso/"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.sentry.io/organization/authentication/sso/okta-sso/okta-scim.md",
+   "title": "Okta SCIM Provisioning | Sentry Docs",
+   "quote": "Configuration of SAML SSO for Okta",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/organization/authentication/sso/okta-sso/okta-scim/"
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.sentry.io/organization/authentication/sso/okta-sso/okta-scim.md",
+   "title": "Okta SCIM Provisioning | Sentry Docs",
+   "quote": "Create users * Deactivate users * Push groups * Import groups * Configure organization-level roles * Update user attributes (organization-level roles only)",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/organization/authentication/sso/okta-sso/okta-scim/"
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.sentry.io/organization/authentication/sso/okta-sso/okta-scim.md",
+   "title": "Okta SCIM Provisioning | Sentry Docs",
+   "quote": "Under General Settings select \"Enable SCIM\", then \"Save Settings\" Sentry will display \"SCIM Information\" that contains your Auth Token and SCIM Base URL.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/organization/authentication/sso/okta-sso/okta-scim/"
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.sentry.io/organization/authentication/sso/okta-sso/okta-scim.md",
+   "title": "Okta SCIM Provisioning | Sentry Docs",
+   "quote": "If a user gets un-assigned, they'll be removed from their organization in Sentry.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/organization/authentication/sso/okta-sso/okta-scim/"
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.sentry.io/organization/authentication/sso/okta-sso/okta-scim.md",
+   "title": "Okta SCIM Provisioning | Sentry Docs",
+   "quote": "Variable Name: `sentryOrgRole`",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/organization/authentication/sso/okta-sso/okta-scim/"
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.sentry.io/organization/authentication/sso/okta-sso/okta-scim.md",
+   "title": "Okta SCIM Provisioning | Sentry Docs",
+   "quote": "For security reasons, the \"Owner\" role cannot be provisioned through SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/organization/authentication/sso/okta-sso/okta-scim/"
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.sentry.io/organization/authentication/sso/okta-sso/okta-scim.md",
+   "title": "Okta SCIM Provisioning | Sentry Docs",
+   "quote": "If the `active` field is set to `false` for any given user, their organization member record gets deleted.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/organization/authentication/sso/okta-sso/okta-scim/"
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.sentry.io/organization/authentication/sso/okta-sso/okta-scim.md",
+   "title": "Okta SCIM Provisioning | Sentry Docs",
+   "quote": "The only filter operation supported for resources is `eq`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/organization/authentication/sso/okta-sso/okta-scim/"
+  },
+  {
+   "id": "c22",
+   "url": "https://docs.sentry.io/organization/authentication/sso/okta-sso/okta-scim.md",
+   "title": "Okta SCIM Provisioning | Sentry Docs",
+   "quote": "The Import Users feature isn't currently supported because Sentry's SCIM API doesn't support the user `name` attribute fields: `firstName` and `lastName` at this time.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/organization/authentication/sso/okta-sso/okta-scim/"
+  },
+  {
+   "id": "c23",
+   "url": "https://docs.sentry.io/organization/authentication/sso/okta-sso/okta-scim.md",
+   "title": "Okta SCIM Provisioning | Sentry Docs",
+   "quote": "If you use Okta to assign organization membership, you'll be unable to make membership changes through Sentry",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/organization/authentication/sso/okta-sso/okta-scim/"
+  },
+  {
+   "id": "c24",
+   "url": "https://docs.sentry.io/organization/authentication/sso/okta-sso/okta-scim.md",
+   "title": "Okta SCIM Provisioning | Sentry Docs",
+   "quote": "To change a user's organization-level role, you will need to deprovision and then reprovision them with the new role.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/organization/authentication/sso/okta-sso/okta-scim/"
+  },
+  {
+   "id": "c25",
+   "url": "https://docs.sentry.io/organization/authentication/sso/azure-sso.md",
+   "title": "Azure Active Directory SSO | Sentry Docs",
+   "quote": "You'll need to have Azure SSO set up and configured for your organization already. Sentry supports User and Group provisioning with Azure.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/organization/authentication/sso/azure-sso/"
+  },
+  {
+   "id": "c26",
+   "url": "https://docs.sentry.io/organization/authentication/sso/azure-sso.md",
+   "title": "Azure Active Directory SSO | Sentry Docs",
+   "quote": "When a user is un-assigned, their membership in Sentry will be deleted.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/organization/authentication/sso/azure-sso/"
+  },
+  {
+   "id": "c27",
+   "url": "https://docs.sentry.io/api/scim/list-an-organizations-scim-members.md",
+   "title": "List an Organization's SCIM Members | Sentry Docs",
+   "quote": "GET /api/0/organizations/{organization\\_id\\_or\\_slug}/scim/v2/Users",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/api/scim/list-an-organizations-scim-members/"
+  },
+  {
+   "id": "c28",
+   "url": "https://docs.sentry.io/api/scim/list-an-organizations-scim-members.md",
+   "title": "List an Organization's SCIM Members | Sentry Docs",
+   "quote": "The maximum number of results the query should return, maximum of 100.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/api/scim/list-an-organizations-scim-members/"
+  },
+  {
+   "id": "c29",
+   "url": "https://docs.sentry.io/api/scim/provision-a-new-organization-member.md",
+   "title": "Provision a New Organization Member | Sentry Docs",
+   "quote": "POST /api/0/organizations/{organization\\_id\\_or\\_slug}/scim/v2/Users Create a new Organization Member via a SCIM Users POST Request. Note that this API does not support setting secondary emails.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/api/scim/provision-a-new-organization-member/"
+  },
+  {
+   "id": "c30",
+   "url": "https://docs.sentry.io/api/scim/provision-a-new-organization-member.md",
+   "title": "Provision a New Organization Member | Sentry Docs",
+   "quote": "The organization role of the member. If unspecified, this will be set to the organization's default role.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/api/scim/provision-a-new-organization-member/"
+  },
+  {
+   "id": "c31",
+   "url": "https://docs.sentry.io/api/scim/query-an-individual-organization-member.md",
+   "title": "Query an Individual Organization Member | Sentry Docs",
+   "quote": "GET /api/0/organizations/{organization\\_id\\_or\\_slug}/scim/v2/Users/{member\\_id}",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/api/scim/query-an-individual-organization-member/"
+  },
+  {
+   "id": "c32",
+   "url": "https://docs.sentry.io/api/scim/query-an-individual-organization-member.md",
+   "title": "Query an Individual Organization Member | Sentry Docs",
+   "quote": "Sentry's SCIM API does not currently support these fields but returns them for compatibility purposes.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/api/scim/query-an-individual-organization-member/"
+  },
+  {
+   "id": "c33",
+   "url": "https://docs.sentry.io/api/scim/update-an-organization-members-attributes.md",
+   "title": "Update an Organization Member's Attributes | Sentry Docs",
+   "quote": "Currently, the only valid operation is setting a member's `active` attribute to false, after which the member will be permanently deleted.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/api/scim/update-an-organization-members-attributes/"
+  },
+  {
+   "id": "c34",
+   "url": "https://docs.sentry.io/api/scim/update-an-organization-members-attributes.md",
+   "title": "Update an Organization Member's Attributes | Sentry Docs",
+   "quote": "PATCH /api/0/organizations/{organization\\_id\\_or\\_slug}/scim/v2/Users/{member\\_id}",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/api/scim/update-an-organization-members-attributes/"
+  },
+  {
+   "id": "c35",
+   "url": "https://docs.sentry.io/api/scim/update-an-organization-members-attributes.md",
+   "title": "Update an Organization Member's Attributes | Sentry Docs",
+   "quote": "curl https://sentry.io/api/0/organizations/{organization_id_or_slug}/scim/v2/Users/{member_id} \\ -H 'Authorization: Bearer <auth_token>'",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/api/scim/update-an-organization-members-attributes/"
+  },
+  {
+   "id": "c36",
+   "url": "https://docs.sentry.io/api/scim/delete-an-organization-member-via-scim.md",
+   "title": "Delete an Organization Member via SCIM | Sentry Docs",
+   "quote": "DELETE /api/0/organizations/{organization\\_id\\_or\\_slug}/scim/v2/Users/{member\\_id}",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/api/scim/delete-an-organization-member-via-scim/"
+  },
+  {
+   "id": "c37",
+   "url": "https://docs.sentry.io/api/scim/list-an-organizations-paginated-teams.md",
+   "title": "List an Organization's Paginated Teams | Sentry Docs",
+   "quote": "GET /api/0/organizations/{organization\\_id\\_or\\_slug}/scim/v2/Groups",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/api/scim/list-an-organizations-paginated-teams/"
+  },
+  {
+   "id": "c38",
+   "url": "https://docs.sentry.io/api/scim/list-an-organizations-paginated-teams.md",
+   "title": "List an Organization's Paginated Teams | Sentry Docs",
+   "quote": "Note that the members field will only contain up to 10,000 members.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/api/scim/list-an-organizations-paginated-teams/"
+  },
+  {
+   "id": "c39",
+   "url": "https://docs.sentry.io/api/scim/provision-a-new-team.md",
+   "title": "Provision a New Team | Sentry Docs",
+   "quote": "POST /api/0/organizations/{organization\\_id\\_or\\_slug}/scim/v2/Groups",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/api/scim/provision-a-new-team/"
+  },
+  {
+   "id": "c40",
+   "url": "https://docs.sentry.io/api/scim/update-a-teams-attributes.md",
+   "title": "Update a Team's Attributes | Sentry Docs",
+   "quote": "PATCH /api/0/organizations/{organization\\_id\\_or\\_slug}/scim/v2/Groups/{team\\_id\\_or\\_slug}",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/api/scim/update-a-teams-attributes/"
+  },
+  {
+   "id": "c41",
+   "url": "https://docs.sentry.io/api/scim/update-a-teams-attributes.md",
+   "title": "Update a Team's Attributes | Sentry Docs",
+   "quote": "Adding a member to a team",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/api/scim/update-a-teams-attributes/"
+  },
+  {
+   "id": "c42",
+   "url": "https://docs.sentry.io/api/scim/delete-an-individual-team.md",
+   "title": "Delete an Individual Team | Sentry Docs",
+   "quote": "DELETE /api/0/organizations/{organization\\_id\\_or\\_slug}/scim/v2/Groups/{team\\_id\\_or\\_slug}",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/api/scim/delete-an-individual-team/"
+  },
+  {
+   "id": "c43",
+   "url": "https://docs.sentry.io/api/scim/query-an-individual-team.md",
+   "title": "Query an Individual Team | Sentry Docs",
+   "quote": "GET /api/0/organizations/{organization\\_id\\_or\\_slug}/scim/v2/Groups/{team\\_id\\_or\\_slug}",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/api/scim/query-an-individual-team/"
+  },
+  {
+   "id": "c44",
+   "url": "https://docs.sentry.io/api/auth.md",
+   "title": "Authentication | Sentry Docs",
+   "quote": "Authentication tokens are passed using an auth header, and are used to authenticate as a user or organization account with the API.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/api/auth/"
+  },
+  {
+   "id": "c45",
+   "url": "https://docs.sentry.io/api/auth.md",
+   "title": "Authentication | Sentry Docs",
+   "quote": "You can create authentication tokens within Sentry by [creating an internal integration]",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/api/auth/"
+  },
+  {
+   "id": "c46",
+   "url": "https://docs.sentry.io/api/auth.md",
+   "title": "Authentication | Sentry Docs",
+   "quote": "Access tokens expire after 30 days. Use the refresh token to obtain new tokens",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/api/auth/"
+  },
+  {
+   "id": "c47",
+   "url": "https://docs.sentry.io/api/ratelimits.md",
+   "title": "Rate Limits | Sentry Docs",
+   "quote": "Sentry rate limits every API request made to prevent abuse and resource overuse. The limit is applied to each unique combination of caller and endpoint.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/api/ratelimits/"
+  },
+  {
+   "id": "c48",
+   "url": "https://docs.sentry.io/organization/integrations/integration-platform/webhooks.md",
+   "title": "Webhooks | Sentry Docs",
+   "quote": "This header lets you know which resource from the list below triggered an action: * `installation` * `event_alert` * `issue` * `metric_alert` * `error` * `comment` * `seer` * `preprod_artifact`",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/organization/integrations/integration-platform/webhooks/"
+  },
+  {
+   "id": "c49",
+   "url": "https://docs.sentry.io/api/organizations/add-a-member-to-an-organization.md",
+   "title": "Add a Member to an Organization | Sentry Docs",
+   "quote": "POST /api/0/organizations/{organization\\_id\\_or\\_slug}/members/ Add or invite a member to an organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/api/organizations/add-a-member-to-an-organization/"
+  },
+  {
+   "id": "c50",
+   "url": "https://docs.sentry.io/api/organizations/delete-an-organization-member.md",
+   "title": "Delete an Organization Member | Sentry Docs",
+   "quote": "DELETE /api/0/organizations/{organization\\_id\\_or\\_slug}/members/{member\\_id}/",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/api/organizations/delete-an-organization-member/"
+  },
+  {
+   "id": "c51",
+   "url": "https://docs.sentry.io/api/organizations/list-an-organizations-members.md",
+   "title": "List an Organization's Members | Sentry Docs",
+   "quote": "GET /api/0/organizations/{organization\\_id\\_or\\_slug}/members/",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/api/organizations/list-an-organizations-members/"
+  },
+  {
+   "id": "c52",
+   "url": "https://docs.sentry.io/api/organizations/retrieve-an-organization-member.md",
+   "title": "Retrieve an Organization Member | Sentry Docs",
+   "quote": "GET /api/0/organizations/{organization\\_id\\_or\\_slug}/members/{member\\_id}/",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/api/organizations/retrieve-an-organization-member/"
+  },
+  {
+   "id": "c53",
+   "url": "https://docs.sentry.io/api/organizations/update-an-organization-members-roles.md",
+   "title": "Update an Organization Member's Roles | Sentry Docs",
+   "quote": "PUT /api/0/organizations/{organization\\_id\\_or\\_slug}/members/{member\\_id}/ Update a member's [organization-level]",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/api/organizations/update-an-organization-members-roles/"
+  },
+  {
+   "id": "c54",
+   "url": "https://docs.sentry.io/api/teams/add-an-organization-member-to-a-team.md",
+   "title": "Add an Organization Member to a Team | Sentry Docs",
+   "quote": "POST /api/0/organizations/{organization\\_id\\_or\\_slug}/members/{member\\_id}/teams/{team\\_id\\_or\\_slug}/",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/api/teams/add-an-organization-member-to-a-team/"
+  },
+  {
+   "id": "c55",
+   "url": "https://docs.sentry.io/api/teams/create-a-new-team.md",
+   "title": "Create a New Team | Sentry Docs",
+   "quote": "POST /api/0/organizations/{organization\\_id\\_or\\_slug}/teams/",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/api/teams/create-a-new-team/"
+  },
+  {
+   "id": "c56",
+   "url": "https://docs.sentry.io/api/teams/delete-a-team.md",
+   "title": "Delete a Team | Sentry Docs",
+   "quote": "DELETE /api/0/teams/{organization\\_id\\_or\\_slug}/{team\\_id\\_or\\_slug}/",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/api/teams/delete-a-team/"
+  },
+  {
+   "id": "c57",
+   "url": "https://docs.sentry.io/api/teams/delete-an-organization-member-from-a-team.md",
+   "title": "Delete an Organization Member from a Team | Sentry Docs",
+   "quote": "DELETE /api/0/organizations/{organization\\_id\\_or\\_slug}/members/{member\\_id}/teams/{team\\_id\\_or\\_slug}/",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/api/teams/delete-an-organization-member-from-a-team/"
+  },
+  {
+   "id": "c58",
+   "url": "https://docs.sentry.io/api/teams/list-a-teams-members.md",
+   "title": "List a Team's Members | Sentry Docs",
+   "quote": "GET /api/0/teams/{organization\\_id\\_or\\_slug}/{team\\_id\\_or\\_slug}/members/",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/api/teams/list-a-teams-members/"
+  },
+  {
+   "id": "c59",
+   "url": "https://docs.sentry.io/api/teams/list-an-organizations-teams.md",
+   "title": "List an Organization's Teams | Sentry Docs",
+   "quote": "GET /api/0/organizations/{organization\\_id\\_or\\_slug}/teams/",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/api/teams/list-an-organizations-teams/"
+  },
+  {
+   "id": "c60",
+   "url": "https://docs.sentry.io/api/teams/update-an-organization-members-team-role.md",
+   "title": "Update an Organization Member's Team Role | Sentry Docs",
+   "quote": "PUT /api/0/organizations/{organization\\_id\\_or\\_slug}/members/{member\\_id}/teams/{team\\_id\\_or\\_slug}/",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sentry.io/api/teams/update-an-organization-members-team-role/"
+  },
+  {
+   "id": "c61",
+   "url": "https://www.okta.com/integrations/sentry/",
+   "title": "Integrate Sentry with Okta",
+   "quote": "Okta's Sentry integration allows end-users to authenticate Sentry with SAML, provision users and groups, automate user onboarding and offboarding processes, and sync Okta groups to Sentry teams automatically.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c62",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/sentry-provisioning-tutorial",
+   "title": "Configure Sentry for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Create users in Sentry. Remove users in Sentry when they don't require access anymore. Keep user attributes synchronized between Microsoft Entra ID and Sentry. Provision groups and group memberships in Sentry. Single sign-on to Sentry (recommended).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c63",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/sentry-provisioning-tutorial",
+   "title": "Configure Sentry for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Long lived bearer token authentication supported.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c64",
+   "url": "https://jumpcloud.com/support/integrate-with-sentry",
+   "title": "Integrate with Sentry | JumpCloud Documentation",
+   "quote": "Automatically provision, update and deprovision users and groups in Sentry from JumpCloud using the SCIM integration.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c65",
+   "url": "https://jumpcloud.com/support/integrate-with-sentry",
+   "title": "Integrate with Sentry | JumpCloud Documentation",
+   "quote": "Sentry does not support PUT method",
+   "accessed": "2026-10-05"
+  }
+ ]
+}

@@ -1,0 +1,1074 @@
+{
+ "slug": "contrast-security",
+ "vendor": "Contrast Security",
+ "vendor_url": "https://www.contrastsecurity.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Contrast Security",
+  "slug": "contrast-security",
+  "category": "Security & Identity",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Pro",
+  "team_price_text": "Pro (CVE Shield): $750/mo billed annually ($9,000/yr), up to 5 users",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Enterprise",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.contrastsecurity.com/pricing-and-packaging",
+  "docs_url": "https://docs.contrastsecurity.com/en/microsoft-entra-id-scim-2-0.html",
+  "evidence": "The pricing page puts 'Enterprise access controls: RBAC, SAML SSO' only on the quote-based Enterprise tier, and Contrast's SCIM 2.0 docs require RBAC enforced and SSO set up first, with SCIM enabled by Customer Success.",
+  "notes": "New row. The public pricing page covers the new CVE Shield product: Free (single user), Pro ($750/month billed annually, flat, up to 5 users, 'available soon') and Enterprise (custom quote, consumption pricing by production hosts) with RBAC and SAML SSO. The core Contrast platform (Assess, ADR, Scan) is sold by quote. SCIM 2.0 (SaaS only, not on-premises TeamServer) needs RBAC enforced and SSO configured, and Customer Success or Support must enable it, so the gate is Enterprise / Contact Sales; the plan comes from combining the pricing page (RBAC and SSO on Enterprise) with the docs, hence confidence medium. Okta setup uses Okta's generic 'SCIM 2.0 Test App (OAuth Bearer Token)' and Entra a non-gallery app (the Entra gallery app is SAML SSO with JIT only), so both are via_generic. Pro is flat priced, so per-user fields are null.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Free (CVE Shield)",
+   "price_text": "$0, 2 applications, single user",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c5"
+   ],
+   "notes": "sso false: SAML SSO is listed only under Enterprise."
+  },
+  {
+   "name": "Pro (CVE Shield)",
+   "price_text": "$750/month billed annually ($9,000/year), up to 5 users; 'to be released soon'",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c4",
+    "c1"
+   ],
+   "notes": "Flat price for about 8 applications (up to 50 services)."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Talk to sales for a quote (annual consumption pricing by production hosts)",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c6",
+    "c7",
+    "c9",
+    "c13"
+   ],
+   "notes": "SCIM inferred: requires RBAC and SSO (Enterprise access controls) and must be enabled by Contrast."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c8",
+   "c9",
+   "c12",
+   "c13",
+   "c14",
+   "c18",
+   "c34"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://<your-contrast-host>/scim/v2",
+  "auth": {
+   "method": "oauth2",
+   "token_source": "Register an OAuth2 client (up to 3 per organisation) via POST /api/v4/organizations/{organizationUuid}/oauth2/configuration, then use client credentials at https://<your-contrast-host>/scim/oauth2/token (scope 'read write').",
+   "token_expiry": "60 minutes by default; tokenTtlMinutes up to 388800 (9 months) for Okta's static bearer token",
+   "cite": [
+    "c15",
+    "c16",
+    "c23",
+    "c28",
+    "c32",
+    "c40"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": false,
+   "Schemas": true,
+   "ResourceTypes": false,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c35",
+    "c43",
+    "c38",
+    "c10",
+    "c11"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c10",
+    "c11",
+    "c39",
+    "c41",
+    "c42",
+    "c30",
+    "c31",
+    "c19"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Okta unassignment deactivates the user (account kept). Entra deactivates immediately and then deletes the account after Entra's 30-day soft-delete window. A disabled user cannot log in or use API keys; settings are kept and reapplied on re-enable.",
+   "cite": [
+    "c29",
+    "c30",
+    "c22",
+    "c64"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName (eq)",
+    "displayName (eq, Groups)"
+   ],
+   "cite": [
+    "c36"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c38",
+    "c45"
+   ],
+   "notes": "startIndex/count, default count 100; no maximum stated."
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "name.formatted",
+    "name.middleName",
+    "name.honorificPrefix",
+    "name.honorificSuffix",
+    "displayName",
+    "emails[type eq \"work\"].value",
+    "emails.primary",
+    "active",
+    "externalId"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "displayName",
+    "externalId",
+    "members"
+   ],
+   "cite": [
+    "c44",
+    "c46",
+    "c20",
+    "c33"
+   ]
+  },
+  "roles": {
+   "supported": false,
+   "how": "No role attribute; SCIM groups become User Access Groups with no default roles, and an admin assigns roles to each group in the Contrast UI.",
+   "cite": [
+    "c21",
+    "c37"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Login email (userName) is immutable; UPN changes are acknowledged but not applied.",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "text": "SCIM-provisioned groups get no role assignments until an admin adds roles manually.",
+    "cite": [
+     "c21"
+    ]
+   },
+   {
+    "text": "Group membership changes take about 60 seconds to apply because of caching.",
+    "cite": [
+     "c24"
+    ]
+   },
+   {
+    "text": "Okta uses a static bearer token (max 9 months) that does not auto-refresh; provisioning stops silently when it expires.",
+    "cite": [
+     "c28",
+     "c32"
+    ]
+   },
+   {
+    "text": "Entra must use a separate non-gallery Enterprise Application for provisioning (the gallery app does SSO only).",
+    "cite": [
+     "c17",
+     "c25"
+    ]
+   },
+   {
+    "text": "/ServiceProviderConfig and /ResourceTypes are not supported.",
+    "cite": [
+     "c35"
+    ]
+   },
+   {
+    "text": "Not available for on-premises TeamServer.",
+    "cite": [
+     "c12"
+    ]
+   }
+  ],
+  "notes": "Available for Contrast SaaS organisations only (Classic and Northstar), not on-premises TeamServer. Must be enabled by Customer Success or Support; RBAC must be enforced."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c47",
+   "c48",
+   "c49"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://<your-contrast-host>/api/v4",
+  "docs_url": "https://api.contrastsecurity.com/",
+  "auth": {
+   "methods": [
+    "api_key"
+   ],
+   "scopes": [],
+   "cite": [
+    "c54"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": true,
+   "reactivate_user": true,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c49",
+    "c50",
+    "c51",
+    "c52",
+    "c53",
+    "c55",
+    "c56",
+    "c57",
+    "c58"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/api/v4/organizations/{organizationId}/users",
+    "purpose": "Find users",
+    "cite": [
+     "c53"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v4/organizations/{organizationId}/users",
+    "purpose": "Create user",
+    "cite": [
+     "c49"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v4/organizations/{organizationId}/users/{userId}",
+    "purpose": "Retrieve user by id",
+    "cite": [
+     "c58"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/v4/organizations/{organizationId}/users/{userId}",
+    "purpose": "Update user by id",
+    "cite": [
+     "c57"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v4/organizations/{organizationId}/users/{userId}",
+    "purpose": "Delete user by id",
+    "cite": [
+     "c51"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/v4/organizations/{organizationId}/users/{userId}/status",
+    "purpose": "Enable or disable a user",
+    "cite": [
+     "c50"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v4/organizations/{organizationId}/roles",
+    "purpose": "Find roles",
+    "cite": [
+     "c59"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v4/organizations/{organizationId}/user-access-groups",
+    "purpose": "Create user access group",
+    "cite": [
+     "c55"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/v4/organizations/{organizationId}/user-access-groups/{userAccessGroupId}/users/{userId}",
+    "purpose": "Add user to user access group",
+    "cite": [
+     "c56"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/v4/organizations/{organizationId}/user-access-groups/{userAccessGroupId}/roles/{roleId}",
+    "purpose": "Assign role to user access group",
+    "cite": [
+     "c52"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v4/organizations/{organizationId}/audit-logs",
+    "purpose": "Find audit logs",
+    "cite": [
+     "c60"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": null,
+   "cite": [
+    "c60"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "Access Control API v4 (hosted customers only) manages users, roles, user access groups and resource groups. Requests use an API-Key header plus an Authorization header."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": false,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c68",
+    "c27"
+   ],
+   "notes": "No Contrast app in the OIN; Contrast documents provisioning through Okta's generic SCIM 2.0 Test App (OAuth Bearer Token)."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": "idp",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/contrast-security-tutorial",
+   "cite": [
+    "c66",
+    "c67",
+    "c17"
+   ],
+   "notes": "Gallery app is SAML SSO with JIT; SCIM provisioning uses a separate non-gallery app per Contrast's docs."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": "LDAP / Active Directory (on-premises TeamServer); SAML group attribute (contrast_groups) adds and removes group membership at login",
+  "docs_public": true,
+  "cite": [
+   "c61",
+   "c63",
+   "c66",
+   "c65"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.contrastsecurity.com/pricing-and-packaging",
+   "title": "Contrast Security Pricing and Packaging",
+   "quote": "Enterprise access controls: RBAC, SAML SSO",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://www.contrastsecurity.com/pricing-and-packaging",
+   "title": "Contrast Security Pricing and Packaging",
+   "quote": "Talk to sales for a quote",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://www.contrastsecurity.com/pricing-and-packaging",
+   "title": "Contrast Security Pricing and Packaging",
+   "quote": "Pro is a flat annual price, starting at $750/month billed annually ($9,000/year), and will be available soon.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://www.contrastsecurity.com/pricing-and-packaging",
+   "title": "Contrast Security Pricing and Packaging",
+   "quote": "Up to 5 users",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://www.contrastsecurity.com/pricing-and-packaging",
+   "title": "Contrast Security Pricing and Packaging",
+   "quote": "Single user",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://www.contrastsecurity.com/pricing-and-packaging",
+   "title": "Contrast Security Pricing and Packaging",
+   "quote": "Unlimited users",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://www.contrastsecurity.com/pricing-and-packaging",
+   "title": "Contrast Security Pricing and Packaging",
+   "quote": "Enterprise moves to annual consumption pricing based on production hosts with a custom quote from sales.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.contrastsecurity.com/en/microsoft-entra-id-scim-2-0.html",
+   "title": "Configure SCIM 2.0 provisioning with Microsoft Entra ID",
+   "quote": "The Contrast SCIM 2.0 API supports user and group provisioning from Microsoft Entra ID (formerly Azure AD).",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.contrastsecurity.com/en/microsoft-entra-id-scim-2-0.html",
+   "title": "Configure SCIM 2.0 provisioning with Microsoft Entra ID",
+   "quote": "SCIM provisioning must be enabled for your organization before you begin.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.contrastsecurity.com/en/microsoft-entra-id-scim-2-0.html",
+   "title": "Configure SCIM 2.0 provisioning with Microsoft Entra ID",
+   "quote": "Create, search, get, update, deactivate/reactivate, full replace, delete",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.contrastsecurity.com/en/microsoft-entra-id-scim-2-0.html",
+   "title": "Configure SCIM 2.0 provisioning with Microsoft Entra ID",
+   "quote": "Create, search, get, rename, add/remove members, full replace, delete",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.contrastsecurity.com/en/microsoft-entra-id-scim-2-0.html",
+   "title": "Configure SCIM 2.0 provisioning with Microsoft Entra ID",
+   "quote": "SCIM provisioning is available for Contrast SaaS organizations only (Classic and Northstar platforms). It is not available for on-premises TeamServer deployments.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.contrastsecurity.com/en/microsoft-entra-id-scim-2-0.html",
+   "title": "Configure SCIM 2.0 provisioning with Microsoft Entra ID",
+   "quote": "Your organization must have RBAC enforced. SCIM-provisioned users are created with an RBAC-controlled role, so organizations without RBAC enabled cannot provision users through SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.contrastsecurity.com/en/microsoft-entra-id-scim-2-0.html",
+   "title": "Configure SCIM 2.0 provisioning with Microsoft Entra ID",
+   "quote": "They authenticate through the SSO connection configured with your identity provider, so make sure SSO is already set up before you provision users.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.contrastsecurity.com/en/microsoft-entra-id-scim-2-0.html",
+   "title": "Configure SCIM 2.0 provisioning with Microsoft Entra ID",
+   "quote": "The Contrast SCIM API is accessible only through OAuth2 bearer tokens.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.contrastsecurity.com/en/microsoft-entra-id-scim-2-0.html",
+   "title": "Configure SCIM 2.0 provisioning with Microsoft Entra ID",
+   "quote": "Contrast access tokens expire after 60 minutes by default",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.contrastsecurity.com/en/microsoft-entra-id-scim-2-0.html",
+   "title": "Configure SCIM 2.0 provisioning with Microsoft Entra ID",
+   "quote": "Use a non-gallery Enterprise Application for SCIM provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.contrastsecurity.com/en/microsoft-entra-id-scim-2-0.html",
+   "title": "Configure SCIM 2.0 provisioning with Microsoft Entra ID",
+   "quote": "enter your Contrast SCIM endpoint as the Tenant URL",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.contrastsecurity.com/en/microsoft-entra-id-scim-2-0.html",
+   "title": "Configure SCIM 2.0 provisioning with Microsoft Entra ID",
+   "quote": "Groups assigned here sync to Contrast as User Access Groups.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.contrastsecurity.com/en/microsoft-entra-id-scim-2-0.html",
+   "title": "Configure SCIM 2.0 provisioning with Microsoft Entra ID",
+   "quote": "Login email (userName) is immutable.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.contrastsecurity.com/en/microsoft-entra-id-scim-2-0.html",
+   "title": "Configure SCIM 2.0 provisioning with Microsoft Entra ID",
+   "quote": "SCIM-provisioned groups have no default role assignments.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c22",
+   "url": "https://docs.contrastsecurity.com/en/microsoft-entra-id-scim-2-0.html",
+   "title": "Configure SCIM 2.0 provisioning with Microsoft Entra ID",
+   "quote": "Entra deactivates the account in Contrast right away",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c23",
+   "url": "https://docs.contrastsecurity.com/en/microsoft-entra-id-scim-2-0.html",
+   "title": "Configure SCIM 2.0 provisioning with Microsoft Entra ID",
+   "quote": "You can register up to three OAuth2 clients per organization.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c24",
+   "url": "https://docs.contrastsecurity.com/en/microsoft-entra-id-scim-2-0.html",
+   "title": "Configure SCIM 2.0 provisioning with Microsoft Entra ID",
+   "quote": "Group membership changes take effect within about 60 seconds after Contrast processes the request, due to caching.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c25",
+   "url": "https://docs.contrastsecurity.com/en/microsoft-entra-id-scim-2-0.html",
+   "title": "Configure SCIM 2.0 provisioning with Microsoft Entra ID",
+   "quote": "If your organization already uses a Contrast gallery app for SSO, create a separate Enterprise Application for SCIM provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c26",
+   "url": "https://docs.contrastsecurity.com/en/microsoft-entra-id-scim-2-0.html",
+   "title": "Configure SCIM 2.0 provisioning with Microsoft Entra ID",
+   "quote": "Users created through SCIM do not receive an invitation email.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c27",
+   "url": "https://docs.contrastsecurity.com/en/scim-2-0-with-okta.html",
+   "title": "Configure SCIM 2.0 provisioning with Okta",
+   "quote": "Search for SCIM 2.0 Test App (OAuth Bearer Token)",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c28",
+   "url": "https://docs.contrastsecurity.com/en/scim-2-0-with-okta.html",
+   "title": "Configure SCIM 2.0 provisioning with Okta",
+   "quote": "tokenTtlMinutes accepts up to 388800 (9 months).",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c29",
+   "url": "https://docs.contrastsecurity.com/en/scim-2-0-with-okta.html",
+   "title": "Configure SCIM 2.0 provisioning with Okta",
+   "quote": "Okta deactivates, but does not delete.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c30",
+   "url": "https://docs.contrastsecurity.com/en/scim-2-0-with-okta.html",
+   "title": "Configure SCIM 2.0 provisioning with Okta",
+   "quote": "Deactivates the user in Contrast when unassigned or deactivated in Okta. Does not delete the account.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c31",
+   "url": "https://docs.contrastsecurity.com/en/scim-2-0-with-okta.html",
+   "title": "Configure SCIM 2.0 provisioning with Okta",
+   "quote": "Push Groups syncs Okta group membership to Contrast as User Access Groups.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c32",
+   "url": "https://docs.contrastsecurity.com/en/scim-2-0-with-okta.html",
+   "title": "Configure SCIM 2.0 provisioning with Okta",
+   "quote": "Bearer tokens do not auto-refresh.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c33",
+   "url": "https://docs.contrastsecurity.com/en/scim-2-0-with-okta.html",
+   "title": "Configure SCIM 2.0 provisioning with Okta",
+   "quote": "Create, search, get, update, deactivate, full replace",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c34",
+   "url": "https://docs.contrastsecurity.com/en/scim-2-0-with-okta.html",
+   "title": "Configure SCIM 2.0 provisioning with Okta",
+   "quote": "The Contrast SCIM 2.0 API supports user and group provisioning from Okta.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c35",
+   "url": "https://api.contrastsecurity.com/docs/scim.v2.73c527090aa0b7cbdedc4e1335da56fd92d9a106.yaml",
+   "title": "Contrast Security SCIM v2 API (OpenAPI)",
+   "quote": "The following SCIM operations are currently not supported:",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.contrastsecurity.com/"
+  },
+  {
+   "id": "c36",
+   "url": "https://api.contrastsecurity.com/docs/scim.v2.73c527090aa0b7cbdedc4e1335da56fd92d9a106.yaml",
+   "title": "Contrast Security SCIM v2 API (OpenAPI)",
+   "quote": "For Users, filtering by `userName` with the `eq` operator is supported.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.contrastsecurity.com/"
+  },
+  {
+   "id": "c37",
+   "url": "https://api.contrastsecurity.com/docs/scim.v2.73c527090aa0b7cbdedc4e1335da56fd92d9a106.yaml",
+   "title": "Contrast Security SCIM v2 API (OpenAPI)",
+   "quote": "Groups map to User Access Groups in the Contrast platform.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.contrastsecurity.com/"
+  },
+  {
+   "id": "c38",
+   "url": "https://api.contrastsecurity.com/docs/scim.v2.73c527090aa0b7cbdedc4e1335da56fd92d9a106.yaml",
+   "title": "Contrast Security SCIM v2 API (OpenAPI)",
+   "quote": "Get a list of users. This endpoint supports pagination and filtering.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.contrastsecurity.com/"
+  },
+  {
+   "id": "c39",
+   "url": "https://api.contrastsecurity.com/docs/scim.v2.73c527090aa0b7cbdedc4e1335da56fd92d9a106.yaml",
+   "title": "Contrast Security SCIM v2 API (OpenAPI)",
+   "quote": "Delete a user from the organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.contrastsecurity.com/"
+  },
+  {
+   "id": "c40",
+   "url": "https://api.contrastsecurity.com/docs/scim.v2.73c527090aa0b7cbdedc4e1335da56fd92d9a106.yaml",
+   "title": "Contrast Security SCIM v2 API (OpenAPI)",
+   "quote": "The Contrast Security SCIM v2 API uses OAuth2 authorization with the `client_credentials` grant type flow.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.contrastsecurity.com/"
+  },
+  {
+   "id": "c41",
+   "url": "https://api.contrastsecurity.com/docs/scim.v2.73c527090aa0b7cbdedc4e1335da56fd92d9a106.yaml",
+   "title": "Contrast Security SCIM v2 API (OpenAPI)",
+   "quote": "summary: Update a user",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.contrastsecurity.com/"
+  },
+  {
+   "id": "c42",
+   "url": "https://api.contrastsecurity.com/docs/scim.v2.73c527090aa0b7cbdedc4e1335da56fd92d9a106.yaml",
+   "title": "Contrast Security SCIM v2 API (OpenAPI)",
+   "quote": "summary: Replace a user",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.contrastsecurity.com/"
+  },
+  {
+   "id": "c43",
+   "url": "https://api.contrastsecurity.com/docs/scim.v2.73c527090aa0b7cbdedc4e1335da56fd92d9a106.yaml",
+   "title": "Contrast Security SCIM v2 API (OpenAPI)",
+   "quote": "summary: Get supported schemas",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.contrastsecurity.com/"
+  },
+  {
+   "id": "c44",
+   "url": "https://api.contrastsecurity.com/docs/scim.v2.73c527090aa0b7cbdedc4e1335da56fd92d9a106.yaml",
+   "title": "Contrast Security SCIM v2 API (OpenAPI)",
+   "quote": "The components of the user's name.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.contrastsecurity.com/"
+  },
+  {
+   "id": "c45",
+   "url": "https://api.contrastsecurity.com/docs/scim.v2.73c527090aa0b7cbdedc4e1335da56fd92d9a106.yaml",
+   "title": "Contrast Security SCIM v2 API (OpenAPI)",
+   "quote": "Specifies the desired maximum number of query results per page.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.contrastsecurity.com/"
+  },
+  {
+   "id": "c46",
+   "url": "https://api.contrastsecurity.com/docs/scim.v2.73c527090aa0b7cbdedc4e1335da56fd92d9a106.yaml",
+   "title": "Contrast Security SCIM v2 API (OpenAPI)",
+   "quote": "The type of email address (e.g., \"work\", \"home\").",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.contrastsecurity.com/"
+  },
+  {
+   "id": "c47",
+   "url": "https://api.contrastsecurity.com/docs/access-control.v4.58d7fdbacf78ef3f27060b7ebc350d4c823ee186.yaml",
+   "title": "Contrast Access Control API (OpenAPI)",
+   "quote": "Contrast access control APIs for managing role-based access control.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.contrastsecurity.com/"
+  },
+  {
+   "id": "c48",
+   "url": "https://api.contrastsecurity.com/docs/access-control.v4.58d7fdbacf78ef3f27060b7ebc350d4c823ee186.yaml",
+   "title": "Contrast Access Control API (OpenAPI)",
+   "quote": "These APIs are available for hosted customers only.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.contrastsecurity.com/"
+  },
+  {
+   "id": "c49",
+   "url": "https://api.contrastsecurity.com/docs/access-control.v4.58d7fdbacf78ef3f27060b7ebc350d4c823ee186.yaml",
+   "title": "Contrast Access Control API (OpenAPI)",
+   "quote": "summary: Create user",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.contrastsecurity.com/"
+  },
+  {
+   "id": "c50",
+   "url": "https://api.contrastsecurity.com/docs/access-control.v4.58d7fdbacf78ef3f27060b7ebc350d4c823ee186.yaml",
+   "title": "Contrast Access Control API (OpenAPI)",
+   "quote": "summary: Updates a user's status by id",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.contrastsecurity.com/"
+  },
+  {
+   "id": "c51",
+   "url": "https://api.contrastsecurity.com/docs/access-control.v4.58d7fdbacf78ef3f27060b7ebc350d4c823ee186.yaml",
+   "title": "Contrast Access Control API (OpenAPI)",
+   "quote": "summary: Delete user by id",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.contrastsecurity.com/"
+  },
+  {
+   "id": "c52",
+   "url": "https://api.contrastsecurity.com/docs/access-control.v4.58d7fdbacf78ef3f27060b7ebc350d4c823ee186.yaml",
+   "title": "Contrast Access Control API (OpenAPI)",
+   "quote": "summary: Assign role to user access group",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.contrastsecurity.com/"
+  },
+  {
+   "id": "c53",
+   "url": "https://api.contrastsecurity.com/docs/access-control.v4.58d7fdbacf78ef3f27060b7ebc350d4c823ee186.yaml",
+   "title": "Contrast Access Control API (OpenAPI)",
+   "quote": "summary: Find users.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.contrastsecurity.com/"
+  },
+  {
+   "id": "c54",
+   "url": "https://api.contrastsecurity.com/docs/access-control.v4.58d7fdbacf78ef3f27060b7ebc350d4c823ee186.yaml",
+   "title": "Contrast Access Control API (OpenAPI)",
+   "quote": "name: API-Key",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.contrastsecurity.com/"
+  },
+  {
+   "id": "c55",
+   "url": "https://api.contrastsecurity.com/docs/access-control.v4.58d7fdbacf78ef3f27060b7ebc350d4c823ee186.yaml",
+   "title": "Contrast Access Control API (OpenAPI)",
+   "quote": "summary: Create user access group",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.contrastsecurity.com/"
+  },
+  {
+   "id": "c56",
+   "url": "https://api.contrastsecurity.com/docs/access-control.v4.58d7fdbacf78ef3f27060b7ebc350d4c823ee186.yaml",
+   "title": "Contrast Access Control API (OpenAPI)",
+   "quote": "summary: Add user to user access group",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.contrastsecurity.com/"
+  },
+  {
+   "id": "c57",
+   "url": "https://api.contrastsecurity.com/docs/access-control.v4.58d7fdbacf78ef3f27060b7ebc350d4c823ee186.yaml",
+   "title": "Contrast Access Control API (OpenAPI)",
+   "quote": "summary: Updates a user by id",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.contrastsecurity.com/"
+  },
+  {
+   "id": "c58",
+   "url": "https://api.contrastsecurity.com/docs/access-control.v4.58d7fdbacf78ef3f27060b7ebc350d4c823ee186.yaml",
+   "title": "Contrast Access Control API (OpenAPI)",
+   "quote": "summary: Retrieve user by id",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.contrastsecurity.com/"
+  },
+  {
+   "id": "c59",
+   "url": "https://api.contrastsecurity.com/docs/access-control.v4.58d7fdbacf78ef3f27060b7ebc350d4c823ee186.yaml",
+   "title": "Contrast Access Control API (OpenAPI)",
+   "quote": "summary: Find roles",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.contrastsecurity.com/"
+  },
+  {
+   "id": "c60",
+   "url": "https://api.contrastsecurity.com/docs/audit.v4.cabb9e1c37207d48b945fed2694f06d579d9b504.yaml",
+   "title": "Contrast Audit API (OpenAPI)",
+   "quote": "summary: Find audit logs",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.contrastsecurity.com/"
+  },
+  {
+   "id": "c61",
+   "url": "https://docs.contrastsecurity.com/en/organization-sso.html",
+   "title": "Configure single sign-on (SSO) at an organization level",
+   "quote": "select the Enable user provisioning checkbox at the bottom of the screen.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c62",
+   "url": "https://docs.contrastsecurity.com/en/organization-sso.html",
+   "title": "Configure single sign-on (SSO) at an organization level",
+   "quote": "For hosted customers, Contrast Security configures authentication; however, a user may be granted permissions to set up SSO for their organization.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c63",
+   "url": "https://docs.contrastsecurity.com/en/organization-sso.html",
+   "title": "Configure single sign-on (SSO) at an organization level",
+   "quote": "If you want to add users who are members of a SAML group that matches the name of a Contrast group, select Add users to their Contrast groups upon SSO login .",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c64",
+   "url": "https://docs.contrastsecurity.com/en/enable-or-disable-a-user.html",
+   "title": "Enable or disable a user account",
+   "quote": "If a user account is in a Disabled state, the user cannot log in to Contrast or use their API keys for authentication. Contrast keeps the original user settings which it applies when you enable the user account again.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c65",
+   "url": "https://docs.contrastsecurity.com/en/ldap.html",
+   "title": "Configure LDAP",
+   "quote": "Contrast integrates with many types of Lightweight Directory Access Protocol (LDAP) servers.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c66",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/contrast-security-tutorial",
+   "title": "Microsoft Entra SSO integration with Contrast Security",
+   "quote": "Contrast Security supports Just In Time user provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c67",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/contrast-security-tutorial",
+   "title": "Microsoft Entra SSO integration with Contrast Security",
+   "quote": "Contrast Security supports SP and IDP initiated SSO.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c68",
+   "url": "https://www.okta.com/integrations/?search=contrast",
+   "title": "Okta Integration Network search: contrast",
+   "quote": "No results found for: “contrast”",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.contrastsecurity.com/pricing-and-packaging",
+  "https://docs.contrastsecurity.com/sitemap.xml",
+  "https://api.contrastsecurity.com/docs/manifest.json (SCIM v2, Access Control v4, Audit v4 specs)",
+  "https://www.okta.com/integrations/?search=contrast",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/toc.json"
+ ],
+ "open_questions": [
+  "The pricing page does not name the plan that includes SCIM; Enterprise is inferred from the RBAC + SSO prerequisites.",
+  "Whether deactivation frees a licence or ends active sessions is not documented.",
+  "Whether the Access Control API is limited to Enterprise is not stated.",
+  "API rate limits are not documented."
+ ]
+}

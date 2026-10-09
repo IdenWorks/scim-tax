@@ -1,0 +1,543 @@
+{
+ "slug": "zuora",
+ "vendor": "Zuora",
+ "vendor_url": "https://www.zuora.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Zuora",
+  "slug": "zuora",
+  "category": "Finance, Accounting & Spend",
+  "status": "gated",
+  "scim_plan": "Contact Sales (quote-only)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales (no public pricing)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": "sso_only",
+   "onelogin": null,
+   "jumpcloud": "sso_only",
+   "generic": true
+  },
+  "pricing_page_url": "https://www.zuora.com/talk-to-sales/",
+  "docs_url": "https://docs.zuora.com/en/zuora-platform/security-and-identity/oneid---identity-and-access-management/setup-sso-with-okta-using-saml-in-oneid/enable-provisioning-using-scim-api",
+  "evidence": "Zuora publishes no pricing (sales is a 'Talk to an expert' request form), and its OneID docs describe enabling provisioning using the SCIM API from Okta and Microsoft Entra ID.",
+  "notes": "Quote-only: Zuora publishes no plans or prices (zuora.com/pricing redirects to a product page; sales is a 'Talk to an expert' form) and documents SCIM, so under rule 6a the row is gated at low confidence; which contracts include OneID SCIM is not public. New row. SCIM 2.0 runs through Zuora OneID (one.zuora.com/scim/v2), which Zuora Global Support must activate; it needs a working custom SAML app and an OAuth 2.0 client (authorization code for Okta, client credentials for Entra). Okta: create, update, deactivate, push groups. Entra: users and groups, with the ?aadOptscim062020 flag required. The Okta OIN 'Zuora' app is SSO only; Entra has no gallery app; Google and JumpCloud are SAML only.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": null,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c3",
+   "c13",
+   "c20",
+   "c24",
+   "c4"
+  ],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://one.zuora.com/scim/v2",
+  "auth": {
+   "method": "oauth2",
+   "token_source": "OneID portal > avatar > Settings > Manage OAuth 2.0 Clients > New (Authorization Code with type 'SCIM Client (IdP)' for Okta; Client Credentials for Entra and server-to-server)",
+   "token_expiry": "Short-lived OAuth access tokens; client secret shown once",
+   "cite": [
+    "c6",
+    "c16",
+    "c21",
+    "c23",
+    "c25"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c13",
+    "c5"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": null,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c11",
+    "c12",
+    "c5",
+    "c17",
+    "c18",
+    "c20"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c11",
+    "c20",
+    "c27"
+   ],
+   "notes": "Okta's Deactivate Users is enabled; a deactivated OneID user cannot sign in through the portal or SSO."
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "emails.value",
+    "emails.type (primary)",
+    "preferredLanguage",
+    "locale"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": [
+    "c7",
+    "c8",
+    "c9",
+    "c10"
+   ]
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Entra must append ?aadOptscim062020 to the Tenant URL; legacy-format PATCH requests are rejected and on-demand group membership updates fail.",
+    "cite": [
+     "c17"
+    ]
+   },
+   {
+    "text": "Group membership only applies to users that already exist in Zuora.",
+    "cite": [
+     "c18"
+    ]
+   },
+   {
+    "text": "OneID must first be activated through Zuora Global Support.",
+    "cite": [
+     "c28"
+    ]
+   }
+  ],
+  "notes": "SCIM provisions into Zuora OneID, the identity layer for Zuora tenants (Billing, Revenue, Zephr and others). Okta and Entra both use custom SAML apps, not catalogue apps."
+ },
+ "user_api": {
+  "available": null,
+  "cite": [],
+  "plan": null,
+  "api_tax": null,
+  "style": null,
+  "base_url": null,
+  "docs_url": null,
+  "auth": {
+   "methods": [],
+   "scopes": [],
+   "cite": []
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": []
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "OneID's documented user management APIs are SCIM 2.0-based (recorded under scim). The 'OneID API reference' they link to was not found on developer.zuora.com (its llms.txt lists no OneID or user endpoints), so no non-SCIM user API is recorded."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/zuora/",
+   "cite": [
+    "c32"
+   ],
+   "notes": "The OIN 'Zuora' app ticks SAML and SWA only. Zuora's OneID SCIM guide uses a custom app (Create App Integration > SAML 2.0) with SCIM provisioning added."
+  },
+  "entra": {
+   "listed": false,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c14",
+    "c15"
+   ],
+   "notes": "Not in the Entra gallery; custom (non-gallery) SAML app with automatic provisioning."
+  },
+  "google": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c30"
+   ],
+   "notes": "Custom SAML app; no Google provisioning documented."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c31"
+   ],
+   "notes": "SAML only in Zuora's guide."
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c3"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.zuora.com/talk-to-sales/",
+   "title": "Talk to a Sales Expert - Zuora",
+   "quote": "Talk to an expert",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.zuora.com/talk-to-sales/",
+   "title": "Talk to a Sales Expert - Zuora",
+   "quote": "Request a call",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://docs.zuora.com/en/zuora-platform/security-and-identity/oneid---identity-and-access-management/setup-sso-with-okta-using-saml-in-oneid/enable-provisioning-using-scim-api",
+   "title": "Enable provisioning using SCIM API | Zuora Product Documentation",
+   "quote": "Learn how to enable provisioning using the SCIM API by configuring OAuth 2.0 client settings and attribute mappings in Okta for Zuora OneID.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://docs.zuora.com/en/zuora-platform/security-and-identity/oneid---identity-and-access-management/setup-sso-with-okta-using-saml-in-oneid/enable-provisioning-using-scim-api",
+   "title": "Enable provisioning using SCIM API | Zuora Product Documentation",
+   "quote": "SCIM connector base URL: https://one.zuora.com/scim/v2",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://docs.zuora.com/en/zuora-platform/security-and-identity/oneid---identity-and-access-management/setup-sso-with-okta-using-saml-in-oneid/enable-provisioning-using-scim-api",
+   "title": "Enable provisioning using SCIM API | Zuora Product Documentation",
+   "quote": "Supported provisioning actions: Select the Push New Users , Push Profile Updates , and Push Groups checkboxes depending on your requirements",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://docs.zuora.com/en/zuora-platform/security-and-identity/oneid---identity-and-access-management/setup-sso-with-okta-using-saml-in-oneid/enable-provisioning-using-scim-api",
+   "title": "Enable provisioning using SCIM API | Zuora Product Documentation",
+   "quote": "Authentication Mode: OAuth 2",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://docs.zuora.com/en/zuora-platform/security-and-identity/oneid---identity-and-access-management/setup-sso-with-okta-using-saml-in-oneid/enable-provisioning-using-scim-api",
+   "title": "Enable provisioning using SCIM API | Zuora Product Documentation",
+   "quote": "In the Attribute Mappings section, configure attribute mappings. Zuora OneID needs the following attributes:",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.zuora.com/en/zuora-platform/security-and-identity/oneid---identity-and-access-management/setup-sso-with-okta-using-saml-in-oneid/enable-provisioning-using-scim-api",
+   "title": "Enable provisioning using SCIM API | Zuora Product Documentation",
+   "quote": "Primary email type",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.zuora.com/en/zuora-platform/security-and-identity/oneid---identity-and-access-management/setup-sso-with-okta-using-saml-in-oneid/enable-provisioning-using-scim-api",
+   "title": "Enable provisioning using SCIM API | Zuora Product Documentation",
+   "quote": "Preferred language",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.zuora.com/en/zuora-platform/security-and-identity/oneid---identity-and-access-management/setup-sso-with-okta-using-saml-in-oneid/enable-provisioning-using-scim-api",
+   "title": "Enable provisioning using SCIM API | Zuora Product Documentation",
+   "quote": "Locale Name",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.zuora.com/en/zuora-platform/security-and-identity/oneid---identity-and-access-management/setup-sso-with-okta-using-saml-in-oneid/enable-provisioning-using-scim-api",
+   "title": "Enable provisioning using SCIM API | Zuora Product Documentation",
+   "quote": "Deactivate Users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.zuora.com/en/zuora-platform/security-and-identity/oneid---identity-and-access-management/setup-sso-with-okta-using-saml-in-oneid/enable-provisioning-using-scim-api",
+   "title": "Enable provisioning using SCIM API | Zuora Product Documentation",
+   "quote": "Update User Attributes",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.zuora.com/en/zuora-platform/security-and-identity/oneid---identity-and-access-management/setup-sso-with-microsoft-entra-id-using-saml-in-oneid/enable-provisioning-using-scim-api-for-microsoft-entra-id",
+   "title": "Enable provisioning using SCIM API for Microsoft Entra ID | Zuora Product Documentation",
+   "quote": "Learn how to configure System for Cross-domain Identity Management (SCIM) 2.0 provisioning in Microsoft Entra ID to automatically manage Zuora users and groups through Zuora OneID.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.zuora.com/en/zuora-platform/security-and-identity/oneid---identity-and-access-management/setup-sso-with-microsoft-entra-id-using-saml-in-oneid/enable-provisioning-using-scim-api-for-microsoft-entra-id",
+   "title": "Enable provisioning using SCIM API for Microsoft Entra ID | Zuora Product Documentation",
+   "quote": "Although Zuora OneID is not listed as an official Microsoft Entra ID marketplace application, you can integrate SCIM provisioning by using the same custom SAML application that you created for SSO.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.zuora.com/en/zuora-platform/security-and-identity/oneid---identity-and-access-management/setup-sso-with-microsoft-entra-id-using-saml-in-oneid/enable-provisioning-using-scim-api-for-microsoft-entra-id",
+   "title": "Enable provisioning using SCIM API for Microsoft Entra ID | Zuora Product Documentation",
+   "quote": "Your custom SAML application is active and working for single sign-on (SSO).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.zuora.com/en/zuora-platform/security-and-identity/oneid---identity-and-access-management/setup-sso-with-microsoft-entra-id-using-saml-in-oneid/enable-provisioning-using-scim-api-for-microsoft-entra-id",
+   "title": "Enable provisioning using SCIM API for Microsoft Entra ID | Zuora Product Documentation",
+   "quote": "Authentication MethodOAuth2 Client Credentials Grant",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.zuora.com/en/zuora-platform/security-and-identity/oneid---identity-and-access-management/setup-sso-with-microsoft-entra-id-using-saml-in-oneid/enable-provisioning-using-scim-api-for-microsoft-entra-id",
+   "title": "Enable provisioning using SCIM API for Microsoft Entra ID | Zuora Product Documentation",
+   "quote": "The Zuora SCIM endpoint rejects these requests with a 400 Bad Request JSON parse error, and group membership updates fail.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.zuora.com/en/zuora-platform/security-and-identity/oneid---identity-and-access-management/setup-sso-with-microsoft-entra-id-using-saml-in-oneid/enable-provisioning-using-scim-api-for-microsoft-entra-id",
+   "title": "Enable provisioning using SCIM API for Microsoft Entra ID | Zuora Product Documentation",
+   "quote": "Group membership can only be applied to users that already exist in Zuora, so the members of a provisioned group must also be in scope for the application.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.zuora.com/en/zuora-platform/security-and-identity/oneid---identity-and-access-management/setup-sso-with-microsoft-entra-id-using-saml-in-oneid/enable-provisioning-using-scim-api-for-microsoft-entra-id",
+   "title": "Enable provisioning using SCIM API for Microsoft Entra ID | Zuora Product Documentation",
+   "quote": "When you add or remove a user in Microsoft Entra ID, the change is applied in Zuora through the Zuora OneID service.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.zuora.com/en/zuora-platform/security-and-identity/oneid---identity-and-access-management/manage-oauth-2.0-clients/create-oauth-tokens-for-automated-user-management-in-okta",
+   "title": "Create OAuth tokens for automated user management in Okta | Zuora Product Documentation",
+   "quote": "Once configured, your IdP can automatically provision, update, and deprovision users in Zuora through the OneID SCIM API.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.zuora.com/en/zuora-platform/security-and-identity/oneid---identity-and-access-management/manage-oauth-2.0-clients/create-oauth-tokens-for-automated-user-management-in-okta",
+   "title": "Create OAuth tokens for automated user management in Okta | Zuora Product Documentation",
+   "quote": "In the upper-right corner of the OneID portal, click your avatar, and then click Settings.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://docs.zuora.com/en/zuora-platform/security-and-identity/oneid---identity-and-access-management/manage-oauth-2.0-clients/create-oauth-tokens-for-automated-user-management-in-okta",
+   "title": "Create OAuth tokens for automated user management in Okta | Zuora Product Documentation",
+   "quote": "Scopes: Select the authorization scope from the list. The scope determines which SCIM API operations the client is permitted to perform (for example, reading or modifying user records).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://docs.zuora.com/en/zuora-platform/security-and-identity/oneid---identity-and-access-management/manage-oauth-2.0-clients/create-oauth-tokens-for-automated-user-management-in-okta",
+   "title": "Create OAuth tokens for automated user management in Okta | Zuora Product Documentation",
+   "quote": "Important: The client secret is displayed only once.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://docs.zuora.com/en/zuora-platform/security-and-identity/oneid---identity-and-access-management/manage-oauth-2.0-clients/create-oauth-tokens-for-user-management-apis-in-one-id",
+   "title": "Create OAuth tokens for user management APIs in One ID | Zuora Product Documentation",
+   "quote": "To automate user and organization management tasks, OneID exposes a set of SCIM 2.0-based user management APIs.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://docs.zuora.com/en/zuora-platform/security-and-identity/oneid---identity-and-access-management/manage-oauth-2.0-clients/create-oauth-tokens-for-user-management-apis-in-one-id",
+   "title": "Create OAuth tokens for user management APIs in One ID | Zuora Product Documentation",
+   "quote": "Your application exchanges these credentials at the OneID token endpoint for a short-lived access token, which it then includes in the Authorization: Bearer <token> header when calling the user management APIs.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://docs.zuora.com/en/zuora-platform/security-and-identity/oneid---identity-and-access-management/oneid-overview",
+   "title": "OneID overview | Zuora Product Documentation",
+   "quote": "Zuora OneID is a robust identity and access management (IAM) platform designed to enhance security and streamline user access across various Zuora applications and services.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://docs.zuora.com/en/zuora-platform/security-and-identity/oneid---identity-and-access-management/users-in-oneid/deactivate-or-reactivate-users",
+   "title": "Deactivate or reactivate users | Zuora Product Documentation",
+   "quote": "A deactivated user cannot log in to OneID, regardless through the OneID portal or an identity provider via single sign-on, until the user account is reactivated in OneID by organization admins.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://docs.zuora.com/en/zuora-platform/security-and-identity/oneid---identity-and-access-management/activate-oneid-for-your-organization",
+   "title": "Activate OneID for your organization | Zuora Product Documentation",
+   "quote": "To enable OneID for your organization, you need to reach out to Zuora Global Support and provide detailed information about your first admin user in OneID.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://docs.zuora.com/en/zuora-platform/security-and-identity/oneid---identity-and-access-management/setup-sso-with-okta-using-saml-in-oneid/add-zuora-oneid-application-to-okta",
+   "title": "Add Zuora OneID application to Okta | Zuora Product Documentation",
+   "quote": "Go to the Applications tab and click Create App Integration.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://docs.zuora.com/en/zuora-platform/security-and-identity/oneid---identity-and-access-management/setup-sso-with-google-using-saml-in-oneid",
+   "title": "Setup SSO with Google using SAML in OneID | Zuora Product Documentation",
+   "quote": "This guide explains the process of setting up SSO with Google using SAML in OneID.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://docs.zuora.com/en/zuora-platform/security-and-identity/oneid---identity-and-access-management/setup-sso-with-jumpcloud-using-saml-in-oneid",
+   "title": "Setup SSO with JumpCloud using SAML in OneID | Zuora Product Documentation",
+   "quote": "This guide provides steps to integrate Zuora OneID with JumpCloud using SAML for seamless single sign-on.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://www.okta.com/integrations/zuora/",
+   "title": "Integrate Zuora with Okta",
+   "quote": "This app integration supports Single Sign-On. See Capabilities for more details.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.zuora.com/pricing/ (redirects to /solutions/intelligent-pricing-and-packaging/)",
+  "https://www.zuora.com/sitemap_index.xml",
+  "https://docs.zuora.com/sitemap.xml",
+  "https://developer.zuora.com/llms.txt",
+  "https://www.okta.com/integrations/zuora/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/zuora-tutorial (404)"
+ ],
+ "open_questions": [
+  "Which Zuora contracts or editions include OneID and SCIM is not public (quote-only).",
+  "SCIM endpoint list beyond Users/Groups, PUT support, delete, filtering, pagination and rate limits are not documented.",
+  "Whether SCIM deactivation frees a licence or ends sessions is not documented.",
+  "The OneID user management API reference linked from the docs was not found publicly; no audit-log API was confirmed.",
+  "JIT on SSO sign-in and CSV import for OneID users were not confirmed."
+ ]
+}

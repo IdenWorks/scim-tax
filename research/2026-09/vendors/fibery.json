@@ -1,0 +1,601 @@
+{
+ "slug": "fibery",
+ "vendor": "Fibery",
+ "vendor_url": "https://fibery.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Fibery",
+  "slug": "fibery",
+  "category": "Productivity & Docs",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "$40/user/mo billed annually",
+  "scim_price_per_user_mo": 40,
+  "team_plan": "Standard",
+  "team_price_text": "Standard: $12/user/mo billed annually",
+  "team_price_per_user_mo": 12,
+  "price_multiplier": 3.3,
+  "sso_plan": "Enterprise",
+  "sso_price_per_user_mo": 40,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": null
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": null,
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://fibery.com/pricing",
+  "docs_url": "https://the.fibery.io/@public/User_Guide/Guide/SAML-SSO-49",
+  "evidence": "Fibery's pricing page lists SAML SSO and SCIM provisioning only under Enterprise ($40 per user/month billed annually, 'Everything in Pro, plus'), and its SAML SSO guide says the Enterprise plan includes SAML SSO and a SCIM endpoint for automatic provisioning/deprovisioning.",
+  "notes": "Free (up to 10 users), Standard $12, Pro $20, Enterprise $40 per user/month billed annually; observers and guests are free. SCIM endpoint https://<workspace>.fibery.io/api/scim/v2 authenticated with an admin's personal API token (HTTP header); the token owner is never deactivated via SCIM. Only Okta (custom internal SAML app, not an OIN app) is documented; no Entra/Google/OneLogin/JumpCloud SCIM guides and no OIN listing found. SCIM deactivation preserves assignments and gives a prorated seat credit. The security page says SAML SSO is for teams on the Pro Plan, which conflicts with the pricing page and guide (Enterprise); pricing page used. The HTTP/GraphQL API can query fibery/user entities but no user-management (invite/deactivate) endpoints are documented.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": null,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "$0, up to 10 users",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c6",
+    "c9"
+   ]
+  },
+  {
+   "name": "Standard",
+   "price_text": "$12 per user/month billed annually",
+   "price_per_user_mo": 12,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c6"
+   ]
+  },
+  {
+   "name": "Pro",
+   "price_text": "$20 per user/month billed annually",
+   "price_per_user_mo": 20,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c4",
+    "c6"
+   ],
+   "notes": "Security page claims SAML SSO on Pro (see conflicts)."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "$40 per user/month billed annually (Chat with us)",
+   "price_per_user_mo": 40,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c5",
+    "c6",
+    "c10"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c6",
+   "c10",
+   "c11",
+   "c12"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://<your-account-name>.fibery.io/api/scim/v2",
+  "auth": {
+   "method": "bearer",
+   "token_source": "An admin's personal Fibery API token, sent in the HTTP Authorization header",
+   "token_expiry": null,
+   "cite": [
+    "c13",
+    "c27"
+   ],
+   "notes": "Guide says Authentication Mode: HTTP Header with the API token; exact header scheme not stated beyond that."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c11",
+    "c12"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": null,
+   "group_push": null,
+   "group_membership": null,
+   "cite": [
+    "c11",
+    "c15",
+    "c16"
+   ],
+   "notes": "Okta actions documented: Import New Users and Profile Updates, Push New Users, Push Profile Updates, Create Users, Deactivate Users. Update is via Okta profile push; PUT vs PATCH not documented."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": true,
+   "revokes_sessions": null,
+   "data_retained": "Assignments and Audit Log actions of the deactivated user are preserved; user can be reactivated with the same access.",
+   "cite": [
+    "c16",
+    "c23",
+    "c24"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "email (unique identifier)"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": [
+    "c21"
+   ]
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": [],
+   "notes": "Default role for JIT-provisioned users (Member or Observer) is set in SAML settings; SCIM role mapping not documented."
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "The admin whose API token is used for SCIM is never deactivated via SCIM; rotate the token first.",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "text": "Only Okta (custom internal app) is documented; other IdPs via support.",
+    "cite": [
+     "c17",
+     "c18",
+     "c22"
+    ]
+   },
+   {
+    "text": "JIT provisioning should be disabled when using SCIM.",
+    "cite": [
+     "c20"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": null,
+  "cite": [
+   "c27",
+   "c29"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": null,
+  "base_url": null,
+  "docs_url": "https://developers.fibery.com/",
+  "notes": "The HTTP commands API and GraphQL API (Public API on all plans per pricing table) can query the fibery/user database, but no invite, deactivate, role or delete operations for users are documented.",
+  "auth": {
+   "methods": [
+    "api_key",
+    "oauth2"
+   ],
+   "scopes": [],
+   "cite": [
+    "c27",
+    "c30"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c29"
+   ]
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "3 requests per second per token; 7 requests per second per workspace.",
+   "cite": [
+    "c28"
+   ]
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "Fibery documents a custom SAML 2.0 app ('I'm an Okta customer adding an internal app') with SCIM enabled; okta.com/integrations/fibery/ returns 404."
+  },
+  "entra": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "Learn tutorials fibery-tutorial / fibery-provisioning-tutorial return 404."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "jumpcloud.com/integrations/fibery returns 404."
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c19"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://fibery.com/pricing",
+   "title": "Fibery pricing",
+   "quote": "Free for small teams. As complex as you need. Introvert-friendly.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://fibery.com/pricing",
+   "title": "Fibery pricing",
+   "quote": "up to 10 users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://fibery.com/pricing",
+   "title": "Fibery pricing",
+   "quote": "for knowledgable orgs looking to connect all things work $ 12 per user/month billed annually",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://fibery.com/pricing",
+   "title": "Fibery pricing",
+   "quote": "for mature orgs determined to work their way $ 20 per user/month billed annually",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://fibery.com/pricing",
+   "title": "Fibery pricing",
+   "quote": "for larger orgs seeking a secure and scalable solution $ 40 per user/month billed annually",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://fibery.com/pricing",
+   "title": "Fibery pricing",
+   "quote": "Everything in Pro, plus Unlimited automations Unlimited integrations SAML SSO SCIM provisioning",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://fibery.com/pricing",
+   "title": "Fibery pricing",
+   "quote": "Automatically add and remove users in your workspace through identity providers like Okta.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://fibery.com/pricing",
+   "title": "Fibery pricing",
+   "quote": "Configure single sign-on using Okta, Azure, OneLogin, or your custom identity provider.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://fibery.com/pricing",
+   "title": "Fibery pricing",
+   "quote": "Public API",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://the.fibery.io/@public/User_Guide/Guide/SAML-SSO-49",
+   "title": "SAML SSO (Fibery User Guide)",
+   "quote": "our Enterprise plan includes SAML SSO — making it possible to connect Fibery to Okta, Azure, OneLogin, or a custom identity provider (IDP) and provides SCIM endpoint to handle automatic user provisioning/deprovisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://the.fibery.io/@public/User_Guide/Guide/SAML-SSO-49",
+   "title": "SAML SSO (Fibery User Guide)",
+   "quote": "Fibery provides SCIM endpoint which can be used by SSO providers to update users' status, i.e. add new users to a workspace or deactivate existing ones.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://the.fibery.io/@public/User_Guide/Guide/SAML-SSO-49",
+   "title": "SAML SSO (Fibery User Guide)",
+   "quote": "SCIM connector base URL: https://<your-account-name>.fibery.io/api/scim/v2",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://the.fibery.io/@public/User_Guide/Guide/SAML-SSO-49",
+   "title": "SAML SSO (Fibery User Guide)",
+   "quote": "Authorization: Provide your API token, note you need to be an admin in the workspace",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://the.fibery.io/@public/User_Guide/Guide/SAML-SSO-49",
+   "title": "SAML SSO (Fibery User Guide)",
+   "quote": "As for safety precautions, Fibery will not deactivate this user based on SCIM request so that API token stays valid.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://the.fibery.io/@public/User_Guide/Guide/SAML-SSO-49",
+   "title": "SAML SSO (Fibery User Guide)",
+   "quote": "Supported provisioning actions: check Import New Users and Profile Updates, Push New Users, Push Profile Updates",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://the.fibery.io/@public/User_Guide/Guide/SAML-SSO-49",
+   "title": "SAML SSO (Fibery User Guide)",
+   "quote": "Now all users who are assigned to the application in Okta will be automatically created in Fibery and all users deactivated or unassigned in Okta will also be deactivated in Fibery.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://the.fibery.io/@public/User_Guide/Guide/SAML-SSO-49",
+   "title": "SAML SSO (Fibery User Guide)",
+   "quote": "Click on Create App Integration.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://the.fibery.io/@public/User_Guide/Guide/SAML-SSO-49",
+   "title": "SAML SSO (Fibery User Guide)",
+   "quote": "Pick I'm an Okta customer adding an internal app.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://the.fibery.io/@public/User_Guide/Guide/SAML-SSO-49",
+   "title": "SAML SSO (Fibery User Guide)",
+   "quote": "Enable just-in-time (JIT) provisioning to create Users in Fibery automatically on sign-in instead of inviting them manually in advance.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://the.fibery.io/@public/User_Guide/Guide/SAML-SSO-49",
+   "title": "SAML SSO (Fibery User Guide)",
+   "quote": "Make sure JIT provisioning is disabled in the Workspace settings in Fibery as SCIM handles the same thing but provides automatic de-provisioning as well.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://the.fibery.io/@public/User_Guide/Guide/SAML-SSO-49",
+   "title": "SAML SSO (Fibery User Guide)",
+   "quote": "Unique identifier field for users: email",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://the.fibery.io/@public/User_Guide/Guide/SAML-SSO-49",
+   "title": "SAML SSO (Fibery User Guide)",
+   "quote": "If you use another IDP and their guide is of no help, please reach us via Intercom",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://the.fibery.io/@public/User_Guide/Guide/User-Management-45",
+   "title": "User Management (Fibery User Guide)",
+   "quote": "All assignments of the deactivated user will be preserved as well as all their actions in Audit Log.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://the.fibery.io/@public/User_Guide/Guide/User-Management-45",
+   "title": "User Management (Fibery User Guide)",
+   "quote": "If you deactivate an Admin or a Member (or demote them to an Observer), you'll get a prorated credit, which will be automatically applied to your next invoice.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://the.fibery.io/@public/User_Guide/Guide/User-Management-45",
+   "title": "User Management (Fibery User Guide)",
+   "quote": "Only workspace Admins can invite, promote, deactivate, or delete users as well as change their roles and emails.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://fibery.com/security",
+   "title": "Fibery Security",
+   "quote": "Fibery supports SAML-based Single Sign On (SSO) for teams on the Pro Plan.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://developers.fibery.com/guides/getting-started/authentication",
+   "title": "Authentication (Fibery API)",
+   "quote": "Your API token carries the same privileges as your user, so be sure to keep it secret.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.fibery.com/guides/getting-started/authentication"
+  },
+  {
+   "id": "c28",
+   "url": "https://developers.fibery.com/guides/getting-started/authentication",
+   "title": "Authentication (Fibery API)",
+   "quote": "The rate limit for incoming requests is 3 requests per second per token. Additionally the entire workspace is limited to 7 requests per second.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://developers.fibery.com/guides/http-api/overview",
+   "title": "Overview (Fibery HTTP API)",
+   "quote": "Take a look at the example below in which we retrieve the basic info about a user.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://developers.fibery.com/guides/getting-started/authentication",
+   "title": "Authentication (Fibery API)",
+   "quote": "There are no granular scopes: an access token carries the same permissions as the user who authorized it, exactly like a personal API token.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://the.fibery.io/@public/User_Guide/Guide/SAML-SSO-49",
+   "title": "SAML SSO (Fibery User Guide)",
+   "quote": "Members can have any access but take a paid seat;",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The security page says SAML SSO is for teams on the Pro Plan; the pricing page comparison table and the SAML SSO guide put SAML SSO (and SCIM) on Enterprise only. Pricing page used.",
+   "cite": [
+    "c26",
+    "c6",
+    "c10"
+   ]
+  }
+ ],
+ "searched": [
+  "https://fibery.com/pricing (static HTML; renderer ERR_TOO_MANY_RETRIES)",
+  "https://fibery.com/llms.txt",
+  "https://fibery.com/security",
+  "https://developers.fibery.com/llms.txt and sitemap.xml (no SCIM or user-management pages)",
+  "https://the.fibery.io/@public/User_Guide/Guide/SAML-SSO-49 (noscript content)",
+  "https://the.fibery.io/@public/User_Guide/Guide/User-Management-45",
+  "https://www.okta.com/integrations/fibery/ (404)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/fibery-tutorial (404)",
+  "https://www.jumpcloud.com/integrations/fibery (404)"
+ ],
+ "open_questions": [
+  "SCIM Groups, PATCH/PUT, filtering, pagination and attribute list are not documented.",
+  "Whether SCIM requires SAML SSO to be configured first is not stated explicitly.",
+  "Whether Entra, OneLogin or JumpCloud work with the generic SCIM endpoint is not documented.",
+  "Whether SCIM deactivation ends active sessions.",
+  "Whether users can be invited/deactivated through the HTTP API.",
+  "Whether an audit-log API exists (audit log is a UI feature on the pricing table)."
+ ]
+}

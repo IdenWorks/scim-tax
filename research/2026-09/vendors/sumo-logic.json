@@ -1,0 +1,894 @@
+{
+ "slug": "sumo-logic",
+ "vendor": "Sumo Logic",
+ "vendor_url": "https://www.sumologic.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Sumo Logic",
+  "slug": "sumo-logic",
+  "category": "Cloud, Infrastructure & Observability",
+  "status": "unknown",
+  "scim_plan": "—",
+  "scim_price_text": "—",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Essentials",
+  "team_price_text": "Essentials: credits-based, unlimited users (Flex estimate $3.14/TB scanned)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Essentials",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": false
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": "via_generic",
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.sumologic.com/pricing",
+  "docs_url": "https://www.sumologic.com/help/docs/manage/security/scim/about-scim-provisioning/",
+  "evidence": "Sumo Logic documents a SCIM User Management API ('allows you to provision users to Sumo Logic from SCIM provisioning providers') with Okta, Entra ID and OneLogin guides, but no page names the plan that includes it.",
+  "notes": "Usage (credit) priced with unlimited users; per-user fields null. The pricing table ticks 'Single sign-on with SAML' and 'Management APIs' (manage users via API) for every plan including Essentials, and SAML docs list Essentials, but SCIM itself is not named on the pricing page or given an availability table, so status stays unknown (rule 1a); likely free if Management APIs covers SCIM. SCIM 2.0 Users only (no Groups), roles via a roles attribute, access-key Basic/Bearer auth, SAML set up first. Okta/Entra catalogue apps are SSO only; provisioning uses custom SCIM apps.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Essentials",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Essentials",
+   "price_text": "Credits-based (Flex pricing estimate $3.14 per TB scanned, US); free trial, self-serve",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": null,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c5",
+    "c6",
+    "c47"
+   ],
+   "notes": "Unlimited users; priced by data scanned/ingested, not per user. SAML and Management APIs rows are ticked for every column in the plan table."
+  },
+  {
+   "name": "Enterprise Suite",
+   "price_text": "Contact sales",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": null,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c4",
+    "c5",
+    "c6",
+    "c47"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c8",
+   "c11",
+   "c12"
+  ],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://api.sumologic.com/api/v1/scim/ (per-deployment API endpoint + /v1/scim/)",
+  "auth": {
+   "method": "basic",
+   "token_source": "Access key (access ID + key), preferably created on a service account; Basic auth or Base64(<access ID>:<access key>) as bearer token",
+   "token_expiry": null,
+   "cite": [
+    "c10",
+    "c13",
+    "c46"
+   ],
+   "notes": "Executing account needs all User Management role capabilities."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": false,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c23",
+    "c26",
+    "c29"
+   ],
+   "notes": "Only /v1/scim/Users and /v1/scim/Users/{id} appear in the OpenAPI spec; no Groups resource."
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": true,
+   "group_push": false,
+   "group_membership": false,
+   "cite": [
+    "c23",
+    "c26",
+    "c27",
+    "c28",
+    "c29",
+    "c30",
+    "c18",
+    "c22"
+   ],
+   "notes": "Roles are assigned through the SCIM roles attribute instead of groups."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Unassigning the user in the IdP deactivates the Sumo Logic user: their dashboards, scheduled searches, scheduled views and access keys are deactivated, monitors keep running; content is kept. Deleting a user (SCIM DELETE or UI) can transfer content to another user.",
+   "cite": [
+    "c18",
+    "c22",
+    "c49",
+    "c50"
+   ],
+   "notes": "Plans have unlimited users, so seats are not a factor. A deactivated user cannot be re-provisioned until the old user is deleted."
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "emails (find user by email address)"
+   ],
+   "cite": [
+    "c25"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c23",
+    "c24"
+   ],
+   "notes": "startIndex/count, default count 100."
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "emails (one address only)",
+    "roles",
+    "active"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": [
+    "c31",
+    "c32",
+    "c33",
+    "c34",
+    "c35",
+    "c21"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "SCIM roles attribute; values must exactly match Sumo Logic role names; IdP app roles map to Sumo roles",
+   "cite": [
+    "c14",
+    "c21",
+    "c32"
+   ]
+  },
+  "rate_limits": {
+   "text": "Four API requests per second (240 per minute) per user; 10 concurrent requests per access key.",
+   "cite": [
+    "c44",
+    "c45"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Only one email address per user is accepted.",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "text": "After an IdP unassign deactivates a user, reassigning errors until the old user is deleted in Sumo Logic.",
+    "cite": [
+     "c19"
+    ]
+   },
+   {
+    "text": "No SCIM Groups endpoint; Okta and Entra setups use custom (non-catalogue) apps.",
+    "cite": [
+     "c16",
+     "c17"
+    ]
+   }
+  ],
+  "notes": "SCIM is part of the public Sumo Logic REST API (SCIM User Management tag). Docs say to set up SAML first so the IdP app can connect. No plan is named for SCIM."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c6",
+   "c43",
+   "c46"
+  ],
+  "plan": "Essentials",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://api.sumologic.com/api/ (per deployment)",
+  "docs_url": "https://www.sumologic.com/help/docs/api/user-management/",
+  "auth": {
+   "methods": [
+    "access key (HTTP Basic: access ID + access key)"
+   ],
+   "scopes": [],
+   "cite": [
+    "c46",
+    "c9"
+   ],
+   "notes": "Executing user needs User Management role capabilities."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": false,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c36",
+    "c37",
+    "c38",
+    "c39",
+    "c40",
+    "c41",
+    "c42"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/v1/users",
+    "purpose": "List users",
+    "cite": [
+     "c36"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/users",
+    "purpose": "Create a user",
+    "cite": [
+     "c37"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/users/{id}",
+    "purpose": "Get a user",
+    "cite": [
+     "c42"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/v1/users/{id}",
+    "purpose": "Update a user",
+    "cite": [
+     "c38"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v1/users/{id}",
+    "purpose": "Delete a user (optionally transfer content)",
+    "cite": [
+     "c39"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/v1/roles/{roleId}/users/{userId}",
+    "purpose": "Assign a role to a user",
+    "cite": [
+     "c40"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v1/roles/{roleId}/users/{userId}",
+    "purpose": "Remove a role from a user",
+    "cite": [
+     "c41"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/scim/Users",
+    "purpose": "SCIM: list users",
+    "cite": [
+     "c23"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/scim/Users",
+    "purpose": "SCIM: create user",
+    "cite": [
+     "c26"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/scim/Users/{id}",
+    "purpose": "SCIM: get user",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/v1/scim/Users/{id}",
+    "purpose": "SCIM: replace user",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/v1/scim/Users/{id}",
+    "purpose": "SCIM: patch user",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v1/scim/Users/{id}",
+    "purpose": "SCIM: delete user",
+    "cite": [
+     "c29"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": [],
+   "notes": "Audit events are written to the Audit Index and searched with the Search Job API; a dedicated audit-log REST API was not found."
+  },
+  "rate_limits": {
+   "text": "Four API requests per second (240 per minute) per user; 10 concurrent requests per access key.",
+   "cite": [
+    "c44",
+    "c45"
+   ]
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/sumo-logic/",
+   "cite": [
+    "c52",
+    "c16"
+   ],
+   "notes": "OIN 'Sumo Logic' app lists SAML and SWA only; Sumo's SCIM guide uses a custom SAML 2.0 app with SCIM provisioning enabled."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/sumologic-tutorial",
+   "cite": [
+    "c51",
+    "c17"
+   ],
+   "notes": "Gallery app is SSO; SCIM is set up through a non-gallery app."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.sumologic.com/help/docs/manage/security/scim/provision-with-onelogin/",
+   "cite": [
+    "c20"
+   ],
+   "notes": "Sumo's guide uses OneLogin's generic 'SCIM Provisioner with SAML (SCIM v2 Enterprise)' app."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c48"
+  ]
+ },
+ "conflicts": [],
+ "searched": [
+  "https://www.sumologic.com/pricing (incl. expanded plan table in rendered DOM)",
+  "https://www.sumologic.com/help/sitemap.xml (scim, saml, users)",
+  "https://www.sumologic.com/help/docs/manage/security/scim/ and provider pages",
+  "https://www.sumologic.com/help/docs/api/scim-user/",
+  "https://api.sumologic.com/docs/sumologic-api.yaml",
+  "https://www.okta.com/integrations/sumo-logic/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/sumologic-tutorial"
+ ],
+ "open_questions": [
+  "Which plans include the SCIM User Management API is not stated (pricing table has no SCIM row; SCIM docs have no availability table).",
+  "Token expiry is not documented (access keys).",
+  "Whether SCIM deactivation ends active sessions is not documented.",
+  "Reactivation via SCIM (active=true) is not documented.",
+  "Google Workspace and JumpCloud catalogue apps not checked."
+ ],
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.sumologic.com/pricing",
+   "title": "Sumo Logic pricing",
+   "quote": "Cloud-scale security operations. Unlimited users. Predictable pricing.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.sumologic.com/pricing",
+   "title": "Sumo Logic pricing",
+   "quote": "Essentials Start free trial Ideal for small-to-medium-sized DevOps and SecOps teams requiring ad-hoc investigation and troubleshooting.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.sumologic.com/pricing",
+   "title": "Sumo Logic pricing",
+   "quote": "Enterprise Suite Ideal for maturing security teams looking for real-time threat detection, investigation, and response.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.sumologic.com/pricing",
+   "title": "Sumo Logic pricing",
+   "quote": "Package subscription cost vary based on specific subscription configuration details.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.sumologic.com/pricing",
+   "title": "Sumo Logic pricing",
+   "quote": "Single sign-on with SAML Support for federated identiy access management and single sign-on",
+   "accessed": "2026-10-05",
+   "interaction": "click Expand on the Platform section of the plan comparison table"
+  },
+  {
+   "id": "c6",
+   "url": "https://www.sumologic.com/pricing",
+   "title": "Sumo Logic pricing",
+   "quote": "Management APIs Administor Sumo Logic and manage users via API and/or with IaC tooling like Terraform",
+   "accessed": "2026-10-05",
+   "interaction": "click Expand on the Platform section of the plan comparison table"
+  },
+  {
+   "id": "c7",
+   "url": "https://www.sumologic.com/pricing",
+   "title": "Sumo Logic pricing",
+   "quote": "Compliance and Audit Logging Monitor and audit Sumo Logic usage to meet regulatory and compliance requirements",
+   "accessed": "2026-10-05",
+   "interaction": "click Expand on the Platform section of the plan comparison table"
+  },
+  {
+   "id": "c8",
+   "url": "https://www.sumologic.com/help/docs/api/scim-user/",
+   "title": "SCIM User Management APIs | Sumo Logic Docs",
+   "quote": "The SCIM User Management API allows you to provision users to Sumo Logic from SCIM provisioning providers .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://www.sumologic.com/help/docs/api/scim-user/",
+   "title": "SCIM User Management APIs | Sumo Logic Docs",
+   "quote": "To use the APIs in this resource, the user or account executing APIs must have the following role capabilities : User Management (all role capabilities)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://www.sumologic.com/help/docs/manage/security/scim/about-scim-provisioning/",
+   "title": "About SCIM Provisioning | Sumo Logic Docs",
+   "quote": "Before configuring a provider, create an access key . (We recommend using a service account to create the access key .) This access key will provide authorization to provision users from the provider into Sumo Logic.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://www.sumologic.com/help/docs/manage/security/scim/about-scim-provisioning/",
+   "title": "About SCIM Provisioning | Sumo Logic Docs",
+   "quote": "Set up SAML for single sign-on in the Sumo Logic instance where you will provision users. This will allow connection to Sumo Logic for provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://www.sumologic.com/help/docs/manage/security/scim/about-scim-provisioning/",
+   "title": "About SCIM Provisioning | Sumo Logic Docs",
+   "quote": "For the SCIM base URL, provide the Sumo Logic API endpoint for your deployment for the SCIM User Management APIs using the format <api-endpoint>/v1/scim/ . For example, https://api.sumologic.com/api/v1/scim/ .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://www.sumologic.com/help/docs/manage/security/scim/about-scim-provisioning/",
+   "title": "About SCIM Provisioning | Sumo Logic Docs",
+   "quote": "Bearer token Use Base64 encoding to Base64 encode <access ID>:<access key> .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://www.sumologic.com/help/docs/manage/security/scim/about-scim-provisioning/",
+   "title": "About SCIM Provisioning | Sumo Logic Docs",
+   "quote": "When users assigned these roles in your app are provisioned, the roles are automatically assigned to the provisioned users in Sumo Logic.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://www.sumologic.com/help/docs/manage/security/scim/provision-with-okta/",
+   "title": "Provision with Okta | Sumo Logic Docs",
+   "quote": "Select Enable on: Create Users Update User Attributes Deactivate Users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://www.sumologic.com/help/docs/manage/security/scim/provision-with-okta/",
+   "title": "Provision with Okta | Sumo Logic Docs",
+   "quote": "Navigate to Applications > Applications and click Create App Integration . Select SAML 2.0 and click Next .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://www.sumologic.com/help/docs/manage/security/scim/provision-with-microsoft-entra-id/",
+   "title": "Provision with Microsoft Entra ID | Sumo Logic Docs",
+   "quote": "Enter a name for the app, select Integrate any other application you don't find in the gallery (Non-gallery) .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://www.sumologic.com/help/docs/manage/security/scim/provision-with-microsoft-entra-id/",
+   "title": "Provision with Microsoft Entra ID | Sumo Logic Docs",
+   "quote": "If you unassign a user from the app in Microsoft Entra ID, the corresponding user is deactivated in Sumo Logic.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://www.sumologic.com/help/docs/manage/security/scim/provision-with-microsoft-entra-id/",
+   "title": "Provision with Microsoft Entra ID | Sumo Logic Docs",
+   "quote": "You must delete the old user from Sumo Logic first so that the user can be provisioned once again from Microsoft Entra ID.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://www.sumologic.com/help/docs/manage/security/scim/provision-with-onelogin/",
+   "title": "Provision with OneLogin | Sumo Logic Docs",
+   "quote": "Select SCIM Provisioner with SAML (SCIM v2 Enterprise) .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://www.sumologic.com/help/docs/manage/security/scim/provision-with-onelogin/",
+   "title": "Provision with OneLogin | Sumo Logic Docs",
+   "quote": "\"roles\" : [ { \"value\" : \"{$user.custom_fields.roles}\" , \"primary\" : true } ]",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://www.sumologic.com/help/docs/manage/security/scim/provision-with-onelogin/",
+   "title": "Provision with OneLogin | Sumo Logic Docs",
+   "quote": "If you unassign a user from the app in OneLogin, the corresponding user is deactivated in Sumo Logic.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://api.sumologic.com/docs/sumologic-api.yaml",
+   "title": "Sumo Logic API (OpenAPI)",
+   "quote": "Retrieves a list of users in the SCIM system, with optional pagination",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.sumologic.com/docs/#tag/scimUserManagement"
+  },
+  {
+   "id": "c24",
+   "url": "https://api.sumologic.com/docs/sumologic-api.yaml",
+   "title": "Sumo Logic API (OpenAPI)",
+   "quote": "The maximum number of results to return. Defaults to 100",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.sumologic.com/docs/#tag/scimUserManagement"
+  },
+  {
+   "id": "c25",
+   "url": "https://api.sumologic.com/docs/sumologic-api.yaml",
+   "title": "Sumo Logic API (OpenAPI)",
+   "quote": "description: Find user with the given email address",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.sumologic.com/docs/#tag/scimUserManagement"
+  },
+  {
+   "id": "c26",
+   "url": "https://api.sumologic.com/docs/sumologic-api.yaml",
+   "title": "Sumo Logic API (OpenAPI)",
+   "quote": "description: Creates a new user in the SCIM system",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.sumologic.com/docs/#tag/scimUserManagement"
+  },
+  {
+   "id": "c27",
+   "url": "https://api.sumologic.com/docs/sumologic-api.yaml",
+   "title": "Sumo Logic API (OpenAPI)",
+   "quote": "description: Updates an existing user's attributes in the SCIM system",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.sumologic.com/docs/#tag/scimUserManagement"
+  },
+  {
+   "id": "c28",
+   "url": "https://api.sumologic.com/docs/sumologic-api.yaml",
+   "title": "Sumo Logic API (OpenAPI)",
+   "quote": "description: Updates specific attributes of an existing user in the SCIM system",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.sumologic.com/docs/#tag/scimUserManagement"
+  },
+  {
+   "id": "c29",
+   "url": "https://api.sumologic.com/docs/sumologic-api.yaml",
+   "title": "Sumo Logic API (OpenAPI)",
+   "quote": "description: Deletes a SCIM user by their unique identifier",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.sumologic.com/docs/#tag/scimUserManagement"
+  },
+  {
+   "id": "c30",
+   "url": "https://api.sumologic.com/docs/sumologic-api.yaml",
+   "title": "Sumo Logic API (OpenAPI)",
+   "quote": "description: Fetches the details of a SCIM user by their unique identifier",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.sumologic.com/docs/#tag/scimUserManagement"
+  },
+  {
+   "id": "c31",
+   "url": "https://api.sumologic.com/docs/sumologic-api.yaml",
+   "title": "Sumo Logic API (OpenAPI)",
+   "quote": "description: Sumo logic accepts only one email address",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.sumologic.com/docs/#tag/scimUserManagement"
+  },
+  {
+   "id": "c32",
+   "url": "https://api.sumologic.com/docs/sumologic-api.yaml",
+   "title": "Sumo Logic API (OpenAPI)",
+   "quote": "description: roles should exactly match with role names within sumologic.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.sumologic.com/docs/#tag/scimUserManagement"
+  },
+  {
+   "id": "c33",
+   "url": "https://api.sumologic.com/docs/sumologic-api.yaml",
+   "title": "Sumo Logic API (OpenAPI)",
+   "quote": "description: Given name of the user (firstName)",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.sumologic.com/docs/#tag/scimUserManagement"
+  },
+  {
+   "id": "c34",
+   "url": "https://api.sumologic.com/docs/sumologic-api.yaml",
+   "title": "Sumo Logic API (OpenAPI)",
+   "quote": "description: Family name of the user (lastName)",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.sumologic.com/docs/#tag/scimUserManagement"
+  },
+  {
+   "id": "c35",
+   "url": "https://api.sumologic.com/docs/sumologic-api.yaml",
+   "title": "Sumo Logic API (OpenAPI)",
+   "quote": "description: True if the user is active",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.sumologic.com/docs/#tag/scimUserManagement"
+  },
+  {
+   "id": "c36",
+   "url": "https://api.sumologic.com/docs/sumologic-api.yaml",
+   "title": "Sumo Logic API (OpenAPI)",
+   "quote": "summary: Get a list of users.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.sumologic.com/docs/#tag/userManagement"
+  },
+  {
+   "id": "c37",
+   "url": "https://api.sumologic.com/docs/sumologic-api.yaml",
+   "title": "Sumo Logic API (OpenAPI)",
+   "quote": "summary: Create a new user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.sumologic.com/docs/#tag/userManagement"
+  },
+  {
+   "id": "c38",
+   "url": "https://api.sumologic.com/docs/sumologic-api.yaml",
+   "title": "Sumo Logic API (OpenAPI)",
+   "quote": "summary: Update a user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.sumologic.com/docs/#tag/userManagement"
+  },
+  {
+   "id": "c39",
+   "url": "https://api.sumologic.com/docs/sumologic-api.yaml",
+   "title": "Sumo Logic API (OpenAPI)",
+   "quote": "summary: Delete a user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.sumologic.com/docs/#tag/userManagement"
+  },
+  {
+   "id": "c40",
+   "url": "https://api.sumologic.com/docs/sumologic-api.yaml",
+   "title": "Sumo Logic API (OpenAPI)",
+   "quote": "summary: Assign a role to a user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.sumologic.com/docs/#tag/roleManagement"
+  },
+  {
+   "id": "c41",
+   "url": "https://api.sumologic.com/docs/sumologic-api.yaml",
+   "title": "Sumo Logic API (OpenAPI)",
+   "quote": "summary: Remove role from a user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.sumologic.com/docs/#tag/roleManagement"
+  },
+  {
+   "id": "c42",
+   "url": "https://api.sumologic.com/docs/sumologic-api.yaml",
+   "title": "Sumo Logic API (OpenAPI)",
+   "quote": "summary: Get a user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.sumologic.com/docs/#tag/userManagement"
+  },
+  {
+   "id": "c43",
+   "url": "https://www.sumologic.com/help/docs/api/user-management/",
+   "title": "User Management APIs | Sumo Logic Docs",
+   "quote": "The User Management API allows you to manage user accounts from HTTP endpoints.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c44",
+   "url": "https://www.sumologic.com/help/docs/api/about-apis/getting-started/",
+   "title": "API Authentication, Endpoints, and Security | Sumo Logic Docs",
+   "quote": "A rate limit of four API requests per second (240 requests per minute) applies to all API calls from a user.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c45",
+   "url": "https://www.sumologic.com/help/docs/api/about-apis/getting-started/",
+   "title": "API Authentication, Endpoints, and Security | Sumo Logic Docs",
+   "quote": "A rate limit of 10 concurrent requests to any API endpoint applies to an access key.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c46",
+   "url": "https://www.sumologic.com/help/docs/api/about-apis/getting-started/",
+   "title": "API Authentication, Endpoints, and Security | Sumo Logic Docs",
+   "quote": "If you prefer to use basic access authentication , you can do a Base64 encoding of your <accessId>:<accessKey> to authenticate your HTTPS request.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c47",
+   "url": "https://www.sumologic.com/help/docs/manage/security/saml/set-up-saml/",
+   "title": "Set Up SAML for Single Sign-On | Sumo Logic Docs",
+   "quote": "Account Type Account Level Cloud Flex Trial, Enterprise Credits Trial, Essentials, Enterprise Operations, Enterprise Security, Enterprise Suite",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c48",
+   "url": "https://www.sumologic.com/help/docs/manage/security/saml/set-up-saml/",
+   "title": "Set Up SAML for Single Sign-On | Sumo Logic Docs",
+   "quote": "In addition to basic SAML configuration, you can choose optional on-demand user creation (using SAML 2.0 assertions)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c49",
+   "url": "https://www.sumologic.com/help/docs/manage/users-roles/users/deactivate-activate-user/",
+   "title": "Deactivate and Activate a User | Sumo Logic Docs",
+   "quote": "All dashboards owned by the user are deactivated. Live Mode is disabled for dashboards owned by the user. Scheduled searches are deactivated for the user. Access keys are deactivated for the user.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c50",
+   "url": "https://www.sumologic.com/help/docs/manage/users-roles/users/delete-user/",
+   "title": "Delete a User | Sumo Logic Docs",
+   "quote": "If you prefer to prevent a user from accessing Sumo Logic without transferring the user's Library content, you can deactivate a user .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c51",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/sumologic-tutorial",
+   "title": "Configure SumoLogic for Single sign-on with Microsoft Entra ID",
+   "quote": "SumoLogic supports IDP initiated SSO.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c52",
+   "url": "https://www.okta.com/integrations/sumo-logic/",
+   "title": "Sumo Logic | Okta Integration Network",
+   "quote": "Securely monitor, troubleshoot, and access your infrastructure and applications at scale",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c53",
+   "url": "https://www.sumologic.com/help/docs/manage/security/scim/provision-with-okta/",
+   "title": "Provision with Okta | Sumo Logic Docs",
+   "quote": "SCIM connector base URL . Enter the API endpoint for your deployment for the SCIM User Management APIs using the format <api-endpoint>/v1/scim/ .",
+   "accessed": "2026-10-05"
+  }
+ ]
+}

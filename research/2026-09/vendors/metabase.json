@@ -1,0 +1,812 @@
+{
+ "slug": "metabase",
+ "vendor": "Metabase",
+ "vendor_url": "https://www.metabase.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Metabase",
+  "slug": "metabase",
+  "category": "Data, Analytics & BI",
+  "status": "gated",
+  "scim_plan": "Pro",
+  "scim_price_text": "Pro: $517.50/mo billed annually ($6,210/yr) incl. 10 users, +$130/user/yr",
+  "scim_price_per_user_mo": 10.83,
+  "team_plan": "Starter",
+  "team_price_text": "Starter: $90/mo billed annually ($1,080/yr) incl. 5 users, +$65/user/yr",
+  "team_price_per_user_mo": 5.42,
+  "price_multiplier": 2.0,
+  "sso_plan": "Pro",
+  "sso_price_per_user_mo": 10.83,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": false,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.metabase.com/pricing/",
+  "docs_url": "https://www.metabase.com/docs/latest/people-and-groups/user-provisioning",
+  "evidence": "Metabase docs: \"User provisioning with SCIM is only available on Pro and Enterprise plans\"; Pro is $517.50/mo billed annually versus Starter at $90/mo.",
+  "notes": "Still gated, but the SCIM plan changed: June recorded SCIM as Enterprise-only (from $20k/yr); the SCIM docs now say Pro and Enterprise, and the pricing FAQ says Pro and Enterprise are the same software feature-wise. Pricing is a base fee plus per-user overage: Starter $90/mo annual ($1,080/yr) with 5 users included then $65/user/yr; Pro $517.50/mo annual ($6,210/yr) with 10 users included then $130/user/yr. Per-user fields use the annual extra-user rates ($65/12 and $130/12) and ignore the base fee. SAML/OIDC/JWT SSO also start at Pro. SCIM officially supports Okta (users and groups) and Entra ID (users only); both are configured as custom SCIM apps, not catalogue apps. Deprovisioning deactivates; Metabase does not support account deletion. Self-hosted open source edition is free with no SSO or SCIM.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Starter",
+  "api_tax": false,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Open Source",
+   "price_text": "Free (self-hosted), unlimited users",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c9",
+    "c35",
+    "c34"
+   ]
+  },
+  {
+   "name": "Starter",
+   "price_text": "$90/mo billed annually ($1,080/yr; $100 monthly), first 5 users included, then $65 per user/year ($6/user/mo monthly)",
+   "price_per_user_mo": 5.42,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c9",
+    "c35",
+    "c34"
+   ]
+  },
+  {
+   "name": "Pro",
+   "price_text": "$517.50/mo billed annually ($6,210/yr; $575 monthly), first 10 users included, then $130 per user/year ($12/user/mo monthly)",
+   "price_per_user_mo": 10.83,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c4",
+    "c5",
+    "c9",
+    "c35"
+   ]
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Custom pricing; price starts at $20,000/year",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c6",
+    "c7",
+    "c9",
+    "c35"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c9",
+   "c11",
+   "c19"
+  ],
+  "plan": "Pro",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://{your-metabase-host}/api/ee/scim/v2",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Admin > Settings > Authentication > User provisioning tab (toggle on; token shown once, can be regenerated)",
+   "token_expiry": null,
+   "cite": [
+    "c12",
+    "c13",
+    "c17",
+    "c25"
+   ],
+   "notes": "Okta auth mode 'HTTP Header' (bearer token)."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c19",
+    "c20"
+   ],
+   "notes": "Only Users and Groups paths appear under /api/ee/scim/v2 in the OpenAPI spec."
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": false,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c18",
+    "c19",
+    "c20",
+    "c21",
+    "c26"
+   ],
+   "notes": "PATCH /Users supports specific replace operations (activate/deactivate), not arbitrary patches. No DELETE /Users; DELETE /Groups/{id} exists. Group push works with Okta only."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": true,
+   "revokes_sessions": null,
+   "data_retained": "Deactivated accounts cannot log in; their questions, models and dashboards are preserved. Account deletion is not supported.",
+   "cite": [
+    "c16",
+    "c26",
+    "c27",
+    "c28",
+    "c8"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [],
+   "cite": [
+    "c23"
+   ],
+   "notes": "filter query parameter on GET /Users and /Groups; supported attributes not documented."
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c22"
+   ],
+   "notes": "startIndex and count query parameters."
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "emails.value",
+    "emails.type",
+    "emails.primary",
+    "active",
+    "locale",
+    "groups.value",
+    "groups.display"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "displayName",
+    "members.value"
+   ],
+   "cite": [
+    "c24",
+    "c21"
+   ]
+  },
+  "roles": {
+   "supported": null,
+   "how": "Group membership via SCIM Groups (Okta); permissions are assigned to Metabase groups.",
+   "cite": [
+    "c13"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Only Okta and Microsoft Entra ID are officially supported; other SCIM clients are untested.",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "text": "Entra ID provisions users only; groups are not created or populated.",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "text": "Enabling SCIM disables SAML JIT user provisioning.",
+    "cite": [
+     "c15"
+    ]
+   },
+   {
+    "text": "PATCH supports only specific replace operations, not arbitrary patches.",
+    "cite": [
+     "c18"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c34",
+   "c39"
+  ],
+  "plan": "Starter",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://{your-metabase-host}/api",
+  "docs_url": "https://www.metabase.com/docs/latest/api",
+  "auth": {
+   "methods": [
+    "api_key"
+   ],
+   "scopes": [],
+   "cite": [
+    "c33",
+    "c34"
+   ],
+   "notes": "X-API-Key header; key permissions come from the group it is assigned to."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": false,
+   "reactivate_user": true,
+   "manage_groups": true,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c29",
+    "c30",
+    "c31",
+    "c32",
+    "c37",
+    "c26",
+    "c39"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/api/user",
+    "purpose": "List users",
+    "cite": [
+     "c39"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/user",
+    "purpose": "Create a new User",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/user/{id}",
+    "purpose": "Get user",
+    "cite": [
+     "c39"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/user/{id}",
+    "purpose": "Update user",
+    "cite": [
+     "c39"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/user/{id}",
+    "purpose": "Disable (deactivate) a User",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/user/{id}/reactivate",
+    "purpose": "Reactivate user",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/permissions/group",
+    "purpose": "List groups",
+    "cite": [
+     "c37"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/permissions/group",
+    "purpose": "Create group",
+    "cite": [
+     "c37"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/permissions/group/{group-id}",
+    "purpose": "Delete group",
+    "cite": [
+     "c37"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/permissions/membership",
+    "purpose": "List group memberships",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/permissions/membership",
+    "purpose": "Add user to group",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/permissions/membership/{id}",
+    "purpose": "Remove group membership",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/ee/scim/api_key",
+    "purpose": "Get SCIM API key",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/ee/scim/api_key",
+    "purpose": "Create or refresh SCIM API key (enables SCIM)",
+    "cite": [
+     "c25"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": [],
+   "notes": "Pricing lists 'Usage analytics & auditing' on Pro; no documented audit-log export API beyond internal /api/ee/audit-app paths."
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": false,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c13",
+    "c38"
+   ],
+   "notes": "Configured through Okta's App Integration Wizard SCIM setup (custom app); no OIN listing at okta.com/integrations/metabase (404)."
+  },
+  "entra": {
+   "listed": false,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c14"
+   ],
+   "notes": "Custom non-gallery app with Entra automatic provisioning; users only. Entra tutorial URL 404."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c36"
+  ],
+  "notes": "SAML JIT is on by default and is switched off when SCIM is enabled."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.metabase.com/pricing/",
+   "title": "Metabase Pricing",
+   "quote": "Starter $100 $90 / mo. $100 / month $1,080 / year",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.metabase.com/pricing/",
+   "title": "Metabase Pricing",
+   "quote": "$6 per user / month $65 per user / year First 5 users included in the plan",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.metabase.com/pricing/",
+   "title": "Metabase Pricing",
+   "quote": "Pro $575 $517.50 / mo. $575 / month $6,210 / year",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.metabase.com/pricing/",
+   "title": "Metabase Pricing",
+   "quote": "$12 per user / month $130 per user / year First 10 users included in the plan",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.metabase.com/pricing/",
+   "title": "Metabase Pricing",
+   "quote": "All Starter features, plus: Row and column level permissions SSO Caching controls Usage analytics & auditing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://www.metabase.com/pricing/",
+   "title": "Metabase Pricing",
+   "quote": "Feature-wise, zero — it's the same software.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://www.metabase.com/pricing/",
+   "title": "Metabase Pricing",
+   "quote": "Price starts at $20,000 / year",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://www.metabase.com/pricing/",
+   "title": "Metabase Pricing",
+   "quote": "Yes. In your instance you can add or deactivate any users. Your billing will automatically be prorated.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://www.metabase.com/docs/latest/people-and-groups/user-provisioning",
+   "title": "User provisioning with SCIM",
+   "quote": "User provisioning with SCIM is only available on Pro and Enterprise plans (both self-hosted and on Metabase Cloud).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://www.metabase.com/docs/latest/people-and-groups/user-provisioning",
+   "title": "User provisioning with SCIM",
+   "quote": "For now, Metabase officially supports SCIM for Okta and Microsoft Entra ID . Other SCIM providers may work, but we haven't tested them.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://www.metabase.com/docs/latest/people-and-groups/user-provisioning",
+   "title": "User provisioning with SCIM",
+   "quote": "The SCIM endpoint is /api/ee/scim/v2 . So your URL will look something like: https://metabase.example.com/api/ee/scim/v2",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://www.metabase.com/docs/latest/people-and-groups/user-provisioning",
+   "title": "User provisioning with SCIM",
+   "quote": "Copy the token and save the token somewhere safe. For security, Metabase can't show you the token again. You can, however, regenerate the token",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://www.metabase.com/docs/latest/people-and-groups/user-provisioning",
+   "title": "User provisioning with SCIM",
+   "quote": "With Okta, Metabase supports user and group provisioning; groups are created and populated in Metabase. The authentication mode you need to set is \"HTTP Header\".",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://www.metabase.com/docs/latest/people-and-groups/user-provisioning",
+   "title": "User provisioning with SCIM",
+   "quote": "With Microsoft Entra ID, Metabase only supports user provisioning (groups aren't created or populated).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://www.metabase.com/docs/latest/people-and-groups/user-provisioning",
+   "title": "User provisioning with SCIM",
+   "quote": "SAML user provisioning is always disabled when SCIM is enabled.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://www.metabase.com/docs/latest/people-and-groups/user-provisioning",
+   "title": "User provisioning with SCIM",
+   "quote": "If you deactivate someone from your SSO, SCIM can let Metabase know to deactivate their Metabase account as well.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://www.metabase.com/docs/latest/people-and-groups/user-provisioning",
+   "title": "User provisioning with SCIM",
+   "quote": "Click the User provisioning tab. Toggle on user provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://www.metabase.com/docs/latest/api.json",
+   "title": "Metabase API (OpenAPI)",
+   "quote": "Activate or deactivate a user. Supports specific replace operations, but not arbitrary patches.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.metabase.com/docs/latest/api"
+  },
+  {
+   "id": "c19",
+   "url": "https://www.metabase.com/docs/latest/api.json",
+   "title": "Metabase API (OpenAPI)",
+   "quote": "\"/api/ee/scim/v2/Users\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.metabase.com/docs/latest/api"
+  },
+  {
+   "id": "c20",
+   "url": "https://www.metabase.com/docs/latest/api.json",
+   "title": "Metabase API (OpenAPI)",
+   "quote": "\"/api/ee/scim/v2/Groups/{id}\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.metabase.com/docs/latest/api"
+  },
+  {
+   "id": "c21",
+   "url": "https://www.metabase.com/docs/latest/api.json",
+   "title": "Metabase API (OpenAPI)",
+   "quote": "Create a single group, and populates it if necessary.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.metabase.com/docs/latest/api"
+  },
+  {
+   "id": "c22",
+   "url": "https://www.metabase.com/docs/latest/api.json",
+   "title": "Metabase API (OpenAPI)",
+   "quote": "\"name\" : \"startIndex\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.metabase.com/docs/latest/api"
+  },
+  {
+   "id": "c23",
+   "url": "https://www.metabase.com/docs/latest/api.json",
+   "title": "Metabase API (OpenAPI)",
+   "quote": "\"name\" : \"filter\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.metabase.com/docs/latest/api"
+  },
+  {
+   "id": "c24",
+   "url": "https://www.metabase.com/docs/latest/api.json",
+   "title": "Metabase API (OpenAPI)",
+   "quote": "\"required\" : [ \"schemas\", \"userName\", \"name\", \"emails\" ]",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.metabase.com/docs/latest/api"
+  },
+  {
+   "id": "c25",
+   "url": "https://www.metabase.com/docs/latest/api.json",
+   "title": "Metabase API (OpenAPI)",
+   "quote": "Create a new SCIM API key, or refresh one that already exists. When called for the first time,",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.metabase.com/docs/latest/api"
+  },
+  {
+   "id": "c26",
+   "url": "https://www.metabase.com/docs/latest/people-and-groups/managing",
+   "title": "Managing people and groups",
+   "quote": "Metabase doesn't explicitly support account deletion. Instead, Metabase deactivates accounts so people can't log in to them, while it preserves any questions, models, dashboards, and other items created by those accounts.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://www.metabase.com/docs/latest/people-and-groups/managing",
+   "title": "Managing people and groups",
+   "quote": "Deactivating an account will mark it as inactive and prevent the user from logging in - but it won't delete that person's saved questions or dashboards.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://www.metabase.com/docs/latest/people-and-groups/managing",
+   "title": "Managing people and groups",
+   "quote": "If you're on a Pro or Enterprise Metabase plan, all active accounts will count toward your user account total.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://www.metabase.com/docs/latest/api.json",
+   "title": "Metabase API (OpenAPI)",
+   "quote": "Disable a `User`.  This does not remove the `User` from the DB, but instead disables their account.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.metabase.com/docs/latest/api"
+  },
+  {
+   "id": "c30",
+   "url": "https://www.metabase.com/docs/latest/api.json",
+   "title": "Metabase API (OpenAPI)",
+   "quote": "Create a new `User`, return a 400 if the email address is already taken",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.metabase.com/docs/latest/api"
+  },
+  {
+   "id": "c31",
+   "url": "https://www.metabase.com/docs/latest/api.json",
+   "title": "Metabase API (OpenAPI)",
+   "quote": "\"/api/user/{id}/reactivate\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.metabase.com/docs/latest/api"
+  },
+  {
+   "id": "c32",
+   "url": "https://www.metabase.com/docs/latest/api.json",
+   "title": "Metabase API (OpenAPI)",
+   "quote": "\"/api/permissions/membership\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.metabase.com/docs/latest/api"
+  },
+  {
+   "id": "c33",
+   "url": "https://www.metabase.com/docs/latest/api.json",
+   "title": "Metabase API (OpenAPI)",
+   "quote": "\"name\" : \"X-API-Key\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.metabase.com/docs/latest/api"
+  },
+  {
+   "id": "c34",
+   "url": "https://www.metabase.com/docs/latest/people-and-groups/api-keys",
+   "title": "API keys",
+   "quote": "Metabase can create API keys to authenticate programmatic requests to the API. To set the permissions for an API key, you can assign the key to a group .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c35",
+   "url": "https://www.metabase.com/docs/latest/people-and-groups/authenticating-with-saml",
+   "title": "Authenticating with SAML",
+   "quote": "SAML authentication is only available on Pro and Enterprise plans (both self-hosted and on Metabase Cloud).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://www.metabase.com/docs/latest/people-and-groups/authenticating-with-saml",
+   "title": "Authenticating with SAML",
+   "quote": "User provisioning is enabled by default. Metabase will create accounts for people who don't yet have a Metabase account but who are able to log in via SAML SSO.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://www.metabase.com/docs/latest/api.json",
+   "title": "Metabase API (OpenAPI)",
+   "quote": "\"/api/permissions/group\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.metabase.com/docs/latest/api"
+  },
+  {
+   "id": "c38",
+   "url": "https://www.metabase.com/docs/latest/people-and-groups/user-provisioning",
+   "title": "User provisioning with SCIM",
+   "quote": "Setting up SCIM in Okta",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c39",
+   "url": "https://www.metabase.com/docs/latest/api.json",
+   "title": "Metabase API (OpenAPI)",
+   "quote": "\"/api/user\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.metabase.com/docs/latest/api"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.metabase.com/pricing/",
+  "https://www.metabase.com/docs/latest/people-and-groups/user-provisioning",
+  "https://www.metabase.com/docs/latest/api.json",
+  "https://www.metabase.com/docs/latest/people-and-groups/managing"
+ ],
+ "open_questions": [
+  "Which attributes the SCIM filter supports.",
+  "Whether SCIM deactivation ends active sessions.",
+  "Whether a Metabase app exists in the Okta OIN or Entra gallery under a different name.",
+  "Whether the audit-app API counts as a supported audit-log API."
+ ]
+}

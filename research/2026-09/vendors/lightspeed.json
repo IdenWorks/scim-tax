@@ -1,0 +1,566 @@
+{
+ "slug": "lightspeed",
+ "vendor": "Lightspeed Retail (X-Series)",
+ "vendor_url": "https://www.lightspeedhq.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Lightspeed Retail (X-Series)",
+  "slug": "lightspeed",
+  "category": "E-commerce & Payments",
+  "status": "none",
+  "scim_plan": "—",
+  "scim_price_text": "—",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Basic",
+  "team_price_text": "Basic: $89/mo per location (1 register), billed annually",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Plus",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": null,
+  "idp": {
+   "okta": null,
+   "entra": null,
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": false
+  },
+  "pricing_page_url": "https://www.lightspeedhq.com/pos/retail/pricing/",
+  "docs_url": "https://x-series-support.lightspeedhq.com/hc/en-us/articles/25533674435867-Connecting-your-identity-provider-to-Retail-POS",
+  "evidence": "Lightspeed's SSO article ('Available on Plus') connects Retail POS to an OpenID Connect identity provider and creates users from the identity token's claims; no SCIM endpoint is documented in the help centre or the X-Series API.",
+  "notes": "Researched Lightspeed Commerce's main retail product, Retail POS (X-Series); the pricing page says its prices reflect X-Series. R-Series, Restaurant and eCom are separate product lines and were not researched. Plans are priced per location with one register included ($89/$149/$289 per month billed annually), so per-user fields are null. SSO is OIDC only (no SAML) and on Plus only; users are created JIT from the ID token, and in 'Access management' mode the IdP also supplies role and outlet. The X-Series REST API can list, read and delete users and kill their sessions, but has no create-user endpoint; personal tokens and 'API access' are Plus only, while OAuth apps (partners) are documented without a plan gate.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Plus",
+  "api_tax": true,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Basic",
+   "price_text": "$89 USD/mo billed annually (1 register included)",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c4",
+    "c5"
+   ]
+  },
+  {
+   "name": "Core",
+   "price_text": "$149 USD/mo billed annually (1 register included)",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c4",
+    "c5"
+   ]
+  },
+  {
+   "name": "Plus",
+   "price_text": "$289 USD/mo billed annually (1 register included)",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c4",
+    "c5",
+    "c6",
+    "c18"
+   ],
+   "notes": "Pricing table markup ticks API access, Custom User Roles and SSO only in the Plus column; the SSO help article says 'Available on Plus'."
+  }
+ ],
+ "scim": {
+  "available": false,
+  "cite": [
+   "c7",
+   "c8"
+  ],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": null,
+   "token_source": null,
+   "token_expiry": null,
+   "cite": []
+  },
+  "endpoints": {
+   "Users": null,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": []
+  },
+  "operations": {
+   "create": null,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": null,
+   "reactivate": null,
+   "delete": null,
+   "group_push": null,
+   "group_membership": null,
+   "cite": []
+  },
+  "deprovision": {
+   "action": null,
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": []
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": []
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "No SCIM in the X-Series help centre (search 'scim' returns nothing) or the X-Series API reference (llms.txt index); users are created from the OIDC ID token on SSO sign-in."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c11",
+   "c18",
+   "c21",
+   "c3"
+  ],
+  "plan": "Plus",
+  "api_tax": true,
+  "style": "REST",
+  "base_url": "https://{domain_prefix}.retail.lightspeed.app/api/2026-07",
+  "docs_url": "https://x-series-api.lightspeedhq.com/reference/listusers",
+  "auth": {
+   "methods": [
+    "oauth2",
+    "personal_token"
+   ],
+   "scopes": [
+    "users:read",
+    "users:write",
+    "audit:read"
+   ],
+   "cite": [
+    "c18",
+    "c19",
+    "c11"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c11",
+    "c12",
+    "c13",
+    "c14"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/users",
+    "purpose": "List users (paginated)",
+    "cite": [
+     "c11"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/users/{user_id}",
+    "purpose": "Get a single user",
+    "cite": [
+     "c12"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/users/bulk",
+    "purpose": "Get multiple users by id",
+    "cite": [
+     "c16"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/user",
+    "purpose": "Get current user",
+    "cite": [
+     "c15"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/users/{user_id}",
+    "purpose": "Delete a single user",
+    "cite": [
+     "c13"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/users/{user_id}/sessions",
+    "purpose": "Delete all sessions and personal tokens of a user",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/auditlog_events",
+    "purpose": "List audit events",
+    "cite": [
+     "c17"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": [],
+   "notes": "Webhook docs list customer, inventory, product, register_closure and sale events; no user events seen."
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": null,
+   "cite": [
+    "c17",
+    "c19"
+   ]
+  },
+  "rate_limits": {
+   "text": "Per retailer per application and per retailer for all users: 300 x registers + 50 requests per 5-minute window (350 for one register).",
+   "cite": [
+    "c20"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "The users:write scope says it covers creating and updating users, but the API reference lists no create or update user endpoint.",
+    "cite": [
+     "c19",
+     "c11"
+    ]
+   },
+   {
+    "text": "Personal tokens are Plus only; OAuth 2.0 apps are documented without a plan restriction.",
+    "cite": [
+     "c18"
+    ]
+   }
+  ],
+  "notes": "API access is ticked only on Plus in the pricing table (read from markup); row api_tax reflects that."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "okta.com/integrations/lightspeed*, -retail, -systems, -hq, -commerce all 404."
+  },
+  "entra": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "No Entra gallery tutorial found at guessed Learn URLs."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "oidc",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c7",
+   "c8",
+   "c9",
+   "c10"
+  ],
+  "notes": "In 'Access management' mode the IdP also assigns role and outlet through ID-token claims at sign-in."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.lightspeedhq.com/pos/retail/pricing/",
+   "title": "POS System Price for Retail | Lightspeed Commerce",
+   "quote": "Basic Designed for essential day-to-day needs for independent retailers. 89 USD /mo",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.lightspeedhq.com/pos/retail/pricing/",
+   "title": "POS System Price for Retail | Lightspeed Commerce",
+   "quote": "Core Ideal for retailers seeking management tools to facilitate business growth 149 USD /mo",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.lightspeedhq.com/pos/retail/pricing/",
+   "title": "POS System Price for Retail | Lightspeed Commerce",
+   "quote": "Plus Tailored for advanced customization and ease of scalability in established retail operations. 289 USD /mo",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.lightspeedhq.com/pos/retail/pricing/",
+   "title": "POS System Price for Retail | Lightspeed Commerce",
+   "quote": "Please note that these prices reflect Lightspeed Retail (X-Series).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.lightspeedhq.com/pos/retail/pricing/",
+   "title": "POS System Price for Retail | Lightspeed Commerce",
+   "quote": "Single Sign-On (SSO): Access all your systems with one secure login.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://x-series-support.lightspeedhq.com/api/v2/help_center/en-us/articles/25533674435867.json",
+   "title": "Connecting your identity provider to Retail POS",
+   "quote": "Available on Plus",
+   "accessed": "2026-10-05",
+   "page_url": "https://x-series-support.lightspeedhq.com/hc/en-us/articles/25533674435867-Connecting-your-identity-provider-to-Retail-POS"
+  },
+  {
+   "id": "c7",
+   "url": "https://x-series-support.lightspeedhq.com/api/v2/help_center/en-us/articles/25533674435867.json",
+   "title": "Connecting your identity provider to Retail POS",
+   "quote": "Retail POS can integrate with identity providers that support the OAuth and Open ID connect protocols.",
+   "accessed": "2026-10-05",
+   "page_url": "https://x-series-support.lightspeedhq.com/hc/en-us/articles/25533674435867-Connecting-your-identity-provider-to-Retail-POS"
+  },
+  {
+   "id": "c8",
+   "url": "https://x-series-support.lightspeedhq.com/api/v2/help_center/en-us/articles/25533674435867.json",
+   "title": "Connecting your identity provider to Retail POS",
+   "quote": "To create a user from the token, specific claims from the token must be mapped to Lightspeed Retail user attributes.",
+   "accessed": "2026-10-05",
+   "page_url": "https://x-series-support.lightspeedhq.com/hc/en-us/articles/25533674435867-Connecting-your-identity-provider-to-Retail-POS"
+  },
+  {
+   "id": "c9",
+   "url": "https://x-series-support.lightspeedhq.com/api/v2/help_center/en-us/articles/25533674435867.json",
+   "title": "Connecting your identity provider to Retail POS",
+   "quote": "Access management: Manage usernames, emails, passwords, MFA, role and outlet assignments in your IDP.",
+   "accessed": "2026-10-05",
+   "page_url": "https://x-series-support.lightspeedhq.com/hc/en-us/articles/25533674435867-Connecting-your-identity-provider-to-Retail-POS"
+  },
+  {
+   "id": "c10",
+   "url": "https://x-series-support.lightspeedhq.com/api/v2/help_center/en-us/articles/25533674435867.json",
+   "title": "Connecting your identity provider to Retail POS",
+   "quote": "Users will be created without a role and must have one assigned before they continue using Retail POS.",
+   "accessed": "2026-10-05",
+   "page_url": "https://x-series-support.lightspeedhq.com/hc/en-us/articles/25533674435867-Connecting-your-identity-provider-to-Retail-POS"
+  },
+  {
+   "id": "c11",
+   "url": "https://x-series-api.lightspeedhq.com/reference/listusers.md",
+   "title": "List users",
+   "quote": "Returns a paginated list of users.",
+   "accessed": "2026-10-05",
+   "page_url": "https://x-series-api.lightspeedhq.com/reference/listusers"
+  },
+  {
+   "id": "c12",
+   "url": "https://x-series-api.lightspeedhq.com/reference/getuserbyid.md",
+   "title": "Get a single user",
+   "quote": "Returns a single user with the requested ID.",
+   "accessed": "2026-10-05",
+   "page_url": "https://x-series-api.lightspeedhq.com/reference/getuserbyid"
+  },
+  {
+   "id": "c13",
+   "url": "https://x-series-api.lightspeedhq.com/reference/deleteuserbyid.md",
+   "title": "Delete a single user",
+   "quote": "Returns the user that has been deleted.",
+   "accessed": "2026-10-05",
+   "page_url": "https://x-series-api.lightspeedhq.com/reference/deleteuserbyid"
+  },
+  {
+   "id": "c14",
+   "url": "https://x-series-api.lightspeedhq.com/reference/deletesessionsbyuserid.md",
+   "title": "Delete user sessions",
+   "quote": "Deletes all sessions and personal tokens of the given user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://x-series-api.lightspeedhq.com/reference/deletesessionsbyuserid"
+  },
+  {
+   "id": "c15",
+   "url": "https://x-series-api.lightspeedhq.com/reference/getuser.md",
+   "title": "Get current user",
+   "quote": "Returns the current user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://x-series-api.lightspeedhq.com/reference/getuser"
+  },
+  {
+   "id": "c16",
+   "url": "https://x-series-api.lightspeedhq.com/reference/getusersbyid.md",
+   "title": "Get multiple users by id",
+   "quote": "Get multiple users by id.",
+   "accessed": "2026-10-05",
+   "page_url": "https://x-series-api.lightspeedhq.com/reference/getusersbyid"
+  },
+  {
+   "id": "c17",
+   "url": "https://x-series-api.lightspeedhq.com/reference/getauditlogevents.md",
+   "title": "List audit events",
+   "quote": "This API returns a list of all the audit log events that match the given filters.",
+   "accessed": "2026-10-05",
+   "page_url": "https://x-series-api.lightspeedhq.com/reference/getauditlogevents"
+  },
+  {
+   "id": "c18",
+   "url": "https://x-series-api.lightspeedhq.com/docs/authorization.md",
+   "title": "Authorization",
+   "quote": "Personal tokens are only available to retailers on the [Plus plan]",
+   "accessed": "2026-10-05",
+   "page_url": "https://x-series-api.lightspeedhq.com/docs/authorization"
+  },
+  {
+   "id": "c19",
+   "url": "https://x-series-api.lightspeedhq.com/docs/scopes.md",
+   "title": "OAuth Scopes",
+   "quote": "Create, update and delete users and customise groups.",
+   "accessed": "2026-10-05",
+   "page_url": "https://x-series-api.lightspeedhq.com/docs/scopes"
+  },
+  {
+   "id": "c20",
+   "url": "https://x-series-api.lightspeedhq.com/docs/rate_limiting.md",
+   "title": "Rate Limiting",
+   "quote": "For a store with a single register that will result in a limit of 350 requests. The rate limiter is currently based on a 5 minute (300 seconds) window.",
+   "accessed": "2026-10-05",
+   "page_url": "https://x-series-api.lightspeedhq.com/docs/rate_limiting"
+  },
+  {
+   "id": "c21",
+   "url": "https://x-series-api.lightspeedhq.com/reference/listusers.md",
+   "title": "List users",
+   "quote": "\"url\": \"https://{domain_prefix}.retail.lightspeed.app/api/2026-07\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://x-series-api.lightspeedhq.com/reference/listusers"
+  },
+  {
+   "id": "c22",
+   "url": "https://x-series-api.lightspeedhq.com/docs/webhooks.md",
+   "title": "Webhooks",
+   "quote": "The `product.update` webhook is fired when a product is updated.",
+   "accessed": "2026-10-05",
+   "page_url": "https://x-series-api.lightspeedhq.com/docs/webhooks"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.lightspeedhq.com/pos/retail/pricing/",
+  "https://x-series-support.lightspeedhq.com help-centre search API: 'single sign-on', 'scim', 'provisioning'",
+  "https://retail-support.lightspeedhq.com help-centre search API (R-Series): 'single sign-on', 'scim', 'provisioning'",
+  "https://x-series-api.lightspeedhq.com/llms.txt (full API reference index)",
+  "https://www.okta.com/integrations/ (lightspeed, lightspeed-retail, lightspeed-systems, lightspeed-hq, lightspeed-commerce: 404)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/ (lightspeed tutorials: 404)"
+ ],
+ "open_questions": [
+  "Whether OAuth 2.0 API apps (not personal tokens) can call the Users endpoints on Basic or Core.",
+  "Whether a user deleted through the API or removed in the IdP frees anything billable (pricing is per register, not per user).",
+  "No IdP catalogue apps were found; Okta/Entra listing for Lightspeed Retail unconfirmed."
+ ]
+}

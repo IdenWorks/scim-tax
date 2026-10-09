@@ -1,0 +1,1090 @@
+{
+ "slug": "seismic",
+ "vendor": "Seismic",
+ "vendor_url": "https://www.seismic.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Seismic",
+  "slug": "seismic",
+  "category": "Sales & CRM",
+  "status": "gated",
+  "scim_plan": "Contact Sales (quote-only)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales (no public pricing; seismic.com/pricing is 404)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "sso_only",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.seismic.com/get-a-demo/",
+  "docs_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementcreateanewuser",
+  "evidence": "Seismic's developer portal documents a SCIM 2.0 API at https://api.seismic.com/scim/v2 (\"Creates a new user within the Seismic tenant using SCIM 2.0\"), and Seismic publishes no prices; buyers are sent to a personalized demo.",
+  "notes": "Quote-only: no public pricing (seismic.com/pricing is 404; Enablement Cloud Starter page lists licence types with Contact Us), so SCIM can only be bought through sales; no plan gate for SCIM or SSO is published. This row is the main Seismic Enablement platform (Seismic Content). The existing lessonly row ('Seismic Learning (Lessonly)') covers the Learning product: on upgraded tenants both products share the same Seismic Platform SCIM API, where one platform user can hold a Content role (Premium, Business, Partner) and a Learning role. SCIM: Users and Groups CRUD, PATCH replace only, active=false to deactivate, DELETE permanent, filter + pagination (max 100), no Bulk; JWT bearer from an OAuth client registered by a tenant admin. Okta OIN 'Seismic' app provisions over SCIM (Create/Update/Deactivate/Group Push); the Entra gallery app is SAML only. Audit-record API and (Early Access) user webhooks exist.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Seismic Enablement Cloud (quote-only)",
+   "price_text": "Contact Sales",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c43"
+   ],
+   "notes": "Enablement Cloud Starter sells Standard, Partner and Intranet user licences; no prices or tier gates published."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c4",
+   "c8",
+   "c12",
+   "c11"
+  ],
+  "plan": "Contact Sales (quote-only; no plan gate published)",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://api.seismic.com/scim/v2",
+  "auth": {
+   "method": "oauth2",
+   "token_source": "OAuth2/OIDC client registered by a tenant admin in the App Registration portal (apps.seismic.com); JWT bearer with seismic.user.manage (write) or seismic.user.view (read) scope",
+   "token_expiry": null,
+   "cite": [
+    "c11",
+    "c48",
+    "c51",
+    "c49",
+    "c50"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": true,
+   "Schemas": true,
+   "ResourceTypes": true,
+   "Bulk": false,
+   "Me": null,
+   "cite": [
+    "c8",
+    "c26",
+    "c36",
+    "c37",
+    "c38",
+    "c39"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c8",
+    "c21",
+    "c23",
+    "c22",
+    "c9",
+    "c25",
+    "c26",
+    "c29",
+    "c30"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "active=false via PATCH disables the user (locked, cannot log in); DELETE permanently removes the user from the tenant and cannot be reverted. For joint Content+Learning users, removing one product means patching off that role.",
+   "cite": [
+    "c22",
+    "c9",
+    "c25",
+    "c4"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName",
+    "name.givenName",
+    "userType",
+    "active",
+    "emails.value"
+   ],
+   "cite": [
+    "c19",
+    "c36"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": 100,
+   "cite": [
+    "c20"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "emails[type eq \"work\"].value",
+    "emails.primary",
+    "active",
+    "userType",
+    "roles",
+    "title",
+    "phoneNumbers",
+    "addresses.formatted",
+    "ims",
+    "preferredLanguage",
+    "timezone"
+   ],
+   "enterprise": [
+    "costCenter",
+    "department",
+    "employeeNumber",
+    "organization"
+   ],
+   "custom": {
+    "supported": true,
+    "how": "Seismic extension urn:ietf:params:scim:schemas:extension:seismic:2.0:User (e.g. ssoId, location, biography) plus tenant-specific custom properties discovered via GET /scim/v2/Schemas"
+   },
+   "group": [
+    "displayName",
+    "externalId"
+   ],
+   "cite": [
+    "c8",
+    "c10",
+    "c13",
+    "c15",
+    "c16",
+    "c17",
+    "c18",
+    "c26",
+    "c38"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "SCIM 'roles' array (case-sensitive): Content roles Premium, Business, Partner and Learning roles Admin, Creator, Manager, Learner or custom; roles override the legacy userType.",
+   "cite": [
+    "c5",
+    "c6",
+    "c15"
+   ]
+  },
+  "rate_limits": {
+   "text": "Standard API tiering: 600 calls per 60 seconds for endpoints not otherwise listed (SCIM is not singled out); 429 with retry hint when exceeded.",
+   "cite": [
+    "c46",
+    "c47"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "PATCH supports only the replace operation (users and groups); group membership is managed through POST/DELETE /scim/v2/Users/{userId}/Groups/{groupId} rather than PATCH members.",
+    "cite": [
+     "c22",
+     "c27",
+     "c29",
+     "c30"
+    ]
+   },
+   {
+    "text": "Bulk is not supported (ServiceProviderConfig).",
+    "cite": [
+     "c37"
+    ]
+   },
+   {
+    "text": "Only one email, of type work, is supported.",
+    "cite": [
+     "c13",
+     "c14"
+    ]
+   },
+   {
+    "text": "PUT treats missing fields as null or fails the request.",
+    "cite": [
+     "c24"
+    ]
+   },
+   {
+    "text": "Role-based Content/Learning management applies only to tenants upgraded to the FY24 Winter user-management model.",
+    "cite": [
+     "c7"
+    ]
+   }
+  ],
+  "notes": "ServiceProviderConfig example reports patch and filter supported, bulk/sort/eTag/changePassword not supported, OAuth bearer token auth."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c4",
+   "c8",
+   "c40",
+   "c48"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://api.seismic.com",
+  "docs_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementretrieveallusersretrieveusersmatchingcertaincriteria",
+  "auth": {
+   "methods": [
+    "oauth2"
+   ],
+   "scopes": [
+    "seismic.user.view",
+    "seismic.user.manage"
+   ],
+   "cite": [
+    "c48",
+    "c49",
+    "c50"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": true,
+   "reactivate_user": true,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c21",
+    "c8",
+    "c22",
+    "c25",
+    "c26",
+    "c6"
+   ],
+   "notes": "Seismic's user-management API is the SCIM API itself; the non-SCIM /integration/v2/users endpoints are read-only and marked legacy."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/scim/v2/Users",
+    "purpose": "List or filter users",
+    "cite": [
+     "c21"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/scim/v2/Users",
+    "purpose": "Create user",
+    "cite": [
+     "c8"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/scim/v2/Users/{userId}",
+    "purpose": "Get user",
+    "cite": [
+     "c16"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/scim/v2/Users/{userId}",
+    "purpose": "Replace user",
+    "cite": [
+     "c23"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/scim/v2/Users/{userId}",
+    "purpose": "Partial update (replace only), e.g. active=false",
+    "cite": [
+     "c22"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/scim/v2/Users/{userId}",
+    "purpose": "Permanently delete user",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/scim/v2/Users/{userId}/Groups",
+    "purpose": "Groups a user belongs to",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/scim/v2/Users/{userId}/Groups/{groupId}",
+    "purpose": "Add user to group",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/scim/v2/Users/{userId}/Groups/{groupId}",
+    "purpose": "Remove user from group",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/scim/v2/Groups",
+    "purpose": "List or filter groups",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/scim/v2/Groups",
+    "purpose": "Create group",
+    "cite": [
+     "c26"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/scim/v2/Groups/{groupId}",
+    "purpose": "Get group",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/scim/v2/Groups/{groupId}",
+    "purpose": "Replace group",
+    "cite": [
+     "c35"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/scim/v2/Groups/{groupId}",
+    "purpose": "Partial group update (replace only)",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/scim/v2/Groups/{groupId}",
+    "purpose": "Delete group",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/scim/v2/Groups/{groupId}/Users",
+    "purpose": "Members of a group",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/scim/v2/ServiceProviderConfig",
+    "purpose": "Service provider configuration",
+    "cite": [
+     "c36"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/scim/v2/Schemas",
+    "purpose": "Tenant schemas incl. custom properties",
+    "cite": [
+     "c38"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/scim/v2/ResourceTypes",
+    "purpose": "Resource types",
+    "cite": [
+     "c39"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/integration/v2/users",
+    "purpose": "List users (legacy)",
+    "cite": [
+     "c40",
+     "c41"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/integration/v2/users/{userId}",
+    "purpose": "Get user (legacy)",
+    "cite": [
+     "c42"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/audits/records",
+    "purpose": "Query audit records (base https://api.seismic.com/pas)",
+    "cite": [
+     "c43",
+     "c44"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": true,
+   "events": [
+    "UserCreatedV1",
+    "UserUpdatedV1",
+    "UserDeletedV1",
+    "UserGroupCreatedV1",
+    "UserGroupUpdatedV1",
+    "UserGroupDeletedV1",
+    "UserGroupMemberChangeV1"
+   ],
+   "cite": [
+    "c52",
+    "c53",
+    "c54"
+   ]
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": null,
+   "cite": [
+    "c43",
+    "c44",
+    "c45"
+   ]
+  },
+  "rate_limits": {
+   "text": "Tiered per endpoint; 600 calls per 60 seconds for most endpoints; audit query is Tier 2 (60 requests/minute per tenant).",
+   "cite": [
+    "c47",
+    "c45"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "User webhook events are Early Access.",
+    "cite": [
+     "c54"
+    ]
+   },
+   {
+    "text": "Non-SCIM /integration/v2/users endpoints are legacy and read-only.",
+    "cite": [
+     "c40"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/seismic/",
+   "cite": [
+    "c55",
+    "c57"
+   ],
+   "notes": "OIN 'Seismic' app marks SAML, SCIM, Create, Update, Deactivate and Group Push (read from page markup). A separate 'Seismic Learning' OIN app (SAML, SCIM, Create/Update/Deactivate) belongs to the lessonly row."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": "idp",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/seismic-tutorial",
+   "cite": [
+    "c58",
+    "c59"
+   ],
+   "notes": "Entra gallery tutorial is SP-initiated SAML only; users must be created in Seismic first."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c8"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.seismic.com/get-a-demo/",
+   "title": "Get your Personalized Demo | Seismic",
+   "quote": "Align teams. Drive productivity. Win more deals.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.seismic.com/enablement-cloud-starter/",
+   "title": "Enablement Cloud Starter | Seismic",
+   "quote": "Three license types are available for purchase with Seismic Enablement Cloud Starter:",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.seismic.com/enablement-cloud-starter/",
+   "title": "Enablement Cloud Starter | Seismic",
+   "quote": "Seismic Enablement Cloud Starter: User Licenses",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/user-roles-across-seismic-content-and-learning.md",
+   "title": "User Roles across Seismic Content and Learning | Seismic Developer Portal",
+   "quote": "Seismic Platform SCIM APIs can be used to manage both Seismic Content and Seismic Learning users.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/user-roles-across-seismic-content-and-learning"
+  },
+  {
+   "id": "c5",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/user-roles-across-seismic-content-and-learning.md",
+   "title": "User Roles across Seismic Content and Learning | Seismic Developer Portal",
+   "quote": "A user can have a Content role and a Learning role",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/user-roles-across-seismic-content-and-learning"
+  },
+  {
+   "id": "c6",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/user-roles-across-seismic-content-and-learning.md",
+   "title": "User Roles across Seismic Content and Learning | Seismic Developer Portal",
+   "quote": "If both roles and usertype are specified, then the roles will be used to create the user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/user-roles-across-seismic-content-and-learning"
+  },
+  {
+   "id": "c7",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/user-roles-across-seismic-content-and-learning.md",
+   "title": "User Roles across Seismic Content and Learning | Seismic Developer Portal",
+   "quote": "The below changes apply only to tenants that are upgraded with the latest user management enhancements.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/user-roles-across-seismic-content-and-learning"
+  },
+  {
+   "id": "c8",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementcreateanewuser.md",
+   "title": "Create a new user | Seismic Developer Portal",
+   "quote": "Creates a new user within the Seismic tenant using SCIM 2.0 (System for Cross-domain Identity Management) protocol.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementcreateanewuser"
+  },
+  {
+   "id": "c9",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementcreateanewuser.md",
+   "title": "Create a new user | Seismic Developer Portal",
+   "quote": "When the active field is set to false, the newly created user is locked and cannot log in until an administrator activates them.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementcreateanewuser"
+  },
+  {
+   "id": "c10",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementcreateanewuser.md",
+   "title": "Create a new user | Seismic Developer Portal",
+   "quote": "Custom properties are supported via urn:ietf:params:scim:schemas:extension:seismic:2.0:User; retrieve tenant-specific definitions from GET /scim/v2/Schemas.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementcreateanewuser"
+  },
+  {
+   "id": "c11",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementcreateanewuser.md",
+   "title": "Create a new user | Seismic Developer Portal",
+   "quote": "JSON Web Token bearer token required in the Authorization header (seismic.user.manage scope)",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementcreateanewuser"
+  },
+  {
+   "id": "c12",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementcreateanewuser.md",
+   "title": "Create a new user | Seismic Developer Portal",
+   "quote": "\"url\": \"https://api.seismic.com\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementcreateanewuser"
+  },
+  {
+   "id": "c13",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementcreateanewuser.md",
+   "title": "Create a new user | Seismic Developer Portal",
+   "quote": "A label indicating the attribute's function, specifying the context or purpose of this email address.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementcreateanewuser"
+  },
+  {
+   "id": "c14",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementcreateanewuser.md",
+   "title": "Create a new user | Seismic Developer Portal",
+   "quote": "and we only support 1 email.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementcreateanewuser"
+  },
+  {
+   "id": "c15",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementcreateanewuser.md",
+   "title": "Create a new user | Seismic Developer Portal",
+   "quote": "User type classification within the Seismic platform determining access levels and feature availability. Ignored when roles array is specified.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementcreateanewuser"
+  },
+  {
+   "id": "c16",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementretrieveauserbyguid.md",
+   "title": "Retrieve a user by GUID | Seismic Developer Portal",
+   "quote": "Returns a single user object with all SCIM (System for Cross-domain Identity Management) attributes including core user fields, enterprise extensions, and Seismic-specific properties.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementretrieveauserbyguid"
+  },
+  {
+   "id": "c17",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementretrieveauserbyguid.md",
+   "title": "Retrieve a user by GUID | Seismic Developer Portal",
+   "quote": "\"urn:ietf:params:scim:schemas:extension:enterprise:2.0:User\": {",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementretrieveauserbyguid"
+  },
+  {
+   "id": "c18",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementretrieveauserbyguid.md",
+   "title": "Retrieve a user by GUID | Seismic Developer Portal",
+   "quote": "\"ssoId\": \"user ssoId\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementretrieveauserbyguid"
+  },
+  {
+   "id": "c19",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementretrieveallusersretrieveusersmatchingcertaincriteria.md",
+   "title": "Retrieve all users || Retrieve users matching certain criteria | Seismic Developer Portal",
+   "quote": "Supports operators: eq, ne, co, gt, ge, lt, le, and logical operators: and, or.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementretrieveallusersretrieveusersmatchingcertaincriteria"
+  },
+  {
+   "id": "c20",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementretrieveallusersretrieveusersmatchingcertaincriteria.md",
+   "title": "Retrieve all users || Retrieve users matching certain criteria | Seismic Developer Portal",
+   "quote": "Default value is 10, maximum value is 100.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementretrieveallusersretrieveusersmatchingcertaincriteria"
+  },
+  {
+   "id": "c21",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementretrieveallusersretrieveusersmatchingcertaincriteria.md",
+   "title": "Retrieve all users || Retrieve users matching certain criteria | Seismic Developer Portal",
+   "quote": "Use this endpoint to retrieve all the users from a tenant or supply a filter to retrieve a subset of users matching the filter criteria.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementretrieveallusersretrieveusersmatchingcertaincriteria"
+  },
+  {
+   "id": "c22",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementupdatecertainattributeswithinauser.md",
+   "title": "Update certain attributes within a user | Seismic Developer Portal",
+   "quote": "For example, to deactivate a user, send a PATCH request with op \"replace\", path \"active\", and value false. Only the replace operation is supported.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementupdatecertainattributeswithinauser"
+  },
+  {
+   "id": "c23",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementupdateauserwithafullpayload.md",
+   "title": "Update a user with a full payload | Seismic Developer Portal",
+   "quote": "Replaces a specific user by supplying the complete SCIM User resource payload.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementupdateauserwithafullpayload"
+  },
+  {
+   "id": "c24",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementupdateauserwithafullpayload.md",
+   "title": "Update a user with a full payload | Seismic Developer Portal",
+   "quote": "Any missing fields in the request will be updated to null or result in a failed request.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementupdateauserwithafullpayload"
+  },
+  {
+   "id": "c25",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementdeleteauserbyguid.md",
+   "title": "Delete a user by GUID | Seismic Developer Portal",
+   "quote": "This operation is not revertible and removes the user from the tenant. To disable a user without deletion, update the active flag to false via PATCH instead.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementdeleteauserbyguid"
+  },
+  {
+   "id": "c26",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementcreateanewgroup.md",
+   "title": "Create a new group | Seismic Developer Portal",
+   "quote": "Creates a new group within the Seismic tenant using SCIM 2.0 (System for Cross-domain Identity Management) protocol.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementcreateanewgroup"
+  },
+  {
+   "id": "c27",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementupdatecertainattributieswithinagroup.md",
+   "title": "Update certain attributes within a group | Seismic Developer Portal",
+   "quote": "For example, to rename a group to \"Marketing Team\", send a PATCH request with op \"replace\", path \"displayName\", and value \"Marketing Team\". Only the replace operation is supported.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementupdatecertainattributieswithinagroup"
+  },
+  {
+   "id": "c28",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementdeleteagroupbyguid.md",
+   "title": "Delete a group by GUID | Seismic Developer Portal",
+   "quote": "This operation is not revertible and removes the group from the tenant.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementdeleteagroupbyguid"
+  },
+  {
+   "id": "c29",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementaddausertoagroup.md",
+   "title": "Add a user to a group | Seismic Developer Portal",
+   "quote": "Adds a specified user to a particular group.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementaddausertoagroup"
+  },
+  {
+   "id": "c30",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementremoveauserfromagroup.md",
+   "title": "Remove a user from a group | Seismic Developer Portal",
+   "quote": "\"/scim/v2/Users/{userId}/Groups/{groupId}\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementremoveauserfromagroup"
+  },
+  {
+   "id": "c31",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementgetalistofmembersofaspecificgroup.md",
+   "title": "Get a list of members of a specific group | Seismic Developer Portal",
+   "quote": "\"/scim/v2/Groups/{groupId}/Users\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementgetalistofmembersofaspecificgroup"
+  },
+  {
+   "id": "c32",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementgetthegroupsauserisin.md",
+   "title": "Get a list of groups a specific user belongs to | Seismic Developer Portal",
+   "quote": "\"/scim/v2/Users/{userId}/Groups\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementgetthegroupsauserisin"
+  },
+  {
+   "id": "c33",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementretrieveallgroupsretrievegroupsmatchingcertaincriteria.md",
+   "title": "Retrieve all groups || Retrieve groups matching certain criteria | Seismic Developer Portal",
+   "quote": "\"/scim/v2/Groups\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementretrieveallgroupsretrievegroupsmatchingcertaincriteria"
+  },
+  {
+   "id": "c34",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementretrieveagroupbyguid.md",
+   "title": "Retrieve a group by GUID | Seismic Developer Portal",
+   "quote": "\"/scim/v2/Groups/{groupId}\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementretrieveagroupbyguid"
+  },
+  {
+   "id": "c35",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementupdateagroupwithafullpayload.md",
+   "title": "Update a group with a full payload | Seismic Developer Portal",
+   "quote": "\"/scim/v2/Groups/{groupId}\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementupdateagroupwithafullpayload"
+  },
+  {
+   "id": "c36",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementgetserviceproviderconfiguration.md",
+   "title": "Get service provider configuration | Seismic Developer Portal",
+   "quote": "Retrieves the SCIM service provider configuration to discover service capabilities, supported features, and authentication schemes.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementgetserviceproviderconfiguration"
+  },
+  {
+   "id": "c37",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementgetserviceproviderconfiguration.md",
+   "title": "Get service provider configuration | Seismic Developer Portal",
+   "quote": "\"bulk\": {",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementgetserviceproviderconfiguration"
+  },
+  {
+   "id": "c38",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementgetcurrenttenantschema.md",
+   "title": "Get current tenant schema | Seismic Developer Portal",
+   "quote": "Example: GET /scim/v2/Schemas returns Resources[] containing schema definitions for User, Group, EnterpriseUser, and tenant-specific extensions with complete attribute metadata including data types, mutability, and canonical values.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementgetcurrenttenantschema"
+  },
+  {
+   "id": "c39",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementgetresourcetypes.md",
+   "title": "Get resource types | Seismic Developer Portal",
+   "quote": "\"/scim/v2/ResourceTypes\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicscimuserandgroupmanagementgetresourcetypes"
+  },
+  {
+   "id": "c40",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicusersgetlistofusers.md",
+   "title": "Get list of users (Legacy) | Seismic Developer Portal",
+   "quote": "This is a legacy endpoint. New integrations should use the",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicusersgetlistofusers"
+  },
+  {
+   "id": "c41",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicusersgetlistofusers.md",
+   "title": "Get list of users (Legacy) | Seismic Developer Portal",
+   "quote": "\"/integration/v2/users\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicusersgetlistofusers"
+  },
+  {
+   "id": "c42",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/seismicusersgettheuserdetailsforthespecifiedid.md",
+   "title": "Get the user details for the specified id (Legacy) | Seismic Developer Portal",
+   "quote": "\"/integration/v2/users/{userId}\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/seismicusersgettheuserdetailsforthespecifiedid"
+  },
+  {
+   "id": "c43",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/queryauditrecords.md",
+   "title": "Query audit records | Seismic Developer Portal",
+   "quote": "Returns audit records for the authenticated user's tenant, ordered latest",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/queryauditrecords"
+  },
+  {
+   "id": "c44",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/queryauditrecords.md",
+   "title": "Query audit records | Seismic Developer Portal",
+   "quote": "\"url\": \"https://api.seismic.com/pas\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/queryauditrecords"
+  },
+  {
+   "id": "c45",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/queryauditrecords.md",
+   "title": "Query audit records | Seismic Developer Portal",
+   "quote": "**Rate limit:** Tier 2 (60 requests/minute per tenant).",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/queryauditrecords"
+  },
+  {
+   "id": "c46",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/rate-limiting.md",
+   "title": "Rate Limiting | Seismic Developer Portal",
+   "quote": "In certain cases, Seismic needs to enforce rate-limiting.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/rate-limiting"
+  },
+  {
+   "id": "c47",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/rate-limiting.md",
+   "title": "Rate Limiting | Seismic Developer Portal",
+   "quote": "600 calls per 60 seconds",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/rate-limiting"
+  },
+  {
+   "id": "c48",
+   "url": "https://developer.seismic.com/seismicsoftware/reference/authentication-overview.md",
+   "title": "Authentication Overview | Seismic Developer Portal",
+   "quote": "All Seismic API endpoints are authenticated using industry standard OpenID Connect/OAuth2 and require a Bearer token to be passed in as an Authorization header for the API to respond.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/reference/authentication-overview"
+  },
+  {
+   "id": "c49",
+   "url": "https://developer.seismic.com/seismicsoftware/docs/scopes-1.md",
+   "title": "Scopes | Seismic Developer Portal",
+   "quote": "Manage profile and group information about any user in the system",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/docs/scopes-1"
+  },
+  {
+   "id": "c50",
+   "url": "https://developer.seismic.com/seismicsoftware/docs/scopes-1.md",
+   "title": "Scopes | Seismic Developer Portal",
+   "quote": "Read profile and group about all users in the system",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/docs/scopes-1"
+  },
+  {
+   "id": "c51",
+   "url": "https://developer.seismic.com/seismicsoftware/docs/app-registration.md",
+   "title": "App Reg Overview | Seismic Developer Portal",
+   "quote": "Note: Only tenant admins can log in to App Registration portal.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/docs/app-registration"
+  },
+  {
+   "id": "c52",
+   "url": "https://developer.seismic.com/seismicsoftware/docs/webhooksoverview.md",
+   "title": "WebhooksOverview | Seismic Developer Portal",
+   "quote": "Occurs when a user is Created.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/docs/webhooksoverview"
+  },
+  {
+   "id": "c53",
+   "url": "https://developer.seismic.com/seismicsoftware/docs/webhooksoverview.md",
+   "title": "WebhooksOverview | Seismic Developer Portal",
+   "quote": "Occurs when there is a change in a user group's members.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/docs/webhooksoverview"
+  },
+  {
+   "id": "c54",
+   "url": "https://developer.seismic.com/seismicsoftware/docs/usercreatedv1.md",
+   "title": "UserCreatedV1 | Seismic Developer Portal",
+   "quote": "Early Access",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.seismic.com/seismicsoftware/docs/usercreatedv1"
+  },
+  {
+   "id": "c55",
+   "url": "https://www.okta.com/integrations/seismic/",
+   "title": "Integrate Seismic with Okta",
+   "quote": "This integration supports Single Sign-On (SSO) and SCIM-based user provisioning — streamlining user management at scale.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c56",
+   "url": "https://www.okta.com/integrations/seismic-learning/",
+   "title": "Integrate Seismic Learning with Okta",
+   "quote": "This app integration supports Single Sign-On and Provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c57",
+   "url": "https://www.okta.com/integrations/?search=seismic",
+   "title": "Okta Integration Network search: seismic",
+   "quote": "Connect Seismic to Okta to simplify and secure access for your teams.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c58",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/seismic-tutorial",
+   "title": "Configure Seismic for Single sign-on with Microsoft Entra ID - Microsoft Entra ID | Microsoft Learn",
+   "quote": "Seismic supports SP initiated SSO.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c59",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/seismic-tutorial",
+   "title": "Configure Seismic for Single sign-on with Microsoft Entra ID - Microsoft Entra ID | Microsoft Learn",
+   "quote": "Work with Seismic support team to add the users in the Seismic platform. Users must be created and activated before you use single sign-on.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.seismic.com/pricing/ (404)",
+  "https://www.seismic.com/sitemap.xml",
+  "https://www.seismic.com/enablement-cloud-starter/",
+  "https://www.seismic.com/get-a-demo/",
+  "https://developer.seismic.com/seismicsoftware/ (SCIM User and Group Management reference, legacy users, scopes, rate limiting, audit, webhooks)",
+  "https://www.okta.com/integrations/?search=seismic",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/toc.json (Seismic SSO tutorial; no provisioning tutorial)"
+ ],
+ "open_questions": [
+  "Whether SCIM or SSO require a particular Seismic package is not published.",
+  "Whether deactivation frees a licence or ends active sessions is not documented.",
+  "SCIM token lifetime is not documented.",
+  "Seismic's own IdP setup guides (Okta SCIM, Entra) sit in the customer knowledge base and were not reachable publicly; Google, OneLogin and JumpCloud listings were not checked.",
+  "Whether SSO sign-in creates users just-in-time is not documented (the Entra tutorial says users must exist first)."
+ ]
+}

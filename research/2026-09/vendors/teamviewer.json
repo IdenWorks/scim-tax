@@ -1,0 +1,950 @@
+{
+ "slug": "teamviewer",
+ "vendor": "TeamViewer",
+ "vendor_url": "https://www.teamviewer.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "TeamViewer",
+  "slug": "teamviewer",
+  "category": "IT Management & Endpoint",
+  "status": "gated",
+  "scim_plan": "Tensor (Enterprise)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Premium",
+  "team_price_text": "Premium: $120.90/mo flat, 15 licensed users (annual)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Tensor (Enterprise)",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": false,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": "native",
+   "generic": true
+  },
+  "pricing_page_url": "https://www.teamviewer.com/en-us/pricing/overview/",
+  "docs_url": "https://www.teamviewer.com/en/global/support/knowledge-base/teamviewer-tensor/integrations/microsoft-entra-id-integration-scim-configuration/",
+  "evidence": "TeamViewer's SCIM guides for Entra ID and Okta require a valid Tensor licence, and the pricing page lists Tensor as a fully customized enterprise licence with SSO (contact sales).",
+  "notes": "Status unchanged (gated, Tensor). Prices changed since June: Premium $120.90/mo (was $112.90) and Corporate $245.90/mo (was $229.90), billed yearly excl. tax; Remote Access $24.90 and Business $50.90 unchanged. Team plan changed from Business to Premium because Business and Remote Access include 1 licensed user; Premium includes 15. Pricing is flat per licence, so per-user fields are null. SCIM base URL https://webapi.teamviewer.com/scim/v2 with a script token; Entra guide says SCIM cannot delete users (deactivate only). Web API is on Business, Premium, Corporate and Tensor. June's ADFS/OneLogin SCIM claim: TeamViewer documents SCIM only for Entra ID and Okta (SSO for OneLogin/ADFS), so that part was dropped.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Business",
+  "api_tax": false,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Remote Access",
+   "price_text": "US$24.90 per month, billed yearly, excl. tax",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c27",
+    "c11",
+    "c29"
+   ],
+   "notes": "1 licensed user."
+  },
+  {
+   "name": "Business",
+   "price_text": "US$50.90 per month, billed yearly, excl. tax",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c27",
+    "c11",
+    "c29"
+   ],
+   "notes": "1 licensed user."
+  },
+  {
+   "name": "Premium",
+   "price_text": "US$120.90 per month, billed yearly, excl. tax; 15 licensed users",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c5",
+    "c27",
+    "c11",
+    "c29"
+   ]
+  },
+  {
+   "name": "Corporate",
+   "price_text": "US$245.90 per month, billed yearly, excl. tax; 30 licensed users",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c4",
+    "c6",
+    "c27",
+    "c11",
+    "c29"
+   ]
+  },
+  {
+   "name": "Tensor",
+   "price_text": "Fully customized license (contact sales)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c7",
+    "c8",
+    "c11",
+    "c19",
+    "c29"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c10",
+   "c11",
+   "c12",
+   "c19",
+   "c20"
+  ],
+  "plan": "Tensor",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://webapi.teamviewer.com/scim/v2",
+  "auth": {
+   "method": "bearer",
+   "token_source": "TeamViewer web app > Admin settings > Apps and token > Create script token (user management and user group permissions)",
+   "token_expiry": null,
+   "cite": [
+    "c16",
+    "c51",
+    "c49"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c12",
+    "c17",
+    "c22"
+   ],
+   "notes": "No SCIM API reference is published; endpoints inferred only from documented user and group sync."
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": false,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c13",
+    "c14",
+    "c17",
+    "c21",
+    "c22"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Account is deactivated, not deleted; removing a user from the company does not delete the TeamViewer account.",
+   "cite": [
+    "c13",
+    "c14",
+    "c23"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "preferredLanguage"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": true,
+    "how": "Required extension attribute urn:ietf:params:scim:schemas:extension:teamviewer:1.0:SsoUser:ssoCustomerId set to the SSO custom identifier on create."
+   },
+   "group": [
+    "displayName"
+   ],
+   "cite": [
+    "c15",
+    "c18",
+    "c20"
+   ],
+   "notes": "Full attribute list is only shown in screenshots in the guides."
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Requires a Tensor licence and a configured SSO domain/custom identifier.",
+    "cite": [
+     "c11",
+     "c19"
+    ]
+   },
+   {
+    "text": "SCIM cannot delete users; Entra's Delete action must be removed from the mapping.",
+    "cite": [
+     "c13"
+    ]
+   },
+   {
+    "text": "Changing a user's username/email is not supported.",
+    "cite": [
+     "c24"
+    ]
+   },
+   {
+    "text": "Provisioning fails if the email is already registered to a TeamViewer account outside the company.",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "text": "Entra provisioning needs Microsoft Entra Premium.",
+    "cite": [
+     "c10"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c29",
+   "c30"
+  ],
+  "plan": "Business",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://webapi.teamviewer.com/api/v1",
+  "docs_url": "https://webapi.teamviewer.com/api/v1/docs/index#/",
+  "auth": {
+   "methods": [
+    "script_token",
+    "oauth2"
+   ],
+   "scopes": [],
+   "cite": [
+    "c30",
+    "c31"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": true,
+   "reactivate_user": true,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c32",
+    "c33",
+    "c34",
+    "c35",
+    "c36",
+    "c37",
+    "c39",
+    "c52"
+   ],
+   "notes": "PUT /users/{id} accepts an 'active' field, used here for deactivate/reactivate."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/api/v1/users",
+    "purpose": "Returns users with filter criteria",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/users",
+    "purpose": "Creates a user",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/users/{id}",
+    "purpose": "Returns a user",
+    "cite": [
+     "c43"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/v1/users/{id}",
+    "purpose": "Updates a user (incl. active, role assign/unassign)",
+    "cite": [
+     "c34",
+     "c52"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/users/{id}",
+    "purpose": "Remove user from company, or permanently delete with isPermanentDelete",
+    "cite": [
+     "c35"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/users/{id}/userroles",
+    "purpose": "Returns the roles assigned to the user",
+    "cite": [
+     "c46"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/usergroups",
+    "purpose": "Returns all user groups",
+    "cite": [
+     "c36"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/usergroups",
+    "purpose": "Creates a new user group",
+    "cite": [
+     "c44"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/usergroups/{groupId}",
+    "purpose": "Removes a user group",
+    "cite": [
+     "c45"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/usergroups/{groupId}/members",
+    "purpose": "Adds users to a user group",
+    "cite": [
+     "c37"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/usergroups/{groupId}/members/{accountId}",
+    "purpose": "Removes a user from a user group",
+    "cite": [
+     "c38"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/userroles",
+    "purpose": "Returns user roles",
+    "cite": [
+     "c41"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/userroles/assign/account",
+    "purpose": "Assigns a user role to user accounts",
+    "cite": [
+     "c39"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/company/license",
+    "purpose": "Returns the company license details",
+    "cite": [
+     "c42"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v2/EventLogging",
+    "purpose": "Returns the event logs (audit logs) by filter criteria",
+    "cite": [
+     "c40"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Tensor",
+   "cite": [
+    "c40",
+    "c8"
+   ],
+   "notes": "Pricing comparison lists 'Auditability (audit log and API)' among Tensor features."
+  },
+  "rate_limits": {
+   "text": "Web API rate limits per 24h depend on the licence (comparison table shows e.g. 14,400 and 36,000 requests per 24h).",
+   "cite": [
+    "c9"
+   ]
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/teamviewer/",
+   "cite": [
+    "c47",
+    "c21"
+   ],
+   "notes": "OIN page markup marks SAML, SWA, SCIM, Create, Update and Deactivate as checked."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/teamviewer-provisioning-tutorial",
+   "cite": [
+    "c48",
+    "c49"
+   ]
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "TeamViewer documents Google Workspace for SSO only."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "TeamViewer documents OneLogin for SSO only; no SCIM guide. OneLogin connector page not loaded."
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://jumpcloud.com/support/integrate-with-teamviewer",
+   "cite": [
+    "c50"
+   ]
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": "AD Connector (manual Active Directory sync) listed in the pricing comparison",
+  "docs_public": true,
+  "cite": [
+   "c27"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.teamviewer.com/en-us/pricing/overview/",
+   "title": "Prices and license overview | TeamViewer",
+   "quote": "TeamViewer Remote Access Access up to 3 unattended devices US$ 24.90 per month / billed yearly / excl. tax",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.teamviewer.com/en-us/pricing/overview/",
+   "title": "Prices and license overview | TeamViewer",
+   "quote": "TeamViewer Business Access up to 200 unattended devices US$ 50.90 per month / billed yearly / excl. tax",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.teamviewer.com/en-us/pricing/overview/",
+   "title": "Prices and license overview | TeamViewer",
+   "quote": "TeamViewer Premium Access up to 300 unattended devices US$ 120.90 per month / billed yearly / excl. tax",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.teamviewer.com/en-us/pricing/overview/",
+   "title": "Prices and license overview | TeamViewer",
+   "quote": "TeamViewer Corporate Access up to 500 unattended devices US$ 245.90 per month / billed yearly / excl. tax",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.teamviewer.com/en-us/pricing/overview/",
+   "title": "Prices and license overview | TeamViewer",
+   "quote": "15 licensed users 1 concurrent connection (channel)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://www.teamviewer.com/en-us/pricing/overview/",
+   "title": "Prices and license overview | TeamViewer",
+   "quote": "30 licensed users 3 concurrent connections (channels)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://www.teamviewer.com/en-us/pricing/overview/",
+   "title": "Prices and license overview | TeamViewer",
+   "quote": "Fully customized license Additional features for enterprises Single sign-on (SSO)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://www.teamviewer.com/en-us/pricing/overview/",
+   "title": "Prices and license overview | TeamViewer",
+   "quote": "Yes, number depends on license Single sign-on (SSO) Auditability (audit log and API)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://www.teamviewer.com/en-us/pricing/overview/",
+   "title": "Prices and license overview | TeamViewer",
+   "quote": "Software integrations Web API (general application programming interface) Web API rate limit 14.400 requests per 24h 36.000 requests per 24h",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://www.teamviewer.com/en/global/support/knowledge-base/teamviewer-tensor/integrations/microsoft-entra-id-integration-scim-configuration/",
+   "title": "Microsoft Entra ID Integration - SCIM Configuration",
+   "quote": "With SCIM (System for Cross-domain Identity Management), it is possible to synchronize users and Microsoft Entra Groups from Microsoft Entra ID (formerly Azure AD) to TeamViewer.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://www.teamviewer.com/en/global/support/knowledge-base/teamviewer-tensor/integrations/microsoft-entra-id-integration-scim-configuration/",
+   "title": "Microsoft Entra ID Integration - SCIM Configuration",
+   "quote": "Have a valid Tensor license for TeamViewer",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://www.teamviewer.com/en/global/support/knowledge-base/teamviewer-tensor/integrations/microsoft-entra-id-integration-scim-configuration/",
+   "title": "Microsoft Entra ID Integration - SCIM Configuration",
+   "quote": "Enter the Tenant URL https://webapi.teamviewer.com/scim/v2",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://www.teamviewer.com/en/global/support/knowledge-base/teamviewer-tensor/integrations/microsoft-entra-id-integration-scim-configuration/",
+   "title": "Microsoft Entra ID Integration - SCIM Configuration",
+   "quote": "Remove the \"Delete\" Option, because the SCIM API can't delete Users in the TeamViewer (Classic) Management Console",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://www.teamviewer.com/en/global/support/knowledge-base/teamviewer-tensor/integrations/microsoft-entra-id-integration-scim-configuration/",
+   "title": "Microsoft Entra ID Integration - SCIM Configuration",
+   "quote": "It allows administrators to create, update and deactivate users within Microsoft Entra ID and keep their TeamViewer accounts automatically updated within 1h",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://www.teamviewer.com/en/global/support/knowledge-base/teamviewer-tensor/integrations/microsoft-entra-id-integration-scim-configuration/",
+   "title": "Microsoft Entra ID Integration - SCIM Configuration",
+   "quote": "Enter the Value urn:ietf:params:scim:schemas:extension:teamviewer:1.0:SsoUser:ssoCustomerId",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://www.teamviewer.com/en/global/support/knowledge-base/teamviewer-tensor/integrations/microsoft-entra-id-integration-scim-configuration/",
+   "title": "Microsoft Entra ID Integration - SCIM Configuration",
+   "quote": "Click Create script token.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://www.teamviewer.com/en/global/support/knowledge-base/teamviewer-tensor/integrations/microsoft-entra-id-integration-scim-configuration/",
+   "title": "Microsoft Entra ID Integration - SCIM Configuration",
+   "quote": "If you want to use the Microsoft Entra ID Groups for the TeamViewer User Groups, please enable it",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://www.teamviewer.com/en/global/support/knowledge-base/teamviewer-tensor/integrations/microsoft-entra-id-integration-scim-configuration/",
+   "title": "Microsoft Entra ID Integration - SCIM Configuration",
+   "quote": "edit the Attribute preferredLanguage",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://www.teamviewer.com/en/global/support/knowledge-base/teamviewer-tensor/integrations/okta-integration-scim-configuration/",
+   "title": "Okta Integration - SCIM Configuration",
+   "quote": "A valid Tensor license for TeamViewer TeamViewer Single Sign-On (SSO) via Okta has been configured successfully",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://www.teamviewer.com/en/global/support/knowledge-base/teamviewer-tensor/integrations/okta-integration-scim-configuration/",
+   "title": "Okta Integration - SCIM Configuration",
+   "quote": "SCIM connector base URL https://webapi.teamviewer.com/scim/v2",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://www.teamviewer.com/en/global/support/knowledge-base/teamviewer-tensor/integrations/okta-integration-scim-configuration/",
+   "title": "Okta Integration - SCIM Configuration",
+   "quote": "tick the Create Users, Update User Attributes, Deactivate Users, and Sync Password checkbox, then click Save.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://www.teamviewer.com/en/global/support/knowledge-base/teamviewer-tensor/integrations/okta-integration-scim-configuration/",
+   "title": "Okta Integration - SCIM Configuration",
+   "quote": "Allocate any groups you want pushed to TeamViewer.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://www.teamviewer.com/en/global/support/knowledge-base/teamviewer-tensor/integrations/okta-integration-scim-configuration/",
+   "title": "Okta Integration - SCIM Configuration",
+   "quote": "removing a user from a TeamViewer company will not delete the user account.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://www.teamviewer.com/en/global/support/knowledge-base/teamviewer-tensor/integrations/okta-integration-scim-configuration/",
+   "title": "Okta Integration - SCIM Configuration",
+   "quote": "Updating the user name/email of the user is not supported by the TeamViewer provisioning integration.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://www.teamviewer.com/en/global/support/knowledge-base/teamviewer-tensor/integrations/okta-integration-scim-configuration/",
+   "title": "Okta Integration - SCIM Configuration",
+   "quote": "Creating new users through Okta Provisioning can fail if the email address is already registered in TeamViewer by another user, even if that user is not part of your TeamViewer Company.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://www.teamviewer.com/en/global/support/knowledge-base/teamviewer-tensor/integrations/okta-integration-scim-configuration/",
+   "title": "Okta Integration - SCIM Configuration",
+   "quote": "It allows administrators to create, update, and delete users within Okta and automatically update their TeamViewer accounts within seconds.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://www.teamviewer.com/en/global/support/knowledge-base/teamviewer-tensor/sso/single-sign-on-sso/",
+   "title": "Single Sign-On (SSO)",
+   "quote": "a SAML 2.0 compatible identity provider (IdP)* a TeamViewer account to access the Management Console and add domains access to the DNS management of your domain to verify the domain ownership a TeamViewer Tensor license.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://www.teamviewer.com/en/global/support/knowledge-base/teamviewer-tensor/sso/single-sign-on-sso/",
+   "title": "Single Sign-On (SSO)",
+   "quote": "Currently, we only support Centrify, Okta, Microsoft Entra ID, OneLogin, ADFS, and Google Workspace",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://www.teamviewer.com/en/global/support/knowledge-base/teamviewer-remote/for-developers/use-the-teamviewer-api/",
+   "title": "Use the TeamViewer API",
+   "quote": "This article applies to all TeamViewer customers with a Business, Premium, Corporate",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://www.teamviewer.com/en/global/support/knowledge-base/teamviewer-remote/for-developers/use-the-teamviewer-api/",
+   "title": "Use the TeamViewer API",
+   "quote": "The API uses REST to communicate with your application and the secure authorization standard OAuth 2.0 to manage access to all data.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://www.teamviewer.com/en/global/support/knowledge-base/teamviewer-remote/for-developers/use-the-teamviewer-api/",
+   "title": "Use the TeamViewer API",
+   "quote": "To use the TeamViewer API, you need to create a script token.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://webapi.teamviewer.com/api/v1/docs/swagger-ui-init.js",
+   "title": "TeamViewer Web API",
+   "quote": "Returns users with filter criteria",
+   "accessed": "2026-10-05",
+   "page_url": "https://webapi.teamviewer.com/api/v1/docs/index#/"
+  },
+  {
+   "id": "c33",
+   "url": "https://webapi.teamviewer.com/api/v1/docs/swagger-ui-init.js",
+   "title": "TeamViewer Web API",
+   "quote": "Creates a user",
+   "accessed": "2026-10-05",
+   "page_url": "https://webapi.teamviewer.com/api/v1/docs/index#/"
+  },
+  {
+   "id": "c34",
+   "url": "https://webapi.teamviewer.com/api/v1/docs/swagger-ui-init.js",
+   "title": "TeamViewer Web API",
+   "quote": "Updates a user",
+   "accessed": "2026-10-05",
+   "page_url": "https://webapi.teamviewer.com/api/v1/docs/index#/"
+  },
+  {
+   "id": "c35",
+   "url": "https://webapi.teamviewer.com/api/v1/docs/swagger-ui-init.js",
+   "title": "TeamViewer Web API",
+   "quote": "The isPermanentDelete parameter should be set true to permanently delete user. It can be left empty or set false to remove user from the company.",
+   "accessed": "2026-10-05",
+   "page_url": "https://webapi.teamviewer.com/api/v1/docs/index#/"
+  },
+  {
+   "id": "c36",
+   "url": "https://webapi.teamviewer.com/api/v1/docs/swagger-ui-init.js",
+   "title": "TeamViewer Web API",
+   "quote": "Returns all user groups",
+   "accessed": "2026-10-05",
+   "page_url": "https://webapi.teamviewer.com/api/v1/docs/index#/"
+  },
+  {
+   "id": "c37",
+   "url": "https://webapi.teamviewer.com/api/v1/docs/swagger-ui-init.js",
+   "title": "TeamViewer Web API",
+   "quote": "Adds users to a user group",
+   "accessed": "2026-10-05",
+   "page_url": "https://webapi.teamviewer.com/api/v1/docs/index#/"
+  },
+  {
+   "id": "c38",
+   "url": "https://webapi.teamviewer.com/api/v1/docs/swagger-ui-init.js",
+   "title": "TeamViewer Web API",
+   "quote": "Removes a user from a user group",
+   "accessed": "2026-10-05",
+   "page_url": "https://webapi.teamviewer.com/api/v1/docs/index#/"
+  },
+  {
+   "id": "c39",
+   "url": "https://webapi.teamviewer.com/api/v1/docs/swagger-ui-init.js",
+   "title": "TeamViewer Web API",
+   "quote": "Assigns a user role to user accounts",
+   "accessed": "2026-10-05",
+   "page_url": "https://webapi.teamviewer.com/api/v1/docs/index#/"
+  },
+  {
+   "id": "c40",
+   "url": "https://webapi.teamviewer.com/api/v1/docs/swagger-ui-init.js",
+   "title": "TeamViewer Web API",
+   "quote": "Returns the event logs (audit logs) by filter criteria",
+   "accessed": "2026-10-05",
+   "page_url": "https://webapi.teamviewer.com/api/v1/docs/index#/"
+  },
+  {
+   "id": "c41",
+   "url": "https://webapi.teamviewer.com/api/v1/docs/swagger-ui-init.js",
+   "title": "TeamViewer Web API",
+   "quote": "Returns user roles",
+   "accessed": "2026-10-05",
+   "page_url": "https://webapi.teamviewer.com/api/v1/docs/index#/"
+  },
+  {
+   "id": "c42",
+   "url": "https://webapi.teamviewer.com/api/v1/docs/swagger-ui-init.js",
+   "title": "TeamViewer Web API",
+   "quote": "Returns the company license details",
+   "accessed": "2026-10-05",
+   "page_url": "https://webapi.teamviewer.com/api/v1/docs/index#/"
+  },
+  {
+   "id": "c43",
+   "url": "https://webapi.teamviewer.com/api/v1/docs/swagger-ui-init.js",
+   "title": "TeamViewer Web API",
+   "quote": "Returns a user",
+   "accessed": "2026-10-05",
+   "page_url": "https://webapi.teamviewer.com/api/v1/docs/index#/"
+  },
+  {
+   "id": "c44",
+   "url": "https://webapi.teamviewer.com/api/v1/docs/swagger-ui-init.js",
+   "title": "TeamViewer Web API",
+   "quote": "Creates a new user group",
+   "accessed": "2026-10-05",
+   "page_url": "https://webapi.teamviewer.com/api/v1/docs/index#/"
+  },
+  {
+   "id": "c45",
+   "url": "https://webapi.teamviewer.com/api/v1/docs/swagger-ui-init.js",
+   "title": "TeamViewer Web API",
+   "quote": "Removes a user group",
+   "accessed": "2026-10-05",
+   "page_url": "https://webapi.teamviewer.com/api/v1/docs/index#/"
+  },
+  {
+   "id": "c46",
+   "url": "https://webapi.teamviewer.com/api/v1/docs/swagger-ui-init.js",
+   "title": "TeamViewer Web API",
+   "quote": "Returns the roles assigned to the user",
+   "accessed": "2026-10-05",
+   "page_url": "https://webapi.teamviewer.com/api/v1/docs/index#/"
+  },
+  {
+   "id": "c47",
+   "url": "https://www.okta.com/integrations/teamviewer/",
+   "title": "Integrate TeamViewer with Okta",
+   "quote": "The All-In-One Software for Remote Support and Online Meetings",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c48",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/teamviewer-provisioning-tutorial",
+   "title": "Configure TeamViewer for automatic user provisioning with Microsoft Entra ID",
+   "quote": "A valid Tensor license for TeamViewer.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c49",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/teamviewer-provisioning-tutorial",
+   "title": "Configure TeamViewer for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Create users in TeamViewer Remove users in TeamViewer when they don't require access anymore Keep user attributes synchronized between Microsoft Entra ID and TeamViewer",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c50",
+   "url": "https://jumpcloud.com/support/integrate-with-teamviewer",
+   "title": "Integrate with TeamViewer | JumpCloud",
+   "quote": "Automatically provision, update and deprovision users and groups in TeamViewer from JumpCloud using the SCIM integration.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c51",
+   "url": "https://www.teamviewer.com/en/global/support/knowledge-base/teamviewer-tensor/integrations/microsoft-entra-id-integration-scim-configuration/",
+   "title": "Microsoft Entra ID Integration - SCIM Configuration",
+   "quote": "create users edit users view users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c52",
+   "url": "https://webapi.teamviewer.com/api/v1/docs/swagger-ui-init.js",
+   "title": "TeamViewer Web API",
+   "quote": "\"active\": { \"type\": \"boolean\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://webapi.teamviewer.com/api/v1/docs/index#/"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "Okta SCIM guide says admins can create, update and delete users from Okta; the Entra guide says the SCIM API can't delete users.",
+   "cite": [
+    "c26",
+    "c13"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.teamviewer.com/en-us/pricing/overview/",
+  "https://www.teamviewer.com/en/sitemap.xml",
+  "https://www.teamviewer.com/en/global/support/knowledge-base/teamviewer-tensor/integrations/microsoft-entra-id-integration-scim-configuration/",
+  "https://www.teamviewer.com/en/global/support/knowledge-base/teamviewer-tensor/integrations/okta-integration-scim-configuration/",
+  "https://www.teamviewer.com/en/global/support/knowledge-base/teamviewer-tensor/sso/single-sign-on-sso/",
+  "https://www.teamviewer.com/en/global/support/knowledge-base/teamviewer-remote/for-developers/use-the-teamviewer-api/",
+  "https://webapi.teamviewer.com/api/v1/docs/index#/",
+  "https://www.okta.com/integrations/teamviewer/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/teamviewer-provisioning-tutorial",
+  "https://jumpcloud.com/support/integrate-with-teamviewer"
+ ],
+ "open_questions": [
+  "Tensor price is not public.",
+  "Whether a deactivated SCIM user frees a licensed-user seat is not documented.",
+  "SCIM token expiry, filtering, pagination and rate limits are not documented.",
+  "No published SCIM API reference (ServiceProviderConfig, Schemas) was found.",
+  "Which Web API rate limit applies to which licence is not clear from the comparison table text.",
+  "User-event webhooks not checked.",
+  "The AD Connector row in the comparison table could not be tied to a specific licence."
+ ]
+}

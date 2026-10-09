@@ -1,0 +1,752 @@
+{
+ "slug": "mixpanel",
+ "vendor": "Mixpanel",
+ "vendor_url": "https://mixpanel.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Mixpanel",
+  "slug": "mixpanel",
+  "category": "Data, Analytics & BI",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Growth",
+  "team_price_text": "Growth: starts at $0 (first 1M monthly events free, then usage-based)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Growth",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": "sso_only",
+   "onelogin": "native",
+   "jumpcloud": "native",
+   "generic": true
+  },
+  "pricing_page_url": "https://mixpanel.com/pricing/",
+  "docs_url": "https://docs.mixpanel.com/docs/access-security/single-sign-on.md",
+  "evidence": "Mixpanel's SSO docs say users on a Growth plan or above can enable SSO, but only accounts with an Enterprise plan have access to SCIM at the moment; the Okta setup guide also requires an active Enterprise plan subscription.",
+  "notes": "Event-volume pricing, unlimited seats, so per-user fields stay null. Conflict: the pricing page's combined row 'SAML-based SSO & SCIM provisioning' is marked Available on Growth (read from page markup), while the SSO docs, the Okta guide and the Entra and JumpCloud pages all say SCIM needs Enterprise. Status kept gated per the docs (behaviour page) at medium confidence; flag for review. Change from June: SAML SSO is now on Growth (June said SSO and SCIM were Enterprise-only). June's '$0.28/1K events' is now shown only in page markup ('$.00028 per event after'), and June's '~$25K+/yr' Enterprise figure has no first-party source, so it is dropped. Google Workspace is SSO only (JIT, no auto-provisioning). Mixpanel warns that JumpCloud SCIM has hard-deleted users unexpectedly. No documented org-member REST API beyond SCIM.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": null,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "Free forever (up to 1M events/month)",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c4",
+    "c8",
+    "c10",
+    "c36"
+   ]
+  },
+  {
+   "name": "Growth",
+   "price_text": "Starts at $0 (first 1M events free, up to 20M)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c4",
+    "c8",
+    "c10",
+    "c36",
+    "c6"
+   ],
+   "notes": "Pricing page markup marks 'SAML-based SSO & SCIM provisioning' Available on Growth; docs say SCIM is Enterprise-only (see conflicts). Slider offers yearly and monthly billing."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Let's chat / Contact Sales",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c10",
+    "c21",
+    "c6"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c10",
+   "c11",
+   "c21",
+   "c22",
+   "c16"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://mixpanel.com/api/app/scim/v2",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Organization Settings > Access Security > SCIM (shown once; regenerating revokes the old token)",
+   "token_expiry": null,
+   "cite": [
+    "c12",
+    "c11",
+    "c13",
+    "c23"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c11",
+    "c29"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": null,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c24",
+    "c25",
+    "c26",
+    "c27",
+    "c29",
+    "c11",
+    "c17"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c26",
+    "c17"
+   ],
+   "notes": "Okta guide: deactivates the user, or deletes the account if specified. Seats are unlimited on all plans."
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "First Name",
+    "Last Name",
+    "Email"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "displayName (must match the Mixpanel Team name)"
+   ],
+   "cite": [
+    "c25",
+    "c29",
+    "c30"
+   ],
+   "notes": "Docs name only First Name, Last Name and Email as supported profile attributes; SCIM attribute paths are not documented."
+  },
+  "roles": {
+   "supported": false,
+   "how": "Per-user Organization Role and project access cannot be set from the IdP; groups map to Mixpanel Teams, whose role and project access are set inside Mixpanel. Provisioned users join as Organization Member.",
+   "cite": [
+    "c28",
+    "c30",
+    "c31"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SCIM affects only users whose email domain is a verified claimed domain; provisioning fails otherwise.",
+    "cite": [
+     "c14",
+     "c32"
+    ]
+   },
+   {
+    "text": "Org role and project access cannot be provisioned from the IdP.",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "text": "Mixpanel warns JumpCloud SCIM has hard-deleted users unexpectedly.",
+    "cite": [
+     "c35"
+    ]
+   },
+   {
+    "text": "No auto-provisioning with Google Workspace (JIT only).",
+    "cite": [
+     "c18"
+    ]
+   },
+   {
+    "text": "Mixpanel implements a SCIM spec subset.",
+    "cite": [
+     "c16"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": null,
+  "cite": [
+   "c39",
+   "c37"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": null,
+  "base_url": null,
+  "docs_url": null,
+  "auth": {
+   "methods": [],
+   "scopes": [],
+   "cite": []
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": []
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": null,
+   "cite": [
+    "c37",
+    "c36"
+   ],
+   "notes": "Audit log on all plans (90-day retention on Free/Growth, 2 years on Enterprise); the docs mention an audit log API but no endpoint reference was found."
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "The API reference index lists data, query, GDPR and Service Accounts APIs but no organization member/user management endpoints; members are invited in the UI."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/mixpanel/",
+   "cite": [
+    "c40",
+    "c24"
+   ],
+   "notes": "OIN page marks SAML, SWA, SCIM and Create/Update/Deactivate/Group Push/Group Linking as checked (read from page markup)."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/mixpanel-provisioning-tutorial",
+   "cite": [
+    "c41",
+    "c42"
+   ]
+  },
+  "google": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://support.google.com/a/answer/7553416?hl=en",
+   "cite": [
+    "c43",
+    "c18"
+   ]
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c19"
+   ],
+   "notes": "OneLogin connector page not loaded; facts from Mixpanel's docs."
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://jumpcloud.com/support/integrate-with-mixpanel",
+   "cite": [
+    "c44",
+    "c45",
+    "c35"
+   ]
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c20",
+   "c11"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://mixpanel.com/pricing/",
+   "title": "Mixpanel Pricing",
+   "quote": "Free Free forever Explore product intelligence for free. No credit card required.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://mixpanel.com/pricing/",
+   "title": "Mixpanel Pricing",
+   "quote": "Growth Starts at $0 Get advanced intelligence with higher limits. Volume discounts available.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://mixpanel.com/pricing/",
+   "title": "Mixpanel Pricing",
+   "quote": "Enterprise Let’s chat Full product intelligence platform with dedicated account support.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://mixpanel.com/pricing/",
+   "title": "Mixpanel Pricing",
+   "quote": "Monthly events Up to 1M First 1M free up to 20M Up to 1T",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://mixpanel.com/pricing/",
+   "title": "Mixpanel Pricing",
+   "quote": "Seats Unlimited Unlimited Unlimited",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://mixpanel.com/pricing/",
+   "title": "Mixpanel Pricing",
+   "quote": "SAML-based SSO & SCIM provisioning",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://mixpanel.com/pricing/",
+   "title": "Mixpanel Pricing",
+   "quote": "User privacy APIs Audit log",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.mixpanel.com/docs/access-security/single-sign-on.md",
+   "title": "Mixpanel Docs: Single Sign-On",
+   "quote": "Users on a Growth plan or above can enable Single Sign-On for authentication.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.mixpanel.com/docs/access-security/single-sign-on"
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.mixpanel.com/docs/access-security/single-sign-on.md",
+   "title": "Mixpanel Docs: Single Sign-On",
+   "quote": "Mixpanel supports SSO and works with any SAML 2.0-compliant SSO provider.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.mixpanel.com/docs/access-security/single-sign-on"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.mixpanel.com/docs/access-security/single-sign-on.md",
+   "title": "Mixpanel Docs: Single Sign-On",
+   "quote": "Note that only accounts with an Enterprise plan have access to SCIM at the moment.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.mixpanel.com/docs/access-security/single-sign-on"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.mixpanel.com/docs/access-security/single-sign-on.md",
+   "title": "Mixpanel Docs: Single Sign-On",
+   "quote": "The base endpoint is `https://mixpanel.com/api/app/scim/v2`, which you can hit using the SCIM token as an Authentication Bearer token.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.mixpanel.com/docs/access-security/single-sign-on"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.mixpanel.com/docs/access-security/single-sign-on.md",
+   "title": "Mixpanel Docs: Single Sign-On",
+   "quote": "The SCIM menu in the Access Security tab of the Organization Settings lets you generate a token used to hit the SCIM endpoints.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.mixpanel.com/docs/access-security/single-sign-on"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.mixpanel.com/docs/access-security/single-sign-on.md",
+   "title": "Mixpanel Docs: Single Sign-On",
+   "quote": "If you wish to revoke your SCIM Provisioning token, you can generate a new one, which will kill the previous token.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.mixpanel.com/docs/access-security/single-sign-on"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.mixpanel.com/docs/access-security/single-sign-on.md",
+   "title": "Mixpanel Docs: Single Sign-On",
+   "quote": "The SCIM endpoint affects only users whose email has a domain in the list of your verified claimed domains.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.mixpanel.com/docs/access-security/single-sign-on"
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.mixpanel.com/docs/access-security/single-sign-on.md",
+   "title": "Mixpanel Docs: Single Sign-On",
+   "quote": "IDPs that currently have an auto-provisioning integration with Mixpanel are Okta, OneLogin, and Azure.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.mixpanel.com/docs/access-security/single-sign-on"
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.mixpanel.com/docs/access-security/single-sign-on.md",
+   "title": "Mixpanel Docs: Single Sign-On",
+   "quote": "Mixpanel uses a SCIM spec subset",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.mixpanel.com/docs/access-security/single-sign-on"
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.mixpanel.com/docs/access-security/single-sign-on.md",
+   "title": "Mixpanel Docs: Single Sign-On",
+   "quote": "when you assign users to Mixpanel in your IDP, they will be provisioned in Mixpanel, and optionally, you can deprovision users within Mixpanel who lose access in your IDP.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.mixpanel.com/docs/access-security/single-sign-on"
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.mixpanel.com/docs/access-security/single-sign-on.md",
+   "title": "Mixpanel Docs: Single Sign-On",
+   "quote": "Unfortunately, we do not have an auto-provisioning integration with G-Suite. You will need to rely on Just In Time Provisioning",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.mixpanel.com/docs/access-security/single-sign-on"
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.mixpanel.com/docs/access-security/single-sign-on.md",
+   "title": "Mixpanel Docs: Single Sign-On",
+   "quote": "The \"Mixpanel\" application is in the OneLogin application store and supports auto-provisioning. You will just need to copy a SCIM token from Mixpanel into the provisioning token box in the OneLogin app.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.mixpanel.com/docs/access-security/single-sign-on"
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.mixpanel.com/docs/access-security/single-sign-on.md",
+   "title": "Mixpanel Docs: Single Sign-On",
+   "quote": "Just-in-Time (JIT) provisioning using SAML will let users sign in automatically upon the initial login event.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.mixpanel.com/docs/access-security/single-sign-on"
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.mixpanel.com/docs/access-security/single-sign-on/okta.md",
+   "title": "Mixpanel Docs: Setup Okta SSO",
+   "quote": "You must have an active Enterprise plan subscription with Mixpanel.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.mixpanel.com/docs/access-security/single-sign-on/okta"
+  },
+  {
+   "id": "c22",
+   "url": "https://docs.mixpanel.com/docs/access-security/single-sign-on/okta.md",
+   "title": "Mixpanel Docs: Setup Okta SSO",
+   "quote": "You must have Okta SSO set up with Mixpanel.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.mixpanel.com/docs/access-security/single-sign-on/okta"
+  },
+  {
+   "id": "c23",
+   "url": "https://docs.mixpanel.com/docs/access-security/single-sign-on/okta.md",
+   "title": "Mixpanel Docs: Setup Okta SSO",
+   "quote": "You need to have generated a SCIM OAuth token to use with the app.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.mixpanel.com/docs/access-security/single-sign-on/okta"
+  },
+  {
+   "id": "c24",
+   "url": "https://docs.mixpanel.com/docs/access-security/single-sign-on/okta.md",
+   "title": "Mixpanel Docs: Setup Okta SSO",
+   "quote": "Push New Users: New users created through Okta and assigned to the application will be created in Mixpanel.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.mixpanel.com/docs/access-security/single-sign-on/okta"
+  },
+  {
+   "id": "c25",
+   "url": "https://docs.mixpanel.com/docs/access-security/single-sign-on/okta.md",
+   "title": "Mixpanel Docs: Setup Okta SSO",
+   "quote": "Push Profile Updates: Updates made to the assigned user's supported profile attributes (First Name, Last Name, Email) through Okta will be pushed to Mixpanel.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.mixpanel.com/docs/access-security/single-sign-on/okta"
+  },
+  {
+   "id": "c26",
+   "url": "https://docs.mixpanel.com/docs/access-security/single-sign-on/okta.md",
+   "title": "Mixpanel Docs: Setup Okta SSO",
+   "quote": "Push User Deactivation: Deactivating the user or removing the user from the application through Okta will deactivate the user in Mixpanel (or delete the account if specified).",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.mixpanel.com/docs/access-security/single-sign-on/okta"
+  },
+  {
+   "id": "c27",
+   "url": "https://docs.mixpanel.com/docs/access-security/single-sign-on/okta.md",
+   "title": "Mixpanel Docs: Setup Okta SSO",
+   "quote": "Reactivate Users: Reassigning a previously unassigned user to the application will reactivate the user's account in Mixpanel.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.mixpanel.com/docs/access-security/single-sign-on/okta"
+  },
+  {
+   "id": "c28",
+   "url": "https://docs.mixpanel.com/docs/access-security/single-sign-on/okta.md",
+   "title": "Mixpanel Docs: Setup Okta SSO",
+   "quote": "You will not be able to set the user's Organization Role and Project access within Okta.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.mixpanel.com/docs/access-security/single-sign-on/okta"
+  },
+  {
+   "id": "c29",
+   "url": "https://docs.mixpanel.com/docs/access-security/single-sign-on/okta.md",
+   "title": "Mixpanel Docs: Setup Okta SSO",
+   "quote": "Use the same name for the Group in Okta as the Team in Mixpanel.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.mixpanel.com/docs/access-security/single-sign-on/okta"
+  },
+  {
+   "id": "c30",
+   "url": "https://docs.mixpanel.com/docs/access-security/single-sign-on/okta.md",
+   "title": "Mixpanel Docs: Setup Okta SSO",
+   "quote": "In the Mixpanel Team, set the Organization Role and access to projects for the group of users.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.mixpanel.com/docs/access-security/single-sign-on/okta"
+  },
+  {
+   "id": "c31",
+   "url": "https://docs.mixpanel.com/docs/access-security/single-sign-on/okta.md",
+   "title": "Mixpanel Docs: Setup Okta SSO",
+   "quote": "New users provisioned from Okta will be automatically added as an Organization Member.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.mixpanel.com/docs/access-security/single-sign-on/okta"
+  },
+  {
+   "id": "c32",
+   "url": "https://docs.mixpanel.com/docs/access-security/single-sign-on/okta.md",
+   "title": "Mixpanel Docs: Setup Okta SSO",
+   "quote": "Provisioning will also fail if the domain of the user's email has not been claimed by your organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.mixpanel.com/docs/access-security/single-sign-on/okta"
+  },
+  {
+   "id": "c33",
+   "url": "https://docs.mixpanel.com/docs/access-security/single-sign-on/azure.md",
+   "title": "Mixpanel Docs: Setup Azure SSO",
+   "quote": "The integration also allows you to remove access within Mixpanel when you remove access in Azure.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.mixpanel.com/docs/access-security/single-sign-on/azure"
+  },
+  {
+   "id": "c34",
+   "url": "https://docs.mixpanel.com/docs/access-security/single-sign-on/azure.md",
+   "title": "Mixpanel Docs: Setup Azure SSO",
+   "quote": "Tenant URL: `https://mixpanel.com/api/app/scim/v2`",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.mixpanel.com/docs/access-security/single-sign-on/azure"
+  },
+  {
+   "id": "c35",
+   "url": "https://docs.mixpanel.com/docs/access-security/single-sign-on/jumpcloud.md",
+   "title": "Mixpanel Docs: Setup JumpCloud SSO",
+   "quote": "Use SCIM with JumpCloud at your own risk. There have been problems reported with the JumpCloud setup process hard deleting users unexpectedly.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.mixpanel.com/docs/access-security/single-sign-on/jumpcloud"
+  },
+  {
+   "id": "c36",
+   "url": "https://docs.mixpanel.com/docs/access-security/audit-log.md",
+   "title": "Mixpanel Docs: Audit Log",
+   "quote": "The audit log is available on all plans. Free and Growth plans retain logs for 90 days. Enterprise plans retain logs for 2 years.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.mixpanel.com/docs/access-security/audit-log"
+  },
+  {
+   "id": "c37",
+   "url": "https://docs.mixpanel.com/docs/access-security/audit-log.md",
+   "title": "Mixpanel Docs: Audit Log",
+   "quote": "and the audit log API, the same information is the `service` field, and MCP entries carry the value `mcp`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.mixpanel.com/docs/access-security/audit-log"
+  },
+  {
+   "id": "c38",
+   "url": "https://docs.mixpanel.com/docs/orgs-and-projects/roles-and-permissions.md",
+   "title": "Mixpanel Docs: Roles & Permissions",
+   "quote": "You can invite users to an organization or to a project with specific role permissions.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.mixpanel.com/docs/orgs-and-projects/roles-and-permissions"
+  },
+  {
+   "id": "c39",
+   "url": "https://docs.mixpanel.com/llms.txt",
+   "title": "Mixpanel Docs index (llms.txt)",
+   "quote": "Service Accounts",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.mixpanel.com/"
+  },
+  {
+   "id": "c40",
+   "url": "https://www.okta.com/integrations/mixpanel/",
+   "title": "Integrate Mixpanel with Okta",
+   "quote": "Add this integration to enable authentication and provisioning capabilities.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c41",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/mixpanel-provisioning-tutorial",
+   "title": "Configure Mixpanel for automatic user provisioning with Microsoft Entra ID",
+   "quote": "When configured, Microsoft Entra ID automatically provisions and de-provisions users and groups to Mixpanel using the Microsoft Entra provisioning service.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c42",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/mixpanel-provisioning-tutorial",
+   "title": "Configure Mixpanel for automatic user provisioning with Microsoft Entra ID",
+   "quote": "An Enterprise level mixpanel organization",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c43",
+   "url": "https://support.google.com/a/answer/7553416?hl=en",
+   "title": "Mixpanel cloud app - Google Workspace Admin Help",
+   "quote": "Use SAML to set up SSO for Mixpanel",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c44",
+   "url": "https://jumpcloud.com/support/integrate-with-mixpanel",
+   "title": "Integrate with Mixpanel - JumpCloud",
+   "quote": "Automatically provision, update and deprovision users and groups in Mixpanel from JumpCloud using the SCIM integration.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c45",
+   "url": "https://jumpcloud.com/support/integrate-with-mixpanel",
+   "title": "Integrate with Mixpanel - JumpCloud",
+   "quote": "A Mixpanel user account with an Enterprise plan",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The pricing page comparison row 'SAML-based SSO & SCIM provisioning' is marked Available on Growth and Enterprise (page markup), but the SSO docs say only Enterprise accounts have SCIM and the Okta guide requires an active Enterprise plan. Docs used for the SCIM gate.",
+   "cite": [
+    "c6",
+    "c10",
+    "c21"
+   ]
+  }
+ ],
+ "searched": [
+  "https://mixpanel.com/pricing/",
+  "https://docs.mixpanel.com/llms.txt",
+  "https://docs.mixpanel.com/docs/access-security/single-sign-on",
+  "https://docs.mixpanel.com/docs/orgs-and-projects/roles-and-permissions",
+  "API reference index (llms.txt): no org member endpoints"
+ ],
+ "open_questions": [
+  "Pricing page vs docs disagree on whether Growth includes SCIM; confirm with Mixpanel.",
+  "SCIM filtering, pagination, discovery endpoints and attribute paths are not documented.",
+  "Whether deprovisioning ends sessions is not documented.",
+  "No documented non-SCIM user-management API; audit log API endpoint not found in the reference.",
+  "Enterprise price is not published."
+ ]
+}

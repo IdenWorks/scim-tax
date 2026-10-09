@@ -1,0 +1,813 @@
+{
+ "slug": "thoughtspot",
+ "vendor": "ThoughtSpot",
+ "vendor_url": "https://www.thoughtspot.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "ThoughtSpot",
+  "slug": "thoughtspot",
+  "category": "Data, Analytics & BI",
+  "status": "unknown",
+  "scim_plan": null,
+  "scim_price_text": null,
+  "scim_price_per_user_mo": null,
+  "team_plan": "Essentials",
+  "team_price_text": "Essentials: from $25/u/mo (billed annually, 5-50 users)",
+  "team_price_per_user_mo": 25,
+  "price_multiplier": null,
+  "sso_plan": "Pro",
+  "sso_price_per_user_mo": 50,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": false,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.thoughtspot.com/pricing",
+  "docs_url": "https://docs.thoughtspot.com/cloud/latest/group-user-management-scim",
+  "evidence": "ThoughtSpot's docs say SCIM 2.0 provisioning is enabled by default for a cluster, but neither the pricing page (Essentials $25, Pro $50, Enterprise custom) nor the editions docs say which plan includes it.",
+  "notes": "Status unknown: SCIM is documented but not tied to any of the three public plans (rule 1a). SAML/OIDC SSO is ticked for Pro and Enterprise only on the pricing table. SCIM deprovisioning is a hard delete (content moves to tsadmin), so scim_ops.deactivate is false. SCIM tokens expire after six months. REST API v2 has user activate/deactivate endpoints; the plan that unlocks it is not stated (the pricing page sells 'Embedded for internal enterprise applications (API & SDK)' as an Enterprise add-on).",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Essentials",
+   "price_text": "Starting as low as $25 per user / per month (billed annually), 5 to 50 users",
+   "price_per_user_mo": 25,
+   "billing": "annual",
+   "sso": false,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c4"
+   ],
+   "notes": "SSO row has no check mark for Essentials in the pricing table markup."
+  },
+  {
+   "name": "Pro",
+   "price_text": "Starting as low as $50 per user / per month (billed annually)",
+   "price_per_user_mo": 50,
+   "billing": "annual",
+   "sso": true,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c4"
+   ]
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Custom pricing tailored to your teams, data, and deployment needs.",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c4"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c5",
+   "c6"
+  ],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": null,
+  "auth": {
+   "method": "bearer",
+   "token_source": "Admin portal > All Orgs > Authentication > Provisioning > Generate Token (per-Org tokens from each Org's Admin > Security settings)",
+   "token_expiry": "6 months",
+   "cite": [
+    "c7",
+    "c8",
+    "c16",
+    "c18"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c9"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": false,
+   "reactivate": null,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c9",
+    "c10",
+    "c12"
+   ]
+  },
+  "deprovision": {
+   "action": "delete",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Hard delete, no suspended state; the user's Liveboards, saved Answers and scheduled jobs transfer to tsadmin. Re-provisioning creates a new account and content is not reassigned automatically.",
+   "cite": [
+    "c10",
+    "c11",
+    "c12"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": []
+  },
+  "roles": {
+   "supported": true,
+   "how": "IdP group membership syncs to ThoughtSpot groups, which carry role privileges",
+   "cite": [
+    "c13"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Deactivation in the IdP (Okta deactivate, Entra disable or unassign) results in a permanent delete; there is no soft-deactivated state.",
+    "cite": [
+     "c10",
+     "c12"
+    ]
+   },
+   {
+    "text": "Large change volumes take 20 to 40 minutes to appear.",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "text": "SAML group mapping overrides SCIM group assignments on login; do not enable both.",
+    "cite": [
+     "c15"
+    ]
+   },
+   {
+    "text": "Multi-Org instances need a separate IdP SCIM app and Org-scoped token per Org; enabling SCIM per Org requires ThoughtSpot support.",
+    "cite": [
+     "c5",
+     "c18"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c20",
+   "c35"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://{ThoughtSpot-Host}/api/rest/2.0",
+  "docs_url": "https://developers.thoughtspot.com/docs/rest-apiv2-reference",
+  "auth": {
+   "methods": [
+    "bearer_token",
+    "session_login"
+   ],
+   "scopes": [],
+   "cite": [
+    "c37"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": true,
+   "reactivate_user": true,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c20",
+    "c21",
+    "c22",
+    "c23",
+    "c26",
+    "c27",
+    "c28",
+    "c29",
+    "c30",
+    "c32",
+    "c33"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/api/rest/2.0/users/search",
+    "purpose": "Search / get users",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/rest/2.0/users/create",
+    "purpose": "Create a user",
+    "cite": [
+     "c21"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/rest/2.0/users/{user_identifier}/update",
+    "purpose": "Update a user",
+    "cite": [
+     "c22"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/rest/2.0/users/{user_identifier}/delete",
+    "purpose": "Delete a user",
+    "cite": [
+     "c23"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/rest/2.0/users/import",
+    "purpose": "Import users",
+    "cite": [
+     "c24"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/rest/2.0/users/force-logout",
+    "purpose": "Log users out of sessions",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/rest/2.0/users/activate",
+    "purpose": "Activate a deactivated user",
+    "cite": [
+     "c26"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/rest/2.0/users/deactivate",
+    "purpose": "Deactivate a user",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/rest/2.0/groups/search",
+    "purpose": "Search groups",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/rest/2.0/groups/create",
+    "purpose": "Create a group",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/rest/2.0/groups/{group_identifier}/update",
+    "purpose": "Update a group, add/remove users and privileges",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/rest/2.0/groups/{group_identifier}/delete",
+    "purpose": "Delete a group",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/rest/2.0/groups/import",
+    "purpose": "Import groups",
+    "cite": [
+     "c42"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/rest/2.0/roles/search",
+    "purpose": "Search roles",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/rest/2.0/roles/create",
+    "purpose": "Create a role",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/rest/2.0/roles/{role_identifier}/update",
+    "purpose": "Update a role",
+    "cite": [
+     "c41"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/rest/2.0/logs/fetch",
+    "purpose": "Fetch security audit logs",
+    "cite": [
+     "c34"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": null,
+   "cite": [
+    "c34",
+    "c38"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Audit log fetch needs the ADMINISTRATION privilege.",
+    "cite": [
+     "c38"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/thoughtspot/",
+   "cite": [
+    "c39"
+   ],
+   "notes": "OIN page marks OIDC, SCIM, Create, Update, Deactivate, Sync Password, Group Push and Schema Discovery as checked (read from page markup); SAML not checked."
+  },
+  "entra": {
+   "listed": null,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c17"
+   ],
+   "notes": "ThoughtSpot points to Microsoft's generic SCIM provisioning docs; no ThoughtSpot tutorial found at learn.microsoft.com (thoughtspot-provisioning-tutorial and thoughtspot-tutorial return 404)."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "jumpcloud.com/support/integrate-with-thoughtspot returned 403 to curl and WebFetch."
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c36",
+   "c19"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.thoughtspot.com/pricing",
+   "title": "ThoughtSpot Plans and Pricing",
+   "quote": "Starting as low as $25 per user / per month (billed annually) Dynamic interactive dashboards Actionable insights From 5 to 50 users",
+   "accessed": "2026-10-05",
+   "interaction": "click the Essentials tab"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.thoughtspot.com/pricing",
+   "title": "ThoughtSpot Plans and Pricing",
+   "quote": "Starting as low as $50 per user / per month (billed annually) AI-powered dashboards and automated insights",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.thoughtspot.com/pricing",
+   "title": "ThoughtSpot Plans and Pricing",
+   "quote": "Custom pricing tailored to your teams, data, and deployment needs.",
+   "accessed": "2026-10-05",
+   "interaction": "click the Enterprise tab"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.thoughtspot.com/pricing",
+   "title": "ThoughtSpot Plans and Pricing",
+   "quote": "Single sign-on via SAML, OAuth, and OIDC",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://docs.thoughtspot.com/cloud/latest/group-user-management-scim",
+   "title": "Manage users and groups with SCIM",
+   "quote": "By default, SCIM is enabled for a cluster. If your ThoughtSpot instance uses Orgs, you must enable SCIM at the Org level to ensure that users are provisioned to a particular group in a particular Org. To enable SCIM per Org, contact ThoughtSpot support.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://docs.thoughtspot.com/cloud/latest/group-user-management-scim",
+   "title": "Manage users and groups with SCIM",
+   "quote": "Before you configure, ensure that your IdP supports SCIM 2.0 for a seamless integration with ThoughtSpot.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://docs.thoughtspot.com/cloud/latest/group-user-management-scim",
+   "title": "Manage users and groups with SCIM",
+   "quote": "Click Generate Token to generate and copy the authentication token. This token is used to authenticate the SCIM service (ThoughtSpot application) in your IdP.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.thoughtspot.com/cloud/latest/group-user-management-scim",
+   "title": "Manage users and groups with SCIM",
+   "quote": "Each SCIM token has a validity of only six months.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.thoughtspot.com/cloud/latest/group-user-management-scim",
+   "title": "Manage users and groups with SCIM",
+   "quote": "ThoughtSpot supports create, read, update, and delete of users and groups, and provisioning users to groups within Orgs.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.thoughtspot.com/cloud/latest/group-user-management-scim",
+   "title": "Manage users and groups with SCIM",
+   "quote": "ThoughtSpot's SCIM implementation treats a de-provisioning request as a permanent (hard) delete.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.thoughtspot.com/cloud/latest/group-user-management-scim",
+   "title": "Manage users and groups with SCIM",
+   "quote": "When a user is removed from ThoughtSpot through SCIM de-provisioning, their content — including personal Liveboards, saved Answers, and scheduled jobs — is automatically transferred to the tsadmin user. No content is deleted.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.thoughtspot.com/cloud/latest/group-user-management-scim",
+   "title": "Manage users and groups with SCIM",
+   "quote": "ThoughtSpot does not support a suspended or soft-deactivated user state. When a de-provisioning signal is received, users are permanently deleted.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.thoughtspot.com/cloud/latest/group-user-management-scim",
+   "title": "Manage users and groups with SCIM",
+   "quote": "Membership in a group in the IdP can automatically assign the corresponding role in ThoughtSpot, controlling access levels.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.thoughtspot.com/cloud/latest/group-user-management-scim",
+   "title": "Manage users and groups with SCIM",
+   "quote": "Low volume changes made in IdP may be reflected immediately in ThoughtSpot. Larger volume changes are usually reflected within 20 to 40 minutes.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.thoughtspot.com/cloud/latest/group-user-management-scim",
+   "title": "Manage users and groups with SCIM",
+   "quote": "Avoid enabling both SAML group mapping and SCIM provisioning simultaneously, as SAML group mapping will override SCIM group assignments on user login.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.thoughtspot.com/cloud/latest/group-user-management-scim",
+   "title": "Manage users and groups with SCIM",
+   "quote": "Copy the token from ThoughtSpot in the bearer token field provided in the Okta interface.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.thoughtspot.com/cloud/latest/group-user-management-scim",
+   "title": "Manage users and groups with SCIM",
+   "quote": "For detailed information on enabling SCIM provisioning in Microsoft Entra, see SCIM provisioning in Microsoft Entra.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.thoughtspot.com/cloud/latest/multi-org-scim",
+   "title": "Configure SCIM for multi-Org deployments",
+   "quote": "ThoughtSpot uses per-Org SCIM tokens to identify which Org a provisioned user belongs to.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.thoughtspot.com/cloud/latest/multi-org-scim",
+   "title": "Configure SCIM for multi-Org deployments",
+   "quote": "If a user logs in before SCIM provisioning is complete, ThoughtSpot creates the user account via Just-in-Time (JIT) provisioning, which defaults to the Primary Org.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://developers.thoughtspot.com/docs/rest-apiv2-reference",
+   "title": "REST API v2.0 reference",
+   "quote": "POST /api/rest/2.0/users/search Gets details of one or several ThoughtSpot users.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://developers.thoughtspot.com/docs/rest-apiv2-reference",
+   "title": "REST API v2.0 reference",
+   "quote": "POST /api/rest/2.0/users/create Creates a user.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://developers.thoughtspot.com/docs/rest-apiv2-reference",
+   "title": "REST API v2.0 reference",
+   "quote": "POST /api/rest/2.0/users/{user_identifier}/update Updates the properties of a user object.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://developers.thoughtspot.com/docs/rest-apiv2-reference",
+   "title": "REST API v2.0 reference",
+   "quote": "POST /api/rest/2.0/users/{user_identifier}/delete Deletes a user object from ThoughtSpot.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://developers.thoughtspot.com/docs/rest-apiv2-reference",
+   "title": "REST API v2.0 reference",
+   "quote": "POST /api/rest/2.0/users/import Imports users from an external database to ThoughtSpot.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://developers.thoughtspot.com/docs/rest-apiv2-reference",
+   "title": "REST API v2.0 reference",
+   "quote": "POST /api/rest/2.0/users/force-logout Logs out users from their current sessions.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://developers.thoughtspot.com/docs/rest-apiv2-reference",
+   "title": "REST API v2.0 reference",
+   "quote": "POST /api/rest/2.0/users/activate Activates a deactivated user account.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://developers.thoughtspot.com/docs/rest-apiv2-reference",
+   "title": "REST API v2.0 reference",
+   "quote": "POST /api/rest/2.0/users/deactivate Deactivates a user account.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://developers.thoughtspot.com/docs/rest-apiv2-reference",
+   "title": "REST API v2.0 reference",
+   "quote": "POST /api/rest/2.0/groups/search Gets details of one or several Groups.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://developers.thoughtspot.com/docs/rest-apiv2-reference",
+   "title": "REST API v2.0 reference",
+   "quote": "POST /api/rest/2.0/groups/create Creates a Group object.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://developers.thoughtspot.com/docs/rest-apiv2-reference",
+   "title": "REST API v2.0 reference",
+   "quote": "POST /api/rest/2.0/groups/{group_identifier}/update Updates the object properties of a group. You can also use this API to add or remove users, sub-groups, and privileges.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://developers.thoughtspot.com/docs/rest-apiv2-reference",
+   "title": "REST API v2.0 reference",
+   "quote": "POST /api/rest/2.0/groups/{group_identifier}/delete Removes a group object from ThoughtSpot.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://developers.thoughtspot.com/docs/rest-apiv2-reference",
+   "title": "REST API v2.0 reference",
+   "quote": "POST /api/rest/2.0/roles/search",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://developers.thoughtspot.com/docs/rest-apiv2-reference",
+   "title": "REST API v2.0 reference",
+   "quote": "POST /api/rest/2.0/roles/create",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://developers.thoughtspot.com/docs/rest-apiv2-reference",
+   "title": "REST API v2.0 reference",
+   "quote": "POST /api/rest/2.0/logs/fetch Gets security audit logs from the ThoughtSpot system.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c35",
+   "url": "https://developers.thoughtspot.com/docs/api-user-management",
+   "title": "Users and groups",
+   "quote": "While you can delete users, it is preferable to deactivate a user, which maintains the user's references within the system.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://developers.thoughtspot.com/docs/api-user-management",
+   "title": "Users and groups",
+   "quote": "When configuring SAML SSO in ThoughtSpot UI, you can select the Automatically add SAML users to ThoughtSpot upon first authentication option, which will use the values in the SAML assertion to create a user if they do not already exist on ThoughtSpot.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://developers.thoughtspot.com/docs/rest-apiv2-getstarted",
+   "title": "Get started with REST API v2.0",
+   "quote": "By default, the bearer token is valid for 300 seconds.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c38",
+   "url": "https://developers.thoughtspot.com/docs/audit-logs",
+   "title": "Audit logs",
+   "quote": "To fetch logs via REST API, you need ADMINISTRATION (Can administer ThoughtSpot) privilege.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c39",
+   "url": "https://www.okta.com/integrations/thoughtspot/",
+   "title": "Integrate Thoughtspot with Okta",
+   "quote": "The integration leverages REST APIs and SCIM to automate user lifecycle management, enabling user accounts to be created, updated, activated, and deactivated seamlessly while mapping Okta groups to ThoughtSpot roles and privileges.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c40",
+   "url": "https://docs.thoughtspot.com/cloud/latest/editions-admin",
+   "title": "Administrator capabilities by edition",
+   "quote": "This article provides information about the capabilities administrators have in each ThoughtSpot edition.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c41",
+   "url": "https://developers.thoughtspot.com/docs/rest-apiv2-reference",
+   "title": "REST API v2.0 reference",
+   "quote": "POST /api/rest/2.0/roles/{role_identifier}/update",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c42",
+   "url": "https://developers.thoughtspot.com/docs/rest-apiv2-reference",
+   "title": "REST API v2.0 reference",
+   "quote": "POST /api/rest/2.0/groups/import Imports group objects from external databases into ThoughtSpot.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.thoughtspot.com/pricing",
+  "https://docs.thoughtspot.com/sitemap-cloud.xml",
+  "https://docs.thoughtspot.com/cloud/latest/group-user-management-scim",
+  "https://docs.thoughtspot.com/cloud/latest/multi-org-scim",
+  "https://docs.thoughtspot.com/cloud/latest/editions-admin",
+  "https://docs.thoughtspot.com/cloud/latest/editions-security",
+  "https://developers.thoughtspot.com/sitemap.xml",
+  "https://developers.thoughtspot.com/docs/rest-apiv2-reference",
+  "https://www.okta.com/integrations/thoughtspot/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/thoughtspot-provisioning-tutorial (404)",
+  "https://jumpcloud.com/support/integrate-with-thoughtspot (403)"
+ ],
+ "open_questions": [
+  "Which plan (Essentials, Pro, Enterprise) includes SCIM provisioning is not stated on the pricing page or the editions docs.",
+  "SCIM base URL pattern is shown only in the admin UI, not in the docs.",
+  "SCIM attribute list, filtering, pagination and rate limits are not documented.",
+  "Which plan includes REST API v2 user management and the audit-log API is not stated.",
+  "Whether SCIM deletion frees a licence seat is not documented (likely, since the user is deleted, but not stated).",
+  "Google, OneLogin and JumpCloud catalogue entries could not be confirmed."
+ ]
+}

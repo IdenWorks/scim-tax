@@ -1,0 +1,801 @@
+{
+ "slug": "hyperproof",
+ "vendor": "Hyperproof",
+ "vendor_url": "https://hyperproof.io",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Hyperproof",
+  "slug": "hyperproof",
+  "category": "Legal, Contracts & Compliance",
+  "status": "gated",
+  "scim_plan": "Contact Sales",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": "sso_only",
+   "generic": true
+  },
+  "pricing_page_url": "https://hyperproof.io/pricing/",
+  "docs_url": "https://help.hyperproof.app/en/articles/14304616-provisioning-hyperproof-users-and-groups-with-scim",
+  "evidence": "Hyperproof's help centre says 'Hyperproof supports SCIM provisioning for users and groups from Okta and Microsoft Entra ID' and can 'add, update, and deactivate users'; there are no public plans or prices, so SCIM can only be bought through sales.",
+  "notes": "Quote-only: Hyperproof publishes no plan names or prices (pricing page blocked to curl and the renderer; a WebFetch read showed no plan table), so SCIM is recorded as gated at low confidence. SCIM 2.0 for users and groups is documented for Okta (OIN app with SCIM create, update, deactivate and group push) and Microsoft Entra ID (a second, non-gallery enterprise app alongside the OIDC SSO app). SSO must be configured first and Hyperproof Support must enable the SCIM feature for the organization. The Admin generates a SCIM endpoint URL and bearer token (a second token can be created for rotation). Removing a user in the IdP deactivates them in Hyperproof (work can be reassigned, user can be reactivated). Roles come from IdP role assignment (Entra app roles ORGANIZATION_ADMINISTRATOR, COMPLIANCE_MANAGER, USER, LIMITED_ACCESS_USER), default Limited access user. JumpCloud is SSO only (SAML). The REST API (OAuth2 client credentials) can list users and manage groups and object role assignments but cannot create or deactivate users.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c2",
+   "c3",
+   "c5",
+   "c8"
+  ],
+  "plan": "Contact Sales",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": "bearer",
+   "token_source": "Settings > Authentication > Provisioning toggle (SCIM Endpoint URL and Bearer Token)",
+   "token_expiry": null,
+   "cite": [
+    "c6",
+    "c7",
+    "c13"
+   ],
+   "notes": "A second token can be created to rotate the one in use."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c2",
+    "c9"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": null,
+   "group_push": true,
+   "group_membership": null,
+   "cite": [
+    "c9",
+    "c14",
+    "c3",
+    "c10"
+   ],
+   "notes": "Okta lists 'Import new users and profile updates' (read); Entra lists 'Deactivate groups'. Profile updates supported; PUT vs PATCH not documented."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "User is deactivated; their work can be reassigned to another user and they can be reactivated from the Users list.",
+   "cite": [
+    "c10",
+    "c24",
+    "c25"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "emails[type eq \"work\"].value",
+    "active",
+    "name.givenName",
+    "name.familyName",
+    "roles"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": [
+    "c20",
+    "c21",
+    "c23",
+    "c22"
+   ],
+   "notes": "Entra guide: remove name.formatted, addresses, phoneNumbers, timezone, externalId, displayName and enterprise employeeId, department, manager mappings ('Hyperproof doesn't use them'); roles is a multi-valued string."
+  },
+  "roles": {
+   "supported": true,
+   "how": "Assign Hyperproof roles in the IdP (Entra app roles with values ORGANIZATION_ADMINISTRATOR, COMPLIANCE_MANAGER, USER, LIMITED_ACCESS_USER, sent in the roles attribute); unassigned users get Limited access user.",
+   "cite": [
+    "c18",
+    "c19",
+    "c11",
+    "c23"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SCIM is only for Okta and Microsoft Entra ID.",
+    "cite": [
+     "c2",
+     "c5"
+    ]
+   },
+   {
+    "text": "The Provisioning menu only appears after SSO is configured and Hyperproof Support enables the SCIM feature on request.",
+    "cite": [
+     "c8"
+    ]
+   },
+   {
+    "text": "Entra needs two apps (one for OIDC SSO, a second non-gallery app for SCIM); sync runs every 40 minutes and is not configurable; group provisioning needs Entra P1 or P2.",
+    "cite": [
+     "c15",
+     "c16",
+     "c17"
+    ]
+   },
+   {
+    "text": "No invitation emails are sent to SCIM-provisioned users.",
+    "cite": [
+     "c4"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c45",
+   "c28",
+   "c29"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://api.hyperproof.app/v1 (US); api.hyperproof.eu (EU); api.hyperproofgov.app (Gov)",
+  "docs_url": "https://developer.hyperproof.app/hyperproof-api",
+  "auth": {
+   "methods": [
+    "oauth2_client_credentials",
+    "oauth2_authorization_code"
+   ],
+   "scopes": [],
+   "cite": [
+    "c42",
+    "c43"
+   ],
+   "notes": "Scopes are per object (e.g. control.read); user and group scope names not checked."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c28",
+    "c30",
+    "c34",
+    "c37",
+    "c38"
+   ],
+   "notes": "Users API is read-only (GET /me, GET /). Role assignments are per object, not organization roles."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/users/me",
+    "purpose": "Get User (requesting user)",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/users/",
+    "purpose": "Get Users",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/groups/",
+    "purpose": "Add Group",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/groups/",
+    "purpose": "Get Groups",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/groups/{groupId}",
+    "purpose": "Get Group",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/groups/{groupId}",
+    "purpose": "Update Group",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/groups/{groupId}/users",
+    "purpose": "Get Group Members",
+    "cite": [
+     "c36"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/groups/{groupId}/users",
+    "purpose": "Add Group Member",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/groups/{groupId}/users/delete",
+    "purpose": "Remove Group Members",
+    "cite": [
+     "c35"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/roles/",
+    "purpose": "Get Roles",
+    "cite": [
+     "c41"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/roleassignments/",
+    "purpose": "Add Role Assignment",
+    "cite": [
+     "c38"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/roleassignments/{id}",
+    "purpose": "Update Role Assignment",
+    "cite": [
+     "c39"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/roleassignments/{id}",
+    "purpose": "Delete Role Assignment",
+    "cite": [
+     "c40"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "No fixed limits; throttling returns HTTP 429 during high activity.",
+   "cite": [
+    "c44"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "No API endpoint to create, invite, update or deactivate users.",
+    "cite": [
+     "c28"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/hyperproof/",
+   "cite": [
+    "c46",
+    "c12"
+   ],
+   "notes": "OIN functionality list checks SAML, SCIM, Create, Update, Deactivate and Group Push (read from the page markup)."
+  },
+  "entra": {
+   "listed": false,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c15"
+   ],
+   "notes": "Non-gallery app for SCIM; learn.microsoft.com hyperproof-tutorial returns 404."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c2",
+    "c5"
+   ],
+   "notes": "Hyperproof documents JumpCloud SAML SSO; SCIM is Okta and Entra only. JumpCloud catalogue page not checked."
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": true,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c26"
+  ],
+  "notes": "CSV-imported users are added as contacts without a role."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://hyperproof.io/pricing/",
+   "title": "Hyperproof Pricing",
+   "quote": "",
+   "accessed": "2026-10-05",
+   "blocked": "Cloudflare 403 to curl; render.cjs ERR_TOO_MANY_RETRIES; WebFetch summary showed no plan names or prices"
+  },
+  {
+   "id": "c2",
+   "url": "https://help.hyperproof.app/en/articles/14304616-provisioning-hyperproof-users-and-groups-with-scim",
+   "title": "Provisioning Hyperproof users and groups with SCIM",
+   "quote": "Hyperproof supports SCIM provisioning for users and groups from Okta and Microsoft Entra ID.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://help.hyperproof.app/en/articles/14304616-provisioning-hyperproof-users-and-groups-with-scim",
+   "title": "Provisioning Hyperproof users and groups with SCIM",
+   "quote": "Hyperproof can add, update, and deactivate users by using SCIM to access and monitor users authenticated by Okta or Microsoft Entra ID.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://help.hyperproof.app/en/articles/14304616-provisioning-hyperproof-users-and-groups-with-scim",
+   "title": "Provisioning Hyperproof users and groups with SCIM",
+   "quote": "No invitations are sent from Hyperproof to individual users when using SCIM provisioning to bring users into Hyperproof.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://help.hyperproof.app/en/articles/14304636-configuring-scim-in-hyperproof",
+   "title": "Configuring SCIM in Hyperproof",
+   "quote": "SSO must be enabled and configured first. Hyperproof supports SCIM using Okta or Microsoft Entra ID SSO.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://help.hyperproof.app/en/articles/14304636-configuring-scim-in-hyperproof",
+   "title": "Configuring SCIM in Hyperproof",
+   "quote": "The Provisioning window displays. Hyperproof generates a SCIM Endpoint URL and Bearer Token.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://help.hyperproof.app/en/articles/14304636-configuring-scim-in-hyperproof",
+   "title": "Configuring SCIM in Hyperproof",
+   "quote": "You can create a second token used to rotate the token that is currently in use.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://help.hyperproof.app/en/articles/14304636-configuring-scim-in-hyperproof",
+   "title": "Configuring SCIM in Hyperproof",
+   "quote": "The Provisioning menu is not visible for you to configure SCIM until SSO configuration is complete and Support has enabled the feature for your organization. To request the SCIM feature, open a",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://help.hyperproof.app/en/articles/14304637-okta-scim-configuration",
+   "title": "Okta SCIM configuration",
+   "quote": "Import new users and profile updates Push new users Push profile updates Push groups Deactivate users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://help.hyperproof.app/en/articles/14304637-okta-scim-configuration",
+   "title": "Okta SCIM configuration",
+   "quote": "If you remove a user from Okta, that user is deactivated in Hyperproof. Be sure to reassign any work assigned to the deactivated user.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://help.hyperproof.app/en/articles/14304637-okta-scim-configuration",
+   "title": "Okta SCIM configuration",
+   "quote": "Hyperproof roles must be assigned to users in Okta or those users will receive the default role of Limited access user when provisioned in Hyperproof.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://help.hyperproof.app/en/articles/14304637-okta-scim-configuration",
+   "title": "Okta SCIM configuration",
+   "quote": "In Okta, locate the Hyperproof app.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://help.hyperproof.app/en/articles/14304637-okta-scim-configuration",
+   "title": "Okta SCIM configuration",
+   "quote": "Click Enable API Integration and add the Hyperproof Bearer Token into the API Token field.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://help.hyperproof.app/en/articles/14304638-microsoft-entra-id-scim-configuration",
+   "title": "Microsoft Entra ID SCIM configuration",
+   "quote": "Push new users Push profile updates Push groups Deactivate users Deactivate groups",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://help.hyperproof.app/en/articles/14304638-microsoft-entra-id-scim-configuration",
+   "title": "Microsoft Entra ID SCIM configuration",
+   "quote": "Remember that SCIM provisioning requires that you have two apps in Microsoft Entra ID, one app for SSO and a second non-gallery enterprise app where the SCIM connection and provisioning are configured.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://help.hyperproof.app/en/articles/14304638-microsoft-entra-id-scim-configuration",
+   "title": "Microsoft Entra ID SCIM configuration",
+   "quote": "Microsoft Entra ID synchronizes with Hyperproof every 40 minutes. The synchronization time is not configurable.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://help.hyperproof.app/en/articles/14304638-microsoft-entra-id-scim-configuration",
+   "title": "Microsoft Entra ID SCIM configuration",
+   "quote": "If you plan to provision groups in Hyperproof from Microsoft Entra ID, you must have a P1 or P2 license.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://help.hyperproof.app/en/articles/14304635-configuring-hyperproof-roles-for-microsoft-entra-id-scim-provisioning",
+   "title": "Configuring Hyperproof roles for Microsoft Entra ID SCIM provisioning",
+   "quote": "To automatically assign Hyperproof roles to users during provisioning, you must create app roles in Microsoft Entra ID.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://help.hyperproof.app/en/articles/14304635-configuring-hyperproof-roles-for-microsoft-entra-id-scim-provisioning",
+   "title": "Configuring Hyperproof roles for Microsoft Entra ID SCIM provisioning",
+   "quote": "Role: Organization Administrator, complete the following fields: Display name - Admin Allowed member types - Users/Groups Value - ORGANIZATION_ADMINISTRATOR",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://help.hyperproof.app/en/articles/14304642-configuring-microsoft-entra-id-attribute-mappings-for-scim-provisioning",
+   "title": "Configuring Microsoft Entra ID attribute mappings for SCIM provisioning",
+   "quote": "Make sure the following required mappings are configured:",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://help.hyperproof.app/en/articles/14304642-configuring-microsoft-entra-id-attribute-mappings-for-scim-provisioning",
+   "title": "Configuring Microsoft Entra ID attribute mappings for SCIM provisioning",
+   "quote": "Not([IsSoftDeleted]) User status (active/inactive) name.givenName givenName First name (required) name.familyName surname Last name (required)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://help.hyperproof.app/en/articles/14304642-configuring-microsoft-entra-id-attribute-mappings-for-scim-provisioning",
+   "title": "Configuring Microsoft Entra ID attribute mappings for SCIM provisioning",
+   "quote": "Remove the following unnecessary mappings. Hyperproof doesn't use them:",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://help.hyperproof.app/en/articles/14304642-configuring-microsoft-entra-id-attribute-mappings-for-scim-provisioning",
+   "title": "Configuring Microsoft Entra ID attribute mappings for SCIM provisioning",
+   "quote": "is in the attribute list as a multi-valued string.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://help.hyperproof.app/en/articles/14304615-removing-a-user-from-your-organization",
+   "title": "Removing a user from your organization",
+   "quote": "Work from a deactivated user can be transferred to another user. Note that Hyperproof does not send notifications to deactivated users.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://help.hyperproof.app/en/articles/14304615-removing-a-user-from-your-organization",
+   "title": "Removing a user from your organization",
+   "quote": "If you want to reactivate the user in your organization, scroll to the end of the Users list, locate the user, and then click",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://help.hyperproof.app/en/articles/14304611-importing-users-into-hyperproof",
+   "title": "Importing users into Hyperproof",
+   "quote": "If your organization has a large number of users, you can import them into Hyperproof via a CSV file.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://developer.hyperproof.app/hyperproof-api/users/users.openapi.md",
+   "title": "Users API",
+   "quote": "Retrieves the stored profile information for the requesting user, including details such as name, email, and organization membership.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.hyperproof.app/hyperproof-api/users/users.openapi"
+  },
+  {
+   "id": "c28",
+   "url": "https://developer.hyperproof.app/hyperproof-api/users/users.openapi.md",
+   "title": "Users API",
+   "quote": "Retrieves a list of all users in an organization, including their names, roles, and status information.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.hyperproof.app/hyperproof-api/users/users.openapi"
+  },
+  {
+   "id": "c29",
+   "url": "https://developer.hyperproof.app/hyperproof-api/users/users.openapi.md",
+   "title": "Users API",
+   "quote": "https://api.hyperproof.app/v1/users",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.hyperproof.app/hyperproof-api/users/users.openapi"
+  },
+  {
+   "id": "c30",
+   "url": "https://developer.hyperproof.app/hyperproof-api/groups/groups.openapi.md",
+   "title": "Groups API",
+   "quote": "POST /](https://developer.hyperproof.app/hyperproof-api/groups/groups.openapi/other/add-group.md): POST /",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.hyperproof.app/hyperproof-api/groups/groups.openapi"
+  },
+  {
+   "id": "c31",
+   "url": "https://developer.hyperproof.app/hyperproof-api/groups/groups.openapi.md",
+   "title": "Groups API",
+   "quote": "GET /](https://developer.hyperproof.app/hyperproof-api/groups/groups.openapi/other/get-groups.md)",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.hyperproof.app/hyperproof-api/groups/groups.openapi"
+  },
+  {
+   "id": "c32",
+   "url": "https://developer.hyperproof.app/hyperproof-api/groups/groups.openapi.md",
+   "title": "Groups API",
+   "quote": "GET /{groupId}](https://developer.hyperproof.app/hyperproof-api/groups/groups.openapi/other/get-group.md)",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.hyperproof.app/hyperproof-api/groups/groups.openapi"
+  },
+  {
+   "id": "c33",
+   "url": "https://developer.hyperproof.app/hyperproof-api/groups/groups.openapi.md",
+   "title": "Groups API",
+   "quote": "PATCH /{groupId}](https://developer.hyperproof.app/hyperproof-api/groups/groups.openapi/other/update-group.md)",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.hyperproof.app/hyperproof-api/groups/groups.openapi"
+  },
+  {
+   "id": "c34",
+   "url": "https://developer.hyperproof.app/hyperproof-api/groups/groups.openapi.md",
+   "title": "Groups API",
+   "quote": "POST /{groupId}/users](https://developer.hyperproof.app/hyperproof-api/groups/groups.openapi/other/add-group-member.md)",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.hyperproof.app/hyperproof-api/groups/groups.openapi"
+  },
+  {
+   "id": "c35",
+   "url": "https://developer.hyperproof.app/hyperproof-api/groups/groups.openapi.md",
+   "title": "Groups API",
+   "quote": "PUT /{groupId}/users/delete](https://developer.hyperproof.app/hyperproof-api/groups/groups.openapi/other/remove-group-members.md)",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.hyperproof.app/hyperproof-api/groups/groups.openapi"
+  },
+  {
+   "id": "c36",
+   "url": "https://developer.hyperproof.app/hyperproof-api/groups/groups.openapi.md",
+   "title": "Groups API",
+   "quote": "GET /{groupId}/users](https://developer.hyperproof.app/hyperproof-api/groups/groups.openapi/other/get-group-members.md)",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.hyperproof.app/hyperproof-api/groups/groups.openapi"
+  },
+  {
+   "id": "c37",
+   "url": "https://developer.hyperproof.app/hyperproof-api/roleassignments/roleassignments.openapi.md",
+   "title": "Role Assignments API",
+   "quote": "Provides access to the roles that are assigned to users in the context of a Hyperproof object.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.hyperproof.app/hyperproof-api/roleassignments/roleassignments.openapi"
+  },
+  {
+   "id": "c38",
+   "url": "https://developer.hyperproof.app/hyperproof-api/roleassignments/roleassignments.openapi.md",
+   "title": "Role Assignments API",
+   "quote": "POST /](https://developer.hyperproof.app/hyperproof-api/roleassignments/roleassignments.openapi/other/add-role-assignment.md)",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.hyperproof.app/hyperproof-api/roleassignments/roleassignments.openapi"
+  },
+  {
+   "id": "c39",
+   "url": "https://developer.hyperproof.app/hyperproof-api/roleassignments/roleassignments.openapi.md",
+   "title": "Role Assignments API",
+   "quote": "PATCH /{id}](https://developer.hyperproof.app/hyperproof-api/roleassignments/roleassignments.openapi/other/update-role-assignment.md)",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.hyperproof.app/hyperproof-api/roleassignments/roleassignments.openapi"
+  },
+  {
+   "id": "c40",
+   "url": "https://developer.hyperproof.app/hyperproof-api/roleassignments/roleassignments.openapi.md",
+   "title": "Role Assignments API",
+   "quote": "DELETE /{id}](https://developer.hyperproof.app/hyperproof-api/roleassignments/roleassignments.openapi/other/delete-role-assignment.md)",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.hyperproof.app/hyperproof-api/roleassignments/roleassignments.openapi"
+  },
+  {
+   "id": "c41",
+   "url": "https://developer.hyperproof.app/hyperproof-api/roles/roles.openapi.md",
+   "title": "Roles API",
+   "quote": "https://api.hyperproof.app/v1/roles",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.hyperproof.app/hyperproof-api/roles/roles.openapi"
+  },
+  {
+   "id": "c42",
+   "url": "https://developer.hyperproof.app/hyperproof-api/authentication.md",
+   "title": "Authenticating with Hyperproof",
+   "quote": "For this API to succeed, your app must have the `control.read` scope.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.hyperproof.app/hyperproof-api/authentication"
+  },
+  {
+   "id": "c43",
+   "url": "https://developer.hyperproof.app/hyperproof-api/authentication.md",
+   "title": "Authenticating with Hyperproof",
+   "quote": "Hyperproof APIs supports **client credentials**.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.hyperproof.app/hyperproof-api/authentication"
+  },
+  {
+   "id": "c44",
+   "url": "https://developer.hyperproof.app/hyperproof-api/api-009-rate-limiting-tutorial.md",
+   "title": "Handling Throttling Responses from the Hyperproof API",
+   "quote": "Hyperproof does not impose any specific limits for customers using our API, but you may occasionally encounter a throttling response during periods of high activity.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.hyperproof.app/hyperproof-api/api-009-rate-limiting-tutorial"
+  },
+  {
+   "id": "c45",
+   "url": "https://developer.hyperproof.app/hyperproof-api.md",
+   "title": "Introducing Hyperproof APIs",
+   "quote": "Hyperproof APIs enable programmatic access to your organization’s compliance data.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.hyperproof.app/hyperproof-api"
+  },
+  {
+   "id": "c46",
+   "url": "https://www.okta.com/integrations/hyperproof/",
+   "title": "Hyperproof | Okta Integration Network",
+   "quote": "Okta's integration with Hypersync allows end users to authenticate to a Hyperproof organization and gain access to specific roles using single sign-on with SAML.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://hyperproof.io/pricing/ (blocked)",
+  "https://hyperproof.io/sitemap_index.xml",
+  "https://help.hyperproof.app/en/collections/19196402-authentication-and-security",
+  "https://help.hyperproof.app/en/collections/19196671-settings",
+  "https://developer.hyperproof.app/llms.txt",
+  "https://developer.hyperproof.app/hyperproof-api (users, groups, roles, roleassignments OpenAPI)",
+  "https://www.okta.com/integrations/hyperproof/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/hyperproof-tutorial (404)"
+ ],
+ "open_questions": [
+  "No public plan or price list; which contract tiers include SSO and SCIM is unknown.",
+  "SCIM version, base URL pattern, filtering, pagination and token expiry are not documented.",
+  "Whether deactivation frees a paid seat or ends sessions is not documented.",
+  "Whether an audit-log API exists was not found in the developer portal."
+ ]
+}

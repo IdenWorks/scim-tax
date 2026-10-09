@@ -1,0 +1,807 @@
+{
+  "scim": {
+    "available": true,
+    "cite": [
+      "c13",
+      "c14",
+      "c24",
+      "c25"
+    ],
+    "plan": "Enterprise",
+    "addon_price_text": null,
+    "sso_required": true,
+    "version": null,
+    "base_url": null,
+    "auth": {
+      "method": "bearer",
+      "token_source": "Team Settings > Single Sign-On (SSO) > SCIM Authentication Token",
+      "token_expiry": null,
+      "cite": [
+        "c17",
+        "c18",
+        "c25"
+      ],
+      "notes": "Okta's API Token field and Entra's Secret Token both take the SCIM Authentication Token; Bearer scheme inferred from those IdP fields."
+    },
+    "endpoints": {
+      "Users": true,
+      "Groups": true,
+      "ServiceProviderConfig": null,
+      "Schemas": null,
+      "ResourceTypes": null,
+      "Bulk": null,
+      "Me": null,
+      "cite": [
+        "c16",
+        "c26",
+        "c27"
+      ]
+    },
+    "operations": {
+      "create": true,
+      "read": null,
+      "update_put": null,
+      "update_patch": null,
+      "deactivate": true,
+      "reactivate": null,
+      "delete": null,
+      "group_push": true,
+      "group_membership": true,
+      "cite": [
+        "c16",
+        "c19"
+      ]
+    },
+    "deprovision": {
+      "action": "deactivate",
+      "frees_seat": null,
+      "revokes_sessions": null,
+      "data_retained": null,
+      "cite": [
+        "c16",
+        "c19"
+      ],
+      "notes": "Docs list both 'Deactivating users' and 'Deprovisioning users' without saying what happens to the account or its pads. Plans have unlimited users, so seats do not apply."
+    },
+    "filtering": {
+      "supported": null,
+      "attributes": [],
+      "cite": []
+    },
+    "pagination": {
+      "supported": null,
+      "max_page_size": null,
+      "cite": []
+    },
+    "attributes": {
+      "core": [
+        "userName",
+        "active",
+        "name.givenName",
+        "name.familyName"
+      ],
+      "enterprise": [],
+      "custom": {
+        "supported": null,
+        "how": null
+      },
+      "group": [
+        "displayName",
+        "members"
+      ],
+      "cite": [
+        "c16",
+        "c26",
+        "c27",
+        "c28"
+      ]
+    },
+    "roles": {
+      "supported": true,
+      "how": "SCIM groups are configured in CoderPad to set permissions (admin/member) and teams; ungrouped users get the Member role.",
+      "cite": [
+        "c20",
+        "c21",
+        "c23"
+      ]
+    },
+    "rate_limits": {
+      "text": null,
+      "cite": []
+    },
+    "limitations": [
+      {
+        "text": "SCIM can only be turned on after SSO is activated (Enterprise only).",
+        "cite": [
+          "c13",
+          "c24"
+        ]
+      },
+      {
+        "text": "Attribute mappings with value filters such as [type eq ...] break provisioning and must be removed.",
+        "cite": [
+          "c28"
+        ]
+      },
+      {
+        "text": "Group names cannot be edited in CoderPad; they come from the IdP.",
+        "cite": [
+          "c22"
+        ]
+      },
+      {
+        "text": "SCIM-created users must still verify their email and log in once at app.coderpad.io before they can use the IdP tile.",
+        "cite": [
+          "c32"
+        ]
+      },
+      {
+        "text": "No JIT provisioning or Single Logout.",
+        "cite": [
+          "c15"
+        ]
+      }
+    ],
+    "notes": "SCIM URL and token are shown in CoderPad's SSO settings after SSO is saved; the URL pattern and SCIM version are not published."
+  },
+  "user_api": {
+    "available": true,
+    "cite": [
+      "c35",
+      "c36",
+      "c10"
+    ],
+    "plan": "Enterprise",
+    "api_tax": true,
+    "style": "REST",
+    "base_url": "https://app.coderpad.io/api",
+    "docs_url": "https://api.interview.coderpad.io/",
+    "auth": {
+      "methods": [
+        "api_key"
+      ],
+      "scopes": [],
+      "cite": [
+        "c37",
+        "c35"
+      ]
+    },
+    "capabilities": {
+      "list_users": true,
+      "get_user": true,
+      "create_user": false,
+      "invite_user": null,
+      "update_user": false,
+      "deactivate_user": false,
+      "delete_user": false,
+      "reactivate_user": false,
+      "manage_groups": false,
+      "assign_roles": false,
+      "assign_licenses": null,
+      "cite": [
+        "c39",
+        "c40",
+        "c41"
+      ],
+      "notes": "Only a read endpoint for organization users (optionally filtered by email) is documented; no write endpoints for users exist in the collection."
+    },
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/api/organization/users",
+        "purpose": "Retrieve company users (optional email filter)",
+        "cite": [
+          "c39",
+          "c40",
+          "c41"
+        ]
+      },
+      {
+        "method": "GET",
+        "path": "/api/organization",
+        "purpose": "Retrieve account info (includes users)",
+        "cite": [
+          "c39",
+          "c43"
+        ]
+      }
+    ],
+    "webhooks_user_events": {
+      "supported": null,
+      "events": [],
+      "cite": []
+    },
+    "audit_log_api": {
+      "supported": null,
+      "plan": null,
+      "cite": []
+    },
+    "rate_limits": {
+      "text": "HTTP 429 'Over quota' when the plan's monthly pad allowance is exceeded; no request-rate limit published.",
+      "cite": [
+        "c42"
+      ]
+    },
+    "limitations": [
+      {
+        "text": "The Interview API is pad- and question-centric; user lifecycle changes need SCIM or the web UI.",
+        "cite": [
+          "c36",
+          "c45"
+        ]
+      }
+    ]
+  },
+  "idp_apps": {
+    "okta": {
+      "listed": true,
+      "sso": true,
+      "provisioning": true,
+      "kind": "scim",
+      "built_by": null,
+      "url": "https://www.okta.com/integrations/coderpad/",
+      "cite": [
+        "c46",
+        "c47",
+        "c30",
+        "c19"
+      ],
+      "notes": "Okta lists SAML, SWA, SCIM, Create, Update, Deactivate and Group Push. Builder not stated."
+    },
+    "entra": {
+      "listed": false,
+      "sso": null,
+      "provisioning": null,
+      "kind": null,
+      "built_by": null,
+      "url": null,
+      "cite": [
+        "c29",
+        "c34"
+      ],
+      "notes": "No gallery app; CoderPad documents a non-gallery enterprise app for SAML and SCIM."
+    },
+    "google": {
+      "listed": false,
+      "sso": true,
+      "provisioning": false,
+      "kind": "sso_only",
+      "built_by": null,
+      "url": null,
+      "cite": [
+        "c31"
+      ],
+      "notes": "Custom SAML app in Google Workspace; no provisioning documented."
+    },
+    "onelogin": {
+      "listed": null,
+      "sso": null,
+      "provisioning": null,
+      "kind": null,
+      "built_by": null,
+      "url": null,
+      "cite": []
+    },
+    "jumpcloud": {
+      "listed": null,
+      "sso": null,
+      "provisioning": null,
+      "kind": null,
+      "built_by": null,
+      "url": null,
+      "cite": []
+    }
+  },
+  "fallbacks": {
+    "jit": false,
+    "jit_protocol": null,
+    "csv_import": null,
+    "other_sync": null,
+    "docs_public": true,
+    "cite": [
+      "c15"
+    ]
+  },
+  "slug": "coderpad",
+  "vendor": "CoderPad",
+  "vendor_url": "https://coderpad.io",
+  "researched_at": "2026-10-05",
+  "row": {
+    "vendor": "CoderPad",
+    "slug": "coderpad",
+    "category": "HR, Payroll & Recruiting",
+    "status": "gated",
+    "scim_plan": "Enterprise",
+    "scim_price_text": "Contact Sales",
+    "scim_price_per_user_mo": null,
+    "team_plan": "Starter",
+    "team_price_text": "Starter: $80/mo flat (annual)",
+    "team_price_per_user_mo": null,
+    "price_multiplier": null,
+    "sso_plan": "Enterprise",
+    "sso_price_per_user_mo": null,
+    "sso_required_for_scim": true,
+    "scim_addon_price_text": null,
+    "min_seats": null,
+    "scim_ops": {
+      "create": true,
+      "update": true,
+      "deactivate": true,
+      "delete": null,
+      "groups": true
+    },
+    "idp": {
+      "okta": "native",
+      "entra": "via_generic",
+      "google": "sso_only",
+      "onelogin": null,
+      "jumpcloud": null,
+      "generic": true
+    },
+    "pricing_page_url": "https://coderpad.io/pricing/",
+    "docs_url": "https://coderpad.io/resources/docs/screen/account-management/sso/",
+    "evidence": "CoderPad's SSO docs say \"Only Enterprise plans support SSO integration\" and that SSO \"can also be combined with User Provisioning through the SCIM protocol\"; the pricing page lists SSO / SAML and API access only in the Custom-priced Enterprise column.",
+    "notes": "Flat per-organization pricing with unlimited users, metered by interviews/tests: Starter $80/mo annual ($120 monthly, 60 interviews/yr), Team $400/mo annual ($500 monthly, 360 interviews/yr), Enterprise custom. Unchanged since June. SCIM (Okta catalogue app; Entra via a non-gallery app) is set up after SSO, so it needs Enterprise. The public Interview API (Enterprise, API key) is mostly about pads and questions; for users it only lists organization users (read only).",
+    "confidence": "medium",
+    "last_verified": "2026-10-05",
+    "api_provisioning": false,
+    "user_api_available": true,
+    "user_api_plan": "Enterprise",
+    "api_tax": true,
+    "first_added": null,
+    "status_prev": "gated"
+  },
+  "plans": [
+    {
+      "name": "Starter",
+      "price_text": "$80/month billed annually ($120 monthly); 60 interviews/yr; unlimited users",
+      "price_per_user_mo": null,
+      "billing": "annual",
+      "sso": false,
+      "scim": false,
+      "user_api": false,
+      "audit_log_api": null,
+      "cite": [
+        "c5",
+        "c6",
+        "c7",
+        "c8",
+        "c9",
+        "c10",
+        "c11",
+        "c35"
+      ]
+    },
+    {
+      "name": "Team",
+      "price_text": "$400/month billed annually ($500 monthly); 360 interviews/yr; unlimited users",
+      "price_per_user_mo": null,
+      "billing": "annual",
+      "sso": false,
+      "scim": false,
+      "user_api": false,
+      "audit_log_api": null,
+      "cite": [
+        "c2",
+        "c4",
+        "c3",
+        "c8",
+        "c9",
+        "c10",
+        "c11",
+        "c35"
+      ]
+    },
+    {
+      "name": "Enterprise",
+      "price_text": "Custom (Talk to Sales)",
+      "price_per_user_mo": null,
+      "billing": "unknown",
+      "sso": true,
+      "scim": true,
+      "user_api": true,
+      "audit_log_api": null,
+      "cite": [
+        "c1",
+        "c9",
+        "c10",
+        "c13",
+        "c14",
+        "c35"
+      ]
+    }
+  ],
+  "citations": [
+    {
+      "id": "c1",
+      "url": "https://coderpad.io/pricing/",
+      "title": "Pricing - CoderPad",
+      "quote": "Enterprise Standardize and scale AI-era hiring — one platform for every stage. Custom Talk to Sales",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c2",
+      "url": "https://coderpad.io/pricing/",
+      "title": "Pricing - CoderPad",
+      "quote": "Team Standardize and scale AI-era hiring — one platform for every stage. $30 per additional test or interview",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c3",
+      "url": "https://coderpad.io/pricing/",
+      "title": "Pricing - CoderPad",
+      "quote": "annual · 360 interviews / yr monthly · 30 interviews / mo",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c4",
+      "url": "https://coderpad.io/pricing/",
+      "title": "Pricing - CoderPad",
+      "quote": "$400/ Month",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c5",
+      "url": "https://coderpad.io/pricing/",
+      "title": "Pricing - CoderPad",
+      "quote": "Starter Real-work, AI-enabled pads across 40+ languages & frameworks.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c6",
+      "url": "https://coderpad.io/pricing/",
+      "title": "Pricing - CoderPad",
+      "quote": "$80/ Month",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c7",
+      "url": "https://coderpad.io/pricing/",
+      "title": "Pricing - CoderPad",
+      "quote": "annual · 60 interviews / yr monthly · 5 interviews / mo",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c8",
+      "url": "https://coderpad.io/pricing/",
+      "title": "Pricing - CoderPad",
+      "quote": "Unlimited users and AI Assist on every plan",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c9",
+      "url": "https://coderpad.io/pricing/",
+      "title": "Pricing - CoderPad",
+      "quote": "SSO / SAML Okta, Azure AD, Google… check Included",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c10",
+      "url": "https://coderpad.io/pricing/",
+      "title": "Pricing - CoderPad",
+      "quote": "API access for custom workflows check Included",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c11",
+      "url": "https://coderpad.io/pricing/",
+      "title": "Pricing - CoderPad",
+      "quote": "Question library 4,000+ 1,400+ 400+",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c12",
+      "url": "https://coderpad.io/pricing/",
+      "title": "Pricing - CoderPad",
+      "quote": "Monthly Annual Save 20%",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c13",
+      "url": "https://coderpad.io/resources/docs/screen/account-management/sso/",
+      "title": "SSO - CoderPad Docs",
+      "quote": "Only Enterprise plans support SSO integration. If you’d like to upgrade your plan to enable SSO, please reach out to our sales team .",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c14",
+      "url": "https://coderpad.io/resources/docs/screen/account-management/sso/",
+      "title": "SSO - CoderPad Docs",
+      "quote": "CoderPad supports SSO integrations using the SAML protocol with Okta, Microsoft Azure, and Google Workspace. SSO can also be combined with User Provisioning through the SCIM protocol.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c15",
+      "url": "https://coderpad.io/resources/docs/screen/account-management/sso/",
+      "title": "SSO - CoderPad Docs",
+      "quote": "It does not currently support Just-In-Time (JIT) provisioning or Single Logout.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c16",
+      "url": "https://coderpad.io/resources/docs/screen/account-management/sso/",
+      "title": "SSO - CoderPad Docs",
+      "quote": "Creating users Updating user attributes (name, family name) Deactivating users Deprovisioning users Group management (Creation / Renaming / Deletion / Assign to users) Importing users in your Identity Provider Importing groups in your Identity Provider",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c17",
+      "url": "https://coderpad.io/resources/docs/screen/account-management/sso/",
+      "title": "SSO - CoderPad Docs",
+      "quote": "After saving the SSO configuration & refreshing the page, scroll down and copy the SCIM Authentication Token .",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c18",
+      "url": "https://coderpad.io/resources/docs/screen/account-management/sso/",
+      "title": "SSO - CoderPad Docs",
+      "quote": "Paste the SCIM Authentication Token you copied from CoderPad into the API Token field.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c19",
+      "url": "https://coderpad.io/resources/docs/screen/account-management/sso/",
+      "title": "SSO - CoderPad Docs",
+      "quote": "Check Create Users, Update User Attributes, Deactivate Users .",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c20",
+      "url": "https://coderpad.io/resources/docs/screen/account-management/sso/",
+      "title": "SSO - CoderPad Docs",
+      "quote": "SCIM provisioned users will automatically have user rights but not admin rights. To manage permissions through SCIM, go to Step 3: SCIM groups configuration and click on the configuration link.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c21",
+      "url": "https://coderpad.io/resources/docs/screen/account-management/sso/",
+      "title": "SSO - CoderPad Docs",
+      "quote": "Groups can manage both permissions and teams (when using the team workspace feature).",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c22",
+      "url": "https://coderpad.io/resources/docs/screen/account-management/sso/",
+      "title": "SSO - CoderPad Docs",
+      "quote": "You can’t add or remove group names, this is done through your SCIM integration on your IDP.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c23",
+      "url": "https://coderpad.io/resources/docs/screen/account-management/sso/",
+      "title": "SSO - CoderPad Docs",
+      "quote": "Groups are optional, users with no groups will have the normal “Member” role & admins can change their permissions afterwards.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c24",
+      "url": "https://coderpad.io/resources/docs/screen/account-management/sso/",
+      "title": "SSO - CoderPad Docs",
+      "quote": "Once SSO has been activated, User Provisioning can be turned on using the SCIM protocol:",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c25",
+      "url": "https://coderpad.io/resources/docs/screen/account-management/sso/",
+      "title": "SSO - CoderPad Docs",
+      "quote": "Tenant URL = SCIM URL Secret Token = SCIM Authentication Token",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c26",
+      "url": "https://coderpad.io/resources/docs/screen/account-management/sso/",
+      "title": "SSO - CoderPad Docs",
+      "quote": "Attribute Mappings : displayName, members",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c27",
+      "url": "https://coderpad.io/resources/docs/screen/account-management/sso/",
+      "title": "SSO - CoderPad Docs",
+      "quote": "userPrincipalName = userName (i.e. the login email) Switch ([IsSoftDeleted]…) = active givenName = name.givenName surname = name.familyName",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c28",
+      "url": "https://coderpad.io/resources/docs/screen/account-management/sso/",
+      "title": "SSO - CoderPad Docs",
+      "quote": "The library we use doesn’t support payloads that include any value selection filters (like [type eq….]), so you will need to ensure they are removed.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c29",
+      "url": "https://coderpad.io/resources/docs/screen/account-management/sso/",
+      "title": "SSO - CoderPad Docs",
+      "quote": "Do not use the Microsoft Entra SAML Toolkit application — it doesn’t allow for SCIM configuration.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c30",
+      "url": "https://coderpad.io/resources/docs/screen/account-management/sso/",
+      "title": "SSO - CoderPad Docs",
+      "quote": "On the App Integration Catalog page, search for CoderPad and select the one with the “SWA” label.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c31",
+      "url": "https://coderpad.io/resources/docs/screen/account-management/sso/",
+      "title": "SSO - CoderPad Docs",
+      "quote": "Configure an “App” in Google Workspace corresponding to CoderPad : Admin > Apps > Web and mobile apps > Add App > Add custom SAML app",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c32",
+      "url": "https://coderpad.io/resources/docs/screen/account-management/sso/",
+      "title": "SSO - CoderPad Docs",
+      "quote": "Then they will need to go to https://app.coderpad.io/login and enter their email address once to get created.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c33",
+      "url": "https://coderpad.io/resources/docs/screen/account-management/sso/",
+      "title": "SSO - CoderPad Docs",
+      "quote": "Target Object Actions : Create, Update, Delete",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c34",
+      "url": "https://coderpad.io/resources/docs/screen/account-management/sso/",
+      "title": "SSO - CoderPad Docs",
+      "quote": "select the Integrate any other application you don’t find in the gallery (Non-gallery) option",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c35",
+      "url": "https://coderpad.io/resources/docs/interview/more-interview-resources/api-key/",
+      "title": "API key - CoderPad Interview Docs",
+      "quote": "API key access is only available on our Enterprise plans and above.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c36",
+      "url": "https://documenter.gw.postman.com/api/collections/19859046/2s9XxvUb9v?segregateAuth=true&versionTag=latest",
+      "title": "CoderPad Interview API (Postman documenter collection JSON)",
+      "quote": "CoderPad provides a simple API for programmatically creating and managing interview pads.",
+      "accessed": "2026-10-05",
+      "page_url": "https://api.interview.coderpad.io/"
+    },
+    {
+      "id": "c37",
+      "url": "https://documenter.gw.postman.com/api/collections/19859046/2s9XxvUb9v?segregateAuth=true&versionTag=latest",
+      "title": "CoderPad Interview API (Postman documenter collection JSON)",
+      "quote": "The API uses a simple HTTP Authorization header to authenticate you.",
+      "accessed": "2026-10-05",
+      "page_url": "https://api.interview.coderpad.io/"
+    },
+    {
+      "id": "c38",
+      "url": "https://documenter.gw.postman.com/api/collections/19859046/2s9XxvUb9v?segregateAuth=true&versionTag=latest",
+      "title": "CoderPad Interview API (Postman documenter collection JSON)",
+      "quote": "https://app.coderpad.io/api/pads",
+      "accessed": "2026-10-05",
+      "page_url": "https://api.interview.coderpad.io/"
+    },
+    {
+      "id": "c39",
+      "url": "https://documenter.gw.postman.com/api/collections/19859046/2s9XxvUb9v?segregateAuth=true&versionTag=latest",
+      "title": "CoderPad Interview API (Postman documenter collection JSON)",
+      "quote": "it returns only the users list of that organization. If the email attribute is set, it returns only the user corresponding to that email.",
+      "accessed": "2026-10-05",
+      "page_url": "https://api.interview.coderpad.io/"
+    },
+    {
+      "id": "c40",
+      "url": "https://documenter.gw.postman.com/api/collections/19859046/2s9XxvUb9v?segregateAuth=true&versionTag=latest",
+      "title": "CoderPad Interview API (Postman documenter collection JSON)",
+      "quote": "{{baseUrl}}/api/organization/users",
+      "accessed": "2026-10-05",
+      "page_url": "https://api.interview.coderpad.io/"
+    },
+    {
+      "id": "c41",
+      "url": "https://documenter.gw.postman.com/api/collections/19859046/2s9XxvUb9v?segregateAuth=true&versionTag=latest",
+      "title": "CoderPad Interview API (Postman documenter collection JSON)",
+      "quote": "Retrieve company users",
+      "accessed": "2026-10-05",
+      "page_url": "https://api.interview.coderpad.io/"
+    },
+    {
+      "id": "c42",
+      "url": "https://documenter.gw.postman.com/api/collections/19859046/2s9XxvUb9v?segregateAuth=true&versionTag=latest",
+      "title": "CoderPad Interview API (Postman documenter collection JSON)",
+      "quote": "429 Over quota You’ve exceeded the number of pads your plan allows in a month.",
+      "accessed": "2026-10-05",
+      "page_url": "https://api.interview.coderpad.io/"
+    },
+    {
+      "id": "c43",
+      "url": "https://documenter.gw.postman.com/api/collections/19859046/2s9XxvUb9v?segregateAuth=true&versionTag=latest",
+      "title": "CoderPad Interview API (Postman documenter collection JSON)",
+      "quote": "{{baseUrl}}/api/organization",
+      "accessed": "2026-10-05",
+      "page_url": "https://api.interview.coderpad.io/"
+    },
+    {
+      "id": "c44",
+      "url": "https://documenter.gw.postman.com/api/collections/19859046/2s9XxvUb9v?segregateAuth=true&versionTag=latest",
+      "title": "CoderPad Interview API (Postman documenter collection JSON)",
+      "quote": "Retrieve a list of pad events",
+      "accessed": "2026-10-05",
+      "page_url": "https://api.interview.coderpad.io/"
+    },
+    {
+      "id": "c45",
+      "url": "https://coderpad.io/resources/docs/interview/account-mgmt/managing-users/",
+      "title": "Managing users - CoderPad Interview Docs",
+      "quote": "Alternatively you can delete a user from your account by selecting Remove from organization .",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c46",
+      "url": "https://www.okta.com/integrations/coderpad/",
+      "title": "Integrate CoderPad with Okta (checked capabilities: SAML, SWA, SCIM, Create, Update, Deactivate, Group Push)",
+      "quote": "CoderPad is an online IDE that helps your company conduct and review high quality technical interviews",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c47",
+      "url": "https://www.okta.com/integrations/coderpad/",
+      "title": "Integrate CoderPad with Okta",
+      "quote": "Add this integration to enable authentication and provisioning capabilities.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    }
+  ],
+  "conflicts": [],
+  "searched": [
+    "https://coderpad.io/pricing/",
+    "https://coderpad.io/doc-sitemap.xml",
+    "https://api.interview.coderpad.io/ (Postman collection)",
+    "https://learn.microsoft.com/en-us/entra/identity/saas-apps/coderpad-tutorial (404)",
+    "https://jumpcloud.com/support/integrate-with-coderpad (403)"
+  ],
+  "open_questions": [
+    "SCIM base URL pattern, version, token expiry, filtering and pagination are not documented.",
+    "What deprovisioning does to the user account and their pads (deactivate vs delete) is not documented.",
+    "Whether the Okta catalogue app was built by CoderPad or Okta is not stated.",
+    "No audit-log API or user-event webhooks documented; the CoderPad Screen product's API was not reviewed.",
+    "OneLogin and JumpCloud catalogue entries not confirmed (JumpCloud returned 403)."
+  ]
+}

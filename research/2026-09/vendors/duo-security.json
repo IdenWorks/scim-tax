@@ -1,0 +1,366 @@
+{
+ "slug": "duo-security",
+ "vendor": "Cisco Duo",
+ "vendor_url": "https://duo.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Cisco Duo",
+  "slug": "duo-security",
+  "category": "Security & Identity",
+  "status": "free",
+  "scim_plan": "Essentials",
+  "scim_price_text": "Essentials: $3/user/mo",
+  "scim_price_per_user_mo": 3,
+  "team_plan": "Essentials",
+  "team_price_text": "Essentials: $3/user/mo",
+  "team_price_per_user_mo": 3,
+  "price_multiplier": 1.0,
+  "sso_plan": "Essentials",
+  "sso_price_per_user_mo": 3,
+  "sso_required_for_scim": false,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "directory_sync",
+   "google": "directory_sync",
+   "onelogin": "via_generic",
+   "jumpcloud": "via_generic",
+   "generic": true
+  },
+  "pricing_page_url": "https://duo.com/editions-and-pricing",
+  "docs_url": "https://duo.com/docs/generic-scim-sync",
+  "evidence": "Duo's generic inbound SCIM guide says \"The Directory Sync feature is part of the Duo Premier, Duo Advantage, and Duo Essentials plans\", and the pricing page lists Duo Directory in Essentials at $3 per user/month, the cheapest paid tier.",
+  "notes": "Unchanged from June: free (No Tax). Inbound SCIM 2.0 (generic and Okta) plus vendor-run directory sync from Entra ID, Google Workspace, AD and OpenLDAP are part of Essentials ($3), Advantage ($6) and Premier ($9); Duo Free (up to 10 users) has no directory sync. Duo is itself an IdP; SCIM here is inbound provisioning of Duo users from an external directory. The SCIM bearer token expires every 90 days. duo.com/pricing now redirects to duo.com/editions-and-pricing. Admin API (users, groups, admins, logs) is on all paid plans.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Essentials",
+  "api_tax": false,
+  "first_added": null,
+  "status_prev": "free"
+ },
+ "plans": [
+  {
+   "name": "Duo Free",
+   "price_text": "$0 per user/month (up to 10 users)",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": false,
+   "cite": ["c1", "c3", "c10"],
+   "notes": "Free lists MFA, integrations and the authenticator app only; Admin API and directory sync are documented for paid plans."
+  },
+  {
+   "name": "Duo Essentials",
+   "price_text": "$3 per user/month",
+   "price_per_user_mo": 3,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": ["c1", "c2", "c3", "c8", "c10"]
+  },
+  {
+   "name": "Duo Advantage",
+   "price_text": "$6 per user/month",
+   "price_per_user_mo": 6,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": ["c1", "c3", "c8", "c10"]
+  },
+  {
+   "name": "Duo Premier",
+   "price_text": "$9 per user/month",
+   "price_per_user_mo": 9,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": ["c1", "c3", "c8", "c10"]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": ["c3", "c4", "c5"],
+  "plan": "Essentials",
+  "addon_price_text": null,
+  "sso_required": false,
+  "version": "2.0",
+  "base_url": "https://api-nnnnnnnn.duosecurity.com/scim/v2",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Duo Admin Panel > Users > External Directories > Add External Directory > Generic Inbound > Complete Setup > API Credentials",
+   "token_expiry": "90 days",
+   "cite": ["c4", "c5", "c6"],
+   "notes": "Owners get an 'Action required' email starting 15 days before expiry; regenerate the token and paste it into the IdP. Base URL does not change."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": ["c4", "c7"],
+   "notes": "Inferred from users and groups provisioning; Duo publishes no SCIM endpoint reference."
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": ["c4", "c7", "c11", "c12", "c13"],
+   "notes": "Deactivation is described as 'typically a PATCH with active: false'. Okta app supports Create, Update, Deactivate and Group Push."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "User stays in Duo with status Disabled and becomes unmanaged and editable; a SCIM DELETE sends the user to the Trash (Pending Deletion), permanently deleted after seven days unless restored.",
+   "cite": ["c11", "c12", "c14"]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": ["userName", "email", "givenName", "familyName"],
+   "enterprise": [],
+   "custom": {
+    "supported": true,
+    "how": "In the SCIM integration's Attribute Mapping, '+ Add mapping' imports additional SCIM attributes and can map them to new custom Duo user attributes."
+   },
+   "group": [],
+   "cite": ["c15", "c16"],
+   "notes": "Required defaults: userName -> Username, email -> Email Address, givenName -> First Name, familyName -> Last Name (Okta guide). The full list of optional SCIM attributes is shown only in the Admin Panel."
+  },
+  "roles": {
+   "supported": false,
+   "how": "SCIM provisioning does not import or manage Duo administrators; group-based policies apply to SCIM-managed groups.",
+   "cite": ["c17"]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {"text": "SCIM cannot import or manage Duo administrators (admin sync is available only via AD, Entra ID, Google or OpenLDAP directory sync).", "cite": ["c17"]},
+   {"text": "Bearer token expires every 90 days and must be regenerated.", "cite": ["c4"]},
+   {"text": "Synced attributes (username, display name, email, phones, group memberships) cannot be edited in Duo via Admin Panel, Admin API or CSV import.", "cite": ["c18"]},
+   {"text": "Changing a user's status in the directory does not update Duo unless the IdP sends an explicit SCIM request such as PATCH active: false.", "cite": ["c13"]}
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": ["c8", "c9"],
+  "plan": "Essentials",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://api-XXXXXXXX.duosecurity.com",
+  "docs_url": "https://duo.com/docs/adminapi",
+  "auth": {
+   "methods": ["other"],
+   "scopes": ["Grant administrators - Read", "Grant administrators - Write", "Grant read information", "Grant applications", "Grant settings", "Grant read log", "Grant resource - Read", "Grant resource - Write"],
+   "cite": ["c19", "c20"],
+   "notes": "Integration key + secret key; each request signed with HMAC-SHA512 and sent with HTTP Basic auth. Permissions are set per Admin API application."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": true,
+   "reactivate_user": true,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": ["c9", "c21", "c22"],
+   "notes": "Deactivate/reactivate via POST /admin/v1/users/[user_id] status 'disabled'/'active' (not allowed for AD or Entra-synced users). Roles apply to administrators via /admin/v1/admins. invite_user = POST /admin/v1/users/enroll."
+  },
+  "endpoints": [
+   {"method": "GET", "path": "/admin/v1/users", "purpose": "Retrieve users", "cite": ["c9"]},
+   {"method": "POST", "path": "/admin/v1/users", "purpose": "Create user", "cite": ["c9"]},
+   {"method": "POST", "path": "/admin/v1/users/bulk_create", "purpose": "Create up to 100 users", "cite": ["c23"]},
+   {"method": "POST", "path": "/admin/v1/users/bulk_restore", "purpose": "Restore users from Trash", "cite": ["c9"]},
+   {"method": "POST", "path": "/admin/v1/users/bulk_send_to_trash", "purpose": "Send users to Trash", "cite": ["c9"]},
+   {"method": "GET", "path": "/admin/v1/users/[user_id]", "purpose": "Retrieve user", "cite": ["c9"]},
+   {"method": "POST", "path": "/admin/v1/users/[user_id]", "purpose": "Modify user (incl. status)", "cite": ["c21"]},
+   {"method": "DELETE", "path": "/admin/v1/users/[user_id]", "purpose": "Delete user", "cite": ["c9"]},
+   {"method": "POST", "path": "/admin/v1/users/enroll", "purpose": "Enroll user (email enrollment link)", "cite": ["c9"]},
+   {"method": "GET", "path": "/admin/v1/users/[user_id]/groups", "purpose": "List a user's groups", "cite": ["c9"]},
+   {"method": "POST", "path": "/admin/v1/users/[user_id]/groups", "purpose": "Add user to group", "cite": ["c9"]},
+   {"method": "DELETE", "path": "/admin/v1/users/[user_id]/groups/[group_id]", "purpose": "Remove user from group", "cite": ["c9"]},
+   {"method": "GET", "path": "/admin/v1/users/directorysync", "purpose": "List directory syncs", "cite": ["c9"]},
+   {"method": "POST", "path": "/admin/v1/users/directorysync/[directory_key]/syncuser", "purpose": "Sync one user from a directory", "cite": ["c9"]},
+   {"method": "GET", "path": "/admin/v1/groups", "purpose": "List groups", "cite": ["c9"]},
+   {"method": "POST", "path": "/admin/v1/groups", "purpose": "Create group", "cite": ["c9"]},
+   {"method": "GET", "path": "/admin/v2/groups/[group_id]", "purpose": "Get group", "cite": ["c9"]},
+   {"method": "GET", "path": "/admin/v2/groups/[group_id]/users", "purpose": "List group members", "cite": ["c9"]},
+   {"method": "POST", "path": "/admin/v1/groups/[group_id]", "purpose": "Update group", "cite": ["c9"]},
+   {"method": "DELETE", "path": "/admin/v1/groups/[group_id]", "purpose": "Delete group", "cite": ["c9"]},
+   {"method": "GET", "path": "/admin/v1/admins", "purpose": "List administrators", "cite": ["c9"]},
+   {"method": "POST", "path": "/admin/v1/admins", "purpose": "Create administrator (with role)", "cite": ["c9"]},
+   {"method": "POST", "path": "/admin/v1/admins/[admin_id]", "purpose": "Modify administrator", "cite": ["c9"]},
+   {"method": "DELETE", "path": "/admin/v1/admins/[admin_id]", "purpose": "Delete administrator", "cite": ["c9"]},
+   {"method": "GET", "path": "/admin/v1/administrative_units", "purpose": "List administrative units", "cite": ["c9"]},
+   {"method": "GET", "path": "/admin/v1/logs/administrator", "purpose": "Administrator (audit) logs", "cite": ["c9"]},
+   {"method": "GET", "path": "/admin/v2/logs/activity", "purpose": "Activity logs", "cite": ["c9"]},
+   {"method": "GET", "path": "/admin/v2/logs/authentication", "purpose": "Authentication logs", "cite": ["c9"]},
+   {"method": "GET", "path": "/admin/v1/info/summary", "purpose": "Account summary (user counts)", "cite": ["c9"]}
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Essentials",
+   "cite": ["c8", "c9"]
+  },
+  "rate_limits": {
+   "text": "Bulk create and bulk restore: max 100 users per request at 50 calls per minute; other calls return 429 when too many requests are made.",
+   "cite": ["c23"]
+  },
+  "limitations": [
+   {"text": "The 'disabled' status cannot be set via Admin API for users managed by Active Directory or Entra ID sync.", "cite": ["c22"]}
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": "vendor",
+   "url": "https://www.okta.com/integrations/duo-security-scim-provisioning/",
+   "cite": ["c24", "c25"],
+   "notes": "OIN 'Duo Security SCIM Provisioning' marks SCIM, Create, Update, Deactivate and Group Push as checked (read from page markup); SAML not checked. Duo's own guide uses it. An Aquera connector is also listed in OIN."
+  },
+  "entra": {
+   "listed": null,
+   "sso": null,
+   "provisioning": true,
+   "kind": "directory_sync",
+   "built_by": "vendor",
+   "url": "https://duo.com/docs/azuresync",
+   "cite": ["c26"],
+   "notes": "Duo-run Entra ID sync imports users and administrators without on-prem software. Entra gallery SCIM app not checked."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": true,
+   "kind": "directory_sync",
+   "built_by": "vendor",
+   "url": "https://duo.com/docs/googlesync",
+   "cite": ["c27"]
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "No Duo OneLogin guide; Duo's generic inbound SCIM works with any directory with outbound SCIM. OneLogin catalogue not checked (bot-blocked)."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "Not checked; generic inbound SCIM would apply."
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": true,
+  "other_sync": "Duo-run directory sync from Active Directory and OpenLDAP (via Duo Authentication Proxy), Entra ID and Google Workspace",
+  "docs_public": true,
+  "cite": ["c18", "c26", "c28"]
+ },
+ "citations": [
+  {"id": "c1", "url": "https://duo.com/editions-and-pricing", "title": "Duo Editions and Pricing", "quote": "Best for small businesses with 10 or fewer users.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c2", "url": "https://duo.com/editions-and-pricing", "title": "Duo Editions and Pricing", "quote": "Utilize Duo as the primary source of truth for user directory, authorization, and attribute management", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c3", "url": "https://duo.com/docs/generic-scim-sync", "title": "Synchronizing Users into Duo from any external directory with SCIM", "quote": "The Directory Sync feature is part of the Duo Premier, Duo Advantage, and Duo Essentials plans", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c4", "url": "https://duo.com/docs/generic-scim-sync", "title": "Synchronizing Users into Duo from any external directory with SCIM", "quote": "The SCIM token expires every 90 days. You will need to regenerate the token in Duo and update it in your external directory for continued inbound provisioning.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c5", "url": "https://duo.com/docs/generic-scim-sync", "title": "Synchronizing Users into Duo from any external directory with SCIM", "quote": "Example: https://api-nnnnnnnn.duosecurity.com/scim/v2", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c6", "url": "https://duo.com/docs/generic-scim-sync", "title": "Synchronizing Users into Duo from any external directory with SCIM", "quote": "Navigate to Users → External Directories or click the External Directories link on the \"Users\" page.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c7", "url": "https://duo.com/docs/generic-scim-sync", "title": "Synchronizing Users into Duo from any external directory with SCIM", "quote": "If you did configure group provisioning then the imported groups show up in the \"SCIM Managed Groups\" section of the page.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c8", "url": "https://duo.com/docs/adminapi", "title": "Duo Admin API", "quote": "Duo Admin API is automatically available to paying Duo Premier, Duo Advantage, and Duo Essentials plan customers and new customers with an Advantage or Premier trial.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c9", "url": "https://duo.com/docs/adminapi", "title": "Duo Admin API", "quote": "The API has methods for creating, retrieving, updating, and deleting the core objects in Duo's system: users , phones , hardware tokens , admins , and integrations .", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c10", "url": "https://duo.com/docs/sso", "title": "Duo Single Sign-On", "quote": "Duo Single Sign-On is available in Duo Premier, Duo Advantage, and Duo Essentials commercial plans , and is not available in Duo Federal plans .", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c11", "url": "https://duo.com/docs/generic-scim-sync", "title": "Synchronizing Users into Duo from any external directory with SCIM", "quote": "When your identity provider deactivates a user, it sends a SCIM request to Duo (typically a PATCH with active: false ) that sets the user's status to \"Disabled\", so the user can no longer authenticate to Duo.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c12", "url": "https://duo.com/docs/generic-scim-sync", "title": "Synchronizing Users into Duo from any external directory with SCIM", "quote": "If your identity provider sends a SCIM DELETE request for a user, Duo sends that user to the Trash, marked as \"Pending Deletion\", and the user can no longer authenticate to Duo.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c13", "url": "https://duo.com/docs/generic-scim-sync", "title": "Synchronizing Users into Duo from any external directory with SCIM", "quote": "If you reactivate the user in your identity provider, it sends a new SCIM request to re-enable the user in Duo, and inbound SCIM resumes management of the user.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c14", "url": "https://duo.com/docs/generic-scim-sync", "title": "Synchronizing Users into Duo from any external directory with SCIM", "quote": "If the deleted user is not restored from the Trash or reconnected to an external directory account via provisioning within seven days, the user is automatically and permanently deleted from Duo.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c15", "url": "https://duo.com/docs/oktasync", "title": "Synchronizing Users into Duo from Okta with SCIM", "quote": "These Duo user attributes are required and have already been mapped to Okta SCIM attributes:", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c16", "url": "https://duo.com/docs/generic-scim-sync", "title": "Synchronizing Users into Duo from any external directory with SCIM", "quote": "If you don't already have a Duo user attribute created to map a given external directory attribute to, you can create a new user attribute to use for mapping by typing in the desired Duo user attribute name and clicking + Add .", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c17", "url": "https://duo.com/docs/generic-scim-sync", "title": "Synchronizing Users into Duo from any external directory with SCIM", "quote": "SCIM provisioning from external directories does not support import and management of Duo administrators.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c18", "url": "https://duo.com/docs/generic-scim-sync", "title": "Synchronizing Users into Duo from any external directory with SCIM", "quote": "User attributes imported from an external directory cannot be edited in Duo via the Admin Panel, Admin API, or CSV import.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c19", "url": "https://duo.com/docs/adminapi", "title": "Duo Admin API", "quote": "Lastly, compute the HMAC-SHA512 of this canonical representation, using your Duo application's secret key as the HMAC key.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c20", "url": "https://duo.com/docs/adminapi", "title": "Duo Admin API", "quote": "The Admin API application can create, update, and delete resource objects such as end users, policies, and devices.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c21", "url": "https://duo.com/docs/adminapi", "title": "Duo Admin API", "quote": "The new status. Must be one of \"active\", \"disabled\", or \"bypass\", or \"locked out\".", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c22", "url": "https://duo.com/docs/adminapi", "title": "Duo Admin API", "quote": "The \"disabled\" status may not be set via Admin API for users managed by Active Directory or Entra ID sync, nor can the API set \"active\" status for users disabled by directory sync.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c23", "url": "https://duo.com/docs/adminapi", "title": "Duo Admin API", "quote": "You can create a maximum of 100 users per request at a rate limit of 50 calls per minute.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c24", "url": "https://www.okta.com/integrations/duo-security-scim-provisioning/", "title": "Integrate Duo Security SCIM Provisioning with Okta", "quote": "This integration allows provisioning of users and groups into Duo Security.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c25", "url": "https://duo.com/docs/oktasync", "title": "Synchronizing Users into Duo from Okta with SCIM", "quote": "search for the Duo Security SCIM Provisioning application", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c26", "url": "https://duo.com/docs/directorysync", "title": "Duo External Directory Synchronization", "quote": "Duo imports users and administrators directly from Entra ID, without any additional on-premises software installation.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c27", "url": "https://duo.com/docs/directorysync", "title": "Duo External Directory Synchronization", "quote": "Duo imports users and administrators directly from Google, without any additional on-premises software installation.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c28", "url": "https://duo.com/docs/directorysync", "title": "Duo External Directory Synchronization", "quote": "When configuring AD sync, you'll need to install the Duo Authentication Proxy application on a server that can connect to your domain controller.", "accessed": "2026-10-05", "page_url": null}
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://duo.com/pricing (redirects to https://duo.com/editions-and-pricing)",
+  "https://duo.com/docs/directorysync",
+  "https://duo.com/docs/generic-scim-sync",
+  "https://duo.com/docs/oktasync",
+  "https://duo.com/docs/azuresync",
+  "https://duo.com/docs/googlesync",
+  "https://duo.com/docs/adminapi",
+  "https://duo.com/docs/sso",
+  "https://www.okta.com/integrations/duo-security-scim-provisioning/"
+ ],
+ "open_questions": [
+  "Duo does not publish a SCIM endpoint reference: ServiceProviderConfig/Schemas, filtering, pagination and the full optional attribute list are undocumented.",
+  "Docs do not say whether disabled SCIM users still count toward the licensed user count.",
+  "Whether the pricing page prices are annual or monthly is not stated.",
+  "Entra gallery listing for Duo provisioning not checked; Duo documents its own Entra ID sync instead."
+ ]
+}

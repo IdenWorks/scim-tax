@@ -1,0 +1,612 @@
+{
+ "slug": "navan",
+ "vendor": "Navan",
+ "vendor_url": "https://navan.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Navan",
+  "slug": "navan",
+  "category": "Finance, Accounting & Spend",
+  "status": "free",
+  "scim_plan": "Navan Business",
+  "scim_price_text": "Free (travel); Expense $15/user/mo after the first 5 expensing users",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Navan Business",
+  "team_price_text": "Free (travel, up to 300 employees); Expense $15/user/mo after the first 5 expensing users",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Navan Business",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": null
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "via_generic",
+   "google": "sso_only",
+   "onelogin": "sso_only",
+   "jumpcloud": null,
+   "generic": false
+  },
+  "pricing_page_url": "https://navan.com/pricing",
+  "docs_url": "https://navan.com/integrations",
+  "evidence": "Navan's integrations page offers an 'Okta SCIM integration' to 'Automate user provisioning' and says most native integrations are included 'with no additional fees from Navan'; the help centre documents SCIM with Okta and Microsoft Entra.",
+  "notes": "New row. Navan (formerly TripActions) is free for travel on Navan Business (companies up to 300 employees); Navan Expense is free for 5 monthly expensing users, then $15/user/mo; Navan Enterprise is quote-only and, per the pricing FAQ, adds support rather than features. No page ties SCIM or SAML/OIDC SSO to a plan, so both are recorded on Navan Business (confidence medium). SCIM via the Okta OIN app (Create/Update/Deactivate; needs Okta Lifecycle Management) and via Entra set up by the Navan account manager (Microsoft's gallery tutorial covers only SAML + JIT). The SCIM endpoint and schema are not published. The public Expense API (OAuth client credentials) has no user endpoints. Per-user prices left null because Navan Business is free for travel and expense is billed per monthly active expensing user. idp.entra is via_generic because Navan supports Entra over SCIM outside the gallery app; generic is false because no endpoint is published.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": null,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Navan Business",
+   "price_text": "Free (travel, companies up to 300 employees); Navan Expense free for the first 5 monthly expensing users, then $15 per user per month",
+   "price_per_user_mo": null,
+   "billing": "monthly",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c6",
+    "c7"
+   ],
+   "notes": "Pricing page does not list SSO or SCIM per tier. SCIM is one of Navan's HRIS integrations ('30+ seamless HRIS integrations' on the Business card), and the integrations FAQ says most native integrations carry no additional Navan fee."
+  },
+  {
+   "name": "Navan Enterprise",
+   "price_text": "Let's talk / Get a price quote",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c6",
+    "c7"
+   ],
+   "notes": "Pricing FAQ says both plans have all travel and expense features; Enterprise adds implementation and scaling support."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c4",
+   "c5",
+   "c9",
+   "c13",
+   "c2",
+   "c6"
+  ],
+  "plan": "Navan Business",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": "other",
+   "token_source": "Navan Admin > Configuration > Integrations > HR Integrations > SCIM > Create token",
+   "token_expiry": null,
+   "cite": [
+    "c25"
+   ],
+   "notes": "In Okta's Enable API Integration flow the admin signs in with an email address plus the Navan SCIM token (entered as the 'Generated Password')."
+  },
+  "endpoints": {
+   "Users": null,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [],
+   "notes": "No SCIM endpoint list or base URL is published."
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": null,
+   "group_push": null,
+   "group_membership": null,
+   "cite": [
+    "c9",
+    "c27",
+    "c28",
+    "c13",
+    "c29"
+   ],
+   "notes": "Help centre: 'Add new users', 'Disable terminated users', 'Update employee profiles'. PUT vs PATCH not documented. Group push not documented (Okta OIN does not tick Group Push)."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": true,
+   "data_retained": "Company keeps all booking data for the deactivated user",
+   "cite": [
+    "c27",
+    "c29",
+    "c16"
+   ],
+   "notes": "SCIM deactivation disables the Navan user; the user-management article says deactivated users immediately lose access."
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "emails (email)",
+    "name.givenName",
+    "name.familyName",
+    "active"
+   ],
+   "enterprise": [
+    "employeeNumber",
+    "title",
+    "department",
+    "costCenter",
+    "region",
+    "division",
+    "travelPolicy",
+    "manager",
+    "travelerApprover",
+    "companyOffice"
+   ],
+   "custom": {
+    "supported": true,
+    "how": "Navan-specific attributes (travelPolicy, travelerApprover, companyOffice, region, division) are created in Okta under the urn:ietf:params:scim:schemas:extension:enterprise:2.0:User namespace"
+   },
+   "group": [],
+   "cite": [
+    "c11",
+    "c12",
+    "c9"
+   ],
+   "notes": "From the Okta field-mapping table: employeeNumber maps to Employee ID, division maps to Subsidiary, manager and travelerApprover must be email strings, companyOffice must match the Navan office name 1:1."
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Okta SCIM requires the customer to subscribe to Okta Lifecycle Management.",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "text": "Entra SCIM is not self-serve: the Navan account manager sets it up.",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "text": "Once an HRIS/SCIM sync is enabled, manual edits to the user list are overridden by the daily sync when they differ.",
+    "cite": [
+     "c15"
+    ]
+   }
+  ],
+  "notes": "SCIM is documented only as an Okta OIN integration (self-serve token) and a Microsoft Entra integration set up by the Navan account manager. Navan does not publish the SCIM base URL, schema or endpoint reference."
+ },
+ "user_api": {
+  "available": null,
+  "cite": [
+   "c22",
+   "c23"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://api.navan.com/v1/expense",
+  "docs_url": "https://developer.navan.com/api/",
+  "auth": {
+   "methods": [
+    "oauth2_client_credentials"
+   ],
+   "scopes": [
+    "Expense: Write"
+   ],
+   "cite": [
+    "c23"
+   ]
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": []
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": [
+    "c19"
+   ],
+   "notes": "Audit logs (beta for some customers) are viewed and exported in the admin UI; no audit-log API is documented."
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "The public Navan Expense API covers transactions, receipts, GL codes, tax mappings and custom fields; it has no user, group or role endpoints. A Booking API and an MCP server also exist. No documented user-management API."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": "vendor",
+   "url": "https://www.okta.com/integrations/navan/",
+   "cite": [
+    "c20",
+    "c4",
+    "c9"
+   ],
+   "notes": "OIN page ticks SAML, SCIM, Create, Update, Deactivate; Group Push, Sync Password and Schema Discovery are not ticked. built_by vendor: Navan's help centre documents the OIN app's provisioning setup."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/navan-tutorial",
+   "cite": [
+    "c21",
+    "c13",
+    "c14"
+   ],
+   "notes": "Microsoft's gallery tutorial covers SAML SSO with JIT only. Navan says it supports an Entra SCIM integration that the account manager sets up (not via the gallery app)."
+  },
+  "google": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c24"
+   ],
+   "notes": "Navan's Google SSO guide uses a custom SAML app ('Setup my own custom app'), not a catalogue app."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c8",
+    "c18"
+   ],
+   "notes": "Navan lists OneLogin as an SSO integration; no provisioning documented. OneLogin catalogue page not checked (blocks bots)."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": true,
+  "other_sync": "HRIS integrations (HiBob, BambooHR, Workday, Rippling, Gusto, Personio and others) and a daily HR-SFTP user file",
+  "docs_public": true,
+  "cite": [
+   "c21",
+   "c17",
+   "c5"
+  ],
+  "notes": "Bulk add/remove/edit by uploading an .xlsx user list, with an option to disable users missing from the file."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://navan.com/pricing",
+   "title": "Navan Pricing",
+   "quote": "Navan Expense is free for the first 5 monthly expensing users, and then is $15 per user per month.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://navan.com/pricing",
+   "title": "Navan Pricing",
+   "quote": "30+ seamless HRIS integrations",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://navan.com/pricing",
+   "title": "Navan Pricing",
+   "quote": "Navan Business and Navan Enterprise both have all the travel and expense features companies love. In addition, Navan Enterprise offers support features to help with implementing and scaling the platform.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://navan.com/integrations",
+   "title": "Navan Integrations",
+   "quote": "Automate user provisioning and maintain data consistency with our Okta SCIM integration.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://navan.com/integrations",
+   "title": "Navan Integrations",
+   "quote": "Navan supports HR integrations through SCIM, SFTP, and direct connections to leading HR platforms, making it easy to sync employee data in the way that works best for your organization.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://navan.com/integrations",
+   "title": "Navan Integrations",
+   "quote": "Most of our native integrations are included as part of your Navan platform subscription, with no additional fees from Navan.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://navan.com/integrations",
+   "title": "Navan Integrations",
+   "quote": "Navan offers secure single sign-on (SSO) integrations with Okta, Azure, SAML 2.0, and OpenID, providing you with flexibility to match your company’s security setup.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://navan.com/integrations",
+   "title": "Navan Integrations",
+   "quote": "Centralize user access and boost security with OneLogin SSO integration.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://cdn.contentful.com/spaces/eux8w6w8hjmq/environments/master/entries/6bQBslspGNugaZjV4IeLy7?access_token=TIe6oU-B-ImyK8tSQc2vGM-NwiddykQsoRc8LnMSceY&locale=en-US",
+   "title": "How do I set up Okta SCIM? (Navan Help Center)",
+   "quote": "An HRIS integration allows you to sync the information in Okta SCIM with your Navan user list. An integration will:",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.navan.com/app/helpcenter/articles/travel/admin/hris-integrations/how-do-i-set-up-okta-scim"
+  },
+  {
+   "id": "c10",
+   "url": "https://cdn.contentful.com/spaces/eux8w6w8hjmq/environments/master/entries/6bQBslspGNugaZjV4IeLy7?access_token=TIe6oU-B-ImyK8tSQc2vGM-NwiddykQsoRc8LnMSceY&locale=en-US",
+   "title": "How do I set up Okta SCIM? (Navan Help Center)",
+   "quote": "This permission is only available to customers subscribed to Okta's Lifecycle product.",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.navan.com/app/helpcenter/articles/travel/admin/hris-integrations/how-do-i-set-up-okta-scim"
+  },
+  {
+   "id": "c11",
+   "url": "https://cdn.contentful.com/spaces/eux8w6w8hjmq/environments/master/entries/6bQBslspGNugaZjV4IeLy7?access_token=TIe6oU-B-ImyK8tSQc2vGM-NwiddykQsoRc8LnMSceY&locale=en-US",
+   "title": "How do I set up Okta SCIM? (Navan Help Center)",
+   "quote": "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.navan.com/app/helpcenter/articles/travel/admin/hris-integrations/how-do-i-set-up-okta-scim"
+  },
+  {
+   "id": "c12",
+   "url": "https://cdn.contentful.com/spaces/eux8w6w8hjmq/environments/master/entries/6bQBslspGNugaZjV4IeLy7?access_token=TIe6oU-B-ImyK8tSQc2vGM-NwiddykQsoRc8LnMSceY&locale=en-US",
+   "title": "How do I set up Okta SCIM? (Navan Help Center)",
+   "quote": "Value must be a 1:1 naming match from Okta to Navan",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.navan.com/app/helpcenter/articles/travel/admin/hris-integrations/how-do-i-set-up-okta-scim"
+  },
+  {
+   "id": "c13",
+   "url": "https://cdn.contentful.com/spaces/eux8w6w8hjmq/environments/master/entries/3mujpqx5M7HyTUBXR0RgZz?access_token=TIe6oU-B-ImyK8tSQc2vGM-NwiddykQsoRc8LnMSceY&locale=en-US",
+   "title": "How do I set up Microsoft Entra? (Navan Help Center)",
+   "quote": "Navan supports an HRIS integration with Microsoft Entra via",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.navan.com/app/helpcenter/articles/travel/admin/hris-integrations/how-do-i-set-up-microsoft-entra"
+  },
+  {
+   "id": "c14",
+   "url": "https://cdn.contentful.com/spaces/eux8w6w8hjmq/environments/master/entries/3mujpqx5M7HyTUBXR0RgZz?access_token=TIe6oU-B-ImyK8tSQc2vGM-NwiddykQsoRc8LnMSceY&locale=en-US",
+   "title": "How do I set up Microsoft Entra? (Navan Help Center)",
+   "quote": "To set up your integration, contact your Navan Account Manager.",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.navan.com/app/helpcenter/articles/travel/admin/hris-integrations/how-do-i-set-up-microsoft-entra"
+  },
+  {
+   "id": "c15",
+   "url": "https://cdn.contentful.com/spaces/eux8w6w8hjmq/environments/master/entries/4uXWLBORP0NCbJ0gW0wItO?access_token=TIe6oU-B-ImyK8tSQc2vGM-NwiddykQsoRc8LnMSceY&locale=en-US",
+   "title": "How do I add or edit users through an HRIS integration? (Navan Help Center)",
+   "quote": "Once an HRIS integration/sync is enabled, manual changes to your user list will be overridden in the daily sync",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.navan.com/app/helpcenter/articles/travel/admin/hris-integrations/add-or-edit-users-via-hris"
+  },
+  {
+   "id": "c16",
+   "url": "https://cdn.contentful.com/spaces/eux8w6w8hjmq/environments/master/entries/21LwvqCARjFyZFI30Wf52n?access_token=TIe6oU-B-ImyK8tSQc2vGM-NwiddykQsoRc8LnMSceY&locale=en-US",
+   "title": "How do I remove/merge accounts or users? (Navan Help Center)",
+   "quote": "Deactivated users will immediately lose access to Navan, and the company will retain all booking data associated with that user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.navan.com/app/helpcenter/articles/travel/admin/user-management/merging-accounts"
+  },
+  {
+   "id": "c17",
+   "url": "https://cdn.contentful.com/spaces/eux8w6w8hjmq/environments/master/entries/4LzodycX6jRP6J2Bb5W0dm?access_token=TIe6oU-B-ImyK8tSQc2vGM-NwiddykQsoRc8LnMSceY&locale=en-US",
+   "title": "How do I make bulk user list updates? (Navan Help Center)",
+   "quote": "Users can be added, removed, or edited in bulk by downloading your existing user list file and uploading a new file with your changes.",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.navan.com/app/helpcenter/articles/travel/admin/user-management/bulk-user-list-updates"
+  },
+  {
+   "id": "c18",
+   "url": "https://cdn.contentful.com/spaces/eux8w6w8hjmq/environments/master/entries/5a5bsRcxRcJjZW4sEgn0sN?access_token=TIe6oU-B-ImyK8tSQc2vGM-NwiddykQsoRc8LnMSceY&locale=en-US",
+   "title": "What SSO integrations does Navan offer? (Navan Help Center)",
+   "quote": "Popular SAML providers include:",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.navan.com/app/helpcenter/articles/expense/admin/integrations/sso-integrations"
+  },
+  {
+   "id": "c19",
+   "url": "https://cdn.contentful.com/spaces/eux8w6w8hjmq/environments/master/entries/37g40E1OwuVARPhdaPNDV9?access_token=TIe6oU-B-ImyK8tSQc2vGM-NwiddykQsoRc8LnMSceY&locale=en-US",
+   "title": "How do I view audit logs of activity on Navan? (Navan Help Center)",
+   "quote": "The data can be viewed directly in Navan or exported to use for compliance and reporting purposes.",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.navan.com/app/helpcenter/articles/travel/admin/dashboards/how-do-i-view-audit-logs-of-activity-on-navan"
+  },
+  {
+   "id": "c20",
+   "url": "https://www.okta.com/integrations/navan/",
+   "title": "Integrate Navan with Okta (Okta Integration Network)",
+   "quote": "Okta’s Navan integration allows users to authenticate securely via a single sign-on with SAML.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c21",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/navan-tutorial",
+   "title": "Configure Navan for Single sign-on with Microsoft Entra ID",
+   "quote": "Navan supports just-in-time user provisioning, which is enabled by default.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c22",
+   "url": "https://developer.navan.com/api/",
+   "title": "Navan Expense API",
+   "quote": "Retrieve and update Navan card transactions, Connect card transactions, manual expenses, payroll, repayments, fees, adjustments, daily rebates, disputes, and statement payments",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c23",
+   "url": "https://developer.navan.com/api/",
+   "title": "Navan Expense API",
+   "quote": "The API uses OAuth 2.0 Bearer token authentication, implemented via the Client Credentials Grant for machine-to-machine communication.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c24",
+   "url": "https://cdn.contentful.com/spaces/eux8w6w8hjmq/environments/master/entries/2IV0tjoEq4HMOluGP9g9sa?access_token=TIe6oU-B-ImyK8tSQc2vGM-NwiddykQsoRc8LnMSceY&locale=en-US",
+   "title": "How do I set up Google SSO? (Navan Help Center)",
+   "quote": "To set up a Google SSO integration, follow the steps listed below.",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.navan.com/app/helpcenter/articles/travel/admin/sso-integrations/google-sso"
+  },
+  {
+   "id": "c25",
+   "url": "https://cdn.contentful.com/spaces/eux8w6w8hjmq/environments/master/entries/6bQBslspGNugaZjV4IeLy7?access_token=TIe6oU-B-ImyK8tSQc2vGM-NwiddykQsoRc8LnMSceY&locale=en-US",
+   "title": "How do I set up Okta SCIM? (Navan Help Center)",
+   "quote": "and copy/save the token that appears.",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.navan.com/app/helpcenter/articles/travel/admin/hris-integrations/how-do-i-set-up-okta-scim"
+  },
+  {
+   "id": "c26",
+   "url": "https://cdn.contentful.com/spaces/eux8w6w8hjmq/environments/master/entries/1XQ3I7rCMWrjHOlVrFFZAk?access_token=TIe6oU-B-ImyK8tSQc2vGM-NwiddykQsoRc8LnMSceY&locale=en-US",
+   "title": "How do I set up Okta SSO? (Navan Help Center)",
+   "quote": "With Okta, both IdP-initiated and SP-initiated SSO features are available.",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.navan.com/app/helpcenter/articles/travel/admin/sso-integrations/okta-sso"
+  },
+  {
+   "id": "c27",
+   "url": "https://cdn.contentful.com/spaces/eux8w6w8hjmq/environments/master/entries/6bQBslspGNugaZjV4IeLy7?access_token=TIe6oU-B-ImyK8tSQc2vGM-NwiddykQsoRc8LnMSceY&locale=en-US",
+   "title": "How do I set up Okta SCIM? (Navan Help Center)",
+   "quote": "Disable terminated users",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.navan.com/app/helpcenter/articles/travel/admin/hris-integrations/how-do-i-set-up-okta-scim"
+  },
+  {
+   "id": "c28",
+   "url": "https://cdn.contentful.com/spaces/eux8w6w8hjmq/environments/master/entries/6bQBslspGNugaZjV4IeLy7?access_token=TIe6oU-B-ImyK8tSQc2vGM-NwiddykQsoRc8LnMSceY&locale=en-US",
+   "title": "How do I set up Okta SCIM? (Navan Help Center)",
+   "quote": "Create Users, Update User Attributes,",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.navan.com/app/helpcenter/articles/travel/admin/hris-integrations/how-do-i-set-up-okta-scim"
+  },
+  {
+   "id": "c29",
+   "url": "https://cdn.contentful.com/spaces/eux8w6w8hjmq/environments/master/entries/3mujpqx5M7HyTUBXR0RgZz?access_token=TIe6oU-B-ImyK8tSQc2vGM-NwiddykQsoRc8LnMSceY&locale=en-US",
+   "title": "How do I set up Microsoft Entra? (Navan Help Center)",
+   "quote": "Disabling terminated users",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.navan.com/app/helpcenter/articles/travel/admin/hris-integrations/how-do-i-set-up-microsoft-entra"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://navan.com/pricing",
+  "https://navan.com/integrations",
+  "https://navan.com/security",
+  "https://navan.com/sitemap.xml",
+  "https://developer.navan.com/llms.txt",
+  "https://developer.navan.com/api/",
+  "Navan Help Center (app.navan.com/app/helpcenter, content via its Contentful delivery API): searches SCIM, SAML, single sign-on, JumpCloud, OneLogin, Google Workspace, deactivate, API, audit, bulk upload users",
+  "https://www.okta.com/integrations/?search=navan",
+  "https://www.okta.com/integrations/navan/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/toc.json (Navan: navan-tutorial)"
+ ],
+ "open_questions": [
+  "SCIM base URL, SCIM version, PUT vs PATCH, filtering, pagination and group support are not published.",
+  "Whether SCIM or SSO is restricted to any plan: neither the pricing page nor the help centre says so.",
+  "Whether SCIM deactivation stops Navan Expense billing for that user (billing is per monthly active expensing user).",
+  "Whether the SCIM token expires.",
+  "JumpCloud and Google Workspace provisioning not documented."
+ ]
+}

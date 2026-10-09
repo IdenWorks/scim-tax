@@ -1,0 +1,727 @@
+{
+ "slug": "mediafly",
+ "vendor": "Mediafly",
+ "vendor_url": "https://www.mediafly.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Mediafly",
+  "slug": "mediafly",
+  "category": "Sales & CRM",
+  "status": "gated",
+  "scim_plan": "Contact Sales (quote-only)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales (quote-only; /pricing redirects to /contact)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Contact Sales (quote-only)",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": null,
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.mediafly.com/contact/",
+  "docs_url": "https://devdocs.mediafly.com/scim/",
+  "evidence": "Mediafly's developer docs say you can \"provision and manage your Mediafly user identities across systems with ... SCIM\" (SCIM 2.0 at scim.mediafly.com/{companycode}/scim/v2), while mediafly.com/pricing redirects to a contact-sales page with no public plans.",
+  "notes": "Quote-only: no public plans; www.mediafly.com/pricing redirects to /contact. SCIM 2.0 is documented on devdocs.mediafly.com (Users and Groups: POST, GET, PUT, PATCH, DELETE; filter subset, startIndex/count paging; bearer token and company code issued by Mediafly on request). Deactivate via active=false; DELETE hard-deletes. User create/PUT does not set group memberships; Groups do. A KB article links an Azure SCIM user/group provisioning guide (behind a Mediafly share consent page, not read). Neither Okta OIN (404) nor the Entra gallery tutorials list Mediafly; SSO is a custom SAML app, with optional SAML JIT user creation and JIT group assignment. The legacy Accounts API (accounts.mediafly.com/api/3.0) also creates, deactivates, deletes users and manages roles.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Mediafly (quote-only)",
+   "price_text": "Contact Sales",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c25",
+    "c20"
+   ],
+   "notes": "No public tier table; SSO from the trust page, SCIM and Accounts API from devdocs, none tied to a plan."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c2",
+   "c3",
+   "c4",
+   "c24"
+  ],
+  "plan": "Contact Sales (quote-only)",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://scim.mediafly.com/{companycode}/scim/v2",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Access token and company code issued by Mediafly on request",
+   "token_expiry": null,
+   "cite": [
+    "c11"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c4",
+    "c9",
+    "c28"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c4",
+    "c7",
+    "c8",
+    "c10",
+    "c13",
+    "c28"
+   ],
+   "notes": "Group membership is managed on Groups (POST with members, PATCH add/remove/set, PUT replace); user POST/PUT does not change memberships. X-HTTP-Method-Override supported for clients limited to GET/POST."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c7",
+    "c8"
+   ],
+   "notes": "PATCH active=false deactivates; DELETE hard-deletes and is discouraged."
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName",
+    "displayName"
+   ],
+   "cite": [
+    "c5"
+   ],
+   "notes": "Subset of SCIM filter expressions; sortBy/sortOrder supported."
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c6"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "externalId",
+    "name.givenName",
+    "name.familyName",
+    "emails[type eq \"work\"].value",
+    "active"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": true,
+    "how": "Mediafly can be configured to support additional attributes per customer"
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c3",
+    "c12"
+   ]
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Creating or replacing a user does not set group memberships; use the Groups endpoints.",
+    "cite": [
+     "c9"
+    ]
+   },
+   {
+    "text": "Only a subset of SCIM filter expressions is supported.",
+    "cite": [
+     "c5"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c20",
+   "c22"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://accounts.mediafly.com/api/3.0",
+  "docs_url": "https://devdocs.mediafly.com/accounts/",
+  "auth": {
+   "methods": [
+    "other"
+   ],
+   "scopes": [],
+   "cite": [
+    "c21",
+    "c23"
+   ],
+   "notes": "POST /authentication/authenticate with an account's username/password returns a bearer access token valid up to an hour; productId issued by Mediafly."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": true,
+   "reactivate_user": true,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c20",
+    "c27"
+   ],
+   "notes": "Roles are the Accounts API's user grouping; invite = create with emailUser=true or the registration/approval flow."
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/authentication/authenticate",
+    "purpose": "Obtain access token",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/users/create?emailUser=true",
+    "purpose": "Create user",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/users/get",
+    "purpose": "Get user",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/users/list",
+    "purpose": "List users",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/users/metadata",
+    "purpose": "Update user metadata",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/users/update",
+    "purpose": "Update password, email, names",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/users/delete",
+    "purpose": "Delete user",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/users/deactivate",
+    "purpose": "Deactivate user",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/users/activate",
+    "purpose": "Activate user",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/users/addrole",
+    "purpose": "Add user to role",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/users/removerole",
+    "purpose": "Remove user from role",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/users/register",
+    "purpose": "Register user for approval",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/users/registrationrequests",
+    "purpose": "List registrations",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/users/approveregistration",
+    "purpose": "Approve registration",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/users/rejectregistration",
+    "purpose": "Reject registration",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/roles/create",
+    "purpose": "Create role",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/roles/get",
+    "purpose": "Get role",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/roles/list",
+    "purpose": "List roles",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/roles/update",
+    "purpose": "Update role",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/roles/delete",
+    "purpose": "Delete role",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/roles/adduser",
+    "purpose": "Add user to role",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/roles/removeuser",
+    "purpose": "Remove user from role",
+    "cite": [
+     "c20"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c18"
+   ],
+   "notes": "okta.com/integrations/mediafly/ returns 404. Mediafly documents Okta SSO as a custom SAML 2.0 app ('Create New App'); no Okta SCIM guide."
+  },
+  "entra": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c14",
+    "c17"
+   ],
+   "notes": "Not in the Entra saas-apps toc.json; Mediafly's Azure AD SSO guide uses a non-gallery application, and a KB article links an Azure SCIM user/group provisioning guide, recorded as via_generic in row.idp."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": true,
+  "other_sync": "Global User Management across Mediafly solutions; legacy Accounts API",
+  "docs_public": true,
+  "cite": [
+   "c15",
+   "c19",
+   "c26"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.mediafly.com/contact/",
+   "title": "Contact Mediafly",
+   "quote": "Connect with the Mediafly team to schedule a free comprehensive revenue assessment, speak with sales, or share a press inquiry.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://devdocs.mediafly.com/scim/",
+   "title": "Mediafly SCIM",
+   "quote": "You can provision and manage your Mediafly user identities across systems with the open standard System for Cross-Domain Identity Management (SCIM).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://devdocs.mediafly.com/scim/",
+   "title": "Mediafly SCIM",
+   "quote": "The Mediafly implementation provides extensions to the SCIM 2.0 specification so that you can edit and manage Mediafly user properties using REST API operations.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://devdocs.mediafly.com/scim/",
+   "title": "Mediafly SCIM",
+   "quote": "Create: POST https://scim.mediafly.com/{companycode}/scim/v2/{resource}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://devdocs.mediafly.com/scim/",
+   "title": "Mediafly SCIM",
+   "quote": "Mediafly only supports a subset of filter expressions that the SCIM spec defines.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://devdocs.mediafly.com/scim/",
+   "title": "Mediafly SCIM",
+   "quote": "startIndex: 1-based index of the first query result.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://devdocs.mediafly.com/scim/",
+   "title": "Mediafly SCIM",
+   "quote": "Use PATCH to set active to false to deactivate user. PUT also supports deactivating user.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://devdocs.mediafly.com/scim/",
+   "title": "Mediafly SCIM",
+   "quote": "This will hard delete the User from Mediafly. We recommend deactivating user instead of deleting in most use cases.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://devdocs.mediafly.com/scim/",
+   "title": "Mediafly SCIM",
+   "quote": "Does not support adding users to groups.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://devdocs.mediafly.com/scim/",
+   "title": "Mediafly SCIM",
+   "quote": "Use PUT to replace the entire group object. This will also replace the group memberships.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://devdocs.mediafly.com/scim/",
+   "title": "Mediafly SCIM",
+   "quote": "Contact Mediafly on how to obtain an Access Token and Company Code.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://devdocs.mediafly.com/scim/",
+   "title": "Mediafly SCIM",
+   "quote": "While this example contains the core user attributes, you can configure Mediafly to support additional attributes to meet your business needs.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://devdocs.mediafly.com/scim/",
+   "title": "Mediafly SCIM",
+   "quote": "This will hard delete the Group from Mediafly.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://community.mediafly.com/knowledge-base/article/configure-scim-usergroup-provisioning-azure-to-mediafly",
+   "title": "Configure SCIM User/Group Provisioning Azure to Mediafly",
+   "quote": "Configure SCIM User/Group Provisioning Azure to Mediafly",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://community.mediafly.com/knowledge-base/article/guide-to-using-sso-and-mediafly",
+   "title": "Guide to using SSO and Mediafly",
+   "quote": "You can also choose to auto-create users that get successfully authenticated via SSO.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://community.mediafly.com/knowledge-base/article/guide-to-using-sso-and-mediafly",
+   "title": "Guide to using SSO and Mediafly",
+   "quote": "If a user is deprovisioned in the identity provider, how is Mediafly notified about this deactivation?",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://community.mediafly.com/knowledge-base/article/using-azure-ad-for-sso-with-mediafly",
+   "title": "Using Azure AD for SSO with Mediafly",
+   "quote": "Mediafly can use Azure AD for user authentication.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://community.mediafly.com/knowledge-base/article/using-okta-for-sso-with-mediafly",
+   "title": "Using Okta for SSO with Mediafly",
+   "quote": "Mediafly can be easily added to Okta as an application and made available for your users for Single Sign On.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://community.mediafly.com/knowledge-base/article/adding-users-with-bulk-import",
+   "title": "Adding users with bulk import",
+   "quote": "Adding users in Mediafly may be done one by one through Airship, or by bulk using the bulk import option.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://devdocs.mediafly.com/accounts/accounts.html",
+   "title": "Mediafly Accounts API",
+   "quote": "create / update / delete / activate / inactivate user accounts",
+   "accessed": "2026-10-05",
+   "page_url": "https://devdocs.mediafly.com/accounts/"
+  },
+  {
+   "id": "c21",
+   "url": "https://devdocs.mediafly.com/accounts/accounts.html",
+   "title": "Mediafly Accounts API",
+   "quote": "Access token value can now be stored and used in the Accounts API calls for up to an hour.",
+   "accessed": "2026-10-05",
+   "page_url": "https://devdocs.mediafly.com/accounts/"
+  },
+  {
+   "id": "c22",
+   "url": "https://devdocs.mediafly.com/accounts/accounts.html",
+   "title": "Mediafly Accounts API",
+   "quote": "https://accounts.mediafly.com/api/{version}/{area}/{operation}?productId=",
+   "accessed": "2026-10-05",
+   "page_url": "https://devdocs.mediafly.com/accounts/"
+  },
+  {
+   "id": "c23",
+   "url": "https://devdocs.mediafly.com/accounts/accounts.html",
+   "title": "Mediafly Accounts API",
+   "quote": "Access token is obtained by making a POST request to",
+   "accessed": "2026-10-05",
+   "page_url": "https://devdocs.mediafly.com/accounts/"
+  },
+  {
+   "id": "c24",
+   "url": "https://devdocs.mediafly.com/scim/",
+   "title": "Mediafly SCIM",
+   "quote": "Manage Mediafly User Identities with SCIM",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://www.mediafly.com/trust-and-security/",
+   "title": "Trust and Security | Mediafly",
+   "quote": "Role-based access controls and enterprise SSO.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://community.mediafly.com/knowledge-base/article/just-in-time-jit-group-assignments",
+   "title": "Just-in-Time (JIT) Group Assignments",
+   "quote": "Just-in-Time (JIT) Group Assignments simplify user group management in Mediafly by automatically assigning users to predefined groups upon authentication through Single Sign-On (SSO).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://devdocs.mediafly.com/accounts/accounts.html",
+   "title": "Mediafly Accounts API",
+   "quote": "add / remove users from roles",
+   "accessed": "2026-10-05",
+   "page_url": "https://devdocs.mediafly.com/accounts/"
+  },
+  {
+   "id": "c28",
+   "url": "https://devdocs.mediafly.com/scim/",
+   "title": "Mediafly SCIM",
+   "quote": "Does support adding users to group.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The SSO guide FAQ tells customers to contact their CSM when a user is deprovisioned in the IdP, while the SCIM docs describe deactivating users with PATCH active=false.",
+   "cite": [
+    "c16",
+    "c7"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.mediafly.com/pricing (redirects to /contact/; no plans)",
+  "https://www.mediafly.com/sitemap_index.xml",
+  "https://devdocs.mediafly.com/ (SCIM and Accounts API docs)",
+  "community.mediafly.com sitemap: all 348 KB articles fetched and grepped for scim, sso, api",
+  "https://assets.mediafly.com/l/7FrjdxmCVnqp (Azure SCIM guide behind a share consent page; render.cjs ERR_TOO_MANY_RETRIES; not read)",
+  "Okta OIN mediafly (404); Entra saas-apps toc.json (not listed); WebSearch unavailable (session cap)"
+ ],
+ "open_questions": [
+  "Which Mediafly packages include SCIM and SSO? No public pricing.",
+  "Does SCIM deactivation free a licence and end sessions?",
+  "Does SCIM expose ServiceProviderConfig/Schemas, and what is the maximum page size and rate limit?",
+  "Is SCIM supported with Okta and other IdPs, or only documented for Azure/Entra?"
+ ]
+}

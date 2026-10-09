@@ -1,0 +1,905 @@
+{
+ "slug": "zoho-desk",
+ "vendor": "Zoho Desk",
+ "vendor_url": "https://www.zoho.com/desk/",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Zoho Desk",
+  "slug": "zoho-desk",
+  "category": "Customer Support & Success",
+  "last_verified": "2026-10-05",
+  "first_added": "2026-09",
+  "status_prev": null,
+  "status": "unknown",
+  "scim_plan": "—",
+  "scim_price_text": "Not disclosed",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Express",
+  "team_price_text": "$7/agent/mo billed annually",
+  "team_price_per_user_mo": 7,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": null
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": "via_generic",
+   "generic": true
+  },
+  "pricing_page_url": "https://www.zoho.com/desk/pricing.html",
+  "docs_url": "https://help.zoho.com/portal/en/kb/directory/admin-guide/directory-stores/cloud-directories-app-specific-guides/articles/add-okta-to-zoho-directory",
+  "evidence": "Zoho Directory documents SCIM Directory Stores for Okta, Entra ID and JumpCloud and says \"Zoho Desk supports role and department assignment through Zoho Directory\", but no Zoho Desk page names the Desk edition that includes it.",
+  "notes": "New row. Agents are Zoho Directory users: an IdP pushes users over SCIM into a Zoho Directory Directory Store, and conditional assignment can give them Zoho Desk roles and departments. Desk's pricing comparison lists no SAML/SCIM line for agents (only Help Center end-user SAML and Office 365 agent SSO from Standard), so the Desk-side gate is undisclosed; Zoho Directory's Free plan is capped at 10 users. Team plan is Express ($7/agent/mo annual, max 5 users). The agents API (add, update, activate, deactivate, delete) is documented and API credits start on the Free edition.",
+  "confidence": "low",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Free",
+  "api_tax": false
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "Free (3 users)",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c25",
+    "c26"
+   ]
+  },
+  {
+   "name": "Express",
+   "price_text": "$7/agent/mo billed annually (up to 5 users)",
+   "price_per_user_mo": 7,
+   "billing": "annual",
+   "sso": null,
+   "scim": null,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c27",
+    "c25",
+    "c26"
+   ]
+  },
+  {
+   "name": "Standard",
+   "price_text": "$14/agent/mo billed annually",
+   "price_per_user_mo": 14,
+   "billing": "annual",
+   "sso": null,
+   "scim": null,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c28",
+    "c26",
+    "c29"
+   ]
+  },
+  {
+   "name": "Professional",
+   "price_text": "$23/agent/mo billed annually",
+   "price_per_user_mo": 23,
+   "billing": "annual",
+   "sso": null,
+   "scim": null,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c30",
+    "c26"
+   ]
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "$40/agent/mo billed annually",
+   "price_per_user_mo": 40,
+   "billing": "annual",
+   "sso": null,
+   "scim": null,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c31",
+    "c26",
+    "c32"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c1",
+   "c2",
+   "c3",
+   "c4",
+   "c5",
+   "c6",
+   "c7",
+   "c20"
+  ],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": null,
+  "base_url": null,
+  "notes": "SCIM lands in Zoho Directory (the org-wide identity layer every Zoho app uses) through a Directory Store; the \"Sync endpoint\" URL is generated per store and its pattern is not documented. Zoho's Okta guide pairs the SCIM app with a SAML app pointing at Zoho Directory Custom Authentication, but the Entra, JumpCloud and custom-store guides do not require SSO, so sso_required is left null. Zoho Desk pricing and help pages do not mention SCIM or name a Desk edition for Zoho Directory provisioning.",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Zoho Directory Admin Panel > User Management > Directory Stores > Add Directory > (Okta / Entra ID / JumpCloud / Create Custom Store) > API INTEGRATION: Sync endpoint and SCIM token",
+   "token_expiry": null,
+   "cite": [
+    "c8",
+    "c2",
+    "c5"
+   ],
+   "notes": "Okta sends the token as an HTTP Header (Authorization). The Microsoft Entra gallery app \"Zoho One\" uses OAuth (Code Auth Grant) instead of a static token."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c9",
+    "c5"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": null,
+   "group_push": null,
+   "group_membership": null,
+   "cite": [
+    "c9",
+    "c10",
+    "c11",
+    "c12",
+    "c13",
+    "c14"
+   ],
+   "notes": "Okta can Push New Users and Push Profile Updates; user status changes are synced when Status Sync is enabled. Okta custom app integrations cannot Push Groups; JumpCloud syncs users through selected user groups. Update method (PUT vs PATCH) not documented."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c10",
+    "c11",
+    "c12",
+    "c15"
+   ],
+   "notes": "Status changes in the IdP deactivate the Zoho Directory user when Status Sync is on. Deactivation releases a Zoho Directory licence; whether it frees the app seat is not documented."
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName"
+   ],
+   "cite": [
+    "c16"
+   ],
+   "notes": "From Microsoft's Zoho One provisioning tutorial (userName marked as supported for filtering)."
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "active",
+    "displayName",
+    "title",
+    "emails[type eq \"work\"].value",
+    "preferredLanguage",
+    "name.givenName",
+    "name.familyName",
+    "name.formatted",
+    "addresses[type eq \"work\"].formatted",
+    "addresses[type eq \"work\"].streetAddress",
+    "addresses[type eq \"work\"].locality",
+    "addresses[type eq \"work\"].region",
+    "addresses[type eq \"work\"].postalCode",
+    "addresses[type eq \"work\"].country",
+    "phoneNumbers[type eq \"mobile\"].value",
+    "phoneNumbers[type eq \"fax\"].value",
+    "phoneNumbers[type eq \"work\"].value",
+    "externalId"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": true,
+    "how": "Directory Store field mapping: profile field, hard-coded value, expression, custom attribute or JSON path mapped onto Zoho Directory fields (custom fields)"
+   },
+   "group": [
+    "displayName",
+    "members",
+    "externalId"
+   ],
+   "cite": [
+    "c16",
+    "c17",
+    "c18"
+   ],
+   "notes": "Core and group attribute lists come from Microsoft's Zoho One provisioning tutorial (gallery app); Zoho Directory's own guides only describe field mapping in the admin panel."
+  },
+  "roles": {
+   "supported": true,
+   "how": "Zoho Directory conditional assignment assigns apps (and app roles, e.g. Zoho Desk roles/departments, Zoho CRM admin) based on group membership or designation; not a SCIM roles attribute",
+   "cite": [
+    "c19",
+    "c20",
+    "c21"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Okta custom app integrations cannot Push Groups or Import Groups.",
+    "cite": [
+     "c13"
+    ]
+   },
+   {
+    "text": "JumpCloud syncs only groups of users, not individual users.",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "text": "Entra provisioning runs on a 40-minute cycle (or on-demand Provision).",
+    "cite": [
+     "c22"
+    ]
+   },
+   {
+    "text": "Zoho Directory Free plan allows only up to 10 users; paid Directory licences are $2 (Standard) or $7 (Professional) per user. How users of paid Zoho apps count against this is not documented.",
+    "cite": [
+     "c23",
+     "c24"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c26",
+   "c33",
+   "c34"
+  ],
+  "plan": "Free",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://desk.zoho.com/api/v1",
+  "docs_url": "https://desk.zoho.com/DeskAPIDocument",
+  "auth": {
+   "methods": [
+    "oauth2"
+   ],
+   "scopes": [
+    "Desk.agents.UPDATE"
+   ],
+   "cite": [
+    "c35"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": true,
+   "reactivate_user": true,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c33",
+    "c36",
+    "c37",
+    "c38",
+    "c39",
+    "c35",
+    "c40",
+    "c41",
+    "c42"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/api/v1/agents",
+    "purpose": "List agents",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/agents/{agent_id}",
+    "purpose": "Get an agent",
+    "cite": [
+     "c36"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/agents",
+    "purpose": "Add an agent",
+    "cite": [
+     "c37"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/agents/{agent_id}",
+    "purpose": "Update an agent",
+    "cite": [
+     "c38"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/agents/activate",
+    "purpose": "Activate agents",
+    "cite": [
+     "c39"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/agents/{agent_id}/deactivate",
+    "purpose": "Deactivate an agent",
+    "cite": [
+     "c35"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/agents/{agent_id}/delete",
+    "purpose": "Delete a confirmed agent (optional anonymize)",
+    "cite": [
+     "c40"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/agents/deleteUnconfirmed",
+    "purpose": "Delete unconfirmed agents",
+    "cite": [
+     "c43"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/roles",
+    "purpose": "List roles",
+    "cite": [
+     "c41"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/profiles",
+    "purpose": "List profiles",
+    "cite": [
+     "c44"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/teams",
+    "purpose": "List teams",
+    "cite": [
+     "c42"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "API credits per day: 5,000 (Free); 25,000 + users x100 (Express); 50,000 + users x250 (Standard); higher on Professional and Enterprise",
+   "cite": [
+    "c26"
+   ]
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": null,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "notes": "No product-specific OIN app with provisioning; Zoho's guide uses a custom Okta SAML app with SCIM provisioning pointed at Zoho Directory.",
+   "cite": [
+    "c9",
+    "c8"
+   ]
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/zoho-one-provisioning-tutorial",
+   "cite": [
+    "c46",
+    "c47",
+    "c48"
+   ],
+   "notes": "Gallery app is \"Zoho One\" (also a separate \"Zoho\" SSO app). Microsoft says to contact Zoho One support to enable provisioning. Zoho Directory also documents Entra ID SCIM provisioning via a Directory Store (sync endpoint + SCIM token)."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c4",
+    "c14"
+   ],
+   "notes": "Zoho's guide uses a JumpCloud Custom Application with Identity Management (SCIM base URL + token); no JumpCloud catalogue page was checked."
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": true,
+  "other_sync": "Office 365 users can be added as agents (Standard and above); Zoho Directory AD sync",
+  "docs_public": true,
+  "cite": [
+   "c29",
+   "c45"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://help.zoho.com/portal/api/kbArticles/205219014603996035?portalId=edbsn3857479fd7bb83e29368ff05a1860319f4481b7f04184d0e9b6e93712995a590",
+   "title": "Directory Stores - Overview",
+   "quote": "You need to copy the sync endpoint and SCIM token from Zoho Directory and paste it in the provisioning setup screen of the required apps in the directory service.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.zoho.com/portal/en/kb/directory/admin-guide/directory-stores/cloud-directories-general-guides/articles/directory-stores-overview"
+  },
+  {
+   "id": "c2",
+   "url": "https://help.zoho.com/portal/api/kbArticles/205219017729722484?portalId=edbsn3857479fd7bb83e29368ff05a1860319f4481b7f04184d0e9b6e93712995a590",
+   "title": "Add Okta to Zoho Directory",
+   "quote": "Under API INTEGRATION, note down the Sync endpoint and SCIM token. Later, you'll need to provide this information in Okta to enable sync.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.zoho.com/portal/en/kb/directory/admin-guide/directory-stores/cloud-directories-app-specific-guides/articles/add-okta-to-zoho-directory"
+  },
+  {
+   "id": "c3",
+   "url": "https://help.zoho.com/portal/api/kbArticles/205219014582268530?portalId=edbsn3857479fd7bb83e29368ff05a1860319f4481b7f04184d0e9b6e93712995a590",
+   "title": "Add Microsoft Entra ID to Zoho Directory",
+   "quote": "Under API INTEGRATION, note down the Sync endpoint and SCIM token. Later on, you'll have to provide this information in Microsoft Entra ID app",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.zoho.com/portal/en/kb/directory/admin-guide/directory-stores/cloud-directories-app-specific-guides/articles/add-microsoft-azure-to-zoho-directory"
+  },
+  {
+   "id": "c4",
+   "url": "https://help.zoho.com/portal/api/kbArticles/205219017556649841?portalId=edbsn3857479fd7bb83e29368ff05a1860319f4481b7f04184d0e9b6e93712995a590",
+   "title": "Add JumpCloud to Zoho Directory",
+   "quote": "In the Base URL field, paste the Sync endpoint copied from Zoho Directory, and in the Token Key field, enter the SCIM token that you generated in Zoho Directory.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.zoho.com/portal/en/kb/directory/admin-guide/directory-stores/cloud-directories-app-specific-guides/articles/add-jumpcloud-to-zoho-directory"
+  },
+  {
+   "id": "c5",
+   "url": "https://help.zoho.com/portal/api/kbArticles/205219034566655640?portalId=edbsn3857479fd7bb83e29368ff05a1860319f4481b7f04184d0e9b6e93712995a590",
+   "title": "Add a Custom Directory Store",
+   "quote": "If you select SCIM as your authentication type Click Save. The Sync endpoint and SCIM token will be generated and displayed.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.zoho.com/portal/en/kb/directory/admin-guide/directory-stores/cloud-directories-general-guides/articles/add-a-custom-directory-store"
+  },
+  {
+   "id": "c6",
+   "url": "https://help.zoho.com/portal/api/kbArticles/205219017729722484?portalId=edbsn3857479fd7bb83e29368ff05a1860319f4481b7f04184d0e9b6e93712995a590",
+   "title": "Add Okta to Zoho Directory",
+   "quote": "Plan required in Zoho Directory: Free plan Professional plan (if you want to add multiple directories)",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.zoho.com/portal/en/kb/directory/admin-guide/directory-stores/cloud-directories-app-specific-guides/articles/add-okta-to-zoho-directory"
+  },
+  {
+   "id": "c7",
+   "url": "https://help.zoho.com/portal/api/kbArticles/205219034566655640?portalId=edbsn3857479fd7bb83e29368ff05a1860319f4481b7f04184d0e9b6e93712995a590",
+   "title": "Add a Custom Directory Store",
+   "quote": "Subscription plans that support this feature: Free trial or any subscription",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.zoho.com/portal/en/kb/directory/admin-guide/directory-stores/cloud-directories-general-guides/articles/add-a-custom-directory-store"
+  },
+  {
+   "id": "c8",
+   "url": "https://help.zoho.com/portal/api/kbArticles/205219017729722484?portalId=edbsn3857479fd7bb83e29368ff05a1860319f4481b7f04184d0e9b6e93712995a590",
+   "title": "Add Okta to Zoho Directory",
+   "quote": "Select HTTP Header from the dropdown menu in the Authentication Mode field. Enter the SCIM token copied from Zoho Directory in the Token field next to Authorization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.zoho.com/portal/en/kb/directory/admin-guide/directory-stores/cloud-directories-app-specific-guides/articles/add-okta-to-zoho-directory"
+  },
+  {
+   "id": "c9",
+   "url": "https://help.zoho.com/portal/api/kbArticles/205219017729722484?portalId=edbsn3857479fd7bb83e29368ff05a1860319f4481b7f04184d0e9b6e93712995a590",
+   "title": "Add Okta to Zoho Directory",
+   "quote": "Enter the Sync endpoint copied from Zoho Directory in the SCIM connector base URL field. Enter email in the Unique identifier field for users field, and select the Push New Users option (as well as Import New Users and Profile Updates, and Push Profile Updates, optionally)",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.zoho.com/portal/en/kb/directory/admin-guide/directory-stores/cloud-directories-app-specific-guides/articles/add-okta-to-zoho-directory"
+  },
+  {
+   "id": "c10",
+   "url": "https://help.zoho.com/portal/api/kbArticles/205219017729722484?portalId=edbsn3857479fd7bb83e29368ff05a1860319f4481b7f04184d0e9b6e93712995a590",
+   "title": "Add Okta to Zoho Directory",
+   "quote": "Choose how the change in user status in Okta should reflect in Zoho Directory.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.zoho.com/portal/en/kb/directory/admin-guide/directory-stores/cloud-directories-app-specific-guides/articles/add-okta-to-zoho-directory"
+  },
+  {
+   "id": "c11",
+   "url": "https://help.zoho.com/portal/api/kbArticles/205219034566655640?portalId=edbsn3857479fd7bb83e29368ff05a1860319f4481b7f04184d0e9b6e93712995a590",
+   "title": "Add a Custom Directory Store",
+   "quote": "Under Status Sync, choose whether changes made to the user status in the custom store should reflect in Zoho Directory.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.zoho.com/portal/en/kb/directory/admin-guide/directory-stores/cloud-directories-general-guides/articles/add-a-custom-directory-store"
+  },
+  {
+   "id": "c12",
+   "url": "https://help.zoho.com/portal/api/kbArticles/205219014582268530?portalId=edbsn3857479fd7bb83e29368ff05a1860319f4481b7f04184d0e9b6e93712995a590",
+   "title": "Add Microsoft Entra ID to Zoho Directory",
+   "quote": "During user import, the users you select here will be deactivated in Zoho Directory.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.zoho.com/portal/en/kb/directory/admin-guide/directory-stores/cloud-directories-app-specific-guides/articles/add-microsoft-azure-to-zoho-directory"
+  },
+  {
+   "id": "c13",
+   "url": "https://help.zoho.com/portal/api/kbArticles/205219017729722484?portalId=edbsn3857479fd7bb83e29368ff05a1860319f4481b7f04184d0e9b6e93712995a590",
+   "title": "Add Okta to Zoho Directory",
+   "quote": "Note: Push Groups and Import Groups options cannot be selected for a custom app integration.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.zoho.com/portal/en/kb/directory/admin-guide/directory-stores/cloud-directories-app-specific-guides/articles/add-okta-to-zoho-directory"
+  },
+  {
+   "id": "c14",
+   "url": "https://help.zoho.com/portal/api/kbArticles/205219017556649841?portalId=edbsn3857479fd7bb83e29368ff05a1860319f4481b7f04184d0e9b6e93712995a590",
+   "title": "Add JumpCloud to Zoho Directory",
+   "quote": "JumpCloud syncs only groups of users and not individual users; hence, only the users present under the selected group will be synced to Zoho Directory.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.zoho.com/portal/en/kb/directory/admin-guide/directory-stores/cloud-directories-app-specific-guides/articles/add-jumpcloud-to-zoho-directory"
+  },
+  {
+   "id": "c15",
+   "url": "https://help.zoho.com/portal/api/kbArticles/205219008120754488?portalId=edbsn3857479fd7bb83e29368ff05a1860319f4481b7f04184d0e9b6e93712995a590",
+   "title": "Directory licensing - Overview",
+   "quote": "When a user is deactivated, one license will be automatically removed from your account, and the user will not be billed from the next month.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.zoho.com/portal/en/kb/directory/admin-guide/home/managing-zoho-directory-subscription/articles/directory-licensing"
+  },
+  {
+   "id": "c16",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/zoho-one-provisioning-tutorial",
+   "title": "Configure Zoho One for automatic user provisioning with Microsoft Entra ID",
+   "quote": "userName String ✓ ✓ active Boolean displayName String title String emails[type eq \"work\"].value String preferredLanguage String name.givenName String name.familyName String name.formatted String",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/zoho-one-provisioning-tutorial",
+   "title": "Configure Zoho One for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Review the group attributes that are synchronized from Microsoft Entra ID to Zoho One in the Attribute-Mapping section.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://help.zoho.com/portal/api/kbArticles/205219034566655640?portalId=edbsn3857479fd7bb83e29368ff05a1860319f4481b7f04184d0e9b6e93712995a590",
+   "title": "Add a Custom Directory Store",
+   "quote": "Custom Attribute: These are custom fields added in the third-party service.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.zoho.com/portal/en/kb/directory/admin-guide/directory-stores/cloud-directories-general-guides/articles/add-a-custom-directory-store"
+  },
+  {
+   "id": "c19",
+   "url": "https://help.zoho.com/portal/api/kbArticles/205219008080014624?portalId=edbsn3857479fd7bb83e29368ff05a1860319f4481b7f04184d0e9b6e93712995a590",
+   "title": "Conditional assignment - Overview",
+   "quote": "Conditional Assignment removes the time-consuming task of assigning apps individually to users by automating it based on preset conditions.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.zoho.com/portal/en/kb/directory/admin-guide/applications/configuring-conditional-assignment-in-zd/articles/conditional-assignment-overview"
+  },
+  {
+   "id": "c20",
+   "url": "https://help.zoho.com/portal/api/kbArticles/205219008080014624?portalId=edbsn3857479fd7bb83e29368ff05a1860319f4481b7f04184d0e9b6e93712995a590",
+   "title": "Conditional assignment - Overview",
+   "quote": "Zoho Desk supports role and department assignment through Zoho Directory and has three default roles (Admins, Agents, and Light Agents).",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.zoho.com/portal/en/kb/directory/admin-guide/applications/configuring-conditional-assignment-in-zd/articles/conditional-assignment-overview"
+  },
+  {
+   "id": "c21",
+   "url": "https://help.zoho.com/portal/api/kbArticles/205219011528586350?portalId=edbsn3857479fd7bb83e29368ff05a1860319f4481b7f04184d0e9b6e93712995a590",
+   "title": "Set up Zoho Directory",
+   "quote": "For example, you can set a condition to assign a user as an app admin in Zoho CRM if their designation is \"Manager\".",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.zoho.com/portal/en/kb/directory/getting-started-with-zoho-directory/zoho-directory-web-app/articles/set-up-zoho-directory"
+  },
+  {
+   "id": "c22",
+   "url": "https://help.zoho.com/portal/api/kbArticles/205219014582268530?portalId=edbsn3857479fd7bb83e29368ff05a1860319f4481b7f04184d0e9b6e93712995a590",
+   "title": "Add Microsoft Entra ID to Zoho Directory",
+   "quote": "To sync the users' information at 40 minute intervals, select the app, go to Provisioning on the left menu, and tap Start provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.zoho.com/portal/en/kb/directory/admin-guide/directory-stores/cloud-directories-app-specific-guides/articles/add-microsoft-azure-to-zoho-directory"
+  },
+  {
+   "id": "c23",
+   "url": "https://help.zoho.com/portal/api/kbArticles/205219005410588400?portalId=edbsn3857479fd7bb83e29368ff05a1860319f4481b7f04184d0e9b6e93712995a590",
+   "title": "User classification (Zoho Directory)",
+   "quote": "The Free plan allows you to add only up to 10 users.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.zoho.com/portal/en/kb/directory/admin-guide/users-1/users/articles/user-classification"
+  },
+  {
+   "id": "c24",
+   "url": "https://help.zoho.com/portal/api/kbArticles/205219008120754488?portalId=edbsn3857479fd7bb83e29368ff05a1860319f4481b7f04184d0e9b6e93712995a590",
+   "title": "Directory licensing - Overview",
+   "quote": "The cost of a Zoho Directory license per user is $2 for the standard plan and $7 for the professional plan.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.zoho.com/portal/en/kb/directory/admin-guide/home/managing-zoho-directory-subscription/articles/directory-licensing"
+  },
+  {
+   "id": "c25",
+   "url": "https://www.zoho.com/desk/pricing-comparison.html",
+   "title": "Zoho Desk edition comparison",
+   "quote": "User Limit 3 users 5 users Unlimited Unlimited Unlimited",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://www.zoho.com/desk/pricing-comparison.html",
+   "title": "Zoho Desk edition comparison",
+   "quote": "5,000 credits 25,000 + (No.of users x100) + Add-on credits 50,000 + (No.of users x250) + Add-on credits",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://www.zohowebstatic.com/sites/zweb/json/pricing/desk-pricing-val.json",
+   "title": "Zoho Desk pricing data (USD first)",
+   "quote": "\"setId\": \"zplan-express-yearly\", \"priceValue\": \"7;7;7;420",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.zoho.com/desk/pricing.html"
+  },
+  {
+   "id": "c28",
+   "url": "https://www.zohowebstatic.com/sites/zweb/json/pricing/desk-pricing-val.json",
+   "title": "Zoho Desk pricing data (USD first)",
+   "quote": "\"setId\": \"zplan-standard-yearly\", \"priceValue\": \"14;12;9;800",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.zoho.com/desk/pricing.html"
+  },
+  {
+   "id": "c29",
+   "url": "https://www.zoho.com/desk/pricing-comparison.html",
+   "title": "Zoho Desk edition comparison",
+   "quote": "Add Office 365 users as agents, so they can access Zoho Desk via single sign-on.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://www.zohowebstatic.com/sites/zweb/json/pricing/desk-pricing-val.json",
+   "title": "Zoho Desk pricing data (USD first)",
+   "quote": "\"setId\": \"zplan-professional-yearly\", \"priceValue\": \"23;20;15;1400",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.zoho.com/desk/pricing.html"
+  },
+  {
+   "id": "c31",
+   "url": "https://www.zohowebstatic.com/sites/zweb/json/pricing/desk-pricing-val.json",
+   "title": "Zoho Desk pricing data (USD first)",
+   "quote": "\"setId\": \"zplan-enterprise-yearly\", \"priceValue\": \"40;35;26.25;2400",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.zoho.com/desk/pricing.html"
+  },
+  {
+   "id": "c32",
+   "url": "https://www.zoho.com/desk/pricing-comparison.html",
+   "title": "Zoho Desk edition comparison",
+   "quote": "Keep a track record of automation and custom modules' activities to prevent any breaches or mishaps.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://desk.zoho.com/DeskAPIDocument",
+   "title": "Zoho Desk API documentation",
+   "quote": "This API lists a particular number of agents, based on the limit specified.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://desk.zoho.com/DeskAPIDocument",
+   "title": "Zoho Desk API documentation",
+   "quote": "https://desk.zoho.com/api/v1/agents/19000001075071/deactivate",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c35",
+   "url": "https://desk.zoho.com/DeskAPIDocument",
+   "title": "Zoho Desk API documentation",
+   "quote": "This API deactivates an agent in your help desk. Credit: 1 credit/call POST /api/v1/agents/{agent_id}/deactivate OAuth Scope Desk.agents.UPDATE",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://desk.zoho.com/DeskAPIDocument",
+   "title": "Zoho Desk API documentation",
+   "quote": "This API fetches details of an agent in your help desk.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://desk.zoho.com/DeskAPIDocument",
+   "title": "Zoho Desk API documentation",
+   "quote": "This API adds an agent to your help desk.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c38",
+   "url": "https://desk.zoho.com/DeskAPIDocument",
+   "title": "Zoho Desk API documentation",
+   "quote": "This API updates details of an agent.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c39",
+   "url": "https://desk.zoho.com/DeskAPIDocument",
+   "title": "Zoho Desk API documentation",
+   "quote": "This API activates agents in your help desk.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c40",
+   "url": "https://desk.zoho.com/DeskAPIDocument",
+   "title": "Zoho Desk API documentation",
+   "quote": "This API deletes a confirmed agent from your help desk.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c41",
+   "url": "https://desk.zoho.com/DeskAPIDocument",
+   "title": "Zoho Desk API documentation",
+   "quote": "This API fetches the details of a particular role.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c42",
+   "url": "https://desk.zoho.com/DeskAPIDocument",
+   "title": "Zoho Desk API documentation",
+   "quote": "This API fetches the details of a team.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c43",
+   "url": "https://desk.zoho.com/DeskAPIDocument",
+   "title": "Zoho Desk API documentation",
+   "quote": "This API deletes unconfirmed agents from your help desk.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c44",
+   "url": "https://desk.zoho.com/DeskAPIDocument",
+   "title": "Zoho Desk API documentation",
+   "quote": "This API fetches the details of a particular profile.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c45",
+   "url": "https://help.zoho.com/portal/api/kbArticles/205219011528586350?portalId=edbsn3857479fd7bb83e29368ff05a1860319f4481b7f04184d0e9b6e93712995a590",
+   "title": "Set up Zoho Directory",
+   "quote": "you can bulk import users through the user data file in CSV, VCS, XLS, and XLXS formats.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.zoho.com/portal/en/kb/directory/getting-started-with-zoho-directory/zoho-directory-web-app/articles/set-up-zoho-directory"
+  },
+  {
+   "id": "c46",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/zoho-one-provisioning-tutorial",
+   "title": "Configure Zoho One for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Create users in Zoho One. Remove users in Zoho One when they don't require access anymore. Keep user attributes synchronized between Microsoft Entra ID and Zoho One. Provision groups and group memberships in Zoho One",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c47",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/zoho-one-provisioning-tutorial",
+   "title": "Configure Zoho One for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Contact Zoho One support to configure Zoho One to support provisioning with Microsoft Entra ID.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c48",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/zohoone-tutorial",
+   "title": "Configure Zoho One for Single sign-on with Microsoft Entra ID",
+   "quote": "In this article, you learn how to integrate Zoho One with Microsoft Entra ID.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.zoho.com/sitemap-index.xml (product, help and API sitemaps for creator, crm, desk, people, workplace, mail, directory, one)",
+  "help.zoho.com KB search API: scim, scim provisioning, crm scim, desk scim, people scim, workplace scim, crm active directory sync, conditional assignment, zoho directory plans",
+  "https://www.zoho.com/directory/pricing.html and Zoho Directory subscription/licensing KB articles",
+  "https://www.okta.com/integrations/ zoho-one, zoho-mail, zoho-crm, zoho-directory (zoho-desk, zoho-people, zoho-creator, zoho-workplace return 404)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/ zoho-one-provisioning-tutorial, zohoone-tutorial, zoho-mail-tutorial",
+  "https://www.zoho.com/desk/pricing.html and pricing-comparison.html (no agent SAML/SCIM row)",
+  "https://www.zohowebstatic.com/sites/zweb/json/pricing/desk-pricing-val.json",
+  "https://desk.zoho.com/DeskAPIDocument (agents, roles, profiles, teams)",
+  "help.zoho.com KB search: desk scim, desk directory"
+ ],
+ "open_questions": [
+  "Which Zoho Desk edition (if any) gates Zoho Directory SCIM provisioning or agent SAML is not stated.",
+  "Whether Desk agents count against the Zoho Directory Free plan's 10-user cap is not documented.",
+  "Docs do not say whether deactivation in Zoho Directory frees the Desk agent licence.",
+  "SCIM version, endpoint pattern, token expiry and PUT/PATCH/delete behaviour are not documented."
+ ]
+}

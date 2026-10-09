@@ -1,0 +1,776 @@
+{
+ "slug": "lovable",
+ "vendor": "Lovable",
+ "vendor_url": "https://lovable.dev",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Lovable",
+  "slug": "lovable",
+  "category": "AI & LLM Tools",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Pro",
+  "team_price_text": "Pro: $25/month, or $250/year ($21/month) billed annually, for 100 credits; flat per workspace, unlimited users",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Business",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": "via_generic",
+   "jumpcloud": "via_generic",
+   "generic": true
+  },
+  "pricing_page_url": "https://lovable.dev/pricing",
+  "docs_url": "https://docs.lovable.dev/features/business/scim",
+  "evidence": "Lovable's pricing page lists 'Directory sync (SCIM)' under Enterprise ('Volume based pricing', 'Book a demo'), and the SCIM docs say 'It is available on the Enterprise plan.'",
+  "notes": "New in 2026-09. Plans are flat per workspace and priced by credits, not per user (unlimited users on every plan): Pro from $25/mo ($21/mo billed annually), Business from $50/mo ($42/mo annually), Enterprise volume-based. SSO (OIDC or SAML) starts at Business; SCIM and audit logs need Enterprise, and SCIM also needs an active SSO provider and a verified domain. SCIM 2.0 at https://api.lovable.dev/scim/v2 with a bearer key; deprovisioning removes the member and transfers owned projects. Roles come from IdP group mappings. Okta OIN app provisions (Create/Update/Deactivate/Group Push); Entra's gallery app is OIDC SSO only and SCIM there needs a separate SAML app. The Lovable REST API (Business+) only reads members and groups. JIT on SSO login is available on Business.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Business",
+  "api_tax": true,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "$0 / month",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": false,
+   "cite": [
+    "c3",
+    "c4",
+    "c28"
+   ]
+  },
+  {
+   "name": "Pro",
+   "price_text": "$25/month monthly, $250/year ($21/month) annually, 100 credits",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": false,
+   "cite": [
+    "c1",
+    "c25",
+    "c4",
+    "c28"
+   ],
+   "notes": "Flat per workspace; higher credit tiers cost more."
+  },
+  {
+   "name": "Business",
+   "price_text": "$50/month monthly, $500/year ($42/month) annually, 100 credits",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c2",
+    "c26",
+    "c4",
+    "c22",
+    "c28",
+    "c3"
+   ]
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Platform fee, volume based pricing (Book a demo)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c22",
+    "c28"
+   ],
+   "notes": "Audit logs included (UI + JSONL export); no audit-log API documented."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c3",
+   "c5",
+   "c6",
+   "c7",
+   "c9"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://api.lovable.dev/scim/v2",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Workspace settings > Access > Identity > SCIM provisioning > Enable (key shown once; rotate from the General tab)",
+   "token_expiry": null,
+   "cite": [
+    "c8",
+    "c20"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c10",
+    "c11"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c10",
+    "c11",
+    "c12"
+   ],
+   "notes": "Docs list Users create/read/update/delete/list and Groups create/read/update/delete/list/member push; PUT vs PATCH is not specified."
+  },
+  "deprovision": {
+   "action": "remove_from_org",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "User is removed from the workspace (pending invites deleted). Projects they owned transfer to the highest-role member; Restricted projects are not transferred and must be moved by an owner.",
+   "cite": [
+    "c12",
+    "c13"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName (email address)"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "displayName (group name, matched case-sensitively)",
+    "members"
+   ],
+   "cite": [
+    "c19",
+    "c11",
+    "c14"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "IdP group-to-role mapping (Viewer, Editor, Admin, Owner) configured in Lovable; highest-privilege mapped role wins; unmapped users get the default role (Viewer).",
+   "cite": [
+    "c14",
+    "c21"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SCIM cannot deactivate or delete the workspace owner.",
+    "cite": [
+     "c15"
+    ]
+   },
+   {
+    "text": "Microsoft Entra ID provisioning works only through a SAML enterprise app, even if SSO uses OIDC.",
+    "cite": [
+     "c16"
+    ]
+   },
+   {
+    "text": "Only users whose email domain is verified for the workspace are provisioned.",
+    "cite": [
+     "c17"
+    ]
+   },
+   {
+    "text": "Removing a user from all mapped groups does not remove workspace access; unassign the app in the IdP instead.",
+    "cite": [
+     "c21"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c28",
+   "c29",
+   "c30",
+   "c43"
+  ],
+  "plan": "Business",
+  "api_tax": true,
+  "style": "REST",
+  "base_url": "https://api.lovable.dev/v1",
+  "docs_url": "https://docs.lovable.dev/api-reference/introduction",
+  "auth": {
+   "methods": [
+    "api_key"
+   ],
+   "scopes": [
+    "workspaces:read",
+    "workspaces:write",
+    "projects:read",
+    "projects:write"
+   ],
+   "cite": [
+    "c31",
+    "c36"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c33",
+    "c34"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/v1/workspaces/{workspace_id}/members",
+    "purpose": "List workspace members",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/workspaces/{workspace_id}/members/{user_id}",
+    "purpose": "Get a workspace member",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/workspaces/{workspace_id}/groups",
+    "purpose": "List workspace groups",
+    "cite": [
+     "c35"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": "Enterprise",
+   "cite": [
+    "c37",
+    "c38"
+   ],
+   "notes": "Audit logs (Enterprise) can be exported as JSONL from the UI; no audit-log API endpoint is documented."
+  },
+  "rate_limits": {
+   "text": "Sliding-window limits per API key, reported in X-RateLimit-* headers; 429 with Retry-After when exceeded.",
+   "cite": [
+    "c32"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "The Lovable API's member endpoints are read-only; no create, invite, update or remove member endpoints are documented.",
+    "cite": [
+     "c33",
+     "c34",
+     "c35"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/lovable/",
+   "cite": [
+    "c39",
+    "c18"
+   ],
+   "notes": "OIN page marks SAML, OIDC, SCIM and Create/Update/Deactivate/Group Push as checked (read from page markup)."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/lovable-oidc-tutorial",
+   "cite": [
+    "c40",
+    "c41",
+    "c16"
+   ],
+   "notes": "Gallery app 'Lovable (OIDC)' is SSO only; Lovable's docs say Entra SCIM needs a SAML enterprise app (generic SCIM)."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "Not named; Lovable documents a generic 'Other SCIM 2.0 providers' setup."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "Not named; Lovable documents a generic 'Other SCIM 2.0 providers' setup."
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "both",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c23",
+   "c24",
+   "c5"
+  ],
+  "notes": "Verified-domain email sign-up can also auto-join users; members list can be exported (not imported) as CSV."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://lovable.dev/pricing",
+   "title": "Lovable Pricing",
+   "quote": "Pro Designed for fast-moving teams building together in real time. $25 / month 100 monthly credits",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://lovable.dev/pricing",
+   "title": "Lovable Pricing",
+   "quote": "Business Advanced controls and power features for growing departments $50 / month 100 monthly credits",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://lovable.dev/pricing",
+   "title": "Lovable Pricing",
+   "quote": "Enterprise Built for large orgs needing flexibility, scale, and governance. Platform fee Book a demo Volume based pricing Unlimited users All Business features Directory sync (SCIM) Audit logs",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://lovable.dev/pricing",
+   "title": "Lovable Pricing",
+   "quote": "Projects that are not visible to other members in your workspace. SSO Security center",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://docs.lovable.dev/features/business/scim.md",
+   "title": "Set up SCIM user provisioning",
+   "quote": "SCIM (System for Cross-domain Identity Management) lets your identity provider (IdP) create, update, and remove Lovable users automatically. It is available on the Enterprise plan.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lovable.dev/features/business/scim"
+  },
+  {
+   "id": "c6",
+   "url": "https://docs.lovable.dev/features/business/scim.md",
+   "title": "Set up SCIM user provisioning",
+   "quote": "No, SCIM requires an active SSO provider. Users provisioned via SCIM authenticate using your configured SSO provider.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lovable.dev/features/business/scim"
+  },
+  {
+   "id": "c7",
+   "url": "https://docs.lovable.dev/features/business/scim.md",
+   "title": "Set up SCIM user provisioning",
+   "quote": "SCIM base URL / Tenant URL: `https://api.lovable.dev/scim/v2`",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lovable.dev/features/business/scim"
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.lovable.dev/features/business/scim.md",
+   "title": "Set up SCIM user provisioning",
+   "quote": "The bearer token that authenticates SCIM requests. Anyone with this key can provision users in your workspace.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lovable.dev/features/business/scim"
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.lovable.dev/features/business/scim.md",
+   "title": "Set up SCIM user provisioning",
+   "quote": "Lovable implements the SCIM 2.0 specification and supports the following operations:",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lovable.dev/features/business/scim"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.lovable.dev/features/business/scim.md",
+   "title": "Set up SCIM user provisioning",
+   "quote": "Users | Create, read, update, delete, list |",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lovable.dev/features/business/scim"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.lovable.dev/features/business/scim.md",
+   "title": "Set up SCIM user provisioning",
+   "quote": "Groups | Create, read, update, delete, list, member push |",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lovable.dev/features/business/scim"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.lovable.dev/features/business/scim.md",
+   "title": "Set up SCIM user provisioning",
+   "quote": "Lovable removes the user from your workspace, or deletes their pending invitation if they have not joined yet.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lovable.dev/features/business/scim"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.lovable.dev/features/business/scim.md",
+   "title": "Set up SCIM user provisioning",
+   "quote": "Projects they owned go to the member with the highest role (owners first, then admins, then editors). Projects with access set to Restricted are not transferred.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lovable.dev/features/business/scim"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.lovable.dev/features/business/scim.md",
+   "title": "Set up SCIM user provisioning",
+   "quote": "Users in a mapped group receive the mapped role. A user in several mapped groups receives the highest-privilege role.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lovable.dev/features/business/scim"
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.lovable.dev/features/business/scim.md",
+   "title": "Set up SCIM user provisioning",
+   "quote": "SCIM cannot deactivate or delete the workspace owner.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lovable.dev/features/business/scim"
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.lovable.dev/features/business/scim.md",
+   "title": "Set up SCIM user provisioning",
+   "quote": "SCIM provisioning in Microsoft Entra ID is supported only through a SAML application.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lovable.dev/features/business/scim"
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.lovable.dev/features/business/scim.md",
+   "title": "Set up SCIM user provisioning",
+   "quote": "SCIM only provisions users whose email domain is verified.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lovable.dev/features/business/scim"
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.lovable.dev/features/business/scim.md",
+   "title": "Set up SCIM user provisioning",
+   "quote": "SCIM provisioning uses the same Lovable app you added from the Okta App Catalog for SSO.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lovable.dev/features/business/scim"
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.lovable.dev/features/business/scim.md",
+   "title": "Set up SCIM user provisioning",
+   "quote": "Unique identifier field: `userName (email address)`",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lovable.dev/features/business/scim"
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.lovable.dev/features/business/scim.md",
+   "title": "Set up SCIM user provisioning",
+   "quote": "Rotating the API key immediately invalidates the previous API key.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lovable.dev/features/business/scim"
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.lovable.dev/features/business/scim.md",
+   "title": "Set up SCIM user provisioning",
+   "quote": "Users removed from all mapped groups keep their workspace access and receive the default role.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lovable.dev/features/business/scim"
+  },
+  {
+   "id": "c22",
+   "url": "https://docs.lovable.dev/features/business/sso.md",
+   "title": "Set up workspace single sign-on (SSO)",
+   "quote": "Single sign-on (SSO) is available on Business and Enterprise plans",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lovable.dev/features/business/sso"
+  },
+  {
+   "id": "c23",
+   "url": "https://docs.lovable.dev/features/business/sso.md",
+   "title": "Set up workspace single sign-on (SSO)",
+   "quote": "Yes, Lovable supports JIT (just-in-time) provisioning through SSO. User accounts are created automatically the first time someone logs in via SSO",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lovable.dev/features/business/sso"
+  },
+  {
+   "id": "c24",
+   "url": "https://docs.lovable.dev/features/business/sso.md",
+   "title": "Set up workspace single sign-on (SSO)",
+   "quote": "Lovable supports both OIDC and SAML 2.0 protocols",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lovable.dev/features/business/sso"
+  },
+  {
+   "id": "c25",
+   "url": "https://docs.lovable.dev/introduction/subscription-plans.md",
+   "title": "Subscription plans",
+   "quote": "100 | $25 | $250 ($21/month)",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lovable.dev/introduction/subscription-plans"
+  },
+  {
+   "id": "c26",
+   "url": "https://docs.lovable.dev/introduction/subscription-plans.md",
+   "title": "Subscription plans",
+   "quote": "100 | $50 | $500 ($42/month)",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lovable.dev/introduction/subscription-plans"
+  },
+  {
+   "id": "c27",
+   "url": "https://docs.lovable.dev/introduction/subscription-plans.md",
+   "title": "Subscription plans",
+   "quote": "Unlimited workspace members | Yes | Yes | Yes | Yes",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lovable.dev/introduction/subscription-plans"
+  },
+  {
+   "id": "c28",
+   "url": "https://docs.lovable.dev/introduction/subscription-plans.md",
+   "title": "Subscription plans",
+   "quote": "Lovable API | — | — | Yes | Yes",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lovable.dev/introduction/subscription-plans"
+  },
+  {
+   "id": "c29",
+   "url": "https://docs.lovable.dev/api-reference/introduction.md",
+   "title": "API basics",
+   "quote": "The base URL is `https://api.lovable.dev`. Endpoints are versioned under `/v1`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lovable.dev/api-reference/introduction"
+  },
+  {
+   "id": "c30",
+   "url": "https://docs.lovable.dev/api-reference/introduction.md",
+   "title": "API basics",
+   "quote": "Creating keys requires a Business or Enterprise plan, and an owner or admin role in the workspace.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lovable.dev/api-reference/introduction"
+  },
+  {
+   "id": "c31",
+   "url": "https://docs.lovable.dev/api-reference/introduction.md",
+   "title": "API basics",
+   "quote": "Requests authenticate with a workspace-scoped API key, sent in the `Lovable-API-Key` header.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lovable.dev/api-reference/introduction"
+  },
+  {
+   "id": "c32",
+   "url": "https://docs.lovable.dev/api-reference/introduction.md",
+   "title": "API basics",
+   "quote": "Each API key has its own rate limit.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lovable.dev/api-reference/introduction"
+  },
+  {
+   "id": "c33",
+   "url": "https://docs.lovable.dev/api-reference/members-access/list-workspace-members.md",
+   "title": "List workspace members",
+   "quote": "openapi.yaml get /v1/workspaces/{workspace_id}/members",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lovable.dev/api-reference/members-access/list-workspace-members"
+  },
+  {
+   "id": "c34",
+   "url": "https://docs.lovable.dev/api-reference/members-access/get-workspace-member.md",
+   "title": "Get workspace member",
+   "quote": "openapi.yaml get /v1/workspaces/{workspace_id}/members/{user_id}",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lovable.dev/api-reference/members-access/get-workspace-member"
+  },
+  {
+   "id": "c35",
+   "url": "https://docs.lovable.dev/api-reference/members-access/list-workspace-groups.md",
+   "title": "List workspace groups",
+   "quote": "openapi.yaml get /v1/workspaces/{workspace_id}/groups",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lovable.dev/api-reference/members-access/list-workspace-groups"
+  },
+  {
+   "id": "c36",
+   "url": "https://docs.lovable.dev/api-reference/members-access/list-workspace-members.md",
+   "title": "List workspace members",
+   "quote": "A key is granted one or more scopes when it is created: `projects:read`, `projects:write`, `workspaces:read`, `workspaces:write`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lovable.dev/api-reference/members-access/list-workspace-members"
+  },
+  {
+   "id": "c37",
+   "url": "https://docs.lovable.dev/features/audit-logs.md",
+   "title": "Audit logs",
+   "quote": "Available on: Enterprise plans",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lovable.dev/features/audit-logs"
+  },
+  {
+   "id": "c38",
+   "url": "https://docs.lovable.dev/features/audit-logs.md",
+   "title": "Audit logs",
+   "quote": "Lovable generates a JSONL file (one JSON event per line) of the audit logs matching your active action, actor, and time range filters",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lovable.dev/features/audit-logs"
+  },
+  {
+   "id": "c39",
+   "url": "https://www.okta.com/integrations/lovable/",
+   "title": "Lovable | Okta",
+   "quote": "The Okta Lovable integration enables secure Single Sign-On (SSO) and automated user provisioning to simplify access management.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c40",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/lovable-oidc-tutorial",
+   "title": "Configure Lovable (OIDC) for Single sign-on with Microsoft Entra ID",
+   "quote": "Lovable supports just-in-time (JIT) provisioning through SSO. User accounts are created automatically the first time users sign in with SSO and are added to the company workspace. Lovable also supports SCIM provisioning on the Enterprise plan.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c41",
+   "url": "https://docs.lovable.dev/features/business/sso.md",
+   "title": "Set up workspace single sign-on (SSO)",
+   "quote": "In the Add from the gallery section, search for Lovable, select it in the results, and add it to your tenant.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lovable.dev/features/business/sso"
+  },
+  {
+   "id": "c42",
+   "url": "https://docs.lovable.dev/features/people.md",
+   "title": "Manage workspace members from the People tab",
+   "quote": "export the workspace member list as CSV",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lovable.dev/features/people"
+  },
+  {
+   "id": "c43",
+   "url": "https://docs.lovable.dev/api-reference/members-access/list-workspace-members.md",
+   "title": "List workspace members",
+   "quote": "Plan: `Business or higher`",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lovable.dev/api-reference/members-access/list-workspace-members"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://lovable.dev/pricing",
+  "https://docs.lovable.dev/llms.txt"
+ ],
+ "open_questions": [
+  "SCIM user attributes beyond userName (email) are not documented.",
+  "PUT vs PATCH support, filtering and pagination for /scim/v2 are not documented.",
+  "Whether SCIM removal frees a seat is moot (unlimited users), and session revocation is not documented.",
+  "SCIM token expiry is not documented (keys are rotated manually).",
+  "No Google Workspace, OneLogin or JumpCloud catalogue apps were found; OneLogin/JumpCloud are via the generic setup.",
+  "No audit-log API endpoint; only UI export."
+ ]
+}

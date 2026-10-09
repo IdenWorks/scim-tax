@@ -1,0 +1,906 @@
+{
+ "slug": "phrase",
+ "vendor": "Phrase",
+ "vendor_url": "https://phrase.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Phrase",
+  "slug": "phrase",
+  "category": "Productivity & Docs",
+  "status": "gated",
+  "scim_plan": "Business",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Professional",
+  "team_price_text": "Professional: $525/mo flat (annual)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Business",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": null
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": "via_generic",
+   "generic": true
+  },
+  "pricing_page_url": "https://phrase.com/pricing/",
+  "docs_url": "https://support.phrase.com/hc/en-us/articles/5784117127580-Phrase-Identity-Management",
+  "evidence": "Phrase's Identity Management article says Platform SSO integrates with IdPs compliant with SCIM 2.0 and SAML 2.0 and that SCIM is configured in the SSO tab, and the pricing page lists Single sign-on from the Business plan (Custom pricing).",
+  "notes": "Status changed from unknown to gated. Phrase now documents a SCIM 2.0 endpoint (Phrase Platform API, /idm/scim/Users on eu.phrase.com or us.phrase.com, bearer token from Organization settings > SSO). SCIM is configured inside Platform SSO, which the pricing page includes from Business (Custom) upward and not on Team ($1,245/month) or Professional/Software UI/UX ($525/month); no page states a separate SCIM plan, so the gate is inferred from the SSO prerequisite and enabling auto-provisioning also requires contacting Phrase support. Pricing is flat per month per plan bundle (TMS and Strings seats), not per user. The cheapest multi-user tiers are Professional (Freelancer & LSP plans) and Software UI/UX (developer plans) at $525/month billed annually; Team is $1,245/month billed annually (June's team plan). Only Users endpoints exist (no Groups); roles can be set on create via a roles attribute but not updated. TMS (v3 users) and Strings (members, invitations, teams) APIs manage users on all business plans.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Team",
+  "api_tax": false,
+  "first_added": null,
+  "status_prev": "unknown"
+ },
+ "plans": [
+  {
+   "name": "Freelancer",
+   "price_text": "$27/month billed annually, 1 TMS seat",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c4",
+    "c7"
+   ],
+   "notes": "Single-seat plan."
+  },
+  {
+   "name": "Professional",
+   "price_text": "$525/month billed annually, unlimited TMS seats, 15 Strings seats",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c5",
+    "c7"
+   ],
+   "notes": "Freelancer & LSP plans tab; comparison table marks SSO only on Business in that tab."
+  },
+  {
+   "name": "Software UI/UX",
+   "price_text": "$525/month billed annually, 15 Strings seats",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c6",
+    "c7"
+   ],
+   "notes": "Developer & designer plans tab."
+  },
+  {
+   "name": "Team",
+   "price_text": "$1,245/month billed annually, unlimited TMS seats, 20 Strings seats",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c7"
+   ]
+  },
+  {
+   "name": "Business",
+   "price_text": "Custom",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c3",
+    "c7",
+    "c8"
+   ],
+   "notes": "scim true inferred: SCIM is configured within Platform SSO, which starts at Business."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Custom",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c7",
+    "c8"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c8",
+   "c9",
+   "c10",
+   "c3"
+  ],
+  "plan": "Business",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://eu.phrase.com/idm/scim (EU) or https://us.phrase.com/idm/scim (US)",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Platform dashboard > Organization settings > SSO tab > Auto-Provisioning Configuration (enabled by Phrase support) > SCIM: enter a SCIM secret, then copy the generated SCIM bearer token and SCIM base URL",
+   "token_expiry": null,
+   "cite": [
+    "c12",
+    "c10",
+    "c32",
+    "c31"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": null,
+   "ServiceProviderConfig": true,
+   "Schemas": true,
+   "ResourceTypes": true,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c25",
+    "c30"
+   ],
+   "notes": "The Phrase Platform OpenAPI lists only /scim/Users, /scim/Schemas, /scim/ResourceTypes and /scim/ServiceProviderConfig; no Groups endpoint is documented."
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": null,
+   "group_membership": null,
+   "cite": [
+    "c25",
+    "c26",
+    "c27",
+    "c28",
+    "c20"
+   ],
+   "notes": "PATCH supports only replace (active, externalId, userName, name, emails). PUT always applies 'active' from the request, so a user can be re-enabled."
+  },
+  "deprovision": {
+   "action": "delete",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Membership removed; if it was the user's last organisation the identity enters a 30-day retention period before permanent deletion. PATCH active=false only disables the user, who stays listed indefinitely.",
+   "cite": [
+    "c13",
+    "c28",
+    "c29",
+    "c20"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "id",
+    "externalId",
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "emails.value"
+   ],
+   "cite": [
+    "c23",
+    "c22"
+   ],
+   "notes": "eq only; single condition."
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": 100,
+   "cite": [
+    "c24"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "id",
+    "externalId",
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "emails[].value",
+    "emails[].primary",
+    "active",
+    "locale",
+    "timezone",
+    "roles[].type",
+    "roles[].value"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": [
+    "c26",
+    "c25",
+    "c33",
+    "c15"
+   ],
+   "notes": "From the ScimUser schema in the Phrase Platform OpenAPI."
+  },
+  "roles": {
+   "supported": true,
+   "how": "roles array on create: one entry per product with type phrase__platform / phrase__tms / phrase__strings / phrase__studio and a role value (Azure AD sends a WindowsAzureActiveDirectoryRole entry with a JSON-escaped array). Role updates via SCIM are not supported.",
+   "cite": [
+    "c15",
+    "c14",
+    "c33"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Enabling auto-provisioning (JIT or SCIM) requires contacting Phrase support; JIT and SCIM cannot be enabled at the same time.",
+    "cite": [
+     "c10",
+     "c11"
+    ]
+   },
+   {
+    "text": "Role updates via SCIM are not supported; roles are applied only on create.",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "text": "SCIM can only update and delete company-managed users; SCIM-created identities cannot be merged with existing ones.",
+    "cite": [
+     "c16",
+     "c17"
+    ]
+   },
+   {
+    "text": "Each Phrase organisation can integrate with only one IdP.",
+    "cite": [
+     "c18"
+    ]
+   },
+   {
+    "text": "Filtering supports only a single eq condition.",
+    "cite": [
+     "c22"
+    ]
+   },
+   {
+    "text": "SCIM-created users cannot be deleted manually in the UI; an IdP that only PATCHes active=false leaves them disabled indefinitely.",
+    "cite": [
+     "c21",
+     "c20"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c34",
+   "c35",
+   "c7"
+  ],
+  "plan": "Team",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://cloud.memsource.com/web (TMS); https://api.phrase.com/v2 (Strings)",
+  "docs_url": "https://developers.phrase.com/en/api/strings/members/list-members",
+  "auth": {
+   "methods": [
+    "api_token",
+    "oauth2",
+    "basic"
+   ],
+   "scopes": [
+    "team.manage"
+   ],
+   "cite": [
+    "c36"
+   ],
+   "notes": "Strings member and invitation endpoints need the team.manage scope. The pricing page lists 'API & Webhooks' (TMS) and 'API & CLI' (Strings) on Team, Business and Enterprise."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": true,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c34",
+    "c35",
+    "c36",
+    "c38",
+    "c39",
+    "c40",
+    "c43",
+    "c44"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/api2/v3/users",
+    "purpose": "TMS: create user (optionally send invitation)",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api2/v3/users/{userUid}",
+    "purpose": "TMS: get user",
+    "cite": [
+     "c40"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api2/v3/users/{userUid}",
+    "purpose": "TMS: edit user",
+    "cite": [
+     "c40"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api2/v1/users/{userUid}/undelete",
+    "purpose": "TMS: restore user",
+    "cite": [
+     "c44"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/accounts/{account_id}/members",
+    "purpose": "Strings: list members",
+    "cite": [
+     "c35"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/accounts/{account_id}/members/{id}",
+    "purpose": "Strings: update member permissions/role",
+    "cite": [
+     "c38"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/accounts/{account_id}/members/{id}",
+    "purpose": "Strings: remove a user from the account",
+    "cite": [
+     "c36"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/accounts/{account_id}/invitations",
+    "purpose": "Strings: invite a person to the account",
+    "cite": [
+     "c43"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/accounts/{account_id}/teams/{team_id}/users",
+    "purpose": "Strings: add user to team",
+    "cite": [
+     "c39"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "Strings API: 1000 requests per 5 minutes and 4 concurrent requests per user by default; limits vary by plan (TMS async API requests 200 on Team, 500 on Business, custom on Enterprise).",
+   "cite": [
+    "c37",
+    "c42"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Strings 'Remove a user from the account' removes the membership but does not delete the user from Phrase.",
+    "cite": [
+     "c36"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": false,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/?search=phrase",
+   "cite": [
+    "c41"
+   ],
+   "notes": "OIN search for 'phrase' returns only Pairaphrase; 'memsource' returns nothing. Phrase documents a custom Okta SCIM app configuration."
+  },
+  "entra": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "No Learn tutorial found at phrase-, phrase-tms-, phraseapp- or memsource- tutorial URLs (all 404). The SCIM API documents an Azure AD role format."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c33"
+   ],
+   "notes": "JumpCloud is named in the SCIM role-format docs; catalogue not checked."
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c19",
+   "c9"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://phrase.com/pricing/",
+   "title": "Phrase Pricing Plans | Localization Platform",
+   "quote": "Team Unlimited TMS Seats 20 Strings Seats All Phrase Products Standard product capacities 1,245 per month billed annually",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://phrase.com/pricing/",
+   "title": "Phrase Pricing Plans | Localization Platform",
+   "quote": "Business Unlimited TMS Seats 150 Strings Seats All Phrase Products High product capacities Custom",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://phrase.com/pricing/",
+   "title": "Phrase Pricing Plans | Localization Platform",
+   "quote": "Advanced translation memory capabilities Single sign-on Enterprise",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://phrase.com/pricing/",
+   "title": "Phrase Pricing Plans | Localization Platform",
+   "quote": "Freelancer 1 TMS Seat No Strings Seats 6 Phrase Products Basic product capacities 27 per month billed annually",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://phrase.com/pricing/",
+   "title": "Phrase Pricing Plans | Localization Platform",
+   "quote": "Professional Unlimited TMS Seats 15 Strings Seats All Phrase Products Increased product capacities 525 per month billed annually",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://phrase.com/pricing/",
+   "title": "Phrase Pricing Plans | Localization Platform",
+   "quote": "Software UI/UX 15 Strings seats 1M Strings Managed Words Unlimited languages Product capabilities for software localization 525 per month",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://phrase.com/pricing/",
+   "title": "Phrase Pricing Plans | Localization Platform",
+   "quote": "Single sign-on Phrase TMS / Phrase Strings Guest users Phrase TMS Automated user activation",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://support.phrase.com/hc/en-us/articles/5784117127580-Phrase-Identity-Management",
+   "title": "Phrase Identity Management | Phrase Help Center",
+   "quote": "The Phrase Platform enables integrations with identity providers (IdPs) compliant with SCIM 2.0 and the SAML 2.0 protocol (Microsoft Entra ID, Okta, Google Workspace, etc.).",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://support.phrase.com/hc/en-us/articles/5784117127580-Phrase-Identity-Management",
+   "title": "Phrase Identity Management | Phrase Help Center",
+   "quote": "Phrase Platform supports two types of user provisioning using SAML/SSO features to automate access to the Platform applications:",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://support.phrase.com/hc/en-us/articles/5784117127580-Phrase-Identity-Management",
+   "title": "Phrase Identity Management | Phrase Help Center",
+   "quote": "Scroll down to Auto-Provisioning Configuration and select Contact support to enable the configuration settings.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c11",
+   "url": "https://support.phrase.com/hc/en-us/articles/5784117127580-Phrase-Identity-Management",
+   "title": "Phrase Identity Management | Phrase Help Center",
+   "quote": "SAML auto-provisioning and SCIM cannot be enabled at the same time.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://support.phrase.com/hc/en-us/articles/5784117127580-Phrase-Identity-Management",
+   "title": "Phrase Identity Management | Phrase Help Center",
+   "quote": "The SCIM bearer token field is populated with a unique token.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://support.phrase.com/hc/en-us/articles/5784117127580-Phrase-Identity-Management",
+   "title": "Phrase Identity Management | Phrase Help Center",
+   "quote": "When the IdP sends a user deletion request, that user’s membership is removed from the Phrase organization. If it is the last organization they belong to, the account enters a 30-day retention period before permanent deletion.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c14",
+   "url": "https://support.phrase.com/hc/en-us/articles/5784117127580-Phrase-Identity-Management",
+   "title": "Phrase Identity Management | Phrase Help Center",
+   "quote": "Updates to existing user roles via SCIM are not supported.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://support.phrase.com/hc/en-us/articles/5784117127580-Phrase-Identity-Management",
+   "title": "Phrase Identity Management | Phrase Help Center",
+   "quote": "When SCIM is used, role assignment and product access can be defined directly in the IdP provisioning request using the roles attribute.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://support.phrase.com/hc/en-us/articles/5784117127580-Phrase-Identity-Management",
+   "title": "Phrase Identity Management | Phrase Help Center",
+   "quote": "SCIM can only update and delete users marked as company-managed, making this step essential.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c17",
+   "url": "https://support.phrase.com/hc/en-us/articles/5784117127580-Phrase-Identity-Management",
+   "title": "Phrase Identity Management | Phrase Help Center",
+   "quote": "A SCIM-created user identity cannot be merged with an existing one. Only fresh identities are supported.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c18",
+   "url": "https://support.phrase.com/hc/en-us/articles/5784117127580-Phrase-Identity-Management",
+   "title": "Phrase Identity Management | Phrase Help Center",
+   "quote": "Each Phrase organization can integrate with only one IdP.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c19",
+   "url": "https://support.phrase.com/hc/en-us/articles/5784117127580-Phrase-Identity-Management",
+   "title": "Phrase Identity Management | Phrase Help Center",
+   "quote": "Just-in-Time (JIT) provisioning is a SAML protocol based method that is used to create users the first time they log in to an application through SAML SSO.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c20",
+   "url": "https://support.phrase.com/hc/en-us/articles/5793349215900-Phrase-User-Management",
+   "title": "Phrase User Management | Phrase Help Center",
+   "quote": "If the identity provider only sends a SCIM PATCH request to deactivate the account, the user is disabled in Phrase but not scheduled for deletion, and remains listed indefinitely.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c21",
+   "url": "https://support.phrase.com/hc/en-us/articles/5793349215900-Phrase-User-Management",
+   "title": "Phrase User Management | Phrase Help Center",
+   "quote": "SCIM-created user identities cannot be manually deleted from the UI.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c22",
+   "url": "https://developers.phrase.com/en/api/platform/scim/list-users.md",
+   "title": "Phrase Platform API: List users",
+   "quote": "Only a single filter condition is supported — compound expressions (e.g. AND) return `400`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.phrase.com/en/api/platform/scim/list-users"
+  },
+  {
+   "id": "c23",
+   "url": "https://developers.phrase.com/en/api/platform/scim/list-users.md",
+   "title": "Phrase Platform API: List users",
+   "quote": "using the `eq` comparator on the following attributes",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.phrase.com/en/api/platform/scim/list-users"
+  },
+  {
+   "id": "c24",
+   "url": "https://developers.phrase.com/en/api/platform/scim/list-users.md",
+   "title": "Phrase Platform API: List users",
+   "quote": "Maximum number of results per page. Must be between `0` and `100`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.phrase.com/en/api/platform/scim/list-users"
+  },
+  {
+   "id": "c25",
+   "url": "https://developers.phrase.com/en/api/platform/scim/create-user.md",
+   "title": "Phrase Platform API: Create user",
+   "quote": "Provisions a new user into the authenticated organization using the SCIM `urn:ietf:params:scim:schemas:core:2.0:User` schema.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.phrase.com/en/api/platform/scim/create-user"
+  },
+  {
+   "id": "c26",
+   "url": "https://developers.phrase.com/en/api/platform/scim/update-user.md",
+   "title": "Phrase Platform API: Update user (PUT)",
+   "quote": "Updatable fields: `userName`, `name.givenName`, `name.familyName`, `emails` (primary address), `externalId`, `locale`, `timezone`, `active`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.phrase.com/en/api/platform/scim/update-user"
+  },
+  {
+   "id": "c27",
+   "url": "https://developers.phrase.com/en/api/platform/scim/update-user-1.md",
+   "title": "Phrase Platform API: Update user (PATCH)",
+   "quote": "Only the `replace` operation is supported.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.phrase.com/en/api/platform/scim/update-user-1"
+  },
+  {
+   "id": "c28",
+   "url": "https://developers.phrase.com/en/api/platform/scim/delete-user.md",
+   "title": "Phrase Platform API: Delete user",
+   "quote": "Deprovisions a user from the authenticated organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.phrase.com/en/api/platform/scim/delete-user"
+  },
+  {
+   "id": "c29",
+   "url": "https://developers.phrase.com/en/api/platform/scim/delete-user.md",
+   "title": "Phrase Platform API: Delete user",
+   "quote": "**Internal user, single-org**: removes all organization memberships and deletes the identity.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.phrase.com/en/api/platform/scim/delete-user"
+  },
+  {
+   "id": "c30",
+   "url": "https://developers.phrase.com/en/api/platform/scim/retrieve-service-provider-configuration.md",
+   "title": "Phrase Platform API: Retrieve service provider configuration",
+   "quote": "Returns the SCIM service provider's configuration, including supported features such as filtering, patch operations, and authentication schemes",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.phrase.com/en/api/platform/scim/retrieve-service-provider-configuration"
+  },
+  {
+   "id": "c31",
+   "url": "https://developers.phrase.com/en/api/platform/scim/list-users.md",
+   "title": "Phrase Platform API: List users",
+   "quote": "url: https://eu.phrase.com/idm/",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.phrase.com/en/api/platform/scim/list-users"
+  },
+  {
+   "id": "c32",
+   "url": "https://developers.phrase.com/en/api/platform/scim/list-users.md",
+   "title": "Phrase Platform API: List users",
+   "quote": "SCIM access token issued via Phrase Platform organization settings.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.phrase.com/en/api/platform/scim/list-users"
+  },
+  {
+   "id": "c33",
+   "url": "https://developers.phrase.com/en/api/platform/scim/create-user.md",
+   "title": "Phrase Platform API: Create user",
+   "quote": "**Standard format** (Okta, JumpCloud): one entry per Phrase product",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.phrase.com/en/api/platform/scim/create-user"
+  },
+  {
+   "id": "c34",
+   "url": "https://developers.phrase.com/en/api/tms/v3/user/create-user.md",
+   "title": "Phrase TMS API: Create user",
+   "quote": "When sendInvitation=true, an invitation email is sent to the user and the password field is ignored.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.phrase.com/en/api/tms/v3/user/create-user"
+  },
+  {
+   "id": "c35",
+   "url": "https://developers.phrase.com/en/api/strings/members/list-members.md",
+   "title": "Phrase Strings API: List members",
+   "quote": "Get all users active in the account.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.phrase.com/en/api/strings/members/list-members"
+  },
+  {
+   "id": "c36",
+   "url": "https://developers.phrase.com/en/api/strings/members/remove-a-user-from-the-account.md",
+   "title": "Phrase Strings API: Remove a user from the account",
+   "quote": "The user will be removed from the account but not deleted from Phrase. Access token scope must include `team.manage`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.phrase.com/en/api/strings/members/remove-a-user-from-the-account"
+  },
+  {
+   "id": "c37",
+   "url": "https://developers.phrase.com/en/api/strings/rate-limiting.md",
+   "title": "Phrase Strings API: Rate Limiting",
+   "quote": "1000 requests per 5 minutes",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.phrase.com/en/api/strings/rate-limiting"
+  },
+  {
+   "id": "c38",
+   "url": "https://developers.phrase.com/_llms/en/api-reference/strings.md",
+   "title": "Phrase Strings API reference index",
+   "quote": "Update user permissions in the account.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c39",
+   "url": "https://developers.phrase.com/_llms/en/api-reference/strings.md",
+   "title": "Phrase Strings API reference index",
+   "quote": "Adds an existing user to the team.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c40",
+   "url": "https://developers.phrase.com/openapi/phrase-tms-latest.json",
+   "title": "Phrase TMS OpenAPI (latest)",
+   "quote": "/api2/v3/users/{userUid}",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c41",
+   "url": "https://www.okta.com/integrations/?search=phrase",
+   "title": "Okta Integration Network | Okta",
+   "quote": "Pairaphrase is enterprise foreign translation software that makes the translation process easy.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c42",
+   "url": "https://phrase.com/pricing/",
+   "title": "Phrase Pricing Plans | Localization Platform",
+   "quote": "API async requests Phrase TMS 200 500 Custom",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c43",
+   "url": "https://developers.phrase.com/_llms/en/api-reference/strings.md",
+   "title": "Phrase Strings API reference index",
+   "quote": "Invite a person to an account.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c44",
+   "url": "https://developers.phrase.com/openapi/phrase-tms-latest.json",
+   "title": "Phrase TMS OpenAPI (latest)",
+   "quote": "/api2/v1/users/{userUid}/undelete",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://phrase.com/pricing/ (curl; three plan tabs and comparison tables)",
+  "support.phrase.com Zendesk search API: scim (4 results)",
+  "https://support.phrase.com/hc/en-us/articles/5784117127580-Phrase-Identity-Management",
+  "https://support.phrase.com/hc/en-us/articles/5793349215900-Phrase-User-Management",
+  "https://developers.phrase.com/llms.txt and /_llms/en/api-reference/{strings,tms}.md",
+  "https://developers.phrase.com/openapi/phrase-platform.json (SCIM), phrase-tms-latest.json, phrase-strings.json",
+  "https://www.okta.com/integrations/?search=phrase and ?search=memsource",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/{phrase,phrase-tms,phraseapp,memsource}-tutorial (404)"
+ ],
+ "open_questions": [
+  "No page states the SCIM plan directly; Business is inferred from SCIM being part of Platform SSO, which the pricing page lists from Business.",
+  "Whether SCIM deprovisioning frees a Strings seat or ends active sessions.",
+  "SCIM token expiry and SCIM rate limits are not documented.",
+  "Whether Groups will be supported; the SCIM API documents Users only.",
+  "Entra, Google, OneLogin and JumpCloud catalogue listings were not confirmed."
+ ]
+}

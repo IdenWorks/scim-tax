@@ -1,0 +1,762 @@
+{
+ "slug": "sigma",
+ "vendor": "Sigma Computing",
+ "vendor_url": "https://www.sigmacomputing.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Sigma Computing",
+  "slug": "sigma",
+  "category": "Data, Analytics & BI",
+  "status": "gated",
+  "scim_plan": "Contact Sales (no public plans)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales (no public pricing)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": false,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": "native",
+   "generic": true
+  },
+  "pricing_page_url": "https://www.sigmacomputing.com/pricing",
+  "docs_url": "https://help.sigmacomputing.com/docs/manage-users-and-teams-with-scim",
+  "evidence": "sigmacomputing.com/pricing redirects to the Contact Us form, and Sigma's docs describe SCIM provisioning with a Sigma-generated bearer token and Directory base URL that 'can be applied across multiple IdPs (e.g. Okta, Azure, etc)'.",
+  "notes": "Quote-only: Sigma publishes no plans or prices (the /pricing URL 308-redirects to /company/contact-us), so SCIM can only be bought through sales and no plan name is public. New row; vendor is Sigma Computing (slug kept as 'sigma'). SCIM requires SAML-only authentication (not 'SAML or password'), is tied to the admin who enabled it, and makes users and teams read-only in Sigma. Okta, Entra (gallery provisioning tutorial) and JumpCloud have SCIM apps; any other IdP can use the generic Directory base URL. SCIM deactivation keeps the user as inactive and transfers their documents to the admin who set up SCIM; users cannot be fully deleted. The REST API (/v2/members, /v2/teams) can create, update and deactivate users; no plan gate is published for it.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c2",
+   "c3",
+   "c4",
+   "c22"
+  ],
+  "plan": "Contact Sales (no public plans)",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": null,
+  "base_url": "Directory base URL generated in Admin Portal > Authentication > Account type and team provisioning",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Sigma Admin Portal > Authentication > Account type and team provisioning > Set up (token named by the admin)",
+   "token_expiry": "never (long-lived; tied to the admin who created it)",
+   "cite": [
+    "c4",
+    "c5",
+    "c20"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c4",
+    "c14",
+    "c19"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": false,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c10",
+    "c13",
+    "c14",
+    "c17",
+    "c18",
+    "c19",
+    "c28"
+   ],
+   "notes": "delete=false: Sigma users cannot be fully deleted, only deactivated."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Profile kept as an inactive user; documents transferred to the admin who set up SCIM (Okta: the admin performing the deactivation).",
+   "cite": [
+    "c11",
+    "c12",
+    "c23"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "userType",
+    "active",
+    "emails[type eq \"work\"].value",
+    "name.givenName",
+    "name.familyName"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c21",
+    "c18"
+   ],
+   "notes": "Attribute list from Microsoft's Entra provisioning tutorial; userType carries the Sigma account type."
+  },
+  "roles": {
+   "supported": true,
+   "how": "userType attribute maps to a Sigma account type (admin, build, act, analyze, view or custom); default Lite if unset",
+   "cite": [
+    "c15"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SCIM only works with SAML-only authentication, not Password or 'SAML or password'.",
+    "cite": [
+     "c2"
+    ]
+   },
+   {
+    "text": "Importing groups to an IdP from Sigma teams is not supported, and Sigma cannot guarantee SCIM works with any IdP.",
+    "cite": [
+     "c6",
+     "c7"
+    ]
+   },
+   {
+    "text": "Provisioning is bound to the admin who set it up; changing that admin requires re-enabling provisioning and a new token.",
+    "cite": [
+     "c5"
+    ]
+   },
+   {
+    "text": "Changing a username creates a new Sigma account instead of renaming.",
+    "cite": [
+     "c9"
+    ]
+   },
+   {
+    "text": "With SCIM on, users and teams can no longer be managed in Sigma; guest users are not supported.",
+    "cite": [
+     "c40"
+    ]
+   }
+  ],
+  "notes": "Sigma's docs do not state the SCIM version or publish a SCIM API reference; endpoint and attribute facts come from the IdP guides."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c24",
+   "c36"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://api.sigmacomputing.com (region-specific hosts)",
+  "docs_url": "https://help.sigmacomputing.com/docs/get-started-with-sigmas-api",
+  "auth": {
+   "methods": [
+    "oauth2"
+   ],
+   "scopes": [],
+   "cite": [
+    "c35"
+   ],
+   "notes": "Client ID and secret exchanged at POST /v2/auth/token for a bearer token."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": false,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c24",
+    "c25",
+    "c26",
+    "c27",
+    "c28",
+    "c31",
+    "c32"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/v2/members",
+    "purpose": "List users",
+    "cite": [
+     "c24"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v2/members",
+    "purpose": "Create a member",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v2/members/{memberId}",
+    "purpose": "Get a member",
+    "cite": [
+     "c26"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/v2/members/{memberId}",
+    "purpose": "Update a member (isArchived for pre-SCIM users)",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v2/members/{memberId}",
+    "purpose": "Deactivate a member",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v2/members/{memberId}/revoke",
+    "purpose": "Revoke a user's OAuth tokens",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v2/teams",
+    "purpose": "List teams",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v2/teams",
+    "purpose": "Create a team",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/v2/teams/{teamId}/members",
+    "purpose": "Update team members",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v2/teams/{teamId}",
+    "purpose": "Delete a team",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v2/accountTypes",
+    "purpose": "List account types",
+    "cite": [
+     "c34"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": [
+    "c37"
+   ],
+   "notes": "Audit logs are a Sigma Audit Logs connection (and cloud-storage export) that Sigma Support or the account executive must enable; the API only reads or toggles the setting."
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "DELETE /v2/members should not be used for SCIM-provisioned members.",
+    "cite": [
+     "c39"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c16",
+    "c10",
+    "c14"
+   ],
+   "notes": "Sigma's docs refer to the Sigma app in Okta's marketplace with SCIM provisioning; okta.com/integrations/sigma-computing/ and /sigma/ return 404."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": "idp",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/sigma-computing-provisioning-tutorial",
+   "cite": [
+    "c19",
+    "c20"
+   ]
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": "idp",
+   "url": "https://jumpcloud.com/support/integrate-with-sigma",
+   "cite": [
+    "c22"
+   ]
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c8",
+   "c38"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.sigmacomputing.com/pricing",
+   "title": "Contact Us | Sigma (pricing URL redirects here)",
+   "quote": "Contact the Sigma team directly and we'll get back to you shortly.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://help.sigmacomputing.com/docs/manage-users-and-teams-with-scim.md",
+   "title": "Manage users and teams with SCIM | Sigma Docs",
+   "quote": "SCIM doesn't work with the following authentication types: Password, SAML or password.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.sigmacomputing.com/docs/manage-users-and-teams-with-scim"
+  },
+  {
+   "id": "c3",
+   "url": "https://help.sigmacomputing.com/docs/manage-users-and-teams-with-scim.md",
+   "title": "Manage users and teams with SCIM | Sigma Docs",
+   "quote": "The configuration instructions in this document are not IdP-specific and can be applied across multiple IdPs (e.g. Okta, Azure, etc).",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.sigmacomputing.com/docs/manage-users-and-teams-with-scim"
+  },
+  {
+   "id": "c4",
+   "url": "https://help.sigmacomputing.com/docs/manage-users-and-teams-with-scim.md",
+   "title": "Manage users and teams with SCIM | Sigma Docs",
+   "quote": "copy the Bearer token and Directory base URL",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.sigmacomputing.com/docs/manage-users-and-teams-with-scim"
+  },
+  {
+   "id": "c5",
+   "url": "https://help.sigmacomputing.com/docs/manage-users-and-teams-with-scim.md",
+   "title": "Manage users and teams with SCIM | Sigma Docs",
+   "quote": "Provisioning is associated with the Admin user who originally set up provisioning in Sigma.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.sigmacomputing.com/docs/manage-users-and-teams-with-scim"
+  },
+  {
+   "id": "c6",
+   "url": "https://help.sigmacomputing.com/docs/manage-users-and-teams-with-scim.md",
+   "title": "Manage users and teams with SCIM | Sigma Docs",
+   "quote": "Importing groups to an IdP from Sigma teams is not currently supported.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.sigmacomputing.com/docs/manage-users-and-teams-with-scim"
+  },
+  {
+   "id": "c7",
+   "url": "https://help.sigmacomputing.com/docs/manage-users-and-teams-with-scim.md",
+   "title": "Manage users and teams with SCIM | Sigma Docs",
+   "quote": "Sigma cannot guarantee that SCIM provisioning works with any IdP.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.sigmacomputing.com/docs/manage-users-and-teams-with-scim"
+  },
+  {
+   "id": "c8",
+   "url": "https://help.sigmacomputing.com/docs/manage-users-and-teams-with-scim.md",
+   "title": "Manage users and teams with SCIM | Sigma Docs",
+   "quote": "when using SAML alone, syncing new users and updates between your IdP and Sigma is not automatic. A user must sign in to Sigma for updates to persist in Sigma.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.sigmacomputing.com/docs/manage-users-and-teams-with-scim"
+  },
+  {
+   "id": "c9",
+   "url": "https://help.sigmacomputing.com/docs/manage-users-and-teams-with-scim.md",
+   "title": "Manage users and teams with SCIM | Sigma Docs",
+   "quote": "Changing a user’s username creates a new account for that user in Sigma and does not update the username of an existing user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.sigmacomputing.com/docs/manage-users-and-teams-with-scim"
+  },
+  {
+   "id": "c10",
+   "url": "https://help.sigmacomputing.com/docs/manage-users-and-teams-with-scim-and-okta.md",
+   "title": "Manage users and teams with SCIM and Okta | Sigma Docs",
+   "quote": "Deactivating a user through Okta deactivates the user in Sigma.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.sigmacomputing.com/docs/manage-users-and-teams-with-scim-and-okta"
+  },
+  {
+   "id": "c11",
+   "url": "https://help.sigmacomputing.com/docs/manage-users-and-teams-with-scim-and-okta.md",
+   "title": "Manage users and teams with SCIM and Okta | Sigma Docs",
+   "quote": "The user's profile information is maintained as an inactive user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.sigmacomputing.com/docs/manage-users-and-teams-with-scim-and-okta"
+  },
+  {
+   "id": "c12",
+   "url": "https://help.sigmacomputing.com/docs/manage-users-and-teams-with-scim-and-okta.md",
+   "title": "Manage users and teams with SCIM and Okta | Sigma Docs",
+   "quote": "Ownership of any documents created by the user is transferred to the Admin performing the deactivation.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.sigmacomputing.com/docs/manage-users-and-teams-with-scim-and-okta"
+  },
+  {
+   "id": "c13",
+   "url": "https://help.sigmacomputing.com/docs/manage-users-and-teams-with-scim-and-okta.md",
+   "title": "Manage users and teams with SCIM and Okta | Sigma Docs",
+   "quote": "Sigma user accounts can be reactivated by reactivating the corresponding account in Okta.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.sigmacomputing.com/docs/manage-users-and-teams-with-scim-and-okta"
+  },
+  {
+   "id": "c14",
+   "url": "https://help.sigmacomputing.com/docs/manage-users-and-teams-with-scim-and-okta.md",
+   "title": "Manage users and teams with SCIM and Okta | Sigma Docs",
+   "quote": "Groups created in Okta are created as teams in Sigma.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.sigmacomputing.com/docs/manage-users-and-teams-with-scim-and-okta"
+  },
+  {
+   "id": "c15",
+   "url": "https://help.sigmacomputing.com/docs/manage-users-and-teams-with-scim-and-okta.md",
+   "title": "Manage users and teams with SCIM and Okta | Sigma Docs",
+   "quote": "the default Lite account type is assigned",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.sigmacomputing.com/docs/manage-users-and-teams-with-scim-and-okta"
+  },
+  {
+   "id": "c16",
+   "url": "https://help.sigmacomputing.com/docs/manage-users-and-teams-with-scim-and-okta.md",
+   "title": "Manage users and teams with SCIM and Okta | Sigma Docs",
+   "quote": "The following instructions support SCIM enablement for Sigma applications created via Okta's marketplace.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.sigmacomputing.com/docs/manage-users-and-teams-with-scim-and-okta"
+  },
+  {
+   "id": "c17",
+   "url": "https://help.sigmacomputing.com/docs/manage-users-and-teams-with-scim-and-okta.md",
+   "title": "Manage users and teams with SCIM and Okta | Sigma Docs",
+   "quote": "Deactivating a group in Okta deactivates the corresponding team in Sigma.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.sigmacomputing.com/docs/manage-users-and-teams-with-scim-and-okta"
+  },
+  {
+   "id": "c18",
+   "url": "https://help.sigmacomputing.com/docs/manage-users-and-teams-with-scim-and-okta.md",
+   "title": "Manage users and teams with SCIM and Okta | Sigma Docs",
+   "quote": "Updates made to the user's name ('given name' and 'family name') in their Okta profile are automatically pushed to Sigma.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.sigmacomputing.com/docs/manage-users-and-teams-with-scim-and-okta"
+  },
+  {
+   "id": "c19",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/sigma-computing-provisioning-tutorial",
+   "title": "Configure Sigma Computing for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Provision groups and group memberships in Sigma Computing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/sigma-computing-provisioning-tutorial",
+   "title": "Configure Sigma Computing for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Long lived bearer token authentication supported.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/sigma-computing-provisioning-tutorial",
+   "title": "Configure Sigma Computing for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Review the user attributes that are synchronized from Microsoft Entra ID to Sigma Computing in the Attribute-Mapping section.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://jumpcloud.com/support/integrate-with-sigma",
+   "title": "Integrate with Sigma | JumpCloud",
+   "quote": "Automatically provision, update and deprovision users and groups in Sigma from JumpCloud using the SCIM integration.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://help.sigmacomputing.com/docs/deactivate-users.md",
+   "title": "Deactivate users | Sigma Docs",
+   "quote": "the user is marked as Inactive in Sigma and the admin in Sigma who set up SCIM inherits the Sigma documents of the deactivated user",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.sigmacomputing.com/docs/deactivate-users"
+  },
+  {
+   "id": "c24",
+   "url": "https://help.sigmacomputing.com/reference/list-members.md",
+   "title": "List members | Sigma API",
+   "quote": "List all users in Sigma.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.sigmacomputing.com/reference/list-members"
+  },
+  {
+   "id": "c25",
+   "url": "https://help.sigmacomputing.com/reference/create-member.md",
+   "title": "Create a member | Sigma API",
+   "quote": "POST https://api.sigmacomputing.com/v2/members",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.sigmacomputing.com/reference/create-member"
+  },
+  {
+   "id": "c26",
+   "url": "https://help.sigmacomputing.com/reference/get-member.md",
+   "title": "Get member | Sigma API",
+   "quote": "GET https://api.sigmacomputing.com/v2/members/{memberId}",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.sigmacomputing.com/reference/get-member"
+  },
+  {
+   "id": "c27",
+   "url": "https://help.sigmacomputing.com/reference/update-member.md",
+   "title": "Update member | Sigma API",
+   "quote": "PATCH https://api.sigmacomputing.com/v2/members/{memberId}",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.sigmacomputing.com/reference/update-member"
+  },
+  {
+   "id": "c28",
+   "url": "https://help.sigmacomputing.com/reference/delete-member.md",
+   "title": "Deactivate member | Sigma API",
+   "quote": "Users cannot be fully deleted, only deactivated.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.sigmacomputing.com/reference/delete-member"
+  },
+  {
+   "id": "c29",
+   "url": "https://help.sigmacomputing.com/reference/revoke-member-tokens.md",
+   "title": "Revoke a user's OAuth tokens | Sigma API",
+   "quote": "POST https://api.sigmacomputing.com/v2/members/{memberId}/revoke",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.sigmacomputing.com/reference/revoke-member-tokens"
+  },
+  {
+   "id": "c30",
+   "url": "https://help.sigmacomputing.com/reference/list-teams.md",
+   "title": "List teams | Sigma API",
+   "quote": "GET https://api.sigmacomputing.com/v2/teams",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.sigmacomputing.com/reference/list-teams"
+  },
+  {
+   "id": "c31",
+   "url": "https://help.sigmacomputing.com/reference/create-team.md",
+   "title": "Create a team | Sigma API",
+   "quote": "POST https://api.sigmacomputing.com/v2/teams",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.sigmacomputing.com/reference/create-team"
+  },
+  {
+   "id": "c32",
+   "url": "https://help.sigmacomputing.com/reference/update-team-members.md",
+   "title": "Update team members | Sigma API",
+   "quote": "PATCH https://api.sigmacomputing.com/v2/teams/{teamId}/members",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.sigmacomputing.com/reference/update-team-members"
+  },
+  {
+   "id": "c33",
+   "url": "https://help.sigmacomputing.com/reference/delete-team.md",
+   "title": "Delete a team | Sigma API",
+   "quote": "DELETE https://api.sigmacomputing.com/v2/teams/{teamId}",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.sigmacomputing.com/reference/delete-team"
+  },
+  {
+   "id": "c34",
+   "url": "https://help.sigmacomputing.com/reference/list-account-types.md",
+   "title": "List account types | Sigma API",
+   "quote": "GET https://api.sigmacomputing.com/v2/accountTypes",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.sigmacomputing.com/reference/list-account-types"
+  },
+  {
+   "id": "c35",
+   "url": "https://help.sigmacomputing.com/reference/post-token.md",
+   "title": "Get access token | Sigma API",
+   "quote": "To generate a token, you must have a valid **Client ID** and **Secret**.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.sigmacomputing.com/reference/post-token"
+  },
+  {
+   "id": "c36",
+   "url": "https://help.sigmacomputing.com/docs/get-started-with-sigmas-api.md",
+   "title": "About the Sigma REST API | Sigma Docs",
+   "quote": "The API allows secure access to all the commonly used resources like connections, datasets, teams, workbooks and more.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.sigmacomputing.com/docs/get-started-with-sigmas-api"
+  },
+  {
+   "id": "c37",
+   "url": "https://help.sigmacomputing.com/docs/enable-audit-logging.md",
+   "title": "Enable or disable audit logging | Sigma Docs",
+   "quote": "contact Sigma Support or your Sigma Account Executive to enable it for your organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.sigmacomputing.com/docs/enable-audit-logging"
+  },
+  {
+   "id": "c38",
+   "url": "https://help.sigmacomputing.com/docs/organization-authentication-methods.md",
+   "title": "Authentication methods for your Sigma organization | Sigma Docs",
+   "quote": "you cannot use OAuth to provision users or assign user account types, team membership, and more.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.sigmacomputing.com/docs/organization-authentication-methods"
+  },
+  {
+   "id": "c39",
+   "url": "https://help.sigmacomputing.com/reference/delete-member.md",
+   "title": "Deactivate member | Sigma API",
+   "quote": "Do **not** use this for members provisioned through SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.sigmacomputing.com/reference/delete-member"
+  },
+  {
+   "id": "c40",
+   "url": "https://help.sigmacomputing.com/docs/manage-users-and-teams-with-scim.md",
+   "title": "Manage users and teams with SCIM | Sigma Docs",
+   "quote": "After SCIM provisioning is enabled for both services, all management of users and teams must be done through your IdP.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.sigmacomputing.com/docs/manage-users-and-teams-with-scim"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.sigmacomputing.com/pricing (308 to /company/contact-us)",
+  "https://help.sigmacomputing.com/llms.txt",
+  "https://help.sigmacomputing.com/docs/manage-users-and-teams-with-scim",
+  "https://help.sigmacomputing.com/docs/manage-users-and-teams-with-scim-and-okta",
+  "https://help.sigmacomputing.com/reference (members, teams, account types)",
+  "https://www.okta.com/integrations/sigma-computing/ (404)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/sigma-computing-provisioning-tutorial",
+  "https://jumpcloud.com/support/integrate-with-sigma"
+ ],
+ "open_questions": [
+  "Which Sigma packages include SAML SSO and SCIM (no public plans)?",
+  "Sigma's own docs do not state the SCIM version, endpoints beyond Users/Groups, filtering or pagination.",
+  "Does deactivation free a licence or end active sessions?",
+  "Is the REST API available on every Sigma package?"
+ ]
+}

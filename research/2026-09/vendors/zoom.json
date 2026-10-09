@@ -1,0 +1,876 @@
+{
+ "slug": "zoom",
+ "vendor": "Zoom",
+ "vendor_url": "https://zoom.us",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Zoom",
+  "slug": "zoom",
+  "category": "Communications (UCaaS/CCaaS)",
+  "status": "gated",
+  "scim_plan": "Business",
+  "scim_price_text": "Business: $18.33/u/mo (annual)",
+  "scim_price_per_user_mo": 18.33,
+  "team_plan": "Pro",
+  "team_price_text": "Pro: $14.16/u/mo (annual; $16.99 monthly)",
+  "team_price_per_user_mo": 14.16,
+  "price_multiplier": 1.3,
+  "sso_plan": "Business",
+  "sso_price_per_user_mo": 18.33,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": "native",
+   "generic": true
+  },
+  "pricing_page_url": "https://zoom.us/pricing",
+  "docs_url": "https://developers.zoom.us/docs/api/scim2.md",
+  "evidence": "Zoom's SCIM2 API reference lists as prerequisites a Business or Education account with an approved vanity URL and Single Sign-On enabled; the pricing page lists SSO from Business ($18.33/user/month billed annually).",
+  "notes": "Pro rose from $13.33 to $14.16/user/mo billed annually ($16.99 monthly); Business stays $18.33 annual ($21.99 monthly), so the multiplier falls from 1.4 to 1.3. Status unchanged (gated). The pricing page lists SSO and managed domains on Business but does not mention SCIM; the Business gate comes from the SCIM2 API prerequisites (Business or Education plus approved vanity URL and SSO), hence medium confidence. Catalogue apps: Okta OIN (SCIM create/update/deactivate/group push), Entra gallery provisioning connector (OAuth 2.0), JumpCloud SCIM (Business, Enterprise; SSO required). Zoom's own pricing HTML is JS-rendered for browser user agents; quotes come from the server-rendered version.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Pro",
+  "api_tax": false,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Basic",
+   "price_text": "Free",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c4",
+    "c5"
+   ],
+   "notes": "The Free plan has basic user API rate limits (50 user creations/day) but Create users requires Pro or higher."
+  },
+  {
+   "name": "Pro",
+   "price_text": "$14.16/user/month billed annually ($16.99 monthly)",
+   "price_per_user_mo": 14.16,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c4",
+    "c5",
+    "c27"
+   ]
+  },
+  {
+   "name": "Business",
+   "price_text": "$18.33/user/month billed annually ($21.99 monthly)",
+   "price_per_user_mo": 18.33,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c3",
+    "c4",
+    "c5"
+   ]
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Contact sales",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": null,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c4"
+   ],
+   "notes": "SCIM on Enterprise is implied (higher tier) but the SCIM2 prerequisites name only Business and Education accounts."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c5",
+   "c6",
+   "c13",
+   "c16"
+  ],
+  "plan": "Business",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://api.zoom.us/scim2",
+  "auth": {
+   "method": "oauth2",
+   "token_source": "Zoom App Marketplace OAuth or server-to-server OAuth app with the SCIM2 scope",
+   "token_expiry": null,
+   "cite": [
+    "c7",
+    "c8",
+    "c37"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c6",
+    "c13",
+    "c14"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c10",
+    "c11",
+    "c13",
+    "c14",
+    "c17"
+   ],
+   "notes": "Documented: GET/POST /scim2/Users, GET/PUT/PATCH/DELETE /scim2/Users/{userId} (PATCH replaces active to activate/deactivate), GET/POST /scim2/Groups, GET/PATCH/DELETE /scim2/Groups/{groupId}."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": true,
+   "revokes_sessions": null,
+   "data_retained": "Account remains in Zoom (deactivated); DELETE /scim2/Users/{userId} removes it.",
+   "cite": [
+    "c10",
+    "c23",
+    "c24"
+   ],
+   "notes": "frees_seat comes from the Users API description of deactivation (removes all licenses); the SCIM2 reference itself does not restate it."
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName"
+   ],
+   "cite": [
+    "c9",
+    "c18"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c15"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "displayName",
+    "emails[type eq \"work\"].value",
+    "active",
+    "locale",
+    "phoneNumbers",
+    "roles",
+    "groups",
+    "title",
+    "userType"
+   ],
+   "enterprise": [
+    "department",
+    "costCenter",
+    "employeeNumber",
+    "manager",
+    "organization"
+   ],
+   "custom": {
+    "supported": true,
+    "how": "{customAttribute} key in the Zoom user extension maps to a Zoom custom attribute; the extension also carries licence/plan fields (zoomWorkplace, zoomPhoneCallingPlan, zoomPhoneNumber, zoomContactCenterPackage, zoomAICompanion and many more), personalLinkName, pronouns and transferee."
+   },
+   "group": [
+    "displayName",
+    "members",
+    "urn:ietf:params:scim:schemas:extension:zoom:2.0:Group:emailAlias"
+   ],
+   "cite": [
+    "c12",
+    "c20",
+    "c6"
+   ],
+   "notes": "Attribute names taken from the SCIM2 reference request/response schemas; Entra maps userName, active, name.givenName, name.familyName, emails[type eq \"work\"], enterprise department and userType."
+  },
+  "roles": {
+   "supported": true,
+   "how": "roles attribute (Zoom role names) on the user; userType sets the licence type (planned for deprecation in favour of plan fields).",
+   "cite": [
+    "c6",
+    "c12"
+   ]
+  },
+  "rate_limits": {
+   "text": "SCIM2 endpoints carry Medium (list) and Light (create/update/delete) rate-limit labels; Business+ accounts get 80/s Light and 60/s Medium.",
+   "cite": [
+    "c33",
+    "c34"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Requires a Business or Education account with an approved vanity URL and SSO enabled; calls fail with 'Account has not enabled Single Sign-On' otherwise.",
+    "cite": [
+     "c5",
+     "c16"
+    ]
+   },
+   {
+    "text": "Admin users cannot be deleted over SCIM.",
+    "cite": [
+     "c11"
+    ]
+   },
+   {
+    "text": "Entra connector notes Zoom allows at most 9,999 basic users.",
+    "cite": [
+     "c19"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c25",
+   "c26",
+   "c27"
+  ],
+  "plan": "Pro",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://api.zoom.us/v2",
+  "docs_url": "https://developers.zoom.us/docs/api/users/",
+  "auth": {
+   "methods": [
+    "oauth2"
+   ],
+   "scopes": [
+    "user:read:admin",
+    "user:write:admin",
+    "group:read:admin",
+    "group:write:admin"
+   ],
+   "cite": [
+    "c35",
+    "c7"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": true,
+   "reactivate_user": true,
+   "manage_groups": true,
+   "assign_roles": null,
+   "assign_licenses": true,
+   "cite": [
+    "c25",
+    "c27",
+    "c29",
+    "c30",
+    "c31",
+    "c36",
+    "c24"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/users",
+    "purpose": "List users",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/users",
+    "purpose": "Create users (create, autoCreate, custCreate, ssoCreate)",
+    "cite": [
+     "c27",
+     "c36"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/users/{userId}",
+    "purpose": "Get a user",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/users/{userId}",
+    "purpose": "Update a user",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/users/{userId}",
+    "purpose": "Disassociate or permanently delete a user",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/users/{userId}/status",
+    "purpose": "Deactivate or reactivate a user",
+    "cite": [
+     "c29",
+     "c24"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/users/{userId}/email",
+    "purpose": "Update a user's email",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/users/{userId}/token",
+    "purpose": "Revoke a user's SSO token",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/users/summary",
+    "purpose": "Get user summary",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/groups",
+    "purpose": "List groups",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/groups",
+    "purpose": "Create a group",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/groups/{groupId}",
+    "purpose": "Update a group",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/groups/{groupId}",
+    "purpose": "Delete a group",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/groups/{groupId}/members",
+    "purpose": "List group members",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/groups/{groupId}/members",
+    "purpose": "Add group members",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/groups/{groupId}/members/{memberId}",
+    "purpose": "Delete a group member",
+    "cite": [
+     "c31"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": true,
+   "events": [
+    "user.created",
+    "user.updated",
+    "user.deleted",
+    "user.deactivated",
+    "user.activated",
+    "user.disassociated",
+    "user.invitation_accepted",
+    "user.signed_in",
+    "user.signed_out",
+    "user.settings_updated",
+    "group.member_added",
+    "group.member_deleted"
+   ],
+   "cite": [
+    "c32"
+   ]
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "Per plan: Free 4/s Light (6,000/day), Pro 30/s, Business+ 80/s for Light APIs; user creation capped at 1,500/day on Pro and 10,000/day on Business+.",
+   "cite": [
+    "c34",
+    "c28",
+    "c33"
+   ]
+  },
+  "limitations": [],
+  "notes": "Endpoint paths copied from the Users API reference (.md export). An audit/activity-log API exists under the Accounts/Reports APIs but was not checked in this pass, so audit_log_api stays null. Licence assignment is via user type/plan fields on create/update and SCIM extension fields."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/zoom/",
+   "cite": [
+    "c21"
+   ],
+   "notes": "OIN marks SAML, OIDC, SCIM, Create, Update, Deactivate and Group Push (plus Universal Logout and Workflows connectors); last updated Sep 16 2026."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/zoom-provisioning-tutorial",
+   "cite": [
+    "c17",
+    "c18",
+    "c37"
+   ],
+   "notes": "Gallery provisioning connector (tenant URL https://api.zoom.us/scim, OAuth 2.0): create, remove, attribute sync."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://jumpcloud.com/support/integrate-with-zoom",
+   "cite": [
+    "c22",
+    "c23"
+   ],
+   "notes": "JumpCloud SCIM via the ZoomOAuth app; Business or Enterprise; SSO required first; removal deactivates but keeps the account. SAML JIT also supported."
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c5"
+  ],
+  "notes": "The Users API supports an ssoCreate action for SSO users, and JumpCloud documents SAML JIT for Zoom, but Zoom's own JIT/CSV support articles (support.zoom.com, JS-rendered) were not loaded."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://zoom.us/pricing",
+   "title": "Zoom Workplace Pricing - Zoom",
+   "quote": "Pro Best for personal use or small teams. $16.99 /user per month · billed monthly $14.16 /user per month · billed annually",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://zoom.us/pricing",
+   "title": "Zoom Workplace Pricing - Zoom",
+   "quote": "Business Best for larger teams. $21.99 /user per month · billed monthly $18.33 /user per month · billed annually",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://zoom.us/pricing",
+   "title": "Zoom Workplace Pricing - Zoom",
+   "quote": "SSO, managed domains",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://zoom.us/pricing",
+   "title": "Zoom Workplace Pricing - Zoom",
+   "quote": "Single sign-on via SAML 2.0",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://developers.zoom.us/docs/api/scim2.md",
+   "title": "SCIM2 | Zoom API",
+   "quote": "Business or Education account with approved",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.zoom.us/docs/api/scim2/"
+  },
+  {
+   "id": "c6",
+   "url": "https://developers.zoom.us/docs/api/scim2.md",
+   "title": "SCIM2 | Zoom API",
+   "quote": "The Zoom SCIM2 API provides support for user and group provisioning through the **User** and **Group** resources.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.zoom.us/docs/api/scim2/"
+  },
+  {
+   "id": "c7",
+   "url": "https://developers.zoom.us/docs/api/scim2.md",
+   "title": "SCIM2 | Zoom API",
+   "quote": "The SCIM2 API supports OAuth authentication.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.zoom.us/docs/api/scim2/"
+  },
+  {
+   "id": "c8",
+   "url": "https://developers.zoom.us/docs/api/scim2.md",
+   "title": "SCIM2 | Zoom API",
+   "quote": "select `SCIM2` as the scope for your app",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.zoom.us/docs/api/scim2/"
+  },
+  {
+   "id": "c9",
+   "url": "https://developers.zoom.us/docs/api/scim2.md",
+   "title": "SCIM2 | Zoom API",
+   "quote": "With the SCIM API, you can use additional features such as attribute filters and search criteria.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.zoom.us/docs/api/scim2/"
+  },
+  {
+   "id": "c10",
+   "url": "https://developers.zoom.us/docs/api/scim2.md",
+   "title": "SCIM2 | Zoom API",
+   "quote": "Activate or deactivate a user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.zoom.us/docs/api/scim2/"
+  },
+  {
+   "id": "c11",
+   "url": "https://developers.zoom.us/docs/api/scim2.md",
+   "title": "SCIM2 | Zoom API",
+   "quote": "Cannot delete Admin user",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.zoom.us/docs/api/scim2/"
+  },
+  {
+   "id": "c12",
+   "url": "https://developers.zoom.us/docs/api/scim2.md",
+   "title": "SCIM2 | Zoom API",
+   "quote": "A custom attribute and its value. This field returns as the custom attribute's name.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.zoom.us/docs/api/scim2/"
+  },
+  {
+   "id": "c13",
+   "url": "https://developers.zoom.us/docs/api/scim2.md",
+   "title": "SCIM2 | Zoom API",
+   "quote": "`/scim2/Users/{userId}`",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.zoom.us/docs/api/scim2/"
+  },
+  {
+   "id": "c14",
+   "url": "https://developers.zoom.us/docs/api/scim2.md",
+   "title": "SCIM2 | Zoom API",
+   "quote": "`/scim2/Groups/{groupId}`",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.zoom.us/docs/api/scim2/"
+  },
+  {
+   "id": "c15",
+   "url": "https://developers.zoom.us/docs/api/scim2.md",
+   "title": "SCIM2 | Zoom API",
+   "quote": "`integer` — The start index for the records.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.zoom.us/docs/api/scim2/"
+  },
+  {
+   "id": "c16",
+   "url": "https://developers.zoom.us/docs/api/scim2.md",
+   "title": "SCIM2 | Zoom API",
+   "quote": "Account has not enabled Single Sign-On.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.zoom.us/docs/api/scim2/"
+  },
+  {
+   "id": "c17",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/zoom-provisioning-tutorial",
+   "title": "Configure Zoom for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Remove users in Zoom when they don't require access anymore",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/zoom-provisioning-tutorial",
+   "title": "Configure Zoom for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Enter https://api.zoom.us/scim in Tenant URL",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/zoom-provisioning-tutorial",
+   "title": "Configure Zoom for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Zoom only allows a maximum of 9,999 basic users today.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/zoom-provisioning-tutorial",
+   "title": "Configure Zoom for automatic user provisioning with Microsoft Entra ID",
+   "quote": "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User:department",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://www.okta.com/integrations/zoom/",
+   "title": "Integrate Zoom with Okta",
+   "quote": "Sign into zoom.us and automate onboarding and offboarding processes",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://jumpcloud.com/support/integrate-with-zoom",
+   "title": "Integrate with Zoom - JumpCloud",
+   "quote": "SSO must be enabled before you can configure SCIM",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://jumpcloud.com/support/integrate-with-zoom",
+   "title": "Integrate with Zoom - JumpCloud",
+   "quote": "the user is deactivated in Zoom, but the account still exists in Zoom",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://developers.zoom.us/docs/api/users.md",
+   "title": "Users | Zoom API",
+   "quote": "Deactivating a user removes all licenses associated with a user, and prevents the deactivated user from logging into their Zoom account.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.zoom.us/docs/api/users/"
+  },
+  {
+   "id": "c25",
+   "url": "https://developers.zoom.us/docs/api/users.md",
+   "title": "Users | Zoom API",
+   "quote": "The User APIs allow developers to programatically access data related to users, groups, and contact groups.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.zoom.us/docs/api/users/"
+  },
+  {
+   "id": "c26",
+   "url": "https://developers.zoom.us/docs/api/users.md",
+   "title": "Users | Zoom API",
+   "quote": "https://api.zoom.us/v2",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.zoom.us/docs/api/users/"
+  },
+  {
+   "id": "c27",
+   "url": "https://developers.zoom.us/docs/api/users.md",
+   "title": "Users | Zoom API",
+   "quote": "- A Pro or higher plan.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.zoom.us/docs/api/users/"
+  },
+  {
+   "id": "c28",
+   "url": "https://developers.zoom.us/docs/api/users.md",
+   "title": "Users | Zoom API",
+   "quote": "10,000 requests per day for **Business+** accounts.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.zoom.us/docs/api/users/"
+  },
+  {
+   "id": "c29",
+   "url": "https://developers.zoom.us/docs/api/users.md",
+   "title": "Users | Zoom API",
+   "quote": "`/users/{userId}/status`",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.zoom.us/docs/api/users/"
+  },
+  {
+   "id": "c30",
+   "url": "https://developers.zoom.us/docs/api/users.md",
+   "title": "Users | Zoom API",
+   "quote": "**Disassociate** (unlink) a user or permanently **delete** a user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.zoom.us/docs/api/users/"
+  },
+  {
+   "id": "c31",
+   "url": "https://developers.zoom.us/docs/api/users.md",
+   "title": "Users | Zoom API",
+   "quote": "`/groups/{groupId}/members`",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.zoom.us/docs/api/users/"
+  },
+  {
+   "id": "c32",
+   "url": "https://developers.zoom.us/docs/api/users/events.md",
+   "title": "Users events | Zoom API",
+   "quote": "POST user.deactivated",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.zoom.us/docs/api/users/events/"
+  },
+  {
+   "id": "c33",
+   "url": "https://developers.zoom.us/docs/api/rate-limits.md",
+   "title": "Rate limits | Zoom API",
+   "quote": "Increased rate limits are available for all Business, Enterprise, Education, and Partner accounts",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.zoom.us/docs/api/rate-limits/"
+  },
+  {
+   "id": "c34",
+   "url": "https://developers.zoom.us/docs/api/rate-limits.md",
+   "title": "Rate limits | Zoom API",
+   "quote": "| Light APIs              | 4/second, 6000/day    | 30/second   | 80/second   |",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.zoom.us/docs/api/rate-limits/"
+  },
+  {
+   "id": "c35",
+   "url": "https://developers.zoom.us/docs/api/users.md",
+   "title": "Users | Zoom API",
+   "quote": "`user:write:admin`",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.zoom.us/docs/api/users/"
+  },
+  {
+   "id": "c36",
+   "url": "https://developers.zoom.us/docs/api/users.md",
+   "title": "Users | Zoom API",
+   "quote": "\"autoCreate\", \"custCreate\", \"ssoCreate\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.zoom.us/docs/api/users/"
+  },
+  {
+   "id": "c37",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/zoom-provisioning-tutorial",
+   "title": "Configure Zoom for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Added support for new authentication method OAuth 2.0",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "Entra's tutorial uses tenant URL https://api.zoom.us/scim while the SCIM2 reference documents /scim2 paths on https://api.zoom.us.",
+   "cite": [
+    "c18",
+    "c13"
+   ]
+  }
+ ],
+ "searched": [
+  "https://zoom.us/pricing",
+  "https://developers.zoom.us/llms.txt",
+  "https://developers.zoom.us/.well-known/api-catalog.json",
+  "https://developers.zoom.us/docs/api/scim2.md",
+  "https://developers.zoom.us/docs/api/users.md",
+  "https://developers.zoom.us/docs/api/users/events.md",
+  "https://developers.zoom.us/docs/api/rate-limits.md",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/zoom-provisioning-tutorial",
+  "https://www.okta.com/integrations/zoom/",
+  "https://jumpcloud.com/support/integrate-with-zoom"
+ ],
+ "open_questions": [
+  "Whether SCIM deactivation revokes active sessions.",
+  "Google Workspace auto-provisioning listing for Zoom not checked (Google help moved; no search budget).",
+  "OneLogin catalogue not checked (bot-blocked).",
+  "SCIM page-size maximum and OAuth token lifetime undocumented in the SCIM2 reference.",
+  "Audit/activity-log API (Reports) plan not verified.",
+  "Whether Zoom supports SAML JIT and CSV import per its own support articles."
+ ]
+}

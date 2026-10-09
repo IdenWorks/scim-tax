@@ -1,0 +1,829 @@
+{
+ "slug": "ringcentral",
+ "vendor": "RingCentral RingEX",
+ "vendor_url": "https://www.ringcentral.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "RingCentral RingEX",
+  "slug": "ringcentral",
+  "category": "Communications (UCaaS/CCaaS)",
+  "status": "free",
+  "scim_plan": "Core",
+  "scim_price_text": "Core: $20/user/mo (annual)",
+  "scim_price_per_user_mo": 20,
+  "team_plan": "Core",
+  "team_price_text": "Core: $20/user/mo (annual), $30 monthly",
+  "team_price_per_user_mo": 20,
+  "price_multiplier": 1.0,
+  "sso_plan": "Core",
+  "sso_price_per_user_mo": 20,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": false
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.ringcentral.com/office/plansandpricing.html",
+  "docs_url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/ringcentral-provisioning-tutorial",
+  "evidence": "RingCentral's public API specification documents SCIM 2.0 /scim/v2/Users create, replace, patch and delete operations, and the pricing page marks single sign-on and \"Developer platform and access to APIs\" as included on Core; no plan restriction is documented.",
+  "notes": "Status kept as free (was free) but at low confidence: no first-party page states which RingEX plan includes SCIM. The inference is that SCIM is part of the public RingCentral REST API, which the pricing page's plan data marks as included on Core, and neither the Entra tutorial nor the Okta OIN page names a plan prerequisite. June's caveat that licences must be pre-purchased before SCIM can provision had no loadable first-party source (support.ringcentral.com articles load by JavaScript and the headless renderer fails on RingCentral hosts) and is dropped. Prices unchanged: Core $20 and Advanced $25 per user/month annual ($30 and $35 monthly). The pricing page now shows Core, Advanced and two AI Customer Engagement bundles (Contact us for pricing); Ultra ($35 annual in the pricing service) is no longer shown as a card. Vendor name updated to the product sold (RingEX). SCIM has no Groups endpoint; SCIM operations are flagged x-availability Limited in the spec. Entra's tutorial lists SCIM rate limits of 300/min read and 1000/min write.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Core",
+  "api_tax": false,
+  "first_added": null,
+  "status_prev": "free"
+ },
+ "plans": [
+  {
+   "name": "Core",
+   "price_text": "$20/user/month paid annually; $30 paid monthly",
+   "price_per_user_mo": 20,
+   "billing": "annual",
+   "sso": true,
+   "scim": null,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c1",
+    "c4",
+    "c5",
+    "c6"
+   ],
+   "notes": "SCIM plan not stated by RingCentral; see row notes."
+  },
+  {
+   "name": "Advanced",
+   "price_text": "$25/user/month paid annually; $35 paid monthly",
+   "price_per_user_mo": 25,
+   "billing": "annual",
+   "sso": true,
+   "scim": null,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c1",
+    "c4",
+    "c5",
+    "c6"
+   ]
+  },
+  {
+   "name": "AI Customer Engagement Bundle with AIR / with AIR and ACE",
+   "price_text": "Contact us for pricing",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": null,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c4",
+    "c5",
+    "c6"
+   ],
+   "notes": "Two bundle cards on the pricing page, both 'Contact us for pricing' in the plan datasource."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c7",
+   "c8",
+   "c21",
+   "c33",
+   "c40"
+  ],
+  "plan": "Core",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://platform.ringcentral.com/scim/v2",
+  "notes": "Plan is inferred (low confidence): SCIM is part of the public REST API, and API access is included on Core per the pricing page plan data.",
+  "auth": {
+   "method": "oauth2",
+   "token_source": "OAuth authorization code flow (Entra: Authorize with a RingCentral admin account under Admin Credentials)",
+   "token_expiry": null,
+   "cite": [
+    "c22",
+    "c34",
+    "c33"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": false,
+   "ServiceProviderConfig": true,
+   "Schemas": true,
+   "ResourceTypes": true,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c7",
+    "c12",
+    "c13",
+    "c14"
+   ],
+   "notes": "The spec lists only /scim/v2/Users, /Users/.search, /Users/{scimUserId}, /Schemas, /ServiceProviderConfig and /ResourceTypes; no /Groups path."
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": true,
+   "group_push": false,
+   "group_membership": false,
+   "cite": [
+    "c7",
+    "c8",
+    "c9",
+    "c10",
+    "c11",
+    "c32"
+   ],
+   "notes": "Deactivate: Okta OIN page markup checks Deactivate; Entra removes users when they no longer need access. Okta Group Push is not checked."
+  },
+  "deprovision": {
+   "action": null,
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [],
+   "notes": "DELETE /scim/v2/Users/{id} 'Deletes a user'; whether active=false disables the extension, frees the licence or keeps numbers/devices is not documented in pages I could load."
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName",
+    "email"
+   ],
+   "cite": [
+    "c15"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c16"
+   ],
+   "notes": "startIndex (1-based) and count parameters."
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "externalId",
+    "active",
+    "title",
+    "name.givenName",
+    "name.familyName",
+    "emails[type eq \"work\"].value",
+    "addresses[type eq \"work\"].country",
+    "addresses[type eq \"work\"].region",
+    "addresses[type eq \"work\"].locality",
+    "addresses[type eq \"work\"].postalCode",
+    "addresses[type eq \"work\"].streetAddress",
+    "phoneNumbers[type eq \"work\"|\"mobile\"|\"other\"].value",
+    "photos[type eq \"photo\"].value"
+   ],
+   "enterprise": [
+    "department"
+   ],
+   "custom": {
+    "supported": true,
+    "how": "Okta schema discovery lets admins create custom attributes in RingCentral and import them into Okta."
+   },
+   "group": [],
+   "cite": [
+    "c17",
+    "c18",
+    "c19",
+    "c39",
+    "c41",
+    "c36"
+   ],
+   "notes": "userName must equal the work email. displayName and manager were removed from Entra mappings in 2020."
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "Entra tutorial: 300/min for read, 1000/min for write. Spec: SCIM reads in the Light throttling group, writes in Heavy.",
+   "cite": [
+    "c35",
+    "c20"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "No SCIM Groups resource; group push is not available.",
+    "cite": [
+     "c7"
+    ]
+   },
+   {
+    "text": "Filtering supports only userName or email expressions.",
+    "cite": [
+     "c15"
+    ]
+   },
+   {
+    "text": "SCIM write operations are marked x-availability Limited in the API specification.",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "text": "Directory Provider must be set to SCIM under Account Settings > Directory Integrations; licences are assigned separately.",
+    "cite": [
+     "c33",
+     "c42"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c5",
+   "c21",
+   "c23"
+  ],
+  "plan": "Core",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://platform.ringcentral.com/restapi/v1.0",
+  "docs_url": "https://developers.ringcentral.com/api-reference",
+  "auth": {
+   "methods": [
+    "oauth2"
+   ],
+   "scopes": [
+    "ReadAccounts",
+    "EditAccounts",
+    "ReadAuditTrail"
+   ],
+   "cite": [
+    "c22",
+    "c20"
+   ],
+   "notes": "RingCentral uses app permissions rather than OAuth scopes."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c23",
+    "c24",
+    "c25",
+    "c26",
+    "c27",
+    "c29",
+    "c30"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/restapi/v1.0/account/{accountId}/extension",
+    "purpose": "List extensions (users)",
+    "cite": [
+     "c23"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/restapi/v1.0/account/{accountId}/extension",
+    "purpose": "Create extension",
+    "cite": [
+     "c24"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/restapi/v1.0/account/{accountId}/extension/{extensionId}",
+    "purpose": "Get extension",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/restapi/v1.0/account/{accountId}/extension/{extensionId}",
+    "purpose": "Update extension (user settings)",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/restapi/v1.0/account/{accountId}/extension/{extensionId}",
+    "purpose": "Delete extension",
+    "cite": [
+     "c26"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/restapi/v2/accounts/{accountId}/extensions",
+    "purpose": "Bulk delete user extensions, keeping or destroying numbers and devices",
+    "cite": [
+     "c26"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/restapi/v1.0/account/{accountId}/user-role",
+    "purpose": "List company user roles",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/restapi/v1.0/account/{accountId}/user-role/{roleId}/bulk-assign",
+    "purpose": "Assign multiple user roles",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/restapi/v1.0/account/{accountId}/extension/{extensionId}/assigned-role",
+    "purpose": "Update a user's assigned roles",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/restapi/v1.0/account/{accountId}/audit-trail/search",
+    "purpose": "Search audit trail",
+    "cite": [
+     "c28"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": null,
+   "cite": [
+    "c28"
+   ],
+   "notes": "Limited to the last 10,000 records or 180 days."
+  },
+  "rate_limits": {
+   "text": "Per-endpoint throttling groups (Light, Medium, Heavy) are assigned in the spec.",
+   "cite": [
+    "c20"
+   ]
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/ringcentral/",
+   "cite": [
+    "c40",
+    "c41"
+   ],
+   "notes": "OIN page markup checks SAML, SWA, SCIM, Create, Update, Attribute Sourcing, Deactivate, Schema Discovery and Attribute Writeback; Group Push and Group Linking unchecked."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/ringcentral-provisioning-tutorial",
+   "cite": [
+    "c37",
+    "c32",
+    "c38",
+    "c33"
+   ]
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "A RingCentral support article titled 'G Suite Auto User Provisioning' exists in the sitemap but its body loads by JavaScript and could not be read."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c7"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.ringcentral.com/office/plansandpricing.html",
+   "title": "RingEX plans and pricing",
+   "quote": "Save up to 33% by paying annually",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.ringcentral.com/services/plans-and-pricing.servlet?businessIdentityId=4&productId=2&licensesCount=2",
+   "title": "RingCentral plans-and-pricing service (feeds the pricing page)",
+   "quote": "\"edition\":\"Core\",\"packages\":{\"regular\":{\"id\":\"1231005\",\"version\":\"2\"},\"trial\":{\"id\":\"1246005\",\"version\":\"1\"}},\"prices\":{\"ANNUAL\":20.0,\"MONTHLY\":30.0}",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ringcentral.com/office/plansandpricing.html"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.ringcentral.com/services/plans-and-pricing.servlet?businessIdentityId=4&productId=2&licensesCount=2",
+   "title": "RingCentral plans-and-pricing service (feeds the pricing page)",
+   "quote": "\"edition\":\"Advanced\",\"packages\":{\"regular\":{\"id\":\"1232005\",\"version\":\"2\"},\"trial\":{\"id\":\"1247005\",\"version\":\"1\"}},\"prices\":{\"ANNUAL\":25.0,\"MONTHLY\":35.0}",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ringcentral.com/office/plansandpricing.html"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.ringcentral.com/shared/datasource/pnp/mvp.exporter.json",
+   "title": "RingEX pricing page plan datasource",
+   "quote": "RingCentral Single Sign-On (SSO) provides a seamless authentication experience for end users.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ringcentral.com/office/plansandpricing.html"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.ringcentral.com/shared/datasource/pnp/mvp.exporter.json",
+   "title": "RingEX pricing page plan datasource",
+   "quote": "Developer platform and access to APIs",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ringcentral.com/office/plansandpricing.html"
+  },
+  {
+   "id": "c6",
+   "url": "https://www.ringcentral.com/shared/datasource/pnp/mvp.exporter.json",
+   "title": "RingEX pricing page plan datasource",
+   "quote": "Checked items are included in plan",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.ringcentral.com/office/plansandpricing.html"
+  },
+  {
+   "id": "c7",
+   "url": "https://netstorage.ringcentral.com/dpw/api-reference/specs/rc-platform.yml",
+   "title": "RingCentral API specification (OpenAPI)",
+   "quote": "/scim/v2/Users: get: tags: - \"SCIM\" summary: \"Search/List Users\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.ringcentral.com/api-reference"
+  },
+  {
+   "id": "c8",
+   "url": "https://netstorage.ringcentral.com/dpw/api-reference/specs/rc-platform.yml",
+   "title": "RingCentral API specification (OpenAPI)",
+   "quote": "summary: \"Create User\" description: \"Creates a new user\" operationId: \"scimCreateUser2\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.ringcentral.com/api-reference"
+  },
+  {
+   "id": "c9",
+   "url": "https://netstorage.ringcentral.com/dpw/api-reference/specs/rc-platform.yml",
+   "title": "RingCentral API specification (OpenAPI)",
+   "quote": "summary: \"Update/Replace User\" description: \"Updates a user\" operationId: \"scimUpdateUser2\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.ringcentral.com/api-reference"
+  },
+  {
+   "id": "c10",
+   "url": "https://netstorage.ringcentral.com/dpw/api-reference/specs/rc-platform.yml",
+   "title": "RingCentral API specification (OpenAPI)",
+   "quote": "summary: \"Delete User\" description: \"Deletes a user\" operationId: \"scimDeleteUser2\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.ringcentral.com/api-reference"
+  },
+  {
+   "id": "c11",
+   "url": "https://netstorage.ringcentral.com/dpw/api-reference/specs/rc-platform.yml",
+   "title": "RingCentral API specification (OpenAPI)",
+   "quote": "summary: \"Update/Patch User\" description: \"Updates a user (partial update)\" operationId: \"scimPatchUser2\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.ringcentral.com/api-reference"
+  },
+  {
+   "id": "c12",
+   "url": "https://netstorage.ringcentral.com/dpw/api-reference/specs/rc-platform.yml",
+   "title": "RingCentral API specification (OpenAPI)",
+   "quote": "summary: \"Get Provider Config\" description: \"Returns SCIM service provider configuration\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.ringcentral.com/api-reference"
+  },
+  {
+   "id": "c13",
+   "url": "https://netstorage.ringcentral.com/dpw/api-reference/specs/rc-platform.yml",
+   "title": "RingCentral API specification (OpenAPI)",
+   "quote": "summary: \"List Schemas\" description: \"Returns the list of schemas\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.ringcentral.com/api-reference"
+  },
+  {
+   "id": "c14",
+   "url": "https://netstorage.ringcentral.com/dpw/api-reference/specs/rc-platform.yml",
+   "title": "RingCentral API specification (OpenAPI)",
+   "quote": "summary: \"List Resource Types\" description: \"Returns the list of supported SCIM resource types\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.ringcentral.com/api-reference"
+  },
+  {
+   "id": "c15",
+   "url": "https://netstorage.ringcentral.com/dpw/api-reference/specs/rc-platform.yml",
+   "title": "RingCentral API specification (OpenAPI)",
+   "quote": "Only support 'userName' or 'email' filter expressions for now",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.ringcentral.com/api-reference"
+  },
+  {
+   "id": "c16",
+   "url": "https://netstorage.ringcentral.com/dpw/api-reference/specs/rc-platform.yml",
+   "title": "RingCentral API specification (OpenAPI)",
+   "quote": "description: \"Start index (1-based)\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.ringcentral.com/api-reference"
+  },
+  {
+   "id": "c17",
+   "url": "https://netstorage.ringcentral.com/dpw/api-reference/specs/rc-platform.yml",
+   "title": "RingCentral API specification (OpenAPI)",
+   "quote": "description: \"MUST be same as work type email address\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.ringcentral.com/api-reference"
+  },
+  {
+   "id": "c18",
+   "url": "https://netstorage.ringcentral.com/dpw/api-reference/specs/rc-platform.yml",
+   "title": "RingCentral API specification (OpenAPI)",
+   "quote": "ScimEnterpriseUser: type: \"object\" properties: department: type: \"string\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.ringcentral.com/api-reference"
+  },
+  {
+   "id": "c19",
+   "url": "https://netstorage.ringcentral.com/dpw/api-reference/specs/rc-platform.yml",
+   "title": "RingCentral API specification (OpenAPI)",
+   "quote": "description: \"External unique resource ID defined by provisioning client\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.ringcentral.com/api-reference"
+  },
+  {
+   "id": "c20",
+   "url": "https://netstorage.ringcentral.com/dpw/api-reference/specs/rc-platform.yml",
+   "title": "RingCentral API specification (OpenAPI)",
+   "quote": "x-availability: \"Limited\" x-throttling-group: \"Heavy\" x-app-permission: \"EditAccounts\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.ringcentral.com/api-reference"
+  },
+  {
+   "id": "c21",
+   "url": "https://netstorage.ringcentral.com/dpw/api-reference/specs/rc-platform.yml",
+   "title": "RingCentral API specification (OpenAPI)",
+   "quote": "url: \"https://platform.ringcentral.com\" description: \"Production API entry point\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.ringcentral.com/api-reference"
+  },
+  {
+   "id": "c22",
+   "url": "https://netstorage.ringcentral.com/dpw/api-reference/specs/rc-platform.yml",
+   "title": "RingCentral API specification (OpenAPI)",
+   "quote": "authorizationUrl: \"https://platform.ringcentral.com/restapi/oauth/authorize\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.ringcentral.com/api-reference"
+  },
+  {
+   "id": "c23",
+   "url": "https://netstorage.ringcentral.com/dpw/api-reference/specs/rc-platform.yml",
+   "title": "RingCentral API specification (OpenAPI)",
+   "quote": "summary: \"List Extensions\" description: | Returns the list of extensions created for a particular account.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.ringcentral.com/api-reference"
+  },
+  {
+   "id": "c24",
+   "url": "https://netstorage.ringcentral.com/dpw/api-reference/specs/rc-platform.yml",
+   "title": "RingCentral API specification (OpenAPI)",
+   "quote": "summary: \"Create Extension\" description: | Creates an extension.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.ringcentral.com/api-reference"
+  },
+  {
+   "id": "c25",
+   "url": "https://netstorage.ringcentral.com/dpw/api-reference/specs/rc-platform.yml",
+   "title": "RingCentral API specification (OpenAPI)",
+   "quote": "summary: \"Update Extension\" description: \"Updates the user settings.\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.ringcentral.com/api-reference"
+  },
+  {
+   "id": "c26",
+   "url": "https://netstorage.ringcentral.com/dpw/api-reference/specs/rc-platform.yml",
+   "title": "RingCentral API specification (OpenAPI)",
+   "quote": "Deletes user extension(s) and either keeps or destroys the assets - numbers and devices.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.ringcentral.com/api-reference"
+  },
+  {
+   "id": "c27",
+   "url": "https://netstorage.ringcentral.com/dpw/api-reference/specs/rc-platform.yml",
+   "title": "RingCentral API specification (OpenAPI)",
+   "quote": "summary: \"Update User Assigned Roles\" description: \"Updates a list of roles assigned to the current user.\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.ringcentral.com/api-reference"
+  },
+  {
+   "id": "c28",
+   "url": "https://netstorage.ringcentral.com/dpw/api-reference/specs/rc-platform.yml",
+   "title": "RingCentral API specification (OpenAPI)",
+   "quote": "Audit trail searching is limited to the last 10,000 records or last 180 days, whichever comes first.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.ringcentral.com/api-reference"
+  },
+  {
+   "id": "c29",
+   "url": "https://netstorage.ringcentral.com/dpw/api-reference/specs/rc-platform.yml",
+   "title": "RingCentral API specification (OpenAPI)",
+   "quote": "summary: \"Get Extension\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.ringcentral.com/api-reference"
+  },
+  {
+   "id": "c30",
+   "url": "https://netstorage.ringcentral.com/dpw/api-reference/specs/rc-platform.yml",
+   "title": "RingCentral API specification (OpenAPI)",
+   "quote": "summary: \"Assign Multiple User Roles\" description: \"Assigns multiple user roles.\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.ringcentral.com/api-reference"
+  },
+  {
+   "id": "c31",
+   "url": "https://netstorage.ringcentral.com/dpw/api-reference/specs/rc-platform.yml",
+   "title": "RingCentral API specification (OpenAPI)",
+   "quote": "summary: \"List Company User Roles\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.ringcentral.com/api-reference"
+  },
+  {
+   "id": "c32",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/ringcentral-provisioning-tutorial",
+   "title": "Configure RingCentral for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Remove users in RingCentral when they don't require access anymore",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/ringcentral-provisioning-tutorial",
+   "title": "Configure RingCentral for automatic user provisioning with Microsoft Entra ID",
+   "quote": "In the RingCentral admin portal, under Account Settings -> Directory Integrations, set the Directory Provider setting to SCIM",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/ringcentral-provisioning-tutorial",
+   "title": "Configure RingCentral for automatic user provisioning with Microsoft Entra ID",
+   "quote": "03/15/2021 - Updated authorization method from permanent bearer token to OAuth code grant flow.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c35",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/ringcentral-provisioning-tutorial",
+   "title": "Configure RingCentral for automatic user provisioning with Microsoft Entra ID",
+   "quote": "10/28/2021 - Rate limiting updated to 300/min for read, 1000/min for write.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/ringcentral-provisioning-tutorial",
+   "title": "Configure RingCentral for automatic user provisioning with Microsoft Entra ID",
+   "quote": "09/10/2020 - Removed support for \"displayName\" and \"manager\" attributes.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/ringcentral-provisioning-tutorial",
+   "title": "Configure RingCentral for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Create users in RingCentral",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c38",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/ringcentral-provisioning-tutorial",
+   "title": "Configure RingCentral for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Keep user attributes synchronized between Microsoft Entra ID and RingCentral",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c39",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/ringcentral-provisioning-tutorial",
+   "title": "Configure RingCentral for automatic user provisioning with Microsoft Entra ID",
+   "quote": "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User:department",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c40",
+   "url": "https://www.okta.com/integrations/ringcentral/",
+   "title": "Integrate RingCentral with Okta",
+   "quote": "From single sign-on to user provisioning, Okta’s RingCentral integration ensures that your users have phone numbers from day one.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c41",
+   "url": "https://www.okta.com/integrations/ringcentral/",
+   "title": "Integrate RingCentral with Okta",
+   "quote": "The integration also support schema discovery, allowing you to create custom attributes in RingCentral and import them into Okta.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c42",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/ringcentral-provisioning-tutorial",
+   "title": "Configure RingCentral for automatic user provisioning with Microsoft Entra ID",
+   "quote": "To assign licenses to users, refer to the video link here .",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.ringcentral.com/office/plansandpricing.html",
+  "https://www.ringcentral.com/shared/datasource/pnp/mvp.exporter.json",
+  "https://www.ringcentral.com/services/plans-and-pricing.servlet?businessIdentityId=4&productId=2&licensesCount=2",
+  "https://netstorage.ringcentral.com/dpw/api-reference/specs/rc-platform.yml",
+  "https://developers.ringcentral.com/sitemap.xml",
+  "https://support.ringcentral.com/content/rc-support.sitemap.xml (RingEX articles; bodies load by JavaScript)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/ringcentral-provisioning-tutorial",
+  "https://www.okta.com/integrations/ringcentral/"
+ ],
+ "open_questions": [
+  "No first-party page states which RingEX plan includes SCIM; status free/Core is inferred at low confidence.",
+  "Whether SCIM deactivation disables the extension, frees the licence, ends sessions or keeps numbers/devices is not documented in loadable pages.",
+  "June's 'licences must be pre-purchased' caveat could not be verified.",
+  "Google Workspace, OneLogin and JumpCloud catalogue status unverified.",
+  "User-event webhooks for extension create/update/delete not confirmed."
+ ]
+}

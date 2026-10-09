@@ -1,0 +1,833 @@
+{
+ "slug": "webex",
+ "vendor": "Webex",
+ "vendor_url": "https://www.webex.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Webex",
+  "slug": "webex",
+  "category": "Communications (UCaaS/CCaaS)",
+  "status": "unknown",
+  "scim_plan": "—",
+  "scim_price_text": "—",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Webex Meet",
+  "team_price_text": "Webex Meet: $144/user/yr ($12/user/mo)",
+  "team_price_per_user_mo": 12,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": "sso_only",
+   "onelogin": null,
+   "jumpcloud": "native",
+   "generic": true
+  },
+  "pricing_page_url": "https://pricing.webex.com/us/en/",
+  "docs_url": "https://developer.webex.com/admin/docs/scim-2-overview",
+  "evidence": "Webex documents a SCIM 2.0 API (webexapis.com/identity/scim/{orgId}/v2) with Users, Groups, Bulk and Schemas endpoints and IdP guides for Entra, Okta and JumpCloud, but its pricing page (Free, Meet $144/user/yr, Suite $270/user/yr, Enterprise contact sales) does not say which plans include SCIM or SSO.",
+  "notes": "New row. Unknown because SCIM is documented but no Webex page names the plan that includes it, and the product has several tiers (rule 1a); the feature comparison table on the pricing page lists no SSO, SCIM or directory-sync row. Prices are annual ($144/user/yr Meet, $270/user/yr Suite = $22.50/mo). SCIM tokens come from a Control Hub service app or an OAuth flow signed in as a full admin; manually generated tokens last 365 days. Entra: legacy Cisco Webex gallery app uses SCIM 1.1 (connector in Preview); Webex recommends a custom non-gallery app on SCIM 2.0. Groups sync only via the Entra ID Wizard app (Graph API). Removing a user from the IdP marks them Inactive; permanent deletion deletes the Webex user; content in spaces is kept. Directory Connector (on-prem AD sync) needs a trial or any paid subscription, which hints that admin sync is not limited to Enterprise, but that statement is about Directory Connector, not SCIM.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Webex Free",
+   "price_text": "$0 /user/year",
+   "price_per_user_mo": 0,
+   "billing": "annual",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1"
+   ]
+  },
+  {
+   "name": "Webex Meet",
+   "price_text": "$144 /user/year ($12 /user/mo)",
+   "price_per_user_mo": 12,
+   "billing": "annual",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c2"
+   ]
+  },
+  {
+   "name": "Webex Suite (Meet + Call)",
+   "price_text": "$270 /user/year ($22.50 /user/mo)",
+   "price_per_user_mo": 22.5,
+   "billing": "annual",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c3"
+   ]
+  },
+  {
+   "name": "Webex Enterprise",
+   "price_text": "Let's talk / Contact Sales",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c4"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c5",
+   "c8",
+   "c26"
+  ],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://webexapis.com/identity/scim/{orgId}/v2",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Control Hub > Apps > Service apps > Get a token, or an OAuth implicit flow signed in as a full admin (scope identity:people_rw)",
+   "token_expiry": "365 days (manually generated token)",
+   "cite": [
+    "c9",
+    "c24",
+    "c25"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": true,
+   "ResourceTypes": null,
+   "Bulk": true,
+   "Me": true,
+   "cite": [
+    "c8",
+    "c11",
+    "c12"
+   ],
+   "notes": "Paths seen in the API reference data: /identity/scim/{orgId}/v2/Users, /Users/{userId}, /identity/scim/v2/Users/me, /v2/Groups, /v2/Groups/{groupId}/Members, /v2/Bulk, /Schemas/SCIM2/User."
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c8",
+    "c12",
+    "c22",
+    "c29",
+    "c30",
+    "c31",
+    "c36"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Removing or soft-deleting the user in Entra marks the Webex user Inactive (renamed); a permanent IdP delete deletes the Webex user. Content they created in spaces is not deleted and follows space retention policy.",
+   "cite": [
+    "c29",
+    "c31",
+    "c32"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName",
+    "id",
+    "meta.lastModified (sortBy)"
+   ],
+   "cite": [
+    "c21"
+   ],
+   "notes": "Search users takes a SCIM filter; sortBy allows userName, id, meta.lastModified."
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c10"
+   ],
+   "notes": "startIndex/count; count defaults to 100."
+  },
+  "attributes": {
+   "core": [
+    "id",
+    "userName",
+    "active",
+    "roles",
+    "name.givenName",
+    "name.familyName",
+    "name.middleName",
+    "name.honorificPrefix",
+    "name.honorificSuffix",
+    "displayName",
+    "nickName",
+    "emails",
+    "userType",
+    "profileUrl",
+    "title",
+    "preferredLanguage",
+    "locale",
+    "externalId",
+    "timezone",
+    "phoneNumbers",
+    "photos",
+    "addresses"
+   ],
+   "enterprise": [
+    "costCenter",
+    "organization",
+    "division",
+    "department",
+    "employeeNumber",
+    "manager"
+   ],
+   "custom": {
+    "supported": true,
+    "how": "Cisco extension urn:scim:schemas:extension:cisco:webexidentity:2.0:User: accountStatus, sipAddresses, managedOrgs, managedGroups, extensionAttribute1-15, externalAttribute1-15"
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c5",
+    "c6",
+    "c7",
+    "c12"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "roles attribute in the core schema and managedOrgs/role in the Cisco extension",
+   "cite": [
+    "c6"
+   ]
+  },
+  "rate_limits": {
+   "text": "Bulk requests are limited to 100 operations.",
+   "cite": [
+    "c11"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "The pre-built Cisco Webex Entra gallery app uses legacy SCIM 1.1 and the Entra connector is in Preview; Webex recommends a custom non-gallery app for SCIM 2.0.",
+    "cite": [
+     "c28",
+     "c37"
+    ]
+   },
+   {
+    "text": "Groups, rooms and avatars sync from Entra only through the Entra ID Wizard app (Graph API).",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "text": "JumpCloud: SAML SSO must be enabled to use SCIM; groups not supported.",
+    "cite": [
+     "c38"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c13",
+   "c15"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://webexapis.com/v1",
+  "docs_url": "https://developer.webex.com/admin/docs/api/v1/people",
+  "auth": {
+   "methods": [
+    "oauth2",
+    "service_app_token"
+   ],
+   "scopes": [
+    "spark-admin:people_read",
+    "spark-admin:people_write",
+    "spark-admin:licenses_read",
+    "spark-admin:roles_read",
+    "identity:people_rw",
+    "identity:people_read",
+    "identity:groups_rw"
+   ],
+   "cite": [
+    "c9",
+    "c25"
+   ],
+   "notes": "Scope names read from the API reference data."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": null,
+   "assign_licenses": true,
+   "cite": [
+    "c13",
+    "c14",
+    "c15",
+    "c16",
+    "c17",
+    "c12"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/people",
+    "purpose": "List people",
+    "cite": [
+     "c15"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/people",
+    "purpose": "Create a person",
+    "cite": [
+     "c13"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/people/{personId}",
+    "purpose": "Get person details",
+    "cite": [
+     "c15"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/people/{personId}",
+    "purpose": "Update a person",
+    "cite": [
+     "c16"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/people/{personId}",
+    "purpose": "Delete a person",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/licenses/users",
+    "purpose": "Assign licenses to users",
+    "cite": [
+     "c17"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/roles",
+    "purpose": "List roles",
+    "cite": [
+     "c19"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/groups",
+    "purpose": "Create a group",
+    "cite": [
+     "c12"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/adminAudit/events",
+    "purpose": "List admin audit events",
+    "cite": [
+     "c18"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": null,
+   "cite": [
+    "c18"
+   ]
+  },
+  "rate_limits": {
+   "text": "Polling /people for status quickly leads to 429 throttling; numeric limits not stated on the pages read.",
+   "cite": [
+    "c20"
+   ]
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/cisco-webex/",
+   "cite": [
+    "c35"
+   ],
+   "notes": "OIN markup marks SAML, SWA, SCIM, Create, Update, Deactivate (no Group Push)."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/cisco-webex-provisioning-tutorial",
+   "cite": [
+    "c36",
+    "c37",
+    "c28"
+   ],
+   "notes": "Gallery connector in Preview, SCIM 1.1 (legacy); custom SCIM 2.0 app recommended by Webex."
+  },
+  "google": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c39",
+    "c40"
+   ],
+   "notes": "Webex documents SSO via a custom SAML app in Google Admin; no Google provisioning documented."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://jumpcloud.com/support/integrate-with-cisco-webex",
+   "cite": [
+    "c38"
+   ]
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": true,
+  "other_sync": "Directory Connector (on-prem Active Directory sync, trial or any paid subscription); Entra ID Wizard app (Graph API)",
+  "docs_public": true,
+  "cite": [
+   "c33",
+   "c34",
+   "c27"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://pricing.webex.com/us/en/",
+   "title": "Webex Plans & Pricing",
+   "quote": "Webex Free $0 /user/year Sign Up, It's Free",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://pricing.webex.com/us/en/",
+   "title": "Webex Plans & Pricing",
+   "quote": "Webex Meet Buy 5 or more, get 6 months free. $144 /user/year $12 /user/mo",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://pricing.webex.com/us/en/",
+   "title": "Webex Plans & Pricing",
+   "quote": "Webex Suite Meet + Call $270 /user/year $22.50 /user/mo",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://pricing.webex.com/us/en/",
+   "title": "Webex Plans & Pricing",
+   "quote": "Webex Enterprise Let's talk AI Assistant included Contact Sales",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://developer.webex.com/admin/docs/scim-2-overview",
+   "title": "SCIM-2 Overview | Webex for Developers",
+   "quote": "Webex supports both the Core Schema and Enterprise Extension schema. This standard allows for interoperability with SCIM 2.0 compliant clients and simplifies automating user identity provisioning to Webex.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://developer.webex.com/admin/docs/scim-2-overview",
+   "title": "SCIM-2 Overview | Webex for Developers",
+   "quote": "managedOrgs orgId role managedGroups (readonly) orgId groupId role extensionAttribute(1-15) externalAttribute(1-15) source value",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://developer.webex.com/admin/docs/scim-2-overview",
+   "title": "SCIM-2 Overview | Webex for Developers",
+   "quote": "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User costCenter organization division department employeeNumber manager",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://developer.webex.com/admin/docs/api/v1/scim-2-users/create-a-user",
+   "title": "Create a user | Webex for Developers",
+   "quote": "Create a user Post Delete a user Delete Get a user Get Get Me Get Search users Get Update a user with PATCH Patch Update a user with PUT Put",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://developer.webex.com/admin/docs/api/v1/scim-2-users/create-a-user",
+   "title": "Create a user | Webex for Developers",
+   "quote": "OAuth token rendered by Identity Broker.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://developer.webex.com/admin/docs/api/v1/scim-2-users/create-a-user",
+   "title": "Create a user | Webex for Developers",
+   "quote": "An integer for the maximum number of query results per page.  The default is 100.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c11",
+   "url": "https://developer.webex.com/admin/docs/api/v1/scim-2-users/create-a-user",
+   "title": "Create a user | Webex for Developers",
+   "quote": "The maximum number of operations in a request is 100; an error is thrown if the limit is exceeded.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://developer.webex.com/admin/docs/api/v1/scim-2-users/create-a-user",
+   "title": "Create a user | Webex for Developers",
+   "quote": "Create a new group for a given organization. The group may optionally be created with group members.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://developer.webex.com/admin/docs/api/v1/scim-2-users/create-a-user",
+   "title": "Create a user | Webex for Developers",
+   "quote": "Create a new user account for a given organization. Only an admin can create a new user account.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c14",
+   "url": "https://developer.webex.com/admin/docs/api/v1/scim-2-users/create-a-user",
+   "title": "Create a user | Webex for Developers",
+   "quote": "Remove a person from the system.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://developer.webex.com/admin/docs/api/v1/scim-2-users/create-a-user",
+   "title": "Create a user | Webex for Developers",
+   "quote": "List people in your organization. For most users, either the `email` or `displayName` parameter is required. Admin users can omit these fields and list all users in their organization.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://developer.webex.com/admin/docs/api/v1/scim-2-users/create-a-user",
+   "title": "Create a user | Webex for Developers",
+   "quote": "Update details for a person, by ID.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c17",
+   "url": "https://developer.webex.com/admin/docs/api/v1/scim-2-users/create-a-user",
+   "title": "Create a user | Webex for Developers",
+   "quote": "Assign licenses and attendee `siteUrls` to existing users. Only an admin can assign licenses.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c18",
+   "url": "https://developer.webex.com/admin/docs/api/v1/scim-2-users/create-a-user",
+   "title": "Create a user | Webex for Developers",
+   "quote": "List admin audit events in your organization. Several query parameters are available to filter the response.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c19",
+   "url": "https://developer.webex.com/admin/docs/api/v1/scim-2-users/create-a-user",
+   "title": "Create a user | Webex for Developers",
+   "quote": "List all roles. Must be called by an admin user.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c20",
+   "url": "https://developer.webex.com/admin/docs/api/v1/scim-2-users/create-a-user",
+   "title": "Create a user | Webex for Developers",
+   "quote": "Calling /people frequently to poll `status` information for a large set of users will quickly lead to `429` errors and throttling of such requests and is therefore discouraged.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c21",
+   "url": "https://developer.webex.com/admin/docs/api/v1/scim-2-users/create-a-user",
+   "title": "Create a user | Webex for Developers",
+   "quote": "The URL encoded filter. If the value is empty, the API will return all users under the organization.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c22",
+   "url": "https://developer.webex.com/admin/docs/api/v1/scim-2-users/create-a-user",
+   "title": "Create a user | Webex for Developers",
+   "quote": "The PATCH API supports `add`, `remove`, and `replace` operations on any individual",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c23",
+   "url": "https://help.webex.com/en-us/article/3211gv",
+   "title": "SCIM 2.0 provisioning with a custom Webex app in Entra ID",
+   "quote": "SCIM synchronization requires no on-premises infrastructure or connectors. This integration keeps your user list in sync whenever a user is created, updated, or removed from the application in Entra ID.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c24",
+   "url": "https://help.webex.com/en-us/article/3211gv",
+   "title": "SCIM 2.0 provisioning with a custom Webex app in Entra ID",
+   "quote": "This token is valid for 365 days (after which it expires).",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c25",
+   "url": "https://help.webex.com/en-us/article/3211gv",
+   "title": "SCIM 2.0 provisioning with a custom Webex app in Entra ID",
+   "quote": "In Control Hub go to Apps > Service apps, select the application, and click Get a token",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c26",
+   "url": "https://help.webex.com/en-us/article/3211gv",
+   "title": "SCIM 2.0 provisioning with a custom Webex app in Entra ID",
+   "quote": "Webex (default) https://webexapis.com/identity/scim/OrgId/v2",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c27",
+   "url": "https://help.webex.com/en-us/article/3211gv",
+   "title": "SCIM 2.0 provisioning with a custom Webex app in Entra ID",
+   "quote": "You can only synchronize groups, rooms, and avatars to Control Hub through the Entra ID Wizard app",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c28",
+   "url": "https://help.webex.com/en-us/article/6ta3gz",
+   "title": "Legacy SCIM provisioning with the Cisco Webex Entra ID gallery app",
+   "quote": "Use this article to learn about the legacy SCIM 1.1 process using the pre-built Cisco Webex app.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c29",
+   "url": "https://help.webex.com/en-us/article/d3p9vfb",
+   "title": "Manage synchronized Entra ID users",
+   "quote": "Webex renames the user and marks the user as Inactive in your organization.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c30",
+   "url": "https://help.webex.com/en-us/article/d3p9vfb",
+   "title": "Manage synchronized Entra ID users",
+   "quote": "Restore a recently deleted user from Recycle Bin Webex reactivates the user and changes the username back to the original value.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c31",
+   "url": "https://help.webex.com/en-us/article/d3p9vfb",
+   "title": "Manage synchronized Entra ID users",
+   "quote": "Delete user from Recycle Bin (permanent delete) Webex deletes the user from your organization.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c32",
+   "url": "https://help.webex.com/en-us/article/hglkq6/Bulk-Delete-Users",
+   "title": "Delete a user from your organization in Control Hub",
+   "quote": "When you delete a user, they can no longer sign in to your Webex site, all their assigned Webex services are removed, and they are removed from any spaces or teams that they were participating in. Any content that they created in spaces is not deleted",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c33",
+   "url": "https://help.webex.com/en-us/article/nlkiw8e/Add-Multiple-Users-in-Cisco-Webex-Control-Hub-with-the-CSV-Template",
+   "title": "Manage multiple users in Control Hub with the CSV template",
+   "quote": "Manage multiple users in Control Hub with the CSV template",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c34",
+   "url": "https://help.webex.com/en-us/article/zqvufbb",
+   "title": "Deployment Guide for Directory Connector",
+   "quote": "To access the Directory Connector software from Control Hub, you require a Webex organization with a trial or any paid subscription.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c35",
+   "url": "https://www.okta.com/integrations/cisco-webex/",
+   "title": "Cisco Webex | Okta Integration Network",
+   "quote": "Manage users in Control Hub SCIM provisioning supported",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c36",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/cisco-webex-provisioning-tutorial",
+   "title": "Configure Cisco Webex for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Create users in Cisco Webex. Remove users in Cisco Webex when they don't require access anymore. Keep user attributes synchronized between Microsoft Entra ID and Cisco Webex. Provision groups and group memberships in Cisco Webex.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c37",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/cisco-webex-provisioning-tutorial",
+   "title": "Configure Cisco Webex for automatic user provisioning with Microsoft Entra ID",
+   "quote": "This connector is currently in Preview.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c38",
+   "url": "https://jumpcloud.com/support/integrate-with-cisco-webex",
+   "title": "Integrate with Cisco Webex | JumpCloud Documentation",
+   "quote": "SAML SSO must be enabled to use SCIM Groups are not supported The following operations are supported for users: Create users Deactivate users Update users",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c39",
+   "url": "https://help.webex.com/en-us/article/brd76f",
+   "title": "Configure single sign-on in Control Hub with Google Apps",
+   "quote": "Configure a custom app in Google Admin",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c40",
+   "url": "https://help.webex.com/en-us/article/ixe4v9/Configure-Single-Sign-On-in-Cisco-Webex-Control-Hub",
+   "title": "Single Sign-On Integration in Control Hub",
+   "quote": "If you have your own identity provider (IdP) in your organization, you can integrate it with your organization in Control Hub for SSO.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://pricing.webex.com/us/en/ (including the 'See all features' table: no SSO/SCIM row)",
+  "https://developer.webex.com/sitemap.xml",
+  "https://developer.webex.com/admin/docs/scim-2-overview",
+  "https://help.webex.com/sitemap.xml (English article URLs grepped for scim, sso, provisioning, plan)",
+  "https://help.webex.com/en-us/article/3211gv",
+  "https://help.webex.com/en-us/article/naa3d5x/Purchase-a-Webex-Plan"
+ ],
+ "open_questions": [
+  "Which Webex plans include SCIM provisioning and Control Hub SSO is not stated on any Webex page found (pricing page feature table is silent).",
+  "Whether deactivation via SCIM frees the license or ends sessions is not documented.",
+  "Okta SCIM help article on help.webex.com was not located (OIN page used).",
+  "Rate limits for the SCIM and People APIs are not stated on the pages read.",
+  "Whether the People API is available on Free/Meet plans (api_tax) is not stated."
+ ]
+}

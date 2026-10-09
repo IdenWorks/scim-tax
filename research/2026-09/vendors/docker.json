@@ -1,0 +1,948 @@
+{
+ "slug": "docker",
+ "vendor": "Docker",
+ "vendor_url": "https://www.docker.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Docker",
+  "slug": "docker",
+  "category": "Developer Tools & CI/CD",
+  "status": "gated",
+  "scim_plan": "Business",
+  "scim_price_text": "Business: $24/user/mo (annual)",
+  "scim_price_per_user_mo": 24,
+  "team_plan": "Team",
+  "team_price_text": "Team: $15/user/mo (annual)",
+  "team_price_per_user_mo": 15,
+  "price_multiplier": 1.6,
+  "sso_plan": "Business",
+  "sso_price_per_user_mo": 24,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": false,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.docker.com/pricing/",
+  "docs_url": "https://docs.docker.com/security/provisioning/scim/",
+  "evidence": "Docker's pricing page lists 'Single Sign-On (SSO)' and 'SCIM user provisioning' under Docker Business ($24 per user/month, annual), while Docker Team ($15 annual) includes audit logs and RBAC but not SSO or SCIM.",
+  "notes": "Unchanged from June: SCIM and SSO start at Business ($24/user/mo, annual only); Team $15 annual or $16 monthly, up to 100 users; Pro ($9 annual) is single-user. SCIM needs SSO configured first. SCIM 2.0 at the Docker Hub API (/v2/scim/2.0) with a bearer token from Docker Home; deprovisioning deactivates and removes the user from the organization (no SCIM DELETE). Roles, org and team via the urn:ietf:params:scim:schemas:extension:docker:2.0:User extension; group push maps IdP groups named org:team to Docker teams. JIT is on by default and JIT values override SCIM. The Okta OIN 'Docker' app is marked SAML-only; Docker's guides use a custom SCIM app in Okta and a non-gallery app in Entra.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Team",
+  "api_tax": false,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Docker Personal",
+   "price_text": "$0",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": false,
+   "cite": [
+    "c1",
+    "c8",
+    "c9",
+    "c3"
+   ],
+   "notes": "Single user, no organization."
+  },
+  {
+   "name": "Docker Pro",
+   "price_text": "$9 per user/month (annual), $11 monthly",
+   "price_per_user_mo": 9,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": false,
+   "cite": [
+    "c1",
+    "c2",
+    "c3",
+    "c8",
+    "c9"
+   ],
+   "notes": "Maximum 1 user; no Docker Hub organization, so no org member API."
+  },
+  {
+   "name": "Docker Team",
+   "price_text": "$15 per user/month (annual), $16 monthly",
+   "price_per_user_mo": 15,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c1",
+    "c2",
+    "c4",
+    "c5",
+    "c3",
+    "c8",
+    "c53"
+   ],
+   "notes": "Up to 100 users, 1 organization, 10 organization access tokens."
+  },
+  {
+   "name": "Docker Business",
+   "price_text": "$24 per user/month (annual only)",
+   "price_per_user_mo": 24,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c1",
+    "c6",
+    "c7",
+    "c8",
+    "c29"
+   ],
+   "notes": "Monthly plan not offered ('–'); Buy now or Contact sales."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c7",
+   "c8",
+   "c11",
+   "c29",
+   "c18",
+   "c40",
+   "c33"
+  ],
+  "plan": "Business",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://hub.docker.com/v2/scim/2.0",
+  "notes": "The exact SCIM Base URL is copied from Docker Home; the Hub API reference serves SCIM under https://hub.docker.com/v2/scim/2.0.",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Docker Home > Identity & auth > SSO and SCIM > SSO connection Actions > Setup SCIM (SCIM Base URL and API Token)",
+   "token_expiry": null,
+   "cite": [
+    "c18",
+    "c20"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": null,
+   "ServiceProviderConfig": true,
+   "Schemas": true,
+   "ResourceTypes": true,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c33",
+    "c35",
+    "c36",
+    "c37",
+    "c38"
+   ],
+   "notes": "The Hub API reference documents Users (GET, POST, GET by id, PUT) only; no Groups path is listed even though group push is documented."
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": false,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c35",
+    "c33",
+    "c32",
+    "c12",
+    "c13",
+    "c10",
+    "c27",
+    "c28"
+   ],
+   "notes": "Deactivation is PUT with active=false; the API reference lists no DELETE or PATCH on Users. Group push and membership come from the group-mapping guide."
+  },
+  "deprovision": {
+   "action": "remove_from_org",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "The Docker account itself remains (Docker IDs are personal); SCIM deactivates it in and removes it from the organization. Users added manually before SCIM must be removed by hand.",
+   "cite": [
+    "c10",
+    "c14",
+    "c16"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName"
+   ],
+   "cite": [
+    "c34"
+   ],
+   "notes": "Operators eq, ne, co, sw, and, or, not, grouping; example filter on userName."
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": 200,
+   "cite": [
+    "c33"
+   ],
+   "notes": "startIndex/count; the OpenAPI count parameter has maximum 200."
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "active",
+    "emails[].value",
+    "displayName (read-only Docker ID)"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": true,
+    "how": "Docker extension urn:ietf:params:scim:schemas:extension:docker:2.0:User with dockerRole (member, editor, owner), dockerOrg and dockerTeam."
+   },
+   "group": [
+    "id",
+    "displayName",
+    "members",
+    "members.value"
+   ],
+   "cite": [
+    "c16",
+    "c17",
+    "c25",
+    "c23",
+    "c39",
+    "c26",
+    "c28"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "dockerRole attribute in the Docker SCIM extension (member, editor, owner); teams via dockerTeam or org:team group mapping.",
+   "cite": [
+    "c22",
+    "c23",
+    "c26"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "JIT values take precedence over and overwrite SCIM attribute values unless JIT is disabled.",
+    "cite": [
+     "c24"
+    ]
+   },
+   {
+    "text": "SCIM cannot remove users who were added manually before SCIM was enabled.",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "text": "Entra ID: SCIM and OIDC cannot share one non-gallery app; a second app is needed for SCIM.",
+    "cite": [
+     "c21"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c43",
+   "c49",
+   "c41",
+   "c40",
+   "c9"
+  ],
+  "plan": "Team",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://hub.docker.com",
+  "docs_url": "https://docs.docker.com/reference/api/hub/latest/",
+  "notes": "Organization member, invite and team endpoints in the Docker Hub API; organizations exist from Team up.",
+  "auth": {
+   "methods": [
+    "bearer (from PAT or organization access token)",
+    "password"
+   ],
+   "scopes": [],
+   "cite": [
+    "c41",
+    "c42"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": null,
+   "create_user": false,
+   "invite_user": true,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c43",
+    "c47",
+    "c45",
+    "c46",
+    "c50",
+    "c51"
+   ],
+   "notes": "Members can be listed, exported, role-changed, removed from the org and invited in bulk; accounts themselves are created by users, not the org API."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/v2/orgs/{org_name}/members",
+    "purpose": "List org members",
+    "cite": [
+     "c43"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v2/orgs/{org_name}/members/export",
+    "purpose": "Export org members CSV",
+    "cite": [
+     "c44"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/v2/orgs/{org_name}/members/{username}",
+    "purpose": "Update org member (role)",
+    "cite": [
+     "c45"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v2/orgs/{org_name}/members/{username}",
+    "purpose": "Remove member from org",
+    "cite": [
+     "c46"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v2/orgs/{org_name}/invites",
+    "purpose": "List org invites",
+    "cite": [
+     "c48"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v2/invites/bulk",
+    "purpose": "Bulk create invites",
+    "cite": [
+     "c47"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v2/orgs/{org_name}/groups",
+    "purpose": "Create a new group (team)",
+    "cite": [
+     "c50"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v2/orgs/{org_name}/groups/{group_name}/members",
+    "purpose": "Add a member to a group",
+    "cite": [
+     "c51"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v2/orgs/{org_name}/groups/{group_name}/members/{username}",
+    "purpose": "Remove a user from a group",
+    "cite": [
+     "c52"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v2/auditlogs/{account}",
+    "purpose": "List audit log events",
+    "cite": [
+     "c53"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Team",
+   "cite": [
+    "c53",
+    "c5"
+   ]
+  },
+  "rate_limits": {
+   "text": "Per-minute limits reported in X-RateLimit-Limit/Remaining/Reset headers; 429 with Retry-After when exceeded. Numbers not published.",
+   "cite": [
+    "c54"
+   ]
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/docker/",
+   "cite": [
+    "c55"
+   ],
+   "notes": "OIN 'Docker' page marks only SAML (page markup) despite marketing text about provisioning; Docker's SCIM guide enables SCIM on the app created for SSO (custom app integration)."
+  },
+  "entra": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "Docker's guide uses a non-gallery app for SCIM; no Entra gallery tutorial found (docker-business-*-tutorial URLs 404)."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "both",
+  "csv_import": null,
+  "other_sync": "Auto-provisioning of existing Docker users by verified email domain",
+  "docs_public": true,
+  "cite": [
+   "c30",
+   "c31",
+   "c15",
+   "c21"
+  ],
+  "notes": "JIT on by default for SAML and OIDC SSO connections. Bulk invites ('Add users in bulk') on Team and up."
+ },
+ "conflicts": [
+  {
+   "text": "Okta OIN marketing text says the Docker integration covers 'enhanced user provisioning', but the OIN functionality list marks only SAML.",
+   "cite": [
+    "c55"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.docker.com/pricing/",
+  "https://docs.docker.com/security/provisioning/scim/",
+  "https://docs.docker.com/security/provisioning/scim/provision-scim/",
+  "https://docs.docker.com/security/provisioning/scim/group-mapping/",
+  "https://docs.docker.com/reference/api/hub/latest/",
+  "https://www.okta.com/integrations/docker/"
+ ],
+ "open_questions": [
+  "Whether SCIM deprovisioning frees the paid seat immediately is not documented.",
+  "SCIM token expiry and rotation policy are not documented on the pages read.",
+  "SCIM Groups endpoint is not in the Hub API reference although group push is documented.",
+  "Google Workspace, OneLogin and JumpCloud SCIM support not documented by Docker."
+ ],
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.docker.com/pricing/",
+   "title": "Docker Pricing",
+   "quote": "Price per user per month (annual plan) – $9 $15 $24",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.docker.com/pricing/",
+   "title": "Docker Pricing",
+   "quote": "Price per user per month (monthly plan) $0 $11 $16 –",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.docker.com/pricing/",
+   "title": "Docker Pricing",
+   "quote": "Maximum number of Users 1 1 100",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.docker.com/pricing/",
+   "title": "Docker Pricing",
+   "quote": "For small teams that need collaborative tools to make working together more efficient.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.docker.com/pricing/",
+   "title": "Docker Pricing",
+   "quote": "Add users in bulk Audit logs Docker Hub role-based access control",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://www.docker.com/pricing/",
+   "title": "Docker Pricing",
+   "quote": "For enterprises desiring robust security, control, and compliance features.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://www.docker.com/pricing/",
+   "title": "Docker Pricing",
+   "quote": "Hardened Docker Desktop Single Sign-On (SSO) SCIM user provisioning",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://www.docker.com/pricing/",
+   "title": "Docker Pricing",
+   "quote": "System for Cross-domain Identity Management (SCIM)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://www.docker.com/pricing/",
+   "title": "Docker Pricing",
+   "quote": "Number of Docker Hub organizations",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.docker.com/security/provisioning/scim/",
+   "title": "SCIM overview | Docker Docs",
+   "quote": "When a user is removed from the Docker application in your identity provider, SCIM deactivates and removes them from your Docker organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.docker.com/security/provisioning/scim/",
+   "title": "SCIM overview | Docker Docs",
+   "quote": "SSO configured for your organization",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.docker.com/security/provisioning/scim/",
+   "title": "SCIM overview | Docker Docs",
+   "quote": "Removing and deactivating users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.docker.com/security/provisioning/scim/",
+   "title": "SCIM overview | Docker Docs",
+   "quote": "Re-activating users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.docker.com/security/provisioning/scim/",
+   "title": "SCIM overview | Docker Docs",
+   "quote": "It cannot remove users who were manually added to your Docker organization before SCIM was set up.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.docker.com/security/provisioning/scim/",
+   "title": "SCIM overview | Docker Docs",
+   "quote": "You can use SCIM alongside Docker's default Just-in-Time (JIT) provisioning or on its own with JIT disabled.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.docker.com/security/provisioning/scim/provision-scim.md",
+   "title": "Set up SCIM provisioning | Docker Docs",
+   "quote": "Indicates if a user is enabled or disabled, set to \"false\" to de-provision a user",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.docker.com/security/provisioning/scim/provision-scim/"
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.docker.com/security/provisioning/scim/provision-scim.md",
+   "title": "Set up SCIM provisioning | Docker Docs",
+   "quote": "User's first name",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.docker.com/security/provisioning/scim/provision-scim/"
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.docker.com/security/provisioning/scim/provision-scim.md",
+   "title": "Set up SCIM provisioning | Docker Docs",
+   "quote": "Copy the **SCIM Base URL** and **API Token** and paste the values into your IdP.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.docker.com/security/provisioning/scim/provision-scim/"
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.docker.com/security/provisioning/scim/provision-scim.md",
+   "title": "Set up SCIM provisioning | Docker Docs",
+   "quote": "Supported provisioning actions: **Push New Users** and **Push Profile Updates**",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.docker.com/security/provisioning/scim/provision-scim/"
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.docker.com/security/provisioning/scim/provision-scim.md",
+   "title": "Set up SCIM provisioning | Docker Docs",
+   "quote": "SCIM Bearer Token: HTTP Header Authorization Bearer Token",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.docker.com/security/provisioning/scim/provision-scim/"
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.docker.com/security/provisioning/scim/provision-scim.md",
+   "title": "Set up SCIM provisioning | Docker Docs",
+   "quote": "Microsoft does not support SCIM and OIDC in the same non-gallery application.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.docker.com/security/provisioning/scim/provision-scim/"
+  },
+  {
+   "id": "c22",
+   "url": "https://docs.docker.com/security/provisioning/scim/provision-scim.md",
+   "title": "Set up SCIM provisioning | Docker Docs",
+   "quote": "You can assign [Docker roles](/security/roles-and-permissions/) to users by adding optional SCIM attributes in your IdP.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.docker.com/security/provisioning/scim/provision-scim/"
+  },
+  {
+   "id": "c23",
+   "url": "https://docs.docker.com/security/provisioning/scim/provision-scim.md",
+   "title": "Set up SCIM provisioning | Docker Docs",
+   "quote": "The external namespace used for these attributes is: `urn:ietf:params:scim:schemas:extension:docker:2.0:User`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.docker.com/security/provisioning/scim/provision-scim/"
+  },
+  {
+   "id": "c24",
+   "url": "https://docs.docker.com/security/provisioning/scim/provision-scim.md",
+   "title": "Set up SCIM provisioning | Docker Docs",
+   "quote": "If SCIM is enabled, JIT values still take precedence and will overwrite attribute values set by SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.docker.com/security/provisioning/scim/provision-scim/"
+  },
+  {
+   "id": "c25",
+   "url": "https://docs.docker.com/security/provisioning/scim/provision-scim.md",
+   "title": "Set up SCIM provisioning | Docker Docs",
+   "quote": "`mail` -> `emails.value`",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.docker.com/security/provisioning/scim/provision-scim/"
+  },
+  {
+   "id": "c26",
+   "url": "https://docs.docker.com/security/provisioning/scim/group-mapping.md",
+   "title": "Group mapping | Docker Docs",
+   "quote": "Name of the group following the group mapping format: `organization:team`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.docker.com/security/provisioning/scim/group-mapping/"
+  },
+  {
+   "id": "c27",
+   "url": "https://docs.docker.com/security/provisioning/scim/group-mapping.md",
+   "title": "Group mapping | Docker Docs",
+   "quote": "Select **Edit** to enable groups on your connection, then select **Push groups**.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.docker.com/security/provisioning/scim/group-mapping/"
+  },
+  {
+   "id": "c28",
+   "url": "https://docs.docker.com/security/provisioning/scim/group-mapping.md",
+   "title": "Group mapping | Docker Docs",
+   "quote": "Unique ID of the user that is a member of this group. Members are referenced by ID.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.docker.com/security/provisioning/scim/group-mapping/"
+  },
+  {
+   "id": "c29",
+   "url": "https://docs.docker.com/security/authentication/single-sign-on.md",
+   "title": "Single sign-on overview | Docker Docs",
+   "quote": "or for a single organization that has a Docker Business subscription.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.docker.com/security/authentication/single-sign-on/"
+  },
+  {
+   "id": "c30",
+   "url": "https://docs.docker.com/security/provisioning.md",
+   "title": "Provision users | Docker Docs",
+   "quote": "By default, Docker enables JIT provisioning when you configure an SSO connection.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.docker.com/security/provisioning/"
+  },
+  {
+   "id": "c31",
+   "url": "https://docs.docker.com/security/provisioning.md",
+   "title": "Provision users | Docker Docs",
+   "quote": "Adds users when email addresses match a verified domain",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.docker.com/security/provisioning/"
+  },
+  {
+   "id": "c32",
+   "url": "https://docs.docker.com/reference/api/hub/latest.yaml",
+   "title": "Docker Hub API reference (OpenAPI)",
+   "quote": "Updates a user. This route is used to change the user's name, activate, and deactivate the user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.docker.com/reference/api/hub/latest/"
+  },
+  {
+   "id": "c33",
+   "url": "https://docs.docker.com/reference/api/hub/latest.yaml",
+   "title": "Docker Hub API reference (OpenAPI)",
+   "quote": "Returns paginated users for an organization. Use `startIndex` and `count` query parameters to receive paginated results.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.docker.com/reference/api/hub/latest/"
+  },
+  {
+   "id": "c34",
+   "url": "https://docs.docker.com/reference/api/hub/latest.yaml",
+   "title": "Docker Hub API reference (OpenAPI)",
+   "quote": "Supported operators are listed below.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.docker.com/reference/api/hub/latest/"
+  },
+  {
+   "id": "c35",
+   "url": "https://docs.docker.com/reference/api/hub/latest.yaml",
+   "title": "Docker Hub API reference (OpenAPI)",
+   "quote": "Creates a user. If the user already exists by email, they are assigned to the organization on the \"company\" team.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.docker.com/reference/api/hub/latest/"
+  },
+  {
+   "id": "c36",
+   "url": "https://docs.docker.com/reference/api/hub/latest.yaml",
+   "title": "Docker Hub API reference (OpenAPI)",
+   "quote": "Get service provider config",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.docker.com/reference/api/hub/latest/"
+  },
+  {
+   "id": "c37",
+   "url": "https://docs.docker.com/reference/api/hub/latest.yaml",
+   "title": "Docker Hub API reference (OpenAPI)",
+   "quote": "Returns all schemas supported for the SCIM configuration.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.docker.com/reference/api/hub/latest/"
+  },
+  {
+   "id": "c38",
+   "url": "https://docs.docker.com/reference/api/hub/latest.yaml",
+   "title": "Docker Hub API reference (OpenAPI)",
+   "quote": "Returns all resource types supported for the SCIM configuration.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.docker.com/reference/api/hub/latest/"
+  },
+  {
+   "id": "c39",
+   "url": "https://docs.docker.com/reference/api/hub/latest.yaml",
+   "title": "Docker Hub API reference (OpenAPI)",
+   "quote": "The username in Docker. Also known as the \"Docker ID\".",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.docker.com/reference/api/hub/latest/"
+  },
+  {
+   "id": "c40",
+   "url": "https://docs.docker.com/reference/api/hub/latest.yaml",
+   "title": "Docker Hub API reference (OpenAPI)",
+   "quote": "url: https://hub.docker.com",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.docker.com/reference/api/hub/latest/"
+  },
+  {
+   "id": "c41",
+   "url": "https://docs.docker.com/reference/api/hub/latest.yaml",
+   "title": "Docker Hub API reference (OpenAPI)",
+   "quote": "Organization access tokens are scoped to specific resources and scopes in an organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.docker.com/reference/api/hub/latest/"
+  },
+  {
+   "id": "c42",
+   "url": "https://docs.docker.com/reference/api/hub/latest.yaml",
+   "title": "Docker Hub API reference (OpenAPI)",
+   "quote": "Using a username and PAT is the most secure way to authenticate with Docker as a user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.docker.com/reference/api/hub/latest/"
+  },
+  {
+   "id": "c43",
+   "url": "https://docs.docker.com/reference/api/hub/latest.yaml",
+   "title": "Docker Hub API reference (OpenAPI)",
+   "quote": "List org members",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.docker.com/reference/api/hub/latest/"
+  },
+  {
+   "id": "c44",
+   "url": "https://docs.docker.com/reference/api/hub/latest.yaml",
+   "title": "Docker Hub API reference (OpenAPI)",
+   "quote": "Export org members CSV",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.docker.com/reference/api/hub/latest/"
+  },
+  {
+   "id": "c45",
+   "url": "https://docs.docker.com/reference/api/hub/latest.yaml",
+   "title": "Docker Hub API reference (OpenAPI)",
+   "quote": "Update org member (role)",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.docker.com/reference/api/hub/latest/"
+  },
+  {
+   "id": "c46",
+   "url": "https://docs.docker.com/reference/api/hub/latest.yaml",
+   "title": "Docker Hub API reference (OpenAPI)",
+   "quote": "Remove member from org",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.docker.com/reference/api/hub/latest/"
+  },
+  {
+   "id": "c47",
+   "url": "https://docs.docker.com/reference/api/hub/latest.yaml",
+   "title": "Docker Hub API reference (OpenAPI)",
+   "quote": "Bulk create invites",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.docker.com/reference/api/hub/latest/"
+  },
+  {
+   "id": "c48",
+   "url": "https://docs.docker.com/reference/api/hub/latest.yaml",
+   "title": "Docker Hub API reference (OpenAPI)",
+   "quote": "List org invites",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.docker.com/reference/api/hub/latest/"
+  },
+  {
+   "id": "c49",
+   "url": "https://docs.docker.com/reference/api/hub/latest.yaml",
+   "title": "Docker Hub API reference (OpenAPI)",
+   "quote": "The groups endpoints allow you to manage your organization's teams and their members.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.docker.com/reference/api/hub/latest/"
+  },
+  {
+   "id": "c50",
+   "url": "https://docs.docker.com/reference/api/hub/latest.yaml",
+   "title": "Docker Hub API reference (OpenAPI)",
+   "quote": "Create a new group",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.docker.com/reference/api/hub/latest/"
+  },
+  {
+   "id": "c51",
+   "url": "https://docs.docker.com/reference/api/hub/latest.yaml",
+   "title": "Docker Hub API reference (OpenAPI)",
+   "quote": "Add a member to a group",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.docker.com/reference/api/hub/latest/"
+  },
+  {
+   "id": "c52",
+   "url": "https://docs.docker.com/reference/api/hub/latest.yaml",
+   "title": "Docker Hub API reference (OpenAPI)",
+   "quote": "Remove a user from a group",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.docker.com/reference/api/hub/latest/"
+  },
+  {
+   "id": "c53",
+   "url": "https://docs.docker.com/reference/api/hub/latest.yaml",
+   "title": "Docker Hub API reference (OpenAPI)",
+   "quote": "The Audit Logs API endpoints allow you to query audit log events across a namespace.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.docker.com/reference/api/hub/latest/"
+  },
+  {
+   "id": "c54",
+   "url": "https://docs.docker.com/reference/api/hub/latest.yaml",
+   "title": "Docker Hub API reference (OpenAPI)",
+   "quote": "The Docker Hub API is limited on the amount of requests you can perform per minute against it.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.docker.com/reference/api/hub/latest/"
+  },
+  {
+   "id": "c55",
+   "url": "https://www.okta.com/integrations/docker/",
+   "title": "Docker | Okta Integration Network",
+   "quote": "From single sign-on to enhanced user provisioning, Okta's Docker integration automates the organization onboarding and offboarding process.",
+   "accessed": "2026-10-05"
+  }
+ ]
+}

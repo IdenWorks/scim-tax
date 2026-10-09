@@ -1,0 +1,945 @@
+{
+ "slug": "qlik",
+ "vendor": "Qlik (Qlik Cloud Analytics)",
+ "vendor_url": "https://www.qlik.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Qlik (Qlik Cloud Analytics)",
+  "slug": "qlik",
+  "category": "Data, Analytics & BI",
+  "status": "partial",
+  "scim_plan": "Starter (all plans; Bring Your Own Identity Provider entitlement)",
+  "scim_price_text": "$300/mo for 10 users, billed annually",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Starter",
+  "team_price_text": "Starter: $300/mo for 10 users, billed annually",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Starter",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": true
+  },
+  "idp": {
+   "okta": "none",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": false
+  },
+  "pricing_page_url": "https://www.qlik.com/us/pricing/data-analytics",
+  "docs_url": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/Admin/auto-provisioning-using-SCIM.htm",
+  "evidence": "Qlik Help says Qlik Cloud is compatible with SCIM 2.0 and that the only supported SCIM connector is Microsoft Entra ID; SCIM needs the Bring Your Own Identity Provider entitlement, which the pricing comparison ticks on every plan from Starter up.",
+  "notes": "New row. Partial because SCIM works with exactly one IdP: Qlik Help lists Microsoft Entra ID as the only SCIM connector, configured as a non-gallery Entra enterprise app with the tenant URL and token from Administration > Identity provider > Manage auto provisioning, and an active Entra interactive IdP is required first. Price-wise SCIM is not gated: the pricing comparison ticks Bring Your Own Identity Provider and Enterprise single sign-on on Starter, Standard, Premium and Enterprise. Pricing is capacity-based, not per user: Starter $300/mo includes 10 users, Standard $825/mo (25 GB, no cost for additional users), Premium $2,750/mo (50 GB), Enterprise quote; all billed annually, so per-user fields are null. SCIM deprovisioning marks users Disabled (cannot log in); admins can then delete them. Okta, Auth0 and other OIDC/SAML IdPs are supported for sign-in only; Okta's OIN 'Qlik' app is SWA only. Qlik Talend Cloud (the data-integration product) has its own separate SCIM API with Okta and Azure AD guides; this row covers Qlik Cloud Analytics. A full REST user API (users, groups, roles, licence assignments, audits, webhooks) is documented on qlik.dev; the pricing page lists APIs on every plan.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Starter",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Starter",
+   "price_text": "$300/mo for 10 users, billed annually (additional users purchasable); 10 GB data fixed",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c8"
+   ]
+  },
+  {
+   "name": "Standard",
+   "price_text": "$825/mo for 25 GB data, billed annually; no cost for additional users",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "c8"
+   ]
+  },
+  {
+   "name": "Premium",
+   "price_text": "$2,750/mo for 50 GB data, billed annually",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c3",
+    "c4",
+    "c6",
+    "c8"
+   ]
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Get a Quote (starts at 250 GB)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c3",
+    "c4",
+    "c7",
+    "c8"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c9",
+   "c10",
+   "c11",
+   "c12"
+  ],
+  "plan": "Starter (all plans; Bring Your Own Identity Provider entitlement)",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": null,
+  "auth": {
+   "method": "bearer",
+   "token_source": "Administration activity center > Identity provider > (Entra ID configuration) > Manage auto provisioning > Enable",
+   "token_expiry": null,
+   "cite": [
+    "c14",
+    "c15",
+    "c22"
+   ],
+   "notes": "The token expires and must be renewed manually in Qlik Cloud, but the lifetime is not stated. The token is stored as an API key of subType externalClient."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c13",
+    "c18"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": null,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c13",
+    "c18",
+    "c19"
+   ],
+   "notes": "Create, update and remove are described from Entra's side; PUT vs PATCH is not stated. SCIM group endpoints cover list, get, delete and patch of IdP-managed groups."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "User is marked Disabled and cannot log in; admins can delete the user afterwards and are encouraged to reassign ownership of apps, data connections and data files.",
+   "cite": [
+    "c19",
+    "c20",
+    "c21"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userPrincipalName (Entra source objectId)",
+    "mail (matching attribute)",
+    "active (from IsSoftDeleted)",
+    "displayName (Join givenName surname)",
+    "mailNickname (Entra source objectId)"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": false,
+    "how": "Entra mappings must be cut down to the five required attributes or provisioning fails."
+   },
+   "group": [],
+   "cite": [
+    "c16",
+    "c17"
+   ],
+   "notes": "The help page lists the Entra source expressions to keep; the SCIM target names are only shown in screenshots, so the target names here are inferred from Entra's default mapping and should be checked."
+  },
+  "roles": {
+   "supported": false,
+   "how": "Roles are not set over SCIM; after provisioning an admin assigns security roles to the provisioned groups in Administration > Manage users > Permissions.",
+   "cite": [
+    "c23"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Only Microsoft Entra ID is a supported SCIM connector, and it needs Entra ID P1 or higher.",
+    "cite": [
+     "c10",
+     "c11"
+    ]
+   },
+   {
+    "text": "Users in nested groups are not provisioned.",
+    "cite": [
+     "c24"
+    ]
+   },
+   {
+    "text": "Custom groups created in Qlik Cloud are not visible to or changed by SCIM.",
+    "cite": [
+     "c13"
+    ]
+   },
+   {
+    "text": "The SCIM token expires and must be renewed manually in Qlik Cloud and pasted into Entra.",
+    "cite": [
+     "c15"
+    ]
+   },
+   {
+    "text": "Each tenant can have only one active interactive IdP at a time.",
+    "cite": [
+     "c38"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c8",
+   "c25"
+  ],
+  "plan": "Starter",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://{tenant}.{region}.qlikcloud.com/api/v1",
+  "docs_url": "https://qlik.dev/apis/rest/users/",
+  "auth": {
+   "methods": [
+    "api_key",
+    "oauth2"
+   ],
+   "scopes": [],
+   "cite": [
+    "c34",
+    "c35"
+   ],
+   "notes": "API keys carry the creating user's permissions and cannot be scoped; OAuth2 clients (including machine-to-machine) support scopes."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": true,
+   "reactivate_user": true,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": true,
+   "cite": [
+    "c25",
+    "c26",
+    "c28",
+    "c29",
+    "c30"
+   ],
+   "notes": "POST /api/v1/users creates an invited user. Deactivate and reactivate are a JSON Patch on /status (statuses active, invited, disabled, deleted, provisioned)."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/api/v1/users",
+    "purpose": "List users",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/users",
+    "purpose": "Create an invited user",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/users/{userId}",
+    "purpose": "Get user",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/users/{userId}",
+    "purpose": "Update user (name, assignedRoles, assignedGroups, status, locale)",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/users/{userId}",
+    "purpose": "Delete user",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/users/actions/count",
+    "purpose": "Count users",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/users/actions/filter",
+    "purpose": "Filter users",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/users/actions/invite",
+    "purpose": "Invite users by email",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/users/me",
+    "purpose": "Current user",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/groups",
+    "purpose": "List groups",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/groups",
+    "purpose": "Create group",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/groups/{groupId}",
+    "purpose": "Get group",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/groups/{groupId}",
+    "purpose": "Update group",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/groups/{groupId}",
+    "purpose": "Delete group",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/groups/actions/filter",
+    "purpose": "Filter groups",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/groups/settings",
+    "purpose": "Get group settings",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/groups/settings",
+    "purpose": "Update group settings",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/roles",
+    "purpose": "List roles",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/roles",
+    "purpose": "Create role",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/roles/{id}",
+    "purpose": "Get role",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/roles/{id}",
+    "purpose": "Update role",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/roles/{id}",
+    "purpose": "Delete role",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/licenses/assignments",
+    "purpose": "List licence assignments",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/licenses/assignments/actions/add",
+    "purpose": "Assign licences to users",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/licenses/assignments/actions/delete",
+    "purpose": "Remove licence assignments",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/licenses/assignments/actions/update",
+    "purpose": "Update licence assignments",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/licenses/overview",
+    "purpose": "Licence overview",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/audits",
+    "purpose": "List recent audit events",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/audits/{id}",
+    "purpose": "Get audit event",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/audits/archive",
+    "purpose": "Audit archive",
+    "cite": [
+     "c31"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": true,
+   "events": [
+    "com.qlik.core.user.created",
+    "com.qlik.core.user.updated",
+    "com.qlik.core.user.deleted",
+    "com.qlik.core.user.provisioned"
+   ],
+   "cite": [
+    "c32",
+    "c33"
+   ]
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": null,
+   "cite": [
+    "c31"
+   ]
+  },
+  "rate_limits": {
+   "text": "Per-endpoint tiers, e.g. List users Tier 1 (1000 requests per minute); create/update/delete user Tier 2 (100 requests per minute).",
+   "cite": [
+    "c26",
+    "c27"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "API keys cannot be scoped and carry the full permissions of the user who created them.",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "text": "Legacy com.qlik.v1.user.* events are deprecated and removed on or after November 30, 2026.",
+    "cite": [
+     "c39"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": false,
+   "provisioning": false,
+   "kind": "swa",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/qlik/",
+   "cite": [
+    "c36"
+   ],
+   "notes": "OIN 'Qlik' app (last updated Jun. 21 2018) has only SWA ticked among its functionality filters. Qlik Help documents Okta as a SAML/OIDC IdP for sign-in (custom app), not for SCIM."
+  },
+  "entra": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": "vendor",
+   "url": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/Admin/auto-provisioning-configure-scim-in-azure.htm",
+   "cite": [
+    "c16",
+    "c37"
+   ],
+   "notes": "Qlik Cloud SCIM uses a non-gallery Entra enterprise app ('Create your own application'). The Entra gallery tutorial found covers Qlik Sense Enterprise Client-Managed (on-premises, SAML with JIT), not Qlik Cloud."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c9",
+   "c25"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.qlik.com/us/pricing/data-analytics",
+   "title": "Qlik Cloud Analytics Plans and Pricing",
+   "quote": "For 10 Users, billed annually (additional individual users available for purchase)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.qlik.com/us/pricing/data-analytics",
+   "title": "Qlik Cloud Analytics Plans and Pricing",
+   "quote": "STARTER $300/mo STANDARD $825/mo PREMIUM $2,750/mo ENTERPRISE Get a Quote",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.qlik.com/us/pricing/data-analytics",
+   "title": "Qlik Cloud Analytics Plans and Pricing (Compare All Plan Features)",
+   "quote": "Bring Your Own Identity Provider",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.qlik.com/us/pricing/data-analytics",
+   "title": "Qlik Cloud Analytics Plans and Pricing (Compare All Plan Features)",
+   "quote": "Enterprise single sign-on",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.qlik.com/us/pricing/data-analytics",
+   "title": "Qlik Cloud Analytics Plans and Pricing",
+   "quote": "For 25 GB data, billed annually (additional GB available for purchase)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://www.qlik.com/us/pricing/data-analytics",
+   "title": "Qlik Cloud Analytics Plans and Pricing",
+   "quote": "For 50 GB data, billed annually (additional GB available for purchase)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://www.qlik.com/us/pricing/data-analytics",
+   "title": "Qlik Cloud Analytics Plans and Pricing",
+   "quote": "Starts at 250 GB of data for analysis.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://www.qlik.com/us/pricing/data-analytics",
+   "title": "Qlik Cloud Analytics Plans and Pricing",
+   "quote": "Embedded analytics (APIs and custom extensions)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/Admin/auto-provisioning-using-SCIM.htm",
+   "title": "Provisioning users and groups using SCIM | Qlik Cloud Help",
+   "quote": "Qlik Cloud is compatible with SCIM 2.0.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/Admin/auto-provisioning-using-SCIM.htm",
+   "title": "Provisioning users and groups using SCIM | Qlik Cloud Help",
+   "quote": "Qlik Cloud supports Microsoft Entra ID (formerly Azure AD).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/Admin/auto-provisioning-configure-scim-in-azure.htm",
+   "title": "Configuring SCIM provisioning in Microsoft Entra ID for Qlik Cloud",
+   "quote": "Microsoft Entra ID with a P1 subscription or higher (formerly Microsoft Azure Active Directory P1)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/Admin/auto-provisioning-configure-qlik-cloud-for-scim.htm",
+   "title": "Configuring Qlik Cloud for SCIM",
+   "quote": "A Qlik Cloud tenant with the “Bring your own Identity Provider” entitlement.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/Admin/auto-provisioning-using-SCIM.htm",
+   "title": "Provisioning users and groups using SCIM | Qlik Cloud Help",
+   "quote": "SCIM group endpoints return and manage only IdP-managed groups. Custom groups are excluded from SCIM group list, get, delete, and patch operations.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/Admin/auto-provisioning-configure-qlik-cloud-for-scim.htm",
+   "title": "Configuring Qlik Cloud for SCIM",
+   "quote": "The access token to allow Microsoft Entra ID to perform provisioning jobs on your tenant and the URL for your Qlik Cloud tenant displays.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/Admin/auto-provisioning-configure-scim-in-azure.htm",
+   "title": "Configuring SCIM provisioning in Microsoft Entra ID for Qlik Cloud",
+   "quote": "When your SCIM token expires, you must manually renew it in Qlik Cloud.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/Admin/auto-provisioning-configure-scim-in-azure.htm",
+   "title": "Configuring SCIM provisioning in Microsoft Entra ID for Qlik Cloud",
+   "quote": "In the Attribute Mappings section, delete all the attributes except for the following:",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/Admin/auto-provisioning-configure-scim-in-azure.htm",
+   "title": "Configuring SCIM provisioning in Microsoft Entra ID for Qlik Cloud",
+   "quote": "If these attributes are not deleted, the provisioning and synchronization flows between Qlik Cloud and Microsoft Entra ID will fail",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/Admin/auto-provisioning-review-assign-entitlements.htm",
+   "title": "Review and assign roles to provisioned users in Qlik Cloud",
+   "quote": "Now that SCIM and auto-provisioning have been configured, you can add, update, and remove Qlik Cloud users from a centralized provisioning console in Microsoft Entra ID.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://community.qlik.com/t5/Official-Support-Articles/Qlik-Cloud-Analytics-Are-users-indicated-as-inactive-in-the/ta-p/2049744",
+   "title": "Qlik Cloud Analytics: Are users indicated as inactive (Qlik Official Support Article)",
+   "quote": "On Qlik Cloud, when users are deprovisioned via SCIM, those users are marked as Disabled",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://community.qlik.com/t5/Official-Support-Articles/Qlik-Cloud-Analytics-Are-users-indicated-as-inactive-in-the/ta-p/2049744",
+   "title": "Qlik Cloud Analytics: Are users indicated as inactive (Qlik Official Support Article)",
+   "quote": "Disabled users are not permitted to log in to Qlik Cloud",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://community.qlik.com/t5/Official-Support-Articles/Qlik-Cloud-Analytics-Are-users-indicated-as-inactive-in-the/ta-p/2049744",
+   "title": "Qlik Cloud Analytics: Are users indicated as inactive (Qlik Official Support Article)",
+   "quote": "After users are marked as Disabled, administrators can opt to delete those users. It is encouraged to reassign ownership of those user’s assets (apps, data connections, data-files).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://community.qlik.com/t5/Official-Support-Articles/Qlik-Cloud-The-authentication-token-associated-with-auto/ta-p/2445655",
+   "title": "Qlik Cloud: The authentication token associated with auto-provisioning (Qlik Official Support Article)",
+   "quote": "The token must be deleted that was created for SCIM Auto-provisioning with Azure.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/Admin/auto-provisioning-review-assign-entitlements.htm",
+   "title": "Review and assign roles to provisioned users in Qlik Cloud",
+   "quote": "Optionally, select the Permissions tab to grant a set of permissions to the group of users.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/Admin/auto-provisioning-configure-scim-in-azure.htm",
+   "title": "Configuring SCIM provisioning in Microsoft Entra ID for Qlik Cloud",
+   "quote": "Microsoft Entra ID provisioning using SCIM does not support provisioning users who are members of nested groups.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://qlik.dev/apis/rest/users/",
+   "title": "Users REST | Qlik Developer Portal",
+   "quote": "Users represent clients accessing the Qlik Cloud tenant.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://qlik.dev/apis/rest/users/",
+   "title": "Users REST | Qlik Developer Portal",
+   "quote": "The status of the user within the tenant. Can be one of: \"active\"\"invited\"\"disabled\"\"deleted\"\"provisioned\"",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://qlik.dev/apis/rest/users/",
+   "title": "Users REST | Qlik Developer Portal",
+   "quote": "Rate limit Tier 2 (100 requests per minute)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://qlik.dev/apis/rest/groups/",
+   "title": "Groups REST | Qlik Developer Portal",
+   "quote": "Groups is the resource representing a group in the system, to which space and tenant roles can be assigned to simplify access control management.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://qlik.dev/apis/rest/roles/",
+   "title": "Roles REST | Qlik Developer Portal",
+   "quote": "Tenant roles are assigned to users or groups in the tenant, and define what permissions they have.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://qlik.dev/apis/rest/licenses/",
+   "title": "Licenses REST | Qlik Developer Portal",
+   "quote": "Licenses define tenant and user entitlements, and can be used in conjunction with the consumption API to get a picture of entitlement usage.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://qlik.dev/apis/rest/audits/",
+   "title": "Audits REST | Qlik Developer Portal",
+   "quote": "Audits provides access to events emitted upon each action taken in your tenant, providing detailed access to what's happening in your tenant.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://qlik.dev/apis/event/core/users/",
+   "title": "Users events (core) | Qlik Developer Portal",
+   "quote": "Published when a new user is provisioned by an IdP.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://qlik.dev/apis/event/",
+   "title": "Events | Qlik Developer Portal",
+   "quote": "Welcome emails: send automated welcome emails when new users are added to your tenant.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://qlik.dev/authenticate/api-key/generate-your-first-api-key/",
+   "title": "Generate your first API key | Qlik Developer Portal",
+   "quote": "It is not possible to apply scopes to an API key. If you require finer control, consider using OAuth2 instead.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c35",
+   "url": "https://qlik.dev/authenticate/oauth/",
+   "title": "OAuth | Qlik Developer Portal",
+   "quote": "Machine-to-Machine application: Apps acting as bots or external service workers requiring access to Qlik Cloud tenants to perform management or administrative functions.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://www.okta.com/integrations/qlik/",
+   "title": "Integrate Qlik with Okta",
+   "quote": "Last updated: Jun. 21 2018",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/qliksense-enterprise-tutorial",
+   "title": "Configure Qlik Sense Enterprise Client-Managed for Single sign-on with Microsoft Entra ID",
+   "quote": "Qlik Sense Enterprise supports just-in-time provisioning",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c38",
+   "url": "https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/Admin/mc-creating-idp.htm",
+   "title": "Configuring identity providers | Qlik Cloud Help",
+   "quote": "Each Qlik Cloud tenant can only have one active interactive IdP at a time.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c39",
+   "url": "https://qlik.dev/apis/event/users/",
+   "title": "Users events | Qlik Developer Portal",
+   "quote": "These events are deprecated and will be removed on or after November 30, 2026.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.qlik.com/us/pricing/data-analytics (incl. Compare All Plan Features table)",
+  "https://qlik.dev/sitemap-0.xml",
+  "Qlik Help search: SCIM",
+  "https://www.okta.com/integrations/qlik/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/qliksense-enterprise-tutorial"
+ ],
+ "open_questions": [
+  "SCIM token lifetime is not stated (docs only say it expires and must be renewed manually).",
+  "Whether a SCIM DELETE removes the user or only disables it, and whether disabling frees the user licence, is not documented.",
+  "The SCIM base URL pattern and supported filters, pagination and PUT vs PATCH are not published; the tenant URL is shown in the admin console.",
+  "Exact SCIM target attribute names are only shown in screenshots on the Entra setup page.",
+  "Whether Qlik Cloud creates users just-in-time on first SSO sign-in is not stated on the pages read.",
+  "No Qlik Cloud app found in the Entra gallery, Google, OneLogin or JumpCloud catalogues."
+ ]
+}

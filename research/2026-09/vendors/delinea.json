@@ -1,0 +1,838 @@
+{
+ "slug": "delinea",
+ "vendor": "Delinea",
+ "vendor_url": "https://delinea.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Delinea",
+  "slug": "delinea",
+  "category": "Security & Identity",
+  "status": "gated",
+  "scim_plan": "Delinea Platform (Contact Sales)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": null,
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Delinea Platform (Contact Sales)",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://delinea.com/buy-try",
+  "docs_url": "https://docs.delinea.com/online-help/delinea-platform/scim/scim-connector.htm",
+  "evidence": "Delinea publishes no prices (its Buy/Try page offers only free trials and sales contact), while its docs say the Delinea SCIM Cloud \"enables IAM/IGA providers to securely integrate with the Delinea Platform using the SCIM 2.0 protocol\".",
+  "notes": "Quote-only: Delinea lists no plans or prices; delinea.com/pricing is 404 and the Buy/Try page only offers 30-day trials, demos and sales contact, so SCIM can only be bought through sales. Scored on the Delinea Platform (the cloud admin product that hosts Secret Server on the Platform, Privilege Manager and the rest). The Platform's SCIM Cloud connector (https://<tenant>.delinea.app/scim/v2, OAuth2 client-credentials token from a service user) documents create, read, PUT/PATCH update, deactivate (active=false) and DELETE for Users plus full Groups CRUD and membership, with Entra ID and Okta guides (both custom/non-gallery or generic SCIM template apps, so idp is via_generic) and SailPoint-style IGA use; it also exposes PAM-extension Containers/PrivilegedData/ContainerPermissions resources. SCIM role support is not implemented yet. Delinea also has an older self-installed 'On-Prem SCIM' for Secret Server. SAML/OIDC federation is documented for Okta, OneLogin, Google and others. Okta's OIN 'Delinea Secret Server' app is SAML only; Microsoft's gallery has a Secret Server (on-premises) SSO tutorial. A non-SCIM Identity REST API (OAuth2 bearer) covers user create/update/state/remove and local groups.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Delinea Platform (quote-only)",
+   "price_text": "Contact sales (no public pricing; 30-day free trials)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c1",
+    "c2",
+    "c33",
+    "c18",
+    "c37",
+    "c47"
+   ],
+   "notes": "No public tier table. SSO, SCIM and APIs are documented for the Delinea Platform without any plan gate being stated."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c18",
+   "c3",
+   "c9",
+   "c26"
+  ],
+  "plan": "Delinea Platform (Contact Sales)",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://<your-hostname>.delinea.app/scim/v2",
+  "auth": {
+   "method": "oauth2",
+   "token_source": "Access > Users > More > Add Service User (OAuth2 client credentials; token from https://<your-hostname>.delinea.app/identity/api/oauth2/token/xpmplatform with scope xpmheadless)",
+   "token_expiry": "Access token expires_in 3609 seconds in the documented example; refresh token typically 12 hours",
+   "cite": [
+    "c21",
+    "c22",
+    "c19",
+    "c9"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c23",
+    "c24",
+    "c30"
+   ],
+   "notes": "Also documents PAM-extension resources: /scim/v2/Containers, /PrivilegedData, /ContainerPermissions, /PrivilegedDataPermissions."
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c25",
+    "c6",
+    "c7",
+    "c8",
+    "c4",
+    "c5"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Entra and Okta send PATCH active=false to disable the user; Entra later sends DELETE (hard delete) 30 days after a soft delete.",
+   "cite": [
+    "c6",
+    "c7",
+    "c11"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName",
+    "displayName",
+    "externalId",
+    "displayName (Groups)"
+   ],
+   "cite": [
+    "c23",
+    "c30"
+   ],
+   "notes": "Only eq and co operators; Entra docs also show externalId eq queries."
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c24",
+    "c12"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "id",
+    "userName",
+    "displayName",
+    "emails (first only)",
+    "phoneNumbers (first only)",
+    "active",
+    "password",
+    "groups",
+    "externalId"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "id",
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c27",
+    "c28",
+    "c29",
+    "c15"
+   ],
+   "notes": "Docs say the standard User and EnterpriseUser schemas are supported but list no enterprise-extension attributes. The Platform keeps no separate first/last name, so Okta must map them. userName comes from the Entra and Okta endpoint pages."
+  },
+  "roles": {
+   "supported": false,
+   "how": "Role support (Get Roles / Get Role by ID) is planned but not implemented; groups sync as Platform groups.",
+   "cite": [
+    "c31"
+   ]
+  },
+  "rate_limits": {
+   "text": "No server rate limit documented; Okta enforces a 60-second timeout per SCIM request, so batches of 50-100 users are recommended.",
+   "cite": [
+    "c17"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Changing userName in Okta suspends the existing Platform user and creates a new one.",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "text": "Okta setup needs an Okta SAML app as the container for SCIM (AIW method uses PUT only; OIN SCIM 2.0 template uses PATCH).",
+    "cite": [
+     "c16",
+     "c13"
+    ]
+   },
+   {
+    "text": "Only the first email and first phone number in the arrays are processed.",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "text": "SCIM role endpoints are not yet implemented (\"once SCIM Cloud enters public preview\").",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "text": "Changes made directly in the Platform can be overwritten by the next IdP sync.",
+    "cite": [
+     "c20"
+    ]
+   }
+  ],
+  "notes": "Base URL as documented in the Entra and Okta configuration pages."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c37",
+   "c44",
+   "c38"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://{tenantHostname}.delinea.app/identity",
+  "docs_url": "https://docs.delinea.com/online-help/platform-api/identity.htm",
+  "auth": {
+   "methods": [
+    "oauth2"
+   ],
+   "scopes": [
+    "xpmheadless"
+   ],
+   "cite": [
+    "c22",
+    "c19"
+   ],
+   "notes": "Bearer JWT from the OAuth2 client-credentials grant of a Platform service user."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c38",
+    "c39",
+    "c40",
+    "c41",
+    "c42",
+    "c43",
+    "c45",
+    "c46"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/api/CDirectoryService/CreateUser",
+    "purpose": "Create a new user in the Cloud Directory Service",
+    "cite": [
+     "c38"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/CDirectoryService/GetUsers",
+    "purpose": "Get all cloud users",
+    "cite": [
+     "c42"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/CDirectoryService/ChangeUser",
+    "purpose": "Change cloud user properties",
+    "cite": [
+     "c45"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/CDirectoryService/SetUserState",
+    "purpose": "Set user state (locked, disabled, expired)",
+    "cite": [
+     "c39"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/entities/users/{idOrName}",
+    "purpose": "Fetch a user by id or name",
+    "cite": [
+     "c46"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/UserMgmt/InviteUsers",
+    "purpose": "Invite one or more users to the cloud portal",
+    "cite": [
+     "c40"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/UserMgmt/RemoveUser",
+    "purpose": "Remove a user from the cloud",
+    "cite": [
+     "c41"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/LocalGroups/AddUsersAndGroupsToLocalGroup",
+    "purpose": "Add principals to a local group",
+    "cite": [
+     "c43"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": null,
+   "cite": [
+    "c47"
+   ],
+   "notes": "GET /api/audit-events on https://{tenantHostname}.delinea.app/audit."
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "Endpoints from the Identity OpenAPI file linked from the Platform API reference (docs.delinea.com/online-help/platform-api/identity.htm). Secret Server also has its own REST API, not recorded here."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": "vendor",
+   "url": "https://www.okta.com/integrations/delinea-secret-server/",
+   "cite": [
+    "c35",
+    "c13"
+   ],
+   "notes": "OIN lists Delinea Secret Server with SAML only (last updated Jul 28 2023). Delinea Platform SCIM with Okta uses an AIW SAML app or the generic SCIM 2.0 template app, not a Delinea catalogue app."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/secretserver-on-premises-tutorial",
+   "cite": [
+    "c36",
+    "c10"
+   ],
+   "notes": "Microsoft gallery tutorial covers Secret Server (on-premises) SSO only. Delinea Platform SCIM with Entra uses a non-gallery app."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": "https://docs.delinea.com/online-help/integrations/onelogin/onelogin-delinea-platform.htm",
+   "cite": [
+    "c34"
+   ],
+   "notes": "From Delinea's own guide: SAML/OIDC federation with OneLogin; no OneLogin SCIM setup documented."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": "Active Directory connector and Microsoft Entra ID direct API integration as identity sources; older self-installed On-Prem SCIM for Secret Server",
+  "docs_public": true,
+  "cite": [
+   "c32",
+   "c33"
+  ]
+ },
+ "conflicts": [],
+ "searched": [
+  "https://delinea.com/pricing (404)",
+  "https://delinea.com/buy-try",
+  "https://delinea.com/sitemap.xml",
+  "https://docs.delinea.com/online-help/library/sitemap_htm.xml (scim, provisioning)",
+  "https://docs.delinea.com/online-help/platform-api/identity.htm and identity/audit OpenAPI JSON",
+  "https://www.okta.com/integrations/?search=delinea",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/ (delinea-*, thycotic-*, secretserver-on-premises-tutorial)"
+ ],
+ "open_questions": [
+  "No public pricing: which Delinea Platform packages include SCIM, SSO and API access is not stated.",
+  "Whether SCIM deactivation frees a licence or ends active sessions is not documented.",
+  "Whether ServiceProviderConfig, Schemas and ResourceTypes discovery endpoints exist is not documented.",
+  "SCIM Cloud FAQ says role support comes \"once SCIM Cloud enters public preview\", suggesting the connector may still be pre-GA."
+ ],
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://delinea.com/buy-try",
+   "title": "Try For Free, or Buy Delinea's PAM Products",
+   "quote": "Ready to get started with one of our Identity Security solutions?",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://delinea.com/buy-try",
+   "title": "Try For Free, or Buy Delinea's PAM Products",
+   "quote": "Try one free for 30 days.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://docs.delinea.com/online-help/delinea-platform/identity-providers/entra-id/entra-id-scim-provisioning-overview.htm",
+   "title": "Microsoft Entra ID SCIM Provisioning Integration",
+   "quote": "provides SCIM 2.0-based user and group provisioning using the SCIM Cloud Connector",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://docs.delinea.com/online-help/delinea-platform/identity-providers/entra-id/entra-id-scim-provisioning-overview.htm",
+   "title": "Microsoft Entra ID SCIM Provisioning Integration",
+   "quote": "Deprovision (disable and delete) user accounts",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://docs.delinea.com/online-help/delinea-platform/identity-providers/entra-id/entra-id-scim-provisioning-overview.htm",
+   "title": "Microsoft Entra ID SCIM Provisioning Integration",
+   "quote": "Manage user groups (add, update, and delete users from a group)",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://docs.delinea.com/online-help/delinea-platform/identity-providers/entra-id/entra-id-scim-provisioning-scim-endpoints.htm",
+   "title": "Supported SCIM Endpoints",
+   "quote": "Disable (soft-delete) a user. When a user is unassigned from the application or soft-deleted in Microsoft Entra ID, a PATCH sets active to false",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://docs.delinea.com/online-help/delinea-platform/identity-providers/entra-id/entra-id-scim-provisioning-scim-endpoints.htm",
+   "title": "Supported SCIM Endpoints",
+   "quote": "Delete a (hard-delete) user. When a user is permanently deleted from Microsoft Entra Entra (30 days after a soft-delete), a DELETE request is sent.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.delinea.com/online-help/delinea-platform/identity-providers/entra-id/entra-id-scim-provisioning-scim-endpoints.htm",
+   "title": "Supported SCIM Endpoints",
+   "quote": "Microsoft Entra ID sends a PATCH with Add operation on the members path, providing user value (SCIM ID) to add.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.delinea.com/online-help/delinea-platform/identity-providers/entra-id/entra-id-scim-provisioning-configuration.htm",
+   "title": "Configuration (Microsoft Entra ID SCIM)",
+   "quote": "Authentication Method : Select OAuth2 Client Credential Grant",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.delinea.com/online-help/delinea-platform/identity-providers/entra-id/entra-id-scim-provisioning-configuration.htm",
+   "title": "Configuration (Microsoft Entra ID SCIM)",
+   "quote": "Select Integrate any other application you don’t find in the gallery",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.delinea.com/online-help/delinea-platform/scim/okta-scim-provisioning/okta-scim-endpoint-reference.htm",
+   "title": "Okta SCIM Endpoint Reference for the Platform",
+   "quote": "Okta does NOT send a DELETE for deactivation.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.delinea.com/online-help/delinea-platform/scim/okta-scim-provisioning/okta-scim-endpoint-reference.htm",
+   "title": "Okta SCIM Endpoint Reference for the Platform",
+   "quote": "Okta pages through results using startIndex increments of 100.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.delinea.com/online-help/delinea-platform/scim/okta-scim-provisioning/okta-scim-provisioning-platform-configuration.htm",
+   "title": "Configuration (Okta SCIM)",
+   "quote": "You can use one of two supported methods for configuring SCIM provisioning in Okta.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.delinea.com/online-help/delinea-platform/scim/okta-scim-provisioning/okta-scim-provisioning-platform-configuration.htm",
+   "title": "Configuration (Okta SCIM)",
+   "quote": "If the username is updated in Okta, the existing user account in the Platform is automatically suspended, and a new account is created with the updated username.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.delinea.com/online-help/delinea-platform/scim/okta-scim-provisioning/okta-scim-provisioning-platform-configuration.htm",
+   "title": "Configuration (Okta SCIM)",
+   "quote": "Since the Platform does not maintain separate first name and last name attributes, you must configure these user attributes by using attribute mappings in Okta.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.delinea.com/online-help/delinea-platform/scim/okta-scim-provisioning/okta-scim-provisioning-platform-configuration.htm",
+   "title": "Configuration (Okta SCIM)",
+   "quote": "You need to create Okta SAML Application in Okta before configuring SCIM provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.delinea.com/online-help/delinea-platform/scim/okta-scim-provisioning/okta-scim-provisioning-platform-faq.htm",
+   "title": "Frequently Asked Questions About Okta SCIM Provisioning",
+   "quote": "Okta enforces a strict 60-second timeout on all SCIM requests.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.delinea.com/online-help/delinea-platform/scim/scim-connector.htm",
+   "title": "Delinea SCIM",
+   "quote": "enables IAM/IGA providers to securely integrate with the Delinea Platform using the SCIM 2.0 protocol.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.delinea.com/online-help/delinea-platform/scim/scim-connector.htm",
+   "title": "Delinea SCIM",
+   "quote": "Authentication is managed via OAuth using client credentials to ensure secure access.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.delinea.com/online-help/delinea-platform/scim/scim-connector.htm",
+   "title": "Delinea SCIM",
+   "quote": "Changes made directly in the Delinea Platform may be overwritten during the next synchronization cycle or cause sync conflicts.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.delinea.com/online-help/delinea-platform/scim/scim-connector-configuration.htm",
+   "title": "Configuring SCIM",
+   "quote": "Navigate to Access > Users > More > Add Service User",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c22",
+   "url": "https://docs.delinea.com/online-help/delinea-platform/scim/scim-connector-configuration.htm",
+   "title": "Configuring SCIM",
+   "quote": "session_expires_in — Refresh token lifetime in seconds (typically 12 hours).",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c23",
+   "url": "https://docs.delinea.com/online-help/delinea-platform/scim/scim-connector-configuration.htm",
+   "title": "Configuring SCIM",
+   "quote": "Filter users by attributes (userName, displayName). Only eq and co operators supported",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c24",
+   "url": "https://docs.delinea.com/online-help/delinea-platform/scim/scim-connector-configuration.htm",
+   "title": "Configuring SCIM",
+   "quote": "Retrieve all users (supports pagination)",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c25",
+   "url": "https://docs.delinea.com/online-help/delinea-platform/scim/scim-connector-configuration.htm",
+   "title": "Configuring SCIM",
+   "quote": "Replace entire user object",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c26",
+   "url": "https://docs.delinea.com/online-help/delinea-platform/scim/scim-connector-configuration.htm",
+   "title": "Configuring SCIM",
+   "quote": "Supported Attributes Delinea supports the SCIM 2.0 protocol as well as the SCIM PAM Extension.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c27",
+   "url": "https://docs.delinea.com/online-help/delinea-platform/scim/scim-connector-configuration.htm",
+   "title": "Configuring SCIM",
+   "quote": "Delinea SCIM Cloud supports the standard SCIM User and EnterpriseUser schemas.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c28",
+   "url": "https://docs.delinea.com/online-help/delinea-platform/scim/scim-connector-configuration.htm",
+   "title": "Configuring SCIM",
+   "quote": "emails Only the first email in the array is processed. phoneNumbers Only the first phone number in the array is processed. active Used for enabling/disabling user accounts.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c29",
+   "url": "https://docs.delinea.com/online-help/delinea-platform/scim/scim-connector-configuration.htm",
+   "title": "Configuring SCIM",
+   "quote": "displayName Name of the group. members Array of users or groups assigned to the group.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c30",
+   "url": "https://docs.delinea.com/online-help/delinea-platform/scim/scim-connector-configuration.htm",
+   "title": "Configuring SCIM",
+   "quote": "Filter groups by attributes (displayName). Only eq and co operators supported",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c31",
+   "url": "https://docs.delinea.com/online-help/delinea-platform/scim/scim-connector-faq.htm",
+   "title": "Frequently Asked Questions About SCIM",
+   "quote": "Role support is planned for a future release and will be added once SCIM Cloud enters public preview.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c32",
+   "url": "https://docs.delinea.com/online-help/delinea-platform/scim/scim-connector-faq.htm",
+   "title": "Frequently Asked Questions About SCIM",
+   "quote": "Use SCIM Cloud whenever possible for cloud IAM/IGA integrations due to simplicity, security, and managed infrastructure.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c33",
+   "url": "https://docs.delinea.com/online-help/delinea-platform/federation/okta.htm",
+   "title": "Okta (Delinea Platform federation)",
+   "quote": "This documentation is a detailed guide for setting up single sign-on (SSO) through Okta, leveraging SAML 2.0 or OIDC.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c34",
+   "url": "https://docs.delinea.com/online-help/integrations/onelogin/onelogin-delinea-platform.htm",
+   "title": "Integrating OneLogin with the Delinea Platform",
+   "quote": "The Delinea Platform integrates with OneLogin via SAML and OIDC using a federation service.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c35",
+   "url": "https://www.okta.com/integrations/delinea-secret-server/",
+   "title": "Delinea Secret Server | Okta Integration Network",
+   "quote": "Protect your privileged accounts with our enterprise-grade Privileged Access Management (PAM) solution. Available both on-premise or on the cloud-native Delinea Platform.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c36",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/secretserver-on-premises-tutorial",
+   "title": "Configure Secret Server (on-premises) for Single sign-on with Microsoft Entra ID",
+   "quote": "Secret Server (on-premises) supports SP and IDP initiated SSO.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c37",
+   "url": "https://docs.delinea.com/online-help/delinea-platform/api/index.htm",
+   "title": "Platform APIs",
+   "quote": "You can use Platform APIs for authentication, and you can also use Secret Server APIs from the Platform.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c38",
+   "url": "https://delineaapidocsprod.blob.core.windows.net/api-docs/identity.publicapi.json",
+   "title": "Delinea API (identity.publicapi.json)",
+   "quote": "Create a new user in the Cloud Directory Service.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.delinea.com/online-help/platform-api/identity.htm"
+  },
+  {
+   "id": "c39",
+   "url": "https://delineaapidocsprod.blob.core.windows.net/api-docs/identity.publicapi.json",
+   "title": "Delinea API (identity.publicapi.json)",
+   "quote": "Set user State (locked, disabled, expired) for a specified cloud user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.delinea.com/online-help/platform-api/identity.htm"
+  },
+  {
+   "id": "c40",
+   "url": "https://delineaapidocsprod.blob.core.windows.net/api-docs/identity.publicapi.json",
+   "title": "Delinea API (identity.publicapi.json)",
+   "quote": "Invite one or more users to the cloud portal.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.delinea.com/online-help/platform-api/identity.htm"
+  },
+  {
+   "id": "c41",
+   "url": "https://delineaapidocsprod.blob.core.windows.net/api-docs/identity.publicapi.json",
+   "title": "Delinea API (identity.publicapi.json)",
+   "quote": "Remove a user from the cloud.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.delinea.com/online-help/platform-api/identity.htm"
+  },
+  {
+   "id": "c42",
+   "url": "https://delineaapidocsprod.blob.core.windows.net/api-docs/identity.publicapi.json",
+   "title": "Delinea API (identity.publicapi.json)",
+   "quote": "Get all cloud users.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.delinea.com/online-help/platform-api/identity.htm"
+  },
+  {
+   "id": "c43",
+   "url": "https://delineaapidocsprod.blob.core.windows.net/api-docs/identity.publicapi.json",
+   "title": "Delinea API (identity.publicapi.json)",
+   "quote": "Add principals to localgroup.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.delinea.com/online-help/platform-api/identity.htm"
+  },
+  {
+   "id": "c44",
+   "url": "https://delineaapidocsprod.blob.core.windows.net/api-docs/identity.publicapi.json",
+   "title": "Delinea API (identity.publicapi.json)",
+   "quote": "https://{tenantHostname}.delinea.app/identity",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.delinea.com/online-help/platform-api/identity.htm"
+  },
+  {
+   "id": "c45",
+   "url": "https://delineaapidocsprod.blob.core.windows.net/api-docs/identity.publicapi.json",
+   "title": "Delinea API (identity.publicapi.json)",
+   "quote": "Change cloud user properties.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.delinea.com/online-help/platform-api/identity.htm"
+  },
+  {
+   "id": "c46",
+   "url": "https://delineaapidocsprod.blob.core.windows.net/api-docs/identity.publicapi.json",
+   "title": "Delinea API (identity.publicapi.json)",
+   "quote": "Fetch a user by id or name",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.delinea.com/online-help/platform-api/identity.htm"
+  },
+  {
+   "id": "c47",
+   "url": "https://delineaapidocsprod.blob.core.windows.net/api-docs/audit.publicapi.json",
+   "title": "Delinea API (audit.publicapi.json)",
+   "quote": "Gets audit events",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.delinea.com/online-help/platform-api/audit.htm"
+  }
+ ]
+}

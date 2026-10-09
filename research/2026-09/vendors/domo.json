@@ -1,0 +1,787 @@
+{
+ "slug": "domo",
+ "vendor": "Domo (Progress)",
+ "vendor_url": "https://www.domo.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Domo (Progress)",
+  "slug": "domo",
+  "category": "Data, Analytics & BI",
+  "status": "gated",
+  "scim_plan": "Custom Pricing (quote-only)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Custom Pricing",
+  "team_price_text": "Contact Sales (credit-based consumption pricing)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": "sso_only",
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.domo.com/pricing",
+  "docs_url": "https://www.domo.com/docs/s/article/000005241",
+  "evidence": "Domo's Knowledge Base documents SCIM endpoints at {YourDomoSubdomain}.domo.com/api/identity/v1/scim for users and directory groups, while the pricing page offers only a 30-day free trial and quote-based Custom Pricing (\"Only pay for what you use\").",
+  "notes": "Quote-only: Domo sells on credit-based consumption pricing with no public plan table (30-day free trial, then Custom Pricing via sales); which contract terms include SCIM or SSO is not published. Progress Software has acquired Domo's AI and Data Platform business; the product is still sold as Domo. SCIM is a generic SCIM 2.0 API configured on the IdP side with a Domo access token (Okta and Entra mappings documented; the Okta OIN and Entra gallery apps are SSO only). Setting active=false or DELETE deletes the user, and deletion fails if the user owns DataSets or DataFlows. SCIM manages only directory groups. JIT via SAML/OIDC SSO is on by default; deleting a user in the IdP does not delete them in Domo without SCIM or the API.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "30-day Free Trial",
+   "price_text": "Free for 30 days, no credit card",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c2"
+   ],
+   "notes": "Full platform, unlimited users."
+  },
+  {
+   "name": "Custom Pricing",
+   "price_text": "Quote-based, credit consumption",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c3"
+   ],
+   "notes": "Everything in the free trial plus dedicated account team, volume discounts, custom add-ons, support packages."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c5",
+   "c7",
+   "c8"
+  ],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://{YourDomoSubdomain}.domo.com/api/identity/v1/scim",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Domo access token generated in Admin (Authentication > Access tokens), owned by a user with Manage All Users / Roles / Groups grants",
+   "token_expiry": "admin-selected days/years",
+   "cite": [
+    "c6",
+    "c19",
+    "c22"
+   ],
+   "notes": "Also accepts X-Domo-Developer-Token header. Version 2.0 inferred from the SCIM 2.0 schema URNs in the examples."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": true,
+   "Schemas": true,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c7",
+    "c8"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c10",
+    "c12",
+    "c13",
+    "c36"
+   ],
+   "notes": "PATCH Users is marked Beta. 'deactivate' (active=false) actually deletes the user."
+  },
+  "deprovision": {
+   "action": "delete",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "User is deleted; deletion fails while the user owns DataSets or DataFlows, which must be reassigned first.",
+   "cite": [
+    "c9",
+    "c10"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [],
+   "cite": [
+    "c11"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c11"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "displayName",
+    "emails (primary, alternate)",
+    "active",
+    "roles",
+    "title",
+    "phoneNumbers (mobile, work)",
+    "locale",
+    "timezone",
+    "groups"
+   ],
+   "enterprise": [
+    "employeeNumber",
+    "department",
+    "organization",
+    "manager"
+   ],
+   "custom": {
+    "supported": true,
+    "how": "urn:ietf:params:scim:schemas:extension:custom:2.0:User customAttributes [{key, values}] for attributes predefined in Domo; Domo extension urn:ietf:params:scim:schemas:extension:domo:2.0:User adds hireDate and employeeLocation"
+   },
+   "group": [
+    "displayName",
+    "members",
+    "domoDisplayName (Domo extension)",
+    "description (Domo extension)"
+   ],
+   "cite": [
+    "c14",
+    "c15",
+    "c16",
+    "c21"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "Single-valued SCIM roles attribute carrying a Domo role ID",
+   "cite": [
+    "c15"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "name.givenName / name.familyName are ignored; Domo uses displayName.",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "text": "SCIM only manages directory groups.",
+    "cite": [
+     "c13"
+    ]
+   },
+   {
+    "text": "Users who own DataSets or DataFlows cannot be deleted (or set inactive) via SCIM.",
+    "cite": [
+     "c9",
+     "c10"
+    ]
+   },
+   {
+    "text": "Entra cannot sync multi-valued custom attributes.",
+    "cite": [
+     "c17"
+    ]
+   },
+   {
+    "text": "Okta keeps Domo IDs per app, so one Okta app per Domo instance is recommended.",
+    "cite": [
+     "c20"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c27",
+   "c28"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://api.domo.com",
+  "docs_url": "https://www.domo.com/docs/portal/API-Reference/Domo-APIs/User-API",
+  "auth": {
+   "methods": [
+    "oauth2"
+   ],
+   "scopes": [
+    "account",
+    "audit",
+    "buzz",
+    "dashboard",
+    "data",
+    "user"
+   ],
+   "cite": [
+    "c31"
+   ],
+   "notes": "OAuth2 client-credentials grant with a client ID and secret from the Developer Portal."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c27",
+    "c29",
+    "c35"
+   ],
+   "notes": "assign_roles via the role property (Admin, Privileged, Participant). No DELETE user endpoint appears in the User API spec."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/v1/users/{id}",
+    "purpose": "Retrieve a user",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/v1/users/{id}",
+    "purpose": "Update a user",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/users",
+    "purpose": "Create a user",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/users",
+    "purpose": "List users",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/groups/{group_id}",
+    "purpose": "Retrieve a group",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/v1/groups/{group_id}",
+    "purpose": "Update a group",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v1/groups/{group_id}",
+    "purpose": "Delete a group",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/groups",
+    "purpose": "List groups",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/groups",
+    "purpose": "Create a group",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/v1/groups/{group_id}/users/{user_id}",
+    "purpose": "Add a user to a group",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v1/groups/{group_id}/users/{user_id}",
+    "purpose": "Remove a user from a group",
+    "cite": [
+     "c35"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/groups/{group_id}/users",
+    "purpose": "List users in a group",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/audit",
+    "purpose": "Retrieve Activity Log Entries",
+    "cite": [
+     "c30"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": null,
+   "cite": [
+    "c30",
+    "c31"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/domo/",
+   "cite": [
+    "c32",
+    "c20"
+   ],
+   "notes": "OIN page markup has SAML, SWA and OIDC checked, SCIM and provisioning unchecked. Domo's SCIM doc gives Okta attribute mappings for a SCIM app configured on the Okta side."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/domo-tutorial",
+   "cite": [
+    "c33",
+    "c17"
+   ],
+   "notes": "Gallery tutorial covers SAML SSO with JIT; no Entra provisioning tutorial (domo-provisioning-tutorial 404). Domo's SCIM doc gives Entra mappings."
+  },
+  "google": {
+   "listed": true,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c34"
+   ],
+   "notes": "Domo's guide selects Domo from the Google Admin SAML app list; source is Domo's page, not Google's."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "both",
+  "csv_import": true,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c23",
+   "c24",
+   "c26",
+   "c33"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.domo.com/pricing",
+   "title": "Domo Consumption-based Pricing | Domo",
+   "quote": "Just straightforward credit-based pricing that adapts to your business needs.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.domo.com/pricing",
+   "title": "Domo Consumption-based Pricing | Domo",
+   "quote": "Try out the Domo platform for 30 days. No credit card required.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.domo.com/pricing",
+   "title": "Domo Consumption-based Pricing | Domo",
+   "quote": "Only pay for what you use and scale with confidence.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.domo.com/pricing",
+   "title": "Domo Consumption-based Pricing | Domo",
+   "quote": "Progress Software Completes Acquisition of Domo's AI and Data Platform Business",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.domo.com/docs/s/article/000005241.md",
+   "title": "SCIM (System for Cross-domain Identity Management) in Domo",
+   "quote": "However, with SCIM, you can configure your identity provider (IdP) to create and/or update users and groups in Domo when those users and groups are created and modified in your IdP.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.domo.com/docs/s/article/000005241"
+  },
+  {
+   "id": "c6",
+   "url": "https://www.domo.com/docs/s/article/000005241.md",
+   "title": "SCIM (System for Cross-domain Identity Management) in Domo",
+   "quote": "Domo's SCIM endpoints use header-based authorization with a Domo access token.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.domo.com/docs/s/article/000005241"
+  },
+  {
+   "id": "c7",
+   "url": "https://www.domo.com/docs/s/article/000005241.md",
+   "title": "SCIM (System for Cross-domain Identity Management) in Domo",
+   "quote": "{YourDomoSubdomain}.domo.com/api/identity/v1/scim",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.domo.com/docs/s/article/000005241"
+  },
+  {
+   "id": "c8",
+   "url": "https://www.domo.com/docs/s/article/000005241.md",
+   "title": "SCIM (System for Cross-domain Identity Management) in Domo",
+   "quote": "Retrieves the SCIM features and functionality supported by Domo.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.domo.com/docs/s/article/000005241"
+  },
+  {
+   "id": "c9",
+   "url": "https://www.domo.com/docs/s/article/000005241.md",
+   "title": "SCIM (System for Cross-domain Identity Management) in Domo",
+   "quote": "If a user owns Domo DataSets or DataFlows, the user cannot be deleted via SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.domo.com/docs/s/article/000005241"
+  },
+  {
+   "id": "c10",
+   "url": "https://www.domo.com/docs/s/article/000005241.md",
+   "title": "SCIM (System for Cross-domain Identity Management) in Domo",
+   "quote": "Setting the \"active\" attribute to false via a PUT or PATCH request also deletes the user and is subject to the same restriction",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.domo.com/docs/s/article/000005241"
+  },
+  {
+   "id": "c11",
+   "url": "https://www.domo.com/docs/s/article/000005241.md",
+   "title": "SCIM (System for Cross-domain Identity Management) in Domo",
+   "quote": "Filter, requestedAttributes (comma-separated list of strings), startIndex (offset), count (limit), sortBy (choose a user attribute to sort by)",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.domo.com/docs/s/article/000005241"
+  },
+  {
+   "id": "c12",
+   "url": "https://www.domo.com/docs/s/article/000005241.md",
+   "title": "SCIM (System for Cross-domain Identity Management) in Domo",
+   "quote": "Partially updates a user's attributes as specified in the request body. Most user attributes can be added, replaced, or removed.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.domo.com/docs/s/article/000005241"
+  },
+  {
+   "id": "c13",
+   "url": "https://www.domo.com/docs/s/article/000005241.md",
+   "title": "SCIM (System for Cross-domain Identity Management) in Domo",
+   "quote": "The SCIM APIs only function on directory groups.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.domo.com/docs/s/article/000005241"
+  },
+  {
+   "id": "c14",
+   "url": "https://www.domo.com/docs/s/article/000005241.md",
+   "title": "SCIM (System for Cross-domain Identity Management) in Domo",
+   "quote": "The \"name\" complex attribute (givenName, familyName, etc.) is not supported and will be ignored.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.domo.com/docs/s/article/000005241"
+  },
+  {
+   "id": "c15",
+   "url": "https://www.domo.com/docs/s/article/000005241.md",
+   "title": "SCIM (System for Cross-domain Identity Management) in Domo",
+   "quote": "Domo supports a single role per user. Role is optional on both create (POST) and update (PUT).",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.domo.com/docs/s/article/000005241"
+  },
+  {
+   "id": "c16",
+   "url": "https://www.domo.com/docs/s/article/000005241.md",
+   "title": "SCIM (System for Cross-domain Identity Management) in Domo",
+   "quote": "Custom attributes must be defined in Domo before they can be populated via SCIM, and the key in the SCIM must match the attribute key in Domo exactly (case-sensitive).",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.domo.com/docs/s/article/000005241"
+  },
+  {
+   "id": "c17",
+   "url": "https://www.domo.com/docs/s/article/000005241.md",
+   "title": "SCIM (System for Cross-domain Identity Management) in Domo",
+   "quote": "Note that Entra does not support syncing multi-valued custom attributes.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.domo.com/docs/s/article/000005241"
+  },
+  {
+   "id": "c18",
+   "url": "https://www.domo.com/docs/s/article/000005241.md",
+   "title": "SCIM (System for Cross-domain Identity Management) in Domo",
+   "quote": "The SCIM integration between your IdP and Domo is configured on the IdP side.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.domo.com/docs/s/article/000005241"
+  },
+  {
+   "id": "c19",
+   "url": "https://www.domo.com/docs/s/article/000005241.md",
+   "title": "SCIM (System for Cross-domain Identity Management) in Domo",
+   "quote": "This grant allows the holder to create, edit, and delete any user and reset their password.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.domo.com/docs/s/article/000005241"
+  },
+  {
+   "id": "c20",
+   "url": "https://www.domo.com/docs/s/article/000005241.md",
+   "title": "SCIM (System for Cross-domain Identity Management) in Domo",
+   "quote": "we recommend creating a new Okta app for each Domo instance and not changing the target instance URL after creation.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.domo.com/docs/s/article/000005241"
+  },
+  {
+   "id": "c21",
+   "url": "https://www.domo.com/docs/s/article/000005241.md",
+   "title": "SCIM (System for Cross-domain Identity Management) in Domo",
+   "quote": "Domo's SCIM endpoints map elements from six SCIM schemas.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.domo.com/docs/s/article/000005241"
+  },
+  {
+   "id": "c22",
+   "url": "https://www.domo.com/docs/s/article/360042934494.md",
+   "title": "Access tokens",
+   "quote": "select the number of days/years before the token expires.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.domo.com/docs/s/article/360042934494"
+  },
+  {
+   "id": "c23",
+   "url": "https://www.domo.com/docs/s/article/000005827.md",
+   "title": "Domo SSO",
+   "quote": "Domo supports single sign-on (SSO) using two protocols: Security Assertion Markup Language 2.0 (SAML) and OpenID Connect (OIDC).",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.domo.com/docs/s/article/000005827"
+  },
+  {
+   "id": "c24",
+   "url": "https://www.domo.com/docs/s/article/000005827.md",
+   "title": "Domo SSO",
+   "quote": "Depending on your configuration, SSO can also auto-provision Domo users and assign them their user role, attributes, and group membership.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.domo.com/docs/s/article/000005827"
+  },
+  {
+   "id": "c25",
+   "url": "https://www.domo.com/docs/s/article/360042934334.md",
+   "title": "Remove Users from Domo",
+   "quote": "If you use SSO, deleting the user from your IdP will NOT delete the user in Domo.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.domo.com/docs/s/article/360042934334"
+  },
+  {
+   "id": "c26",
+   "url": "https://www.domo.com/docs/s/article/360042934274.md",
+   "title": "Add Users to Domo",
+   "quote": "You can add/edit users or groups in bulk by uploading a CSV file containing the information for all the users or groups you want to add/replace.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.domo.com/docs/s/article/360042934274"
+  },
+  {
+   "id": "c27",
+   "url": "https://www.domo.com/docs/portal/API-Reference/Domo-APIs/User-API.yaml",
+   "title": "User API",
+   "quote": "The API allows you to create, retrieve a user or a list of users, and update user information.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.domo.com/docs/portal/API-Reference/Domo-APIs/User-API"
+  },
+  {
+   "id": "c28",
+   "url": "https://www.domo.com/docs/portal/API-Reference/Domo-APIs/User-API.yaml",
+   "title": "User API",
+   "quote": "https://api.domo.com",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.domo.com/docs/portal/API-Reference/Domo-APIs/User-API"
+  },
+  {
+   "id": "c29",
+   "url": "https://www.domo.com/docs/portal/API-Reference/Domo-APIs/Group-API.yaml",
+   "title": "Group API",
+   "quote": "Add a user to a group",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.domo.com/docs/portal/API-Reference/Domo-APIs/Group-API"
+  },
+  {
+   "id": "c30",
+   "url": "https://www.domo.com/docs/portal/API-Reference/Domo-APIs/Activity-Log-API.yaml",
+   "title": "Activity Log API",
+   "quote": "Retrieve Activity Log Entries",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.domo.com/docs/portal/API-Reference/Domo-APIs/Activity-Log-API"
+  },
+  {
+   "id": "c31",
+   "url": "https://www.domo.com/docs/portal/API-Reference/Domo-APIs/API-Authentication.yaml",
+   "title": "API Authentication",
+   "quote": "The value is a space separated list of strings containing any of the following scopes: account, audit, buzz, dashboard, data, and user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.domo.com/docs/portal/API-Reference/Domo-APIs/API-Authentication"
+  },
+  {
+   "id": "c32",
+   "url": "https://www.okta.com/integrations/domo/",
+   "title": "Integrate Domo with Okta",
+   "quote": "Simple and secure identity management for your Domo users through Okta SSO",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/domo-tutorial",
+   "title": "Microsoft Entra SSO integration with Domo",
+   "quote": "Domo supports Just In Time user provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://www.domo.com/docs/s/article/360043438053.md",
+   "title": "Enabling SSO with Google",
+   "quote": "Follow the steps in this article to configure Google as a SAML identity provider for Domo.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.domo.com/docs/s/article/360043438053"
+  },
+  {
+   "id": "c35",
+   "url": "https://www.domo.com/docs/portal/API-Reference/Domo-APIs/Group-API.yaml",
+   "title": "Group API",
+   "quote": "Remove a user from a group",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.domo.com/docs/portal/API-Reference/Domo-APIs/Group-API"
+  },
+  {
+   "id": "c36",
+   "url": "https://www.domo.com/docs/s/article/000005241.md",
+   "title": "SCIM (System for Cross-domain Identity Management) in Domo",
+   "quote": "Deletes the specified Domo user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.domo.com/docs/s/article/000005241"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.domo.com/pricing",
+  "https://www.domo.com/docs/llms.txt",
+  "https://www.domo.com/docs/_llms/en/knowledge-base.md",
+  "https://www.domo.com/docs/s/article/000005241.md",
+  "https://www.domo.com/docs/s/article/000005827.md",
+  "https://www.domo.com/docs/portal/API-Reference/Domo-APIs/User-API.yaml",
+  "https://www.okta.com/integrations/domo/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/domo-tutorial",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/domo-provisioning-tutorial (404)"
+ ],
+ "open_questions": [
+  "Which Domo contracts/editions include SCIM and SSO is not published (pricing is quote-only).",
+  "Whether SCIM deletion frees a licence (Domo advertises unlimited users on consumption pricing) is not documented.",
+  "SCIM and API rate limits are not documented.",
+  "Supported SCIM filter attributes/operators and max page size are not documented.",
+  "No user DELETE endpoint is listed in the public User API spec, though the Remove Users article points to 'the Domo API' for deletion."
+ ]
+}

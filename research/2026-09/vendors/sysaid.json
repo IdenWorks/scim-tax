@@ -1,0 +1,769 @@
+{
+ "slug": "sysaid",
+ "vendor": "SysAid",
+ "vendor_url": "https://www.sysaid.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "SysAid",
+  "slug": "sysaid",
+  "category": "IT Management & Endpoint",
+  "status": "none",
+  "scim_plan": "—",
+  "scim_price_text": "—",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Professional",
+  "team_price_text": "Professional: $89/agent/mo (billing period not stated)",
+  "team_price_per_user_mo": 89,
+  "price_multiplier": null,
+  "sso_plan": "Professional",
+  "sso_price_per_user_mo": 89,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": null,
+   "update": null,
+   "deactivate": null,
+   "delete": null,
+   "groups": null
+  },
+  "idp": {
+   "okta": "directory_sync",
+   "entra": "directory_sync",
+   "google": "directory_sync",
+   "onelogin": "directory_sync",
+   "jumpcloud": null,
+   "generic": false
+  },
+  "pricing_page_url": "https://www.sysaid.com/pricing",
+  "docs_url": "https://documentation.sysaid.com/docs/azure",
+  "evidence": "SysAid documents no SCIM endpoint: users come in through vendor-run repository syncs that pull from Entra ID (about every 24 hours), Okta, OneLogin, Google Workspace or LDAP, plus SAML SSO add-ons that can create users at first login.",
+  "notes": "New row. Professional $89 per agent/month (quote form; billing period not stated) and Enterprise custom from 20 agents. The pricing page lists MFA & SSO as a platform security feature, not per plan. No SCIM anywhere in the docs index or developer reference. Provisioning is SysAid-run pull sync (Marketplace add-ons): Entra ID (~24 h), Okta Repository (API token, custom interval), OneLogin Repository (~12 h, needs OneLogin SSO), Google User Repository (can disable deleted Google users) and LDAP. SAML SSO add-ons (Okta, OneLogin, Office 365, Entra SSO Connector) can JIT-create users. Okta's OIN SysAid app is SWA only. The REST API (OAuth client credentials, 24 h tokens) creates agents and end users, manages groups and deletes end users; it is listed as included on Professional and Enterprise. Webhooks cover service records only. CSV import covers end users only.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Professional",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Professional",
+   "price_text": "$89 agent/month (Get a quote)",
+   "price_per_user_mo": 89,
+   "billing": "unknown",
+   "sso": true,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c3",
+    "c4"
+   ],
+   "notes": "SSO from the page-wide 'MFA & SSO' security line; SSO is configured through Marketplace add-ons."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Custom, starting at 20 agents (Contact sales)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c3",
+    "c4"
+   ]
+  }
+ ],
+ "scim": {
+  "available": false,
+  "cite": [
+   "c11",
+   "c12",
+   "c17"
+  ],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": null,
+   "token_source": null,
+   "token_expiry": null,
+   "cite": []
+  },
+  "endpoints": {
+   "Users": null,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": []
+  },
+  "operations": {
+   "create": null,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": null,
+   "reactivate": null,
+   "delete": null,
+   "group_push": null,
+   "group_membership": null,
+   "cite": []
+  },
+  "deprovision": {
+   "action": null,
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": []
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": []
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "Not offered by absence: the documentation index (llms.txt) and developer reference contain no SCIM page or endpoint; directory integrations pull users from the IdP instead."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c17",
+   "c3",
+   "c35"
+  ],
+  "plan": "Professional",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://{account}.sysaidit.com/connect/v1",
+  "docs_url": "https://developers.sysaid.com/",
+  "auth": {
+   "methods": [
+    "oauth2"
+   ],
+   "scopes": [],
+   "cite": [
+    "c32"
+   ],
+   "notes": "App Key (client ID and secret) exchanged at POST /v1/access-tokens for a bearer token, default lifetime 24 hours."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c18",
+    "c19",
+    "c23",
+    "c24",
+    "c25",
+    "c26",
+    "c27",
+    "c29",
+    "c30",
+    "c20",
+    "c22",
+    "c28"
+   ],
+   "notes": "update_user and delete_user are documented for end users; agents can be created, regrouped and converted to or from end users (removes or grants agent roles)."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/agents",
+    "purpose": "List agents",
+    "cite": [
+     "c18"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/agents",
+    "purpose": "Create an agent",
+    "cite": [
+     "c19"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/agents/{id}/groups",
+    "purpose": "Add agent to groups",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/agents/{id}/groups",
+    "purpose": "Remove agent from groups",
+    "cite": [
+     "c21"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/agents/{id}/convert",
+    "purpose": "Convert agent to end user",
+    "cite": [
+     "c22"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/end-users",
+    "purpose": "List end users",
+    "cite": [
+     "c23"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/end-users",
+    "purpose": "Create an end user",
+    "cite": [
+     "c24"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/end-users/{id}",
+    "purpose": "Get an end user",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/end-users/{id}",
+    "purpose": "Update an end user",
+    "cite": [
+     "c26"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/end-users/{id}",
+    "purpose": "Permanently delete an end user",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/end-users/{id}/groups",
+    "purpose": "Add end user to groups",
+    "cite": [
+     "c36"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/end-users/{id}/groups",
+    "purpose": "Remove end user from groups",
+    "cite": [
+     "c37"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/end-users/{id}/convert",
+    "purpose": "Convert end user to agent",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/groups",
+    "purpose": "List user groups",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/groups",
+    "purpose": "Create a user group",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/groups/{id}",
+    "purpose": "Get a group",
+    "cite": [
+     "c38"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/groups/{id}/members",
+    "purpose": "List group members",
+    "cite": [
+     "c31"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": false,
+   "events": [],
+   "cite": [
+    "c33"
+   ],
+   "notes": "Supported webhook events are sr.created and sr.updated (service records) only."
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": false,
+   "provisioning": false,
+   "kind": "swa",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/sysaid/",
+   "cite": [
+    "c34"
+   ],
+   "notes": "OIN functionality table ticks only SWA (checked in rendered page). SysAid's own Okta guide uses a custom SAML 2.0 app plus the Okta Repository pull sync (directory_sync)."
+  },
+  "entra": {
+   "listed": false,
+   "sso": null,
+   "provisioning": false,
+   "kind": "directory_sync",
+   "built_by": "vendor",
+   "url": "https://documentation.sysaid.com/docs/azure",
+   "cite": [
+    "c11",
+    "c10"
+   ],
+   "notes": "No SysAid tutorial in Microsoft Learn's SaaS app index; SysAid pulls users with its own Entra ID add-on and offers an Entra SSO Connector add-on."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": true,
+   "kind": "directory_sync",
+   "built_by": "vendor",
+   "url": "https://documentation.sysaid.com/docs/google-user-repository-integration",
+   "cite": [
+    "c14"
+   ]
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "directory_sync",
+   "built_by": "vendor",
+   "url": "https://documentation.sysaid.com/docs/onelogin-user-repository",
+   "cite": [
+    "c13",
+    "c7"
+   ],
+   "notes": "From SysAid's own OneLogin guides (SAML Custom Connector + OneLogin Repository add-on)."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": true,
+  "other_sync": "Vendor-run user repository sync from Entra ID, Okta, OneLogin, Google Workspace and LDAP/AD",
+  "docs_public": true,
+  "cite": [
+   "c7",
+   "c8",
+   "c9",
+   "c11",
+   "c12",
+   "c13",
+   "c14",
+   "c15",
+   "c16"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.sysaid.com/pricing",
+   "title": "SysAid Pricing | ITSM Plans From $89 per Agent per Month",
+   "quote": "AI-native service management with unlimited agentic AI. No usage caps, no continuous approvals, no surprise invoices. $89 agent/month",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://www.sysaid.com/pricing",
+   "title": "SysAid Pricing | ITSM Plans From $89 per Agent per Month",
+   "quote": "Custom starting at 20 agents Contact sales",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://www.sysaid.com/pricing",
+   "title": "SysAid Pricing | ITSM Plans From $89 per Agent per Month",
+   "quote": "SysAid Connect Native integrations and developer API Professional: included Enterprise: included",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://www.sysaid.com/pricing",
+   "title": "SysAid Pricing | ITSM Plans From $89 per Agent per Month",
+   "quote": "SECURITY & COMPLIANCE: GDPR · CCPA · SOC 2 Type II · ISO 27001/27017/27018 · MFA & SSO · SSL · DPA · Multi-Region Data Residency",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://documentation.sysaid.com/docs/okta.md",
+   "title": "Okta",
+   "quote": "The Okta integration allows you to sync SysAid with your Okta account so you can automatically log in to SysAid whenever you log in to Okta.",
+   "accessed": "2026-10-05",
+   "page_url": "https://documentation.sysaid.com/docs/okta"
+  },
+  {
+   "id": "c6",
+   "url": "https://documentation.sysaid.com/docs/okta.md",
+   "title": "Okta",
+   "quote": "Select the SAML 2.0 option button.",
+   "accessed": "2026-10-05",
+   "page_url": "https://documentation.sysaid.com/docs/okta"
+  },
+  {
+   "id": "c7",
+   "url": "https://documentation.sysaid.com/docs/onelogin.md",
+   "title": "OneLogin",
+   "quote": "(Optional) If you want SysAid to create new users with their OneLogin IDs, Enter Y in the Create New Users field.",
+   "accessed": "2026-10-05",
+   "page_url": "https://documentation.sysaid.com/docs/onelogin"
+  },
+  {
+   "id": "c8",
+   "url": "https://documentation.sysaid.com/docs/office-365.md",
+   "title": "Office 365",
+   "quote": "(Optional) If you want SysAid to create new users with their Office 365 IDs, enter \"Y\" in the Create New Users field.",
+   "accessed": "2026-10-05",
+   "page_url": "https://documentation.sysaid.com/docs/office-365"
+  },
+  {
+   "id": "c9",
+   "url": "https://documentation.sysaid.com/docs/sso-connector.md",
+   "title": "SSO Connector",
+   "quote": "If it’s enabled, users without a SysAid account will have one created for them at first login.",
+   "accessed": "2026-10-05",
+   "page_url": "https://documentation.sysaid.com/docs/sso-connector"
+  },
+  {
+   "id": "c10",
+   "url": "https://documentation.sysaid.com/docs/sso-connector.md",
+   "title": "SSO Connector",
+   "quote": "Install the SSO Connector add-on and enter your SysAid Callback URL.",
+   "accessed": "2026-10-05",
+   "page_url": "https://documentation.sysaid.com/docs/sso-connector"
+  },
+  {
+   "id": "c11",
+   "url": "https://documentation.sysaid.com/docs/azure.md",
+   "title": "Setting Up Microsoft Entra ID (Azure)",
+   "quote": "by automatically pulling user data from Azure to SysAid. The integration runs these data imports about every 24 hours",
+   "accessed": "2026-10-05",
+   "page_url": "https://documentation.sysaid.com/docs/azure"
+  },
+  {
+   "id": "c12",
+   "url": "https://documentation.sysaid.com/docs/okta-repository.md",
+   "title": "Integrating Okta Repository with SysAid",
+   "quote": "by automatically pulling user data from Okta to SysAid. The integration runs these data imports on a schedule that you define",
+   "accessed": "2026-10-05",
+   "page_url": "https://documentation.sysaid.com/docs/okta-repository"
+  },
+  {
+   "id": "c13",
+   "url": "https://documentation.sysaid.com/docs/onelogin-user-repository.md",
+   "title": "Integrating OneLogin User Repository with SysAid",
+   "quote": "by automatically pulling user data from OneLogin to SysAid. The integration runs these data imports about every 12 hours",
+   "accessed": "2026-10-05",
+   "page_url": "https://documentation.sysaid.com/docs/onelogin-user-repository"
+  },
+  {
+   "id": "c14",
+   "url": "https://documentation.sysaid.com/docs/google-user-repository-integration.md",
+   "title": "Google User Repository Integration",
+   "quote": "Sync your Google Workspace Users and Groups into SysAid and map their user information fields to corresponding SysAid fields.",
+   "accessed": "2026-10-05",
+   "page_url": "https://documentation.sysaid.com/docs/google-user-repository-integration"
+  },
+  {
+   "id": "c15",
+   "url": "https://documentation.sysaid.com/docs/ldap-integration.md",
+   "title": "LDAP Integration",
+   "quote": "Import all users and user groups into SysAid automatically to save time.",
+   "accessed": "2026-10-05",
+   "page_url": "https://documentation.sysaid.com/docs/ldap-integration"
+  },
+  {
+   "id": "c16",
+   "url": "https://documentation.sysaid.com/docs/importing-end-users.md",
+   "title": "Importing End Users via CSV",
+   "quote": "Use CSV import to add multiple End Users to SysAid at once or update existing End User details in bulk.",
+   "accessed": "2026-10-05",
+   "page_url": "https://documentation.sysaid.com/docs/importing-end-users"
+  },
+  {
+   "id": "c17",
+   "url": "https://documentation.sysaid.com/docs/sysaid-api.md",
+   "title": "SysAid API",
+   "quote": "SysAid provides a REST API that allows organizations to integrate SysAid with other systems, automate workflows, and manage data programmatically.",
+   "accessed": "2026-10-05",
+   "page_url": "https://documentation.sysaid.com/docs/sysaid-api"
+  },
+  {
+   "id": "c18",
+   "url": "https://developers.sysaid.com/reference/getagents.md",
+   "title": "Get List of Agents",
+   "quote": "Retrieve a paginated list of agents in your account.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.sysaid.com/reference/getagents"
+  },
+  {
+   "id": "c19",
+   "url": "https://developers.sysaid.com/reference/createagent.md",
+   "title": "Create a New Agent",
+   "quote": "Create a new IT Agent user in your SysAid account.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.sysaid.com/reference/createagent"
+  },
+  {
+   "id": "c20",
+   "url": "https://developers.sysaid.com/reference/addagenttogroups.md",
+   "title": "Add Agent to Groups",
+   "quote": "Add a specific Agent to one or more existing user groups in your SysAid account.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.sysaid.com/reference/addagenttogroups"
+  },
+  {
+   "id": "c21",
+   "url": "https://developers.sysaid.com/reference/removeagentfromgroups.md",
+   "title": "Remove Agent from Groups",
+   "quote": "Remove a specific Agent from one or more user groups.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.sysaid.com/reference/removeagentfromgroups"
+  },
+  {
+   "id": "c22",
+   "url": "https://developers.sysaid.com/reference/convertagenttoenduser-1.md",
+   "title": "Convert Agent to End user",
+   "quote": "Convert an existing Agent into an End user. This action removes the Agent's elevated permissions and system roles",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.sysaid.com/reference/convertagenttoenduser-1"
+  },
+  {
+   "id": "c23",
+   "url": "https://developers.sysaid.com/reference/getendusers.md",
+   "title": "Get List of End Users",
+   "quote": "Retrieve a paginated list of end users in your SysAid account.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.sysaid.com/reference/getendusers"
+  },
+  {
+   "id": "c24",
+   "url": "https://developers.sysaid.com/reference/createenduser.md",
+   "title": "Create a New End User",
+   "quote": "Creates a new end user in your SysAid account.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.sysaid.com/reference/createenduser"
+  },
+  {
+   "id": "c25",
+   "url": "https://developers.sysaid.com/reference/getenduser.md",
+   "title": "Get End User by ID",
+   "quote": "Retrieve detailed information about a specific end user using their unique SysAid ID.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.sysaid.com/reference/getenduser"
+  },
+  {
+   "id": "c26",
+   "url": "https://developers.sysaid.com/reference/updateenduser.md",
+   "title": "Update End User Details",
+   "quote": "Update the details of an existing end user identified by their SysAid ID.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.sysaid.com/reference/updateenduser"
+  },
+  {
+   "id": "c27",
+   "url": "https://developers.sysaid.com/reference/deleteenduser.md",
+   "title": "Delete End User",
+   "quote": "Permanently delete an end user from your SysAid account using their unique ID.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.sysaid.com/reference/deleteenduser"
+  },
+  {
+   "id": "c28",
+   "url": "https://developers.sysaid.com/reference/convertendusertoagent-1.md",
+   "title": "Convert End User to Agent",
+   "quote": "Convert an existing end user into an Agent.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.sysaid.com/reference/convertendusertoagent-1"
+  },
+  {
+   "id": "c29",
+   "url": "https://developers.sysaid.com/reference/getgroups-1.md",
+   "title": "Get List of Groups",
+   "quote": "Retrieve a list of all user groups in your SysAid account.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.sysaid.com/reference/getgroups-1"
+  },
+  {
+   "id": "c30",
+   "url": "https://developers.sysaid.com/reference/creategroup.md",
+   "title": "Create a New Group",
+   "quote": "Creates a new user group in your SysAid account.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.sysaid.com/reference/creategroup"
+  },
+  {
+   "id": "c31",
+   "url": "https://developers.sysaid.com/reference/getgroupmembers.md",
+   "title": "Get Group Members",
+   "quote": "Retrieve a list of all users assigned to a specific group by its unique ID.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.sysaid.com/reference/getgroupmembers"
+  },
+  {
+   "id": "c32",
+   "url": "https://developers.sysaid.com/docs/authentication-guide.md",
+   "title": "Authentication Guide",
+   "quote": "The tokenLifetime parameter value is in seconds. The default is 86400 (24 hours).",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.sysaid.com/docs/authentication-guide"
+  },
+  {
+   "id": "c33",
+   "url": "https://developers.sysaid.com/docs/webhooks-overview.md",
+   "title": "Webhooks Overview",
+   "quote": "Triggered when a new service record is created",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.sysaid.com/docs/webhooks-overview"
+  },
+  {
+   "id": "c34",
+   "url": "https://www.okta.com/integrations/sysaid/",
+   "title": "Integrate SysAid with Okta",
+   "quote": "Add this integration to enable authentication and provisioning capabilities.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c35",
+   "url": "https://developers.sysaid.com/reference/getenduser.md",
+   "title": "Get End User by ID",
+   "quote": "https://{account}.sysaidit.com/connect/v1",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.sysaid.com/reference/getenduser"
+  },
+  {
+   "id": "c36",
+   "url": "https://developers.sysaid.com/reference/addendusertogroups.md",
+   "title": "Add End User to Groups",
+   "quote": "Add a specific end user to one or more existing user groups in your SysAid account.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.sysaid.com/reference/addendusertogroups"
+  },
+  {
+   "id": "c37",
+   "url": "https://developers.sysaid.com/reference/removeenduserfromgroups.md",
+   "title": "Remove End User from Groups",
+   "quote": "Remove a specific End User from one or more user groups.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.sysaid.com/reference/removeenduserfromgroups"
+  },
+  {
+   "id": "c38",
+   "url": "https://developers.sysaid.com/reference/getgroup.md",
+   "title": "Get Group by ID",
+   "quote": "Retrieve detailed information about a specific group using its unique ID.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.sysaid.com/reference/getgroup"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.sysaid.com/pricing (render.cjs)",
+  "https://www.sysaid.com/llms.txt",
+  "https://documentation.sysaid.com/llms.txt (full docs index: SSO, repository, LDAP, CSV, API pages; no SCIM)",
+  "https://developers.sysaid.com/llms.txt and reference pages (Users, Groups, auth, webhooks; no SCIM)",
+  "https://www.okta.com/integrations/sysaid/ (render.cjs; SWA only)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/toc.json (no SysAid entry)"
+ ],
+ "open_questions": [
+  "Whether the $89 Professional price is annual or monthly billing is not stated.",
+  "Whether the SSO and repository add-ons are free Marketplace add-ons on Professional is not stated.",
+  "Whether the repository syncs deactivate SysAid users removed in Entra/Okta/OneLogin is not documented (only Google mentions disabling deleted users).",
+  "No audit-log API is documented."
+ ]
+}

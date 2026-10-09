@@ -1,0 +1,850 @@
+{
+ "slug": "blackline",
+ "vendor": "BlackLine",
+ "vendor_url": "https://www.blackline.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "BlackLine",
+  "slug": "blackline",
+  "category": "Finance, Accounting & Spend",
+  "status": "unknown",
+  "scim_plan": "—",
+  "scim_price_text": "—",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": null,
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": null,
+  "idp": {
+   "okta": "sso_only",
+   "entra": "none",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": "none",
+   "generic": null
+  },
+  "pricing_page_url": "https://www.blackline.com/request-a-demo/",
+  "docs_url": null,
+  "evidence": "BlackLine publishes no pricing (www.blackline.com/pricing returns HTTP 500; buyers go to 'Request a Demo'), its product documentation (docs.blackline.com) sits behind a login, and its Okta catalogue app supports only SAML and SWA.",
+  "notes": "New row. Financial close and accounting automation sold by quote only. No public SCIM documentation: the public developer portal (developer.blackline.com) lists 21 APIs and none is SCIM, the Okta Integration Network app marks only SAML and SWA, and there is no Microsoft Learn (Entra) or JumpCloud guide. The product help centre (docs.blackline.com, Document360) requires a customer login, so SCIM cannot be ruled out and the row stays unknown. BlackLine does publish a customer-only REST User Management API (OAuth 2.0 client credentials, bl.users scope) with create, list, update, async deprovision, and team/role/entity assignment endpoints; it is not tied to a published plan.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": null,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [],
+ "scim": {
+  "available": null,
+  "cite": [],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": null,
+   "token_source": null,
+   "token_expiry": null,
+   "cite": []
+  },
+  "endpoints": {
+   "Users": null,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": []
+  },
+  "operations": {
+   "create": null,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": null,
+   "reactivate": null,
+   "delete": null,
+   "group_push": null,
+   "group_membership": null,
+   "cite": []
+  },
+  "deprovision": {
+   "action": null,
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": []
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": []
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": []
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c9",
+   "c4",
+   "c8"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://{environment}.api.blackline.com",
+  "docs_url": "https://developer.blackline.com/docs/users/1/overview",
+  "auth": {
+   "methods": [
+    "oauth2"
+   ],
+   "scopes": [
+    "bl.users"
+   ],
+   "cite": [
+    "c6",
+    "c16",
+    "c10",
+    "c17",
+    "c7"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": null,
+   "reactivate_user": true,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": true,
+   "cite": [
+    "c12",
+    "c11",
+    "c18",
+    "c19",
+    "c21",
+    "c22",
+    "c23",
+    "c25",
+    "c27",
+    "c28",
+    "c29",
+    "c31",
+    "c32",
+    "c34",
+    "c37",
+    "c40",
+    "c41"
+   ],
+   "notes": "Deactivate/reactivate via the isActive field on update; separate async deprovision endpoint. assign_licenses mapped from 'roles and products' assignment (BlackLine licenses per product). Teams act as groups."
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/v1/users",
+    "purpose": "Create a new user in the system",
+    "cite": [
+     "c18"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/users",
+    "purpose": "Get the list of all users",
+    "cite": [
+     "c19",
+     "c13"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/users/me",
+    "purpose": "Get logged-in user information",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/users/{id}",
+    "purpose": "Get user information by user id",
+    "cite": [
+     "c21"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/v1/users/{id}",
+    "purpose": "Perform an update operation on an existing user",
+    "cite": [
+     "c22"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/users/{id}/deprovision",
+    "purpose": "Triggers the async deprovision process",
+    "cite": [
+     "c23",
+     "c11"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/users/{id}/deprovision",
+    "purpose": "Gets the status for the requested user deprovision process",
+    "cite": [
+     "c24"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/users/{id}/entities",
+    "purpose": "Assign single or multiple entities to a user",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/users/{id}/entities",
+    "purpose": "Get the list of entities for a user",
+    "cite": [
+     "c26"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v1/users/{id}/entities",
+    "purpose": "Unassign multiple entities from a user",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v1/users/{id}/entities/{entityId}",
+    "purpose": "Unassign single entity from a user",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/users/{id}/teams",
+    "purpose": "Assign single or multiple teams to a user",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/users/{id}/teams",
+    "purpose": "Get the list of teams for a user",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v1/users/{id}/teams/{teamId}",
+    "purpose": "Unassign single team from a user",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/users/{id}/roles-products",
+    "purpose": "Assign single or multiple roles and products to a user",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/users/{id}/roles-products",
+    "purpose": "List all the roles and products assigned to a user",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v1/users/{id}/roles-products",
+    "purpose": "Unassign single role and product from a user",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/users/roles-products",
+    "purpose": "List all the available roles and products combination",
+    "cite": [
+     "c35"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/users/{id}/preferences",
+    "purpose": "Gets the preferences for a specific user",
+    "cite": [
+     "c36"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/teams",
+    "purpose": "Create a team",
+    "cite": [
+     "c37"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/teams",
+    "purpose": "Get the list of teams",
+    "cite": [
+     "c38"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/teams/{teamId}",
+    "purpose": "Get a specific team",
+    "cite": [
+     "c39"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/v1/teams/{teamId}",
+    "purpose": "Update a team",
+    "cite": [
+     "c40"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v1/teams/{teamId}",
+    "purpose": "Delete a team",
+    "cite": [
+     "c41"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/teams/hierarchy",
+    "purpose": "Get teams in heirarchy structure",
+    "cite": [
+     "c42"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/teams/{teamId}/users",
+    "purpose": "Get the list of users for a team",
+    "cite": [
+     "c43"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/roles",
+    "purpose": "Get the list of all available roles",
+    "cite": [
+     "c15"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "Default 1000 requests per minute per client (global); HTTP 429 when exceeded.",
+   "cite": [
+    "c5",
+    "c14"
+   ]
+  },
+  "limitations": [],
+  "notes": "Customer-only API ('currently we are only allowing customers to access APIs'); environments us, eu, ap and sandboxes sbus, sbeu, sbap. Credentials are created by a System Administrator in Financial Close > Settings > API Client Settings. BlackLine has no public tier table, so plan and api_tax are unknown."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/blackline/",
+   "cite": [
+    "c3"
+   ],
+   "notes": "OIN page (last updated Mar. 20 2018) marks only SAML and SWA as checked (read from page markup); SCIM and all provisioning boxes unchecked."
+  },
+  "entra": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "No BlackLine entry in the Microsoft Learn Entra SaaS tutorial index; blackline-tutorial and blackline-provisioning-tutorial return 404."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "jumpcloud.com/support/integrate-with-blackline returns AccessDenied (no guide)."
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": false,
+  "cite": [
+   "c2"
+  ],
+  "notes": "docs.blackline.com redirects to a Document360 login; admin documentation is not public."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.blackline.com/request-a-demo/",
+   "title": "Request a Demo | BlackLine",
+   "quote": "Automate your financial operations all in one platform.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://docs.blackline.com/",
+   "title": "BlackLine documentation login",
+   "quote": "Blackline User Login",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://www.okta.com/integrations/blackline/",
+   "title": "Integrate BlackLine with Okta",
+   "quote": "BlackLine automates complex, manual and repetitive accounting processes and enables companies to move beyond the legacy record-to-report process",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/page/faqs",
+   "title": "FAQs | BlackLine Developer Portal",
+   "quote": "Yes, currently we are only allowing customers to access APIs.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/faqs"
+  },
+  {
+   "id": "c5",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/page/faqs",
+   "title": "FAQs | BlackLine Developer Portal",
+   "quote": "What is the default maximum rate limit per client? 1000 requests per minute (unless specified).",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/faqs"
+  },
+  {
+   "id": "c6",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/page/faqs",
+   "title": "FAQs | BlackLine Developer Portal",
+   "quote": "All clients require a Client ID / Client Secret to integrate with Blackline APIs for OAuth 2.0.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/faqs"
+  },
+  {
+   "id": "c7",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/page/get-started",
+   "title": "Get Started | BlackLine Developer Portal",
+   "quote": "Only users with the System Administrator role may access the API Client Settings section and use the Self-Service API Credentials tool.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/get-started"
+  },
+  {
+   "id": "c8",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/page/get-started",
+   "title": "Get Started | BlackLine Developer Portal",
+   "quote": "Production Environment: https://us.api.blackline.com/",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/get-started"
+  },
+  {
+   "id": "c9",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/apis/users/download_spec",
+   "title": "User Management API (OpenAPI spec)",
+   "quote": "APIs to manage user accounts, roles, teams and user assignments of entities and teams.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/docs/users/1/overview"
+  },
+  {
+   "id": "c10",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/apis/users/download_spec",
+   "title": "User Management API (OpenAPI spec)",
+   "quote": "security: - bearerAuth: - bl.users",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/docs/users/1/overview"
+  },
+  {
+   "id": "c11",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/apis/users/download_spec",
+   "title": "User Management API (OpenAPI spec)",
+   "quote": "Triggers the async deprovision process. Use GET for status information. Only a system administrator role can access this API.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/docs/users/1/overview"
+  },
+  {
+   "id": "c12",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/apis/users/download_spec",
+   "title": "User Management API (OpenAPI spec)",
+   "quote": "loginId: type: string firstName: type: string lastName: type: string isActive: type: boolean email: type: string",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/docs/users/1/overview"
+  },
+  {
+   "id": "c13",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/apis/users/download_spec",
+   "title": "User Management API (OpenAPI spec)",
+   "quote": "example: loginId eq 'sample.user' and phoneNumber is null",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/docs/users/1/overview"
+  },
+  {
+   "id": "c14",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/apis/users/download_spec",
+   "title": "User Management API (OpenAPI spec)",
+   "quote": "Too Many Request - User has sent too many requests in a given amount of time.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/docs/users/1/overview"
+  },
+  {
+   "id": "c15",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/apis/roles/download_spec",
+   "title": "Roles API (OpenAPI spec)",
+   "quote": "summary: Get the list of all available roles.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/docs/roles/1/overview"
+  },
+  {
+   "id": "c16",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/apis/token/download_spec",
+   "title": "Token API (OpenAPI spec)",
+   "quote": "Generates an OAuth token based on passed in values. This token is sent along with other BlackLine APIs and used to authenticate the request.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/docs/token/1/overview"
+  },
+  {
+   "id": "c17",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/apis/token/download_spec",
+   "title": "Token API (OpenAPI spec)",
+   "quote": "Enter a list of API scope names separated by spaces. Receive the appropriate scope names from BlackLine support.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/docs/token/1/overview"
+  },
+  {
+   "id": "c18",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/apis/users/download_spec",
+   "title": "User Management API (OpenAPI spec)",
+   "quote": "summary: Create a new user in the system",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/docs/users/1/overview"
+  },
+  {
+   "id": "c19",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/apis/users/download_spec",
+   "title": "User Management API (OpenAPI spec)",
+   "quote": "summary: Get the list of all users",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/docs/users/1/overview"
+  },
+  {
+   "id": "c20",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/apis/users/download_spec",
+   "title": "User Management API (OpenAPI spec)",
+   "quote": "summary: Get logged-in user information",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/docs/users/1/overview"
+  },
+  {
+   "id": "c21",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/apis/users/download_spec",
+   "title": "User Management API (OpenAPI spec)",
+   "quote": "summary: Get user information by user id",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/docs/users/1/overview"
+  },
+  {
+   "id": "c22",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/apis/users/download_spec",
+   "title": "User Management API (OpenAPI spec)",
+   "quote": "summary: Perform an update operation on an existing user",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/docs/users/1/overview"
+  },
+  {
+   "id": "c23",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/apis/users/download_spec",
+   "title": "User Management API (OpenAPI spec)",
+   "quote": "summary: Triggers the async deprovision process.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/docs/users/1/overview"
+  },
+  {
+   "id": "c24",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/apis/users/download_spec",
+   "title": "User Management API (OpenAPI spec)",
+   "quote": "summary: Gets the status for the requested user deprovision process.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/docs/users/1/overview"
+  },
+  {
+   "id": "c25",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/apis/users/download_spec",
+   "title": "User Management API (OpenAPI spec)",
+   "quote": "summary: Assign single or multiple entities to a user",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/docs/users/1/overview"
+  },
+  {
+   "id": "c26",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/apis/users/download_spec",
+   "title": "User Management API (OpenAPI spec)",
+   "quote": "summary: Get the list of entities for a user",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/docs/users/1/overview"
+  },
+  {
+   "id": "c27",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/apis/users/download_spec",
+   "title": "User Management API (OpenAPI spec)",
+   "quote": "summary: Unassign multiple entities from a user",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/docs/users/1/overview"
+  },
+  {
+   "id": "c28",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/apis/users/download_spec",
+   "title": "User Management API (OpenAPI spec)",
+   "quote": "summary: Unassign single entity from a user",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/docs/users/1/overview"
+  },
+  {
+   "id": "c29",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/apis/users/download_spec",
+   "title": "User Management API (OpenAPI spec)",
+   "quote": "summary: Assign single or multiple teams to a user",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/docs/users/1/overview"
+  },
+  {
+   "id": "c30",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/apis/users/download_spec",
+   "title": "User Management API (OpenAPI spec)",
+   "quote": "summary: Get the list of teams for a user",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/docs/users/1/overview"
+  },
+  {
+   "id": "c31",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/apis/users/download_spec",
+   "title": "User Management API (OpenAPI spec)",
+   "quote": "summary: Unassign single team from a user",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/docs/users/1/overview"
+  },
+  {
+   "id": "c32",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/apis/users/download_spec",
+   "title": "User Management API (OpenAPI spec)",
+   "quote": "summary: Assign single or multiple roles and products to a user",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/docs/users/1/overview"
+  },
+  {
+   "id": "c33",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/apis/users/download_spec",
+   "title": "User Management API (OpenAPI spec)",
+   "quote": "summary: List all the roles and products assigned to a user",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/docs/users/1/overview"
+  },
+  {
+   "id": "c34",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/apis/users/download_spec",
+   "title": "User Management API (OpenAPI spec)",
+   "quote": "summary: Unassign single role and product from a user",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/docs/users/1/overview"
+  },
+  {
+   "id": "c35",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/apis/users/download_spec",
+   "title": "User Management API (OpenAPI spec)",
+   "quote": "summary: List all the available roles and products combination",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/docs/users/1/overview"
+  },
+  {
+   "id": "c36",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/apis/users/download_spec",
+   "title": "User Management API (OpenAPI spec)",
+   "quote": "summary: Gets the preferences for a specific user",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/docs/users/1/overview"
+  },
+  {
+   "id": "c37",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/apis/teams/download_spec",
+   "title": "Team Management API (OpenAPI spec)",
+   "quote": "summary: Create a team",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/docs/teams/1/overview"
+  },
+  {
+   "id": "c38",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/apis/teams/download_spec",
+   "title": "Team Management API (OpenAPI spec)",
+   "quote": "summary: Get the list of teams",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/docs/teams/1/overview"
+  },
+  {
+   "id": "c39",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/apis/teams/download_spec",
+   "title": "Team Management API (OpenAPI spec)",
+   "quote": "summary: Get a specific team",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/docs/teams/1/overview"
+  },
+  {
+   "id": "c40",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/apis/teams/download_spec",
+   "title": "Team Management API (OpenAPI spec)",
+   "quote": "summary: Update a team",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/docs/teams/1/overview"
+  },
+  {
+   "id": "c41",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/apis/teams/download_spec",
+   "title": "Team Management API (OpenAPI spec)",
+   "quote": "summary: Delete a team",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/docs/teams/1/overview"
+  },
+  {
+   "id": "c42",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/apis/teams/download_spec",
+   "title": "Team Management API (OpenAPI spec)",
+   "quote": "summary: Get teams in heirarchy structure.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/docs/teams/1/overview"
+  },
+  {
+   "id": "c43",
+   "url": "https://developer.blackline.com/portals/api/sites/p-svcprj-apigee-us-prod-7640-externaldeveloperportal/liveportal/apis/teams/download_spec",
+   "title": "Team Management API (OpenAPI spec)",
+   "quote": "summary: Get the list of users for a team",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.blackline.com/docs/teams/1/overview"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.blackline.com/pricing/ (HTTP 500)",
+  "https://www.blackline.com/request-a-demo/",
+  "https://www.blackline.com/sitemap.xml",
+  "https://www.blackline.com/llms.txt",
+  "https://www.blackline.com/why-blackline/security/",
+  "https://www.blackline.com/legal/security/",
+  "https://trust.blackline.com/",
+  "https://docs.blackline.com (login required)",
+  "developer.blackline.com API catalogue (21 APIs) and Users/Teams/Roles/Token/Settings OpenAPI specs: no SCIM or SSO",
+  "https://www.okta.com/integrations/blackline/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/toc.json",
+  "https://jumpcloud.com/support/integrate-with-blackline (AccessDenied)"
+ ],
+ "open_questions": [
+  "Whether BlackLine offers SCIM at all: product docs (docs.blackline.com) are login-only and the public API catalogue has no SCIM API.",
+  "Which plan or contract includes SAML SSO and the User Management API (no public pricing or tier table).",
+  "What the async user deprovision does to the seat/licence and data.",
+  "Google Workspace and OneLogin catalogue listings not checked."
+ ]
+}

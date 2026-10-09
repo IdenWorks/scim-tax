@@ -1,0 +1,970 @@
+{
+ "slug": "servicenow",
+ "vendor": "ServiceNow",
+ "vendor_url": "https://www.servicenow.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "ServiceNow",
+  "slug": "servicenow",
+  "category": "IT Management & Endpoint",
+  "status": "gated",
+  "scim_plan": "ServiceNow AI Platform, SCIM v2 plugin (package tier not stated)",
+  "scim_price_text": "Contact Sales (Get Custom Quote)",
+  "scim_price_per_user_mo": null,
+  "team_plan": "ITSM Foundation",
+  "team_price_text": "ITSM Foundation: Get Custom Quote",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": false,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "api_connector",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.servicenow.com/products/itsm/pricing.html",
+  "docs_url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/l2AQb7ABV9L4C34c6LjhNg/content",
+  "evidence": "ServiceNow's ITSM pricing page offers Foundation, Advanced and Prime only through 'Get Custom Quote', and its docs say SCIM requires activating the SCIM v2 (com.snc.integration.scim2) plugin.",
+  "notes": "Status kept at gated because every ServiceNow package is quote-only, not because of a documented tier gate. June's claim that SCIM/SSO needs Advanced or Prime has no first-party source and is dropped; the docs describe SCIM as a platform plugin an admin installs (or requests from ServiceNow) without naming a package. The June pricing URL (servicenow.com/pricing.html) now returns 404; the ITSM pricing page (Foundation/Advanced/Prime, Get Custom Quote) is used instead, and the 9 April 2026 consolidation date was not re-verified. SAML/OIDC SSO is the Multi-Provider SSO platform plugin, also with no tier stated. SCIM 2.0 provider supports Users, Groups and discovery endpoints with OAuth 2.0 bearer or basic auth; no SSO prerequisite. Okta's ServiceNow UD app is marked SCIM; Entra's gallery app provisions through ServiceNow's table/SOAP APIs with basic auth.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": true,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "ITSM Foundation",
+   "price_text": "Get Custom Quote",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c4"
+   ]
+  },
+  {
+   "name": "ITSM Advanced",
+   "price_text": "Get Custom Quote",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2"
+   ]
+  },
+  {
+   "name": "ITSM Prime",
+   "price_text": "Get Custom Quote",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c3"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c5",
+   "c7",
+   "c16",
+   "c39",
+   "c15"
+  ],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": false,
+  "version": "2.0",
+  "base_url": "https://{instance}.service-now.com/api/now/scim",
+  "auth": {
+   "method": "oauth2",
+   "token_source": "OAuth 2.0 (plugin required) or Basic Authentication with a user holding the scim_admin role",
+   "token_expiry": null,
+   "cite": [
+    "c41",
+    "c12",
+    "c9",
+    "c24"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": true,
+   "Schemas": true,
+   "ResourceTypes": true,
+   "Bulk": false,
+   "Me": null,
+   "cite": [
+    "c26",
+    "c31",
+    "c36",
+    "c37",
+    "c38",
+    "c40"
+   ],
+   "notes": "Also read-only Companies, CostCenters, Departments and Locations resources."
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c28",
+    "c26",
+    "c27",
+    "c29",
+    "c30",
+    "c19",
+    "c25",
+    "c31",
+    "c32",
+    "c33",
+    "c34"
+   ],
+   "notes": "Deactivate/reactivate inferred from the active attribute mapping to sys_user.active, writable via PUT/PATCH."
+  },
+  "deprovision": {
+   "action": "other",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "active=false sets sys_user.active (record kept); DELETE /scim/Users/{id} deletes the sys_user record. Which one an IdP sends depends on the IdP.",
+   "cite": [
+    "c19",
+    "c30",
+    "c25",
+    "c8"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [],
+   "cite": [
+    "c43",
+    "c40"
+   ],
+   "notes": "RFC 7644 operators except NOT; maxResults 500; sort not supported."
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": 500,
+   "cite": [
+    "c44",
+    "c42"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "active",
+    "displayName",
+    "name.givenName",
+    "name.familyName",
+    "name.middleName",
+    "name.honorificPrefix",
+    "emails.value",
+    "emails.default.value",
+    "emails.work.value",
+    "addresses.streetAddress",
+    "addresses.locality",
+    "addresses.region",
+    "addresses.postalCode",
+    "addresses.country",
+    "addresses.default.* / addresses.home.*",
+    "phoneNumbers.value",
+    "phoneNumbers.home.value",
+    "phoneNumbers.mobile.value",
+    "phoneNumbers.work.value",
+    "preferredLanguage",
+    "timezone",
+    "title",
+    "externalId",
+    "id",
+    "meta.created",
+    "meta.lastModified"
+   ],
+   "enterprise": [
+    "company.name",
+    "company.value",
+    "costCenter.name",
+    "costCenter.value",
+    "department.name",
+    "department.value",
+    "employeeNumber",
+    "gender",
+    "location.name",
+    "location.value",
+    "manager.displayName",
+    "manager.value"
+   ],
+   "custom": {
+    "supported": true,
+    "how": "SCIM Extension schemas map custom attributes to fields not covered by the core or ServiceNow extension schema (scim_config_admin role); ETL definitions customise mapping"
+   },
+   "group": [
+    "displayName",
+    "externalId",
+    "members.value",
+    "company.value",
+    "company.name",
+    "id",
+    "meta.created",
+    "meta.lastModified"
+   ],
+   "cite": [
+    "c16",
+    "c19",
+    "c17",
+    "c18",
+    "c20",
+    "c21",
+    "c22",
+    "c23",
+    "c34",
+    "c13"
+   ],
+   "notes": "The 'enterprise' list is ServiceNow's own extension schema urn:ietf:params:scim:schemas:extension:servicenow:2.0:User, not the RFC enterprise extension."
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "Instance inbound REST API rate-limit rules (per hour) apply if configured.",
+   "cite": [
+    "c54"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Bulk, sort, ETag and changePassword are not supported; POST /scim/Users does not support search or bulk modifications.",
+    "cite": [
+     "c40",
+     "c28"
+    ]
+   },
+   {
+    "text": "Group member arrays default to a maximum of 100 (system property com.snc.integration.scim2.max.member.count).",
+    "cite": [
+     "c35",
+     "c14"
+    ]
+   },
+   {
+    "text": "Requires the SCIM v2, OAuth 2.0, REST API Provider and REST API Access Policy plugins and a scim_admin user (admin-equivalent).",
+    "cite": [
+     "c9",
+     "c10"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c46",
+   "c53"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://{instance}.service-now.com/api/now/table",
+  "docs_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/c_TableAPI.html",
+  "auth": {
+   "methods": [
+    "basic",
+    "oauth2"
+   ],
+   "scopes": [],
+   "cite": [
+    "c12",
+    "c46"
+   ],
+   "notes": "Access is governed by the calling user’s roles and table ACLs, not OAuth scopes."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c46",
+    "c47",
+    "c48",
+    "c49",
+    "c50",
+    "c51",
+    "c52"
+   ],
+   "notes": "Via the generic Table API on the sys_user table."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/api/now/table/{tableName}",
+    "purpose": "List records (e.g. tableName=sys_user, sys_user_group)",
+    "cite": [
+     "c47"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/now/table/{tableName}/{sys_id}",
+    "purpose": "Get a record",
+    "cite": [
+     "c48"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/now/table/{tableName}",
+    "purpose": "Create a record",
+    "cite": [
+     "c49"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/now/table/{tableName}/{sys_id}",
+    "purpose": "Update a record",
+    "cite": [
+     "c50"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/now/table/{tableName}/{sys_id}",
+    "purpose": "Update a record",
+    "cite": [
+     "c51"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/now/table/{tableName}/{sys_id}",
+    "purpose": "Delete a record",
+    "cite": [
+     "c52"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "Admins can define inbound REST API rate-limit rules per hour by user, role or globally.",
+   "cite": [
+    "c54"
+   ]
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/servicenow-ud/",
+   "cite": [
+    "c57"
+   ],
+   "notes": "App name \"ServiceNow UD\". OIN page markup marks SAML, SWA, SCIM, Create, Update, Deactivate, Sync Password, Group Push, Group Linking and Schema Discovery as checked."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "api_connector",
+   "built_by": "idp",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/servicenow-provisioning-tutorial",
+   "cite": [
+    "c58",
+    "c60",
+    "c59"
+   ],
+   "notes": "Gallery app uses Basic Authentication and ServiceNow's table/SOAP APIs, not SCIM. ServiceNow's own docs also describe generic SCIM provisioning from a provider."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": "Table/SOAP API provisioning (Entra gallery app)",
+  "docs_public": true,
+  "cite": [
+   "c60",
+   "c56"
+  ]
+ },
+ "conflicts": [],
+ "searched": [
+  "https://www.servicenow.com/pricing.html (404)",
+  "https://www.servicenow.com/sitemap.xml (pricing pages)",
+  "https://www.servicenow.com/products/itsm/pricing.html",
+  "ServiceNow docs search API: SCIM, SCIM plugin license subscription, Multi-Provider SSO, Table API, REST API rate limiting",
+  "https://www.okta.com/integrations/servicenow/ (404)",
+  "https://www.okta.com/integrations/servicenow-ud/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/servicenow-provisioning-tutorial"
+ ],
+ "open_questions": [
+  "No first-party source says which ServiceNow package or subscription includes the SCIM v2 or Multi-Provider SSO plugins.",
+  "Whether IdP deprovisioning frees a fulfiller licence or ends sessions is not documented.",
+  "OAuth token lifetime for SCIM clients not documented on the pages read.",
+  "Google Workspace, OneLogin and JumpCloud catalogue apps not checked.",
+  "Audit-log API and user-event webhooks not researched beyond the Table API."
+ ],
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.servicenow.com/products/itsm/pricing.html",
+   "title": "IT Service Management (ITSM) Pricing - ServiceNow",
+   "quote": "Deliver faster, smarter, and resilient enterprise IT services with the ITSM package and pricing plan that works for you. Get Custom Quote ITSM Foundation",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.servicenow.com/products/itsm/pricing.html",
+   "title": "IT Service Management (ITSM) Pricing - ServiceNow",
+   "quote": "ITSM Advanced Agentic workflows that automate complex IT processes, working side by side with your team. Includes Foundation, and:",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.servicenow.com/products/itsm/pricing.html",
+   "title": "IT Service Management (ITSM) Pricing - ServiceNow",
+   "quote": "ITSM Prime AI Specialists that independently manage IT workflows, make decisions, and drive results. Includes Foundation, Advanced, and:",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.servicenow.com/products/itsm/pricing.html",
+   "title": "IT Service Management (ITSM) Pricing - ServiceNow",
+   "quote": "ITSM Foundation AI agents and skills that accelerate IT service delivery with task-based, always-on support.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/oL66E_cwDD_tnWQYzYPRdA/topics/s9~x1Jycf7EDUk4g00urgg/content",
+   "title": "System for Cross-domain Identity Management (SCIM) | ServiceNow Docs",
+   "quote": "To access this API, you must activate the SCIM v2 - ServiceNow® Cross-domain Identity Management (com.snc.integration.scim2) plugin.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/platform-security/identity/scim.html"
+  },
+  {
+   "id": "c6",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/oL66E_cwDD_tnWQYzYPRdA/topics/irDsm4ZAJBp4gHN2ghr21w/content",
+   "title": "Activating the SCIM plugin | ServiceNow Docs",
+   "quote": "You can search for the plugin by its name or ID. If you cannot find a plugin, you might have to request it from ServiceNow personnel.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/platform-security/identity/activate-scim-plugin.html"
+  },
+  {
+   "id": "c7",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/oL66E_cwDD_tnWQYzYPRdA/topics/irDsm4ZAJBp4gHN2ghr21w/content",
+   "title": "Activating the SCIM plugin | ServiceNow Docs",
+   "quote": "For SCIM activation, install the SCIM v2 - ServiceNow Cross-domain Identity Management (com.snc.integration.scim2) plugin.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/platform-security/identity/activate-scim-plugin.html"
+  },
+  {
+   "id": "c8",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/oL66E_cwDD_tnWQYzYPRdA/topics/uMg5~j8FfuueDZyjp5Mrcg/content",
+   "title": "Exploring SCIM Provider | ServiceNow Docs",
+   "quote": "The SCIM provider synchronizes the changes made to identities in the IdP, including creating, updating, or deleting records.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/platform-security/identity/explore-scim-provider.html"
+  },
+  {
+   "id": "c9",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/oL66E_cwDD_tnWQYzYPRdA/topics/uMg5~j8FfuueDZyjp5Mrcg/content",
+   "title": "Exploring SCIM Provider | ServiceNow Docs",
+   "quote": "Activate the other plugins that other plugins that are required for SCIM: OAuth 2.0 REST API Provider REST API Access Policy",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/platform-security/identity/explore-scim-provider.html"
+  },
+  {
+   "id": "c10",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/oL66E_cwDD_tnWQYzYPRdA/topics/uMg5~j8FfuueDZyjp5Mrcg/content",
+   "title": "Exploring SCIM Provider | ServiceNow Docs",
+   "quote": "The scim_admin role is equivalent to giving the user the admin role",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/platform-security/identity/explore-scim-provider.html"
+  },
+  {
+   "id": "c11",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/oL66E_cwDD_tnWQYzYPRdA/topics/N7isM8T1gtFUxjWMpQpPAg/content",
+   "title": "Tutorial: Configure SCIM for user provisioning with a Provider | ServiceNow Docs",
+   "quote": "Configuring SCIM automatically provisions and de-provisions users and groups to ServiceNow by using the providers provisioning service.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/platform-security/identity/configure-scim-for-user-provisioning-with-azure-ad.html"
+  },
+  {
+   "id": "c12",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/oL66E_cwDD_tnWQYzYPRdA/topics/N7isM8T1gtFUxjWMpQpPAg/content",
+   "title": "Tutorial: Configure SCIM for user provisioning with a Provider | ServiceNow Docs",
+   "quote": "You can provision users using SCIM by the following authentication methods: Provisioning user using Basic Authentication Provisioning user using OAuth",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/platform-security/identity/configure-scim-for-user-provisioning-with-azure-ad.html"
+  },
+  {
+   "id": "c13",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/oL66E_cwDD_tnWQYzYPRdA/topics/5Gz4NvqxIt777Hyr~7udGA/content",
+   "title": "Create a SCIM Extension schema | ServiceNow Docs",
+   "quote": "Create custom attributes to map to fields that are not mapped as part of either the core schema or the ServiceNow extension schema.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/platform-security/identity/create-scim-extension-schemas.html"
+  },
+  {
+   "id": "c14",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/oL66E_cwDD_tnWQYzYPRdA/topics/w348Y8jXw~g04UCOfjQFiQ/content",
+   "title": "SCIM customization properties and schemas | ServiceNow Docs",
+   "quote": "com.snc.integration.scim2.max.member.count The SCIM maximum member count.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/platform-security/identity/scim-customization-properties-and-schemas.html"
+  },
+  {
+   "id": "c15",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/l2AQb7ABV9L4C34c6LjhNg/content",
+   "title": "System for Cross-domain Identity Management (SCIM) API | ServiceNow Docs",
+   "quote": "The SCIM service has six resources: User (core and extension) Group (core and extension) Company CostCenter Department Location",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/scim-api.html"
+  },
+  {
+   "id": "c16",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/l2AQb7ABV9L4C34c6LjhNg/content",
+   "title": "System for Cross-domain Identity Management (SCIM) API | ServiceNow Docs",
+   "quote": "The SCIM User resource has both core (schema: urn:ietf:params:scim:schemas:core:2.0:User) and extension (urn:ietf:params:scim:schemas:extension:servicenow:2.0:User) schemas.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/scim-api.html"
+  },
+  {
+   "id": "c17",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/l2AQb7ABV9L4C34c6LjhNg/content",
+   "title": "System for Cross-domain Identity Management (SCIM) API | ServiceNow Docs",
+   "quote": "displayName name emails.value email emails.default.value email emails.work.value email id sys_id meta.created sys_created_on meta.lastModified sys_updated_on name.familyName last_name name.givenName first_name name.honorificPrefix introduction name.middleName middle_name",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/scim-api.html"
+  },
+  {
+   "id": "c18",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/l2AQb7ABV9L4C34c6LjhNg/content",
+   "title": "System for Cross-domain Identity Management (SCIM) API | ServiceNow Docs",
+   "quote": "phoneNumbers.value phone phoneNumbers.home.value home_phone phoneNumbers.mobile.value mobile_phone phoneNumbers.work.value phone preferredLanguage preferred_language timezone time_zone title title userName user_name",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/scim-api.html"
+  },
+  {
+   "id": "c19",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/l2AQb7ABV9L4C34c6LjhNg/content",
+   "title": "System for Cross-domain Identity Management (SCIM) API | ServiceNow Docs",
+   "quote": "active active addresses.country country",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/scim-api.html"
+  },
+  {
+   "id": "c20",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/l2AQb7ABV9L4C34c6LjhNg/content",
+   "title": "System for Cross-domain Identity Management (SCIM) API | ServiceNow Docs",
+   "quote": "company.name company.name company.value company.sys_id costCenter.name cost_center.name costCenter.value cost_center.sys_id department.name department.name department.value department.sys_id employeeNumber employee_number",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/scim-api.html"
+  },
+  {
+   "id": "c21",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/l2AQb7ABV9L4C34c6LjhNg/content",
+   "title": "System for Cross-domain Identity Management (SCIM) API | ServiceNow Docs",
+   "quote": "employeeNumber employee_number gender gender location.name location.name location.value location.sys_id manager.displayName manager.name manager.value manager.sys_id",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/scim-api.html"
+  },
+  {
+   "id": "c22",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/l2AQb7ABV9L4C34c6LjhNg/content",
+   "title": "System for Cross-domain Identity Management (SCIM) API | ServiceNow Docs",
+   "quote": "SCIM attribute name Sys Scim User field name externalId external_id",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/scim-api.html"
+  },
+  {
+   "id": "c23",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/l2AQb7ABV9L4C34c6LjhNg/content",
+   "title": "System for Cross-domain Identity Management (SCIM) API | ServiceNow Docs",
+   "quote": "SCIM attribute name Group field name displayName name id sys_id meta.created sys_created_on meta.lastModified sys_updated_on",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/scim-api.html"
+  },
+  {
+   "id": "c24",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/l2AQb7ABV9L4C34c6LjhNg/content",
+   "title": "System for Cross-domain Identity Management (SCIM) API | ServiceNow Docs",
+   "quote": "The scim_admin role is required to access the SCIM-specific tables and the private SCIM endpoints and enables access to the User [sys_user] and Group [sys_user_group] tables.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/scim-api.html"
+  },
+  {
+   "id": "c25",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/l2AQb7ABV9L4C34c6LjhNg/content",
+   "title": "System for Cross-domain Identity Management (SCIM) API | ServiceNow Docs",
+   "quote": "SCIM - DELETE /scim/Users/{user_id} Deletes the specified user record from the User [sys_user] table of a ServiceNow instance using the System for Cross-domain Identity Management (SCIM) protocol.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/scim-api.html"
+  },
+  {
+   "id": "c26",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/l2AQb7ABV9L4C34c6LjhNg/content",
+   "title": "System for Cross-domain Identity Management (SCIM) API | ServiceNow Docs",
+   "quote": "SCIM - GET /scim/Users Returns one or more user records from the User [sys_user] table",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/scim-api.html"
+  },
+  {
+   "id": "c27",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/l2AQb7ABV9L4C34c6LjhNg/content",
+   "title": "System for Cross-domain Identity Management (SCIM) API | ServiceNow Docs",
+   "quote": "SCIM - GET /scim/Users/{user_id}",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/scim-api.html"
+  },
+  {
+   "id": "c28",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/l2AQb7ABV9L4C34c6LjhNg/content",
+   "title": "System for Cross-domain Identity Management (SCIM) API | ServiceNow Docs",
+   "quote": "SCIM - POST /scim/Users Creates a user record in the User [sys_user] table of a ServiceNow instance using the System for Cross-domain Identity Management (SCIM) protocol. Note: The search and bulk modifications functionality as noted in the RFC7643 specification are not supported by this endpoint.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/scim-api.html"
+  },
+  {
+   "id": "c29",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/l2AQb7ABV9L4C34c6LjhNg/content",
+   "title": "System for Cross-domain Identity Management (SCIM) API | ServiceNow Docs",
+   "quote": "SCIM - PUT /scim/Users/{user_id} Updates the specified user record in the User [sys_user] table",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/scim-api.html"
+  },
+  {
+   "id": "c30",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/l2AQb7ABV9L4C34c6LjhNg/content",
+   "title": "System for Cross-domain Identity Management (SCIM) API | ServiceNow Docs",
+   "quote": "SCIM - PATCH /scim/Users/{user_id} Enables you to add, replace, and remove specified fields in a user record in the User [sys_user] table",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/scim-api.html"
+  },
+  {
+   "id": "c31",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/l2AQb7ABV9L4C34c6LjhNg/content",
+   "title": "System for Cross-domain Identity Management (SCIM) API | ServiceNow Docs",
+   "quote": "SCIM - POST /scim/Groups",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/scim-api.html"
+  },
+  {
+   "id": "c32",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/l2AQb7ABV9L4C34c6LjhNg/content",
+   "title": "System for Cross-domain Identity Management (SCIM) API | ServiceNow Docs",
+   "quote": "SCIM - PATCH /scim/Groups/{group_id} Enables you to add, update, and delete specified fields in a group record in the Group [sys_user_group] table",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/scim-api.html"
+  },
+  {
+   "id": "c33",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/l2AQb7ABV9L4C34c6LjhNg/content",
+   "title": "System for Cross-domain Identity Management (SCIM) API | ServiceNow Docs",
+   "quote": "SCIM - DELETE /scim/Groups/{group_id} Deletes the specified group record from the Group [sys_user_group] table",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/scim-api.html"
+  },
+  {
+   "id": "c34",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/l2AQb7ABV9L4C34c6LjhNg/content",
+   "title": "System for Cross-domain Identity Management (SCIM) API | ServiceNow Docs",
+   "quote": "members.value Sys_id of the associated user or group record.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/scim-api.html"
+  },
+  {
+   "id": "c35",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/l2AQb7ABV9L4C34c6LjhNg/content",
+   "title": "System for Cross-domain Identity Management (SCIM) API | ServiceNow Docs",
+   "quote": "Maximum size: 100 - You can modify this maximum size by updating the system property com.snc.interation.scim2.max.member.count.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/scim-api.html"
+  },
+  {
+   "id": "c36",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/l2AQb7ABV9L4C34c6LjhNg/content",
+   "title": "System for Cross-domain Identity Management (SCIM) API | ServiceNow Docs",
+   "quote": "SCIM - GET /scim/ServiceProviderConfig",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/scim-api.html"
+  },
+  {
+   "id": "c37",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/l2AQb7ABV9L4C34c6LjhNg/content",
+   "title": "System for Cross-domain Identity Management (SCIM) API | ServiceNow Docs",
+   "quote": "SCIM - GET /scim/Schemas",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/scim-api.html"
+  },
+  {
+   "id": "c38",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/l2AQb7ABV9L4C34c6LjhNg/content",
+   "title": "System for Cross-domain Identity Management (SCIM) API | ServiceNow Docs",
+   "quote": "SCIM - GET /scim/ResourceTypes",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/scim-api.html"
+  },
+  {
+   "id": "c39",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/l2AQb7ABV9L4C34c6LjhNg/content",
+   "title": "System for Cross-domain Identity Management (SCIM) API | ServiceNow Docs",
+   "quote": "Default URL: /api/now/scim/Users/{user_id}",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/scim-api.html"
+  },
+  {
+   "id": "c40",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/l2AQb7ABV9L4C34c6LjhNg/content",
+   "title": "System for Cross-domain Identity Management (SCIM) API | ServiceNow Docs",
+   "quote": "\"patch\": { \"supported\": true }, \"bulk\": { \"supported\": false, \"maxOperations\": 0, \"maxPayloadSize\": 1000000 }, \"filter\": { \"supported\": true, \"maxResults\": 500 }, \"changePassword\": { \"supported\": false }, \"sort\": { \"supported\": false }, \"etag\": { \"supported\": false }",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/scim-api.html"
+  },
+  {
+   "id": "c41",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/l2AQb7ABV9L4C34c6LjhNg/content",
+   "title": "System for Cross-domain Identity Management (SCIM) API | ServiceNow Docs",
+   "quote": "\"authenticationSchemes\": [ { \"name\": \"OAuth 2.0 Bearer Token\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/scim-api.html"
+  },
+  {
+   "id": "c42",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/l2AQb7ABV9L4C34c6LjhNg/content",
+   "title": "System for Cross-domain Identity Management (SCIM) API | ServiceNow Docs",
+   "quote": "count Number of records to return. A negative value is interpreted as zero. Data type: Number Maximum: 500 - A value greater than this results in a bad request error. Default: 10",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/scim-api.html"
+  },
+  {
+   "id": "c43",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/l2AQb7ABV9L4C34c6LjhNg/content",
+   "title": "System for Cross-domain Identity Management (SCIM) API | ServiceNow Docs",
+   "quote": "filter Filter expression to apply to the return results. Field filters are expressed as <field_name> <operator> <\"value\"> . Refer to RFC7644 for a list of the valid operators. Note: The NOT operator is not supported by this method.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/scim-api.html"
+  },
+  {
+   "id": "c44",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/l2AQb7ABV9L4C34c6LjhNg/content",
+   "title": "System for Cross-domain Identity Management (SCIM) API | ServiceNow Docs",
+   "quote": "startIndex One-based index into the table at which to start retrieving records.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/scim-api.html"
+  },
+  {
+   "id": "c45",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/l2AQb7ABV9L4C34c6LjhNg/content",
+   "title": "System for Cross-domain Identity Management (SCIM) API | ServiceNow Docs",
+   "quote": "SCIM - GET /scim/Companies",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/scim-api.html"
+  },
+  {
+   "id": "c46",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/8K4Q783p8VM02RsEO_qryQ/content",
+   "title": "Table API | ServiceNow Docs",
+   "quote": "The Table API provides endpoints that allow you to perform create, read, update, and delete (CRUD) operations on existing tables. The calling user must have sufficient roles to access the data in the table specified in the request.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/c_TableAPI.html"
+  },
+  {
+   "id": "c47",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/8K4Q783p8VM02RsEO_qryQ/content",
+   "title": "Table API | ServiceNow Docs",
+   "quote": "Table - GET /now/table/{tableName}",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/c_TableAPI.html"
+  },
+  {
+   "id": "c48",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/8K4Q783p8VM02RsEO_qryQ/content",
+   "title": "Table API | ServiceNow Docs",
+   "quote": "Table - GET /now/table/{tableName}/{sys_id}",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/c_TableAPI.html"
+  },
+  {
+   "id": "c49",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/8K4Q783p8VM02RsEO_qryQ/content",
+   "title": "Table API | ServiceNow Docs",
+   "quote": "Table - POST /now/table/{tableName}",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/c_TableAPI.html"
+  },
+  {
+   "id": "c50",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/8K4Q783p8VM02RsEO_qryQ/content",
+   "title": "Table API | ServiceNow Docs",
+   "quote": "Table - PUT /now/table/{tableName}/{sys_id}",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/c_TableAPI.html"
+  },
+  {
+   "id": "c51",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/8K4Q783p8VM02RsEO_qryQ/content",
+   "title": "Table API | ServiceNow Docs",
+   "quote": "Table - PATCH /now/table/{tableName}/{sys_id}",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/c_TableAPI.html"
+  },
+  {
+   "id": "c52",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/8K4Q783p8VM02RsEO_qryQ/content",
+   "title": "Table API | ServiceNow Docs",
+   "quote": "Table - DELETE /now/table/{tableName}/{sys_id} Deletes the specified record from the specified table.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/c_TableAPI.html"
+  },
+  {
+   "id": "c53",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/8K4Q783p8VM02RsEO_qryQ/content",
+   "title": "Table API | ServiceNow Docs",
+   "quote": "Default URL: /api/now/table/{tableName}/{sys_id}",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-apis/c_TableAPI.html"
+  },
+  {
+   "id": "c54",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/eJIqiaxRKVcMaR8XQU6_oA/topics/tyVXGUsg1uT56BAg4Ga2xQ/content",
+   "title": "Inbound REST API rate limiting | ServiceNow Docs",
+   "quote": "To prevent excessive inbound REST API requests, set rules that limit the number of inbound REST API requests processed per hour.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/api-reference/rest-api-explorer/inbound-REST-API-rate-limiting.html"
+  },
+  {
+   "id": "c55",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/oL66E_cwDD_tnWQYzYPRdA/topics/SbL3yjs6MibIkMMNpZDwYg/content",
+   "title": "Activate Multi-Provider SSO plugin | ServiceNow Docs",
+   "quote": "This integration requires the Integration - Multiple Provider Single Sign-On Installer (com.snc.integration.sso.multi.installer) plugin.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/platform-security/authentication/t_ActivateMultipleProviderSSO.html"
+  },
+  {
+   "id": "c56",
+   "url": "https://www.servicenow.com/docs/api/khub/maps/oL66E_cwDD_tnWQYzYPRdA/topics/SbL3yjs6MibIkMMNpZDwYg/content",
+   "title": "Activate Multi-Provider SSO plugin | ServiceNow Docs",
+   "quote": "The com.snc.integration.sso.multi.installer plugin can also be used for OIDC, SAML, and Digest.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.servicenow.com/docs/r/australia/platform-security/authentication/t_ActivateMultipleProviderSSO.html"
+  },
+  {
+   "id": "c57",
+   "url": "https://www.okta.com/integrations/servicenow-ud/",
+   "title": "Integrate ServiceNow UD with Okta",
+   "quote": "From single sign-on to enhanced user provisioning, Okta lets organizations automate their entire onboarding and offboarding process. The integration also support schema discovery, allowing you to create custom attributes in ServiceNow and import them into Okta.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c58",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/servicenow-provisioning-tutorial",
+   "title": "Configure ServiceNow for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Create users in ServiceNow. Remove users in ServiceNow when they don't need access anymore. Keep user attributes synchronized between Microsoft Entra ID and ServiceNow. Provision groups and group memberships in ServiceNow.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c59",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/servicenow-provisioning-tutorial",
+   "title": "Configure ServiceNow for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Allow single sign-on to ServiceNow (recommended). Basic Authentication authentication supported.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c60",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/servicenow-provisioning-tutorial",
+   "title": "Configure ServiceNow for automatic user provisioning with Microsoft Entra ID",
+   "quote": "review the ServiceNow SOAP API . Provisioning requests are sent by default to https://{your-instance-name}.service-now.com/{table-name}.",
+   "accessed": "2026-10-05"
+  }
+ ]
+}

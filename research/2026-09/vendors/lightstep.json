@@ -1,0 +1,503 @@
+{
+ "slug": "lightstep",
+ "vendor": "Lightstep (ServiceNow Cloud Observability)",
+ "vendor_url": "https://docs.lightstep.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Lightstep (ServiceNow Cloud Observability)",
+  "slug": "lightstep",
+  "category": "Cloud, Infrastructure & Observability",
+  "status": "partial",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Unknown (pricing page blocked)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Enterprise",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": null
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "sso_only",
+   "google": null,
+   "onelogin": "sso_only",
+   "jumpcloud": null,
+   "generic": false
+  },
+  "pricing_page_url": "https://www.servicenow.com/standard/other-documents/pricing-cloud-observability.html",
+  "docs_url": "https://docs.lightstep.com/docs/set-up-sso",
+  "evidence": "Cloud Observability's SSO docs say 'The Okta integration uses System for Cross-domain Identity Management (SCIM)' to provision, de-provision and update users; Entra ID and OneLogin are SAML only (OneLogin with JIT), and no generic SCIM endpoint is documented.",
+  "notes": "Lightstep was renamed ServiceNow Cloud Observability in August 2023 and is end-of-life: supported through March 1, 2026 or the subscription term end, whichever is later, so it can no longer be newly bought. SCIM works only through Okta's Lightstep OIN app, which points at the public API base https://api.lightstep.com/public/v0.2/{org} with an API key; there is no documented generic SCIM endpoint, hence partial. The pricing page (lightstep.com/pricing redirects to servicenow.com) blocked every fetch, so the plan gate is not verified: Enterprise is taken from the JIT doc, which assumes 'a Cloud Observability Enterprise account and an IdP' (docs, not pricing; low confidence). The public API can list, create (invite) and delete users.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c4",
+   "c5",
+   "c6",
+   "c12"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": null,
+  "base_url": "https://api.lightstep.com/public/v0.2/{org} (EU: https://api.eu.lightstep.com/public/v0.2/{org})",
+  "auth": {
+   "method": "other",
+   "token_source": "Cloud Observability API key with Organization Admin privileges, entered as Okta's API Token",
+   "token_expiry": null,
+   "cite": [
+    "c7",
+    "c6"
+   ]
+  },
+  "endpoints": {
+   "Users": null,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": []
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": null,
+   "group_push": null,
+   "group_membership": null,
+   "cite": [
+    "c5",
+    "c8"
+   ]
+  },
+  "deprovision": {
+   "action": null,
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [],
+   "notes": "Okta 'Deactivate Users' is documented, but what it does in Cloud Observability is not."
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": []
+  },
+  "roles": {
+   "supported": true,
+   "how": "New users get the organization's default role; roles can also be mapped from SAML attributes.",
+   "cite": [
+    "c5",
+    "c23"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SCIM provisioning is documented only for Okta; Entra ID is a custom SAML app and OneLogin is SAML with JIT.",
+    "cite": [
+     "c3",
+     "c4",
+     "c10",
+     "c11"
+    ]
+   },
+   {
+    "text": "Product end-of-life: supported through March 1, 2026 or subscription term end.",
+    "cite": [
+     "c2"
+    ]
+   }
+  ],
+  "notes": "Documented only as Okta's Lightstep app; plan inferred from the JIT doc's Enterprise prerequisite because the pricing page could not be loaded."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c20",
+   "c16"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://api.lightstep.com/public/v0.2",
+  "docs_url": "https://docs.lightstep.com/docs/api-rapidoc-v2",
+  "auth": {
+   "methods": [
+    "api_key"
+   ],
+   "scopes": [],
+   "cite": [
+    "c7"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": null,
+   "create_user": true,
+   "invite_user": true,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c16",
+    "c17",
+    "c18",
+    "c19"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/{organization}/users",
+    "purpose": "List Users",
+    "cite": [
+     "c16"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/{organization}/users",
+    "purpose": "Create New User (invites by email, default role)",
+    "cite": [
+     "c17"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/{organization}/users/{username}",
+    "purpose": "Delete User",
+    "cite": [
+     "c18"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/{organization}/role-binding?role-name={role-name}&project={project}",
+    "purpose": "List User Roles",
+    "cite": [
+     "c19"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "Role assignment is documented via Terraform (user_role_binding) rather than an API write endpoint."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/lightstep/",
+   "cite": [
+    "c21",
+    "c4",
+    "c8",
+    "c9"
+   ],
+   "notes": "OIN page markup ticks SAML, SCIM, Create, Update and Deactivate."
+  },
+  "entra": {
+   "listed": false,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c10",
+    "c3"
+   ],
+   "notes": "Docs use a non-gallery 'Create your own application' SAML app."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "Google sign-in is OAuth2 'Sign in with Google', not SAML; no Google catalogue app checked."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c11",
+    "c3"
+   ],
+   "notes": "Vendor docs: SAML with JIT provisioning only."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": "Terraform provider for user role bindings; bulk create/delete via public API",
+  "docs_public": true,
+  "cite": [
+   "c13",
+   "c14",
+   "c11"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.servicenow.com/standard/other-documents/pricing-cloud-observability.html",
+   "title": "Cloud Observability pricing (ServiceNow)",
+   "quote": "",
+   "accessed": "2026-10-05",
+   "blocked": "curl connection reset, WebFetch 403 and render.cjs ERR_TOO_MANY_RETRIES; lightstep.com/pricing 301-redirects here"
+  },
+  {
+   "id": "c2",
+   "url": "https://docs.lightstep.com/docs/set-up-sso",
+   "title": "Set up SSO",
+   "quote": "End of Life notice for Cloud Observability: Cloud Observability will be supported through March 1st, 2026 or your subscription term end date (whichever is later).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://docs.lightstep.com/docs/set-up-sso",
+   "title": "Set up SSO",
+   "quote": "Cloud Observability supports SSO with OAuth2 for Google, and SSO with Security Assertion Markup Language (SAML) for Microsoft Entra ID (formerly Azure AD), Okta, and OneLogin.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://docs.lightstep.com/docs/set-up-sso",
+   "title": "Set up SSO",
+   "quote": "The Okta integration uses System for Cross-domain Identity Management (SCIM) to sync user information between Cloud Observability and Okta.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://docs.lightstep.com/docs/set-up-sso",
+   "title": "Set up SSO",
+   "quote": "Once you set up the integration, Okta Admins can provision, de-provision, and update Cloud Observability users in Okta. New Cloud Observability users are assigned the default role.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://docs.lightstep.com/docs/set-up-sso",
+   "title": "Set up SSO",
+   "quote": "Base URL - Enter https://api.lightstep.com/public/v0.2/YOUR-ORG and replace YOUR-ORG with your Cloud Observability organization name.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://docs.lightstep.com/docs/set-up-sso",
+   "title": "Set up SSO",
+   "quote": "API Token - Enter your Cloud Observability API key.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.lightstep.com/docs/set-up-sso",
+   "title": "Set up SSO",
+   "quote": "Select Create Users, Update User Attributes, and Deactivate Users.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.lightstep.com/docs/set-up-sso",
+   "title": "Set up SSO",
+   "quote": "In August 2023, Lightstep became Cloud Observability. The Okta integration uses the Lightstep name, but it works with Cloud Observability.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.lightstep.com/docs/set-up-sso",
+   "title": "Set up SSO",
+   "quote": "To add Cloud Observability, select New application and then Create your own application.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.lightstep.com/docs/set-up-sso",
+   "title": "Set up SSO",
+   "quote": "JIT (Just In Time) Provisioning: Once users are assigned to Cloud Observability in OneLogin, they can provision a new Cloud Observability account upon first login.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.lightstep.com/docs/set-up-jit-provisioning",
+   "title": "Set up JIT provisioning",
+   "quote": "The steps below assume you have a Cloud Observability Enterprise account and an IdP (for example, Microsoft Entra ID or Okta).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.lightstep.com/docs/set-up-jit-provisioning",
+   "title": "Set up JIT provisioning",
+   "quote": "With JIT provisioning, first-time users can log into Cloud Observability with their Identity Provider (IdP) credentials. Cloud Observability automatically creates their account and assigns them a default role.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.lightstep.com/docs/create-lightstep-users",
+   "title": "User and role management",
+   "quote": "If you're using SSO, automate user creation with Just-in-Time (JIT) provisioning or Okta and System for Cross-domain Identity Management (SCIM). You can also create users in bulk with the Cloud Observability API.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.lightstep.com/docs/create-lightstep-users",
+   "title": "User and role management",
+   "quote": "Deleting users\tUse the Cloud Observability API or Cloud Observability UI.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.lightstep.com/api/v02/public-api-docs.json",
+   "title": "Cloud Observability API v0.2 (OpenAPI)",
+   "quote": "Returns information about all users in an organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lightstep.com/docs/api-rapidoc-v2"
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.lightstep.com/api/v02/public-api-docs.json",
+   "title": "Cloud Observability API v0.2 (OpenAPI)",
+   "quote": "Creates a new user and invites them to Lightstep via email.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lightstep.com/docs/api-rapidoc-v2"
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.lightstep.com/api/v02/public-api-docs.json",
+   "title": "Cloud Observability API v0.2 (OpenAPI)",
+   "quote": "Deletes an existing Lightstep user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lightstep.com/docs/api-rapidoc-v2"
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.lightstep.com/api/v02/public-api-docs.json",
+   "title": "Cloud Observability API v0.2 (OpenAPI)",
+   "quote": "Lists users with a specific role in an organization or project.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.lightstep.com/docs/api-rapidoc-v2"
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.lightstep.com/docs/api-overview",
+   "title": "Use the Cloud Observability API",
+   "quote": "The Cloud Observability API allows customers to interact with Cloud Observability programmatically. It exposes a subset of operations available through the Cloud Observability UI as a JSON API.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://www.okta.com/integrations/lightstep/",
+   "title": "Lightstep | Okta Integration Network",
+   "quote": "Add this integration to enable authentication and provisioning capabilities.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://docs.lightstep.com/docs/manage-users-and-roles",
+   "title": "Manage users",
+   "quote": "Delete users in bulk by selecting them, selecting Delete selected users, and selecting Confirm in the dialog.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://docs.lightstep.com/docs/map-saml-attributes",
+   "title": "Map SAML attributes to roles",
+   "quote": "The steps show an example where Cloud Observability assigns the Organization Editor role to all users whose team attribute is product.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://lightstep.com/pricing (301 to servicenow.com pricing PDF page, blocked)",
+  "https://docs.lightstep.com/docs/set-up-sso",
+  "https://docs.lightstep.com/sitemap.xml",
+  "https://docs.lightstep.com/api/v02/public-api-docs.json"
+ ],
+ "open_questions": [
+  "Lowest plan with SSO and Okta SCIM is not verified from a pricing page (blocked); Enterprise comes from the JIT doc.",
+  "What Okta deactivation does in Cloud Observability (delete vs disable, seat) is not documented.",
+  "Whether the public API is limited by plan is not stated.",
+  "Whether existing customers can still buy or renew after the March 1, 2026 end-of-life date."
+ ]
+}

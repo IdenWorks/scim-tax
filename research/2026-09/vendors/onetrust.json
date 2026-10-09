@@ -1,0 +1,874 @@
+{
+ "slug": "onetrust",
+ "vendor": "OneTrust",
+ "vendor_url": "https://www.onetrust.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "OneTrust",
+  "slug": "onetrust",
+  "category": "Legal, Contracts & Compliance",
+  "status": "gated",
+  "scim_plan": "Contact Sales (quote-only)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales (quote-only; priced by admin users and inventory)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Contact Sales (quote-only)",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": false,
+   "groups": true
+  },
+  "idp": {
+   "okta": "sso_only",
+   "entra": "sso_only",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.onetrust.com/pricing/",
+  "docs_url": "https://developer.onetrust.com/onetrust/reference/managing-users",
+  "evidence": "OneTrust's developer portal documents SCIM 2.0 Users and Groups APIs 'so that you can automatically provision and deprovision users within the OneTrust application using your organization’s identity provider', while every OneTrust package on the pricing page is quote-only ('Get Pricing').",
+  "notes": "Quote-only: every package (AI Governance, Consent & Preferences, Privacy Automation, Tech Risk & Compliance, Third-Party Management) is 'Get Pricing', priced by admin users plus inventory, visitors or profiles. SCIM is documented publicly on developer.onetrust.com with two generations: a Legacy SCIM Integration (/api/scim/v2, SCIM groups = role-organization combinations) and an Enhanced SCIM Integration (/api/scim/v3, user groups that carry roles, plus ServiceProviderConfig, Schemas and ResourceTypes). Auth is OAuth 2.0 client credentials created in Global Settings with the SCIM scope. Deprovisioning is deactivation (active=false via PATCH/PUT); DELETE /Users is documented as 'not available at this time'. The Okta OIN app is SAML plus Workflows connector (no SCIM tick) and the Entra gallery app is SSO with JIT, so IdPs connect through the generic endpoint. A separate Access Management API (v2 users, user groups, roles, organizations, audit records) also exists. Which plans or modules include SCIM is not stated publicly; the help-centre SCIM articles (my.onetrust.com) could not be loaded.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "All packages (AI Governance, Consent & Preferences, Privacy Automation, Tech Risk & Compliance, Third-Party Management)",
+   "price_text": "Get Pricing (custom quote; priced by admin users and inventory, visitors or profiles)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2"
+   ],
+   "notes": "No public tier table; the Entra tutorial requires a 'single sign-on enabled subscription'."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c3",
+   "c4",
+   "c6",
+   "c7",
+   "c19"
+  ],
+  "plan": "Contact Sales (quote-only)",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://{hostname}/api/scim/v3 (Enhanced; legacy /api/scim/v2), hostname e.g. app.onetrust.com, app-eu.onetrust.com, trial.onetrust.com",
+  "auth": {
+   "method": "oauth2",
+   "token_source": "Global Settings > OAuth 2.0 client credentials (client_id/client_secret) with the SCIM scope; token from POST /api/access/v1/oauth/token (client_credentials)",
+   "token_expiry": null,
+   "cite": [
+    "c19",
+    "c20",
+    "c21"
+   ],
+   "notes": "Token lifetime is not stated in prose; the example token response shows expires_in 31535999 seconds."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": true,
+   "Schemas": true,
+   "ResourceTypes": true,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c4",
+    "c15",
+    "c16",
+    "c17",
+    "c18",
+    "c19"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": false,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c4",
+    "c5",
+    "c10",
+    "c11",
+    "c15",
+    "c29"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Users are set inactive (active=false) and remain listed as Inactive users; DELETE /Users is not available.",
+   "cite": [
+    "c5",
+    "c10",
+    "c11"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "id",
+    "externalId",
+    "email",
+    "emails",
+    "givenName",
+    "familyName",
+    "userType",
+    "active"
+   ],
+   "cite": [
+    "c8"
+   ],
+   "notes": "Operators eq, co, sw, gt, ge, lt, le."
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": 25,
+   "cite": [
+    "c9",
+    "c5"
+   ],
+   "notes": "startIndex/count; v3 GET /Users count maximum 25 (default 25)."
+  },
+  "attributes": {
+   "core": [
+    "id",
+    "externalId",
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "userType (Internal|External)",
+    "active",
+    "emails.value",
+    "emails.primary",
+    "emails.type",
+    "emails.display",
+    "roles",
+    "title",
+    "groups (read-only)"
+   ],
+   "enterprise": [
+    "businessUnit",
+    "division",
+    "employeeNumber",
+    "officeLocation",
+    "department",
+    "manager.value",
+    "organization",
+    "legacyManager"
+   ],
+   "custom": {
+    "supported": null,
+    "how": "Group resources carry a urn:ietf:params:scim:schemas:onetrust:Group extension (category, description); no custom user schema is documented."
+   },
+   "group": [
+    "id",
+    "externalId",
+    "displayName",
+    "members.value",
+    "members.type",
+    "urn:ietf:params:scim:schemas:onetrust:Group.category",
+    "urn:ietf:params:scim:schemas:onetrust:Group.description"
+   ],
+   "cite": [
+    "c13",
+    "c14",
+    "c15"
+   ],
+   "notes": "From the v3 Create User / Create User Group OpenAPI definitions. Responses always return roles: [] and organization: null in the Enhanced integration."
+  },
+  "roles": {
+   "supported": true,
+   "how": "Legacy: membership in SCIM groups, each a role-organization combination. Enhanced: membership in user groups that carry roles. Users without roles/organization get the defaults set on the User Provisioning screen in Global Settings.",
+   "cite": [
+    "c7",
+    "c6",
+    "c12",
+    "c29"
+   ]
+  },
+  "rate_limits": {
+   "text": "User Provisioning API quota 2k calls/minute, 20k calls/hour on /api/scim/*; account default 200,000/hour and 1,000/minute per API; HTTP 429 with Retry-After.",
+   "cite": [
+    "c22",
+    "c23"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "DELETE /Users is documented as not available; deprovisioning is deactivation only.",
+    "cite": [
+     "c11"
+    ]
+   },
+   {
+    "text": "GET /Users does not return invited users.",
+    "cite": [
+     "c5"
+    ]
+   },
+   {
+    "text": "v3 GET /Users returns at most 25 users per page.",
+    "cite": [
+     "c9"
+    ]
+   }
+  ],
+  "notes": "The SCIM base path is versioned v2 (Legacy SCIM Integration) and v3 (Enhanced SCIM Integration); both follow the SCIM 2.0 core schema. Hostnames per region are listed in the OpenAPI server variable."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c24",
+   "c25"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://{hostname}/api/access",
+  "docs_url": "https://developer.onetrust.com/onetrust/reference/createuserv2",
+  "auth": {
+   "methods": [
+    "oauth2"
+   ],
+   "scopes": [
+    "USER",
+    "SCIM",
+    "ORGANIZATION"
+   ],
+   "cite": [
+    "c20",
+    "c28",
+    "c19"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c24",
+    "c25",
+    "c28",
+    "c33",
+    "c34",
+    "c35"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/api/access/v2/users",
+    "purpose": "List users",
+    "cite": [
+     "c35"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/access/v2/users",
+    "purpose": "Create user",
+    "cite": [
+     "c24"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/access/v2/users/{userId}",
+    "purpose": "Get user",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/access/v2/users/{userId}",
+    "purpose": "Update user",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/access/v2/users/{userId}/access-levels",
+    "purpose": "Get user roles",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/access/v2/users/{userId}/access-levels",
+    "purpose": "Add user role",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/access/v2/users/{userId}/access-levels",
+    "purpose": "Remove user role",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/access/v2/users/{userId}/default-organization",
+    "purpose": "Set user default organization",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/access/v2/user-groups",
+    "purpose": "List user groups",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/access/v2/user-groups",
+    "purpose": "Create user group",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/access/v2/user-groups/{groupId}",
+    "purpose": "Get user group",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/access/v2/user-groups/{groupId}",
+    "purpose": "Update user group",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/access/v2/user-groups/{groupId}",
+    "purpose": "Delete user group",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/access/v2/user-groups/{groupId}/access-levels",
+    "purpose": "Get user group roles",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/access/v2/user-groups/{groupId}/access-levels",
+    "purpose": "Add user group roles",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/access/v2/user-groups/{groupId}/access-levels",
+    "purpose": "Replace user group roles",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/access/v2/user-groups/{groupId}/access-levels",
+    "purpose": "Remove user group roles",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/access/v2/user-groups/{groupId}/members",
+    "purpose": "List users in user group",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/access/v2/user-groups/{groupId}/members",
+    "purpose": "Add multiple users to user group",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/access/v2/user-groups/{groupId}/members",
+    "purpose": "Remove multiple users from user group",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/access/v2/user-groups/{groupId}/members/{memberId}",
+    "purpose": "Add user to user group",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/access/v2/user-groups/{groupId}/members/{memberId}",
+    "purpose": "Remove user from user group",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/access/v1/login-history",
+    "purpose": "Audit records for login history",
+    "cite": [
+     "c26"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/audit/v1/users/{userId}/activities",
+    "purpose": "Audit records for a user's profile changes",
+    "cite": [
+     "c27"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": null,
+   "cite": [
+    "c26",
+    "c27"
+   ],
+   "notes": "Login history and user-profile change audit records only."
+  },
+  "rate_limits": {
+   "text": "Account default 200,000 requests/hour and 1,000/minute per API; HTTP 429 with Retry-After.",
+   "cite": [
+    "c23"
+   ]
+  },
+  "limitations": [],
+  "notes": "Access Management API (OpenAPI 'Platform - Access Management'): users, user groups, roles (access levels), organizations and audit records. Endpoints are from the published OpenAPI definition. Plan availability is not stated (quote-only)."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/onetrust/",
+   "cite": [
+    "c32"
+   ],
+   "notes": "OIN page marks SAML and Workflows Connectors as checked; SCIM and the provisioning capabilities are unchecked (read from page markup)."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/onetrust-tutorial",
+   "cite": [
+    "c30",
+    "c31"
+   ],
+   "notes": "Gallery app 'OneTrust Privacy Management Software': SP/IdP-initiated SSO with JIT user provisioning; no Entra provisioning tutorial exists (onetrust-provisioning-tutorial 404)."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c30",
+   "c3"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.onetrust.com/pricing/",
+   "title": "Pricing and Packaging | OneTrust",
+   "quote": "Pricing based on admin users and AI inventory",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.onetrust.com/pricing/",
+   "title": "Pricing and Packaging | OneTrust",
+   "quote": "Get Customized Pricing Schedule a quick call for a personalized quote based on your team size and business goals.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://developer.onetrust.com/onetrust/reference/managing-users.md",
+   "title": "Managing Users | OneTrust Developer Portal",
+   "quote": "so that you can automatically provision and deprovision users within the OneTrust application using your organization’s identity provider.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.onetrust.com/onetrust/reference/managing-users"
+  },
+  {
+   "id": "c4",
+   "url": "https://developer.onetrust.com/onetrust/reference/managing-users.md",
+   "title": "Managing Users | OneTrust Developer Portal",
+   "quote": "POST https://trial.onetrust.com/api/scim/v2/Users",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.onetrust.com/onetrust/reference/managing-users"
+  },
+  {
+   "id": "c5",
+   "url": "https://developer.onetrust.com/onetrust/reference/managing-users.md",
+   "title": "Managing Users | OneTrust Developer Portal",
+   "quote": "endpoint can be used to retrieve the list of all Active and Inactive users in the account. Note: The Response will not include Invited users.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.onetrust.com/onetrust/reference/managing-users"
+  },
+  {
+   "id": "c6",
+   "url": "https://developer.onetrust.com/onetrust/reference/getusers.md",
+   "title": "Get List of Users (v3) | OneTrust Developer Portal",
+   "quote": "This API supports OneTrust's Enhanced SCIM Integration that leverages Group Provisioning to manage access for users by provisioning them to one or more user groups.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.onetrust.com/onetrust/reference/getusers"
+  },
+  {
+   "id": "c7",
+   "url": "https://developer.onetrust.com/onetrust/reference/getallusersusingget.md",
+   "title": "Get List of Users (v2) | OneTrust Developer Portal",
+   "quote": "This API supports OneTrust's Legacy SCIM Integration that leverages SCIM groups, which are unique role-organization combinations that each represent a specific role within a particular organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.onetrust.com/onetrust/reference/getallusersusingget"
+  },
+  {
+   "id": "c8",
+   "url": "https://developer.onetrust.com/onetrust/reference/getusers.md",
+   "title": "Get List of Users (v3) | OneTrust Developer Portal",
+   "quote": "Filters can be applied on the id, externalId, email, emails, givenName, familyName, userType, and active attributes.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.onetrust.com/onetrust/reference/getusers"
+  },
+  {
+   "id": "c9",
+   "url": "https://developer.onetrust.com/onetrust/reference/getusers.md",
+   "title": "Get List of Users (v3) | OneTrust Developer Portal",
+   "quote": "\"default\": \"25\", \"maximum\": 25",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.onetrust.com/onetrust/reference/getusers"
+  },
+  {
+   "id": "c10",
+   "url": "https://developer.onetrust.com/onetrust/reference/modifyuser.md",
+   "title": "Modify User (v3) | OneTrust Developer Portal",
+   "quote": "Use this API to activate a user, deactivate a user, or partially update a user's attributes.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.onetrust.com/onetrust/reference/modifyuser"
+  },
+  {
+   "id": "c11",
+   "url": "https://developer.onetrust.com/onetrust/reference/deleteuserusingdelete.md",
+   "title": "Delete User (v2) | OneTrust Developer Portal",
+   "quote": "The Delete User feature is not available at this time.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.onetrust.com/onetrust/reference/deleteuserusingdelete"
+  },
+  {
+   "id": "c12",
+   "url": "https://developer.onetrust.com/onetrust/reference/createuser.md",
+   "title": "Create User (v3) | OneTrust Developer Portal",
+   "quote": "If a value is not provided for roles or organization in the request, the newly created user will be assigned the default role and organization as configured on the User Provisioning screen within Global Settings in the OneTrust application.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.onetrust.com/onetrust/reference/createuser"
+  },
+  {
+   "id": "c13",
+   "url": "https://developer.onetrust.com/onetrust/reference/createuser.md",
+   "title": "Create User (v3) | OneTrust Developer Portal",
+   "quote": "Username of the user in the OneTrust application.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.onetrust.com/onetrust/reference/createuser"
+  },
+  {
+   "id": "c14",
+   "url": "https://developer.onetrust.com/onetrust/reference/createuser.md",
+   "title": "Create User (v3) | OneTrust Developer Portal",
+   "quote": "The office location of the user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.onetrust.com/onetrust/reference/createuser"
+  },
+  {
+   "id": "c15",
+   "url": "https://developer.onetrust.com/onetrust/reference/creategroup.md",
+   "title": "Create User Group (v3) | OneTrust Developer Portal",
+   "quote": "Use this API to create a user group.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.onetrust.com/onetrust/reference/creategroup"
+  },
+  {
+   "id": "c16",
+   "url": "https://developer.onetrust.com/onetrust/reference/getserviceproviderconfigusingget.md",
+   "title": "Get Service Provider Configuration | OneTrust Developer Portal",
+   "quote": "Use this API to retrieve the service provider configuration resource.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.onetrust.com/onetrust/reference/getserviceproviderconfigusingget"
+  },
+  {
+   "id": "c17",
+   "url": "https://developer.onetrust.com/onetrust/reference/getschemasusingget.md",
+   "title": "Get List of Supported SCIM Schemas | OneTrust Developer Portal",
+   "quote": "Get List of Supported SCIM Schemas",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.onetrust.com/onetrust/reference/getschemasusingget"
+  },
+  {
+   "id": "c18",
+   "url": "https://developer.onetrust.com/onetrust/reference/getresourcetypesusingget.md",
+   "title": "Get Supported Resources | OneTrust Developer Portal",
+   "quote": "Get Supported Resources",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.onetrust.com/onetrust/reference/getresourcetypesusingget"
+  },
+  {
+   "id": "c19",
+   "url": "https://developer.onetrust.com/onetrust/reference/oauth-20-scopes.md",
+   "title": "OAuth 2.0 Scopes | OneTrust Developer Portal",
+   "quote": "Grants full access to the SCIM APIs for User Provisioning. This includes all the endpoints under Users, Groups, Resources, Schemas, and Service Provider.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.onetrust.com/onetrust/reference/oauth-20-scopes"
+  },
+  {
+   "id": "c20",
+   "url": "https://developer.onetrust.com/onetrust/reference/getoauthtoken-1.md",
+   "title": "Generate Access Token | OneTrust Developer Portal",
+   "quote": "Use this API to generate an OAuth access token using the client_credentials grant type.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.onetrust.com/onetrust/reference/getoauthtoken-1"
+  },
+  {
+   "id": "c21",
+   "url": "https://developer.onetrust.com/onetrust/reference/getoauthtoken-1.md",
+   "title": "Generate Access Token | OneTrust Developer Portal",
+   "quote": "Client credentials can be generated from within Global Settings in the OneTrust application.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.onetrust.com/onetrust/reference/getoauthtoken-1"
+  },
+  {
+   "id": "c22",
+   "url": "https://developer.onetrust.com/onetrust/reference/rate-limits-overview.md",
+   "title": "Rate Limits | OneTrust Developer Portal",
+   "quote": "User Provisioning API Quota | 2k Calls/Minute, 20k Calls/Hour",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.onetrust.com/onetrust/reference/rate-limits-overview"
+  },
+  {
+   "id": "c23",
+   "url": "https://developer.onetrust.com/onetrust/reference/rate-limits-overview.md",
+   "title": "Rate Limits | OneTrust Developer Portal",
+   "quote": "Default API Rate Limit | 1,000 / Minute",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.onetrust.com/onetrust/reference/rate-limits-overview"
+  },
+  {
+   "id": "c24",
+   "url": "https://developer.onetrust.com/onetrust/reference/createuserv2.md",
+   "title": "Create User (Access Management v2) | OneTrust Developer Portal",
+   "quote": "Use this API to create a new user in your account.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.onetrust.com/onetrust/reference/createuserv2"
+  },
+  {
+   "id": "c25",
+   "url": "https://developer.onetrust.com/onetrust/reference/createuserv2.md",
+   "title": "Create User (Access Management v2) | OneTrust Developer Portal",
+   "quote": "APIs to manage users and their memberships and access levels.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.onetrust.com/onetrust/reference/createuserv2"
+  },
+  {
+   "id": "c26",
+   "url": "https://developer.onetrust.com/onetrust/reference/loginhistory.md",
+   "title": "Get Audit Records for Login History | OneTrust Developer Portal",
+   "quote": "Use this API to retrieve the login history of all users or a specific user for audit purposes.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.onetrust.com/onetrust/reference/loginhistory"
+  },
+  {
+   "id": "c27",
+   "url": "https://developer.onetrust.com/onetrust/reference/useractivity.md",
+   "title": "Get Audit Records for User's Profile | OneTrust Developer Portal",
+   "quote": "Use this API to retrieve a list of changes made to a user's profile for audit purposes.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.onetrust.com/onetrust/reference/useractivity"
+  },
+  {
+   "id": "c28",
+   "url": "https://developer.onetrust.com/onetrust/reference/oauth-20-scopes.md",
+   "title": "OAuth 2.0 Scopes | OneTrust Developer Portal",
+   "quote": "Grants full access to manage Users, User Groups, and User Group membership. This includes Create, Read, Update and Delete operations.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.onetrust.com/onetrust/reference/oauth-20-scopes"
+  },
+  {
+   "id": "c29",
+   "url": "https://developer.onetrust.com/onetrust/reference/updating-a-users-role-organization.md",
+   "title": "Updating a User's Role & Organization | OneTrust Developer Portal",
+   "quote": "In the OneTrust application, a SCIM group is a combination of a role and organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.onetrust.com/onetrust/reference/updating-a-users-role-organization"
+  },
+  {
+   "id": "c30",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/onetrust-tutorial",
+   "title": "Configure OneTrust Privacy Management Software for single sign-on with Microsoft Entra ID",
+   "quote": "OneTrust Privacy Management Software supports Just In Time user provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/onetrust-tutorial",
+   "title": "Configure OneTrust Privacy Management Software for single sign-on with Microsoft Entra ID",
+   "quote": "OneTrust Privacy Management Software single sign-on enabled subscription.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://www.okta.com/integrations/onetrust/",
+   "title": "OneTrust | Okta Integration Network",
+   "quote": "The integration of Okta and OneTrust combines the leading identity provider with the leader in consent management.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://developer.onetrust.com/onetrust/reference/getuserv2.md",
+   "title": "Get User (Access Management v2) | OneTrust Developer Portal",
+   "quote": "Get User",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.onetrust.com/onetrust/reference/getuserv2"
+  },
+  {
+   "id": "c34",
+   "url": "https://developer.onetrust.com/onetrust/reference/updateuserv2.md",
+   "title": "Update User (Access Management v2) | OneTrust Developer Portal",
+   "quote": "Update User",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.onetrust.com/onetrust/reference/updateuserv2"
+  },
+  {
+   "id": "c35",
+   "url": "https://developer.onetrust.com/onetrust/reference/getalluserdetailsv2.md",
+   "title": "Get List of Users (Access Management v2) | OneTrust Developer Portal",
+   "quote": "Get List of Users",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.onetrust.com/onetrust/reference/getalluserdetailsv2"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.onetrust.com/pricing/ (rendered; all packages 'Get Pricing')",
+  "https://developer.onetrust.com/sitemap.xml and /onetrust/llms.txt",
+  "developer.onetrust.com OpenAPI: platform-user-provisioning.json and platform-access-management.json",
+  "https://my.onetrust.com/s/article/UUID-93f936ef-8076-280c-a58e-ba2d3437dfad (render.cjs ERR_TOO_MANY_RETRIES; curl returns the Salesforce shell only)",
+  "Okta OIN okta.com/integrations/onetrust/",
+  "learn.microsoft.com onetrust-tutorial (SSO + JIT); onetrust-provisioning-tutorial (404)"
+ ],
+ "open_questions": [
+  "Which OneTrust packages or editions include SCIM and SSO (quote-only; help-centre SCIM articles on my.onetrust.com could not be loaded).",
+  "Whether SAML SSO must be configured before SCIM.",
+  "Whether deactivating a user frees an admin-user licence and ends active sessions.",
+  "OAuth token lifetime (only an example expires_in value is shown).",
+  "Whether Google Workspace, OneLogin or JumpCloud list a OneTrust app; those catalogues were not checked."
+ ]
+}

@@ -1,0 +1,799 @@
+{
+ "slug": "zapier",
+ "vendor": "Zapier",
+ "vendor_url": "https://zapier.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Zapier",
+  "slug": "zapier",
+  "category": "Productivity & Docs",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Team",
+  "team_price_text": "Team: from $69/mo billed yearly, flat for 25 users",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Team",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": false,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": null,
+   "onelogin": "native",
+   "jumpcloud": "sso_only",
+   "generic": true
+  },
+  "pricing_page_url": "https://zapier.com/pricing",
+  "docs_url": "https://help.zapier.com/hc/en-us/articles/8496291497741-Provision-user-accounts-with-SCIM",
+  "evidence": "Zapier's help centre says 'SCIM user provisioning is available only to Enterprise accounts with Workspaces', and the pricing page's comparison table ticks User provisioning (SCIM) only under Enterprise (Contact for pricing).",
+  "notes": "Status unchanged (gated). Pricing page now defaults to yearly billing: Professional from $19.99/mo (1 seat) and Team from $69/mo (25 users), task-tier priced and flat per account, so per-user fields are null. June recorded monthly list prices (Professional $29.99, Team $103.50); the team plan is now Team because Professional has only 1 seat. SAML SSO and audit log (UI) start at Team; SCIM, domain capture and log streams are Enterprise. SCIM needs Enterprise with Workspaces; DELETE deactivates (no hard delete), shared assets go to the owner. No non-SCIM user API. JIT via SAML.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": false,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "$0/month",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": false,
+   "cite": [
+    "c2",
+    "c8",
+    "c9"
+   ],
+   "notes": "1 seat, 100 tasks/month."
+  },
+  {
+   "name": "Professional",
+   "price_text": "Starting from $19.99/month (yearly billing toggle)",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": false,
+   "cite": [
+    "c3",
+    "c1",
+    "c8",
+    "c9"
+   ],
+   "notes": "1 seat; task-tier priced, not per user."
+  },
+  {
+   "name": "Team",
+   "price_text": "Starting from $69/month (yearly billing toggle), 25 users",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": false,
+   "cite": [
+    "c4",
+    "c5",
+    "c1",
+    "c8",
+    "c10"
+   ],
+   "notes": "Flat per account, task-tier priced. Audit log in the Admin Center (UI), no API."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Contact for pricing",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": false,
+   "audit_log_api": null,
+   "cite": [
+    "c6",
+    "c7",
+    "c8",
+    "c10",
+    "c43",
+    "c44"
+   ],
+   "notes": "SCIM needs Enterprise with Workspaces. Log streams push audit events to an HTTPS endpoint (Enterprise); no pull audit-log API documented."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c10",
+   "c11",
+   "c14",
+   "c8"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://zapier.com/scim/v3",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Settings > User Provisioning (Provision tab): enable, then generate/regenerate token",
+   "token_expiry": null,
+   "cite": [
+    "c12",
+    "c13"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": true,
+   "Schemas": true,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": true,
+   "cite": [
+    "c16",
+    "c17",
+    "c19",
+    "c23",
+    "c25"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": false,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c19",
+    "c20",
+    "c21",
+    "c22",
+    "c15",
+    "c23",
+    "c47"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": true,
+   "data_retained": "Shared Zaps, app connections and folders transfer to the account owner; unshared Zaps are paused. Users cannot be permanently deleted; deactivated users can be reactivated via PATCH/PUT.",
+   "cite": [
+    "c22",
+    "c29",
+    "c30"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName",
+    "id",
+    "displayName"
+   ],
+   "cite": [
+    "c26",
+    "c27"
+   ],
+   "notes": "Operators eq, co, sw, gt, ge, lt, le with and/or; POST /Users/.search and /Groups/.search also supported. Not the full SCIM filter DSL."
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c18"
+   ],
+   "notes": "startIndex and count; default 50 per page."
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "externalId",
+    "name.givenName",
+    "name.familyName",
+    "name.formatted",
+    "displayName",
+    "emails",
+    "active",
+    "timezone",
+    "groups"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c19",
+    "c39",
+    "c23",
+    "c45"
+   ]
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "Rate-limited; 429 returned when limited (no numbers published).",
+   "cite": [
+    "c33"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Account owner cannot be deprovisioned.",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "text": "With SCIM enabled, users must be removed from the IdP, not from Zapier's Members page.",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "text": "Users can only be created in verified domains; userName must equal email.",
+    "cite": [
+     "c32",
+     "c34"
+    ]
+   },
+   {
+    "text": "Only Enterprise accounts with Workspaces; Microsoft AD FS not supported.",
+    "cite": [
+     "c10",
+     "c35"
+    ]
+   }
+  ],
+  "notes": "Base URL is /scim/v3 while the protocol is SCIM 2.0; request examples on the same page use /scim/v2 paths. The IdP template uses urn:scim:schemas:core:1.0."
+ },
+ "user_api": {
+  "available": false,
+  "cite": [
+   "c38",
+   "c51"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": null,
+  "base_url": null,
+  "docs_url": null,
+  "auth": {
+   "methods": [],
+   "scopes": [],
+   "cite": []
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": []
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": [],
+   "notes": "Log streams (Enterprise) send audit-log events, including members added, to an HTTPS endpoint; the full event list was not checked."
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": [
+    "c43",
+    "c44"
+   ],
+   "notes": "Audit log is a UI in the Admin Center (Team and Enterprise); Log streams push the same events to an HTTPS endpoint on Enterprise. No pull API documented."
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "No separate user-management REST API is documented; Zapier points to the SCIM API for managing members programmatically. developer docs (docs.zapier.com) cover integrations, MCP and SDK only. Availability false is by absence."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/zapier-saml/",
+   "cite": [
+    "c48",
+    "c37"
+   ],
+   "notes": "OIN 'Zapier SAML' page ticks SAML, SWA, SCIM and Create/Update/Deactivate."
+  },
+  "entra": {
+   "listed": true,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/zapier-provisioning-tutorial",
+   "cite": [
+    "c45",
+    "c46"
+   ]
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c36"
+   ],
+   "notes": "From Zapier's own guide; OneLogin catalogue page not loaded."
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://jumpcloud.com/support/integrate-with-zapier",
+   "cite": [
+    "c49",
+    "c50"
+   ],
+   "notes": "JumpCloud guide covers SAML SSO with JIT; no SCIM/identity-management section."
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c40",
+   "c11"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://zapier.com/pricing",
+   "title": "Plans & Pricing | Zapier",
+   "quote": "Pay yearly (Save 33%)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://zapier.com/pricing",
+   "title": "Plans & Pricing | Zapier",
+   "quote": "Free forever $0 /month Start automating with AI.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://zapier.com/pricing",
+   "title": "Plans & Pricing | Zapier",
+   "quote": "Professional Starting from $19.99 /month Unlock the full power of the Zapier platform with unlimited access to Zaps, Tables, and Forms.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://zapier.com/pricing",
+   "title": "Plans & Pricing | Zapier",
+   "quote": "Team Starting from $69 /month Collaborate with your team to build and manage complete AI-powered systems.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://zapier.com/pricing",
+   "title": "Plans & Pricing | Zapier",
+   "quote": "25 users Shared Zaps and folders Shared app connections SAML SSO Priority support",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://zapier.com/pricing",
+   "title": "Plans & Pricing | Zapier",
+   "quote": "Enterprise Contact for pricing Scale AI-powered systems across your entire organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://zapier.com/pricing",
+   "title": "Plans & Pricing | Zapier",
+   "quote": "Unlimited users Advanced admin permissions and app controls",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://zapier.com/pricing",
+   "title": "Plans & Pricing | Zapier",
+   "quote": "SAML single sign-on (SSO) User provisioning (SCIM) Domain capture",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://zapier.com/pricing",
+   "title": "Plans & Pricing | Zapier",
+   "quote": "Seats 1 1 25 Unlimited",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://help.zapier.com/hc/en-us/articles/8496291497741-Provision-user-accounts-with-SCIM",
+   "title": "Provision user accounts with SCIM | Zapier Help Center",
+   "quote": "SCIM user provisioning is available only to Enterprise accounts with Workspaces. If your Enterprise account does not have Workspaces, contact your account manager.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://help.zapier.com/hc/en-us/articles/8496291497741-Provision-user-accounts-with-SCIM",
+   "title": "Provision user accounts with SCIM | Zapier Help Center",
+   "quote": "The base URL of the API is https://zapier.com/scim/v3 , with all SCIM methods branching off from this base URL.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://help.zapier.com/hc/en-us/articles/8496291497741-Provision-user-accounts-with-SCIM",
+   "title": "Provision user accounts with SCIM | Zapier Help Center",
+   "quote": "you need to go to the Provision tab in Zapier, enable user provisioning for your account and generate the corresponding API token. If you ever lose the token or you have reasons to believe that it is compromised, you can use the same page to regenerate it",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://help.zapier.com/hc/en-us/articles/8496291497741-Provision-user-accounts-with-SCIM",
+   "title": "Provision user accounts with SCIM | Zapier Help Center",
+   "quote": "The API token must be included in an Authorization header with a type of Bearer",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://help.zapier.com/hc/en-us/articles/8496291497741-Provision-user-accounts-with-SCIM",
+   "title": "Provision user accounts with SCIM | Zapier Help Center",
+   "quote": "Zapier supports the version 2.0 of the SCIM protocol.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://help.zapier.com/hc/en-us/articles/8496291497741-Provision-user-accounts-with-SCIM",
+   "title": "Provision user accounts with SCIM | Zapier Help Center",
+   "quote": "Push User Deletion : Deleting the user will deactivate the user in Zapier. Reactivate User : Reactivated users also get reactivated in Zapier.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://help.zapier.com/hc/en-us/articles/8496291497741-Provision-user-accounts-with-SCIM",
+   "title": "Provision user accounts with SCIM | Zapier Help Center",
+   "quote": "GET /ServiceProviderConfigs Return the configuration details for our API, including which operations are supported.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://help.zapier.com/hc/en-us/articles/8496291497741-Provision-user-accounts-with-SCIM",
+   "title": "Provision user accounts with SCIM | Zapier Help Center",
+   "quote": "GET /Schemas/Users Returns configuration details for how users are formatted.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://help.zapier.com/hc/en-us/articles/8496291497741-Provision-user-accounts-with-SCIM",
+   "title": "Provision user accounts with SCIM | Zapier Help Center",
+   "quote": "Returns a paginated list of users, fifty users per page by default. You can control the start and the number of users with the startIndex and count parameters.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://help.zapier.com/hc/en-us/articles/8496291497741-Provision-user-accounts-with-SCIM",
+   "title": "Provision user accounts with SCIM | Zapier Help Center",
+   "quote": "Create a new member in your team account. This API requires at least userName to be passed, which needs to be an email address.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://help.zapier.com/hc/en-us/articles/8496291497741-Provision-user-accounts-with-SCIM",
+   "title": "Provision user accounts with SCIM | Zapier Help Center",
+   "quote": "Right now we only support the Add and Replace operations.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://help.zapier.com/hc/en-us/articles/8496291497741-Provision-user-accounts-with-SCIM",
+   "title": "Provision user accounts with SCIM | Zapier Help Center",
+   "quote": "Updates a single team member, overwriting all values even an attribute is empty or not provided.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://help.zapier.com/hc/en-us/articles/8496291497741-Provision-user-accounts-with-SCIM",
+   "title": "Provision user accounts with SCIM | Zapier Help Center",
+   "quote": "Deprovision a team member. We do not delete users with this endpoint, instead we mark them and their team membership as inactive. As such, they are not able to log in in Zapier until they are activated again.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://help.zapier.com/hc/en-us/articles/8496291497741-Provision-user-accounts-with-SCIM",
+   "title": "Provision user accounts with SCIM | Zapier Help Center",
+   "quote": "Create a new team in your Enterprise account. This API requires at least displayName to be passed.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://help.zapier.com/hc/en-us/articles/8496291497741-Provision-user-accounts-with-SCIM",
+   "title": "Provision user accounts with SCIM | Zapier Help Center",
+   "quote": "Deprovision a team and remove all of its memberships.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://help.zapier.com/hc/en-us/articles/8496291497741-Provision-user-accounts-with-SCIM",
+   "title": "Provision user accounts with SCIM | Zapier Help Center",
+   "quote": "This API represents the owner of the account. The API will return a redirect to the corresponding user endpoint.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://help.zapier.com/hc/en-us/articles/8496291497741-Provision-user-accounts-with-SCIM",
+   "title": "Provision user accounts with SCIM | Zapier Help Center",
+   "quote": "this endpoint also supports filtering the users with the filter parameter.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://help.zapier.com/hc/en-us/articles/8496291497741-Provision-user-accounts-with-SCIM",
+   "title": "Provision user accounts with SCIM | Zapier Help Center",
+   "quote": "eq equal co contains sw starts with gt greater than ge greater than or equal lt less than le less than or equal",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://help.zapier.com/hc/en-us/articles/8496291497741-Provision-user-accounts-with-SCIM",
+   "title": "Provision user accounts with SCIM | Zapier Help Center",
+   "quote": "The account owner cannot be de-provisioned. If you want to do that, you have to first transfer your Zapier account to someone else.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://help.zapier.com/hc/en-us/articles/8496291497741-Provision-user-accounts-with-SCIM",
+   "title": "Provision user accounts with SCIM | Zapier Help Center",
+   "quote": "When a user is deactivated via SCIM, Zapier immediately deactivates their membership in your account and its teams, ensuring that their access is immediately revoked. All shared Zap workflows, app connections, and folders are transferred to the account owner.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://help.zapier.com/hc/en-us/articles/8496291497741-Provision-user-accounts-with-SCIM",
+   "title": "Provision user accounts with SCIM | Zapier Help Center",
+   "quote": "The user's unshared Zap workflows are paused.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://help.zapier.com/hc/en-us/articles/8496291497741-Provision-user-accounts-with-SCIM",
+   "title": "Provision user accounts with SCIM | Zapier Help Center",
+   "quote": "When SCIM is enabled, you must remove users from your IdP. You cannot remove them from Zapier's Members page.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://help.zapier.com/hc/en-us/articles/8496291497741-Provision-user-accounts-with-SCIM",
+   "title": "Provision user accounts with SCIM | Zapier Help Center",
+   "quote": "Users cannot be created with domains that are not verified by the team.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://help.zapier.com/hc/en-us/articles/8496291497741-Provision-user-accounts-with-SCIM",
+   "title": "Provision user accounts with SCIM | Zapier Help Center",
+   "quote": "The SCIM API is rate-limited. If your requests are being limited, a 429 response will be returned.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://help.zapier.com/hc/en-us/articles/8496291497741-Provision-user-accounts-with-SCIM",
+   "title": "Provision user accounts with SCIM | Zapier Help Center",
+   "quote": "The username must be the same as the email address in Zapier.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c35",
+   "url": "https://help.zapier.com/hc/en-us/articles/8496291497741-Provision-user-accounts-with-SCIM",
+   "title": "Provision user accounts with SCIM | Zapier Help Center",
+   "quote": "Microsoft Active Directory Federation Services is not supported at this time.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://help.zapier.com/hc/en-us/articles/8496291497741-Provision-user-accounts-with-SCIM",
+   "title": "Provision user accounts with SCIM | Zapier Help Center",
+   "quote": "Alternatively, you can use the official OneLogin Zapier app for configuring both SAML and SCIM.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://help.zapier.com/hc/en-us/articles/8496291497741-Provision-user-accounts-with-SCIM",
+   "title": "Provision user accounts with SCIM | Zapier Help Center",
+   "quote": "You can use our early access Okta app, which offers both SAML and SCIM support.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c38",
+   "url": "https://help.zapier.com/hc/en-us/articles/8496291497741-Provision-user-accounts-with-SCIM",
+   "title": "Provision user accounts with SCIM | Zapier Help Center",
+   "quote": "It is also possible to use our SCIM API for managing the members of your team programmatically.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c39",
+   "url": "https://help.zapier.com/hc/en-us/articles/8496291497741-Provision-user-accounts-with-SCIM",
+   "title": "Provision user accounts with SCIM | Zapier Help Center",
+   "quote": "When supplied, timezones in provisioning requests are expected to be in the IANA format",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c40",
+   "url": "https://help.zapier.com/hc/en-us/articles/8496279747085-Set-up-single-sign-on-with-SAML",
+   "title": "Set up single sign-on with SAML | Zapier Help Center",
+   "quote": "Zapier supports both Zapier-initiated SAML SSO and IdP-initiated SAML SSO. You can also provision users using Just-in-Time provisioning (JIT).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c41",
+   "url": "https://help.zapier.com/hc/en-us/articles/8496279747085-Set-up-single-sign-on-with-SAML",
+   "title": "Set up single sign-on with SAML | Zapier Help Center",
+   "quote": "To set up single sign-on, you must: Verify ownership of your domain .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c42",
+   "url": "https://help.zapier.com/hc/en-us/articles/8496281082253-Remove-members-from-your-Team-or-Enterprise-account",
+   "title": "Remove members from your Team or Enterprise account | Zapier Help Center",
+   "quote": "Ownership of all shared and unshared Zaps will transfer to the user selected during removal.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c43",
+   "url": "https://help.zapier.com/hc/en-us/articles/49374721349901-Understanding-the-audit-log-and-log-streams",
+   "title": "Understanding the audit log and log streams | Zapier Help Center",
+   "quote": "Log streams send each event as a JSON payload to a destination URL that you choose, at the moment the event occurs.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c44",
+   "url": "https://help.zapier.com/hc/en-us/articles/49374721349901-Understanding-the-audit-log-and-log-streams",
+   "title": "Understanding the audit log and log streams | Zapier Help Center",
+   "quote": "Plans Team and Enterprise Enterprise",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c45",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/zapier-provisioning-tutorial",
+   "title": "Configure Zapier for automatic user provisioning with Microsoft Entra ID",
+   "quote": "When configured, Microsoft Entra ID automatically provisions and de-provisions users and groups to Zapier using the Microsoft Entra provisioning service.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c46",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/zapier-provisioning-tutorial",
+   "title": "Configure Zapier for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Add Zapier from the Microsoft Entra application gallery to start managing provisioning to Zapier.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c47",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/zapier-provisioning-tutorial",
+   "title": "Configure Zapier for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Provision groups and group memberships in Zapier",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c48",
+   "url": "https://www.okta.com/integrations/zapier-saml/",
+   "title": "Integrate Zapier SAML with Okta",
+   "quote": "Add this integration to enable authentication and provisioning capabilities.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c49",
+   "url": "https://jumpcloud.com/support/integrate-with-zapier",
+   "title": "Integrate with Zapier | JumpCloud Documentation",
+   "quote": "A Zapier Enterprise plan or as an add-on on Team plan",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c50",
+   "url": "https://jumpcloud.com/support/integrate-with-zapier",
+   "title": "Integrate with Zapier | JumpCloud Documentation",
+   "quote": "Using JIT Provisioning",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c51",
+   "url": "https://docs.zapier.com/llms.txt",
+   "title": "Zapier Docs llms.txt",
+   "quote": "Enterprise access control, data residency, compliance, and audit logging.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.zapier.com/"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "Zapier's pricing page lists SAML SSO as a Team plan feature, while JumpCloud's Zapier guide says it needs 'A Zapier Enterprise plan or as an add-on on Team plan'. Pricing page used.",
+   "cite": [
+    "c5",
+    "c49"
+   ]
+  },
+  {
+   "text": "The SCIM article gives the base URL as https://zapier.com/scim/v3 but its request examples use /scim/v2 paths.",
+   "cite": [
+    "c11",
+    "c18"
+   ]
+  }
+ ],
+ "searched": [
+  "https://zapier.com/pricing",
+  "help-centre search API: scim, user provisioning, saml, audit log",
+  "https://docs.zapier.com/llms.txt",
+  "https://www.okta.com/integrations/zapier-saml/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/zapier-provisioning-tutorial",
+  "https://jumpcloud.com/support/integrate-with-zapier"
+ ],
+ "open_questions": [
+  "Whether SCIM deactivation frees a billable seat is not documented (Enterprise has unlimited users).",
+  "Okta and Entra app publisher (vendor vs IdP) not stated.",
+  "Google Workspace catalogue not checked; OneLogin catalogue page not loaded.",
+  "No SCIM role mapping or custom/enterprise-extension attributes documented.",
+  "Whether 'SCIM user provisioning ... with Workspaces' is a separate charge is not stated."
+ ]
+}

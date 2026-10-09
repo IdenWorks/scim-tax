@@ -1,0 +1,438 @@
+{
+ "slug": "vmware-tanzu",
+ "vendor": "VMware Tanzu Platform (Broadcom)",
+ "vendor_url": "https://www.vmware.com/products/app-platform/tanzu",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "VMware Tanzu Platform (Broadcom)",
+  "slug": "vmware-tanzu",
+  "category": "Cloud, Infrastructure & Observability",
+  "status": "gated",
+  "scim_plan": "VMware Tanzu Platform",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "VMware Tanzu Platform",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": null,
+   "deactivate": null,
+   "delete": null,
+   "groups": null
+  },
+  "idp": {
+   "okta": null,
+   "entra": null,
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.vmware.com/products/app-platform/tanzu",
+  "docs_url": "https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/10-4/eart/t-uaa-uaa-scopes.html",
+  "evidence": "Broadcom's Tanzu UAA docs say UAA supports SCIM and that the scim.write scope \"gives admin write access to all SCIM endpoints, /Users , and /Groups\"; Tanzu Platform is sold only through Contact Sales.",
+  "notes": "Quote-only: Tanzu Platform (now sold by Broadcom) has no public pricing; the product page offers only Contact Sales. It is a self-managed private-cloud PaaS whose identity server, Tanzu UAA, exposes SCIM /Users and /Groups endpoints protected by OAuth scopes. Broadcom does not document an IdP provisioning connector, SCIM version or deprovisioning behaviour; SAML/OIDC/LDAP users are created as shadow users on first login, and bulk import uses the cf-mgmt tool. idp entries are left null because no IdP-specific provisioning guide exists. Researched the Elastic Application Runtime (Cloud Foundry) and Tanzu Hub docs, v10.4.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "VMware Tanzu Platform",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "VMware Tanzu Platform",
+   "price_text": "Contact Sales",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c3",
+    "c5"
+   ],
+   "notes": "No public tier table; the product page offers only Contact Sales. Self-managed private-cloud PaaS."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c3",
+   "c5",
+   "c2"
+  ],
+  "plan": "VMware Tanzu Platform",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": "oauth2",
+   "token_source": "UAA OAuth client token carrying scim.read / scim.write / scim.create scopes (e.g. uaac token client get admin)",
+   "token_expiry": null,
+   "cite": [
+    "c5",
+    "c6",
+    "c12"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c5"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": null,
+   "reactivate": null,
+   "delete": null,
+   "group_push": null,
+   "group_membership": null,
+   "cite": [
+    "c6"
+   ]
+  },
+  "deprovision": {
+   "action": null,
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": []
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": []
+  },
+  "roles": {
+   "supported": true,
+   "how": "Platform admin rights are UAA groups (scim.read, scim.write, cloud_controller.admin) that can be mapped from SAML, OIDC or LDAP groups; org and space roles are set separately with cf set-org-role / cf set-space-role.",
+   "cite": [
+    "c13",
+    "c11"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "The SCIM endpoints are Tanzu UAA's own /Users and /Groups API, documented only through OAuth scopes; Broadcom documents no IdP (Okta, Entra) provisioning connector, SCIM version or base URL for it.",
+    "cite": [
+     "c5",
+     "c3"
+    ]
+   },
+   {
+    "text": "Self-managed product: UAA runs inside the customer's own Tanzu deployment, so there is no vendor-hosted tenant SCIM URL.",
+    "cite": [
+     "c1",
+     "c4"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c5",
+   "c7",
+   "c11"
+  ],
+  "plan": "VMware Tanzu Platform",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": null,
+  "docs_url": "https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/10-4/eart/t-uaa-uaa-scopes.html",
+  "auth": {
+   "methods": [
+    "oauth2"
+   ],
+   "scopes": [
+    "scim.read",
+    "scim.write",
+    "scim.create",
+    "scim.invite"
+   ],
+   "cite": [
+    "c5",
+    "c6",
+    "c7"
+   ]
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": true,
+   "invite_user": true,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c6",
+    "c7",
+    "c11",
+    "c13"
+   ],
+   "notes": "Users are created through UAA (/Users, cf create-user) and invited through /invite_users; org/space roles are assigned with the cf CLI (Cloud Controller API). HTTP methods for UAA user endpoints other than POST /Users are not shown on Broadcom's pages."
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/Users",
+    "purpose": "Create a UAA user (scim.create scope)",
+    "cite": [
+     "c6"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "okta.com/integrations/vmware-tanzu/ and related slugs returned 404."
+  },
+  "entra": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "No Entra gallery tutorial found (vmware-tanzu-tutorial 404)."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "both",
+  "csv_import": null,
+  "other_sync": "LDAP identity provider in UAA; bulk import of SAML/LDAP users with the cf-mgmt tool",
+  "docs_public": true,
+  "cite": [
+   "c8",
+   "c9",
+   "c10",
+   "c15"
+  ],
+  "notes": "jit_protocol 'both': UAA creates shadow users for SAML and OIDC (and LDAP) sign-ins."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.vmware.com/products/app-platform/tanzu",
+   "title": "VMware Tanzu Platform",
+   "quote": "The pre-engineered private cloud PaaS for the agentic era. Modernize apps, build and govern agents to safely deliver critical software faster.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.vmware.com/products/app-platform/tanzu",
+   "title": "VMware Tanzu Platform",
+   "quote": "Ready to Get Started? CONTACT SALES",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/10-4/eart/t-uaa-uaa-overview.html",
+   "title": "Tanzu UAA overview",
+   "quote": "Tanzu UAA provides identity-based security for apps and APIs. It supports open standards for authentication and authorization, including: OAuth OpenID Connect SAML LDAP SCIM",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/10-4/eart/t-uaa-uaa-overview.html",
+   "title": "Tanzu UAA overview",
+   "quote": "Tanzu User Account and Authentication (Tanzu UAA) is a commercial version of the open-source identity server project under the Cloud Foundry Foundation.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/10-4/eart/t-uaa-uaa-scopes.html",
+   "title": "Tanzu UAA scopes",
+   "quote": "scim.write This scope gives admin write access to all SCIM endpoints, /Users , and /Groups .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/10-4/eart/t-uaa-uaa-scopes.html",
+   "title": "Tanzu UAA scopes",
+   "quote": "scim.create This scope gives the ability to create a user with a POST request to the /Users endpoint, but not to modify, read, or delete users.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/10-4/eart/t-uaa-uaa-scopes.html",
+   "title": "Tanzu UAA scopes",
+   "quote": "scim.invite This scope is required to participate in invitations using the /invite_users endpoint.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/10-4/eart/t-uaa-uaa-concepts.html",
+   "title": "Tanzu UAA concepts",
+   "quote": "Users that have authenticated through an external IDP still get assigned a record in the users table in the Tanzu UAA database.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/10-4/eart/t-uaa-uaa-concepts.html",
+   "title": "Tanzu UAA concepts",
+   "quote": "Each time an external user is authenticated and the assertion is passed to Tanzu UAA, Tanzu UAA refreshes the user information.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/10-4/eart/external-user-management.html",
+   "title": "Adding existing SAML or LDAP users to an Elastic Application Runtime deployment",
+   "quote": "You can import SAML or LDAP users in bulk by using the CF-MGMT Tool.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/10-4/eart/external-user-management.html",
+   "title": "Adding existing SAML or LDAP users to an Elastic Application Runtime deployment",
+   "quote": "Create the user in UAA by running: cf create-user USERNAME --origin PROVIDER-NAME",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/10-4/eart/t-uaa-uaa-user-management.html",
+   "title": "Creating and managing users with the UAA CLI (UAAC)",
+   "quote": "The value scim.write represents sufficient permissions to create accounts.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/10-4/eart/t-uaa-uaa-user-management.html",
+   "title": "Creating and managing users with the UAA CLI (UAAC)",
+   "quote": "uaac group map --name scim.read \"GROUP-NAME\" --origin PROVIDER-NAME",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-hub/10-4/tnz-hub/users-overview.html",
+   "title": "Manage users in Tanzu Hub",
+   "quote": "As an administrator, you must configure Tanzu Hub so that users can see and manage the applications and resources assigned to them.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/10-4/eart/t-uaa-identity-providers.html",
+   "title": "Identity providers in UAA",
+   "quote": "Tanzu UAA links the external user to the internal shadow user record by matching the nameID to the user.username .",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.vmware.com/products/app-platform/tanzu",
+  "https://www.vmware.com/products/app-platform/tanzu/faq",
+  "https://techdocs.broadcom.com/sitemap.xml (no Tanzu pages indexed)",
+  "https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/10-4/eart/toc-user-accounts-index.html",
+  "https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/10-4/eart/t-uaa-uaa-overview.html",
+  "https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/10-4/eart/t-uaa-uaa-scopes.html",
+  "https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/10-4/eart/t-uaa-uaa-concepts.html",
+  "https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/10-4/eart/t-uaa-uaa-user-management.html",
+  "https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/10-4/eart/external-user-management.html",
+  "https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-hub/10-4/tnz-hub/users-overview.html"
+ ],
+ "open_questions": [
+  "SCIM version, base URL and filtering/pagination of the UAA /Users endpoint are not shown on Broadcom's pages (UAA API reference is on docs.cloudfoundry.org, not a Broadcom domain).",
+  "Whether Okta/Entra SCIM clients can provision into UAA is not documented.",
+  "Deprovisioning behaviour (delete vs deactivate) through UAA SCIM is not documented on Broadcom's pages.",
+  "No public pricing or licensing metric.",
+  "Audit-log API and user-event webhooks not researched/documented."
+ ]
+}

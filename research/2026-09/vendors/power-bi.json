@@ -1,0 +1,563 @@
+{
+ "slug": "power-bi",
+ "vendor": "Power BI (Microsoft)",
+ "vendor_url": "https://www.microsoft.com/en-us/power-platform/products/power-bi",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Power BI (Microsoft)",
+  "slug": "power-bi",
+  "category": "Data, Analytics & BI",
+  "status": "none",
+  "scim_plan": "—",
+  "scim_price_text": "—",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Pro",
+  "team_price_text": "Pro: $14/u/mo",
+  "team_price_per_user_mo": 14.0,
+  "price_multiplier": null,
+  "sso_plan": "Free",
+  "sso_price_per_user_mo": 0.0,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": null,
+   "update": null,
+   "deactivate": null,
+   "delete": null,
+   "groups": null
+  },
+  "idp": {
+   "okta": null,
+   "entra": "directory_sync",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": false
+  },
+  "pricing_page_url": "https://www.microsoft.com/en-us/power-platform/products/power-bi/pricing",
+  "docs_url": "https://learn.microsoft.com/en-us/power-bi/enterprise/service-admin-licensing-organization",
+  "evidence": "Microsoft documents no SCIM endpoint for Power BI; users are Microsoft Entra ID accounts (authentication \"follows the Microsoft Entra auth code grant flow\") and \"Billing, License, and User administrators assign licenses to users\" from the Microsoft 365 admin center or the Azure portal.",
+  "notes": "New row. Power BI (now also sold inside Microsoft Fabric) has no SCIM service-provider endpoint of its own: every Power BI user is a Microsoft Entra ID account in the customer's tenant, so provisioning means creating the user in Entra ID (itself, or via Microsoft 365/Graph) and assigning a Power BI Pro or Premium Per User licence in the Microsoft 365 admin center or Azure portal. Other IdPs reach Power BI only through Entra ID (federation or Entra provisioning); there is no Power BI app in the Entra gallery or the Okta Integration Network. Scored like Azure DevOps: status none, idp.entra directory_sync to mark Entra-native identity, sso_plan Free because sign-in through the tenant's Entra ID (which can federate to the customer's own IdP) applies to every licence including the Fabric free account. Prices: Pro $14 and Premium Per User $24 per user/month paid yearly; PPU is also a $14 step-up add-on for Pro/E5 users; Pro is included in Microsoft 365 E5 and Office 365 E5. The Power BI REST API manages workspace access (add, update and remove users or groups per workspace, admin variants for Fabric administrators) and exposes the tenant activity (audit) log; user and licence creation itself is Microsoft Graph, scored under microsoft-365. Status none by absence.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Fabric free account",
+   "price_text": "Free",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": true,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c7"
+   ],
+   "notes": "Free licence; cannot share content. Sign-in via Entra ID applies to every licence."
+  },
+  {
+   "name": "Pro",
+   "price_text": "$14.00 user/month, paid yearly",
+   "price_per_user_mo": 14.0,
+   "billing": "annual",
+   "sso": true,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c4",
+    "c7",
+    "c22"
+   ]
+  },
+  {
+   "name": "Premium Per User",
+   "price_text": "$24.00 user/month, paid yearly",
+   "price_per_user_mo": 24.0,
+   "billing": "annual",
+   "sso": true,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c4",
+    "c7"
+   ]
+  }
+ ],
+ "scim": {
+  "available": false,
+  "cite": [
+   "c5",
+   "c6",
+   "c7"
+  ],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": null,
+   "token_source": null,
+   "token_expiry": null,
+   "cite": []
+  },
+  "endpoints": {
+   "Users": null,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": []
+  },
+  "operations": {
+   "create": null,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": null,
+   "reactivate": null,
+   "delete": null,
+   "group_push": null,
+   "group_membership": null,
+   "cite": []
+  },
+  "deprovision": {
+   "action": null,
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": []
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": []
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "No SCIM endpoint: Power BI users are Entra ID identities and licences are assigned in the Microsoft 365 admin center or Azure portal. Entra's inbound SCIM API and Graph belong to Microsoft 365/Entra, not Power BI."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c9",
+   "c10",
+   "c14"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://api.powerbi.com/v1.0/myorg",
+  "docs_url": "https://learn.microsoft.com/en-us/rest/api/power-bi/",
+  "auth": {
+   "methods": [
+    "oauth2",
+    "service_principal"
+   ],
+   "scopes": [
+    "Workspace.Read.All",
+    "Workspace.ReadWrite.All",
+    "Tenant.Read.All",
+    "Tenant.ReadWrite.All"
+   ],
+   "cite": [
+    "c15",
+    "c20",
+    "c21"
+   ]
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c9",
+    "c10",
+    "c12",
+    "c13",
+    "c14",
+    "c16",
+    "c17"
+   ],
+   "notes": "The Power BI REST API grants, changes and removes workspace roles for users and groups and lists a user's item access; creating users and assigning licences is done in Entra ID / Microsoft Graph, not this API. Add Group User only grants workspace permissions to an existing identity."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/v1.0/myorg/groups/{groupId}/users",
+    "purpose": "List users with access to a workspace",
+    "cite": [
+     "c11"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1.0/myorg/groups/{groupId}/users",
+    "purpose": "Grant a user or group a workspace role",
+    "cite": [
+     "c9",
+     "c10"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/v1.0/myorg/groups/{groupId}/users",
+    "purpose": "Update a user's workspace role",
+    "cite": [
+     "c12"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v1.0/myorg/groups/{groupId}/users/{user}",
+    "purpose": "Remove a user from a workspace",
+    "cite": [
+     "c13"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1.0/myorg/admin/groups/{groupId}/users",
+    "purpose": "Admin: grant workspace permissions",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v1.0/myorg/admin/groups/{groupId}/users/{user}",
+    "purpose": "Admin: remove workspace permissions",
+    "cite": [
+     "c16"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1.0/myorg/admin/users/{userId}/artifactAccess",
+    "purpose": "Admin: list items a user can access",
+    "cite": [
+     "c17"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1.0/myorg/admin/activityevents",
+    "purpose": "Admin: tenant audit activity events",
+    "cite": [
+     "c19"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": null,
+   "cite": [
+    "c18",
+    "c19",
+    "c20"
+   ],
+   "notes": "Requires the Fabric administrator role or a service principal; no licence tier named."
+  },
+  "rate_limits": {
+   "text": "Admin APIs: maximum 200 requests per hour.",
+   "cite": [
+    "c15"
+   ]
+  },
+  "limitations": [],
+  "notes": "Workspace-access API, not an account lifecycle API. Plan gate is not stated on the API reference; the user API plan stays null."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "https://www.okta.com/integrations/power-bi/ and /microsoft-power-bi/ return 404; Okta reaches Power BI only through its Microsoft Office 365 app into Entra ID (scored under microsoft-365)."
+  },
+  "entra": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": "directory_sync",
+   "built_by": "vendor",
+   "url": null,
+   "cite": [
+    "c7",
+    "c6"
+   ],
+   "notes": "Power BI is a first-party Microsoft service on the tenant's own Entra ID: users sign in with their Entra account and licences are assigned to Entra users or groups. There is no separate Entra gallery app (no Power BI entry in the Entra SaaS app tutorials index)."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": "Native Microsoft Entra ID identity; licences assigned to Entra users or groups in the Microsoft 365 admin center or Azure portal; self-service sign-up with a work account.",
+  "docs_public": true,
+  "cite": [
+   "c5",
+   "c6",
+   "c23"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.microsoft.com/en-us/power-platform/products/power-bi/pricing",
+   "title": "Power BI: Pricing Plan | Microsoft Power Platform",
+   "quote": "Power BI Pro $14.00 user/month, paid yearly",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.microsoft.com/en-us/power-platform/products/power-bi/pricing",
+   "title": "Power BI: Pricing Plan | Microsoft Power Platform",
+   "quote": "Power BI Premium Per User $24.00 user/month, paid yearly",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.microsoft.com/en-us/power-platform/products/power-bi/pricing",
+   "title": "Power BI: Pricing Plan | Microsoft Power Platform",
+   "quote": "Included in Microsoft Fabric free account",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.microsoft.com/en-us/power-platform/products/power-bi/pricing",
+   "title": "Power BI: Pricing Plan | Microsoft Power Platform",
+   "quote": "Power BI Pro and Power BI Premium per user subscriptions are available for self-service purchase and through the Microsoft 365 admin center.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://learn.microsoft.com/en-us/power-bi/enterprise/service-admin-licensing-organization",
+   "title": "Power BI Licensing Guide for Organizations - Microsoft Fabric | Microsoft Learn",
+   "quote": "After signing up and purchasing a subscription or a free trial, Billing, License, and User administrators assign licenses to users in their organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://learn.microsoft.com/en-us/power-bi/enterprise/service-admin-licensing-organization",
+   "title": "Power BI Licensing Guide for Organizations - Microsoft Fabric | Microsoft Learn",
+   "quote": "You can assign licenses from either the Microsoft 365 admin center or the Azure portal.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://learn.microsoft.com/en-us/power-bi/guidance/whitepaper-powerbi-security",
+   "title": "Power BI security white paper - Power BI | Microsoft Learn",
+   "quote": "That sequence describes the process of user authentication in Power BI, which follows the Microsoft Entra auth code grant flow .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://learn.microsoft.com/en-us/power-bi/guidance/whitepaper-powerbi-security",
+   "title": "Power BI security white paper - Power BI | Microsoft Learn",
+   "quote": "For more information about options for an organization's user authentication models (sign-in models), see Choosing a sign-in model for Microsoft 365 .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://learn.microsoft.com/en-us/rest/api/power-bi/groups/add-group-user",
+   "title": "Groups - Add Group User - REST API (Power BI Power BI REST APIs) | Microsoft Learn",
+   "quote": "POST https://api.powerbi.com/v1.0/myorg/groups/{groupId}/users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://learn.microsoft.com/en-us/rest/api/power-bi/groups/add-group-user",
+   "title": "Groups - Add Group User - REST API (Power BI Power BI REST APIs) | Microsoft Learn",
+   "quote": "Grants the specified user the specified permissions to the specified workspace.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://learn.microsoft.com/en-us/rest/api/power-bi/groups/get-group-users",
+   "title": "Groups - Get Group Users - REST API (Power BI Power BI REST APIs) | Microsoft Learn",
+   "quote": "GET https://api.powerbi.com/v1.0/myorg/groups/{groupId}/users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://learn.microsoft.com/en-us/rest/api/power-bi/groups/update-group-user",
+   "title": "Groups - Update Group User - REST API (Power BI Power BI REST APIs) | Microsoft Learn",
+   "quote": "PUT https://api.powerbi.com/v1.0/myorg/groups/{groupId}/users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://learn.microsoft.com/en-us/rest/api/power-bi/groups/delete-user-in-group",
+   "title": "Groups - Delete User In Group - REST API (Power BI Power BI REST APIs) | Microsoft Learn",
+   "quote": "DELETE https://api.powerbi.com/v1.0/myorg/groups/{groupId}/users/{user}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://learn.microsoft.com/en-us/rest/api/power-bi/admin/groups-add-user-as-admin",
+   "title": "Admin - Groups AddUserAsAdmin - REST API (Power BI Power BI REST APIs) | Microsoft Learn",
+   "quote": "POST https://api.powerbi.com/v1.0/myorg/admin/groups/{groupId}/users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://learn.microsoft.com/en-us/rest/api/power-bi/admin/groups-add-user-as-admin",
+   "title": "Admin - Groups AddUserAsAdmin - REST API (Power BI Power BI REST APIs) | Microsoft Learn",
+   "quote": "Required Scope Tenant.ReadWrite.All Limitations Maximum 200 requests per hour.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://learn.microsoft.com/en-us/rest/api/power-bi/admin/groups-delete-user-as-admin",
+   "title": "Admin - Groups DeleteUserAsAdmin - REST API (Power BI Power BI REST APIs) | Microsoft Learn",
+   "quote": "DELETE https://api.powerbi.com/v1.0/myorg/admin/groups/{groupId}/users/{user}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://learn.microsoft.com/en-us/rest/api/power-bi/admin/users-get-user-artifact-access-as-admin",
+   "title": "Admin - Users GetUserArtifactAccessAsAdmin - REST API (Power BI Power BI REST APIs) | Microsoft Learn",
+   "quote": "GET https://api.powerbi.com/v1.0/myorg/admin/users/{userId}/artifactAccess",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://learn.microsoft.com/en-us/rest/api/power-bi/admin/get-activity-events",
+   "title": "Admin - Get Activity Events - REST API (Power BI Power BI REST APIs) | Microsoft Learn",
+   "quote": "Returns a list of audit activity events for a tenant.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://learn.microsoft.com/en-us/rest/api/power-bi/admin/get-activity-events",
+   "title": "Admin - Get Activity Events - REST API (Power BI Power BI REST APIs) | Microsoft Learn",
+   "quote": "GET https://api.powerbi.com/v1.0/myorg/admin/activityevents",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://learn.microsoft.com/en-us/rest/api/power-bi/admin/get-activity-events",
+   "title": "Admin - Get Activity Events - REST API (Power BI Power BI REST APIs) | Microsoft Learn",
+   "quote": "The user must be a Fabric administrator or authenticate using a service principal.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://learn.microsoft.com/en-us/rest/api/power-bi/groups/add-group-user",
+   "title": "Groups - Add Group User - REST API (Power BI Power BI REST APIs) | Microsoft Learn",
+   "quote": "Required Scope Workspace.ReadWrite.All",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://learn.microsoft.com/en-us/power-bi/fundamentals/service-features-license-type",
+   "title": "Power BI service features by license type - Power BI | Microsoft Learn",
+   "quote": "Power BI Pro is a per-user license that lets users create, read, and interact with content that others publish to the Power BI service.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://learn.microsoft.com/en-us/power-bi/fundamentals/service-features-license-type",
+   "title": "Power BI service features by license type - Power BI | Microsoft Learn",
+   "quote": "If you're signing up as an individual in an organization and your administrator didn't assign you a license, use self-service signup to try or buy Power BI or Fabric.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.microsoft.com/en-us/power-platform/products/power-bi/pricing",
+  "https://learn.microsoft.com/en-us/power-bi/enterprise/service-admin-licensing-organization",
+  "https://learn.microsoft.com/en-us/power-bi/fundamentals/service-features-license-type",
+  "https://learn.microsoft.com/en-us/power-bi/guidance/whitepaper-powerbi-security",
+  "https://learn.microsoft.com/en-us/rest/api/power-bi/ (Groups and Admin operation groups)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/toc.json (no Power BI entry)",
+  "https://www.okta.com/integrations/power-bi/ (404)",
+  "https://www.okta.com/integrations/microsoft-power-bi/ (404)"
+ ],
+ "open_questions": [
+  "Does using the Power BI REST API require a Pro licence for the calling user (workspace APIs act on shared workspaces, which need Pro)? Not stated on the API reference.",
+  "Removing a user's Power BI licence: does it end sessions or keep their content? Not documented on the pages checked."
+ ]
+}

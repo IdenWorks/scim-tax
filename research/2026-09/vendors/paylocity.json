@@ -1,0 +1,491 @@
+{
+ "slug": "paylocity",
+ "vendor": "Paylocity",
+ "vendor_url": "https://www.paylocity.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Paylocity",
+  "slug": "paylocity",
+  "category": "HR, Payroll & Recruiting",
+  "status": "none",
+  "scim_plan": "—",
+  "scim_price_text": "—",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Request Pricing",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": null,
+  "idp": {
+   "okta": "sso_only",
+   "entra": "sso_only",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": false
+  },
+  "pricing_page_url": "https://www.paylocity.com/pricing/",
+  "docs_url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/paylocity-tutorial",
+  "evidence": "Microsoft's Paylocity tutorial requires a \"Paylocity single sign-on (SSO) enabled subscription\" and says \"Work with Paylocity support team to add the users in the Paylocity platform\"; Paylocity's own Okta and Entra integrations only send employee data from Paylocity into the IdP.",
+  "notes": "New row. No inbound SCIM: Paylocity is the HR system of record, and every identity integration found is outbound (Paylocity -> Okta/Entra ID via HR-sourced provisioning; Okta OIN app checks SCIM Create/Update/Attribute Sourcing but no Deactivate; Aquera connector imports from Paylocity). Rule 3a/3b: scored as a provisioning target, so none. SAML SSO is configured under HR & Payroll > User Access > SSO Configuration and needs an \"SSO enabled subscription\" (plan not named; pricing is quote-only, so team/SSO plan fields are null). Paylocity also sells an Access Management (IT) product built on OneLogin that provisions employees outward; noted in fallbacks.other_sync, not status. Developer API is approval-gated and employee-centric (OAuth client credentials; beta CoreHR v2 employee endpoints; new-hire, employee-change and termination webhooks). Confidence low: Paylocity's client help centre is login-only.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Paylocity HCM (custom package)",
+   "price_text": "Request Pricing",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2"
+   ],
+   "notes": "No public plan names or prices; SSO requires an \"SSO enabled subscription\" per Microsoft's tutorial."
+  }
+ ],
+ "scim": {
+  "available": false,
+  "cite": [
+   "c9",
+   "c11",
+   "c8",
+   "c6"
+  ],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": null,
+   "token_source": null,
+   "token_expiry": null,
+   "cite": []
+  },
+  "endpoints": {
+   "Users": null,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": []
+  },
+  "operations": {
+   "create": null,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": null,
+   "reactivate": null,
+   "delete": null,
+   "group_push": null,
+   "group_membership": null,
+   "cite": []
+  },
+  "deprovision": {
+   "action": null,
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": []
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": []
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "Paylocity is the HR system of record. Its Okta and Entra integrations push employee identity data OUT of Paylocity into the IdP (outbound/HR-sourced), and Okta's Aquera connector imports users from Paylocity; none provisions users INTO Paylocity. Microsoft's tutorial says users must be created in Paylocity with Paylocity support before SSO. Rule 3a: scim.available false."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c13",
+   "c14",
+   "c15"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": null,
+  "docs_url": "https://developer.paylocity.com/integrations/docs/getting-started",
+  "auth": {
+   "methods": [
+    "oauth2"
+   ],
+   "scopes": [],
+   "cite": [
+    "c15"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c17",
+    "c18"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/apiHub/coreHR/v2/companies/{companyId}/employees",
+    "purpose": "(EA) Get employees [batch] (beta)",
+    "cite": [
+     "c16",
+     "c17"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/apiHub/coreHR/v2/companies/{companyId}/employees/{employeeId}",
+    "purpose": "(EA) Get employee [single] (beta)",
+    "cite": [
+     "c18"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": true,
+   "events": [
+    "New Hire",
+    "Employee Change",
+    "Termination"
+   ],
+   "cite": [
+    "c19",
+    "c21",
+    "c22"
+   ],
+   "notes": "Employee (HR record) webhooks; the termination webhook is suggested for disabling Active Directory users."
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "API access requires Paylocity approval (existing customer or a sponsoring customer); the CoreHR v2 employee endpoints are beta, early-adopter only.",
+    "cite": [
+     "c14",
+     "c16"
+    ]
+   }
+  ],
+  "notes": "Employee (worker) data API for customers and partners, not management of Paylocity login users or roles."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/paylocity/",
+   "cite": [
+    "c7",
+    "c9",
+    "c8"
+   ],
+   "notes": "OIN markup checks SAML, SWA, SCIM, Create, Update and Attribute Sourcing (no Deactivate): an HR-sourced import from Paylocity into Okta, not provisioning into Paylocity. Paylocity (Demo) app is the same. Separate \"Paylocity User Mastering Connector by Aquera\" (third party) also imports users from Paylocity."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/paylocity-tutorial",
+   "cite": [
+    "c3",
+    "c4",
+    "c6",
+    "c11"
+   ],
+   "notes": "Gallery app with SAML SSO tutorial only; users created manually in Paylocity. Paylocity's own Entra integration flows Paylocity -> Entra."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "Paylocity marketplace lists a Google Workspace integration page (outbound, not loaded in detail)."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "Paylocity's Access Management product is built on OneLogin (outbound provisioning from Paylocity); OneLogin catalogue page not loaded."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": false,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": "Outbound: Paylocity pushes employee identity/status to Okta and Entra ID (HR-sourced provisioning), and sells an Access Management add-on built on OneLogin that provisions Paylocity employees into Office 365, Google Workspace and OneLogin-catalogue apps.",
+  "docs_public": true,
+  "cite": [
+   "c6",
+   "c9",
+   "c11",
+   "c12"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.paylocity.com/pricing/",
+   "title": "Paylocity Pricing | Paylocity for HR, Finance, and IT",
+   "quote": "Get the solution that matches your needs and is priced for your budget.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.paylocity.com/pricing/",
+   "title": "Paylocity Pricing | Paylocity for HR, Finance, and IT",
+   "quote": "Request Pricing with a Free Demo",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/paylocity-tutorial",
+   "title": "Configure Paylocity for Single sign-on with Microsoft Entra ID",
+   "quote": "Paylocity single sign-on (SSO) enabled subscription.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/paylocity-tutorial",
+   "title": "Configure Paylocity for Single sign-on with Microsoft Entra ID",
+   "quote": "Paylocity supports SP and IDP initiated SSO",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/paylocity-tutorial",
+   "title": "Configure Paylocity for Single sign-on with Microsoft Entra ID",
+   "quote": "In Paylocity, navigate to HR & Payroll > User Access > SSO Configuration.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/paylocity-tutorial",
+   "title": "Configure Paylocity for Single sign-on with Microsoft Entra ID",
+   "quote": "Work with Paylocity support team to add the users in the Paylocity platform. Users must be created and activated before you use single sign-on.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://www.okta.com/integrations/paylocity/",
+   "title": "Integrate Paylocity with Okta",
+   "quote": "Okta’s Paylocity Integration provides clients the benefits of single-sign on and user provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://www.okta.com/integrations/paylocity-user-mastering-connector-by-aquera/",
+   "title": "Integrate Paylocity User Mastering Connector by Aquera with Okta",
+   "quote": "The Paylocity User Mastering Connector by Aquera provides the integration to Okta required to import users and their attributes on an ongoing basis from Paylocity, which acts as the user system of record.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://www.paylocity.com/products/capabilities/integrations/marketplace/okta/",
+   "title": "Okta Integration with Paylocity",
+   "quote": "Through this integration, employee identity and status data flows securely from Paylocity into Okta, reducing manual provisioning while supporting consistent access control across the workforce.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://www.paylocity.com/products/capabilities/integrations/marketplace/okta/",
+   "title": "Okta Integration with Paylocity",
+   "quote": "Automate user provisioning and deprovisioning based on employee lifecycle events",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://www.paylocity.com/products/capabilities/integrations/marketplace/microsoft-365-entra-id/",
+   "title": "Microsoft 365 (Entra ID) Integration with Paylocity",
+   "quote": "Employee identity and employment status information flows securely from Paylocity into Entra ID, supporting automated access to Microsoft 365 applications.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://www.paylocity.com/products/it/access-management/",
+   "title": "Identity & Access Management Solutions | IAM Software | Paylocity",
+   "quote": "Provision access to platforms like Office 365, Google Workspace, Zoom, and Salesforce plus access to 7,000+ software titles in the OneLogin Marketplace to ensure support for even the most specialized applications.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://developer.paylocity.com/integrations/docs/getting-started.md",
+   "title": "Getting Started | Paylocity Developer Portal",
+   "quote": "Paylocity offers access to APIs that allow customers and partners to access desired data quickly and securely for building integrations.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.paylocity.com/integrations/docs/getting-started"
+  },
+  {
+   "id": "c14",
+   "url": "https://developer.paylocity.com/integrations/docs/getting-started.md",
+   "title": "Getting Started | Paylocity Developer Portal",
+   "quote": "To be approved to access a demo environment, you must be an existing Paylocity customer or have at least one (1) existing Paylocity customer willing to participate in early adoption testing",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.paylocity.com/integrations/docs/getting-started"
+  },
+  {
+   "id": "c15",
+   "url": "https://developer.paylocity.com/integrations/docs/getting-started.md",
+   "title": "Getting Started | Paylocity Developer Portal",
+   "quote": "When the access request has been reviewed and approved, Paylocity will contact you and provide OAUTH credentials and access to a Sandbox account.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.paylocity.com/integrations/docs/getting-started"
+  },
+  {
+   "id": "c16",
+   "url": "https://developer.paylocity.com/integrations/reference/get_apihub_corehr_v2_companies_companyid_employees.md",
+   "title": "(EA) Get Employee [Batch] | Paylocity Developer Portal",
+   "quote": "This endpoint version is currently in beta and available only to approved early adoption (EA) partners and customers.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.paylocity.com/integrations/reference/get_apihub_corehr_v2_companies_companyid_employees"
+  },
+  {
+   "id": "c17",
+   "url": "https://developer.paylocity.com/integrations/reference/get_apihub_corehr_v2_companies_companyid_employees.md",
+   "title": "(EA) Get Employee [Batch] | Paylocity Developer Portal",
+   "quote": "/apiHub/coreHR/v2/companies/{companyId}/employees",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.paylocity.com/integrations/reference/get_apihub_corehr_v2_companies_companyid_employees"
+  },
+  {
+   "id": "c18",
+   "url": "https://developer.paylocity.com/integrations/reference/get_apihub_corehr_v2_companies_companyid_employees_employeeid.md",
+   "title": "(EA) Get Employee [Single] | Paylocity Developer Portal",
+   "quote": "/apiHub/coreHR/v2/companies/{companyId}/employees/{employeeId}",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.paylocity.com/integrations/reference/get_apihub_corehr_v2_companies_companyid_employees_employeeid"
+  },
+  {
+   "id": "c19",
+   "url": "https://developer.paylocity.com/integrations/reference/termination-webhooks.md",
+   "title": "Termination Webhooks | Paylocity Developer Portal",
+   "quote": "Automate disabling of active directory users",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.paylocity.com/integrations/reference/termination-webhooks"
+  },
+  {
+   "id": "c20",
+   "url": "https://developer.paylocity.com/integrations/reference/termination-webhooks.md",
+   "title": "Termination Webhooks | Paylocity Developer Portal",
+   "quote": "Log into HR & Payroll and terminate the employee.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.paylocity.com/integrations/reference/termination-webhooks"
+  },
+  {
+   "id": "c21",
+   "url": "https://developer.paylocity.com/integrations/reference/llms.txt",
+   "title": "Paylocity Developer Portal: API Reference index",
+   "quote": "Employee Change Webhooks",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.paylocity.com/integrations/reference/webhooks-overview"
+  },
+  {
+   "id": "c22",
+   "url": "https://developer.paylocity.com/integrations/reference/llms.txt",
+   "title": "Paylocity Developer Portal: API Reference index",
+   "quote": "New Hire Webhooks",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.paylocity.com/integrations/reference/webhooks-overview"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.paylocity.com/pricing/",
+  "https://www.paylocity.com/sitemap.xml (2,670 URLs; no SCIM pages)",
+  "https://www.paylocity.com/llms.txt",
+  "https://developer.paylocity.com/llms.txt and integrations/docs + reference llms.txt (no SCIM)",
+  "https://www.paylocity.com/products/capabilities/integrations/marketplace/okta/",
+  "https://www.paylocity.com/products/capabilities/integrations/marketplace/microsoft-365-entra-id/",
+  "https://www.paylocity.com/products/it/access-management/",
+  "https://www.okta.com/integrations/?search=paylocity (4 apps)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/paylocity-tutorial",
+  "Help centre: client login only"
+ ],
+ "open_questions": [
+  "Which Paylocity package or add-on includes SSO (the \"SSO enabled subscription\") is not published.",
+  "Whether Paylocity supports SAML JIT user creation is not documented (Microsoft's tutorial says users must exist first).",
+  "Paylocity help centre is login-only; SCIM absence could not be confirmed there.",
+  "What the Okta Paylocity app's Create/Update provisioning writes into Paylocity (if anything) is not documented by Paylocity."
+ ]
+}

@@ -10,7 +10,7 @@ Usage: python3 research/2026-09/merge.py <results_dir> [--dry-run]
 """
 import json,sys,glob,os,re,datetime
 HERE=os.path.dirname(os.path.abspath(__file__)); ROOT=os.path.abspath(os.path.join(HERE,'..','..'))
-sys.path.insert(0,'/private/tmp/claude-501/-Users-pranay-Documents-cld/50a713ec-a577-47d4-8ca1-46777461f183/scratchpad')
+sys.path.insert(0,HERE)
 FIELDS=['vendor','slug','category','status','scim_plan','scim_price_text','scim_price_per_user_mo','team_plan','team_price_text','team_price_per_user_mo','price_multiplier','sso_plan','sso_price_per_user_mo','sso_required_for_scim','scim_addon_price_text','min_seats','scim_ops','idp','pricing_page_url','docs_url','evidence','notes','confidence','last_verified','first_added','status_prev']
 def norm(s):
     s=s.lower().replace('&','and'); s=re.sub(r'\(.*?\)','',s); return re.sub(r'[^a-z0-9]+','-',s).strip('-')

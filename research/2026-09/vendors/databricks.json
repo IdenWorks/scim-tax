@@ -1,0 +1,914 @@
+{
+ "slug": "databricks",
+ "vendor": "Databricks",
+ "vendor_url": "https://www.databricks.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Databricks",
+  "slug": "databricks",
+  "category": "Data, Analytics & BI",
+  "status": "free",
+  "scim_plan": "Premium",
+  "scim_price_text": "Premium: usage-based (from $0.15/DBU)",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Premium",
+  "team_price_text": "Premium: usage-based (from $0.15/DBU)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Premium",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": false,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": null,
+   "onelogin": "native",
+   "jumpcloud": "native",
+   "generic": true
+  },
+  "pricing_page_url": "https://www.databricks.com/product/pricing/platform-addons",
+  "docs_url": "https://docs.databricks.com/aws/en/admin/users-groups/scim/",
+  "evidence": "Databricks' SCIM docs say \"Your Databricks account must have the Premium plan or above\", and its pricing page says the Standard tier is discontinued for new customers on AWS and Google Cloud, making Premium the entry tier.",
+  "notes": "Status changed gated -> free: Standard is discontinued for new customers on AWS/GCP (existing Standard accounts were moved to Premium on Oct 1, 2025), so SCIM sits on the entry (Premium) tier with no upcharge; June's own row already had multiplier 1.0. Usage-based DBU pricing, so per-user fields are null; June's '~$0.55/DBU' could not be found on the current page and was replaced with the listed 'starting at $0.15/DBU' (Data Engineering). Azure Databricks pricing is set by Microsoft and was not re-checked. Account SCIM for Okta, Entra, OneLogin, JumpCloud; deprovisioning deactivates (tokens blocked, objects kept). Entra automatic identity management is an alternative sync. Enterprise adds compliance features; ESC add-on is 15% of spend.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Premium",
+  "api_tax": false,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Premium",
+   "price_text": "Usage-based, pay-as-you-go per DBU; e.g. Data Engineering starting at $0.15/DBU",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c6",
+    "c45",
+    "c12"
+   ],
+   "notes": "Lowest tier for new customers on AWS and GCP (Standard discontinued). Audit logs listed on Premium; queried via system tables, not a REST endpoint."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Usage-based per DBU (higher DBU rates; contact sales for commits)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c4",
+    "c5",
+    "c6"
+   ],
+   "notes": "Adds advanced compliance and security; Enhanced Security and Compliance add-on is 15% of product spend."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c6",
+   "c9",
+   "c12",
+   "c31"
+  ],
+  "plan": "Premium",
+  "addon_price_text": null,
+  "sso_required": false,
+  "version": "2.0",
+  "base_url": "https://accounts.cloud.databricks.com/api/2.1/accounts/<account-id>/scim/v2/",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Account console > Security > Identity provider setup > Enable user provisioning (SCIM token + Account SCIM URL)",
+   "token_expiry": null,
+   "cite": [
+    "c9",
+    "c11",
+    "c39"
+   ],
+   "notes": "Token can be regenerated; old token keeps working for 24 hours. API calls also accept OAuth with the 'scim' scope."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c34",
+    "c41",
+    "c42"
+   ],
+   "notes": "Service principals also have SCIM endpoints."
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c10",
+    "c16",
+    "c19",
+    "c29",
+    "c30",
+    "c34",
+    "c41",
+    "c42"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": true,
+   "data_retained": "Deactivation keeps permissions and objects; user tokens remain but cannot authenticate; compute keeps running; scheduled jobs fail unless reassigned. Deleting via Okta deletes the user; OneLogin 'Delete' archives resources irreversibly.",
+   "cite": [
+    "c10",
+    "c16",
+    "c24",
+    "c27",
+    "c28"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "displayName",
+    "userName"
+   ],
+   "cite": [
+    "c35"
+   ],
+   "notes": "Operators eq, co, sw, ne with and/or; max 200 nodes in a filter expression."
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": 100,
+   "cite": [
+    "c36",
+    "c37"
+   ],
+   "notes": "count is documented as '<= 100' while the description says the default is 10000."
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "displayName",
+    "name.givenName",
+    "name.familyName",
+    "emails",
+    "active",
+    "roles",
+    "externalId (reserved, not supported)",
+    "title (SCIM 2.1, Beta)",
+    "userType (SCIM 2.1, Beta)",
+    "addresses[type=work].locality (Beta)",
+    "addresses[type=work].region (Beta)",
+    "addresses[type=work].country (Beta)"
+   ],
+   "enterprise": [
+    "costCenter (Beta)",
+    "organization (Beta)",
+    "division (Beta)",
+    "department (Beta)"
+   ],
+   "custom": {
+    "supported": false,
+    "how": "Only a fixed set of nine identity attributes (Beta) can be provisioned on account SCIM 2.1."
+   },
+   "group": [
+    "displayName",
+    "externalId",
+    "members",
+    "roles"
+   ],
+   "cite": [
+    "c31",
+    "c32",
+    "c33",
+    "c38",
+    "c40",
+    "c43"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "SCIM 'roles' attribute on users and groups (admin role); entitlements can be provisioned from the IdP; workspace assignment managed in Databricks.",
+   "cite": [
+    "c43"
+   ]
+  },
+  "rate_limits": {
+   "text": "Account SCIM API: 20 GET/s, 240 LIST/min, 2 PATCH/s, 5 POST/PUT/DELETE/s; max 10,000 users+service principals and 5,000 groups per account.",
+   "cite": [
+    "c44",
+    "c8"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Usernames and email addresses cannot be updated; userName and emails.value must match.",
+    "cite": [
+     "c18",
+     "c23",
+     "c38"
+    ]
+   },
+   {
+    "text": "Groups cannot be renamed; Entra group name changes do not sync.",
+    "cite": [
+     "c17",
+     "c22"
+    ]
+   },
+   {
+    "text": "Entra SCIM connector cannot sync nested groups or service principals (automatic identity management can).",
+    "cite": [
+     "c13",
+     "c21"
+    ]
+   },
+   {
+    "text": "OneLogin cannot create groups in Databricks.",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "text": "Workspace-level SCIM is legacy (Public Preview).",
+    "cite": [
+     "c14"
+    ]
+   }
+  ],
+  "notes": "Account-level SCIM is recommended; workspace-level SCIM (/api/2.0/preview/scim/v2) is legacy Public Preview. API reference documents /api/2.0/accounts/{account_id}/scim/v2; docs call the newer surface 'account SCIM 2.1' at /api/2.1/. SSO is recommended, not required."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c12",
+   "c30",
+   "c34"
+  ],
+  "plan": "Premium",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://accounts.cloud.databricks.com",
+  "docs_url": "https://docs.databricks.com/api/account/accountusers",
+  "auth": {
+   "methods": [
+    "oauth2"
+   ],
+   "scopes": [
+    "scim"
+   ],
+   "cite": [
+    "c39"
+   ],
+   "notes": "Method list beyond the 'scim' API scope not separately cited."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": true,
+   "reactivate_user": true,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c29",
+    "c30",
+    "c34",
+    "c41",
+    "c42",
+    "c43"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/api/2.0/accounts/{account_id}/scim/v2/Users",
+    "purpose": "List users",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/2.0/accounts/{account_id}/scim/v2/Users/{id}",
+    "purpose": "Get user",
+    "cite": [
+     "c53"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/2.0/accounts/{account_id}/scim/v2/Users",
+    "purpose": "Create user",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/2.0/accounts/{account_id}/scim/v2/Users/{id}",
+    "purpose": "Replace user",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/2.0/accounts/{account_id}/scim/v2/Users/{id}",
+    "purpose": "Update user (e.g. active=false to deactivate)",
+    "cite": [
+     "c52",
+     "c30"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/2.0/accounts/{account_id}/scim/v2/Users/{id}",
+    "purpose": "Delete user",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/2.0/accounts/{account_id}/scim/v2/Groups",
+    "purpose": "List groups",
+    "cite": [
+     "c41"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/2.0/accounts/{account_id}/scim/v2/Groups/{id}",
+    "purpose": "Get group",
+    "cite": [
+     "c41"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/2.0/accounts/{account_id}/scim/v2/Groups",
+    "purpose": "Create group",
+    "cite": [
+     "c41"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/2.0/accounts/{account_id}/scim/v2/Groups/{id}",
+    "purpose": "Replace group",
+    "cite": [
+     "c42"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/2.0/accounts/{account_id}/scim/v2/Groups/{id}",
+    "purpose": "Update group / membership",
+    "cite": [
+     "c42"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/2.0/accounts/{account_id}/scim/v2/Groups/{id}",
+    "purpose": "Delete group",
+    "cite": [
+     "c42"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": "Premium",
+   "cite": [
+    "c4",
+    "c47"
+   ],
+   "notes": "Audit logs are queried through the audit log system table (Public Preview) or log delivery, not a dedicated REST endpoint."
+  },
+  "rate_limits": {
+   "text": "Account SCIM API: 20 GET/s, 240 LIST/min, 2 PATCH/s, 5 POST/PUT/DELETE/s.",
+   "cite": [
+    "c44"
+   ]
+  },
+  "limitations": [],
+  "notes": "Databricks' user-management API is its SCIM API (Account Users/Groups/Service Principals, plus legacy workspace SCIM); there is no separate non-SCIM user API."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/databricks/",
+   "cite": [
+    "c48",
+    "c15"
+   ],
+   "notes": "OIN page marks SAML, SCIM, Create, Update, Deactivate, Group Push and Group Linking as checked (read from page markup)."
+  },
+  "entra": {
+   "listed": true,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c20"
+   ],
+   "notes": "Gallery app 'Azure Databricks SCIM Provisioning Connector' per Databricks docs; Microsoft Learn tutorial not checked. Entra automatic identity management is a separate vendor-run sync."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c24",
+    "c26"
+   ],
+   "notes": "From Databricks' OneLogin guide; OneLogin catalogue not loaded (bot challenge)."
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://jumpcloud.com/support/integrate-with-databricks",
+   "cite": [
+    "c49",
+    "c50"
+   ]
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "both",
+  "csv_import": null,
+  "other_sync": "Automatic identity management (Microsoft Entra ID sync, including nested groups and service principals)",
+  "docs_public": true,
+  "cite": [
+   "c45",
+   "c46",
+   "c13"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.databricks.com/product/pricing",
+   "title": "Databricks Pricing",
+   "quote": "Databricks offers you a pay-as-you-go approach with no up-front costs. Only pay for the products you use at per second granularity.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.databricks.com/product/pricing",
+   "title": "Databricks Pricing",
+   "quote": "Data Engineering Starting at $0.15 / DBU",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.databricks.com/product/pricing/platform-addons",
+   "title": "Databricks Data + AI Platform and Add-Ons",
+   "quote": "Databricks has discontinued the Standard tier for new customers on AWS and Google Cloud. Any existing customer that remains on the Standard tier on AWS and Google Cloud will be automatically upgraded to the premium tier on Oct 1, 2025.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.databricks.com/product/pricing/platform-addons",
+   "title": "Databricks Data + AI Platform and Add-Ons",
+   "quote": "Audit logs and automated policy controls",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.databricks.com/product/pricing/platform-addons",
+   "title": "Databricks Data + AI Platform and Add-Ons",
+   "quote": "Enhanced Security and Compliance Add-on Provides enhanced security and controls for your compliance needs",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://docs.databricks.com/aws/en/admin/users-groups/scim/",
+   "title": "Sync users and groups from your identity provider using SCIM | Databricks on AWS",
+   "quote": "Your Databricks account must have the Premium plan or above .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://docs.databricks.com/aws/en/admin/users-groups/scim/",
+   "title": "Sync users and groups from your identity provider using SCIM | Databricks on AWS",
+   "quote": "Databricks recommends that you configure single sign-on for users to log in to Databricks using your IdP.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.databricks.com/aws/en/admin/users-groups/scim/",
+   "title": "Sync users and groups from your identity provider using SCIM | Databricks on AWS",
+   "quote": "You can have a maximum of 10,000 combined users and service principals and 5000 groups in an account.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.databricks.com/aws/en/admin/users-groups/scim/",
+   "title": "Sync users and groups from your identity provider using SCIM | Databricks on AWS",
+   "quote": "In the Identity management section, click Enable user provisioning . Copy the SCIM token and the Account SCIM URL.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.databricks.com/aws/en/admin/users-groups/scim/",
+   "title": "Sync users and groups from your identity provider using SCIM | Databricks on AWS",
+   "quote": "When you remove a user from the account-level SCIM connector, that user is deactivated from the account and all of their workspaces, regardless of whether or not identity federation has been enabled.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.databricks.com/aws/en/admin/users-groups/scim/",
+   "title": "Sync users and groups from your identity provider using SCIM | Databricks on AWS",
+   "quote": "In the Identity management section, click Regenerate token . Make a note of the new token. The previous token will continue to work for 24 hours.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.databricks.com/aws/en/admin/users-groups/scim/",
+   "title": "Sync users and groups from your identity provider using SCIM | Databricks on AWS",
+   "quote": "You can use a SCIM provisioning connector in your IdP or invoke the Identity and Access Management SCIM APIs to manage provisioning. You can also use these APIs to manage identities in Databricks directly, without an IdP.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.databricks.com/aws/en/admin/users-groups/scim/",
+   "title": "Sync users and groups from your identity provider using SCIM | Databricks on AWS",
+   "quote": "Automatic identity management also supports syncing Microsoft Entra ID service principals and nested groups to Databricks , which is not supported using SCIM provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.databricks.com/aws/en/admin/users-groups/scim/",
+   "title": "Sync users and groups from your identity provider using SCIM | Databricks on AWS",
+   "quote": "Workspace-level SCIM provisioning is a legacy configuration that is in Public Preview.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.databricks.com/aws/en/admin/users-groups/scim/okta",
+   "title": "Configure SCIM provisioning for Okta | Databricks on AWS",
+   "quote": "Databricks is available as a provisioning app in the Okta Integration Network (OIN), enabling you to use Okta to provision users and groups with Databricks automatically.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.databricks.com/aws/en/admin/users-groups/scim/okta",
+   "title": "Configure SCIM provisioning for Okta | Databricks on AWS",
+   "quote": "If you delete a user from the account-level Databricks application in Okta, the user is deleted in the Databricks account and loses access to all workspaces",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.databricks.com/aws/en/admin/users-groups/scim/okta",
+   "title": "Configure SCIM provisioning for Okta | Databricks on AWS",
+   "quote": "You cannot rename groups in Databricks ; do not attempt to rename them in Okta.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.databricks.com/aws/en/admin/users-groups/scim/okta",
+   "title": "Configure SCIM provisioning for Okta | Databricks on AWS",
+   "quote": "You cannot update Databricks usernames and email addresses.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.databricks.com/aws/en/admin/users-groups/scim/okta",
+   "title": "Configure SCIM provisioning for Okta | Databricks on AWS",
+   "quote": "To push groups from Okta to Databricks , go to the Push Groups tab. Users who already exist in Databricks are matched by email address.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.databricks.com/aws/en/admin/users-groups/scim/aad",
+   "title": "Configure SCIM provisioning using Microsoft Entra ID | Databricks on AWS",
+   "quote": "Under Add from the gallery, search for and select Azure Databricks SCIM Provisioning Connector .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.databricks.com/aws/en/admin/users-groups/scim/aad",
+   "title": "Configure SCIM provisioning using Microsoft Entra ID | Databricks on AWS",
+   "quote": "You cannot sync nested groups or Microsoft Entra ID service principal s from the Azure Databricks SCIM Provisioning Connector application.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://docs.databricks.com/aws/en/admin/users-groups/scim/aad",
+   "title": "Configure SCIM provisioning using Microsoft Entra ID | Databricks on AWS",
+   "quote": "Updates to group names in Microsoft Entra ID do not sync into Databricks .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://docs.databricks.com/aws/en/admin/users-groups/scim/aad",
+   "title": "Configure SCIM provisioning using Microsoft Entra ID | Databricks on AWS",
+   "quote": "The parameters userName and emails.value must match.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://docs.databricks.com/aws/en/admin/users-groups/scim/onelogin",
+   "title": "Configure SCIM provisioning for OneLogin | Databricks on AWS",
+   "quote": "Delete deletes the user in Databricks and archives the user's resources. This is not reversible.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://docs.databricks.com/aws/en/admin/users-groups/scim/onelogin",
+   "title": "Configure SCIM provisioning for OneLogin | Databricks on AWS",
+   "quote": "You must create Databricks groups in Databricks ; you cannot add groups using OneLogin.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://docs.databricks.com/aws/en/admin/users-groups/scim/onelogin",
+   "title": "Configure SCIM provisioning for OneLogin | Databricks on AWS",
+   "quote": "When you delete users in OneLogin, OneLogin deactivates them from the Databricks account.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://docs.databricks.com/aws/en/admin/users-groups/users",
+   "title": "Manage users | Databricks on AWS",
+   "quote": "Deactivation prevents the user from authenticating and accessing the account, workspaces, or Databricks APIs, but does not remove its permissions or objects. This is preferable to removal, which is a destructive action.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://docs.databricks.com/aws/en/admin/users-groups/users",
+   "title": "Manage users | Databricks on AWS",
+   "quote": "Applications or scripts that use the tokens generated by the user are no longer able to access the Databricks API. The tokens remain but cannot be used to authenticate while a user is deactivated.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://docs.databricks.com/aws/en/admin/users-groups/users",
+   "title": "Manage users | Databricks on AWS",
+   "quote": "When reactivated, the user regains access with the same permissions.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://docs.databricks.com/aws/en/admin/users-groups/users",
+   "title": "Manage users | Databricks on AWS",
+   "quote": "You cannot deactivate a user using the account console. Instead, use the Account Users API .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://docs.databricks.com/aws/en/admin/users-groups/identity-attributes/provision-with-scim",
+   "title": "Manage identity attributes with account SCIM | Databricks on AWS",
+   "quote": "Identity attributes are managed on account SCIM 2.1 , at https://accounts.cloud.databricks.com/api/2.1/accounts/<account-id>/scim/v2/ .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://docs.databricks.com/aws/en/admin/users-groups/identity-attributes/provision-with-scim",
+   "title": "Manage identity attributes with account SCIM | Databricks on AWS",
+   "quote": "For External namespace , use urn:ietf:params:scim:schemas:core:2.0:User for the first five attributes (Title through Work Country) and urn:ietf:params:scim:schemas:extension:enterprise:2.0:User for the last four (Cost Center through Department).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://docs.databricks.com/aws/en/admin/users-groups/identity-attributes/provision-with-scim",
+   "title": "Manage identity attributes with account SCIM | Databricks on AWS",
+   "quote": "This feature is in Beta .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://docs.databricks.com/api/account/accountusers",
+   "title": "User | Databricks API Reference",
+   "quote": "List users GET /api/2.0/accounts/{account_id}/scim/v2/Users Create a new user POST /api/2.0/accounts/{account_id}/scim/v2/Users Replace a user PUT /api/2.0/accounts/{account_id}/scim/v2/Users/{id} Delete a user DELETE /api/2.0/accounts/{account_id}/scim/v2/Users/{id}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c35",
+   "url": "https://docs.databricks.com/api/account/accountusers",
+   "title": "User | Databricks API Reference",
+   "quote": "Query by which the results have to be filtered. Supported operators are equals(eq), contains(co), starts with(sw) and not equals(ne).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://docs.databricks.com/api/account/accountusers",
+   "title": "User | Databricks API Reference",
+   "quote": "Desired number of results per page. Default is 10000.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://docs.databricks.com/api/account/accountusers",
+   "title": "User | Databricks API Reference",
+   "quote": "Specifies the index of the first result. First item is number 1.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c38",
+   "url": "https://docs.databricks.com/api/account/accountusers",
+   "title": "User | Databricks API Reference",
+   "quote": "All the emails associated with the <Databricks> user. This attribute cannot be updated through the SCIM PATCH or PUT APIs; any supplied change is ignored.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c39",
+   "url": "https://docs.databricks.com/api/account/accountusers",
+   "title": "User | Databricks API Reference",
+   "quote": "API scopes: scim",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c40",
+   "url": "https://docs.databricks.com/api/account/accountusers",
+   "title": "User | Databricks API Reference",
+   "quote": "External ID is not currently supported. It is reserved for future use.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c41",
+   "url": "https://docs.databricks.com/api/account/accountgroups",
+   "title": "Group | Databricks API Reference",
+   "quote": "Get group details GET /api/2.0/accounts/{account_id}/scim/v2/Groups/{id} List group details GET /api/2.0/accounts/{account_id}/scim/v2/Groups Create a new group POST /api/2.0/accounts/{account_id}/scim/v2/Groups",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c42",
+   "url": "https://docs.databricks.com/api/account/accountgroups",
+   "title": "Group | Databricks API Reference",
+   "quote": "Replace a group PUT /api/2.0/accounts/{account_id}/scim/v2/Groups/{id} Delete a group DELETE /api/2.0/accounts/{account_id}/scim/v2/Groups/{id} Update group details PATCH /api/2.0/accounts/{account_id}/scim/v2/Groups/{id}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c43",
+   "url": "https://docs.databricks.com/api/account/accountusers",
+   "title": "User | Databricks API Reference",
+   "quote": "roles array of object Indicates if the group has the admin role.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c44",
+   "url": "https://docs.databricks.com/aws/en/resources/limits",
+   "title": "Resource limits | Databricks on AWS",
+   "quote": "Account SCIM API GET requests per second 20 Account Yes Account SCIM API LIST requests per minute 240 Account Yes Account SCIM API PATCH requests per second 2 Account Yes Account SCIM API POST / PUT / DELETE requests per second 5",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c45",
+   "url": "https://docs.databricks.com/aws/en/security/auth/single-sign-on/",
+   "title": "Configure SSO in Databricks | Databricks on AWS",
+   "quote": "SSO supports using either SAML 2.0 or OpenID Connect (OIDC).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c46",
+   "url": "https://docs.databricks.com/aws/en/security/auth/single-sign-on/",
+   "title": "Configure SSO in Databricks | Databricks on AWS",
+   "quote": "You can configure just-in-time (JIT) provisioning to automatically create new user accounts from your identity provider upon their first login.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c47",
+   "url": "https://docs.databricks.com/aws/en/admin/account-settings/audit-logs",
+   "title": "Audit log reference | Databricks on AWS",
+   "quote": "To access and query your account's audit logs, use the audit log system table (Public Preview) .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c48",
+   "url": "https://www.okta.com/integrations/databricks/",
+   "title": "Integrate Databricks with Okta",
+   "quote": "Integrate Databricks with Okta",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c49",
+   "url": "https://jumpcloud.com/support/integrate-with-databricks",
+   "title": "Integrate with Databricks | JumpCloud Documentation",
+   "quote": "Automatically provision, update and deprovision users and groups in Databricks from JumpCloud using the SCIM integration.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c50",
+   "url": "https://jumpcloud.com/support/integrate-with-databricks",
+   "title": "Integrate with Databricks | JumpCloud Documentation",
+   "quote": "A Databricks Premium plan and above",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c52",
+   "url": "https://docs.databricks.com/api/account/accountusers",
+   "title": "User | Databricks API Reference",
+   "quote": "Update user details PATCH /api/2.0/accounts/{account_id}/scim/v2/Users/{id}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c53",
+   "url": "https://docs.databricks.com/api/account/accountusers",
+   "title": "User | Databricks API Reference",
+   "quote": "Get user details GET /api/2.0/accounts/{account_id}/scim/v2/Users/{id} List users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c51",
+   "url": "https://docs.databricks.com/aws/en/admin/users-groups/users",
+   "title": "Manage users | Databricks on AWS",
+   "quote": "Account admins can deactivate users across a Databricks account.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.databricks.com/product/pricing",
+  "https://www.databricks.com/product/pricing/platform-addons",
+  "https://docs.databricks.com/aws/en/admin/users-groups/scim/",
+  "https://docs.databricks.com/aws/en/admin/users-groups/scim/okta",
+  "https://docs.databricks.com/aws/en/admin/users-groups/scim/aad",
+  "https://docs.databricks.com/aws/en/admin/users-groups/scim/onelogin",
+  "https://docs.databricks.com/aws/en/admin/users-groups/users",
+  "https://docs.databricks.com/aws/en/admin/users-groups/identity-attributes/provision-with-scim",
+  "https://docs.databricks.com/api/account/accountusers",
+  "https://docs.databricks.com/api/account/accountgroups",
+  "https://docs.databricks.com/aws/en/resources/limits",
+  "https://docs.databricks.com/aws/en/security/auth/single-sign-on/",
+  "https://docs.databricks.com/aws/en/admin/account-settings/audit-logs",
+  "https://www.okta.com/integrations/databricks/",
+  "https://jumpcloud.com/support/integrate-with-databricks"
+ ],
+ "open_questions": [
+  "Docs do not say whether deactivated users stop counting toward any seat or user limit (pricing is usage-based, not per seat).",
+  "API reference shows /api/2.0/accounts/.../scim/v2 while the identity-attributes page and Users page use /api/2.1/; whether 2.0 is deprecated is not stated.",
+  "Google Workspace provisioning to Databricks is not documented on AWS docs.",
+  "Azure Databricks still lists tiers via Microsoft; whether Azure Standard has been retired was not verified.",
+  "Whether ServiceProviderConfig/Schemas endpoints exist is not documented in the API reference."
+ ]
+}

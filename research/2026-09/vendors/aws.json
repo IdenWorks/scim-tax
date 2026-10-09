@@ -1,0 +1,808 @@
+{
+ "slug": "aws",
+ "vendor": "AWS (IAM Identity Center)",
+ "vendor_url": "https://aws.amazon.com/iam/identity-center/",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "AWS (IAM Identity Center)",
+  "slug": "aws",
+  "category": "Cloud, Infrastructure & Observability",
+  "status": "free",
+  "scim_plan": "IAM Identity Center (any AWS account)",
+  "scim_price_text": "No extra charge",
+  "scim_price_per_user_mo": 0,
+  "team_plan": null,
+  "team_price_text": "Pay-as-you-go AWS usage; IAM Identity Center no extra charge",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "IAM Identity Center (any AWS account)",
+  "sso_price_per_user_mo": 0,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": "native",
+   "onelogin": "via_generic",
+   "jumpcloud": "via_generic",
+   "generic": true
+  },
+  "pricing_page_url": "https://aws.amazon.com/iam/identity-center/faqs/",
+  "docs_url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/provision-automatically.html",
+  "evidence": "AWS's IAM Identity Center FAQ says \"IAM Identity Center is offered at no extra charge\", and the user guide says it supports automatic provisioning of users and groups from your IdP using SCIM v2.0.",
+  "notes": "New row. AWS is usage-priced; workforce SSO and SCIM for AWS accounts and apps run through IAM Identity Center, which has no extra charge, so status is free and per-user team fields stay null. Classic IAM users have no SCIM. SCIM is a subset: bearer token valid one year, no /Bulk, /Me or /Search, eq-only filters, single-valued multi-value attributes, group members not returned on read. Once SCIM is on, users can't be added or edited in the console. Identity Store API (create/update/delete users, groups, memberships) stays available alongside SCIM. Google Workspace SCIM covers users only (no group push). IAM Identity Center also acts as an IdP for AWS-managed and customer SAML apps but does not push SCIM outbound.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "IAM Identity Center (any AWS account)",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "IAM Identity Center",
+   "price_text": "No extra charge",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c1",
+    "c2",
+    "c22",
+    "c32"
+   ],
+   "notes": "AWS services are usage-priced; IAM Identity Center itself carries no charge."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c1",
+   "c2",
+   "c13"
+  ],
+  "plan": "IAM Identity Center (any AWS account)",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://scim.{region}.amazonaws.com/{tenant_id}/scim/v2",
+  "auth": {
+   "method": "bearer",
+   "token_source": "IAM Identity Center console > Settings > Identity source > Actions > Manage provisioning > Access tokens > Generate token",
+   "token_expiry": "1 year",
+   "cite": [
+    "c6",
+    "c7",
+    "c3"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": true,
+   "Schemas": true,
+   "ResourceTypes": true,
+   "Bulk": false,
+   "Me": false,
+   "cite": [
+    "c8",
+    "c9",
+    "c34",
+    "c35"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c8",
+    "c13",
+    "c14",
+    "c15",
+    "c36",
+    "c26",
+    "c41"
+   ]
+  },
+  "deprovision": {
+   "action": "other",
+   "frees_seat": null,
+   "revokes_sessions": false,
+   "data_retained": "Behaviour depends on the IdP: Okta unassignment disables the user; DELETE removes the user permanently. Disabled or deleted users can't sign in or create new sessions, but existing IAM role sessions in the console/CLI are not ended by ending Identity Center sessions.",
+   "cite": [
+    "c4",
+    "c26",
+    "c14",
+    "c20",
+    "c21"
+   ],
+   "notes": "No per-seat charge, so seat freeing does not apply."
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName",
+    "externalId",
+    "groups.value",
+    "id",
+    "manager",
+    "displayName (Groups)",
+    "members.value (Groups)"
+   ],
+   "cite": [
+    "c17"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": 100,
+   "cite": [
+    "c16"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.formatted",
+    "name.familyName",
+    "name.givenName",
+    "name.middleName",
+    "name.honorificPrefix",
+    "name.honorificSuffix",
+    "displayName",
+    "nickName",
+    "profileUrl",
+    "title",
+    "userType",
+    "preferredLanguage",
+    "locale",
+    "timezone",
+    "active",
+    "emails (single value: type, value, primary)",
+    "phoneNumbers (single value: type, value)",
+    "addresses (single value: formatted, streetAddress, locality, region, postalCode, country)",
+    "roles (single value: value, type, primary)",
+    "externalId"
+   ],
+   "enterprise": [
+    "employeeNumber",
+    "costCenter",
+    "organization",
+    "division",
+    "department",
+    "manager.value",
+    "manager.$ref"
+   ],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "displayName",
+    "members (value, type, $ref; not returned on read)",
+    "externalId"
+   ],
+   "cite": [
+    "c10",
+    "c12",
+    "c11",
+    "c37",
+    "c17"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "SCIM roles attribute (single value only); AWS access itself is granted through permission-set assignments to users or groups, not via SCIM.",
+   "cite": [
+    "c37"
+   ]
+  },
+  "rate_limits": {
+   "text": "25 TPS per write API and 40 TPS per read API, per Identity Store instance; increases via support case.",
+   "cite": [
+    "c18"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Only eq filters (with and); no /Me, /Bulk or /Search endpoints.",
+    "cite": [
+     "c9",
+     "c17"
+    ]
+   },
+   {
+    "text": "Multi-valued user attributes are not supported; only single values.",
+    "cite": [
+     "c10",
+     "c37"
+    ]
+   },
+   {
+    "text": "GetGroup/ListGroups return an empty members list; PatchGroup doesn't support remove-all or replace.",
+    "cite": [
+     "c11",
+     "c38"
+    ]
+   },
+   {
+    "text": "After SCIM is enabled, users cannot be added or edited in the console.",
+    "cite": [
+     "c5"
+    ]
+   },
+   {
+    "text": "Google Workspace SCIM provisions users only; groups must be created manually or via the Identity Store API.",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "text": "SCIM tokens expire after one year and must be rotated or sync stops.",
+    "cite": [
+     "c3"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c22",
+   "c23",
+   "c42"
+  ],
+  "plan": "IAM Identity Center (any AWS account)",
+  "api_tax": false,
+  "style": "other",
+  "base_url": "https://identitystore.{region}.amazonaws.com",
+  "docs_url": "https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Operations.html",
+  "auth": {
+   "methods": [
+    "aws_sigv4"
+   ],
+   "scopes": [
+    "identitystore:CreateUser",
+    "identitystore:UpdateUser",
+    "identitystore:DeleteUser",
+    "identitystore:ListUsers",
+    "identitystore:CreateGroupMembership"
+   ],
+   "cite": [
+    "c42"
+   ],
+   "notes": "AWS JSON protocol with IAM permissions; callable by principals in the management or delegated administrator account. Scopes listed are IAM action names (the docs show identitystore:Create*/Update*/Delete* in an SCP example)."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c22",
+    "c23",
+    "c24",
+    "c25",
+    "c39",
+    "c40"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "CreateUser (AWS JSON action, X-Amz-Target AWSIdentityStore.CreateUser)",
+    "purpose": "Create a user",
+    "cite": [
+     "c22"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "ListUsers",
+    "purpose": "List users (paginated)",
+    "cite": [
+     "c23"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "UpdateUser",
+    "purpose": "Update user attributes",
+    "cite": [
+     "c39"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "DeleteUser",
+    "purpose": "Delete a user",
+    "cite": [
+     "c24"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "CreateGroup",
+    "purpose": "Create a group",
+    "cite": [
+     "c40"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "CreateGroupMembership",
+    "purpose": "Add a member to a group",
+    "cite": [
+     "c25"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": [],
+   "notes": "Changes are logged as CloudTrail events, which can feed EventBridge; no dedicated user webhooks documented here."
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": null,
+   "cite": [
+    "c32"
+   ],
+   "notes": "Via AWS CloudTrail (SCIM and Identity Store calls logged as events)."
+  },
+  "rate_limits": {
+   "text": "Identity Store APIs: 20 TPS per API per Identity Store instance.",
+   "cite": [
+    "c19"
+   ]
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/aws-iam-identity-center/",
+   "cite": [
+    "c27",
+    "c26",
+    "c41"
+   ],
+   "notes": "OIN markup: SAML, SCIM, Create, Update, Deactivate, Group Push, Group Linking, Schema Discovery checked."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/aws-single-sign-on-provisioning-tutorial",
+   "cite": [
+    "c28"
+   ]
+  },
+  "google": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/gs-gwp.html",
+   "cite": [
+    "c29"
+   ],
+   "notes": "From AWS's Google Workspace tutorial; user provisioning only, no group push. Google's own catalogue page not loaded."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/onelogin-idp.html",
+   "cite": [
+    "c30"
+   ],
+   "notes": "From AWS's OneLogin guide; OneLogin catalogue not loaded."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/jumpcloud-idp.html",
+   "cite": [
+    "c31"
+   ],
+   "notes": "From AWS's JumpCloud guide; jumpcloud.com blocks plain requests."
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": "Manual provisioning in the console when the IdP lacks SCIM; Active Directory via AWS Directory Service as identity source",
+  "docs_public": true,
+  "cite": [
+   "c33"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://aws.amazon.com/iam/identity-center/faqs/",
+   "title": "AWS IAM Identity Center FAQs",
+   "quote": "IAM Identity Center is offered at no extra charge.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/provision-automatically.html",
+   "title": "Provision users and groups from an external identity provider using SCIM - AWS IAM Identity Center",
+   "quote": "IAM Identity Center supports automatic provisioning (synchronization) of user and group information from your identity provider (IdP) into IAM Identity Center using the System for Cross-domain Identity Management (SCIM) v2.0 protocol.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/provision-automatically.md",
+   "title": "Provision users and groups from an external identity provider using SCIM - AWS IAM Identity Center",
+   "quote": "SCIM access tokens are generated with a validity of one year.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/provision-automatically.html"
+  },
+  {
+   "id": "c4",
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/provision-automatically.md",
+   "title": "Provision users and groups from an external identity provider using SCIM - AWS IAM Identity Center",
+   "quote": "User deprovisioning behavior is managed by the identity provider and may vary by their implementation.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/provision-automatically.html"
+  },
+  {
+   "id": "c5",
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/provision-automatically.md",
+   "title": "Provision users and groups from an external identity provider using SCIM - AWS IAM Identity Center",
+   "quote": "After setting up automatic provisioning with SCIM for your IdP, you can no longer add or edit users in the IAM Identity Center console.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/provision-automatically.html"
+  },
+  {
+   "id": "c6",
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/developerguide/making-api-requests.md",
+   "title": "Making API Requests - IAM Identity Center SCIM Implementation",
+   "quote": "IAM Identity Center SCIM implementation supports the bearer HTTP authentication scheme.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.aws.amazon.com/singlesignon/latest/developerguide/making-api-requests.html"
+  },
+  {
+   "id": "c7",
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/generate-token.md",
+   "title": "Generate an access token - AWS IAM Identity Center",
+   "quote": "On the Automatic provisioning page, under Access tokens, choose Generate token.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/generate-token.html"
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/developerguide/supported-apis.md",
+   "title": "Supported API operations - IAM Identity Center SCIM Implementation",
+   "quote": "The following API operations are supported by the IAM Identity Center SCIM implementation:",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.aws.amazon.com/singlesignon/latest/developerguide/supported-apis.html"
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/developerguide/limitations.md",
+   "title": "Limitations from SCIM specification - IAM Identity Center SCIM Implementation",
+   "quote": "Some SCIM protocol endpoints are not supported, such as /Me, /Bulk, and /Search.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.aws.amazon.com/singlesignon/latest/developerguide/limitations.html"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/developerguide/limitations.md",
+   "title": "Limitations from SCIM specification - IAM Identity Center SCIM Implementation",
+   "quote": "IAM Identity Center currently does not support multi-valued attributes in general for users.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.aws.amazon.com/singlesignon/latest/developerguide/limitations.html"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/developerguide/limitations.md",
+   "title": "Limitations from SCIM specification - IAM Identity Center SCIM Implementation",
+   "quote": "return an empty member list. To see group information for a certain member, call",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.aws.amazon.com/singlesignon/latest/developerguide/limitations.html"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/developerguide/limitations.md",
+   "title": "Limitations from SCIM specification - IAM Identity Center SCIM Implementation",
+   "quote": "Enterprise user schema extension attributes – Single value",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.aws.amazon.com/singlesignon/latest/developerguide/limitations.html"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/developerguide/createuser.md",
+   "title": "CreateUser - IAM Identity Center SCIM Implementation",
+   "quote": "POST https://scim.us-east-1.amazonaws.com/{tenant_id}/scim/v2/Users",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.aws.amazon.com/singlesignon/latest/developerguide/createuser.html"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/developerguide/deleteuser.md",
+   "title": "DeleteUser - IAM Identity Center SCIM Implementation",
+   "quote": "A user can be deleted by making a DELETE request to the /Users endpoint with an existing user ID.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.aws.amazon.com/singlesignon/latest/developerguide/deleteuser.html"
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/developerguide/patchuser.md",
+   "title": "PatchUser - IAM Identity Center SCIM Implementation",
+   "quote": "The /Users endpoint allows a PATCH request to be made for partial changes to an existing user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.aws.amazon.com/singlesignon/latest/developerguide/patchuser.html"
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/developerguide/listusers.md",
+   "title": "ListUsers - IAM Identity Center SCIM Implementation",
+   "quote": "A maximum of 100 results can be returned per page.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.aws.amazon.com/singlesignon/latest/developerguide/listusers.html"
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/developerguide/listusers.md",
+   "title": "ListUsers - IAM Identity Center SCIM Implementation",
+   "quote": "Supported filter combinations: (userName), (externalId), (groups.value), (id and manager), (manager and id).",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.aws.amazon.com/singlesignon/latest/developerguide/listusers.html"
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/limits.md",
+   "title": "Quotas - AWS IAM Identity Center",
+   "quote": "have per-API throttle limits of 25 transactions per second (TPS) for write APIs and 40 TPS for read APIs.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/limits.html"
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/limits.md",
+   "title": "Quotas - AWS IAM Identity Center",
+   "quote": "have a throttle limit of 20 transactions per second (TPS) per API.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/limits.html"
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/disableuser.md",
+   "title": "Disable user access - AWS IAM Identity Center",
+   "quote": "When you disable user access or delete a user in IAM Identity Center, that user will immediately be prevented from signing in to the AWS access portal and will not be able to create new sign in sessions.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/disableuser.html"
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/end-active-sessions.md",
+   "title": "View and end active sessions - AWS IAM Identity Center",
+   "quote": "Ending an active session for an IAM Identity Center user doesn't end any active IAM role sessions in the AWS Management Console or AWS CLI.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/end-active-sessions.html"
+  },
+  {
+   "id": "c22",
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_CreateUser.md",
+   "title": "CreateUser - Identity Store API",
+   "quote": "Creates a user within the specified identity store.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_CreateUser.html"
+  },
+  {
+   "id": "c23",
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_ListUsers.md",
+   "title": "ListUsers - Identity Store API",
+   "quote": "Lists all users in the identity store. Returns a paginated list of complete User objects.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_ListUsers.html"
+  },
+  {
+   "id": "c24",
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_DeleteUser.md",
+   "title": "DeleteUser - Identity Store API",
+   "quote": "Deletes a user within an identity store given UserId.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_DeleteUser.html"
+  },
+  {
+   "id": "c25",
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_CreateGroupMembership.md",
+   "title": "CreateGroupMembership - Identity Store API",
+   "quote": "Creates a relationship between a member and a group.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_CreateGroupMembership.html"
+  },
+  {
+   "id": "c26",
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/gs-okta.md",
+   "title": "Configure SAML and SCIM with Okta - AWS IAM Identity Center",
+   "quote": "Deactivate users – Users who are unassigned from the IAM Identity Center application in Okta are disabled in IAM Identity Center.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/gs-okta.html"
+  },
+  {
+   "id": "c27",
+   "url": "https://www.okta.com/integrations/aws-iam-identity-center/",
+   "title": "Integrate AWS IAM Identity Center with Okta",
+   "quote": "Federating with AWS IAM Identity Center (successor to AWS Single Sign-On) enables an Okta sign-in experience to AWS",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/aws-single-sign-on-provisioning-tutorial",
+   "title": "Configure AWS IAM Identity Center for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Microsoft Entra ID automatically provisions and de-provisions users and groups to AWS IAM Identity Center using the Microsoft Entra provisioning service.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/gs-gwp.md",
+   "title": "Configure SAML and SCIM with Google Workspace - AWS IAM Identity Center",
+   "quote": "SCIM automatic synchronization from Google Workspace is currently limited to user provisioning. Automatic group provisioning is not supported at this time.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/gs-gwp.html"
+  },
+  {
+   "id": "c30",
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/onelogin-idp.md",
+   "title": "Setting up SCIM provisioning between OneLogin and IAM Identity Center - AWS IAM Identity Center",
+   "quote": "IAM Identity Center supports automatic provisioning (synchronization) of user and group information from OneLogin into IAM Identity Center",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/onelogin-idp.html"
+  },
+  {
+   "id": "c31",
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/jumpcloud-idp.md",
+   "title": "Configure SAML and SCIM with JumpCloud - AWS IAM Identity Center",
+   "quote": "The following steps walk you through how to enable automatic provisioning of users and groups from JumpCloud to IAM Identity Center using the SCIM protocol.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/jumpcloud-idp.html"
+  },
+  {
+   "id": "c32",
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/scim-logging-using-cloudtrail.md",
+   "title": "Logging IAM Identity Center SCIM API calls with AWS CloudTrail - AWS IAM Identity Center",
+   "quote": "CloudTrail captures API calls for SCIM as events.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/scim-logging-using-cloudtrail.html"
+  },
+  {
+   "id": "c33",
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/provision-automatically.md",
+   "title": "Provision users and groups from an external identity provider using SCIM - AWS IAM Identity Center",
+   "quote": "In those cases, you can manually provision users through the IAM Identity Center console.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/provision-automatically.html"
+  },
+  {
+   "id": "c34",
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/developerguide/serviceproviderconfig.md",
+   "title": "ServiceProviderConfig - IAM Identity Center SCIM Implementation",
+   "quote": "The /ServiceProviderConfig endpoint is read only.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.aws.amazon.com/singlesignon/latest/developerguide/serviceproviderconfig.html"
+  },
+  {
+   "id": "c35",
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/developerguide/getschema.md",
+   "title": "GetSchema - IAM Identity Center SCIM Implementation",
+   "quote": "Information about supported SCIM schemas can be retrieved by making a request to the /Schemas endpoint.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.aws.amazon.com/singlesignon/latest/developerguide/getschema.html"
+  },
+  {
+   "id": "c36",
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/developerguide/putuser.md",
+   "title": "PutUser - IAM Identity Center SCIM Implementation",
+   "quote": "An existing user can be overwritten by making a PUT request to the /Users endpoint with the user ID.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.aws.amazon.com/singlesignon/latest/developerguide/putuser.html"
+  },
+  {
+   "id": "c37",
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/developerguide/createuser.md",
+   "title": "CreateUser - IAM Identity Center SCIM Implementation",
+   "quote": "The roles attribute value cannot contain display field, only value, type, and primary are supported.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.aws.amazon.com/singlesignon/latest/developerguide/createuser.html"
+  },
+  {
+   "id": "c38",
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/developerguide/limitations.md",
+   "title": "Limitations from SCIM specification - IAM Identity Center SCIM Implementation",
+   "quote": "The PatchGroup API doesn't support remove all or replace operations.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.aws.amazon.com/singlesignon/latest/developerguide/limitations.html"
+  },
+  {
+   "id": "c39",
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_UpdateUser.md",
+   "title": "UpdateUser - Identity Store API",
+   "quote": "Updates the specified user metadata and attributes in the specified identity store.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_UpdateUser.html"
+  },
+  {
+   "id": "c40",
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_CreateGroup.md",
+   "title": "CreateGroup - Identity Store API",
+   "quote": "Creates a group within the specified identity store.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_CreateGroup.html"
+  },
+  {
+   "id": "c41",
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/gs-okta.md",
+   "title": "Configure SAML and SCIM with Okta - AWS IAM Identity Center",
+   "quote": "Group push – Groups (and their members) in Okta are synchronized to IAM Identity Center.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/gs-okta.html"
+  },
+  {
+   "id": "c42",
+   "url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/provision-automatically.md",
+   "title": "Provision users and groups from an external identity provider using SCIM - AWS IAM Identity Center",
+   "quote": "When you configure SCIM provisioning from an external IdP, the Identity Store APIs that allow for mutating users and group membership remain accessible.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/provision-automatically.html"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://aws.amazon.com/iam/identity-center/faqs/",
+  "https://docs.aws.amazon.com/singlesignon/latest/userguide/toc-contents.json",
+  "https://docs.aws.amazon.com/singlesignon/latest/developerguide/toc-contents.json",
+  "https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Operations.html"
+ ],
+ "open_questions": [
+  "Whether SCIM PATCH active=false and Okta deactivation are reversible (reactivate) is not explicitly documented.",
+  "Custom SCIM attributes/extensions beyond the enterprise schema are not documented.",
+  "Whether IAM Identity Center creates users just-in-time on SAML sign-in is not documented; the docs say users must be provisioned by SCIM or manually."
+ ]
+}

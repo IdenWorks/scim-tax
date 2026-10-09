@@ -1,0 +1,785 @@
+{
+ "slug": "canny",
+ "vendor": "Canny",
+ "vendor_url": "https://canny.io",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Canny",
+  "slug": "canny",
+  "category": "Project & Work Management",
+  "status": "gated",
+  "scim_plan": "Business",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Pro",
+  "team_price_text": "Pro: from $79/mo billed yearly (flat, 10 managers)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Business",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": null,
+   "deactivate": true,
+   "delete": null,
+   "groups": null
+  },
+  "idp": {
+   "okta": "sso_only",
+   "entra": "directory_sync",
+   "google": "directory_sync",
+   "onelogin": "native",
+   "jumpcloud": null,
+   "generic": false
+  },
+  "pricing_page_url": "https://canny.io/pricing",
+  "docs_url": "https://help.canny.io/en/articles/5087863-onelogin-integration.md",
+  "evidence": "Canny's OneLogin guide says \"OneLogin is only available on the Business plan in Canny\" and has admins \"click the Generate SCIM Token button and copy the SCIM Bearer Token\"; the pricing page lists SSO integrations under Business (\"Let's talk\").",
+  "notes": "New row. Flat plans: Free $0 (5 managers), Pro from $79/mo billed yearly (10 managers), Business custom. All IdP integrations (Okta, OIDC, Entra ID, OneLogin, Google Workspace admin management) are Business-only. SCIM exists only through Canny's OneLogin app (SCIM bearer token, OIDC sign-in, role via 'Set Role (SCIM)'); with one IdP this would be partial, but the price gate comes first, so gated. Entra ID and Google Workspace are Canny-run syncs that add admins and remove offboarded users; Okta and generic OIDC are sign-in with JIT only. No generic SCIM endpoint is documented. The public REST API (all plans) manages feedback end-users, not admin teammates.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Free",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "$0",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c4",
+    "c8",
+    "c3",
+    "c6"
+   ],
+   "notes": "25 tracked users, 5 managers."
+  },
+  {
+   "name": "Pro",
+   "price_text": "from $79/month billed yearly (flat; scales with tracked users)",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c4",
+    "c5",
+    "c3",
+    "c6"
+   ],
+   "notes": "100+ tracked users, 10 managers. 'Auth & SSO' row shows a dash for Free and Pro (read from page markup)."
+  },
+  {
+   "name": "Business",
+   "price_text": "Let's talk (Custom, billed yearly)",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c3",
+    "c4",
+    "c7",
+    "c10"
+   ],
+   "notes": "SCIM exists only through the OneLogin integration."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c9",
+   "c10",
+   "c11"
+  ],
+  "plan": "Business",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": "bearer",
+   "token_source": "Canny Settings > OneLogin settings page > Generate SCIM Token (pasted into the Canny app in OneLogin)",
+   "token_expiry": null,
+   "cite": [
+    "c11"
+   ]
+  },
+  "endpoints": {
+   "Users": null,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": []
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": null,
+   "group_push": null,
+   "group_membership": null,
+   "cite": [
+    "c9",
+    "c12"
+   ]
+  },
+  "deprovision": {
+   "action": "remove_from_org",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c12",
+    "c22"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "email (OneLogin parameter; must be unique)"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": [
+    "c19"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "OneLogin rule action 'Set Role (SCIM) in Canny' with a macro matching a Canny role label (Owner, Manager, Contributor or a custom role); blank defaults to Owner.",
+   "cite": [
+    "c13",
+    "c17"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SCIM is only documented for the OneLogin app; Okta and OIDC are sign-in with JIT, Entra ID and Google Workspace use Canny-run syncs.",
+    "cite": [
+     "c11",
+     "c27",
+     "c20",
+     "c24"
+    ]
+   },
+   {
+    "text": "An invalid role value means the user is not provisioned; a blank role defaults to Owner.",
+    "cite": [
+     "c14",
+     "c17"
+    ]
+   },
+   {
+    "text": "Provisioning Owner/Manager seats can change the bill.",
+    "cite": [
+     "c15"
+    ]
+   }
+  ],
+  "notes": "No public SCIM base URL, schema or endpoint reference; the token only plugs into Canny's OneLogin catalogue app."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c36",
+   "c37",
+   "c6"
+  ],
+  "plan": "Free",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://canny.io/api",
+  "docs_url": "https://developers.canny.io/api-reference",
+  "auth": {
+   "methods": [
+    "api_key"
+   ],
+   "scopes": [],
+   "cite": [
+    "c36"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c38",
+    "c42",
+    "c43",
+    "c44"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/v2/users/list",
+    "purpose": "List end-users (cursor pagination)",
+    "cite": [
+     "c38",
+     "c47"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/users/retrieve",
+    "purpose": "Retrieve a user by Canny id, app userID or email",
+    "cite": [
+     "c42"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/users/create_or_update",
+    "purpose": "Create or update an end-user",
+    "cite": [
+     "c43"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/users/delete",
+    "purpose": "Delete a user and their feedback",
+    "cite": [
+     "c44"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/users/remove_user_from_company",
+    "purpose": "Remove a user from a company",
+    "cite": [
+     "c45"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": [
+    "c46"
+   ],
+   "notes": "Documented event types cover posts, comments and votes; no user or admin events listed."
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "Per API key: Business 20 req/s, 600/min, 15,000/h; lower on Pro and Free.",
+   "cite": [
+    "c40",
+    "c41"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "The users API manages end-users who leave feedback (isAdmin is read-only on the user object); there is no documented endpoint to invite, remove or change the role of admin teammates.",
+    "cite": [
+     "c38",
+     "c39"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/canny/",
+   "cite": [
+    "c35",
+    "c27",
+    "c28"
+   ],
+   "notes": "OIN app marks only OIDC (read from page markup); Canny's Okta guide describes OIDC client ID/secret sign-in with JIT."
+  },
+  "entra": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "directory_sync",
+   "built_by": "vendor",
+   "url": "https://help.canny.io/en/articles/3896811-microsoft-entra-id-integration",
+   "cite": [
+    "c20",
+    "c21",
+    "c22",
+    "c23"
+   ],
+   "notes": "Configured from Canny's own Entra ID settings page by connecting a Microsoft account; no Microsoft Learn tutorial found (canny-tutorial 404). Sync mechanism is not described."
+  },
+  "google": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "directory_sync",
+   "built_by": "vendor",
+   "url": "https://help.canny.io/en/articles/4228880-google-workspace-integration",
+   "cite": [
+    "c24",
+    "c25",
+    "c26"
+   ],
+   "notes": "Canny imports selected Google groups weekly and revokes access when Google reports a deleted user."
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c9",
+    "c11",
+    "c16",
+    "c18"
+   ],
+   "notes": "From Canny's OneLogin guide; OneLogin's connector page was not loaded."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "oidc",
+  "csv_import": null,
+  "other_sync": "Google Workspace group import (weekly) and Entra ID admin sync, both Business-only and run by Canny",
+  "docs_public": true,
+  "cite": [
+   "c27",
+   "c30",
+   "c31",
+   "c24",
+   "c20"
+  ],
+  "notes": "Okta, OIDC and OneLogin sign-ins create the account on first login and send an admin invite to confirm the email."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://canny.io/pricing",
+   "title": "Pricing | Canny",
+   "quote": "starts at $79 / month billed yearly Pro",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://canny.io/pricing",
+   "title": "Pricing | Canny",
+   "quote": "All Pro features, plus: 5,000+ tracked users SSO integrations CRM integrations",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://canny.io/pricing",
+   "title": "Pricing | Canny",
+   "quote": "Auth & SSO Okta, OIDC, Entra ID, OneLogin",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://canny.io/pricing",
+   "title": "Pricing | Canny",
+   "quote": "Free $0 / mo billed yearly Pro $79 / mo billed yearly Business Custom billed yearly",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://canny.io/pricing",
+   "title": "Pricing | Canny",
+   "quote": "Managers 5 10 Custom",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://canny.io/pricing",
+   "title": "Pricing | Canny",
+   "quote": "Idea Management API & webhooks Custom fields",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://canny.io/pricing",
+   "title": "Pricing | Canny",
+   "quote": "Tie feedback to opportunity revenue at enterprise scale",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://canny.io/pricing",
+   "title": "Pricing | Canny",
+   "quote": "For teams getting started with AI-powered feedback capture",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://help.canny.io/en/articles/5087863-onelogin-integration.md",
+   "title": "OneLogin integration | Canny Help Center",
+   "quote": "Allow your teammates one-click login access to Canny and automatically provision and deprovision your OneLogin users as admin members of your Canny workspace.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.canny.io/en/articles/5087863-onelogin-integration"
+  },
+  {
+   "id": "c10",
+   "url": "https://help.canny.io/en/articles/5087863-onelogin-integration.md",
+   "title": "OneLogin integration | Canny Help Center",
+   "quote": "OneLogin is only available on the Business plan in Canny.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.canny.io/en/articles/5087863-onelogin-integration"
+  },
+  {
+   "id": "c11",
+   "url": "https://help.canny.io/en/articles/5087863-onelogin-integration.md",
+   "title": "OneLogin integration | Canny Help Center",
+   "quote": "click the Generate SCIM Token button and copy the SCIM Bearer Token",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.canny.io/en/articles/5087863-onelogin-integration"
+  },
+  {
+   "id": "c12",
+   "url": "https://help.canny.io/en/articles/5087863-onelogin-integration.md",
+   "title": "OneLogin integration | Canny Help Center",
+   "quote": "configure the delete user action to be either \"Delete\" or \"Suspend\" so that the user is properly removed from your Canny company",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.canny.io/en/articles/5087863-onelogin-integration"
+  },
+  {
+   "id": "c13",
+   "url": "https://help.canny.io/en/articles/5087863-onelogin-integration.md",
+   "title": "OneLogin integration | Canny Help Center",
+   "quote": "use the Set Role (SCIM) in Canny dropdown to set the role in Canny",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.canny.io/en/articles/5087863-onelogin-integration"
+  },
+  {
+   "id": "c14",
+   "url": "https://help.canny.io/en/articles/5087863-onelogin-integration.md",
+   "title": "OneLogin integration | Canny Help Center",
+   "quote": "If you provide an invalid role (i.e. one that does not match with an existing role in Canny), the user will not be provisioned.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.canny.io/en/articles/5087863-onelogin-integration"
+  },
+  {
+   "id": "c15",
+   "url": "https://help.canny.io/en/articles/5087863-onelogin-integration.md",
+   "title": "OneLogin integration | Canny Help Center",
+   "quote": "Provisioning Owner/Manager admin seats (or custom roles) may affect your billing.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.canny.io/en/articles/5087863-onelogin-integration"
+  },
+  {
+   "id": "c16",
+   "url": "https://help.canny.io/en/articles/5087863-onelogin-integration.md",
+   "title": "OneLogin integration | Canny Help Center",
+   "quote": "OneLogin uses OIDC under the hood.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.canny.io/en/articles/5087863-onelogin-integration"
+  },
+  {
+   "id": "c17",
+   "url": "https://help.canny.io/en/articles/5087863-onelogin-integration.md",
+   "title": "OneLogin integration | Canny Help Center",
+   "quote": "The default role is Owner, so if that is left blank, that user will default to Owner-level permissions.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.canny.io/en/articles/5087863-onelogin-integration"
+  },
+  {
+   "id": "c18",
+   "url": "https://help.canny.io/en/articles/5087863-onelogin-integration.md",
+   "title": "OneLogin integration | Canny Help Center",
+   "quote": "Search for \"canny\" and then click our app to begin the installation process",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.canny.io/en/articles/5087863-onelogin-integration"
+  },
+  {
+   "id": "c19",
+   "url": "https://help.canny.io/en/articles/5087863-onelogin-integration.md",
+   "title": "OneLogin integration | Canny Help Center",
+   "quote": "the Email field must be the OneLogin user's email address which must be unique across the entire company",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.canny.io/en/articles/5087863-onelogin-integration"
+  },
+  {
+   "id": "c20",
+   "url": "https://help.canny.io/en/articles/3896811-microsoft-entra-id-integration.md",
+   "title": "Microsoft Entra ID integration | Canny Help Center",
+   "quote": "Allow your teammates one-click login access to Canny and automatically provision and deprovision your Entra ID users as admin members of your Canny workspace.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.canny.io/en/articles/3896811-microsoft-entra-id-integration"
+  },
+  {
+   "id": "c21",
+   "url": "https://help.canny.io/en/articles/3896811-microsoft-entra-id-integration.md",
+   "title": "Microsoft Entra ID integration | Canny Help Center",
+   "quote": "Entra ID is only available on the Business plan in Canny.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.canny.io/en/articles/3896811-microsoft-entra-id-integration"
+  },
+  {
+   "id": "c22",
+   "url": "https://help.canny.io/en/articles/3896811-microsoft-entra-id-integration.md",
+   "title": "Microsoft Entra ID integration | Canny Help Center",
+   "quote": "Offboarded users will automatically be removed from the Canny admin list and lose admin access to Canny.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.canny.io/en/articles/3896811-microsoft-entra-id-integration"
+  },
+  {
+   "id": "c23",
+   "url": "https://help.canny.io/en/articles/3896811-microsoft-entra-id-integration.md",
+   "title": "Microsoft Entra ID integration | Canny Help Center",
+   "quote": "go to your Microsoft Entra ID settings page",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.canny.io/en/articles/3896811-microsoft-entra-id-integration"
+  },
+  {
+   "id": "c24",
+   "url": "https://help.canny.io/en/articles/4228880-google-workspace-integration.md",
+   "title": "Google Workspace integration | Canny Help Center",
+   "quote": "Canny will immediately begin importing users. We'll also re-import every week, when new members join your team.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.canny.io/en/articles/4228880-google-workspace-integration"
+  },
+  {
+   "id": "c25",
+   "url": "https://help.canny.io/en/articles/4228880-google-workspace-integration.md",
+   "title": "Google Workspace integration | Canny Help Center",
+   "quote": "notify Canny when a user account is deleted, and Canny will revoke permissions accordingly.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.canny.io/en/articles/4228880-google-workspace-integration"
+  },
+  {
+   "id": "c26",
+   "url": "https://help.canny.io/en/articles/4228880-google-workspace-integration.md",
+   "title": "Google Workspace integration | Canny Help Center",
+   "quote": "Google Workspace is only available on the Business plan.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.canny.io/en/articles/4228880-google-workspace-integration"
+  },
+  {
+   "id": "c27",
+   "url": "https://help.canny.io/en/articles/4029303-okta-sso-integration.md",
+   "title": "Okta SSO Integration | Canny Help Center",
+   "quote": "Canny supports JIT (just-in-time) authentication with Okta, meaning the first time someone authenticates into Canny with Okta, a contributor account will be provisioned",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.canny.io/en/articles/4029303-okta-sso-integration"
+  },
+  {
+   "id": "c28",
+   "url": "https://help.canny.io/en/articles/4029303-okta-sso-integration.md",
+   "title": "Okta SSO Integration | Canny Help Center",
+   "quote": "Go to the Sign On tab and copy the Client ID and Client Secret values.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.canny.io/en/articles/4029303-okta-sso-integration"
+  },
+  {
+   "id": "c29",
+   "url": "https://help.canny.io/en/articles/4029303-okta-sso-integration.md",
+   "title": "Okta SSO Integration | Canny Help Center",
+   "quote": "For teams using Okta, you now have the option to require logins via Okta.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.canny.io/en/articles/4029303-okta-sso-integration"
+  },
+  {
+   "id": "c30",
+   "url": "https://help.canny.io/en/articles/8047570-openid-connect-oidc-sso-integration.md",
+   "title": "OpenID Connect (OIDC) SSO Integration | Canny Help Center",
+   "quote": "OIDC SSO is available only on the Business plan.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.canny.io/en/articles/8047570-openid-connect-oidc-sso-integration"
+  },
+  {
+   "id": "c31",
+   "url": "https://help.canny.io/en/articles/12005851-canny-sso-single-sign-on-options-use-cases.md",
+   "title": "Canny SSO (Single Sign-On) options & use cases | Canny Help Center",
+   "quote": "Anyone authenticated through this method will be given admin access to your Canny workspace.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.canny.io/en/articles/12005851-canny-sso-single-sign-on-options-use-cases"
+  },
+  {
+   "id": "c32",
+   "url": "https://help.canny.io/en/articles/467017-adding-teammates.md",
+   "title": "Adding teammates | Canny Help Center",
+   "quote": "Your teammates just need to accept the email invite to join Canny as an admin!",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.canny.io/en/articles/467017-adding-teammates"
+  },
+  {
+   "id": "c33",
+   "url": "https://help.canny.io/en/articles/1627335-deleting-users-and-admins.md",
+   "title": "Deleting users and admins | Canny Help Center",
+   "quote": "A Canny admin cannot delete themselves.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.canny.io/en/articles/1627335-deleting-users-and-admins"
+  },
+  {
+   "id": "c34",
+   "url": "https://help.canny.io/en/articles/1627335-deleting-users-and-admins.md",
+   "title": "Deleting users and admins | Canny Help Center",
+   "quote": "This will delete the user's profile, as well as all their votes, comments, and any posts they have created that have no votes or comments.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.canny.io/en/articles/1627335-deleting-users-and-admins"
+  },
+  {
+   "id": "c35",
+   "url": "https://www.okta.com/integrations/canny/",
+   "title": "Integrate Canny with Okta",
+   "quote": "Using our Okta SSO integration, your team members can log into your Canny company as admins who can manage and organize posts, users, and other settings.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://developers.canny.io/api-reference",
+   "title": "Canny API Reference",
+   "quote": "API requests must be authenticated by including your secret API key.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://developers.canny.io/api-reference",
+   "title": "Canny API Reference",
+   "quote": "The API expects the request to use the POST HTTP method, the body as JSON, and the Content-Type header set to \"application/json\".",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c38",
+   "url": "https://developers.canny.io/api-reference",
+   "title": "Canny API Reference",
+   "quote": "List the end-users within your workspace.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c39",
+   "url": "https://developers.canny.io/api-reference",
+   "title": "Canny API Reference",
+   "quote": "Whether or not the user is a Canny admin.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c40",
+   "url": "https://developers.canny.io/api-reference",
+   "title": "Canny API Reference",
+   "quote": "Requests are counted per API key across every endpoint, in one-second, one-minute and one-hour windows. The allowance depends on your plan.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c41",
+   "url": "https://developers.canny.io/api-reference",
+   "title": "Canny API Reference",
+   "quote": "20 requests per second, 600 per minute, 15,000 per hour.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c42",
+   "url": "https://developers.canny.io/api-reference",
+   "title": "Canny API Reference",
+   "quote": "Retrieves the details of an existing user.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c43",
+   "url": "https://developers.canny.io/api-reference",
+   "title": "Canny API Reference",
+   "quote": "https://canny.io/api/v1/users/create_or_update",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c44",
+   "url": "https://developers.canny.io/api-reference",
+   "title": "Canny API Reference",
+   "quote": "Returns \"success\" if the user was successfully deleted.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c45",
+   "url": "https://developers.canny.io/api-reference",
+   "title": "Canny API Reference",
+   "quote": "Removes the user from a company that they were previously associated with.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c46",
+   "url": "https://developers.canny.io/api-reference",
+   "title": "Canny API Reference",
+   "quote": "This is a list of all types of events we send.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c47",
+   "url": "https://developers.canny.io/api-reference",
+   "title": "Canny API Reference",
+   "quote": "https://canny.io/api/v2/users/list",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [],
+ "open_questions": [
+  "Is there a SCIM base URL or schema list that a non-OneLogin SCIM client could use? None is published.",
+  "Does SCIM deprovisioning (OneLogin Delete/Suspend) free the manager seat, and which user attributes besides email are sent?",
+  "How does the Entra ID integration provision and deprovision (Graph polling, webhook)? The guide does not say.",
+  "Is there an audit-log API? None documented."
+ ]
+}

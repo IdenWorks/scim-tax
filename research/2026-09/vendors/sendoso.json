@@ -1,0 +1,684 @@
+{
+ "slug": "sendoso",
+ "vendor": "Sendoso",
+ "vendor_url": "https://www.sendoso.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Sendoso",
+  "slug": "sendoso",
+  "category": "Marketing & Advertising",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Starter",
+  "team_price_text": "Starter: Talk to sales (5 complimentary licenses)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Core",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": false,
+   "groups": false
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "sso_only",
+   "google": "sso_only",
+   "onelogin": "sso_only",
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.sendoso.com/compare-plans",
+  "docs_url": "https://developer.sendoso.com/scim/overview/introduction",
+  "evidence": "Sendoso's Compare Plans feature table ticks SCIM User Management only for Enterprise (Talk to sales), while its SSO guide says SSO is included in the Core, Advanced, and Enterprise Plans.",
+  "notes": "New in 2026-09. Four plans (Starter, Core, Advanced, Enterprise), all 'Talk to sales' with no public prices, so price fields are null. Plan ticks for SSO (Core+), Sendoso API (Advanced+), Admin Audit Log and SCIM User Management (Enterprise only) were read from the check/cross icons in the Feature Comparison table markup. SCIM 2.0 API at app.sendoso.com/api/scim/v2/Users uses OAuth 2.0 authorization code (2-hour access tokens, SCIM client id/secret from developers@sendoso.com); documented operations are list, create and PUT update (active=false deactivates); no DELETE, PATCH or Groups. Okta's OIN Sendoso app is the only documented SCIM IdP (Create, Update, Deactivate); Entra, Google and OneLogin guides cover SSO only. Core REST API can list users, invite users and list teams.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Advanced",
+  "api_tax": true,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Starter",
+   "price_text": "Talk to sales",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": false,
+   "cite": [
+    "c1",
+    "c2",
+    "c3",
+    "c5"
+   ],
+   "notes": "5 complimentary licenses, 100 sends/month. Ticks read from the Feature Comparison table icons."
+  },
+  {
+   "name": "Core",
+   "price_text": "Talk to sales",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": false,
+   "cite": [
+    "c1",
+    "c2",
+    "c3",
+    "c5"
+   ]
+  },
+  {
+   "name": "Advanced",
+   "price_text": "Talk to sales",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5"
+   ]
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Talk to sales",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5"
+   ],
+   "notes": "Pricing table lists an 'Admin Audit Log' on Enterprise only; no audit-log API is documented."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c2",
+   "c6",
+   "c11"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://app.sendoso.com/api/scim/v2",
+  "auth": {
+   "method": "oauth2",
+   "token_source": "SCIM-specific client id and secret obtained from developers@sendoso.com; OAuth authorization-code flow (scope scim). In Okta: Provisioning > Configure API Integration > Authenticate with Sendoso.",
+   "token_expiry": "2 hours (7200 s access token; refresh token expires only when used)",
+   "cite": [
+    "c12",
+    "c13",
+    "c10"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c14",
+    "c15"
+   ],
+   "notes": "The SCIM reference lists only Get All Users, Get Single User, Create User and Update User; no Groups or discovery endpoints are documented."
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": null,
+   "group_push": false,
+   "group_membership": null,
+   "cite": [
+    "c14",
+    "c15",
+    "c16",
+    "c7",
+    "c24"
+   ],
+   "notes": "Deactivate/reactivate via PUT with active. Team assignment uses the 'division' user attribute, not SCIM Groups. Okta OIN app lists Create, Update, Deactivate only (no Group Push)."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c6",
+    "c16"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": 100,
+   "cite": [
+    "c14"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "emails.value",
+    "active",
+    "userType"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": true,
+    "how": "Non-standard 'division' attribute sets the user's Sendoso team and must match the team name exactly."
+   },
+   "group": [],
+   "cite": [
+    "c14",
+    "c15",
+    "c16",
+    "c9"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "userType attribute maps to the Sendoso role (SCIM reference: sender, manager, admin; Okta guide also lists department_admin). Defaults to sender when empty.",
+   "cite": [
+    "c9",
+    "c15"
+   ]
+  },
+  "rate_limits": {
+   "text": "Rate limited; exceeding the limit returns 429 Too Many Requests. No numeric limit published.",
+   "cite": [
+    "c17"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "If division is empty, the SCIM-provisioned user is not added to any team and must be added manually.",
+    "cite": [
+     "c9"
+    ]
+   },
+   {
+    "text": "SCIM credentials are issued by Sendoso support, not self-served in the admin UI.",
+    "cite": [
+     "c12"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c4",
+   "c18"
+  ],
+  "plan": "Advanced",
+  "api_tax": true,
+  "style": "REST",
+  "base_url": "https://app.sendoso.com/api/v3",
+  "docs_url": "https://developer.sendoso.com/rest-api/overview/introduction",
+  "auth": {
+   "methods": [
+    "oauth2"
+   ],
+   "scopes": [
+    "public",
+    "write",
+    "update",
+    "marketplace",
+    "smartsend"
+   ],
+   "cite": [
+    "c19"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": false,
+   "invite_user": true,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": false,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c20",
+    "c21",
+    "c22",
+    "c23"
+   ],
+   "notes": "Invite sets role (regular or manager) and team; groups are listed only. get_user covers only the current authorised user (/me)."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/api/v3/me",
+    "purpose": "Get current authorised user",
+    "cite": [
+     "c23"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v3/users",
+    "purpose": "List active users (paginated, max 100 per page)",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v3/users",
+    "purpose": "Invite a new user to a team group",
+    "cite": [
+     "c21"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v3/groups",
+    "purpose": "List active team groups",
+    "cite": [
+     "c22"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v3/groups/{team_group_id}/members",
+    "purpose": "List users in a team group",
+    "cite": [
+     "c22"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": false,
+   "events": [],
+   "cite": [
+    "c25"
+   ],
+   "notes": "Webhooks cover send status events only."
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "Rate limited; exceeding the limit returns 429 Too Many Requests. No numeric limit published.",
+   "cite": [
+    "c26"
+   ]
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/sendoso/",
+   "cite": [
+    "c24",
+    "c6",
+    "c7"
+   ],
+   "notes": "OIN page markup ticks SAML, SCIM, Create, Update, Deactivate (last updated Feb. 12 2024)."
+  },
+  "entra": {
+   "listed": false,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c27"
+   ],
+   "notes": "Vendor guide uses an Entra app registration (OIDC via Auth0) and support completes setup; no Entra gallery tutorial found (404)."
+  },
+  "google": {
+   "listed": false,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c27"
+   ],
+   "notes": "Google OAuth 2.0 client set up by the customer; SSO only."
+  },
+  "onelogin": {
+   "listed": false,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c27"
+   ],
+   "notes": "Vendor guide uses OneLogin's generic SAML Test Connector."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "jumpcloud.com integration URL returned 403; vendor documents a generic custom SAML connection."
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": "Rippling integration syncs employee records for HR gifting automations (recipients, not Sendoso users) and can act as SSO provider.",
+  "docs_public": true,
+  "cite": [
+   "c8",
+   "c28"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.sendoso.com/compare-plans",
+   "title": "Sendoso Compare Plans",
+   "quote": "Everything in Advanced , plus: Enterprise-grade governance, security, and priority support to run gifting as a global revenue channel.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://www.sendoso.com/compare-plans",
+   "title": "Sendoso Compare Plans (Feature Comparison)",
+   "quote": "Single Sign-On (SSO) Policy Center IP Allow Listing Admin Audit Log Anti-Bribery Controls SCIM User Management",
+   "accessed": "2026-10-05",
+   "page_url": null,
+   "interaction": "click the Feature Comparison tab"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.sendoso.com/compare-plans",
+   "title": "Sendoso Compare Plans",
+   "quote": "Flexible pricing. Based on your size, goals, global presence, etc. Pay only for the features you need. No hidden fees.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://www.sendoso.com/compare-plans",
+   "title": "Sendoso Compare Plans (Feature Comparison)",
+   "quote": "Meeting Scheduler HRIS Hub Sendoso API",
+   "accessed": "2026-10-05",
+   "page_url": null,
+   "interaction": "click the Feature Comparison tab"
+  },
+  {
+   "id": "c5",
+   "url": "https://sendoso.zendesk.com/api/v2/help_center/en-us/articles/360021081451.json",
+   "title": "Setting Up SSO",
+   "quote": "SSO is included in the Core, Advanced, and Enterprise Plans.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.sendoso.com/hc/en-us/articles/360021081451-Setting-Up-SSO"
+  },
+  {
+   "id": "c6",
+   "url": "https://sendoso.zendesk.com/api/v2/help_center/en-us/articles/360021081451.json",
+   "title": "Setting Up SSO",
+   "quote": "After that, any updates to the user's profile in Okta will push to Sendoso (ie. a change to their division attribute). This method will also de-provision a user if they are removed from the application in Okta.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.sendoso.com/hc/en-us/articles/360021081451-Setting-Up-SSO"
+  },
+  {
+   "id": "c7",
+   "url": "https://sendoso.zendesk.com/api/v2/help_center/en-us/articles/360021081451.json",
+   "title": "Setting Up SSO",
+   "quote": "Which Okta provisioning methods are supported? Create Users, Update User Attributes, and Deactivate Users.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.sendoso.com/hc/en-us/articles/360021081451-Setting-Up-SSO"
+  },
+  {
+   "id": "c8",
+   "url": "https://sendoso.zendesk.com/api/v2/help_center/en-us/articles/360021081451.json",
+   "title": "Setting Up SSO",
+   "quote": "Sendoso will create the user from Okta when they click on the assigned application for the first time. No updates or deletions will be handled via this method.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.sendoso.com/hc/en-us/articles/360021081451-Setting-Up-SSO"
+  },
+  {
+   "id": "c9",
+   "url": "https://sendoso.zendesk.com/api/v2/help_center/en-us/articles/360021081451.json",
+   "title": "Setting Up SSO",
+   "quote": "When using SCIM, if no values are added for userType, Sendoso will default to the lowest permission set (sender). In the event division doesn't have a value, the user will not be provisioned to any team in Sendoso",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.sendoso.com/hc/en-us/articles/360021081451-Setting-Up-SSO"
+  },
+  {
+   "id": "c10",
+   "url": "https://sendoso.zendesk.com/api/v2/help_center/en-us/articles/360021081451.json",
+   "title": "Setting Up SSO",
+   "quote": "Next, click the checkbox to Enable API Integration and then the 'Authenticate with Sendoso' button.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.sendoso.com/hc/en-us/articles/360021081451-Setting-Up-SSO"
+  },
+  {
+   "id": "c11",
+   "url": "https://developer.sendoso.com/scim/overview/introduction",
+   "title": "Sendoso SCIM Introduction",
+   "quote": "Sendoso implements the SCIM Version 2.0 protocol so you can easily manage users in the Sendoso platform.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://developer.sendoso.com/scim/overview/authentication",
+   "title": "Sendoso SCIM Authentication & Authorization",
+   "quote": "In order to start using the SCIM API, you'll need a client id and client secret specific for the SCIM API. You can obtain those by contacting our support at developers@sendoso.com",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://developer.sendoso.com/scim/overview/authentication",
+   "title": "Sendoso SCIM Authentication & Authorization",
+   "quote": "Please note that access tokens have a limited lifespan of 7200 seconds (2 hours) and will need to be refreshed.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c14",
+   "url": "https://developer.sendoso.com/scim/reference/get-users",
+   "title": "Sendoso SCIM Get All Users",
+   "quote": "Specifies the desired maximum number of query results per page, e.g., 10. When specified, the service provider MUST NOT return more results than specified, although it MAY return fewer results. If unspecified, the maximum will be 100",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://developer.sendoso.com/scim/reference/create-users",
+   "title": "Sendoso SCIM Create User",
+   "quote": "Create a new user and assign them a role and a team",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://developer.sendoso.com/scim/reference/update-user",
+   "title": "Sendoso SCIM Update User",
+   "quote": "Wheter or not the user needs to be activated or deactivated from the Sendoso platform.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c17",
+   "url": "https://developer.sendoso.com/scim/overview/rate-limits",
+   "title": "Sendoso SCIM Rate Limits",
+   "quote": "Once the rate limit is exceeded, the API will return a 429 Too Many Requests response and the application will be temporarily blocked from making further requests.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c18",
+   "url": "https://developer.sendoso.com/rest-api/overview/introduction",
+   "title": "Sendoso API Introduction",
+   "quote": "Sendoso API allows you to integrate Sendoso's direct mail and gifting capabilities into your own application or platform.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c19",
+   "url": "https://developer.sendoso.com/rest-api/overview/authentication",
+   "title": "Sendoso API Authentication & Authorization",
+   "quote": "Allows your application to update the user's account details.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c20",
+   "url": "https://developer.sendoso.com/rest-api/reference/users/get-users",
+   "title": "Sendoso API Get All Users",
+   "quote": "Retrieve a paginated list of all active users associated to the organization.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c21",
+   "url": "https://developer.sendoso.com/rest-api/reference/users/invite-user",
+   "title": "Sendoso API Invite New User",
+   "quote": "Create a new user invitation for a specific team group.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c22",
+   "url": "https://developer.sendoso.com/rest-api/reference/teams/get-team-users",
+   "title": "Sendoso API Get All Team Group Users",
+   "quote": "Get the list of users for the specific team.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c23",
+   "url": "https://developer.sendoso.com/rest-api/reference/users/get-current-user",
+   "title": "Sendoso API Get Current User",
+   "quote": "Get information about the current authorized user.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c24",
+   "url": "https://www.okta.com/integrations/sendoso/",
+   "title": "Sendoso | Okta Integration Network",
+   "quote": "Sendoso SAML SSO App is discoverable on the Okta Integration Network.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c25",
+   "url": "https://developer.sendoso.com/webhooks/introduction",
+   "title": "Sendoso Webhooks Introduction",
+   "quote": "Enable Sendoso webhooks to receive real time status updates on your sends.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c26",
+   "url": "https://developer.sendoso.com/rest-api/overview/rate-limits",
+   "title": "Sendoso API Rate Limits",
+   "quote": "Sendoso's API enforces rate limiting to ensure that the resources of the platform are shared fairly among all users and to prevent abuse or misuse of the API.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c27",
+   "url": "https://sendoso.zendesk.com/api/v2/help_center/en-us/articles/360021081451.json",
+   "title": "Setting Up SSO",
+   "quote": "Search for SAML, and select SAML Test Connector (IdP w/attr).",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.sendoso.com/hc/en-us/articles/360021081451-Setting-Up-SSO"
+  },
+  {
+   "id": "c28",
+   "url": "https://sendoso.zendesk.com/api/v2/help_center/en-us/articles/44067384764827.json",
+   "title": "Rippling Integration",
+   "quote": "The Sendoso and Rippling integration allows you to automate your HR Campaigns for employee milestones, like work anniversaries, birthdays, and new hire dates.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.sendoso.com/hc/en-us/articles/44067384764827-Rippling-Integration"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The SCIM API reference lists roles sender, manager, admin, while the Okta guide also allows department_admin; the core REST invite endpoint only accepts regular and manager.",
+   "cite": [
+    "c9",
+    "c15",
+    "c21"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.sendoso.com/compare-plans (static and rendered; Feature Comparison table parsed from markup)",
+  "https://www.sendoso.com/llms.txt",
+  "https://developer.sendoso.com/llms.txt (REST, SCIM, Marketplace, Webhooks references)",
+  "support.sendoso.com help-centre search API: scim, sso, single sign-on, provisioning, okta, user management",
+  "Okta OIN (okta.com/integrations/sendoso/), Entra tutorial URLs (404), JumpCloud integration URL (403)"
+ ],
+ "open_questions": [
+  "No public prices for any plan; Enterprise price is quote-only.",
+  "Whether a deactivated user frees a license, ends sessions or keeps send history is not documented.",
+  "SCIM filtering, PATCH, DELETE and Groups support are not documented.",
+  "The SCIM 'Get Single User' reference page shows the collection path without a {user_id}; the single-user path is not clearly documented.",
+  "Whether the 'Admin Audit Log' (Enterprise) is exposed through an API is not documented.",
+  "Whether SCIM works with IdPs other than Okta (for example Entra with a long-lived token) is not documented; the OAuth flow implies Okta's OAuth-based connector."
+ ]
+}

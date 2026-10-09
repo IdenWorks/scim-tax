@@ -1,0 +1,1290 @@
+{
+ "slug": "notion",
+ "vendor": "Notion",
+ "vendor_url": "https://www.notion.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Notion",
+  "slug": "notion",
+  "category": "Productivity & Docs",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Plus",
+  "team_price_text": "Plus: $10/member/mo (annual)",
+  "team_price_per_user_mo": 10,
+  "price_multiplier": null,
+  "sso_plan": "Business",
+  "sso_price_per_user_mo": 20,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": "native",
+   "onelogin": "native",
+   "jumpcloud": "native",
+   "generic": true
+  },
+  "pricing_page_url": "https://www.notion.com/pricing",
+  "docs_url": "https://www.notion.com/help/provision-users-and-groups-with-scim",
+  "evidence": "Notion's pricing page lists 'User provisioning (SCIM)' under Enterprise (Custom pricing, Contact Sales): 'Access the Notion SCIM API to provision and manage users and groups.' The SCIM help doc says the feature is only available on the Enterprise Plan.",
+  "notes": "Unchanged from June: SCIM Enterprise-only (Contact Sales); Plus $10 and Business $20 per member/mo billed yearly (pricing page defaults to yearly). SAML SSO starts at Business. SCIM DELETE (or active=false) removes the member from the workspace and logs them out of all sessions; the Notion account itself is not deleted. SCIM tokens are per workspace and tied to the owner who created them (revoked if that owner leaves or is downgraded). Guests can't be managed over SCIM; profile updates need a verified email domain. Google's integration does not provision groups. New since June: an Enterprise-only Admin API (api.notion.com/admin) covers listing users, permission groups and memberships and revoking managed users' sessions, but not creating or removing members. The public API (all plans) only lists and retrieves users. Audit log is Enterprise, viewed in-app or streamed to a SIEM via webhook.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Enterprise",
+  "api_tax": true,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "$0 per member / month",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": false,
+   "cite": [
+    "c2",
+    "c1",
+    "c47",
+    "c51",
+    "c49"
+   ]
+  },
+  {
+   "name": "Plus",
+   "price_text": "$10 per member / month (billed yearly)",
+   "price_per_user_mo": 10,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": false,
+   "cite": [
+    "c3",
+    "c6",
+    "c47",
+    "c11",
+    "c51",
+    "c49"
+   ]
+  },
+  {
+   "name": "Business",
+   "price_text": "$20 per member / month (billed yearly)",
+   "price_per_user_mo": 20,
+   "billing": "annual",
+   "sso": true,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": false,
+   "cite": [
+    "c4",
+    "c6",
+    "c47",
+    "c7",
+    "c11",
+    "c51",
+    "c49"
+   ],
+   "notes": "One SAML configuration per Business workspace."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Custom pricing, Contact Sales",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c5",
+    "c1",
+    "c11",
+    "c47",
+    "c51",
+    "c49"
+   ],
+   "notes": "Audit log (in-app) and SIEM streaming on Enterprise; no REST audit-log endpoint found."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c1",
+   "c11",
+   "c12",
+   "c37",
+   "c16"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://api.notion.com/scim/v2",
+  "notes": "Notion's IdP guide gives the tenant URL as https://app.notion.com/scim/v2 (see conflicts). The IdP must support SAML 2.0, but the OneLogin guide says to configure SCIM before SSO, so SSO need not be enabled first.",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Manage organization > General > SCIM provisioning (one token per workspace; organization owners only)",
+   "token_expiry": "Revoked when the creating workspace owner leaves or is downgraded; otherwise no stated expiry",
+   "cite": [
+    "c14",
+    "c36",
+    "c15",
+    "c45"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": true,
+   "Schemas": null,
+   "ResourceTypes": true,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c17",
+    "c16",
+    "c29",
+    "c31"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c29",
+    "c35",
+    "c23",
+    "c21",
+    "c31",
+    "c40"
+   ]
+  },
+  "deprovision": {
+   "action": "remove_from_org",
+   "frees_seat": true,
+   "revokes_sessions": true,
+   "data_retained": "The user is removed from the workspace but the Notion user account is not deleted (manual deletion only). Removed seats stay usable by another member until the billing period ends.",
+   "cite": [
+    "c21",
+    "c22",
+    "c23",
+    "c10"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "email",
+    "given_name",
+    "family_name",
+    "displayName (Groups)"
+   ],
+   "cite": [
+    "c19",
+    "c20"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": 100,
+   "cite": [
+    "c18"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.formatted",
+    "name.familyName",
+    "name.givenName",
+    "photos",
+    "title",
+    "phoneNumbers",
+    "addresses",
+    "roles",
+    "locale",
+    "preferredLanguage",
+    "userType",
+    "emails",
+    "active"
+   ],
+   "enterprise": [
+    "manager.value",
+    "manager.displayName",
+    "division",
+    "department",
+    "costCenter",
+    "organization",
+    "employeeNumber"
+   ],
+   "custom": {
+    "supported": true,
+    "how": "Notion extension schema urn:ietf:params:scim:schemas:extension:notion:2.0:User with a 'role' attribute (owner | membership_admin | member | restricted_member)"
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c26",
+    "c25",
+    "c34",
+    "c30",
+    "c31"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "Workspace role via the Notion extension 'role' attribute (owner, membership_admin, member, restricted_member); OneLogin rules can map roles to Notion permission groups.",
+   "cite": [
+    "c25",
+    "c42"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Workspace guests cannot be managed via SCIM.",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "text": "Profile (name/email) updates require verified ownership of the user's email domain.",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "text": "The workspace owner who created the SCIM token cannot be removed via SCIM; removing an owner revokes their tokens and breaks integrations.",
+    "cite": [
+     "c24",
+     "c15"
+    ]
+   },
+   {
+    "text": "Profile photo is read only at user creation; meta.created and meta.lastModified are not meaningful; only one phone number is stored.",
+    "cite": [
+     "c30",
+     "c33",
+     "c34"
+    ]
+   },
+   {
+    "text": "Group deletion is refused if it would leave pages with no full-access user.",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "text": "Google Workspace's SCIM integration does not provision or deprovision groups.",
+    "cite": [
+     "c39"
+    ]
+   },
+   {
+    "text": "Deleting the Notion app in Okta removes all provisioned users from the workspace.",
+    "cite": [
+     "c41"
+    ]
+   },
+   {
+    "text": "A separate SCIM token is needed for each workspace.",
+    "cite": [
+     "c36"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c51",
+   "c53",
+   "c54",
+   "c56"
+  ],
+  "plan": "Enterprise",
+  "api_tax": true,
+  "style": "REST",
+  "base_url": "https://api.notion.com/admin",
+  "docs_url": "https://developers.notion.com/reference/admin/intro",
+  "notes": "Admin API (Enterprise only, organization bot token). The user and permission-group scopes are only for 'eligible' Enterprise organizations. The public Notion API (https://api.notion.com, all plans) only lists and retrieves users; it cannot create, invite or remove members.",
+  "auth": {
+   "methods": [
+    "bearer (organization bot token)"
+   ],
+   "scopes": [
+    "user:read",
+    "permission-group:read",
+    "permission-group:write",
+    "managed-user-session:write"
+   ],
+   "cite": [
+    "c54",
+    "c56",
+    "c57",
+    "c58"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c57",
+    "c70",
+    "c61",
+    "c65",
+    "c66"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/v1/spaces/{space_id}/users",
+    "purpose": "Admin API: list active workspace members and guest bots",
+    "cite": [
+     "c57"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/managed_users/revoke_session",
+    "purpose": "Admin API: revoke a managed user's sessions",
+    "cite": [
+     "c58"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/spaces/{space_id}/groups",
+    "purpose": "Admin API: list permission groups",
+    "cite": [
+     "c59"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/spaces/{space_id}/groups",
+    "purpose": "Admin API: create a permission group",
+    "cite": [
+     "c61"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/spaces/{space_id}/groups/{group_id}",
+    "purpose": "Admin API: retrieve a group",
+    "cite": [
+     "c60"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/v1/spaces/{space_id}/groups/{group_id}",
+    "purpose": "Admin API: rename a group",
+    "cite": [
+     "c62"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v1/spaces/{space_id}/groups/{group_id}",
+    "purpose": "Admin API: delete a group",
+    "cite": [
+     "c63"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/spaces/{space_id}/groups/{group_id}/members",
+    "purpose": "Admin API: list group members",
+    "cite": [
+     "c64"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/spaces/{space_id}/groups/{group_id}/members",
+    "purpose": "Admin API: add a group member",
+    "cite": [
+     "c65"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/v1/spaces/{space_id}/groups/{group_id}/members/users/{user_id}",
+    "purpose": "Admin API: change a member's role in a group",
+    "cite": [
+     "c66"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v1/spaces/{space_id}/groups/{group_id}/members/users/{user_id}",
+    "purpose": "Admin API: remove a group member",
+    "cite": [
+     "c67"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/users",
+    "purpose": "Public API (api.notion.com): list workspace users, guests excluded",
+    "cite": [
+     "c68",
+     "c69"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/users/{user_id}",
+    "purpose": "Public API: retrieve a user",
+    "cite": [
+     "c70"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/users/me",
+    "purpose": "Public API: retrieve the token's bot user",
+    "cite": [
+     "c71"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": [],
+   "notes": "Public API webhook event types cover pages, databases, data sources and comments only; user activity is available through the Enterprise SIEM stream."
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": [],
+   "notes": "Audit log is Enterprise (in-app) and can be streamed to a SIEM via webhook; no REST audit-log endpoint documented."
+  },
+  "rate_limits": {
+   "text": "Per-connection limit of 600 requests/minute on Business and Enterprise and 180/minute on other plans, plus a per-workspace limit (public API).",
+   "cite": [
+    "c72",
+    "c73"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Admin API user and permission-group scopes are only for eligible Enterprise organizations.",
+    "cite": [
+     "c56"
+    ]
+   },
+   {
+    "text": "Public API cannot filter users by email or name and excludes guests from list results.",
+    "cite": [
+     "c68",
+     "c69"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/notion/",
+   "cite": [
+    "c74",
+    "c40"
+   ]
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/notion-provisioning-tutorial",
+   "cite": [
+    "c75",
+    "c76",
+    "c38"
+   ]
+  },
+  "google": {
+   "listed": true,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://knowledge.workspace.google.com/admin/users/advanced/configure-notion-user-provisioning?hl=en",
+   "cite": [
+    "c77",
+    "c39"
+   ],
+   "notes": "No group provisioning."
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c42",
+    "c43"
+   ],
+   "notes": "From Notion's own OneLogin guide."
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://jumpcloud.com/support/integrate-with-notion",
+   "cite": [
+    "c78"
+   ]
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c48",
+   "c26"
+  ],
+  "notes": "SAML 'Automatic account creation' creates accounts for new SSO users on selected domains (Business and Enterprise)."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.notion.com/pricing",
+   "title": "Notion Pricing Plans",
+   "quote": "Access the Notion SCIM API to provision and manage users and groups.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://www.notion.com/pricing",
+   "title": "Notion Pricing Plans",
+   "quote": "Free $0 per seat/month",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://www.notion.com/pricing",
+   "title": "Notion Pricing Plans",
+   "quote": "Plus $10 per seat/month",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://www.notion.com/pricing",
+   "title": "Notion Pricing Plans",
+   "quote": "Business $20 per seat/month",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://www.notion.com/pricing",
+   "title": "Notion Pricing Plans",
+   "quote": "Enterprise Contact us",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://www.notion.com/pricing",
+   "title": "Notion Pricing Plans",
+   "quote": "Pay yearly Save up to 20% with yearly",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://www.notion.com/pricing",
+   "title": "Notion Pricing Plans",
+   "quote": "Verify ownership of an email domain to access advanced security features including single-sign on.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://www.notion.com/pricing",
+   "title": "Notion Pricing Plans",
+   "quote": "Access a detailed log of security and safety-related activity for your workspace account to identify potential security issues, investigate suspicious behavior, or troubleshoot access.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://www.notion.com/pricing",
+   "title": "Notion Pricing Plans",
+   "quote": "Build bespoke integrations to connect your Notion workspace to internal tools and workflows. Public API",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://www.notion.com/pricing",
+   "title": "Notion Pricing Plans",
+   "quote": "If you removed members, you will not receive credit but instead will still have use of that seat for a different user for the remainder of the billing period.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c11",
+   "url": "https://www.notion.com/help/provision-users-and-groups-with-scim",
+   "title": "Provision users & groups with SCIM | Notion Help Center",
+   "quote": "Note: This feature is only available for users on the Enterprise Plan.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://www.notion.com/help/provision-users-and-groups-with-scim",
+   "title": "Provision users & groups with SCIM | Notion Help Center",
+   "quote": "Your Identity Provider (IdP) must support the SAML 2.0 protocol.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://www.notion.com/help/provision-users-and-groups-with-scim",
+   "title": "Provision users & groups with SCIM | Notion Help Center",
+   "quote": "We currently support Okta, OneLogin, Rippling, and custom SCIM applications.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c14",
+   "url": "https://www.notion.com/help/provision-users-and-groups-with-scim",
+   "title": "Provision users & groups with SCIM | Notion Help Center",
+   "quote": "Only Enterprise Plan organization owners can generate and view SCIM API tokens.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://www.notion.com/help/provision-users-and-groups-with-scim",
+   "title": "Provision users & groups with SCIM | Notion Help Center",
+   "quote": "When a workspace owner leaves the workspace or their role is changed, their token will be revoked.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://www.notion.com/help/provision-users-and-groups-with-scim",
+   "title": "Provision users & groups with SCIM | Notion Help Center",
+   "quote": "Retrieve a list of the SCIM resource types available.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c17",
+   "url": "https://www.notion.com/help/provision-users-and-groups-with-scim",
+   "title": "Provision users & groups with SCIM | Notion Help Center",
+   "quote": "Retrieve a description of the SCIM specification features available.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c18",
+   "url": "https://www.notion.com/help/provision-users-and-groups-with-scim",
+   "title": "Provision users & groups with SCIM | Notion Help Center",
+   "quote": "You can paginate using the startIndex and count parameters. Note that startIndex is 1-indexed and count has a maximum of 100.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c19",
+   "url": "https://www.notion.com/help/provision-users-and-groups-with-scim",
+   "title": "Provision users & groups with SCIM | Notion Help Center",
+   "quote": "You can filter the results with the filter parameter. Valid attributes to filter by are email , given_name , and family_name",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c20",
+   "url": "https://www.notion.com/help/provision-users-and-groups-with-scim",
+   "title": "Provision users & groups with SCIM | Notion Help Center",
+   "quote": "Groups can be filtered by their displayName attribute",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c21",
+   "url": "https://www.notion.com/help/provision-users-and-groups-with-scim",
+   "title": "Provision users & groups with SCIM | Notion Help Center",
+   "quote": "Remove a user from your workspace. The user is logged out of all active sessions.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c22",
+   "url": "https://www.notion.com/help/provision-users-and-groups-with-scim",
+   "title": "Provision users & groups with SCIM | Notion Help Center",
+   "quote": "The user account cannot be deleted through SCIM. Account deletion must be done manually.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c23",
+   "url": "https://www.notion.com/help/provision-users-and-groups-with-scim",
+   "title": "Provision users & groups with SCIM | Notion Help Center",
+   "quote": "Removing a user from your workspace can also be achieved by setting the active user attribute to false by sending a PATCH /Users/<id> or a PUT /Users/<id> request.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c24",
+   "url": "https://www.notion.com/help/provision-users-and-groups-with-scim",
+   "title": "Provision users & groups with SCIM | Notion Help Center",
+   "quote": "The workspace owner that created the SCIM bot token cannot be removed via the API.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c25",
+   "url": "https://www.notion.com/help/provision-users-and-groups-with-scim",
+   "title": "Provision users & groups with SCIM | Notion Help Center",
+   "quote": "To provision a restricted member through SCIM, you must set the SCIM ‘role’ attribute to ‘restricted_member’",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c26",
+   "url": "https://www.notion.com/help/provision-users-and-groups-with-scim",
+   "title": "Provision users & groups with SCIM | Notion Help Center",
+   "quote": "The table below outlines the mapping between SCIM user attributes and Notion user profile fields.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c27",
+   "url": "https://www.notion.com/help/provision-users-and-groups-with-scim",
+   "title": "Provision users & groups with SCIM | Notion Help Center",
+   "quote": "At this time, you can’t manage workspace guests using Notion’s SCIM API.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c28",
+   "url": "https://www.notion.com/help/provision-users-and-groups-with-scim",
+   "title": "Provision users & groups with SCIM | Notion Help Center",
+   "quote": "You can only update a member's profile information if you have verified ownership of the user's email domain",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c29",
+   "url": "https://www.notion.com/help/provision-users-and-groups-with-scim",
+   "title": "Provision users & groups with SCIM | Notion Help Center",
+   "quote": "If the user does not exist, calling this will create a new Notion user and then add that user to your workspace.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c30",
+   "url": "https://www.notion.com/help/provision-users-and-groups-with-scim",
+   "title": "Provision users & groups with SCIM | Notion Help Center",
+   "quote": "The SCIM API will read the profile photo property on user creation, but not on future updates.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c31",
+   "url": "https://www.notion.com/help/provision-users-and-groups-with-scim",
+   "title": "Provision users & groups with SCIM | Notion Help Center",
+   "quote": "Create and remove groups in your workspace. Add and remove members in a group.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c32",
+   "url": "https://www.notion.com/help/provision-users-and-groups-with-scim",
+   "title": "Provision users & groups with SCIM | Notion Help Center",
+   "quote": "Group deletion will be forbidden if it would result in no one having full access to one or more pages.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c33",
+   "url": "https://www.notion.com/help/provision-users-and-groups-with-scim",
+   "title": "Provision users & groups with SCIM | Notion Help Center",
+   "quote": "Note that meta.created and meta.lastModified do not reflect meaningful timestamp values.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c34",
+   "url": "https://www.notion.com/help/provision-users-and-groups-with-scim",
+   "title": "Provision users & groups with SCIM | Notion Help Center",
+   "quote": "Notion stores one phone number per user.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c35",
+   "url": "https://www.notion.com/help/provision-users-and-groups-with-scim",
+   "title": "Provision users & groups with SCIM | Notion Help Center",
+   "quote": "Update, and returns the updated user record.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c36",
+   "url": "https://www.notion.com/help/provision-users-and-groups-with-scim",
+   "title": "Provision users & groups with SCIM | Notion Help Center",
+   "quote": "For each workspace you want to manage via SCIM, you must generate a separate SCIM API token.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c37",
+   "url": "https://www.notion.com/help/set-up-identity-provider-for-scim",
+   "title": "Set up Identity Provider (IdP) for SCIM | Notion Help Center",
+   "quote": "Notion’s SCIM tenant URL is https://app.notion.com/scim/v2",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c38",
+   "url": "https://www.notion.com/help/set-up-identity-provider-for-scim",
+   "title": "Set up Identity Provider (IdP) for SCIM | Notion Help Center",
+   "quote": "Notion’s Azure SCIM integration supports the following provisioning features:",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c39",
+   "url": "https://www.notion.com/help/set-up-identity-provider-for-scim",
+   "title": "Set up Identity Provider (IdP) for SCIM | Notion Help Center",
+   "quote": "Google’s SCIM integration does not support group provisioning and de-provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c40",
+   "url": "https://www.notion.com/help/set-up-identity-provider-for-scim",
+   "title": "Set up Identity Provider (IdP) for SCIM | Notion Help Center",
+   "quote": "After setting up the API integration, open the Push Groups tab, and add the Okta groups you want to sync with Notion from the Push Groups button.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c41",
+   "url": "https://www.notion.com/help/set-up-identity-provider-for-scim",
+   "title": "Set up Identity Provider (IdP) for SCIM | Notion Help Center",
+   "quote": "Doing so will remove all provisioned users from the workspace.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c42",
+   "url": "https://www.notion.com/help/set-up-identity-provider-for-scim",
+   "title": "Set up Identity Provider (IdP) for SCIM | Notion Help Center",
+   "quote": "Creating rules to map OneLogin roles with permission groups in Notion.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c43",
+   "url": "https://www.notion.com/help/set-up-identity-provider-for-scim",
+   "title": "Set up Identity Provider (IdP) for SCIM | Notion Help Center",
+   "quote": "Choose between Delete (removing the user from the Notion workspace) or Do Nothing.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c44",
+   "url": "https://www.notion.com/help/set-up-identity-provider-for-scim",
+   "title": "Set up Identity Provider (IdP) for SCIM | Notion Help Center",
+   "quote": "it’s important to configure SCIM before configuring SSO",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c45",
+   "url": "https://www.notion.com/help/set-up-identity-provider-for-scim",
+   "title": "Set up Identity Provider (IdP) for SCIM | Notion Help Center",
+   "quote": "All tokens will expire once the workspace owner that generated the token leaves the workspace or is downgraded to a member.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c46",
+   "url": "https://www.notion.com/help/set-up-identity-provider-for-scim",
+   "title": "Set up Identity Provider (IdP) for SCIM | Notion Help Center",
+   "quote": "Deactivating users, which removes them from your workspace.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c47",
+   "url": "https://www.notion.com/help/saml-sso-configuration",
+   "title": "SAML SSO configuration | Notion Help Center",
+   "quote": "Your workspace must be on a Business Plan or Enterprise Plan.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c48",
+   "url": "https://www.notion.com/help/saml-sso-configuration",
+   "title": "SAML SSO configuration | Notion Help Center",
+   "quote": "Select Automatic account creation to automatically create accounts for new SAML SSO users who sign up using one of the selected email domains.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c49",
+   "url": "https://www.notion.com/help/audit-log",
+   "title": "Audit log | Notion Help Center",
+   "quote": "The audit log feature is available to organization owners on the Enterprise Plan.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c50",
+   "url": "https://www.notion.com/help/audit-log",
+   "title": "Audit log | Notion Help Center",
+   "quote": "You can use Notion’s custom SIEM integration to send a continuous stream of audit log events to your SIEM platform in real-time via webhooks.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c51",
+   "url": "https://www.notion.com/help/admin-apis-for-enterprise-organizations",
+   "title": "Admin APIs for Enterprise organizations | Notion Help Center",
+   "quote": "This feature is only available on the Enterprise Plan, and only organization owners can set it up.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c52",
+   "url": "https://www.notion.com/help/admin-apis-for-enterprise-organizations",
+   "title": "Admin APIs for Enterprise organizations | Notion Help Center",
+   "quote": "This includes common tasks like starting a workspace export, creating and releasing legal holds, logging managed users out of Notion, and more.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c53",
+   "url": "https://developers.notion.com/reference/admin/intro.md",
+   "title": "Introduction - Notion Admin API",
+   "quote": "The base URL to send all API requests is `https://api.notion.com/admin`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.notion.com/reference/admin/intro"
+  },
+  {
+   "id": "c54",
+   "url": "https://developers.notion.com/reference/admin/intro.md",
+   "title": "Introduction - Notion Admin API",
+   "quote": "Every request is authenticated with an organization bot token tied to your Notion organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.notion.com/reference/admin/intro"
+  },
+  {
+   "id": "c55",
+   "url": "https://developers.notion.com/reference/admin/intro.md",
+   "title": "Introduction - Notion Admin API",
+   "quote": "List endpoints that paginate use cursor-based pagination.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.notion.com/reference/admin/intro"
+  },
+  {
+   "id": "c56",
+   "url": "https://developers.notion.com/reference/admin/scopes.md",
+   "title": "Scopes - Notion Admin API",
+   "quote": "The `user` and `permission-group` scopes are available only to eligible Enterprise organizations.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.notion.com/reference/admin/scopes"
+  },
+  {
+   "id": "c57",
+   "url": "https://developers.notion.com/reference/admin/list-users.md",
+   "title": "List users - Notion Admin API",
+   "quote": "List active workspace members and guest bots.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.notion.com/reference/admin/list-users"
+  },
+  {
+   "id": "c58",
+   "url": "https://developers.notion.com/reference/admin/revoke-user-session.md",
+   "title": "Revoke a managed user's sessions - Notion Admin API",
+   "quote": "Revoke a managed user's sessions.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.notion.com/reference/admin/revoke-user-session"
+  },
+  {
+   "id": "c59",
+   "url": "https://developers.notion.com/reference/admin/list-permission-groups.md",
+   "title": "List groups - Notion Admin API",
+   "quote": "List permission groups in a workspace.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.notion.com/reference/admin/list-permission-groups"
+  },
+  {
+   "id": "c60",
+   "url": "https://developers.notion.com/reference/admin/retrieve-permission-group.md",
+   "title": "Retrieve a group - Notion Admin API",
+   "quote": "Retrieve a permission group in a workspace.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.notion.com/reference/admin/retrieve-permission-group"
+  },
+  {
+   "id": "c61",
+   "url": "https://developers.notion.com/reference/admin/create-permission-group.md",
+   "title": "Create a group - Notion Admin API",
+   "quote": "Create an admin-managed permission group in a workspace.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.notion.com/reference/admin/create-permission-group"
+  },
+  {
+   "id": "c62",
+   "url": "https://developers.notion.com/reference/admin/update-permission-group.md",
+   "title": "Update a group - Notion Admin API",
+   "quote": "Rename an admin-managed permission group.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.notion.com/reference/admin/update-permission-group"
+  },
+  {
+   "id": "c63",
+   "url": "https://developers.notion.com/reference/admin/delete-permission-group.md",
+   "title": "Delete a group - Notion Admin API",
+   "quote": "Delete an admin-managed permission group.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.notion.com/reference/admin/delete-permission-group"
+  },
+  {
+   "id": "c64",
+   "url": "https://developers.notion.com/reference/admin/list-permission-group-members.md",
+   "title": "List group members - Notion Admin API",
+   "quote": "List a permission group's direct user memberships.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.notion.com/reference/admin/list-permission-group-members"
+  },
+  {
+   "id": "c65",
+   "url": "https://developers.notion.com/reference/admin/add-permission-group-member.md",
+   "title": "Add a group member - Notion Admin API",
+   "quote": "Add a direct user member to an admin-managed permission group.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.notion.com/reference/admin/add-permission-group-member"
+  },
+  {
+   "id": "c66",
+   "url": "https://developers.notion.com/reference/admin/update-permission-group-member.md",
+   "title": "Update a group member - Notion Admin API",
+   "quote": "Change a direct member's role in an admin-managed permission group.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.notion.com/reference/admin/update-permission-group-member"
+  },
+  {
+   "id": "c67",
+   "url": "https://developers.notion.com/reference/admin/remove-permission-group-member.md",
+   "title": "Remove a group member - Notion Admin API",
+   "quote": "Remove a direct user member from an admin-managed permission group.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.notion.com/reference/admin/remove-permission-group-member"
+  },
+  {
+   "id": "c68",
+   "url": "https://developers.notion.com/reference/get-users.md",
+   "title": "List all users - Notion API",
+   "quote": "Guests are not included in the response.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.notion.com/reference/get-users"
+  },
+  {
+   "id": "c69",
+   "url": "https://developers.notion.com/reference/get-users.md",
+   "title": "List all users - Notion API",
+   "quote": "The API does not currently support filtering users by their email and/or name.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.notion.com/reference/get-users"
+  },
+  {
+   "id": "c70",
+   "url": "https://developers.notion.com/reference/get-user.md",
+   "title": "Retrieve a user - Notion API",
+   "quote": "Retrieves a [User](/reference/user) using the ID specified.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.notion.com/reference/get-user"
+  },
+  {
+   "id": "c71",
+   "url": "https://developers.notion.com/reference/get-self.md",
+   "title": "Retrieve your token's bot user - Notion API",
+   "quote": "Retrieves the [User](/reference/user) associated with the token provided in the authorization header.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.notion.com/reference/get-self"
+  },
+  {
+   "id": "c72",
+   "url": "https://developers.notion.com/reference/request-limits.md",
+   "title": "Request limits - Notion API",
+   "quote": "The Notion API enforces two rate limits: a per-connection limit and a per-workspace limit.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.notion.com/reference/request-limits"
+  },
+  {
+   "id": "c73",
+   "url": "https://developers.notion.com/reference/request-limits.md",
+   "title": "Request limits - Notion API",
+   "quote": "Business and Enterprise | 600 requests per minute (an average of 10 per second)",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.notion.com/reference/request-limits"
+  },
+  {
+   "id": "c74",
+   "url": "https://www.okta.com/integrations/notion/",
+   "title": "Notion | Okta Integration Network",
+   "quote": "Notion's Okta integration supports single sign-on and user and group provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c75",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/notion-provisioning-tutorial",
+   "title": "Configure Notion for automatic user provisioning with Microsoft Entra ID",
+   "quote": "When configured, Microsoft Entra ID automatically provisions and de-provisions users and groups to Notion using the Microsoft Entra provisioning service.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c76",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/notion-provisioning-tutorial",
+   "title": "Configure Notion for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Provision groups and group memberships in Notion.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c77",
+   "url": "https://knowledge.workspace.google.com/admin/users/advanced/configure-notion-user-provisioning?hl=en",
+   "title": "Configure Notion user provisioning | Google Workspace Help",
+   "quote": "You need at least one verified domain in your Notion Enterprise Plan account before setting up user provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c78",
+   "url": "https://jumpcloud.com/support/integrate-with-notion",
+   "title": "Integrate with Notion | JumpCloud Documentation",
+   "quote": "Automatically provision, update and deprovision users and groups in Notion from JumpCloud using the SCIM integration.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c79",
+   "url": "https://jumpcloud.com/support/integrate-with-notion",
+   "title": "Integrate with Notion | JumpCloud Documentation",
+   "quote": "A Notion Workspace Owner account with a Business or Enterprise plan",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "Notion's SCIM API doc uses https://api.notion.com/scim/v2, while its IdP setup guide gives the tenant URL as https://app.notion.com/scim/v2.",
+   "cite": [
+    "c16",
+    "c37"
+   ]
+  },
+  {
+   "text": "JumpCloud's Notion guide lists 'a Business or Enterprise plan' as a prerequisite, while Notion says SCIM is Enterprise-only (JumpCloud's line likely covers SSO). Notion's page is used.",
+   "cite": [
+    "c79",
+    "c11"
+   ]
+  },
+  {
+   "text": "Notion's SCIM doc names Okta, OneLogin, Rippling and custom SCIM as supported, but Notion's IdP guide also documents Azure (Entra) and Google; JumpCloud publishes its own connector.",
+   "cite": [
+    "c13",
+    "c38",
+    "c78"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.notion.com/pricing",
+  "https://www.notion.com/help/provision-users-and-groups-with-scim",
+  "https://www.notion.com/help/set-up-identity-provider-for-scim",
+  "https://www.notion.com/help/saml-sso-configuration",
+  "https://www.notion.com/help/audit-log",
+  "https://www.notion.com/help/admin-apis-for-enterprise-organizations",
+  "https://www.notion.com/help/sitemap.xml",
+  "https://www.notion.com/llms.txt",
+  "https://developers.notion.com/llms.txt",
+  "https://developers.notion.com/reference/admin/intro",
+  "https://developers.notion.com/reference/admin/scopes",
+  "https://developers.notion.com/reference/get-users",
+  "https://developers.notion.com/reference/request-limits",
+  "https://developers.notion.com/reference/webhooks-events-delivery",
+  "https://www.okta.com/integrations/notion/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/notion-provisioning-tutorial",
+  "https://knowledge.workspace.google.com/admin/users/advanced/configure-notion-user-provisioning?hl=en",
+  "https://jumpcloud.com/support/integrate-with-notion"
+ ],
+ "open_questions": [
+  "SCIM token expiry beyond owner-departure revocation is not documented.",
+  "Reactivation behaviour (re-adding a removed member via SCIM) is not documented beyond POST adding existing accounts.",
+  "No SCIM rate limits documented.",
+  "Whether the Schemas endpoint and filtering by userName/externalId are supported is not documented.",
+  "No REST audit-log API documented; only in-app log and SIEM webhook stream.",
+  "Okta/Entra catalogue apps: who built them is not stated."
+ ]
+}

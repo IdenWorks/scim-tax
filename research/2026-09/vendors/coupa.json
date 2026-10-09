@@ -1,0 +1,722 @@
+{
+ "slug": "coupa",
+ "vendor": "Coupa",
+ "vendor_url": "https://www.coupa.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Coupa",
+  "slug": "coupa",
+  "category": "Finance, Accounting & Spend",
+  "status": "none",
+  "scim_plan": "—",
+  "scim_price_text": "—",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": null,
+   "update": null,
+   "deactivate": null,
+   "delete": null,
+   "groups": null
+  },
+  "idp": {
+   "okta": "api_connector",
+   "entra": "sso_only",
+   "google": "sso_only",
+   "onelogin": null,
+   "jumpcloud": "sso_only",
+   "generic": null
+  },
+  "pricing_page_url": "https://www.coupa.com/contact-us/",
+  "docs_url": "https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/oauth-2.0-and-oidc/set-up-okta-user-provisioning-with-oauth-2.0",
+  "evidence": "Okta's Coupa setup points the API Endpoint at https://your-instance-name.coupahost.com/api and Coupa's Okta provisioning guide uses an OAuth client with core.user.read and core.user.write scopes; Coupa's developer docs document no SCIM endpoint, and Microsoft says provisioning into Coupa is a manual task.",
+  "notes": "Status changed from partial (pilot draft) to none under the post-pilot rule for provisioning without SCIM: Okta's OIN app provisions Coupa through Coupa's proprietary Core REST API (https://{instance}.coupahost.com/api) with OAuth 2.0, not through a SCIM endpoint, so row.api_provisioning is true and idp.okta is api_connector. No Coupa page says SCIM is not offered; none rests on absence, with the developer sitemap (603 pages, none mentioning SCIM), the API reference, the Compass help pages and the pricing URL checked (medium confidence). No public price list: coupa.com/pricing does not show a price page (it redirected to the homepage during the pilot and returns a Cloudflare challenge now) and buying goes through a sales contact form, so no plan, price or tier gate can be recorded. Microsoft Entra's gallery app is SSO-only with manual provisioning; SAML is authentication-only (no JIT). HR systems can sync users through Coupa's Users API or SFTP CSV import. The Entra tutorial lists a 'Coupa single sign-on (SSO) enabled subscription' as a prerequisite, which hints SSO is subscription-dependent but is not a Coupa source. New row (no June status).",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": true,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [],
+ "scim": {
+  "available": null,
+  "cite": [
+   "c3",
+   "c4"
+  ],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": null,
+   "token_source": null,
+   "token_expiry": null,
+   "cite": []
+  },
+  "endpoints": {
+   "Users": null,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": []
+  },
+  "operations": {
+   "create": null,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": null,
+   "reactivate": null,
+   "delete": null,
+   "group_push": null,
+   "group_membership": null,
+   "cite": []
+  },
+  "deprovision": {
+   "action": null,
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": []
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": null,
+   "group": [],
+   "cite": []
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Coupa's own Okta provisioning guide points Okta at the proprietary Core REST API (https://{your-instance-name}.coupahost.com/api) with an OAuth/OIDC client, not at a SCIM endpoint; no SCIM base URL, schema or ServiceProviderConfig is documented in Coupa's public developer docs.",
+    "cite": [
+     "c3",
+     "c4"
+    ]
+   },
+   {
+    "text": "The person authenticating the Okta API integration must have Coupa admin credentials, otherwise a 404 is returned on redirect.",
+    "cite": [
+     "c5"
+    ]
+   },
+   {
+    "text": "Microsoft Entra gallery app does not provision; Microsoft says provisioning into Coupa is manual (or via Coupa's own tools/APIs).",
+    "cite": [
+     "c22",
+     "c23"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c6",
+   "c7",
+   "c12",
+   "c26"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://{instance_name}.coupahost.com/api",
+  "docs_url": "https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/resources/reference-data-resources/users-api-users",
+  "auth": {
+   "methods": [
+    "oauth2"
+   ],
+   "scopes": [
+    "core.user.read",
+    "core.user.write",
+    "offline_access",
+    "openid"
+   ],
+   "cite": [
+    "c8",
+    "c9",
+    "c10",
+    "c11",
+    "c4"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": false,
+   "reactivate_user": true,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": true,
+   "cite": [
+    "c6",
+    "c7",
+    "c12",
+    "c13",
+    "c14",
+    "c15",
+    "c16",
+    "c17",
+    "c18"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/api/users",
+    "purpose": "Create user",
+    "cite": [
+     "c6",
+     "c7"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/users",
+    "purpose": "Query users",
+    "cite": [
+     "c6",
+     "c7"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/users/:id",
+    "purpose": "Show user",
+    "cite": [
+     "c6",
+     "c7"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/users/:id",
+    "purpose": "Update user (including active flag, roles, user groups, license flags)",
+    "cite": [
+     "c6",
+     "c7",
+     "c12",
+     "c14"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/user_groups",
+    "purpose": "Create User Group",
+    "cite": [
+     "c19"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/user_groups",
+    "purpose": "Query User Groups",
+    "cite": [
+     "c19"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/user_groups/:id",
+    "purpose": "Show User Group",
+    "cite": [
+     "c19"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/user_groups/:id",
+    "purpose": "Update User Group",
+    "cite": [
+     "c19"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/user_groups/:id",
+    "purpose": "Update User Group",
+    "cite": [
+     "c19"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/user_group_memberships",
+    "purpose": "Create a user group membership",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/user_group_memberships",
+    "purpose": "Query user group memberships",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/user_group_memberships/:id",
+    "purpose": "Show a user group membership",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/user_group_memberships/:id",
+    "purpose": "Update a user group membership",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/user_group_memberships/:id",
+    "purpose": "Update a user group membership",
+    "cite": [
+     "c20"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "25 requests per second with a burst query limit of 20 calls.",
+   "cite": [
+    "c21"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Nothing can be deleted through the API; users are deactivated by updating them with a PUT request.",
+    "cite": [
+     "c12"
+    ]
+   },
+   {
+    "text": "GET on a resource root returns 50 records per call; further records are paged with an offset parameter in increments of 50.",
+    "cite": [
+     "c26",
+     "c27"
+    ]
+   },
+   {
+    "text": "API keys are deprecated; integrations must use OAuth 2.0 / OIDC clients. Access tokens from client credentials last about 24 hours; refresh tokens expire every 90 days.",
+    "cite": [
+     "c8",
+     "c10",
+     "c11"
+    ]
+   },
+   {
+    "text": "A GraphQL interface also exists alongside REST.",
+    "cite": [
+     "c28"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "api_connector",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/coupa/",
+   "cite": [
+    "c2",
+    "c3",
+    "c4"
+   ],
+   "notes": "Okta's catalogue page marks SAML, SWA and SCIM plus Create, Update, Deactivate and Sync Password in its markup, but Okta's setup guide and Coupa's own guide connect Okta to Coupa's Core REST API with an OAuth client, not to a SCIM endpoint."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/coupa-tutorial",
+   "cite": [
+    "c22",
+    "c23",
+    "c24"
+   ]
+  },
+  "google": {
+   "listed": true,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://support.google.com/a/answer/6363764?hl=en",
+   "cite": [
+    "c25"
+   ]
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://jumpcloud.com/support/integrate-with-coupa",
+   "cite": [
+    "c29"
+   ]
+  }
+ },
+ "fallbacks": {
+  "jit": false,
+  "jit_protocol": null,
+  "csv_import": true,
+  "other_sync": "HR-system user sync through Coupa's standard data interfaces (Users API or SFTP CSV Users Import); Okta lifecycle connector over the Core API",
+  "docs_public": true,
+  "cite": [
+   "c30",
+   "c31",
+   "c18",
+   "c32",
+   "c33"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.coupa.com/contact-us/",
+   "title": "Contact Us | Coupa",
+   "quote": "Are you considering Coupa? We’d love to speak with you. Fill out the form below to get in touch with one of our representatives.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.okta.com/integrations/coupa/",
+   "title": "Integrate Coupa with Okta | Okta Integration Network",
+   "quote": "From single sign-on to user provisioning, Okta’s Coupa integration handles user access and groups throughout the user’s lifecycle.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://help.okta.com/oie/en-us/content/topics/provisioning/coupa/coupa-integrate.htm",
+   "title": "Integrate Coupa with Okta | Okta Help",
+   "quote": "API Endpoint: Set to https://your-instance-name.coupahost.com/api.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/oauth-2.0-and-oidc/set-up-okta-user-provisioning-with-oauth-2.0",
+   "title": "Set Up Okta User Provisioning with OAuth 2.0 | Coupa Documentation",
+   "quote": "core.user.read, core.user.write, offline_access, openid",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/oauth-2.0-and-oidc/set-up-okta-user-provisioning-with-oauth-2.0",
+   "title": "Set Up Okta User Provisioning with OAuth 2.0 | Coupa Documentation",
+   "quote": "The person authenticating the integration in Okta must have admin credentials in Coupa. If not, the system will throw a 404 error when it tries to apply the redirect.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/resources/reference-data-resources/users-api-users",
+   "title": "Users API (/users) | Coupa Documentation",
+   "quote": "The users API allows you to create, update, or query users. This ranges from basic demographics, to managing passwords, to managing the groups and approval permissions they may have.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/resources/reference-data-resources/users-api-users",
+   "title": "Users API (/users) | Coupa Documentation",
+   "quote": "POST | /api/users | create | Create user | GET | /api/users | index | Query users | GET | /api/users/:id | show | Show user | PUT | /api/users/:id | update | Update user",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/oauth-2.0-and-oidc",
+   "title": "OAuth 2.0 and OIDC | Coupa Documentation",
+   "quote": "API keys are deprecated. You must transition any existing keys to OAuth clients and revoke the keys under Setup > API Keys.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/oauth-2.0-and-oidc/openid-connect-clients",
+   "title": "OpenID Connect Clients | Coupa Documentation",
+   "quote": "Coupa scopes take the form of service.object.right. For example, core.accounting.read or core.accounting.write.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/oauth-2.0-and-oidc/openid-connect-clients",
+   "title": "OpenID Connect Clients | Coupa Documentation",
+   "quote": "Refresh tokens expire every 90 days, after which you must reauthenticate.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/oauth-2.0-and-oidc/set-up-an-openid-connect-client",
+   "title": "Set Up an OpenID Connect Client | Coupa Documentation",
+   "quote": "The POST response has the access_token that was generated to authorize API calls within the defined scope for the next 24 hours ( expires_in 86,399 seconds).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/get-started-with-the-api",
+   "title": "Get Started with the API | Coupa Documentation",
+   "quote": "Deleting data is not supported for any resource via the API. Users can inactivate a subset of resources using a PUT request.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/resources/reference-data-resources/users-api-users",
+   "title": "Users API (/users) | Coupa Documentation",
+   "quote": "When true, the user is active. You can query active users only using the query parameter: /api/users?status=active",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/resources/reference-data-resources/users-api-users",
+   "title": "Users API (/users) | Coupa Documentation",
+   "quote": "Set to Yes if you want the system to invite the user to the system and have them set up their password",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/resources/reference-data-resources/users-api-users",
+   "title": "Users API (/users) | Coupa Documentation",
+   "quote": "Does the user have a Purchasing License?",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/resources/reference-data-resources/users-api-users",
+   "title": "Users API (/users) | Coupa Documentation",
+   "quote": "roles | roles | | | | yes | yes | Role",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/resources/reference-data-resources/users-api-users",
+   "title": "Users API (/users) | Coupa Documentation",
+   "quote": "user-groups | User groups | | | | yes | yes | User Group",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://compass.coupa.com/en-us/products/total-spend-management-platform/integration-playbooks-and-resources/other-integration-playbooks/erp-integration-adapters/integration-scenarios/1.-user-integration-scenarios-(optional)",
+   "title": "1. User Integration Scenarios (Optional) | Coupa",
+   "quote": "Our standard data interfaces allow third-party HR systems to create, update, deactivate, and reactivate Users in Coupa.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/resources/reference-data-resources/users-api-users/user-groups-api",
+   "title": "User Groups API | Coupa Documentation",
+   "quote": "POST | /api/user_groups | create | Create User Group | GET | /api/user_groups | index | Query User Groups | GET | /api/user_groups/:id | show | Show User Group | PATCH | /api/user_groups/:id | update | Update User Group | PUT | /api/user_groups/:id | update",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/resources/reference-data-resources/users-api-users/user-group-membership-api",
+   "title": "User Group Membership API | Coupa Documentation",
+   "quote": "POST | /api/user_group_memberships | create | Create an user group membership | GET | /api/user_group_memberships | index | Query User group memberships",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/get-started-with-the-api/exception-handling-and-error-codes",
+   "title": "Exception Handling and Error Codes | Coupa Documentation",
+   "quote": "Coupa limits the number of requests made to the API to 25 requests per second and a burst query limit of 20 calls.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/coupa-tutorial",
+   "title": "Configure Coupa for Single sign-on with Microsoft Entra ID | Microsoft Learn",
+   "quote": "In order to enable Microsoft Entra users to log into Coupa, they must be provisioned into Coupa. In the case of Coupa, provisioning is a manual task.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/coupa-tutorial",
+   "title": "Configure Coupa for Single sign-on with Microsoft Entra ID | Microsoft Learn",
+   "quote": "You can use any other Coupa user account creation tools or APIs provided by Coupa to provision Microsoft Entra user accounts.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/coupa-tutorial",
+   "title": "Configure Coupa for Single sign-on with Microsoft Entra ID | Microsoft Learn",
+   "quote": "Coupa supports SP initiated SSO",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://support.google.com/a/answer/6363764?hl=en",
+   "title": "Coupa cloud app | Google Workspace Admin Help",
+   "quote": "Using the SAML 2.0 standard, you can configure single sign-on (SSO) for a number of cloud apps. After you set up SSO, your users can use their Google Workspace credentials to sign in to an app using SSO.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/get-started-with-the-api",
+   "title": "Get Started with the API | Coupa Documentation",
+   "quote": "Each Coupa customer has their own url, of the form {instance_name}.coupahost.com. For example: https://companyname.coupahost.com/api/users.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/get-started-with-the-api/querying-options",
+   "title": "Querying Options | Coupa Documentation",
+   "quote": "If you need to get more than 50 records, you can rerun API get with an offset.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/get-started-with-the-api/introducing-graphql",
+   "title": "Introducing GraphQL | Coupa Documentation",
+   "quote": "GraphQL is an open specification for an API query language that allows you to request only the data you need when you need it.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://jumpcloud.com/support/integrate-with-coupa",
+   "title": "Integrate with Coupa | JumpCloud Documentation",
+   "quote": "Use JumpCloud SAML Single Sign On (SSO) to give your users convenient but secure access to all their web applications with a single set of credentials.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://docs.coupa.com/en/developer-documentation/coupa-core-user-authentication/coupa-saml-faq",
+   "title": "Coupa SAML FAQ | Coupa Documentation",
+   "quote": "Current Coupa SAML setup is only for authentication and not user provision within Coupa. Authorization is done via Coupa user role.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://docs.coupa.com/en/developer-documentation/coupa-core-flat-files-csv/flat-file-csv-import/users-import",
+   "title": "Users Import | Coupa Documentation",
+   "quote": "The User Import process read files from the ./Incoming/Users/ in the SFTP.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://docs.coupa.com",
+   "title": "Coupa Documentation",
+   "quote": "Find information on our API and flat file integrations, SSO, and Coupa IP addresses.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://docs.coupa.com",
+   "title": "Coupa Documentation",
+   "quote": "Customers must sign in to learn how to administer and use each of the Coupa products.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "Okta's catalogue page tags the Coupa app SCIM in its markup, while Okta's own setup guide sets the API Endpoint to Coupa's Core REST API and Coupa's guide sets up an OAuth client with core.user scopes for Okta provisioning.",
+   "cite": [
+    "c2",
+    "c3",
+    "c4"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.coupa.com/contact-us/",
+  "https://www.okta.com/integrations/coupa/",
+  "https://help.okta.com/oie/en-us/content/topics/provisioning/coupa/coupa-integrate.htm",
+  "https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/oauth-2.0-and-oidc/set-up-okta-user-provisioning-with-oauth-2.0",
+  "https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/resources/reference-data-resources/users-api-users",
+  "https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/oauth-2.0-and-oidc",
+  "https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/oauth-2.0-and-oidc/openid-connect-clients",
+  "https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/oauth-2.0-and-oidc/set-up-an-openid-connect-client",
+  "https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/get-started-with-the-api",
+  "https://compass.coupa.com/en-us/products/total-spend-management-platform/integration-playbooks-and-resources/other-integration-playbooks/erp-integration-adapters/integration-scenarios/1.-user-integration-scenarios-(optional)",
+  "https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/resources/reference-data-resources/users-api-users/user-groups-api",
+  "https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/resources/reference-data-resources/users-api-users/user-group-membership-api",
+  "https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/get-started-with-the-api/exception-handling-and-error-codes",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/coupa-tutorial",
+  "https://support.google.com/a/answer/6363764?hl=en",
+  "https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/get-started-with-the-api/querying-options",
+  "https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/get-started-with-the-api/introducing-graphql",
+  "https://jumpcloud.com/support/integrate-with-coupa",
+  "https://docs.coupa.com/en/developer-documentation/coupa-core-user-authentication/coupa-saml-faq",
+  "https://docs.coupa.com/en/developer-documentation/coupa-core-flat-files-csv/flat-file-csv-import/users-import",
+  "https://docs.coupa.com",
+  "https://www.coupa.com/pricing/ (Cloudflare challenge; redirected to the homepage during the pilot)",
+  "https://docs.coupa.com/en/developer-documentation/sitemap.xml (603 pages, none mention SCIM)",
+  "https://www.onelogin.com/connector/coupanew (bot challenge, not loaded)",
+  "https://www.onelogin.com/connector/coupahost (bot challenge, not loaded)"
+ ],
+ "open_questions": [
+  "No public pricing or edition table: which Coupa subscriptions include SSO, API access and the Okta provisioning integration is not disclosed.",
+  "Coupa's public developer docs show no SCIM 2.0 endpoint; whether Coupa exposes a standard SCIM server (Okta's OIN page tags the app 'SCIM') is undocumented. Okta's own setup uses the Core REST API at /api.",
+  "Which Okta lifecycle operations Coupa supports is shown only by checkmarks in Okta's page markup (Create, Update, Deactivate, Sync Password checked; Group Push not checked); Coupa does not document them.",
+  "What deactivation (active=false) does to licences/seats, sessions and retained data is not documented.",
+  "Whether there is a user-event webhook (Coupa 'call outs') or an audit log API is not documented in the pages reviewed.",
+  "OneLogin catalogue pages for Coupa (onelogin.com/connector/coupanew, /coupahost) could not be loaded (bot challenge); OneLogin SSO/provisioning status unknown.",
+  "Google Workspace and JumpCloud catalogue pages document SAML SSO only; they do not state whether provisioning exists (recorded as provisioning null, row idp sso_only).",
+  "Whether the Users API's license flags (purchasing-user, expense-user, etc.) can be set by the Okta connector, and how the Okta app maps roles/content groups, is not documented by Coupa."
+ ]
+}

@@ -1,0 +1,749 @@
+{
+ "slug": "growthbook",
+ "vendor": "GrowthBook",
+ "vendor_url": "https://www.growthbook.io",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "GrowthBook",
+  "slug": "growthbook",
+  "category": "Developer Tools & CI/CD",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Pro",
+  "team_price_text": "Pro: $40/seat/mo",
+  "team_price_per_user_mo": 40,
+  "price_multiplier": null,
+  "sso_plan": "Enterprise",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.growthbook.io/pricing",
+  "docs_url": "https://docs.growthbook.io/integrations/scim",
+  "evidence": "GrowthBook's pricing page lists \"SSO & SCIM provisioning\" only under the Enterprise (Custom, Contact Us) plan, and the SCIM docs say SCIM is available on Enterprise plans and requires SSO.",
+  "notes": "Cloud plans: Starter free (up to 3 users), Pro $40/seat/month (up to 30 users; billing period not stated on the page), Enterprise custom. SSO on Starter/Pro is Google sign-in only; custom OIDC SSO and SCIM are Enterprise. SCIM uses a Secret API key with Admin role as the bearer token; officially supports Okta (via Okta's generic SCIM 2.0 Test App) and Entra ID (non-gallery app). Deprovisioning removes the member from the organization; only growthbookRole can be updated over SCIM (no name or email changes). Self-hosted Enterprise needs a license key. REST API (members, roles, teams) has no plan gate on the pricing table; teams are an Enterprise feature.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Starter",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Starter",
+   "price_text": "Free, up to 3 users",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c2",
+    "c1",
+    "c31"
+   ],
+   "notes": "SSO is Google sign-in only on Starter and Pro."
+  },
+  {
+   "name": "Pro",
+   "price_text": "$40 / seat / month, up to 30 users",
+   "price_per_user_mo": 40,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c3",
+    "c1",
+    "c31"
+   ]
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Custom (Contact Us)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c4",
+    "c31",
+    "c33"
+   ],
+   "notes": "Exportable audit logs; no audit-log REST endpoint found."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c1",
+   "c5",
+   "c6",
+   "c9"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://api.growthbook.io/scim/v2",
+  "notes": "Self-hosted base URL is {YOUR_API_HOST}/scim/v2.",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Settings > API Keys: Secret API Key with Admin role",
+   "token_expiry": null,
+   "cite": [
+    "c7"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c6",
+    "c16"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": null,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c11",
+    "c8",
+    "c37",
+    "c16",
+    "c12"
+   ],
+   "notes": "Updates are limited to growthbookRole; the HTTP verb is not documented. Deprovisioning removes the member rather than leaving a deactivated user; re-provisioning adds them back with the default role."
+  },
+  "deprovision": {
+   "action": "remove_from_org",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c8",
+    "c36"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "active",
+    "displayName",
+    "externalId"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": true,
+    "how": "growthbookRole attribute in the core User namespace (values readonly, collaborator, engineer, analyst, experimenter, admin)"
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c15",
+    "c38",
+    "c16"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "growthbookRole attribute sets the global role; groups become Teams; project-level roles not supported",
+   "cite": [
+    "c38",
+    "c14",
+    "c16"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Officially supports only Okta and Microsoft Entra ID.",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "text": "Only growthbookRole can be updated; user email cannot be changed after provisioning.",
+    "cite": [
+     "c12",
+     "c13"
+    ]
+   },
+   {
+    "text": "Project-level permissions cannot be provisioned via SCIM.",
+    "cite": [
+     "c14"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c20",
+   "c31"
+  ],
+  "plan": "Starter",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://api.growthbook.io/api",
+  "docs_url": "https://docs.growthbook.io/api/members/operation/listMembers",
+  "auth": {
+   "methods": [
+    "api_key"
+   ],
+   "scopes": [],
+   "cite": [
+    "c30"
+   ],
+   "notes": "Secret keys (admin or readonly role) or personal access tokens, via HTTP Basic or Bearer."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c21",
+    "c22",
+    "c23",
+    "c24",
+    "c26"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/v1/members",
+    "purpose": "Get all organization members",
+    "cite": [
+     "c21"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/members/{id}/role",
+    "purpose": "Update a member's global role",
+    "cite": [
+     "c23"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v1/members/{id}",
+    "purpose": "Remove a user from the organization",
+    "cite": [
+     "c22"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/teams",
+    "purpose": "List teams",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/teams",
+    "purpose": "Create a team",
+    "cite": [
+     "c26"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v1/teams/{id}",
+    "purpose": "Delete a team",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/teams/{id}/members",
+    "purpose": "Add members to team",
+    "cite": [
+     "c24"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v1/teams/{id}/members",
+    "purpose": "Remove members from team",
+    "cite": [
+     "c27"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": true,
+   "events": [
+    "user.login"
+   ],
+   "cite": [
+    "c32"
+   ]
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": [],
+   "notes": "Audit log is exportable in the app (Enterprise per pricing); no audit REST endpoint in the OpenAPI spec."
+  },
+  "rate_limits": {
+   "text": "60 requests per minute",
+   "cite": [
+    "c29"
+   ]
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": false,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/?search=growthbook",
+   "cite": [
+    "c19",
+    "c17"
+   ],
+   "notes": "No OIN app; GrowthBook's guide uses Okta's generic SCIM 2.0 Test App (OAuth Bearer Token)."
+  },
+  "entra": {
+   "listed": false,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c18"
+   ],
+   "notes": "Guide uses a non-gallery Entra enterprise app."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "oidc",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c35",
+   "c34"
+  ],
+  "notes": "SSO emailDomains setting allows auto-joining the organization from a verified email domain."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.growthbook.io/pricing",
+   "title": "GrowthBook Pricing",
+   "quote": "Regulated industries choose enterprise for advanced governance, and custom security integrations (SSO, SCIM).",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://www.growthbook.io/pricing",
+   "title": "GrowthBook Pricing",
+   "quote": "The Starter plan is free for up to three users and includes unlimited feature flags and experiments on GrowthBook's cloud platform",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://www.growthbook.io/pricing",
+   "title": "GrowthBook Pricing",
+   "quote": "The Pro tier adds more seats (up to 30 users) and advanced experimentation features such as sequential testing",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://www.growthbook.io/pricing",
+   "title": "GrowthBook Pricing",
+   "quote": "Pricing tailored to your scale and licensing requirements",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://docs.growthbook.io/integrations/scim.md",
+   "title": "SCIM Integration - GrowthBook Docs",
+   "quote": "Verify that your GrowthBook organization is on an enterprise plan with SSO enabled.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.growthbook.io/integrations/scim"
+  },
+  {
+   "id": "c6",
+   "url": "https://docs.growthbook.io/integrations/scim.md",
+   "title": "SCIM Integration - GrowthBook Docs",
+   "quote": "For GrowthBook Cloud users, the Base URL is `https://api.growthbook.io/scim/v2`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.growthbook.io/integrations/scim"
+  },
+  {
+   "id": "c7",
+   "url": "https://docs.growthbook.io/integrations/scim.md",
+   "title": "SCIM Integration - GrowthBook Docs",
+   "quote": "You can obtain your OAuth Bearer Token by creating a new Secret API Key with an `Admin` role.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.growthbook.io/integrations/scim"
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.growthbook.io/integrations/scim.md",
+   "title": "SCIM Integration - GrowthBook Docs",
+   "quote": "If a user is deprovisioned in your identity provider, they will be removed from GrowthBook.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.growthbook.io/integrations/scim"
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.growthbook.io/integrations/scim.md",
+   "title": "SCIM Integration - GrowthBook Docs",
+   "quote": "GrowthBook follows the SCIM 2.0 protocol.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.growthbook.io/integrations/scim"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.growthbook.io/integrations/scim.md",
+   "title": "SCIM Integration - GrowthBook Docs",
+   "quote": "GrowthBook officially supports Okta and Azure AD/Microsoft Entra ID.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.growthbook.io/integrations/scim"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.growthbook.io/integrations/scim.md",
+   "title": "SCIM Integration - GrowthBook Docs",
+   "quote": "When a user is provisioned, they are added to your GrowthBook organization with your organization's default role.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.growthbook.io/integrations/scim"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.growthbook.io/integrations/scim.md",
+   "title": "SCIM Integration - GrowthBook Docs",
+   "quote": "The only property GrowthBook supports updating is `growthbookRole`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.growthbook.io/integrations/scim"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.growthbook.io/integrations/scim.md",
+   "title": "SCIM Integration - GrowthBook Docs",
+   "quote": "It's not possible to update a user's email after they're provisioned.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.growthbook.io/integrations/scim"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.growthbook.io/integrations/scim.md",
+   "title": "SCIM Integration - GrowthBook Docs",
+   "quote": "Project-level permissions are not supported when provisioning a user via SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.growthbook.io/integrations/scim"
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.growthbook.io/integrations/scim.md",
+   "title": "SCIM Integration - GrowthBook Docs",
+   "quote": "| userName | userPrincipalName | 1 |",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.growthbook.io/integrations/scim"
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.growthbook.io/integrations/scim.md",
+   "title": "SCIM Integration - GrowthBook Docs",
+   "quote": "When a group is synced with GrowthBook, it creates a team in your GrowthBook organization and adds any members in the group to the team.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.growthbook.io/integrations/scim"
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.growthbook.io/integrations/scim.md",
+   "title": "SCIM Integration - GrowthBook Docs",
+   "quote": "search for \"SCIM 2.0 Test App (OAuth Bearer Token).\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.growthbook.io/integrations/scim"
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.growthbook.io/integrations/scim.md",
+   "title": "SCIM Integration - GrowthBook Docs",
+   "quote": "Integrate any other application you don't find in the gallery (Non-gallery)",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.growthbook.io/integrations/scim"
+  },
+  {
+   "id": "c19",
+   "url": "https://www.okta.com/integrations/?search=growthbook",
+   "title": "Okta Integration Network search: growthbook",
+   "quote": "No results found for: “growthbook”",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.growthbook.io/api/members/operation/listMembers.md",
+   "title": "Get all organization members - GrowthBook REST API",
+   "quote": "GrowthBook offers a full REST API for interacting with the application.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.growthbook.io/api/members/operation/listMembers"
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.growthbook.io/api/members/operation/listMembers.md",
+   "title": "Get all organization members - GrowthBook REST API",
+   "quote": "openapi.yaml GET /v1/members",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.growthbook.io/api/members/operation/listMembers"
+  },
+  {
+   "id": "c22",
+   "url": "https://docs.growthbook.io/api/members/operation/deleteMember.md",
+   "title": "Removes a single user from an organization - GrowthBook REST API",
+   "quote": "openapi.yaml DELETE /v1/members/{id}",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.growthbook.io/api/members/operation/deleteMember"
+  },
+  {
+   "id": "c23",
+   "url": "https://docs.growthbook.io/api/members/operation/updateMemberRole.md",
+   "title": "Update a member's global role - GrowthBook REST API",
+   "quote": "openapi.yaml POST /v1/members/{id}/role",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.growthbook.io/api/members/operation/updateMemberRole"
+  },
+  {
+   "id": "c24",
+   "url": "https://docs.growthbook.io/api/Teams/operation/addTeamMembers.md",
+   "title": "Add members to team - GrowthBook REST API",
+   "quote": "openapi.yaml POST /v1/teams/{id}/members",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.growthbook.io/api/Teams/operation/addTeamMembers"
+  },
+  {
+   "id": "c25",
+   "url": "https://docs.growthbook.io/api/Teams/operation/listTeams.md",
+   "title": "Get all teams - GrowthBook REST API",
+   "quote": "openapi.yaml GET /v1/teams",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.growthbook.io/api/Teams/operation/listTeams"
+  },
+  {
+   "id": "c26",
+   "url": "https://docs.growthbook.io/api/Teams/operation/createTeam.md",
+   "title": "Create a single team - GrowthBook REST API",
+   "quote": "openapi.yaml POST /v1/teams",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.growthbook.io/api/Teams/operation/createTeam"
+  },
+  {
+   "id": "c27",
+   "url": "https://docs.growthbook.io/api/Teams/operation/removeTeamMember.md",
+   "title": "Remove members from team - GrowthBook REST API",
+   "quote": "openapi.yaml DELETE /v1/teams/{id}/members",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.growthbook.io/api/Teams/operation/removeTeamMember"
+  },
+  {
+   "id": "c28",
+   "url": "https://docs.growthbook.io/api/Teams/operation/deleteTeam.md",
+   "title": "Delete a single team - GrowthBook REST API",
+   "quote": "openapi.yaml DELETE /v1/teams/{id}",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.growthbook.io/api/Teams/operation/deleteTeam"
+  },
+  {
+   "id": "c29",
+   "url": "https://docs.growthbook.io/api/members/operation/listMembers.md",
+   "title": "GrowthBook REST API",
+   "quote": "You exceeded the rate limit of 60 requests per minute.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.growthbook.io/api/members/operation/listMembers"
+  },
+  {
+   "id": "c30",
+   "url": "https://docs.growthbook.io/api/members/operation/listMembers.md",
+   "title": "GrowthBook REST API",
+   "quote": "We support both the HTTP Basic and Bearer authentication schemes for convenience.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.growthbook.io/api/members/operation/listMembers"
+  },
+  {
+   "id": "c31",
+   "url": "https://www.growthbook.io/pricing",
+   "title": "GrowthBook Pricing",
+   "quote": "MCP Server Agent Skills REST API Webhooks",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c32",
+   "url": "https://docs.growthbook.io/app/webhooks/event-webhooks/events.md",
+   "title": "Webhooks Events - GrowthBook Docs",
+   "quote": "| **[user.login](#user-login)** | Triggered when a user logs in |",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.growthbook.io/app/webhooks/event-webhooks/events"
+  },
+  {
+   "id": "c33",
+   "url": "https://docs.growthbook.io/account/audit-logs.md",
+   "title": "Audit Logs - GrowthBook Docs",
+   "quote": "These logs are not user editable and the log is exportable.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.growthbook.io/account/audit-logs"
+  },
+  {
+   "id": "c34",
+   "url": "https://docs.growthbook.io/sso.md",
+   "title": "Enterprise SSO - GrowthBook Docs",
+   "quote": "SSO is available on GrowthBook Cloud or Self-hosted via OpenID Connect.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.growthbook.io/sso"
+  },
+  {
+   "id": "c35",
+   "url": "https://docs.growthbook.io/sso.md",
+   "title": "Enterprise SSO - GrowthBook Docs",
+   "quote": "Allow [auto-joining](/account/user-permissions#self-registering-and-automatic-approvals) from a specified email domain.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.growthbook.io/sso"
+  },
+  {
+   "id": "c36",
+   "url": "https://docs.growthbook.io/account/user-permissions.md",
+   "title": "User Permissions - GrowthBook Docs",
+   "quote": "To remove a user from your organization, you can click on the three dots next to their name and select `Remove User`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.growthbook.io/account/user-permissions"
+  },
+  {
+   "id": "c37",
+   "url": "https://docs.growthbook.io/integrations/scim.md",
+   "title": "SCIM Integration - GrowthBook Docs",
+   "quote": "If they are re-provisioned, they will be added back to GrowthBook, and their role will reset to the organization's default role.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.growthbook.io/integrations/scim"
+  },
+  {
+   "id": "c38",
+   "url": "https://docs.growthbook.io/integrations/scim.md",
+   "title": "SCIM Integration - GrowthBook Docs",
+   "quote": "Variable name: growthbookRole",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.growthbook.io/integrations/scim"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.growthbook.io/pricing",
+  "https://docs.growthbook.io/llms.txt",
+  "https://docs.growthbook.io/sitemap.xml",
+  "https://docs.growthbook.io/openapi.yaml",
+  "https://www.okta.com/integrations/?search=growthbook",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/growthbook-tutorial (404)"
+ ],
+ "open_questions": [
+  "Docs do not say whether SCIM deprovisioning frees the seat or ends active sessions.",
+  "SCIM filtering, pagination, PATCH vs PUT and ServiceProviderConfig/Schemas endpoints are not documented.",
+  "Pro price billing period (monthly vs annual) is not stated on the pricing page.",
+  "Google Workspace, OneLogin and JumpCloud catalogue entries not checked (OneLogin blocks bots); GrowthBook documents only Okta and Entra."
+ ]
+}

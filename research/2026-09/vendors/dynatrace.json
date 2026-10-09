@@ -1,0 +1,326 @@
+{
+ "slug": "dynatrace",
+ "vendor": "Dynatrace",
+ "vendor_url": "https://www.dynatrace.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Dynatrace",
+  "slug": "dynatrace",
+  "category": "Cloud, Infrastructure & Observability",
+  "status": "free",
+  "scim_plan": "Dynatrace Platform Subscription (DPS)",
+  "scim_price_text": "Included in DPS (annual commit, usage-based rate card); no SCIM upcharge",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Dynatrace Platform Subscription (DPS)",
+  "team_price_text": "Infrastructure Monitoring: $29/mo per host (rate card, drawn from annual commit)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Dynatrace Platform Subscription (DPS)",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.dynatrace.com/pricing/",
+  "docs_url": "https://docs.dynatrace.com/docs/manage/identity-access-management/user-and-group-management/access-scim",
+  "evidence": "Dynatrace's pricing FAQ says a Dynatrace Platform Subscription \"gives you access to all platform capabilities that are generally available\", with SSO listed as included and \"no per-seat fees, no user tiers\"; the SCIM docs describe SCIM 2.0 for Dynatrace SaaS with no plan restriction.",
+  "notes": "Changed from gated to free. Dynatrace sells one licensing model, the Dynatrace Platform Subscription (minimum annual spend commit drawn down at a public rate card), which includes every generally available capability, unlimited seats and SSO; there are no user tiers. The SCIM docs name no plan or edition gate. June's 'requires Enterprise contract' and 'median ACV ~$183K' had no first-party source and were dropped. Prices are per host or per GiB, so per-user fields are null. SCIM is documented for Okta (SCIM 2.0 test apps) and Entra ID (non-gallery app); the gallery/OIN apps are SSO only. Domain ownership verification is required before SCIM. User and group management also available through the Account Management API (OAuth client scopes).",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Dynatrace Platform Subscription (DPS)",
+  "api_tax": false,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Dynatrace Platform Subscription (DPS)",
+   "price_text": "Minimum annual spend commit consumed at rate card, e.g. Foundation & Discovery $7/mo per host, Infrastructure Monitoring $29/mo per host, Full-Stack Monitoring $58/mo per 8 GiB host",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": ["c1", "c2", "c3", "c4", "c5", "c12", "c19"],
+   "notes": "Single subscription; capabilities are not tiered. Commit amount is not published."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": ["c5", "c6", "c7"],
+  "plan": "Dynatrace Platform Subscription (DPS)",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://api.sso.dynatrace.com/idm/public/scim/<YOUR_ACCOUNT_ID>/v2",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Account Management > Identity & access management > SCIM configuration > Generate token",
+   "token_expiry": null,
+   "cite": ["c7", "c8", "c9"],
+   "notes": "Token shown once; up to 10 SCIM tokens per account."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": ["c6"]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": ["c6", "c10", "c11"]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": ["c10"],
+   "notes": "Docs: a user disabled or removed in the IdP is disabled in Dynatrace. Seats are unlimited under DPS, so seat freeing is moot."
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": ["userName", "name.givenName", "name.familyName", "active", "displayName"],
+   "enterprise": [],
+   "custom": {
+    "supported": false,
+    "how": null
+   },
+   "group": ["displayName", "externalId", "members"],
+   "cite": ["c13", "c14", "c15", "c16"],
+   "notes": "userName is the email and must be persistent; email changes via SCIM are ignored. Entra mapping also sends displayName. FAQ: additional fields such as group description cannot be set during provisioning."
+  },
+  "roles": {
+   "supported": false,
+   "how": "Permissions to SCIM groups must be assigned manually in Dynatrace or via the Account Management API.",
+   "cite": ["c17"]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {"text": "Only users whose email domains have been verified for ownership can be synchronized.", "cite": ["c18"]},
+   {"text": "Email address changes via SCIM are ignored; userName must be persistent.", "cite": ["c13", "c14"]},
+   {"text": "SCIM-type groups cannot be removed or modified through Account Management.", "cite": ["c20"]},
+   {"text": "SCIM is for Dynatrace SaaS; per-IdP guides exist only for Azure (Entra ID) and Okta.", "cite": ["c5", "c21"]},
+   {"text": "Default account limit of 10,000 users (adjustable) and 10 SCIM tokens (not adjustable).", "cite": ["c22"]}
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": ["c23", "c24"],
+  "plan": "Dynatrace Platform Subscription (DPS)",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://api.dynatrace.com/iam/v1/accounts/{accountUuid}",
+  "docs_url": "https://docs.dynatrace.com/docs/dynatrace-api/account-management-api",
+  "auth": {
+   "methods": ["oauth2"],
+   "scopes": ["account-idm-read", "account-idm-write", "account-audit-logs-read"],
+   "cite": ["c24", "c25", "c26", "c27"],
+   "notes": "OAuth clients created in Account Management > Identity & access management > OAuth clients; Bearer token in Authorization header."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": ["c23", "c28", "c29"],
+   "notes": "Roles are permissions assigned to groups via the Permission management API."
+  },
+  "endpoints": [
+   {"method": "GET", "path": "https://api.dynatrace.com/iam/v1/accounts/{accountUuid}/users", "purpose": "List all users", "cite": ["c24"]},
+   {"method": "POST", "path": "https://api.dynatrace.com/iam/v1/accounts/{accountUuid}/users", "purpose": "Create a user", "cite": ["c25"]},
+   {"method": "DELETE", "path": "https://api.dynatrace.com/iam/v1/accounts/{accountUuid}/users/{email}", "purpose": "Delete a user", "cite": ["c30"]},
+   {"method": "GET", "path": "https://api.dynatrace.com/iam/v1/accounts/{accountUuid}/users/{email}", "purpose": "View a user's groups", "cite": ["c23"]},
+   {"method": "POST", "path": "https://api.dynatrace.com/iam/v1/accounts/{accountUuid}/users/{email}", "purpose": "Add a user to groups", "cite": ["c23"]},
+   {"method": "PUT", "path": "https://api.dynatrace.com/iam/v1/accounts/{accountUuid}/users/{email}/groups", "purpose": "Set user's groups", "cite": ["c23"]},
+   {"method": "DELETE", "path": "https://api.dynatrace.com/iam/v1/accounts/{accountUuid}/users/{email}/groups", "purpose": "Remove user from groups", "cite": ["c23"]},
+   {"method": "GET", "path": "https://api.dynatrace.com/iam/v1/accounts/{accountUuid}/groups", "purpose": "List all groups", "cite": ["c28"]},
+   {"method": "POST", "path": "https://api.dynatrace.com/iam/v1/accounts/{accountUuid}/groups", "purpose": "Create a group", "cite": ["c28"]},
+   {"method": "PUT", "path": "https://api.dynatrace.com/iam/v1/accounts/{accountUuid}/groups/{groupUuid}", "purpose": "Edit a group", "cite": ["c28"]},
+   {"method": "DELETE", "path": "https://api.dynatrace.com/iam/v1/accounts/{accountUuid}/groups/{groupUuid}", "purpose": "Delete a group", "cite": ["c28"]},
+   {"method": "GET", "path": "https://api.dynatrace.com/iam/v1/accounts/{accountUuid}/groups/{groupUuid}/users", "purpose": "List group members", "cite": ["c28"]},
+   {"method": "POST", "path": "https://api.dynatrace.com/iam/v1/accounts/{accountUuid}/groups/{groupUuid}/permissions", "purpose": "Assign permissions to a group", "cite": ["c29"]},
+   {"method": "GET", "path": "https://api.dynatrace.com/audit/v1/accounts/{accountUuid}", "purpose": "List account audit logs", "cite": ["c27"]}
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Dynatrace Platform Subscription (DPS)",
+   "cite": ["c19", "c27"]
+  },
+  "rate_limits": {
+   "text": "OAuth token requests are throttled per source IP and per OAuth client id; exceeding the limit returns HTTP 429.",
+   "cite": ["c31"]
+  },
+  "limitations": [
+   {"text": "No documented update or disable endpoint for users in the User management API (list, create, delete, group membership only).", "cite": ["c23"]}
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/dynatrace/",
+   "cite": ["c32", "c21"],
+   "notes": "OIN 'Dynatrace' app marks SAML and SWA only (read from page markup). Dynatrace's Okta guide provisions through Okta's SCIM 2.0 test apps or by adding SCIM to the SSO app."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/dynatrace-tutorial",
+   "cite": ["c33", "c34"],
+   "notes": "Gallery app is SSO with JIT; Dynatrace's Azure SCIM guide uses a non-gallery enterprise app."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "Not checked (OneLogin catalogue bot-blocked); Dynatrace has no OneLogin SCIM guide."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": ["c35", "c36"]
+ },
+ "citations": [
+  {"id": "c1", "url": "https://www.dynatrace.com/pricing/", "title": "Dynatrace pricing", "quote": "Dynatrace Platform Subscription (DPS) is a licensing model where you make a minimum annual spend commitment at the platform level and then consume that commit based on actual usage and a straightforward rate card.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c2", "url": "https://www.dynatrace.com/pricing/", "title": "Dynatrace pricing", "quote": "Yes, Dynatrace Platform Subscription gives you access to all platform capabilities that are generally available when you sign the order form.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c3", "url": "https://www.dynatrace.com/pricing/", "title": "Dynatrace pricing", "quote": "Give your security team full governance over user access through SSO, granular access policies, and IP allow lists.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c4", "url": "https://www.dynatrace.com/pricing/", "title": "Dynatrace pricing", "quote": "Give every team member full platform access—no per-seat fees, no user tiers, no cost surprises.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c5", "url": "https://docs.dynatrace.com/docs/manage/identity-access-management/user-and-group-management/access-scim", "title": "SCIM — Dynatrace Docs", "quote": "You can configure Dynatrace SaaS to be provided with user identity information automatically from your organization's identity provider (IdP) through SCIM.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c6", "url": "https://docs.dynatrace.com/docs/manage/identity-access-management/user-and-group-management/access-scim", "title": "SCIM — Dynatrace Docs", "quote": "Dynatrace supports SCIM 2.0 and GET , POST , PATCH , PUT , and DELETE operations for both User and Group resources.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c7", "url": "https://docs.dynatrace.com/docs/manage/identity-access-management/user-and-group-management/access-scim/scim-azure", "title": "Azure SCIM configuration for Dynatrace", "quote": "Example: https://api.sso.dynatrace.com/idm/public/scim/<YOUR_ACCOUNT_ID>/v2", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c8", "url": "https://docs.dynatrace.com/docs/manage/identity-access-management/user-and-group-management/access-scim", "title": "SCIM — Dynatrace Docs", "quote": "Dynatrace SCIM supports Bearer Token Authentication only.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c9", "url": "https://docs.dynatrace.com/docs/manage/identity-access-management/user-and-group-management/access-scim", "title": "SCIM — Dynatrace Docs", "quote": "You can generate up to 10 SCIM authentication tokens.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c10", "url": "https://docs.dynatrace.com/docs/manage/identity-access-management/user-and-group-management/access-scim", "title": "SCIM — Dynatrace Docs", "quote": "if a user is disabled or removed from the IdP, it will also disable the user in Dynatrace", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c11", "url": "https://docs.dynatrace.com/docs/manage/identity-access-management/user-and-group-management/access-scim", "title": "SCIM — Dynatrace Docs", "quote": "Users will be assigned to groups in Dynatrace mirroring the relationship within the IdP", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c12", "url": "https://www.dynatrace.com/pricing/", "title": "Dynatrace pricing", "quote": "Infrastructure observability for cloud, hyperscaler, and data center.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c13", "url": "https://docs.dynatrace.com/docs/manage/identity-access-management/user-and-group-management/access-scim", "title": "SCIM — Dynatrace Docs", "quote": "userName must be persistent. Dynatrace does not support user email change.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c14", "url": "https://docs.dynatrace.com/docs/manage/identity-access-management/user-and-group-management/access-scim", "title": "SCIM — Dynatrace Docs", "quote": "No, an email address can't be changed by SCIM. Any requests to update an email address are ignored.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c15", "url": "https://docs.dynatrace.com/docs/manage/identity-access-management/user-and-group-management/access-scim/scim-azure", "title": "Azure SCIM configuration for Dynatrace", "quote": "Switch([IsSoftDeleted],,\"False\",\"True\",\"True\",\"False\")", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c16", "url": "https://docs.dynatrace.com/docs/manage/identity-access-management/user-and-group-management/access-scim", "title": "SCIM — Dynatrace Docs", "quote": "No, we're limited by the SCIM protocol specification, so additional fields, such as description , can't be set during provisioning.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c17", "url": "https://docs.dynatrace.com/docs/manage/identity-access-management/user-and-group-management/access-scim", "title": "SCIM — Dynatrace Docs", "quote": "Permissions to SCIM groups still have to be assigned manually in Dynatrace", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c18", "url": "https://docs.dynatrace.com/docs/manage/identity-access-management/user-and-group-management/access-scim", "title": "SCIM — Dynatrace Docs", "quote": "Only users whose email domains have been verified for ownership can be synchronized with Dynatrace via SCIM.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c19", "url": "https://docs.dynatrace.com/docs/dynatrace-api/account-management-api", "title": "Account Management API — Dynatrace Docs", "quote": "View audit logs related to your Dynatrace account.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c20", "url": "https://docs.dynatrace.com/docs/manage/identity-access-management/user-and-group-management/access-scim", "title": "SCIM — Dynatrace Docs", "quote": "Groups of type SCIM are managed by SCIM only and cannot be removed or modified through Account Management", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c21", "url": "https://docs.dynatrace.com/docs/manage/identity-access-management/user-and-group-management/access-scim/scim-okta", "title": "Okta SCIM configuration for Dynatrace", "quote": "You can use either SCIM 2.0 Test App (Header Auth)", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c22", "url": "https://docs.dynatrace.com/docs/manage/identity-access-management/iam-limits", "title": "Identity and Access Management limits", "quote": "The following table indicates the current default IAM resource limits.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c23", "url": "https://docs.dynatrace.com/docs/dynatrace-api/account-management-api/user-management-api", "title": "User management API", "quote": "Add user to user groups. Existing memberships are unaffected.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c24", "url": "https://docs.dynatrace.com/docs/dynatrace-api/account-management-api/user-management-api/get-all-users", "title": "User management API - GET all users", "quote": "https://api.dynatrace.com/iam/v1/accounts/{accountUuid}/users", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c25", "url": "https://docs.dynatrace.com/docs/dynatrace-api/account-management-api/user-management-api/post-user", "title": "User management API - POST a user", "quote": "you need the Allow write access for identity resources (users and groups) ( account-idm-write ) scope assigned to your token.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c26", "url": "https://docs.dynatrace.com/docs/dynatrace-api/account-management-api", "title": "Account Management API — Dynatrace Docs", "quote": "Select the lock icon next to any end point to display information about the OAuth 2.0 tokens that secure that endpoint.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c27", "url": "https://docs.dynatrace.com/docs/dynatrace-api/account-management-api/account-audits-api/get-account-audits", "title": "Account audits API - GET account audit logs", "quote": "https://api.dynatrace.com/audit/v1/accounts/{accountUuid}", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c28", "url": "https://docs.dynatrace.com/docs/dynatrace-api/account-management-api/group-management-api", "title": "Group management API", "quote": "Get an overview of members of a user group.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c29", "url": "https://docs.dynatrace.com/docs/dynatrace-api/account-management-api/permission-management-api/post-permissions", "title": "Permission management API - POST permissions", "quote": "https://api.dynatrace.com/iam/v1/accounts/{accountUuid}/groups/{groupUuid}/permissions", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c30", "url": "https://docs.dynatrace.com/docs/dynatrace-api/account-management-api/user-management-api/delete-user", "title": "User management API - DELETE a user", "quote": "https://api.dynatrace.com/iam/v1/accounts/{accountUuid}/users/{email}", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c31", "url": "https://docs.dynatrace.com/docs/manage/identity-access-management/iam-limits", "title": "Identity and Access Management limits", "quote": "If you exceed the Throttle at limit in the specified time period, you may experience HTTP 429 response status code errors, indicating that you should reduce your request rate.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c32", "url": "https://www.okta.com/integrations/dynatrace/", "title": "Dynatrace | Okta Integration Network", "quote": "Okta integration with Dynatrace allows end users to authenticate to Dynatrace using their company credentials.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c33", "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/dynatrace-tutorial", "title": "Configure Dynatrace for Single sign-on with Microsoft Entra ID", "quote": "Dynatrace supports Just In Time user provisioning.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c34", "url": "https://docs.dynatrace.com/docs/manage/identity-access-management/user-and-group-management/access-scim/scim-azure", "title": "Azure SCIM configuration for Dynatrace", "quote": "Make sure that you have selected Integrate any other application you don't find in the gallery (Non-gallery) .", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c35", "url": "https://docs.dynatrace.com/docs/manage/identity-access-management/user-and-group-management/access-saml", "title": "SAML — Dynatrace Docs", "quote": "Yes, Dynatrace supports JIT creation of users when using SAML federation. Federated users are created or updated on the fly after successful authentication.", "accessed": "2026-10-05", "page_url": null},
+  {"id": "c36", "url": "https://docs.dynatrace.com/docs/manage/identity-access-management/user-and-group-management/access-saml", "title": "SAML — Dynatrace Docs", "quote": "If you want to use your organization's corporate credentials for authentication in Dynatrace, you can set up SAML to delegate authentication to your IdP.", "accessed": "2026-10-05", "page_url": null}
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.dynatrace.com/pricing/",
+  "https://docs.dynatrace.com/docs/manage/identity-access-management/user-and-group-management/access-scim",
+  "https://docs.dynatrace.com/docs/manage/identity-access-management/user-and-group-management/access-scim/scim-okta",
+  "https://docs.dynatrace.com/docs/manage/identity-access-management/user-and-group-management/access-scim/scim-azure",
+  "https://docs.dynatrace.com/docs/manage/identity-access-management/user-and-group-management/access-saml",
+  "https://docs.dynatrace.com/docs/manage/identity-access-management/iam-limits",
+  "https://docs.dynatrace.com/docs/dynatrace-api/account-management-api",
+  "https://www.okta.com/integrations/dynatrace/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/dynatrace-tutorial"
+ ],
+ "open_questions": [
+  "The pricing page does not name SCIM explicitly; status rests on 'all platform capabilities' in DPS plus SCIM docs with no edition gate. Whether SCIM works during the 15-day trial or on classic (non-DPS) licences is not stated.",
+  "Minimum annual DPS commit amount is not published.",
+  "SCIM filtering, pagination, ServiceProviderConfig/Schemas and token expiry are not documented.",
+  "Whether a SCIM-disabled user can be reactivated, and whether sessions are revoked, is not documented.",
+  "Dynatrace Managed (self-hosted) SCIM availability not researched."
+ ]
+}

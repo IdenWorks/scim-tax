@@ -1,0 +1,474 @@
+{
+ "slug": "transcend",
+ "vendor": "Transcend",
+ "vendor_url": "https://transcend.io",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Transcend",
+  "slug": "transcend",
+  "category": "Legal, Contracts & Compliance",
+  "status": "none",
+  "scim_plan": "—",
+  "scim_price_text": "—",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "All plans (Core Platform)",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": null,
+  "idp": {
+   "okta": "sso_only",
+   "entra": "sso_only",
+   "google": "sso_only",
+   "onelogin": "sso_only",
+   "jumpcloud": null,
+   "generic": false
+  },
+  "pricing_page_url": "https://transcend.io/pricing",
+  "docs_url": "https://docs.transcend.io/docs/articles/security/access-control/adding-revoking-and-auto-provisioning-access",
+  "evidence": "Transcend's access-control docs describe only manual adds, SAML just-in-time provisioning with group-to-team mapping, and GraphQL removeUser/disableUserAccount mutations; no SCIM endpoint is documented.",
+  "notes": "Quote-only: transcend.io/pricing redirects to a Contact us / demo form. No SCIM: users are created by SAML JIT on first sign-in (SSO groups or title/department map to Transcend teams; later logins only add teams, never remove), removed by an admin or the GraphQL API, or blocked by deactivating them in the IdP. SSO is SAML with a custom app per IdP (Okta, Entra, Google, OneLogin, Auth0); a plans announcement on Transcend's blog says the Core Platform on every plan includes unlimited seats and single sign-on. Scored as none; JIT-only may be reclassified at merge.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Contact Sales (Privacy Rights / Data Discovery & Classification plans on the Core Platform)",
+   "price_text": "Contact Sales",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2"
+   ],
+   "notes": "No public tier table; SSO and audit logs are part of the Core Platform included in plans. scim false reflects absence in docs."
+  }
+ ],
+ "scim": {
+  "available": false,
+  "cite": [
+   "c3",
+   "c4",
+   "c5"
+  ],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": null,
+   "token_source": null,
+   "token_expiry": null,
+   "cite": []
+  },
+  "endpoints": {
+   "Users": null,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": []
+  },
+  "operations": {
+   "create": null,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": null,
+   "reactivate": null,
+   "delete": null,
+   "group_push": null,
+   "group_membership": null,
+   "cite": []
+  },
+  "deprovision": {
+   "action": null,
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": []
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": []
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "available=false reflects absence: the 'Automated Provisioning' section of the access-control docs covers only SAML JIT, and the docs llms.txt index has no SCIM entry."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c6",
+   "c12",
+   "c13"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "GraphQL",
+  "base_url": "https://api.transcend.io/graphql",
+  "docs_url": "https://docs.transcend.io/docs/articles/overview/developer-tools/graphql-api",
+  "auth": {
+   "methods": [
+    "api_key (Bearer)"
+   ],
+   "scopes": [
+    "Manage Access Controls"
+   ],
+   "cite": [
+    "c7",
+    "c13",
+    "c19"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": true,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c6",
+    "c8",
+    "c14"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/graphql (mutation removeUser)",
+    "purpose": "Remove a user by email",
+    "cite": [
+     "c6"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/graphql (mutation disableUserAccount)",
+    "purpose": "Disable a user account by id",
+    "cite": [
+     "c8"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/graphql (query users)",
+    "purpose": "Find users by name or email",
+    "cite": [
+     "c14"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": [],
+   "notes": "Audit trails are documented in the Admin Dashboard; no audit-log API found."
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "GraphQL playground at the API host lists all operations; only the user mutations shown in the access-control article were verified. Base URL is api.us.transcend.io for US hosting."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c10",
+    "c11",
+    "c16"
+   ],
+   "notes": "Custom SAML app; Transcend says official Okta/OneLogin apps are planned. Not found in OIN search."
+  },
+  "entra": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c17",
+    "c11"
+   ],
+   "notes": "Custom (non-gallery) enterprise application; no Entra gallery entry in the SaaS-apps TOC."
+  },
+  "google": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c10"
+   ]
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c10",
+    "c11"
+   ]
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c3",
+   "c4",
+   "c9",
+   "c10"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://transcend.io/pricing",
+   "title": "Contact us | Transcend",
+   "quote": "Meet with a Solutions Engineer",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://transcend.io/blog/new-plans-startups-mid-market-companies",
+   "title": "Transcend Launches New Plans For Startups & Mid-Market Companies",
+   "quote": "The Transcend Core Platform includes unlimited integrations, unlimited seats, single sign-on, audit logs, SOC 2 & ISO 27001 reports",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://docs.transcend.io/docs/articles/security/access-control/adding-revoking-and-auto-provisioning-access.md",
+   "title": "Adding, Revoking, & Auto-Provisioning Access",
+   "quote": "When one of your employees logs into Transcend for the first time using their SSO login",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.transcend.io/docs/articles/security/access-control/adding-revoking-and-auto-provisioning-access"
+  },
+  {
+   "id": "c4",
+   "url": "https://docs.transcend.io/docs/articles/security/access-control/adding-revoking-and-auto-provisioning-access.md",
+   "title": "Adding, Revoking, & Auto-Provisioning Access",
+   "quote": "When a user is just in time provisioned and their SSO attributes do not map them to a team, the default behavior is that the user will have no scopes applied to them.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.transcend.io/docs/articles/security/access-control/adding-revoking-and-auto-provisioning-access"
+  },
+  {
+   "id": "c5",
+   "url": "https://docs.transcend.io/docs/articles/security/access-control/adding-revoking-and-auto-provisioning-access.md",
+   "title": "Adding, Revoking, & Auto-Provisioning Access",
+   "quote": "If you are using Single Sign On, the easiest way to revoke access is to deactivate the user within your single sign on provider.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.transcend.io/docs/articles/security/access-control/adding-revoking-and-auto-provisioning-access"
+  },
+  {
+   "id": "c6",
+   "url": "https://docs.transcend.io/docs/articles/security/access-control/adding-revoking-and-auto-provisioning-access.md",
+   "title": "Adding, Revoking, & Auto-Provisioning Access",
+   "quote": "If you have a need to programmatically remove a user from Transcend, you can leverage the",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.transcend.io/docs/articles/security/access-control/adding-revoking-and-auto-provisioning-access"
+  },
+  {
+   "id": "c7",
+   "url": "https://docs.transcend.io/docs/articles/security/access-control/adding-revoking-and-auto-provisioning-access.md",
+   "title": "Adding, Revoking, & Auto-Provisioning Access",
+   "quote": "a Transcend API key with the scope `Manage Access Controls`",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.transcend.io/docs/articles/security/access-control/adding-revoking-and-auto-provisioning-access"
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.transcend.io/docs/articles/security/access-control/adding-revoking-and-auto-provisioning-access.md",
+   "title": "Adding, Revoking, & Auto-Provisioning Access",
+   "quote": "To disable a user account, you will need to utilize the",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.transcend.io/docs/articles/security/access-control/adding-revoking-and-auto-provisioning-access"
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.transcend.io/docs/articles/security/access-control/adding-revoking-and-auto-provisioning-access.md",
+   "title": "Adding, Revoking, & Auto-Provisioning Access",
+   "quote": "it does not sync or “reset” membership to only what the SSO provider sends at the time of login",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.transcend.io/docs/articles/security/access-control/adding-revoking-and-auto-provisioning-access"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.transcend.io/docs/articles/security/sso/setting-up-sso.md",
+   "title": "Setting up SSO",
+   "quote": "Configure single sign on with SAML so employees in your organization can log in with Okta, OneLogin, G Suite, Auth0, or other identity providers",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.transcend.io/docs/articles/security/sso/setting-up-sso"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.transcend.io/docs/articles/security/sso/setting-up-sso.md",
+   "title": "Setting up SSO",
+   "quote": "We have plans to have official apps in Okta, OneLogin, and other popular identity providers soon. In the meantime, you can create a SAML-based application.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.transcend.io/docs/articles/security/sso/setting-up-sso"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.transcend.io/docs/articles/overview/developer-tools/graphql-api.md",
+   "title": "Transcend's GraphQL API",
+   "quote": "The GraphQL API is hosted at `https://api.transcend.io/graphql` (or `https://api.us.transcend.io/graphql` if you are a US-based customer).",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.transcend.io/docs/articles/overview/developer-tools/graphql-api"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.transcend.io/docs/articles/overview/developer-tools/graphql-api.md",
+   "title": "Transcend's GraphQL API",
+   "quote": "Include the API key generated as a Bearer token, with the `Authorization` header in any requests you send to the GraphQL API.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.transcend.io/docs/articles/overview/developer-tools/graphql-api"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.transcend.io/docs/articles/security/access-control/adding-revoking-and-auto-provisioning-access.md",
+   "title": "Adding, Revoking, & Auto-Provisioning Access",
+   "quote": "The resulting output will be the `email`, `name`, and `id` of the user",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.transcend.io/docs/articles/security/access-control/adding-revoking-and-auto-provisioning-access"
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.transcend.io/docs/articles/security/access-control/adding-revoking-and-auto-provisioning-access.md",
+   "title": "Adding, Revoking, & Auto-Provisioning Access",
+   "quote": "In the _Add User_ modal, provide the details in the form, including:",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.transcend.io/docs/articles/security/access-control/adding-revoking-and-auto-provisioning-access"
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.transcend.io/docs/articles/security/sso/okta-sso-guide.md",
+   "title": "Okta SSO Configuration Guide",
+   "quote": "If you use Push Groups, you can also:",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.transcend.io/docs/articles/security/sso/okta-sso-guide"
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.transcend.io/docs/articles/security/sso/azure-ad-sso-guide.md",
+   "title": "Microsoft Entra ID SSO Configuration Guide",
+   "quote": "Navigate to Microsoft Entra ID (formerly Azure Active Directory) and select _Enterprise Applications_ from the menu.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.transcend.io/docs/articles/security/sso/azure-ad-sso-guide"
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.transcend.io/docs/articles/security/audit-trail.md",
+   "title": "Audit Trail",
+   "quote": "There are audit trails throughout the Transcend Admin Dashboard",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.transcend.io/docs/articles/security/audit-trail"
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.transcend.io/docs/articles/overview/developer-tools/authentication.md",
+   "title": "Authenticating to API",
+   "quote": "Each API key can be assigned",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.transcend.io/docs/articles/overview/developer-tools/authentication"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://transcend.io/pricing (redirects to /contact, no tiers)",
+  "https://transcend.io/sitemap.xml",
+  "https://docs.transcend.io/llms.txt (no SCIM entry)",
+  "https://docs.transcend.io/sitemap.xml (no SCIM page)",
+  "https://docs.transcend.io/docs/articles/security/access-control/adding-revoking-and-auto-provisioning-access",
+  "https://docs.transcend.io/docs/articles/security/sso/setting-up-sso",
+  "https://docs.transcend.io/docs/articles/overview/developer-tools/graphql-api",
+  "https://www.okta.com/integrations/?search=transcend (rendered: only 'Transcend Engagement', an unrelated vendor)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/toc.json (no Transcend entry)"
+ ],
+ "open_questions": [
+  "No public prices or tier table.",
+  "Whether the GraphQL API can create or invite users was not verified (only remove, disable and list are documented in the pages read).",
+  "Whether disabling or removing a user frees a seat is moot (unlimited seats per the plans announcement) but not stated for current plans.",
+  "JumpCloud catalogue not checked."
+ ]
+}
