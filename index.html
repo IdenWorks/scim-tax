@@ -644,10 +644,6 @@
       .download-wrap { margin-left: 0; }
     }
 
-    .cat-select {
-      font: inherit; font-size: 12px; color: var(--n700); background: var(--white);
-      border: 1px solid var(--n300); padding: 6px 8px; max-width: 220px;
-    }
     .plan-cell .sso-diff {
       text-decoration: underline dotted var(--n400);
       text-underline-offset: 3px;
@@ -751,9 +747,6 @@
           </button>
         </div>
 
-        <select class="cat-select" id="cat-filter" aria-label="Filter by category">
-          <option value="">All categories</option>
-        </select>
 
         <div class="download-wrap">
           <button class="download-trigger" type="button" aria-label="Download dataset">
@@ -1832,7 +1825,6 @@ function scimPlanText(r) {
   return `SCIM: ${plan}, ${price}`;
 }
 
-let currentCategory = '';
 
 function attrEsc(s) {
   return String(s || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;');
@@ -1859,12 +1851,11 @@ function extLink(url) {
 function filtered() {
   return V.filter(r => {
     const matchFilter = currentFilter === 'all' || r[1] === currentFilter;
-    const matchCategory = !currentCategory || r[12] === currentCategory;
     const q = currentSearch.toLowerCase();
     // The slug keeps a vendor's former name (victorops-splunk-on-call, convertkit), so old names still find the row.
     const qn = q.replace(/[^a-z0-9]/g, '');
     const matchSearch = !q || r[0].toLowerCase().includes(q) || (r[12] || '').toLowerCase().includes(q) || (qn && r[18].replace(/[^a-z0-9]/g, '').includes(qn));
-    return matchFilter && matchCategory && matchSearch;
+    return matchFilter && matchSearch;
   });
 }
 
@@ -1942,20 +1933,6 @@ document.getElementById('search').addEventListener('input', e => {
   currentSearch = e.target.value.trim();
   render();
 });
-
-// Category filter
-(function initCategories() {
-  const sel = document.getElementById('cat-filter');
-  if (!sel) return;
-  const cats = [...new Set(V.map(r => r[12]).filter(Boolean))].sort();
-  cats.forEach(c => {
-    const o = document.createElement('option');
-    o.value = c; o.textContent = c;
-    sel.appendChild(o);
-  });
-  if (cats.length === 0) sel.hidden = true;
-  sel.addEventListener('change', () => { currentCategory = sel.value; render(); });
-})();
 
 // Filters
 document.getElementById('filters').addEventListener('click', e => {
