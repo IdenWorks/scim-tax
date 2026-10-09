@@ -18,7 +18,7 @@ const logo = fs.readFileSync(path.join(__dirname, 'iden-logo.svg'), 'utf8').repl
   .replace(/fill="#404040"/g, 'fill="currentColor"'); // logo takes the text colour
 
 const page = (w, h, title, date, foot, by) => `<!doctype html><html><head><meta charset="utf-8">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; }
   body { width: ${w}px; height: ${h}px; background: #fff; color: #0f0f0f; font-family: 'Inter', sans-serif; padding: 0 72px; display: flex; flex-direction: column; }
@@ -26,7 +26,7 @@ const page = (w, h, title, date, foot, by) => `<!doctype html><html><head><meta 
   .main { flex: 1; display: flex; flex-direction: column; justify-content: center; }
   h1 { font-size: ${title}px; line-height: 1; font-weight: 500; letter-spacing: -0.03em; }
   .foot { height: ${foot}px; border-top: 1px solid #e5e7eb; display: flex; align-items: center; justify-content: space-between; font-size: ${by}px; color: #6b7280; }
-  .foot .by { display: flex; align-items: center; gap: ${Math.round(by * 0.45)}px; }
+  .foot .by { display: flex; align-items: center; gap: ${Math.round(by * 0.45)}px; font-weight: 300; }
   .foot .by svg { height: ${Math.round(by * 0.95)}px; width: auto; }
 </style></head><body>
   <div class="top"><span>Updated ${month}</span><span>scimtax.org</span></div>
