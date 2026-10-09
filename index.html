@@ -599,6 +599,7 @@
 
     .price-cell { white-space: nowrap; font-variant-numeric: tabular-nums; }
     .price-contact    { color: var(--n400); }
+    .empty-val        { color: var(--n300); font-size: 12px; }
     .price-free-text  { color: var(--green); font-weight: 500; }
 
     .ext-link {
@@ -1782,11 +1783,11 @@ function copyToClipboard(text, btn) {
 // flat team price like "$24.95/mo for 10 members" would read as a per-user price.
 function multCell(r) {
   const status = r[1];
-  if (status === 'none' || status === 'unknown') return `<span class="mult-muted">—</span>`;
+  if (status === 'none' || status === 'unknown') return `<span class="empty-val">-</span>`;
   if (status === 'free') return `<span class="mult-green">Free</span>`;
   let ratio = r[9];
   if (ratio == null && r[7] > 0 && r[8] != null) ratio = r[8] / r[7];
-  if (ratio == null) return `<span class="mult-muted">—</span>`;
+  if (ratio == null) return `<span class="empty-val">-</span>`;
   const fmt = ratio >= 10 ? Math.round(ratio) + 'X' : (Math.round(ratio * 10) / 10) + 'X';
   if (ratio > 5) return `<span class="mult-red">${fmt}</span>`;
   if (ratio > 2) return `<span class="mult-amber">${fmt}</span>`;
@@ -1852,7 +1853,7 @@ function planAndPrice(planRaw, priceRaw, extraClass) {
   return price === '—' ? name : `${name}<span class="plan-sep">: </span>${priceCell(price)}`;
 }
 function scimPlanCell(r) {
-  if (!r[2] || r[2].trim().startsWith('—')) return `<span class="price-contact">—</span>`;
+  if (!r[2] || r[2].trim().startsWith('—')) return `<span class="empty-val">-</span>`;
   return planAndPrice(r[2], r[3], ssoDiffers(r) ? ' sso-diff' : '');
 }
 function basePlanCell(r) {
@@ -1885,7 +1886,7 @@ function attrEsc(s) {
 }
 
 function priceCell(p) {
-  if (!p || p === '—') return `<span class="price-contact">—</span>`;
+  if (!p || p === '—') return `<span class="empty-val">-</span>`;
   if (p === 'Free') return `<span class="price-free-text">Free</span>`;
   if (!/[$€£]/.test(p)) return `<span class="price-contact">${p}</span>`; // Contact Sales, Unverified, Not public, Usage-based ...
   return `<span class="price-cell">${p}</span>`;
