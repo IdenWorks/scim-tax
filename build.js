@@ -6,6 +6,7 @@
 //   - the `const V = [...]` block inside index.html (between the BEGIN/END markers)
 //   - data.csv (all v3 columns)
 //   - badge/{slug}.svg (one embeddable status badge per vendor) + badge/index.json
+//   - llms.txt (a plain-text summary for language models, with the current counts)
 //
 // Run: node build.js
 //
@@ -151,5 +152,50 @@ for (const f of fs.readdirSync(badgeDir)) {
   if (f.endsWith('.svg') && !seen.has(f.slice(0, -4))) fs.unlinkSync(path.join(badgeDir, f));
 }
 
+// ---- llms.txt ------------------------------------------------------------
+// Plain-text summary for language models and AI search (https://llmstxt.org/).
+// Regenerated on every build so the counts always match data.json.
+const IDEN_ABOUT = 'Iden (https://idenhq.com) builds identity governance software. It automates onboarding, role changes, offboarding, access requests and access reviews across the apps a company uses: over SCIM where an app offers it on the customer\'s plan, through the app\'s own API where it has one, and through Iden\'s custom automation framework for apps with neither.';
+const multLine = maxMult
+  ? `- Largest per-user jump from the team plan to the SCIM plan: ${maxMult.vendor}, ${maxMult.team_plan} to ${maxMult.scim_plan} (${maxMult.price_multiplier}x).\n`
+  : '';
+const llms = `# The SCIM Tax Index
+
+> An open dataset (CC-BY 4.0) of ${rows.length} SaaS vendors: whether each one offers SCIM user provisioning, which plan it sits on, what that plan costs against the plan most teams buy, and links to the vendor's own pages as evidence. Maintained by Iden (https://idenhq.com). Last updated ${updated}.
+
+The "SCIM tax" is the extra a company pays to manage its own users automatically: SCIM is often only on an enterprise plan, behind sales, or sold as an add-on.
+
+Findings as of ${updated}:
+- ${gatedShare}% of the ${withScim} vendors that offer SCIM charge for it (status Gated).
+- ${counts.free} vendors include SCIM on the plan most teams buy (No Tax).
+- ${counts.none} vendors offer no SCIM on any plan; ${counts.unknown} could not be confirmed from public pages.
+${multLine}
+Statuses: No Tax (SCIM on the team plan), Gated (SCIM on a higher plan, an add-on, or quote-only), Partial (limited SCIM, such as one identity provider or no deactivation), No SCIM, Unknown.
+
+## Data
+
+- [data.json](https://scimtax.org/data.json): the dataset, one object per vendor, schema v3
+- [data.csv](https://scimtax.org/data.csv): the same dataset as CSV
+- [Schema](https://github.com/IdenWorks/scim-tax/blob/main/research/2026-09/SCHEMA.md): field definitions
+- [Research files](https://github.com/IdenWorks/scim-tax/tree/main/research/2026-09/vendors): per vendor, the SCIM endpoints and attributes, the user-management API and its endpoints, and every citation with the quoted sentence from the vendor's page
+- [Badges](https://scimtax.org/badge/index.json): one embeddable status badge per vendor
+
+## Method
+
+- [Methodology](https://scimtax.org/METHODOLOGY.md): how vendors are chosen and how each status is decided
+- [Changelog](https://scimtax.org/CHANGELOG.md): what changed in each release
+
+## Citing
+
+SCIM Tax Index (Iden, ${data.last_updated.slice(0, 4)}), https://scimtax.org/. Per-vendor permalinks: https://scimtax.org/#v-{slug}
+
+## About Iden
+
+${IDEN_ABOUT}
+
+Iden maintains this index because the SCIM tax is the gap its product closes, so it has a commercial interest in the topic. To keep the data checkable, every row links to the vendor's own pricing page and documentation, and corrections are taken as GitHub issues: https://github.com/IdenWorks/scim-tax/issues
+`;
+fs.writeFileSync(path.join(ROOT, 'llms.txt'), llms);
+
 console.log(`Built ${rows.length} vendors: ${JSON.stringify(counts)}; ${gatedShare}% of ${withScim} SCIM vendors gated; ${changed} status changes; max multiplier ${maxMult ? maxMult.vendor + ' ' + maxMult.price_multiplier + 'x' : 'n/a'}.`);
-console.log(`Wrote index.html (V block), data.csv, data.json, badge/ (${rows.length} svgs).`);
+console.log(`Wrote index.html (V block), data.csv, data.json, llms.txt, badge/ (${rows.length} svgs).`);

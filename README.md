@@ -20,6 +20,7 @@ The result is sometimes called the "SCIM tax": the systematic premium paid acros
 | `data.json` | The dataset, schema v3. Source of truth. CC-BY 4.0. |
 | `data.csv` | The same dataset flattened to CSV. Generated. CC-BY 4.0. |
 | `index.html` | The published site. Generated table, otherwise hand-written. |
+| `llms.txt` | Plain-text summary of the dataset and who maintains it, for language models and AI search. Generated. |
 | `badge/{slug}.svg` | One embeddable status badge per vendor, plus `badge/index.json`. Generated. |
 | `research/2026-09/` | Schema v3 definition, the merge scripts, and one research file per vendor (`vendors/{slug}.json`) with SCIM and user-API depth and a citation for every fact. |
 | `METHODOLOGY.md` | How vendors were selected and how each row was recorded. |
@@ -64,7 +65,7 @@ All changes need a public source URL. Private quotes are not accepted.
 
 ## Why we made this
 
-We are [Iden](https://idenhq.com). We build identity governance for SaaS stacks that include vendors charging extra for SCIM. We have a commercial interest in seeing the SCIM tax discussed in the open. We do not have a commercial interest in skewing the dataset, and the data is auditable against the linked pricing pages on every row.
+We are [Iden](https://idenhq.com). We build identity governance software: it automates onboarding, role changes, offboarding, access requests and access reviews across a company's apps, over SCIM where an app offers it, through the app's API where it has one, and through our custom automation framework for apps with neither. We have a commercial interest in seeing the SCIM tax discussed in the open. We do not have a commercial interest in skewing the dataset, and the data is auditable against the linked pricing pages on every row.
 
 If you find a row that misrepresents a vendor, open an issue. We will fix it.
 
