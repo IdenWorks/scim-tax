@@ -649,7 +649,8 @@
       text-underline-offset: 3px;
       cursor: help;
     }
-    .plan-cell .sso-diff:hover, .plan-cell .sso-diff:focus-visible { text-decoration-color: var(--black); outline: none; }
+    td[data-full]:not([data-full=""]) { cursor: default; }
+    td[data-full]:hover .sso-diff { text-decoration-color: var(--black); }
     .sso-tip {
       position: fixed;
       z-index: 50;
@@ -766,7 +767,7 @@
           <thead>
             <tr>
               <th data-col="0" style="width: 26%">Vendor</th>
-              <th data-col="2" style="width: 35%" title="Dotted underline: single sign-on sits on a different plan. Hover to see it.">SCIM Plan</th>
+              <th data-col="2" style="width: 35%" title="Hover a plan for full pricing. Dotted underline: single sign-on is on a different plan.">SCIM Plan</th>
               <th data-col="4" style="width: 30%" title="The cheapest paid plan for a team">Standard Plan</th>
               <th class="mult-col" style="width: 9%">Jump</th>
             </tr>
@@ -1806,25 +1807,78 @@ function ssoDiffers(r) {
   return !(a === b || (a && scim.toLowerCase().includes(a)) || (b && sso.toLowerCase().includes(b)));
 }
 
+// Cells show the plan name and one price; the full text from data.json is in the hover tooltip.
+function planName(p) {
+  if (!p || p.trim().startsWith('—')) return '';
+  return p.replace(/\s*\([^)]*\)/g, '').replace(/^[\s,;:]+|[\s,;:]+$/g, '');
+}
+const UNITS = [
+  [/\/\s*full (platform )?(user|seat)\s*\/\s*mo(nth)?/i, '/u/mo'],
+  [/\/\s*mo(nth)?\s*\/\s*(user|member|seat)/i, '/u/mo'],
+  [/\/\s*(u|user|member|seat|license|licence)\s*\/\s*(yr|year)/i, '/u/yr'],
+  [/\/\s*(u|user|member|seat|license|licence)\s*\/\s*mo(nth)?/i, '/u/mo'],
+  [/per (user|member|seat|license|licence),? per month|\/(user|member|seat|license|licence)\/month|per (user|member|seat|license|licence)\/month/i, '/u/mo'],
+  [/\/\s*mo(nth)?\b/i, '/mo'], [/per month/i, '/mo'], [/\/\s*yr\b|\/\s*year|per year/i, '/yr'],
+]
+function shortPrice(t) {
+  if (!t || t.trim() === '—') return '—';
+  t = t.trim().replace(/^[^:$€£]{1,60}:\s*/, ''); // drop a leading "Plan name:" label
+  const l = t.toLowerCase();
+  if (/^(not offered|n\/a)/.test(l)) return '—';
+  if (/unverified/.test(l)) return 'Unverified';
+  if (/^free\b/.test(l) || /^[$€£]0\b/.test(l)) return 'Free';
+  const m = t.match(/(?:US\$|\$|€|£|USD\s?)\s?[\d,]+(?:\.\d+)?k?(?:\s*(?:\/\s*(?:full (?:platform )?)?[a-z]+(?:\s*\/\s*[a-z]+)?|per [a-z]+(?:\s*\/\s*[a-z]+| per [a-z]+)?))?/i);
+  if (m) {
+    let v = m[0].replace('US$', '$').replace(/^USD\s?/, '$');
+    UNITS.forEach(([re, to]) => { v = v.replace(re, to); });
+    return v.replace(/\s+(?=\/)/g, '');
+  }
+  if (/contact|quote|pricing|talk|speak|call sales|request|sales|^custom/.test(l)) return 'Contact Sales';
+  if (/no new subscriptions/.test(l)) return 'Not sold';
+  if (/^add-on/.test(l)) return 'Add-on';
+  if (/usage|consumption|pay.as.you.go|pay.per|pay for|per job|per transaction|auction|%|quantity.priced/.test(l)) return 'Usage-based';
+  if (/included|no extra charge|no additional|no charge/.test(l)) return 'Included';
+  return 'Not public';
+}
+
+// A plan name that is only a sales instruction ("Contact Sales", "Custom quote") adds nothing next to the price.
+const NOT_A_PLAN = /^(contact( sales)?|custom( quote)?|quote|request|get (a )?quote|price upon request|not stated|unknown)$/i;
+function planAndPrice(planRaw, priceRaw, extraClass) {
+  let plan = planName(planRaw);
+  const price = shortPrice(priceRaw);
+  if (NOT_A_PLAN.test(plan) || plan.toLowerCase() === price.toLowerCase()) plan = '';
+  if (!plan) return priceCell(price);
+  const name = `<span class="plan-name${extraClass || ''}">${plan}</span>`;
+  return price === '—' ? name : `${name}<span class="plan-sep">: </span>${priceCell(price)}`;
+}
 function scimPlanCell(r) {
-  const plan = r[2], price = r[3];
-  const noPlan = !plan || plan.trim().startsWith('—');
-  if (noPlan) return `<span class="price-contact">—</span>`;
-  const name = ssoDiffers(r)
-    ? `<span class="plan-name sso-diff" tabindex="0" data-sso="${attrEsc(scimPlanText(r) + '\nSSO: ' + r[13] + (r[14] != null ? ` ($${r[14]}/u/mo)` : ''))}">${plan}</span>`
-    : `<span class="plan-name">${plan}</span>`;
-  const noPrice = !price || price === '—';
-  if (noPrice) return name;
-  return `${name}<span class="plan-sep">:</span>${priceCell(price)}`;
+  if (!r[2] || r[2].trim().startsWith('—')) return `<span class="price-contact">—</span>`;
+  return planAndPrice(r[2], r[3], ssoDiffers(r) ? ' sso-diff' : '');
+}
+function basePlanCell(r) {
+  return planAndPrice(r[6], r[4], '');
 }
 
+// Full detail for the hover tooltip. The price text often repeats the plan name ("Plus: $10 ..."); drop that.
+function priceDetail(plan, price) {
+  if (!price || price === '—') return '';
+  return plan && price.toLowerCase().startsWith(plan.toLowerCase() + ':') ? price.slice(plan.length + 1).trim() : price;
+}
 function scimPlanText(r) {
-  const plan = r[2], price = r[3];
-  if (!plan || plan.trim().startsWith('—')) return '';
-  if (!price || price === '—') return `SCIM: ${plan}`;
-  return `SCIM: ${plan}, ${price}`;
+  if (!r[2] || r[2].trim().startsWith('—')) return '';
+  const parts = [`SCIM plan: ${r[2]}`];
+  const price = priceDetail(r[2], r[3]);
+  if (price) parts.push(`Price: ${price}`);
+  if (ssoDiffers(r)) parts.push(`SSO: ${r[13]}${r[14] != null ? ` ($${r[14]}/u/mo)` : ''}`);
+  return parts.join('\n');
 }
-
+function basePlanText(r) {
+  const parts = [];
+  if (r[6]) parts.push(`Standard plan: ${r[6]}`);
+  const price = priceDetail(r[6], r[4]);
+  if (price) parts.push(`Price: ${price}`);
+  return parts.join('\n');
+}
 
 function attrEsc(s) {
   return String(s || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;');
@@ -1833,8 +1887,7 @@ function attrEsc(s) {
 function priceCell(p) {
   if (!p || p === '—') return `<span class="price-contact">—</span>`;
   if (p === 'Free') return `<span class="price-free-text">Free</span>`;
-  if (p.toLowerCase().startsWith('contact')) return `<span class="price-contact">Contact Sales</span>`;
-  if (/unverified$/i.test(p)) return `<span class="price-contact">${p}</span>`;
+  if (!/[$€£]/.test(p)) return `<span class="price-contact">${p}</span>`; // Contact Sales, Unverified, Not public, Usage-based ...
   return `<span class="price-cell">${p}</span>`;
 }
 
@@ -1903,8 +1956,8 @@ function render() {
           </a>
         </span>
       </td>
-      <td class="plan-cell"${ssoDiffers(r) ? '' : ` title="${attrEsc(scimPlanText(r))}"`}>${scimPlanCell(r)}</td>
-      <td class="base-cell" title="${attrEsc(r[4] && r[4] !== '—' ? r[4] : '')}">${priceCell(r[4])}</td>
+      <td class="plan-cell" data-full="${attrEsc(scimPlanText(r))}">${scimPlanCell(r)}</td>
+      <td class="base-cell" data-full="${attrEsc(basePlanText(r))}">${basePlanCell(r)}</td>
       <td class="mult-col">${multCell(r)}</td>
     </tr>
   `;
@@ -2007,23 +2060,23 @@ document.querySelectorAll('[data-copy]').forEach(btn => {
   });
 });
 
-// SSO plan tooltip on the SCIM plan name (hover, keyboard focus, or tap)
-(function ssoTooltip() {
+// Full plan and price detail on hover (or tap) over a plan cell
+(function planTooltip() {
   const tip = document.createElement('div');
   tip.className = 'sso-tip'; tip.setAttribute('role', 'tooltip'); tip.hidden = true;
   document.body.appendChild(tip);
   const show = (el) => {
-    tip.textContent = el.dataset.sso; tip.hidden = false;
+    if (!el.dataset.full) return;
+    tip.textContent = el.dataset.full; tip.hidden = false;
     const r = el.getBoundingClientRect(), t = tip.getBoundingClientRect();
     tip.style.left = Math.max(8, Math.min(r.left, window.innerWidth - t.width - 8)) + 'px';
     tip.style.top = (r.top - t.height - 8 < 8 ? r.bottom + 8 : r.top - t.height - 8) + 'px';
   };
   const hide = () => { tip.hidden = true; };
   const tbody = document.getElementById('tbody');
-  tbody.addEventListener('mouseover', (e) => { const el = e.target.closest('.sso-diff'); if (el) show(el); });
-  tbody.addEventListener('mouseout', (e) => { if (e.target.closest('.sso-diff')) hide(); });
-  tbody.addEventListener('focusin', (e) => { const el = e.target.closest('.sso-diff'); if (el) show(el); });
-  tbody.addEventListener('focusout', hide);
+  tbody.addEventListener('mouseover', (e) => { const el = e.target.closest('td[data-full]'); if (el) show(el); });
+  tbody.addEventListener('mouseout', (e) => { const el = e.target.closest('td[data-full]'); if (el && !el.contains(e.relatedTarget)) hide(); });
+  tbody.addEventListener('click', (e) => { const el = e.target.closest('td[data-full]'); if (el) show(el); });
   window.addEventListener('scroll', hide, { passive: true });
 })();
 
