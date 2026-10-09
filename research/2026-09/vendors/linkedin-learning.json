@@ -1,0 +1,549 @@
+{
+ "slug": "linkedin-learning",
+ "vendor": "LinkedIn Learning",
+ "vendor_url": "https://business.linkedin.com/learn",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "LinkedIn Learning",
+  "slug": "linkedin-learning",
+  "category": "Learning & Development",
+  "status": "unknown",
+  "scim_plan": "Not stated",
+  "scim_price_text": "Not stated",
+  "scim_price_per_user_mo": null,
+  "team_plan": "LinkedIn Learning for Teams",
+  "team_price_text": "Teams: $379.88/seat/yr (~$31.66/u/mo), up to 20 licenses",
+  "team_price_per_user_mo": 31.66,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": false,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": false,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "native",
+   "google": null,
+   "onelogin": "via_generic",
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://business.linkedin.com/learn/product/linkedin-learning-for-teams",
+  "docs_url": "https://learn.microsoft.com/en-us/linkedin/learning/user-and-attribute-management/user-attribute-mgmt-docs/scim",
+  "evidence": "LinkedIn's SCIM guide documents a bearer-token SCIM endpoint (https://api.linkedin.com/scim) for Entra ID and Okta that creates users, assigns and revokes licenses and syncs groups, but no LinkedIn page says which plan includes SCIM or SSO.",
+  "notes": "SCIM is well documented, but the plan gate is not published: the Teams page ($379.88 per seat/year, up to 20 licenses) and the compare-plans page (business plan is Contact sales) never mention SSO or SCIM, so status stays unknown rather than gated. Deprovisioning revokes the licence; SCIM cannot delete users or assign permissions. LinkedIn officially supports Entra ID and Okta; OneLogin works only via OneLogin's generic 'SCIM Provisioner with SAML' app, and Okta needs a custom SAML app because the OIN LinkedIn Learning app is SAML only. SSO is 'preferred', not required. There is no non-SCIM user-management API: the Learning APIs cover content and activity reporting. Other sync: CSV, SFTP, HTTPS, Workday and SuccessFactors.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": null,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "LinkedIn Learning for Teams",
+   "price_text": "$379.88 USD per seat/year (up to 20 licenses)",
+   "price_per_user_mo": 31.66,
+   "billing": "annual",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c4"
+   ]
+  },
+  {
+   "name": "LinkedIn Learning (business / enterprise)",
+   "price_text": "Contact sales",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c3"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c5",
+   "c8",
+   "c9",
+   "c10"
+  ],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": false,
+  "version": "2.0",
+  "base_url": "https://api.linkedin.com/scim",
+  "auth": {
+   "method": "bearer",
+   "token_source": "LinkedIn Learning admin > Authentication > Automate user management > Configure SCIM > Add SCIM > Generate token (Full Admin only)",
+   "token_expiry": null,
+   "cite": [
+    "c8",
+    "c13"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c6",
+    "c9"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": false,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c6",
+    "c7",
+    "c18",
+    "c19"
+   ],
+   "notes": "Update is documented ('Automatically update user attributes: Yes') without saying PUT or PATCH."
+  },
+  "deprovision": {
+   "action": "other",
+   "frees_seat": true,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c6",
+    "c7",
+    "c27"
+   ],
+   "notes": "Deprovisioning removes the user's LinkedIn Learning licence; user deletion is not supported over SCIM."
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "externalId",
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "displayName",
+    "addresses[type eq \"work\"].locality",
+    "title",
+    "emails[type eq \"work\"].value"
+   ],
+   "enterprise": [
+    "manager",
+    "department"
+   ],
+   "custom": {
+    "supported": null,
+    "how": "Custom attributes are documented via CSV upload or SSO attribute mapping, not via SCIM."
+   },
+   "group": [],
+   "cite": [
+    "c14",
+    "c15"
+   ]
+  },
+  "roles": {
+   "supported": false,
+   "how": "'Assign permissions' and 'Change or revoke permissions' are listed as not supported.",
+   "cite": [
+    "c7"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Officially supported IdPs are Azure AD (Entra ID) and Okta; other IdPs must ask their Customer Success Manager.",
+    "cite": [
+     "c5"
+    ]
+   },
+   {
+    "text": "SCIM cannot delete users or assign/revoke permissions; group assignment by attribute rules is not supported.",
+    "cite": [
+     "c7"
+    ]
+   },
+   {
+    "text": "Okta's catalogue LinkedIn Learning app does not support SCIM; a custom SAML 2.0 app with SCIM provisioning is required.",
+    "cite": [
+     "c17"
+    ]
+   },
+   {
+    "text": "OneLogin's native LinkedIn Learning app does not support SCIM; use the generic SCIM Provisioner with SAML app.",
+    "cite": [
+     "c20",
+     "c21"
+    ]
+   }
+  ],
+  "notes": "Version 2.0 inferred from the enterprise extension URNs (urn:ietf:params:scim:schemas:extension:enterprise:2.0) in the attribute mapping and OneLogin's 'SCIM v2 Enterprise' app; sso_required false because SSO is listed as '(preferred)'."
+ },
+ "user_api": {
+  "available": null,
+  "cite": [],
+  "plan": null,
+  "api_tax": null,
+  "style": null,
+  "base_url": null,
+  "docs_url": null,
+  "auth": {
+   "methods": [],
+   "scopes": [],
+   "cite": []
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": []
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "The documented LinkedIn Learning APIs are content (learningAssets, learningClassifications) and activity-report APIs (c26); no non-SCIM user-management API is documented."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/linkedin-learning/",
+   "cite": [
+    "c22",
+    "c17",
+    "c18"
+   ],
+   "notes": "OIN app ticks SAML only; LinkedIn's guide uses a custom SAML 2.0 app with SCIM provisioning instead (row idp.okta = via_generic)."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/linkedinlearning-tutorial",
+   "cite": [
+    "c16",
+    "c13",
+    "c23"
+   ],
+   "notes": "LinkedIn's guide provisions through the gallery LinkedIn Learning app's Provisioning tab; Microsoft's own tutorial covers SSO and JIT only."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "Google SSO is supported (c25); Google catalogue app not checked."
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c20",
+    "c21"
+   ],
+   "notes": "From LinkedIn's guide; OneLogin's own connector page not loaded. SCIM via OneLogin's generic SCIM Provisioner app (row idp.onelogin = via_generic)."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": true,
+  "other_sync": "SFTP, HTTPS, Workday and SuccessFactors learner sync",
+  "docs_public": true,
+  "cite": [
+   "c23",
+   "c24",
+   "c12",
+   "c25"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://business.linkedin.com/learn/product/linkedin-learning-for-teams",
+   "title": "LinkedIn Learning for Teams",
+   "quote": "Designed for small teams & organizations who need 20 or fewer licenses.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://business.linkedin.com/learn/product/linkedin-learning-for-teams",
+   "title": "LinkedIn Learning for Teams",
+   "quote": "$379.88 USD per seat/year",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://business.linkedin.com/learn/compare-plans",
+   "title": "LinkedIn Learning - Compare Pricing & Plans",
+   "quote": "Organizations looking to develop critical skills at scale and support continuous learning across the workforce.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://business.linkedin.com/learn/compare-plans",
+   "title": "LinkedIn Learning - Compare Pricing & Plans",
+   "quote": "If you have 20 or less learners that want comprehensive, high-quality content and want access to dashboards ot understand your employees' learning progress.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://learn.microsoft.com/en-us/linkedin/learning/user-and-attribute-management/user-attribute-mgmt-docs/scim",
+   "title": "Configuring SCIM Automated User Provisioning for LinkedIn Learning",
+   "quote": "LinkedIn Learning currently supports SCIM integrations with the following Identity Providers: Azure Active Directory Okta",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://learn.microsoft.com/en-us/linkedin/learning/user-and-attribute-management/user-attribute-mgmt-docs/scim",
+   "title": "Configuring SCIM Automated User Provisioning for LinkedIn Learning",
+   "quote": "Create user profiles and assign licenses in LinkedIn Learning Remove user licenses in LinkedIn Learning when they do not require access anymore Keep user attributes synchronized between your Identity Provider and LinkedIn Learning Provision groups and group memberships in LinkedIn Learning",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://learn.microsoft.com/en-us/linkedin/learning/user-and-attribute-management/user-attribute-mgmt-docs/scim",
+   "title": "Configuring SCIM Automated User Provisioning for LinkedIn Learning",
+   "quote": "Assign permissions No Automatically update user attributes Yes Change or revoke permissions No Delete users No Add users to groups Yes Remove users from groups Yes",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://learn.microsoft.com/en-us/linkedin/learning/user-and-attribute-management/user-attribute-mgmt-docs/scim",
+   "title": "Configuring SCIM Automated User Provisioning for LinkedIn Learning",
+   "quote": "LinkedIn Learning utilizes a bearer token for SCIM authentication, which can be generated in the interface by a Full Admin.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://learn.microsoft.com/en-us/linkedin/learning/user-and-attribute-management/user-attribute-mgmt-docs/scim",
+   "title": "Configuring SCIM Automated User Provisioning for LinkedIn Learning",
+   "quote": "SCIM base URL = https://api.linkedin.com/scim",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://learn.microsoft.com/en-us/linkedin/learning/user-and-attribute-management/user-attribute-mgmt-docs/scim",
+   "title": "Configuring SCIM Automated User Provisioning for LinkedIn Learning",
+   "quote": "Single Sign-on enabled in LinkedIn Learning (preferred)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://learn.microsoft.com/en-us/linkedin/learning/user-and-attribute-management/user-attribute-mgmt-docs/scim",
+   "title": "Configuring SCIM Automated User Provisioning for LinkedIn Learning",
+   "quote": "Large scale group sync (10k >) Yes",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://learn.microsoft.com/en-us/linkedin/learning/user-and-attribute-management/user-attribute-mgmt-docs/scim",
+   "title": "Configuring SCIM Automated User Provisioning for LinkedIn Learning",
+   "quote": "Click Manage users via CSV > Download filtered users via CSV.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://learn.microsoft.com/en-us/linkedin/learning/user-and-attribute-management/user-attribute-mgmt-docs/azure-ad-auto-provisioning",
+   "title": "SCIM Automated Provisioning - Azure Active Directory",
+   "quote": "Under the Admin Credentials section, input https://api.linkedin.com/scim in the Tenant URL field and input the access token value retrieved earlier in the Secret Token field.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://learn.microsoft.com/en-us/linkedin/learning/user-and-attribute-management/user-attribute-mgmt-docs/azure-ad-auto-provisioning",
+   "title": "SCIM Automated Provisioning - Azure Active Directory",
+   "quote": "userPrincipalName externalId Yes userPrincipalName userName Yes manager urn:ietf:params:scim:schemas:extension:enterprise:2.0:User:manager No givenName name.givenName No surname name.familyName No displayName displayName No",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://learn.microsoft.com/en-us/linkedin/learning/user-and-attribute-management/user-attribute-mgmt-docs/azure-ad-auto-provisioning",
+   "title": "SCIM Automated Provisioning - Azure Active Directory",
+   "quote": "city addresses[type eq \"work\"].locality No jobTitle title No department urn:ietf:params:scim:schemas:extension:enterprise:2.0:User:department No mail emails[type eq \"work\"].value No (Preferred)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://learn.microsoft.com/en-us/linkedin/learning/user-and-attribute-management/user-attribute-mgmt-docs/azure-ad-auto-provisioning",
+   "title": "SCIM Automated Provisioning - Azure Active Directory",
+   "quote": "In the applications list, select LinkedIn Learning .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://learn.microsoft.com/en-us/linkedin/learning/user-and-attribute-management/user-attribute-mgmt-docs/okta-scim",
+   "title": "SCIM Automated Provisioning - Okta",
+   "quote": "There is an older LinkedIn Learning application available in the Okta catalog that does not support SCIM, so make sure you do not choose that application.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://learn.microsoft.com/en-us/linkedin/learning/user-and-attribute-management/user-attribute-mgmt-docs/okta-scim",
+   "title": "SCIM Automated Provisioning - Okta",
+   "quote": "Enable the following settings: Create Users Update User Attributes Deactivate Users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://learn.microsoft.com/en-us/linkedin/learning/user-and-attribute-management/user-attribute-mgmt-docs/okta-scim",
+   "title": "SCIM Automated Provisioning - Okta",
+   "quote": "This section guides you through the steps to configure the Okta SCIM provisioning service to create, update, and delete groups in LinkedIn Learning based on the selected groups in the Okta application.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://learn.microsoft.com/en-us/linkedin/learning/user-and-attribute-management/user-attribute-mgmt-docs/onelogin-scim",
+   "title": "SCIM Automated Provisioning - OneLogin",
+   "quote": "OneLogin has LinkedIn Learning native application to setup SSO, but the standard native application does not support SCIM.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://learn.microsoft.com/en-us/linkedin/learning/user-and-attribute-management/user-attribute-mgmt-docs/onelogin-scim",
+   "title": "SCIM Automated Provisioning - OneLogin",
+   "quote": "it is required to add a custom application from the available applications (SCIM Provisioner with SAML (SCIM v2 Enterprise, full SAML))",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://www.okta.com/integrations/linkedin-learning/",
+   "title": "LinkedIn Learning | Okta Integration Network",
+   "quote": "Add this integration",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/linkedinlearning-tutorial",
+   "title": "Configure LinkedIn Learning for Single sign-on with Microsoft Entra ID",
+   "quote": "LinkedIn Learning supports Just In Time user provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/linkedinlearning-tutorial",
+   "title": "Configure LinkedIn Learning for Single sign-on with Microsoft Entra ID",
+   "quote": "When you enable this option, users are automatically granted a license when they are authenticated for the first time.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://learn.microsoft.com/en-us/linkedin/learning/sso-auth/sso-docs/sso-overview",
+   "title": "SSO Overview",
+   "quote": "LinkedIn Learning currently supports SAML version 2.0 , LTI 1.0 and 1.1, and Google SSO .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://learn.microsoft.com/en-us/linkedin/learning/overview/",
+   "title": "LinkedIn Learning APIs overview",
+   "quote": "LinkedIn Learning APIs are designed to represent LinkedIn Learning content in a unified and extensible format.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://learn.microsoft.com/en-us/linkedin/learning/user-and-attribute-management/user-attribute-mgmt-docs/azure-ad-auto-provisioning",
+   "title": "SCIM Automated Provisioning - Azure Active Directory",
+   "quote": "After successfully completing the initial sync, it is highly recommended you stop the provisioning service before making any changes to assigned users/groups to avoid revoking licenses in error.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://business.linkedin.com/learn/product/linkedin-learning-for-teams",
+  "https://business.linkedin.com/learn/compare-plans",
+  "https://www.linkedin.com/learning/subscription/products?product=teams (login wall)",
+  "https://learn.microsoft.com/en-us/linkedin/learning/toc.json (full docs index)",
+  "https://learn.microsoft.com/en-us/linkedin/learning/user-and-attribute-management/user-attribute-mgmt-docs/scim",
+  "https://business.linkedin.com/sitemap.xml (learn pages)",
+  "https://business.linkedin.com/learn/help",
+  "https://www.linkedin.com/help/learning search (400)"
+ ],
+ "open_questions": [
+  "Which LinkedIn Learning plan includes SSO and SCIM (Teams vs the Contact-sales business plan) is not stated on any public LinkedIn page.",
+  "Whether deprovisioning ends active sessions or keeps learning history is not documented.",
+  "SCIM filtering, pagination, rate limits and token expiry are not documented.",
+  "JumpCloud and Google catalogue entries not checked."
+ ]
+}

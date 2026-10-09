@@ -1,0 +1,528 @@
+{
+ "slug": "rubrik",
+ "vendor": "Rubrik",
+ "vendor_url": "https://www.rubrik.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Rubrik",
+  "slug": "rubrik",
+  "category": "Security & Identity",
+  "status": "unknown",
+  "scim_plan": "—",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": null,
+  "idp": {
+   "okta": "none",
+   "entra": null,
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": false
+  },
+  "pricing_page_url": "https://www.rubrik.com/pricing",
+  "docs_url": null,
+  "evidence": "Rubrik's public RSC GraphQL reference documents user management (createUser, deleteUsersFromAccount, updateRoleAssignments, addIdentityProvider) but no SCIM, and its product documentation requires a login, so SCIM support and plan cannot be determined publicly.",
+  "notes": "New in 2026-09. Quote-only: no public price list, and www.rubrik.com refused curl, WebFetch and the headless renderer (403 / ERR_TOO_MANY_RETRIES). Product docs (docs.rubrik.com) require a Rubrik login, so rule 5 'none by absence' cannot be applied. The public developer portal's GraphQL schema has no SCIM operations; it does expose user CRUD, role assignment, SSO identity providers and SSO-group role mapping, and an audit-event query. The Okta OIN 'Rubrik Security Cloud' app is an API integration for backing up Okta, not SSO/provisioning into Rubrik.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": null,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [],
+ "scim": {
+  "available": null,
+  "cite": [],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": null,
+   "token_source": null,
+   "token_expiry": null,
+   "cite": []
+  },
+  "endpoints": {
+   "Users": null,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": []
+  },
+  "operations": {
+   "create": null,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": null,
+   "reactivate": null,
+   "delete": null,
+   "group_push": null,
+   "group_membership": null,
+   "cite": []
+  },
+  "deprovision": {
+   "action": null,
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": []
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": []
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "Not determinable from public sources. Rubrik's product documentation (docs.rubrik.com) requires a login and www.rubrik.com refuses automated fetches. The public RSC GraphQL schema index (1,006 mutations, 1,159 queries, 7,837 types) contains no SCIM operation or type; the only Okta OIN app is an API service integration for backing up Okta, not SSO or provisioning."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c3",
+   "c5"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "GraphQL",
+  "base_url": "https://<INSTANCE>.my.rubrik.com/api/graphql",
+  "docs_url": "https://developer.rubrik.com/Rubrik-Security-Cloud-API/System-Settings/Users-and-Access/",
+  "auth": {
+   "methods": [
+    "oauth2_client_credentials"
+   ],
+   "scopes": [],
+   "cite": [
+    "c14",
+    "c15"
+   ],
+   "notes": "Service accounts (client ID + secret) obtain a bearer token from /api/client_token; RBAC roles on the service account limit access. Token lifetime configurable up to 24 hours (example 43200 s)."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": null,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": true,
+   "delete_user": true,
+   "reactivate_user": true,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c4",
+    "c5",
+    "c6",
+    "c7",
+    "c8",
+    "c9",
+    "c10"
+   ],
+   "notes": "Deactivate/reactivate here means admin lock/unlock of user accounts. Group management means assigning roles to SSO (IdP) groups via inviteSsoGroup."
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/api/graphql (query usersInCurrentAndDescendantOrganization)",
+    "purpose": "List users with roles, groups, lockout and MFA state",
+    "cite": [
+     "c4"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/graphql (mutation createUser)",
+    "purpose": "Create a user with email and role IDs",
+    "cite": [
+     "c5"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/graphql (mutation createSsoUsers)",
+    "purpose": "Create SSO users",
+    "cite": [
+     "c11"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/graphql (mutation deleteUsersFromAccount)",
+    "purpose": "Delete users from the account",
+    "cite": [
+     "c6"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/graphql (mutation updateRoleAssignments)",
+    "purpose": "Replace role assignments for users and/or groups",
+    "cite": [
+     "c7"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/graphql (mutation revokeAllOrgRoles)",
+    "purpose": "Revoke all org roles from users and groups",
+    "cite": [
+     "c13"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/graphql (mutation lockUsersByAdmin)",
+    "purpose": "Admin locks user accounts",
+    "cite": [
+     "c8"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/graphql (mutation unlockUsersByAdmin)",
+    "purpose": "Admin unlocks user accounts",
+    "cite": [
+     "c9"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/graphql (mutation inviteSsoGroup)",
+    "purpose": "Assign roles to an SSO group",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/graphql (mutation addIdentityProvider)",
+    "purpose": "Add an SSO identity provider",
+    "cite": [
+     "c12"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/graphql (query userAuditConnection)",
+    "purpose": "Read audit events",
+    "cite": [
+     "c16"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": [],
+   "notes": "Event webhooks exist for workload/audit events; user-lifecycle event types not confirmed."
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": null,
+   "cite": [
+    "c16"
+   ]
+  },
+  "rate_limits": {
+   "text": "HTTP 429 on exceeding the rate limit; guidance is to stay under 50 requests per second.",
+   "cite": [
+    "c17",
+    "c18"
+   ]
+  },
+  "limitations": [],
+  "notes": "Rubrik Security Cloud (RSC) GraphQL API. Plan gating is not documented publicly (quote-only vendor). A beta Task-Based REST API covers workloads only."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": false,
+   "provisioning": false,
+   "kind": null,
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/rubrik-security-cloud/",
+   "cite": [
+    "c2"
+   ],
+   "notes": "The only OIN listing ('Rubrik Security Cloud') has just 'API' checked: an API service integration that lets Rubrik back up and restore the Okta tenant. SAML, OIDC, SWA and SCIM are unchecked (read from page markup)."
+  },
+  "entra": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "No Entra Learn tutorial found (rubrik-tutorial, rubrik-security-cloud-tutorial, rubrik-provisioning-tutorial all 404)."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "OneLogin connector pages block bots; no public Rubrik OneLogin guide."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "jumpcloud.com/support/integrate-with-rubrik returned 403."
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": false,
+  "cite": [
+   "c12",
+   "c10"
+  ],
+  "notes": "RSC supports external SSO identity providers (addIdentityProvider) and role assignment to SSO groups (inviteSsoGroup), which suggests group-based access at SSO sign-in, but JIT behaviour is not documented publicly. Product docs require a login."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.rubrik.com/pricing",
+   "title": "Rubrik pricing",
+   "quote": "",
+   "accessed": "2026-10-05",
+   "page_url": null,
+   "blocked": "403 to curl and WebFetch; render.cjs ERR_TOO_MANY_RETRIES (www.rubrik.com blocks all automated fetches)"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.okta.com/integrations/rubrik-security-cloud/",
+   "title": "Integrate Rubrik Security Cloud with Okta",
+   "quote": "The Rubrik integration for Okta allows customers to connect their Okta tenant to the Rubrik Security Cloud through API service integration for automated backup and rapid recovery.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://developer.rubrik.com/Rubrik-Security-Cloud-API/API-Reference/",
+   "title": "Rubrik Developer Center: API Reference",
+   "quote": "Every query, mutation, and type in the Rubrik Security Cloud schema, generated directly from it. One endpoint serves all of it: POST https://<INSTANCE>.my.rubrik.com/api/graphql",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://developer.rubrik.com/Rubrik-Security-Cloud-API/System-Settings/Users-and-Access/",
+   "title": "Rubrik Developer Center: Users and Access",
+   "quote": "usersInCurrentAndDescendantOrganization ( shouldIncludeUserWithoutRole : true",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://developer.rubrik.com/Rubrik-Security-Cloud-API/API-Reference/mutations/createUser/",
+   "title": "Rubrik Developer Center: createUser",
+   "quote": "createUser Create a new user. Arguments Argument Type Description email (required) String! User email. roleIds (required) [String!]! Role IDs to assign to the user.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://developer.rubrik.com/Rubrik-Security-Cloud-API/API-Reference/mutations/deleteUsersFromAccount/",
+   "title": "Rubrik Developer Center: deleteUsersFromAccount",
+   "quote": "deleteUsersFromAccount Deletes specified users from the account.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://developer.rubrik.com/Rubrik-Security-Cloud-API/API-Reference/mutations/updateRoleAssignments/",
+   "title": "Rubrik Developer Center: updateRoleAssignments",
+   "quote": "updateRoleAssignments Replaces RBAC role assignments for the given users and/or groups. Existing role assignments are overwritten with the provided role IDs.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://developer.rubrik.com/Rubrik-Security-Cloud-API/API-Reference/mutations/lockUsersByAdmin/",
+   "title": "Rubrik Developer Center: lockUsersByAdmin",
+   "quote": "lockUsersByAdmin Specifies the endpoint through which the admin can lock the user accounts.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://developer.rubrik.com/Rubrik-Security-Cloud-API/API-Reference/mutations/unlockUsersByAdmin/",
+   "title": "Rubrik Developer Center: unlockUsersByAdmin",
+   "quote": "unlockUsersByAdmin Specifies the endpoint through which the admin can unlock the user accounts.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://developer.rubrik.com/Rubrik-Security-Cloud-API/API-Reference/mutations/inviteSsoGroup/",
+   "title": "Rubrik Developer Center: inviteSsoGroup",
+   "quote": "inviteSsoGroup Assigns roles to SSO groups in the current organization using the given group name and role IDs.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c11",
+   "url": "https://developer.rubrik.com/Rubrik-Security-Cloud-API/API-Reference/mutations/createSsoUsers/",
+   "title": "Rubrik Developer Center: createSsoUsers",
+   "quote": "createSsoUsers Create SSO users.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://developer.rubrik.com/Rubrik-Security-Cloud-API/API-Reference/mutations/addIdentityProvider/",
+   "title": "Rubrik Developer Center: addIdentityProvider",
+   "quote": "addIdentityProvider Add a new identity provider.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://developer.rubrik.com/Rubrik-Security-Cloud-API/API-Reference/mutations/revokeAllOrgRoles/",
+   "title": "Rubrik Developer Center: revokeAllOrgRoles",
+   "quote": "revokeAllOrgRoles Revoke all roles of the current organization from the specified users and groups.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c14",
+   "url": "https://developer.rubrik.com/Rubrik-Security-Cloud-API/authentication/",
+   "title": "Rubrik Developer Center: Authentication",
+   "quote": "A client ID and client secret are used to authenticate to an authorization server and obtain an access token to invoke the Rubrik APIs.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://developer.rubrik.com/Rubrik-Security-Cloud-API/authentication/",
+   "title": "Rubrik Developer Center: Authentication",
+   "quote": "An example response from the authorization server shows the access token and the number of seconds when the token will expire. This time is configurable up to 24 hours within the RSC session security settings.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://developer.rubrik.com/Rubrik-Security-Cloud-API/Observability/Events/",
+   "title": "Rubrik Developer Center: Events",
+   "quote": "Audit Events GraphQL PowerShell SDK Shell query { userAuditConnection ( filters : {",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c17",
+   "url": "https://developer.rubrik.com/Rubrik-Security-Cloud-API/troubleshooting/",
+   "title": "Rubrik Developer Center: Troubleshooting",
+   "quote": "HTTP 429 indicates that the client has exceeded the API rate limit. Rubrik Security Cloud enforces rate limits to protect platform stability.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c18",
+   "url": "https://developer.rubrik.com/Rubrik-Security-Cloud-API/troubleshooting/",
+   "title": "Rubrik Developer Center: Troubleshooting",
+   "quote": "Stay under 50 requests per second",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c19",
+   "url": "https://developer.rubrik.com/Rubrik-Security-Cloud-API/API-Reference/mutations/",
+   "title": "Rubrik Developer Center: Mutations",
+   "quote": "addIdentityProvider",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.rubrik.com/",
+   "title": "Rubrik Documentation (login required)",
+   "quote": "",
+   "accessed": "2026-10-05",
+   "page_url": null,
+   "blocked": "redirects to the onepassport.rubrik.com sign-in page; product docs require a Rubrik login"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.rubrik.com/pricing (403; render.cjs ERR_TOO_MANY_RETRIES)",
+  "https://www.rubrik.com/sitemap.xml (403)",
+  "https://www.rubrik.com/llms.txt (403)",
+  "https://docs.rubrik.com/ and /sitemap.xml (login redirect)",
+  "https://support.rubrik.com/ (login portal)",
+  "https://developer.rubrik.com/search/search_index.json (guides: no 'scim')",
+  "https://developer.rubrik.com/Rubrik-Security-Cloud-API/API-Reference/mutations/ and /queries/ and types indexes (no 'scim')",
+  "https://trust.rubrik.com/ (no SSO/SCIM detail)",
+  "https://www.okta.com/integrations/rubrik-security-cloud/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/rubrik-tutorial (404)",
+  "https://jumpcloud.com/support/integrate-with-rubrik (403)"
+ ],
+ "open_questions": [
+  "Whether Rubrik Security Cloud supports SCIM provisioning at all (product docs are login-only).",
+  "Edition/plan gating of SSO and of the GraphQL user API is not public.",
+  "Whether SSO sign-in creates users just-in-time (createSsoUsers / inviteSsoGroup suggest group-based SSO access) is not documented publicly.",
+  "Rubrik pricing page could not be loaded by any allowed method."
+ ]
+}

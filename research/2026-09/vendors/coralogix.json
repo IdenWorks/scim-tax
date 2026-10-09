@@ -1,0 +1,329 @@
+{
+ "slug": "coralogix",
+ "vendor": "Coralogix",
+ "vendor_url": "https://coralogix.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Coralogix",
+  "slug": "coralogix",
+  "category": "Cloud, Infrastructure & Observability",
+  "status": "free",
+  "scim_plan": "All plans (usage-based units)",
+  "scim_price_text": "Usage-priced: logs $0.42/GB, traces $0.16/GB, metrics $0.06/GB; all features included",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Usage-priced (units); no tiers, unlimited users",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "All plans (usage-based units)",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": "via_generic",
+   "jumpcloud": "native",
+   "generic": true
+  },
+  "pricing_page_url": "https://coralogix.com/pricing/",
+  "docs_url": "https://coralogix.com/docs/user-guides/account-management/user-management/scim/",
+  "evidence": "Coralogix's pricing page says \"Pay for your data and nothing more. All features & support included.\" with no tiers, and its docs say Coralogix supports SCIM to automate user and group provisioning.",
+  "notes": "No plan tiers: pricing is usage-based (units; logs $0.42/GB, traces $0.16/GB, metrics $0.06/GB, AI $1.50 per 1M tokens) with unlimited users, and every account gets all features including RBAC and SAML SSO, so SCIM carries no upcharge; per-user fields stay null. SCIM uses a Team API key (team-members and team-groups permissions) as bearer token against the region-specific https://api.{domain}/scim endpoint. Okta OIN app provisions (Create/Update/Deactivate); Entra gallery app is SSO-only and Coralogix documents Entra SCIM through a non-gallery app; OneLogin uses the generic 'SCIM Provisioner with SAML (SCIM v2 Core)' app; JumpCloud has a catalogue SCIM app. Existing non-SCIM users should be deleted before enabling SCIM. Org-level SAML also does JIT provisioning.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "All plans (usage-based units)",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Usage-based (units)",
+   "price_text": "Logs $0.42 per GB, Traces $0.16 per GB, Metrics $0.06 per GB, AI $1.50 per 1M tokens; 1 unit = $1.50",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": ["c1", "c2", "c3", "c4", "c5", "c6", "c25"],
+   "notes": "Single usage-based plan with no tiers; unlimited users and hosts; all features included. 14-day free trial with 8 units."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": ["c1", "c4", "c6", "c7", "c11"],
+  "plan": "All plans (usage-based units)",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://api.{coralogix-domain}/scim",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Settings > Keys > Team Keys: Team API key with team-members:ReadConfig, team-members:Manage, team-groups:ReadConfig, team-groups:Manage",
+   "token_expiry": null,
+   "cite": ["c9", "c12"]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": ["c6", "c14"]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": ["c8", "c10", "c14", "c15", "c18"],
+   "notes": "Okta and OneLogin: create, update, deactivate. Entra: create users and groups, update groups, delete users and groups. Okta group push syncs group members."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Deactivated users cannot log in to the team; on reactivation they regain access and keep all previously specified access controls.",
+   "cite": ["c8"],
+   "notes": "Users are unlimited on every account, so seat release does not apply to pricing. The Entra integration documents deleting users and groups."
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": ["userName", "name.givenName", "name.familyName", "active"],
+   "enterprise": [],
+   "custom": { "supported": null, "how": null },
+   "group": ["displayName", "objectId (Entra)", "members"],
+   "cite": ["c8", "c10", "c14"],
+   "notes": "Okta/OneLogin update firstname, lastname and username; Entra creates users with userPrincipalName, givenName and surname. No full SCIM schema reference is published."
+  },
+  "roles": {
+   "supported": true,
+   "how": "Roles and scopes are set per group in Coralogix; with Entra a system role (Platform Admin, Data Admin, Observability Lead, Standard User, Read-Only User, Security User) and an 'Exact' scope can be assigned to a group through the integration. Okta cannot sync roles.",
+   "cite": ["c16", "c17"]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   { "text": "Users already added to the account should be deleted before starting the SCIM integration (one admin may remain) and recreated through SCIM.", "cite": ["c19"] },
+   { "text": "Okta cannot sync roles or scopes; they are edited in Coralogix per group.", "cite": ["c17"] },
+   { "text": "Group names may only contain letters, numbers, underscores and hyphens (no periods).", "cite": ["c20"] },
+   { "text": "Entra pushes users and groups every 40 minutes, through a non-gallery Enterprise Application.", "cite": ["c13"] }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": ["c25", "c26", "c27"],
+  "plan": "All plans (usage-based units)",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://api.coralogix.com/mgmt/openapi/5",
+  "docs_url": "https://coralogix.com/docs/api-reference/v5/users-management-service/overview/",
+  "auth": {
+   "methods": ["api_key"],
+   "scopes": ["team-members:ReadConfig", "team-members:Manage", "team-groups:ReadConfig", "team-groups:Manage"],
+   "cite": ["c12", "c27"]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": null,
+   "reactivate_user": true,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": ["c25", "c26", "c28", "c29", "c30", "c31", "c32", "c33", "c34", "c35", "c36"]
+  },
+  "endpoints": [
+   { "method": "POST", "path": "/aaa/users/v2", "purpose": "Create users (add members to the team)", "cite": ["c28"] },
+   { "method": "PUT", "path": "/aaa/users/v2", "purpose": "Update team members", "cite": ["c29"] },
+   { "method": "PATCH", "path": "/aaa/users/v2:updateStatuses", "purpose": "Activate or revoke (deactivate) users", "cite": ["c26"] },
+   { "method": "GET", "path": "/aaa/users/v2/{user_account_id}", "purpose": "Get a team member", "cite": ["c30"] },
+   { "method": "GET", "path": "/aaa/users/v2", "purpose": "Search team members by username and status", "cite": ["c31"] },
+   { "method": "GET", "path": "/aaa/team-groups/v2", "purpose": "List team groups", "cite": ["c32"] },
+   { "method": "POST", "path": "/aaa/team-groups/v2", "purpose": "Create team group", "cite": ["c33"] },
+   { "method": "PUT", "path": "/aaa/team-groups/v2/{group_id}", "purpose": "Update team group (name, roles, users)", "cite": ["c34"] },
+   { "method": "DELETE", "path": "/aaa/team-groups/v2/{group_id}", "purpose": "Delete team group", "cite": ["c35"] },
+   { "method": "GET", "path": "/aaa/team-groups/v2/{group_id}/users/list", "purpose": "List users in a team group", "cite": ["c36"] },
+   { "method": "GET", "path": "/aaa/system-roles/v1", "purpose": "List system roles", "cite": ["c37"] },
+   { "method": "GET", "path": "/aaa/custom-roles/v1", "purpose": "List custom roles", "cite": ["c38"] }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": [],
+   "notes": "Audit events (user actions and API operations) are routed into a designated audit team and queried like logs; no dedicated audit-log API is documented."
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   { "text": "The service overview table lists team-scoped paths (/aaa/teams/v2/{team_id}/members); the per-method reference pages document /aaa/users/v2 routes. The per-method paths are recorded here.", "cite": ["c25", "c28"] },
+   { "text": "Requests must go to the account's regional host; seven regional base URLs are documented.", "cite": ["c27"] }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/coralogix/",
+   "cite": ["c39"],
+   "notes": "OIN page marks SAML, SCIM, Create, Update and Deactivate as checked (read from page markup); Group Push not checked on the OIN page although Coralogix's guide describes pushing groups."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/coralogix-tutorial",
+   "cite": ["c40", "c13"],
+   "notes": "Gallery tutorial covers SSO only; Coralogix documents SCIM with Entra through a non-gallery Enterprise Application and the generic endpoint."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": ["c21"],
+   "notes": "Coralogix's guide uses OneLogin's generic 'SCIM Provisioner with SAML (SCIM v2 Core)' app; no Coralogix-specific OneLogin connector checked (OneLogin pages block bots)."
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://jumpcloud.com/support/integrate-with-coralogix",
+   "cite": ["c41", "c42"],
+   "notes": "JumpCloud says SAML SSO must be configured to use SCIM and lists userName as required plus core and enterprise optional mappings."
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": "SAML group sync (group memberships updated from SAML assertion on every SSO login)",
+  "docs_public": true,
+  "cite": ["c22", "c23", "c24"]
+ },
+ "citations": [
+  { "id": "c1", "url": "https://coralogix.com/pricing/", "title": "Pricing - Coralogix", "quote": "Pay for your data and nothing more. All features & support included.", "accessed": "2026-10-05" },
+  { "id": "c2", "url": "https://coralogix.com/pricing/", "title": "Pricing - Coralogix", "quote": "Every account includes: 24/7 real human support Unlimited sources Unlimited users and hosts Daily quota renewal Enterprise features", "accessed": "2026-10-05" },
+  { "id": "c3", "url": "https://coralogix.com/pricing/", "title": "Pricing - Coralogix", "quote": "Get built-in access to advanced capabilities like RBAC, SSO, audit trails, and compliance controls.", "accessed": "2026-10-05" },
+  { "id": "c4", "url": "https://coralogix.com/pricing/", "title": "Pricing - Coralogix", "quote": "Regardless of how you prioritize your data, you have full access to all Coralogix features.", "accessed": "2026-10-05" },
+  { "id": "c5", "url": "https://coralogix.com/pricing/", "title": "Pricing - Coralogix", "quote": "1 unit = $1.50 worth of logs, metrics, and traces, across varying data pipelines.", "accessed": "2026-10-05" },
+  { "id": "c6", "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scim/", "title": "SCIM | Coralogix Docs", "quote": "Coralogix supports the SCIM specification (System for Cross-Domain Identity Management), an open standard that allows you to automate user and group provisioning using a REST API.", "accessed": "2026-10-05" },
+  { "id": "c7", "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scim/", "title": "SCIM | Coralogix Docs", "quote": "Enable SCIM 2.0 integration in Okta", "accessed": "2026-10-05" },
+  { "id": "c8", "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scim/", "title": "SCIM | Coralogix Docs", "quote": "Users deactivated in Okta will be deactivated in Coralogix. They won’t be able to log in using their team in Coralogix. If a user is reactivated, they will regain access to Coralogix and keep all previously specified access controls.", "accessed": "2026-10-05" },
+  { "id": "c9", "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scim/", "title": "SCIM | Coralogix Docs", "quote": "To ensure that accounts can't be created by unauthorized users, Coralogix uses a Bearer Token authentication.", "accessed": "2026-10-05" },
+  { "id": "c10", "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scim/", "title": "SCIM | Coralogix Docs", "quote": "Updates to user profiles in Okta (firstname, lastname, username) will be updated in Coralogix.", "accessed": "2026-10-05" },
+  { "id": "c11", "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scim/", "title": "SCIM | Coralogix Docs", "quote": "endpoint that corresponds to your Coralogix domain using the domain selector at the top of the page", "accessed": "2026-10-05" },
+  { "id": "c12", "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scim/", "title": "SCIM | Coralogix Docs", "quote": "navigate to Settings > Keys > Team Keys to create a Team API key with the following permissions", "accessed": "2026-10-05" },
+  { "id": "c13", "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scim/", "title": "SCIM | Coralogix Docs", "quote": "This integration will push Azure Active Directory Users and Groups to Coralogix every 40 minutes", "accessed": "2026-10-05" },
+  { "id": "c14", "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scim/", "title": "SCIM | Coralogix Docs", "quote": "Create Groups (supported attributes are: displayName, objectId, members)", "accessed": "2026-10-05" },
+  { "id": "c15", "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scim/", "title": "SCIM | Coralogix Docs", "quote": "Delete users and Groups", "accessed": "2026-10-05" },
+  { "id": "c16", "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scim/", "title": "SCIM | Coralogix Docs", "quote": "Assign a system role to a group: Platform Admin, Data Admin, Observability Lead, Standard User, Read-Only User, and Security User", "accessed": "2026-10-05" },
+  { "id": "c17", "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scim/", "title": "SCIM | Coralogix Docs", "quote": "Roles and Scope should be edited in Coralogix side under Groups per the relevant Okta group.", "accessed": "2026-10-05" },
+  { "id": "c18", "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scim/", "title": "SCIM | Coralogix Docs", "quote": "An Okta group can be synced to Coralogix with all it users, moving a user between groups in Okta that are configured in Coralogix will move the user to another team.", "accessed": "2026-10-05" },
+  { "id": "c19", "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scim/", "title": "SCIM | Coralogix Docs", "quote": "If you have already added users to your Coralogix account, delete them before beginning this integration. If necessary, you may leave one admin user.", "accessed": "2026-10-05" },
+  { "id": "c20", "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scim/", "title": "SCIM | Coralogix Docs", "quote": "Group names must contain only supported characters, such as letters, numbers, underscores", "accessed": "2026-10-05" },
+  { "id": "c21", "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scim/", "title": "SCIM | Coralogix Docs", "quote": "Use SCIM Provisioner with SAML (SCIM v2 Core) from Find Applications", "accessed": "2026-10-05" },
+  { "id": "c22", "url": "https://coralogix.com/docs/user-guides/account-management/user-management/sso-with-saml.md", "title": "SSO with SAML | Coralogix Docs", "quote": "Organization-level SAML supports Just-in-Time (JIT) provisioning. On a user's first successful sign-in, user accounts are created as needed, team memberships are provisioned for the assigned teams", "accessed": "2026-10-05", "page_url": "https://coralogix.com/docs/user-guides/account-management/user-management/sso-with-saml/" },
+  { "id": "c23", "url": "https://coralogix.com/docs/user-guides/account-management/user-management/sso-with-saml.md", "title": "SSO with SAML | Coralogix Docs", "quote": "Coralogix supports SAML 2.0 single sign-on (SSO), so you can let users sign in with your identity provider (IdP) and manage access centrally.", "accessed": "2026-10-05", "page_url": "https://coralogix.com/docs/user-guides/account-management/user-management/sso-with-saml/" },
+  { "id": "c24", "url": "https://coralogix.com/docs/user-guides/account-management/user-management/saml-group-sync.md", "title": "SAML group sync | Coralogix Docs", "quote": "SAML group sync aligns a user's Coralogix group memberships with the groups your identity provider (IdP) sends in the SAML assertion.", "accessed": "2026-10-05", "page_url": "https://coralogix.com/docs/user-guides/account-management/user-management/saml-group-sync/" },
+  { "id": "c25", "url": "https://coralogix.com/docs/api-reference/v5/users-management-service/overview.md", "title": "Users Management Service overview | Coralogix API Reference", "quote": "The Users Management service provides programmatic, team-scoped administration of users in Coralogix. Use it to create a user in a team, update a user's attributes, activate or revoke one or more users", "accessed": "2026-10-05", "page_url": "https://coralogix.com/docs/api-reference/v5/users-management-service/overview/" },
+  { "id": "c26", "url": "https://coralogix.com/docs/api-reference/v5/users-management-service/activaterevoke-users.md", "title": "Activate/Revoke Users | Coralogix API Reference", "quote": "PATCH https://api.coralogix.com/mgmt/openapi/5/aaa/users/v2:updateStatuses", "accessed": "2026-10-05", "page_url": "https://coralogix.com/docs/api-reference/v5/users-management-service/activaterevoke-users/" },
+  { "id": "c27", "url": "https://coralogix.com/docs/api-reference/v5/users-management-service/activaterevoke-users.md", "title": "Activate/Revoke Users | Coralogix API Reference", "quote": "Requests must go to your account region’s host — a call to another region’s host fails even with a valid API key.", "accessed": "2026-10-05", "page_url": "https://coralogix.com/docs/api-reference/v5/users-management-service/activaterevoke-users/" },
+  { "id": "c28", "url": "https://coralogix.com/docs/api-reference/v5/users-management-service/create-users.md", "title": "Create Users | Coralogix API Reference", "quote": "POST https://api.coralogix.com/mgmt/openapi/5/aaa/users/v2", "accessed": "2026-10-05", "page_url": "https://coralogix.com/docs/api-reference/v5/users-management-service/create-users/" },
+  { "id": "c29", "url": "https://coralogix.com/docs/api-reference/v5/users-management-service/update-users.md", "title": "Update Users | Coralogix API Reference", "quote": "PUT https://api.coralogix.com/mgmt/openapi/5/aaa/users/v2", "accessed": "2026-10-05", "page_url": "https://coralogix.com/docs/api-reference/v5/users-management-service/update-users/" },
+  { "id": "c30", "url": "https://coralogix.com/docs/api-reference/v5/users-management-service/get-user.md", "title": "Get User | Coralogix API Reference", "quote": "GET https://api.coralogix.com/mgmt/openapi/5/aaa/users/v2/{user_account_id}", "accessed": "2026-10-05", "page_url": "https://coralogix.com/docs/api-reference/v5/users-management-service/get-user/" },
+  { "id": "c31", "url": "https://coralogix.com/docs/api-reference/v5/users-management-service/search-users.md", "title": "Search Users | Coralogix API Reference", "quote": "Searches for team members by query.", "accessed": "2026-10-05", "page_url": "https://coralogix.com/docs/api-reference/v5/users-management-service/search-users/" },
+  { "id": "c32", "url": "https://coralogix.com/docs/api-reference/v5/team-groups-management-service/get-team-groups.md", "title": "Get Team Groups | Coralogix API Reference", "quote": "GET https://api.coralogix.com/mgmt/openapi/5/aaa/team-groups/v2", "accessed": "2026-10-05", "page_url": "https://coralogix.com/docs/api-reference/v5/team-groups-management-service/get-team-groups/" },
+  { "id": "c33", "url": "https://coralogix.com/docs/api-reference/v5/team-groups-management-service/create-team-group.md", "title": "Create Team Group | Coralogix API Reference", "quote": "POST https://api.coralogix.com/mgmt/openapi/5/aaa/team-groups/v2", "accessed": "2026-10-05", "page_url": "https://coralogix.com/docs/api-reference/v5/team-groups-management-service/create-team-group/" },
+  { "id": "c34", "url": "https://coralogix.com/docs/api-reference/v5/team-groups-management-service/update-team-group.md", "title": "Update Team Group | Coralogix API Reference", "quote": "PUT https://api.coralogix.com/mgmt/openapi/5/aaa/team-groups/v2/{group_id}", "accessed": "2026-10-05", "page_url": "https://coralogix.com/docs/api-reference/v5/team-groups-management-service/update-team-group/" },
+  { "id": "c35", "url": "https://coralogix.com/docs/api-reference/v5/team-groups-management-service/delete-team-group.md", "title": "Delete Team Group | Coralogix API Reference", "quote": "DELETE https://api.coralogix.com/mgmt/openapi/5/aaa/team-groups/v2/{group_id}", "accessed": "2026-10-05", "page_url": "https://coralogix.com/docs/api-reference/v5/team-groups-management-service/delete-team-group/" },
+  { "id": "c36", "url": "https://coralogix.com/docs/api-reference/v5/team-groups-management-service/get-group-users.md", "title": "Get Group Users | Coralogix API Reference", "quote": "GET https://api.coralogix.com/mgmt/openapi/5/aaa/team-groups/v2/{group_id}/users/list", "accessed": "2026-10-05", "page_url": "https://coralogix.com/docs/api-reference/v5/team-groups-management-service/get-group-users/" },
+  { "id": "c37", "url": "https://coralogix.com/docs/api-reference/v5/role-management-service/list-system-roles.md", "title": "List System Roles | Coralogix API Reference", "quote": "GET https://api.coralogix.com/mgmt/openapi/5/aaa/system-roles/v1", "accessed": "2026-10-05", "page_url": "https://coralogix.com/docs/api-reference/v5/role-management-service/list-system-roles/" },
+  { "id": "c38", "url": "https://coralogix.com/docs/api-reference/v5/role-management-service/list-custom-roles.md", "title": "List Custom Roles | Coralogix API Reference", "quote": "GET https://api.coralogix.com/mgmt/openapi/5/aaa/custom-roles/v1", "accessed": "2026-10-05", "page_url": "https://coralogix.com/docs/api-reference/v5/role-management-service/list-custom-roles/" },
+  { "id": "c39", "url": "https://www.okta.com/integrations/coralogix/", "title": "Integrate Coralogix with Okta", "quote": "Okta’s Coralogix integration enables users to authenticate using single sign-on and gain access to specific log data with SAML. The integration automatically provisions, deactivates and modifies Coralogix users.", "accessed": "2026-10-05" },
+  { "id": "c40", "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/coralogix-tutorial", "title": "Configure Coralogix for Single sign-on with Microsoft Entra ID", "quote": "Coralogix supports SP initiated SSO", "accessed": "2026-10-05" },
+  { "id": "c41", "url": "https://jumpcloud.com/support/integrate-with-coralogix", "title": "Integrate with Coralogix | JumpCloud Documentation", "quote": "Automatically provision, update and deprovision users and groups in Coralogix from JumpCloud using the SCIM integration.", "accessed": "2026-10-05" },
+  { "id": "c42", "url": "https://jumpcloud.com/support/integrate-with-coralogix", "title": "Integrate with Coralogix | JumpCloud Documentation", "quote": "SAML SSO must be configured to use SCIM", "accessed": "2026-10-05" }
+ ],
+ "conflicts": [
+  { "text": "The Users Management service overview lists team-scoped paths (/aaa/teams/v2/{team_id}/members, /members/status, /search) while the per-method pages document /aaa/users/v2 routes with team_id as an optional query parameter.", "cite": ["c25", "c28"] }
+ ],
+ "searched": [
+  "https://coralogix.com/pricing/",
+  "https://coralogix.com/docs/llms.txt",
+  "https://coralogix.com/sitemap.xml",
+  "https://coralogix.com/docs/user-guides/account-management/user-management/scim/",
+  "https://coralogix.com/docs/api-reference/v5/users-management-service/overview.md",
+  "https://www.okta.com/integrations/coralogix/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/coralogix-tutorial",
+  "https://jumpcloud.com/support/integrate-with-coralogix"
+ ],
+ "open_questions": [
+  "SCIM docs do not publish a schema reference: filtering, pagination, PUT vs PATCH, discovery endpoints and enterprise/custom attributes are undocumented.",
+  "Docs do not say whether SCIM deactivation ends active sessions.",
+  "SCIM token (Team API key) expiry is not documented.",
+  "No Google Workspace catalogue app found; not checked in Google's admin help.",
+  "Whether audit events can be pulled through a dedicated API (vs querying the audit team's logs) is not documented.",
+  "API rate limits and user-event webhooks not found."
+ ]
+}

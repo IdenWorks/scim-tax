@@ -1,0 +1,647 @@
+{
+ "slug": "rudderstack",
+ "vendor": "RudderStack",
+ "vendor_url": "https://www.rudderstack.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "RudderStack",
+  "slug": "rudderstack",
+  "category": "Data, Analytics & BI",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Growth",
+  "team_price_text": "Growth: $265/month for 1 million events (monthly price; 15% off annually), unlimited team members",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Enterprise",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": false,
+   "groups": false
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "via_generic",
+   "google": "sso_only",
+   "onelogin": "sso_only",
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.rudderstack.com/pricing/",
+  "docs_url": "https://www.rudderstack.com/docs/user-guides/sso-setup/okta/scim-configuration/",
+  "evidence": "RudderStack's Okta SCIM guide states \"The Single Sign-On (SSO) feature is available in the Enterprise plan only\", SCIM is configured on that SSO app, and the pricing page lists SSO only under Enterprise (Contact sales).",
+  "notes": "New in 2026-09. Pricing is event-volume based, not per user: Free $0 (250K events/month, 10 members), Growth from $265/month for 1M events (monthly price shown; page says save 15% with annual billing), Enterprise custom. SCIM (Okta OIN app and Entra via the generic https://api.rudderstack.com/scim/v2 endpoint) rides on Enterprise-only SAML SSO; Google Workspace and OneLogin are SAML/JIT only. SCIM creates, updates display name and deactivates (revokes the org role, keeps the user record); no delete and no group push. No member-management REST API; Audit Logs API is Enterprise.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": false,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "$0, 250K events/month",
+   "price_per_user_mo": 0,
+   "billing": "monthly",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": false,
+   "cite": [
+    "c1",
+    "c28"
+   ],
+   "notes": "Up to 10 members per organization."
+  },
+  {
+   "name": "Growth",
+   "price_text": "$265/month for 1M events/month (scales with volume; 15% off with annual billing)",
+   "price_per_user_mo": null,
+   "billing": "monthly",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": false,
+   "cite": [
+    "c2",
+    "c5",
+    "c28"
+   ],
+   "notes": "Flat, event-priced; unlimited team members. SSO and audit logs are not in Growth per the Enterprise card and docs."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Contact sales",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": false,
+   "audit_log_api": true,
+   "cite": [
+    "c3",
+    "c4",
+    "c6",
+    "c27"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c6",
+   "c14",
+   "c15",
+   "c11"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://api.rudderstack.com/scim/v2",
+  "auth": {
+   "method": "bearer",
+   "token_source": "RudderStack dashboard: organization-level Service Access Token (Settings > Access tokens), pasted as the Okta API Token or Entra Secret Token",
+   "token_expiry": null,
+   "cite": [
+    "c11",
+    "c15",
+    "c30"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": false,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c7",
+    "c12"
+   ],
+   "notes": "Paths are not documented; Users is inferred from documented user push. Group operations are 'coming soon'."
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": false,
+   "group_push": false,
+   "group_membership": false,
+   "cite": [
+    "c7",
+    "c8",
+    "c9",
+    "c12",
+    "c13",
+    "c17"
+   ],
+   "notes": "Updates are limited to display name; email changes are not supported. PUT vs PATCH not documented."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "User record kept in RudderStack's database; only the organization user role is revoked, removing workspace access.",
+   "cite": [
+    "c10",
+    "c13",
+    "c17"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "displayName"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": [
+    "c8"
+   ],
+   "notes": "Only display name is documented as updatable; email (Okta username format must be Email) cannot be changed via SCIM. No full attribute list is published."
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "No group push or group import; SCIM group operations are 'coming soon'.",
+    "cite": [
+     "c12"
+    ]
+   },
+   {
+    "text": "Users cannot be removed via SCIM; unassigning deactivates instead.",
+    "cite": [
+     "c13",
+     "c17"
+    ]
+   },
+   {
+    "text": "Email address cannot be updated via SCIM; only display name.",
+    "cite": [
+     "c8"
+    ]
+   },
+   {
+    "text": "Google Workspace integration is JIT-only, no SCIM.",
+    "cite": [
+     "c19"
+    ]
+   },
+   {
+    "text": "Must use an organization-level Service Access Token or provisioning fails.",
+    "cite": [
+     "c11"
+    ]
+   }
+  ],
+  "notes": "SCIM is configured on the customer's SAML SSO app (Okta OIN app or an Entra non-gallery app); SSO is Enterprise-only. RudderStack may need to switch SCIM on for the organization (Entra 403). Version 2.0 is read from the /scim/v2 base URL."
+ },
+ "user_api": {
+  "available": false,
+  "cite": [
+   "c29"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://api.rudderstack.com",
+  "docs_url": "https://www.rudderstack.com/docs/api/",
+  "auth": {
+   "methods": [
+    "bearer"
+   ],
+   "scopes": [],
+   "cite": [
+    "c25",
+    "c30"
+   ],
+   "notes": "Service Access Tokens (organization or workspace level) and Personal Access Tokens authenticate the platform APIs."
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": []
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/v2/audit-logs",
+    "purpose": "List audit logs (not user management)",
+    "cite": [
+     "c26"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Enterprise",
+   "cite": [
+    "c25",
+    "c26",
+    "c27"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "By absence: RudderStack's API index lists Audit Logs, Organization Usage, Data Catalog, Event Audit, User Suppression, HTTP, Pixel, Profiles, Reverse ETL Connections and Transformation APIs; none manages members, groups or roles. Members are managed in the dashboard."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/rudderstack/",
+   "cite": [
+    "c24",
+    "c20",
+    "c7"
+   ],
+   "notes": "OIN page marks SAML, SCIM, Create, Update and Deactivate as checked (read from page markup); Group Push, Sync Password, SWA and OIDC unchecked."
+  },
+  "entra": {
+   "listed": false,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c18",
+    "c15"
+   ],
+   "notes": "No Entra gallery app (Learn tutorial rudderstack-tutorial 404); RudderStack's guide uses a non-gallery SAML app plus automatic provisioning to the generic SCIM endpoint."
+  },
+  "google": {
+   "listed": null,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c19",
+    "c31"
+   ],
+   "notes": "Custom SAML app; JIT-only with group-based access via the SAML memberOf attribute. Deprovisioning is manual."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c23"
+   ],
+   "notes": "RudderStack's guide uses OneLogin's SAML Custom Connector (Advanced); no provisioning documented. OneLogin catalogue page not loaded."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "jumpcloud.com/support/integrate-with-rudderstack returned 403."
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": "Google Workspace SAML group-based provisioning (memberOf attribute maps users to groups at sign-in)",
+  "docs_public": true,
+  "cite": [
+   "c21",
+   "c22",
+   "c31"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.rudderstack.com/pricing/",
+   "title": "Pricing | RudderStack",
+   "quote": "Free For startups and small teams building their customer data stack. $0 free forever 250K Events/month",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://www.rudderstack.com/pricing/",
+   "title": "Pricing | RudderStack",
+   "quote": "Growth For teams with higher volume and advanced integration needs. $265 /month 1 million events/month",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://www.rudderstack.com/pricing/",
+   "title": "Pricing | RudderStack",
+   "quote": "Enterprise For large organizations that require advanced security, governance, and white-glove support. Custom Enterprise-grade volume Contact sales",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://www.rudderstack.com/pricing/",
+   "title": "Pricing | RudderStack",
+   "quote": "Everything in Growth, plus: 5 minute warehouse sync Unlimited Transformations Access to Profiles & Data Apps HIPAA SSO White glove support",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://www.rudderstack.com/pricing/",
+   "title": "Pricing | RudderStack",
+   "quote": "Save 15% with annual billing",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://www.rudderstack.com/docs/user-guides/sso-setup/okta/scim-configuration/index.md",
+   "title": "Okta SCIM Configuration | RudderStack",
+   "quote": "The Single Sign-On (SSO) feature is available in the Enterprise plan only.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.rudderstack.com/docs/user-guides/sso-setup/okta/scim-configuration/"
+  },
+  {
+   "id": "c7",
+   "url": "https://www.rudderstack.com/docs/user-guides/sso-setup/okta/scim-configuration/index.md",
+   "title": "Okta SCIM Configuration | RudderStack",
+   "quote": "You can create or link a user in RudderStack when assigning the app to a user in Okta.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.rudderstack.com/docs/user-guides/sso-setup/okta/scim-configuration/"
+  },
+  {
+   "id": "c8",
+   "url": "https://www.rudderstack.com/docs/user-guides/sso-setup/okta/scim-configuration/index.md",
+   "title": "Okta SCIM Configuration | RudderStack",
+   "quote": "You can only update the user's display name. Updating the email is not supported currently.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.rudderstack.com/docs/user-guides/sso-setup/okta/scim-configuration/"
+  },
+  {
+   "id": "c9",
+   "url": "https://www.rudderstack.com/docs/user-guides/sso-setup/okta/scim-configuration/index.md",
+   "title": "Okta SCIM Configuration | RudderStack",
+   "quote": "This feature deactivates a user's RudderStack account when it is unassigned in Okta or their Okta account is deactivated. To reactivate the account, you can reassign the app to the user in Okta.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.rudderstack.com/docs/user-guides/sso-setup/okta/scim-configuration/"
+  },
+  {
+   "id": "c10",
+   "url": "https://www.rudderstack.com/docs/user-guides/sso-setup/okta/scim-configuration/index.md",
+   "title": "Okta SCIM Configuration | RudderStack",
+   "quote": "When a user is deactivated through SCIM, RudderStack does not delete the user from its database; it only revokes their organization user role leading to the loss of their workspace access.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.rudderstack.com/docs/user-guides/sso-setup/okta/scim-configuration/"
+  },
+  {
+   "id": "c11",
+   "url": "https://www.rudderstack.com/docs/user-guides/sso-setup/okta/scim-configuration/index.md",
+   "title": "Okta SCIM Configuration | RudderStack",
+   "quote": "Make sure to create an organization-level Service Access Token. Otherwise, your SCIM provisioning tasks will fail.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.rudderstack.com/docs/user-guides/sso-setup/okta/scim-configuration/"
+  },
+  {
+   "id": "c12",
+   "url": "https://www.rudderstack.com/docs/user-guides/sso-setup/okta/scim-configuration/index.md",
+   "title": "Okta SCIM Configuration | RudderStack",
+   "quote": "Pushing groups Support for SCIM group operations is coming soon.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.rudderstack.com/docs/user-guides/sso-setup/okta/scim-configuration/"
+  },
+  {
+   "id": "c13",
+   "url": "https://www.rudderstack.com/docs/user-guides/sso-setup/okta/scim-configuration/index.md",
+   "title": "Okta SCIM Configuration | RudderStack",
+   "quote": "Removing users The user account is deactivated (disabled) instead as it achieves the same outcome.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.rudderstack.com/docs/user-guides/sso-setup/okta/scim-configuration/"
+  },
+  {
+   "id": "c14",
+   "url": "https://www.rudderstack.com/docs/user-guides/sso-setup/okta/scim-configuration/index.md",
+   "title": "Okta SCIM Configuration | RudderStack",
+   "quote": "As SCIM is implemented after SSO, there is no need for a password for SSO authentication.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.rudderstack.com/docs/user-guides/sso-setup/okta/scim-configuration/"
+  },
+  {
+   "id": "c15",
+   "url": "https://www.rudderstack.com/docs/user-guides/sso-setup/azure/index.md",
+   "title": "Microsoft Azure Entra ID (formerly Azure AD) SSO Setup | RudderStack",
+   "quote": "Tenant URL Required https://api.rudderstack.com/scim/v2 Secret Token Your Service Access Token obtained in the Prerequisites section.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.rudderstack.com/docs/user-guides/sso-setup/azure/"
+  },
+  {
+   "id": "c16",
+   "url": "https://www.rudderstack.com/docs/user-guides/sso-setup/azure/index.md",
+   "title": "Microsoft Azure Entra ID (formerly Azure AD) SSO Setup | RudderStack",
+   "quote": "If you see a 403 - Forbidden error, contact the RudderStack team to enable SCIM for your organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.rudderstack.com/docs/user-guides/sso-setup/azure/"
+  },
+  {
+   "id": "c17",
+   "url": "https://www.rudderstack.com/docs/user-guides/sso-setup/azure/index.md",
+   "title": "Microsoft Azure Entra ID (formerly Azure AD) SSO Setup | RudderStack",
+   "quote": "RudderStack does not support removing users - this is because it uses SCIM with SAML, where removing a user from Azure Entra ID implies that they also lose the ability to authenticate to RudderStack completely",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.rudderstack.com/docs/user-guides/sso-setup/azure/"
+  },
+  {
+   "id": "c18",
+   "url": "https://www.rudderstack.com/docs/user-guides/sso-setup/azure/index.md",
+   "title": "Microsoft Azure Entra ID (formerly Azure AD) SSO Setup | RudderStack",
+   "quote": "select Integrate any other application you don't find in the gallery (Non-gallery)",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.rudderstack.com/docs/user-guides/sso-setup/azure/"
+  },
+  {
+   "id": "c19",
+   "url": "https://www.rudderstack.com/docs/user-guides/sso-setup/google/index.md",
+   "title": "Google Workspace SSO Setup | RudderStack",
+   "quote": "As this is a JIT (Just In Time) provisioning-only integration, RudderStack does not support SCIM with Google Workspace.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.rudderstack.com/docs/user-guides/sso-setup/google/"
+  },
+  {
+   "id": "c20",
+   "url": "https://www.rudderstack.com/docs/user-guides/sso-setup/okta/index.md",
+   "title": "Okta SSO Setup | RudderStack",
+   "quote": "The Okta RudderStack app is available on the Okta Integration Network (OIN).",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.rudderstack.com/docs/user-guides/sso-setup/okta/"
+  },
+  {
+   "id": "c21",
+   "url": "https://www.rudderstack.com/docs/user-guides/sso-setup/okta/index.md",
+   "title": "Okta SSO Setup | RudderStack",
+   "quote": "The Okta-RudderStack SAML integration supports the following features: SP-initiated SSO JIT(Just In Time) Provisioning",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.rudderstack.com/docs/user-guides/sso-setup/okta/"
+  },
+  {
+   "id": "c22",
+   "url": "https://www.rudderstack.com/docs/user-guides/sso-setup/okta/index.md",
+   "title": "Okta SSO Setup | RudderStack",
+   "quote": "New users who sign in through SSO for the first time will automatically land in this workspace.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.rudderstack.com/docs/user-guides/sso-setup/okta/"
+  },
+  {
+   "id": "c23",
+   "url": "https://www.rudderstack.com/docs/user-guides/sso-setup/onelogin/index.md",
+   "title": "OneLogin SSO Setup | RudderStack",
+   "quote": "This guide lists the steps to configure and enable OneLogin SSO for your organization. RudderStack supports only the SAML 2.0 protocol for SSO.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.rudderstack.com/docs/user-guides/sso-setup/onelogin/"
+  },
+  {
+   "id": "c24",
+   "url": "https://www.okta.com/integrations/rudderstack/",
+   "title": "RudderStack | Okta",
+   "quote": "RudderStack is a customer data platform for developers.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c25",
+   "url": "https://www.rudderstack.com/docs/api/audit-logs-api/index.md",
+   "title": "Audit Logs API | RudderStack",
+   "quote": "Only Admins can access the Audit Logs API Generate an organization-level Service Access Token in the RudderStack dashboard to authenticate the API",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.rudderstack.com/docs/api/audit-logs-api/"
+  },
+  {
+   "id": "c26",
+   "url": "https://www.rudderstack.com/docs/api/audit-logs-api/index.md",
+   "title": "Audit Logs API | RudderStack",
+   "quote": "You can access Audit Logs using the below endpoint: GET /v2/audit-logs",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.rudderstack.com/docs/api/audit-logs-api/"
+  },
+  {
+   "id": "c27",
+   "url": "https://www.rudderstack.com/docs/dashboard-guides/audit-logs/index.md",
+   "title": "Audit Logs | RudderStack",
+   "quote": "The Audit Logs feature is available for only in the RudderStack Enterprise plan.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.rudderstack.com/docs/dashboard-guides/audit-logs/"
+  },
+  {
+   "id": "c28",
+   "url": "https://www.rudderstack.com/docs/access-management/member-management/index.md",
+   "title": "Member Management in RudderStack",
+   "quote": "Plan Member limit Free 10 members per organization Growth Unlimited Enterprise Unlimited",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.rudderstack.com/docs/access-management/member-management/"
+  },
+  {
+   "id": "c29",
+   "url": "https://www.rudderstack.com/docs/api/index.md",
+   "title": "RudderStack API",
+   "quote": "Explore the RudderStack APIs to programmatically manage your RudderStack connections, transformations and other RudderStack features.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.rudderstack.com/docs/api/"
+  },
+  {
+   "id": "c30",
+   "url": "https://www.rudderstack.com/docs/access-management/service-access-tokens/index.md",
+   "title": "Service Access Tokens | RudderStack",
+   "quote": "Organization-level SATs are associated with the entire organization and have Admin permissions by default.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.rudderstack.com/docs/access-management/service-access-tokens/"
+  },
+  {
+   "id": "c31",
+   "url": "https://www.rudderstack.com/docs/user-guides/sso-setup/google/index.md",
+   "title": "Google Workspace SSO Setup | RudderStack",
+   "quote": "Group-based provisioning (via SAML group membership)",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.rudderstack.com/docs/user-guides/sso-setup/google/"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.rudderstack.com/pricing/",
+  "https://www.rudderstack.com/docs/llms.txt",
+  "https://www.rudderstack.com/docs/sitemap.xml",
+  "https://www.rudderstack.com/docs/api/",
+  "https://www.rudderstack.com/docs/user-guides/sso-setup/ (all IdP guides)",
+  "https://www.okta.com/integrations/rudderstack/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/rudderstack-tutorial (404)",
+  "https://jumpcloud.com/support/integrate-with-rudderstack (403)"
+ ],
+ "open_questions": [
+  "SCIM attribute schema beyond display name/email is not documented.",
+  "Whether deactivation frees a billable seat is moot (pricing is by events), and whether it ends active sessions is not documented.",
+  "Service Access Token expiry is not documented.",
+  "Annual Growth price is not stated as a number (only 'Save 15% with annual billing').",
+  "Plan for SCIM is inferred from SSO being Enterprise-only; the pricing page does not name SCIM."
+ ]
+}

@@ -1,0 +1,239 @@
+{
+ "slug": "cornerstone",
+ "vendor": "Cornerstone OnDemand",
+ "vendor_url": "https://www.cornerstoneondemand.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Cornerstone OnDemand",
+  "slug": "cornerstone",
+  "category": "Learning & Development",
+  "status": "gated",
+  "scim_plan": "Contact Sales (quote-only)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales (no public pricing)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Contact Sales (quote-only)",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": null
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "sso_only",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": false
+  },
+  "pricing_page_url": "https://www.cornerstoneondemand.com/pricing/",
+  "docs_url": null,
+  "evidence": "Cornerstone publishes no pricing (its /pricing/ URL redirects to the LMS product page); Okta's Integration Network lists the Cornerstone OnDemand app with SAML, SCIM, Create, Update and Deactivate.",
+  "notes": "Quote-only: no public plans or prices; /pricing/ redirects to the learning-management product page, so SSO, provisioning and API access can only be bought through sales. SCIM evidence comes only from Okta's OIN page (SCIM, Create, Update, Deactivate checked); Cornerstone publishes no SCIM endpoint documentation (its help centre needs a customer login), so generic is false and confidence is low. Microsoft's Entra gallery app keeps SSO but its provisioning integration (built on the Cornerstone SOAP web service) is 'no longer supported' and being removed. The REST Employee/OU API is a separately purchased 'Cornerstone API' product (Edge Marketplace), OAuth 2.0 client-credentials only.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": null,
+  "user_api_available": true,
+  "user_api_plan": "Cornerstone API (separate purchase)",
+  "api_tax": true,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Contact Sales",
+   "price_text": "No public pricing; /pricing/ redirects to the LMS product page",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": ["c1", "c4", "c9"],
+   "notes": "Cornerstone API (REST) and Reporting API are each separate purchases."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": ["c2", "c3"],
+  "plan": "Contact Sales (quote-only)",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": null,
+  "base_url": null,
+  "auth": { "method": null, "token_source": null, "token_expiry": null, "cite": [] },
+  "endpoints": { "Users": null, "Groups": null, "ServiceProviderConfig": null, "Schemas": null, "ResourceTypes": null, "Bulk": null, "Me": null, "cite": [] },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": null,
+   "group_push": null,
+   "group_membership": null,
+   "cite": ["c2", "c3"],
+   "notes": "From Okta's OIN capability checkboxes (Create, Update, Deactivate, Schema Discovery), read from page markup."
+  },
+  "deprovision": { "action": null, "frees_seat": null, "revokes_sessions": null, "data_retained": null, "cite": [] },
+  "filtering": { "supported": null, "attributes": [], "cite": [] },
+  "pagination": { "supported": null, "max_page_size": null, "cite": [] },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": { "supported": null, "how": null },
+   "group": [],
+   "cite": []
+  },
+  "roles": { "supported": null, "how": null, "cite": [] },
+  "rate_limits": { "text": null, "cite": [] },
+  "limitations": [
+   { "text": "Microsoft says the Entra gallery provisioning integration is no longer supported and will be removed; SSO stays.", "cite": ["c6"] }
+  ],
+  "notes": "Availability is evidenced only by Okta's OIN page; Cornerstone's own SCIM documentation, if any, is not public."
+ },
+ "user_api": {
+  "available": true,
+  "cite": ["c8", "c9", "c10"],
+  "plan": "Cornerstone API (separate purchase)",
+  "api_tax": true,
+  "style": "REST",
+  "base_url": "https://{portal}.csod.com/services/api",
+  "docs_url": "https://csod.dev/reference/core-hr/",
+  "auth": {
+   "methods": ["oauth2_client_credentials"],
+   "scopes": ["Employee API - View", "Employee API - Edit"],
+   "cite": ["c8", "c11", "c12", "c14"]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": null,
+   "reactivate_user": true,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": ["c13", "c14", "c15", "c16", "c17"],
+   "notes": "Deactivation and rehire are handled through employment status (termination) and activation-period updates; groups are readable per employee only."
+  },
+  "endpoints": [
+   { "method": "GET", "path": "/x/users/v2/employees", "purpose": "Fetch employee records in bulk", "cite": ["c13"] },
+   { "method": "POST", "path": "/x/users/v2/employees", "purpose": "Create an employee record", "cite": ["c14"] },
+   { "method": "GET", "path": "/x/users/v2/employees/identifiers", "purpose": "Fetch employee identifiers in bulk", "cite": ["c10"] },
+   { "method": "PATCH", "path": "/x/users/v2/employees/{guid}", "purpose": "Update employee by GUID", "cite": ["c10"] },
+   { "method": "GET", "path": "/x/users/v2/employees/{id}/", "purpose": "Get an employee record", "cite": ["c15"] },
+   { "method": "PATCH", "path": "/x/users/v2/employees/{id}/", "purpose": "Update the core employee record", "cite": ["c15"] },
+   { "method": "GET", "path": "/x/users/v2/employees/{id}/activation-period", "purpose": "Get activation period", "cite": ["c16"] },
+   { "method": "PATCH", "path": "/x/users/v2/employees/{id}/activation-period", "purpose": "Update activation period", "cite": ["c16"] },
+   { "method": "GET", "path": "/x/users/v2/employees/{id}/groups", "purpose": "Groups an employee is in", "cite": ["c10"] },
+   { "method": "GET", "path": "/x/users/v2/employees/{id}/employment-status", "purpose": "Get user type and employment status", "cite": ["c17"] },
+   { "method": "PATCH", "path": "/x/users/v2/employees/{id}/employment-status", "purpose": "Update user type and employment status (termination, rehire)", "cite": ["c17"] },
+   { "method": "PUT", "path": "/x/authentication/v1/users/{userId}/password", "purpose": "Set user password", "cite": ["c10"] },
+   { "method": "GET", "path": "/x/organizations/v1/ous", "purpose": "List OUs", "cite": ["c10"] },
+   { "method": "POST", "path": "/x/organizations/v1/ous", "purpose": "Create OU", "cite": ["c10"] }
+  ],
+  "webhooks_user_events": {
+   "supported": true,
+   "events": ["Employee Created", "Employee Updated"],
+   "cite": ["c19"]
+  },
+  "audit_log_api": { "supported": null, "plan": null, "cite": [] },
+  "rate_limits": {
+   "text": "Foundational APIs: 417 requests per minute, 25,000 per hour, 600,000 per day; Employee and OU APIs have their own limits.",
+   "cite": ["c18"]
+  },
+  "limitations": [
+   { "text": "Only the OAuth 2.0 client-credentials grant is supported; access tokens last one hour by default.", "cite": ["c11", "c12"] },
+   { "text": "Reporting API is a separate purchase from Cornerstone API.", "cite": ["c9"] }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/cornerstone-ondemand/",
+   "cite": ["c2", "c3"],
+   "notes": "OIN page marks SAML, SWA, SCIM, Create, Update, Deactivate and Schema Discovery as checked (read from page markup). The overview text ('Provides competency assessments...') is generic."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/cornerstone-ondemand-tutorial",
+   "cite": ["c4", "c6", "c7"],
+   "notes": "Gallery app still says it supports automated provisioning, but the provisioning tutorial says the integration (Cornerstone SOAP web service, admin username/password) is no longer supported and will be removed."
+  },
+  "google": { "listed": null, "sso": null, "provisioning": null, "kind": null, "built_by": null, "url": null, "cite": [] },
+  "onelogin": { "listed": null, "sso": null, "provisioning": null, "kind": null, "built_by": null, "url": null, "cite": [] },
+  "jumpcloud": { "listed": null, "sso": null, "provisioning": null, "kind": null, "built_by": null, "url": null, "cite": [], "notes": "jumpcloud.com/support/integrate-with-cornerstone(-ondemand) returned no page." }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": "Bulk API for recurring system-to-system user/OU imports; Edge HRIS inbound integrations",
+  "docs_public": false,
+  "cite": ["c20"]
+ },
+ "citations": [
+  { "id": "c1", "url": "https://www.cornerstoneondemand.com/pricing/", "title": "Learning Management System | LMS Software for Scalable Employee Training - Cornerstone", "quote": "Learning Management System | LMS Software for Scalable Employee Training - Cornerstone", "accessed": "2026-10-05" },
+  { "id": "c2", "url": "https://www.okta.com/integrations/cornerstone-ondemand/", "title": "Integrate Cornerstone OnDemand with Okta", "quote": "Add this integration to enable authentication and provisioning capabilities.", "accessed": "2026-10-05" },
+  { "id": "c3", "url": "https://www.okta.com/integrations/cornerstone-ondemand/", "title": "Integrate Cornerstone OnDemand with Okta", "quote": "Provides competency assessments to identify skill gaps within an organization.", "accessed": "2026-10-05" },
+  { "id": "c4", "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/cornerstone-ondemand-tutorial", "title": "Configure Cornerstone for Single sign-on with Microsoft Entra ID", "quote": "Cornerstone supports SP initiated SSO.", "accessed": "2026-10-05" },
+  { "id": "c5", "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/cornerstone-ondemand-tutorial", "title": "Configure Cornerstone for Single sign-on with Microsoft Entra ID", "quote": "Cornerstone supports Automated user provisioning", "accessed": "2026-10-05" },
+  { "id": "c6", "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/cornerstone-ondemand-provisioning-tutorial", "title": "Configure Cornerstone OnDemand for automatic user provisioning with Microsoft Entra ID", "quote": "This provisioning integration is no longer supported. As a result of this, the provisioning functionality of the Cornerstone OnDemand application in the Microsoft Entra Enterprise App Gallery is removed soon. The application's SSO functionality will remain intact.", "accessed": "2026-10-05" },
+  { "id": "c7", "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/cornerstone-ondemand-provisioning-tutorial", "title": "Configure Cornerstone OnDemand for automatic user provisioning with Microsoft Entra ID", "quote": "The Microsoft Entra provisioning integration relies on the Cornerstone OnDemand web service", "accessed": "2026-10-05" },
+  { "id": "c8", "url": "https://csod.dev/guides/getting-started", "title": "Introduction | Cornerstone API", "quote": "The APIs are RESTful, support modern authentication and authorization using OAuth 2.0, and support JSON (and in some cases XML as well).", "accessed": "2026-10-05" },
+  { "id": "c9", "url": "https://csod.dev/faq", "title": "FAQ | Cornerstone API", "quote": "When you purchase Cornerstone API, you get access to the following:", "accessed": "2026-10-05", "interaction": "click 'What APIs do I get access to when I purchase Cornerstone APIs?'" },
+  { "id": "c10", "url": "https://csod.dev/reference/core-hr/", "title": "Cornerstone Reference: Core and HR APIs", "quote": "As a part of our foundational API package, use the Cornerstone Core and HR APIs to programatically control user data, included employee information, OU information, and approvals.", "accessed": "2026-10-05" },
+  { "id": "c11", "url": "https://csod.dev/faq", "title": "FAQ | Cornerstone API", "quote": "Currently, Cornerstone only supports the client credential grant type with it's OAuth 2.0 authentication and authorization framework for APIs.", "accessed": "2026-10-05", "interaction": "click 'What grant types does Cornerstone support with its OAuth2 framework for APIs?'" },
+  { "id": "c12", "url": "https://csod.dev/faq", "title": "FAQ | Cornerstone API", "quote": "By default, the OAuth 2.0 access token is valid for an hour (3600 seconds).", "accessed": "2026-10-05", "interaction": "click 'How long does an OAuth2 access token remain active?'" },
+  { "id": "c13", "url": "https://csod.dev/reference/core-hr/", "title": "Cornerstone Reference: Core and HR APIs", "quote": "Use this endpoint to fetch employee records in bulk. All query parameters are optional.", "accessed": "2026-10-05" },
+  { "id": "c14", "url": "https://csod.dev/reference/core-hr/", "title": "Cornerstone Reference: Core and HR APIs", "quote": "You can use this endpoint to create new employee records in Cornerstone. You can only create one record per request.", "accessed": "2026-10-05" },
+  { "id": "c15", "url": "https://csod.dev/reference/core-hr/", "title": "Cornerstone Reference: Core and HR APIs", "quote": "This endpoint allows you to get and update a single employee record containing the bulk of the information about the employee using a unique identifier.", "accessed": "2026-10-05" },
+  { "id": "c16", "url": "https://csod.dev/reference/core-hr/", "title": "Cornerstone Reference: Core and HR APIs", "quote": "Use this endpoint to update the activation period for an employee.", "accessed": "2026-10-05" },
+  { "id": "c17", "url": "https://csod.dev/reference/core-hr/", "title": "Cornerstone Reference: Core and HR APIs", "quote": "Use this endpoint to fetch and update an employee's user type and employment status, including termination and rehire information", "accessed": "2026-10-05" },
+  { "id": "c18", "url": "https://csod.dev/reference/core-hr/", "title": "Cornerstone Reference: Core and HR APIs", "quote": "The throttling limit across all Foundational APIs is 417 requests per minute, 25,000 requests per hour and 600,000 requests per day.", "accessed": "2026-10-05" },
+  { "id": "c19", "url": "https://csod.dev/guides/webhooks/event-payload-samples.html", "title": "Event Payload Samples | Cornerstone API", "quote": "Employee Created", "accessed": "2026-10-05" },
+  { "id": "c20", "url": "https://csod.dev/", "title": "Cornerstone Developer Portal", "quote": "Leverage our Bulk API to reliably import large amounts of data into Cornerstone, either one-time or as a recurring system-to-system sync.", "accessed": "2026-10-05" }
+ ],
+ "conflicts": [
+  { "text": "Microsoft's Entra SSO tutorial still says Cornerstone supports automated user provisioning, while the provisioning tutorial says that integration is no longer supported and will be removed.", "cite": ["c5", "c6"] }
+ ],
+ "searched": [
+  "https://www.cornerstoneondemand.com/pricing/ (redirects to /platform/learning-management-lms/)",
+  "https://www.cornerstoneondemand.com/sitemap.xml (pages and resources sitemaps: no SCIM, SSO or provisioning pages)",
+  "https://csod.dev/ (developer portal: guides, Core/HR reference, FAQ, webhooks)",
+  "https://csod.dev/reference/core-hr/ (no SCIM endpoints)",
+  "help.csod.com (customer help centre requires login; not searchable)",
+  "https://www.okta.com/integrations/cornerstone-ondemand/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/cornerstone-ondemand-tutorial",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/cornerstone-ondemand-provisioning-tutorial",
+  "https://jumpcloud.com/support/integrate-with-cornerstone-ondemand (no page)"
+ ],
+ "open_questions": [
+  "Cornerstone publishes no SCIM documentation: base URL, auth, attributes and deprovisioning behaviour are unknown; whether Okta's app uses SCIM or the Cornerstone API is not stated beyond the OIN checkbox.",
+  "Whether SSO, SCIM or Okta provisioning cost extra on a Cornerstone contract is not public.",
+  "Google Workspace, OneLogin and JumpCloud catalogue entries not found or not checked.",
+  "No audit-log API found in the public developer portal."
+ ]
+}

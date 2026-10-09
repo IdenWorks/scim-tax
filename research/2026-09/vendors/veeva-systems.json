@@ -1,0 +1,928 @@
+{
+ "slug": "veeva-systems",
+ "vendor": "Veeva Vault (Veeva Systems)",
+ "vendor_url": "https://www.veeva.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Veeva Vault (Veeva Systems)",
+  "slug": "veeva-systems",
+  "category": "Vertical SaaS (Healthcare, Education, Real Estate, Construction, Field Service)",
+  "status": "free",
+  "scim_plan": "Any Vault (Vault API)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Vault (quote-based)",
+  "team_price_text": "Contact Sales",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Any Vault",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": false
+  },
+  "idp": {
+   "okta": "sso_only",
+   "entra": null,
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.veeva.com/products/vault-platform/",
+  "docs_url": "https://general.veevavault.dev/vault-api/api-reference/26.2/scim",
+  "evidence": "Vault API's reference says 'Vault API is based on SCIM 2.0. All SCIM endpoints require a Vault session ID which can be used as Bearer tokens', with no plan or licence restriction stated.",
+  "notes": "Changed from gated to free (judgement call, medium confidence): Veeva has no public pricing or plan tiers, and SCIM 2.0 (/api/{version}/scim/v2: Users, Me, ServiceProviderConfig, Schemas, ResourceTypes) is part of the standard Vault API with no edition or add-on gate documented. June's 'Vault Enterprise per 18R2' gate and the $50-$200/user industry estimate have no first-party source and were dropped. SCIM has no PATCH, Bulk or Groups; roles via securityProfile. Okta OIN app is SSO only per its text.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Any Vault (Vault API)",
+  "api_tax": false,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Vault (per application, quote-based)",
+   "price_text": "Contact Sales; no public price list or plan tiers",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c1",
+    "c2",
+    "c3",
+    "c47",
+    "c52",
+    "c34"
+   ],
+   "notes": "Veeva publishes no pricing page or tier table. SCIM, the Vault REST API and audit-trail endpoints are part of the standard Vault API reference with no plan or licence restriction stated; API calls need a user whose security profile grants API Access."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c3",
+   "c11"
+  ],
+  "plan": "Any Vault (Vault API)",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://{vaultDNS}/api/{version}/scim/v2",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Vault session ID (from /api/{version}/auth or an API access token) used as the Bearer token; the user needs the API Access permission",
+   "token_expiry": null,
+   "cite": [
+    "c3",
+    "c7",
+    "c47"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": false,
+   "ServiceProviderConfig": true,
+   "Schemas": true,
+   "ResourceTypes": true,
+   "Bulk": false,
+   "Me": true,
+   "cite": [
+    "c11",
+    "c17",
+    "c18",
+    "c19",
+    "c15",
+    "c8",
+    "c9",
+    "c5"
+   ],
+   "notes": "Resource types are User and SecurityProfile only; no Group resource. ServiceProviderConfig reports bulk unsupported."
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": false,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": null,
+   "group_push": false,
+   "group_membership": false,
+   "cite": [
+    "c11",
+    "c12",
+    "c14",
+    "c5",
+    "c10",
+    "c45",
+    "c8",
+    "c9"
+   ],
+   "notes": "Deactivate/reactivate inferred from the core 'active' attribute being readWrite and PUT accepting any editable attribute. No SCIM DELETE endpoint is documented."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c10",
+    "c45"
+   ],
+   "notes": "Setting active=false via PUT. Outside SCIM, DELETE /api/{version}/objects/users/{user_id} disables (not deletes) the user in one Vault or across the domain."
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "any attribute with eq (e.g. userName)"
+   ],
+   "cite": [
+    "c42",
+    "c6"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c43",
+    "c6"
+   ],
+   "notes": "count/startIndex; count defaults to 1000 and ServiceProviderConfig reports maxResults 1000."
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "emails[type eq \"work\"].value",
+    "displayName",
+    "active",
+    "preferredLanguage",
+    "locale",
+    "timezone"
+   ],
+   "enterprise": [
+    "manager"
+   ],
+   "custom": {
+    "supported": true,
+    "how": "Veeva extension schema urn:ietf:params:scim:schemas:extension:veevavault:2.0:User carries securityProfile, securityPolicy, licenseType and extendedAttributes (name/value pairs for other user__sys fields such as is_asset_portal_user__sys)."
+   },
+   "group": [],
+   "cite": [
+    "c35",
+    "c36",
+    "c37",
+    "c38",
+    "c39",
+    "c40",
+    "c41",
+    "c44",
+    "c10"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "securityProfile (required on create) sets the user's Vault security profile; SecurityProfiles is a readable SCIM resource type. licenseType sets the licence (default full__v).",
+   "cite": [
+    "c37",
+    "c38",
+    "c8"
+   ]
+  },
+  "rate_limits": {
+   "text": "Vault-wide burst limit per fixed 5-minute window (example 2,000 requests), then responses are delayed.",
+   "cite": [
+    "c48",
+    "c49"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "No PATCH and no Bulk (ServiceProviderConfig).",
+    "cite": [
+     "c5"
+    ]
+   },
+   {
+    "text": "No SCIM Group resource; groups must be managed with the non-SCIM groups API.",
+    "cite": [
+     "c8",
+     "c9"
+    ]
+   },
+   {
+    "text": "userName domain must match the Vault, and only the 'work' email type is supported.",
+    "cite": [
+     "c35",
+     "c36"
+    ]
+   },
+   {
+    "text": "Filtering supports only single 'eq' expressions.",
+    "cite": [
+     "c42"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c47",
+   "c2",
+   "c21"
+  ],
+  "plan": "Any Vault (Vault API)",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://{vaultDNS}/api/{version}",
+  "docs_url": "https://general.veevavault.dev/vault-api/api-reference/26.2/users",
+  "auth": {
+   "methods": [
+    "session_id",
+    "api_access_token"
+   ],
+   "scopes": [],
+   "cite": [
+    "c3",
+    "c47"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": false,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c21",
+    "c22",
+    "c23",
+    "c24",
+    "c25",
+    "c46",
+    "c30",
+    "c37"
+   ],
+   "notes": "DELETE /objects/users/{user_id} disables rather than deletes, so delete_user is false. Roles are set through security profile fields."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/api/{version}/objects/users",
+    "purpose": "Retrieve all users",
+    "cite": [
+     "c21"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/{version}/objects/users/{id}",
+    "purpose": "Retrieve a user",
+    "cite": [
+     "c22"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/{version}/objects/users",
+    "purpose": "Create one or more users",
+    "cite": [
+     "c23"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/{version}/objects/users/{id}",
+    "purpose": "Update a user",
+    "cite": [
+     "c24"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/{version}/objects/users/{user_id}",
+    "purpose": "Disable a user in one Vault or all Vaults in the domain",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/{version}/objects/users/{user_id}/vault_membership/{vault_id}",
+    "purpose": "Update a user's membership in a Vault",
+    "cite": [
+     "c26"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/{version}/objects/users/{id}/permissions",
+    "purpose": "Retrieve a user's permissions",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/{version}/objects/licenses",
+    "purpose": "Retrieve licence usage vs purchased licences",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/{version}/objects/groups",
+    "purpose": "List groups",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/{version}/objects/groups",
+    "purpose": "Create a group",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/{version}/objects/groups/{group_id}",
+    "purpose": "Update a group (incl. members)",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/{version}/objects/groups/{group_id}",
+    "purpose": "Delete a group",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/{version}/metadata/audittrail",
+    "purpose": "List audit trail types",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/{version}/audittrail/{audit_trail_type}",
+    "purpose": "Retrieve audit trail details (past 30 days)",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/{version}/scim/v2/Users",
+    "purpose": "SCIM: create user",
+    "cite": [
+     "c11"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/{version}/scim/v2/Users",
+    "purpose": "SCIM: list users",
+    "cite": [
+     "c12"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/{version}/scim/v2/Users/{id}",
+    "purpose": "SCIM: get user",
+    "cite": [
+     "c13"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/{version}/scim/v2/Users/{id}",
+    "purpose": "SCIM: replace user",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/{version}/scim/v2/Me",
+    "purpose": "SCIM: current user",
+    "cite": [
+     "c15"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/{version}/scim/v2/ServiceProviderConfig",
+    "purpose": "SCIM: ServiceProviderConfig",
+    "cite": [
+     "c17"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Any Vault (Vault API)",
+   "cite": [
+    "c50",
+    "c33"
+   ]
+  },
+  "rate_limits": {
+   "text": "Burst limit per fixed 5-minute window (example 2,000); /auth has its own 1-minute burst limit.",
+   "cite": [
+    "c48",
+    "c49"
+   ]
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/veeva-vault/",
+   "cite": [
+    "c51"
+   ],
+   "notes": "OIN overview text says the connector does not support Vault's SCIM endpoint, although the page markup also checks SAML, SWA, SCIM, Create, Update and Deactivate (see conflicts)."
+  },
+  "entra": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c3"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.veeva.com/products/vault-platform/",
+   "title": "Veeva Vault Platform | Veeva",
+   "quote": "Manages data, content, and agents in a single platform.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.veeva.com/products/vault-platform/",
+   "title": "Veeva Vault Platform | Veeva",
+   "quote": "Integrate with other systems using the Vault API, and fuel analytics and AI with Direct Data API.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/scim",
+   "title": "SCIM | Vault Developer Portal",
+   "quote": "Vault API is based on SCIM 2.0. All SCIM endpoints require a Vault session ID which can be used as Bearer tokens.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/scim/discovery-endpoints/retrieve-scim-provider",
+   "title": "Retrieve SCIM Provider",
+   "quote": "Retrieve a JSON that describes the SCIM specification features available on the currently authenticated Vault.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/scim/discovery-endpoints/retrieve-scim-provider",
+   "title": "Retrieve SCIM Provider",
+   "quote": "\"patch\": { \"supported\": false }, \"bulk\": { \"supported\": false,",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/scim/discovery-endpoints/retrieve-scim-provider",
+   "title": "Retrieve SCIM Provider",
+   "quote": "\"filter\": { \"supported\": false, \"maxResults\": 1000 }",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/scim/discovery-endpoints/retrieve-scim-provider",
+   "title": "Retrieve SCIM Provider",
+   "quote": "\"name\": \"OAuth Bearer Token\", \"description\": \"Authentication scheme using the OAuth Bearer Token Standard\"",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/scim/discovery-endpoints/retrieve-all-scim-resource-types",
+   "title": "Retrieve All SCIM Resource Types",
+   "quote": "\"id\": \"SecurityProfile\", \"name\": \"SecurityProfile\",",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/scim/discovery-endpoints/retrieve-all-scim-resource-types",
+   "title": "Retrieve All SCIM Resource Types",
+   "quote": "\"id\": \"User\", \"name\": \"User\",",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/scim/discovery-endpoints/retrieve-all-scim-schema-information",
+   "title": "Retrieve All SCIM Schema Information",
+   "quote": "\"name\": \"active\", \"type\": \"boolean\", \"multiValued\": false, \"description\": \"A Boolean value indicating the User's administrative status.\", \"required\": false, \"caseExact\": true, \"mutability\": \"readWrite\",",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/scim/users/create-user-with-scim",
+   "title": "Create User with SCIM | Vault Developer Portal",
+   "quote": "POST /api/{version}/scim/v2/Users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/scim/users/retrieve-all-users-with-scim",
+   "title": "Retrieve All Users with SCIM | Vault Developer Portal",
+   "quote": "GET /api/{version}/scim/v2/Users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/scim/users/retrieve-single-user-with-scim",
+   "title": "Retrieve Single User with SCIM | Vault Developer Portal",
+   "quote": "GET /api/{version}/scim/v2/Users/{id}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/scim/users/update-user-with-scim",
+   "title": "Update User with SCIM | Vault Developer Portal",
+   "quote": "PUT /api/{version}/scim/v2/Users/{id}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/scim/users/retrieve-current-user-with-scim",
+   "title": "Retrieve Current User with SCIM | Vault Developer Portal",
+   "quote": "GET /api/{version}/scim/v2/Me",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/scim/users/update-current-user-with-scim",
+   "title": "Update Current User with SCIM | Vault Developer Portal",
+   "quote": "PUT /api/{version}/scim/v2/Me",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/scim/discovery-endpoints/retrieve-scim-provider",
+   "title": "Retrieve SCIM Provider | Vault Developer Portal",
+   "quote": "GET /api/{version}/scim/v2/ServiceProviderConfig",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/scim/discovery-endpoints/retrieve-all-scim-schema-information",
+   "title": "Retrieve All SCIM Schema Information | Vault Developer Portal",
+   "quote": "GET /api/{version}/scim/v2/Schemas",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/scim/discovery-endpoints/retrieve-all-scim-resource-types",
+   "title": "Retrieve All SCIM Resource Types | Vault Developer Portal",
+   "quote": "GET /api/{version}/scim/v2/ResourceTypes",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/scim/users/retrieve-scim-resources",
+   "title": "Retrieve SCIM Resources | Vault Developer Portal",
+   "quote": "GET /api/{version}/scim/v2/{type}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/users/retrieve-all-users",
+   "title": "Retrieve All Users | Vault Developer Portal",
+   "quote": "GET /api/{version}/objects/users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/users/retrieve-user",
+   "title": "Retrieve User | Vault Developer Portal",
+   "quote": "GET /api/{version}/objects/users/{id}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/users/create-users/create-single-user",
+   "title": "Create Single User | Vault Developer Portal",
+   "quote": "POST /api/{version}/objects/users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/users/update-users/update-single-user",
+   "title": "Update Single User | Vault Developer Portal",
+   "quote": "PUT /api/{version}/objects/users/{id}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/users/disable-user",
+   "title": "Disable User | Vault Developer Portal",
+   "quote": "DELETE /api/{version}/objects/users/{user_id}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/users/update-vault-membership",
+   "title": "Update Vault Membership | Vault Developer Portal",
+   "quote": "PUT /api/{version}/objects/users/{user_id}/vault_membership/{vault_id}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/users/retrieve-application-license-usage",
+   "title": "Retrieve Application License Usage | Vault Developer Portal",
+   "quote": "GET /api/{version}/objects/licenses",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/users/retrieve-user-permissions",
+   "title": "Retrieve User Permissions | Vault Developer Portal",
+   "quote": "GET /api/{version}/objects/users/{id}/permissions",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/groups/retrieve-all-groups",
+   "title": "Retrieve All Groups | Vault Developer Portal",
+   "quote": "GET /api/{version}/objects/groups",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/groups/create-group",
+   "title": "Create Group | Vault Developer Portal",
+   "quote": "POST /api/{version}/objects/groups",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/groups/update-group",
+   "title": "Update Group | Vault Developer Portal",
+   "quote": "PUT /api/{version}/objects/groups/{group_id}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/groups/delete-group",
+   "title": "Delete Group | Vault Developer Portal",
+   "quote": "DELETE /api/{version}/objects/groups/{group_id}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/logs/audit/retrieve-audit-types",
+   "title": "Retrieve Audit Types | Vault Developer Portal",
+   "quote": "GET /api/{version}/metadata/audittrail",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/logs/audit/retrieve-audit-details",
+   "title": "Retrieve Audit Details | Vault Developer Portal",
+   "quote": "GET /api/{version}/audittrail/{audit_trail_type}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c35",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/scim/users/create-user-with-scim",
+   "title": "Create User with SCIM",
+   "quote": "Must be in the format name@domain.com , and the domain must match the Vault.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/scim/users/create-user-with-scim",
+   "title": "Create User with SCIM",
+   "quote": "The email type, which is work . Other types are not supported.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/scim/users/create-user-with-scim",
+   "title": "Create User with SCIM",
+   "quote": "securityProfile Required A JSON object with the user’s security profile, set with the value sub-attribute.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c38",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/scim/users/create-user-with-scim",
+   "title": "Create User with SCIM",
+   "quote": "licenseType Optional A JSON object with the user’s license type, set with the value sub-attribute. If omitted, defaults to full__v .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c39",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/scim/users/create-user-with-scim",
+   "title": "Create User with SCIM",
+   "quote": "securityPolicy Optional A JSON object with the user’s security policy, set with the value sub-attribute. If omitted, defaults to Basic .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c40",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/scim/users/create-user-with-scim",
+   "title": "Create User with SCIM",
+   "quote": "timezone Required The user’s timezone, for example, America/Los_Angeles .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c41",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/scim/users/create-user-with-scim",
+   "title": "Create User with SCIM",
+   "quote": "\"extendedAttributes\": [ { \"name\": \"is_asset_portal_user__sys\", \"value\": \"false\" } ]",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c42",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/scim/users/retrieve-all-users-with-scim",
+   "title": "Retrieve All Users with SCIM",
+   "quote": "Complex expressions are not supported, and eq is the only supported operator.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c43",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/scim/users/retrieve-all-users-with-scim",
+   "title": "Retrieve All Users with SCIM",
+   "quote": "Specify the number of query results per page, for example, 10 . Negative values are treated as 0 , and 0 returns no results except for totalResults . If omitted, defaults to 1000 .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c44",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/scim/users/retrieve-all-users-with-scim",
+   "title": "Retrieve All Users with SCIM",
+   "quote": "\"urn:ietf:params:scim:schemas:extension:enterprise:2.0:User\": { \"manager\": \"61603\" }",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c45",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/scim/users/update-user-with-scim",
+   "title": "Update User with SCIM",
+   "quote": "You can include any editable attribute. Invalid attributes are ignored.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c46",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/users/disable-user",
+   "title": "Disable User",
+   "quote": "Disable a user in a specific Vault or disable a user in all Vaults in the domain.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c47",
+   "url": "https://general.veevavault.dev/vault-api/getting-started/prerequisites",
+   "title": "Prerequisites | Vault Developer Portal",
+   "quote": "To make API calls against Vault, you need a Vault user account with API access.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c48",
+   "url": "https://general.veevavault.dev/vault-api/references/api-rate-limits",
+   "title": "Vault API Rate Limits",
+   "quote": "Burst Limit is the number of API calls that your Vault can receive within a fixed 5-minute period.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c49",
+   "url": "https://general.veevavault.dev/vault-api/references/api-rate-limits",
+   "title": "Vault API Rate Limits",
+   "quote": "For example, a Vault might allow 2,000 API requests within a 5-minute window.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c50",
+   "url": "https://general.veevavault.dev/vault-api/api-reference/26.2/logs/audit/retrieve-audit-details",
+   "title": "Retrieve Audit Details",
+   "quote": "Retrieve all audit details for a specific audit type. This request supports optional parameters to narrow the results to a specified date and time within the past 30 days.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c51",
+   "url": "https://www.okta.com/integrations/veeva-vault/",
+   "title": "Veeva Vault | Okta Integration Network",
+   "quote": "Using Okta's connector, you can quickly and securely deploy Single Sign-On (SSO) across Veeva Vault applications. The connector does not currently support Veeva Vault's SCIM endpoint for user provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c52",
+   "url": "https://platform.veevavault.help/en/gr/13977/",
+   "title": "Configuring Single Sign-on | Veeva Vault Help",
+   "quote": "Federated ID",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "Okta's OIN page text says the Veeva Vault connector does not support Vault's SCIM endpoint, while the same page's capability markup checks SCIM, Create, Update and Deactivate.",
+   "cite": [
+    "c51"
+   ]
+  },
+  {
+   "text": "ServiceProviderConfig example reports filter supported: false, while Retrieve All Users with SCIM documents an eq filter parameter. Recorded the endpoint docs.",
+   "cite": [
+    "c6",
+    "c42"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.veeva.com/pricing/ (404)",
+  "https://www.veeva.com/products/ (redirects to home)",
+  "https://general.veevavault.dev/llms.txt",
+  "platform.veevavault.help search API: scim (no SCIM article), user provisioning, single sign-on",
+  "https://www.okta.com/integrations/veeva-vault/",
+  "learn.microsoft.com Veeva Vault tutorials (404) and Learn search"
+ ],
+ "open_questions": [
+  "Whether SCIM or the Vault API carries any licence or edition requirement (no public pricing; June's 'Vault Enterprise per 18R2' claim had no first-party source).",
+  "Whether SCIM deactivation frees a licence or ends sessions; no SCIM DELETE documented.",
+  "Whether Vault creates users just in time on SSO sign-in (Federated ID mapping only seen).",
+  "Whether Veeva Vault is in the Entra gallery, Google, OneLogin or JumpCloud catalogues."
+ ]
+}

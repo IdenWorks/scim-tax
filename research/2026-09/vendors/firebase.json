@@ -1,0 +1,417 @@
+{
+ "slug": "firebase",
+ "vendor": "Firebase",
+ "vendor_url": "https://firebase.google.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Firebase",
+  "slug": "firebase",
+  "category": "Cloud, Infrastructure & Observability",
+  "status": "none",
+  "scim_plan": "—",
+  "scim_price_text": "—",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Blaze",
+  "team_price_text": "Blaze: pay as you go (usage-based)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": null,
+  "idp": {
+   "okta": "none",
+   "entra": null,
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": false
+  },
+  "pricing_page_url": "https://firebase.google.com/pricing",
+  "docs_url": null,
+  "evidence": "Firebase's IAM docs say project members are Google accounts, service accounts or Google groups assigned roles in the console or via Google Cloud IAM; no SCIM endpoint appears on the pricing page, in the docs sitemap or the IAM/API docs.",
+  "notes": "Usage-priced (Spark no-cost, Blaze pay as you go), no per-seat plans, so per-user fields stay null. Console access is via Google accounts; project membership is managed through Google Cloud IAM (console or Resource Manager projects.setIamPolicy), so workforce provisioning happens upstream in Google Workspace/Cloud Identity rather than in Firebase. Granting Google groups lets group membership drive access. Firebase Authentication's SAML/OIDC MAUs on the pricing page are end-user auth for customers' apps, not workforce SSO. Okta's OIN 'Firebase' app is SWA only. Cloud Audit Logs record Firebase Management admin activity.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Spark",
+   "price_text": "No-cost",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1"
+   ]
+  },
+  {
+   "name": "Blaze",
+   "price_text": "Pay as you go",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c3"
+   ],
+   "notes": "Usage-based billing."
+  }
+ ],
+ "scim": {
+  "available": null,
+  "cite": [],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": null,
+  "base_url": null,
+  "notes": "No SCIM in the Firebase docs sitemap (30,194 URLs, none matching 'scim'), pricing page or IAM docs.",
+  "auth": {
+   "method": null,
+   "token_source": null,
+   "token_expiry": null,
+   "cite": []
+  },
+  "endpoints": {
+   "Users": null,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": []
+  },
+  "operations": {
+   "create": null,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": null,
+   "reactivate": null,
+   "delete": null,
+   "group_push": null,
+   "group_membership": null,
+   "cite": []
+  },
+  "deprovision": {
+   "action": null,
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": []
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": []
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": []
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c5",
+   "c8",
+   "c9"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://cloudresourcemanager.googleapis.com/v3",
+  "docs_url": "https://firebase.google.com/docs/projects/iam/overview",
+  "notes": "Project membership is an IAM policy on the Google Cloud project; there is no Firebase-specific member API.",
+  "auth": {
+   "methods": [
+    "oauth2"
+   ],
+   "scopes": [
+    "https://www.googleapis.com/auth/cloud-platform",
+    "https://www.googleapis.com/auth/cloudplatformprojects"
+   ],
+   "cite": [
+    "c11"
+   ]
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c5",
+    "c8"
+   ],
+   "notes": "Roles are granted/revoked to Google accounts, service accounts and Google groups by replacing the project IAM policy; Owner cannot be granted via setIamPolicy."
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/v3/{resource=projects/*}:setIamPolicy",
+    "purpose": "Replace the project IAM policy (grant or remove member roles)",
+    "cite": [
+     "c8",
+     "c9",
+     "c14"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": null,
+   "cite": [
+    "c13"
+   ],
+   "notes": "Via Google Cloud Audit Logs (Cloud Logging), service firebase.googleapis.com."
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Owner role cannot be granted through setIamPolicy; the user must be invited in the console and accept.",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "text": "setIamPolicy replaces the whole policy rather than appending.",
+    "cite": [
+     "c14"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": false,
+   "provisioning": false,
+   "kind": "swa",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/firebase/",
+   "cite": [
+    "c12"
+   ],
+   "notes": "OIN page marks SWA only (no SAML, OIDC or SCIM)."
+  },
+  "entra": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "learn.microsoft.com/.../firebase-tutorial returns 404."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "Firebase members are Google accounts and Google groups natively; no separate catalogue app."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "jumpcloud.com/integrations/firebase returns 404."
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": "Access follows Google accounts and Google groups (Google Workspace / Cloud Identity) granted IAM roles on the project",
+  "docs_public": true,
+  "cite": [
+   "c4",
+   "c6"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://firebase.google.com/pricing",
+   "title": "Firebase Pricing",
+   "quote": "No-cost (Spark plan)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://firebase.google.com/pricing",
+   "title": "Firebase Pricing",
+   "quote": "Pay as you go (Blaze plan)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://firebase.google.com/pricing",
+   "title": "Firebase Pricing",
+   "quote": "Access more services and higher usage levels",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://firebase.google.com/docs/projects/iam/overview",
+   "title": "Manage project access with Firebase IAM",
+   "quote": "Project members can be of the following types: Google account Service account Google group",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://firebase.google.com/docs/projects/iam/overview",
+   "title": "Manage project access with Firebase IAM",
+   "quote": "To manage the role(s) assigned to each project member, you must be an Owner of the Firebase project (or be assigned a role with the permission resourcemanager.projects.setIamPolicy).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://firebase.google.com/docs/projects/iam/overview",
+   "title": "Manage project access with Firebase IAM",
+   "quote": "The Firebase console offers a simplified way to assign roles to project members in the",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://firebase.google.com/docs/projects/iam/overview",
+   "title": "Manage project access with Firebase IAM",
+   "quote": "Custom roles: Fully customized roles that you create to tailor a set of permissions that meet the specific requirements of your organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.cloud.google.com/resource-manager/reference/rest/v3/projects/setIamPolicy",
+   "title": "Method: projects.setIamPolicy",
+   "quote": "Sets the IAM access control policy for the specified project, in the format projects/{ProjectIdOrNumber} e.g. projects/123.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.cloud.google.com/resource-manager/reference/rest/v3/projects/setIamPolicy",
+   "title": "Method: projects.setIamPolicy",
+   "quote": "POST https://cloudresourcemanager.googleapis.com/v3/{resource=projects/*}:setIamPolicy",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.cloud.google.com/resource-manager/reference/rest/v3/projects/setIamPolicy",
+   "title": "Method: projects.setIamPolicy",
+   "quote": "A user cannot be granted the owner role using setIamPolicy(). The user must be granted the owner role using the Cloud Platform Console and must explicitly accept the invitation.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.cloud.google.com/resource-manager/reference/rest/v3/projects/setIamPolicy",
+   "title": "Method: projects.setIamPolicy",
+   "quote": "https://www.googleapis.com/auth/cloud-platform",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://www.okta.com/integrations/firebase/",
+   "title": "Firebase with Okta",
+   "quote": "Firebase gives you the tools and infrastructure you need to build better apps and grow successful businesses.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://firebase.google.com/docs/projects/cloud-audit-logs",
+   "title": "Cloud Audit Logs for Firebase Management",
+   "quote": "Firebase Management audit logs use the service name firebase.googleapis.com.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.cloud.google.com/resource-manager/reference/rest/v3/projects/setIamPolicy",
+   "title": "Method: projects.setIamPolicy",
+   "quote": "CAUTION: This method will replace the existing policy, and cannot be used to append additional IAM settings.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://firebase.google.com/pricing (rendered)",
+  "https://firebase.google.com/sitemap.xml (both child sitemaps; no 'scim' URLs)",
+  "https://firebase.google.com/docs/projects/iam/overview",
+  "https://docs.cloud.google.com/resource-manager/reference/rest/v3/projects/setIamPolicy (API reference)",
+  "https://firebase.google.com/docs/projects/cloud-audit-logs",
+  "https://www.okta.com/integrations/firebase/ (SWA only)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/firebase-tutorial (404)",
+  "https://www.jumpcloud.com/integrations/firebase (404)",
+  "https://firebase.google.com/support/faq (help/FAQ)"
+ ],
+ "open_questions": [
+  "Whether Google Cloud Workforce Identity Federation can be used for Firebase console sign-in (not stated in Firebase docs).",
+  "IAM API quotas not checked."
+ ]
+}

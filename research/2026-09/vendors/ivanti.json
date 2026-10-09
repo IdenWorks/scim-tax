@@ -1,0 +1,813 @@
+{
+ "slug": "ivanti",
+ "vendor": "Ivanti (Neurons for MDM)",
+ "vendor_url": "https://www.ivanti.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Ivanti (Neurons for MDM)",
+  "slug": "ivanti",
+  "category": "IT Management & Endpoint",
+  "status": "gated",
+  "scim_plan": "Ivanti Neurons for MDM (quote-only)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Ivanti Neurons for MDM (quote-only)",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": false,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.ivanti.com/company/how-to-buy",
+  "docs_url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-with-scim",
+  "evidence": "Ivanti Neurons for MDM 'User Provisioning uses the SCIM protocol to automatically create and update user and group objects sourced from an IdP'; Ivanti publishes no prices ('Get a Quote. Contact our sales team to get started.').",
+  "notes": "Quote-only: Ivanti publishes no plans or prices; every product is bought through sales, so SCIM is gated at low confidence. Ivanti is a multi-product suite; this row covers Ivanti Neurons for MDM (UEM, formerly MobileIron Cloud), whose SCIM 2.0 endpoint backs the Okta OIN 'Ivanti' app (SCIM create/update/deactivate/group push) and an Entra non-gallery app. Deleting a user in the IdP only soft-deletes (sets inactive) in MDM; hard delete is manual. Nested groups and OUs are not supported. The separate Ivanti Neurons platform also offers SCIM v2 (Okta, Entra ID, PingOne; OAuth2 client credentials) and requires external SAML authentication to be active first. Ivanti Neurons for ITSM (Ivanti Service Manager) is JIT on SAML per Microsoft's Entra tutorial. MDM also has a REST Customer Integration API to create, invite, update and delete users.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Ivanti Neurons for MDM",
+   "price_text": "Contact Sales (Get a Quote)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c30",
+    "c1",
+    "c18",
+    "c31"
+   ],
+   "notes": "No public tier table; SAML and SCIM are documented product features."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c1",
+   "c3",
+   "c30"
+  ],
+  "plan": "Ivanti Neurons for MDM (quote-only)",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": null,
+  "notes": "Version taken from the documented SCIM 2.0 schema URNs (enterprise:2.0, ivanti:2.0). The 'Target SCIM URL' is generated per tenant in the admin portal; its pattern is not published.",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Admin > Identity > User Provisioning > select IdP > Generate (token + Target SCIM URL); max 2 tokens; tokens can be set active/inactive, renewed or removed",
+   "token_expiry": null,
+   "cite": [
+    "c2",
+    "c3",
+    "c8",
+    "c16"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c1",
+    "c12"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": false,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c1",
+    "c9",
+    "c10",
+    "c17",
+    "c20"
+   ],
+   "notes": "Update is supported (attribute list), but PUT vs PATCH is not specified. A SCIM delete is treated as a soft delete (inactive)."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "User is kept with status inactive/disabled; an admin must delete it manually in the MDM portal. Deleting a provisioned group deletes the group and disables its independent members, moving them to All Users Group.",
+   "cite": [
+    "c9",
+    "c10",
+    "c17"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "externalId"
+   ],
+   "cite": [
+    "c4"
+   ]
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "id",
+    "userName",
+    "displayName",
+    "active",
+    "name.givenName",
+    "name.familyName",
+    "emails"
+   ],
+   "enterprise": [
+    "department"
+   ],
+   "custom": {
+    "supported": true,
+    "how": "Create the attribute under Admin > Identity > User Provisioning > Edit Settings > Add Custom Attribute, then map it in the IdP as urn:ietf:params:scim:schemas:extension:ivanti:2.0:User:<name>."
+   },
+   "group": [],
+   "cite": [
+    "c5",
+    "c6",
+    "c7",
+    "c44"
+   ]
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Nested group provisioning is not supported; OUs are not supported (users and groups only).",
+    "cite": [
+     "c11",
+     "c12"
+    ]
+   },
+   {
+    "text": "No SCIM event notification support.",
+    "cite": [
+     "c13"
+    ]
+   },
+   {
+    "text": "Email address is mandatory for provisioning.",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "text": "Updating an attribute to a blank value is not reflected in MDM.",
+    "cite": [
+     "c15"
+    ]
+   },
+   {
+    "text": "IdP deletes are soft deletes; permanent deletion must be done manually in the portal.",
+    "cite": [
+     "c9",
+     "c10"
+    ]
+   },
+   {
+    "text": "Once SAML is configured for SCIM users, Local and LDAP users are also authenticated through SAML unless exempted.",
+    "cite": [
+     "c18"
+    ]
+   },
+   {
+    "text": "Ivanti Neurons platform SCIM (separate product) requires external authentication to be active, and with Okta supports only SAML-based authentication; it uses OAuth 2 client credentials.",
+    "cite": [
+     "c26",
+     "c27",
+     "c28",
+     "c29"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c31",
+   "c40",
+   "c41"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://{tenant host}/api/v1",
+  "docs_url": "https://help.ivanti.com/mi/help/en_US/cld/8x/api/MDMCustomerIntegrationAPIGuide/User%20API%20Calls.htm",
+  "auth": {
+   "methods": [
+    "basic",
+    "oauth2"
+   ],
+   "scopes": [],
+   "cite": [
+    "c40",
+    "c42"
+   ],
+   "notes": "Calls need Tenant Admin credentials (examples use Basic auth); token-based auth uses an OIDC client and the client-credentials grant at /oauth2/token."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c32",
+    "c33",
+    "c34",
+    "c35",
+    "c36",
+    "c37",
+    "c38",
+    "c39"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "api/v1/accounts",
+    "purpose": "Create user without password (optional sendInvite)",
+    "cite": [
+     "c32",
+     "c41"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "api/v1/account",
+    "purpose": "Create user with password",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/invite/enduser",
+    "purpose": "Invite user to register",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/account",
+    "purpose": "Get all accounts",
+    "cite": [
+     "c35"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/account?fq=UID%3DUID",
+    "purpose": "Search for a user by UID",
+    "cite": [
+     "c39"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/v1/account",
+    "purpose": "Update user account",
+    "cite": [
+     "c38"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/account?id={id}",
+    "purpose": "Delete one or more users",
+    "cite": [
+     "c36"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/account?accountIds={accountIDs}&groupIds={groupIDs}",
+    "purpose": "Remove a user account from a user group",
+    "cite": [
+     "c37"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/account/",
+    "purpose": "Apply a custom attribute to a user",
+    "cite": [
+     "c43"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Only calls listed in the guide are supported.",
+    "cite": [
+     "c31"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": false,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/ivanti/",
+   "cite": [
+    "c21",
+    "c19",
+    "c20"
+   ],
+   "notes": "OIN 'Ivanti' (Neurons for MDM) page marks SCIM, Create, Update, Deactivate and Group Push as checked, not SAML (read from page markup); updated Aug 2026. A separate OIN 'Ivanti Neurons' app is OIDC sign-in only (c22) and 'MobileIron Cloud' is SAML/SWA."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/mobileiron-tutorial",
+   "cite": [
+    "c23",
+    "c24",
+    "c16"
+   ],
+   "notes": "The gallery 'MobileIron' app is SSO with manual provisioning; Ivanti documents SCIM through an Entra non-gallery app with the MDM token and Target SCIM URL."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": "Neurons for MDM also syncs from LDAP and an Entra ID user source (being replaced by SCIM); Ivanti Service Manager / Neurons for ITSM uses SAML JIT.",
+  "docs_public": true,
+  "cite": [
+   "c12",
+   "c25",
+   "c45"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-with-scim.md",
+   "title": "User Provisioning with SCIM (Ivanti Neurons for MDM)",
+   "quote": "User Provisioning uses the SCIM protocol to automatically create and update user and group objects sourced from an IdP to Ivanti Neurons for MDM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-with-scim"
+  },
+  {
+   "id": "c2",
+   "url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-with-scim.md",
+   "title": "User Provisioning with SCIM (Ivanti Neurons for MDM)",
+   "quote": "A maximum of 2 tokens can be generated any time.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-with-scim"
+  },
+  {
+   "id": "c3",
+   "url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-with-scim.md",
+   "title": "User Provisioning with SCIM (Ivanti Neurons for MDM)",
+   "quote": "To start User Provisioning for an IdP, generate a token and the target URL from Ivanti Neurons for MDM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-with-scim"
+  },
+  {
+   "id": "c4",
+   "url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-with-scim.md",
+   "title": "User Provisioning with SCIM (Ivanti Neurons for MDM)",
+   "quote": "SCIM users and groups can now be searched using their respective external Ids.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-with-scim"
+  },
+  {
+   "id": "c5",
+   "url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-with-scim.md",
+   "title": "User Provisioning with SCIM (Ivanti Neurons for MDM)",
+   "quote": "Core attributes - id - userName - displayname - active - givenName - familyName - emails",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-with-scim"
+  },
+  {
+   "id": "c6",
+   "url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-with-scim.md",
+   "title": "User Provisioning with SCIM (Ivanti Neurons for MDM)",
+   "quote": "Currently only the Department attribute is supported.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-with-scim"
+  },
+  {
+   "id": "c7",
+   "url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-with-scim.md",
+   "title": "User Provisioning with SCIM (Ivanti Neurons for MDM)",
+   "quote": "This section describes how to create custom and enterprise attributes for an IdP during user provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-with-scim"
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-with-scim.md",
+   "title": "User Provisioning with SCIM (Ivanti Neurons for MDM)",
+   "quote": "You can change the state of an existing token.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-with-scim"
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-for-entra-id-idp.md",
+   "title": "User Provisioning for Entra ID IdP (Ivanti Neurons for MDM)",
+   "quote": "If you delete a user in Entra ID, the corresponding SCIM API does not delete the user permanently but performs a soft delete and changes the user status from active to inactive.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-for-entra-id-idp"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-for-entra-id-idp.md",
+   "title": "User Provisioning for Entra ID IdP (Ivanti Neurons for MDM)",
+   "quote": "If you want to permanently delete the user, log in to Ivanti Neurons for MDM administrative portal and manually delete the inactive/ disabled user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-for-entra-id-idp"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-for-entra-id-idp.md",
+   "title": "User Provisioning for Entra ID IdP (Ivanti Neurons for MDM)",
+   "quote": "Nested group provisioning process is not supported in SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-for-entra-id-idp"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-for-entra-id-idp.md",
+   "title": "User Provisioning for Entra ID IdP (Ivanti Neurons for MDM)",
+   "quote": "In LDAP, Users, Groups, and OU are supported, whereas In SCIM, Users and Groups are supported, but not OU.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-for-entra-id-idp"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-for-entra-id-idp.md",
+   "title": "User Provisioning for Entra ID IdP (Ivanti Neurons for MDM)",
+   "quote": "Currently, Ivanti Neurons for MDM does not support SCIM event notification.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-for-entra-id-idp"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-for-entra-id-idp.md",
+   "title": "User Provisioning for Entra ID IdP (Ivanti Neurons for MDM)",
+   "quote": "Email address is a mandatory field for provisioning and migrating users or members.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-for-entra-id-idp"
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-for-entra-id-idp.md",
+   "title": "User Provisioning for Entra ID IdP (Ivanti Neurons for MDM)",
+   "quote": "When a user attribute of a provisioned user is updated with blank or empty value, the updated attribute value is not reflected in Ivanti Neurons for MDM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-for-entra-id-idp"
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-for-entra-id-idp.md",
+   "title": "User Provisioning for Entra ID IdP (Ivanti Neurons for MDM)",
+   "quote": "Copy and paste the Token from the Ivanti Neurons for MDM in the **Secret Token** field in the Entra ID portal.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-for-entra-id-idp"
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-for-entra-id-idp.md",
+   "title": "User Provisioning for Entra ID IdP (Ivanti Neurons for MDM)",
+   "quote": "When a provisioned user group is deleted from Microsoft Entra ID, the group is deleted in Ivanti Neurons for MDM and the independent members that belong to the deleted group are disabled and are associated to All Users Group.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-for-entra-id-idp"
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-for-entra-id-idp.md",
+   "title": "User Provisioning for Entra ID IdP (Ivanti Neurons for MDM)",
+   "quote": "Once SAML is configured for the Identity Provider (IdP) for SCIM users, all users from various sources like Local and LDAP will be authenticated through SAML.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-for-entra-id-idp"
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-for-okta-idp.md",
+   "title": "User Provisioning for Okta IdP (Ivanti Neurons for MDM)",
+   "quote": "After you create the users and groups on your **Okta** application, you can establish the connection between **Okta** and Ivanti Neurons for MDM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-for-okta-idp"
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-for-okta-idp.md",
+   "title": "User Provisioning for Okta IdP (Ivanti Neurons for MDM)",
+   "quote": "Select the group and click **push Group by name** to save and sync the group.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-for-okta-idp"
+  },
+  {
+   "id": "c21",
+   "url": "https://www.okta.com/integrations/ivanti/",
+   "title": "Integrate Ivanti with Okta",
+   "quote": "The Okta–Ivanti integration uses Okta as an external Identity Provider (IdP) to automate user and group provisioning into Ivanti Neurons for MDM.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://www.okta.com/integrations/ivanti-neurons/",
+   "title": "Integrate Ivanti Neurons with Okta",
+   "quote": "Enables Ivanti Neurons users to log into their Ivanti Neurons tenant using Okta as a single sign-on provider.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/mobileiron-tutorial",
+   "title": "Configure MobileIron for single sign-on with Microsoft Entra ID",
+   "quote": "In the case of MobileIron, provisioning is a manual task.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/mobileiron-tutorial",
+   "title": "Configure MobileIron for single sign-on with Microsoft Entra ID",
+   "quote": "MobileIron supports SP and IDP initiated SSO.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/ivanti-service-manager-tutorial",
+   "title": "Configure Ivanti Service Manager (ISM) for single sign-on with Microsoft Entra ID",
+   "quote": "Ivanti Service Manager (ISM) supports Just In Time user provisioning",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://docs.ivanti.com/neurons/help/enu/scim-provisioning.md",
+   "title": "SCIM Provisioning (Ivanti Neurons)",
+   "quote": "You can synchronize users and user groups from that IdP, enabling SCIM v2 synchronization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ivanti.com/neurons/help/enu/scim-provisioning"
+  },
+  {
+   "id": "c27",
+   "url": "https://docs.ivanti.com/neurons/help/enu/scim-provisioning.md",
+   "title": "SCIM Provisioning (Ivanti Neurons)",
+   "quote": "To use SCIM provisioning, ensure that external authentication is set up and is active.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ivanti.com/neurons/help/enu/scim-provisioning"
+  },
+  {
+   "id": "c28",
+   "url": "https://docs.ivanti.com/neurons/help/enu/scim-provisioning-okta.md",
+   "title": "SCIM Provisioning - Okta (Ivanti Neurons)",
+   "quote": "SCIM provisioning supports only SAML-based authentication.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ivanti.com/neurons/help/enu/scim-provisioning-okta"
+  },
+  {
+   "id": "c29",
+   "url": "https://docs.ivanti.com/neurons/help/enu/scim-provisioning-okta.md",
+   "title": "SCIM Provisioning - Okta (Ivanti Neurons)",
+   "quote": "Select the **OAuth 2** option from the **Authentication Mode** drop-down list.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ivanti.com/neurons/help/enu/scim-provisioning-okta"
+  },
+  {
+   "id": "c30",
+   "url": "https://www.ivanti.com/company/how-to-buy",
+   "title": "How To Buy Ivanti Services & Solutions",
+   "quote": "Get a Quote Contact our sales team to get started.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://help.ivanti.com/mi/help/en_US/cld/8x/api/MDMCustomerIntegrationAPIGuide/User%20API%20Calls.htm",
+   "title": "User API Calls (Ivanti Neurons for MDM Customer Integration API Guide)",
+   "quote": "This chapter describes the supported API calls for customer integration using the API. If the call does not appear in this document, then it is unsupported.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://help.ivanti.com/mi/help/en_US/cld/8x/api/MDMCustomerIntegrationAPIGuide/User%20API%20Calls.htm",
+   "title": "User API Calls (Ivanti Neurons for MDM Customer Integration API Guide)",
+   "quote": "This call creates a user without a password.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://help.ivanti.com/mi/help/en_US/cld/8x/api/MDMCustomerIntegrationAPIGuide/User%20API%20Calls.htm",
+   "title": "User API Calls (Ivanti Neurons for MDM Customer Integration API Guide)",
+   "quote": "This call creates a user with a password.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://help.ivanti.com/mi/help/en_US/cld/8x/api/MDMCustomerIntegrationAPIGuide/User%20API%20Calls.htm",
+   "title": "User API Calls (Ivanti Neurons for MDM Customer Integration API Guide)",
+   "quote": "This call invites a user to register with Ivanti Neurons for MDM, optionally setting device ownership to EMPLOYEE, COMPANY, or UNKNOWN.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c35",
+   "url": "https://help.ivanti.com/mi/help/en_US/cld/8x/api/MDMCustomerIntegrationAPIGuide/User%20API%20Calls.htm",
+   "title": "User API Calls (Ivanti Neurons for MDM Customer Integration API Guide)",
+   "quote": "This call gets information about all accounts, including the id and emailAddress values that you can use in other calls.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://help.ivanti.com/mi/help/en_US/cld/8x/api/MDMCustomerIntegrationAPIGuide/User%20API%20Calls.htm",
+   "title": "User API Calls (Ivanti Neurons for MDM Customer Integration API Guide)",
+   "quote": "This call deletes one or more users.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://help.ivanti.com/mi/help/en_US/cld/8x/api/MDMCustomerIntegrationAPIGuide/User%20API%20Calls.htm",
+   "title": "User API Calls (Ivanti Neurons for MDM Customer Integration API Guide)",
+   "quote": "This call deletes a user account from a user group.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c38",
+   "url": "https://help.ivanti.com/mi/help/en_US/cld/8x/api/MDMCustomerIntegrationAPIGuide/User%20API%20Calls.htm",
+   "title": "User API Calls (Ivanti Neurons for MDM Customer Integration API Guide)",
+   "quote": "This call updates a user’s account information.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c39",
+   "url": "https://help.ivanti.com/mi/help/en_US/cld/8x/api/MDMCustomerIntegrationAPIGuide/User%20API%20Calls.htm",
+   "title": "User API Calls (Ivanti Neurons for MDM Customer Integration API Guide)",
+   "quote": "This call searches for a user by the user’s user ID (UID).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c40",
+   "url": "https://help.ivanti.com/mi/help/en_US/cld/8x/api/MDMCustomerIntegrationAPIGuide/User%20API%20Calls.htm",
+   "title": "User API Calls (Ivanti Neurons for MDM Customer Integration API Guide)",
+   "quote": "This call requires Tenant Admin credentials.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c41",
+   "url": "https://help.ivanti.com/mi/help/en_US/cld/8x/api/MDMCustomerIntegrationAPIGuide/User%20API%20Calls.htm",
+   "title": "User API Calls (Ivanti Neurons for MDM Customer Integration API Guide)",
+   "quote": "https://cluster056.auto.acme.com/api/v1/accounts?sendInvite=true",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c42",
+   "url": "https://help.ivanti.com/mi/help/en_US/cld/8x/api/MDMCustomerIntegrationAPIGuide/Token-Based%20Authentication.htm",
+   "title": "Token-Based Authentication (Ivanti Neurons for MDM Customer Integration API Guide)",
+   "quote": "OIDC client creation API response gives client_id and client_secret that must be passed in /oauth2/token API to get the Access Token.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c43",
+   "url": "https://help.ivanti.com/mi/help/en_US/cld/8x/api/MDMCustomerIntegrationAPIGuide/User%20API%20Calls.htm",
+   "title": "User API Calls (Ivanti Neurons for MDM Customer Integration API Guide)",
+   "quote": "This applies a custom attribute to a single user.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c44",
+   "url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-with-scim.md",
+   "title": "User Provisioning with SCIM (Ivanti Neurons for MDM)",
+   "quote": "urn\\:ietf\\:params\\:scim\\:schemas\\:extension\\:ivanti:2.0\\:User:\\<CustomAttribute123Name>",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-with-scim"
+  },
+  {
+   "id": "c45",
+   "url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-for-entra-id-idp.md",
+   "title": "User Provisioning for Entra ID IdP (Ivanti Neurons for MDM)",
+   "quote": "When migrating from Entra ID User Source to User Provisioning Entra ID (SCIM), select Sync All Users and Groups.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.ivanti.com/nmdm/admin-guide/enu/vnow/user-provisioning-for-entra-id-idp"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.ivanti.com/company/how-to-buy",
+  "https://www.ivanti.com/lp/quote",
+  "https://www.ivanti.com/pricing (404)",
+  "https://www.ivanti.com/support/product-documentation",
+  "https://docs.ivanti.com/llms.txt",
+  "https://docs.ivanti.com/sitemap.xml",
+  "https://help.ivanti.com/sitemap.xml",
+  "https://www.okta.com/integrations/ivanti/",
+  "https://www.okta.com/integrations/ivanti-neurons/",
+  "https://www.okta.com/integrations/mobileiron-cloud/",
+  "Entra tutorials: mobileiron-tutorial, ivanti-service-manager-tutorial"
+ ],
+ "open_questions": [
+  "Ivanti publishes no prices; whether SCIM needs a specific Neurons for MDM bundle or tier is not public.",
+  "Target SCIM URL pattern, token expiry, PUT vs PATCH support, pagination and group attributes are not documented.",
+  "Whether SCIM deactivation frees a licence or ends device/user sessions is not documented.",
+  "Google Workspace, OneLogin and JumpCloud catalogue listings were not checked.",
+  "Which Ivanti product a buyer's IT team treats as 'Ivanti' varies; Neurons platform and Neurons for ITSM provisioning are summarised in notes only."
+ ]
+}

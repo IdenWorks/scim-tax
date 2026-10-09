@@ -1,0 +1,700 @@
+{
+ "slug": "beyondtrust",
+ "vendor": "BeyondTrust",
+ "vendor_url": "https://www.beyondtrust.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "BeyondTrust",
+  "slug": "beyondtrust",
+  "category": "Security & Identity",
+  "status": "gated",
+  "scim_plan": "Pathfinder platform (Contact Sales)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": false,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.beyondtrust.com/pricing-request",
+  "docs_url": "https://docs.beyondtrust.com/bt-docs/docs/scim-provisioning",
+  "evidence": "BeyondTrust publishes no prices (\"Contact our sales team to get details about pricing, request a custom quote\"); its Pathfinder docs say \"SCIM 2.0 provisioning lets Pathfinder automate user and group lifecycle management from an external identity provider.\"",
+  "notes": "New row. BeyondTrust is a multi-product PAM suite (Pathfinder platform, Password Safe, Privileged Remote Access, Remote Support, EPM, Entitle, Identity Security Insights); every product is quote-only, so gated follows the Contact Sales rule. The row covers the Pathfinder platform admin (app.beyondtrust.io), whose SCIM 2.0 endpoint (bearer token with admin-chosen expiry) is documented for Okta, Entra ID and SailPoint via generic SCIM apps; SAML is not required. Privileged Remote Access also has its own SCIM security provider at [host]/api/scim/v2 (one provider per site), and Password Safe/BeyondInsight and EPM have separate SCIM docs. The Okta OIN \"BeyondTrust\" app (2019) is SAML only, and the Entra gallery app (BeyondTrust Remote Support) is SSO with JIT. The Pathfinder REST API covers only IP allowlists; user CRUD is in the PRA Configuration API (OAuth client credentials, 20 req/s and 15,000/hour).",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Contact Sales (PRA Configuration API)",
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "BeyondTrust products (Pathfinder, PRA, Remote Support, Password Safe, EPM, Entitle)",
+   "price_text": "Contact Sales (custom quote)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c19",
+    "c25"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c1",
+   "c2",
+   "c3",
+   "c6"
+  ],
+  "plan": "Pathfinder platform (Contact Sales)",
+  "addon_price_text": null,
+  "sso_required": false,
+  "version": "2.0",
+  "base_url": "https://api.beyondtrust.io/api/{organization-id}/platform/auth/scim/v2",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Pathfinder Administration > SCIM Tokens > Create Token",
+   "token_expiry": "admin-selected expiration date",
+   "cite": [
+    "c5"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c7",
+    "c12"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c7",
+    "c12",
+    "c15"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c13",
+    "c15"
+   ],
+   "notes": "Okta and Entra default to PATCH active=false; DELETE /Users/{id} is a hard delete when the IdP is set to delete."
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "emails[primary eq true].value",
+    "emails[type eq \"work\"].value",
+    "active",
+    "roles"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": [
+    "c8",
+    "c9",
+    "c18"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "roles attribute (custom attribute or group push); provisioned groups map to roles and application access",
+   "cite": [
+    "c8",
+    "c9",
+    "c17"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SCIM-provisioned users are federated only if their email domain matches a configured SAML provider; otherwise they sign in as local users.",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "text": "Nested group support depends on release and IdP.",
+    "cite": [
+     "c16"
+    ]
+   },
+   {
+    "text": "No IdP catalogue app with SCIM: Okta uses the generic \"SCIM 2.0 Test App (Bearer Token)\" and Entra a non-gallery app.",
+    "cite": [
+     "c10",
+     "c11"
+    ]
+   },
+   {
+    "text": "Privileged Remote Access allows only one SCIM provider per site.",
+    "cite": [
+     "c24"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c25",
+   "c27",
+   "c21"
+  ],
+  "plan": "Contact Sales (PRA Configuration API)",
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://{example.beyondtrustcloud.com}/api/config/v1",
+  "docs_url": "https://docs.beyondtrust.com/pra/reference/configuration-api",
+  "auth": {
+   "methods": [
+    "oauth2"
+   ],
+   "scopes": [],
+   "cite": [
+    "c25"
+   ],
+   "notes": "OAuth 2 client credentials from an API account at /login > Management > API Configuration. Pathfinder's own API uses admin personal access tokens, which may need enabling by BeyondTrust."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c28",
+    "c29",
+    "c30",
+    "c31",
+    "c32"
+   ],
+   "notes": "PRA Configuration API; create covers local users only and delete only non-admins. Group policy endpoints also exist but were not reviewed."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/user",
+    "purpose": "Get all users (PRA)",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/user",
+    "purpose": "Create a local user (PRA)",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/user/{id}",
+    "purpose": "Get a user (PRA)",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/user/{id}",
+    "purpose": "Update properties on a user (PRA)",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/user/{id}",
+    "purpose": "Delete a non-admin user (PRA)",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/user/provision",
+    "purpose": "Provision users / recalculate permissions (PRA)",
+    "cite": [
+     "c33"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "PRA Configuration API: 20 requests per second and 15,000 per hour per API account.",
+   "cite": [
+    "c26"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "The Pathfinder platform API exposes only IP allowlist management, not users.",
+    "cite": [
+     "c21"
+    ]
+   },
+   {
+    "text": "Pathfinder personal access tokens may not be enabled for a site without contacting BeyondTrust.",
+    "cite": [
+     "c22"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/beyondtrust/",
+   "cite": [
+    "c34"
+   ],
+   "notes": "OIN \"BeyondTrust\" app (last updated Aug. 28 2019) marks only SAML (read from page markup); SCIM goes through the generic SCIM 2.0 Test App per vendor docs."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/bomgarremotesupport-tutorial",
+   "cite": [
+    "c35",
+    "c36"
+   ],
+   "notes": "Gallery app is BeyondTrust Remote Support (SP-initiated SAML with JIT); Pathfinder SCIM uses a non-gallery app."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": "AD/LDAP directory authentication (Pathfinder directory proxy)",
+  "docs_public": true,
+  "cite": [
+   "c19",
+   "c36"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.beyondtrust.com/pricing-request",
+   "title": "Pricing Request | BeyondTrust",
+   "quote": "Contact our sales team to get details about pricing, request a custom quote, or make technical inquiries about your deployment requirements.",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://docs.beyondtrust.com/bt-docs/docs/scim-provisioning",
+   "title": "SCIM provisioning | Pathfinder",
+   "quote": "SCIM 2.0 provisioning lets Pathfinder automate user and group lifecycle management from an external identity provider.",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://docs.beyondtrust.com/bt-docs/docs/scim-provisioning",
+   "title": "SCIM provisioning | Pathfinder",
+   "quote": "SCIM provisioning complements, but does not replace, authentication methods such as SAML or AD/LDAP.",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://docs.beyondtrust.com/bt-docs/docs/scim-provisioning",
+   "title": "SCIM provisioning | Pathfinder",
+   "quote": "Supported IdPs Okta Microsoft Entra ID SailPoint IdentityNow",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://docs.beyondtrust.com/bt-docs/docs/scim-provisioning",
+   "title": "SCIM provisioning | Pathfinder",
+   "quote": "Select ☰ > Administration > SCIM Tokens. The SCIM Tokens page displays. Enter a name. Select an expiration date from the list. Click Create Token.",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://docs.beyondtrust.com/bt-docs/docs/scim-provisioning",
+   "title": "SCIM provisioning | Pathfinder",
+   "quote": "https://api.beyondtrust.io/api/{organization-id}/platform/auth/scim/v2",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://docs.beyondtrust.com/bt-docs/docs/scim-provisioning",
+   "title": "SCIM provisioning | Pathfinder",
+   "quote": "Create Account Triggers POST /scim/v2/Users Update Account Triggers PUT /scim/v2/Users/{id} Delete Account Triggers DELETE /scim/v2/Users/{id} Disable Account Triggers PATCH active=false Enable Account Triggers PATCH active=true",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.beyondtrust.com/bt-docs/docs/scim-provisioning",
+   "title": "SCIM provisioning | Pathfinder",
+   "quote": "Map the following attributes in each policy: userName (email), name.givenName, name.familyName, active, roles.",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.beyondtrust.com/bt-docs/docs/scim-provisioning",
+   "title": "SCIM provisioning | Pathfinder",
+   "quote": "user.email emails[primary eq true].value App-level role or group roles (map to a custom attribute or group push)",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.beyondtrust.com/bt-docs/docs/scim-provisioning",
+   "title": "SCIM provisioning | Pathfinder",
+   "quote": "In Okta Admin: Applications → Browse App Catalog → search \"SCIM 2.0 Test App (Bearer Token)\" → Add Integration",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.beyondtrust.com/bt-docs/docs/scim-provisioning",
+   "title": "SCIM provisioning | Pathfinder",
+   "quote": "Select: \"Integrate any other application you don't find in the gallery\"",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.beyondtrust.com/bt-docs/docs/scim-provisioning",
+   "title": "SCIM provisioning | Pathfinder",
+   "quote": "Assign a group (not just user) to the app under Users and Groups → Entra creates the group in the target via POST /scim/v2/Groups",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.beyondtrust.com/bt-docs/docs/scim-provisioning",
+   "title": "SCIM provisioning | Pathfinder",
+   "quote": "When the user is unassigned or deprovisioned, Pathfinder deactivates the account based on supported behavior.",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.beyondtrust.com/bt-docs/docs/scim-provisioning",
+   "title": "SCIM provisioning | Pathfinder",
+   "quote": "SCIM-provisioned users are treated as federated only when their email domain matches a configured SAML provider in the org.",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.beyondtrust.com/bt-docs/docs/scim-provisioning",
+   "title": "SCIM provisioning | Pathfinder",
+   "quote": "Okta defaults to PATCH active=false for deactivation, not DELETE. To get a hard delete, the app provisioning option must explicitly be set to delete.",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.beyondtrust.com/bt-docs/docs/scim-provisioning",
+   "title": "SCIM provisioning | Pathfinder",
+   "quote": "Confirm whether nested groups are supported in your release and provider combination.",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.beyondtrust.com/bt-docs/docs/scim-provisioning",
+   "title": "SCIM provisioning | Pathfinder",
+   "quote": "Review how Pathfinder maps provisioned groups to roles, permissions, or application access.",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.beyondtrust.com/bt-docs/docs/scim-provisioning",
+   "title": "SCIM provisioning | Pathfinder",
+   "quote": "userPrincipalName userName givenName name.givenName surname name.familyName mail emails[type eq \"work\"].value accountEnabled active",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.beyondtrust.com/bt-docs/docs/user-management",
+   "title": "User management | Pathfinder",
+   "quote": "JIT via SAML: Account is created on first SSO login.",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.beyondtrust.com/bt-docs/docs/user-management",
+   "title": "User management | Pathfinder",
+   "quote": "Deleting a user is an unrecoverable operation. The user access is immediately revoked from all sites and associated applications.",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.beyondtrust.com/bt-docs/reference/introduction",
+   "title": "Introduction | Pathfinder",
+   "quote": "Use the Pathfinder Authentication API to manage authentication settings for your organization, such as the IP addresses allowed to reach your resources.",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://docs.beyondtrust.com/bt-docs/reference/introduction",
+   "title": "Introduction | Pathfinder",
+   "quote": "Personal access tokens may not be turned on for your site. To use them, contact your BeyondTrust representative.",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://docs.beyondtrust.com/pra/docs/scim",
+   "title": "SCIM | PRA",
+   "quote": "BeyondTrust Privileged Remote Access integrates with SCIM (System for Cross-domain Identity Management) to automate user and group provisioning.",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://docs.beyondtrust.com/pra/docs/scim",
+   "title": "SCIM | PRA",
+   "quote": "The base URL to use with the SCIM provider you are connecting with is [*host]/api/scim/v2*. Only one SCIM provider can be created.",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://docs.beyondtrust.com/pra/reference/apiconfiguserindex.md",
+   "title": "Get all Users. | PRA",
+   "quote": "The BeyondTrust Privileged Remote Access Configuration APIs require OAuth 2 credentials for authentication.",
+   "page_url": "https://docs.beyondtrust.com/pra/reference/apiconfiguserindex",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://docs.beyondtrust.com/pra/reference/apiconfiguserindex.md",
+   "title": "Get all Users. | PRA",
+   "quote": "Requests are limited to 20 per second and 15,000 per hour.",
+   "page_url": "https://docs.beyondtrust.com/pra/reference/apiconfiguserindex",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://docs.beyondtrust.com/pra/reference/apiconfiguserindex.md",
+   "title": "Get all Users. | PRA",
+   "quote": "\"url\": \"https://{example.beyondtrustcloud.com}/api/config/v1\"",
+   "page_url": "https://docs.beyondtrust.com/pra/reference/apiconfiguserindex",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://docs.beyondtrust.com/pra/reference/apiconfiguserindex.md",
+   "title": "Get all Users. | PRA",
+   "quote": "\"summary\": \"Get all Users.\"",
+   "page_url": "https://docs.beyondtrust.com/pra/reference/apiconfiguserindex",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://docs.beyondtrust.com/pra/reference/apiconfiguserstore.md",
+   "title": "Create a local User. | PRA",
+   "quote": "There is no way to add non-local users via this API.",
+   "page_url": "https://docs.beyondtrust.com/pra/reference/apiconfiguserstore",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://docs.beyondtrust.com/pra/reference/apiconfigusershow.md",
+   "title": "Get a User. | PRA",
+   "quote": "\"summary\": \"Get a User.\"",
+   "page_url": "https://docs.beyondtrust.com/pra/reference/apiconfigusershow",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://docs.beyondtrust.com/pra/reference/apiconfiguserupdate.md",
+   "title": "Update properties on a User. | PRA",
+   "quote": "\"summary\": \"Update properties on a User.\"",
+   "page_url": "https://docs.beyondtrust.com/pra/reference/apiconfiguserupdate",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://docs.beyondtrust.com/pra/reference/apiconfiguserdestroy.md",
+   "title": "Delete a non-admin User. | PRA",
+   "quote": "Only non-administrators can be deleted.",
+   "page_url": "https://docs.beyondtrust.com/pra/reference/apiconfiguserdestroy",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://docs.beyondtrust.com/pra/reference/apiconfiguserprovision.md",
+   "title": "Provision Users. | PRA",
+   "quote": "\"summary\": \"Provision Users.\"",
+   "page_url": "https://docs.beyondtrust.com/pra/reference/apiconfiguserprovision",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://www.okta.com/integrations/beyondtrust/",
+   "title": "Integrate BeyondTrust with Okta",
+   "quote": "BeyondTrust offers the industrys broadest set of privileged access management capabilities to defend against cyber attacks",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c35",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/bomgarremotesupport-tutorial",
+   "title": "Configure BeyondTrust Remote Support for Single sign-on with Microsoft Entra ID",
+   "quote": "BeyondTrust Remote Support supports SP initiated SSO",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/bomgarremotesupport-tutorial",
+   "title": "Configure BeyondTrust Remote Support for Single sign-on with Microsoft Entra ID",
+   "quote": "BeyondTrust Remote Support supports Just In Time user provisioning",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.beyondtrust.com/pricing (redirects to pricing-request form)",
+  "https://docs.beyondtrust.com/sitemap.xml (3,968 URLs; SCIM pages for Pathfinder, PRA, Password Safe, EPM)",
+  "https://docs.beyondtrust.com/bt-docs/docs/scim-provisioning",
+  "https://docs.beyondtrust.com/bt-docs/docs/user-management",
+  "https://docs.beyondtrust.com/bt-docs/reference/introduction",
+  "https://docs.beyondtrust.com/pra/docs/scim",
+  "https://docs.beyondtrust.com/pra/reference/configuration-api",
+  "https://www.okta.com/integrations/beyondtrust/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/ (beyondtrust-* tutorials 404; bomgarremotesupport-tutorial found)"
+ ],
+ "open_questions": [
+  "Whether SCIM is included in every BeyondTrust contract or licensed separately is not public.",
+  "Whether deactivation frees a licence or ends active sessions is not documented.",
+  "Pathfinder SCIM filtering, pagination, discovery endpoints and rate limits are not documented.",
+  "No user-event webhooks or audit-log API documented for Pathfinder."
+ ]
+}

@@ -1,0 +1,789 @@
+{
+ "slug": "insightly",
+ "vendor": "Insightly",
+ "vendor_url": "https://www.insightly.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Insightly",
+  "slug": "insightly",
+  "category": "Sales & CRM",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Enterprise: $99/user/mo billed annually",
+  "scim_price_per_user_mo": 99,
+  "team_plan": "Plus",
+  "team_price_text": "Plus: $29/user/mo billed annually",
+  "team_price_per_user_mo": 29,
+  "price_multiplier": 3.4,
+  "sso_plan": "Enterprise",
+  "sso_price_per_user_mo": 99,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": false,
+   "groups": false
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": null,
+   "onelogin": "sso_only",
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.insightly.com/pricing-plans/",
+  "docs_url": "https://support.insight.ly/en-US/Knowledge/article/1455/",
+  "evidence": "Insightly's help centre says \"SAML and SCIM are only available on the Enterprise level plan\", and its CRM plan limits table marks SAML and SCIM single sign-on as not available on Plus or Professional.",
+  "notes": "CRM pricing: Plus $29, Professional $49, Enterprise $99 per user/mo, USD billed annually. SAML and SCIM both start at Enterprise; SCIM requires SAML to be enabled first, and SAML is IdP-initiated only. SCIM 2.0 supports /Users and /Schemas only (no Groups, no Bulk); DELETE deactivates (active=false), no hard delete; product licences are not assigned by SCIM and must be added by an admin afterwards. Okta (OIN, SCIM create/update/deactivate) and Entra (Insightly SAML gallery app with provisioning) have catalogue apps; OneLogin uses a SAML Custom Connector (SSO only). The REST API v3.1 is on all plans (Basic auth with a per-user API key) but its Users endpoints are read-only.",
+  "confidence": "medium",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Plus",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null,
+  "last_verified": "2026-10-05"
+ },
+ "plans": [
+  {
+   "name": "Plus",
+   "price_text": "$29 per user / month, billed annually",
+   "price_per_user_mo": 29,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c5",
+    "c25",
+    "c28"
+   ]
+  },
+  {
+   "name": "Professional",
+   "price_text": "$49 per user / month, billed annually",
+   "price_per_user_mo": 49,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c5",
+    "c25",
+    "c28"
+   ]
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "$99 per user / month, billed annually (Contact sales)",
+   "price_per_user_mo": 99,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c4",
+    "c5",
+    "c6",
+    "c25",
+    "c28"
+   ],
+   "notes": "Comprehensive audit logging (18-month retention) on Enterprise; no audit-log API found."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c6",
+   "c7",
+   "c5",
+   "c18"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": null,
+  "auth": {
+   "method": null,
+   "token_source": "System Settings > Security > SAML and SCIM: check Enable SCIM Provisioning and Save to generate the SCIM Token and SCIM URL",
+   "token_expiry": null,
+   "cite": [
+    "c10",
+    "c11",
+    "c19"
+   ],
+   "notes": "Regenerate invalidates previous tokens. Okta takes the token in its API Token field; the header scheme is not stated."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": false,
+   "ServiceProviderConfig": null,
+   "Schemas": true,
+   "ResourceTypes": null,
+   "Bulk": false,
+   "Me": null,
+   "cite": [
+    "c7",
+    "c8"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": false,
+   "group_push": false,
+   "group_membership": false,
+   "cite": [
+    "c8",
+    "c12",
+    "c14",
+    "c15"
+   ],
+   "notes": "PATCH supports only the replace operation. active is editable, so reactivation via active=true is plausible but not stated."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c12"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName"
+   ],
+   "cite": [
+    "c13"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c15"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "id",
+    "userName",
+    "meta.resourceType",
+    "meta.created",
+    "meta.lastModified",
+    "active",
+    "name.givenName",
+    "name.familyName",
+    "emails"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": [
+    "c16",
+    "c32"
+   ],
+   "notes": "userName maps to the user's email; emails is read-only with a single type=work address."
+  },
+  "roles": {
+   "supported": false,
+   "how": "Not via SCIM; product licences are assigned manually by an admin after provisioning.",
+   "cite": [
+    "c9"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SCIM requires SAML to be enabled and set up first; SAML is IdP-initiated only (no SP-initiated).",
+    "cite": [
+     "c6",
+     "c17"
+    ]
+   },
+   {
+    "text": "Only /Users and /Schemas; batch operations are not supported.",
+    "cite": [
+     "c8"
+    ]
+   },
+   {
+    "text": "Product licences are not assigned by SCIM; an admin must assign them per user afterwards.",
+    "cite": [
+     "c9"
+    ]
+   },
+   {
+    "text": "No hard delete: DELETE /Users/{id} sets active=false.",
+    "cite": [
+     "c12"
+    ]
+   },
+   {
+    "text": "Filtering supports only userName eq; PATCH supports only replace.",
+    "cite": [
+     "c13",
+     "c14"
+    ]
+   },
+   {
+    "text": "SAML and SCIM are not supported on the Insightly mobile application.",
+    "cite": [
+     "c33"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c25",
+   "c26",
+   "c31"
+  ],
+  "plan": "Plus",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://api.{pod}.insightly.com/v3.1/",
+  "docs_url": "https://api.insightly.com/v3.1/Help",
+  "auth": {
+   "methods": [
+    "basic_api_key"
+   ],
+   "scopes": [],
+   "cite": [
+    "c26",
+    "c31"
+   ],
+   "notes": "Per-user API key as the Basic-auth username; calls run with that user's permissions. Admins can turn API access off per user."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": false,
+   "invite_user": false,
+   "update_user": false,
+   "deactivate_user": false,
+   "delete_user": false,
+   "reactivate_user": false,
+   "manage_groups": true,
+   "assign_roles": false,
+   "assign_licenses": false,
+   "cite": [
+    "c29",
+    "c34",
+    "c35",
+    "c37",
+    "c38"
+   ],
+   "notes": "The v3.1 swagger lists only GET operations on /Users (list, get, Me, Search). Teams (user groups) can be created, updated, deleted and have members added or removed."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/v3.1/Users",
+    "purpose": "Gets a list of Users",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v3.1/Users/{id}",
+    "purpose": "Gets a User",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v3.1/Users/Me",
+    "purpose": "Gets the User object for the calling user",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v3.1/Users/Search",
+    "purpose": "Gets a filtered list of Users",
+    "cite": [
+     "c35"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v3.1/Permissions",
+    "purpose": "Gets the Permissions for a User",
+    "cite": [
+     "c36"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v3.1/Teams",
+    "purpose": "Gets a list of Teams",
+    "cite": [
+     "c37",
+     "c38"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v3.1/Teams",
+    "purpose": "Adds a Team",
+    "cite": [
+     "c37",
+     "c38"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/v3.1/Teams",
+    "purpose": "Updates a Team",
+    "cite": [
+     "c37",
+     "c38"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v3.1/Teams/{id}",
+    "purpose": "Deletes a Team",
+    "cite": [
+     "c37",
+     "c38"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v3.1/Teams/{id}/TeamMembers",
+    "purpose": "Adds a Team Member",
+    "cite": [
+     "c37",
+     "c38"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v3.1/Teams/{id}/TeamMembers/{permissionId}",
+    "purpose": "Deletes a Team Member",
+    "cite": [
+     "c37",
+     "c38"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": [],
+   "notes": "Enterprise has comprehensive audit logging in-app; no audit-log endpoint appears in the v3.1 swagger."
+  },
+  "rate_limits": {
+   "text": "No more than 10 requests per second per instance; daily limit by plan: Plus 40,000, Professional 60,000, Enterprise 100,000 requests/day/instance; 429 when reached.",
+   "cite": [
+    "c27",
+    "c28"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Users endpoints are read-only: users cannot be created, updated or deactivated through the REST API.",
+    "cite": [
+     "c29",
+     "c34",
+     "c35"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/insightly/",
+   "cite": [
+    "c21",
+    "c19",
+    "c18"
+   ],
+   "notes": "OIN capability list (rendered DOM) marks SAML, SWA, SCIM, Create, Update and Deactivate checked; Group Push unchecked. Okta's page does not name the builder."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/insightly-saml-provisioning-tutorial",
+   "cite": [
+    "c22",
+    "c23",
+    "c20"
+   ],
+   "notes": "Gallery app is named 'Insightly SAML'. Entra maps userName, active, name.givenName and name.familyName."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": false,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c24"
+   ],
+   "notes": "Insightly's OneLogin guide uses the generic SAML Custom Connector (Advanced); no SCIM setup is described."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c6"
+  ],
+  "notes": "For SAML without SCIM, the guide says to add users to Insightly first and have them complete registration, which suggests no JIT, but it does not say so outright."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.insightly.com/pricing-plans/",
+   "title": "Insightly CRM pricing plans",
+   "quote": "Helps small teams simplify workflows, stay organized, and move quickly. $29 per user / month All prices USD, billed annually",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.insightly.com/pricing-plans/",
+   "title": "Insightly CRM pricing plans",
+   "quote": "Gives growing businesses tools to automate sales, track performance, and close deals. Recommended $49 per user / month",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.insightly.com/pricing-plans/",
+   "title": "Insightly CRM pricing plans",
+   "quote": "Equips large organizations with advanced customization, security, and integrations. $99 per user / month All prices USD, billed annually Contact sales",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.insightly.com/pricing-plans/",
+   "title": "Insightly CRM pricing plans",
+   "quote": "All Professional plan features and: Sandboxes Products, pricebooks, and quotes Comprehensive audit logging",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://support.insight.ly/en-US/Knowledge/article/3595/",
+   "title": "CRM Plan Level Limits - Insightly Help Center",
+   "quote": "SAML and SCIM single sign-on (SSO)* Not available Not available Available",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://support.insight.ly/en-US/Knowledge/article/1455/",
+   "title": "How to set up SAML Single Sign-On (SSO) - Insightly Help Center",
+   "quote": "SAML Single Sign-On and SCIM can be used together in Insightly although implementation of SCIM is codependent on SAML. SAML and SCIM are only available on the Enterprise level plan",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://support.insight.ly/en-US/Knowledge/article/1455/",
+   "title": "How to set up SAML Single Sign-On (SSO) - Insightly Help Center",
+   "quote": "Insightly supports the Users and Schemas endpoints of SCIM 2.0.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://support.insight.ly/en-US/Knowledge/article/1455/",
+   "title": "How to set up SAML Single Sign-On (SSO) - Insightly Help Center",
+   "quote": "Insightly’s implementation of SCIM supports the /Users and /Schemas endpoints. Batch operations are not supported.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://support.insight.ly/en-US/Knowledge/article/1455/",
+   "title": "How to set up SAML Single Sign-On (SSO) - Insightly Help Center",
+   "quote": "Product licenses are not assigned when provisioning users via SCIM. An administrator has to manually assign licenses to each user from within the Insightly app after provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://support.insight.ly/en-US/Knowledge/article/1455/",
+   "title": "How to set up SAML Single Sign-On (SSO) - Insightly Help Center",
+   "quote": "check the Enable SCIM Provisioning checkbox and click Save to generate a SCIM Token and reveal the SCIM URL.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://support.insight.ly/en-US/Knowledge/article/1455/",
+   "title": "How to set up SAML Single Sign-On (SSO) - Insightly Help Center",
+   "quote": "To regenerate the SCIM token, the Regenerate button can be clicked. This will invalidate any previously generated tokens.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://support.insight.ly/en-US/Knowledge/article/1455/",
+   "title": "How to set up SAML Single Sign-On (SSO) - Insightly Help Center",
+   "quote": "DELETE /Users/{id} Deactivates a user Insightly does not support hard deleting users. This operation is equivalent to setting active=false.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://support.insight.ly/en-US/Knowledge/article/1455/",
+   "title": "How to set up SAML Single Sign-On (SSO) - Insightly Help Center",
+   "quote": "Returns both active and inactive users that match the filter. Insightly only supports the “userName eq” filter.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://support.insight.ly/en-US/Knowledge/article/1455/",
+   "title": "How to set up SAML Single Sign-On (SSO) - Insightly Help Center",
+   "quote": "PATCH /Users/{id} Updates fields included in the request only. Insightly only supports the “replace” operation.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://support.insight.ly/en-US/Knowledge/article/1455/",
+   "title": "How to set up SAML Single Sign-On (SSO) - Insightly Help Center",
+   "quote": "GET /Users Gets a list of users Returns both active and inactive users. Paging per SCIM spec.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://support.insight.ly/en-US/Knowledge/article/1455/",
+   "title": "How to set up SAML Single Sign-On (SSO) - Insightly Help Center",
+   "quote": "name.givenName User.FIRST_NAME name.familyName User.LAST_NAME emails (readonly) User.EMAIL_ADDRESS Contains a single email address with type=work",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://support.insight.ly/en-US/Knowledge/article/1455/",
+   "title": "How to set up SAML Single Sign-On (SSO) - Insightly Help Center",
+   "quote": "Insightly only supports IDP-initiate SAML 2.0. SP-initiated SAML is not supported.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://support.insight.ly/en-US/Knowledge/article/4561/",
+   "title": "Setup of SAML and SCIM for Okta - Insightly Help Center",
+   "quote": "Must be on the Insightly Enterprise level plan to use SAML and SCIM.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://support.insight.ly/en-US/Knowledge/article/4561/",
+   "title": "Setup of SAML and SCIM for Okta - Insightly Help Center",
+   "quote": "To enable all supported SCIM operations, check the Enable checkboxes within the Create Users , Update User Attributes , and Deactivate Users sections.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://support.insight.ly/en-US/Knowledge/article/4560/",
+   "title": "Setup of SAML and SCIM for Azure - Insightly Help Center",
+   "quote": "Paste the Tenant URL and Secret Token from Insightly into the corresponding fields.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://www.okta.com/integrations/insightly/",
+   "title": "Integrate Insightly with Okta",
+   "quote": "With the Okta integration you can easily manage and provision Insightly users from your Okta account.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/insightly-saml-provisioning-tutorial",
+   "title": "Configure Insightly SAML for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Create users in Insightly SAML. Remove users in Insightly SAML when they don't require access anymore. Keep user attributes synchronized between Microsoft Entra ID and Insightly SAML.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/insightly-saml-tutorial",
+   "title": "Configure Insightly SAML for Single sign-on with Microsoft Entra ID",
+   "quote": "Insightly SAML supports IDP initiated SSO.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://support.insight.ly/en-US/Knowledge/article/4953/",
+   "title": "Setup of SAML for OneLogin - Insightly Help Center",
+   "quote": "Enter “SAML Custom Connector” into the search bar and select SAML Custom Connector (Advanced) .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://api.insightly.com/v3.1/Help",
+   "title": "Insightly API v3.1 Help",
+   "quote": "Users on all plans can use the REST -based Application Programming Interface (API) to query and update their Insightly data.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://api.insightly.com/v3.1/Help",
+   "title": "Insightly API v3.1 Help",
+   "quote": "Insightly uses HTTP Basic authentication to determine which user is making calls to the API.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://api.insightly.com/v3.1/Help",
+   "title": "Insightly API v3.1 Help",
+   "quote": "No more than 10 requests are allowed per second, and a daily limit is set based on the plan level",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://api.insightly.com/v3.1/Help",
+   "title": "Insightly API v3.1 Help",
+   "quote": "Plus - 40,000 requests/day/instance Professional - 60,000 requests/day/instance Enterprise - 100,000 requests/day/instance",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://api.na1.insightly.com/v3.1/swagger/docs/v3.1",
+   "title": "Insightly API v3.1 swagger",
+   "quote": "Gets a list of Users",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.insightly.com/v3.1/Help"
+  },
+  {
+   "id": "c30",
+   "url": "https://support.insight.ly/en-US/Knowledge/article/1151/",
+   "title": "Deleting User - Insightly Help Center",
+   "quote": "Insightly administrators can delete users or they can delete and replace user by replacing the deleted user with a new user.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://support.insight.ly/en-US/Knowledge/article/1439/",
+   "title": "How to manage API Access for a user - Insightly Help Center",
+   "quote": "Insightly administrators can turn API Access on or off for any user, including themselves",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://support.insight.ly/en-US/Knowledge/article/1455/",
+   "title": "How to set up SAML Single Sign-On (SSO) - Insightly Help Center",
+   "quote": "userName User.EMAIL_ADDRESS meta.resourceType (readonly) “User” meta.created (readonly) User.DATE_CREATED_UTC",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://support.insight.ly/en-US/Knowledge/article/1455/",
+   "title": "How to set up SAML Single Sign-On (SSO) - Insightly Help Center",
+   "quote": "This feature is not supported on the Insightly mobile application",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://api.na1.insightly.com/v3.1/swagger/docs/v3.1",
+   "title": "Insightly API v3.1 swagger",
+   "quote": "Gets the User object for the calling user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.insightly.com/v3.1/Help"
+  },
+  {
+   "id": "c35",
+   "url": "https://api.na1.insightly.com/v3.1/swagger/docs/v3.1",
+   "title": "Insightly API v3.1 swagger",
+   "quote": "Gets a filtered list of Users",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.insightly.com/v3.1/Help"
+  },
+  {
+   "id": "c36",
+   "url": "https://api.na1.insightly.com/v3.1/swagger/docs/v3.1",
+   "title": "Insightly API v3.1 swagger",
+   "quote": "Gets the Permissions for a User",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.insightly.com/v3.1/Help"
+  },
+  {
+   "id": "c37",
+   "url": "https://api.na1.insightly.com/v3.1/swagger/docs/v3.1",
+   "title": "Insightly API v3.1 swagger",
+   "quote": "Gets a list of Teams.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.insightly.com/v3.1/Help"
+  },
+  {
+   "id": "c38",
+   "url": "https://api.na1.insightly.com/v3.1/swagger/docs/v3.1",
+   "title": "Insightly API v3.1 swagger",
+   "quote": "Deletes a Team Member",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.insightly.com/v3.1/Help"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.insightly.com/pricing-plans/",
+  "https://support.insight.ly knowledge search: scim, okta, single sign, user api, audit",
+  "https://api.insightly.com/v3.1/Help and v3.1 swagger",
+  "https://www.okta.com/integrations/insightly/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/insightly-saml-provisioning-tutorial"
+ ],
+ "open_questions": [
+  "SCIM base URL pattern and auth header scheme are not published (the URL and token are revealed in-app).",
+  "Docs do not say whether SCIM deactivation frees the paid licence or ends active sessions.",
+  "Reactivation via SCIM (active=true) is not explicitly documented.",
+  "Whether Insightly supports SAML JIT user creation is not stated.",
+  "No Google Workspace or JumpCloud catalogue app with SAML or provisioning was confirmed."
+ ]
+}

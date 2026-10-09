@@ -1,0 +1,932 @@
+{
+ "slug": "grafana-cloud",
+ "vendor": "Grafana Cloud",
+ "vendor_url": "https://grafana.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Grafana Cloud",
+  "slug": "grafana-cloud",
+  "category": "Cloud, Infrastructure & Observability",
+  "status": "free",
+  "scim_plan": "Pro",
+  "scim_price_text": "Pro: $19/mo platform fee + usage",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Pro",
+  "team_price_text": "Pro: $19/mo platform fee + usage",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Pro",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": false,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": "none",
+   "onelogin": "none",
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://grafana.com/pricing/",
+  "docs_url": "https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-scim-provisioning/",
+  "evidence": "Grafana's SCIM docs list the prerequisite as \"Grafana Enterprise or a paid Grafana Cloud account with SCIM provisioning enabled\", and the pricing page's lowest paid tier is Pro at $19/month + usage.",
+  "notes": "Status changed gated -> free. Grafana Cloud's pricing page now lists only Free, Pro ($19/month platform fee + usage) and Enterprise ($25,000/year minimum spend commit); the June 'Advanced' plan and its ~$25k/yr figure no longer appear, so the June scim_plan is dropped. Grafana's SCIM docs require 'Grafana Enterprise or a paid Grafana Cloud account with SCIM provisioning enabled', and the Feb 2026 GA note says SCIM is available 'for Grafana Cloud', so SCIM sits on the paid Pro tier with no listed upcharge. The pricing page itself does not mention SAML or SCIM (confidence medium); the phrase 'with SCIM provisioning enabled' leaves open whether Pro stacks need Grafana to switch it on. Pricing is usage-based (Grafana visualization from $8 per active user on Pro), so per-user fields stay null. SCIM needs SAML at stack level and supports only Okta and Entra ID; SCIM-provisioned users can only be deactivated, never deleted.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Free",
+  "api_tax": false,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "$0, always free",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c14",
+    "c39",
+    "c43"
+   ],
+   "notes": "SAML and SCIM need a paid account; the free tier is limited to 3 active Grafana users."
+  },
+  {
+   "name": "Pro",
+   "price_text": "From $19 / month + usage",
+   "price_per_user_mo": null,
+   "billing": "monthly",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c3",
+    "c5",
+    "c14",
+    "c39",
+    "c43"
+   ],
+   "notes": "Platform fee plus usage; Grafana visualization starts at $8 per active user beyond 3 included users."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Starts at $25,000 / year spend commit",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c4",
+    "c14",
+    "c39",
+    "c43"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c6",
+   "c14",
+   "c37",
+   "c7",
+   "c13"
+  ],
+  "plan": "Pro",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": null,
+  "base_url": "https://{stack-name}.grafana.net/apis/scim.grafana.app/v0alpha1/namespaces/stacks-{stack-id}",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Administration > Users and access > Service accounts > Add service account (roles: User administration, Teams) > create token",
+   "token_expiry": null,
+   "cite": [
+    "c16",
+    "c17",
+    "c23",
+    "c35"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c29",
+    "c9",
+    "c22"
+   ],
+   "notes": "Only the /Users path appears literally in the docs; Groups support is inferred from the group provisioning (teams) feature."
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": false,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c10",
+    "c24",
+    "c27",
+    "c29",
+    "c9",
+    "c30"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": true,
+   "revokes_sessions": null,
+   "data_retained": "SCIM-provisioned users cannot be deleted from Grafana, only deactivated; the GA note promises automatic seat reclamation and access removal on deactivation.",
+   "cite": [
+    "c27",
+    "c36"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName"
+   ],
+   "cite": [
+    "c29",
+    "c25"
+   ]
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "emails[type eq \"work\"].value",
+    "displayName",
+    "externalId",
+    "active"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": false,
+    "how": "Attributes Grafana does not use are ignored"
+   },
+   "group": [
+    "externalId"
+   ],
+   "cite": [
+    "c20",
+    "c18",
+    "c19",
+    "c33"
+   ],
+   "notes": "Only the Entra ID mapping table documents attributes; externalId is mandatory and must match the SAML userUID / external UID claim."
+  },
+  "roles": {
+   "supported": false,
+   "how": "SCIM does not assign roles; basic roles come from Role Sync (SAML role mapping) at login.",
+   "cite": [
+    "c28"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Requires SAML authentication from the same IdP; other auth methods are not supported.",
+    "cite": [
+     "c7",
+     "c12"
+    ]
+   },
+   {
+    "text": "Only Entra ID and Okta are supported identity providers.",
+    "cite": [
+     "c8",
+     "c37"
+    ]
+   },
+   {
+    "text": "SCIM-provisioned users cannot be deleted, only deactivated; SCIM-provisioned teams can only be deleted from the IdP.",
+    "cite": [
+     "c27",
+     "c31"
+    ]
+   },
+   {
+    "text": "SCIM Group Sync and Team Sync cannot be enabled together; migration from Team Sync is 'coming soon'.",
+    "cite": [
+     "c9",
+     "c34"
+    ]
+   },
+   {
+    "text": "Only work email addresses are supported.",
+    "cite": [
+     "c18"
+    ]
+   },
+   {
+    "text": "SCIM is stack-level only; the Cloud Portal (grafana.com) layer cannot be provisioned by SCIM.",
+    "cite": [
+     "c41"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c43",
+   "c49",
+   "c56"
+  ],
+  "plan": "Free",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://{stack-name}.grafana.net/api",
+  "docs_url": "https://grafana.com/docs/grafana/latest/developer-resources/api-reference/http-api/api-legacy/org/",
+  "auth": {
+   "methods": [
+    "service_account_token",
+    "basic"
+   ],
+   "scopes": [
+    "org.users:write",
+    "org.users:remove"
+   ],
+   "cite": [
+    "c43",
+    "c55",
+    "c45",
+    "c46"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": null,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c44",
+    "c48",
+    "c47",
+    "c45",
+    "c46",
+    "c49",
+    "c50",
+    "c52"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/api/org/users",
+    "purpose": "List users in the current organization",
+    "cite": [
+     "c44"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/org/users/lookup",
+    "purpose": "Look up users in the current organization",
+    "cite": [
+     "c48"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/org/users",
+    "purpose": "Add a user to the current organization",
+    "cite": [
+     "c47"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/org/users/:userId",
+    "purpose": "Update a user's org role",
+    "cite": [
+     "c45"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/org/users/:userId",
+    "purpose": "Remove a user from the current organization",
+    "cite": [
+     "c46"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/teams/search",
+    "purpose": "Search teams",
+    "cite": [
+     "c54"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/teams",
+    "purpose": "Create a team",
+    "cite": [
+     "c50"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/teams/:id",
+    "purpose": "Delete a team",
+    "cite": [
+     "c51"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/teams/:teamId/members",
+    "purpose": "Add a team member",
+    "cite": [
+     "c52"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/teams/:teamId/members/:userId",
+    "purpose": "Remove a team member",
+    "cite": [
+     "c53"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "The global User API (/api/users, /api/admin/users) needs basic auth as a Grafana server admin and cannot use service account tokens; Grafana Cloud customers are pointed to the Organization API instead.",
+    "cite": [
+     "c55",
+     "c56"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/grafana-labs/",
+   "cite": [
+    "c57",
+    "c40",
+    "c26",
+    "c23"
+   ],
+   "notes": "OIN 'Grafana Labs' app has only SAML ticked in its functionality list (SCIM/Create/Deactivate unticked, read from page markup) though its blurb mentions provisioning; Grafana's SCIM guide has you enable SCIM on your own SAML app integration with the generic base URL."
+  },
+  "entra": {
+   "listed": false,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c21"
+   ],
+   "notes": "Grafana's guide creates a non-gallery enterprise application; no Entra gallery tutorial for Grafana was found on Microsoft Learn."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": false,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c8"
+   ],
+   "notes": "Not a supported SCIM IdP per Grafana docs."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": false,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c8"
+   ],
+   "notes": "Not a supported SCIM IdP per Grafana docs."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": "Team Sync and Role Sync (SAML group/role mapping at login); LDAP on stacks",
+  "docs_public": true,
+  "cite": [
+   "c32",
+   "c41"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://grafana.com/pricing/",
+   "title": "Grafana Pricing | Free, Pro, Enterprise | Grafana Labs",
+   "quote": "Free Always free Always $0",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://grafana.com/pricing/",
+   "title": "Grafana Pricing | Free, Pro, Enterprise | Grafana Labs",
+   "quote": "Pro Self-serve From $19 / month + usage",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://grafana.com/pricing/",
+   "title": "Grafana Pricing | Free, Pro, Enterprise | Grafana Labs",
+   "quote": "Ready for scaling with more retention, basic support, and usage-based pricing.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://grafana.com/pricing/",
+   "title": "Grafana Pricing | Free, Pro, Enterprise | Grafana Labs",
+   "quote": "Enterprise Full service Starts at $25,000 / year spend commit",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://grafana.com/pricing/",
+   "title": "Grafana Pricing | Free, Pro, Enterprise | Grafana Labs",
+   "quote": "Pro Self-serve Starts at $8 / active user",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-scim-provisioning/",
+   "title": "Configure SCIM provisioning | Grafana documentation",
+   "quote": "Available in Grafana Enterprise and Grafana Cloud.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-scim-provisioning/",
+   "title": "Configure SCIM provisioning | Grafana documentation",
+   "quote": "SCIM provisioning only works with SAML authentication. Other authentication methods aren’t supported.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-scim-provisioning/",
+   "title": "Configure SCIM provisioning | Grafana documentation",
+   "quote": "The following identity providers are supported: Entra ID Okta",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-scim-provisioning/",
+   "title": "Configure SCIM provisioning | Grafana documentation",
+   "quote": "Enable SCIM group provisioning. When enabled, Grafana will create, update, and delete teams based on SCIM requests from your identity provider. Cannot be enabled if Team Sync is enabled.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-scim-provisioning/",
+   "title": "Configure SCIM provisioning | Grafana documentation",
+   "quote": "Enable SCIM user provisioning. When enabled, Grafana will create, update, and deactivate users based on SCIM requests from your identity provider.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-scim-provisioning/",
+   "title": "Configure SCIM provisioning | Grafana documentation",
+   "quote": "When enabled, prevents non-SCIM provisioned users from signing in. Cloud Portal users can always sign in regardless of this setting.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-scim-provisioning/",
+   "title": "Configure SCIM provisioning | Grafana documentation",
+   "quote": "Use the same identity provider for user provisioning and for authentication flow: You must use the same identity provider for both authentication and user provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-scim-provisioning/",
+   "title": "Configure SCIM provisioning | Grafana documentation",
+   "quote": "You can configure SCIM in Grafana using the Grafana user interface. To do this, navigate to Administration > Authentication > SCIM.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-scim-provisioning/configure-scim-with-entraid/",
+   "title": "Configure SCIM with Entra ID | Grafana documentation",
+   "quote": "Grafana Enterprise or a paid Grafana Cloud account with SCIM provisioning enabled.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-scim-provisioning/configure-scim-with-entraid/",
+   "title": "Configure SCIM with Entra ID | Grafana documentation",
+   "quote": "https://{stack-name}.grafana.net/apis/scim.grafana.app/v0alpha1/namespaces/stacks-{stack-id}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-scim-provisioning/configure-scim-with-entraid/",
+   "title": "Configure SCIM with Entra ID | Grafana documentation",
+   "quote": "Create a new token for the service account and save it securely. This token will be used in the Entra ID configuration",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-scim-provisioning/configure-scim-with-entraid/",
+   "title": "Configure SCIM with Entra ID | Grafana documentation",
+   "quote": "User administration — required for user sync (create, read, update, and remove users in the organization)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-scim-provisioning/configure-scim-with-entraid/",
+   "title": "Configure SCIM with Entra ID | Grafana documentation",
+   "quote": "Only work email addresses are supported. Entra ID must be configured to use emails[type eq \"work\"].value for email mapping.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-scim-provisioning/configure-scim-with-entraid/",
+   "title": "Configure SCIM with Entra ID | Grafana documentation",
+   "quote": "The externalId attribute in Grafana is mandatory. Entra ID uses this to uniquely identify users and groups.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-scim-provisioning/configure-scim-with-entraid/",
+   "title": "Configure SCIM with Entra ID | Grafana documentation",
+   "quote": "userPrincipalName\tuserName mail\temails[type eq \"work\"].value displayName\tdisplayName objectId\texternalId",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-scim-provisioning/configure-scim-with-entraid/",
+   "title": "Configure SCIM with Entra ID | Grafana documentation",
+   "quote": "Name the application and select non-gallery",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-scim-provisioning/configure-scim-with-entraid/",
+   "title": "Configure SCIM with Entra ID | Grafana documentation",
+   "quote": "Navigate to the Groups tab in provisioning Enable Group provisioning Select the groups to synchronize with Grafana",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-scim-provisioning/configure-scim-with-okta/",
+   "title": "Configure SCIM with Okta | Grafana documentation",
+   "quote": "Authentication Mode: HTTP Header Authorization: Bearer {your-grafana-service-account-token}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-scim-provisioning/configure-scim-with-okta/",
+   "title": "Configure SCIM with Okta | Grafana documentation",
+   "quote": "In the To App tab, enable: Create Users Update User Attributes Deactivate Users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-scim-provisioning/configure-scim-with-okta/",
+   "title": "Configure SCIM with Okta | Grafana documentation",
+   "quote": "Unique identifier field: userName",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-scim-provisioning/configure-scim-with-okta/",
+   "title": "Configure SCIM with Okta | Grafana documentation",
+   "quote": "SAML authentication configured with Okta",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-scim-provisioning/manage-users-teams/",
+   "title": "Manage users and teams with SCIM | Grafana documentation",
+   "quote": "After a user is provisioned through SCIM, they cannot be deleted from Grafana - they can only be deactivated through the identity provider.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-scim-provisioning/manage-users-teams/",
+   "title": "Manage users and teams with SCIM | Grafana documentation",
+   "quote": "SCIM handles user synchronization but not role assignments. Role management is handled through Role Sync, and any role changes take effect during user authentication.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-scim-provisioning/manage-users-teams/",
+   "title": "Manage users and teams with SCIM | Grafana documentation",
+   "quote": "/apis/scim.grafana.app/v0alpha1/namespaces/{$STACK_ID}/Users?filter=userName eq \"existing.user@company.com\"",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-scim-provisioning/manage-users-teams/",
+   "title": "Manage users and teams with SCIM | Grafana documentation",
+   "quote": "SCIM can automatically create and delete teams based on group changes in the identity provider.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-scim-provisioning/manage-users-teams/",
+   "title": "Manage users and teams with SCIM | Grafana documentation",
+   "quote": "Teams provisioned through SCIM cannot be deleted manually from Grafana - they can only be deleted by removing their corresponding groups from the identity provider.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-scim-provisioning/manage-users-teams/",
+   "title": "Manage users and teams with SCIM | Grafana documentation",
+   "quote": "users can still be created through SAML just-in-time provisioning when they log in, manually through the Grafana UI, or via automation tools like Terraform and the Grafana API.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-scim-provisioning/manage-users-teams/",
+   "title": "Manage users and teams with SCIM | Grafana documentation",
+   "quote": "During provisioning, if the identity provider sends user attributes that has no use in Grafana, those attributes will be gracefully ignored.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-scim-provisioning/manage-users-teams/",
+   "title": "Manage users and teams with SCIM | Grafana documentation",
+   "quote": "Team Sync Migration: Support for migrating from Team Sync to SCIM Group Sync is coming soon.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c35",
+   "url": "https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-scim-provisioning/troubleshooting/",
+   "title": "Troubleshoot SCIM provisioning | Grafana documentation",
+   "quote": "Cause: Invalid or expired authentication token. Solution: Generate a new token from the Service Account details page in Grafana.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://grafana.com/whats-new/2026-02-03-scim-user-and-team-provisioning/",
+   "title": "SCIM user and team provisioning | Grafana Labs",
+   "quote": "Automate deprovisioning: Gain peace of mind with automatic seat reclamation and instant access removal the second a user is deactivated in your IdP.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://grafana.com/whats-new/2026-02-03-scim-user-and-team-provisioning/",
+   "title": "SCIM user and team provisioning | Grafana Labs",
+   "quote": "Enable SCIM now - available with Okta and Entra ID for Grafana Cloud and Enterprise v12.4.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c38",
+   "url": "https://grafana.com/whats-new/2025-05-05-scim-user-and-team-provisioning/",
+   "title": "SCIM user and team provisioning | Grafana Labs",
+   "quote": "Enable the enableSCIM feature toggle to start using SCIM to simplify team management and accelerate the onboarding process for users!",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c39",
+   "url": "https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-authentication/saml/configure-saml-with-okta/oin-application/",
+   "title": "Configure SAML with Okta catalog application | Grafana documentation",
+   "quote": "Grafana Enterprise or a paid Grafana Cloud account.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c40",
+   "url": "https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-authentication/saml/configure-saml-with-okta/oin-application/",
+   "title": "Configure SAML with Okta catalog application | Grafana documentation",
+   "quote": "SAML Single Sign-On (SSO) SAML Attribute Mapping SAML Group Mapping SAML External ID Mapping for SCIM provisioning",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c41",
+   "url": "https://grafana.com/docs/grafana-cloud/platform/security-and-account-management/security-and-access/authentication-and-permissions/",
+   "title": "Configure authentication and authorization | Grafana Cloud documentation",
+   "quote": "Stack authentication options: Stack-level authentication supports multiple authentication methods including SAML, OAuth, OIDC, LDAP, and SCIM provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c42",
+   "url": "https://grafana.com/docs/grafana-cloud/platform/security-and-account-management/security-and-access/authentication-and-permissions/",
+   "title": "Configure authentication and authorization | Grafana Cloud documentation",
+   "quote": "Social login (Google, GitHub, Microsoft, Amazon) SAML SSO (Private Preview)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c43",
+   "url": "https://grafana.com/docs/grafana/latest/developer-resources/api-reference/http-api/api-legacy/org/",
+   "title": "Organization HTTP API | Grafana documentation",
+   "quote": "The Organization HTTP API is divided in two resources, /api/org (current organization) and /api/orgs (admin organizations). One big difference between these are that the admin of all organizations API only works with basic authentication",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c44",
+   "url": "https://grafana.com/docs/grafana/latest/developer-resources/api-reference/http-api/api-legacy/org/",
+   "title": "Organization HTTP API | Grafana documentation",
+   "quote": "GET\tGet all users within the current organization\t/api/org/users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c45",
+   "url": "https://grafana.com/docs/grafana/latest/developer-resources/api-reference/http-api/api-legacy/org/",
+   "title": "Organization HTTP API | Grafana documentation",
+   "quote": "PATCH\tUpdates the given user\t/api/org/users/:userId",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c46",
+   "url": "https://grafana.com/docs/grafana/latest/developer-resources/api-reference/http-api/api-legacy/org/",
+   "title": "Organization HTTP API | Grafana documentation",
+   "quote": "DELETE\tDelete user in current organization\t/api/org/users/:userId",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c47",
+   "url": "https://grafana.com/docs/grafana/latest/developer-resources/api-reference/http-api/api-legacy/org/",
+   "title": "Organization HTTP API | Grafana documentation",
+   "quote": "POST\tAdd a new user to the current organization\t/api/org/users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c48",
+   "url": "https://grafana.com/docs/grafana/latest/developer-resources/api-reference/http-api/api-legacy/org/",
+   "title": "Organization HTTP API | Grafana documentation",
+   "quote": "GET\tGet all users within the current organization (lookup)\t/api/org/users/lookup",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c49",
+   "url": "https://grafana.com/docs/grafana/latest/developer-resources/api-reference/http-api/api-legacy/team/",
+   "title": "Team HTTP API | Grafana documentation",
+   "quote": "Organization Admins are able to manage all teams and team members.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c50",
+   "url": "https://grafana.com/docs/grafana/latest/developer-resources/api-reference/http-api/api-legacy/team/",
+   "title": "Team HTTP API | Grafana documentation",
+   "quote": "POST /api/teams",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c51",
+   "url": "https://grafana.com/docs/grafana/latest/developer-resources/api-reference/http-api/api-legacy/team/",
+   "title": "Team HTTP API | Grafana documentation",
+   "quote": "DELETE /api/teams/:id",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c52",
+   "url": "https://grafana.com/docs/grafana/latest/developer-resources/api-reference/http-api/api-legacy/team/",
+   "title": "Team HTTP API | Grafana documentation",
+   "quote": "POST /api/teams/:teamId/members",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c53",
+   "url": "https://grafana.com/docs/grafana/latest/developer-resources/api-reference/http-api/api-legacy/team/",
+   "title": "Team HTTP API | Grafana documentation",
+   "quote": "DELETE /api/teams/:teamId/members/:userId",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c54",
+   "url": "https://grafana.com/docs/grafana/latest/developer-resources/api-reference/http-api/api-legacy/team/",
+   "title": "Team HTTP API | Grafana documentation",
+   "quote": "GET /api/teams/search?perpage=50&page=1&query=myteam&sort=memberCount-desc",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c55",
+   "url": "https://grafana.com/docs/grafana/latest/developer-resources/api-reference/http-api/api-legacy/user/",
+   "title": "User HTTP API | Grafana documentation",
+   "quote": "To use these API endpoints you have to use Basic authentication and the Grafana user must have the Grafana server administrator permission.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c56",
+   "url": "https://grafana.com/docs/grafana/latest/developer-resources/api-reference/http-api/api-legacy/user/",
+   "title": "User HTTP API | Grafana documentation",
+   "quote": "For Grafana Cloud customers, refer to Organization HTTP API for finding users with the org Admin role.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c57",
+   "url": "https://www.okta.com/integrations/grafana-labs/",
+   "title": "Integrate Grafana Labs with Okta",
+   "quote": "The Okta and Grafana Labs integration enables users to authenticate securely using Single Sign-On (SSO) with SAML, along with streamlined user provisioning and lifecycle management capabilities.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The May 2025 public-preview announcement told users to 'Enable the enableSCIM feature toggle'; the 2026 docs say SCIM is configured in the UI on paid Cloud accounts 'with SCIM provisioning enabled', which leaves open whether Grafana must turn it on per stack.",
+   "cite": [
+    "c38",
+    "c14",
+    "c13"
+   ]
+  }
+ ],
+ "searched": [
+  "https://grafana.com/pricing/",
+  "https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-scim-provisioning/",
+  "https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-scim-provisioning/manage-users-teams/",
+  "https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-scim-provisioning/configure-scim-with-entraid/",
+  "https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-scim-provisioning/configure-scim-with-okta/",
+  "https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-scim-provisioning/troubleshooting/",
+  "https://grafana.com/whats-new/2026-02-03-scim-user-and-team-provisioning/",
+  "https://grafana.com/whats-new/2025-05-05-scim-user-and-team-provisioning/",
+  "https://grafana.com/docs/grafana-cloud/platform/security-and-account-management/security-and-access/authentication-and-permissions/",
+  "https://grafana.com/docs/grafana-cloud/platform/pricing-and-usage/stack-plans/",
+  "https://grafana.com/en/sitemap.xml (scim|saml|audit)",
+  "https://www.okta.com/integrations/grafana-labs/",
+  "https://learn.microsoft.com (Entra gallery: grafana-tutorial 404)",
+  "https://jumpcloud.com/support/integrate-with-grafana (403)"
+ ],
+ "open_questions": [
+  "Does SCIM on Grafana Cloud Pro need Grafana support to enable it ('with SCIM provisioning enabled')?",
+  "SCIM version, ServiceProviderConfig/Schemas endpoints, PUT vs PATCH support and pagination are not documented.",
+  "Service account token expiry for the SCIM token is not stated on the SCIM pages.",
+  "Whether deactivation revokes active sessions is not documented.",
+  "No Grafana Cloud audit-log API or user-event webhooks found in the docs.",
+  "JumpCloud catalogue page blocked (403)."
+ ]
+}

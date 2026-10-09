@@ -1,0 +1,955 @@
+{
+ "slug": "bitwarden",
+ "vendor": "Bitwarden",
+ "vendor_url": "https://bitwarden.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Bitwarden",
+  "slug": "bitwarden",
+  "category": "Security & Identity",
+  "status": "free",
+  "scim_plan": "Teams",
+  "scim_price_text": "Teams: $4/u/mo (annual, SCIM included)",
+  "scim_price_per_user_mo": 4,
+  "team_plan": "Teams",
+  "team_price_text": "Teams: $4/u/mo (annual)",
+  "team_price_per_user_mo": 4,
+  "price_multiplier": 1.0,
+  "sso_plan": "Enterprise",
+  "sso_price_per_user_mo": 6,
+  "sso_required_for_scim": false,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "via_generic",
+   "google": "directory_sync",
+   "onelogin": "via_generic",
+   "jumpcloud": "native",
+   "generic": true
+  },
+  "pricing_page_url": "https://bitwarden.com/pricing/business/",
+  "docs_url": "https://bitwarden.com/help/about-scim.md",
+  "evidence": "Bitwarden's business pricing page lists \"Automate provisioning with SCIM\" on the Teams plan ($4 per user/month billed annually), and its SCIM docs say \"Teams and Enterprise organizations can use SCIM.\"",
+  "notes": "Unchanged from June: SCIM, Directory Connector, event logs and the Public API are on Teams ($4/u/mo annual) and Enterprise ($6/u/mo annual); SAML/OIDC SSO and JIT are Enterprise only, and SSO is not required for SCIM. A free 2-person organization exists without these tools. Deactivation in the IdP revokes the member (no seat used); Okta deletes also only revoke. Entra and OneLogin use generic/non-gallery SCIM apps; Okta (OIN app) and JumpCloud (catalogue app) have Bitwarden apps; Google Workspace syncs only via Bitwarden's Directory Connector. The org Public API (OAuth2 client credentials) can create, update, revoke, restore and remove members, manage groups and read events.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Teams",
+  "api_tax": false,
+  "first_added": null,
+  "status_prev": "free"
+ },
+ "plans": [
+  {
+   "name": "Teams",
+   "price_text": "$4 per month / per user billed annually",
+   "price_per_user_mo": 4,
+   "billing": "annual",
+   "sso": false,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c1",
+    "c8",
+    "c2",
+    "c5",
+    "c10",
+    "c11",
+    "c15",
+    "c38"
+   ]
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "$6 per month / per user billed annually",
+   "price_per_user_mo": 6,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c3",
+    "c9",
+    "c4",
+    "c5",
+    "c11",
+    "c15",
+    "c38"
+   ]
+  },
+  {
+   "name": "Custom (Request a quote)",
+   "price_text": "Request a quote",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c5"
+   ],
+   "notes": "Tailored plan for large organizations; features not itemised."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c2",
+   "c13",
+   "c14",
+   "c15",
+   "c36"
+  ],
+  "plan": "Teams",
+  "addon_price_text": null,
+  "sso_required": false,
+  "version": "2.0",
+  "base_url": null,
+  "notes": "sso_required=false inferred: SCIM is on Teams, where Login with SSO is not available. The SCIM URL is shown per organization in Admin Console > Settings > SCIM provisioning; no URL pattern is published.",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Admin Console > Settings > SCIM provisioning (SCIM URL and SCIM API key)",
+   "token_expiry": null,
+   "cite": [
+    "c16",
+    "c33"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c13",
+    "c19"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": null,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c13",
+    "c20",
+    "c26",
+    "c30",
+    "c19",
+    "c34",
+    "c24"
+   ],
+   "notes": "Status changes sync (Entra sends active via the IsSoftDeleted mapping). Display name, external ID and email changes do not sync. Okta 'Delete user' only revokes; SCIM event logs mention 'removing users', so whether a SCIM DELETE removes the member is unclear."
+  },
+  "deprovision": {
+   "action": "suspend",
+   "frees_seat": true,
+   "revokes_sessions": null,
+   "data_retained": "Revoked members stay listed under the Revoked tab, lose access to organization vault items and collections, cannot use SSO, and can be restored.",
+   "cite": [
+    "c20",
+    "c21",
+    "c26",
+    "c27"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "active",
+    "emails[primary eq true].value",
+    "userName",
+    "displayName",
+    "externalId"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "displayName",
+    "members",
+    "externalId"
+   ],
+   "cite": [
+    "c18",
+    "c22",
+    "c23",
+    "c19"
+   ]
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Display name and external ID changes in the IdP are not synced; email address changes are not supported once provisioned.",
+    "cite": [
+     "c22",
+     "c23",
+     "c29"
+    ]
+   },
+   {
+    "text": "The SCIM API cannot be used to query group membership; use the Public API.",
+    "cite": [
+     "c19"
+    ]
+   },
+   {
+    "text": "Okta 'suspended' status does not revoke the member; Okta deletes only revoke.",
+    "cite": [
+     "c28",
+     "c27"
+    ]
+   },
+   {
+    "text": "Directory Connector must be turned off before enabling SCIM.",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "text": "Provisioned users default to Staged status (no invite, no seat) until invited, unless automatic invitations are on.",
+    "cite": [
+     "c17"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c38",
+   "c39",
+   "c41",
+   "c7"
+  ],
+  "plan": "Teams",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://api.bitwarden.com (US) or https://api.bitwarden.eu (EU)",
+  "docs_url": "https://bitwarden.com/help/api/",
+  "auth": {
+   "methods": [
+    "oauth2_client_credentials"
+   ],
+   "scopes": [
+    "api.organization"
+   ],
+   "cite": [
+    "c39",
+    "c40"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": true,
+   "reactivate_user": true,
+   "manage_groups": true,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c42",
+    "c49",
+    "c54",
+    "c44",
+    "c45",
+    "c46",
+    "c47",
+    "c55"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/public/members",
+    "purpose": "List all members",
+    "cite": [
+     "c42"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/public/members",
+    "purpose": "Create (invite) a member",
+    "cite": [
+     "c49"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/public/members/{id}",
+    "purpose": "Retrieve a member",
+    "cite": [
+     "c42"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/public/members/{id}",
+    "purpose": "Update a member",
+    "cite": [
+     "c54"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/public/members/{id}",
+    "purpose": "Remove a member",
+    "cite": [
+     "c46"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/public/members/{id}/revoke",
+    "purpose": "Revoke a member's access to the organization",
+    "cite": [
+     "c44"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/public/members/{id}/restore",
+    "purpose": "Restore a member",
+    "cite": [
+     "c45"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/public/members/{id}/group-ids",
+    "purpose": "Update a member's groups",
+    "cite": [
+     "c47"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/public/groups",
+    "purpose": "Create a group",
+    "cite": [
+     "c55"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/public/organization/import",
+    "purpose": "Import members and groups",
+    "cite": [
+     "c48"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/public/organization/subscription",
+    "purpose": "Update the organization's subscription (seats)",
+    "cite": [
+     "c50"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/public/events",
+    "purpose": "List event (audit) logs",
+    "cite": [
+     "c43"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Teams",
+   "cite": [
+    "c43",
+    "c7",
+    "c10"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/bitwarden/",
+   "cite": [
+    "c51",
+    "c31"
+   ],
+   "notes": "OIN app (last updated Jul 2026): SAML, OIDC, SCIM, Create, Deactivate, Group Push checked in page markup."
+  },
+  "entra": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c32",
+    "c11"
+   ],
+   "notes": "Bitwarden's SCIM guide uses a Non-gallery enterprise application; Microsoft's Bitwarden Learn tutorial URLs return 404."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": true,
+   "kind": "directory_sync",
+   "built_by": "vendor",
+   "url": null,
+   "cite": [
+    "c52"
+   ],
+   "notes": "Google Workspace is not in Bitwarden's SCIM IdP list; provisioning via Bitwarden Directory Connector."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c35"
+   ],
+   "notes": "Uses OneLogin's generic 'SCIM Provisioner with SAML (SCIM v2 Enterprise)' app."
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c37"
+   ],
+   "notes": "Bitwarden's JumpCloud guide selects a 'Bitwarden' app from JumpCloud's application catalogue; JumpCloud's own page not loaded."
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "both",
+  "csv_import": null,
+  "other_sync": "Bitwarden Directory Connector (Active Directory/LDAP, Entra ID, Google Workspace, Okta, OneLogin)",
+  "docs_public": true,
+  "cite": [
+   "c53",
+   "c52",
+   "c25"
+  ],
+  "notes": "JIT is Enterprise only (with SSO)."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://bitwarden.com/pricing/business/",
+   "title": "Bitwarden Business Pricing",
+   "quote": "For teams and growing companies that need to move quickly.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://bitwarden.com/pricing/business/",
+   "title": "Bitwarden Business Pricing",
+   "quote": "Automate provisioning with SCIM",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://bitwarden.com/pricing/business/",
+   "title": "Bitwarden Business Pricing",
+   "quote": "For businesses needing advanced protection and control.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://bitwarden.com/pricing/business/",
+   "title": "Bitwarden Business Pricing",
+   "quote": "Passwordless SSO integration",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://bitwarden.com/pricing/business/",
+   "title": "Bitwarden Business Pricing",
+   "quote": "Pricing shown in USD and based on an annual subscription. Taxes not included.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://bitwarden.com/pricing/business/",
+   "title": "Bitwarden Business Pricing",
+   "quote": "Use the SCIM protocol to manage and provision Bitwarden users from your Identity Provider or directory service for easy onboarding and employee succession.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://bitwarden.com/pricing/business/",
+   "title": "Bitwarden Business Pricing",
+   "quote": "Use the Bitwarden Public API to manage members, collections, groups, event logs, and policies of an Organization",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://bitwarden.com/pricing/business/",
+   "title": "Bitwarden Business Pricing",
+   "quote": "$ 4 per month / per user billed annually",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://bitwarden.com/pricing/business/",
+   "title": "Bitwarden Business Pricing",
+   "quote": "$ 6 per month / per user billed annually",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://bitwarden.com/help/password-manager-plans.md",
+   "title": "Password Manager Plans",
+   "quote": "Teams organizations include all premium features for all enrolled users, unlimited secure data sharing within the Teams organization, and a suite of operational tools such as event logging and an API for organization management.",
+   "accessed": "2026-10-05",
+   "page_url": "https://bitwarden.com/help/password-manager-plans/"
+  },
+  {
+   "id": "c11",
+   "url": "https://bitwarden.com/help/password-manager-plans.md",
+   "title": "Password Manager Plans",
+   "quote": "enterprise-only tools like SSO authentication, enterprise policy enforcement, and a self-host option.",
+   "accessed": "2026-10-05",
+   "page_url": "https://bitwarden.com/help/password-manager-plans/"
+  },
+  {
+   "id": "c12",
+   "url": "https://bitwarden.com/help/password-manager-plans.md",
+   "title": "Password Manager Plans",
+   "quote": "Teams organizations subscriptions can be billed annually or monthly.",
+   "accessed": "2026-10-05",
+   "page_url": "https://bitwarden.com/help/password-manager-plans/"
+  },
+  {
+   "id": "c13",
+   "url": "https://bitwarden.com/help/about-scim.md",
+   "title": "About SCIM",
+   "quote": "will accept requests from your identity provider (IdP) for user and group provisioning and de-provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": "https://bitwarden.com/help/about-scim/"
+  },
+  {
+   "id": "c14",
+   "url": "https://bitwarden.com/help/about-scim.md",
+   "title": "About SCIM",
+   "quote": "Bitwarden supports SCIM v2 using standard attribute mappings and offers integration documentation for:",
+   "accessed": "2026-10-05",
+   "page_url": "https://bitwarden.com/help/about-scim/"
+  },
+  {
+   "id": "c15",
+   "url": "https://bitwarden.com/help/about-scim.md",
+   "title": "About SCIM",
+   "quote": "Teams and Enterprise organizations can use SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://bitwarden.com/help/about-scim/"
+  },
+  {
+   "id": "c16",
+   "url": "https://bitwarden.com/help/about-scim.md",
+   "title": "About SCIM",
+   "quote": "To set up SCIM, your IdP will need a SCIM URL and API key to make authorized requests to the Bitwarden server.",
+   "accessed": "2026-10-05",
+   "page_url": "https://bitwarden.com/help/about-scim/"
+  },
+  {
+   "id": "c17",
+   "url": "https://bitwarden.com/help/about-scim.md",
+   "title": "About SCIM",
+   "quote": "By default, a user provisioned through SCIM is placed into a Staged status",
+   "accessed": "2026-10-05",
+   "page_url": "https://bitwarden.com/help/about-scim/"
+  },
+  {
+   "id": "c18",
+   "url": "https://bitwarden.com/help/about-scim.md",
+   "title": "About SCIM",
+   "quote": "An indication that the user is `active` (required)",
+   "accessed": "2026-10-05",
+   "page_url": "https://bitwarden.com/help/about-scim/"
+  },
+  {
+   "id": "c19",
+   "url": "https://bitwarden.com/help/about-scim.md",
+   "title": "About SCIM",
+   "quote": "Group provisioning must be used in order to assign synced users to groups, however the SCIM API cannot be used to query members in a group.",
+   "accessed": "2026-10-05",
+   "page_url": "https://bitwarden.com/help/about-scim/"
+  },
+  {
+   "id": "c20",
+   "url": "https://bitwarden.com/help/about-scim.md",
+   "title": "About SCIM",
+   "quote": "When a user is temporarily suspended or de-activated in your IdP, as opposed to being outright removed, their access to your organization will automatically be revoked.",
+   "accessed": "2026-10-05",
+   "page_url": "https://bitwarden.com/help/about-scim/"
+  },
+  {
+   "id": "c21",
+   "url": "https://bitwarden.com/help/about-scim.md",
+   "title": "About SCIM",
+   "quote": "Not occupy a license seat.",
+   "accessed": "2026-10-05",
+   "page_url": "https://bitwarden.com/help/about-scim/"
+  },
+  {
+   "id": "c22",
+   "url": "https://bitwarden.com/help/about-scim.md",
+   "title": "About SCIM",
+   "quote": "While requests to the SCIM API can be configured to include member display names, this data is not currently synced to Bitwarden on initial provision or when changes occur in the IdP.",
+   "accessed": "2026-10-05",
+   "page_url": "https://bitwarden.com/help/about-scim/"
+  },
+  {
+   "id": "c23",
+   "url": "https://bitwarden.com/help/about-scim.md",
+   "title": "About SCIM",
+   "quote": "it will not currently sync changes to the external ID from the IdP to Bitwarden.",
+   "accessed": "2026-10-05",
+   "page_url": "https://bitwarden.com/help/about-scim/"
+  },
+  {
+   "id": "c24",
+   "url": "https://bitwarden.com/help/about-scim.md",
+   "title": "About SCIM",
+   "quote": "including inviting users and removing users, as well as creating or deleting groups.",
+   "accessed": "2026-10-05",
+   "page_url": "https://bitwarden.com/help/about-scim/"
+  },
+  {
+   "id": "c25",
+   "url": "https://bitwarden.com/help/about-scim.md",
+   "title": "About SCIM",
+   "quote": "If you used Directory Connector prior to implementing SCIM, make sure to turn Directory Connector off before turning SCIM provisioning on.",
+   "accessed": "2026-10-05",
+   "page_url": "https://bitwarden.com/help/about-scim/"
+  },
+  {
+   "id": "c26",
+   "url": "https://bitwarden.com/help/okta-scim-integration.md",
+   "title": "Okta SCIM Integration",
+   "quote": "Deactivating a user in Okta will change their Bitwarden status to revoked.",
+   "accessed": "2026-10-05",
+   "page_url": "https://bitwarden.com/help/okta-scim-integration/"
+  },
+  {
+   "id": "c27",
+   "url": "https://bitwarden.com/help/okta-scim-integration.md",
+   "title": "Okta SCIM Integration",
+   "quote": "Users deleted in Okta will be moved to revoked status in the Bitwarden organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://bitwarden.com/help/okta-scim-integration/"
+  },
+  {
+   "id": "c28",
+   "url": "https://bitwarden.com/help/okta-scim-integration.md",
+   "title": "Okta SCIM Integration",
+   "quote": "Choosing the suspended status for a user in Okta will not result in a revoked status in Bitwarden.",
+   "accessed": "2026-10-05",
+   "page_url": "https://bitwarden.com/help/okta-scim-integration/"
+  },
+  {
+   "id": "c29",
+   "url": "https://bitwarden.com/help/okta-scim-integration.md",
+   "title": "Okta SCIM Integration",
+   "quote": "Bitwarden does not support changing a user's email address once provisioned.",
+   "accessed": "2026-10-05",
+   "page_url": "https://bitwarden.com/help/okta-scim-integration/"
+  },
+  {
+   "id": "c30",
+   "url": "https://bitwarden.com/help/okta-scim-integration.md",
+   "title": "Okta SCIM Integration",
+   "quote": "Groups and their users in Okta can be pushed to Bitwarden.",
+   "accessed": "2026-10-05",
+   "page_url": "https://bitwarden.com/help/okta-scim-integration/"
+  },
+  {
+   "id": "c31",
+   "url": "https://bitwarden.com/help/okta-scim-integration.md",
+   "title": "Okta SCIM Integration",
+   "quote": "In the search bar, enter `Bitwarden` and select Bitwarden",
+   "accessed": "2026-10-05",
+   "page_url": "https://bitwarden.com/help/okta-scim-integration/"
+  },
+  {
+   "id": "c32",
+   "url": "https://bitwarden.com/help/microsoft-entra-id-scim-integration.md",
+   "title": "Microsoft Entra ID SCIM",
+   "quote": "Choose the Non-gallery option and then select the Create button.",
+   "accessed": "2026-10-05",
+   "page_url": "https://bitwarden.com/help/microsoft-entra-id-scim-integration/"
+  },
+  {
+   "id": "c33",
+   "url": "https://bitwarden.com/help/microsoft-entra-id-scim-integration.md",
+   "title": "Microsoft Entra ID SCIM",
+   "quote": "Enter your SCIM API Key",
+   "accessed": "2026-10-05",
+   "page_url": "https://bitwarden.com/help/microsoft-entra-id-scim-integration/"
+  },
+  {
+   "id": "c34",
+   "url": "https://bitwarden.com/help/microsoft-entra-id-scim-integration.md",
+   "title": "Microsoft Entra ID SCIM",
+   "quote": "Switch([IsSoftDeleted], , \"False\", \"True\", \"True\", \"False\")",
+   "accessed": "2026-10-05",
+   "page_url": "https://bitwarden.com/help/microsoft-entra-id-scim-integration/"
+  },
+  {
+   "id": "c35",
+   "url": "https://bitwarden.com/help/onelogin-scim-integration.md",
+   "title": "OneLogin SCIM Integration",
+   "quote": "In the search bar, type `SCIM` and select the SCIM Provisioner with SAML (SCIM v2 Enterprise) app",
+   "accessed": "2026-10-05",
+   "page_url": "https://bitwarden.com/help/onelogin-scim-integration/"
+  },
+  {
+   "id": "c36",
+   "url": "https://bitwarden.com/help/onelogin-scim-integration.md",
+   "title": "OneLogin SCIM Integration",
+   "quote": "SCIM integrations are available for Teams and Enterprise organizations.",
+   "accessed": "2026-10-05",
+   "page_url": "https://bitwarden.com/help/onelogin-scim-integration/"
+  },
+  {
+   "id": "c37",
+   "url": "https://bitwarden.com/help/jumpcloud-scim-integration.md",
+   "title": "JumpCloud SCIM Integration",
+   "quote": "Enter `Bitwarden` in the search box and select the configure button",
+   "accessed": "2026-10-05",
+   "page_url": "https://bitwarden.com/help/jumpcloud-scim-integration/"
+  },
+  {
+   "id": "c38",
+   "url": "https://bitwarden.com/help/public-api.md",
+   "title": "Bitwarden Public API",
+   "quote": "Access to the Bitwarden Public API is available for all Enterprise and Teams organizations.",
+   "accessed": "2026-10-05",
+   "page_url": "https://bitwarden.com/help/public-api/"
+  },
+  {
+   "id": "c39",
+   "url": "https://bitwarden.com/help/public-api.md",
+   "title": "Bitwarden Public API",
+   "quote": "application request flow to grant bearer access tokens from the endpoint. Authentication requests take `client_id` and `client_secret` as required parameters.",
+   "accessed": "2026-10-05",
+   "page_url": "https://bitwarden.com/help/public-api/"
+  },
+  {
+   "id": "c40",
+   "url": "https://bitwarden.com/help/public-api.md",
+   "title": "Bitwarden Public API",
+   "quote": "you will always use `grant_type=client_credentials` and `scope=api.organization`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://bitwarden.com/help/public-api/"
+  },
+  {
+   "id": "c41",
+   "url": "https://bitwarden.com/help/public-api.md",
+   "title": "Bitwarden Public API",
+   "quote": "For cloud-hosted, `https://api.bitwarden.com` or `https://api.bitwarden.eu`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://bitwarden.com/help/public-api/"
+  },
+  {
+   "id": "c42",
+   "url": "https://bitwarden.com/help/public-api.md",
+   "title": "Bitwarden Public API",
+   "quote": "get/public/members",
+   "accessed": "2026-10-05",
+   "page_url": "https://bitwarden.com/help/public-api/"
+  },
+  {
+   "id": "c43",
+   "url": "https://bitwarden.com/help/public-api.md",
+   "title": "Bitwarden Public API",
+   "quote": "get/public/events",
+   "accessed": "2026-10-05",
+   "page_url": "https://bitwarden.com/help/public-api/"
+  },
+  {
+   "id": "c44",
+   "url": "https://bitwarden.com/help/api/",
+   "title": "Bitwarden Public API (Swagger)",
+   "quote": "Revoke a member's access to an organization.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c45",
+   "url": "https://bitwarden.com/help/api/",
+   "title": "Bitwarden Public API (Swagger)",
+   "quote": "Restore a member.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c46",
+   "url": "https://bitwarden.com/help/api/",
+   "title": "Bitwarden Public API (Swagger)",
+   "quote": "Remove a member.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c47",
+   "url": "https://bitwarden.com/help/api/",
+   "title": "Bitwarden Public API (Swagger)",
+   "quote": "Update a member's groups.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c48",
+   "url": "https://bitwarden.com/help/api/",
+   "title": "Bitwarden Public API (Swagger)",
+   "quote": "Import members and groups.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c49",
+   "url": "https://bitwarden.com/help/api/",
+   "title": "Bitwarden Public API (Swagger)",
+   "quote": "Create a member.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c50",
+   "url": "https://bitwarden.com/help/api/",
+   "title": "Bitwarden Public API (Swagger)",
+   "quote": "Update the organization's current subscription for Password Manager and/or Secrets Manager.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c51",
+   "url": "https://www.okta.com/integrations/bitwarden/",
+   "title": "Integrate Bitwarden with Okta",
+   "quote": "The Okta integration enables secure SAML and OIDC-based Single Sign-On alongside SCIM provisioning",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c52",
+   "url": "https://bitwarden.com/help/directory-sync.md",
+   "title": "Directory Connector",
+   "quote": "Google Workspace",
+   "accessed": "2026-10-05",
+   "page_url": "https://bitwarden.com/help/directory-sync/"
+  },
+  {
+   "id": "c53",
+   "url": "https://bitwarden.com/help/about-scim.md",
+   "title": "About SCIM",
+   "quote": "Enterprise organizations can use just-in-time (JIT).",
+   "accessed": "2026-10-05",
+   "page_url": "https://bitwarden.com/help/about-scim/"
+  },
+  {
+   "id": "c54",
+   "url": "https://bitwarden.com/help/api/",
+   "title": "Bitwarden Public API (Swagger)",
+   "quote": "Update a member.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c55",
+   "url": "https://bitwarden.com/help/api/",
+   "title": "Bitwarden Public API (Swagger)",
+   "quote": "Create a group.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://bitwarden.com/pricing/business/",
+  "https://bitwarden.com/help/about-scim/",
+  "IdP SCIM guides (Okta, Entra, OneLogin, JumpCloud)",
+  "https://bitwarden.com/help/public-api/",
+  "https://bitwarden.com/help/api/ (embedded OpenAPI)"
+ ],
+ "open_questions": [
+  "Whether a SCIM DELETE removes the member or only revokes is not stated directly.",
+  "SCIM filtering, pagination and rate limits are not documented.",
+  "Public API rate limits are not documented.",
+  "jit_protocol 'both' assumes JIT applies to both SAML and OIDC SSO; the JIT article was not loaded."
+ ]
+}

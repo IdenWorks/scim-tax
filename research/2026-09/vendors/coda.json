@@ -1,0 +1,1156 @@
+{
+  "scim": {
+    "available": true,
+    "cite": [
+      "c4",
+      "c6",
+      "c7",
+      "c74",
+      "c9"
+    ],
+    "plan": "Enterprise",
+    "addon_price_text": null,
+    "sso_required": true,
+    "version": "2.0",
+    "base_url": null,
+    "auth": {
+      "method": "bearer",
+      "token_source": "Admin settings > Provisioning > Generate new token",
+      "token_expiry": null,
+      "cite": [
+        "c8",
+        "c9",
+        "c13"
+      ],
+      "notes": "Only one SCIM token is valid at a time; generating a new token invalidates the previous one."
+    },
+    "endpoints": {
+      "Users": true,
+      "Groups": true,
+      "ServiceProviderConfig": null,
+      "Schemas": null,
+      "ResourceTypes": null,
+      "Bulk": null,
+      "Me": null,
+      "cite": [
+        "c12",
+        "c20"
+      ]
+    },
+    "operations": {
+      "create": true,
+      "read": null,
+      "update_put": null,
+      "update_patch": null,
+      "deactivate": true,
+      "reactivate": true,
+      "delete": null,
+      "group_push": true,
+      "group_membership": null,
+      "cite": [
+        "c12",
+        "c14",
+        "c18",
+        "c24",
+        "c30"
+      ],
+      "notes": "Coda's SSO article says managed provisioning can create, update, import, deactivate, reactivate and delete users; the SCIM and IdP articles list only create, update, deactivate and group push, so delete is left null."
+    },
+    "deprovision": {
+      "action": "deactivate",
+      "frees_seat": true,
+      "revokes_sessions": null,
+      "data_retained": "Docs are kept and can be transferred to a new owner; untransferred docs stay editable for 7 days, then become read-only until transferred. Reactivated users regain their previous doc access.",
+      "cite": [
+        "c12",
+        "c24",
+        "c25",
+        "c26",
+        "c27",
+        "c48"
+      ],
+      "notes": "frees_seat comes from the Admin API description of user deactivation (\"ensuring the user is no longer paid\"); the SCIM docs do not restate it."
+    },
+    "filtering": {
+      "supported": null,
+      "attributes": [],
+      "cite": []
+    },
+    "pagination": {
+      "supported": null,
+      "max_page_size": null,
+      "cite": []
+    },
+    "attributes": {
+      "core": [
+        "userName (email format)"
+      ],
+      "enterprise": [],
+      "custom": {
+        "supported": null,
+        "how": null
+      },
+      "group": [
+        "displayName",
+        "members"
+      ],
+      "cite": [
+        "c11",
+        "c20"
+      ],
+      "notes": "Coda does not publish a SCIM attribute list. Entra's tutorial maps userName, active, name.givenName and name.familyName; JumpCloud's page maps further attributes; both are IdP pages, see idp_apps."
+    },
+    "roles": {
+      "supported": null,
+      "how": null,
+      "cite": []
+    },
+    "rate_limits": {
+      "text": null,
+      "cite": []
+    },
+    "limitations": [
+      {
+        "text": "SAML SSO must be configured before SCIM can be turned on.",
+        "cite": [
+          "c7"
+        ]
+      },
+      {
+        "text": "For Microsoft Entra ID, Coda tells admins not to use the Entra gallery app (it does not support sharing with groups) and to create a custom app instead.",
+        "cite": [
+          "c19"
+        ]
+      },
+      {
+        "text": "Deactivating SCIM-provisioned users in Coda is discouraged; the Admin API rejects activation changes when SCIM is enabled unless bypassScim is set.",
+        "cite": [
+          "c24",
+          "c52"
+        ]
+      }
+    ],
+    "notes": "The SCIM Base URL is shown in Admin settings > Provisioning; its pattern is not published. SCIM version 2.0 comes from JumpCloud's Coda page."
+  },
+  "user_api": {
+    "available": true,
+    "cite": [
+      "c32",
+      "c39",
+      "c40"
+    ],
+    "plan": "Enterprise",
+    "api_tax": true,
+    "style": "REST",
+    "base_url": "https://coda.io/apis/admin/v1",
+    "docs_url": "https://docs.superhuman.com/developers/apis/admin/v1",
+    "auth": {
+      "methods": [
+        "api_key"
+      ],
+      "scopes": [],
+      "cite": [
+        "c35",
+        "c41"
+      ],
+      "notes": "Org-admin API token from coda.io/account, sent as a Bearer token."
+    },
+    "capabilities": {
+      "list_users": true,
+      "get_user": null,
+      "create_user": false,
+      "invite_user": null,
+      "update_user": null,
+      "deactivate_user": true,
+      "delete_user": null,
+      "reactivate_user": true,
+      "manage_groups": false,
+      "assign_roles": true,
+      "assign_licenses": null,
+      "cite": [
+        "c33",
+        "c34",
+        "c46",
+        "c48",
+        "c50",
+        "c55",
+        "c63"
+      ],
+      "notes": "Groups are read-only (list groups and members as provisioned by SCIM). Roles are per workspace (Admin, DocMaker, Editor). create_user is false: workspace add only takes an existing user."
+    },
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/organizations/{organizationId}/users",
+        "purpose": "List organization users",
+        "cite": [
+          "c46",
+          "c47"
+        ]
+      },
+      {
+        "method": "POST",
+        "path": "/organizations/{organizationId}/users/{userEmail}/deactivate",
+        "purpose": "Deactivate a user (no longer paid; docs can be reassigned)",
+        "cite": [
+          "c48",
+          "c49"
+        ]
+      },
+      {
+        "method": "POST",
+        "path": "/organizations/{organizationId}/users/{userEmail}/activate",
+        "purpose": "Activate a deactivated user",
+        "cite": [
+          "c50",
+          "c51"
+        ]
+      },
+      {
+        "method": "POST",
+        "path": "/organizations/{organizationId}/users/transferResources",
+        "purpose": "Transfer docs and workspace membership from a deactivated user",
+        "cite": [
+          "c53",
+          "c54"
+        ]
+      },
+      {
+        "method": "GET",
+        "path": "/organizations/{organizationId}/groups",
+        "purpose": "List groups",
+        "cite": [
+          "c55",
+          "c56"
+        ]
+      },
+      {
+        "method": "GET",
+        "path": "/organizations/{organizationId}/groups/{groupId}",
+        "purpose": "Get group",
+        "cite": [
+          "c57"
+        ]
+      },
+      {
+        "method": "GET",
+        "path": "/organizations/{organizationId}/groups/{groupId}/members",
+        "purpose": "List group members",
+        "cite": [
+          "c58",
+          "c59"
+        ]
+      },
+      {
+        "method": "GET",
+        "path": "/organizations/{organizationId}/workspaces/{workspaceId}/users",
+        "purpose": "List workspace users",
+        "cite": [
+          "c60"
+        ]
+      },
+      {
+        "method": "POST",
+        "path": "/organizations/{organizationId}/workspaces/{workspaceId}/users",
+        "purpose": "Add an existing user to a workspace with a role",
+        "cite": [
+          "c61",
+          "c62",
+          "c63"
+        ]
+      },
+      {
+        "method": "PUT",
+        "path": "/organizations/{organizationId}/workspaces/{workspaceId}/users/{userEmail}",
+        "purpose": "Update workspace user role",
+        "cite": [
+          "c64",
+          "c63"
+        ]
+      },
+      {
+        "method": "DELETE",
+        "path": "/organizations/{organizationId}/workspaces/{workspaceId}/users/{userEmail}",
+        "purpose": "Remove a user from a workspace (not from the org)",
+        "cite": [
+          "c65",
+          "c66"
+        ]
+      },
+      {
+        "method": "GET",
+        "path": "/organizations/{organizationId}/audit/events",
+        "purpose": "List audit events",
+        "cite": [
+          "c44",
+          "c45"
+        ]
+      }
+    ],
+    "webhooks_user_events": {
+      "supported": true,
+      "events": [],
+      "cite": [
+        "c43"
+      ],
+      "notes": "Webhooks deliver audit events (which include user login/logout and role changes); no separate user-lifecycle event list is published."
+    },
+    "audit_log_api": {
+      "supported": true,
+      "plan": "Enterprise",
+      "cite": [
+        "c44",
+        "c36",
+        "c32"
+      ]
+    },
+    "rate_limits": {
+      "text": "Unspecified per-minute limit; HTTP 429 when exceeded. List endpoints take limit 1-500 (default 100) with pageToken paging.",
+      "cite": [
+        "c42",
+        "c67"
+      ]
+    },
+    "limitations": [
+      {
+        "text": "Admin API cannot create users or manage group membership; groups come only from SCIM.",
+        "cite": [
+          "c33",
+          "c61"
+        ]
+      }
+    ],
+    "notes": "The Admin API is separate from the public Coda (doc) API, which is open to all users but only covers docs, tables and pages, not user management."
+  },
+  "idp_apps": {
+    "okta": {
+      "listed": true,
+      "sso": true,
+      "provisioning": true,
+      "kind": "scim",
+      "built_by": "vendor",
+      "url": "https://www.okta.com/integrations/coda/",
+      "cite": [
+        "c68",
+        "c69",
+        "c21",
+        "c14"
+      ],
+      "notes": "Okta lists SAML, SCIM, Create, Update, Deactivate and Group Push. Coda calls it the Coda-built Okta connector."
+    },
+    "entra": {
+      "listed": true,
+      "sso": true,
+      "provisioning": true,
+      "kind": "scim",
+      "built_by": null,
+      "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/coda-provisioning-tutorial",
+      "cite": [
+        "c70",
+        "c71",
+        "c72",
+        "c19"
+      ],
+      "notes": "Gallery app provisions users, but Coda says it is outdated and recommends a custom non-gallery app for group sharing."
+    },
+    "google": {
+      "listed": null,
+      "sso": null,
+      "provisioning": null,
+      "kind": null,
+      "built_by": null,
+      "url": null,
+      "cite": []
+    },
+    "onelogin": {
+      "listed": null,
+      "sso": null,
+      "provisioning": null,
+      "kind": null,
+      "built_by": null,
+      "url": null,
+      "cite": []
+    },
+    "jumpcloud": {
+      "listed": true,
+      "sso": true,
+      "provisioning": true,
+      "kind": "scim",
+      "built_by": null,
+      "url": "https://jumpcloud.com/support/integrate-with-coda",
+      "cite": [
+        "c73",
+        "c74",
+        "c75",
+        "c76",
+        "c22"
+      ],
+      "notes": "JumpCloud page says create, update, deactivate users; it also says groups are not supported while Coda documents JumpCloud group push."
+    }
+  },
+  "fallbacks": {
+    "jit": true,
+    "jit_protocol": "saml",
+    "csv_import": null,
+    "other_sync": "Google sign-in on all plans (login only, no provisioning); a one-time Google Groups import via Okta is documented.",
+    "docs_public": true,
+    "cite": [
+      "c29",
+      "c15",
+      "c31",
+      "c23"
+    ]
+  },
+  "slug": "coda",
+  "vendor": "Superhuman Docs",
+  "vendor_url": "https://superhuman.com/docs",
+  "researched_at": "2026-10-05",
+  "row": {
+    "vendor": "Superhuman Docs",
+    "slug": "coda",
+    "category": "Productivity & Docs",
+    "status": "gated",
+    "scim_plan": "Enterprise",
+    "scim_price_text": "Contact Sales",
+    "scim_price_per_user_mo": null,
+    "team_plan": "Pro",
+    "team_price_text": "Pro: $12/Doc Maker/mo (annual)",
+    "team_price_per_user_mo": 12,
+    "price_multiplier": null,
+    "sso_plan": "Enterprise",
+    "sso_price_per_user_mo": null,
+    "sso_required_for_scim": true,
+    "scim_addon_price_text": null,
+    "min_seats": null,
+    "scim_ops": {
+      "create": true,
+      "update": true,
+      "deactivate": true,
+      "delete": null,
+      "groups": true
+    },
+    "idp": {
+      "okta": "native",
+      "entra": "native",
+      "google": null,
+      "onelogin": null,
+      "jumpcloud": "native",
+      "generic": true
+    },
+    "pricing_page_url": "https://superhuman.com/plans/docs",
+    "docs_url": "https://help.coda.io/hc/en-us/articles/39555902374797-Configure-SCIM-for-provisioning",
+    "evidence": "The Superhuman Docs (formerly Coda) pricing page lists \"SAML SSO\" and \"Provision users via SCIM\" only under the Custom-priced Enterprise plan, and Coda's help centre says \"SCIM is only available to customers on our Enterprise plan\".",
+    "notes": "Coda now sells as Superhuman Docs; coda.io/pricing redirects to superhuman.com/plans/docs. Prices changed since June: Pro is now $12/Doc Maker/mo annual ($15 monthly; was $10/$12), and the Team tier is now Business at $33/Doc Maker/mo annual ($40 monthly; was Team $30). Only Doc Makers are billed; editors and viewers are free. SAML SSO, SCIM (users and group push) and the Admin API (users, groups, audit events) are Enterprise-only, Contact Sales. SAML must be configured before SCIM. Coda built the Okta connector; for Entra, Coda tells admins to use a custom (non-gallery) app because the gallery app does not support group sharing.",
+    "confidence": "high",
+    "last_verified": "2026-10-05",
+    "api_provisioning": false,
+    "user_api_available": true,
+    "user_api_plan": "Enterprise",
+    "api_tax": true,
+    "first_added": null,
+    "status_prev": "gated"
+  },
+  "plans": [
+    {
+      "name": "Free",
+      "price_text": "$0",
+      "price_per_user_mo": 0,
+      "billing": "unknown",
+      "sso": false,
+      "scim": false,
+      "user_api": false,
+      "audit_log_api": false,
+      "cite": [
+        "c1",
+        "c4",
+        "c39"
+      ]
+    },
+    {
+      "name": "Pro",
+      "price_text": "$12/Doc Maker/mo billed annually ($15 monthly)",
+      "price_per_user_mo": 12,
+      "billing": "annual",
+      "sso": false,
+      "scim": false,
+      "user_api": false,
+      "audit_log_api": false,
+      "cite": [
+        "c2",
+        "c4",
+        "c39"
+      ]
+    },
+    {
+      "name": "Business",
+      "price_text": "$33/Doc Maker/mo billed annually ($40 monthly)",
+      "price_per_user_mo": 33,
+      "billing": "annual",
+      "sso": false,
+      "scim": false,
+      "user_api": false,
+      "audit_log_api": false,
+      "cite": [
+        "c3",
+        "c4",
+        "c39"
+      ]
+    },
+    {
+      "name": "Enterprise",
+      "price_text": "Custom (Contact sales)",
+      "price_per_user_mo": null,
+      "billing": "unknown",
+      "sso": true,
+      "scim": true,
+      "user_api": true,
+      "audit_log_api": true,
+      "cite": [
+        "c4",
+        "c6",
+        "c32",
+        "c39"
+      ]
+    }
+  ],
+  "citations": [
+    {
+      "id": "c1",
+      "url": "https://superhuman.com/plans/docs",
+      "title": "Superhuman Docs | Pricing & Plans",
+      "quote": "Free $0 USD Get Superhuman Free",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c2",
+      "url": "https://superhuman.com/plans/docs",
+      "title": "Superhuman Docs | Pricing & Plans",
+      "quote": "Pro $12 USD / month per Doc Maker , billed annually $15 when billed monthly",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c3",
+      "url": "https://superhuman.com/plans/docs",
+      "title": "Superhuman Docs | Pricing & Plans",
+      "quote": "Business $33 USD / month per Doc Maker , billed annually $40 when billed monthly",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c4",
+      "url": "https://superhuman.com/plans/docs",
+      "title": "Superhuman Docs | Pricing & Plans",
+      "quote": "Enterprise Custom Contact sales Everything in Business, plus: SAML SSO Provision users via SCIM AI admin controls Doc & folder governance Advanced access controls Audit events Advanced user management",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c5",
+      "url": "https://help.coda.io/hc/en-us/articles/39555902374797-Configure-SCIM-for-provisioning",
+      "title": "Configure SCIM for provisioning - Coda Help Center",
+      "quote": "SCIM is only available to customers on our Enterprise plan",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c6",
+      "url": "https://help.coda.io/api/v2/help_center/articles/39555902374797.json",
+      "title": "Configure SCIM for provisioning (Coda Help Center, JSON API)",
+      "quote": "SCIM is only available to customers on our Enterprise plan",
+      "accessed": "2026-10-05",
+      "page_url": "https://help.coda.io/hc/en-us/articles/39555902374797-Configure-SCIM-for-provisioning"
+    },
+    {
+      "id": "c7",
+      "url": "https://help.coda.io/api/v2/help_center/articles/39555902374797.json",
+      "title": "Configure SCIM for provisioning (Coda Help Center, JSON API)",
+      "quote": "Before enabling SCIM, you must first have configured SAML for your org",
+      "accessed": "2026-10-05",
+      "page_url": "https://help.coda.io/hc/en-us/articles/39555902374797-Configure-SCIM-for-provisioning"
+    },
+    {
+      "id": "c8",
+      "url": "https://help.coda.io/api/v2/help_center/articles/39555902374797.json",
+      "title": "Configure SCIM for provisioning (Coda Help Center, JSON API)",
+      "quote": "Then click Generate new token at the bottom of the page. (Note: Only one SCIM token is valid at a time. If SCIM was previously configured, generating a new token invalidates the previous token.)",
+      "accessed": "2026-10-05",
+      "page_url": "https://help.coda.io/hc/en-us/articles/39555902374797-Configure-SCIM-for-provisioning"
+    },
+    {
+      "id": "c9",
+      "url": "https://help.coda.io/api/v2/help_center/articles/39555902374797.json",
+      "title": "Configure SCIM for provisioning (Coda Help Center, JSON API)",
+      "quote": "Note the SCIM Base URL and SCIM Bearer Token . You will need this information later.",
+      "accessed": "2026-10-05",
+      "page_url": "https://help.coda.io/hc/en-us/articles/39555902374797-Configure-SCIM-for-provisioning"
+    },
+    {
+      "id": "c10",
+      "url": "https://help.coda.io/api/v2/help_center/articles/39555902374797.json",
+      "title": "Configure SCIM for provisioning (Coda Help Center, JSON API)",
+      "quote": "Scroll to - or search for - the Provisioning tab Toggle on the Provision with SCIM setting.",
+      "accessed": "2026-10-05",
+      "page_url": "https://help.coda.io/hc/en-us/articles/39555902374797-Configure-SCIM-for-provisioning"
+    },
+    {
+      "id": "c11",
+      "url": "https://help.coda.io/api/v2/help_center/articles/39555902374797.json",
+      "title": "Configure SCIM for provisioning (Coda Help Center, JSON API)",
+      "quote": "Ensure your application passes user identity to Coda in \"email\" format; that is, your identity provider is sending email-address-like user identities to Coda.",
+      "accessed": "2026-10-05",
+      "page_url": "https://help.coda.io/hc/en-us/articles/39555902374797-Configure-SCIM-for-provisioning"
+    },
+    {
+      "id": "c12",
+      "url": "https://help.coda.io/api/v2/help_center/articles/39555902374797.json",
+      "title": "Configure SCIM for provisioning (Coda Help Center, JSON API)",
+      "quote": "Create users Update user attributes Deactivate users Push user groups to Coda",
+      "accessed": "2026-10-05",
+      "page_url": "https://help.coda.io/hc/en-us/articles/39555902374797-Configure-SCIM-for-provisioning"
+    },
+    {
+      "id": "c13",
+      "url": "https://help.coda.io/api/v2/help_center/articles/39555902374797.json",
+      "title": "Configure SCIM for provisioning (Coda Help Center, JSON API)",
+      "quote": "Note that your identity provider may require the word Bearer before the token",
+      "accessed": "2026-10-05",
+      "page_url": "https://help.coda.io/hc/en-us/articles/39555902374797-Configure-SCIM-for-provisioning"
+    },
+    {
+      "id": "c14",
+      "url": "https://help.coda.io/api/v2/help_center/articles/39555766691469.json",
+      "title": "Set up SAML SSO & SCIM with Okta (Coda Help Center, JSON API)",
+      "quote": "SCIM: Create users Update user attributes Deactivate users Group push",
+      "accessed": "2026-10-05",
+      "page_url": "https://help.coda.io/hc/en-us/articles/39555766691469-Set-up-SAML-SSO-SCIM-with-Okta"
+    },
+    {
+      "id": "c15",
+      "url": "https://help.coda.io/api/v2/help_center/articles/39555766691469.json",
+      "title": "Set up SAML SSO & SCIM with Okta (Coda Help Center, JSON API)",
+      "quote": "SAML: IdP-initiated SSO SP-initiated SSO Just-In-Time provisioning",
+      "accessed": "2026-10-05",
+      "page_url": "https://help.coda.io/hc/en-us/articles/39555766691469-Set-up-SAML-SSO-SCIM-with-Okta"
+    },
+    {
+      "id": "c16",
+      "url": "https://help.coda.io/api/v2/help_center/articles/39555766691469.json",
+      "title": "Set up SAML SSO & SCIM with Okta (Coda Help Center, JSON API)",
+      "quote": "The following SAML attributes are supported for Okta:",
+      "accessed": "2026-10-05",
+      "page_url": "https://help.coda.io/hc/en-us/articles/39555766691469-Set-up-SAML-SSO-SCIM-with-Okta"
+    },
+    {
+      "id": "c17",
+      "url": "https://help.coda.io/api/v2/help_center/articles/39555766691469.json",
+      "title": "Set up SAML SSO & SCIM with Okta (Coda Help Center, JSON API)",
+      "quote": "If you want to enable provisioning of groups in Coda, check the Import Groups checkbox.",
+      "accessed": "2026-10-05",
+      "page_url": "https://help.coda.io/hc/en-us/articles/39555766691469-Set-up-SAML-SSO-SCIM-with-Okta"
+    },
+    {
+      "id": "c18",
+      "url": "https://help.coda.io/api/v2/help_center/articles/39555762788237.json",
+      "title": "Set up SAML SSO & SCIM with Microsoft Entra ID (Coda Help Center, JSON API)",
+      "quote": "SCIM Create users Update user attributes Deactivate users Create groups",
+      "accessed": "2026-10-05",
+      "page_url": "https://help.coda.io/hc/en-us/articles/39555762788237-Set-up-SAML-SSO-SCIM-with-Microsoft-Entra-ID"
+    },
+    {
+      "id": "c19",
+      "url": "https://help.coda.io/api/v2/help_center/articles/39555762788237.json",
+      "title": "Set up SAML SSO & SCIM with Microsoft Entra ID (Coda Help Center, JSON API)",
+      "quote": "Do NOT use the existing Coda app in the Entra ID Gallery, as it does not support the latest updates to share with groups at this time.",
+      "accessed": "2026-10-05",
+      "page_url": "https://help.coda.io/hc/en-us/articles/39555762788237-Set-up-SAML-SSO-SCIM-with-Microsoft-Entra-ID"
+    },
+    {
+      "id": "c20",
+      "url": "https://help.coda.io/api/v2/help_center/articles/39555865147021.json",
+      "title": "Push user groups to Coda (Coda Help Center, JSON API)",
+      "quote": "Customers on our Enterprise plan can use SCIM to push user groups from your identity provider to Coda.",
+      "accessed": "2026-10-05",
+      "page_url": "https://help.coda.io/hc/en-us/articles/39555865147021-Push-user-groups-to-Coda"
+    },
+    {
+      "id": "c21",
+      "url": "https://help.coda.io/api/v2/help_center/articles/39555865147021.json",
+      "title": "Push user groups to Coda (Coda Help Center, JSON API)",
+      "quote": "If you are using the Coda-built Okta connector",
+      "accessed": "2026-10-05",
+      "page_url": "https://help.coda.io/hc/en-us/articles/39555865147021-Push-user-groups-to-Coda"
+    },
+    {
+      "id": "c22",
+      "url": "https://help.coda.io/api/v2/help_center/articles/39555865147021.json",
+      "title": "Push user groups to Coda (Coda Help Center, JSON API)",
+      "quote": "Org admins can follow the steps below to push user groups from JumpCloud to Coda. Note that you must have already configured SCIM for Coda .",
+      "accessed": "2026-10-05",
+      "page_url": "https://help.coda.io/hc/en-us/articles/39555865147021-Push-user-groups-to-Coda"
+    },
+    {
+      "id": "c23",
+      "url": "https://help.coda.io/api/v2/help_center/articles/39555865147021.json",
+      "title": "Push user groups to Coda (Coda Help Center, JSON API)",
+      "quote": "If your organization uses Google Groups to organize users and Okta to provision access, you can perform a one-time sync of Google Groups to Okta to get an initial import of Google Groups to Coda.",
+      "accessed": "2026-10-05",
+      "page_url": "https://help.coda.io/hc/en-us/articles/39555865147021-Push-user-groups-to-Coda"
+    },
+    {
+      "id": "c24",
+      "url": "https://help.coda.io/api/v2/help_center/articles/39555998877325.json",
+      "title": "Deactivate Enterprise users and transfer their docs (Coda Help Center, JSON API)",
+      "quote": "Since members provisioned via SCIM will be automatically deactivated and reactivated via your IDP, deactivating them via Coda can lead to things being out of sync.",
+      "accessed": "2026-10-05",
+      "page_url": "https://help.coda.io/hc/en-us/articles/39555998877325-Deactivate-Enterprise-users-and-transfer-their-docs"
+    },
+    {
+      "id": "c25",
+      "url": "https://help.coda.io/api/v2/help_center/articles/39555998877325.json",
+      "title": "Deactivate Enterprise users and transfer their docs (Coda Help Center, JSON API)",
+      "quote": "Deactivate users when they are no longer with your organization. Doing so will deactivate their Coda account and allow you to transfer all their docs to a new owner.",
+      "accessed": "2026-10-05",
+      "page_url": "https://help.coda.io/hc/en-us/articles/39555998877325-Deactivate-Enterprise-users-and-transfer-their-docs"
+    },
+    {
+      "id": "c26",
+      "url": "https://help.coda.io/api/v2/help_center/articles/39555998877325.json",
+      "title": "Deactivate Enterprise users and transfer their docs (Coda Help Center, JSON API)",
+      "quote": "If you choose not to transfer ownership, docs will remain editable for 7 days after the user is deactivated or removed. If doc ownership is not transferred within 7 days, these docs will then become read-only until transferred.",
+      "accessed": "2026-10-05",
+      "page_url": "https://help.coda.io/hc/en-us/articles/39555998877325-Deactivate-Enterprise-users-and-transfer-their-docs"
+    },
+    {
+      "id": "c27",
+      "url": "https://help.coda.io/api/v2/help_center/articles/39555998877325.json",
+      "title": "Deactivate Enterprise users and transfer their docs (Coda Help Center, JSON API)",
+      "quote": "Should the user ever be reactivated, Coda will recognize them as the same user as before; they will regain any doc access that they previously had (prior to their deactivation).",
+      "accessed": "2026-10-05",
+      "page_url": "https://help.coda.io/hc/en-us/articles/39555998877325-Deactivate-Enterprise-users-and-transfer-their-docs"
+    },
+    {
+      "id": "c28",
+      "url": "https://help.coda.io/api/v2/help_center/articles/39629608416013.json",
+      "title": "Set up SSO for your org (Coda Help Center, JSON API)",
+      "quote": "Org admins on our Enterprise plan can enable SAML 2.0 SSO for all managed domains in their organization.",
+      "accessed": "2026-10-05",
+      "page_url": "https://help.coda.io/hc/en-us/articles/39629608416013-Set-up-SSO-for-your-org"
+    },
+    {
+      "id": "c29",
+      "url": "https://help.coda.io/api/v2/help_center/articles/39629608416013.json",
+      "title": "Set up SSO for your org (Coda Help Center, JSON API)",
+      "quote": "JIT or Just-In-Time Provisioning: Creates new users or updates existing users on the fly. When a user first logs into Coda through SSO, Coda will set up a new account for that user.",
+      "accessed": "2026-10-05",
+      "page_url": "https://help.coda.io/hc/en-us/articles/39629608416013-Set-up-SSO-for-your-org"
+    },
+    {
+      "id": "c30",
+      "url": "https://help.coda.io/api/v2/help_center/articles/39629608416013.json",
+      "title": "Set up SSO for your org (Coda Help Center, JSON API)",
+      "quote": "Managed Provisioning: An optional form of provisioning using the SCIM protocol. This allows IT administrators via Identity Providers to create, update, import, deactivate, reactivate, and delete users.",
+      "accessed": "2026-10-05",
+      "page_url": "https://help.coda.io/hc/en-us/articles/39629608416013-Set-up-SSO-for-your-org"
+    },
+    {
+      "id": "c31",
+      "url": "https://help.coda.io/api/v2/help_center/articles/39629608416013.json",
+      "title": "Set up SSO for your org (Coda Help Center, JSON API)",
+      "quote": "This login method is available to customers on all subscription plans - Free, Pro, Team, and Enterprise.",
+      "accessed": "2026-10-05",
+      "page_url": "https://help.coda.io/hc/en-us/articles/39629608416013-Set-up-SSO-for-your-org"
+    },
+    {
+      "id": "c32",
+      "url": "https://help.coda.io/api/v2/help_center/articles/39555856878477.json",
+      "title": "Intro to the Admin API (Coda Help Center, JSON API)",
+      "quote": "Access to the Admin API is limited to org admins on our Enterprise plan.",
+      "accessed": "2026-10-05",
+      "page_url": "https://help.coda.io/hc/en-us/articles/39555856878477-Intro-to-the-Admin-API"
+    },
+    {
+      "id": "c33",
+      "url": "https://help.coda.io/api/v2/help_center/articles/39555856878477.json",
+      "title": "Intro to the Admin API (Coda Help Center, JSON API)",
+      "quote": "directly activate and deactivate users from your organization list all users in your org (defined as any user with an email address registered to the organization) transfer resources (e.g. docs) from a deactivated user list SCIM groups and group memberships as provisioned from your identity provider to Coda",
+      "accessed": "2026-10-05",
+      "page_url": "https://help.coda.io/hc/en-us/articles/39555856878477-Intro-to-the-Admin-API"
+    },
+    {
+      "id": "c34",
+      "url": "https://help.coda.io/api/v2/help_center/articles/39555856878477.json",
+      "title": "Intro to the Admin API (Coda Help Center, JSON API)",
+      "quote": "list all users in a given workspace add or remove workspace users",
+      "accessed": "2026-10-05",
+      "page_url": "https://help.coda.io/hc/en-us/articles/39555856878477-Intro-to-the-Admin-API"
+    },
+    {
+      "id": "c35",
+      "url": "https://help.coda.io/api/v2/help_center/articles/39555856878477.json",
+      "title": "Intro to the Admin API (Coda Help Center, JSON API)",
+      "quote": "As an org admin, you can generate an API token at https://coda.io/account to use for these endpoints.",
+      "accessed": "2026-10-05",
+      "page_url": "https://help.coda.io/hc/en-us/articles/39555856878477-Intro-to-the-Admin-API"
+    },
+    {
+      "id": "c36",
+      "url": "https://help.coda.io/api/v2/help_center/articles/39555856878477.json",
+      "title": "Intro to the Admin API (Coda Help Center, JSON API)",
+      "quote": "Audit events contain records of user activities performed within a Coda organization.",
+      "accessed": "2026-10-05",
+      "page_url": "https://help.coda.io/hc/en-us/articles/39555856878477-Intro-to-the-Admin-API"
+    },
+    {
+      "id": "c37",
+      "url": "https://help.coda.io/api/v2/help_center/articles/39555941038349.json",
+      "title": "Does Coda have an API? (Coda Help Center, JSON API)",
+      "quote": "Coda has a public API available to all users. The API allows you to get data in and out of tables in Coda as well as access computed values from formulas and user-selected values from controls.",
+      "accessed": "2026-10-05",
+      "page_url": "https://help.coda.io/hc/en-us/articles/39555941038349-Does-Coda-have-an-API"
+    },
+    {
+      "id": "c38",
+      "url": "https://help.coda.io/api/v2/help_center/articles/39555725230989.json",
+      "title": "Billing and pricing basics (Coda Help Center, JSON API)",
+      "quote": "With Coda’s unique Maker billing model, we only charge for Doc Makers in paid workspaces. Editors and viewers are entirely free!",
+      "accessed": "2026-10-05",
+      "page_url": "https://help.coda.io/hc/en-us/articles/39555725230989-Billing-and-pricing-basics"
+    },
+    {
+      "id": "c39",
+      "url": "https://docs.superhuman.com/developers/apis/admin/v1",
+      "title": "Superhuman Docs API (admin/v1) Reference Documentation",
+      "quote": "Access to the Admin API is limited to enterprise organizations. Only organization admins can use the Admin API for resources related to their organization.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c40",
+      "url": "https://docs.superhuman.com/developers/apis/admin/v1",
+      "title": "Superhuman Docs API (admin/v1) Reference Documentation",
+      "quote": "This API uses a base path of https://coda.io/apis/admin/v1 .",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c41",
+      "url": "https://docs.superhuman.com/developers/apis/admin/v1",
+      "title": "Superhuman Docs API (admin/v1) Reference Documentation",
+      "quote": "curl -s -H 'Authorization: Bearer <your API token>'",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c42",
+      "url": "https://docs.superhuman.com/developers/apis/admin/v1",
+      "title": "Superhuman Docs API (admin/v1) Reference Documentation",
+      "quote": "The Superhuman Docs Admin API sets a reasonable limit on the number of requests that can be made per minute. Once this limit is reached, calls to the API will start returning errors with an HTTP status code of 429.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c43",
+      "url": "https://docs.superhuman.com/developers/apis/admin/v1",
+      "title": "Superhuman Docs API (admin/v1) Reference Documentation",
+      "quote": "Webhooks enable an application to receive notifications of audit events in Superhuman Docs as they occur.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c44",
+      "url": "https://docs.superhuman.com/developers/apis/admin/v1",
+      "title": "Superhuman Docs API (admin/v1) Reference Documentation",
+      "quote": "List audit events Returns a list of audit events within an organization.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c45",
+      "url": "https://docs.superhuman.com/developers/apis/admin/v1",
+      "title": "Superhuman Docs API (admin/v1) Reference Documentation",
+      "quote": "get /organizations/{organizationId}/audit/events",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c46",
+      "url": "https://docs.superhuman.com/developers/apis/admin/v1",
+      "title": "Superhuman Docs API (admin/v1) Reference Documentation",
+      "quote": "List organization users Returns a list of users within an organization, across all registered domains.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c47",
+      "url": "https://docs.superhuman.com/developers/apis/admin/v1",
+      "title": "Superhuman Docs API (admin/v1) Reference Documentation",
+      "quote": "get /organizations/{organizationId}/users",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c48",
+      "url": "https://docs.superhuman.com/developers/apis/admin/v1",
+      "title": "Superhuman Docs API (admin/v1) Reference Documentation",
+      "quote": "Deactivate a user Deactivates a user, ensuring the user is no longer paid and allowing their docs to be reassigned to a new owner.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c49",
+      "url": "https://docs.superhuman.com/developers/apis/admin/v1",
+      "title": "Superhuman Docs API (admin/v1) Reference Documentation",
+      "quote": "post /organizations/{organizationId}/users/{userEmail}/deactivate",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c50",
+      "url": "https://docs.superhuman.com/developers/apis/admin/v1",
+      "title": "Superhuman Docs API (admin/v1) Reference Documentation",
+      "quote": "Activate a user Activates a deactivated user.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c51",
+      "url": "https://docs.superhuman.com/developers/apis/admin/v1",
+      "title": "Superhuman Docs API (admin/v1) Reference Documentation",
+      "quote": "post /organizations/{organizationId}/users/{userEmail}/activate",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c52",
+      "url": "https://docs.superhuman.com/developers/apis/admin/v1",
+      "title": "Superhuman Docs API (admin/v1) Reference Documentation",
+      "quote": "By default, requests to update org users' activation state are rejected if SCIM is enabled for the organization.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c53",
+      "url": "https://docs.superhuman.com/developers/apis/admin/v1",
+      "title": "Superhuman Docs API (admin/v1) Reference Documentation",
+      "quote": "Transfer user resources Transfers resources such as docs and workspace membership from a deactivated user to an active user.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c54",
+      "url": "https://docs.superhuman.com/developers/apis/admin/v1",
+      "title": "Superhuman Docs API (admin/v1) Reference Documentation",
+      "quote": "post /organizations/{organizationId}/users/transferResources",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c55",
+      "url": "https://docs.superhuman.com/developers/apis/admin/v1",
+      "title": "Superhuman Docs API (admin/v1) Reference Documentation",
+      "quote": "List groups Returns a list of groups in the organization",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c56",
+      "url": "https://docs.superhuman.com/developers/apis/admin/v1",
+      "title": "Superhuman Docs API (admin/v1) Reference Documentation",
+      "quote": "get /organizations/{organizationId}/groups",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c57",
+      "url": "https://docs.superhuman.com/developers/apis/admin/v1",
+      "title": "Superhuman Docs API (admin/v1) Reference Documentation",
+      "quote": "get /organizations/{organizationId}/groups/{groupId}",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c58",
+      "url": "https://docs.superhuman.com/developers/apis/admin/v1",
+      "title": "Superhuman Docs API (admin/v1) Reference Documentation",
+      "quote": "List group members Returns a list of members for this group",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c59",
+      "url": "https://docs.superhuman.com/developers/apis/admin/v1",
+      "title": "Superhuman Docs API (admin/v1) Reference Documentation",
+      "quote": "get /organizations/{organizationId}/groups/{groupId}/members",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c60",
+      "url": "https://docs.superhuman.com/developers/apis/admin/v1",
+      "title": "Superhuman Docs API (admin/v1) Reference Documentation",
+      "quote": "get /organizations/{organizationId}/workspaces/{workspaceId}/users",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c61",
+      "url": "https://docs.superhuman.com/developers/apis/admin/v1",
+      "title": "Superhuman Docs API (admin/v1) Reference Documentation",
+      "quote": "Add workspace user Adds an existing user to a workspace.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c62",
+      "url": "https://docs.superhuman.com/developers/apis/admin/v1",
+      "title": "Superhuman Docs API (admin/v1) Reference Documentation",
+      "quote": "post /organizations/{organizationId}/workspaces/{workspaceId}/users",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c63",
+      "url": "https://docs.superhuman.com/developers/apis/admin/v1",
+      "title": "Superhuman Docs API (admin/v1) Reference Documentation",
+      "quote": "role required string ( WorkspaceUserRole ) Enum : \"Admin\" \"DocMaker\" \"Editor\"",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c64",
+      "url": "https://docs.superhuman.com/developers/apis/admin/v1",
+      "title": "Superhuman Docs API (admin/v1) Reference Documentation",
+      "quote": "put /organizations/{organizationId}/workspaces/{workspaceId}/users/{userEmail}",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c65",
+      "url": "https://docs.superhuman.com/developers/apis/admin/v1",
+      "title": "Superhuman Docs API (admin/v1) Reference Documentation",
+      "quote": "Removes a user from a workspace. Note this does not remove the user from Superhuman Docs or from other workspaces.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c66",
+      "url": "https://docs.superhuman.com/developers/apis/admin/v1",
+      "title": "Superhuman Docs API (admin/v1) Reference Documentation",
+      "quote": "delete /organizations/{organizationId}/workspaces/{workspaceId}/users/{userEmail}",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c67",
+      "url": "https://docs.superhuman.com/developers/apis/admin/v1",
+      "title": "Superhuman Docs API (admin/v1) Reference Documentation",
+      "quote": "limit integer [ 1 .. 500 ] Default: 100",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c68",
+      "url": "https://www.okta.com/integrations/coda/",
+      "title": "Integrate Superhuman Docs (fka Coda) with Okta",
+      "quote": "From single-sign-on to user provisioning, Okta's Superhuman Docs integration allows you to manage user access from inside Okta across the user's lifecycle.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c69",
+      "url": "https://www.okta.com/integrations/coda/",
+      "title": "Integrate Superhuman Docs (fka Coda) with Okta (checked capabilities: SAML, SCIM, Create, Update, Deactivate, Group Push)",
+      "quote": "Add this integration to enable authentication and provisioning capabilities.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c70",
+      "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/coda-provisioning-tutorial",
+      "title": "Configure Coda for automatic user provisioning with Microsoft Entra ID",
+      "quote": "When configured, Microsoft Entra ID automatically provisions and de-provisions users to Coda using the Microsoft Entra provisioning service.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c71",
+      "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/coda-provisioning-tutorial",
+      "title": "Configure Coda for automatic user provisioning with Microsoft Entra ID",
+      "quote": "A Coda Enterprise administrator account.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c72",
+      "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/coda-tutorial",
+      "title": "Configure Coda for Single sign-on with Microsoft Entra ID",
+      "quote": "Coda supports Just In Time user provisioning.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c73",
+      "url": "https://jumpcloud.com/support/integrate-with-coda",
+      "title": "Integrate with Coda | JumpCloud",
+      "quote": "Automatically provision, update and deprovision users in Coda from JumpCloud using the SCIM integration.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c74",
+      "url": "https://jumpcloud.com/support/integrate-with-coda",
+      "title": "Integrate with Coda | JumpCloud",
+      "quote": "Coda SCIM API is based on version 2.0 of the SCIM standard",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c75",
+      "url": "https://jumpcloud.com/support/integrate-with-coda",
+      "title": "Integrate with Coda | JumpCloud",
+      "quote": "A Coda Org admin on an Enterprise plan",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c76",
+      "url": "https://jumpcloud.com/support/integrate-with-coda",
+      "title": "Integrate with Coda | JumpCloud",
+      "quote": "Create User Update User Attributes Deactivate Users Group Push Groups are not supported",
+      "accessed": "2026-10-05",
+      "page_url": null
+    }
+  ],
+  "conflicts": [
+    {
+      "text": "JumpCloud's Coda page lists Group Push but also says groups are not supported; Coda's own docs describe pushing JumpCloud groups.",
+      "cite": [
+        "c76",
+        "c22"
+      ]
+    },
+    {
+      "text": "Coda's SSO article says SCIM can delete users; the SCIM setup article lists only create, update, deactivate and group push.",
+      "cite": [
+        "c30",
+        "c12"
+      ]
+    }
+  ],
+  "searched": [
+    "https://superhuman.com/plans/docs",
+    "help.coda.io search: scim",
+    "help.coda.io search: deactivated billing",
+    "https://docs.superhuman.com/developers/apis/admin/v1",
+    "https://coda.io/apis/admin/v1/openapi.json"
+  ],
+  "open_questions": [
+    "SCIM base URL pattern, token expiry, filtering, pagination and full attribute list are not published by Coda.",
+    "Whether SCIM deprovisioning ends active sessions is not documented.",
+    "Whether SCIM delete is supported (SSO article says yes, SCIM article omits it).",
+    "No Google Workspace or OneLogin catalogue app with provisioning found; OneLogin page not checked (blocks bots).",
+    "Enterprise price is not published."
+  ]
+}

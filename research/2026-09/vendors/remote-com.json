@@ -1,0 +1,597 @@
+{
+ "slug": "remote-com",
+ "vendor": "Remote",
+ "vendor_url": "https://remote.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Remote",
+  "slug": "remote-com",
+  "category": "HR, Payroll & Recruiting",
+  "status": "none",
+  "scim_plan": "—",
+  "scim_price_text": "—",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Contractor Management",
+  "team_price_text": "Contractor Management: $29/contractor/mo",
+  "team_price_per_user_mo": 29,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": false,
+   "update": false,
+   "deactivate": false,
+   "delete": false,
+   "groups": false
+  },
+  "idp": {
+   "okta": "none",
+   "entra": null,
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": false
+  },
+  "pricing_page_url": "https://remote.com/pricing",
+  "docs_url": "https://developer.remote.com/reference/get_v1_scim_v2_users",
+  "evidence": "Remote's SCIM 2.0 API only lists and reads users and groups, and Okta's Remote.com app is described as \"a one-way integration from Remote to Okta\" with Remote as the system of record, so IdPs cannot provision users into Remote over SCIM.",
+  "notes": "Status changed from gated to none. June read 'SCIM publicly documented' as provisioning gated to Enterprise/Scale, but the documented SCIM 2.0 API (gateway.remote.com/v1/scim/v2) is read-only (GET Users, GET Groups/departments): it exposes Remote as an HR source for IdPs, not as a provisioning target. Okta's catalogue app is HR-driven (Remote to Okta), not inbound. The June 'Enterprise/Scale' plan gate had no first-party source and is dropped. Prices: EOR shows $699/employee/mo; June's $599 annual figure appears only in the page's embedded data, not in visible text, so it is not recorded; Contractor Management $29/contractor/mo; Contractor Management Plus $99. SAML 2.0 SSO exists company-wide but its plan is not published. Admin (Company Manager) users can be created, invited and deleted through the Remote API with a customer API token. idp.generic is set false because the SCIM endpoint cannot create or change users.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Contractor Management",
+   "price_text": "$29/contractor/mo",
+   "price_per_user_mo": 29,
+   "billing": "unknown",
+   "sso": null,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1"
+   ]
+  },
+  {
+   "name": "Contractor Management Plus",
+   "price_text": "$99/contractor/mo",
+   "price_per_user_mo": 99,
+   "billing": "unknown",
+   "sso": null,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c3"
+   ]
+  },
+  {
+   "name": "Employer of Record",
+   "price_text": "$699/employee/mo (as displayed)",
+   "price_per_user_mo": 699,
+   "billing": "unknown",
+   "sso": null,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c2"
+   ],
+   "notes": "The page's embedded billing-cycle data also carries an annual figure of 599, but it is not in the visible text, so it is not recorded here."
+  }
+ ],
+ "scim": {
+  "available": false,
+  "cite": [
+   "c4",
+   "c5",
+   "c10"
+  ],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://gateway.remote.com/v1/scim/v2",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Customer API token from the Integration Settings page (company admin or owner), or partner OAuth2 tokens",
+   "token_expiry": null,
+   "cite": [
+    "c9",
+    "c18",
+    "c19"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c4",
+    "c5"
+   ]
+  },
+  "operations": {
+   "create": false,
+   "read": true,
+   "update_put": false,
+   "update_patch": false,
+   "deactivate": false,
+   "reactivate": false,
+   "delete": false,
+   "group_push": false,
+   "group_membership": false,
+   "cite": [
+    "c4",
+    "c5",
+    "c10"
+   ],
+   "notes": "Only GET /v1/scim/v2/Users, /Users/{id}, /Groups and /Groups/{id} are listed in the API reference; write operations are marked false because the IdP integration is documented as one-way from Remote."
+  },
+  "deprovision": {
+   "action": null,
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": []
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [],
+   "cite": [
+    "c6"
+   ],
+   "notes": "Operators eq, ne, co, sw, ew, pr, lt, le, gt, ge."
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c7"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "name.formatted",
+    "name.honorificPrefix",
+    "displayName",
+    "nickName",
+    "emails",
+    "active",
+    "id",
+    "meta"
+   ],
+   "enterprise": [
+    "department",
+    "employeeNumber",
+    "manager"
+   ],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "displayName (departments)"
+   ],
+   "cite": [
+    "c8",
+    "c4",
+    "c5"
+   ]
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "Remote API: 300 requests per minute per company.",
+   "cite": [
+    "c20"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Read-only SCIM: Remote is the system of record; IdPs read employees from Remote rather than provisioning into it.",
+    "cite": [
+     "c10",
+     "c11"
+    ]
+   }
+  ],
+  "notes": "scim.available is false for inbound provisioning; a read-only outbound SCIM 2.0 API exists."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c14",
+   "c15",
+   "c16",
+   "c19"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://gateway.remote.com/v1",
+  "docs_url": "https://developer.remote.com/reference/post_v1_company-managers",
+  "auth": {
+   "methods": [
+    "api_key",
+    "oauth2"
+   ],
+   "scopes": [
+    "company_manager:write"
+   ],
+   "cite": [
+    "c9",
+    "c21"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": true,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c14",
+    "c15",
+    "c16",
+    "c4"
+   ],
+   "notes": "Covers Company Manager (admin) users; employee accounts follow employment onboarding."
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/v1/company-managers",
+    "purpose": "Create and invite a Company Manager",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v1/company-managers/{user_id}",
+    "purpose": "Delete a Company Manager user",
+    "cite": [
+     "c15"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/company-managers",
+    "purpose": "List company managers",
+    "cite": [
+     "c16"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/scim/v2/Users",
+    "purpose": "List users (SCIM, read-only)",
+    "cite": [
+     "c4"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": true,
+   "events": [
+    "employment.user_status.invited",
+    "employment.user_status.initiated",
+    "employment.user_status.activated",
+    "employment.user_status.deactivated"
+   ],
+   "cite": [
+    "c17",
+    "c22"
+   ]
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "300 requests per minute per company (not per token).",
+   "cite": [
+    "c20"
+   ]
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": false,
+   "provisioning": false,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/remote-com/",
+   "cite": [
+    "c10",
+    "c11"
+   ],
+   "notes": "OIN page marks SCIM, Create and Update, but provisioning is HR-driven from Remote into Okta (one-way); SAML is not checked. It does not provision accounts into Remote, so idp.okta is 'none'."
+  },
+  "entra": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "No Microsoft Learn tutorial at remote-com-tutorial or remote-tutorial (404)."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "jumpcloud.com/support/integrate-with-remote returned 403."
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": "Remote acts as HR source of truth (read-only SCIM and Okta HR-driven import)",
+  "docs_public": true,
+  "cite": [
+   "c12",
+   "c13",
+   "c23",
+   "c10"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://remote.com/pricing",
+   "title": "Remote Pricing",
+   "quote": "Contractor Management $29 per contractor/month",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://remote.com/pricing",
+   "title": "Remote Pricing",
+   "quote": "Employer of Record $699 per employee/month",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://remote.com/pricing",
+   "title": "Remote Pricing",
+   "quote": "Contractor Management Plus $99 per contractor/month",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://developer.remote.com/reference/get_v1_scim_v2_users",
+   "title": "List users via SCIM v2.0 - Remote API",
+   "quote": "Retrieves a list of users for the authenticated company following SCIM 2.0 standard",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.remote.com/reference/get_v1_scim_v2_users"
+  },
+  {
+   "id": "c5",
+   "url": "https://developer.remote.com/llms.txt",
+   "title": "Remote developer docs index (llms.txt)",
+   "quote": "Retrieves a list of groups (departments) for the authenticated company following SCIM 2.0 standard",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.remote.com/reference/get_v1_scim_v2_groups"
+  },
+  {
+   "id": "c6",
+   "url": "https://developer.remote.com/reference/get_v1_scim_v2_users",
+   "title": "List users via SCIM v2.0 - Remote API",
+   "quote": "Filter expression for attributes (supports eq, ne, co, sw, ew, pr, lt, le, gt, ge)",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.remote.com/reference/get_v1_scim_v2_users"
+  },
+  {
+   "id": "c7",
+   "url": "https://developer.remote.com/reference/get_v1_scim_v2_users",
+   "title": "List users via SCIM v2.0 - Remote API",
+   "quote": "1-based index of the first result",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.remote.com/reference/get_v1_scim_v2_users"
+  },
+  {
+   "id": "c8",
+   "url": "https://developer.remote.com/reference/get_v1_scim_v2_users",
+   "title": "List users via SCIM v2.0 - Remote API",
+   "quote": "\"department\": \"Engineering\", \"employeeNumber\": \"EMP001\", \"manager\": { \"displayName\": \"Jane Manager\", \"value\": \"789012\" }",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.remote.com/reference/get_v1_scim_v2_users"
+  },
+  {
+   "id": "c9",
+   "url": "https://developer.remote.com/reference/get_v1_scim_v2_users",
+   "title": "List users via SCIM v2.0 - Remote API",
+   "quote": "**Customer API token** (`CustomerAPIToken`) — generated by the customer on their Integration Settings page.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.remote.com/reference/get_v1_scim_v2_users"
+  },
+  {
+   "id": "c10",
+   "url": "https://www.okta.com/integrations/remote-com/",
+   "title": "Integrate Remote.com with Okta",
+   "quote": "This is a one-way integration from Remote to Okta. Remote serves as the system of record for employee information, while Okta automatically receives employee lifecycle updates through integration.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://www.okta.com/integrations/remote-com/",
+   "title": "Integrate Remote.com with Okta",
+   "quote": "The Remote.com integration enables organizations to automatically provision and maintain employee accounts in Okta using Remote as the authoritative source of employee data.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://developer.remote.com/docs/sso-configuration.md",
+   "title": "SSO Configuration - Remote API",
+   "quote": "Remote supports any IdP that utilizes standard SAML 2.0 inputs (URL and X.509 certificate).",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.remote.com/docs/sso-configuration"
+  },
+  {
+   "id": "c13",
+   "url": "https://remote.com/why-remote/security-compliance",
+   "title": "Security and Compliance | Remote",
+   "quote": "SSO can be enabled on a company-wide basis, allowing users to log into the Remote platform securely using their company credentials.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://developer.remote.com/reference/post_v1_company-managers.md",
+   "title": "Create and invite a Company Manager - Remote API",
+   "quote": "Create a Company Manager and sends the invitation email for signing in to the Remote Platform.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.remote.com/reference/post_v1_company-managers"
+  },
+  {
+   "id": "c15",
+   "url": "https://developer.remote.com/reference/delete_v1_company-managers_user_id.md",
+   "title": "Deletes a Company Manager user - Remote API",
+   "quote": "Deletes a Company Manager user",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.remote.com/reference/delete_v1_company-managers_user_id"
+  },
+  {
+   "id": "c16",
+   "url": "https://developer.remote.com/llms.txt",
+   "title": "Remote developer docs index (llms.txt)",
+   "quote": "List all company managers of an integration.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.remote.com/reference/get_v1_company-managers"
+  },
+  {
+   "id": "c17",
+   "url": "https://developer.remote.com/llms.txt",
+   "title": "Remote developer docs index (llms.txt)",
+   "quote": "This event is triggered whenever an employment user is updated to the inactive status.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.remote.com/reference/employmentuser_statusdeactivated"
+  },
+  {
+   "id": "c18",
+   "url": "https://developer.remote.com/docs/authorization-for-customers.md",
+   "title": "Obtaining access token - Remote API",
+   "quote": "Note that only company admin or company owner can create and revoke the API token.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.remote.com/docs/authorization-for-customers"
+  },
+  {
+   "id": "c19",
+   "url": "https://developer.remote.com/docs/authorization-for-customers.md",
+   "title": "Obtaining access token - Remote API",
+   "quote": "Tokens starting with `ra_live_` are meant for production use. It means they only work against the `https://gateway.remote.com/` server.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.remote.com/docs/authorization-for-customers"
+  },
+  {
+   "id": "c20",
+   "url": "https://developer.remote.com/docs/rate-limit.md",
+   "title": "Rate Limit Policy - Remote API",
+   "quote": "The Remote API limits the number of authenticated requests to 300 **requests per minute**.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.remote.com/docs/rate-limit"
+  },
+  {
+   "id": "c21",
+   "url": "https://developer.remote.com/reference/post_v1_company-managers.md",
+   "title": "Create and invite a Company Manager - Remote API",
+   "quote": "Manage managers (`company_manager:write`)",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.remote.com/reference/post_v1_company-managers"
+  },
+  {
+   "id": "c22",
+   "url": "https://developer.remote.com/llms.txt",
+   "title": "Remote developer docs index (llms.txt)",
+   "quote": "This event is triggered whenever an employment user is updated to the active status.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.remote.com/reference/employmentuser_statusactivated"
+  },
+  {
+   "id": "c23",
+   "url": "https://developer.remote.com/docs/sso-configuration.md",
+   "title": "SSO Configuration - Remote API",
+   "quote": "The SSO configuration API allows you to programmatically manage Single Sign-On (SSO) settings, enabling users to authenticate with Remote using their company's Identity Provider (IdP).",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.remote.com/docs/sso-configuration"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://remote.com/pricing",
+  "https://remote.com/sitemap.xml",
+  "https://remote.com/why-remote/security-compliance",
+  "https://remote.com/global-hr/integrations-for-customers",
+  "https://remote.com/global-hr/enterprise",
+  "https://developer.remote.com/llms.txt",
+  "https://developer.remote.com/reference/get_v1_scim_v2_users",
+  "https://developer.remote.com/docs/sso-configuration",
+  "https://developer.remote.com/docs/authorization-for-customers",
+  "https://developer.remote.com/docs/rate-limit",
+  "https://www.okta.com/integrations/remote-com/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/remote-com-tutorial (404)",
+  "https://support.remote.com/hc/en-us search (403 to curl, WebFetch and renderer)"
+ ],
+ "open_questions": [
+  "Help centre (support.remote.com) blocks automated access; any article on SCIM or SSO plan requirements could not be read.",
+  "Which Remote plans include SAML SSO is not published.",
+  "Whether the read-only SCIM API needs a specific plan is not stated.",
+  "Whether a user API plan gate exists is not documented.",
+  "No audit-log API found in the developer docs index.",
+  "Whether SSO sign-in creates accounts just-in-time is not documented."
+ ]
+}

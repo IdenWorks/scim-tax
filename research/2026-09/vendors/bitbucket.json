@@ -1,0 +1,1001 @@
+{
+ "slug": "bitbucket",
+ "vendor": "Bitbucket",
+ "vendor_url": "https://bitbucket.org",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Bitbucket",
+  "slug": "bitbucket",
+  "category": "Developer Tools & CI/CD",
+  "status": "gated",
+  "scim_plan": "Add-on (Atlassian Guard Standard)",
+  "scim_price_text": "Standard $3.65 + Atlassian Guard Standard $4.20 per user / month (monthly billing)",
+  "scim_price_per_user_mo": 7.85,
+  "team_plan": "Standard",
+  "team_price_text": "Standard: $3.65/u/mo (monthly billing)",
+  "team_price_per_user_mo": 3.65,
+  "price_multiplier": 2.2,
+  "sso_plan": "Atlassian Guard Standard (add-on)",
+  "sso_price_per_user_mo": 7.85,
+  "sso_required_for_scim": false,
+  "scim_addon_price_text": "Atlassian Guard Standard $4.20/user/mo (monthly billing)",
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": false,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": "native",
+   "onelogin": "native",
+   "jumpcloud": "native",
+   "generic": true
+  },
+  "pricing_page_url": "https://www.atlassian.com/software/bitbucket/pricing",
+  "docs_url": "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+  "evidence": "Bitbucket's pricing table marks \"Atlassian Guard (SSO, audit logs)\" as \"Requires Atlassian Guard subscription\" on Free, Standard and Premium, and Atlassian Guard Standard ($4.20 per user / month) includes \"SCIM automated user provisioning\".",
+  "notes": "New row. Bitbucket Cloud users are Atlassian accounts, so SCIM is Atlassian's organization-level user provisioning, sold in the Atlassian Guard add-on (Guard Standard $4.20/u/mo monthly billing; annual billing is per user tier, e.g. $4,200/yr for 51-100 users). Bitbucket prices are the monthly-billing prices shown by default (Standard $3.65, Premium $7.25); scim_price_per_user_mo = Standard + Guard Standard. Big caveat: IdP group sync is not yet available for Bitbucket, so SCIM creates, updates and deactivates the Atlassian account but cannot grant Bitbucket workspace access by group. SCIM DELETE deactivates. Bitbucket's own REST API is read-only for workspace members (2.0); group and invitation management still uses supported 1.0 endpoints. IdP apps are the Atlassian Cloud apps; Okta's standalone 'Bitbucket' app is SWA only and Entra's 'Bitbucket by resolution GmbH' app is a third-party SAML app.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Free",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "$0, free forever for up to 5 users",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c1",
+    "c4",
+    "c5",
+    "c13",
+    "c43"
+   ],
+   "notes": "SSO, SCIM and the org audit log only with an Atlassian Guard subscription."
+  },
+  {
+   "name": "Standard",
+   "price_text": "$3.65 per user / month",
+   "price_per_user_mo": 3.65,
+   "billing": "monthly",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c2",
+    "c4",
+    "c5",
+    "c6",
+    "c13",
+    "c43"
+   ],
+   "notes": "Price shown is the monthly-billing price (data-testid monthly-price); annual billing is sold in flat user tiers not shown on the static page. SSO and audit logs need an Atlassian Guard subscription on every Bitbucket plan."
+  },
+  {
+   "name": "Premium",
+   "price_text": "$7.25 per user / month",
+   "price_per_user_mo": 7.25,
+   "billing": "monthly",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c3",
+    "c4",
+    "c5",
+    "c13",
+    "c43"
+   ],
+   "notes": "SSO and audit logs need an Atlassian Guard subscription on every Bitbucket plan."
+  },
+  {
+   "name": "Atlassian Guard Standard (add-on)",
+   "price_text": "$4.20 per user / month (monthly billing); annual billing is per user tier, e.g. $4,200 per year for 51-100 users",
+   "price_per_user_mo": 4.2,
+   "billing": "monthly",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c7",
+    "c8",
+    "c9",
+    "c10",
+    "c11",
+    "c38",
+    "c39",
+    "c13"
+   ],
+   "notes": "Add-on on top of any Bitbucket (or other Atlassian Cloud) subscription."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c8",
+   "c12",
+   "c13",
+   "c5",
+   "c20"
+  ],
+  "plan": "Atlassian Guard Standard (add-on)",
+  "addon_price_text": "Atlassian Guard Standard $4.20 per user / month (monthly billing)",
+  "sso_required": false,
+  "version": "2.0",
+  "base_url": "https://api.atlassian.com/scim/directory/{directoryId}",
+  "auth": {
+   "method": "bearer",
+   "token_source": "admin.atlassian.com > Security > Identity providers > (directory) > User provisioning > Regenerate API key",
+   "token_expiry": "1 year",
+   "cite": [
+    "c21",
+    "c33"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c27",
+    "c26"
+   ],
+   "notes": "The API intro lists schemas and resources (\"Get schemas and resources\"); individual Schemas/ServiceProviderConfig/ResourceTypes pages could not be loaded this session (renderer retries exhausted)."
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": false,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c27",
+    "c22",
+    "c16",
+    "c17",
+    "c26"
+   ],
+   "notes": "Group sync does not reach Bitbucket: groups push into the Atlassian organization but group-based Bitbucket access is not yet supported."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": true,
+   "revokes_sessions": null,
+   "data_retained": "Deactivation keeps the Atlassian account's personal data so it can be reactivated; SCIM DELETE deactivates and unlinks rather than deleting the account.",
+   "cite": [
+    "c15",
+    "c22",
+    "c30",
+    "c36",
+    "c37"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName",
+    "externalId"
+   ],
+   "cite": [
+    "c28"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c23",
+    "c31"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "emails",
+    "externalId",
+    "name.formatted",
+    "name.givenName",
+    "name.familyName",
+    "name.middleName",
+    "name.honorificPrefix",
+    "name.honorificSuffix",
+    "displayName",
+    "nickName",
+    "title",
+    "preferredLanguage",
+    "timezone",
+    "phoneNumbers",
+    "active"
+   ],
+   "enterprise": [
+    "organization",
+    "department"
+   ],
+   "custom": {
+    "supported": null,
+    "how": "No arbitrary custom attributes documented; responses also carry urn:scim:schemas:extension:atlassian-external:1.0 atlassianAccountId."
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c27",
+    "c29",
+    "c32"
+   ]
+  },
+  "roles": {
+   "supported": false,
+   "how": "No SCIM role attribute; in Atlassian, app access comes from groups, and group sync is not yet available for Bitbucket.",
+   "cite": [
+    "c14"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Syncing groups from the IdP is not yet available for Bitbucket (only Jira, Confluence and Trello), so SCIM manages the Atlassian account but not Bitbucket workspace group access.",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "text": "SCIM DELETE does not delete the account; it deactivates it.",
+    "cite": [
+     "c22",
+     "c30"
+    ]
+   },
+   {
+    "text": "Group renames are not supported over SCIM.",
+    "cite": [
+     "c24"
+    ]
+   },
+   {
+    "text": "Guard Standard allows one identity provider; multiple IdPs need an Enterprise plan.",
+    "cite": [
+     "c35"
+    ]
+   },
+   {
+    "text": "150,000 user limit per directory.",
+    "cite": [
+     "c25"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c43",
+   "c44",
+   "c46"
+  ],
+  "plan": "Free",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://api.bitbucket.org/2.0",
+  "docs_url": "https://developer.atlassian.com/cloud/bitbucket/rest/api-group-workspaces/",
+  "auth": {
+   "methods": [
+    "oauth2",
+    "access_token",
+    "api_token"
+   ],
+   "scopes": [
+    "read:workspace:bitbucket"
+   ],
+   "cite": [
+    "c45"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": false,
+   "invite_user": true,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c43",
+    "c44",
+    "c46",
+    "c47",
+    "c48",
+    "c49"
+   ],
+   "notes": "Bitbucket's 2.0 API is read-only for members; group membership and invitations use the 1.0 endpoints Atlassian still supports until Bitbucket moves to the Atlassian Cloud Admin API. Account lifecycle is in the Atlassian admin APIs, not Bitbucket's."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/workspaces/{workspace}/members",
+    "purpose": "List users in a workspace",
+    "cite": [
+     "c43",
+     "c44"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/workspaces/{workspace}/members/{member}",
+    "purpose": "Get user membership for a workspace",
+    "cite": [
+     "c43"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/workspaces/{workspace}/permissions",
+    "purpose": "List user permissions in a workspace",
+    "cite": [
+     "c43"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/1.0/groups/{workspace_id}/",
+    "purpose": "List groups in a workspace (1.0, still supported)",
+    "cite": [
+     "c46",
+     "c50"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/1.0/groups/{workspace_id}",
+    "purpose": "Create a group",
+    "cite": [
+     "c47"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/1.0/groups/{workspace_id}/{group_slug}/",
+    "purpose": "Delete a group",
+    "cite": [
+     "c52"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/1.0/groups/{workspace_id}/{group_slug}/members",
+    "purpose": "List group members",
+    "cite": [
+     "c51"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/1.0/groups/{workspace_id}/{group_slug}/members/{uuid}/",
+    "purpose": "Add a member to a group",
+    "cite": [
+     "c48"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/1.0/groups/{workspace_id}/{group_slug}/members/{uuid}",
+    "purpose": "Remove a member from a group",
+    "cite": [
+     "c49"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": "addon",
+   "plan": "Atlassian Guard Standard (organization audit log)",
+   "cite": [
+    "c11",
+    "c39"
+   ]
+  },
+  "rate_limits": {
+   "text": "Authenticated requests: 1,000 per hour rolling for most API resources (scaled limits for some); anonymous: 60 per hour.",
+   "cite": [
+    "c53",
+    "c54"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "No Bitbucket endpoint creates users; Bitbucket users are Atlassian accounts created through invitation, SCIM or the Atlassian admin APIs.",
+    "cite": [
+     "c46",
+     "c43"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/atlassian-cloud/",
+   "cite": [
+    "c56",
+    "c55"
+   ],
+   "notes": "Provisioning goes through the Atlassian Cloud OIN app (SAML, SCIM, Create/Update/Deactivate/Group Push/Group Linking checked in page markup). The separate 'Bitbucket' OIN app (last updated Nov 2019) is SWA only."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/atlassian-cloud-provisioning-tutorial",
+   "cite": [
+    "c57",
+    "c58"
+   ],
+   "notes": "Via the Atlassian Cloud gallery app. The Entra 'Bitbucket by resolution GmbH' app is a third-party SAML SSO app with JIT, not provisioning."
+  },
+  "google": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://knowledge.workspace.google.com/admin/users/advanced/configure-atlassian-cloud-user-provisioning?hl=en",
+   "cite": [
+    "c59",
+    "c60"
+   ],
+   "notes": "Via the Atlassian Cloud app; Google requires SSO set up first."
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c19",
+    "c34"
+   ],
+   "notes": "From Atlassian's own docs; OneLogin's connector page was not loaded (bot protection)."
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://jumpcloud.com/support/integrate-with-atlassian-cloud",
+   "cite": [
+    "c61",
+    "c62"
+   ],
+   "notes": "Via the Atlassian Cloud app; jumpcloud.com/support/integrate-with-bitbucket returned 403."
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": "Google Workspace user sync and Azure AD for nested groups into the Atlassian organization (Atlassian docs).",
+  "docs_public": true,
+  "cite": [
+   "c41",
+   "c12"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.atlassian.com/software/bitbucket/pricing",
+   "title": "Bitbucket pricing",
+   "quote": "Free Free forever for up to 5 users $0",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.atlassian.com/software/bitbucket/pricing",
+   "title": "Bitbucket pricing",
+   "quote": "Standard For growing teams to collaborate on code and CI/CD $3.65 per user / month",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.atlassian.com/software/bitbucket/pricing",
+   "title": "Bitbucket pricing",
+   "quote": "Premium Accelerate velocity with AI & automation $7.25 per user / month",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.atlassian.com/software/bitbucket/pricing",
+   "title": "Bitbucket pricing",
+   "quote": "Atlassian Guard (SSO, audit logs)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.atlassian.com/software/bitbucket/pricing",
+   "title": "Bitbucket pricing",
+   "quote": "Requires Atlassian Guard subscription",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://www.atlassian.com/software/bitbucket/pricing",
+   "title": "Bitbucket pricing",
+   "quote": "Bitbucket, Standard, Monthly (USD, Default, 15-10-2025)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://www.atlassian.com/software/guard/pricing",
+   "title": "Atlassian Guard pricing",
+   "quote": "Standard Everything you need to get started $4.20 per user / month",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://www.atlassian.com/software/guard/pricing",
+   "title": "Atlassian Guard pricing",
+   "quote": "SCIM automated user provisioning Automate user lifecycle management with SCIM provisioning and de-provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://www.atlassian.com/software/guard/pricing",
+   "title": "Atlassian Guard pricing",
+   "quote": "\"price\":\"4.20\",\"priceCurrency\":\"USD\",\"billingDuration\":\"P1M\"",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://www.atlassian.com/software/guard/pricing",
+   "title": "Atlassian Guard pricing",
+   "quote": "$4,200 per year User tier: 51 - 100",
+   "accessed": "2026-10-05",
+   "interaction": "click the Annually billing toggle"
+  },
+  {
+   "id": "c11",
+   "url": "https://www.atlassian.com/software/guard/pricing",
+   "title": "Atlassian Guard pricing",
+   "quote": "Organization audit log A centralized log of admin activity across your Atlassian apps.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+   "title": "Understand user provisioning",
+   "quote": "We support user provisioning using the System for Cross-domain Identity Management (SCIM), and this feature uses the SCIM 2.0 version of the protocol.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+   "title": "Understand user provisioning",
+   "quote": "Role: Organization admin Atlassian Cloud: Atlassian Guard Standard",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+   "title": "Understand user provisioning",
+   "quote": "Syncing groups is only currently available for Jira app instances, Confluence, Trello and not yet available for Bitbucket.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+   "title": "Understand user provisioning",
+   "quote": "When you delete a user from your identity provider, we deactivate the user account.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+   "title": "Understand user provisioning",
+   "quote": "Provisioning is available for all Atlassian accounts, which means that you can create, update, and deactivate accounts from your identity provider.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+   "title": "Understand user provisioning",
+   "quote": "Activate a user account You can activate a user's Atlassian account from your identity provider.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+   "title": "Understand user provisioning",
+   "quote": "Maximum users: 1 million Maximum users per group: 290,000 Maximum groups: 250,000",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+   "title": "Understand user provisioning",
+   "quote": "Okta: Learn how to configure user provisioning with Okta OneLogin: Learn how to configure user provisioning for OneLogin Azure AD: Learn how to configure user provisioning for Azure AD",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/intro/",
+   "title": "User provisioning REST API",
+   "quote": "For instance, if the Directory base URL is https://api.atlassian.com/scim/directory/abcdeg1234, the directoryId is abcdeg1234.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/intro/",
+   "title": "User provisioning REST API",
+   "quote": "To authenticate your script and administer your directory, utilize this API key as a Bearer access token.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/intro/",
+   "title": "User provisioning REST API",
+   "quote": "Deleting a managed user account via the user provisioning API is not supported. The DELETE operation deactivates the managed user account in Adminhub, which is the same as setting the active flag to false.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/intro/",
+   "title": "User provisioning REST API",
+   "quote": "If there are more results available after the current page, a link to the next page of results is included in the JSON. You can use the cursor parameter to set a specific starting point for the results.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/intro/",
+   "title": "User provisioning REST API",
+   "quote": "Changing group names isn't supported.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/intro/",
+   "title": "User provisioning REST API",
+   "quote": "There is a 150,000 user limit per directory.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/intro/",
+   "title": "User provisioning REST API",
+   "quote": "Create, get and update users Create, get and update groups by ID Get schemas and resources",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/api-group-users/",
+   "title": "User provisioning REST API: Users",
+   "quote": "GET /scim/directory/{directoryId}/Users/{userId} PUT /scim/directory/{directoryId}/Users/{userId} DEL /scim/directory/{directoryId}/Users/{userId} PATCH /scim/directory/{directoryId}/Users/{userId} GET /scim/directory/{directoryId}/Users POST /scim/directory/{directoryId}/Users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/api-group-users/",
+   "title": "User provisioning REST API: Users",
+   "quote": "Filtering is supported with a single exact match (eq) against the userName and externalId attributes.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/api-group-users/",
+   "title": "User provisioning REST API: Users",
+   "quote": "Display name displayName Singular false Email address emails Multi-Valued true Organization organization Singular false Job title title Singular false Timezone timezone Singular false Department department Singular false Preferred language preferredLanguage Singular false",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/api-group-users/",
+   "title": "User provisioning REST API: Users",
+   "quote": "Deleting a user via the SCIM APIs will unlink the user from your identity provider and deactivate the user within Atlassian if they are managed by your organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/api-group-users/",
+   "title": "User provisioning REST API: Users",
+   "quote": "Note: While this API enables pagination, sorting functionality is not supported.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/api-group-users/",
+   "title": "User provisioning REST API: Users",
+   "quote": "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://support.atlassian.com/provisioning-users/docs/manage-scim-api-key-expiration/",
+   "title": "Manage API key expiration for SCIM",
+   "quote": "When you set up user provisioning or regenerate an API key, we automatically set it to expire in one year.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://support.atlassian.com/provisioning-users/docs/supported-identity-providers/",
+   "title": "Supported identity providers",
+   "quote": "The following identity providers are supported for SCIM user provisioning: Auth0 CyberArk Idaptive (formerly Centrify) Duo Google Workspace JumpCloud Microsoft Azure Active Directory (AD) Okta OneLogin Ping Identity",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c35",
+   "url": "https://support.atlassian.com/provisioning-users/docs/supported-identity-providers/",
+   "title": "Supported identity providers",
+   "quote": "An Atlassian Guard Standard subscription allows you to connect one identity provider. An Enterprise plan allows you to connect multiple identity providers.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://support.atlassian.com/user-management/docs/deactivate-a-managed-account/",
+   "title": "Deactivate a managed account",
+   "quote": "This won’t delete personal data associated with the Atlassian account, since you can reactivate the account at any time. We’ll stop billing your organization for this account.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://support.atlassian.com/user-management/docs/deactivate-a-managed-account/",
+   "title": "Deactivate a managed account",
+   "quote": "Once you deactivate an account, the account will lose access to Atlassian account services immediately.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c38",
+   "url": "https://support.atlassian.com/security-and-access-policies/docs/atlassian-guard-product-and-plan-availability/",
+   "title": "Atlassian Guard product and plan availability",
+   "quote": "SAML single sign-on Atlassian Cloud: Atlassian Guard Standard Apps : Jira, Jira Service Management, Jira Product Discovery, Jira Align, Confluence, Bitbucket, Trello, Statuspage",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c39",
+   "url": "https://support.atlassian.com/security-and-access-policies/docs/atlassian-guard-product-and-plan-availability/",
+   "title": "Atlassian Guard product and plan availability",
+   "quote": "Audit logs for organization administration activities Atlassian Cloud: Atlassian Guard Standard",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c40",
+   "url": "https://support.atlassian.com/provisioning-users/docs/what-are-setup-options-for-provisioning-and-single-sign-on/",
+   "title": "What are the setup options for provisioning and single sign-on?",
+   "quote": "You can choose to configure both user authentication and provisioning or to configure only one. It doesn’t matter the order you configure them in.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c41",
+   "url": "https://support.atlassian.com/provisioning-users/docs/what-are-setup-options-for-provisioning-and-single-sign-on/",
+   "title": "What are the setup options for provisioning and single sign-on?",
+   "quote": "If you provision users with SAML Just-In-Time, select domains to link to the Directory.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c42",
+   "url": "https://support.atlassian.com/user-management/docs/default-groups-and-permissions/",
+   "title": "Default groups and permissions",
+   "quote": "Bitbucket bitbucket-users-{enterprise-name} The permission to access the Bitbucket app and view the default workspace .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c43",
+   "url": "https://developer.atlassian.com/cloud/bitbucket/rest/api-group-workspaces/",
+   "title": "Bitbucket Cloud REST API: Workspaces",
+   "quote": "GET /workspaces/{workspace}/members GET /workspaces/{workspace}/members/{member} GET /workspaces/{workspace}/permissions",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c44",
+   "url": "https://developer.atlassian.com/cloud/bitbucket/rest/api-group-workspaces/",
+   "title": "Bitbucket Cloud REST API: Workspaces",
+   "quote": "Returns all members of the requested workspace.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c45",
+   "url": "https://developer.atlassian.com/cloud/bitbucket/rest/api-group-workspaces/",
+   "title": "Bitbucket Cloud REST API: Workspaces",
+   "quote": "read:workspace:bitbucket",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c46",
+   "url": "https://support.atlassian.com/bitbucket-cloud/docs/groups-endpoint/",
+   "title": "Bitbucket groups endpoint (1.0)",
+   "quote": "Until the Atlassian platform services are fully available in Bitbucket we will continue to support these 1.0 REST endpoints: /1.0/groups /1.0/group-privileges /1.0/invitations /1.0/users/{accountname}/invitations",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c47",
+   "url": "https://support.atlassian.com/bitbucket-cloud/docs/groups-endpoint/",
+   "title": "Bitbucket groups endpoint (1.0)",
+   "quote": "POST https://api.bitbucket.org/1.0/groups/{workspace_id} --data \"name=string\" Creates a new group.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c48",
+   "url": "https://support.atlassian.com/bitbucket-cloud/docs/groups-endpoint/",
+   "title": "Bitbucket groups endpoint (1.0)",
+   "quote": "PUT https://api.bitbucket.org/1.0/groups/{workspace_id}/{group_slug}/members/{uuid}/ --data '{}' Adds a member to a group.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c49",
+   "url": "https://support.atlassian.com/bitbucket-cloud/docs/groups-endpoint/",
+   "title": "Bitbucket groups endpoint (1.0)",
+   "quote": "DELETE https://api.bitbucket.org/1.0/groups/{workspace_id}/{group_slug}/members/{uuid} Deletes a member from a group.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c50",
+   "url": "https://support.atlassian.com/bitbucket-cloud/docs/groups-endpoint/",
+   "title": "Bitbucket groups endpoint (1.0)",
+   "quote": "GET https://api.bitbucket.org/1.0/groups/{workspace_id}/ Get a list of a groups for workspace.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c51",
+   "url": "https://support.atlassian.com/bitbucket-cloud/docs/groups-endpoint/",
+   "title": "Bitbucket groups endpoint (1.0)",
+   "quote": "GET https://api.bitbucket.org/1.0/groups/{workspace_id}/{group_slug}/members Gets the membership for a group.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c52",
+   "url": "https://support.atlassian.com/bitbucket-cloud/docs/groups-endpoint/",
+   "title": "Bitbucket groups endpoint (1.0)",
+   "quote": "DELETE https://api.bitbucket.org/1.0/groups/{workspace_id}/{group_slug}/ Deletes a group.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c53",
+   "url": "https://support.atlassian.com/bitbucket-cloud/docs/api-request-limits/",
+   "title": "API request limits",
+   "quote": "Anonymous requests are subject to a strict rate limit of 60 requests per hour across all API resources.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c54",
+   "url": "https://support.atlassian.com/bitbucket-cloud/docs/api-request-limits/",
+   "title": "API request limits",
+   "quote": "the total you can run consecutively over an hour is 1,000.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c55",
+   "url": "https://www.okta.com/integrations/bitbucket/",
+   "title": "Integrate Bitbucket with Okta",
+   "quote": "Collaborate on code with inline comments and pull requests. Manage and share your Git repositories to build and ship software, as a team.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c56",
+   "url": "https://www.okta.com/integrations/atlassian-cloud/",
+   "title": "Integrate Atlassian Cloud with Okta",
+   "quote": "Add this integration to enable authentication and provisioning capabilities.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c57",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/atlassian-cloud-provisioning-tutorial",
+   "title": "Configure Atlassian Cloud for automatic user provisioning",
+   "quote": "Create users in Atlassian Cloud Remove users in Atlassian Cloud when they don't require access anymore Keep user attributes synchronized between Microsoft Entra ID and Atlassian Cloud Provision groups and group memberships in Atlassian Cloud",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c58",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/bitbucket-tutorial",
+   "title": "Bitbucket by resolution GmbH for Single sign-on with Microsoft Entra ID",
+   "quote": "SAML SSO for Bitbucket by resolution GmbH supports Just In Time user provisioning",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c59",
+   "url": "https://knowledge.workspace.google.com/admin/users/advanced/configure-atlassian-cloud-user-provisioning?hl=en",
+   "title": "Configure Atlassian Cloud user provisioning",
+   "quote": "You can set up automated user provisioning (autoprovisioning) so that any changes you make to user accounts in Google Workspace are automatically synced with this third-party app.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c60",
+   "url": "https://knowledge.workspace.google.com/admin/users/advanced/configure-atlassian-cloud-user-provisioning?hl=en",
+   "title": "Configure Atlassian Cloud user provisioning",
+   "quote": "Before you can set up automated user provisioning, you need to set up SSO for Atlassian Cloud.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c61",
+   "url": "https://jumpcloud.com/support/integrate-with-atlassian-cloud",
+   "title": "Integrate with Atlassian Cloud",
+   "quote": "Integrate your JumpCloud account with Atlassian Cloud through a SCIM Connector. After you connect JumpCloud with Atlassian Cloud, you can provision, update, and deprovision users and groups.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c62",
+   "url": "https://jumpcloud.com/support/integrate-with-atlassian-cloud",
+   "title": "Integrate with Atlassian Cloud",
+   "quote": "SSO is recommended, but not required for SCIM",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The Bitbucket groups-endpoint page says Bitbucket Cloud REST API 1.0 was removed permanently on 29 April 2019, but the same page says /1.0/groups, /1.0/group-privileges and /1.0/invitations are still supported until Atlassian platform services are fully available in Bitbucket.",
+   "cite": [
+    "c46"
+   ]
+  },
+  {
+   "text": "Atlassian's default groups page lists bitbucket-users-{enterprise-name} app-access groups, while the provisioning page says group sync is not yet available for Bitbucket.",
+   "cite": [
+    "c42",
+    "c14"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.atlassian.com/software/bitbucket/pricing",
+  "https://www.atlassian.com/software/guard/pricing",
+  "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+  "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/intro/",
+  "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/api-group-users/",
+  "https://developer.atlassian.com/cloud/bitbucket/rest/api-group-workspaces/",
+  "https://support.atlassian.com/bitbucket-cloud/docs/groups-endpoint/",
+  "https://support.atlassian.com/bitbucket-cloud.xml (sitemap)",
+  "https://support.atlassian.com/provisioning-users.xml (sitemap)"
+ ],
+ "open_questions": [
+  "Annual-billing per-user price for Bitbucket Standard/Premium and Guard Standard is sold in flat user tiers; only the monthly price is a clean per-user figure.",
+  "Whether SCIM deactivation ends active Bitbucket sessions is not stated.",
+  "SCIM rate limits are not documented.",
+  "Schemas, ServiceProviderConfig and ResourceTypes reference pages could not be loaded this session; Bulk and /Me support unconfirmed.",
+  "Whether Bitbucket workspace webhooks include any user or membership events was not verified.",
+  "CSV user import for Bitbucket/Atlassian Cloud not verified.",
+  "Max SCIM page size not documented."
+ ]
+}

@@ -1,0 +1,904 @@
+{
+ "slug": "mural",
+ "vendor": "Mural",
+ "vendor_url": "https://www.mural.co",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Mural",
+  "slug": "mural",
+  "category": "Collaboration & Messaging",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Team+",
+  "team_price_text": "Team+: $9.99/member/mo (billed annually)",
+  "team_price_per_user_mo": 9.99,
+  "price_multiplier": null,
+  "sso_plan": "Business",
+  "sso_price_per_user_mo": 17.99,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.mural.co/pricing",
+  "docs_url": "https://developers.mural.co/enterprise/docs/about-the-scim-api.md",
+  "evidence": "Mural's pricing page lists 'SCIM user and group management' only under Enterprise (Contact for pricing), and its SCIM docs say SCIM is available only with Mural's Enterprise plan.",
+  "notes": "Unchanged from June: SCIM is Enterprise-only (Contact Sales); Team+ $9.99 and Business $17.99 per member/mo billed annually (Team+ $12 monthly). SAML SSO starts on Business, one tier below SCIM, and must be working before SCIM is configured. SCIM auth uses an Authorization: apikey <key> header from the company dashboard. DELETE is a hard delete; PATCH active=false is the reversible deactivation Okta uses (Okta cannot delete). Enterprise API (member information, user-type/licence updates, users report, audit log) is listed with Enterprise's reporting APIs.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Enterprise",
+  "api_tax": true,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "$0 USD for unlimited members",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": false,
+   "cite": [
+    "c1",
+    "c6",
+    "c8",
+    "c9"
+   ]
+  },
+  {
+   "name": "Team+",
+   "price_text": "$9.99 per member/month billed annually ($12 billed monthly)",
+   "price_per_user_mo": 9.99,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": false,
+   "cite": [
+    "c2",
+    "c3",
+    "c6",
+    "c8",
+    "c9"
+   ]
+  },
+  {
+   "name": "Business",
+   "price_text": "$17.99 per member/month billed annually",
+   "price_per_user_mo": 17.99,
+   "billing": "annual",
+   "sso": true,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": false,
+   "cite": [
+    "c4",
+    "c5",
+    "c6",
+    "c8",
+    "c9"
+   ]
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Contact for pricing",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c7",
+    "c8",
+    "c9"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c20",
+   "c10",
+   "c21",
+   "c22",
+   "c35",
+   "c8"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://api.mural.co/enterprise/v1/scim",
+  "auth": {
+   "method": "other",
+   "token_source": "Company dashboard > Identity and access > Provisioning > Create SCIM API key (managed on the API keys page)",
+   "token_expiry": null,
+   "cite": [
+    "c33",
+    "c39",
+    "c23"
+   ],
+   "notes": "Header Authorization: apikey <key>."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": true,
+   "Schemas": true,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c29",
+    "c13",
+    "c31",
+    "c32"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c15",
+    "c16",
+    "c12",
+    "c11",
+    "c13",
+    "c14",
+    "c36"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Deactivation is a reversible soft delete; DELETE hard-deletes the user's identity data (Mural recommends transferring content ownership first).",
+   "cite": [
+    "c36",
+    "c12",
+    "c11",
+    "c37",
+    "c41"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName (email)"
+   ],
+   "cite": [
+    "c25",
+    "c30"
+   ],
+   "notes": "Only filtering by email is available; no sort."
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": 100,
+   "cite": [
+    "c29"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "emails",
+    "name.givenName",
+    "name.familyName",
+    "userType",
+    "active",
+    "profileUrl",
+    "id",
+    "externalId"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c17",
+    "c18",
+    "c34"
+   ],
+   "notes": "Attribute table on About the SCIM API maps email, givenName, familyName, userName, userType, active (locked), profileUrl (avatar), id."
+  },
+  "roles": {
+   "supported": true,
+   "how": "SCIM groups map to workspaces with designated permissions; on tiered Member pricing, groups set Full vs Limited Member user type.",
+   "cite": [
+    "c42",
+    "c43"
+   ]
+  },
+  "rate_limits": {
+   "text": "More than 25 requests per second returns 429.",
+   "cite": [
+    "c24"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Only members, not guests, can be provisioned.",
+    "cite": [
+     "c26"
+    ]
+   },
+   {
+    "text": "No filter or sort on GET except lookup by email.",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "text": "Okta cannot delete Mural users (deactivate only).",
+    "cite": [
+     "c37"
+    ]
+   },
+   {
+    "text": "Invalid custom profile fields cause all fields to be ignored.",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "text": "Group-to-workspace mapping should stay under 40,000 users per workspace.",
+    "cite": [
+     "c28"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c51",
+   "c52",
+   "c9"
+  ],
+  "plan": "Enterprise",
+  "api_tax": true,
+  "style": "REST",
+  "base_url": "https://api.mural.co/enterprise/v1",
+  "docs_url": "https://developers.mural.co/enterprise/docs/member-information-api",
+  "auth": {
+   "methods": [
+    "api_key"
+   ],
+   "scopes": [
+    "Member Information",
+    "Audit logs",
+    "SCIM"
+   ],
+   "cite": [
+    "c51",
+    "c52"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": true,
+   "cite": [
+    "c44",
+    "c45",
+    "c47"
+   ],
+   "notes": "Non-SCIM Enterprise API reads members and bulk-updates user types; lifecycle changes go through SCIM."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/enterprise/v1/members",
+    "purpose": "List company members (username, name, email, license, status)",
+    "cite": [
+     "c44"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/enterprise/v1/members/{username}",
+    "purpose": "Get company member",
+    "cite": [
+     "c45"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/enterprise/v1/members/summary",
+    "purpose": "Licence summary",
+    "cite": [
+     "c46"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/enterprise/v1/members/user-types",
+    "purpose": "Bulk update member user types (licences)",
+    "cite": [
+     "c47"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/enterprise/v1/reports/users",
+    "purpose": "Users report",
+    "cite": [
+     "c48"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/enterprise/v1/audit-log",
+    "purpose": "Audit log events (up to 30 days per call)",
+    "cite": [
+     "c49"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Enterprise",
+   "cite": [
+    "c49",
+    "c9",
+    "c50"
+   ]
+  },
+  "rate_limits": {
+   "text": "Audit log API: 1,500 calls per day per customer.",
+   "cite": [
+    "c50"
+   ]
+  },
+  "limitations": [],
+  "notes": "Plan for the Enterprise API is taken from the pricing page, which lists audit logs, downloadable reports and reporting APIs under Enterprise; the API docs do not name a plan for the member information endpoints."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/mural/",
+   "cite": [
+    "c53",
+    "c37"
+   ],
+   "notes": "OIN page marks SAML, SCIM and Create/Update/Deactivate/Group Push as checked (read from page markup)."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/mural-identity-provisioning-tutorial",
+   "cite": [
+    "c54",
+    "c55"
+   ],
+   "notes": "Listed as MURAL Identity."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "jumpcloud.com/support/integrate-with-mural returned Access Denied."
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c38",
+   "c21"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.mural.co/pricing",
+   "title": "Mural Pricing",
+   "quote": "Free Get your team started fast $0 USD for unlimited members",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.mural.co/pricing",
+   "title": "Mural Pricing",
+   "quote": "$9.99 per month, billed annually",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.mural.co/pricing",
+   "title": "Mural Pricing",
+   "quote": "$12 per month, billed monthly",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.mural.co/pricing",
+   "title": "Mural Pricing",
+   "quote": "Collaborate across teams with the security of SSO and unlimited guests",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.mural.co/pricing",
+   "title": "Mural Pricing",
+   "quote": "$17 .99 USD per member / month billed annually",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://www.mural.co/pricing",
+   "title": "Mural Pricing",
+   "quote": "Single sign-on (SSO) (SAML 2.0)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://www.mural.co/pricing",
+   "title": "Mural Pricing",
+   "quote": "Level up teamwork across multiple workspaces with enterprise-grade controls and proven transformation expertise Contact for pricing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://www.mural.co/pricing",
+   "title": "Mural Pricing",
+   "quote": "SCIM user and group management",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://www.mural.co/pricing",
+   "title": "Mural Pricing",
+   "quote": "Audit logs, downloadable reports, and reporting APIs",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://developers.mural.co/enterprise/docs/about-the-scim-api.md",
+   "title": "Mural Enterprise API: About the SCIM API",
+   "quote": "System for Cross-domain Identity Management, also known as SCIM, provides automated provisioning and user management for Mural Enterprise accounts.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.mural.co/enterprise/docs/about-the-scim-api"
+  },
+  {
+   "id": "c11",
+   "url": "https://developers.mural.co/enterprise/docs/about-the-scim-api.md",
+   "title": "Mural Enterprise API: About the SCIM API",
+   "quote": "Delete a member. This is a hard delete, erasing the user's identity data from Mural.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.mural.co/enterprise/docs/about-the-scim-api"
+  },
+  {
+   "id": "c12",
+   "url": "https://developers.mural.co/enterprise/docs/about-the-scim-api.md",
+   "title": "Mural Enterprise API: About the SCIM API",
+   "quote": "For a soft delete enabling user reactivation, use a PATCH call to set 'active' == ‘false’.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.mural.co/enterprise/docs/about-the-scim-api"
+  },
+  {
+   "id": "c13",
+   "url": "https://developers.mural.co/enterprise/docs/about-the-scim-api.md",
+   "title": "Mural Enterprise API: About the SCIM API",
+   "quote": "Update an existing group’s resource. Either add, remove, or replace members to the group.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.mural.co/enterprise/docs/about-the-scim-api"
+  },
+  {
+   "id": "c14",
+   "url": "https://developers.mural.co/enterprise/docs/about-the-scim-api.md",
+   "title": "Mural Enterprise API: About the SCIM API",
+   "quote": "Deactivate a group to revoke members' access to the mapped Mural workspace(s).",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.mural.co/enterprise/docs/about-the-scim-api"
+  },
+  {
+   "id": "c15",
+   "url": "https://developers.mural.co/enterprise/docs/about-the-scim-api.md",
+   "title": "Mural Enterprise API: About the SCIM API",
+   "quote": "Create a new Mural account.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.mural.co/enterprise/docs/about-the-scim-api"
+  },
+  {
+   "id": "c16",
+   "url": "https://developers.mural.co/enterprise/docs/about-the-scim-api.md",
+   "title": "Mural Enterprise API: About the SCIM API",
+   "quote": "Update an existing member's resource, overwriting all values for a member.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.mural.co/enterprise/docs/about-the-scim-api"
+  },
+  {
+   "id": "c17",
+   "url": "https://developers.mural.co/enterprise/docs/about-the-scim-api.md",
+   "title": "Mural Enterprise API: About the SCIM API",
+   "quote": "These attributes include the member's first name, last name, and email.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.mural.co/enterprise/docs/about-the-scim-api"
+  },
+  {
+   "id": "c18",
+   "url": "https://developers.mural.co/enterprise/docs/about-the-scim-api.md",
+   "title": "Mural Enterprise API: About the SCIM API",
+   "quote": "Attributes are details associated with a group, including the unique group `displayName`. Members should be added to a group.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.mural.co/enterprise/docs/about-the-scim-api"
+  },
+  {
+   "id": "c19",
+   "url": "https://developers.mural.co/enterprise/docs/about-the-scim-api.md",
+   "title": "Mural Enterprise API: About the SCIM API",
+   "quote": "Mural's SCIM implementation targets the",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.mural.co/enterprise/docs/about-the-scim-api"
+  },
+  {
+   "id": "c20",
+   "url": "https://developers.mural.co/enterprise/docs/set-up-the-scim-api.md",
+   "title": "Mural Enterprise API: Set up the SCIM API",
+   "quote": "SCIM is available only with Mural's Enterprise plan.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.mural.co/enterprise/docs/set-up-the-scim-api"
+  },
+  {
+   "id": "c21",
+   "url": "https://developers.mural.co/enterprise/docs/set-up-the-scim-api.md",
+   "title": "Mural Enterprise API: Set up the SCIM API",
+   "quote": "The base URL for all calls to Mural is `https://api.mural.co/enterprise/v1/scim`. All SCIM methods are branches of this base URL.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.mural.co/enterprise/docs/set-up-the-scim-api"
+  },
+  {
+   "id": "c22",
+   "url": "https://developers.mural.co/enterprise/docs/set-up-the-scim-api.md",
+   "title": "Mural Enterprise API: Set up the SCIM API",
+   "quote": "must be properly set up and functional in your Enterprise account before you start configuring automated provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.mural.co/enterprise/docs/set-up-the-scim-api"
+  },
+  {
+   "id": "c23",
+   "url": "https://developers.mural.co/enterprise/docs/set-up-the-scim-api.md",
+   "title": "Mural Enterprise API: Set up the SCIM API",
+   "quote": "You must be a Mural company administrator to generate SCIM API keys.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.mural.co/enterprise/docs/set-up-the-scim-api"
+  },
+  {
+   "id": "c24",
+   "url": "https://developers.mural.co/enterprise/docs/set-up-the-scim-api.md",
+   "title": "Mural Enterprise API: Set up the SCIM API",
+   "quote": "If your app sends more than 25 requests per second, you will receive a 429 error.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.mural.co/enterprise/docs/set-up-the-scim-api"
+  },
+  {
+   "id": "c25",
+   "url": "https://developers.mural.co/enterprise/docs/set-up-the-scim-api.md",
+   "title": "Mural Enterprise API: Set up the SCIM API",
+   "quote": "Filter and sort options for `GET` endpoints are not currently available. However, you can filter by email address in the `GET` endpoint to find a member's mural ID",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.mural.co/enterprise/docs/set-up-the-scim-api"
+  },
+  {
+   "id": "c26",
+   "url": "https://developers.mural.co/enterprise/docs/set-up-the-scim-api.md",
+   "title": "Mural Enterprise API: Set up the SCIM API",
+   "quote": "Only Mural members can be provisioned via SCIM, not guests.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.mural.co/enterprise/docs/set-up-the-scim-api"
+  },
+  {
+   "id": "c27",
+   "url": "https://developers.mural.co/enterprise/docs/set-up-the-scim-api.md",
+   "title": "Mural Enterprise API: Set up the SCIM API",
+   "quote": "If any profile fields in a custom profile are invalid, all of the fields will be ignored.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.mural.co/enterprise/docs/set-up-the-scim-api"
+  },
+  {
+   "id": "c28",
+   "url": "https://developers.mural.co/enterprise/docs/set-up-the-scim-api.md",
+   "title": "Mural Enterprise API: Set up the SCIM API",
+   "quote": "workspaces can handle up to 40,000 users without significant performance impact.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.mural.co/enterprise/docs/set-up-the-scim-api"
+  },
+  {
+   "id": "c29",
+   "url": "https://developers.mural.co/enterprise/reference/getallusersscim.md",
+   "title": "Mural Enterprise API: Get a list of company members (SCIM)",
+   "quote": "Maximum count is 100.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.mural.co/enterprise/reference/getallusersscim"
+  },
+  {
+   "id": "c30",
+   "url": "https://developers.mural.co/enterprise/reference/getallusersscim.md",
+   "title": "Mural Enterprise API: Get a list of company members (SCIM)",
+   "quote": "Returns resources matching the expression defined in the filter.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.mural.co/enterprise/reference/getallusersscim"
+  },
+  {
+   "id": "c31",
+   "url": "https://developers.mural.co/enterprise/reference/getserviceproviderconfig.md",
+   "title": "Mural Enterprise API: Get SCIM service provider configuration",
+   "quote": "Retrieve the SCIM features supported by Mural.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.mural.co/enterprise/reference/getserviceproviderconfig"
+  },
+  {
+   "id": "c32",
+   "url": "https://developers.mural.co/enterprise/reference/getuserschema.md",
+   "title": "Mural Enterprise API: Get details of a single schema",
+   "quote": "Retrieve the details of a single SCIM schema using the schema ID.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.mural.co/enterprise/reference/getuserschema"
+  },
+  {
+   "id": "c33",
+   "url": "https://developers.mural.co/enterprise/reference/postuserscim.md",
+   "title": "Mural Enterprise API: Create a new company member (SCIM)",
+   "quote": "Prefix the value with `apikey` to indicate the custom authorization type.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.mural.co/enterprise/reference/postuserscim"
+  },
+  {
+   "id": "c34",
+   "url": "https://developers.mural.co/enterprise/reference/postuserscim.md",
+   "title": "Mural Enterprise API: Create a new company member (SCIM)",
+   "quote": "Id of the user in company's identity provider.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.mural.co/enterprise/reference/postuserscim"
+  },
+  {
+   "id": "c35",
+   "url": "https://support.mural.co/s/article/automated-scim-provisioning",
+   "title": "Mural Support: Automatic SCIM provisioning",
+   "quote": "Available for: Enterprise plan Set up by: Company admin",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://support.mural.co/s/article/automated-scim-provisioning",
+   "title": "Mural Support: Automatic SCIM provisioning",
+   "quote": "Deprovision (deactivate) user accounts.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://support.mural.co/s/article/automated-scim-provisioning",
+   "title": "Mural Support: Automatic SCIM provisioning",
+   "quote": "It's important to ensure Okta can create, update, and deactivate Mural user accounts. Okta currently does not support deleting Mural user accounts.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c38",
+   "url": "https://support.mural.co/s/article/automated-scim-provisioning",
+   "title": "Mural Support: Automatic SCIM provisioning",
+   "quote": "With manual provisioning (Just-in-Time), user accounts are created during the initial sign-in process, either via a username and password or SAML SSO.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c39",
+   "url": "https://support.mural.co/s/article/automated-scim-provisioning",
+   "title": "Mural Support: Automatic SCIM provisioning",
+   "quote": "If you ever need to create a new key or revoke an existing key, you must take that action on the API keys page.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c40",
+   "url": "https://support.mural.co/s/article/automated-scim-provisioning",
+   "title": "Mural Support: Automatic SCIM provisioning",
+   "quote": "If you use a different IdP, refer to your IdP’s specific configuration guide and support team for implementing SCIM provisioning configurations.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c41",
+   "url": "https://support.mural.co/s/article/automated-scim-provisioning",
+   "title": "Mural Support: Automatic SCIM provisioning",
+   "quote": "When you use SCIM for provisioning, this customizable page is what new unprovisioned users and deactivated users will see.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c42",
+   "url": "https://support.mural.co/s/article/Managing-user-accounts-through-SCIM-groups",
+   "title": "Mural Support: Managing user accounts through SCIM groups",
+   "quote": "Workspace access and permissions - Map user groups to specific Mural workspaces with designated permissions, streamlining access control directly from the IdP.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c43",
+   "url": "https://support.mural.co/s/article/Managing-user-accounts-through-SCIM-groups",
+   "title": "Mural Support: Managing user accounts through SCIM groups",
+   "quote": "For customers on Mural's tiered Member pricing model, manage Full Member and Limited Member types based on group membership in the IdP.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c44",
+   "url": "https://developers.mural.co/enterprise/reference/getcompanymembers.md",
+   "title": "Mural Enterprise API: Get a list of company members",
+   "quote": "Retrieve a list of all Mural members in your company.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.mural.co/enterprise/reference/getcompanymembers"
+  },
+  {
+   "id": "c45",
+   "url": "https://developers.mural.co/enterprise/reference/getcompanymember.md",
+   "title": "Mural Enterprise API: Get company member",
+   "quote": "Retrieve information about a Mural member in your company.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.mural.co/enterprise/reference/getcompanymember"
+  },
+  {
+   "id": "c46",
+   "url": "https://developers.mural.co/enterprise/reference/getcompanymemberssummary.md",
+   "title": "Mural Enterprise API: Get company members summary",
+   "quote": "Retrieve summarized information of all Mural members in your company.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.mural.co/enterprise/reference/getcompanymemberssummary"
+  },
+  {
+   "id": "c47",
+   "url": "https://developers.mural.co/enterprise/reference/patch_enterprise-v1-members-user-types.md",
+   "title": "Mural Enterprise API: Update company member user types",
+   "quote": "The Company Member User Types API is available to companies on a Member pricing plan to bulk update member user types.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.mural.co/enterprise/reference/patch_enterprise-v1-members-user-types"
+  },
+  {
+   "id": "c48",
+   "url": "https://developers.mural.co/enterprise/reference/getallusers.md",
+   "title": "Mural Enterprise API: Get a list of users",
+   "quote": "The Users Report API lists all users created in your organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.mural.co/enterprise/reference/getallusers"
+  },
+  {
+   "id": "c49",
+   "url": "https://developers.mural.co/enterprise/reference/get_enterprise-v1-audit-log.md",
+   "title": "Mural Enterprise API: Get audit logs for your company",
+   "quote": "Retrieve member audit events for your company for up to 30 consecutive days.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.mural.co/enterprise/reference/get_enterprise-v1-audit-log"
+  },
+  {
+   "id": "c50",
+   "url": "https://developers.mural.co/enterprise/docs/explore-audit-logs.md",
+   "title": "Mural Enterprise API: About the Audit Log API",
+   "quote": "the Mural audit log API enforces a rate limit of 1,500 calls per day per customer",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.mural.co/enterprise/docs/explore-audit-logs"
+  },
+  {
+   "id": "c51",
+   "url": "https://developers.mural.co/enterprise/docs/member-information-api.md",
+   "title": "Mural Enterprise API: Member information API",
+   "quote": "These endpoints require an API key with Member Information scope generated for your company to use.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.mural.co/enterprise/docs/member-information-api"
+  },
+  {
+   "id": "c52",
+   "url": "https://developers.mural.co/enterprise/docs/create-api-keys.md",
+   "title": "Mural Enterprise API: Create API keys",
+   "quote": "Each API key has one or more scopes that define which endpoints that key works with. For example, you can create an API key with scopes for both Audit logs and SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.mural.co/enterprise/docs/create-api-keys"
+  },
+  {
+   "id": "c53",
+   "url": "https://www.okta.com/integrations/mural/",
+   "title": "Integrate Mural with Okta",
+   "quote": "Add this integration to enable authentication and provisioning capabilities.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c54",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/mural-identity-provisioning-tutorial",
+   "title": "Configure MURAL Identity for automatic user provisioning with Microsoft Entra ID",
+   "quote": "SCIM provisioning is only available for MURAL’s Enterprise plan.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c55",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/mural-identity-provisioning-tutorial",
+   "title": "Configure MURAL Identity for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Provision groups and group memberships in MURAL Identity.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.mural.co/pricing",
+  "https://developers.mural.co/enterprise/docs.md",
+  "https://support.mural.co/s/article/automated-scim-provisioning"
+ ],
+ "open_questions": [
+  "Whether deactivation frees the paid seat is not documented.",
+  "SCIM key expiry not documented.",
+  "Google Workspace, OneLogin and JumpCloud catalogue entries not confirmed (JumpCloud page blocked).",
+  "Whether deprovisioning ends active sessions is not documented.",
+  "Enterprise API plan for member information endpoints is not stated in the API docs."
+ ]
+}

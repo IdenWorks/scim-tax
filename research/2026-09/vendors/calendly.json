@@ -1,0 +1,1205 @@
+{
+ "slug": "calendly",
+ "vendor": "Calendly",
+ "vendor_url": "https://calendly.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Calendly",
+  "slug": "calendly",
+  "category": "Productivity & Docs",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Enterprise: starts at $15k/yr (50-seat minimum)",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Standard",
+  "team_price_text": "Standard: $10/seat/mo (billed yearly)",
+  "team_price_per_user_mo": 10,
+  "price_multiplier": null,
+  "sso_plan": "Teams + SSO add-on",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": 50,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": false
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": "native",
+   "jumpcloud": "native",
+   "generic": true
+  },
+  "pricing_page_url": "https://calendly.com/pricing",
+  "docs_url": "https://calendly.com/help/how-to-set-up-scim-with-your-identity-provider",
+  "evidence": "Calendly's pricing page lists \"Automate and secure user identities using SCIM\" only for Enterprise (\"Starts at $15k /yr Starts at 50 seats\"), and the SCIM help article is marked \"Plans: Enterprise\".",
+  "notes": "Status unchanged from June (gated). Price change: June recorded Standard $12 and Teams $20 per user/month (annual); the pricing page (Billed yearly) now shows Standard $10 and Teams $16 per seat/month. The page's embedded price data suggests $12/$20 are now the monthly-billing prices, but that data is not visible page text, so it is not cited. Enterprise starts at $15k/yr with a 50-seat minimum. SAML SSO is a paid add-on on Teams (price unlisted) and included in Enterprise; SCIM is Enterprise-only and requires SAML first. Calendly does not support SAML JIT. SCIM deactivation is reversible; delete is permanent. Some older Enterprise plans have SAML but not SCIM. The v2 REST API (all plans, including Free) can list, invite and remove organization members; the activity log API is Enterprise-only.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Free",
+  "api_tax": false,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "Always free",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c1",
+    "c8",
+    "c9",
+    "c51",
+    "c70"
+   ]
+  },
+  {
+   "name": "Standard",
+   "price_text": "$10 /seat/mo billed yearly",
+   "price_per_user_mo": 10,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c2",
+    "c4",
+    "c8",
+    "c9",
+    "c51",
+    "c70"
+   ]
+  },
+  {
+   "name": "Teams",
+   "price_text": "$16 /seat/mo billed yearly",
+   "price_per_user_mo": 16,
+   "billing": "annual",
+   "sso": true,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c3",
+    "c4",
+    "c5",
+    "c8",
+    "c49",
+    "c9",
+    "c51",
+    "c70"
+   ],
+   "notes": "SAML SSO only with the optional SSO security add-on (price not listed)."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Starts at $15k /yr, starts at 50 seats",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c6",
+    "c7",
+    "c9",
+    "c11",
+    "c70"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c9",
+   "c11",
+   "c12",
+   "c31",
+   "c32"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": null,
+  "auth": {
+   "method": "bearer",
+   "token_source": "Admin → Access → Single sign-on → Optional: Connect SCIM → Generate new bearer token (Settings → Access → User provisioning in the Entra guide)",
+   "token_expiry": "configurable (admin chooses when the token expires)",
+   "cite": [
+    "c14",
+    "c15"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": false,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c17",
+    "c40"
+   ],
+   "notes": "Base URL is copied from the admin console and not published. Entra group provisioning must be turned off; groups are assigned via a user attribute instead."
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": false,
+   "group_membership": true,
+   "cite": [
+    "c20",
+    "c34",
+    "c45",
+    "c25",
+    "c26",
+    "c40",
+    "c29"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Deactivate (active=false / OneLogin Suspend) keeps the user's data so the account can be reactivated; Delete permanently removes the user and their Calendly data, and a pre-existing personal account reverts to a free solo user.",
+   "cite": [
+    "c17",
+    "c25",
+    "c26",
+    "c47",
+    "c41",
+    "c42"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "displayName",
+    "active",
+    "externalId",
+    "name.givenName",
+    "name.familyName",
+    "emails[primary]"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": true,
+    "how": "Group attribute 'group' in urn:ietf:params:scim:schemas:extension:Calendly:2.0:User (Entra) / namespace urn:calendly:scim:schemas:2.0:User (Okta), mapped to Calendly groups in Settings → Access → User provisioning."
+   },
+   "group": [],
+   "cite": [
+    "c17",
+    "c18",
+    "c35",
+    "c43",
+    "c36",
+    "c30"
+   ],
+   "notes": "Help article says only displayName, userName, active and externalID should be sent and extra attributes cause errors; the Okta guide keeps Given name, Family name and Primary email too."
+  },
+  "roles": {
+   "supported": false,
+   "how": "Roles are changed in Calendly (Settings → People → Active users), not via SCIM.",
+   "cite": [
+    "c24"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SAML SSO must be set up before SCIM.",
+    "cite": [
+     "c13",
+     "c32"
+    ]
+   },
+   {
+    "text": "Provisioning fails when all seats are full; provisioned users must accept an emailed invite and sign in via SSO before taking a seat.",
+    "cite": [
+     "c22",
+     "c23"
+    ]
+   },
+   {
+    "text": "Only displayName, userName, active and externalID are accepted; extra attributes cause errors.",
+    "cite": [
+     "c19"
+    ]
+   },
+   {
+    "text": "No SCIM group push; groups are mapped from a user attribute, after which groups can't be managed manually. OneLogin's catalogue app does not support the custom group attribute.",
+    "cite": [
+     "c40",
+     "c37",
+     "c48"
+    ]
+   },
+   {
+    "text": "Some older Enterprise plans include SAML but not SCIM.",
+    "cite": [
+     "c38"
+    ]
+   },
+   {
+    "text": "Email changes require the user to verify the new address before they appear.",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "text": "With SCIM enabled, users can only be removed through the IdP.",
+    "cite": [
+     "c27"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c51",
+   "c55",
+   "c57"
+  ],
+  "plan": "Free",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://api.calendly.com",
+  "docs_url": "https://developer.calendly.com/api-docs/overview/api/reference",
+  "auth": {
+   "methods": [
+    "oauth2",
+    "personal_access_token"
+   ],
+   "scopes": [
+    "users:read",
+    "organizations:read",
+    "organizations:write",
+    "groups:read",
+    "activity_log:read"
+   ],
+   "cite": [
+    "c76",
+    "c77",
+    "c73",
+    "c74"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": false,
+   "invite_user": true,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": false,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c55",
+    "c54",
+    "c59",
+    "c57",
+    "c73",
+    "c65"
+   ],
+   "notes": "Users join by invitation; DELETE organization_memberships removes a user (admin only, not the owner). Groups and teams are read-only."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/users/me",
+    "purpose": "Get current user",
+    "cite": [
+     "c53"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/users/{uuid}",
+    "purpose": "Get a user",
+    "cite": [
+     "c54"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/organization_memberships",
+    "purpose": "List organization memberships (all users in an org)",
+    "cite": [
+     "c55"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/organization_memberships/{uuid}",
+    "purpose": "Get a membership",
+    "cite": [
+     "c56"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/organization_memberships/{uuid}",
+    "purpose": "Remove a user from the organization",
+    "cite": [
+     "c57",
+     "c58"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/organizations/{uuid}/invitations",
+    "purpose": "Invite a user to the organization",
+    "cite": [
+     "c59"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/organizations/{uuid}/invitations",
+    "purpose": "List invitations",
+    "cite": [
+     "c60"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/organizations/{org_uuid}/invitations/{uuid}",
+    "purpose": "Get an invitation",
+    "cite": [
+     "c61"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/organizations/{org_uuid}/invitations/{uuid}",
+    "purpose": "Revoke an invitation",
+    "cite": [
+     "c62"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/teams",
+    "purpose": "List teams",
+    "cite": [
+     "c63"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/teams/{team_uuid}",
+    "purpose": "Get a team",
+    "cite": [
+     "c64"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/groups",
+    "purpose": "List groups",
+    "cite": [
+     "c65"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/groups/{uuid}",
+    "purpose": "Get a group",
+    "cite": [
+     "c66"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/group_relationships",
+    "purpose": "List group relationships",
+    "cite": [
+     "c67"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/group_relationships/{uuid}",
+    "purpose": "Get a group relationship",
+    "cite": [
+     "c68"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/activity_log_entries",
+    "purpose": "List activity log entries (Enterprise)",
+    "cite": [
+     "c69",
+     "c70"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": false,
+   "events": [],
+   "cite": [
+    "c71",
+    "c72",
+    "c52"
+   ],
+   "notes": "Webhook events cover invitees, no-shows, event types, routing forms, meeting recaps and contacts; no user or membership events. Webhooks need a paid plan."
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Enterprise",
+   "cite": [
+    "c69",
+    "c70",
+    "c7"
+   ]
+  },
+  "rate_limits": {
+   "text": "500 requests per user per minute on paid plans, 50 on Free.",
+   "cite": [
+    "c78"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "An organization owner can't be removed via the API.",
+    "cite": [
+     "c58"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/calendly/",
+   "cite": [
+    "c79",
+    "c80",
+    "c33",
+    "c34"
+   ],
+   "notes": "OIN page marks SAML, SWA, SCIM, Create, Update and Deactivate as checked (read from page markup)."
+  },
+  "entra": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c39",
+    "c16"
+   ],
+   "notes": "Calendly's Entra guide uses the app you created for SAML SSO; no Microsoft Learn tutorial found (calendly-tutorial returns 404)."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c46",
+    "c45",
+    "c48"
+   ],
+   "notes": "From Calendly's own OneLogin guide; OneLogin's connector page was not loaded."
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://jumpcloud.com/support/integrate-with-calendly",
+   "cite": [
+    "c81"
+   ]
+  }
+ },
+ "fallbacks": {
+  "jit": false,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c50"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://calendly.com/pricing",
+   "title": "Pricing | Calendly",
+   "quote": "Free Always free Get started",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://calendly.com/pricing",
+   "title": "Pricing | Calendly",
+   "quote": "Standard Add Notetaker & Callie $10 /seat/mo",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://calendly.com/pricing",
+   "title": "Pricing | Calendly",
+   "quote": "Teams Add Notetaker & Callie $16 /seat/mo",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://calendly.com/pricing",
+   "title": "Pricing | Calendly",
+   "quote": "Billed monthly Billed yearly Save up to 20%",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://calendly.com/pricing",
+   "title": "Pricing | Calendly",
+   "quote": "SSO security add-on (optional)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://calendly.com/pricing",
+   "title": "Pricing | Calendly",
+   "quote": "Enterprise Starts at $15k /yr Starts at 50 seats.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://calendly.com/pricing",
+   "title": "Pricing | Calendly",
+   "quote": "Route with Salesforce lookup Connect Microsoft Dynamics Enable SSO & SAML Domain control Audit log compliance Data deletion API",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://calendly.com/pricing",
+   "title": "Pricing | Calendly",
+   "quote": "SAML Single Sign-On (SSO) Let employees sign in securely using your identity provider. – – Add-on",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://calendly.com/pricing",
+   "title": "Pricing | Calendly",
+   "quote": "Automate and secure user identities using SCIM Automate user provisioning and deprovisioning through SCIM. – – –",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://calendly.com/pricing",
+   "title": "Pricing | Calendly",
+   "quote": "Automate group provisioning Automatically create and manage groups based on your identity system. – – –",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://calendly.com/help/how-to-set-up-scim-with-your-identity-provider",
+   "title": "How to set up SCIM with your identity provider | Calendly Help",
+   "quote": "Plans: Enterprise Feature access may vary based on your plan, when your account was created, and any add-ons.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://calendly.com/help/how-to-set-up-scim-with-your-identity-provider",
+   "title": "How to set up SCIM with your identity provider | Calendly Help",
+   "quote": "Use SCIM 2.0 to automate user provisioning with identity providers like Okta, OneLogin, and Microsoft Entra ID (formerly Azure).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://calendly.com/help/how-to-set-up-scim-with-your-identity-provider",
+   "title": "How to set up SCIM with your identity provider | Calendly Help",
+   "quote": "Set up SAML single sign-on (SSO) in Calendly.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://calendly.com/help/how-to-set-up-scim-with-your-identity-provider",
+   "title": "How to set up SCIM with your identity provider | Calendly Help",
+   "quote": "Under Optional: Connect SCIM, toggle SCIM provisioning on.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://calendly.com/help/how-to-set-up-scim-with-your-identity-provider",
+   "title": "How to set up SCIM with your identity provider | Calendly Help",
+   "quote": "Choose when your token should expire.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://calendly.com/help/how-to-set-up-scim-with-your-identity-provider",
+   "title": "How to set up SCIM with your identity provider | Calendly Help",
+   "quote": "In your identity provider (IdP), create a custom app for Calendly.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://calendly.com/help/how-to-set-up-scim-with-your-identity-provider",
+   "title": "How to set up SCIM with your identity provider | Calendly Help",
+   "quote": "Name (required) displayName The user’s name as shown in Calendly Email address (required) userName Used to log in to calendly.com Active (required) active Must be set to true to allow login. Setting to false disables the user.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://calendly.com/help/how-to-set-up-scim-with-your-identity-provider",
+   "title": "How to set up SCIM with your identity provider | Calendly Help",
+   "quote": "No equivalent (optional) externalID Unique identifier in your identity provider",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://calendly.com/help/how-to-set-up-scim-with-your-identity-provider",
+   "title": "How to set up SCIM with your identity provider | Calendly Help",
+   "quote": "Only use the attributes listed. Extra attributes will cause errors.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://calendly.com/help/scim-user-provisioning-overview",
+   "title": "SCIM user provisioning overview | Calendly Help",
+   "quote": "After you turn on SSO, you can use SCIM to automatically add, update, deactivate, or remove users in your Calendly organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://calendly.com/help/scim-user-provisioning-overview",
+   "title": "SCIM user provisioning overview | Calendly Help",
+   "quote": "Calendly supports any identity provider that uses SCIM 2.0.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://calendly.com/help/scim-user-provisioning-overview",
+   "title": "SCIM user provisioning overview | Calendly Help",
+   "quote": "If all seats are full, provisioning will fail and your IdP will show an error.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://calendly.com/help/scim-user-provisioning-overview",
+   "title": "SCIM user provisioning overview | Calendly Help",
+   "quote": "After you add a user with SCIM, Calendly sends them an invite. They need to accept the invite and sign in using SSO. Once they do, they’ll take one of your open seats.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://calendly.com/help/scim-user-provisioning-overview",
+   "title": "SCIM user provisioning overview | Calendly Help",
+   "quote": "Update the role: Open Settings → People → Active users in Calendly and make the change.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://calendly.com/help/scim-user-provisioning-overview",
+   "title": "SCIM user provisioning overview | Calendly Help",
+   "quote": "Deactivate: The user loses access to Calendly, including login and scheduling. You can reactivate them later.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://calendly.com/help/scim-user-provisioning-overview",
+   "title": "SCIM user provisioning overview | Calendly Help",
+   "quote": "Delete: The user is permanently removed from your organization. This action cannot be undone. If the user had a previous Calendly account, they'll regain access as a free, solo user.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://calendly.com/help/scim-user-provisioning-overview",
+   "title": "SCIM user provisioning overview | Calendly Help",
+   "quote": "When SCIM is enabled, users can only be removed through your IdP.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://calendly.com/help/scim-user-provisioning-overview",
+   "title": "SCIM user provisioning overview | Calendly Help",
+   "quote": "The user must verify the new address from their inbox before the update appears in Calendly.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://calendly.com/help/how-to-automate-group-provisioning",
+   "title": "How to automate group provisioning | Calendly Help",
+   "quote": "Automated group provisioning uses SCIM to place users into specific groups in Calendly.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://calendly.com/help/how-to-automate-group-provisioning",
+   "title": "How to automate group provisioning | Calendly Help",
+   "quote": "Turn on Mapping attributes to open the Group Mapping table.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://calendly.com/help/how-to-set-up-scim-on-okta",
+   "title": "How to set up SCIM on Okta | Calendly Help",
+   "quote": "SCIM is only available for accounts on our Enterprise plan.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://calendly.com/help/how-to-set-up-scim-on-okta",
+   "title": "How to set up SCIM on Okta | Calendly Help",
+   "quote": "SAML Single Sign-On (SSO) must be set up before SCIM can be set up.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://calendly.com/help/how-to-set-up-scim-on-okta",
+   "title": "How to set up SCIM on Okta | Calendly Help",
+   "quote": "Search for the Calendly application and select it.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://calendly.com/help/how-to-set-up-scim-on-okta",
+   "title": "How to set up SCIM on Okta | Calendly Help",
+   "quote": "Select Enable for Create Users, Update User Attributes, and Deactivate Users.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c35",
+   "url": "https://calendly.com/help/how-to-set-up-scim-on-okta",
+   "title": "How to set up SCIM on Okta | Calendly Help",
+   "quote": "Under Attribute Mappings, remove all attributes except Username, Given name, Family name, Primary email, and Display name.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://calendly.com/help/how-to-set-up-scim-on-okta",
+   "title": "How to set up SCIM on Okta | Calendly Help",
+   "quote": "External namespace: urn:calendly:scim:schemas:2.0:User",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://calendly.com/help/how-to-set-up-scim-on-okta",
+   "title": "How to set up SCIM on Okta | Calendly Help",
+   "quote": "Once you configure Map to groups, you will no longer be able to manage groups manually.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c38",
+   "url": "https://calendly.com/help/how-to-set-up-scim-with-microsoft-entra-id",
+   "title": "How to set up SCIM with Microsoft Entra ID | Calendly Help",
+   "quote": "Some older Enterprise plans include SAML but not SCIM.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c39",
+   "url": "https://calendly.com/help/how-to-set-up-scim-with-microsoft-entra-id",
+   "title": "How to set up SCIM with Microsoft Entra ID | Calendly Help",
+   "quote": "From All Applications, select the app you use for SAML SSO.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c40",
+   "url": "https://calendly.com/help/how-to-set-up-scim-with-microsoft-entra-id",
+   "title": "How to set up SCIM with Microsoft Entra ID | Calendly Help",
+   "quote": "Turn Enabled off, then select Save and close.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c41",
+   "url": "https://calendly.com/help/how-to-set-up-scim-with-microsoft-entra-id",
+   "title": "How to set up SCIM with Microsoft Entra ID | Calendly Help",
+   "quote": "If on, deleted users will lose all Calendly data.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c42",
+   "url": "https://calendly.com/help/how-to-set-up-scim-with-microsoft-entra-id",
+   "title": "How to set up SCIM with Microsoft Entra ID | Calendly Help",
+   "quote": "If off, users will be turned off but can be reactivated.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c43",
+   "url": "https://calendly.com/help/how-to-set-up-scim-with-microsoft-entra-id",
+   "title": "How to set up SCIM with Microsoft Entra ID | Calendly Help",
+   "quote": "Attribute: urn:ietf:params:scim:schemas:extension:Calendly:2.0:User:group",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c44",
+   "url": "https://calendly.com/help/how-to-set-up-scim-with-microsoft-entra-id",
+   "title": "How to set up SCIM with Microsoft Entra ID | Calendly Help",
+   "quote": "SCIM sync runs every 40 minutes.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c45",
+   "url": "https://calendly.com/help/how-to-configure-scim-with-onelogin",
+   "title": "How to configure SCIM with OneLogin | Calendly Help",
+   "quote": "Deactivate and delete users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c46",
+   "url": "https://calendly.com/help/how-to-configure-scim-with-onelogin",
+   "title": "How to configure SCIM with OneLogin | Calendly Help",
+   "quote": "Search for the Calendly app and select it.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c47",
+   "url": "https://calendly.com/help/how-to-configure-scim-with-onelogin",
+   "title": "How to configure SCIM with OneLogin | Calendly Help",
+   "quote": "The Suspend action deactivates the Calendly user account and revokes access, but preserves the user's data so the account can be reactivated later.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c48",
+   "url": "https://calendly.com/help/how-to-configure-scim-with-onelogin",
+   "title": "How to configure SCIM with OneLogin | Calendly Help",
+   "quote": "OneLogin does not currently support custom attributes for catalog applications",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c49",
+   "url": "https://calendly.com/help/how-to-set-up-saml-sso-with-your-identity-provider",
+   "title": "How to set up SAML SSO with your identity provider | Calendly Help",
+   "quote": "Teams with SSO add-on, Teams Plus with SSO add-on, and Enterprise",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c50",
+   "url": "https://calendly.com/help/how-to-set-up-saml-sso-with-your-identity-provider",
+   "title": "How to set up SAML SSO with your identity provider | Calendly Help",
+   "quote": "Calendly doesn't support Just-in-Time (JIT) provisioning. Use SCIM instead to manage users.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c51",
+   "url": "https://developer.calendly.com/docs/getting-started/frequently-asked-questions.md",
+   "title": "Frequently Asked Questions | Calendly Developer",
+   "quote": "Developers can make GET and POST requests to API endpoints on behalf of a Calendly user on any subscription plan, including the Free plan (with the exception of a few endpoints that are specific to our Enterprise plan).",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.calendly.com/docs/getting-started/frequently-asked-questions"
+  },
+  {
+   "id": "c52",
+   "url": "https://developer.calendly.com/docs/getting-started/frequently-asked-questions.md",
+   "title": "Frequently Asked Questions | Calendly Developer",
+   "quote": "the Calendly user account for which the webhook subscription is being made will need a paid subscription on the Standard, Teams, or Enterprise plan.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.calendly.com/docs/getting-started/frequently-asked-questions"
+  },
+  {
+   "id": "c53",
+   "url": "https://developer.calendly.com/api-docs/calendly-api/users/get-current-user.md",
+   "title": "Get current user | Calendly API",
+   "quote": "GET https://api.calendly.com/users/me",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.calendly.com/api-docs/calendly-api/users/get-current-user"
+  },
+  {
+   "id": "c54",
+   "url": "https://developer.calendly.com/api-docs/calendly-api/users/get-user.md",
+   "title": "Get user | Calendly API",
+   "quote": "GET https://api.calendly.com/users/{uuid}",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.calendly.com/api-docs/calendly-api/users/get-user"
+  },
+  {
+   "id": "c55",
+   "url": "https://developer.calendly.com/api-docs/calendly-api/organizations/list-organization-memberships.md",
+   "title": "List Organization Memberships | Calendly API",
+   "quote": "GET https://api.calendly.com/organization_memberships",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.calendly.com/api-docs/calendly-api/organizations/list-organization-memberships"
+  },
+  {
+   "id": "c56",
+   "url": "https://developer.calendly.com/api-docs/calendly-api/organizations/get-organization-membership.md",
+   "title": "Get Organization Membership | Calendly API",
+   "quote": "GET https://api.calendly.com/organization_memberships/{uuid}",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.calendly.com/api-docs/calendly-api/organizations/get-organization-membership"
+  },
+  {
+   "id": "c57",
+   "url": "https://developer.calendly.com/api-docs/calendly-api/organizations/delete-organization-membership.md",
+   "title": "Remove User from Organization | Calendly API",
+   "quote": "DELETE https://api.calendly.com/organization_memberships/{uuid} Removes a user from an organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.calendly.com/api-docs/calendly-api/organizations/delete-organization-membership"
+  },
+  {
+   "id": "c58",
+   "url": "https://developer.calendly.com/api-docs/calendly-api/organizations/delete-organization-membership.md",
+   "title": "Remove User from Organization | Calendly API",
+   "quote": "An organization owner can't be removed",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.calendly.com/api-docs/calendly-api/organizations/delete-organization-membership"
+  },
+  {
+   "id": "c59",
+   "url": "https://developer.calendly.com/api-docs/calendly-api/organizations/create-organization-invitation.md",
+   "title": "Invite User to Organization | Calendly API",
+   "quote": "POST https://api.calendly.com/organizations/{uuid}/invitations",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.calendly.com/api-docs/calendly-api/organizations/create-organization-invitation"
+  },
+  {
+   "id": "c60",
+   "url": "https://developer.calendly.com/api-docs/calendly-api/organizations/list-organization-invitations.md",
+   "title": "List Organization Invitations | Calendly API",
+   "quote": "GET https://api.calendly.com/organizations/{uuid}/invitations",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.calendly.com/api-docs/calendly-api/organizations/list-organization-invitations"
+  },
+  {
+   "id": "c61",
+   "url": "https://developer.calendly.com/api-docs/calendly-api/organizations/get-organization-invitation.md",
+   "title": "Get Organization Invitation | Calendly API",
+   "quote": "GET https://api.calendly.com/organizations/{org_uuid}/invitations/{uuid}",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.calendly.com/api-docs/calendly-api/organizations/get-organization-invitation"
+  },
+  {
+   "id": "c62",
+   "url": "https://developer.calendly.com/api-docs/calendly-api/organizations/revoke-organization-invitation.md",
+   "title": "Revoke User's Organization Invitation | Calendly API",
+   "quote": "DELETE https://api.calendly.com/organizations/{org_uuid}/invitations/{uuid}",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.calendly.com/api-docs/calendly-api/organizations/revoke-organization-invitation"
+  },
+  {
+   "id": "c63",
+   "url": "https://developer.calendly.com/api-docs/calendly-api/organizations/list-teams.md",
+   "title": "List Teams | Calendly API",
+   "quote": "GET https://api.calendly.com/teams",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.calendly.com/api-docs/calendly-api/organizations/list-teams"
+  },
+  {
+   "id": "c64",
+   "url": "https://developer.calendly.com/api-docs/calendly-api/organizations/get-team.md",
+   "title": "Get Team | Calendly API",
+   "quote": "GET https://api.calendly.com/teams/{team_uuid}",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.calendly.com/api-docs/calendly-api/organizations/get-team"
+  },
+  {
+   "id": "c65",
+   "url": "https://developer.calendly.com/api-docs/calendly-api/groups/list-groups.md",
+   "title": "List Groups | Calendly API",
+   "quote": "GET https://api.calendly.com/groups",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.calendly.com/api-docs/calendly-api/groups/list-groups"
+  },
+  {
+   "id": "c66",
+   "url": "https://developer.calendly.com/api-docs/calendly-api/groups/get-group.md",
+   "title": "Get Group | Calendly API",
+   "quote": "GET https://api.calendly.com/groups/{uuid}",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.calendly.com/api-docs/calendly-api/groups/get-group"
+  },
+  {
+   "id": "c67",
+   "url": "https://developer.calendly.com/api-docs/calendly-api/groups/list-group-relationships.md",
+   "title": "List Group Relationships | Calendly API",
+   "quote": "GET https://api.calendly.com/group_relationships",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.calendly.com/api-docs/calendly-api/groups/list-group-relationships"
+  },
+  {
+   "id": "c68",
+   "url": "https://developer.calendly.com/api-docs/calendly-api/groups/get-group-relationship.md",
+   "title": "Get Group Relationship | Calendly API",
+   "quote": "GET https://api.calendly.com/group_relationships/{uuid}",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.calendly.com/api-docs/calendly-api/groups/get-group-relationship"
+  },
+  {
+   "id": "c69",
+   "url": "https://developer.calendly.com/api-docs/calendly-api/activity-log/list-activity-log-entries.md",
+   "title": "List activity log entries | Calendly API",
+   "quote": "GET https://api.calendly.com/activity_log_entries",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.calendly.com/api-docs/calendly-api/activity-log/list-activity-log-entries"
+  },
+  {
+   "id": "c70",
+   "url": "https://developer.calendly.com/api-docs/calendly-api/activity-log/list-activity-log-entries.md",
+   "title": "List activity log entries | Calendly API",
+   "quote": "This endpoint requires an Enterprise subscription.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.calendly.com/api-docs/calendly-api/activity-log/list-activity-log-entries"
+  },
+  {
+   "id": "c71",
+   "url": "https://developer.calendly.com/api-docs/calendly-api/webhooks/create-webhook-subscription.md",
+   "title": "Create Webhook Subscription | Calendly API",
+   "quote": "The user subscription scope only triggers the webhook for subscribed events that belong to the specific user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.calendly.com/api-docs/calendly-api/webhooks/create-webhook-subscription"
+  },
+  {
+   "id": "c72",
+   "url": "https://developer.calendly.com/api-docs/calendly-api/webhooks/create-webhook-subscription.md",
+   "title": "Create Webhook Subscription | Calendly API",
+   "quote": "invitee.created",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.calendly.com/api-docs/calendly-api/webhooks/create-webhook-subscription"
+  },
+  {
+   "id": "c73",
+   "url": "https://developer.calendly.com/docs/authentication/scopes.md",
+   "title": "Authorization Scopes | Calendly Developer",
+   "quote": "Invite or remove users from an organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.calendly.com/docs/authentication/scopes"
+  },
+  {
+   "id": "c74",
+   "url": "https://developer.calendly.com/docs/authentication/scopes.md",
+   "title": "Authorization Scopes | Calendly Developer",
+   "quote": "Retrieve organization data, memberships, and invitations.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.calendly.com/docs/authentication/scopes"
+  },
+  {
+   "id": "c75",
+   "url": "https://developer.calendly.com/docs/authentication/scopes.md",
+   "title": "Authorization Scopes | Calendly Developer",
+   "quote": "`POST /organization_invitations` `DELETE /organization_invitations/{uuid}` `DELETE /organization_memberships/{uuid}`",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.calendly.com/docs/authentication/scopes"
+  },
+  {
+   "id": "c76",
+   "url": "https://developer.calendly.com/api-docs/calendly-api/organizations/create-organization-invitation.md",
+   "title": "Invite User to Organization | Calendly API",
+   "quote": "Authorization header (bearer token, required) — OAuth 2.0",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.calendly.com/api-docs/calendly-api/organizations/create-organization-invitation"
+  },
+  {
+   "id": "c77",
+   "url": "https://developer.calendly.com/api-docs/calendly-api/organizations/create-organization-invitation.md",
+   "title": "Invite User to Organization | Calendly API",
+   "quote": "Authorization header (bearer token, required) — Personal Access Token",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.calendly.com/api-docs/calendly-api/organizations/create-organization-invitation"
+  },
+  {
+   "id": "c78",
+   "url": "https://developer.calendly.com/api-docs/overview/rate-limits.md",
+   "title": "Rate Limits | Calendly Developer",
+   "quote": "Paid Plans | 500 requests per user per minute | Free Plan | 50 requests per user per minute",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.calendly.com/api-docs/overview/rate-limits"
+  },
+  {
+   "id": "c79",
+   "url": "https://www.okta.com/integrations/calendly/",
+   "title": "Integrate Calendly with Okta",
+   "quote": "From Single Sign-On to user provisioning, Okta's Calendly integration lets your team manage access throughout the user's lifecycle.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c80",
+   "url": "https://www.okta.com/integrations/calendly/",
+   "title": "Integrate Calendly with Okta",
+   "quote": "SAML SWA WS-Federation OIDC SCIM Brokered Consent Cross App Access Privileged Access Management Provisioning Create Update Attribute Sourcing Deactivate",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c81",
+   "url": "https://jumpcloud.com/support/integrate-with-calendly",
+   "title": "Integrate with Calendly | JumpCloud Documentation",
+   "quote": "Automatically provision, update and deprovision users in Calendly from JumpCloud using the SCIM integration.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The scopes page lists invitations as POST /organization_invitations and DELETE /organization_invitations/{uuid}, while the endpoint reference documents POST /organizations/{uuid}/invitations and DELETE /organizations/{org_uuid}/invitations/{uuid}. The endpoint reference paths are used.",
+   "cite": [
+    "c75",
+    "c59",
+    "c62"
+   ]
+  }
+ ],
+ "searched": [
+  "https://calendly.com/pricing",
+  "https://calendly.com/help/scim",
+  "https://developer.calendly.com/llms.txt"
+ ],
+ "open_questions": [
+  "The SCIM base URL pattern is not published (copied from the admin console).",
+  "Whether SCIM deactivation frees the seat or ends sessions is not documented.",
+  "SCIM filtering, pagination and PUT vs PATCH support are not documented.",
+  "Price of the Teams SSO add-on is not listed.",
+  "'Teams Plus' is named in the SAML help article but not on the pricing page."
+ ]
+}

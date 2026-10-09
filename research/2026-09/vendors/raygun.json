@@ -1,0 +1,654 @@
+{
+ "slug": "raygun",
+ "vendor": "Raygun",
+ "vendor_url": "https://raygun.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Raygun",
+  "slug": "raygun",
+  "category": "Cloud, Infrastructure & Observability",
+  "status": "none",
+  "scim_plan": "—",
+  "scim_price_text": "—",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Basic (Crash Reporting)",
+  "team_price_text": "Basic: $40/mo per 100,000 errors (annual), unlimited members",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Business",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": null,
+  "idp": {
+   "okta": "none",
+   "entra": "sso_only",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": "sso_only",
+   "generic": false
+  },
+  "pricing_page_url": "https://raygun.com/pricing",
+  "docs_url": "https://raygun.com/documentation/privacy-security/single-sign-on/",
+  "evidence": "Raygun's SSO docs say SAML SSO is free on Business and Enterprise (a $50/month add-on otherwise) and that provisioning works by creating the account on first SSO sign-in, with de-provisioning done by contacting Raygun or removing the team member; no SCIM is offered.",
+  "notes": "Status unchanged (none). Usage-priced per module, not per user: Crash Reporting Basic $40, Team $80, Business $400 per month on annual billing (save 33% vs monthly $60/$120/$600), Enterprise custom; unlimited members on all plans. SAML SSO is included on Business and Enterprise and is a $50/month add-on on other plans. Provisioning is JIT on SAML sign-in only; removal is manual. Okta's OIN Raygun app is SWA only. The Raygun API v3 (personal access tokens, all plans) can list teams and send/revoke invitations but cannot list or remove members.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": false,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": null,
+  "status_prev": "none"
+ },
+ "scim": {
+  "available": null,
+  "cite": [
+   "c11",
+   "c12",
+   "c13"
+  ],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": null,
+   "token_source": null,
+   "token_expiry": null,
+   "cite": []
+  },
+  "endpoints": {
+   "Users": null,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": []
+  },
+  "operations": {
+   "create": null,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": null,
+   "reactivate": null,
+   "delete": null,
+   "group_push": null,
+   "group_membership": null,
+   "cite": []
+  },
+  "deprovision": {
+   "action": null,
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": []
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": []
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "No SCIM in pricing, the documentation sitemap or the SSO page; SSO page says provisioning is JIT on first SSO sign-in and deprovisioning is manual. Recorded as none by absence."
+ },
+ "user_api": {
+  "available": false,
+  "cite": [
+   "c17",
+   "c18",
+   "c4"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://api.raygun.com/v3",
+  "docs_url": "https://raygun.com/documentation/product-guides/raygun-api/",
+  "auth": {
+   "methods": [
+    "personal_access_token"
+   ],
+   "scopes": [
+    "teams:read",
+    "invitations:read",
+    "invitations:write"
+   ],
+   "cite": [
+    "c18",
+    "c19",
+    "c21",
+    "c22"
+   ]
+  },
+  "capabilities": {
+   "list_users": false,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": true,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": false,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c21",
+    "c22",
+    "c23"
+   ],
+   "notes": "Teams can be listed but not modified; no member list or removal endpoint in the API endpoint table."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/teams",
+    "purpose": "List teams",
+    "cite": [
+     "c27",
+     "c21"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/teams/{team-identifier}",
+    "purpose": "Get team by identifier",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/invitations",
+    "purpose": "List invitations",
+    "cite": [
+     "c24",
+     "c29"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/invitations",
+    "purpose": "Send an invitation",
+    "cite": [
+     "c24",
+     "c25",
+     "c22"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/invitations/{invitation-identifier}",
+    "purpose": "Get invitation by identifier",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/invitations/{invitation-identifier}/revoke",
+    "purpose": "Revoke invitation",
+    "cite": [
+     "c26",
+     "c23"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "10 calls per second, 600 per minute, 10,000 per day",
+   "cite": [
+    "c20"
+   ]
+  },
+  "limitations": [],
+  "notes": "The Raygun API (all plans) is a data API; for people it only lists teams and sends/revokes invitations. No endpoints to list, update or remove members, so it is not counted as a user-management API."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": false,
+   "provisioning": false,
+   "kind": "swa",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/raygun/",
+   "cite": [
+    "c32",
+    "c14"
+   ],
+   "notes": "OIN Raygun app marks SWA only; Raygun's docs say to build a custom Okta SAML app."
+  },
+  "entra": {
+   "listed": null,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c16",
+    "c12"
+   ],
+   "notes": "Custom SAML app configuration; JIT only."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c15",
+    "c12"
+   ]
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c11",
+   "c12",
+   "c13",
+   "c31"
+  ]
+ },
+ "plans": [
+  {
+   "name": "Basic",
+   "price_text": "$40 per 100,000 errors/mo (annual); $60 monthly",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": false,
+   "cite": [
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "c10"
+   ],
+   "notes": "Crash Reporting module; unlimited members. SAML SSO available as a $50/month add-on below Business. Raygun API included but has no member-management endpoints beyond invitations."
+  },
+  {
+   "name": "Team",
+   "price_text": "$80 per 200,000 errors/mo (annual); $120 monthly",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": false,
+   "cite": [
+    "c6",
+    "c10"
+   ]
+  },
+  {
+   "name": "Business",
+   "price_text": "$400 per 1,000,000 errors/mo (annual); $600 monthly",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": false,
+   "cite": [
+    "c7",
+    "c8",
+    "c10"
+   ]
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Talk to us (custom)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": false,
+   "cite": [
+    "c9",
+    "c10"
+   ]
+  }
+ ],
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://raygun.com/pricing",
+   "title": "Raygun Pricing",
+   "quote": "Annual (save 33%)",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://raygun.com/pricing",
+   "title": "Raygun Pricing",
+   "quote": "Basic $ 40 Per 100,000 errors/mo* $ 60 Per 100,000 errors/mo* Free 14 day trial",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://raygun.com/pricing",
+   "title": "Raygun Pricing",
+   "quote": "Unlimited members",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://raygun.com/pricing",
+   "title": "Raygun Pricing",
+   "quote": "Raygun API Extract, manipulate, and visualize your Raygun data",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://raygun.com/pricing",
+   "title": "Raygun Pricing",
+   "quote": "Audit log View history of your team’s changes and activities in Raygun",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://raygun.com/pricing",
+   "title": "Raygun Pricing",
+   "quote": "Team $ 80 Per 200,000 errors/mo* $ 120 Per 200,000 errors/mo*",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://raygun.com/pricing",
+   "title": "Raygun Pricing",
+   "quote": "Business $ 400 Per 1,000,000 errors/mo* $ 600 Per 1,000,000 errors/mo*",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://raygun.com/pricing",
+   "title": "Raygun Pricing",
+   "quote": "Everything in Team, plus: SAML SSO Supports SAML2 (Security Assertion Markup Language) standard for authenticating users",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://raygun.com/pricing",
+   "title": "Raygun Pricing",
+   "quote": "Enterprise Talk to us Custom",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://raygun.com/documentation/privacy-security/single-sign-on/",
+   "title": "Single sign on integration instructions · Raygun Docs",
+   "quote": "SAML SSO is available for free for customers on Business and Enterprise plans. Other plans can add-on SSO with an additional $50/month fee.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c11",
+   "url": "https://raygun.com/documentation/privacy-security/single-sign-on/",
+   "title": "Single sign on integration instructions · Raygun Docs",
+   "quote": "Currently, we support auto provisioning users. As long as the identity provider has specified the particular users have access to Raygun via their identity provider.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://raygun.com/documentation/privacy-security/single-sign-on/",
+   "title": "Single sign on integration instructions · Raygun Docs",
+   "quote": "For customers using SSO, a Raygun account will be automatically created when signing in via your identity provider for the first time.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://raygun.com/documentation/privacy-security/single-sign-on/",
+   "title": "Single sign on integration instructions · Raygun Docs",
+   "quote": "For de-provisioning users from the system, you can either contact us to delete the Raygun user account, or remove the team member from the user's team in your Raygun account.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c14",
+   "url": "https://raygun.com/documentation/privacy-security/single-sign-on/",
+   "title": "Single sign on integration instructions · Raygun Docs",
+   "quote": "If you are looking to configure with OKTA , you will need to set up a custom OKTA SSO app.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://raygun.com/documentation/privacy-security/single-sign-on/",
+   "title": "Single sign on integration instructions · Raygun Docs",
+   "quote": "If you are configuring with JumpCloud , you will need to have the \"Sign assertion\" checkbox ticked",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://raygun.com/documentation/privacy-security/single-sign-on/",
+   "title": "Single sign on integration instructions · Raygun Docs",
+   "quote": "If you are configuring with Azure Active Directory/Microsoft Entra ID , you will need the following settings applied in your app",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c17",
+   "url": "https://raygun.com/documentation/product-guides/raygun-api/",
+   "title": "Raygun API · Raygun Docs",
+   "quote": "Raygun's API allows you to access your Raygun data so that you can display, manipulate and process it in other tools, scripts and applications.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c18",
+   "url": "https://raygun.com/documentation/product-guides/raygun-api/",
+   "title": "Raygun API · Raygun Docs",
+   "quote": "Raygun's API is secured using Bearer Authentication using Personal Access Tokens .",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c19",
+   "url": "https://raygun.com/documentation/product-guides/raygun-api/",
+   "title": "Raygun API · Raygun Docs",
+   "quote": "Every user on your plan can create personal access tokens for the applications they have access to.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c20",
+   "url": "https://raygun.com/documentation/product-guides/raygun-api/",
+   "title": "Raygun API · Raygun Docs",
+   "quote": "Second Limit: 10 calls per second. Minute Limit: 600 calls per minute. Daily Limit: 10,000 calls per day.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c21",
+   "url": "https://raygun.com/documentation/product-guides/raygun-api/",
+   "title": "Raygun API · Raygun Docs",
+   "quote": "List teams List teams for the plan(s) and the user which the token has access to teams:read",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c22",
+   "url": "https://raygun.com/documentation/product-guides/raygun-api/",
+   "title": "Raygun API · Raygun Docs",
+   "quote": "Send invitation Send an invitation to a user invitations:write",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c23",
+   "url": "https://raygun.com/documentation/product-guides/raygun-api/",
+   "title": "Raygun API · Raygun Docs",
+   "quote": "Revoke invitation Revoke a sent invitation invitations:write",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c24",
+   "url": "https://api.raygun.com/v3/raygun-openapi-spec.json",
+   "title": "Raygun API v3 OpenAPI specification",
+   "quote": "\"/invitations\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.raygun.com/v3/swagger/index.html"
+  },
+  {
+   "id": "c25",
+   "url": "https://api.raygun.com/v3/raygun-openapi-spec.json",
+   "title": "Raygun API v3 OpenAPI specification",
+   "quote": "\"summary\": \"Send an invitation\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.raygun.com/v3/swagger/index.html"
+  },
+  {
+   "id": "c26",
+   "url": "https://api.raygun.com/v3/raygun-openapi-spec.json",
+   "title": "Raygun API v3 OpenAPI specification",
+   "quote": "\"summary\": \"Revoke invitation\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.raygun.com/v3/swagger/index.html"
+  },
+  {
+   "id": "c27",
+   "url": "https://api.raygun.com/v3/raygun-openapi-spec.json",
+   "title": "Raygun API v3 OpenAPI specification",
+   "quote": "\"summary\": \"List teams\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.raygun.com/v3/swagger/index.html"
+  },
+  {
+   "id": "c28",
+   "url": "https://api.raygun.com/v3/raygun-openapi-spec.json",
+   "title": "Raygun API v3 OpenAPI specification",
+   "quote": "\"summary\": \"Get team by identifier\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.raygun.com/v3/swagger/index.html"
+  },
+  {
+   "id": "c29",
+   "url": "https://api.raygun.com/v3/raygun-openapi-spec.json",
+   "title": "Raygun API v3 OpenAPI specification",
+   "quote": "\"summary\": \"List invitations\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.raygun.com/v3/swagger/index.html"
+  },
+  {
+   "id": "c30",
+   "url": "https://api.raygun.com/v3/raygun-openapi-spec.json",
+   "title": "Raygun API v3 OpenAPI specification",
+   "quote": "\"summary\": \"Get invitation by identifier\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.raygun.com/v3/swagger/index.html"
+  },
+  {
+   "id": "c31",
+   "url": "https://raygun.com/documentation/raygun-for-teams/inviting-team-members/",
+   "title": "Inviting team members · Raygun Docs",
+   "quote": "Removing a team member from the Users team will remove the member from every team.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c32",
+   "url": "https://www.okta.com/integrations/raygun/",
+   "title": "Raygun | Okta Integration Network",
+   "quote": "This app integration supports Single Sign-On. See Capabilities for more details.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://raygun.com/pricing",
+  "https://raygun.com/sitemap.xml",
+  "https://raygun.com/documentation/sitemap.xml (no SCIM URLs)",
+  "https://raygun.com/documentation/privacy-security/single-sign-on/",
+  "https://raygun.com/documentation/privacy-security/single-sign-on-basic/",
+  "https://raygun.com/documentation/product-guides/raygun-api/",
+  "https://api.raygun.com/v3/raygun-openapi-spec.json",
+  "https://raygun.com/documentation/raygun-for-teams/inviting-team-members/",
+  "https://www.okta.com/integrations/raygun/"
+ ],
+ "open_questions": [
+  "Whether an audit-log API exists (audit log is a UI feature on all plans).",
+  "Google Workspace and OneLogin SAML not specifically documented."
+ ]
+}

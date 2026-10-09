@@ -1,0 +1,573 @@
+{
+ "slug": "proof",
+ "vendor": "Proof",
+ "vendor_url": "https://www.proof.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Proof",
+  "slug": "proof",
+  "category": "Legal, Contracts & Compliance",
+  "status": "gated",
+  "scim_plan": "Premium & Enterprise (Proof Command Center)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Pro+",
+  "team_price_text": "Pro+: $199/month flat + transaction fees",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Premium & Enterprise",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": false
+  },
+  "idp": {
+   "okta": "none",
+   "entra": "none",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.proof.com/pricing",
+  "docs_url": "https://dev.proof.com/reference/createuser",
+  "evidence": "Proof's pricing page lists \"Proof Command Center (Admin, SSO, SCIM)\" only under Premium & Enterprise (\"Custom pricing\"), above Pro ($0/month) and Pro+ ($199/month) plus transaction fees.",
+  "notes": "New row. Proof (proof.com, formerly Notarize) prices Pro at $0/month and Pro+ at $199/month (flat platform fees, monthly, plus per-transaction fees), so per-user fields are null; Premium & Enterprise is custom-priced. SSO and SCIM come with Proof Command Center on Premium & Enterprise; the SSO guide says Command Center can also be purchased separately (price not public). SCIM 2.0 schemas at https://api.proof.com/scim/v1/organizations/{organization_id} with the Proof API key: Users (create, get, list with userName filter, PUT, PATCH, DELETE, active=false), ServiceProviderConfig, Schemas, ResourceTypes; no Groups; roles owner/admin/employee via the roles attribute. SAML JIT provisioning is also available. Not found in the Okta OIN or Entra gallery. Security events API (OCSF) needs Command Center.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": false,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Pro",
+   "price_text": "$0/month + transaction fees",
+   "price_per_user_mo": null,
+   "billing": "monthly",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": false,
+   "cite": [
+    "c1",
+    "c3",
+    "c5"
+   ],
+   "notes": "Flat platform fee, not per user; per-transaction fees apply."
+  },
+  {
+   "name": "Pro+",
+   "price_text": "$199/month + transaction fees",
+   "price_per_user_mo": null,
+   "billing": "monthly",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": false,
+   "cite": [
+    "c2",
+    "c3",
+    "c5"
+   ],
+   "notes": "Adds API access (transaction API); SSO/SCIM not listed."
+  },
+  {
+   "name": "Premium & Enterprise",
+   "price_text": "Custom pricing",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": true,
+   "cite": [
+    "c4",
+    "c5",
+    "c6",
+    "c21"
+   ],
+   "notes": "Includes Proof Command Center (Admin, SSO, SCIM); the SSO guide also allows a separately purchased Command Center."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c5",
+   "c6",
+   "c10",
+   "c11",
+   "c25"
+  ],
+  "plan": "Premium & Enterprise (Proof Command Center)",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://api.proof.com/scim/v1/organizations/{organization_id}",
+  "auth": {
+   "method": "other",
+   "token_source": "Proof API key sent in the ApiKey header (ServiceProviderConfig describes it as an API key bearer header)",
+   "token_expiry": null,
+   "cite": [
+    "c10",
+    "c12"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": false,
+   "ServiceProviderConfig": true,
+   "Schemas": true,
+   "ResourceTypes": true,
+   "Bulk": false,
+   "Me": null,
+   "cite": [
+    "c11",
+    "c12",
+    "c13",
+    "c19",
+    "c20"
+   ],
+   "notes": "ResourceTypes returns only User; Schemas is exposed at /Schemas/Users."
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": false,
+   "group_membership": false,
+   "cite": [
+    "c9",
+    "c11",
+    "c16",
+    "c17",
+    "c18",
+    "c19",
+    "c23"
+   ],
+   "notes": "Path is /scim/v1/... but payloads use urn:ietf:params:scim:schemas:core:2.0:User. Reactivation inferred from the writable active attribute."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c9",
+    "c16"
+   ],
+   "notes": "active=false marks the identity deprovisioned; DELETE /Users/{user_id} also exists (204)."
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName"
+   ],
+   "cite": [
+    "c13",
+    "c14"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c15"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "displayName",
+    "emails[primary].value",
+    "roles[primary].value",
+    "externalId",
+    "active"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": [
+    "c8",
+    "c9",
+    "c20",
+    "c24"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "roles attribute (primary only): owner, admin or employee; PATCH add/replace on roles",
+   "cite": [
+    "c8",
+    "c17"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Only the primary email and primary role are supported.",
+    "cite": [
+     "c8"
+    ]
+   },
+   {
+    "text": "No Groups resource; bulk not supported.",
+    "cite": [
+     "c13",
+     "c19"
+    ]
+   },
+   {
+    "text": "An organization member cannot delete themselves via SCIM.",
+    "cite": [
+     "c16"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": false,
+  "cite": [
+   "c3",
+   "c25"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://api.proof.com",
+  "docs_url": "https://dev.proof.com/reference/createuser",
+  "auth": {
+   "methods": [],
+   "scopes": [],
+   "cite": []
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": []
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Premium & Enterprise (Command Center)",
+   "cite": [
+    "c21"
+   ],
+   "notes": "List Security Events returns OCSF-format security events; requires Command Center access."
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "Apart from SCIM, the Proof API (API access from Pro+) covers transactions, documents, webhooks, organizations and verifiable credentials; no non-SCIM user/team-member endpoints are listed in llms.txt. False is by absence."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "okta.com/integrations/proof/, /notarize/, /proof-com/ return 404."
+  },
+  "entra": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "No Proof or Notarize entry in the Entra SaaS tutorial index (toc.json)."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c7",
+   "c22"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.proof.com/pricing",
+   "title": "Proof Platform Pricing | Proof",
+   "quote": "Pro $0 / month + transaction fees For small businesses getting started",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.proof.com/pricing",
+   "title": "Proof Platform Pricing | Proof",
+   "quote": "Pro+ $199 / month + transaction fees For growing teams that need more control",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.proof.com/pricing",
+   "title": "Proof Platform Pricing | Proof",
+   "quote": "Everything in Pro, and: API access",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.proof.com/pricing",
+   "title": "Proof Platform Pricing | Proof",
+   "quote": "Premium & Enterprise Custom pricing For mid- and large-sized businesses",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.proof.com/pricing",
+   "title": "Proof Platform Pricing | Proof",
+   "quote": "Proof Command Center (Admin, SSO, SCIM)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://dev.proof.com/docs/single-sign-on-sso-command-center.md",
+   "title": "Single Sign-On (SSO) - Proof Developer docs",
+   "quote": "This documentation assumes that you are on a Premium or Enterprise pricing tier or that you have purchased Command Center.",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.proof.com/docs/single-sign-on-sso-command-center"
+  },
+  {
+   "id": "c7",
+   "url": "https://dev.proof.com/docs/single-sign-on-sso-command-center.md",
+   "title": "Single Sign-On (SSO) - Proof Developer docs",
+   "quote": "Streamline new user onboarding with just-in-time user provisioning (JIT provisioning).",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.proof.com/docs/single-sign-on-sso-command-center"
+  },
+  {
+   "id": "c8",
+   "url": "https://dev.proof.com/reference/createuser.md",
+   "title": "Create User - Proof API reference",
+   "quote": "List of user roles, only primary supported. One of “owner”, “admin” or “employee”",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.proof.com/reference/createuser"
+  },
+  {
+   "id": "c9",
+   "url": "https://dev.proof.com/reference/createuser.md",
+   "title": "Create User - Proof API reference",
+   "quote": "Used to indicate whether the identity is active (true) or deprovisioned (false).",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.proof.com/reference/createuser"
+  },
+  {
+   "id": "c10",
+   "url": "https://dev.proof.com/reference/createuser.md",
+   "title": "Create User - Proof API reference",
+   "quote": "\"url\": \"https://api.proof.com\", \"description\": \"Public API URL\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.proof.com/reference/createuser"
+  },
+  {
+   "id": "c11",
+   "url": "https://dev.proof.com/reference/createuser.md",
+   "title": "Create User - Proof API reference",
+   "quote": "/scim/v1/organizations/{organization_id}/Users/",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.proof.com/reference/createuser"
+  },
+  {
+   "id": "c12",
+   "url": "https://dev.proof.com/reference/serviceproviderconfig.md",
+   "title": "Retrieve Service Provider Config - Proof API reference",
+   "quote": "API key authorization bearer header",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.proof.com/reference/serviceproviderconfig"
+  },
+  {
+   "id": "c13",
+   "url": "https://dev.proof.com/reference/serviceproviderconfig.md",
+   "title": "Retrieve Service Provider Config - Proof API reference",
+   "quote": "\"patch\": { \"supported\": true }, \"bulk\": { \"supported\": false }, \"filter\": { \"supported\": true }",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.proof.com/reference/serviceproviderconfig"
+  },
+  {
+   "id": "c14",
+   "url": "https://dev.proof.com/reference/listuser.md",
+   "title": "List Users - Proof API reference",
+   "quote": "Filter by userName. e.g. userName eq",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.proof.com/reference/listuser"
+  },
+  {
+   "id": "c15",
+   "url": "https://dev.proof.com/reference/listuser.md",
+   "title": "List Users - Proof API reference",
+   "quote": "The 1-based index of the first result in the current set of list results",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.proof.com/reference/listuser"
+  },
+  {
+   "id": "c16",
+   "url": "https://dev.proof.com/reference/deleteuser.md",
+   "title": "Delete User - Proof API reference",
+   "quote": "Organization member can't delete self",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.proof.com/reference/deleteuser"
+  },
+  {
+   "id": "c17",
+   "url": "https://dev.proof.com/reference/updateuser.md",
+   "title": "Update User - Proof API reference",
+   "quote": "Can be one of: add, remove, replace",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.proof.com/reference/updateuser"
+  },
+  {
+   "id": "c18",
+   "url": "https://dev.proof.com/reference/replaceuser.md",
+   "title": "Replace User - Proof API reference",
+   "quote": "Replace User",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.proof.com/reference/replaceuser"
+  },
+  {
+   "id": "c19",
+   "url": "https://dev.proof.com/reference/resourcetypes.md",
+   "title": "Retrieve Resource Types - Proof API reference",
+   "quote": "\"description\": \"User Account\", \"endpoint\": \"/Users\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.proof.com/reference/resourcetypes"
+  },
+  {
+   "id": "c20",
+   "url": "https://dev.proof.com/reference/userschema.md",
+   "title": "Retrieve Users Schema - Proof API reference",
+   "quote": "SCIM /Users provisioning endpoints",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.proof.com/reference/userschema"
+  },
+  {
+   "id": "c21",
+   "url": "https://dev.proof.com/llms.txt",
+   "title": "Proof Documentation (llms.txt)",
+   "quote": "Returns a paginated list of security events in OCSF format for the authenticated organization. Requires Command Center access.",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.proof.com/reference/listsecurityevents"
+  },
+  {
+   "id": "c22",
+   "url": "https://support.proof.com/api/v2/help_center/en-us/articles/8271646759959.json",
+   "title": "Domain-Based Single Sign-On (SSO) Overview - Proof Help Center",
+   "quote": "Full control over user provisioning from your identity provider.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.proof.com/hc/en-us/articles/8271646759959-Domain-Based-Single-Sign-On-SSO-Overview"
+  },
+  {
+   "id": "c23",
+   "url": "https://dev.proof.com/reference/retrieveuser.md",
+   "title": "Retrieve User - Proof API reference",
+   "quote": "Retrieve User",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.proof.com/reference/retrieveuser"
+  },
+  {
+   "id": "c24",
+   "url": "https://dev.proof.com/reference/userschema.md",
+   "title": "Retrieve Users Schema - Proof API reference",
+   "quote": "The name of the user, suitable for display to end-users",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.proof.com/reference/userschema"
+  },
+  {
+   "id": "c25",
+   "url": "https://dev.proof.com/llms.txt",
+   "title": "Proof Documentation (llms.txt)",
+   "quote": "API Endpoint Reference: SCIM API Specification",
+   "accessed": "2026-10-05",
+   "page_url": "https://dev.proof.com/reference/createuser"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.proof.com/pricing (rendered)",
+  "https://www.proof.com/sitemap.xml (758 URLs)",
+  "https://dev.proof.com/llms.txt (SSO guide, SCIM API Specification, security events)",
+  "dev.proof.com SCIM reference pages (.md exports with OpenAPI)",
+  "support.proof.com help-centre search API: SCIM (0 results), single sign-on, command center, provisioning",
+  "okta.com/integrations/proof|notarize|proof-com (404)",
+  "learn.microsoft.com Entra saas-apps toc.json (no Proof)"
+ ],
+ "open_questions": [
+  "What does Command Center cost when bought separately from Premium/Enterprise?",
+  "Does SCIM deactivation or DELETE free a seat or end sessions, and is user data retained?",
+  "Is SSO required before SCIM can be enabled?",
+  "Is there a public Okta, Entra or OneLogin catalogue app for Proof?"
+ ]
+}

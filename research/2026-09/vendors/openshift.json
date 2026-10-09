@@ -1,0 +1,485 @@
+{
+ "slug": "openshift",
+ "vendor": "Red Hat OpenShift",
+ "vendor_url": "https://www.redhat.com/en/technologies/cloud-computing/openshift",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Red Hat OpenShift",
+  "slug": "openshift",
+  "category": "Cloud, Infrastructure & Observability",
+  "status": "none",
+  "scim_plan": "—",
+  "scim_price_text": "—",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Usage-priced: reserved instances from $0.076/hour (4 vCPU, 3-year contract); no per-user plans",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": null,
+  "idp": {
+   "okta": null,
+   "entra": null,
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": false
+  },
+  "pricing_page_url": "https://www.redhat.com/en/technologies/cloud-computing/openshift/pricing",
+  "docs_url": "https://docs.redhat.com/en/documentation/openshift_container_platform/4.20/html/authentication_and_authorization/understanding-identity-provider",
+  "evidence": "OpenShift's identity provider documentation lists htpasswd, Keystone, LDAP, basic auth, request header, GitHub, GitLab, Google and OpenID Connect providers; users are created on first login (mappingMethod 'claim') and no SCIM endpoint is documented.",
+  "notes": "New row, named Red Hat OpenShift. Priced by infrastructure (vCPU-hours or cores), not per user: the pricing page quotes reserved instances from $0.076/hour on a 4 vCPU, 3-year contract, so plan and per-user fields are null. Cluster sign-in uses OAuth identity providers configured as custom resources (OIDC, LDAP, GitHub, GitLab, Google, htpasswd and others; no SAML provider). With the default mappingMethod 'claim' a User and Identity are created on first login (JIT); 'lookup' requires users to be provisioned manually or by an external process. Groups can be synced from LDAP. Admins can manage User and Group objects through the Kubernetes-style user.openshift.io/v1 API, but there is no SCIM endpoint and no IdP catalogue app was found. 'None' is by absence (rule 2: JIT-only is none).",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Red Hat OpenShift cloud services (ROSA, Azure Red Hat OpenShift, Dedicated, IBM Cloud)",
+   "price_text": "From $0.076/hour per reserved instance (4 vCPU, 3-year contract); billed by the cloud provider or Red Hat",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c8"
+   ],
+   "notes": "Infrastructure-priced; self-managed subscriptions are not priced on the page."
+  }
+ ],
+ "scim": {
+  "available": false,
+  "cite": [
+   "c3",
+   "c5"
+  ],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": null,
+   "token_source": null,
+   "token_expiry": null,
+   "cite": []
+  },
+  "endpoints": {
+   "Users": null,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": []
+  },
+  "operations": {
+   "create": null,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": null,
+   "reactivate": null,
+   "delete": null,
+   "group_push": null,
+   "group_membership": null,
+   "cite": []
+  },
+  "deprovision": {
+   "action": null,
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": []
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": []
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "The supported identity provider list (htpasswd, Keystone, LDAP, basic auth, request header, GitHub, GitLab, Google, OIDC) has no SCIM; provisioning is JIT on login or manual/external via the User API. 'false' is by absence (rule 5)."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c8",
+   "c9"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://<cluster API server>/apis/user.openshift.io/v1",
+  "docs_url": "https://docs.redhat.com/en/documentation/openshift_container_platform/4.20/html/user_and_group_apis/user-user-openshift-io-v1",
+  "auth": {
+   "methods": [
+    "oauth2"
+   ],
+   "scopes": [],
+   "cite": [
+    "c6"
+   ],
+   "notes": "OAuth access tokens from the cluster OAuth server; authorization via RBAC."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": false,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c9",
+    "c10",
+    "c11",
+    "c12"
+   ],
+   "notes": "Role assignment is done with Kubernetes RBAC objects, not researched here."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/apis/user.openshift.io/v1/users",
+    "purpose": "List or watch users",
+    "cite": [
+     "c9"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/apis/user.openshift.io/v1/users",
+    "purpose": "Create a user",
+    "cite": [
+     "c9"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/apis/user.openshift.io/v1/users",
+    "purpose": "Delete a collection of users",
+    "cite": [
+     "c9"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/apis/user.openshift.io/v1/users/{name}",
+    "purpose": "Read a user",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/apis/user.openshift.io/v1/users/{name}",
+    "purpose": "Replace a user",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/apis/user.openshift.io/v1/users/{name}",
+    "purpose": "Partially update a user",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/apis/user.openshift.io/v1/users/{name}",
+    "purpose": "Delete a user",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/apis/user.openshift.io/v1/groups",
+    "purpose": "List or watch groups",
+    "cite": [
+     "c11"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/apis/user.openshift.io/v1/groups",
+    "purpose": "Create a group",
+    "cite": [
+     "c11"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/apis/user.openshift.io/v1/groups",
+    "purpose": "Delete a collection of groups",
+    "cite": [
+     "c11"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/apis/user.openshift.io/v1/groups/{name}",
+    "purpose": "Read a group",
+    "cite": [
+     "c12"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/apis/user.openshift.io/v1/groups/{name}",
+    "purpose": "Replace a group",
+    "cite": [
+     "c12"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/apis/user.openshift.io/v1/groups/{name}",
+    "purpose": "Partially update a group",
+    "cite": [
+     "c12"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/apis/user.openshift.io/v1/groups/{name}",
+    "purpose": "Delete a group",
+    "cite": [
+     "c12"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "Kubernetes-style API on each cluster's API server (user.openshift.io/v1 Users, Groups, Identities)."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "No OIN app found (okta.com/integrations/red-hat-openshift/, /redhat-openshift/, /openshift-container-platform/ and /openshift/ all 404); OpenShift connects to Okta or any IdP as a generic OIDC provider."
+  },
+  "entra": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "No Microsoft Learn gallery tutorial found (red-hat-openshift-tutorial, openshift-tutorial 404)."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "No catalogue app found."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "No catalogue app found."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "No catalogue app found."
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "oidc",
+  "csv_import": null,
+  "other_sync": "LDAP group sync (oc adm groups sync) from an LDAP directory",
+  "docs_public": true,
+  "cite": [
+   "c3",
+   "c4",
+   "c13",
+   "c7"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.redhat.com/en/technologies/cloud-computing/openshift/pricing",
+   "title": "Red Hat OpenShift pricing",
+   "quote": "Reserved instances of Red Hat OpenShift are available for as little as $0.076/hour.*",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.redhat.com/en/technologies/cloud-computing/openshift/pricing",
+   "title": "Red Hat OpenShift pricing",
+   "quote": "*Pricing based on 4vCPU, 3 year contract. Minimum worker node configuration required.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://docs.redhat.com/en/documentation/openshift_container_platform/4.20/html/authentication_and_authorization/understanding-identity-provider",
+   "title": "Chapter 6. Understanding identity provider configuration | OpenShift Container Platform 4.20 | Red Hat Documentation",
+   "quote": "Configure an oidc identity provider to integrate with an OpenID Connect identity provider using an Authorization Code Flow.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://docs.redhat.com/en/documentation/openshift_container_platform/4.20/html/authentication_and_authorization/understanding-identity-provider",
+   "title": "Chapter 6. Understanding identity provider configuration | OpenShift Container Platform 4.20 | Red Hat Documentation",
+   "quote": "The default value. Provisions a user with the identity’s preferred user name. Fails if a user with that user name is already mapped to another identity.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://docs.redhat.com/en/documentation/openshift_container_platform/4.20/html/authentication_and_authorization/understanding-identity-provider",
+   "title": "Chapter 6. Understanding identity provider configuration | OpenShift Container Platform 4.20 | Red Hat Documentation",
+   "quote": "Looks up an existing identity, user identity mapping, and user, but does not automatically provision users or identities. This allows cluster administrators to set up identities and users manually, or using an external process.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://docs.redhat.com/en/documentation/openshift_container_platform/4.20/html/authentication_and_authorization/understanding-identity-provider",
+   "title": "Chapter 6. Understanding identity provider configuration | OpenShift Container Platform 4.20 | Red Hat Documentation",
+   "quote": "As an administrator, you can configure OAuth to specify an identity provider after you install your cluster. Developers and administrators obtain OAuth access tokens to authenticate themselves to the API.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://docs.redhat.com/en/documentation/openshift_container_platform/4.20/html/authentication_and_authorization/understanding-identity-provider",
+   "title": "Chapter 6. Understanding identity provider configuration | OpenShift Container Platform 4.20 | Red Hat Documentation",
+   "quote": "Configure the ldap identity provider to validate user names and passwords against an LDAPv3 server, using simple bind authentication.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.redhat.com/en/documentation/openshift_container_platform/4.20/html/user_and_group_apis/user-user-openshift-io-v1",
+   "title": "Chapter 5. User [user.openshift.io/v1] | OpenShift Container Platform 4.20 | Red Hat Documentation",
+   "quote": "Upon log in, every user of the system receives a User and Identity resource. Administrators may directly manipulate the attributes of the users for their own tracking, or set groups via the API.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.redhat.com/en/documentation/openshift_container_platform/4.20/html/user_and_group_apis/user-user-openshift-io-v1",
+   "title": "Chapter 5. User [user.openshift.io/v1] | OpenShift Container Platform 4.20 | Red Hat Documentation",
+   "quote": "/apis/user.openshift.io/v1/users DELETE: delete collection of User GET: list or watch objects of kind User POST: create an User",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.redhat.com/en/documentation/openshift_container_platform/4.20/html/user_and_group_apis/user-user-openshift-io-v1",
+   "title": "Chapter 5. User [user.openshift.io/v1] | OpenShift Container Platform 4.20 | Red Hat Documentation",
+   "quote": "/apis/user.openshift.io/v1/users/{name} DELETE: delete an User GET: read the specified User PATCH: partially update the specified User PUT: replace the specified User",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.redhat.com/en/documentation/openshift_container_platform/4.20/html/user_and_group_apis/group-user-openshift-io-v1",
+   "title": "Chapter 2. Group [user.openshift.io/v1] | OpenShift Container Platform 4.20 | Red Hat Documentation",
+   "quote": "/apis/user.openshift.io/v1/groups DELETE: delete collection of Group GET: list or watch objects of kind Group POST: create a Group",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.redhat.com/en/documentation/openshift_container_platform/4.20/html/user_and_group_apis/group-user-openshift-io-v1",
+   "title": "Chapter 2. Group [user.openshift.io/v1] | OpenShift Container Platform 4.20 | Red Hat Documentation",
+   "quote": "/apis/user.openshift.io/v1/groups/{name} DELETE: delete a Group GET: read the specified Group PATCH: partially update the specified Group PUT: replace the specified Group",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.redhat.com/en/documentation/openshift_container_platform/4.20/html/authentication_and_authorization/ldap-syncing",
+   "title": "Chapter 19. Syncing LDAP groups | OpenShift Container Platform 4.20 | Red Hat Documentation",
+   "quote": "Sync LDAP groups with OpenShift Container Platform so you can manage user membership and permissions using groups stored in your LDAP directory.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.redhat.com/en/technologies/cloud-computing/openshift/pricing (rendered)",
+  "docs.redhat.com OCP 4.20 Authentication and authorization: Understanding identity provider configuration (supported IdP list, mappingMethod)",
+  "docs.redhat.com OCP 4.20 User and group APIs: User and Group [user.openshift.io/v1]",
+  "docs.redhat.com OCP 4.20 Syncing LDAP groups",
+  "Okta OIN slugs openshift, red-hat-openshift, redhat-openshift, openshift-container-platform (404)",
+  "learn.microsoft.com red-hat-openshift-tutorial, openshift-tutorial (404)"
+ ],
+ "open_questions": [
+  "Whether the Red Hat Hybrid Cloud Console (console.redhat.com / OpenShift Cluster Manager) offers SCIM or other provisioning for Red Hat accounts that administer OpenShift.",
+  "Per-edition pricing for self-managed OpenShift (Kubernetes Engine, Container Platform, Platform Plus) is not on the pricing page.",
+  "Whether deleting a User object also removes its Identity and ends active OAuth tokens."
+ ]
+}

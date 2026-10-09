@@ -1,0 +1,567 @@
+{
+ "slug": "klaviyo",
+ "vendor": "Klaviyo",
+ "vendor_url": "https://www.klaviyo.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Klaviyo",
+  "slug": "klaviyo",
+  "category": "Marketing & Advertising",
+  "status": "free",
+  "scim_plan": "Any paid plan (Email from $20/mo)",
+  "scim_price_text": "Included on paid plans; Email plan from $20/mo (500 active profiles)",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Email",
+  "team_price_text": "Email: $20/mo (500 active profiles)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Any paid plan",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": null
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": "native",
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.klaviyo.com/pricing",
+  "docs_url": "https://help.klaviyo.com/hc/en-us/articles/10952782535579",
+  "evidence": "Klaviyo's SCIM guide says \"You must have a paid plan and be an Admin or Owner to set up this feature\" and SSO must be on first; the cheapest paid plan is Email at $20/mo.",
+  "notes": "Status changed gated to free: Klaviyo's offering did not change (SCIM on any paid plan, as in June), but under the v3 price-gate rule SCIM on the cheapest paid plan with no upcharge is 'free'. Pricing is by active profiles (contacts), not seats, so per-user fields and the multiplier are null; the plans view shows Free (up to 250 active profiles), Email $20/mo and Marketing $90/mo at 500 profiles (monthly; no annual price shown). The pricing page itself does not mention SSO or SCIM (gate comes from the help centre, hence medium confidence). SAML SSO (IdP-initiated only) must be enabled before SCIM. Okta and Entra are documented as custom SAML/SCIM apps; OneLogin has a Klaviyo catalogue connector with SCIM bearer token. Klaviyo's public REST API documents no user or team-member endpoints.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": null,
+  "user_api_available": null,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "$0, up to 250 active profiles",
+   "price_per_user_mo": null,
+   "billing": "monthly",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c6",
+    "c20"
+   ]
+  },
+  {
+   "name": "Email",
+   "price_text": "$20/mo at 500 active profiles (price scales with profiles)",
+   "price_per_user_mo": null,
+   "billing": "monthly",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c4",
+    "c5",
+    "c6",
+    "c20"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c6",
+   "c7",
+   "c10",
+   "c12",
+   "c31"
+  ],
+  "plan": "Any paid plan",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": null,
+  "auth": {
+   "method": "bearer",
+   "token_source": "Organization name > Settings > Security > SCIM Provisioning (access key with Klaviyo-API-Key prefix, shown once)",
+   "token_expiry": null,
+   "cite": [
+    "c8",
+    "c9",
+    "c14"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c10",
+    "c19"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": true,
+   "group_push": null,
+   "group_membership": null,
+   "cite": [
+    "c11",
+    "c15",
+    "c32"
+   ],
+   "notes": "Okta guide enables Create Users, Update User Attributes and Deactivate Users; OneLogin guide keeps Create/Delete/Update user and recommends Delete on removal. Whether the API takes PUT or PATCH is not documented."
+  },
+  "deprovision": {
+   "action": null,
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": []
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "active",
+    "emails[type eq \"work\"].value",
+    "name.givenName",
+    "name.familyName",
+    "emails[primary eq \"True\"].value",
+    "roles[primary eq \"True\"].value"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": false,
+    "how": null
+   },
+   "group": [],
+   "cite": [
+    "c16"
+   ],
+   "notes": "List from the Entra section: 'Klaviyo only supports the following attributes'. Okta adds a 'role' attribute in the core 2.0 User namespace."
+  },
+  "roles": {
+   "supported": true,
+   "how": "role attribute (core schema) with values admin, manager, analyst, campaign_coordinator, content_creator, support; roles then become read-only in Klaviyo",
+   "cite": [
+    "c12",
+    "c13",
+    "c26"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SSO must be turned on before SCIM can be set up.",
+    "cite": [
+     "c7"
+    ]
+   },
+   {
+    "text": "Entra: appRoleAssignments not supported; only the listed attributes are supported.",
+    "cite": [
+     "c16",
+     "c17"
+    ]
+   },
+   {
+    "text": "With SSO JIT/SCIM on, user roles can only be changed in the IdP.",
+    "cite": [
+     "c26"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": null,
+  "cite": [],
+  "plan": null,
+  "api_tax": null,
+  "style": null,
+  "base_url": null,
+  "docs_url": null,
+  "auth": {
+   "methods": [],
+   "scopes": [],
+   "cite": []
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": []
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "developers.klaviyo.com API reference (584 endpoint pages) lists account endpoints (Get Accounts) but no user, team-member or role endpoints; left null as no explicit statement."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/klaviyo/",
+   "cite": [
+    "c28",
+    "c23"
+   ],
+   "notes": "An OIN 'Klaviyo' listing exists (SSO use case, 2016) but Klaviyo's own SSO and SCIM guides use a custom SAML app with SCIM added."
+  },
+  "entra": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c24",
+    "c18"
+   ],
+   "notes": "Klaviyo's guide uses a non-gallery 'Create your own application' app with Automatic provisioning."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c25",
+    "c14"
+   ],
+   "notes": "Per Klaviyo's guide; OneLogin's own connector page not loaded."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "jumpcloud.com/support/integrate-with-klaviyo returned 403."
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c22",
+   "c27"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.klaviyo.com/pricing",
+   "title": "Klaviyo Pricing",
+   "quote": "Up to 250 active profiles",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.klaviyo.com/pricing",
+   "title": "Klaviyo Pricing",
+   "quote": "Email marketing comes standard with every plan.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.klaviyo.com/pricing?tab=marketing",
+   "title": "Klaviyo Pricing (plans view)",
+   "quote": "Get $19 off your first month on the $20 email plan.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.klaviyo.com/pricing?tab=marketing",
+   "title": "Klaviyo Pricing (plans view)",
+   "quote": "Grow with email. Automate campaigns, build subscribers.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.klaviyo.com/pricing?tab=marketing",
+   "title": "Klaviyo Pricing (plans view)",
+   "quote": "Your plan price is based on the number of active profiles you have and the products included.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://help.klaviyo.com/hc/en-us/articles/10952782535579",
+   "title": "How to set up SCIM user provisioning",
+   "quote": "You must have a paid plan and be an Admin or Owner to set up this feature.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://help.klaviyo.com/hc/en-us/articles/10952782535579",
+   "title": "How to set up SCIM user provisioning",
+   "quote": "You also have SSO turned on in Klaviyo before you set up SCIM.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://help.klaviyo.com/hc/en-us/articles/10952782535579",
+   "title": "How to set up SCIM user provisioning",
+   "quote": "Copy or download the access key, including the prefix Klaviyo-API-Key.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://help.klaviyo.com/hc/en-us/articles/10952782535579",
+   "title": "How to set up SCIM user provisioning",
+   "quote": "Note that this key is only shown once, so make sure you can access it.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://help.klaviyo.com/hc/en-us/articles/10952782535579",
+   "title": "How to set up SCIM user provisioning",
+   "quote": "Below, we have instructions for OKTA, One Login, and Azure, although you can set it up using any other provider.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://help.klaviyo.com/hc/en-us/articles/10952782535579",
+   "title": "How to set up SCIM user provisioning",
+   "quote": "Check Enable for the following features: Create Users. Update User Attribute. Deactivate Users.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://help.klaviyo.com/hc/en-us/articles/10952782535579",
+   "title": "How to set up SCIM user provisioning",
+   "quote": "In External namespace, enter the following: urn:ietf:params:scim:schemas:core:2.0:User",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://help.klaviyo.com/hc/en-us/articles/10952782535579",
+   "title": "How to set up SCIM user provisioning",
+   "quote": "valid role values are as follows: admin manager analyst campaign_coordinator content_creator support",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://help.klaviyo.com/hc/en-us/articles/10952782535579",
+   "title": "How to set up SCIM user provisioning",
+   "quote": "In the SCIM Bearer Token field, paste your SCIM access key.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://help.klaviyo.com/hc/en-us/articles/10952782535579",
+   "title": "How to set up SCIM user provisioning",
+   "quote": "Do not uncheck the Create user, Delete user, or Update user boxes.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://help.klaviyo.com/hc/en-us/articles/10952782535579",
+   "title": "How to set up SCIM user provisioning",
+   "quote": "Note that Klaviyo only supports the following attributes in customappsso Attribute column for SCIM:",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://help.klaviyo.com/hc/en-us/articles/10952782535579",
+   "title": "How to set up SCIM user provisioning",
+   "quote": "appRoleAssignments is not supported",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://help.klaviyo.com/hc/en-us/articles/10952782535579",
+   "title": "How to set up SCIM user provisioning",
+   "quote": "Paste the SCIM base URL from Klaviyo into the Tenant URL field.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://help.klaviyo.com/hc/en-us/articles/10952782535579",
+   "title": "How to set up SCIM user provisioning",
+   "quote": "For Unique identifier field for users, type in “userName.”",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://help.klaviyo.com/hc/en-us/articles/9353860331035",
+   "title": "How to set up single sign-on (SSO)",
+   "quote": "You must have a paid plan to use SSO.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://help.klaviyo.com/hc/en-us/articles/9353860331035",
+   "title": "How to set up single sign-on (SSO)",
+   "quote": "Klaviyo does not support service provider (SP) SSO, only IdP SSO.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://help.klaviyo.com/hc/en-us/articles/9353860331035",
+   "title": "How to set up single sign-on (SSO)",
+   "quote": "Instead, user accounts are created the first time users try to log in to an application, as long as the user has permission for that app.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://help.klaviyo.com/hc/en-us/articles/9353860331035",
+   "title": "How to set up single sign-on (SSO)",
+   "quote": "Select I’m an Okta customer adding an internal app.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://help.klaviyo.com/hc/en-us/articles/9353860331035",
+   "title": "How to set up single sign-on (SSO)",
+   "quote": "Click Create your own application.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://help.klaviyo.com/hc/en-us/articles/9353860331035",
+   "title": "How to set up single sign-on (SSO)",
+   "quote": "Search for “Klaviyo” and then select the result that appears.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://help.klaviyo.com/hc/en-us/articles/9353860331035",
+   "title": "How to set up single sign-on (SSO)",
+   "quote": "To update a role, you will need to do so inside your IdP or by temporarily turning off both JIT and SCIM to update inside of Klaviyo.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://help.klaviyo.com/hc/en-us/articles/9674090873883",
+   "title": "Troubleshoot SSO and SCIM errors",
+   "quote": "Cannot provision new SSO user for {email} in account ({company_id}) (Just-in-Time provisioning not enabled)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://www.okta.com/integrations/klaviyo/",
+   "title": "Integrate Klaviyo with Okta",
+   "quote": "Klaviyo is email platform powered by data built for for commerce and web businesses",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://help.klaviyo.com/hc/en-us/articles/40493034144795",
+   "title": "How to create a custom user role",
+   "quote": "Klaviyo provides 7 static roles (Owner, Admin, Manager, Analyst, Campaign Coordinator, Content Creator, Support) by default.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://help.klaviyo.com/hc/en-us/articles/360053547071",
+   "title": "How to add or delete users and manage permissions",
+   "quote": "You cannot delete the Owner of an account. To remove an Owner, you must first transfer account ownership to someone else.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://help.klaviyo.com/hc/en-us/articles/10952782535579",
+   "title": "How to set up SCIM user provisioning",
+   "quote": "Copy the base URL and paste it somewhere, preferably where you stored the access key.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://help.klaviyo.com/hc/en-us/articles/10952782535579",
+   "title": "How to set up SCIM user provisioning",
+   "quote": "Recommended: select Delete in the dropdown for When users are deleted in OneLogin, or the user's app access is removed, perform the below action.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.klaviyo.com/pricing",
+  "https://www.klaviyo.com/pricing?tab=marketing",
+  "help.klaviyo.com search API: scim, remove user, manage users, audit log",
+  "https://developers.klaviyo.com/en/reference/api_overview"
+ ],
+ "open_questions": [
+  "SCIM base URL pattern is not published (shown in the Klaviyo UI only).",
+  "What a SCIM deactivate does in Klaviyo (removal vs suspension, data kept) is not documented.",
+  "Group provisioning support is not documented.",
+  "No public user-management REST API found; Klaviyo does not state either way."
+ ]
+}

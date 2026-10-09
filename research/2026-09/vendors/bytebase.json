@@ -1,0 +1,1036 @@
+{
+ "slug": "bytebase",
+ "vendor": "Bytebase",
+ "vendor_url": "https://www.bytebase.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Bytebase",
+  "slug": "bytebase",
+  "category": "Developer Tools & CI/CD",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Pro",
+  "team_price_text": "Pro: $20/u/mo",
+  "team_price_per_user_mo": 20,
+  "price_multiplier": null,
+  "sso_plan": "Enterprise",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.bytebase.com/pricing/",
+  "docs_url": "https://docs.bytebase.com/administration/scim/overview",
+  "evidence": "Bytebase's pricing page lists \"OIDC, LDAP SSO, SCIM, 2FA, audit log\" under the Enterprise plan (Contact Us); Community and Pro have no SCIM.",
+  "notes": "Unchanged from June: Community free (up to 20 users), Pro $20/user/month (cancel any time, billing period not stated), Enterprise Contact Us on a yearly subscription. Pro includes only Google/GitHub sign-in (social, not counted as SSO); OIDC/OAuth2/LDAP SSO and SCIM are Enterprise. SCIM is documented for Entra ID (non-gallery app) and Okta (custom app) only; other SCIM clients are untested. The REST API is not plan-gated (Community is enough for the API tutorials).",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Community",
+  "api_tax": false,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Community",
+   "price_text": "Free / FOREVER",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c1",
+    "c2",
+    "c31",
+    "c29"
+   ],
+   "notes": "Up to 20 users, 10 database instances."
+  },
+  {
+   "name": "Pro",
+   "price_text": "$20 / USER PER MONTH",
+   "price_per_user_mo": 20,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c3",
+    "c4",
+    "c7",
+    "c29",
+    "c30"
+   ],
+   "notes": "Google and GitHub sign-in only (social, not SAML/OIDC with the customer's IdP). Audit log 7-day retention. Can be cancelled any time; annual vs monthly billing not stated."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Contact Us",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c5",
+    "c6",
+    "c7",
+    "c29"
+   ],
+   "notes": "Yearly subscription; 14-day free trial."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c6",
+   "c8",
+   "c11"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://<your-bytebase-url>/hook/scim/workspaces/<workspace-id>",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Settings > Members > Directory Sync (Okta guide); Security & Policy > Users & Groups > Sync From Entra ID (Azure AD) (Entra guide)",
+   "token_expiry": null,
+   "cite": [
+    "c12",
+    "c13",
+    "c21",
+    "c56"
+   ],
+   "notes": "Token can be rotated through the API (rotateDirectorySyncToken), which immediately invalidates the previous one. Expiry is not documented."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c15",
+    "c16",
+    "c18",
+    "c9"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": null,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c16",
+    "c17",
+    "c18",
+    "c9",
+    "c35"
+   ]
+  },
+  "deprovision": {
+   "action": null,
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": []
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name",
+    "emails"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": true,
+    "how": "Entra guide adds a custom group attribute 'email' (mapped from mail) to sync the group email."
+   },
+   "group": [
+    "displayName",
+    "externalId",
+    "email (custom)",
+    "members"
+   ],
+   "cite": [
+    "c9",
+    "c15",
+    "c20"
+   ],
+   "notes": "Docs only say users sync 'name and email'; exact SCIM attribute paths beyond userName are not listed."
+  },
+  "roles": {
+   "supported": false,
+   "how": "SCIM does not sync roles (Role column is ❌ for both IdPs); roles are granted to synced groups inside Bytebase projects.",
+   "cite": [
+    "c9"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Only Entra ID and Okta are documented; other SCIM-capable IdPs may work but are untested.",
+    "cite": [
+     "c8",
+     "c25"
+    ]
+   },
+   {
+    "text": "LDAP SSO cannot be combined with SCIM; Entra/Okta must use OIDC or OAuth 2.0 sign-in for SCIM.",
+    "cite": [
+     "c24"
+    ]
+   },
+   {
+    "text": "The Bytebase External URL must be configured and reachable from the IdP (self-hosted).",
+    "cite": [
+     "c22"
+    ]
+   },
+   {
+    "text": "Assigning an Okta group provisions its members only; groups must be pushed with Okta Push Groups. Nested groups are not supported.",
+    "cite": [
+     "c17",
+     "c28"
+    ]
+   },
+   {
+    "text": "Only Workspace Admins can configure SCIM.",
+    "cite": [
+     "c10"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c36",
+   "c31",
+   "c30"
+  ],
+  "plan": "Community",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": null,
+  "docs_url": "https://api.bytebase.com",
+  "auth": {
+   "methods": [
+    "service_account_key",
+    "workload_identity_oidc"
+   ],
+   "scopes": [],
+   "cite": [
+    "c32",
+    "c33"
+   ],
+   "notes": "Service account API key exchanged for access tokens (1 hour by default). Access is governed by Bytebase IAM permissions (e.g. bb.users.list, bb.users.delete), not OAuth scopes. Every endpoint is served by the customer's own Bytebase instance, so there is no fixed base URL."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": true,
+   "reactivate_user": true,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c37",
+    "c39",
+    "c38",
+    "c41",
+    "c40",
+    "c42",
+    "c44",
+    "c45",
+    "c55"
+   ],
+   "notes": "DeleteUser is reversible via UndeleteUser, so it behaves as a deactivate. CreateUser is self-hosted only; in SaaS mode users are added through the workspace IAM policy."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/v1/users",
+    "purpose": "List users",
+    "cite": [
+     "c37"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/users",
+    "purpose": "Create a user (self-hosted only)",
+    "cite": [
+     "c38"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/users/{user}",
+    "purpose": "Get a user",
+    "cite": [
+     "c39"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/v1/users/{user}",
+    "purpose": "Update a user",
+    "cite": [
+     "c41"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v1/users/{user}",
+    "purpose": "Delete a user",
+    "cite": [
+     "c40"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/users/{user}:undelete",
+    "purpose": "Restore a deleted user",
+    "cite": [
+     "c42"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/users:batchGet",
+    "purpose": "Batch get users",
+    "cite": [
+     "c43"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/groups",
+    "purpose": "List groups",
+    "cite": [
+     "c44"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/groups",
+    "purpose": "Create a group",
+    "cite": [
+     "c45"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/groups/{group}",
+    "purpose": "Get a group",
+    "cite": [
+     "c46"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/v1/groups/{group}",
+    "purpose": "Update a group",
+    "cite": [
+     "c48"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v1/groups/{group}",
+    "purpose": "Delete a group",
+    "cite": [
+     "c47"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/roles",
+    "purpose": "List roles",
+    "cite": [
+     "c49"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/roles",
+    "purpose": "Create a custom role",
+    "cite": [
+     "c50"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/roles/{role}",
+    "purpose": "Get a role",
+    "cite": [
+     "c51"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/v1/roles/{role}",
+    "purpose": "Update a role",
+    "cite": [
+     "c53"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v1/roles/{role}",
+    "purpose": "Delete a custom role",
+    "cite": [
+     "c52"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/workspaces/{workspace}:getIamPolicy",
+    "purpose": "Get workspace IAM policy (role bindings)",
+    "cite": [
+     "c54"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/workspaces/{workspace}:setIamPolicy",
+    "purpose": "Set workspace IAM policy (grant workspace roles)",
+    "cite": [
+     "c55"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/workspaces/{workspace}:rotateDirectorySyncToken",
+    "purpose": "Rotate the SCIM directory sync token",
+    "cite": [
+     "c57",
+     "c56"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/auditLogs:search",
+    "purpose": "Search audit logs",
+    "cite": [
+     "c58"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/auditLogs:export",
+    "purpose": "Export audit logs",
+    "cite": [
+     "c59"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": false,
+   "events": [],
+   "cite": [
+    "c34"
+   ],
+   "notes": "Webhooks are project-level and cover issue and pipeline events only."
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Pro",
+   "cite": [
+    "c29",
+    "c30",
+    "c58"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "CreateUser works only on self-hosted; in SaaS mode admins add users via workspace IAM policy.",
+    "cite": [
+     "c38"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": null,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c14",
+    "c16"
+   ],
+   "notes": "Bytebase's guide has admins build their own SWA app and switch provisioning to SCIM; no OIN catalogue app found (okta.com/integrations/bytebase/ returns 404)."
+  },
+  "entra": {
+   "listed": false,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c19"
+   ],
+   "notes": "Bytebase's guide uses a non-gallery enterprise app."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "Bytebase's SSO overview lists JumpCloud via LDAP with no SCIM guide."
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "oidc",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c26",
+   "c27"
+  ],
+  "notes": "JIT applies to SSO sign-in (OAuth 2.0, OIDC, LDAP)."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.bytebase.com/pricing/",
+   "title": "Bytebase Pricing",
+   "quote": "Community Get started with governed database workflows for individuals and small teams. Free / FOREVER",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.bytebase.com/pricing/",
+   "title": "Bytebase Pricing",
+   "quote": "Community support Up to 20 users 10 database instances Database change management",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.bytebase.com/pricing/",
+   "title": "Bytebase Pricing",
+   "quote": "Pro Standardize workflows as your team grows with shared policies, approvals, and integrations. $20 / USER PER MONTH",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.bytebase.com/pricing/",
+   "title": "Bytebase Pricing",
+   "quote": "Email support Custom users 10 database instances Google, GitHub SSO Groups",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.bytebase.com/pricing/",
+   "title": "Bytebase Pricing",
+   "quote": "Enterprise Operate databases with advanced controls, auditability, and dedicated support. Contact Us",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://www.bytebase.com/pricing/",
+   "title": "Bytebase Pricing",
+   "quote": "SLA support Custom users Custom database instances Custom approval, dynamic data masking OIDC, LDAP SSO, SCIM, 2FA, audit log",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://www.bytebase.com/pricing/",
+   "title": "Bytebase Pricing",
+   "quote": "For the Pro plan, you can cancel your subscription at any time. For the Enterprise plan, it is yearly subscription. You can not cancel in the middle of the year.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.bytebase.com/administration/scim/overview",
+   "title": "SCIM Overview - Bytebase Docs",
+   "quote": "Bytebase implements SCIM 2.0 and provides built-in support for the following identity providers:",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.bytebase.com/administration/scim/overview",
+   "title": "SCIM Overview - Bytebase Docs",
+   "quote": "Okta | Sync name and email | Sync group name, email and membership",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.bytebase.com/administration/scim/overview",
+   "title": "SCIM Overview - Bytebase Docs",
+   "quote": "You must be the Workspace Admin to configure SCIM.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.bytebase.com/administration/scim/okta",
+   "title": "Okta - Bytebase Docs (SCIM)",
+   "quote": "SCIM Endpoint URL: https://<your-bytebase-url>/hook/scim/workspaces/<workspace-id>",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.bytebase.com/administration/scim/okta",
+   "title": "Okta - Bytebase Docs (SCIM)",
+   "quote": "Secret Token: Bearer token for authentication",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.bytebase.com/administration/scim/okta",
+   "title": "Okta - Bytebase Docs (SCIM)",
+   "quote": "Navigate to Settings -> Members. Click the Directory Sync button (or gear icon).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.bytebase.com/administration/scim/okta",
+   "title": "Okta - Bytebase Docs (SCIM)",
+   "quote": "Select SWA - Secure Web Authentication and click Next.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.bytebase.com/administration/scim/okta",
+   "title": "Okta - Bytebase Docs (SCIM)",
+   "quote": "Unique identifier field for users: userName",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.bytebase.com/administration/scim/okta",
+   "title": "Okta - Bytebase Docs (SCIM)",
+   "quote": "Enable the following features: Create Users Update User Attributes Deactivate Users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.bytebase.com/administration/scim/okta",
+   "title": "Okta - Bytebase Docs (SCIM)",
+   "quote": "Assigning a group provisions all members as users, but does not create the group in Bytebase.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.bytebase.com/administration/scim/okta",
+   "title": "Okta - Bytebase Docs (SCIM)",
+   "quote": "After the status changes to Active, the groups are successfully synced to Bytebase.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.bytebase.com/administration/scim/entra-id",
+   "title": "Entra ID - Bytebase Docs (SCIM)",
+   "quote": "Select Create your own application. Give your application a descriptive name, and select Integrate any other application you don't find in the gallery (Non-gallery) option, then click Create.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.bytebase.com/administration/scim/entra-id",
+   "title": "Entra ID - Bytebase Docs (SCIM)",
+   "quote": "Bytebase uses the group's externalId to uniquely identify a group. By default, Entra ID maps objectId to externalId, which is stable and recommended. You can optionally add a custom email attribute to sync the group email to Bytebase.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.bytebase.com/administration/scim/entra-id",
+   "title": "Entra ID - Bytebase Docs (SCIM)",
+   "quote": "Click Sync From Entra ID (Azure AD).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://docs.bytebase.com/administration/scim/entra-id",
+   "title": "Entra ID - Bytebase Docs (SCIM)",
+   "quote": "Bytebase endpoint implements SCIM protocol, please make sure you have configured External URL and it's network accessible from Entra.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://docs.bytebase.com/administration/sso/overview",
+   "title": "SSO Overview - Bytebase Docs",
+   "quote": "For automatic user and group provisioning, Bytebase supports SCIM 2.0 with Entra ID and Okta.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://docs.bytebase.com/administration/sso/overview",
+   "title": "SSO Overview - Bytebase Docs",
+   "quote": "LDAP does not support SCIM",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://docs.bytebase.com/administration/sso/overview",
+   "title": "SSO Overview - Bytebase Docs",
+   "quote": "Bytebase implements standard SCIM 2.0, so other cloud IdPs that can push SCIM over HTTP may work but are untested.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://docs.bytebase.com/administration/sso/overview",
+   "title": "SSO Overview - Bytebase Docs",
+   "quote": "Bytebase employs JIT (Just-In-Time) user provisioning. It will create the user the first time the user signs in.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://docs.bytebase.com/administration/sso/overview",
+   "title": "SSO Overview - Bytebase Docs",
+   "quote": "Bytebase supports three SSO protocols:",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://docs.bytebase.com/administration/user-groups/overview",
+   "title": "Users & Groups - Bytebase Docs",
+   "quote": "Bytebase does not support nested groups. A group can only contain users, it can't contain another group.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://docs.bytebase.com/security/audit-log",
+   "title": "Audit Log - Bytebase Docs",
+   "quote": "Audit logging is available only for Pro and Enterprise plans.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://docs.bytebase.com/security/audit-log",
+   "title": "Audit Log - Bytebase Docs",
+   "quote": "Use the Bytebase API to programmatically access audit logs for integration with external systems and automated monitoring.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://docs.bytebase.com/tutorials/sql-review-api",
+   "title": "SQL Review with Bytebase API - Bytebase Docs",
+   "quote": "This tutorial will walk you through using SQL Review in Bytebase with Bytebase API to improve your database schema change process. The Community Plan is sufficient for completing this tutorial.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://docs.bytebase.com/administration/service-account",
+   "title": "Service Account - Bytebase Docs",
+   "quote": "Unlike human users, service accounts authenticate via API keys and are intended for programmatic access.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://docs.bytebase.com/administration/service-account",
+   "title": "Service Account - Bytebase Docs",
+   "quote": "They stay valid until they expire, which is 1 hour by default and follows the workspace's Access token duration setting.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://docs.bytebase.com/change-database/webhook",
+   "title": "Webhook - Bytebase Docs",
+   "quote": "User can configure project-level webhooks to let Bytebase post messages to the configured webhook endpoint upon various events.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c35",
+   "url": "https://docs.bytebase.com/changelog/bytebase-3-14-1",
+   "title": "Bytebase 3.14.1 changelog",
+   "quote": "Azure SCIM — Enhance SCIM PATCH API and fix SCIM sync issues.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://api.bytebase.com/openapi.yaml",
+   "title": "Bytebase API Reference (openapi.yaml)",
+   "quote": "API reference for Bytebase. Every endpoint is served by your own Bytebase instance.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.bytebase.com/"
+  },
+  {
+   "id": "c37",
+   "url": "https://api.bytebase.com/openapi.yaml",
+   "title": "Bytebase API Reference (openapi.yaml)",
+   "quote": "/v1/users: get: tags: - UserService summary: ListUsers",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.bytebase.com/"
+  },
+  {
+   "id": "c38",
+   "url": "https://api.bytebase.com/openapi.yaml",
+   "title": "Bytebase API Reference (openapi.yaml)",
+   "quote": "Creates a user in the caller's workspace (admin action, self-hosted only). In SaaS mode, admins should add users via workspace IAM policy instead.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.bytebase.com/"
+  },
+  {
+   "id": "c39",
+   "url": "https://api.bytebase.com/openapi.yaml",
+   "title": "Bytebase API Reference (openapi.yaml)",
+   "quote": "/v1/users/{user}: get: tags: - UserService summary: GetUser",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.bytebase.com/"
+  },
+  {
+   "id": "c40",
+   "url": "https://api.bytebase.com/openapi.yaml",
+   "title": "Bytebase API Reference (openapi.yaml)",
+   "quote": "Deletes a user. Requires bb.users.delete permission with additional validation: the last remaining workspace admin cannot be deleted.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.bytebase.com/"
+  },
+  {
+   "id": "c41",
+   "url": "https://api.bytebase.com/openapi.yaml",
+   "title": "Bytebase API Reference (openapi.yaml)",
+   "quote": "Updates a user. Users can update their own profile, or users with bb.users.update permission can update any user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.bytebase.com/"
+  },
+  {
+   "id": "c42",
+   "url": "https://api.bytebase.com/openapi.yaml",
+   "title": "Bytebase API Reference (openapi.yaml)",
+   "quote": "/v1/users/{user}:undelete: post: tags: - UserService summary: UndeleteUser description: |- Restores a deleted user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.bytebase.com/"
+  },
+  {
+   "id": "c43",
+   "url": "https://api.bytebase.com/openapi.yaml",
+   "title": "Bytebase API Reference (openapi.yaml)",
+   "quote": "/v1/users:batchGet: get: tags: - UserService summary: BatchGetUsers",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.bytebase.com/"
+  },
+  {
+   "id": "c44",
+   "url": "https://api.bytebase.com/openapi.yaml",
+   "title": "Bytebase API Reference (openapi.yaml)",
+   "quote": "/v1/groups: get: tags: - GroupService summary: ListGroups",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.bytebase.com/"
+  },
+  {
+   "id": "c45",
+   "url": "https://api.bytebase.com/openapi.yaml",
+   "title": "Bytebase API Reference (openapi.yaml)",
+   "quote": "summary: CreateGroup description: |- Creates a new group.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.bytebase.com/"
+  },
+  {
+   "id": "c46",
+   "url": "https://api.bytebase.com/openapi.yaml",
+   "title": "Bytebase API Reference (openapi.yaml)",
+   "quote": "/v1/groups/{group}: get: tags: - GroupService summary: GetGroup",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.bytebase.com/"
+  },
+  {
+   "id": "c47",
+   "url": "https://api.bytebase.com/openapi.yaml",
+   "title": "Bytebase API Reference (openapi.yaml)",
+   "quote": "Deletes a group. Group owners or users with bb.groups.delete permission can delete.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.bytebase.com/"
+  },
+  {
+   "id": "c48",
+   "url": "https://api.bytebase.com/openapi.yaml",
+   "title": "Bytebase API Reference (openapi.yaml)",
+   "quote": "Updates a group. Group owners or users with bb.groups.update permission can update.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.bytebase.com/"
+  },
+  {
+   "id": "c49",
+   "url": "https://api.bytebase.com/openapi.yaml",
+   "title": "Bytebase API Reference (openapi.yaml)",
+   "quote": "/v1/roles: get: tags: - RoleService summary: ListRoles",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.bytebase.com/"
+  },
+  {
+   "id": "c50",
+   "url": "https://api.bytebase.com/openapi.yaml",
+   "title": "Bytebase API Reference (openapi.yaml)",
+   "quote": "summary: CreateRole description: |- Creates a new custom role.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.bytebase.com/"
+  },
+  {
+   "id": "c51",
+   "url": "https://api.bytebase.com/openapi.yaml",
+   "title": "Bytebase API Reference (openapi.yaml)",
+   "quote": "/v1/roles/{role}: get: tags: - RoleService summary: GetRole",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.bytebase.com/"
+  },
+  {
+   "id": "c52",
+   "url": "https://api.bytebase.com/openapi.yaml",
+   "title": "Bytebase API Reference (openapi.yaml)",
+   "quote": "summary: DeleteRole description: |- Deletes a custom role.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.bytebase.com/"
+  },
+  {
+   "id": "c53",
+   "url": "https://api.bytebase.com/openapi.yaml",
+   "title": "Bytebase API Reference (openapi.yaml)",
+   "quote": "summary: UpdateRole description: |- Updates a role's properties.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.bytebase.com/"
+  },
+  {
+   "id": "c54",
+   "url": "https://api.bytebase.com/openapi.yaml",
+   "title": "Bytebase API Reference (openapi.yaml)",
+   "quote": "/v1/workspaces/{workspace}:getIamPolicy: get: tags: - WorkspaceService summary: GetIamPolicy",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.bytebase.com/"
+  },
+  {
+   "id": "c55",
+   "url": "https://api.bytebase.com/openapi.yaml",
+   "title": "Bytebase API Reference (openapi.yaml)",
+   "quote": "/v1/workspaces/{workspace}:setIamPolicy: post: tags: - WorkspaceService summary: SetIamPolicy",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.bytebase.com/"
+  },
+  {
+   "id": "c56",
+   "url": "https://api.bytebase.com/openapi.yaml",
+   "title": "Bytebase API Reference (openapi.yaml)",
+   "quote": "Mints a new directory sync (SCIM) token, immediately invalidating the previous one.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.bytebase.com/"
+  },
+  {
+   "id": "c57",
+   "url": "https://api.bytebase.com/openapi.yaml",
+   "title": "Bytebase API Reference (openapi.yaml)",
+   "quote": "/v1/workspaces/{workspace}:rotateDirectorySyncToken: post:",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.bytebase.com/"
+  },
+  {
+   "id": "c58",
+   "url": "https://api.bytebase.com/openapi.yaml",
+   "title": "Bytebase API Reference (openapi.yaml)",
+   "quote": "/v1/auditLogs:search: post: tags: - AuditLogService summary: SearchAuditLogs",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.bytebase.com/"
+  },
+  {
+   "id": "c59",
+   "url": "https://api.bytebase.com/openapi.yaml",
+   "title": "Bytebase API Reference (openapi.yaml)",
+   "quote": "/v1/auditLogs:export: post: tags: - AuditLogService summary: ExportAuditLogs",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.bytebase.com/"
+  },
+  {
+   "id": "c60",
+   "url": "https://api.bytebase.com/openapi.yaml",
+   "title": "Bytebase API Reference (openapi.yaml)",
+   "quote": "source means where the user comes from. For now we support Entra ID SCIM sync, so the source could be Entra ID.",
+   "accessed": "2026-10-05",
+   "page_url": "https://api.bytebase.com/"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.bytebase.com/pricing/",
+  "https://docs.bytebase.com/llms.txt",
+  "https://docs.bytebase.com/administration/scim/overview",
+  "https://api.bytebase.com/openapi.yaml",
+  "https://www.okta.com/integrations/bytebase/ (404)"
+ ],
+ "open_questions": [
+  "SCIM deprovisioning behaviour (deactivate vs delete, seat release, session revocation) is not documented.",
+  "SCIM token expiry is not documented.",
+  "SCIM filtering, pagination, PUT and DELETE support are not documented.",
+  "Whether Bytebase Cloud (SaaS) Enterprise supports SCIM the same way as self-hosted is not stated.",
+  "API rate limits are not documented."
+ ]
+}

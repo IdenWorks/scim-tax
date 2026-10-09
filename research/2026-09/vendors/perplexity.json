@@ -1,0 +1,695 @@
+{
+ "slug": "perplexity",
+ "vendor": "Perplexity",
+ "vendor_url": "https://www.perplexity.ai",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Perplexity",
+  "slug": "perplexity",
+  "category": "AI & LLM Tools",
+  "status": "gated",
+  "scim_plan": "Enterprise Pro (50+ seats, contract) or Enterprise Max",
+  "scim_price_text": "Contact Sales (contract required)",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Enterprise Pro",
+  "team_price_text": "Enterprise Pro: $34/seat/mo billed annually",
+  "team_price_per_user_mo": 34,
+  "price_multiplier": null,
+  "sso_plan": "Enterprise Pro",
+  "sso_price_per_user_mo": 34,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": 50,
+  "scim_ops": {
+   "create": true,
+   "update": null,
+   "deactivate": true,
+   "delete": null,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.perplexity.ai/enterprise/pricing",
+  "docs_url": "https://www.perplexity.ai/help-center/en/articles/11652604-scim-based-user-account-management",
+  "evidence": "Perplexity's pricing table marks \"Integrate with your identity provider for SCIM\" as \"Contract required\" on Enterprise Pro and Enterprise Max, and the help centre says SCIM is exclusive to Enterprise organizations with 50 seats or more, or with at least one Enterprise Max user.",
+  "notes": "New row. Enterprise Pro ($34/seat/mo annual) includes SAML SSO; SCIM needs a sales contract and either 50+ seats or one Enterprise Max seat ($271/seat/mo annual), so it is priced as Contact Sales with a 50-seat minimum. Billing FAQ lists $40/mo or $400/yr for Pro and $325/mo or $3,250/yr for Max (the $34 and $271 headline prices are annual equivalents). SSO and SCIM run through WorkOS; IdPs offered in setup are Okta, Entra ID, Google Workspace and Custom SCIM. Okta setup uses a custom SAML app with SCIM API integration (no OIN app found). SCIM deactivation removes the user from the org and frees the seat. Roles are mapped from two IdP groups (Admin/Member). JIT on SSO sign-in is an optional toggle. Audit logs (50+ seats or Enterprise Max) are pushed to a webhook. No user-management API; the public API only has org usage analytics.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": null,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Enterprise Pro",
+   "price_text": "$34/seat/month billed annually ($40 monthly, $400/year per billing FAQ)",
+   "price_per_user_mo": 34,
+   "billing": "annual",
+   "sso": true,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c30",
+    "c25"
+   ],
+   "notes": "SCIM and audit logs on Enterprise Pro need 50+ seats and a contract (\"Contract required\")."
+  },
+  {
+   "name": "Enterprise Max",
+   "price_text": "$271/seat/month billed annually ($325 monthly, $3,250/year per billing FAQ)",
+   "price_per_user_mo": 271,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": true,
+   "cite": [
+    "c3",
+    "c4",
+    "c26",
+    "c7",
+    "c28"
+   ],
+   "notes": "Pricing table still marks SCIM \"Contract required\"; help centre says one Enterprise Max seat unlocks SCIM."
+  },
+  {
+   "name": "Enterprise (custom security tier)",
+   "price_text": "Custom pricing (Contact sales)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": true,
+   "cite": [
+    "c5"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c6",
+   "c5",
+   "c7",
+   "c8",
+   "c10"
+  ],
+  "plan": "Enterprise Pro with 50+ seats (contract) or any org with an Enterprise Max seat",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": null,
+   "token_source": "Settings > Organization > Identity > SCIM > Connect (IdP-specific setup steps, run through WorkOS)",
+   "token_expiry": null,
+   "cite": [
+    "c16",
+    "c19"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c10",
+    "c22"
+   ],
+   "notes": "Inferred from the documented Custom SCIM option and SCIM-synced groups; Perplexity does not publish a SCIM endpoint reference."
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": null,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c17",
+    "c21",
+    "c22",
+    "c14"
+   ]
+  },
+  "deprovision": {
+   "action": "remove_from_org",
+   "frees_seat": true,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c21",
+    "c17",
+    "c24"
+   ],
+   "notes": "Users deactivated in the IdP are removed from the organization; removing a member frees the seat for reassignment but does not reduce the purchased seat count."
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": []
+  },
+  "roles": {
+   "supported": true,
+   "how": "Group-to-role mapping: map one IdP group to the Admin role and one to the Member role in the SCIM role-assignment settings.",
+   "cite": [
+    "c11"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SCIM requires 50+ seats or at least one Enterprise Max seat; the pricing page marks SCIM as \"Contract required\".",
+    "cite": [
+     "c7",
+     "c6"
+    ]
+   },
+   {
+    "text": "SCIM-managed user records cannot be edited or removed in the Perplexity UI.",
+    "cite": [
+     "c13"
+    ]
+   },
+   {
+    "text": "No welcome e-mail is sent to SCIM-provisioned users.",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "text": "Users who already belong to another Perplexity organization are excluded from the SCIM sync.",
+    "cite": [
+     "c15"
+    ]
+   },
+   {
+    "text": "SCIM article says user groups are not supported beyond Admin/Member; the newer Roles & Permissions article describes read-only SCIM-synced groups that depend on plan.",
+    "cite": [
+     "c12",
+     "c22",
+     "c23"
+    ]
+   },
+   {
+    "text": "Domains must be verified before SCIM can be enabled.",
+    "cite": [
+     "c16"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": null,
+  "cite": [
+   "c34"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": null,
+  "base_url": null,
+  "docs_url": null,
+  "auth": {
+   "methods": [],
+   "scopes": [],
+   "cite": []
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": []
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": true,
+   "events": [
+    "member_removed",
+    "member_role_changed",
+    "role_users_changed",
+    "role_groups_changed"
+   ],
+   "cite": [
+    "c27",
+    "c29"
+   ],
+   "notes": "Delivered as audit-log events to a customer webhook."
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Enterprise with 50+ seats or an Enterprise Max seat",
+   "cite": [
+    "c27",
+    "c28"
+   ],
+   "notes": "Push delivery to a customer-configured HTTPS webhook, not a pull API."
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "The public API documents an org-scoped Analytics API (usage per member) but no user, group or seat management endpoints.",
+    "cite": [
+     "c34"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c32",
+    "c33",
+    "c9"
+   ],
+   "notes": "Help centre has Okta set up as a custom SAML 2.0 app with SCIM provisioning enabled on it; no Okta Integration Network page found."
+  },
+  "entra": {
+   "listed": null,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c9"
+   ],
+   "notes": "Entra ID listed in the SCIM setup picker; no Entra gallery tutorial found."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": true,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c9"
+   ],
+   "notes": "Google Workspace listed in the SCIM setup picker; mechanism not documented."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c18",
+   "c10"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.perplexity.ai/enterprise/pricing",
+   "title": "Perplexity Pricing: Plans for Individuals and Enterprise",
+   "quote": "$34 / month per seat when billed annually",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://www.perplexity.ai/enterprise/pricing",
+   "title": "Perplexity Pricing: Plans for Individuals and Enterprise",
+   "quote": "Manage user permissions and integrate with SSO",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://www.perplexity.ai/enterprise/pricing",
+   "title": "Perplexity Pricing: Plans for Individuals and Enterprise",
+   "quote": "$271 / month per seat when billed annually",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://www.perplexity.ai/enterprise/pricing",
+   "title": "Perplexity Pricing: Plans for Individuals and Enterprise",
+   "quote": "Premium security features including SCIM, audit logs, and data retention settings",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://www.perplexity.ai/enterprise/pricing",
+   "title": "Perplexity Pricing: Plans for Individuals and Enterprise",
+   "quote": "For organizations that need enterprise-grade controls like SCIM, role-based access control, audit logs, and other scaled security features, contact us to discuss custom pricing.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://www.perplexity.ai/enterprise/pricing",
+   "title": "Perplexity Pricing: Plans for Individuals and Enterprise",
+   "quote": "Integrate with your identity provider for SCIM",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://www.perplexity.ai/help-center/en/articles/11652604-scim-based-user-account-management.md",
+   "title": "SCIM-based user account management - Perplexity Help Center",
+   "quote": "Please note, SCIM is exclusive to Enterprise Organization’s with 50 seats or more, or with at least one Enterprise Max user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.perplexity.ai/help-center/en/articles/11652604-scim-based-user-account-management"
+  },
+  {
+   "id": "c8",
+   "url": "https://www.perplexity.ai/help-center/en/articles/11652604-scim-based-user-account-management.md",
+   "title": "SCIM-based user account management - Perplexity Help Center",
+   "quote": "If your organization has fewer than 50 seats, you can upgrade at least one seat to Enterprise Max to access SCIM-based user management.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.perplexity.ai/help-center/en/articles/11652604-scim-based-user-account-management"
+  },
+  {
+   "id": "c9",
+   "url": "https://www.perplexity.ai/help-center/en/articles/11652604-scim-based-user-account-management.md",
+   "title": "SCIM-based user account management - Perplexity Help Center",
+   "quote": "Select your identity provider (Okta, Entra ID, Google Workspace and more)",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.perplexity.ai/help-center/en/articles/11652604-scim-based-user-account-management"
+  },
+  {
+   "id": "c10",
+   "url": "https://www.perplexity.ai/help-center/en/articles/11652604-scim-based-user-account-management.md",
+   "title": "SCIM-based user account management - Perplexity Help Center",
+   "quote": "We also offer Custom SCIM which you will find at the bottom of the list.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.perplexity.ai/help-center/en/articles/11652604-scim-based-user-account-management"
+  },
+  {
+   "id": "c11",
+   "url": "https://www.perplexity.ai/help-center/en/articles/11652604-scim-based-user-account-management.md",
+   "title": "SCIM-based user account management - Perplexity Help Center",
+   "quote": "To assign member and admin roles to user groups, create two separate Perplexity user groups within your IdP, one group that is assigned the “member” role, and another that is assigned the “admin” role.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.perplexity.ai/help-center/en/articles/11652604-scim-based-user-account-management"
+  },
+  {
+   "id": "c12",
+   "url": "https://www.perplexity.ai/help-center/en/articles/11652604-scim-based-user-account-management.md",
+   "title": "SCIM-based user account management - Perplexity Help Center",
+   "quote": "User groups within Perplexity are currently not supported (e.g. users within the “engineering” user group) outside of distinguishing “Admin” users and “Member” users.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.perplexity.ai/help-center/en/articles/11652604-scim-based-user-account-management"
+  },
+  {
+   "id": "c13",
+   "url": "https://www.perplexity.ai/help-center/en/articles/11652604-scim-based-user-account-management.md",
+   "title": "SCIM-based user account management - Perplexity Help Center",
+   "quote": "User records managed through SCIM can’t be edited through the Perplexity UI (e.g. removing the user).",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.perplexity.ai/help-center/en/articles/11652604-scim-based-user-account-management"
+  },
+  {
+   "id": "c14",
+   "url": "https://www.perplexity.ai/help-center/en/articles/11652604-scim-based-user-account-management.md",
+   "title": "SCIM-based user account management - Perplexity Help Center",
+   "quote": "No welcome e-mails are sent out to users when added via SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.perplexity.ai/help-center/en/articles/11652604-scim-based-user-account-management"
+  },
+  {
+   "id": "c15",
+   "url": "https://www.perplexity.ai/help-center/en/articles/11652604-scim-based-user-account-management.md",
+   "title": "SCIM-based user account management - Perplexity Help Center",
+   "quote": "Users that are members of other organizations will be excluded from the SCIM sync.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.perplexity.ai/help-center/en/articles/11652604-scim-based-user-account-management"
+  },
+  {
+   "id": "c16",
+   "url": "https://www.perplexity.ai/help-center/en/articles/11652604-scim-based-user-account-management.md",
+   "title": "SCIM-based user account management - Perplexity Help Center",
+   "quote": "Ensure you verify your domains before enabling SCIM",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.perplexity.ai/help-center/en/articles/11652604-scim-based-user-account-management"
+  },
+  {
+   "id": "c17",
+   "url": "https://www.perplexity.ai/help-center/en/articles/11199936-single-sign-on-sso-troubleshooting.md",
+   "title": "Single Sign-On (SSO) Troubleshooting - Perplexity Help Center",
+   "quote": "When a user is deprovisioned from the IdP, SCIM sends a request to Perplexity to disable or remove the user account automatically.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.perplexity.ai/help-center/en/articles/11199936-single-sign-on-sso-troubleshooting"
+  },
+  {
+   "id": "c18",
+   "url": "https://www.perplexity.ai/help-center/en/articles/11199936-single-sign-on-sso-troubleshooting.md",
+   "title": "Single Sign-On (SSO) Troubleshooting - Perplexity Help Center",
+   "quote": "Users are created in Perplexity when they first log in via SSO/IdP, not when they are added in the IdP.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.perplexity.ai/help-center/en/articles/11199936-single-sign-on-sso-troubleshooting"
+  },
+  {
+   "id": "c19",
+   "url": "https://www.perplexity.ai/help-center/en/articles/11199936-single-sign-on-sso-troubleshooting.md",
+   "title": "Single Sign-On (SSO) Troubleshooting - Perplexity Help Center",
+   "quote": "Our SSO platform (WorkOS) helps organizations manage user access effectively.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.perplexity.ai/help-center/en/articles/11199936-single-sign-on-sso-troubleshooting"
+  },
+  {
+   "id": "c20",
+   "url": "https://www.perplexity.ai/help-center/en/articles/11199936-single-sign-on-sso-troubleshooting.md",
+   "title": "Single Sign-On (SSO) Troubleshooting - Perplexity Help Center",
+   "quote": "However, the user’s account and data will remain in the Perplexity system until an admin manually deletes or removes it.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.perplexity.ai/help-center/en/articles/11199936-single-sign-on-sso-troubleshooting"
+  },
+  {
+   "id": "c21",
+   "url": "https://www.perplexity.ai/help-center/en/articles/11187754-enterprise-roles-and-permissions.md",
+   "title": "Enterprise roles and permissions - Perplexity Help Center",
+   "quote": "Users deactivated through your identity provider are removed from your organization automatically.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.perplexity.ai/help-center/en/articles/11187754-enterprise-roles-and-permissions"
+  },
+  {
+   "id": "c22",
+   "url": "https://www.perplexity.ai/help-center/en/articles/11187754-enterprise-roles-and-permissions.md",
+   "title": "Enterprise roles and permissions - Perplexity Help Center",
+   "quote": "groups from your identity provider appear automatically and display a SCIM badge. These groups are read-only in Perplexity, and membership changes must be made in your identity provider.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.perplexity.ai/help-center/en/articles/11187754-enterprise-roles-and-permissions"
+  },
+  {
+   "id": "c23",
+   "url": "https://www.perplexity.ai/help-center/en/articles/11187754-enterprise-roles-and-permissions.md",
+   "title": "Enterprise roles and permissions - Perplexity Help Center",
+   "quote": "Custom roles, group management, and SCIM directory group sync also depend on your organization's plan.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.perplexity.ai/help-center/en/articles/11187754-enterprise-roles-and-permissions"
+  },
+  {
+   "id": "c24",
+   "url": "https://www.perplexity.ai/help-center/en/articles/10352978-user-management-for-enterprise-organizations.md",
+   "title": "User Management for Enterprise organizations - Perplexity Help Center",
+   "quote": "Their seat becomes available for another member straight away.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.perplexity.ai/help-center/en/articles/10352978-user-management-for-enterprise-organizations"
+  },
+  {
+   "id": "c25",
+   "url": "https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions.md",
+   "title": "Enterprise Pricing and Billing: Frequently Asked Questions - Perplexity Help Center",
+   "quote": "Enterprise Pro: Each seat is $40 per month or $400 per year",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions"
+  },
+  {
+   "id": "c26",
+   "url": "https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions.md",
+   "title": "Enterprise Pricing and Billing: Frequently Asked Questions - Perplexity Help Center",
+   "quote": "Enterprise Max: Each seat is $325 per month or $3,250 per year",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions"
+  },
+  {
+   "id": "c27",
+   "url": "https://www.perplexity.ai/help-center/en/articles/11652747-audit-logs.md",
+   "title": "Audit Logs - Perplexity Help Center",
+   "quote": "Audit Logs are delivered in real time to a webhook endpoint that you configure via HTTP POST requests",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.perplexity.ai/help-center/en/articles/11652747-audit-logs"
+  },
+  {
+   "id": "c28",
+   "url": "https://www.perplexity.ai/help-center/en/articles/11652747-audit-logs.md",
+   "title": "Audit Logs - Perplexity Help Center",
+   "quote": "Audit Logs are exclusive to Enterprise Organizations with 50 seats or more, or with at least one Enterprise Max user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.perplexity.ai/help-center/en/articles/11652747-audit-logs"
+  },
+  {
+   "id": "c29",
+   "url": "https://www.perplexity.ai/help-center/en/articles/11652747-audit-logs.md",
+   "title": "Audit Logs - Perplexity Help Center",
+   "quote": "An admin removed a member from the organization",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.perplexity.ai/help-center/en/articles/11652747-audit-logs"
+  },
+  {
+   "id": "c30",
+   "url": "https://www.perplexity.ai/help-center/en/articles/11200832-sso-integration-getting-started.md",
+   "title": "SSO Integration: Getting Started - Perplexity Help Center",
+   "quote": "We support single sign-on (SSO) with Enterprise Pro.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.perplexity.ai/help-center/en/articles/11200832-sso-integration-getting-started"
+  },
+  {
+   "id": "c31",
+   "url": "https://www.perplexity.ai/help-center/en/articles/11200832-sso-integration-getting-started.md",
+   "title": "SSO Integration: Getting Started - Perplexity Help Center",
+   "quote": "Note: Users must be invited to the organization to sign in using SSO.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.perplexity.ai/help-center/en/articles/11200832-sso-integration-getting-started"
+  },
+  {
+   "id": "c32",
+   "url": "https://www.perplexity.ai/help-center/en/articles/12844186-setting-up-sso-with-okta.md",
+   "title": "Setting up SSO with Okta - Perplexity Help Center",
+   "quote": "SAML Application Creation: Ability to create custom SAML 2.0 integrations",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.perplexity.ai/help-center/en/articles/12844186-setting-up-sso-with-okta"
+  },
+  {
+   "id": "c33",
+   "url": "https://www.perplexity.ai/help-center/en/articles/12844186-setting-up-sso-with-okta.md",
+   "title": "Setting up SSO with Okta - Perplexity Help Center",
+   "quote": "Optional: Configure Automated Provisioning (SCIM)",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.perplexity.ai/help-center/en/articles/12844186-setting-up-sso-with-okta"
+  },
+  {
+   "id": "c34",
+   "url": "https://docs.perplexity.ai/llms.txt",
+   "title": "Perplexity API docs index (llms.txt)",
+   "quote": "Query your organization's Perplexity usage analytics programmatically with a free, org-scoped API key",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.perplexity.ai/docs/admin/computer-analytics-api"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "SCIM article says Perplexity user groups are not supported beyond Admin and Member, while the Roles & Permissions article describes read-only SCIM-synced groups (plan-dependent).",
+   "cite": [
+    "c12",
+    "c22"
+   ]
+  },
+  {
+   "text": "Pricing page shows Enterprise Pro at $34 and Max at $271 per seat per month billed annually; billing FAQ gives $400 and $3,250 per year ($33.33 and $270.83 per month).",
+   "cite": [
+    "c1",
+    "c25",
+    "c3",
+    "c26"
+   ]
+  },
+  {
+   "text": "SSO Getting Started says users must be invited to sign in with SSO, while the SSO troubleshooting article documents an optional JIT provisioning toggle.",
+   "cite": [
+    "c31",
+    "c18"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.perplexity.ai/enterprise/pricing",
+  "https://www.perplexity.ai/help-center/_llms/other/en.md (help-centre index)",
+  "https://www.perplexity.ai/help-center/en/articles/11652604-scim-based-user-account-management",
+  "https://www.perplexity.ai/help-center/en/articles/11199936-single-sign-on-sso-troubleshooting",
+  "https://www.perplexity.ai/help-center/en/articles/11187754-enterprise-roles-and-permissions",
+  "https://www.perplexity.ai/help-center/en/articles/10352978-user-management-for-enterprise-organizations",
+  "https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions",
+  "https://www.perplexity.ai/help-center/en/articles/11652747-audit-logs",
+  "https://www.perplexity.ai/help-center/en/articles/11200832-sso-integration-getting-started",
+  "https://www.perplexity.ai/help-center/en/articles/12844186-setting-up-sso-with-okta",
+  "https://docs.perplexity.ai/llms.txt (API reference index: no user endpoints)",
+  "https://www.okta.com/integrations/perplexity/ (404), /perplexity-enterprise/ (404), /perplexity-ai/ (404)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/perplexity-tutorial (404)"
+ ],
+ "open_questions": [
+  "SCIM base URL, token type and expiry are shown in-app (WorkOS) and not documented publicly.",
+  "Supported SCIM attributes, filtering and pagination are not documented.",
+  "Whether SCIM updates (PUT/PATCH), hard delete and reactivation are supported is not documented.",
+  "Whether the Okta, Entra and Google options are catalogue apps or generic SCIM connections is not documented; OneLogin and JumpCloud not checked."
+ ]
+}

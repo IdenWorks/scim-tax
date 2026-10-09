@@ -1,0 +1,561 @@
+{
+ "slug": "netskope",
+ "vendor": "Netskope",
+ "vendor_url": "https://www.netskope.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Netskope",
+  "slug": "netskope",
+  "status": "gated",
+  "scim_plan": "Contact Sales",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.netskope.com/get-started",
+  "docs_url": "https://docs.netskope.com/en/user-import-methods-and-supported-attributes/",
+  "evidence": "Netskope's docs say users are imported 'By supporting both SCIM 2.0 and the Netskope Directory Importer', with a SCIM endpoint at https://<tenant-name>.goskope.com/api/v2/scim; Netskope publishes no prices, only a contact form.",
+  "notes": "Quote-only: Netskope (SASE/SSE platform) publishes no plans or prices; every purchase goes through the Get Started contact form, so SCIM can only be bought through sales. SCIM provisions the protected end users and groups that Netskope policies and Netskope Client enrollment use (users must exist in the tenant), not only admins. SCIM 2.0 at https://<tenant>.goskope.com/api/v2/scim, bearer token from an RBACv3 service account (API key with admin-set expiry) or OAuth2 client credentials for Entra; bearer token auth is to be deprecated. Okta (Netskope User Enrollment) and Entra (Netskope User Authentication) gallery apps provision. Directory Importer (on-prem AD) and manual import are alternatives. No public pricing page exists (www.netskope.com/pricing returns 403/404).",
+  "confidence": "low",
+  "api_provisioning": false,
+  "user_api_available": null,
+  "user_api_plan": null,
+  "api_tax": null,
+  "last_verified": "2026-10-05",
+  "first_added": "2026-09",
+  "status_prev": null,
+  "category": "Security & Identity"
+ },
+ "plans": [
+  {
+   "name": "Custom quote (no public plans)",
+   "price_text": "Contact Sales",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c2",
+   "c3",
+   "c5"
+  ],
+  "plan": "Contact Sales",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://<tenant-name>.goskope.com/api/v2/scim (EU: https://<tenant-name>.eu.goskope.com/api/v2/scim)",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Settings > Administration & Roles > Administrators > Service Accounts (RBACv3 role with End User Provisioning > Users & Groups > Manage); OAuth2 client credentials also supported for Entra",
+   "token_expiry": "admin-set when generating the service-account API key",
+   "cite": [
+    "c6",
+    "c7",
+    "c8",
+    "c21"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": true,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c3",
+    "c4",
+    "c24"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": null,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c4",
+    "c10",
+    "c11"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c4",
+    "c10",
+    "c15"
+   ],
+   "notes": "Okta's To App setting deactivates users (SCIM 'Toggle Active'); DELETE User is also supported. Once a user is removed from the tenant, Netskope Client on their devices is disabled, or uninstalled automatically when the Client Configuration option is on."
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "emails (single value only)",
+    "active"
+   ],
+   "enterprise": [
+    "department",
+    "division",
+    "organization",
+    "manager",
+    "costCenter"
+   ],
+   "custom": {
+    "supported": true,
+    "how": "Define urn:ietf:params:scim:schemas:extension:tenant:2.0:User via PUT /api/v2/scim/Schemas/...; single-value strings, name max 32 chars, value max 64 chars. A Netskope platform extension urn:ietf:params:scim:schemas:extension:netskope:2.0:User also exists."
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c2",
+    "c12",
+    "c13",
+    "c14",
+    "c23",
+    "c24"
+   ],
+   "notes": "The import-methods table lists UPN (userName), Email ID, First/Last Name, Groups and custom attributes for SCIM; OU is not supported over SCIM. Group attribute names are inferred from standard SCIM group calls (Create Group, Add User to Group)."
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "REST API v2 rate limits are applied per endpoint (RateLimit-Limit per second header); SCIM-specific limits not documented.",
+   "cite": [
+    "c19"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Email attribute is single-valued; custom attributes must be single-value strings (name 32 chars, value 64 chars max).",
+    "cite": [
+     "c12",
+     "c14"
+    ]
+   },
+   {
+    "text": "Okta app does not support Sync passwords, Import Users, Import Groups or Import Profile Updates.",
+    "cite": [
+     "c22"
+    ]
+   },
+   {
+    "text": "Only one import method (SCIM or Directory Importer) may update a given user.",
+    "cite": [
+     "c2"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": null,
+  "cite": [
+   "c18"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://<tenant-name>.goskope.com/api/v2",
+  "docs_url": "https://docs.netskope.com/en/rest-api-v2-overview-312207/",
+  "auth": {
+   "methods": [
+    "api_key"
+   ],
+   "scopes": [],
+   "cite": [
+    "c18",
+    "c7"
+   ]
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": []
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "Rate limits are applied per endpoint; RateLimit-Limit, RateLimit-Remaining and RateLimit-Reset headers are returned.",
+   "cite": [
+    "c19"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "The full REST API v2 endpoint list is in a Swagger UI inside the customer's tenant; no public non-SCIM user-management endpoints were found.",
+    "cite": [
+     "c18"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/netskope-user-enrollment/",
+   "cite": [
+    "c16",
+    "c10"
+   ],
+   "notes": "Netskope User Enrollment app (SAML + SCIM)."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/netskope-user-authentication-tutorial",
+   "cite": [
+    "c17",
+    "c9",
+    "c8"
+   ],
+   "notes": "Netskope User Authentication gallery app; Microsoft's tutorial covers SSO, Netskope's doc covers provisioning."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": "Netskope Directory Importer (on-prem Active Directory) and manual user import",
+  "docs_public": true,
+  "cite": [
+   "c2",
+   "c20"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.netskope.com/get-started",
+   "title": "Get Started with Netskope - Netskope",
+   "quote": "Complete the form and we will be in touch shortly.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://docs.netskope.com/en/user-import-methods-and-supported-attributes/",
+   "title": "User Import Methods and Supported Attributes - Netskope Technical Documentation",
+   "quote": "By supporting both SCIM 2.0 and the Netskope Directory Importer , organizations can securely import mandatory attributes",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://docs.netskope.com/en/user-import-methods-and-supported-attributes/",
+   "title": "User Import Methods and Supported Attributes - Netskope Technical Documentation",
+   "quote": "Netskope SCIM implementation follows the RFC 7643 & 7644 standards and support SCIM calls from IDPs that follows the same SCIM RFC standards.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://docs.netskope.com/en/user-import-methods-and-supported-attributes/",
+   "title": "User Import Methods and Supported Attributes - Netskope Technical Documentation",
+   "quote": "Create User Create Group Delete User Delete Group Add User to Group Remove User to Group Toggle Active",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://docs.netskope.com/en/scim-user-provisioning-with-rbacv3/",
+   "title": "SCIM User Provisioning with RBACv3 - Netskope Technical Documentation",
+   "quote": "SCIM Base URL: https://<tenant-name>.goskope.com/api/v2/scim or https://<tenant-name>.eu.goskope.com/api/v2/scim",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://docs.netskope.com/en/scim-user-provisioning-with-rbacv3/",
+   "title": "SCIM User Provisioning with RBACv3 - Netskope Technical Documentation",
+   "quote": "Ensure the IdP is configured to use the API token in the Authorization: Bearer header for all SCIM API calls.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://docs.netskope.com/en/scim-user-provisioning-with-rbacv3/",
+   "title": "SCIM User Provisioning with RBACv3 - Netskope Technical Documentation",
+   "quote": "Under REST API Authentication Methods, select API Key. and set the token expiration as required.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.netskope.com/en/integration-with-entra-id-for-user-provisioning/",
+   "title": "User Provisioning with Entra ID - Netskope Technical Documentation",
+   "quote": "Netskope now supports OAuth2 Client Credentials flow, which provides a more secure, machine-to-machine authentication method for entitling Microsoft Entra ID to work with Netskope.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.netskope.com/en/integration-with-entra-id-for-user-provisioning/",
+   "title": "User Provisioning with Entra ID - Netskope Technical Documentation",
+   "quote": "select Netskope User Authentication from the gallery.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.netskope.com/en/integration-with-okta-for-user-provisioning/",
+   "title": "User Provisioning with OKTA - Netskope Technical Documentation",
+   "quote": "select Create Users , Update User Attributes , and Deactivate Users to complete the Netskope and Okta Lifecycle management capabilities.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.netskope.com/en/integration-with-okta-for-user-provisioning/",
+   "title": "User Provisioning with OKTA - Netskope Technical Documentation",
+   "quote": "Push Groups : Groups and their members in Okta can be pushed to the Netskope tenant.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.netskope.com/en/custom-scim-attributes/",
+   "title": "Custom SCIM Attributes - Netskope Technical Documentation",
+   "quote": "the Netskope SCIM implementation only supports a single value for the email attribute.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.netskope.com/en/custom-scim-attributes/",
+   "title": "Custom SCIM Attributes - Netskope Technical Documentation",
+   "quote": "Includes standardized corporate metadata such as department, division, organization, and manager.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.netskope.com/en/custom-scim-attributes/",
+   "title": "Custom SCIM Attributes - Netskope Technical Documentation",
+   "quote": "Maximum length of a custom attribute name – 32 characters",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.netskope.com/en/deprovisioning-users/",
+   "title": "Deprovisioning Users - Netskope Technical Documentation",
+   "quote": "the Netskope Client installed in his devices are uninstalled automatically if the administrator has configured the option",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://www.okta.com/integrations/netskope-user-enrollment/",
+   "title": "Integrate Netskope User Enrollment with Okta",
+   "quote": "enables provisioning and deprovisioning via SCIM",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c17",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/netskope-user-authentication-tutorial",
+   "title": "Configure Netskope User Authentication for Single sign-on with Microsoft Entra ID - Microsoft Entra ID | Microsoft Learn",
+   "quote": "Enable your users to be automatically signed-in to Netskope User Authentication with their Microsoft Entra accounts.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.netskope.com/en/rest-api-v2-overview-312207/",
+   "title": "REST API v2 Overview - Netskope Technical Documentation",
+   "quote": "To see API parameters information, click the API Documentation link on the REST API v2 page, which opens the Swagger UI.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.netskope.com/en/using-the-rest-api-v2-dataexport-iterator-endpoints/",
+   "title": "Using the REST API v2 dataexport Iterator Endpoints - Netskope Technical Documentation",
+   "quote": "Rate limits are applied by endpoint, and this value provides the number allowed per second",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.netskope.com/en/provisioning-users-for-netskope-client/",
+   "title": "Provisioning Users for Netskope Client - Netskope Technical Documentation",
+   "quote": "it is mandatory to populate users and groups as described in this article.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.netskope.com/en/scim-user-provisioning-with-rbacv3/",
+   "title": "SCIM User Provisioning with RBACv3 - Netskope Technical Documentation",
+   "quote": "To revoke access, delete the Service Account or remove the SCIM role assignment.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c22",
+   "url": "https://docs.netskope.com/en/integration-with-okta-for-user-provisioning/",
+   "title": "User Provisioning with OKTA - Netskope Technical Documentation",
+   "quote": "Import Profile Updates",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c23",
+   "url": "https://docs.netskope.com/en/custom-scim-attributes/",
+   "title": "Custom SCIM Attributes - Netskope Technical Documentation",
+   "quote": "urn:ietf:params:scim:schemas:extension:netskope:2.0:User",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c24",
+   "url": "https://docs.netskope.com/en/custom-scim-attributes/",
+   "title": "Custom SCIM Attributes - Netskope Technical Documentation",
+   "quote": "curl --location --request PUT 'https:// <tenant-url> /api/v2/scim/Schemas/urn:ietf:params:scim:schemas:extension:tenant:2.0:User'",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "Netskope's Okta provisioning doc lists 'Update user attributes' under Unsupported Features, but its steps tell admins to enable Update User Attributes in the To App settings.",
+   "cite": [
+    "c22",
+    "c10"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.netskope.com/pricing (403 to curl, ERR_TOO_MANY_RETRIES in render.cjs, 404 to WebFetch)",
+  "https://www.netskope.com/page-sitemap.xml (no pricing page)",
+  "https://www.netskope.com/get-started",
+  "https://docs.netskope.com/topic-sitemap.xml",
+  "https://docs.netskope.com/en/scim-user-provisioning-with-rbacv3/",
+  "https://docs.netskope.com/en/user-import-methods-and-supported-attributes/",
+  "https://docs.netskope.com/en/custom-scim-attributes/",
+  "https://docs.netskope.com/en/integration-with-okta-for-user-provisioning/",
+  "https://docs.netskope.com/en/integration-with-entra-id-for-user-provisioning/",
+  "https://docs.netskope.com/en/deprovisioning-users/",
+  "https://docs.netskope.com/en/rest-api-v2-overview-312207/",
+  "https://www.okta.com/integrations/netskope-user-enrollment/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/netskope-user-authentication-tutorial"
+ ],
+ "open_questions": [
+  "No public pricing: which Netskope One bundles include SCIM and SSO, and at what price, is not published.",
+  "Whether a non-SCIM user-management REST API exists is not documented publicly (Swagger is inside the tenant).",
+  "Audit-log API endpoint and plan not confirmed from public docs.",
+  "SCIM filtering, pagination, ServiceProviderConfig/ResourceTypes endpoints and SCIM rate limits are not documented.",
+  "Google Workspace, OneLogin and JumpCloud catalogue provisioning not checked/confirmed.",
+  "Whether a deprovisioned user frees a licence is not documented."
+ ]
+}

@@ -1,0 +1,903 @@
+{
+ "slug": "slack",
+ "vendor": "Slack",
+ "vendor_url": "https://slack.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Slack",
+  "slug": "slack",
+  "category": "Collaboration & Messaging",
+  "status": "gated",
+  "scim_plan": "Business+",
+  "scim_price_text": "Business+: $15/u/mo (annual)",
+  "scim_price_per_user_mo": 15,
+  "team_plan": "Pro",
+  "team_price_text": "Pro: $7.25/u/mo (annual), $8.75 monthly",
+  "team_price_per_user_mo": 7.25,
+  "price_multiplier": 2.1,
+  "sso_plan": "Business+",
+  "sso_price_per_user_mo": 15,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": false,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": "native",
+   "onelogin": null,
+   "jumpcloud": "native",
+   "generic": true
+  },
+  "pricing_page_url": "https://slack.com/pricing",
+  "docs_url": "https://docs.slack.dev/admins/scim-api/",
+  "evidence": "Slack's SCIM help article says SCIM provisioning is \"Available on the Business+ and Enterprise plans\", and the developer docs say \"The SCIM API is only available to Slack workspaces on Business+ or Enterprise plans\".",
+  "notes": "Status, plans and prices unchanged since June: Pro $7.25 and Business+ $15 per user/month annual ($8.75 and $18 monthly; the page currently shows a 50%-off-for-3-months monthly promo). SAML SSO starts on Business+ (Pro has OAuth with Google only); Enterprise+ is Contact Sales and adds multi-SAML and SCIM for guests. New nuance: the SCIM help article says SCIM is also available on Free and Pro if a Salesforce org is connected to Slack. SCIM 1.1 and 2.0 at api.slack.com/scim, OAuth token with the admin scope; DELETE only deactivates (no permanent delete). Admin user-management Web API methods (admin.users.*, admin.roles.*) and the Audit Logs API are Enterprise-only.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Enterprise+",
+  "api_tax": true,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "$0",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": false,
+   "cite": [
+    "c3",
+    "c4",
+    "c6"
+   ],
+   "notes": "SCIM possible only with a connected Salesforce org."
+  },
+  {
+   "name": "Pro",
+   "price_text": "$7.25/user/mo annual; $8.75 monthly",
+   "price_per_user_mo": 7.25,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": false,
+   "cite": [
+    "c1",
+    "c4",
+    "c3",
+    "c6",
+    "c33"
+   ],
+   "notes": "SSO is OAuth with Google only; SCIM only with a connected Salesforce org."
+  },
+  {
+   "name": "Business+",
+   "price_text": "$15/user/mo annual; $18 monthly",
+   "price_per_user_mo": 15,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": false,
+   "audit_log_api": false,
+   "cite": [
+    "c2",
+    "c4",
+    "c3",
+    "c6",
+    "c33",
+    "c45"
+   ]
+  },
+  {
+   "name": "Enterprise+",
+   "price_text": "Contact sales for pricing",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c5",
+    "c4",
+    "c6",
+    "c33",
+    "c45"
+   ],
+   "notes": "Multi-SAML; SCIM supports guests."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c3",
+   "c6",
+   "c11",
+   "c12",
+   "c13"
+  ],
+  "plan": "Business+",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://api.slack.com/scim/VERSION/ (v1 or v2)",
+  "auth": {
+   "method": "oauth2",
+   "token_source": "Slack app with the admin OAuth scope, installed by an Owner/Admin (org install on Enterprise)",
+   "token_expiry": null,
+   "cite": [
+    "c14",
+    "c8"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": true,
+   "Schemas": true,
+   "ResourceTypes": true,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c20",
+    "c21",
+    "c12"
+   ],
+   "notes": "Reference lists GET /ServiceProviderConfigs, /ResourceTypes, /Schemas, /Users and /Groups (GET, POST, PUT, PATCH, DELETE)."
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": false,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c12",
+    "c19",
+    "c22",
+    "c23",
+    "c15",
+    "c52"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": true,
+   "revokes_sessions": true,
+   "data_retained": "Messages and files are not deleted; the user is removed from all channels.",
+   "cite": [
+    "c22",
+    "c15",
+    "c31",
+    "c32"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName",
+    "email",
+    "restricted",
+    "ultra_restricted"
+   ],
+   "cite": [
+    "c24"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": 1000,
+   "cite": [
+    "c25"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.familyName",
+    "nickName",
+    "displayName",
+    "emails[0].value",
+    "profileUrl",
+    "photos[0].value",
+    "groups",
+    "title",
+    "timezone",
+    "active",
+    "password",
+    "addresses (locality, country, postalCode)",
+    "name.honorificPrefix",
+    "locale",
+    "phoneNumbers[0].value",
+    "preferredLanguage",
+    "roles",
+    "userType"
+   ],
+   "enterprise": [
+    "costCenter",
+    "department",
+    "division",
+    "employeeNumber",
+    "manager.managerId",
+    "organization"
+   ],
+   "custom": {
+    "supported": true,
+    "how": "urn:ietf:params:scim:schemas:extension:slack:profile:2.0:User (e.g. profile.startDate) and custom profile fields, max 50; urn:scim:schemas:extension:slack:guest:2.0:User marks multi-channel guests"
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c26",
+    "c27",
+    "c28",
+    "c29"
+   ]
+  },
+  "roles": {
+   "supported": null,
+   "how": "Guest status via the slack:guest extension (multi-channel guests, Enterprise only); the roles attribute creates a profile field and does not set admin/owner roles (not documented as a role mapping).",
+   "cite": [
+    "c28",
+    "c26"
+   ]
+  },
+  "rate_limits": {
+   "text": "Rate limited; HTTP 429 when limited (no numbers published on the SCIM pages).",
+   "cite": [
+    "c16"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Users cannot be permanently deleted, only deactivated.",
+    "cite": [
+     "c15"
+    ]
+   },
+   {
+    "text": "Single-Channel Guests cannot be fully provisioned via SCIM.",
+    "cite": [
+     "c17"
+    ]
+   },
+   {
+    "text": "Re-provisioning a duplicate email (even of a deactivated user) fails until the email is changed manually.",
+    "cite": [
+     "c18"
+    ]
+   },
+   {
+    "text": "The Workspace Primary Owner cannot be deactivated.",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "text": "Free and Pro get SCIM only when a Salesforce org is connected.",
+    "cite": [
+     "c7"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c33",
+   "c34",
+   "c35"
+  ],
+  "plan": "Enterprise+",
+  "api_tax": true,
+  "style": "REST",
+  "base_url": "https://slack.com/api/",
+  "docs_url": "https://docs.slack.dev/admins/managing-users/",
+  "auth": {
+   "methods": [
+    "oauth2"
+   ],
+   "scopes": [
+    "admin.users:read",
+    "admin.users:write",
+    "admin.roles:write",
+    "users:read"
+   ],
+   "cite": [
+    "c34",
+    "c51",
+    "c41"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": true,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c34",
+    "c35",
+    "c37",
+    "c38",
+    "c40",
+    "c41"
+   ],
+   "notes": "admin.users.remove removes a user from a workspace; deactivation is through SCIM. users.list (users:read) is a read-only Web API method on all plans."
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "https://slack.com/api/admin.users.invite",
+    "purpose": "Invite a user to a workspace (Enterprise)",
+    "cite": [
+     "c35"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "https://slack.com/api/admin.users.assign",
+    "purpose": "Assign an existing org user to a workspace",
+    "cite": [
+     "c39"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "https://slack.com/api/admin.users.remove",
+    "purpose": "Remove a user from a workspace",
+    "cite": [
+     "c36"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "https://slack.com/api/admin.users.list",
+    "purpose": "List users on a workspace",
+    "cite": [
+     "c37"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "https://slack.com/api/admin.users.setAdmin",
+    "purpose": "Set a user as admin",
+    "cite": [
+     "c38"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "https://slack.com/api/admin.roles.addAssignments",
+    "purpose": "Add role assignments",
+    "cite": [
+     "c40"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "https://slack.com/api/admin.users.session.reset",
+    "purpose": "Wipe a user's sessions",
+    "cite": [
+     "c42"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "https://slack.com/api/users.list",
+    "purpose": "List workspace users (read-only, all plans)",
+    "cite": [
+     "c41"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": true,
+   "events": [
+    "team_join",
+    "user_change"
+   ],
+   "cite": [
+    "c43",
+    "c44"
+   ]
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Enterprise+",
+   "cite": [
+    "c45"
+   ]
+  },
+  "rate_limits": {
+   "text": "Web API methods are tiered (admin.users.invite Tier 2, admin.users.list Tier 4).",
+   "cite": [
+    "c35",
+    "c37"
+   ]
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/slack/",
+   "cite": [
+    "c46",
+    "c9"
+   ],
+   "notes": "OIN page checks SAML, SWA, SCIM, Create, Update, Deactivate, Group Push, Group Linking, Schema Discovery."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/slack-provisioning-tutorial",
+   "cite": [
+    "c47",
+    "c48"
+   ],
+   "notes": "Microsoft tutorial covers Business+; Enterprise Grid customers follow Slack's instructions."
+  },
+  "google": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://support.google.com/a/answer/6399782?hl=en",
+   "cite": [
+    "c49",
+    "c9"
+   ]
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "Slack lists OneLogin as a SCIM option but links to a OneLogin knowledge-base page that blocks bots; not verified."
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://jumpcloud.com/support/integrate-with-slack",
+   "cite": [
+    "c50"
+   ]
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": "Live syncing of Active Directory groups via supported IdPs",
+  "docs_public": true,
+  "cite": [
+   "c8"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://slack.com/pricing",
+   "title": "Slack Pricing Plans",
+   "quote": "$7.25 USD per user / month, when paying annually",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://slack.com/pricing",
+   "title": "Slack Pricing Plans",
+   "quote": "$15 USD per user / month, when paying annually",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://slack.com/pricing",
+   "title": "Slack Pricing Plans",
+   "quote": "Slack supports member provisioning with SCIM. Use a connector app and supported identity provider.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://slack.com/pricing",
+   "title": "Slack Pricing Plans",
+   "quote": "OAuth with Google SAML-based Supports Multi-SAML",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://slack.com/pricing",
+   "title": "Slack Pricing Plans",
+   "quote": "Contact sales for pricing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://slack.com/help/articles/212572638-Manage-members-with-SCIM-provisioning",
+   "title": "Manage members with SCIM provisioning | Slack",
+   "quote": "Available on the Business+ and  Enterprise plans",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://slack.com/help/articles/212572638-Manage-members-with-SCIM-provisioning",
+   "title": "Manage members with SCIM provisioning | Slack",
+   "quote": "Available on the  Free and  Pro plans if you've connected a Salesforce org to Slack",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://slack.com/help/articles/212572638-Manage-members-with-SCIM-provisioning",
+   "title": "Manage members with SCIM provisioning | Slack",
+   "quote": "During setup, your identity provider will ask for an API token created through the OAuth 2.0 flow.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://slack.com/help/articles/212572638-Manage-members-with-SCIM-provisioning",
+   "title": "Manage members with SCIM provisioning | Slack",
+   "quote": "Google Workspace (SAML) Microsoft Entra Okta OneLogin PingFederate PingOne",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://slack.com/help/articles/212572638-Manage-members-with-SCIM-provisioning",
+   "title": "Manage members with SCIM provisioning | Slack",
+   "quote": "members and guests added through SCIM are billable as soon as they sign in for the first time",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.slack.dev/admins/scim-api/",
+   "title": "Using the Slack SCIM API | Slack Developer Docs",
+   "quote": "The SCIM API is only available to Slack workspaces on Business+ or Enterprise plans",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.slack.dev/admins/scim-api/",
+   "title": "Using the Slack SCIM API | Slack Developer Docs",
+   "quote": "Provision and manage user accounts and groups with the Slack SCIM API using either version 1.1 or version 2.0 of the SCIM protocol.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.slack.dev/admins/scim-api/",
+   "title": "Using the Slack SCIM API | Slack Developer Docs",
+   "quote": "The base URL for all calls to the SCIM API is https://api.slack.com/scim/VERSION/ .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.slack.dev/admins/scim-api/",
+   "title": "Using the Slack SCIM API | Slack Developer Docs",
+   "quote": "An OAuth token with the admin scope is required to access the SCIM API.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.slack.dev/admins/scim-api/",
+   "title": "Using the Slack SCIM API | Slack Developer Docs",
+   "quote": "Users can not be permanently deleted from Slack, they can only be deactivated.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.slack.dev/admins/scim-api/",
+   "title": "Using the Slack SCIM API | Slack Developer Docs",
+   "quote": "The SCIM API is rate limited. If your requests are being limited, an HTTP: 429 error will be returned.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.slack.dev/admins/scim-api/",
+   "title": "Using the Slack SCIM API | Slack Developer Docs",
+   "quote": "Single-Channel Guests can not be fully provisioned via SCIM.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.slack.dev/admins/scim-api/",
+   "title": "Using the Slack SCIM API | Slack Developer Docs",
+   "quote": "Attempts to provision a user with a duplicate email address (even if the existing user has been previously deactivated in Slack) will fail.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.slack.dev/admins/scim-api/",
+   "title": "Using the Slack SCIM API | Slack Developer Docs",
+   "quote": "The supported Operations are remove , replace and add .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.slack.dev/reference/scim-api/",
+   "title": "SCIM API reference | Slack Developer Docs",
+   "quote": "GET /ServiceProviderConfigs",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.slack.dev/reference/scim-api/",
+   "title": "SCIM API reference | Slack Developer Docs",
+   "quote": "GET /ResourceTypes",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://docs.slack.dev/reference/scim-api/",
+   "title": "SCIM API reference | Slack Developer Docs",
+   "quote": "Sets a Slack user to deactivated",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://docs.slack.dev/reference/scim-api/",
+   "title": "SCIM API reference | Slack Developer Docs",
+   "quote": "Deactivate activated users by setting the active attribute equal to false . Alternatively, re-enable deactivated users by setting the active attribute equal to true .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://docs.slack.dev/reference/scim-api/",
+   "title": "SCIM API reference | Slack Developer Docs",
+   "quote": "it's possible to filter the list by the username , email , restricted , and ultra_restricted attributes",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://docs.slack.dev/reference/scim-api/",
+   "title": "SCIM API reference | Slack Developer Docs",
+   "quote": "reduce the count parameter to 1,000 or less, and use the startIndex parameter to paginate through users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://docs.slack.dev/reference/scim-api/",
+   "title": "SCIM API reference | Slack Developer Docs",
+   "quote": "Slack will also create profile fields if the following SCIM attributes are present:",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://docs.slack.dev/reference/scim-api/",
+   "title": "SCIM API reference | Slack Developer Docs",
+   "quote": "Must provide the urn:ietf:params:scim:schemas:extension:slack:profile:2.0:User schema in request body.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://docs.slack.dev/reference/scim-api/",
+   "title": "SCIM API reference | Slack Developer Docs",
+   "quote": "Slack also supports a custom extension, called urn:scim:schemas:extension:slack:guest:2.0:User , that can be used to designate a user as a multi-channel guest.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://docs.slack.dev/reference/scim-api/",
+   "title": "SCIM API reference | Slack Developer Docs",
+   "quote": "Members members Multi-valued Required",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://docs.slack.dev/reference/scim-api/",
+   "title": "SCIM API reference | Slack Developer Docs",
+   "quote": "The primary owner of a Workspace can not be deactivated.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://slack.com/help/articles/204475027-Deactivate-a-members-account",
+   "title": "Deactivate a member's account | Slack",
+   "quote": "People aren't notified when their accounts are deactivated, nor are their messages or files deleted. They'll be removed from all channels, signed out of your workspace(s) on all devices, and unable to sign back in.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://slack.com/help/articles/218915077-Slacks-Fair-Billing-Policy",
+   "title": "Slack's Fair Billing Policy | Slack",
+   "quote": "If someone you’ve already paid for becomes inactive, we’ll add a prorated credit to your account for the unused time",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://docs.slack.dev/admins/managing-users/",
+   "title": "Managing users | Slack Developer Docs",
+   "quote": "The features within are only available to Slack workspaces on an Enterprise plan.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://docs.slack.dev/admins/managing-users/",
+   "title": "Managing users | Slack Developer Docs",
+   "quote": "admin.users:write allows your app to assign, invite, and remove users in a workspace.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c35",
+   "url": "https://docs.slack.dev/reference/methods/admin.users.invite",
+   "title": "admin.users.invite method | Slack Developer Docs",
+   "quote": "POST https://slack.com/api/admin.users.invite",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://docs.slack.dev/reference/methods/admin.users.remove",
+   "title": "admin.users.remove method | Slack Developer Docs",
+   "quote": "POST https://slack.com/api/admin.users.remove",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://docs.slack.dev/reference/methods/admin.users.list",
+   "title": "admin.users.list method | Slack Developer Docs",
+   "quote": "POST https://slack.com/api/admin.users.list",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c38",
+   "url": "https://docs.slack.dev/reference/methods/admin.users.setAdmin",
+   "title": "admin.users.setAdmin method | Slack Developer Docs",
+   "quote": "POST https://slack.com/api/admin.users.setAdmin",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c39",
+   "url": "https://docs.slack.dev/reference/methods/admin.users.assign",
+   "title": "admin.users.assign method | Slack Developer Docs",
+   "quote": "POST https://slack.com/api/admin.users.assign",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c40",
+   "url": "https://docs.slack.dev/reference/methods/admin.roles.addAssignments",
+   "title": "admin.roles.addAssignments method | Slack Developer Docs",
+   "quote": "POST https://slack.com/api/admin.roles.addAssignments",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c41",
+   "url": "https://docs.slack.dev/reference/methods/users.list",
+   "title": "users.list method | Slack Developer Docs",
+   "quote": "GET https://slack.com/api/users.list",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c42",
+   "url": "https://docs.slack.dev/reference/methods/admin.users.session.reset",
+   "title": "admin.users.session.reset method | Slack Developer Docs",
+   "quote": "POST https://slack.com/api/admin.users.session.reset",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c43",
+   "url": "https://docs.slack.dev/reference/events/team_join",
+   "title": "team_join event | Slack Developer Docs",
+   "quote": "A new member has joined",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c44",
+   "url": "https://docs.slack.dev/reference/events/user_change",
+   "title": "user_change event | Slack Developer Docs",
+   "quote": "A member's data has changed",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c45",
+   "url": "https://docs.slack.dev/admins/audit-logs-api/",
+   "title": "Using the Audit Logs API | Slack Developer Docs",
+   "quote": "The Audit Logs API is meant for anyone interested in programmatically monitoring audit events in a Slack Enterprise organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c46",
+   "url": "https://www.okta.com/integrations/slack/",
+   "title": "Integrate Slack with Okta",
+   "quote": "Okta integrates with Slack to create a space where your teams can share, archive, and search for key documents and conversations",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c47",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/slack-provisioning-tutorial",
+   "title": "Configure Slack for automatic user provisioning with Microsoft Entra ID",
+   "quote": "A Slack tenant with the Business+ plan only. Enteprise Grid customers should follow Slack's instructions instead.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c48",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/slack-provisioning-tutorial",
+   "title": "Configure Slack for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Provision groups and group memberships in Slack",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c49",
+   "url": "https://support.google.com/a/answer/6399782?hl=en",
+   "title": "Configure Slack user provisioning | Google Workspace Help",
+   "quote": "You can set up automated user provisioning (autoprovisioning) so that any changes you make to user accounts in Google Workspace are automatically synced with this third-party app.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c50",
+   "url": "https://jumpcloud.com/support/integrate-with-slack",
+   "title": "Integrate with Slack | JumpCloud",
+   "quote": "Provision, update, and deprovision users in Slack in real-time from JumpCloud using the SCIM integration.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c51",
+   "url": "https://docs.slack.dev/reference/methods/admin.users.invite",
+   "title": "admin.users.invite method | Slack Developer Docs",
+   "quote": "admin.users:write",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c52",
+   "url": "https://slack.com/help/articles/212572638-Manage-members-with-SCIM-provisioning",
+   "title": "Manage members with SCIM provisioning | Slack",
+   "quote": "Create or delete a user group",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://slack.com/pricing",
+  "https://slack.com/help/articles/212572638-Manage-members-with-SCIM-provisioning",
+  "https://docs.slack.dev/admins/scim-api/",
+  "https://docs.slack.dev/reference/scim-api/",
+  "https://docs.slack.dev/admins/managing-users/",
+  "https://docs.slack.dev/admins/audit-logs-api/",
+  "https://www.okta.com/integrations/slack/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/slack-provisioning-tutorial",
+  "https://support.google.com/a/answer/6399782",
+  "https://jumpcloud.com/support/integrate-with-slack"
+ ],
+ "open_questions": [
+  "Whether SSO must be configured before SCIM is not stated by Slack.",
+  "SCIM token expiry is not documented (OAuth app token).",
+  "Numeric SCIM rate limits are not published on the SCIM pages.",
+  "OneLogin catalogue entry not verified (OneLogin page blocks bots).",
+  "JIT account creation on SAML sign-in is not covered in the pages loaded."
+ ]
+}

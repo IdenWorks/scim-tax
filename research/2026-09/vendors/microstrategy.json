@@ -1,0 +1,806 @@
+{
+  "slug": "microstrategy",
+  "vendor": "Strategy",
+  "vendor_url": "https://www.strategysoftware.com",
+  "researched_at": "2026-10-05",
+  "row": {
+    "vendor": "Strategy",
+    "category": "Data, Analytics & BI",
+    "status": "unknown",
+    "scim_plan": "Plan not disclosed",
+    "scim_price_text": "Not disclosed",
+    "scim_price_per_user_mo": null,
+    "team_plan": "Standard",
+    "team_price_text": "Standard: as low as $13/mo/user (50 to 300 users)",
+    "team_price_per_user_mo": 13,
+    "price_multiplier": null,
+    "sso_plan": null,
+    "sso_price_per_user_mo": null,
+    "sso_required_for_scim": false,
+    "scim_addon_price_text": null,
+    "min_seats": 50,
+    "scim_ops": {
+      "create": true,
+      "update": true,
+      "deactivate": true,
+      "delete": true,
+      "groups": true
+    },
+    "idp": {
+      "okta": "via_generic",
+      "entra": "via_generic",
+      "google": null,
+      "onelogin": null,
+      "jumpcloud": null,
+      "generic": true
+    },
+    "pricing_page_url": "https://software.strategy.com/pricing",
+    "docs_url": "https://www2.strategy.com/producthelp/Current/Workstation/en-us/Content/config_lib_server_scim.htm",
+    "evidence": "Strategy's Workstation help says 'Strategy One (September 2025) adds support for System for Cross-Domain Identity Management (SCIM) 2.0 protocol', but the pricing page (Standard from $13/mo/user, Enterprise and Government on quote) does not say which plan includes SCIM.",
+    "notes": "MicroStrategy now trades as Strategy (Strategy One / Strategy Mosaic). SCIM 2.0 is a documented Library server feature since Strategy One September 2025, enabled per environment in Workstation with a generated bearer token; Okta (custom SAML/SWA app) and Entra (non-gallery app) setup guides plus PingFederate. The pricing page lists Standard ($13/mo/user, 50-300 users), Enterprise and Government (quote) but names neither SSO nor SCIM per plan, so status is unknown rather than free: the docs set no edition gate, but the plan is not stated. Okta deletes are not propagated (manual delete in Library). A full REST API (users, user groups, security roles) is documented with X-MSTR-AuthToken session auth; plan gate not stated.",
+    "confidence": "low",
+    "api_provisioning": false,
+    "user_api_available": true,
+    "user_api_plan": null,
+    "api_tax": null,
+    "slug": "microstrategy",
+    "last_verified": "2026-10-05",
+    "first_added": "2026-09",
+    "status_prev": null
+  },
+  "plans": [
+    {
+      "name": "Standard",
+      "price_text": "Pricing as low as $13/mo/user; for teams from 50 to 300 users",
+      "price_per_user_mo": 13,
+      "billing": "unknown",
+      "sso": null,
+      "scim": null,
+      "user_api": null,
+      "audit_log_api": null,
+      "cite": [
+        "c1",
+        "c2"
+      ]
+    },
+    {
+      "name": "Enterprise",
+      "price_text": "Get a Quote",
+      "price_per_user_mo": null,
+      "billing": "unknown",
+      "sso": null,
+      "scim": null,
+      "user_api": null,
+      "audit_log_api": null,
+      "cite": [
+        "c3"
+      ]
+    },
+    {
+      "name": "Government",
+      "price_text": "Get a Quote (FedRAMP)",
+      "price_per_user_mo": null,
+      "billing": "unknown",
+      "sso": null,
+      "scim": null,
+      "user_api": null,
+      "audit_log_api": null,
+      "cite": [
+        "c3"
+      ],
+      "notes": "FedRAMP authorized, hosted on AWS GovCloud."
+    }
+  ],
+  "scim": {
+    "available": true,
+    "cite": [
+      "c4",
+      "c5",
+      "c6",
+      "c23"
+    ],
+    "plan": null,
+    "addon_price_text": null,
+    "sso_required": false,
+    "version": "2.0",
+    "base_url": "<Library Server URL>/api/scim/v2",
+    "auth": {
+      "method": "bearer",
+      "token_source": "Workstation > Environments > (right-click) Configure Enterprise Security > Configure SCIM > Bearer Token > Generate",
+      "token_expiry": "Admin-selected expiration from a drop-down",
+      "cite": [
+        "c6",
+        "c7",
+        "c25"
+      ]
+    },
+    "endpoints": {
+      "Users": true,
+      "Groups": true,
+      "ServiceProviderConfig": true,
+      "Schemas": true,
+      "ResourceTypes": true,
+      "Bulk": null,
+      "Me": null,
+      "cite": [
+        "c23"
+      ]
+    },
+    "operations": {
+      "create": true,
+      "read": true,
+      "update_put": true,
+      "update_patch": true,
+      "deactivate": true,
+      "reactivate": null,
+      "delete": true,
+      "group_push": true,
+      "group_membership": true,
+      "cite": [
+        "c23",
+        "c24",
+        "c20",
+        "c30",
+        "c22"
+      ]
+    },
+    "deprovision": {
+      "action": "deactivate",
+      "frees_seat": null,
+      "revokes_sessions": null,
+      "data_retained": "Okta deactivates (active=false maps to 'Enabled user'); Okta deletes do not delete the Library user. A SCIM DELETE (e.g. Entra) keeps the user's profile content, reassigning file ownership to Administrator; subscriptions where the user was the only recipient are deleted.",
+      "cite": [
+        "c19",
+        "c11",
+        "c24"
+      ]
+    },
+    "filtering": {
+      "supported": true,
+      "attributes": [
+        "userName eq (Users)",
+        "displayName eq (Groups)"
+      ],
+      "cite": [
+        "c9"
+      ]
+    },
+    "pagination": {
+      "supported": true,
+      "max_page_size": 10000,
+      "cite": [
+        "c10"
+      ],
+      "notes": "count defaults to 1000; totalResults is not accurate; no sorting."
+    },
+    "attributes": {
+      "core": [
+        "id",
+        "meta.created",
+        "meta.lastModified",
+        "userName",
+        "displayName",
+        "active",
+        "emails[primary eq true].value",
+        "preferredLanguage",
+        "locale"
+      ],
+      "enterprise": [],
+      "custom": {
+        "supported": true,
+        "how": "Strategy extension schema urn:ietf:params:scim:schemas:extension:strategy:2.0:User (distinguishedName); any core/enterprise/strategy attribute can be mapped to user system prompts"
+      },
+      "group": [
+        "id",
+        "meta.created",
+        "meta.lastModified",
+        "displayName",
+        "members",
+        "distinguishedName (strategy extension)"
+      ],
+      "cite": [
+        "c13",
+        "c14",
+        "c4",
+        "c12"
+      ],
+      "notes": "The enterprise extension schema is read only for system-prompt mapping; no fixed enterprise attributes are mapped."
+    },
+    "roles": {
+      "supported": null,
+      "how": "No SCIM role attribute is documented; privileges come from group membership and security roles (REST API).",
+      "cite": [
+        "c12",
+        "c28"
+      ]
+    },
+    "rate_limits": {
+      "text": null,
+      "cite": []
+    },
+    "limitations": [
+      {
+        "text": "Okta deletes are not propagated; users must be deleted manually in Library. Okta SCIM cannot be added to an OIDC app (use SAML or SWA app).",
+        "cite": [
+          "c19",
+          "c18"
+        ]
+      },
+      {
+        "text": "Only one email per user; sub-attributes of complex types (e.g. name.familyName) cannot be custom-mapped.",
+        "cite": [
+          "c8",
+          "c15"
+        ]
+      },
+      {
+        "text": "Filtering only on userName eq / displayName eq; no sorting; totalResults is inaccurate.",
+        "cite": [
+          "c9",
+          "c16"
+        ]
+      },
+      {
+        "text": "SCIM sync cannot remove groups manually added by an admin.",
+        "cite": [
+          "c12"
+        ]
+      },
+      {
+        "text": "Entra provisioning runs in 40-minute intervals.",
+        "cite": [
+          "c22"
+        ]
+      }
+    ]
+  },
+  "user_api": {
+    "available": true,
+    "cite": [
+      "c26",
+      "c27"
+    ],
+    "plan": null,
+    "api_tax": null,
+    "style": "REST",
+    "base_url": "<Library Server URL>/api",
+    "docs_url": "https://demo.microstrategy.com/MicroStrategyLibrary/api-docs/index.html",
+    "auth": {
+      "methods": [
+        "session_token (X-MSTR-AuthToken via POST /auth/login)"
+      ],
+      "scopes": [],
+      "cite": [
+        "c27"
+      ]
+    },
+    "capabilities": {
+      "list_users": true,
+      "get_user": true,
+      "create_user": true,
+      "invite_user": null,
+      "update_user": true,
+      "deactivate_user": null,
+      "delete_user": true,
+      "reactivate_user": null,
+      "manage_groups": true,
+      "assign_roles": true,
+      "assign_licenses": null,
+      "cite": [
+        "c26",
+        "c27",
+        "c28",
+        "c29"
+      ]
+    },
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/api/users",
+        "purpose": "Get info for a set of users",
+        "cite": [
+          "c26"
+        ]
+      },
+      {
+        "method": "POST",
+        "path": "/api/users",
+        "purpose": "Create a user",
+        "cite": [
+          "c26"
+        ]
+      },
+      {
+        "method": "GET",
+        "path": "/api/users/{id}",
+        "purpose": "Get info for a specific user",
+        "cite": [
+          "c26"
+        ]
+      },
+      {
+        "method": "PATCH",
+        "path": "/api/users/{id}",
+        "purpose": "Update info for a specific user",
+        "cite": [
+          "c26"
+        ]
+      },
+      {
+        "method": "DELETE",
+        "path": "/api/users/{id}",
+        "purpose": "Delete user",
+        "cite": [
+          "c27"
+        ]
+      },
+      {
+        "method": "GET",
+        "path": "/api/users/{id}/memberships",
+        "purpose": "Direct user groups",
+        "cite": [
+          "c26"
+        ]
+      },
+      {
+        "method": "GET",
+        "path": "/api/usergroups",
+        "purpose": "List user groups",
+        "cite": [
+          "c29"
+        ]
+      },
+      {
+        "method": "POST",
+        "path": "/api/usergroups",
+        "purpose": "Create a user group",
+        "cite": [
+          "c29"
+        ]
+      },
+      {
+        "method": "PATCH",
+        "path": "/api/usergroups/{id}",
+        "purpose": "Update a user group",
+        "cite": [
+          "c29"
+        ]
+      },
+      {
+        "method": "DELETE",
+        "path": "/api/usergroups/{id}",
+        "purpose": "Delete a user group",
+        "cite": [
+          "c29"
+        ]
+      },
+      {
+        "method": "GET",
+        "path": "/api/usergroups/{id}/members",
+        "purpose": "Group members",
+        "cite": [
+          "c29"
+        ]
+      },
+      {
+        "method": "GET",
+        "path": "/api/securityRoles",
+        "purpose": "List security roles",
+        "cite": [
+          "c28"
+        ]
+      },
+      {
+        "method": "PATCH",
+        "path": "/api/securityRoles/{id}/members",
+        "purpose": "Update members of a security role",
+        "cite": [
+          "c28"
+        ]
+      },
+      {
+        "method": "GET",
+        "path": "/api/users/{userId}/securityRoles",
+        "purpose": "Security roles for a user",
+        "cite": [
+          "c28"
+        ]
+      },
+      {
+        "method": "POST",
+        "path": "/api/license/iServer/audit",
+        "purpose": "Perform license audit",
+        "cite": [
+          "c33"
+        ]
+      }
+    ],
+    "webhooks_user_events": {
+      "supported": null,
+      "events": [],
+      "cite": []
+    },
+    "audit_log_api": {
+      "supported": null,
+      "plan": null,
+      "cite": []
+    },
+    "rate_limits": {
+      "text": null,
+      "cite": []
+    },
+    "limitations": [
+      {
+        "text": "Plan gate for the REST API is not stated on the pricing page.",
+        "cite": [
+          "c26"
+        ]
+      }
+    ]
+  },
+  "idp_apps": {
+    "okta": {
+      "listed": null,
+      "sso": true,
+      "provisioning": true,
+      "kind": "scim",
+      "built_by": null,
+      "url": null,
+      "cite": [
+        "c18",
+        "c20",
+        "c5"
+      ],
+      "notes": "Customer-built SAML/SWA app with SCIM enabled; no OIN listing found (okta.com/integrations/microstrategy 404)."
+    },
+    "entra": {
+      "listed": null,
+      "sso": true,
+      "provisioning": true,
+      "kind": "scim",
+      "built_by": null,
+      "url": null,
+      "cite": [
+        "c21",
+        "c22"
+      ],
+      "notes": "Strategy's guide uses a non-gallery Entra app."
+    },
+    "google": {
+      "listed": null,
+      "sso": null,
+      "provisioning": null,
+      "kind": null,
+      "built_by": null,
+      "url": null,
+      "cite": []
+    },
+    "onelogin": {
+      "listed": null,
+      "sso": null,
+      "provisioning": null,
+      "kind": null,
+      "built_by": null,
+      "url": null,
+      "cite": []
+    },
+    "jumpcloud": {
+      "listed": null,
+      "sso": null,
+      "provisioning": null,
+      "kind": null,
+      "built_by": null,
+      "url": null,
+      "cite": []
+    }
+  },
+  "fallbacks": {
+    "jit": true,
+    "jit_protocol": "saml",
+    "csv_import": null,
+    "other_sync": "LDAP directory import/sync (Import User At Login, import filters); PingFederate SCIM guide also documented.",
+    "docs_public": true,
+    "cite": [
+      "c17",
+      "c32",
+      "c31",
+      "c34"
+    ]
+  },
+  "citations": [
+    {
+      "id": "c1",
+      "url": "https://software.strategy.com/pricing",
+      "title": "Plans & Pricing for Strategy Mosaic, the AI-Ready BI Platform",
+      "quote": "For teams from 50 to 300 users",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c2",
+      "url": "https://software.strategy.com/pricing",
+      "title": "Plans & Pricing for Strategy Mosaic, the AI-Ready BI Platform",
+      "quote": "Pricing as low as $13/mo/user",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c3",
+      "url": "https://software.strategy.com/pricing",
+      "title": "Plans & Pricing for Strategy Mosaic, the AI-Ready BI Platform",
+      "quote": "Fully managed enterprise offering",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c4",
+      "url": "https://www2.strategy.com/producthelp/Current/Workstation/en-us/Content/config_lib_server_scim.htm",
+      "title": "Configure the Library Server as SCIM 2.0 Service Provider | Strategy Workstation Help",
+      "quote": "adds support for System for Cross-Domain Identity Management (SCIM) 2.0 protocol.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c5",
+      "url": "https://www2.strategy.com/producthelp/Current/Workstation/en-us/Content/config_lib_server_scim.htm",
+      "title": "Configure the Library Server as SCIM 2.0 Service Provider | Strategy Workstation Help",
+      "quote": "Certified with identity providers like Okta and Azure",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c6",
+      "url": "https://www2.strategy.com/producthelp/Current/Workstation/en-us/Content/config_lib_server_scim.htm",
+      "title": "Configure the Library Server as SCIM 2.0 Service Provider | Strategy Workstation Help",
+      "quote": "Support for bearer authentication",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c7",
+      "url": "https://www2.strategy.com/producthelp/Current/Workstation/en-us/Content/config_lib_server_scim.htm",
+      "title": "Configure the Library Server as SCIM 2.0 Service Provider | Strategy Workstation Help",
+      "quote": "choose a token expiration time from the drop-down list",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c8",
+      "url": "https://www2.strategy.com/producthelp/Current/Workstation/en-us/Content/config_lib_server_scim.htm",
+      "title": "Configure the Library Server as SCIM 2.0 Service Provider | Strategy Workstation Help",
+      "quote": "The SCIM API stores one email per user.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c9",
+      "url": "https://www2.strategy.com/producthelp/Current/Workstation/en-us/Content/config_lib_server_scim.htm",
+      "title": "Configure the Library Server as SCIM 2.0 Service Provider | Strategy Workstation Help",
+      "quote": "The filter parameter only supports",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c10",
+      "url": "https://www2.strategy.com/producthelp/Current/Workstation/en-us/Content/config_lib_server_scim.htm",
+      "title": "Configure the Library Server as SCIM 2.0 Service Provider | Strategy Workstation Help",
+      "quote": "the default value is",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c11",
+      "url": "https://www2.strategy.com/producthelp/Current/Workstation/en-us/Content/config_lib_server_scim.htm",
+      "title": "Configure the Library Server as SCIM 2.0 Service Provider | Strategy Workstation Help",
+      "quote": "The Intelligence Server does not delete the user's content in the profile, but the file owner is updated to Administrator.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c12",
+      "url": "https://www2.strategy.com/producthelp/Current/Workstation/en-us/Content/config_lib_server_scim.htm",
+      "title": "Configure the Library Server as SCIM 2.0 Service Provider | Strategy Workstation Help",
+      "quote": "For existing users, SCIM sync cannot remove groups manually added by the admin.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c13",
+      "url": "https://www2.strategy.com/producthelp/Current/Workstation/en-us/Content/config_lib_server_scim.htm",
+      "title": "Configure the Library Server as SCIM 2.0 Service Provider | Strategy Workstation Help",
+      "quote": "Custom user schema from Strategy Library",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c14",
+      "url": "https://www2.strategy.com/producthelp/Current/Workstation/en-us/Content/config_lib_server_scim.htm",
+      "title": "Configure the Library Server as SCIM 2.0 Service Provider | Strategy Workstation Help",
+      "quote": "SCIM 2.0 enterprise user schema",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c15",
+      "url": "https://www2.strategy.com/producthelp/Current/Workstation/en-us/Content/config_lib_server_scim.htm",
+      "title": "Configure the Library Server as SCIM 2.0 Service Provider | Strategy Workstation Help",
+      "quote": "Attribute mapping customization does not support mapping sub-attributes of complex attribute types",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c16",
+      "url": "https://www2.strategy.com/producthelp/Current/Workstation/en-us/Content/config_lib_server_scim.htm",
+      "title": "Configure the Library Server as SCIM 2.0 Service Provider | Strategy Workstation Help",
+      "quote": "Sorting parameters (for example,",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c17",
+      "url": "https://www2.strategy.com/producthelp/Current/Workstation/en-us/Content/config_lib_server_scim.htm",
+      "title": "Configure the Library Server as SCIM 2.0 Service Provider | Strategy Workstation Help",
+      "quote": "Allow user to log on if Web Single Sign-on - MicroStrategy user link not found",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c18",
+      "url": "https://www2.strategy.com/producthelp/Current/Workstation/en-us/Content/config_scim_okta.htm",
+      "title": "Configure SCIM Provisioning with Okta | Strategy Workstation Help",
+      "quote": "Adding SCIM provisioning to an OpenID Connect (OIDC) integration isn't supported in Okta.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c19",
+      "url": "https://www2.strategy.com/producthelp/Current/Workstation/en-us/Content/config_scim_okta.htm",
+      "title": "Configure SCIM Provisioning with Okta | Strategy Workstation Help",
+      "quote": "If you delete a SCIM user in Okta, it will not delete in",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c20",
+      "url": "https://www2.strategy.com/producthelp/Current/Workstation/en-us/Content/config_scim_okta.htm",
+      "title": "Configure SCIM Provisioning with Okta | Strategy Workstation Help",
+      "quote": "Push New Users",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c21",
+      "url": "https://www2.strategy.com/producthelp/Current/Workstation/en-us/Content/config_scim_azure.htm",
+      "title": "Configure SCIM Provisioning with Entra ID | Strategy Workstation Help",
+      "quote": "Integrate any other application you don't find in the gallery (Non-gallery)",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c22",
+      "url": "https://www2.strategy.com/producthelp/Current/Workstation/en-us/Content/config_scim_azure.htm",
+      "title": "Configure SCIM Provisioning with Entra ID | Strategy Workstation Help",
+      "quote": "will synchronize user/group changes to Library in 40 minute intervals.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c23",
+      "url": "https://demo.microstrategy.com/MicroStrategyLibrary/api/openapi.json",
+      "title": "Strategy REST 2026 (OpenAPI)",
+      "quote": "/api/scim/v2/ServiceProviderConfig",
+      "accessed": "2026-10-05",
+      "page_url": "https://demo.microstrategy.com/MicroStrategyLibrary/api-docs/index.html"
+    },
+    {
+      "id": "c24",
+      "url": "https://demo.microstrategy.com/MicroStrategyLibrary/api/openapi.json",
+      "title": "Strategy REST 2026 (OpenAPI)",
+      "quote": "Deletes an existing user resource by unique identifier.",
+      "accessed": "2026-10-05",
+      "page_url": "https://demo.microstrategy.com/MicroStrategyLibrary/api-docs/index.html"
+    },
+    {
+      "id": "c25",
+      "url": "https://demo.microstrategy.com/MicroStrategyLibrary/api/openapi.json",
+      "title": "Strategy REST 2026 (OpenAPI)",
+      "quote": "The SCIM 2.0 API requires a Bearer token for authentication. Generate the token from SCIM config and enter it here.",
+      "accessed": "2026-10-05",
+      "page_url": "https://demo.microstrategy.com/MicroStrategyLibrary/api-docs/index.html"
+    },
+    {
+      "id": "c26",
+      "url": "https://demo.microstrategy.com/MicroStrategyLibrary/api/openapi.json",
+      "title": "Strategy REST 2026 (OpenAPI)",
+      "quote": "Get info for a set of users",
+      "accessed": "2026-10-05",
+      "page_url": "https://demo.microstrategy.com/MicroStrategyLibrary/api-docs/index.html"
+    },
+    {
+      "id": "c27",
+      "url": "https://demo.microstrategy.com/MicroStrategyLibrary/api/openapi.json",
+      "title": "Strategy REST 2026 (OpenAPI)",
+      "quote": "Delete user for specific user id. You obtain the authorization token needed to execute the request using POST /auth/login",
+      "accessed": "2026-10-05",
+      "page_url": "https://demo.microstrategy.com/MicroStrategyLibrary/api-docs/index.html"
+    },
+    {
+      "id": "c28",
+      "url": "https://demo.microstrategy.com/MicroStrategyLibrary/api/openapi.json",
+      "title": "Strategy REST 2026 (OpenAPI)",
+      "quote": "Update members of a specific security role",
+      "accessed": "2026-10-05",
+      "page_url": "https://demo.microstrategy.com/MicroStrategyLibrary/api-docs/index.html"
+    },
+    {
+      "id": "c29",
+      "url": "https://demo.microstrategy.com/MicroStrategyLibrary/api/openapi.json",
+      "title": "Strategy REST 2026 (OpenAPI)",
+      "quote": "Create a user group",
+      "accessed": "2026-10-05",
+      "page_url": "https://demo.microstrategy.com/MicroStrategyLibrary/api-docs/index.html"
+    },
+    {
+      "id": "c30",
+      "url": "https://demo.microstrategy.com/MicroStrategyLibrary/api/openapi.json",
+      "title": "Strategy REST 2026 (OpenAPI)",
+      "quote": "Patch an existing group",
+      "accessed": "2026-10-05",
+      "page_url": "https://demo.microstrategy.com/MicroStrategyLibrary/api-docs/index.html"
+    },
+    {
+      "id": "c31",
+      "url": "https://www2.strategy.com/producthelp/Current/Workstation/en-us/Content/directory_service_import_user.htm",
+      "title": "Import LDAP Users and Group Information | Strategy Workstation Help",
+      "quote": "You can import LDAP user and group information into the Strategy metadata.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c32",
+      "url": "https://www2.strategy.com/producthelp/Current/Workstation/en-us/Content/configure_saml_enterprise_security.htm",
+      "title": "Enable Single Sign-On with SAML Authentication | Strategy Workstation Help",
+      "quote": "you can import a user during SAML authentication for multi-tenant environments.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c33",
+      "url": "https://demo.microstrategy.com/MicroStrategyLibrary/api/openapi.json",
+      "title": "Strategy REST 2026 (OpenAPI)",
+      "quote": "Perform license audit",
+      "accessed": "2026-10-05",
+      "page_url": "https://demo.microstrategy.com/MicroStrategyLibrary/api-docs/index.html"
+    },
+    {
+      "id": "c34",
+      "url": "https://www2.strategy.com/producthelp/Current/Workstation/en-us/Content/config_lib_server_scim.htm",
+      "title": "Configure the Library Server as SCIM 2.0 Service Provider | Strategy Workstation Help",
+      "quote": "Synch Web Single Sign-on user at logon",
+      "accessed": "2026-10-05",
+      "page_url": null
+    }
+  ],
+  "conflicts": [],
+  "searched": [
+    "https://software.strategy.com/pricing",
+    "https://www.strategysoftware.com/pricing (403 to curl; rendered via redirect to software.strategy.com)",
+    "https://www2.strategy.com/producthelp/Current/Workstation/en-us/Content/config_lib_server_scim.htm",
+    "https://www2.strategy.com/producthelp/Current/Workstation/en-us/Content/config_scim_okta.htm",
+    "https://www2.strategy.com/producthelp/Current/Workstation/en-us/Content/config_scim_azure.htm",
+    "https://www2.strategy.com/producthelp/Current/Workstation/en-us/Content/configure_saml_enterprise_security.htm",
+    "https://www2.strategy.com/producthelp/Current/Workstation/en-us/Content/directory_service_import_user.htm",
+    "Workstation help TOC chunks (Data/Tocs/Workstation_Chunk0-3.js)",
+    "https://demo.microstrategy.com/MicroStrategyLibrary/api/openapi.json",
+    "https://community.strategy.com (403)",
+    "https://www.okta.com/integrations/microstrategy/ (404)",
+    "https://learn.microsoft.com/en-us/entra/identity/saas-apps/microstrategy-tutorial (404)"
+  ],
+  "open_questions": [
+    "Which plan (Standard, Enterprise, Government) includes SCIM, SSO and REST API access is not stated on the pricing page.",
+    "Whether deactivating a user frees a licence or ends sessions is not documented.",
+    "SCIM rate limits and Bulk support are not documented.",
+    "Pricing page does not say whether $13/mo/user is annual billing.",
+    "Google, OneLogin and JumpCloud catalogue listings not checked."
+  ]
+}

@@ -1,0 +1,721 @@
+{
+ "slug": "docuware",
+ "vendor": "DocuWare",
+ "vendor_url": "https://start.docuware.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "DocuWare",
+  "slug": "docuware",
+  "category": "Productivity & Docs",
+  "status": "gated",
+  "scim_plan": "DocuWare Cloud (quote-only plans)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales (DocuWare says Cloud typically costs $30 to $125+ per user per month)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": false,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://start.docuware.com/faq/docuware-pricing",
+  "docs_url": "https://knowledgecenter.docuware.com/docs/user-provisioning-api-intgration-guide",
+  "evidence": "DocuWare's Knowledge Center says DocuWare Cloud User Provisioning uses SCIM, and its API guide describes a SCIM 2.0 compliant service for Entra ID, Okta, Ping and generic IdPs; pricing is quote-only (\"Your DocuWare rep will work with you to build a solution\").",
+  "notes": "Quote-only: DocuWare publishes no plan table, only that Cloud has four standard tiers and typically costs $30 to $125+ per user per month; tier names and which tier includes User Provisioning are not public. SCIM (User Provisioning v3) is documented for DocuWare Cloud (Entra ID, Okta, PingOne, generic IdPs, on-prem AD via a connector) and on-premises 7.13+. Entra and Okta are set up as custom (non-gallery / custom SAML+SCIM) apps, not catalogue apps. SCIM DELETE is a soft delete that deactivates the user; group DELETE is not supported. SSO is OIDC (Entra ID etc.) under Configuration > Security and is not a prerequisite for SCIM (Okta setup uses a placeholder SAML app only to unlock provisioning). A non-SCIM Platform API exposes user, group and role endpoints. The legacy User Synchronization desktop app is being retired in favour of User Provisioning.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "DocuWare Cloud (four unnamed standard tiers)",
+   "price_text": "Typically $30 to $125+ per user per month; quote via sales or partner",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c3"
+   ],
+   "notes": "Tier names and per-tier features are not published."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c4",
+   "c5",
+   "c6",
+   "c34"
+  ],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": false,
+  "version": "2.0",
+  "base_url": "https://{your-organization}.docuware.cloud/DocuWare/Services/UserProvisioningService/{externalIdp}/scim",
+  "auth": {
+   "method": "oauth2",
+   "token_source": "DocuWare Configuration > General > User Provisioning: create an Application Registration (client ID + secret); Entra can also use a generated Bearer token",
+   "token_expiry": null,
+   "cite": [
+    "c7",
+    "c8",
+    "c18",
+    "c20"
+   ],
+   "notes": "JWT bearer tokens with scope docuware.userProvisioning; Entra supports OAuth2 client-credentials grant or a bearer token; Okta uses OAuth 2 authorization flow."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": true,
+   "ResourceTypes": true,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c5",
+    "c6"
+   ],
+   "notes": "Endpoint table also lists GET /AvailabilityCheck (unauthenticated health check)."
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c9",
+    "c13",
+    "c16",
+    "c17",
+    "c22"
+   ],
+   "notes": "Reactivation inferred from PATCH replace on the active attribute (documented path). DELETE /Users is a soft delete (deactivation)."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "User is marked disabled and can no longer log in; DELETE is a soft delete.",
+   "cite": [
+    "c9",
+    "c17"
+   ],
+   "notes": "The on-premises licence page says a deleted or disabled user's named client licence can be reassigned; Cloud licensing behaviour is not documented."
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName",
+    "externalId",
+    "displayName (Groups)"
+   ],
+   "cite": [
+    "c11"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c12"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "externalId",
+    "active",
+    "emails.value",
+    "emails.primary",
+    "name.givenName",
+    "name.familyName"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "displayName",
+    "members.value",
+    "members.display"
+   ],
+   "cite": [
+    "c14",
+    "c30",
+    "c31",
+    "c32"
+   ],
+   "notes": "The enterprise extension schema must be declared but no enterprise attributes are documented as mapped."
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "DELETE on Groups is not supported.",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "text": "PATCH remove is not supported for users.",
+    "cite": [
+     "c15"
+    ]
+   },
+   {
+    "text": "Filtering supports only userName eq / externalId eq (users) and displayName eq (groups).",
+    "cite": [
+     "c11"
+    ]
+   },
+   {
+    "text": "For non-generic IdPs the userName is stored without the email domain.",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "text": "Configuring User Provisioning requires the Organization Administrator role.",
+    "cite": [
+     "c23"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c25"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": null,
+  "docs_url": "https://knowledgecenter.docuware.com/docs/default-web-service-docuware-platform-api",
+  "auth": {
+   "methods": [
+    "oauth2"
+   ],
+   "scopes": [],
+   "cite": [
+    "c29"
+   ],
+   "notes": "OAuth access tokens last 60 minutes."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c25",
+    "c26",
+    "c33"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/Organization/UserInfo",
+    "purpose": "Create user",
+    "cite": [
+     "c25",
+     "c26"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/Organization/UserInfo",
+    "purpose": "Modify user properties",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/Organization/Users?Active={true|false}&Name={UserName}",
+    "purpose": "Get all users of the organization",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/Organization/UserByID?userId={UserId}",
+    "purpose": "Get information of a user",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/Organization/GroupUsers?groupId={GroupId}",
+    "purpose": "Get all users of a group",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/Organization/UserRoles?UserId={UserId}",
+    "purpose": "Get all roles of a user",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/Organization/UserRoles?UserId={UserId}",
+    "purpose": "Add or remove user from a role",
+    "cite": [
+     "c25",
+     "c33"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/Organization/UserGroups?UserId={UserId}",
+    "purpose": "Get all groups of a user",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/Organization/UserGroups?UserId={UserId}",
+    "purpose": "Add or remove user from a group",
+    "cite": [
+     "c25",
+     "c33"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/Organization/Roles",
+    "purpose": "Get all roles of the organization",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/Organization/Role?roleId={RoleId}",
+    "purpose": "Get information of a role",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/Organization/Groups",
+    "purpose": "Get all groups of the organization",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/Organization/Group?groupId={GroupId}",
+    "purpose": "Get information of a group",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/Organization/Groups",
+    "purpose": "Create a new group",
+    "cite": [
+     "c25"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": null,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c21",
+    "c22"
+   ],
+   "notes": "DocuWare's guide builds a custom SAML+SCIM app integration in Okta; no OIN listing found (okta.com/integrations/docuware returned 404)."
+  },
+  "entra": {
+   "listed": false,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c19"
+   ],
+   "notes": "Set up as a non-gallery enterprise application."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "jumpcloud.com returned 403 to plain requests."
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": "User Provisioning On-Premises connector syncs on-prem Active Directory/OpenLDAP to DocuWare over SCIM; legacy User Synchronization desktop app (being retired)",
+  "docs_public": true,
+  "cite": [
+   "c5",
+   "c28"
+  ],
+  "notes": "SSO can auto-link existing users at first login; account creation on SSO login is not documented."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://start.docuware.com/faq/docuware-pricing",
+   "title": "FAQ | How Much Does DocuWare Cost?",
+   "quote": "DocuWare Cloud typically costs between $30 and $125+ per user per month",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://start.docuware.com/faq/docuware-pricing",
+   "title": "FAQ | How Much Does DocuWare Cost?",
+   "quote": "DocuWare Cloud offers four standard plan tiers. Each can be extended with additional users and storage at any time.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://start.docuware.com/faq/docuware-pricing",
+   "title": "FAQ | How Much Does DocuWare Cost?",
+   "quote": "Your DocuWare rep will work with you to build a solution tailored to your team's specific requirements and budget.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://knowledgecenter.docuware.com/docs/user-provisioning-synchronisation",
+   "title": "User provisioning",
+   "quote": "DocuWare Cloud User Provisioning service leverages the System for Cross-domain Identity Management (SCIM) protocol to streamline and automate the management of user identities across various applications and systems.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://knowledgecenter.docuware.com/docs/user-provisioning-api-intgration-guide",
+   "title": "How to: User Provisioning API Integration Guide",
+   "quote": "The DocuWare User Provisioning v3 Service is a SCIM 2.0 compliant REST API that enables automatic user provisioning and group management from external Identity Providers (IdPs) such as Azure Entra ID, Okta, Ping Identity",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://knowledgecenter.docuware.com/docs/user-provisioning-api-intgration-guide",
+   "title": "How to: User Provisioning API Integration Guide",
+   "quote": "https://{your-organization}.docuware.cloud/DocuWare/Services/UserProvisioningService/{externalIdp}/scim",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://knowledgecenter.docuware.com/docs/user-provisioning-api-intgration-guide",
+   "title": "How to: User Provisioning API Integration Guide",
+   "quote": "All endpoints (except health check) require JWT Bearer token authentication",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://knowledgecenter.docuware.com/docs/user-provisioning-api-intgration-guide",
+   "title": "How to: User Provisioning API Integration Guide",
+   "quote": "Configure the correct scopes: docuware.userProvisioning",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://knowledgecenter.docuware.com/docs/user-provisioning-api-intgration-guide",
+   "title": "How to: User Provisioning API Integration Guide",
+   "quote": "The DELETE operation soft deletes a user from the DocuWare system. This operation deactivates the user.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://knowledgecenter.docuware.com/docs/user-provisioning-api-intgration-guide",
+   "title": "How to: User Provisioning API Integration Guide",
+   "quote": "The DELETE operation for groups is not supported by the DocuWare User Provisioning v3 Service.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://knowledgecenter.docuware.com/docs/user-provisioning-api-intgration-guide",
+   "title": "How to: User Provisioning API Integration Guide",
+   "quote": "filter - SCIM filter expression (supports only userName eq \"value\" & externalId eq \"value\") (case insensitive)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://knowledgecenter.docuware.com/docs/user-provisioning-api-intgration-guide",
+   "title": "How to: User Provisioning API Integration Guide",
+   "quote": "count - Number of results per page (default: all results if not specified, minimum: 0)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://knowledgecenter.docuware.com/docs/user-provisioning-api-intgration-guide",
+   "title": "How to: User Provisioning API Integration Guide",
+   "quote": "The service supports replace and add operations for user updates.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://knowledgecenter.docuware.com/docs/user-provisioning-api-intgration-guide",
+   "title": "How to: User Provisioning API Integration Guide",
+   "quote": "schemas - SCIM schema identifiers (must include both Core and Enterprise User schemas)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://knowledgecenter.docuware.com/docs/user-provisioning-api-intgration-guide",
+   "title": "How to: User Provisioning API Integration Guide",
+   "quote": "The remove operation is not supported and will return an error",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://knowledgecenter.docuware.com/docs/user-provisioning-api-intgration-guide",
+   "title": "How to: User Provisioning API Integration Guide",
+   "quote": "The service supports add, remove and replace(only for group displayName) operations for group management.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://knowledgecenter.docuware.com/docs/integrate-generic-identity-provider-to-user-provisioning",
+   "title": "How to integrate generic identity provider to user provisioning",
+   "quote": "User deactivation: When users are deactivated in the identity provider, they are marked as disabled in DocuWare and can no longer log in.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://knowledgecenter.docuware.com/docs/integrate-generic-identity-provider-to-user-provisioning",
+   "title": "How to integrate generic identity provider to user provisioning",
+   "quote": "In the dropdown Identity Provider select Generic Identity Provider.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://knowledgecenter.docuware.com/docs/how-to-integrate-azure-entra-to-docuware-user-provisioning",
+   "title": "How to integrate Azure Entra to DocuWare user provisioning",
+   "quote": "select Integrate any other application you don't find in the gallery (Non-gallery)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://knowledgecenter.docuware.com/docs/how-to-integrate-azure-entra-to-docuware-user-provisioning",
+   "title": "How to integrate Azure Entra to DocuWare user provisioning",
+   "quote": "two authentication methods are offered: OAuth2 Client Credentials Grant and Bearer Authentication",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://knowledgecenter.docuware.com/docs/integrate-okta-user-provisioning",
+   "title": "Integrate Okta user provisioning",
+   "quote": "This sign-in method is not used for authentication but is required to enable SCIM provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://knowledgecenter.docuware.com/docs/integrate-okta-user-provisioning",
+   "title": "Integrate Okta user provisioning",
+   "quote": "A new To App section appears under the Provisioning tab. Under Provisioning to App , select Edit and enable Create Users , Update User Attributes , and Deactivate Users .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://knowledgecenter.docuware.com/docs/news-712-user-provisioning",
+   "title": "New component 'User Provisioning'",
+   "quote": "Role required for accessing this component: Organization Administrator.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://knowledgecenter.docuware.com/docs/docuware-license-model",
+   "title": "DocuWare license model",
+   "quote": "If the user is deleted or disabled, the named client license can be assigned to other users.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://knowledgecenter.docuware.com/docs/default-web-service-docuware-platform-api",
+   "title": "Default web service: DocuWare Platform API",
+   "quote": "The list below shows the available endpoints for the default REST web service \"DocuWare Platform API\".",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://knowledgecenter.docuware.com/docs/default-web-service-docuware-platform-api",
+   "title": "Default web service: DocuWare Platform API",
+   "quote": "Content type has to be set to application/vnd.docuware.platform.createorganizationuser+json",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://knowledgecenter.docuware.com/docs/connect-to-microsoft-entra",
+   "title": "Connect to Microsoft Entra",
+   "quote": "DocuWare supports Microsoft Entra ID (formerly: Azure Active Directory) as an Identity Provider for single sign-on.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://knowledgecenter.docuware.com/docs/connect-to-microsoft-entra",
+   "title": "Connect to Microsoft Entra",
+   "quote": "If this option is activated, the first time a user logs in with single sign-on, DocuWare will search for a suitable existing DocuWare user with the appropriate user name and email address.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://developer.docuware.com/rest/documentation.html",
+   "title": "OAuth Support | DocuWare SDK Documentation",
+   "quote": "The access token provided by the OAuth authentication process has a lifetime of 60 minutes.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://knowledgecenter.docuware.com/docs/how-to-integrate-azure-entra-to-docuware-user-provisioning",
+   "title": "How to integrate Azure Entra to DocuWare user provisioning",
+   "quote": "emails[type eq \"work\"].value: Coalesce([mail],[userPrincipalName])",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://knowledgecenter.docuware.com/docs/user-provisioning-api-intgration-guide",
+   "title": "How to: User Provisioning API Integration Guide",
+   "quote": "userName - User's login name (without domain if email for non-generic Idps)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://knowledgecenter.docuware.com/docs/user-provisioning-api-intgration-guide",
+   "title": "How to: User Provisioning API Integration Guide",
+   "quote": "Members are referenced by their externalId (not internal DocuWare user ID)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://knowledgecenter.docuware.com/docs/default-web-service-docuware-platform-api",
+   "title": "Default web service: DocuWare Platform API",
+   "quote": "To pass the ID/GUID of a user, simply write the username into a global variable of type \"User\" and pass the variable in the HTTP request.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://knowledgecenter.docuware.com/docs/user-provisioning-api-intgration-guide",
+   "title": "How to: User Provisioning API Integration Guide",
+   "quote": "Supported versions: DocuWare Cloud + 7.15 + 7.14 + 7.13",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://start.docuware.com/faq/docuware-pricing",
+  "https://start.docuware.com/sitemap.xml",
+  "https://knowledgecenter.docuware.com/sitemap-en.xml",
+  "https://developer.docuware.com/rest/index.html",
+  "https://www.okta.com/integrations/docuware/ (404)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/docuware-tutorial (404)"
+ ],
+ "open_questions": [
+  "Which of the four DocuWare Cloud tiers include User Provisioning (SCIM) and SSO is not published.",
+  "Whether SCIM deactivation frees a DocuWare Cloud licence or ends active sessions is not documented.",
+  "Bearer token / client secret expiry for SCIM is not documented.",
+  "No rate limits documented for the SCIM or Platform API.",
+  "Platform API base URL, plan availability and whether an audit-log API exists are not documented publicly.",
+  "Whether DocuWare offers JIT user creation on SSO login is not documented (only linking of existing users)."
+ ]
+}

@@ -1,0 +1,598 @@
+{
+ "slug": "veracode",
+ "vendor": "Veracode",
+ "vendor_url": "https://www.veracode.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Veracode",
+  "slug": "veracode",
+  "category": "Security & Identity",
+  "status": "none",
+  "scim_plan": "—",
+  "scim_price_text": "—",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": null,
+  "idp": {
+   "okta": "sso_only",
+   "entra": "sso_only",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": false
+  },
+  "pricing_page_url": "https://www.veracode.com/get-your-personalised-veracode-solution-demo/",
+  "docs_url": "https://docs.veracode.com/r/about_saml",
+  "evidence": "Veracode's SSO docs cover SAML with just-in-time (JIT) provisioning and say \"To automate provisioning for large numbers of users, we recommend you use the Admin API\"; no SCIM endpoint is documented.",
+  "notes": "Quote-only: no public plans or prices (veracode.com/pricing redirects to the platform page; buying is via demo/sales). No SCIM in the docs sitemap, API reference or SSO docs. Users arrive via SAML JIT provisioning (enabled through Veracode Technical Support) or via the Identity REST API (create/read/update/delete users, teams, roles, business units; delete a user's JWT sessions), which admins can script. Okta's OIN app is SAML only; the Entra gallery app is SSO with JIT. Audit log entries are available from the Reporting REST API (AUDIT report type). REST APIs are limited to 500 calls/minute per IP address.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [],
+ "scim": {
+  "available": null,
+  "cite": [],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": null,
+   "token_source": null,
+   "token_expiry": null,
+   "cite": []
+  },
+  "endpoints": {
+   "Users": null,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": []
+  },
+  "operations": {
+   "create": null,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": null,
+   "reactivate": null,
+   "delete": null,
+   "group_push": null,
+   "group_membership": null,
+   "cite": []
+  },
+  "deprovision": {
+   "action": null,
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": []
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": []
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "No SCIM endpoint found in Veracode's docs (sitemap of 870 pages contains no SCIM page); Veracode points to SAML JIT and its own APIs for provisioning."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c7",
+   "c8",
+   "c5"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://api.veracode.com/api/authn/v2",
+  "docs_url": "https://docs.veracode.com/r/c_identity_intro",
+  "auth": {
+   "methods": [
+    "hmac (Veracode API ID/key, veracode_hmac)"
+   ],
+   "scopes": [
+    "Admin API role (API user) or Administrator role (UI user)"
+   ],
+   "cite": [
+    "c8",
+    "c9",
+    "c32"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": null,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c7",
+    "c9",
+    "c10",
+    "c11",
+    "c12",
+    "c15",
+    "c16",
+    "c23"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/api/authn/v2/users",
+    "purpose": "Create a UI, SAML or API user",
+    "cite": [
+     "c9"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/authn/v2/users",
+    "purpose": "List users",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/authn/v2/users/search?search_term={search_term}",
+    "purpose": "Search users",
+    "cite": [
+     "c13"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/authn/v2/users/{userId}?partial=true",
+    "purpose": "Update a user",
+    "cite": [
+     "c11"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/authn/v2/users/{userId}",
+    "purpose": "Delete a user",
+    "cite": [
+     "c12"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/authn/v2/teams",
+    "purpose": "List teams",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/authn/v2/teams",
+    "purpose": "Create a team",
+    "cite": [
+     "c15"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/authn/v2/teams/{teamId}?partial=true&incremental=true",
+    "purpose": "Add members to a team",
+    "cite": [
+     "c16"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/authn/v2/teams/{teamId}",
+    "purpose": "Delete a team",
+    "cite": [
+     "c17"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/authn/v2/roles",
+    "purpose": "List roles",
+    "cite": [
+     "c18"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/authn/v2/roles",
+    "purpose": "Create a custom role",
+    "cite": [
+     "c19"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/authn/v2/business_units",
+    "purpose": "Create a business unit",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/authn/v2/session/user_id/{user_id}",
+    "purpose": "Delete all JWT tokens (sessions) for a user",
+    "cite": [
+     "c21",
+     "c22"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": null,
+   "cite": [
+    "c27"
+   ]
+  },
+  "rate_limits": {
+   "text": "All REST APIs: 500 calls/minute per IP address; HTTP 429 when exceeded.",
+   "cite": [
+    "c26"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "The legacy Admin XML API is deprecated for organisations on the new SSO/JIT workflow; use the Identity API.",
+    "cite": [
+     "c5"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/veracode/",
+   "cite": [
+    "c28"
+   ],
+   "notes": "OIN page marks only SAML as a supported capability (read from page markup); no provisioning actions are checked."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/veracode-tutorial",
+   "cite": [
+    "c29"
+   ]
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "https://jumpcloud.com/support/integrate-with-veracode returned 403."
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c2",
+   "c6",
+   "c29"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.veracode.com/get-your-personalised-veracode-solution-demo/",
+   "title": "Get Your Personalized Veracode Solution Demo",
+   "quote": "Get Your Personalized Veracode Solution Demo",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://docs.veracode.com/r/about_saml",
+   "title": "Single-sign on (SSO) | Veracode Docs",
+   "quote": "Set up SAML and just-in-time (JIT) provisioning to allow users in your organization to access Veracode products and services using Single Sign-On (SSO).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://docs.veracode.com/r/about_saml",
+   "title": "Single-sign on (SSO) | Veracode Docs",
+   "quote": "Veracode implements the portions of the SAML standard that manage authentication, but the Technical Support team must provision your account before you can use the service. To automate provisioning for large numbers of users, we recommend you use the Admin API.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://docs.veracode.com/r/about_saml",
+   "title": "Single-sign on (SSO) | Veracode Docs",
+   "quote": "Send a request to Veracode Technical Support. The Technical Support team will help you configure your identity provider (IdP).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://docs.veracode.com/r/About_Migrating_to_Just_In_Time_Provisioning",
+   "title": "About migrating to JIT provisioning | Veracode Docs",
+   "quote": "Admin XML API deprecation: the Admin XML API is deprecated in the new workflow. Use the Identity API to manage users, teams, and business units with the new workflow.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://docs.veracode.com/r/About_Migrating_to_Just_In_Time_Provisioning",
+   "title": "About migrating to JIT provisioning | Veracode Docs",
+   "quote": "In July 2022, Veracode introduced the Single Sign-on and Just-In-Time (JIT) Provisioning feature.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://docs.veracode.com/r/c_identity_intro",
+   "title": "Identity REST API | Veracode Docs",
+   "quote": "The API provides endpoints for Administrators to manage users (UI users and API users), teams, and business units using the create, update, read, and delete actions on their respective objects.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.veracode.com/r/c_identity_intro",
+   "title": "Identity REST API | Veracode Docs",
+   "quote": "An API user account with the Admin API role.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.veracode.com/r/c_identity_intro",
+   "title": "Identity REST API | Veracode Docs",
+   "quote": "http --auth-type=veracode_hmac POST \"https://api.veracode.com/api/authn/v2/users\" < input.json",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.veracode.com/r/c_identity_intro",
+   "title": "Identity REST API | Veracode Docs",
+   "quote": "http --auth-type=veracode_hmac GET \"https://api.veracode.com/api/authn/v2/users\"",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.veracode.com/r/c_identity_intro",
+   "title": "Identity REST API | Veracode Docs",
+   "quote": "http --auth-type=veracode_hmac PUT \"https://api.veracode.com/api/authn/v2/users/{userId}?partial=true\" < input.json",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.veracode.com/r/c_identity_intro",
+   "title": "Identity REST API | Veracode Docs",
+   "quote": "http --auth_type=veracode_hmac DELETE \"https://api.veracode.com/api/authn/v2/users/{userId}\"",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.veracode.com/r/c_identity_intro",
+   "title": "Identity REST API | Veracode Docs",
+   "quote": "http --auth-type=veracode_hmac GET \"https://api.veracode.com/api/authn/v2/users/search?search_term={search_term}\"",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.veracode.com/r/c_identity_intro",
+   "title": "Identity REST API | Veracode Docs",
+   "quote": "http --auth-type=veracode_hmac GET \"https://api.veracode.com/api/authn/v2/teams\"",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.veracode.com/r/c_identity_intro",
+   "title": "Identity REST API | Veracode Docs",
+   "quote": "http --auth-type=veracode_hmac POST \"https://api.veracode.com/api/authn/v2/teams\" < input.json",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.veracode.com/r/c_identity_intro",
+   "title": "Identity REST API | Veracode Docs",
+   "quote": "http --auth-type=veracode_hmac PUT \"https://api.veracode.com/api/authn/v2/teams/{teamId}?partial=true&incremental=true\" < input.json",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.veracode.com/r/c_identity_intro",
+   "title": "Identity REST API | Veracode Docs",
+   "quote": "http --auth-type=veracode_hmac DELETE \"https://api.veracode.com/api/authn/v2/teams/{teamId}\"",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.veracode.com/r/c_identity_intro",
+   "title": "Identity REST API | Veracode Docs",
+   "quote": "http --auth-type=veracode_hmac GET \"https://api.veracode.com/api/authn/v2/roles\"",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.veracode.com/r/c_identity_intro",
+   "title": "Identity REST API | Veracode Docs",
+   "quote": "http --auth-type=veracode_hmac POST \"https://api.veracode.com/api/authn/v2/roles\" < input.json",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.veracode.com/r/c_identity_intro",
+   "title": "Identity REST API | Veracode Docs",
+   "quote": "http --auth-type=veracode_hmac POST \"https://api.veracode.com/api/authn/v2/business_units\" < input.json",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.veracode.com/r/c_identity_intro",
+   "title": "Identity REST API | Veracode Docs",
+   "quote": "To delete all JWT tokens for a user, send the following request:",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://docs.veracode.com/r/c_identity_intro",
+   "title": "Identity REST API | Veracode Docs",
+   "quote": "http ---auth-type=veracode_hmac DELETE \"https://api.veracode.com/api/authn/v2/session/user_id/{user_id}\"",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://docs.veracode.com/r/c_identity_intro",
+   "title": "Identity REST API | Veracode Docs",
+   "quote": "Administrators assign roles when creating users or editing users.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://docs.veracode.com/r/Manage_users",
+   "title": "Manage users | Veracode Docs",
+   "quote": "If you want to temporarily deactivate the user, select No in the Login Enabled field.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://docs.veracode.com/r/About_API_Rate_Limiting",
+   "title": "API rate limiting | Veracode Docs",
+   "quote": "All REST APIs500 calls/minute per IP address",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://docs.veracode.com/r/Reporting_REST_API",
+   "title": "Reporting REST API | Veracode Docs",
+   "quote": "AUDITReturns audit log entries, such as user actions and system modifications",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://www.okta.com/integrations/veracode/",
+   "title": "Integrate Veracode with Okta",
+   "quote": "This app integration supports Single Sign-On. See Capabilities for more details.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/veracode-tutorial",
+   "title": "Microsoft Entra SSO integration with Veracode",
+   "quote": "Veracode supports identity provider initiated SSO and just-in-time user provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://docs.veracode.com/r/about_saml",
+   "title": "Single-sign on (SSO) | Veracode Docs",
+   "quote": "Create a new user or update an existing user using the Administration page in the Veracode Platform, or the Identity API.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://docs.veracode.com/r/c_identity_intro",
+   "title": "Identity REST API | Veracode Docs",
+   "quote": "This API requires secure authentication to Veracode.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.veracode.com/pricing/ (redirects to /platform/; no public pricing)",
+  "https://www.veracode.com/page-sitemap.xml",
+  "https://docs.veracode.com/sitemap.xml (870 URLs, none mention SCIM)",
+  "https://docs.veracode.com/r/about_saml",
+  "https://docs.veracode.com/r/About_Migrating_to_Just_In_Time_Provisioning",
+  "https://docs.veracode.com/r/c_identity_intro",
+  "https://docs.veracode.com/r/Manage_users",
+  "https://www.okta.com/integrations/veracode/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/veracode-tutorial",
+  "https://jumpcloud.com/support/integrate-with-veracode (403)"
+ ],
+ "open_questions": [
+  "Veracode publishes no plans or prices, so SSO and API plan gating are unknown.",
+  "Whether SCIM is available privately on request is not documented; WebSearch was unavailable (session budget exhausted), so only Veracode's own sitemap and docs were checked.",
+  "Whether deleting a user frees a licence is not documented."
+ ]
+}

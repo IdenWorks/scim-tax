@@ -1,0 +1,710 @@
+{
+ "slug": "teleport",
+ "vendor": "Teleport",
+ "vendor_url": "https://goteleport.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Teleport",
+  "slug": "teleport",
+  "category": "Security & Identity",
+  "status": "gated",
+  "scim_plan": "Enterprise (Identity Governance)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Enterprise",
+  "team_price_text": "Contact Sales (pricing page is a Get Pricing form)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Enterprise",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "directory_sync",
+   "google": "sso_only",
+   "onelogin": "sso_only",
+   "jumpcloud": "sso_only",
+   "generic": true
+  },
+  "pricing_page_url": "https://goteleport.com/pricing/",
+  "docs_url": "https://goteleport.com/docs/identity-governance/integrations/scim/",
+  "evidence": "Teleport's SCIM docs state \"Identity Governance is available only with Teleport Enterprise,\" and the feature matrix lists SCIM provisioning as \"Available In Teleport Identity Governance\" with no Community Edition support; the pricing page publishes no prices.",
+  "notes": "Status unchanged (gated). The pricing page no longer shows a Team plan or any prices, only a Get Pricing form ('Pay only for what you use: active users and protected resources'); the June Team price (~$12-18/resource/mo) has no first-party source now and was dropped. Current plans per docs: Community Edition (free, restricted to companies under 100 employees and $10M revenue), Enterprise (Cloud) and Enterprise (Self-Hosted). SAML/OIDC SSO is Enterprise-only (Community supports GitHub SSO only). SCIM needs the Identity Governance product on Enterprise plus a configured SAML connector. Okta deprovisioning deletes the Teleport user and creates a session lock. Entra ID uses a Teleport-run Microsoft Graph user/group sync, not SCIM. Admin API is gRPC (Go client, tctl, Terraform), not REST.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Community Edition",
+  "api_tax": false,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Community Edition",
+   "price_text": "Free (companies with <100 employees and <US$10M annual revenue)",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c3",
+    "c2",
+    "c33",
+    "c23",
+    "c37"
+   ],
+   "notes": "SSO is GitHub only, which is not SAML/OIDC with the customer's IdP."
+  },
+  {
+   "name": "Enterprise (Cloud)",
+   "price_text": "Contact Sales",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c1",
+    "c2",
+    "c33",
+    "c22",
+    "c4",
+    "c37"
+   ],
+   "notes": "SCIM requires the Identity Governance product on Enterprise."
+  },
+  {
+   "name": "Enterprise (Self-Hosted)",
+   "price_text": "Contact Sales",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c1",
+    "c2",
+    "c33",
+    "c4",
+    "c37"
+   ],
+   "notes": "SCIM requires the Identity Governance product on Enterprise."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c2",
+   "c4",
+   "c5",
+   "c6",
+   "c12"
+  ],
+  "plan": "Enterprise (Identity Governance)",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://{tenant}.teleport.sh/v1/webapi/scim/okta (Okta); generic SCIM base URL is shown in the Web UI",
+  "auth": {
+   "method": "oauth2",
+   "token_source": "Web UI > Add new integration > SCIM > SCIM Credentials (Client ID, Client Secret, Base URL); Okta: Zero Trust Access > Integrations > Okta > SCIM tile (API Token, bearer)",
+   "token_expiry": null,
+   "cite": [
+    "c7",
+    "c13",
+    "c18"
+   ],
+   "notes": "Generic SCIM uses OAuth 2.0 client credentials; the Okta integration uses a bearer API token that is invalidated when the SCIM configuration is re-saved."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c11",
+    "c5",
+    "c8"
+   ],
+   "notes": "Teleport does not publish a SCIM endpoint reference; Users and Groups are inferred from the user provisioning (Okta) and group-membership (generic) guides. SailPoint schema discovery is mentioned but /Schemas is not named."
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c9",
+    "c36",
+    "c11",
+    "c5",
+    "c8"
+   ],
+   "notes": "Deactivation deletes the user; re-provisioning recreates the user and revokes the lock. Group push maps to pre-created SCIM-type Access Lists only."
+  },
+  "deprovision": {
+   "action": "delete",
+   "frees_seat": null,
+   "revokes_sessions": true,
+   "data_retained": "Teleport user is deleted and a lock is created that terminates sessions and blocks already-issued credentials; the lock is revoked if the user is re-provisioned.",
+   "cite": [
+    "c11",
+    "c36"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": true,
+    "how": "All attributes sent (except password) are stored in an internal user label and echoed back in SCIM responses; none are mapped to Teleport user traits."
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c17",
+    "c16",
+    "c8",
+    "c5"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "Roles are granted by Teleport Access Lists; SCIM group displayName maps 1:1 to a SCIM-type Access List whose grants hold the roles. Okta-provisioned users get the default okta-requester role.",
+   "cite": [
+    "c8",
+    "c19"
+   ]
+  },
+  "rate_limits": {
+   "text": "Defaults (Teleport v18.9.2+): average 600 requests per 60 s window, burst 1200, max 300 concurrent mutating operations, per Auth Service instance; HTTP 429 with Retry-After when exceeded; configurable per SCIM plugin (v18.10.1+).",
+   "cite": [
+    "c9",
+    "c10"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Okta provisioning is To App only; importing from Teleport to Okta is not supported.",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "text": "Okta does not send suspensions, so suspended Okta users keep existing sessions and credentials.",
+    "cite": [
+     "c15"
+    ]
+   },
+   {
+    "text": "Only SCIM-type Access Lists created in advance (e.g. via Terraform) can be managed; group displayName must exactly match the Access List title.",
+    "cite": [
+     "c8"
+    ]
+   },
+   {
+    "text": "SCIM attributes are not shown in the UI and are stored in an internal label subject to change.",
+    "cite": [
+     "c16"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c23",
+   "c24",
+   "c25"
+  ],
+  "plan": "Community Edition",
+  "api_tax": false,
+  "style": "other",
+  "base_url": null,
+  "docs_url": "https://goteleport.com/docs/zero-trust-access/api/",
+  "auth": {
+   "methods": [
+    "tls_client_certificate"
+   ],
+   "scopes": [],
+   "cite": [
+    "c24"
+   ],
+   "notes": "Access is governed by Teleport RBAC roles on the API user, not OAuth scopes."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c26",
+    "c27",
+    "c28",
+    "c25"
+   ],
+   "notes": "Documented via tctl (users add/ls/rm, edit user), which uses the same gRPC API; groups are Access Lists (Identity Governance, Enterprise). User locks are the closest thing to deactivation."
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Community Edition",
+   "cite": [
+    "c25",
+    "c37"
+   ],
+   "notes": "Clients can subscribe to audit events through the gRPC API; the Event Handler plugin exports them to SIEMs on all editions."
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "The API is gRPC (Go client) with TLS certificate auth; no REST user endpoints are documented.",
+    "cite": [
+     "c23",
+     "c24"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/teleport/",
+   "cite": [
+    "c29",
+    "c12"
+   ],
+   "notes": "OIN page marks SAML, SCIM, Create, Update and Deactivate as checked; Group Push is not checked on the OIN page although Teleport's legacy custom-app steps enable Push Groups."
+  },
+  "entra": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "directory_sync",
+   "built_by": "vendor",
+   "url": "https://goteleport.com/docs/identity-governance/integrations/entra-id/",
+   "cite": [
+    "c20",
+    "c21",
+    "c22"
+   ],
+   "notes": "Teleport-run user and group import over Microsoft Graph; no Entra gallery tutorial for Teleport was found (Learn tutorial URLs 404)."
+  },
+  "google": {
+   "listed": null,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://goteleport.com/docs/zero-trust-access/sso/integrate-idp/google-workspace/",
+   "cite": [
+    "c34"
+   ],
+   "notes": "Teleport documents Google Workspace as an SSO provider only; no Google catalogue page checked."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c31"
+   ],
+   "notes": "From Teleport's own OneLogin SSO guide; OneLogin's catalogue not checked."
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://jumpcloud.com/support/integrate-with-teleport",
+   "cite": [
+    "c30"
+   ],
+   "notes": "JumpCloud guide covers SAML SSO only."
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "both",
+  "csv_import": null,
+  "other_sync": "Teleport-run Okta user sync (Okta API) and Entra ID user/group sync (Microsoft Graph)",
+  "docs_public": true,
+  "cite": [
+   "c32",
+   "c33",
+   "c20"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://goteleport.com/pricing/",
+   "title": "Teleport Pricing: Cloud & Self-Hosted",
+   "quote": "Transparent Pricing. Pay only for what you use: active users and protected resources.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://goteleport.com/docs/feature-matrix.md",
+   "title": "Teleport Features (feature matrix)",
+   "quote": "User & Group Provisioning & Deprovisioning (SCIM & Custom Protocols), including Okta, Microsoft Entra ID, and SailPoint",
+   "accessed": "2026-10-05",
+   "page_url": "https://goteleport.com/docs/feature-matrix/"
+  },
+  {
+   "id": "c3",
+   "url": "https://goteleport.com/docs/feature-matrix.md",
+   "title": "Teleport Features (feature matrix)",
+   "quote": "Commercial for binaries, with restrictions: Free usage for companies with <100 employees and <US$10M annual revenue.",
+   "accessed": "2026-10-05",
+   "page_url": "https://goteleport.com/docs/feature-matrix/"
+  },
+  {
+   "id": "c4",
+   "url": "https://goteleport.com/docs/identity-governance/integrations/scim/",
+   "title": "SCIM Integration",
+   "quote": "Identity Governance is available only with Teleport Enterprise.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://goteleport.com/docs/identity-governance/integrations/scim.md",
+   "title": "SCIM Integration",
+   "quote": "The SCIM integration between SCIM providers and Teleport enables automated synchronization of SCIM group memberships and Teleport Access List memberships.",
+   "accessed": "2026-10-05",
+   "page_url": "https://goteleport.com/docs/identity-governance/integrations/scim/"
+  },
+  {
+   "id": "c6",
+   "url": "https://goteleport.com/docs/identity-governance/integrations/scim.md",
+   "title": "SCIM Integration",
+   "quote": "A running Teleport cluster with SSO enabled (e.g. Okta SAML connector)",
+   "accessed": "2026-10-05",
+   "page_url": "https://goteleport.com/docs/identity-governance/integrations/scim/"
+  },
+  {
+   "id": "c7",
+   "url": "https://goteleport.com/docs/identity-governance/integrations/scim.md",
+   "title": "SCIM Integration",
+   "quote": "Teleport uses OAuth 2.0 Bearer Tokens for SCIM authentication.",
+   "accessed": "2026-10-05",
+   "page_url": "https://goteleport.com/docs/identity-governance/integrations/scim/"
+  },
+  {
+   "id": "c8",
+   "url": "https://goteleport.com/docs/identity-governance/integrations/scim.md",
+   "title": "SCIM Integration",
+   "quote": "Each SCIM group displayName must match the spec.title of a Teleport Access List.",
+   "accessed": "2026-10-05",
+   "page_url": "https://goteleport.com/docs/identity-governance/integrations/scim/"
+  },
+  {
+   "id": "c9",
+   "url": "https://goteleport.com/docs/identity-governance/integrations/scim.md",
+   "title": "SCIM Integration",
+   "quote": "Limits apply uniformly to all SCIM operations (GET for retrieve and search, POST for create, PUT for replace, PATCH for modify, and DELETE).",
+   "accessed": "2026-10-05",
+   "page_url": "https://goteleport.com/docs/identity-governance/integrations/scim/"
+  },
+  {
+   "id": "c10",
+   "url": "https://goteleport.com/docs/identity-governance/integrations/scim.md",
+   "title": "SCIM Integration",
+   "quote": "When a SCIM request is rejected because the rate limit is exceeded, Teleport responds with HTTP 429 Too Many Requests",
+   "accessed": "2026-10-05",
+   "page_url": "https://goteleport.com/docs/identity-governance/integrations/scim/"
+  },
+  {
+   "id": "c11",
+   "url": "https://goteleport.com/docs/identity-governance/integrations/okta/scim-integration.md",
+   "title": "Okta SCIM Integration",
+   "quote": "When a user is unassigned from the Okta app, or is deactivated by the Okta admin, Teleport will immediately delete the user in question, and create a lock that will both immediately terminate any existing sessions",
+   "accessed": "2026-10-05",
+   "page_url": "https://goteleport.com/docs/identity-governance/integrations/okta/scim-integration/"
+  },
+  {
+   "id": "c12",
+   "url": "https://goteleport.com/docs/identity-governance/integrations/okta/scim-integration.md",
+   "title": "Okta SCIM Integration",
+   "quote": "Provide SCIM connector base URL, like: https://example.teleport.sh/v1/webapi/scim/okta.",
+   "accessed": "2026-10-05",
+   "page_url": "https://goteleport.com/docs/identity-governance/integrations/okta/scim-integration/"
+  },
+  {
+   "id": "c13",
+   "url": "https://goteleport.com/docs/identity-governance/integrations/okta/scim-integration.md",
+   "title": "Okta SCIM Integration",
+   "quote": "Set Authentication Mode to \"HTTP Header\" and paste the Bearer Token generated in Step 1 of this guide.",
+   "accessed": "2026-10-05",
+   "page_url": "https://goteleport.com/docs/identity-governance/integrations/okta/scim-integration/"
+  },
+  {
+   "id": "c14",
+   "url": "https://goteleport.com/docs/identity-governance/integrations/okta/scim-integration.md",
+   "title": "Okta SCIM Integration",
+   "quote": "Teleport supports only To App (Okta -> Teleport) provisioning and does not support importing from Teleport to Okta.",
+   "accessed": "2026-10-05",
+   "page_url": "https://goteleport.com/docs/identity-governance/integrations/okta/scim-integration/"
+  },
+  {
+   "id": "c15",
+   "url": "https://goteleport.com/docs/identity-governance/integrations/okta/scim-integration.md",
+   "title": "Okta SCIM Integration",
+   "quote": "Okta does not send SCIM updates to Teleport when a user is suspended.",
+   "accessed": "2026-10-05",
+   "page_url": "https://goteleport.com/docs/identity-governance/integrations/okta/scim-integration/"
+  },
+  {
+   "id": "c16",
+   "url": "https://goteleport.com/docs/identity-governance/integrations/okta/scim-integration.md",
+   "title": "Okta SCIM Integration",
+   "quote": "Please note Teleport doesn't display SCIM attributes in the UI. They are stored in an internal user label which is subject to change.",
+   "accessed": "2026-10-05",
+   "page_url": "https://goteleport.com/docs/identity-governance/integrations/okta/scim-integration/"
+  },
+  {
+   "id": "c17",
+   "url": "https://goteleport.com/docs/identity-governance/integrations/okta/scim-integration.md",
+   "title": "Okta SCIM Integration",
+   "quote": "Unique identifier field for users: userName.",
+   "accessed": "2026-10-05",
+   "page_url": "https://goteleport.com/docs/identity-governance/integrations/okta/scim-integration/"
+  },
+  {
+   "id": "c18",
+   "url": "https://goteleport.com/docs/identity-governance/integrations/okta/scim-integration.md",
+   "title": "Okta SCIM Integration",
+   "quote": "Note that saving the new SCIM configuration will invalidate the existing SCIM token.",
+   "accessed": "2026-10-05",
+   "page_url": "https://goteleport.com/docs/identity-governance/integrations/okta/scim-integration/"
+  },
+  {
+   "id": "c19",
+   "url": "https://goteleport.com/docs/identity-governance/integrations/okta/user-sync.md",
+   "title": "Okta User Sync",
+   "quote": "The Teleport users created by the synchronization process or SCIM provisioning all inherit their username from the upstream Okta organization, and are given a default role of okta-requester.",
+   "accessed": "2026-10-05",
+   "page_url": "https://goteleport.com/docs/identity-governance/integrations/okta/user-sync/"
+  },
+  {
+   "id": "c20",
+   "url": "https://goteleport.com/docs/identity-governance/integrations/entra-id.md",
+   "title": "Entra ID Integration",
+   "quote": "User sync: Periodic import of Entra ID users as Teleport users.",
+   "accessed": "2026-10-05",
+   "page_url": "https://goteleport.com/docs/identity-governance/integrations/entra-id/"
+  },
+  {
+   "id": "c21",
+   "url": "https://goteleport.com/docs/identity-governance/integrations/entra-id.md",
+   "title": "Entra ID Integration",
+   "quote": "To import users and groups from Entra ID, Teleport must be configured with a credential to authenticate with the Microsoft Graph API.",
+   "accessed": "2026-10-05",
+   "page_url": "https://goteleport.com/docs/identity-governance/integrations/entra-id/"
+  },
+  {
+   "id": "c22",
+   "url": "https://goteleport.com/docs/zero-trust-access/sso/integrate-idp/entra-id.md",
+   "title": "Teleport Authentication with Microsoft Entra ID (SAML)",
+   "quote": "Enterprise SSO is available only with Teleport Enterprise.",
+   "accessed": "2026-10-05",
+   "page_url": "https://goteleport.com/docs/zero-trust-access/sso/integrate-idp/entra-id/"
+  },
+  {
+   "id": "c23",
+   "url": "https://goteleport.com/docs/zero-trust-access/api.md",
+   "title": "Using the Teleport API",
+   "quote": "The Teleport Auth Service provides a gRPC API for remotely interacting with your cluster.",
+   "accessed": "2026-10-05",
+   "page_url": "https://goteleport.com/docs/zero-trust-access/api/"
+  },
+  {
+   "id": "c24",
+   "url": "https://goteleport.com/docs/zero-trust-access/api/getting-started.md",
+   "title": "API Getting Started Guide",
+   "quote": "Teleport API clients authenticate to Teleport using TLS credentials.",
+   "accessed": "2026-10-05",
+   "page_url": "https://goteleport.com/docs/zero-trust-access/api/getting-started/"
+  },
+  {
+   "id": "c25",
+   "url": "https://goteleport.com/docs/zero-trust-access/api/getting-started.md",
+   "title": "API Getting Started Guide",
+   "quote": "tctl, the Teleport Kubernetes Operator, and the Teleport Terraform provider use this API, and you can write custom tools to manage API resources or subscribe to Teleport audit events.",
+   "accessed": "2026-10-05",
+   "page_url": "https://goteleport.com/docs/zero-trust-access/api/getting-started/"
+  },
+  {
+   "id": "c26",
+   "url": "https://goteleport.com/docs/zero-trust-access/rbac-get-started/users.md",
+   "title": "Local Users",
+   "quote": "A Teleport administrator creates Teleport user accounts and maps them to the roles they can use.",
+   "accessed": "2026-10-05",
+   "page_url": "https://goteleport.com/docs/zero-trust-access/rbac-get-started/users/"
+  },
+  {
+   "id": "c27",
+   "url": "https://goteleport.com/docs/zero-trust-access/rbac-get-started/users.md",
+   "title": "Local Users",
+   "quote": "Admins can delete a local user via tctl:",
+   "accessed": "2026-10-05",
+   "page_url": "https://goteleport.com/docs/zero-trust-access/rbac-get-started/users/"
+  },
+  {
+   "id": "c28",
+   "url": "https://goteleport.com/docs/zero-trust-access/rbac-get-started/users.md",
+   "title": "Local Users",
+   "quote": "Admins can edit user entries via tctl.",
+   "accessed": "2026-10-05",
+   "page_url": "https://goteleport.com/docs/zero-trust-access/rbac-get-started/users/"
+  },
+  {
+   "id": "c29",
+   "url": "https://www.okta.com/integrations/teleport/",
+   "title": "Integrate Teleport with Okta",
+   "quote": "The Okta Teleport integration allows users to authenticate securely through Single Sign-On with SAML along with SCIM provisioning capabilities.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://jumpcloud.com/support/integrate-with-teleport",
+   "title": "Integrate with Teleport | JumpCloud Documentation",
+   "quote": "Use JumpCloud SAML Single Sign On (SSO) to give your users convenient but secure access to all their web applications with a single set of credentials.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://goteleport.com/docs/zero-trust-access/sso/integrate-idp/one-login.md",
+   "title": "Teleport Authentication with OneLogin as an SSO Provider",
+   "quote": "Enterprise SSO is available only with Teleport Enterprise.",
+   "accessed": "2026-10-05",
+   "page_url": "https://goteleport.com/docs/zero-trust-access/sso/integrate-idp/one-login/"
+  },
+  {
+   "id": "c32",
+   "url": "https://goteleport.com/docs/identity-governance/integrations/scim.md",
+   "title": "SCIM Integration",
+   "quote": "By default, SSO users in Teleport are ephemeral.",
+   "accessed": "2026-10-05",
+   "page_url": "https://goteleport.com/docs/identity-governance/integrations/scim/"
+  },
+  {
+   "id": "c33",
+   "url": "https://goteleport.com/docs/feature-matrix.md",
+   "title": "Teleport Features (feature matrix)",
+   "quote": "GitHub, Google Workspace, Microsoft Entra ID, Okta, SailPoint, OIDC, SAML, Teleport",
+   "accessed": "2026-10-05",
+   "page_url": "https://goteleport.com/docs/feature-matrix/"
+  },
+  {
+   "id": "c34",
+   "url": "https://goteleport.com/docs/zero-trust-access/sso/integrate-idp/google-workspace.md",
+   "title": "Teleport Authentication with Google Workspace (G Suite)",
+   "quote": "to be a single sign-on (SSO) provider that issues Teleport credentials to specific groups of users.",
+   "accessed": "2026-10-05",
+   "page_url": "https://goteleport.com/docs/zero-trust-access/sso/integrate-idp/google-workspace/"
+  },
+  {
+   "id": "c35",
+   "url": "https://goteleport.com/docs/identity-governance/integrations/scim/sailpoint.md",
+   "title": "SCIM SailPoint Integration",
+   "quote": "SailPoint provides a SCIM identity management connector that allows you to manage Teleport Access List membership through SailPoint IdentityNow or SailPoint IdentityIQ.",
+   "accessed": "2026-10-05",
+   "page_url": "https://goteleport.com/docs/identity-governance/integrations/scim/sailpoint/"
+  },
+  {
+   "id": "c36",
+   "url": "https://goteleport.com/docs/identity-governance/integrations/okta/scim-integration.md",
+   "title": "Okta SCIM Integration",
+   "quote": "Deactivate Users - Deletes the Teleport user when it is unassigned in Okta or their Okta account is deactivated.",
+   "accessed": "2026-10-05",
+   "page_url": "https://goteleport.com/docs/identity-governance/integrations/okta/scim-integration/"
+  },
+  {
+   "id": "c37",
+   "url": "https://goteleport.com/docs/feature-matrix.md",
+   "title": "Teleport Features (feature matrix)",
+   "quote": "Export to SIEM",
+   "accessed": "2026-10-05",
+   "page_url": "https://goteleport.com/docs/feature-matrix/"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://goteleport.com/pricing/",
+  "https://goteleport.com/docs/llms.txt",
+  "https://goteleport.com/docs/sitemap.xml",
+  "https://goteleport.com/docs/feature-matrix/",
+  "https://www.okta.com/integrations/teleport/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/teleport-tutorial (404)",
+  "https://jumpcloud.com/support/integrate-with-teleport"
+ ],
+ "open_questions": [
+  "Pricing page publishes no prices or plan table; Enterprise and Identity Governance prices are Contact Sales.",
+  "Whether Identity Governance is a separately priced add-on to Enterprise is not stated on a pricing page.",
+  "No SCIM endpoint reference: ServiceProviderConfig, Schemas, ResourceTypes, filtering and pagination are undocumented.",
+  "Generic SCIM OAuth token lifetime is not documented.",
+  "Whether deleting a user frees a billed active-user slot is not documented.",
+  "No user-event webhooks documented.",
+  "General gRPC API rate limits are not documented."
+ ]
+}

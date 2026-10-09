@@ -1,0 +1,770 @@
+{
+ "slug": "slab",
+ "vendor": "Slab",
+ "vendor_url": "https://slab.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Slab",
+  "slug": "slab",
+  "category": "Productivity & Docs",
+  "status": "gated",
+  "scim_plan": "Business",
+  "scim_price_text": "Business: $12.50/user/mo billed annually",
+  "scim_price_per_user_mo": 12.5,
+  "team_plan": "Startup",
+  "team_price_text": "Startup: $6.67/user/mo billed annually",
+  "team_price_per_user_mo": 6.67,
+  "price_multiplier": 1.9,
+  "sso_plan": "Business",
+  "sso_price_per_user_mo": 12.5,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": false,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": null,
+   "google": null,
+   "onelogin": "native",
+   "jumpcloud": null,
+   "generic": false
+  },
+  "pricing_page_url": "https://slab.com/pricing/",
+  "docs_url": "https://help.slab.com/en/articles/4714053-okta-scim-integration",
+  "evidence": "Slab's pricing table ticks SCIM Provisioning and SAML-based SSO only on Business ($12.50/user/mo billed annually) and Enterprise, and the Okta SCIM guide says you must be on the Business or Enterprise plan.",
+  "notes": "New row. Plans: Free (up to 10 users), Startup $6.67, Business $12.50 per user/mo billed annually, Enterprise custom (at least 100 users). SCIM and SAML SSO start at Business, one tier above the Startup team plan; the 'Single Sign On' row ticked on every plan is Google/Slack/Microsoft sign-in, not SAML. SCIM is documented only through Slab's Okta and OneLogin catalogue apps (SAML must be configured first); no generic SCIM endpoint, Entra, Google Workspace or JumpCloud provisioning is documented. Slab's GraphQL API and webhooks are Business+ but are documented as content APIs; whether they manage users could not be confirmed (Apollo Studio schema did not render). Deactivated users stop being billed (credit for remaining term).",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": null,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "$0 user / month (up to 10 users)",
+   "price_per_user_mo": 0,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c4",
+    "c5",
+    "c6"
+   ]
+  },
+  {
+   "name": "Startup",
+   "price_text": "$6.67 user / month billed annually",
+   "price_per_user_mo": 6.67,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c5",
+    "c6"
+   ]
+  },
+  {
+   "name": "Business",
+   "price_text": "$12.50 user / month billed annually",
+   "price_per_user_mo": 12.5,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c5",
+    "c6",
+    "c8"
+   ],
+   "notes": "GraphQL API and webhooks included; Audit Logs row is not ticked on the pricing table although the help centre says audit logs are on Business (see conflicts)."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Custom (contact sales@slab.com), at least 100 users",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c4",
+    "c5",
+    "c6"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c10",
+   "c8",
+   "c9",
+   "c26",
+   "c27",
+   "c23"
+  ],
+  "plan": "Business",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": null,
+  "base_url": null,
+  "notes": "SCIM is set up only through Slab's own Okta and OneLogin catalogue apps; Slab does not publish a SCIM base URL, version or generic setup guide.",
+  "auth": {
+   "method": null,
+   "token_source": "Slab Team settings > Integrations > Okta (or OneLogin) > Provisioning tab > enable SCIM and copy SCIM API Token",
+   "token_expiry": null,
+   "cite": [
+    "c15"
+   ]
+  },
+  "endpoints": {
+   "Users": null,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": []
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": false,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c11",
+    "c12",
+    "c13",
+    "c14",
+    "c32",
+    "c33"
+   ],
+   "notes": "Deleting a user in Okta deactivates them in Slab rather than deleting them. Update method (PUT/PATCH) not documented."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": true,
+   "revokes_sessions": null,
+   "data_retained": "Deactivated users can no longer log in; their published posts stay and ownership is transferred to another teammate or Slab Bot. A credit is issued for the remaining subscription time, and billing counts only users who can log in. Reactivated users must rejoin topics and groups.",
+   "cite": [
+    "c13",
+    "c34",
+    "c35",
+    "c36",
+    "c7"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name",
+    "title"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": true,
+    "how": "userType attribute (admin, guest or standard user) mapped from Okta assignments or OneLogin rules; groups parameter in OneLogin maps roles to Slab Groups."
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c17",
+    "c18",
+    "c22",
+    "c20",
+    "c29",
+    "c31",
+    "c14"
+   ],
+   "notes": "Slab does not publish a full attribute list; name and title are named as synced fields, userName is the matching key."
+  },
+  "roles": {
+   "supported": true,
+   "how": "userType attribute sets standard user, admin or guest; OneLogin roles map to Slab Groups via a rule.",
+   "cite": [
+    "c20",
+    "c29",
+    "c22",
+    "c28"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Username changes are not supported; changing the Okta username can break the user.",
+    "cite": [
+     "c17"
+    ]
+   },
+   {
+    "text": "Password sync is not supported.",
+    "cite": [
+     "c16"
+    ]
+   },
+   {
+    "text": "Users or groups assigned in Okta before SCIM was enabled are not updated or deactivated until unassigned and reassigned.",
+    "cite": [
+     "c19"
+    ]
+   },
+   {
+    "text": "The IdP is the source of truth: Slab-side edits to name or title and to pushed group membership are overwritten.",
+    "cite": [
+     "c18",
+     "c21"
+    ]
+   },
+   {
+    "text": "Push-group members join Slab groups as regular members; group owners must be set in Slab.",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "text": "OneLogin provisioning needs OneLogin's Advanced Directory add-on.",
+    "cite": [
+     "c30"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": null,
+  "cite": [
+   "c37",
+   "c38",
+   "c39",
+   "c6"
+  ],
+  "plan": "Business",
+  "api_tax": null,
+  "style": "GraphQL",
+  "base_url": null,
+  "docs_url": "https://studio.apollographql.com/public/Slab/home",
+  "notes": "Slab has a GraphQL API (Business and Enterprise) documented as a content API acting as Slab Bot. Whether it exposes user management could not be checked: the Apollo Studio schema page did not render headlessly and the endpoint refuses unauthenticated introspection.",
+  "auth": {
+   "methods": [],
+   "scopes": [],
+   "cite": [],
+   "notes": "Admins copy an API token from Team settings > Developer; the auth scheme is not described on the help page."
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": []
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": [
+    "c40"
+   ],
+   "notes": "Audit logs are viewable in Team settings (Business and Enterprise per the help centre); no API export is documented."
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/slab/",
+   "cite": [
+    "c43",
+    "c8",
+    "c25"
+   ],
+   "notes": "OIN page marks SAML and SCIM, and Create, Update, Deactivate, Group Push and Group Linking as checked (read from page markup)."
+  },
+  "entra": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "No Slab tutorial in Microsoft Learn's SaaS app tutorial index; Slab lists Microsoft/Office 365/Azure AD sign-in among SSO options but documents no Entra SAML or provisioning setup."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "Slab supports Google sign-in; no Google Workspace SAML or provisioning app documented."
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c26",
+    "c27"
+   ],
+   "notes": "From Slab's own OneLogin guide (OneLogin catalogue not loaded)."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "jumpcloud.com returned 403 to curl and WebFetch."
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c24",
+   "c41",
+   "c42"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://slab.com/pricing/",
+   "title": "Pricing - Slab",
+   "quote": "Yes! Slab is free to for up to 10 users + guests forever.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://slab.com/pricing/",
+   "title": "Pricing - Slab",
+   "quote": "6.67 user / month billed annually",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://slab.com/pricing/",
+   "title": "Pricing - Slab",
+   "quote": "12.50 user / month billed annually",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://slab.com/pricing/",
+   "title": "Pricing - Slab",
+   "quote": "Users Up to 10 Unlimited Unlimited At least 100",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://slab.com/pricing/",
+   "title": "Pricing - Slab",
+   "quote": "SAML-based SSO SCIM Provisioning Audit Logs",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://slab.com/pricing/",
+   "title": "Pricing - Slab",
+   "quote": "API GraphQL GraphQL Webhooks",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://slab.com/pricing/",
+   "title": "Pricing - Slab",
+   "quote": "You will be billed for the number of users who can log into Slab. Admins may deactivate users at any time.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://help.slab.com/en/articles/4714053-okta-scim-integration",
+   "title": "Okta SCIM Integration | Slab Help Center",
+   "quote": "You must have an Okta account and be on the Business or Enterprise plan for Slab.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://help.slab.com/en/articles/4714053-okta-scim-integration",
+   "title": "Okta SCIM Integration | Slab Help Center",
+   "quote": "Before using SCIM, you must set up the SAML 2.0 integration with Okta.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://help.slab.com/en/articles/4714053-okta-scim-integration",
+   "title": "Okta SCIM Integration | Slab Help Center",
+   "quote": "Slab supports SCIM via Okta, allowing you to streamline your process without having to manually create or provision user accounts for every new hire",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c11",
+   "url": "https://help.slab.com/en/articles/4714053-okta-scim-integration",
+   "title": "Okta SCIM Integration | Slab Help Center",
+   "quote": "Create users: Users in Okta that are assigned to the Slab application in Okta are automatically added as members to your organization in Slab.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://help.slab.com/en/articles/4714053-okta-scim-integration",
+   "title": "Okta SCIM Integration | Slab Help Center",
+   "quote": "Update users: Updating user attributes in Okta will push them to Slab as well and reflect those changes.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://help.slab.com/en/articles/4714053-okta-scim-integration",
+   "title": "Okta SCIM Integration | Slab Help Center",
+   "quote": "Deactivate users: Deactivating or deleting users in Okta will automatically deactivate those users in Slab as well.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c14",
+   "url": "https://help.slab.com/en/articles/4714053-okta-scim-integration",
+   "title": "Okta SCIM Integration | Slab Help Center",
+   "quote": "Group Push: Assigning groups in Okta will push the groups to Slab and also sync all members.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://help.slab.com/en/articles/4714053-okta-scim-integration",
+   "title": "Okta SCIM Integration | Slab Help Center",
+   "quote": "Open your Okta Integration settings, and under Provisioning tab, enable SCIM and copy your SCIM API Token",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://help.slab.com/en/articles/4714053-okta-scim-integration",
+   "title": "Okta SCIM Integration | Slab Help Center",
+   "quote": "Syncing Passwords: Slab does not support automatically updating user passwords in Slab when updated in Okta.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c17",
+   "url": "https://help.slab.com/en/articles/4714053-okta-scim-integration",
+   "title": "Okta SCIM Integration | Slab Help Center",
+   "quote": "The SCIM integration uses Okta usernames to manage and sync users and thus does not support username changes",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c18",
+   "url": "https://help.slab.com/en/articles/4714053-okta-scim-integration",
+   "title": "Okta SCIM Integration | Slab Help Center",
+   "quote": "Changes to a user's name or title in Slab will be reverted back to the original on a resync from Okta, or overridden by a new value set in Okta.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c19",
+   "url": "https://help.slab.com/en/articles/4714053-okta-scim-integration",
+   "title": "Okta SCIM Integration | Slab Help Center",
+   "quote": "Users or Groups assigned to the Slab app before SCIM is enabled will not have SCIM working for them.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c20",
+   "url": "https://help.slab.com/en/articles/4714053-okta-scim-integration",
+   "title": "Okta SCIM Integration | Slab Help Center",
+   "quote": "choose the appropriate User Type to be mapped in Slab (i.e. if the users should be a standard user, admin or guest in Slab)",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c21",
+   "url": "https://help.slab.com/en/articles/4714053-okta-scim-integration",
+   "title": "Okta SCIM Integration | Slab Help Center",
+   "quote": "An existing group in Slab will have its members overridden when a new group of the same name is pushed from Okta.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c22",
+   "url": "https://help.slab.com/en/articles/2360592-sso-provisioning-with-okta",
+   "title": "SSO & Provisioning with Okta | Slab Help Center",
+   "quote": "July 26, 2021 - Added userType attribute mapping.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c23",
+   "url": "https://help.slab.com/en/articles/2360592-sso-provisioning-with-okta",
+   "title": "SSO & Provisioning with Okta | Slab Help Center",
+   "quote": "December 28, 2020 - Added support for SCIM with Users.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c24",
+   "url": "https://help.slab.com/en/articles/2360592-sso-provisioning-with-okta",
+   "title": "SSO & Provisioning with Okta | Slab Help Center",
+   "quote": "JIT (just in time) provisioning",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c25",
+   "url": "https://help.slab.com/en/articles/2360592-sso-provisioning-with-okta",
+   "title": "SSO & Provisioning with Okta | Slab Help Center",
+   "quote": "Slab supports SAML 2.0 SSO via Okta.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c26",
+   "url": "https://help.slab.com/en/articles/3936175-sso-provisioning-with-onelogin",
+   "title": "SSO & Provisioning with OneLogin | Slab Help Center",
+   "quote": "Slab supports SSO with OneLogin via SAML 2.0, as well as user and group provisioning with SCIM, allowing your team to access Slab securely.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c27",
+   "url": "https://help.slab.com/en/articles/3936175-sso-provisioning-with-onelogin",
+   "title": "SSO & Provisioning with OneLogin | Slab Help Center",
+   "quote": "You must have a OneLogin account and be on the Business or Enterprise plan for Slab.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c28",
+   "url": "https://help.slab.com/en/articles/3936175-sso-provisioning-with-onelogin",
+   "title": "SSO & Provisioning with OneLogin | Slab Help Center",
+   "quote": "Slab Groups are more similar to OneLogin Roles, whereas OneLogin Groups are a different concept that does not map to any SCIM entity.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c29",
+   "url": "https://help.slab.com/en/articles/3936175-sso-provisioning-with-onelogin",
+   "title": "SSO & Provisioning with OneLogin | Slab Help Center",
+   "quote": "allows you to set the Slab user type from OneLogin (e.g. you can configure if provisioned users should be admins, guests, or just regular users in Slab)",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c30",
+   "url": "https://help.slab.com/en/articles/3936175-sso-provisioning-with-onelogin",
+   "title": "SSO & Provisioning with OneLogin | Slab Help Center",
+   "quote": "You will need the Advanced Directory add-on to use provisioning in OneLogin.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c31",
+   "url": "https://help.slab.com/en/articles/3936175-sso-provisioning-with-onelogin",
+   "title": "SSO & Provisioning with OneLogin | Slab Help Center",
+   "quote": "Under the Parameters section, click on the Groups field.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c32",
+   "url": "https://help.slab.com/en/articles/8461800-group-sync-through-scim",
+   "title": "Group sync through SCIM | Slab Help Center",
+   "quote": "Existing groups in Okta and OneLogin can be automatically pushed to your Slab account and sync all the members.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c33",
+   "url": "https://help.slab.com/en/articles/8149226-push-groups-with-okta",
+   "title": "Push Groups with Okta | Slab Help Center",
+   "quote": "When a user is added to an Okta push group, they will be added to the Slab group as a regular member.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c34",
+   "url": "https://help.slab.com/en/articles/6512643-managing-teammates",
+   "title": "Managing teammates | Slab Help Center",
+   "quote": "When a teammate is deactivated, a credit will be issued for the user based on the amount of remaining time in your subscription.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c35",
+   "url": "https://help.slab.com/en/articles/6512643-managing-teammates",
+   "title": "Managing teammates | Slab Help Center",
+   "quote": "Ownership of a deactivated teammate's published posts must be transferred to another teammate.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c36",
+   "url": "https://help.slab.com/en/articles/6512643-managing-teammates",
+   "title": "Managing teammates | Slab Help Center",
+   "quote": "Reactivated team members must rejoin any topics and/or groups they previously were part of.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c37",
+   "url": "https://help.slab.com/en/articles/6545629-developer-tools-api-webhooks",
+   "title": "Developer tools: API & webhooks | Slab Help Center",
+   "quote": "Currently, API & webhooks are only available to customers on the Business or Enterprise plan",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c38",
+   "url": "https://help.slab.com/en/articles/6545629-developer-tools-api-webhooks",
+   "title": "Developer tools: API & webhooks | Slab Help Center",
+   "quote": "Those features allow you to create Slab content programmatically, receive notifications when a post is published, and much more!",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c39",
+   "url": "https://help.slab.com/en/articles/6545629-developer-tools-api-webhooks",
+   "title": "Developer tools: API & webhooks | Slab Help Center",
+   "quote": "The content you receive from Slab's GraphQL Slab API depends on what the Slab Bot user has access to.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c40",
+   "url": "https://help.slab.com/en/articles/6512729-audit-logs",
+   "title": "Audit logs | Slab Help Center",
+   "quote": "Audit logs are available to admins on Business and Enterprise plans",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c41",
+   "url": "https://help.slab.com/en/articles/3816044-authentication",
+   "title": "Authentication | Slab Help Center",
+   "quote": "New users can either be invite-only, or automatically created when they sign in using their team email address SSO.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c42",
+   "url": "https://help.slab.com/en/articles/3816044-authentication",
+   "title": "Authentication | Slab Help Center",
+   "quote": "Slab supports SSO through Google, Okta, OneLogin, Microsoft/Office 365/Azure AD, and Slack.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c43",
+   "url": "https://www.okta.com/integrations/slab/",
+   "title": "Integrate Slab with Okta",
+   "quote": "With Slab's Okta integration, you can streamline your process without having to manually create or provision user accounts for every new hire, giving your entire team easy access to Slab.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The pricing table ticks Audit Logs only for Enterprise, but the help centre says audit logs are available on Business and Enterprise plans.",
+   "cite": [
+    "c5",
+    "c40"
+   ]
+  }
+ ],
+ "searched": [
+  "https://slab.com/pricing/ (rendered; tick marks read from markup)",
+  "https://help.slab.com/sitemap.xml (all SSO, SCIM, users, API, audit articles)",
+  "https://help.slab.com/en/articles/6545629-developer-tools-api-webhooks",
+  "https://studio.apollographql.com/public/Slab/home (did not render headlessly)",
+  "https://the.slab.com/public/posts/slab-webhooks-a9evxmgd (did not render)",
+  "https://www.okta.com/integrations/slab/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/toc.json (no Slab entry)",
+  "https://jumpcloud.com/support/integrate-with-slab (403)"
+ ],
+ "open_questions": [
+  "Slab does not publish SCIM version, base URL, endpoints or a full attribute list.",
+  "Whether Slab's GraphQL API can list, create or deactivate users is not confirmed (schema not loaded).",
+  "Whether webhooks include user events is not confirmed (webhooks doc did not render).",
+  "Whether SCIM deactivation ends active sessions is not documented.",
+  "JumpCloud catalogue page could not be loaded (403)."
+ ]
+}

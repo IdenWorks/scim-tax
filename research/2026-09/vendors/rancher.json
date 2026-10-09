@@ -1,0 +1,465 @@
+{
+ "slug": "rancher",
+ "vendor": "Rancher (SUSE Rancher Prime)",
+ "vendor_url": "https://www.rancher.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Rancher (SUSE Rancher Prime)",
+  "slug": "rancher",
+  "category": "Cloud, Infrastructure & Observability",
+  "status": "unknown",
+  "scim_plan": null,
+  "scim_price_text": "—",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Rancher Prime",
+  "team_price_text": "Contact Sales (request pricing form)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Rancher (open source, self-hosted)",
+  "sso_price_per_user_mo": 0,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": null,
+  "idp": {
+   "okta": "sso_only",
+   "entra": "sso_only",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": false
+  },
+  "pricing_page_url": "https://www.rancher.com/pricing",
+  "docs_url": "https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/authentication-config/",
+  "evidence": "Rancher's docs list SAML/OIDC auth providers (Okta, Entra ID, Keycloak, PingIdentity, Shibboleth, generic OIDC) but no SCIM; SCIM 2.0 exists only in Rancher's source code as an experimental 'scim' feature flag, which main-branch code is turning into a Prime-only feature.",
+  "notes": "New row. Rancher Manager is open source and self-hosted (free); Rancher Prime is SUSE's paid subscription built from the same code, priced only through a request-pricing form. External authentication (AD, LDAP, Entra ID, Okta SAML, Keycloak, Ping, Shibboleth, AD FS, generic OIDC) is in the open-source product; users are created when they first log in (JIT) and groups come from the IdP. No SCIM in the docs (ranchermanager.docs.rancher.com v2.11 to v2.16 sitemap, SUSE Rancher docs sitemap, feature-flags page). Rancher's GitHub source has an 'Add Experimental SCIM Support' package (SCIM 2.0 under /v1-scim/{provider}/, bearer token from Kubernetes secrets, Users and Groups) behind a 'scim' feature flag that is off by default in v2.14+ releases; on main it is now declared with newPrimeFeature, suggesting a Prime-only gate in a future release. Undocumented, so status is unknown; likely gated (Prime) or free (community flag) once documented. User API: Kubernetes-style users.management.cattle.io resource (create, list, get, delete) and the v3 API, available in open source.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Rancher (open source)",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Rancher (open source)",
+   "price_text": "Free, self-hosted",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": true,
+   "scim": null,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c4",
+    "c8"
+   ]
+  },
+  {
+   "name": "Rancher Prime",
+   "price_text": "Contact Sales (request pricing)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": null,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c3"
+   ]
+  }
+ ],
+ "scim": {
+  "available": null,
+  "cite": [
+   "c12",
+   "c13",
+   "c15",
+   "c16"
+  ],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "/v1-scim/{provider}/ on the Rancher server (from source code)",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Kubernetes secrets (source code)",
+   "token_expiry": null,
+   "cite": [
+    "c14"
+   ]
+  },
+  "endpoints": {
+   "Users": null,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [],
+   "notes": "Source code lists User and Group resources; not documented."
+  },
+  "operations": {
+   "create": null,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": null,
+   "reactivate": null,
+   "delete": null,
+   "group_push": null,
+   "group_membership": null,
+   "cite": [
+    "c17",
+    "c18"
+   ],
+   "notes": "Source package doc lists user list/get/create/update/delete and group list/get/create/PATCH/delete; left null because it is not in public docs."
+  },
+  "deprovision": {
+   "action": null,
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": []
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": []
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Experimental and behind the 'scim' feature flag (default off) in released v2.15.2 code; main branch declares it a Prime feature.",
+    "cite": [
+     "c15",
+     "c16"
+    ]
+   }
+  ],
+  "notes": "available left null: SCIM exists in Rancher's source code but not in any product documentation or release notes."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c8",
+   "c9"
+  ],
+  "plan": "Rancher (open source)",
+  "api_tax": false,
+  "style": "other",
+  "base_url": null,
+  "docs_url": "https://ranchermanager.docs.rancher.com/api/workflows/users",
+  "auth": {
+   "methods": [
+    "api_key"
+   ],
+   "scopes": [],
+   "cite": [
+    "c20"
+   ],
+   "notes": "Kubernetes API access to the Rancher management cluster or Rancher API tokens."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c8",
+    "c9",
+    "c10",
+    "c11"
+   ],
+   "notes": "Documented as kubectl operations on the users.management.cattle.io custom resource (Kubernetes REST API); group membership comes from the external IdP and can be refreshed via GroupMembershipRefreshRequest."
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "okta.com/integrations/rancher/ and /suse-rancher/ return 404; Rancher documents Okta SAML as an auth provider."
+  },
+  "entra": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "learn.microsoft.com rancher-tutorial returns 404; Rancher documents Entra ID as an auth provider."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": "idp",
+   "url": "https://www.jumpcloud.com/support/integrate-with-rancher",
+   "cite": [
+    "c19"
+   ],
+   "notes": "JumpCloud article covers SAML SSO setup for Rancher; no SCIM provisioning described."
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "both",
+  "csv_import": null,
+  "other_sync": "Group membership pulled from the external IdP at login (AD, LDAP, SAML, OIDC providers)",
+  "docs_public": true,
+  "cite": [
+   "c4",
+   "c5",
+   "c6",
+   "c7"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.rancher.com/pricing",
+   "title": "Request Pricing | Rancher",
+   "quote": "Fill out the form below to get detailed pricing from your regional sales team.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://documentation.suse.com/cloudnative/rancher-manager/v2.15/en/about-rancher/prime.html",
+   "title": "Rancher Prime | SUSE Rancher Manager",
+   "quote": "Rancher Prime uses the same open source code as the Rancher project which remains fully open source.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://documentation.suse.com/cloudnative/rancher-manager/v2.15/en/about-rancher/prime.html",
+   "title": "Rancher Prime | SUSE Rancher Manager",
+   "quote": "What Prime adds is what you need to run Rancher in production, including a trusted software supply chain, longer support lifecycles and enterprise support from SUSE.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/authentication-config/",
+   "title": "Authentication Config | Rancher",
+   "quote": "The Rancher authentication proxy integrates with the following external authentication services.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/authentication-config/",
+   "title": "Authentication Config | Rancher",
+   "quote": "Keycloak (SAML) Okta Google OAuth Shibboleth Generic (OIDC)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/authentication-config/manage-users-and-groups",
+   "title": "Users and Groups | Rancher",
+   "quote": "When you configure an external authentication provider, users from that provider will be able to log in to your Rancher server. When a user logs in, the authentication provider will supply your Rancher server with a list of groups to which the user belongs.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/authentication-config/",
+   "title": "Authentication Config | Rancher",
+   "quote": "Any user in the authorization service can access Rancher. We generally discourage use of this setting!",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://ranchermanager.docs.rancher.com/api/workflows/users",
+   "title": "Users | Rancher",
+   "quote": "The User resource (users.management.cattle.io) represents a user account in Rancher.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://ranchermanager.docs.rancher.com/api/workflows/users",
+   "title": "Users | Rancher",
+   "quote": "Creating a local user is a two-step process: you must create the User resource, then provide a password via a Kubernetes Secret .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://ranchermanager.docs.rancher.com/api/workflows/users",
+   "title": "Users | Rancher",
+   "quote": "Deleting a user automatically deletes the corresponding password Secret .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://ranchermanager.docs.rancher.com/api/workflows/users",
+   "title": "Users | Rancher",
+   "quote": "Group membership is only supported for external authentication providers.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://raw.githubusercontent.com/rancher/rancher/main/pkg/auth/providers/scim/doc.go",
+   "title": "rancher/rancher pkg/auth/providers/scim/doc.go",
+   "quote": "Package scim implements SCIM 2.0 (RFC 7644) endpoints for user and group provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": "https://github.com/rancher/rancher/blob/main/pkg/auth/providers/scim/doc.go"
+  },
+  {
+   "id": "c13",
+   "url": "https://raw.githubusercontent.com/rancher/rancher/main/pkg/auth/providers/scim/doc.go",
+   "title": "rancher/rancher pkg/auth/providers/scim/doc.go",
+   "quote": "Endpoints are registered under /v1-scim/{provider}/ where provider identifies",
+   "accessed": "2026-10-05",
+   "page_url": "https://github.com/rancher/rancher/blob/main/pkg/auth/providers/scim/doc.go"
+  },
+  {
+   "id": "c14",
+   "url": "https://raw.githubusercontent.com/rancher/rancher/main/pkg/auth/providers/scim/doc.go",
+   "title": "rancher/rancher pkg/auth/providers/scim/doc.go",
+   "quote": "Bearer token authentication via Kubernetes secrets",
+   "accessed": "2026-10-05",
+   "page_url": "https://github.com/rancher/rancher/blob/main/pkg/auth/providers/scim/doc.go"
+  },
+  {
+   "id": "c15",
+   "url": "https://raw.githubusercontent.com/rancher/rancher/v2.15.2/pkg/features/feature.go",
+   "title": "rancher/rancher v2.15.2 pkg/features/feature.go",
+   "quote": "\"scim\",\n\t\t\"Enable SCIM identity provisioning\",",
+   "accessed": "2026-10-05",
+   "page_url": "https://github.com/rancher/rancher/blob/v2.15.2/pkg/features/feature.go"
+  },
+  {
+   "id": "c16",
+   "url": "https://raw.githubusercontent.com/rancher/rancher/main/pkg/features/feature.go",
+   "title": "rancher/rancher main pkg/features/feature.go",
+   "quote": "SCIM = newPrimeFeature(",
+   "accessed": "2026-10-05",
+   "page_url": "https://github.com/rancher/rancher/blob/main/pkg/features/feature.go"
+  },
+  {
+   "id": "c17",
+   "url": "https://raw.githubusercontent.com/rancher/rancher/main/pkg/auth/providers/scim/doc.go",
+   "title": "rancher/rancher pkg/auth/providers/scim/doc.go",
+   "quote": "Group resources: list, get, create, update (PATCH), delete",
+   "accessed": "2026-10-05",
+   "page_url": "https://github.com/rancher/rancher/blob/main/pkg/auth/providers/scim/doc.go"
+  },
+  {
+   "id": "c18",
+   "url": "https://raw.githubusercontent.com/rancher/rancher/main/pkg/auth/providers/scim/doc.go",
+   "title": "rancher/rancher pkg/auth/providers/scim/doc.go",
+   "quote": "User resources: list, get, create, update, delete",
+   "accessed": "2026-10-05",
+   "page_url": "https://github.com/rancher/rancher/blob/main/pkg/auth/providers/scim/doc.go"
+  },
+  {
+   "id": "c20",
+   "url": "https://ranchermanager.docs.rancher.com/api/api-tokens",
+   "title": "Using API Tokens | Rancher",
+   "quote": "Rancher v2.13 introduced a new token resource in the ext.cattle.io API group to serve as the public API for tokens",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://www.jumpcloud.com/support/integrate-with-rancher",
+   "title": "Integrate with Rancher | JumpCloud Documentation",
+   "quote": "Read this article to learn how to integrate with Rancher.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.rancher.com/pricing",
+  "https://documentation.suse.com/cloudnative/rancher-manager/v2.15/en/about-rancher/prime.html",
+  "https://ranchermanager.docs.rancher.com/sitemap.xml (all versions, 'scim')",
+  "https://documentation.suse.com/sitemap.xml (rancher-manager v2.11-v2.16, 'scim')",
+  "https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/installation-references/feature-flags",
+  "https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/authentication-config/",
+  "https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/authentication-config/manage-users-and-groups",
+  "https://ranchermanager.docs.rancher.com/api/workflows/users",
+  "github.com/rancher/rancher releases v2.11-v2.15 notes ('scim')",
+  "github.com/rancher/rancher source pkg/auth/providers/scim",
+  "https://www.okta.com/integrations/rancher/ (404)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/rancher-tutorial (404)",
+  "https://www.jumpcloud.com/support/integrate-with-rancher"
+ ],
+ "open_questions": [
+  "Will SCIM ship as a documented feature, and only for Rancher Prime?",
+  "Which SCIM endpoints, attributes and deprovisioning behaviour does the experimental provider support?",
+  "Does JumpCloud or Okta offer provisioning for Rancher?"
+ ]
+}

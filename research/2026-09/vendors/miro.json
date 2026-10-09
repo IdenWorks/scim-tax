@@ -1,0 +1,1161 @@
+{
+ "slug": "miro",
+ "vendor": "Miro",
+ "vendor_url": "https://miro.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Miro",
+  "slug": "miro",
+  "category": "Collaboration & Messaging",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Contact Sales (custom pricing, from 30 members)",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Starter",
+  "team_price_text": "Starter: $8/member/mo (billed yearly)",
+  "team_price_per_user_mo": 8,
+  "price_multiplier": null,
+  "sso_plan": "Business",
+  "sso_price_per_user_mo": 20,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": 30,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": "native",
+   "onelogin": "native",
+   "jumpcloud": "native",
+   "generic": true
+  },
+  "pricing_page_url": "https://miro.com/pricing/",
+  "docs_url": "https://developers.miro.com/reference/scim-introduction.md",
+  "evidence": "Miro's pricing comparison lists SCIM user provisioning as Not included on Free, Starter and Business and Included only on Enterprise (custom pricing, from 30 members); the SCIM API docs say it is available for Miro Enterprise accounts.",
+  "notes": "Unchanged from June: SCIM is Enterprise-only (Contact Sales, from 30 members); Starter $8 and Business $20 per member/mo billed yearly. SAML SSO starts on Business, one tier below SCIM. SAML SSO must be working before SCIM is configured. IdP-initiated deletes are treated as deactivation (frees the licence); only direct DELETE calls remove a user. Google Workspace and OneLogin provisioning is users only (no group sync). Enterprise REST APIs (org members, teams, user groups, session reset, audit logs) are Enterprise-only; the basic REST API on all plans covers boards and board members, not org users.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Enterprise",
+  "api_tax": true,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "$0",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": false,
+   "cite": [
+    "c1",
+    "c7",
+    "c6",
+    "c9",
+    "c8"
+   ]
+  },
+  {
+   "name": "Starter",
+   "price_text": "$8/month per member, billed yearly",
+   "price_per_user_mo": 8,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": false,
+   "cite": [
+    "c2",
+    "c7",
+    "c6",
+    "c9",
+    "c8"
+   ]
+  },
+  {
+   "name": "Business",
+   "price_text": "$20/month per member, billed yearly",
+   "price_per_user_mo": 20,
+   "billing": "annual",
+   "sso": true,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": false,
+   "cite": [
+    "c3",
+    "c7",
+    "c6",
+    "c9",
+    "c8"
+   ]
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Custom pricing, from 30 members (Contact sales)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c4",
+    "c5",
+    "c6",
+    "c7",
+    "c9",
+    "c8",
+    "c51"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c11",
+   "c12",
+   "c33",
+   "c34",
+   "c16",
+   "c17",
+   "c6"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://miro.com/api/v1/scim/",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Company settings > Enterprise integrations > SCIM Provisioning > Generate new token",
+   "token_expiry": null,
+   "cite": [
+    "c17",
+    "c18"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": true,
+   "Schemas": true,
+   "ResourceTypes": true,
+   "Bulk": false,
+   "Me": null,
+   "cite": [
+    "c13",
+    "c20",
+    "c21",
+    "c29"
+   ],
+   "notes": "API reference lists ServiceProviderConfig, ResourceTypes, Schemas, Users and Groups; Bulk not supported."
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c35",
+    "c38",
+    "c26",
+    "c27",
+    "c28",
+    "c29",
+    "c30",
+    "c14",
+    "c19"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": true,
+   "revokes_sessions": true,
+   "data_retained": "Deactivated users keep their user group memberships and board ownership; a direct SCIM DELETE removes the user and transfers their boards to the oldest team admin.",
+   "cite": [
+    "c35",
+    "c36",
+    "c37",
+    "c26",
+    "c50"
+   ],
+   "notes": "Deactivated users lose access to the Enterprise subscription and cannot log in with SSO; an optional Block deactivated users setting also blocks other Miro subscriptions and logs them out."
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName",
+    "active",
+    "displayName",
+    "groups.value",
+    "userType"
+   ],
+   "cite": [
+    "c21"
+   ],
+   "notes": "Operators eq, ne, co, sw, ew, pr, gt, ge, lt, le, and, or, not; sortBy/sortOrder supported."
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": 1000,
+   "cite": [
+    "c22"
+   ],
+   "notes": "startIndex + count, default 100. ServiceProviderConfig example advertises filter maxResults 200 (see conflicts)."
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.formatted",
+    "name.givenName",
+    "name.familyName",
+    "displayName",
+    "userType",
+    "active",
+    "emails",
+    "photos",
+    "roles",
+    "preferredLanguage",
+    "groups"
+   ],
+   "enterprise": [
+    "employeeNumber",
+    "costCenter",
+    "organization",
+    "division",
+    "department",
+    "manager.value",
+    "manager.displayName"
+   ],
+   "custom": {
+    "supported": false,
+    "how": "Help centre says attributes beyond the listed ones are ignored."
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c23",
+    "c24",
+    "c25",
+    "c39",
+    "c28",
+    "c44"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "roles attribute: organization_user_role (ORGANIZATION_INTERNAL_ADMIN / ORGANIZATION_INTERNAL_USER) and organization_admin_role (Content Admin, User Admin, Security Admin, custom admin roles); licence via userType.",
+   "cite": [
+    "c24",
+    "c23"
+   ]
+  },
+  "rate_limits": {
+   "text": "Per 30 seconds: GET Users 200, POST Users 200, PUT/PATCH Users 100, DELETE Users 20, GET Groups 5, GET Group 20, PATCH Groups 5 (>500 bytes) or 100; up to 8000 users per Group PATCH (413 above).",
+   "cite": [
+    "c31",
+    "c32"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Bulk operations, password changes and ETags are not supported.",
+    "cite": [
+     "c13"
+    ]
+   },
+   {
+    "text": "Delete events sent by an IdP are treated as deactivation; only direct API DELETE removes the user.",
+    "cite": [
+     "c37"
+    ]
+   },
+   {
+    "text": "Google Workspace and OneLogin provisioning is users only, no group sync.",
+    "cite": [
+     "c46",
+     "c47"
+    ]
+   },
+   {
+    "text": "userName, userType and roles.value cannot be updated while a user is deactivated.",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "text": "Users are provisioned with the subscription's default licence; userType changes it.",
+    "cite": [
+     "c40"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c56",
+   "c9",
+   "c10"
+  ],
+  "plan": "Enterprise",
+  "api_tax": true,
+  "style": "REST",
+  "base_url": "https://api.miro.com",
+  "docs_url": "https://developers.miro.com/reference/enterprise-get-organization-members",
+  "auth": {
+   "methods": [
+    "oauth2"
+   ],
+   "scopes": [
+    "organizations:read",
+    "organizations:teams:read",
+    "organizations:teams:write",
+    "organizations:groups:read",
+    "organizations:groups:write",
+    "sessions:delete",
+    "auditlogs:read"
+   ],
+   "cite": [
+    "c57",
+    "c61",
+    "c64",
+    "c70",
+    "c71"
+   ],
+   "notes": "Scopes as listed under Required scope on each endpoint page; Company Admin role required."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": false,
+   "invite_user": true,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c57",
+    "c60",
+    "c61",
+    "c64"
+   ],
+   "notes": "Invite team members requires the user to already exist in the org; new org users come via SCIM. Team role updates only; org-level user lifecycle is SCIM."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/v2/orgs/{org_id}/members",
+    "purpose": "List organization members",
+    "cite": [
+     "c57"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v2/orgs/{org_id}/members/{member_id}",
+    "purpose": "Get organization member",
+    "cite": [
+     "c58"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v2/orgs/{org_id}/teams/{team_id}/members",
+    "purpose": "List team members",
+    "cite": [
+     "c59"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v2/orgs/{org_id}/teams/{team_id}/members",
+    "purpose": "Invite an existing org user to a team",
+    "cite": [
+     "c60"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/v2/orgs/{org_id}/teams/{team_id}/members/{member_id}",
+    "purpose": "Update team member role",
+    "cite": [
+     "c61"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v2/orgs/{org_id}/teams/{team_id}/members/{member_id}",
+    "purpose": "Remove member from team",
+    "cite": [
+     "c62"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v2/orgs/{org_id}/groups",
+    "purpose": "List user groups",
+    "cite": [
+     "c63"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v2/orgs/{org_id}/groups",
+    "purpose": "Create user group",
+    "cite": [
+     "c64"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/v2/orgs/{org_id}/groups/{group_id}",
+    "purpose": "Update user group",
+    "cite": [
+     "c65"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v2/orgs/{org_id}/groups/{group_id}",
+    "purpose": "Delete user group",
+    "cite": [
+     "c66"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v2/orgs/{org_id}/groups/{group_id}/members",
+    "purpose": "Add user group member",
+    "cite": [
+     "c67"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/v2/orgs/{org_id}/groups/{group_id}/members",
+    "purpose": "Bulk add/remove user group members (up to 500)",
+    "cite": [
+     "c68"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v2/orgs/{org_id}/groups/{group_id}/members/{member_id}",
+    "purpose": "Remove user group member",
+    "cite": [
+     "c69"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v2/sessions/reset_all",
+    "purpose": "Reset all sessions of a user",
+    "cite": [
+     "c70"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v2/audit/logs",
+    "purpose": "Get audit logs",
+    "cite": [
+     "c71"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Enterprise",
+   "cite": [
+    "c51",
+    "c71",
+    "c8"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/miro-formerly-realtimeboard/",
+   "cite": [
+    "c52",
+    "c45"
+   ],
+   "notes": "OIN page marks SAML, SWA, SCIM and Create/Update/Deactivate/Group Push/Group Linking as checked (read from page markup)."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/miro-provisioning-tutorial",
+   "cite": [
+    "c53"
+   ]
+  },
+  "google": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://support.google.com/a/answer/14207443?hl=en",
+   "cite": [
+    "c54",
+    "c46"
+   ],
+   "notes": "Users only; no group sync."
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c47",
+    "c48"
+   ],
+   "notes": "OneLogin connector page not loaded; facts from Miro's help centre. Users only."
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://jumpcloud.com/support/integrate-with-miro",
+   "cite": [
+    "c55"
+   ]
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": "Domain control routes new users on corporate domains into the Enterprise subscription",
+  "docs_public": true,
+  "cite": [
+   "c49",
+   "c11"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://miro.com/pricing/",
+   "title": "Miro Pricing",
+   "quote": "Free For small teams getting started with Miro $0",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://miro.com/pricing/",
+   "title": "Miro Pricing",
+   "quote": "Starter For small teams collaborating regularly with unlimited boards $8/month per member, billed yearly",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://miro.com/pricing/",
+   "title": "Miro Pricing",
+   "quote": "Business For growing organizations and consultants to streamline workflows with AI $20/month per member, billed yearly",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://miro.com/pricing/",
+   "title": "Miro Pricing",
+   "quote": "Enterprise For large organizations that need security, governance, and AI at scale Custom pricing—from 30 members",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://miro.com/pricing/",
+   "title": "Miro Pricing",
+   "quote": "SCIM provisioning Automatically provision, sync, and deactivate users through your identity provider including Okta, Entra ID, and more",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://miro.com/pricing/",
+   "title": "Miro Pricing",
+   "quote": "SCIM user provisioning Not included Not included Not included Included",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://miro.com/pricing/",
+   "title": "Miro Pricing",
+   "quote": "SAML single sign-on (SSO) Not included Not included Included Included",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://miro.com/pricing/",
+   "title": "Miro Pricing",
+   "quote": "Audit logs & SIEM integrations Not included Not included Not included Included",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://miro.com/pricing/",
+   "title": "Miro Pricing",
+   "quote": "Enterprise APIs Not included Not included Not included Included",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://miro.com/pricing/",
+   "title": "Miro Pricing",
+   "quote": "REST APIs Included Included Included Included",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://developers.miro.com/reference/scim-introduction.md",
+   "title": "Miro SCIM API: Introduction",
+   "quote": "The SCIM API is available for Miro Enterprise accounts.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.miro.com/reference/scim-introduction"
+  },
+  {
+   "id": "c12",
+   "url": "https://developers.miro.com/reference/scim-introduction.md",
+   "title": "Miro SCIM API: Introduction",
+   "quote": "Miro's SCIM API is based on the open standard System for Cross-domain Identity Management (SCIM) and implements SCIM 2.0.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.miro.com/reference/scim-introduction"
+  },
+  {
+   "id": "c13",
+   "url": "https://developers.miro.com/reference/scim-introduction.md",
+   "title": "Miro SCIM API: Introduction",
+   "quote": "Bulk operations aren't supported. Each request must target a single resource.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.miro.com/reference/scim-introduction"
+  },
+  {
+   "id": "c14",
+   "url": "https://developers.miro.com/reference/scim-introduction.md",
+   "title": "Miro SCIM API: Introduction",
+   "quote": "Create, update, and delete user groups.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.miro.com/reference/scim-introduction"
+  },
+  {
+   "id": "c15",
+   "url": "https://developers.miro.com/reference/scim-introduction.md",
+   "title": "Miro SCIM API: Introduction",
+   "quote": "Miro supports automated provisioning with the following identity providers:",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.miro.com/reference/scim-introduction"
+  },
+  {
+   "id": "c16",
+   "url": "https://developers.miro.com/reference/scim-getting-started.md",
+   "title": "Miro SCIM API: Getting started",
+   "quote": "Navigate to Settings > Enterprise Integrations page and enable SSO/SAML feature.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.miro.com/reference/scim-getting-started"
+  },
+  {
+   "id": "c17",
+   "url": "https://developers.miro.com/reference/scim-getting-started.md",
+   "title": "Miro SCIM API: Getting started",
+   "quote": "The API token must be included in every call to SCIM via Authorization header with type Bearer",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.miro.com/reference/scim-getting-started"
+  },
+  {
+   "id": "c18",
+   "url": "https://developers.miro.com/reference/scim-getting-started.md",
+   "title": "Miro SCIM API: Getting started",
+   "quote": "In the SCIM Provisioning section, click Generate new token.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.miro.com/reference/scim-getting-started"
+  },
+  {
+   "id": "c19",
+   "url": "https://developers.miro.com/reference/user-lifecycle-management.md",
+   "title": "Miro SCIM API: User lifecycle management",
+   "quote": "you can also set the user's status to inactive using the Update user API",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.miro.com/reference/user-lifecycle-management"
+  },
+  {
+   "id": "c20",
+   "url": "https://developers.miro.com/reference/listserviceproviderconfigs.md",
+   "title": "Miro SCIM API: Get Service Provider Config",
+   "quote": "Retrieve supported operations and SCIM API basic configuration.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.miro.com/reference/listserviceproviderconfigs"
+  },
+  {
+   "id": "c21",
+   "url": "https://developers.miro.com/reference/listusers.md",
+   "title": "Miro SCIM API: List users",
+   "quote": "For fetching all active users in the organization: active eq true",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.miro.com/reference/listusers"
+  },
+  {
+   "id": "c22",
+   "url": "https://developers.miro.com/reference/listusers.md",
+   "title": "Miro SCIM API: List users",
+   "quote": "The count query parameter is set to 100 by default and the maximum value allowed for this parameter is 1000.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.miro.com/reference/listusers"
+  },
+  {
+   "id": "c23",
+   "url": "https://developers.miro.com/reference/createuser.md",
+   "title": "Miro SCIM API: Create user",
+   "quote": "An organization can have one or more of the following license type values: Full, Free, Free Restricted, Full (Trial), Basic, Collaborate, Accelerate.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.miro.com/reference/createuser"
+  },
+  {
+   "id": "c24",
+   "url": "https://developers.miro.com/reference/createuser.md",
+   "title": "Miro SCIM API: Create user",
+   "quote": "organization_admin_role supported values include: Content Admin, User Admin, Security Admin, or names of custom admin roles.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.miro.com/reference/createuser"
+  },
+  {
+   "id": "c25",
+   "url": "https://developers.miro.com/reference/createuser.md",
+   "title": "Miro SCIM API: Create user",
+   "quote": "Enterprise User extension schema.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.miro.com/reference/createuser"
+  },
+  {
+   "id": "c26",
+   "url": "https://developers.miro.com/reference/deleteuser.md",
+   "title": "Miro SCIM API: Delete user",
+   "quote": "After a user is deleted, the ownership of all the boards that belong to the deleted user is transferred to the oldest team member who currently has an admin role.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.miro.com/reference/deleteuser"
+  },
+  {
+   "id": "c27",
+   "url": "https://developers.miro.com/reference/replaceuser.md",
+   "title": "Miro SCIM API: Replace user",
+   "quote": "userName, userType, and roles.value cannot be updated.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.miro.com/reference/replaceuser"
+  },
+  {
+   "id": "c28",
+   "url": "https://developers.miro.com/reference/patchgroup.md",
+   "title": "Miro SCIM API: Patch group",
+   "quote": "Patch operation for group can be used to add, remove, or replace user group members and to update the display name of the group (user group).",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.miro.com/reference/patchgroup"
+  },
+  {
+   "id": "c29",
+   "url": "https://developers.miro.com/reference/createscimgroup.md",
+   "title": "Miro SCIM API: Create group",
+   "quote": "Creates a new Miro user group in the organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.miro.com/reference/createscimgroup"
+  },
+  {
+   "id": "c30",
+   "url": "https://developers.miro.com/reference/deletescimgroup.md",
+   "title": "Miro SCIM API: Delete group",
+   "quote": "Deleting a Miro user group removes the group and its memberships only. It does NOT delete the member users or remove them from the organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.miro.com/reference/deletescimgroup"
+  },
+  {
+   "id": "c31",
+   "url": "https://developers.miro.com/reference/rate-limits.md",
+   "title": "Miro SCIM API: Rate limits",
+   "quote": "In order to protect the service for all customers, Miro implements rate limits for every SCIM API method.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.miro.com/reference/rate-limits"
+  },
+  {
+   "id": "c32",
+   "url": "https://developers.miro.com/reference/rate-limits.md",
+   "title": "Miro SCIM API: Rate limits",
+   "quote": "It is possible to sync up to 8000 users in one single Group PATCH request.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.miro.com/reference/rate-limits"
+  },
+  {
+   "id": "c33",
+   "url": "https://help.miro.com/api/v2/help_center/articles/37593868431378.json",
+   "title": "Miro Help Center: SCIM",
+   "quote": "Available for: Enterprise plan",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.miro.com/hc/en-us/articles/37593868431378-SCIM"
+  },
+  {
+   "id": "c34",
+   "url": "https://help.miro.com/api/v2/help_center/articles/37593868431378.json",
+   "title": "Miro Help Center: SCIM",
+   "quote": "SAML based SSO must be properly set up and be functional in your Enterprise plan before you start configuring automated provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.miro.com/hc/en-us/articles/37593868431378-SCIM"
+  },
+  {
+   "id": "c35",
+   "url": "https://help.miro.com/api/v2/help_center/articles/37593868431378.json",
+   "title": "Miro Help Center: SCIM",
+   "quote": "Deactivating/deleting a user or disabling a user's access to the application in the IdP will deactivate the user in your Miro Enterprise plan. The user moves from an Active to a Deactivated state (and users section, respectively) and stops consuming a license.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.miro.com/hc/en-us/articles/37593868431378-SCIM"
+  },
+  {
+   "id": "c36",
+   "url": "https://help.miro.com/api/v2/help_center/articles/37593868431378.json",
+   "title": "Miro Help Center: SCIM",
+   "quote": "Deactivation alone doesn't change the user's user group memberships or reassign board ownership.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.miro.com/hc/en-us/articles/37593868431378-SCIM"
+  },
+  {
+   "id": "c37",
+   "url": "https://help.miro.com/api/v2/help_center/articles/37593868431378.json",
+   "title": "Miro Help Center: SCIM",
+   "quote": "Delete events initiated by your identity solution will be treated as a request to Deactivate",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.miro.com/hc/en-us/articles/37593868431378-SCIM"
+  },
+  {
+   "id": "c38",
+   "url": "https://help.miro.com/api/v2/help_center/articles/37593868431378.json",
+   "title": "Miro Help Center: SCIM",
+   "quote": "Assigning a user back to the application or reactivating the user profile in the IdP will reactivate them in your Miro Enterprise subscription if they were previously provisioned and deactivated.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.miro.com/hc/en-us/articles/37593868431378-SCIM"
+  },
+  {
+   "id": "c39",
+   "url": "https://help.miro.com/api/v2/help_center/articles/37593868431378.json",
+   "title": "Miro Help Center: SCIM",
+   "quote": "The attributes listed below aren't required and will be accepted by Miro if present (other attributes sent to Miro will be ignored).",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.miro.com/hc/en-us/articles/37593868431378-SCIM"
+  },
+  {
+   "id": "c40",
+   "url": "https://help.miro.com/api/v2/help_center/articles/37593868431378.json",
+   "title": "Miro Help Center: SCIM",
+   "quote": "All users provisioned under SCIM are assigned the default license of your subscription",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.miro.com/hc/en-us/articles/37593868431378-SCIM"
+  },
+  {
+   "id": "c41",
+   "url": "https://help.miro.com/api/v2/help_center/articles/37593868431378.json",
+   "title": "Miro Help Center: SCIM",
+   "quote": "Miro supports preconfigured Okta and Entra ID however you can use any Identity Provider of your choice for as long as it allows setting up SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.miro.com/hc/en-us/articles/37593868431378-SCIM"
+  },
+  {
+   "id": "c42",
+   "url": "https://help.miro.com/api/v2/help_center/articles/37593868431378.json",
+   "title": "Miro Help Center: SCIM",
+   "quote": "Removing a user from an IdP group removes them from the corresponding Miro user group immediately.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.miro.com/hc/en-us/articles/37593868431378-SCIM"
+  },
+  {
+   "id": "c43",
+   "url": "https://help.miro.com/api/v2/help_center/articles/37593868431378.json",
+   "title": "Miro Help Center: SCIM",
+   "quote": "PATCH scim/users/{userId} DELETE scim/users/{userId} Third Rate Limit Level 3",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.miro.com/hc/en-us/articles/37593868431378-SCIM"
+  },
+  {
+   "id": "c44",
+   "url": "https://help.miro.com/api/v2/help_center/articles/37593868431378.json",
+   "title": "Miro Help Center: SCIM",
+   "quote": "there's no password attribute to sync via SCIM",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.miro.com/hc/en-us/articles/37593868431378-SCIM"
+  },
+  {
+   "id": "c45",
+   "url": "https://help.miro.com/api/v2/help_center/articles/360036768134.json",
+   "title": "Miro Help Center: Setting up automated provisioning with OKTA",
+   "quote": "Groups from Okta must be assigned to the Miro application, even if their users are already assigned individually, and then added to the app's Push Groups",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.miro.com/hc/en-us/articles/360036768134-Setting-up-automated-provisioning-with-OKTA"
+  },
+  {
+   "id": "c46",
+   "url": "https://help.miro.com/api/v2/help_center/articles/37685590535954.json",
+   "title": "Miro Help Center: Setting up automated provisioning with Google",
+   "quote": "Note: this integration provisions users only. Google Workspace's autoprovisioning for Miro doesn't sync Google groups to Miro user groups or teams.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.miro.com/hc/en-us/articles/37685590535954-Setting-up-automated-provisioning-with-Google"
+  },
+  {
+   "id": "c47",
+   "url": "https://help.miro.com/api/v2/help_center/articles/37685973852434.json",
+   "title": "Miro Help Center: Setting up automated provisioning with OneLogin",
+   "quote": "Note: this integration provisions users only. Group assignments aren't yet supported for OneLogin, so it doesn't sync OneLogin groups to Miro user groups or teams.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.miro.com/hc/en-us/articles/37685973852434-Setting-up-automated-provisioning-with-OneLogin"
+  },
+  {
+   "id": "c48",
+   "url": "https://help.miro.com/api/v2/help_center/articles/37685973852434.json",
+   "title": "Miro Help Center: Setting up automated provisioning with OneLogin",
+   "quote": "In the search field, type \"Miro\" and choose the app listed as SAML, provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.miro.com/hc/en-us/articles/37685973852434-Setting-up-automated-provisioning-with-OneLogin"
+  },
+  {
+   "id": "c49",
+   "url": "https://help.miro.com/api/v2/help_center/articles/4403139914130.json",
+   "title": "Miro Help Center: User provisioning on Enterprise Plan",
+   "quote": "JIT provisioning, integrated with Single Sign-on (SSO) , automatically adds all new users registered under your corporate SSO domains to a specific team in your Enterprise Plan.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.miro.com/hc/en-us/articles/4403139914130-User-provisioning-on-Enterprise-Plan"
+  },
+  {
+   "id": "c50",
+   "url": "https://help.miro.com/api/v2/help_center/articles/11846063620882.json",
+   "title": "Miro Help Center: Block deactivated users",
+   "quote": "When a Company Admin deactivates a user , they lose access to the Enterprise subscription and can no longer log in with SSO.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.miro.com/hc/en-us/articles/11846063620882-Block-deactivated-users"
+  },
+  {
+   "id": "c51",
+   "url": "https://help.miro.com/api/v2/help_center/articles/360017571434.json",
+   "title": "Miro Help Center: Audit logs",
+   "quote": "Admins can use the Audit Log API or supported SIEM Integrations to programmatically access and collect audit log data.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.miro.com/hc/en-us/articles/360017571434-Audit-logs"
+  },
+  {
+   "id": "c52",
+   "url": "https://www.okta.com/integrations/miro-formerly-realtimeboard/",
+   "title": "Integrate Miro (formerly RealtimeBoard) with Okta",
+   "quote": "Add this integration to enable authentication and provisioning capabilities.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c53",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/miro-provisioning-tutorial",
+   "title": "Configure Miro for automatic user provisioning with Microsoft Entra ID",
+   "quote": "configure Microsoft Entra ID to automatically provision and de-provision users and/or groups to Miro.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c54",
+   "url": "https://support.google.com/a/answer/14207443?hl=en",
+   "title": "Configure Miro user provisioning - Google Workspace Admin Help",
+   "quote": "You can set up automated user provisioning (autoprovisioning) so that any changes you make to user accounts in Google Workspace are automatically synced with this third-party app.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c55",
+   "url": "https://jumpcloud.com/support/integrate-with-miro",
+   "title": "Integrate with Miro - JumpCloud",
+   "quote": "Automatically provision, update and deprovision users in Miro from JumpCloud using the SCIM integration.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c56",
+   "url": "https://developers.miro.com/reference/enterprise-get-organization-members.md",
+   "title": "Miro REST API: Get organization members",
+   "quote": "This API is available only for Enterprise plan users. You can only use this endpoint if you have the role of a Company Admin.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.miro.com/reference/enterprise-get-organization-members"
+  },
+  {
+   "id": "c57",
+   "url": "https://developers.miro.com/reference/enterprise-get-organization-members.md",
+   "title": "Miro REST API: Get organization members",
+   "quote": "Retrieves organization members based on the organization ID and the cursor, or based on the user emails provided in the request.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.miro.com/reference/enterprise-get-organization-members"
+  },
+  {
+   "id": "c58",
+   "url": "https://developers.miro.com/reference/enterprise-get-organization-member.md",
+   "title": "Miro REST API: Get organization member",
+   "quote": "Retrieves organization member information for an existing organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.miro.com/reference/enterprise-get-organization-member"
+  },
+  {
+   "id": "c59",
+   "url": "https://developers.miro.com/reference/enterprise-get-team-members.md",
+   "title": "Miro REST API: List team members",
+   "quote": "Retrieves team members by cursor.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.miro.com/reference/enterprise-get-team-members"
+  },
+  {
+   "id": "c60",
+   "url": "https://developers.miro.com/reference/enterprise-invite-team-member.md",
+   "title": "Miro REST API: Invite team members",
+   "quote": "Invites a new Miro user to an existing team. The user must exist in your Miro organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.miro.com/reference/enterprise-invite-team-member"
+  },
+  {
+   "id": "c61",
+   "url": "https://developers.miro.com/reference/enterprise-update-team-member.md",
+   "title": "Miro REST API: Update team member",
+   "quote": "Updates team member role in team by id.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.miro.com/reference/enterprise-update-team-member"
+  },
+  {
+   "id": "c62",
+   "url": "https://developers.miro.com/reference/enterprise-delete-team-member.md",
+   "title": "Miro REST API: Delete team member from team",
+   "quote": "Deletes team member from team by id.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.miro.com/reference/enterprise-delete-team-member"
+  },
+  {
+   "id": "c63",
+   "url": "https://developers.miro.com/reference/enterprise-get-groups.md",
+   "title": "Miro REST API: List of user groups",
+   "quote": "Retrieves the list of user groups in an organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.miro.com/reference/enterprise-get-groups"
+  },
+  {
+   "id": "c64",
+   "url": "https://developers.miro.com/reference/enterprise-create-group.md",
+   "title": "Miro REST API: Create user group",
+   "quote": "Creates a new user group in an organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.miro.com/reference/enterprise-create-group"
+  },
+  {
+   "id": "c65",
+   "url": "https://developers.miro.com/reference/enterprise-update-group.md",
+   "title": "Miro REST API: Update user group",
+   "quote": "Updates a user group in an organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.miro.com/reference/enterprise-update-group"
+  },
+  {
+   "id": "c66",
+   "url": "https://developers.miro.com/reference/enterprise-delete-group.md",
+   "title": "Miro REST API: Delete user group",
+   "quote": "Deletes a user group from an organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.miro.com/reference/enterprise-delete-group"
+  },
+  {
+   "id": "c67",
+   "url": "https://developers.miro.com/reference/enterprise-create-group-member.md",
+   "title": "Miro REST API: Create user group member",
+   "quote": "Adds a member to a user group in an organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.miro.com/reference/enterprise-create-group-member"
+  },
+  {
+   "id": "c68",
+   "url": "https://developers.miro.com/reference/enterprise-update-group-members.md",
+   "title": "Miro REST API: Bulk edit of membership in user group",
+   "quote": "You can add or remove up to 500 users at a time.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.miro.com/reference/enterprise-update-group-members"
+  },
+  {
+   "id": "c69",
+   "url": "https://developers.miro.com/reference/enterprise-delete-group-member.md",
+   "title": "Miro REST API: Delete user group member",
+   "quote": "Removes a member from a user group in an organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.miro.com/reference/enterprise-delete-group-member"
+  },
+  {
+   "id": "c70",
+   "url": "https://developers.miro.com/reference/enterprise-post-user-sessions-reset.md",
+   "title": "Miro REST API: Reset all sessions of a user",
+   "quote": "Calling this API ends all active Miro sessions across devices for a particular user, requiring the user to sign in again.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.miro.com/reference/enterprise-post-user-sessions-reset"
+  },
+  {
+   "id": "c71",
+   "url": "https://developers.miro.com/reference/enterprise-get-audit-logs.md",
+   "title": "Miro REST API: Get audit logs",
+   "quote": "Retrieves a page of audit events within your organization's configured audit log retention period.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.miro.com/reference/enterprise-get-audit-logs"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "Help centre groups POST/PUT/PATCH/DELETE Users at rate-limit Level 3; the developer rate-limit page lists POST 200 (Level 1), PUT/PATCH 100 (Level 2), DELETE 20 (Level 3) per 30 seconds. Developer page used.",
+   "cite": [
+    "c43",
+    "c31"
+   ]
+  }
+ ],
+ "searched": [
+  "https://miro.com/pricing/",
+  "https://developers.miro.com/llms.txt",
+  "https://developers.miro.com/reference/scim-introduction",
+  "help.miro.com search: SCIM",
+  "help.miro.com search: invite users CSV"
+ ],
+ "open_questions": [
+  "SCIM token expiry is not documented.",
+  "No public user-event webhooks found (Miro webhooks cover board items).",
+  "CSV bulk import of users not documented (only CSV export).",
+  "Enterprise REST API rate limits per endpoint use Miro's level system; not recorded.",
+  "ServiceProviderConfig example says filter maxResults 200 while List users allows count up to 1000."
+ ]
+}

@@ -1,0 +1,937 @@
+{
+ "slug": "doppler",
+ "vendor": "Doppler",
+ "vendor_url": "https://www.doppler.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Doppler",
+  "slug": "doppler",
+  "category": "Security & Identity",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Team",
+  "team_price_text": "Team: $21/user/mo",
+  "team_price_per_user_mo": 21,
+  "price_multiplier": null,
+  "sso_plan": "Team",
+  "sso_price_per_user_mo": 21,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": "sso_only",
+   "onelogin": "via_generic",
+   "jumpcloud": "via_generic",
+   "generic": true
+  },
+  "pricing_page_url": "https://www.doppler.com/pricing",
+  "docs_url": "https://docs.doppler.com/docs/okta-scim",
+  "evidence": "Doppler's pricing page lists \"Enterprise SCIM\" only on the Custom-priced Enterprise plan, and the docs say \"SAML SSO is available with our Team plan while SCIM is exclusive to our Enterprise plan.\"",
+  "notes": "Unchanged from June: SAML SSO on Team ($21/user/mo), SCIM only on Enterprise (Custom pricing). Doppler bills per seat per month; no annual price is listed. Developer is free for 3 users then $8/mo per additional user. SCIM needs an existing SAML app and a verified domain; IdP guides cover Okta, Entra ID, OneLogin, JumpCloud, Duo and Authentik, all using custom/non-gallery apps (the Okta OIN app is SAML-only). Doppler has no suspended-user state, so deprovisioning removes the user. User groups are Enterprise or a $9/seat/mo Team add-on. June's third-party Enterprise estimate is dropped (no first-party source).",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Developer",
+  "api_tax": false,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Developer",
+   "price_text": "Free for 3 users, $8/mo per additional user",
+   "price_per_user_mo": null,
+   "billing": "monthly",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c5",
+    "c6"
+   ],
+   "notes": "3 days of activity logs."
+  },
+  {
+   "name": "Team",
+   "price_text": "$21/mo per user",
+   "price_per_user_mo": 21,
+   "billing": "monthly",
+   "sso": true,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c5",
+    "c6"
+   ],
+   "notes": "Pricing FAQ says Doppler charges per seat per month; no annual rate is published. Custom roles, user groups and extra syncs are $9/seat/mo add-ons."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Custom pricing",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c4",
+    "c6"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c4",
+   "c6",
+   "c7",
+   "c8",
+   "c9",
+   "c52"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": null,
+  "auth": {
+   "method": "bearer",
+   "token_source": "Team > SSO > SCIM 2.0 > Manage, then Tokens > SCIM > Roll",
+   "token_expiry": null,
+   "cite": [
+    "c16",
+    "c29",
+    "c12",
+    "c45"
+   ],
+   "notes": "Token format dp.scim.*; rolling a token invalidates the old one. The JumpCloud guide uses a 'Basic Auth Header' value from the same page."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c24",
+    "c13",
+    "c28"
+   ],
+   "notes": "JumpCloud guide calls the /users endpoint path; groups are created by Okta Push Groups. Discovery endpoints are not documented."
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c11",
+    "c19",
+    "c13",
+    "c24"
+   ],
+   "notes": "Okta 'Update User Attributes' is enabled but the PUT vs PATCH method is not documented."
+  },
+  "deprovision": {
+   "action": "delete",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c15",
+    "c19"
+   ],
+   "notes": "Doppler has no suspended state; IdPs should delete the user. Whether the seat frees immediately and what data is kept is not documented."
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c23"
+   ],
+   "notes": "startIndex/count paging per the JumpCloud guide."
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name",
+    "emails"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c10",
+    "c17",
+    "c18",
+    "c24",
+    "c13"
+   ],
+   "notes": "Only the attributes the IdP guides map: username = email, name (first + last), email. No published SCIM schema; group attributes inferred from Okta push-group behaviour (name + members)."
+  },
+  "roles": {
+   "supported": true,
+   "how": "IdP groups are pushed as Doppler groups, which are then granted project roles; the workplace role for new users is a default set in Doppler.",
+   "cite": [
+    "c26",
+    "c27",
+    "c49"
+   ]
+  },
+  "rate_limits": {
+   "text": "Doppler API limits vary by plan (Enterprise 480 reads/min, 240 writes/min); SCIM-specific limits not stated.",
+   "cite": [
+    "c32"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Entra ID provisioning syncs at fixed 40-minute intervals after the initial cycle.",
+    "cite": [
+     "c21"
+    ]
+   },
+   {
+    "text": "Requires a verified domain and an existing SAML application.",
+    "cite": [
+     "c51",
+     "c9"
+    ]
+   },
+   {
+    "text": "No suspend support; IdPs must delete users rather than suspend them.",
+    "cite": [
+     "c15"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c5",
+   "c30",
+   "c34"
+  ],
+  "plan": "Developer",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://api.doppler.com",
+  "docs_url": "https://docs.doppler.com/reference/api",
+  "auth": {
+   "methods": [
+    "bearer_token"
+   ],
+   "scopes": [],
+   "cite": [
+    "c31",
+    "c33"
+   ],
+   "notes": "Personal, CLI, service account, SCIM and read-only Audit tokens; no OAuth scopes."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c34",
+    "c35",
+    "c36",
+    "c37",
+    "c38",
+    "c39",
+    "c40"
+   ],
+   "notes": "Workplace Users API exposes List, Retrieve and Update (role change) only; no create/remove user endpoint is documented. Invites can be listed."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/v3/workplace/users",
+    "purpose": "List workplace users (filter by email)",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v3/workplace/users/{slug}",
+    "purpose": "Retrieve a workplace user",
+    "cite": [
+     "c35"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/v3/workplace/users/{slug}",
+    "purpose": "Update a workplace user's workplace role",
+    "cite": [
+     "c36",
+     "c37"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v3/workplace/groups",
+    "purpose": "List groups",
+    "cite": [
+     "c38"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v3/workplace/groups",
+    "purpose": "Create a group",
+    "cite": [
+     "c38"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v3/workplace/groups/group/{slug}",
+    "purpose": "Retrieve a group",
+    "cite": [
+     "c41"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/v3/workplace/groups/group/{slug}",
+    "purpose": "Update a group",
+    "cite": [
+     "c41"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v3/workplace/groups/group/{slug}",
+    "purpose": "Delete a group",
+    "cite": [
+     "c41"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v3/workplace/groups/group/{slug}/members",
+    "purpose": "Add a group member",
+    "cite": [
+     "c39"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v3/workplace/groups/group/{slug}/members/{type}/{member_slug}",
+    "purpose": "Remove a group member",
+    "cite": [
+     "c40"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v3/workplace/invites",
+    "purpose": "List pending invites",
+    "cite": [
+     "c42"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v3/workplace/roles",
+    "purpose": "List workplace roles",
+    "cite": [
+     "c43"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v3/logs",
+    "purpose": "List activity logs",
+    "cite": [
+     "c44"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": null,
+   "cite": [
+    "c44"
+   ],
+   "notes": "Activity Logs API; retention is 3 days (Developer), 90 days (Team), custom (Enterprise)."
+  },
+  "rate_limits": {
+   "text": "Per plan: Developer 240 reads/60 writes per min, Team 480/120, Enterprise 480/240; 429 on limit.",
+   "cite": [
+    "c32"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "No documented endpoint to create or remove a workplace user.",
+    "cite": [
+     "c34",
+     "c36"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/doppler/",
+   "cite": [
+    "c46",
+    "c9"
+   ],
+   "notes": "OIN app shows only SAML checked (rendered page). Doppler's SCIM guide adds SCIM to a custom Okta SAML app instead."
+  },
+  "entra": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c20"
+   ],
+   "notes": "No Entra gallery tutorial found (doppler-tutorial 404); Doppler documents a custom SAML enterprise app with SCIM provisioning."
+  },
+  "google": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c47"
+   ],
+   "notes": "Custom Google SAML app; no Google SCIM guide."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c14"
+   ],
+   "notes": "Uses OneLogin's generic 'SCIM Provisioner with SAML (SCIM v2 Core)' app."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c22"
+   ],
+   "notes": "Uses JumpCloud's Custom API identity-management connector against Doppler's SCIM base URI."
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": "Email SSO self-registration for verified domains",
+  "docs_public": true,
+  "cite": [
+   "c48",
+   "c49"
+  ],
+  "notes": "SAML users get a default workplace role 'when their account is created', implying SAML account creation, but JIT is not named explicitly."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.doppler.com/pricing",
+   "title": "Doppler Pricing",
+   "quote": "Developer Secure your solo projects & focus on what matters - building. Free for 3 users $8/mo per additional user",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.doppler.com/pricing",
+   "title": "Doppler Pricing",
+   "quote": "Team Unlock team productivity & protect shared secrets. Free for 14 days $21/mo per user Change Requests SAML SSO",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.doppler.com/pricing",
+   "title": "Doppler Pricing",
+   "quote": "Enterprise Tailored to your compliance and regulatory needs. Custom pricing Scales with your team",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.doppler.com/pricing",
+   "title": "Doppler Pricing",
+   "quote": "Custom permissions & roles User groups Enterprise SCIM Fully manage in Terraform",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.doppler.com/pricing",
+   "title": "Doppler Pricing",
+   "quote": "API and webhooks access",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://docs.doppler.com/docs/workplace-team.md",
+   "title": "Team Management",
+   "quote": "SAML SSO is available with our Team plan while SCIM is exclusive to our Enterprise plan.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/docs/workplace-team"
+  },
+  {
+   "id": "c7",
+   "url": "https://docs.doppler.com/docs/okta-scim.md",
+   "title": "Okta SCIM",
+   "quote": "This guide will show you how to set up an Okta SCIM 2.0 application to automatically provision and manage user access to Doppler.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/docs/okta-scim"
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.doppler.com/docs/okta-scim.md",
+   "title": "Okta SCIM",
+   "quote": "Enterprise subscription",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/docs/okta-scim"
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.doppler.com/docs/okta-scim.md",
+   "title": "Okta SCIM",
+   "quote": "If you haven't, please follow that link and create one before continuing.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/docs/okta-scim"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.doppler.com/docs/okta-scim.md",
+   "title": "Okta SCIM",
+   "quote": "set the value of the Unique identifier field for users field to email and check the Push New Users, Push Profile Updates, and Push Groups checkboxes.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/docs/okta-scim"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.doppler.com/docs/okta-scim.md",
+   "title": "Okta SCIM",
+   "quote": "check the Enable box next to Create Users, Update User Attributes, and Deactivate Users, then click Save.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/docs/okta-scim"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.doppler.com/docs/okta-scim.md",
+   "title": "Okta SCIM",
+   "quote": "performing a roll will invalidate the old token, so any existing SCIM setup using that token will stop working until it's updated with the new token.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/docs/okta-scim"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.doppler.com/docs/okta-scim.md",
+   "title": "Okta SCIM",
+   "quote": "Setting that up as a push group will create a Doppler Engineers group in Doppler with the same users as members.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/docs/okta-scim"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.doppler.com/docs/onelogin-scim.md",
+   "title": "OneLogin SCIM",
+   "quote": "Enter \"SCIM v2 Core\" into the search field, then click the SCIM Provisioner with SAML (SCIM v2 Core) box.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/docs/onelogin-scim"
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.doppler.com/docs/onelogin-scim.md",
+   "title": "OneLogin SCIM",
+   "quote": "Users should be deleted from the Doppler application (not suspended) as we do not support the concept of a suspended user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/docs/onelogin-scim"
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.doppler.com/docs/onelogin-scim.md",
+   "title": "OneLogin SCIM",
+   "quote": "Now head back to the Doppler dashboard to get the SCIM Bearer Auth token.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/docs/onelogin-scim"
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.doppler.com/docs/onelogin-scim.md",
+   "title": "OneLogin SCIM",
+   "quote": "Click on SCIM Username to bring up the edit field modal, changing the Value field to Email, then click Save.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/docs/onelogin-scim"
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.doppler.com/docs/onelogin-scim.md",
+   "title": "OneLogin SCIM",
+   "quote": "The last remaining field to create is the name field which compromises of the user's first and last name.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/docs/onelogin-scim"
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.doppler.com/docs/onelogin-scim.md",
+   "title": "OneLogin SCIM",
+   "quote": "The final step is to enable the OneLogin application to automatically provision, update, and delete users in Doppler.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/docs/onelogin-scim"
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.doppler.com/docs/microsoft-entra-id-scim.md",
+   "title": "Microsoft Entra ID SCIM",
+   "quote": "This guide will show you how to configure a Microsoft Entra ID SAML application to enable SCIM for Doppler.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/docs/microsoft-entra-id-scim"
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.doppler.com/docs/microsoft-entra-id-scim.md",
+   "title": "Microsoft Entra ID SCIM",
+   "quote": "It may take a couple minutes for the initial sync to kick off. After that, it will update at fixed intervals (40 minutes).",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/docs/microsoft-entra-id-scim"
+  },
+  {
+   "id": "c22",
+   "url": "https://docs.doppler.com/docs/jumpcloud-scim.md",
+   "title": "JumpCloud SCIM",
+   "quote": "scroll down to the Configuration settings section and choose the Custom API option.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/docs/jumpcloud-scim"
+  },
+  {
+   "id": "c23",
+   "url": "https://docs.doppler.com/docs/jumpcloud-scim.md",
+   "title": "JumpCloud SCIM",
+   "quote": "Set the Limit Name field to count and the Offset Name field to startIndex.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/docs/jumpcloud-scim"
+  },
+  {
+   "id": "c24",
+   "url": "https://docs.doppler.com/docs/jumpcloud-scim.md",
+   "title": "JumpCloud SCIM",
+   "quote": "set the mapping values for Company Email and Username to Resources[].userName. Under Optional Mappings, choose Display Name from the dropdown menu on the right and then enter Resources[].name for the mapping value.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/docs/jumpcloud-scim"
+  },
+  {
+   "id": "c25",
+   "url": "https://docs.doppler.com/docs/jumpcloud-scim.md",
+   "title": "JumpCloud SCIM",
+   "quote": "Copy the contents of the Basic Auth Header field.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/docs/jumpcloud-scim"
+  },
+  {
+   "id": "c26",
+   "url": "https://docs.doppler.com/docs/user-groups.md",
+   "title": "User Groups",
+   "quote": "users and groups memberships are managed and provisioned from your Identify Provider (IDP).",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/docs/user-groups"
+  },
+  {
+   "id": "c27",
+   "url": "https://docs.doppler.com/docs/user-groups.md",
+   "title": "User Groups",
+   "quote": "(Enterprise required) where they are provisioned based on mappings from your IDP.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/docs/user-groups"
+  },
+  {
+   "id": "c28",
+   "url": "https://docs.doppler.com/reference/api.md",
+   "title": "API Reference",
+   "quote": "Provide read/write access to users and groups within your workplace. This may be used by your Identity Provider (IdP)",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/reference/api"
+  },
+  {
+   "id": "c29",
+   "url": "https://docs.doppler.com/reference/api.md",
+   "title": "API Reference",
+   "quote": "Generated from the Tokens > SCIM page on the Doppler Dashboard (requires SCIM to be enabled)",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/reference/api"
+  },
+  {
+   "id": "c30",
+   "url": "https://docs.doppler.com/reference/api.md",
+   "title": "API Reference",
+   "quote": "The Doppler API is organized around REST.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/reference/api"
+  },
+  {
+   "id": "c31",
+   "url": "https://docs.doppler.com/reference/api.md",
+   "title": "API Reference",
+   "quote": "Authentication to the API is performed by providing a bearer token to the HTTP Authorization header.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/reference/api"
+  },
+  {
+   "id": "c32",
+   "url": "https://docs.doppler.com/reference/api.md",
+   "title": "API Reference",
+   "quote": "These rate limits vary depending on your plan.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/reference/api"
+  },
+  {
+   "id": "c33",
+   "url": "https://docs.doppler.com/reference/api.md",
+   "title": "API Reference",
+   "quote": "Provide read-only access to users and groups within your workplace",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/reference/api"
+  },
+  {
+   "id": "c34",
+   "url": "https://docs.doppler.com/reference/users-list.md",
+   "title": "Workplace Users: List",
+   "quote": "Get all users within a workplace",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/reference/users-list"
+  },
+  {
+   "id": "c35",
+   "url": "https://docs.doppler.com/reference/users-get.md",
+   "title": "Workplace Users: Retrieve",
+   "quote": "/v3/workplace/users/{slug}",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/reference/users-get"
+  },
+  {
+   "id": "c36",
+   "url": "https://docs.doppler.com/reference/users-update.md",
+   "title": "Workplace Users: Update",
+   "quote": "Update a specific user for a workplace",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/reference/users-update"
+  },
+  {
+   "id": "c37",
+   "url": "https://docs.doppler.com/reference/users-update.md",
+   "title": "Workplace Users: Update",
+   "quote": "The identifier of the workplace role. E.g., `owner`, `collaborator`, etc.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/reference/users-update"
+  },
+  {
+   "id": "c38",
+   "url": "https://docs.doppler.com/reference/groups-list.md",
+   "title": "Groups: List",
+   "quote": "/v3/workplace/groups",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/reference/groups-list"
+  },
+  {
+   "id": "c39",
+   "url": "https://docs.doppler.com/reference/groups-add_member.md",
+   "title": "Groups: Add Member",
+   "quote": "/v3/workplace/groups/group/{slug}/members",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/reference/groups-add_member"
+  },
+  {
+   "id": "c40",
+   "url": "https://docs.doppler.com/reference/groups-delete_member.md",
+   "title": "Groups: Delete Member",
+   "quote": "/v3/workplace/groups/group/{slug}/members/{type}/{member_slug}",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/reference/groups-delete_member"
+  },
+  {
+   "id": "c41",
+   "url": "https://docs.doppler.com/reference/groups-delete.md",
+   "title": "Groups: Delete",
+   "quote": "/v3/workplace/groups/group/{slug}",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/reference/groups-delete"
+  },
+  {
+   "id": "c42",
+   "url": "https://docs.doppler.com/reference/invites-list.md",
+   "title": "Invites: List",
+   "quote": "/v3/workplace/invites",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/reference/invites-list"
+  },
+  {
+   "id": "c43",
+   "url": "https://docs.doppler.com/reference/workplace_roles-list.md",
+   "title": "Workplace Roles: List",
+   "quote": "/v3/workplace/roles",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/reference/workplace_roles-list"
+  },
+  {
+   "id": "c44",
+   "url": "https://docs.doppler.com/reference/activity_logs-list.md",
+   "title": "Activity Logs: List",
+   "quote": "/v3/logs",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/reference/activity_logs-list"
+  },
+  {
+   "id": "c45",
+   "url": "https://docs.doppler.com/reference/auth-token-formats.md",
+   "title": "Auth Token Formats",
+   "quote": "dp.scim.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/reference/auth-token-formats"
+  },
+  {
+   "id": "c46",
+   "url": "https://www.okta.com/integrations/doppler/",
+   "title": "Integrate Doppler with Okta",
+   "quote": "Doppler lets you manage your software secrets through a streamlined secrets manager.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c47",
+   "url": "https://docs.doppler.com/docs/google-saml.md",
+   "title": "Google SAML SSO",
+   "quote": "Learn how to create a Google SAML application for Doppler SSO.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/docs/google-saml"
+  },
+  {
+   "id": "c48",
+   "url": "https://docs.doppler.com/docs/workplace-team.md",
+   "title": "Team Management",
+   "quote": "Users can be added to Doppler using four methods:",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/docs/workplace-team"
+  },
+  {
+   "id": "c49",
+   "url": "https://docs.doppler.com/docs/okta-saml.md",
+   "title": "Okta SAML SSO",
+   "quote": "The Workplace Role controls the initial permissions a user will receive when their account is created.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/docs/okta-saml"
+  },
+  {
+   "id": "c50",
+   "url": "https://docs.doppler.com/docs/workplace-team.md",
+   "title": "Team Management",
+   "quote": "User Groups is standard on our Enterprise plan or can be added on to an existing Team plan.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/docs/workplace-team"
+  },
+  {
+   "id": "c51",
+   "url": "https://docs.doppler.com/docs/okta-scim.md",
+   "title": "Okta SCIM",
+   "quote": "Domain Verified",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.doppler.com/docs/okta-scim"
+  },
+  {
+   "id": "c52",
+   "url": "https://docs.doppler.com/docs/okta-scim",
+   "title": "Okta SCIM",
+   "quote": "This guide will show you how to set up an Okta SCIM 2.0 application to automatically provision and manage user access to Doppler.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.doppler.com/pricing",
+  "https://docs.doppler.com/llms.txt",
+  "https://docs.doppler.com/docs/setting-up-saml-sso",
+  "https://docs.doppler.com/docs/scim",
+  "https://docs.doppler.com/docs/okta-scim",
+  "https://docs.doppler.com/docs/microsoft-entra-id-scim",
+  "https://docs.doppler.com/docs/onelogin-scim",
+  "https://docs.doppler.com/docs/jumpcloud-scim",
+  "https://docs.doppler.com/docs/workplace-team",
+  "https://docs.doppler.com/docs/user-groups",
+  "https://docs.doppler.com/reference/api",
+  "https://www.okta.com/integrations/doppler/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/doppler-tutorial (404)"
+ ],
+ "open_questions": [
+  "No published SCIM schema or ServiceProviderConfig; full attribute list, filtering support and PUT vs PATCH are undocumented.",
+  "SCIM base URI pattern is shown only in the dashboard.",
+  "Docs do not say whether SCIM deletion frees the seat immediately or what happens to the user's personal tokens and configs.",
+  "SCIM token expiry is not documented (tokens are rolled manually).",
+  "Activity Logs API plan availability is not stated beyond retention per plan.",
+  "Whether SAML sign-in creates accounts just in time is implied but not stated."
+ ]
+}

@@ -1,0 +1,580 @@
+{
+ "slug": "screencloud",
+ "vendor": "ScreenCloud",
+ "vendor_url": "https://screencloud.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "ScreenCloud",
+  "slug": "screencloud",
+  "category": "Collaboration & Messaging",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Contact Sales (35-screen minimum)",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Core",
+  "team_price_text": "Core: $20/screen/mo billed annually (unlimited users)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Pro",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": 35,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://screencloud.com/pricing",
+  "docs_url": "https://help.screencloud.com/en/articles/10114877-configuring-scim-integration-for-screencloud-with-microsoft-azure-entra",
+  "evidence": "ScreenCloud's Entra SCIM guide says 'SSO and SCIM for ScreenCloud is only available on the Enterprise tier plan', and the pricing page lists Enterprise as Contact Sales.",
+  "notes": "Unchanged gate (Enterprise, Contact Sales), but the seat minimum is now 35 screens (help centre), not the June 25; June's 25-screen figure had no first-party source found and is dropped. Priced per screen with unlimited users, so per-user price fields are now null (June recorded $20 as per-user). Core $20 and Pro $30 per screen/month billed annually. SSO help article says SSO is on Pro and Enterprise with a 35-license annual minimum, while the pricing grid shows SSO only on Enterprise. SCIM works through custom Okta and non-gallery Entra apps using a tenant SCIM URL and token; SSO must be set up first. Category: digital signage for internal communications (closest fit Collaboration & Messaging).",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Core",
+  "api_tax": false,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Core",
+   "price_text": "$20 Screen/month, billed annually",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c5",
+    "c7"
+   ],
+   "notes": "Priced per screen with unlimited users."
+  },
+  {
+   "name": "Pro",
+   "price_text": "$30 Screen/month, billed annually",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": null,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c5",
+    "c7",
+    "c22"
+   ],
+   "notes": "SSO help article says SSO is available on Pro with a minimum of 35 licenses billed annually; the pricing grid shows SSO only on Enterprise (see conflicts)."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Contact Sales",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c4",
+    "c5",
+    "c7",
+    "c16",
+    "c23"
+   ],
+   "notes": "Minimum subscription of 35 screens."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c7",
+   "c8",
+   "c10",
+   "c16"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": null,
+  "base_url": null,
+  "notes": "Tenant-specific SCIM Tenant URL shown in Account > Organization > Single Sign-On > Provisioning Settings; URL pattern not published.",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Account > Organization > Single Sign-On > Provisioning Settings > Generate SCIM API token",
+   "token_expiry": null,
+   "cite": [
+    "c9",
+    "c19"
+   ],
+   "notes": "Okta uses HTTP Header (Authorization) auth with the generated token; token is shown once and can be regenerated."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c15",
+    "c17"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c15",
+    "c17",
+    "c18",
+    "c12",
+    "c14"
+   ],
+   "notes": "Okta article: creating, updating and deleting users and groups; To App options Create Users, Update User Attributes, Deactivate User; Push Groups supported. HTTP methods not documented."
+  },
+  "deprovision": {
+   "action": null,
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [],
+   "notes": "Docs say removed users are provisioned by Entra on the next cycle but do not say whether ScreenCloud deactivates or deletes them."
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "email (unique identifier)"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "groups carry across to ScreenCloud groups"
+   ],
+   "cite": [
+    "c21",
+    "c12"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "Group-based: a provisioned IdP group becomes a ScreenCloud group whose permissions are set in ScreenCloud; users without a group get no permissions.",
+   "cite": [
+    "c12",
+    "c13"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SSO must be configured before SCIM.",
+    "cite": [
+     "c8"
+    ]
+   },
+   {
+    "text": "Users provisioned without a group get no permissions until assigned in ScreenCloud.",
+    "cite": [
+     "c13"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c5",
+   "c28"
+  ],
+  "plan": "Core",
+  "api_tax": false,
+  "style": "GraphQL",
+  "base_url": null,
+  "docs_url": "https://help.screencloud.com/en/articles/10115788-using-developer-graphql-api-tools-with-screencloud",
+  "notes": "GraphQL API listed on every plan on the pricing page. The GraphQL schema docs (screencloud.github.io/signage-next-graphql-docs) are a JS app and were not read, so no operations are recorded.",
+  "auth": {
+   "methods": [],
+   "scopes": [],
+   "cite": []
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c29"
+   ],
+   "notes": "From the help article's example 'creating/removing users in your ScreenCloud spaces'."
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": [],
+   "notes": "User audit logs are a Pro feature and enhanced audit logs Enterprise in the UI; no audit-log API found."
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": false,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c20",
+    "c15",
+    "c18"
+   ],
+   "notes": "Custom SAML 2.0 app integration with SCIM enabled; no ScreenCloud page on okta.com/integrations (404)."
+  },
+  "entra": {
+   "listed": false,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c11",
+    "c14"
+   ],
+   "notes": "Non-gallery enterprise application with automatic provisioning."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c25"
+   ],
+   "notes": "Named as an SSO IdP in ScreenCloud's SSO article; no SCIM guide."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c24",
+   "c7"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://screencloud.com/pricing",
+   "title": "Digital Signage Software Pricing - ScreenCloud",
+   "quote": "Core $ 2 0 Screen/month, billed annually Best for businesses getting started with digital signage.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://screencloud.com/pricing",
+   "title": "Digital Signage Software Pricing - ScreenCloud",
+   "quote": "Pro $ 3 0 Screen/month, billed annually Ideal if you need advanced analytics and content for your screens.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://screencloud.com/pricing",
+   "title": "Digital Signage Software Pricing - ScreenCloud",
+   "quote": "Advanced security, control and support for large-scale deployments.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://screencloud.com/pricing",
+   "title": "Digital Signage Software Pricing - ScreenCloud",
+   "quote": "Unlimited users Enhanced user audit logs Proof of play logs Custom user permissions Single sign-on",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://screencloud.com/pricing",
+   "title": "Digital Signage Software Pricing - ScreenCloud",
+   "quote": "Screen management Unlimited file storage Remote device management GraphQL API Weblinks",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://screencloud.com/pricing",
+   "title": "Digital Signage Software Pricing - ScreenCloud",
+   "quote": "Unlimited users User audit logs Proof of play logs Custom user permissions",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://help.screencloud.com/en/articles/10114877-configuring-scim-integration-for-screencloud-with-microsoft-azure-entra",
+   "title": "Configuring SCIM integration for ScreenCloud with Microsoft Azure / Entra",
+   "quote": "In addition, SSO and SCIM for ScreenCloud is only available on the Enterprise tier plan.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://help.screencloud.com/en/articles/10114877-configuring-scim-integration-for-screencloud-with-microsoft-azure-entra",
+   "title": "Configuring SCIM integration for ScreenCloud with Microsoft Azure / Entra",
+   "quote": "Please note that you need to have SSO set up between ScreenCloud and Azure / Entra before you can implement SCIM.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://help.screencloud.com/en/articles/10114877-configuring-scim-integration-for-screencloud-with-microsoft-azure-entra",
+   "title": "Configuring SCIM integration for ScreenCloud with Microsoft Azure / Entra",
+   "quote": "Click the Generate SCIM API token button to find the SCIM Authorization Token. Make sure to save the authentication token somewhere safe once you receive it, as you are not able to view it again afterward.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://help.screencloud.com/en/articles/10114877-configuring-scim-integration-for-screencloud-with-microsoft-azure-entra",
+   "title": "Configuring SCIM integration for ScreenCloud with Microsoft Azure / Entra",
+   "quote": "Your account's SCIM URL is found in Account > Organization under the Single Sign-On tab. Scroll down until you reach Provisioning Settings, where you can click the copy link button to copy the SCIM Tenant URL.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://help.screencloud.com/en/articles/10114877-configuring-scim-integration-for-screencloud-with-microsoft-azure-entra",
+   "title": "Configuring SCIM integration for ScreenCloud with Microsoft Azure / Entra",
+   "quote": "Select the third option, which reads \"Integrate any other application you don't find in the gallery (Non-gallery)\", and click Create.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://help.screencloud.com/en/articles/10114877-configuring-scim-integration-for-screencloud-with-microsoft-azure-entra",
+   "title": "Configuring SCIM integration for ScreenCloud with Microsoft Azure / Entra",
+   "quote": "Through SCIM, You can invite users to ScreenCloud individually or by group. We recommend inviting users as a group, as the group carries across to ScreenCloud.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://help.screencloud.com/en/articles/10114877-configuring-scim-integration-for-screencloud-with-microsoft-azure-entra",
+   "title": "Configuring SCIM integration for ScreenCloud with Microsoft Azure / Entra",
+   "quote": "If a user was invited and not included as a group, they will be added to your ScreenCloud account without any user permissions applied.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://help.screencloud.com/en/articles/10114877-configuring-scim-integration-for-screencloud-with-microsoft-azure-entra",
+   "title": "Configuring SCIM integration for ScreenCloud with Microsoft Azure / Entra",
+   "quote": "The Microsoft Azure Portal will automatically provision any newly assigned or removed users with the next refresh interval set for the account.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://help.screencloud.com/en/articles/10119787-how-to-configure-single-sign-on-sso-and-scim-for-screencloud-with-okta",
+   "title": "How to configure Single Sign-On (SSO) and SCIM for ScreenCloud with Okta",
+   "quote": "Without accessing ScreenCloud's account settings, you can perform operations like creating, updating, and deleting users and groups.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://help.screencloud.com/en/articles/10119787-how-to-configure-single-sign-on-sso-and-scim-for-screencloud-with-okta",
+   "title": "How to configure Single Sign-On (SSO) and SCIM for ScreenCloud with Okta",
+   "quote": "Before you begin, please note that setting up SSO and SCIM for ScreenCloud requires the ScreenCloud Enterprise subscription.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://help.screencloud.com/en/articles/10119787-how-to-configure-single-sign-on-sso-and-scim-for-screencloud-with-okta",
+   "title": "How to configure Single Sign-On (SSO) and SCIM for ScreenCloud with Okta",
+   "quote": "For Supported provisioning actions, enable Push New Users , Push Profile Updates , and Push Groups .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://help.screencloud.com/en/articles/10119787-how-to-configure-single-sign-on-sso-and-scim-for-screencloud-with-okta",
+   "title": "How to configure Single Sign-On (SSO) and SCIM for ScreenCloud with Okta",
+   "quote": "Click To App and enable the options for Create Users , Update User Attributes Deactivate User , and hit Save .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://help.screencloud.com/en/articles/10119787-how-to-configure-single-sign-on-sso-and-scim-for-screencloud-with-okta",
+   "title": "How to configure Single Sign-On (SSO) and SCIM for ScreenCloud with Okta",
+   "quote": "For the Authentication Mode, select HTTP Header .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://help.screencloud.com/en/articles/10119787-how-to-configure-single-sign-on-sso-and-scim-for-screencloud-with-okta",
+   "title": "How to configure Single Sign-On (SSO) and SCIM for ScreenCloud with Okta",
+   "quote": "Head to Applications > Applications and click Create App Integration",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://help.screencloud.com/en/articles/10119787-how-to-configure-single-sign-on-sso-and-scim-for-screencloud-with-okta",
+   "title": "How to configure Single Sign-On (SSO) and SCIM for ScreenCloud with Okta",
+   "quote": "For the Unique identifier field for users, write email .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://help.screencloud.com/en/articles/10119903-setting-up-single-sign-on-sso-for-your-screencloud-account",
+   "title": "Setting up Single Sign-On (SSO) for your ScreenCloud account",
+   "quote": "Pro and Enterprise plans with a minimum of 35 licenses billed annually.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://help.screencloud.com/en/articles/10119903-setting-up-single-sign-on-sso-for-your-screencloud-account",
+   "title": "Setting up Single Sign-On (SSO) for your ScreenCloud account",
+   "quote": "SSO is an extra add-on feature for your ScreenCloud account that comes automatically for the Enterprise plan , which requires a minimum subscription of 35 screens.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://help.screencloud.com/en/articles/10119903-setting-up-single-sign-on-sso-for-your-screencloud-account",
+   "title": "Setting up Single Sign-On (SSO) for your ScreenCloud account",
+   "quote": "Turn this on to automatically create a ScreenCloud user when authenticated in your Identity Provider.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://help.screencloud.com/en/articles/10119903-setting-up-single-sign-on-sso-for-your-screencloud-account",
+   "title": "Setting up Single Sign-On (SSO) for your ScreenCloud account",
+   "quote": "Okta OneLogin Microsoft Azure",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://help.screencloud.com/en/articles/10119903-setting-up-single-sign-on-sso-for-your-screencloud-account",
+   "title": "Setting up Single Sign-On (SSO) for your ScreenCloud account",
+   "quote": "Our system will automatically try to map the values from your Identity Provider to the following attributes.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://help.screencloud.com/en/articles/10120942-people-groups-and-spaces-managing-users-teams-with-screencloud",
+   "title": "People, Groups, and Spaces: Managing Users & Teams With ScreenCloud",
+   "quote": "Click on \"Delete Member\" to remove the user from your ScreenCloud organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://help.screencloud.com/en/articles/10115788-using-developer-graphql-api-tools-with-screencloud",
+   "title": "Using Developer GraphQL API Tools with ScreenCloud",
+   "quote": "With our GraphQL feature, anything you do manually in ScreenCloud Studio can be done automatically using code.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://help.screencloud.com/en/articles/10115788-using-developer-graphql-api-tools-with-screencloud",
+   "title": "Using Developer GraphQL API Tools with ScreenCloud",
+   "quote": "Automate repetitive tasks like creating/removing users in your ScreenCloud spaces.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://help.screencloud.com/en/articles/10120942-people-groups-and-spaces-managing-users-teams-with-screencloud",
+   "title": "People, Groups, and Spaces: Managing Users & Teams With ScreenCloud",
+   "quote": "is where you can invite and add an unlimited number of users to your ScreenCloud organization.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The SSO help article says SSO is available on 'Pro and Enterprise plans with a minimum of 35 licenses billed annually', but the pricing page lists Single sign-on only in the Enterprise column; the SCIM guides say SSO and SCIM are Enterprise-only.",
+   "cite": [
+    "c22",
+    "c4",
+    "c7"
+   ]
+  }
+ ],
+ "searched": [
+  "https://screencloud.com/pricing",
+  "https://screencloud.com/sitemap-0.xml",
+  "https://help.screencloud.com/sitemap.xml",
+  "https://www.okta.com/integrations/screencloud/ (404)",
+  "https://developer.screencloud.com/"
+ ],
+ "open_questions": [
+  "SCIM deprovisioning behaviour (deactivate vs delete, seat, sessions) is not documented.",
+  "SCIM base URL pattern, version, attributes, filtering and pagination are not documented.",
+  "Whether SSO is on Pro (help article) or Enterprise only (pricing grid).",
+  "GraphQL user-management operations not read (schema docs are a JS app)."
+ ]
+}

@@ -1,0 +1,853 @@
+{
+ "slug": "kustomer",
+ "vendor": "Kustomer",
+ "vendor_url": "https://www.kustomer.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Kustomer",
+  "slug": "kustomer",
+  "category": "Customer Support & Success",
+  "status": "gated",
+  "scim_plan": "Ultimate",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Enterprise",
+  "team_price_text": "Contact Sales",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Enterprise + SAML add-on (included in Ultimate)",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": null,
+   "google": null,
+   "onelogin": "via_generic",
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.kustomer.com/pricing/",
+  "docs_url": "https://help.kustomer.com/en_us/okta-scim-SJpB_K8f5",
+  "evidence": "Kustomer's pricing details page shows SCIM as \"No\" on Enterprise and included on Ultimate, with SAML SSO a paid add-on on Enterprise; plan prices are not published.",
+  "notes": "Kustomer no longer publishes prices (\"we don't post one-size-fits-all pricing\"); the comprehensive pricing details page (last updated December 19, 2025) lists two current plans, Enterprise and Ultimate, with SCIM only on Ultimate and SAML SSO a paid ($) add-on on Enterprise. Legacy seat-based plans show no SCIM; legacy usage-based ProfessionalAI/EnterpriseAI/UltimateAI plans all list SCIM. SCIM 2.0 endpoint at https://[orgname].api.kustomerapp.com/v1/scim/v2 authenticated with a Kustomer API key; setup is documented for Okta (custom SAML app with SCIM, not an OIN catalogue app) and OneLogin (generic SCIM Provisioner). Okta's guide notes Okta Lifecycle Management is needed on the Okta side. SCIM cannot manage org owners. No Entra, Google or JumpCloud provisioning guide found.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Enterprise",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Enterprise",
+   "price_text": "Contact Sales (not published)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "c6",
+    "c7"
+   ],
+   "notes": "SAML SSO available as a paid add-on ($ = available with additional charge). API rate limit 1,000 RPM."
+  },
+  {
+   "name": "Ultimate",
+   "price_text": "Contact Sales (not published)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c1",
+    "c2",
+    "c3",
+    "c5",
+    "c6",
+    "c7"
+   ],
+   "notes": "API rate limit 2,000 RPM."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c3",
+   "c8",
+   "c26"
+  ],
+  "plan": "Ultimate",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://[orgname].api.kustomerapp.com/v1/scim/v2",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Kustomer Settings > Security > API Keys > Add API Key (roles org.admin, org.user, org.hooks, org.permission, org.tracking)",
+   "token_expiry": "configurable (guides set No Expiration)",
+   "cite": [
+    "c10",
+    "c11",
+    "c26"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c8",
+    "c12"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": null,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c12",
+    "c13",
+    "c20",
+    "c21"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Deactivated users keep their team assignments; a reactivated user is back in the same teams.",
+   "cite": [
+    "c13",
+    "c20",
+    "c21"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName (email)",
+    "name.givenName",
+    "name.familyName",
+    "emails[type eq \"work\"].value (primary)"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": true,
+    "how": "UserType (user, limited = collaborator, seasonal), PermissionSets (array of permission set IDs) and DisplayName, sent in the core User namespace (urn:ietf:params:scim:schemas:core:2.0:User)."
+   },
+   "group": [
+    "displayName (Okta pushed group becomes a Kustomer Team)",
+    "members"
+   ],
+   "cite": [
+    "c12",
+    "c22",
+    "c23",
+    "c24",
+    "c25"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "PermissionSets attribute with Kustomer permission set IDs per user, or permission sets assigned to a Team that a pushed group maps to.",
+   "cite": [
+    "c16",
+    "c25"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SCIM cannot manage users with org owner permissions; updates to org owners are dropped.",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "text": "Team names with an emoji make Okta's Import Groups fail.",
+    "cite": [
+     "c15"
+    ]
+   },
+   {
+    "text": "Okta setup needs Okta Lifecycle Management or Advanced Lifecycle Management on the Okta side.",
+    "cite": [
+     "c17"
+    ]
+   },
+   {
+    "text": "Deactivating a user does not remove their team memberships.",
+    "cite": [
+     "c21"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c31",
+   "c32",
+   "c5"
+  ],
+  "plan": "Enterprise",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://api.kustomerapp.com/v1",
+  "docs_url": "https://developer.kustomer.com/kustomer-api-docs/reference/getusers",
+  "auth": {
+   "methods": [
+    "api_key"
+   ],
+   "scopes": [
+    "org.admin",
+    "org.user",
+    "org.permission",
+    "org.user.audit_logs.read"
+   ],
+   "cite": [
+    "c44",
+    "c10",
+    "c43"
+   ],
+   "notes": "Bearer API key created under Settings > Security > API Keys with role scopes."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": true,
+   "manage_groups": true,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c31",
+    "c33",
+    "c34",
+    "c35",
+    "c39",
+    "c40",
+    "c41"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/users",
+    "purpose": "Get users",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/users/{id}",
+    "purpose": "Get user by ID",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/users/{ids}",
+    "purpose": "Get multiple users by IDs",
+    "cite": [
+     "c36"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/users",
+    "purpose": "Create / invite new user",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/users/{id}",
+    "purpose": "Update user (deleted: true deletes, deleted: null restores)",
+    "cite": [
+     "c35"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/auth/roles",
+    "purpose": "Get available organization roles",
+    "cite": [
+     "c37"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/role-groups",
+    "purpose": "List role groups (permission sets)",
+    "cite": [
+     "c38"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/teams",
+    "purpose": "List teams",
+    "cite": [
+     "c42"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/teams",
+    "purpose": "Create team",
+    "cite": [
+     "c39"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/teams/{id}/members",
+    "purpose": "Add team member",
+    "cite": [
+     "c40"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/teams/{id}/members",
+    "purpose": "Remove team member",
+    "cite": [
+     "c41"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/audit-logs",
+    "purpose": "Query audit log events",
+    "cite": [
+     "c43"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Enterprise",
+   "cite": [
+    "c43",
+    "c6"
+   ]
+  },
+  "rate_limits": {
+   "text": "1,000 requests per minute on Enterprise, 2,000 on Ultimate.",
+   "cite": [
+    "c5"
+   ]
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": false,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": "idp",
+   "url": "https://www.okta.com/integrations/?search=kustomer",
+   "cite": [
+    "c45",
+    "c18",
+    "c30"
+   ],
+   "notes": "No Kustomer app in the OIN; Kustomer's guide has admins create a custom SAML app and turn on SCIM provisioning on it."
+  },
+  "entra": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c7"
+   ],
+   "notes": "Kustomer documents SAML SSO with Entra (Ultimate or SAML add-on) but no Entra provisioning guide."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": "idp",
+   "url": null,
+   "cite": [
+    "c19"
+   ],
+   "notes": "Kustomer's guide uses OneLogin's generic SCIM Provisioner with SAML (SCIM v2 Core)."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": "Bulk user import via webhooks, workflows or Data Connect",
+  "docs_public": true,
+  "cite": [
+   "c28"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.kustomer.com/pricing/",
+   "title": "Pricing & ROI Calculator | Kustomer",
+   "quote": "Every CX team's setup is different, so we don't post one-size-fits-all pricing.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://www.kustomer.com/comprehensive-pricing-details/",
+   "title": "Pricing Details | Kustomer",
+   "quote": "Current pricing: Feature Enterprise Ultimate",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://www.kustomer.com/comprehensive-pricing-details/",
+   "title": "Pricing Details | Kustomer",
+   "quote": "SAML Single Sign-on $ ✔️ SCIM No ✔️",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://www.kustomer.com/comprehensive-pricing-details/",
+   "title": "Pricing Details | Kustomer",
+   "quote": "$Available with additional charge.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://www.kustomer.com/comprehensive-pricing-details/",
+   "title": "Pricing Details | Kustomer",
+   "quote": "API Rate Limit 1,000 RPM 2,000 RPM",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://www.kustomer.com/comprehensive-pricing-details/",
+   "title": "Pricing Details | Kustomer",
+   "quote": "Audit Log ✔️ ✔️ Automatic Language Detection",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://help.kustomer.com/en_us/microsoft-single-sign-on-S1nHeKEGw.md",
+   "title": "Set up Microsoft Entra ID (Azure AD) single sign-on (SSO)",
+   "quote": "SAML SSO is enabled on your Kustomer subscription (included in Ultimate; available as an add-on on other plans",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.kustomer.com/en_us/microsoft-single-sign-on-S1nHeKEGw"
+  },
+  {
+   "id": "c8",
+   "url": "https://help.kustomer.com/en_us/okta-scim-SJpB_K8f5.md",
+   "title": "Manage users with Okta SCIM",
+   "quote": "SCIM connector base URL: https://[orgname].api.kustomerapp.com/v1/scim/v2/",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.kustomer.com/en_us/okta-scim-SJpB_K8f5"
+  },
+  {
+   "id": "c9",
+   "url": "https://help.kustomer.com/en_us/okta-scim-SJpB_K8f5.md",
+   "title": "Manage users with Okta SCIM",
+   "quote": "Before you can set up Okta SCIM provisioning, the Okta app or another compatible SAML app should be installed.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.kustomer.com/en_us/okta-scim-SJpB_K8f5"
+  },
+  {
+   "id": "c10",
+   "url": "https://help.kustomer.com/en_us/onelogin-scim-B1yWcS2wq.md",
+   "title": "Manage users with OneLogin SCIM",
+   "quote": "Roles: org.admin, org.user, org.hooks, org.permission, org.tracking",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.kustomer.com/en_us/onelogin-scim-B1yWcS2wq"
+  },
+  {
+   "id": "c11",
+   "url": "https://help.kustomer.com/en_us/okta-scim-SJpB_K8f5.md",
+   "title": "Manage users with Okta SCIM",
+   "quote": "In the HTTP Header: Authorization field, paste the API key you created on the Kustomer site in the previous step.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.kustomer.com/en_us/okta-scim-SJpB_K8f5"
+  },
+  {
+   "id": "c12",
+   "url": "https://help.kustomer.com/en_us/okta-scim-SJpB_K8f5.md",
+   "title": "Manage users with Okta SCIM",
+   "quote": "In the Push Groups tab in Okta, push a group to Kustomer. This creates the group in Kustomer as a Team.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.kustomer.com/en_us/okta-scim-SJpB_K8f5"
+  },
+  {
+   "id": "c13",
+   "url": "https://help.kustomer.com/en_us/okta-scim-SJpB_K8f5.md",
+   "title": "Manage users with Okta SCIM",
+   "quote": "go to Provisioning > To App, then check Update User Attributes and Deactivate Users.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.kustomer.com/en_us/okta-scim-SJpB_K8f5"
+  },
+  {
+   "id": "c14",
+   "url": "https://help.kustomer.com/en_us/okta-scim-SJpB_K8f5.md",
+   "title": "Manage users with Okta SCIM",
+   "quote": "No, however you can manage all other permissions levels including administrators.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.kustomer.com/en_us/okta-scim-SJpB_K8f5"
+  },
+  {
+   "id": "c15",
+   "url": "https://help.kustomer.com/en_us/okta-scim-SJpB_K8f5.md",
+   "title": "Manage users with Okta SCIM",
+   "quote": "Team names cannot contain an emoji when passing them to Okta. If an emoji is included, the Import Group function will fail.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.kustomer.com/en_us/okta-scim-SJpB_K8f5"
+  },
+  {
+   "id": "c16",
+   "url": "https://help.kustomer.com/en_us/okta-scim-SJpB_K8f5.md",
+   "title": "Manage users with Okta SCIM",
+   "quote": "Rather than just managing permission sets in Teams, you can manage provisioning through individual user permission sets.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.kustomer.com/en_us/okta-scim-SJpB_K8f5"
+  },
+  {
+   "id": "c17",
+   "url": "https://help.kustomer.com/en_us/okta-scim-SJpB_K8f5.md",
+   "title": "Manage users with Okta SCIM",
+   "quote": "Your Okta account will also need to have purchased the",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.kustomer.com/en_us/okta-scim-SJpB_K8f5"
+  },
+  {
+   "id": "c18",
+   "url": "https://help.kustomer.com/en_us/okta-scim-SJpB_K8f5.md",
+   "title": "Manage users with Okta SCIM",
+   "quote": "In Okta, go to your Kustomer app.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.kustomer.com/en_us/okta-scim-SJpB_K8f5"
+  },
+  {
+   "id": "c19",
+   "url": "https://help.kustomer.com/en_us/onelogin-scim-B1yWcS2wq.md",
+   "title": "Manage users with OneLogin SCIM",
+   "quote": "Search for SCIM v2 and choose the SCIM Provisioner application with SAML (SCIM v2 Core).",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.kustomer.com/en_us/onelogin-scim-B1yWcS2wq"
+  },
+  {
+   "id": "c20",
+   "url": "https://help.kustomer.com/en_us/onelogin-scim-B1yWcS2wq.md",
+   "title": "Manage users with OneLogin SCIM",
+   "quote": "Select Provisioning from the sidebar. Check the Enable provisioning workflow box, and select",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.kustomer.com/en_us/onelogin-scim-B1yWcS2wq"
+  },
+  {
+   "id": "c21",
+   "url": "https://help.kustomer.com/en_us/onelogin-scim-B1yWcS2wq.md",
+   "title": "Manage users with OneLogin SCIM",
+   "quote": "Deactivating a user does not remove them from their team assignments in Kustomer. Similarly, a user who is reactivated later will still be in the same teams they were a member of previously.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.kustomer.com/en_us/onelogin-scim-B1yWcS2wq"
+  },
+  {
+   "id": "c22",
+   "url": "https://help.kustomer.com/en_us/onelogin-scim-B1yWcS2wq.md",
+   "title": "Manage users with OneLogin SCIM",
+   "quote": "\"userName\": \"{$user.email}\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.kustomer.com/en_us/onelogin-scim-B1yWcS2wq"
+  },
+  {
+   "id": "c23",
+   "url": "https://help.kustomer.com/en_us/onelogin-scim-B1yWcS2wq.md",
+   "title": "Manage users with OneLogin SCIM",
+   "quote": "\"givenName\": \"{$user.firstname}\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.kustomer.com/en_us/onelogin-scim-B1yWcS2wq"
+  },
+  {
+   "id": "c24",
+   "url": "https://help.kustomer.com/en_us/onelogin-scim-B1yWcS2wq.md",
+   "title": "Manage users with OneLogin SCIM",
+   "quote": "\"familyName\": \"{$user.lastname}\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.kustomer.com/en_us/onelogin-scim-B1yWcS2wq"
+  },
+  {
+   "id": "c25",
+   "url": "https://help.kustomer.com/en_us/onelogin-scim-B1yWcS2wq.md",
+   "title": "Manage users with OneLogin SCIM",
+   "quote": "This template includes the UserType, PermissionSets, and DisplayName fields.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.kustomer.com/en_us/onelogin-scim-B1yWcS2wq"
+  },
+  {
+   "id": "c26",
+   "url": "https://help.kustomer.com/en_us/onelogin-scim-B1yWcS2wq.md",
+   "title": "Manage users with OneLogin SCIM",
+   "quote": "SCIM Base Url: https://[orgname].api.kustomerapp.com/v1/scim/v2",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.kustomer.com/en_us/onelogin-scim-B1yWcS2wq"
+  },
+  {
+   "id": "c27",
+   "url": "https://help.kustomer.com/en_us/add-users-BkGzi4rIb.md",
+   "title": "Add users to Kustomer",
+   "quote": "If a member of your team leaves temporarily or permanently, you can deactivate the user at any time.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.kustomer.com/en_us/add-users-BkGzi4rIb"
+  },
+  {
+   "id": "c28",
+   "url": "https://help.kustomer.com/en_us/add-users-BkGzi4rIb.md",
+   "title": "Add users to Kustomer",
+   "quote": "It's also possible to import users in bulk using webhooks, workflows, as well as the Data Connect import feature.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.kustomer.com/en_us/add-users-BkGzi4rIb"
+  },
+  {
+   "id": "c29",
+   "url": "https://help.kustomer.com/en_us/saml-authentication-and-sso-login-rJHxwIUAw.md",
+   "title": "Set up SAML authentication and SSO login",
+   "quote": "Kustomer supports various SAML providers. The following is an example of one such integration using Okta, but these steps can be adapted to any other SAML provider.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.kustomer.com/en_us/saml-authentication-and-sso-login-rJHxwIUAw"
+  },
+  {
+   "id": "c30",
+   "url": "https://help.kustomer.com/en_us/saml-authentication-and-sso-login-rJHxwIUAw.md",
+   "title": "Set up SAML authentication and SSO login",
+   "quote": "Select Create New App.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.kustomer.com/en_us/saml-authentication-and-sso-login-rJHxwIUAw"
+  },
+  {
+   "id": "c31",
+   "url": "https://developer.kustomer.com/kustomer-api-docs/reference/getusers.md",
+   "title": "Get Users",
+   "quote": "Retrieves users within the organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.kustomer.com/kustomer-api-docs/reference/getusers"
+  },
+  {
+   "id": "c32",
+   "url": "https://developer.kustomer.com/kustomer-api-docs/reference/getusers.md",
+   "title": "Get Users",
+   "quote": "\"url\": \"https://api.kustomerapp.com/v1\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.kustomer.com/kustomer-api-docs/reference/getusers"
+  },
+  {
+   "id": "c33",
+   "url": "https://developer.kustomer.com/kustomer-api-docs/reference/getuserbyid.md",
+   "title": "Get User by ID",
+   "quote": "Retrieves a user using their unique ID.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.kustomer.com/kustomer-api-docs/reference/getuserbyid"
+  },
+  {
+   "id": "c34",
+   "url": "https://developer.kustomer.com/kustomer-api-docs/reference/createinvitenewuser.md",
+   "title": "Create / Invite New User",
+   "quote": "Creates an account for a new user and sends an email invitation to join the organization within Kustomer.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.kustomer.com/kustomer-api-docs/reference/createinvitenewuser"
+  },
+  {
+   "id": "c35",
+   "url": "https://developer.kustomer.com/kustomer-api-docs/reference/updateuserbyid.md",
+   "title": "Update User by ID",
+   "quote": "To delete a user, set deleted to true. You can restore a user by setting deleted to null.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.kustomer.com/kustomer-api-docs/reference/updateuserbyid"
+  },
+  {
+   "id": "c36",
+   "url": "https://developer.kustomer.com/kustomer-api-docs/reference/getmultipleusersbyids.md",
+   "title": "Get Multiple Users by IDs",
+   "quote": "Retrieves multiple users in a single request using a list of unique user IDs separated by a comma.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.kustomer.com/kustomer-api-docs/reference/getmultipleusersbyids"
+  },
+  {
+   "id": "c37",
+   "url": "https://developer.kustomer.com/kustomer-api-docs/reference/getauthroles.md",
+   "title": "Get Auth Roles",
+   "quote": "Gets available organization roles.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.kustomer.com/kustomer-api-docs/reference/getauthroles"
+  },
+  {
+   "id": "c38",
+   "url": "https://developer.kustomer.com/kustomer-api-docs/reference/getallrolegroups.md",
+   "title": "Get All Role Groups",
+   "quote": "Lists the organization's role groups. This will include both the system (uneditable) and custom role groups.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.kustomer.com/kustomer-api-docs/reference/getallrolegroups"
+  },
+  {
+   "id": "c39",
+   "url": "https://developer.kustomer.com/kustomer-api-docs/reference/createteam.md",
+   "title": "Create Team",
+   "quote": "Creates a Team.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.kustomer.com/kustomer-api-docs/reference/createteam"
+  },
+  {
+   "id": "c40",
+   "url": "https://developer.kustomer.com/kustomer-api-docs/reference/addteammember.md",
+   "title": "Add Team Member",
+   "quote": "Adds a member to a Team.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.kustomer.com/kustomer-api-docs/reference/addteammember"
+  },
+  {
+   "id": "c41",
+   "url": "https://developer.kustomer.com/kustomer-api-docs/reference/removeteammember.md",
+   "title": "Remove Team Member",
+   "quote": "Deletes a member of a Team.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.kustomer.com/kustomer-api-docs/reference/removeteammember"
+  },
+  {
+   "id": "c42",
+   "url": "https://developer.kustomer.com/kustomer-api-docs/reference/getteams.md",
+   "title": "Get Teams",
+   "quote": "Gets a paginated list of teams.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.kustomer.com/kustomer-api-docs/reference/getteams"
+  },
+  {
+   "id": "c43",
+   "url": "https://developer.kustomer.com/kustomer-api-docs/reference/getauditlogs.md",
+   "title": "Query events associated with your organization",
+   "quote": "org.user.audit_logs.read",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.kustomer.com/kustomer-api-docs/reference/getauditlogs"
+  },
+  {
+   "id": "c44",
+   "url": "https://developer.kustomer.com/kustomer-api-docs/reference/getusers.md",
+   "title": "Get Users",
+   "quote": "\"scheme\": \"bearer\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.kustomer.com/kustomer-api-docs/reference/getusers"
+  },
+  {
+   "id": "c45",
+   "url": "https://www.okta.com/integrations/?search=kustomer",
+   "title": "Okta Integration Network search",
+   "quote": "No results found for: \"kustomer\"",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The main pricing page shows a single package with SAML SSO and SCIM included, while the comprehensive pricing details page splits current pricing into Enterprise (SCIM: No, SAML: paid add-on) and Ultimate (both included). The row follows the per-plan table.",
+   "cite": [
+    "c1",
+    "c3"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.kustomer.com/pricing/",
+  "https://www.kustomer.com/comprehensive-pricing-details/",
+  "https://help.kustomer.com/llms.txt",
+  "https://help.kustomer.com/sitemap.xml (articles 1-7)",
+  "https://developer.kustomer.com/sitemap.xml",
+  "https://www.okta.com/integrations/?search=kustomer",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/toc.json"
+ ],
+ "open_questions": [
+  "Enterprise and Ultimate prices are not published.",
+  "SCIM docs do not say whether hard delete is supported, whether updates use PUT or PATCH, or whether filtering and pagination work.",
+  "Whether deactivation frees a seat or ends sessions is not documented.",
+  "No Entra ID, Google Workspace or JumpCloud provisioning guide was found; Entra gallery listing not checked beyond the Microsoft Learn tutorial index.",
+  "Whether user-event webhooks exist was not checked."
+ ]
+}

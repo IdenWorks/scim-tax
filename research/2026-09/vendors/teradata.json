@@ -1,0 +1,571 @@
+{
+ "slug": "teradata",
+ "vendor": "Teradata",
+ "vendor_url": "https://www.teradata.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Teradata",
+  "slug": "teradata",
+  "category": "Data, Analytics & BI",
+  "status": "gated",
+  "scim_plan": "Teradata Cloud (Elastic Compute), quote-only",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales (Fixed + Flex, Teradata Units)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Teradata Cloud (Elastic Compute), quote-only",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.teradata.com/pricing",
+  "docs_url": "https://docs.teradata.com/r/Teradata-Elastic-Compute-User-Guide/Configuring-Teradata-Elastic-Compute/Configure-Identity-Provider-and-SCIM-in-Admin-Console/Stage-3-Automate-User-Provisioning-with-SCIM",
+  "evidence": "Teradata's Elastic Compute guide says SCIM keeps users and group memberships in sync with the IdP ('When you remove the user, Teradata revokes access'), while the pricing page only offers Fixed + Flex packages via a pricing specialist.",
+  "notes": "Quote-only: teradata.com/pricing describes Fixed + Flex pricing in Teradata Units with three unnamed packages and no public prices ('Talk to a Teradata pricing specialist'), so SCIM can only be bought through sales. New row. SCIM (Global Identity) is documented for Teradata Cloud Elastic Compute (released June 2026) and is not available for the existing Enterprise Data Warehouse (EDW) or Active Compute. Each site gets its own generated SCIM endpoint, client ID/secret and a bearer token that expires in at most 90 days. Okta and Entra are configured with generic SCIM apps (Okta 'SCIM 2.0 Test App (Header Auth)', Entra non-gallery app); Ping Identity is also named. SSO is OIDC only (SAML not supported) and is mandatory for Elastic Compute. Okta's catalogue lists only 'Teradata Marketing Studio', a different product. No REST user-management API for the console is documented.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": null,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Fixed + Flex packages (three, unnamed)",
+   "price_text": "Contact sales (priced in Teradata Units)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c3"
+   ],
+   "notes": "Pricing page names 'Three packages' but no package names or prices; SSO/SCIM apply to Teradata Cloud Elastic Compute sites, package mapping not stated."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c4",
+   "c6",
+   "c12",
+   "c18",
+   "c23",
+   "c29"
+  ],
+  "plan": "Teradata Cloud (Elastic Compute), quote-only",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": null,
+  "auth": {
+   "method": "bearer",
+   "token_source": "Admin Console > Access control > Provisioning users > Enable (SCIM URL, client ID/secret, then Generate access token)",
+   "token_expiry": "up to 90 days",
+   "cite": [
+    "c7",
+    "c9",
+    "c10",
+    "c11"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c13"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": null,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c4",
+    "c14",
+    "c15",
+    "c19",
+    "c26"
+   ],
+   "notes": "Okta setup enables Create Users, Update User Attributes and Deactivate Users; PUT vs PATCH not documented."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c4",
+    "c19"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": [
+    "c8"
+   ],
+   "notes": "Only userName is documented (becomes the Teradata database username; defaults to email in Okta and Entra)."
+  },
+  "roles": {
+   "supported": true,
+   "how": "IdP groups synced by SCIM are mapped to platform roles in Admin Console (Access Control > Role mapping) and to Elastic Compute roles (Site Admin, Data Curator, Data User, custom roles synced through SCIM).",
+   "cite": [
+    "c21",
+    "c22",
+    "c26"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SCIM applies only to Elastic Compute, not to the Enterprise Data Warehouse (EDW) or Active Compute.",
+    "cite": [
+     "c18"
+    ]
+   },
+   {
+    "text": "Bearer token expires in at most 90 days and must be rotated; client secret and token are shown only once.",
+    "cite": [
+     "c7",
+     "c10",
+     "c11"
+    ]
+   },
+   {
+    "text": "SSO is OIDC only; SAML is not supported.",
+    "cite": [
+     "c24"
+    ]
+   },
+   {
+    "text": "Sync typically takes 5 to 40 minutes, depending on the IdP.",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "text": "Each site has its own SCIM endpoint and credentials; they cannot be reused across sites.",
+    "cite": [
+     "c6"
+    ]
+   }
+  ],
+  "notes": "Endpoint URL is generated per site in Admin Console (Access control > Provisioning users) and shown only once; its pattern is not published. Version 2.0 is inferred from the Okta 'SCIM 2.0 Test App' template the docs use. A parallel set of pages covers the same steps in 'Vantage Console'."
+ },
+ "user_api": {
+  "available": null,
+  "cite": [],
+  "plan": null,
+  "api_tax": null,
+  "style": null,
+  "base_url": null,
+  "docs_url": null,
+  "auth": {
+   "methods": [],
+   "scopes": [],
+   "cite": []
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": []
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "No REST user-management API for Teradata Cloud Admin Console was found in docs.teradata.com search. Database users are managed with SQL (CREATE/DROP/MODIFY USER), which SCIM itself uses for EDW via a SCIM admin database account."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": false,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/?search=teradata",
+   "cite": [
+    "c28",
+    "c12"
+   ],
+   "notes": "OIN search for 'teradata' returns only Teradata Marketing Studio (a different product). Teradata's docs use Okta's generic 'SCIM 2.0 Test App (Header Auth)'."
+  },
+  "entra": {
+   "listed": false,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c17"
+   ],
+   "notes": "Teradata's docs use an Entra non-gallery app ('Integrate any other application'); no gallery tutorial found."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "Not mentioned by Teradata; not checked."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "Not mentioned by Teradata; connector pages block bots."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "Not mentioned by Teradata; not checked."
+  }
+ },
+ "fallbacks": {
+  "jit": false,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c5"
+  ],
+  "notes": "SCIM must provision a user before SSO sign-in works, so there is no JIT on sign-in for Elastic Compute."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.teradata.com/pricing",
+   "title": "Teradata pricing",
+   "quote": "Fixed + Flex Pricing provides customers with financial control in the agentic era.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://www.teradata.com/pricing",
+   "title": "Teradata pricing",
+   "quote": "Talk to a Teradata pricing specialist today.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://www.teradata.com/pricing",
+   "title": "Teradata pricing",
+   "quote": "A unit is a single, unified currency that applies across all Teradata services—compute, storage, software, and AI.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://docs.teradata.com/api/khub/maps/3b4_2CMU6URh~l5F5thcWA/topics/1TKQmuTDGEsJbSXtch4jlQ/content",
+   "title": "Stage 3: Automate User Provisioning with SCIM",
+   "quote": "When you add a user to the correct group in the IdP, Teradata automatically creates the account with the correct role. When you remove the user, Teradata revokes access.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.teradata.com/r/Teradata-Elastic-Compute-User-Guide/Configuring-Teradata-Elastic-Compute/Configure-Identity-Provider-and-SCIM-in-Admin-Console/Stage-3-Automate-User-Provisioning-with-SCIM"
+  },
+  {
+   "id": "c5",
+   "url": "https://docs.teradata.com/api/khub/maps/3b4_2CMU6URh~l5F5thcWA/topics/1TKQmuTDGEsJbSXtch4jlQ/content",
+   "title": "Stage 3: Automate User Provisioning with SCIM",
+   "quote": "SCIM handles the user lifecycle, and the IdP handles authentication. SCIM must provision a user before the user can sign in using SSO.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.teradata.com/r/Teradata-Elastic-Compute-User-Guide/Configuring-Teradata-Elastic-Compute/Configure-Identity-Provider-and-SCIM-in-Admin-Console/Stage-3-Automate-User-Provisioning-with-SCIM"
+  },
+  {
+   "id": "c6",
+   "url": "https://docs.teradata.com/api/khub/maps/3b4_2CMU6URh~l5F5thcWA/topics/txZp3IBnVp6l4tf_Uwr0iQ/content",
+   "title": "SCIM Terms",
+   "quote": "The unique HTTPS URL that the IdP uses to send provisioning requests. The Console generates this URL per site. You cannot reuse a URL across sites.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.teradata.com/r/Teradata-Elastic-Compute-User-Guide/Configuring-Teradata-Elastic-Compute/Configure-Identity-Provider-and-SCIM-in-Admin-Console/Stage-3-Automate-User-Provisioning-with-SCIM/SCIM-Terms"
+  },
+  {
+   "id": "c7",
+   "url": "https://docs.teradata.com/api/khub/maps/3b4_2CMU6URh~l5F5thcWA/topics/txZp3IBnVp6l4tf_Uwr0iQ/content",
+   "title": "SCIM Terms",
+   "quote": "Included in the Authorization header of every SCIM request. The token expiry can be up to 90 days. Token expiry is the most common cause of SCIM failure, so plan token rotation.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.teradata.com/r/Teradata-Elastic-Compute-User-Guide/Configuring-Teradata-Elastic-Compute/Configure-Identity-Provider-and-SCIM-in-Admin-Console/Stage-3-Automate-User-Provisioning-with-SCIM/SCIM-Terms"
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.teradata.com/api/khub/maps/3b4_2CMU6URh~l5F5thcWA/topics/txZp3IBnVp6l4tf_Uwr0iQ/content",
+   "title": "SCIM Terms",
+   "quote": "The SCIM value that becomes the Teradata database username. This value must match the username claim from sign-in. It defaults to email in both Okta and Entra.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.teradata.com/r/Teradata-Elastic-Compute-User-Guide/Configuring-Teradata-Elastic-Compute/Configure-Identity-Provider-and-SCIM-in-Admin-Console/Stage-3-Automate-User-Provisioning-with-SCIM/SCIM-Terms"
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.teradata.com/api/khub/maps/3b4_2CMU6URh~l5F5thcWA/topics/JmHC261Z2A1fLD~iJHflQg/content",
+   "title": "Enable SCIM in Admin Console",
+   "quote": "All sites and their SCIM status appear on the Provisioning users page",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.teradata.com/r/Teradata-Elastic-Compute-User-Guide/Configuring-Teradata-Elastic-Compute/Configure-Identity-Provider-and-SCIM-in-Admin-Console/Stage-3-Automate-User-Provisioning-with-SCIM/Enable-SCIM-in-Admin-Console"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.teradata.com/api/khub/maps/3b4_2CMU6URh~l5F5thcWA/topics/JmHC261Z2A1fLD~iJHflQg/content",
+   "title": "Enable SCIM in Admin Console",
+   "quote": "In the Access token expiration section, set the access token expiration (up to 90 days).",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.teradata.com/r/Teradata-Elastic-Compute-User-Guide/Configuring-Teradata-Elastic-Compute/Configure-Identity-Provider-and-SCIM-in-Admin-Console/Stage-3-Automate-User-Provisioning-with-SCIM/Enable-SCIM-in-Admin-Console"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.teradata.com/api/khub/maps/3b4_2CMU6URh~l5F5thcWA/topics/JmHC261Z2A1fLD~iJHflQg/content",
+   "title": "Enable SCIM in Admin Console",
+   "quote": "You cannot retrieve the Client Secret and Access Token afterward. You can only rotate them, and rotating the secret requires the original value.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.teradata.com/r/Teradata-Elastic-Compute-User-Guide/Configuring-Teradata-Elastic-Compute/Configure-Identity-Provider-and-SCIM-in-Admin-Console/Stage-3-Automate-User-Provisioning-with-SCIM/Enable-SCIM-in-Admin-Console"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.teradata.com/api/khub/maps/3b4_2CMU6URh~l5F5thcWA/topics/XfiakxaUrNIeMXVsrd8XPQ/content",
+   "title": "Configure SCIM in Okta",
+   "quote": "Search for SCIM 2.0 Test App (Header Auth), select the template, and then select Add Integration",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.teradata.com/r/Teradata-Elastic-Compute-User-Guide/Configuring-Teradata-Elastic-Compute/Configure-Identity-Provider-and-SCIM-in-Admin-Console/Stage-3-Automate-User-Provisioning-with-SCIM/Configure-SCIM-in-Okta"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.teradata.com/api/khub/maps/3b4_2CMU6URh~l5F5thcWA/topics/XfiakxaUrNIeMXVsrd8XPQ/content",
+   "title": "Configure SCIM in Okta",
+   "quote": "Do not include a trailing slash, because Okta appends /Users and /Groups automatically.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.teradata.com/r/Teradata-Elastic-Compute-User-Guide/Configuring-Teradata-Elastic-Compute/Configure-Identity-Provider-and-SCIM-in-Admin-Console/Stage-3-Automate-User-Provisioning-with-SCIM/Configure-SCIM-in-Okta"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.teradata.com/api/khub/maps/3b4_2CMU6URh~l5F5thcWA/topics/XfiakxaUrNIeMXVsrd8XPQ/content",
+   "title": "Configure SCIM in Okta",
+   "quote": "Enable these settings: Create Users Update User Attributes Deactivate Users",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.teradata.com/r/Teradata-Elastic-Compute-User-Guide/Configuring-Teradata-Elastic-Compute/Configure-Identity-Provider-and-SCIM-in-Admin-Console/Stage-3-Automate-User-Provisioning-with-SCIM/Configure-SCIM-in-Okta"
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.teradata.com/api/khub/maps/3b4_2CMU6URh~l5F5thcWA/topics/XfiakxaUrNIeMXVsrd8XPQ/content",
+   "title": "Configure SCIM in Okta",
+   "quote": "Search for and select the groups you want to push, then select Save",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.teradata.com/r/Teradata-Elastic-Compute-User-Guide/Configuring-Teradata-Elastic-Compute/Configure-Identity-Provider-and-SCIM-in-Admin-Console/Stage-3-Automate-User-Provisioning-with-SCIM/Configure-SCIM-in-Okta"
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.teradata.com/api/khub/maps/3b4_2CMU6URh~l5F5thcWA/topics/g1y78V~3PqhgESVY3pQmLA/content",
+   "title": "Configure SCIM in Microsoft Entra ID",
+   "quote": "Enter the SCIM Endpoint URL as the Tenant URL and the Access Token as the Secret Token.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.teradata.com/r/Teradata-Elastic-Compute-User-Guide/Configuring-Teradata-Elastic-Compute/Configure-Identity-Provider-and-SCIM-in-Admin-Console/Stage-3-Automate-User-Provisioning-with-SCIM/Configure-SCIM-in-Microsoft-Entra-ID"
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.teradata.com/api/khub/maps/3b4_2CMU6URh~l5F5thcWA/topics/g1y78V~3PqhgESVY3pQmLA/content",
+   "title": "Configure SCIM in Microsoft Entra ID",
+   "quote": "Select Integrate any other application, enter a name, then select Create",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.teradata.com/r/Teradata-Elastic-Compute-User-Guide/Configuring-Teradata-Elastic-Compute/Configure-Identity-Provider-and-SCIM-in-Admin-Console/Stage-3-Automate-User-Provisioning-with-SCIM/Configure-SCIM-in-Microsoft-Entra-ID"
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.teradata.com/api/khub/maps/3b4_2CMU6URh~l5F5thcWA/topics/qnuHQBGKiH8Nc3ryAoGm_w/content",
+   "title": "Define the Scope for Elastic Compute",
+   "quote": "Global Identity and SCIM is enabled only for Elastic Compute, not for the existing Enterprise Data Warehouse (EDW) or Active Compute.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.teradata.com/r/Teradata-Elastic-Compute-User-Guide/Configuring-Teradata-Elastic-Compute/Configure-Identity-Provider-and-SCIM-in-Admin-Console/Stage-3-Automate-User-Provisioning-with-SCIM/Define-the-Scope-for-Elastic-Compute"
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.teradata.com/api/khub/maps/3b4_2CMU6URh~l5F5thcWA/topics/AbzzzHT6oKh5X5A8L2RoXQ/content",
+   "title": "Validate Provisioning End to End",
+   "quote": "Remove the test user from the IdP group and confirm that Console deactivates access.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.teradata.com/r/Teradata-Elastic-Compute-User-Guide/Configuring-Teradata-Elastic-Compute/Configure-Identity-Provider-and-SCIM-in-Admin-Console/Stage-3-Automate-User-Provisioning-with-SCIM/Validate-Provisioning-End-to-End"
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.teradata.com/api/khub/maps/3b4_2CMU6URh~l5F5thcWA/topics/AbzzzHT6oKh5X5A8L2RoXQ/content",
+   "title": "Validate Provisioning End to End",
+   "quote": "Wait for the sync cycle. This typically takes 5 to 40 minutes, depending on the IdP configuration.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.teradata.com/r/Teradata-Elastic-Compute-User-Guide/Configuring-Teradata-Elastic-Compute/Configure-Identity-Provider-and-SCIM-in-Admin-Console/Stage-3-Automate-User-Provisioning-with-SCIM/Validate-Provisioning-End-to-End"
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.teradata.com/api/khub/maps/3b4_2CMU6URh~l5F5thcWA/topics/woQrFkJuRNM3Wg1dr6MuVw/content",
+   "title": "Map at Least One Role",
+   "quote": "To complete setup, you must map at least one IdP group to a platform role. At minimum, map one group to the Organization Admin role.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.teradata.com/r/Teradata-Elastic-Compute-User-Guide/Configuring-Teradata-Elastic-Compute/Configure-Identity-Provider-and-SCIM-in-Admin-Console/Stage-2-Connect-the-IdP-in-Admin-Console/Map-at-Least-One-Role"
+  },
+  {
+   "id": "c22",
+   "url": "https://docs.teradata.com/api/khub/maps/3b4_2CMU6URh~l5F5thcWA/topics/mPfUtudRiy4CwkDfhTq1ug/content",
+   "title": "Available Roles",
+   "quote": "Organization-specific roles defined in your IdP and synchronized through SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.teradata.com/r/Teradata-Elastic-Compute-User-Guide/Configuring-Teradata-Elastic-Compute/Assign-Access-to-Elastic-Compute/Available-Roles"
+  },
+  {
+   "id": "c23",
+   "url": "https://docs.teradata.com/api/khub/maps/3b4_2CMU6URh~l5F5thcWA/topics/iF8AgH2mKn24miZnAid0gg/content",
+   "title": "Set Up SSO Authentication",
+   "quote": "Single Sign-On (SSO) authentication is a mandatory prerequisite for Elastic Compute.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.teradata.com/r/Teradata-Elastic-Compute-User-Guide/Configuring-Teradata-Elastic-Compute/Set-Up-SSO-Authentication"
+  },
+  {
+   "id": "c24",
+   "url": "https://docs.teradata.com/api/khub/maps/3b4_2CMU6URh~l5F5thcWA/topics/iF8AgH2mKn24miZnAid0gg/content",
+   "title": "Set Up SSO Authentication",
+   "quote": "Global Identity supports Bring Your Own Identity Provider (BYOIDP) using OpenID Connect (OIDC) for authentication and SCIM for automated user and group provisioning. SAML protocol is not supported.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.teradata.com/r/Teradata-Elastic-Compute-User-Guide/Configuring-Teradata-Elastic-Compute/Set-Up-SSO-Authentication"
+  },
+  {
+   "id": "c25",
+   "url": "https://docs.teradata.com/api/khub/maps/3b4_2CMU6URh~l5F5thcWA/topics/B3a8Ao1sVXtGxkflkfPXmw/content",
+   "title": "Get Started with Configuring Global Identity",
+   "quote": "A user who has administrative privileges to manage workflows on Okta, Microsoft Entra ID, or Ping Identity.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.teradata.com/r/Teradata-Elastic-Compute-User-Guide/Configuring-Teradata-Elastic-Compute/Configure-Identity-Provider-and-SCIM-in-Admin-Console/Get-Started-with-Configuring-Global-Identity"
+  },
+  {
+   "id": "c26",
+   "url": "https://docs.teradata.com/api/khub/maps/3b4_2CMU6URh~l5F5thcWA/topics/~tNWNVmwm93lJNVGUje_Kg/content",
+   "title": "Assign Access to Elastic Compute",
+   "quote": "Groups are defined in your Identity Provider and synchronized to Admin Console via SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.teradata.com/r/Teradata-Elastic-Compute-User-Guide/Configuring-Teradata-Elastic-Compute/Assign-Access-to-Elastic-Compute"
+  },
+  {
+   "id": "c27",
+   "url": "https://docs.teradata.com/api/khub/maps/3b4_2CMU6URh~l5F5thcWA/topics/txZp3IBnVp6l4tf_Uwr0iQ/content",
+   "title": "SCIM Terms",
+   "quote": "A dedicated database account that SCIM uses to run CREATE USER, DROP USER, or MODIFY USER.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.teradata.com/r/Teradata-Elastic-Compute-User-Guide/Configuring-Teradata-Elastic-Compute/Configure-Identity-Provider-and-SCIM-in-Admin-Console/Stage-3-Automate-User-Provisioning-with-SCIM/SCIM-Terms"
+  },
+  {
+   "id": "c28",
+   "url": "https://www.okta.com/integrations/?search=teradata",
+   "title": "Okta Integration Network search: teradata",
+   "quote": "Teradata Marketing Studio",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c29",
+   "url": "https://docs.teradata.com/api/khub/maps/my1hOPZJq0wDGtbV_NYrqA/topics/DbcpVH7aeG7sIMpY86WhrQ/content",
+   "title": "What's New: June 2026",
+   "quote": "User provisioning through System for Cross-domain Identity Management (SCIM)",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.teradata.com/r/Teradata-Elastic-Compute-Updates-and-Changes/What-s-New/June-2026"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.teradata.com/pricing",
+  "docs.teradata.com search API: SCIM",
+  "docs.teradata.com search API: user management API",
+  "docs.teradata.com search API: Console API users",
+  "https://www.okta.com/integrations/?search=teradata"
+ ],
+ "open_questions": [
+  "Which of the three Fixed + Flex packages include Elastic Compute, SSO and SCIM is not published.",
+  "SCIM endpoint URL pattern, filtering, pagination, PUT/PATCH support and DELETE behaviour are not documented.",
+  "Whether deprovisioning frees capacity/licence or keeps the user's database objects is not documented.",
+  "No REST user-management or audit-log API for the Admin Console is documented."
+ ]
+}

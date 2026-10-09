@@ -1,0 +1,531 @@
+{
+ "slug": "facebook-workplace",
+ "vendor": "Workplace from Meta",
+ "vendor_url": "https://www.meta.com/workplace/",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Workplace from Meta",
+  "slug": "facebook-workplace",
+  "category": "Collaboration & Messaging",
+  "status": "none",
+  "scim_plan": "—",
+  "scim_price_text": "—",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "— (product closed; no pricing page)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": null,
+  "idp": {
+   "okta": "none",
+   "entra": "none",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": false
+  },
+  "pricing_page_url": "https://www.meta.com/workplace/",
+  "docs_url": "https://developers.facebook.com/docs/workplace/reference/account-management-api/scim-v2",
+  "evidence": "Meta's Workplace page now says \"Workplace has closed as of May 2026.\", so the product (and its SCIM 2.0 API at scim.workplace.com) can no longer be bought or provisioned.",
+  "notes": "Discontinued: Workplace from Meta (formerly Workplace by Facebook) closed in May 2026; workplace.com and its pricing page redirect to a closure notice at meta.com/workplace. Status 'none' only because nothing is sold today; the rules do not cover discontinued products, so this row should probably be dropped or flagged at merge. Before closure, Meta's still-online developer docs documented a SCIM 2.0 API (base https://scim.workplace.com/, bearer token from a custom integration app with the Manage Accounts permission; create, PUT/PATCH, deactivate via active=false which ends sessions immediately; DELETE also only deactivates; Groups mapped to People Sets) plus Graph API account management, and Okta OIN and Entra gallery provisioning apps are still listed. No plan or price for SCIM could be cited because the pricing pages are gone.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": false,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [],
+ "scim": {
+  "available": false,
+  "cite": [
+   "c1",
+   "c2",
+   "c4"
+  ],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://scim.workplace.com/",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Admin Panel > Integrations: create a custom integration app with the Manage Accounts permission (System Administrator only)",
+   "token_expiry": null,
+   "cite": [
+    "c5",
+    "c6"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": true,
+   "Schemas": true,
+   "ResourceTypes": true,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c21",
+    "c4",
+    "c12",
+    "c24"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": false,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c24",
+    "c23",
+    "c7",
+    "c8",
+    "c12",
+    "c10"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": true,
+   "data_retained": "Account is deactivated, not deleted; DELETE on /Users also only deactivates.",
+   "cite": [
+    "c7",
+    "c8"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName",
+    "externalId"
+   ],
+   "cite": [
+    "c10"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c9"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.formatted",
+    "name.givenName",
+    "name.familyName",
+    "displayName",
+    "title",
+    "userType",
+    "preferredLanguage",
+    "locale",
+    "timezone",
+    "active",
+    "emails",
+    "phoneNumbers",
+    "addresses",
+    "photos",
+    "externalId"
+   ],
+   "enterprise": [
+    "employeeNumber",
+    "department",
+    "manager"
+   ],
+   "custom": {
+    "supported": true,
+    "how": "Facebook extensions: accountstatusdetails (invited, claimed, claimLink, accessCode, canDelete), authmethod (authMethod), frontline (frontline, hasAccess), starttermdates (startDate, termDate), and customprofilefields for Additional Profile Fields."
+   },
+   "group": [
+    "displayName",
+    "members",
+    "externalId"
+   ],
+   "cite": [
+    "c22",
+    "c14",
+    "c15",
+    "c11"
+   ]
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Group responses may be truncated to 10,000 members.",
+    "cite": [
+     "c13"
+    ]
+   },
+   {
+    "text": "A User-Agent header is mandatory on every SCIM request.",
+    "cite": [
+     "c16"
+    ]
+   },
+   {
+    "text": "Creating an account starts invitation emails unless 'Send invites when accounts are created' is disabled.",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "text": "Workplace closed in May 2026; none of this is usable today.",
+    "cite": [
+     "c1"
+    ]
+   }
+  ],
+  "notes": "Product closed (May 2026), so SCIM is no longer available. The fields below record what Meta's developer docs (still online) documented before closure; SCIM 1.1 (www.workplace.com/scim/v1) was deprecated earlier."
+ },
+ "user_api": {
+  "available": false,
+  "cite": [
+   "c1",
+   "c3"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": null,
+  "docs_url": "https://developers.facebook.com/docs/workplace/reference/account-management-api",
+  "auth": {
+   "methods": [],
+   "scopes": [],
+   "cite": []
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": []
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "Graph API account management endpoints (read, create, modify, delete users) were documented, but the product closed in May 2026. Endpoint paths not recorded."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/workplace-by-facebook/",
+   "cite": [
+    "c18"
+   ],
+   "notes": "OIN 'Workplace by Facebook' page (last updated Aug 7 2025) is still listed with SAML and SCIM provisioning; the target service closed in May 2026."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/workplace-from-meta-provisioning-tutorial",
+   "cite": [
+    "c19"
+   ],
+   "notes": "Entra provisioning tutorial still published; the target service closed in May 2026."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c4"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.meta.com/workplace/",
+   "title": "Workplace from Meta | Meta",
+   "quote": "Workplace has closed as of May 2026.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://developers.facebook.com/docs/workplace/reference/account-management-api",
+   "title": "Account Management APIs - Workplace",
+   "quote": "This set of guides introduces the concepts of account provisioning and deactivation through the use of account management APIs using SCIM V1, SCIM V2.0 or the Graph API",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://developers.facebook.com/docs/workplace/reference/account-management-api",
+   "title": "Account Management APIs - Workplace",
+   "quote": "Read, create, modify and delete users using the account management endpoints on the Graph API.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://developers.facebook.com/docs/workplace/reference/account-management-api/scim-v2",
+   "title": "SCIM API 2.0 - Workplace",
+   "quote": "The base URL for the SCIM 2.0 API is https://scim.workplace.com/",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://developers.facebook.com/docs/workplace/reference/account-management-api/scim-v2",
+   "title": "SCIM API 2.0 - Workplace",
+   "quote": "The Manage Accounts permission is required to allow SCIM API access.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://developers.facebook.com/docs/workplace/reference/account-management-api/scim-v2",
+   "title": "SCIM API 2.0 - Workplace",
+   "quote": "To receive an access token, you need to create an app on the Integrations page of the Admin Panel.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://developers.facebook.com/docs/workplace/reference/account-management-api/scim-v2",
+   "title": "SCIM API 2.0 - Workplace",
+   "quote": "The user will immediately be deactivated and any current mobile or web sessions for that user will be immediately terminated.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://developers.facebook.com/docs/workplace/reference/account-management-api/scim-v2",
+   "title": "SCIM API 2.0 - Workplace",
+   "quote": "For legacy support calling DELETE on the /Users endpoint will deactivate the user account.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://developers.facebook.com/docs/workplace/reference/account-management-api/scim-v2",
+   "title": "SCIM API 2.0 - Workplace",
+   "quote": "You can specify a different page size and page offset by including the parameters count and startIndex.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://developers.facebook.com/docs/workplace/reference/account-management-api/scim-v2",
+   "title": "SCIM API 2.0 - Workplace",
+   "quote": "You can retrieve a single user by username / email address by including a username filter:",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c11",
+   "url": "https://developers.facebook.com/docs/workplace/reference/account-management-api/scim-v2",
+   "title": "SCIM API 2.0 - Workplace",
+   "quote": "Within Workplace SCIM Groups are mapped to People Sets. Users should only be added to and removed from groups, never updated.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://developers.facebook.com/docs/workplace/reference/account-management-api/scim-v2",
+   "title": "SCIM API 2.0 - Workplace",
+   "quote": "You can use a PATCH request to add or remove members from a group as well change the display name.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://developers.facebook.com/docs/workplace/reference/account-management-api/scim-v2",
+   "title": "SCIM API 2.0 - Workplace",
+   "quote": "If included the response may be truncated to 10000 members for performance reasons.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c14",
+   "url": "https://developers.facebook.com/docs/workplace/reference/account-management-api/scim-v2",
+   "title": "SCIM API 2.0 - Workplace",
+   "quote": "Additional Profile Fields in Workplace can be accessed using the SCIM API schema extension customprofilefields.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://developers.facebook.com/docs/workplace/reference/account-management-api/scim-v2",
+   "title": "SCIM API 2.0 - Workplace",
+   "quote": "The Frontline Extension will allow you to set which accounts are for frontline team members and to toggle account access to meet local regulatory responsibilities.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://developers.facebook.com/docs/workplace/reference/account-management-api/scim-v2",
+   "title": "SCIM API 2.0 - Workplace",
+   "quote": "Note: A User-Agent string is mandatory in all SCIM API requests.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c17",
+   "url": "https://developers.facebook.com/docs/workplace/",
+   "title": "Workplace - Meta for Developers",
+   "quote": "Workplace from Meta is going away. You will be able to continue using Workplace until 31 August 2025.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c18",
+   "url": "https://www.okta.com/integrations/workplace-by-facebook/",
+   "title": "Workplace by Facebook | Okta",
+   "quote": "From single sign-on to enhanced user provisioning, Okta’s Workplace by Facebook integration allows your employees to communicate and work together efficiently.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c19",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/workplace-from-meta-provisioning-tutorial",
+   "title": "Configure Workplace from Meta for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Remove users in Workplace from Meta when they don't require access anymore",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c20",
+   "url": "https://developers.facebook.com/docs/workplace/reference/account-management-api/scim-v2",
+   "title": "SCIM API 2.0 - Workplace",
+   "quote": "Once a new User Account is created, Workplace will begin sending invitation and other notification emails.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c21",
+   "url": "https://developers.facebook.com/docs/workplace/reference/account-management-api/scim-v2",
+   "title": "SCIM API 2.0 - Workplace",
+   "quote": "https://scim.workplace.com/ServiceProviderConfig",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c22",
+   "url": "https://developers.facebook.com/docs/workplace/reference/account-management-api/scim-v2",
+   "title": "SCIM API 2.0 - Workplace",
+   "quote": "The following properties belong to the SCIM extension urn:ietf:params:scim:schemas:extension:enterprise:2.0:User",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c23",
+   "url": "https://developers.facebook.com/docs/workplace/reference/account-management-api/scim-v2",
+   "title": "SCIM API 2.0 - Workplace",
+   "quote": "You can use the PUT and PATCH requests to deactivate user accounts.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c24",
+   "url": "https://developers.facebook.com/docs/workplace/reference/account-management-api/scim-v2",
+   "title": "SCIM API 2.0 - Workplace",
+   "quote": "To create a new account, send a POST request to the endpoint https://scim.workplace.com/Users/.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "Meta's developer docs banner says Workplace can be used until 31 August 2025; the meta.com/workplace page says Workplace closed as of May 2026. The closure page is used.",
+   "cite": [
+    "c17",
+    "c1"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.workplace.com/ and /pricing (redirect to meta.com/workplace closure notice)",
+  "https://www.meta.com/workplace/ (closed as of May 2026)",
+  "https://developers.facebook.com/docs/workplace/ (account management APIs, SCIM 2.0 reference)",
+  "https://www.facebook.com/help/work (redirects to the closure notice)",
+  "okta.com/integrations/workplace-by-facebook/",
+  "learn.microsoft.com workplace-from-meta-provisioning-tutorial"
+ ],
+ "open_questions": [
+  "Rules do not cover discontinued products: decide at merge whether to drop the row.",
+  "Pre-closure plan and price for SCIM (Core plan) could not be cited; pricing pages are gone."
+ ]
+}

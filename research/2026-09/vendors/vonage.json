@@ -1,0 +1,585 @@
+{
+ "slug": "vonage",
+ "vendor": "Vonage Business Communications",
+ "vendor_url": "https://www.vonage.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Vonage Business Communications",
+  "slug": "vonage",
+  "category": "Communications (UCaaS/CCaaS)",
+  "status": "gated",
+  "scim_plan": "Premium",
+  "scim_price_text": "$29.99 per line/mo",
+  "scim_price_per_user_mo": 29.99,
+  "team_plan": "Mobile",
+  "team_price_text": "$19.99 per line/mo",
+  "team_price_per_user_mo": 19.99,
+  "price_multiplier": 1.5,
+  "sso_plan": "Premium",
+  "sso_price_per_user_mo": 29.99,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": false,
+   "groups": null
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": "sso_only",
+   "onelogin": "native",
+   "jumpcloud": null,
+   "generic": false
+  },
+  "pricing_page_url": "https://www.vonage.com/unified-communications/pricing/",
+  "docs_url": "https://businesssupport.vonage.com/articles/answer/Single-Sign-On-SSO-for-VBC",
+  "evidence": "Vonage's support centre calls SCIM \"a free SSO add-on\", and the VBC pricing page lists Single Sign-On only from the Premium plan ($29.99 per month/per line) upward, not on Mobile ($19.99).",
+  "notes": "SCIM plan is inferred: SCIM is a free add-on to SSO, and the pricing page shows SSO only on Premium and Advanced. The support article says 'SSO is a free service' without naming plans (see conflicts). Prices are the list prices with the Annually toggle selected; a 12-month 30% promotion shows $13.99/$20.99/$27.99. SCIM works with Okta, Entra and OneLogin catalogue apps (no generic endpoint documented); Google Workspace is SSO only. Deprovisioning unlinks and blocks sign-in but does not delete the user or revoke sessions.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Mobile",
+   "price_text": "$19.99 per month/per line (12-month promotion $13.99)",
+   "price_per_user_mo": 19.99,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c5"
+   ]
+  },
+  {
+   "name": "Premium",
+   "price_text": "$29.99 per month/per line (12-month promotion $20.99)",
+   "price_per_user_mo": 29.99,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c5",
+    "c6"
+   ],
+   "notes": "SCIM inferred: Vonage calls SCIM a free SSO add-on, and SSO first appears on Premium."
+  },
+  {
+   "name": "Advanced",
+   "price_text": "$39.99 per month/per line (12-month promotion $27.99)",
+   "price_per_user_mo": 39.99,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c4",
+    "c5",
+    "c6"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c6",
+   "c3",
+   "c5",
+   "c10"
+  ],
+  "plan": "Premium",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": "oauth2",
+   "token_source": "Admin Portal > Account > User Provisioning > Service ID for SCIM Integration (Service ID + Secret ID); the IdP authorises by signing in to Vonage with these credentials",
+   "token_expiry": null,
+   "cite": [
+    "c10",
+    "c16",
+    "c21"
+   ]
+  },
+  "endpoints": {
+   "Users": null,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": []
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": false,
+   "group_push": null,
+   "group_membership": null,
+   "cite": [
+    "c12",
+    "c13",
+    "c14",
+    "c15",
+    "c21"
+   ],
+   "notes": "Okta/Entra 'deactivate' or 'delete' unlinks the profile from provisioning and blocks SSO sign-in; the VBC user is not deleted. Vendor docs don't say whether IdP updates are sent as PUT or PATCH."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": false,
+   "revokes_sessions": false,
+   "data_retained": "User record kept in VBC and unlinked from provisioning; profile becomes editable in the Admin Portal",
+   "cite": [
+    "c14",
+    "c15",
+    "c18"
+   ],
+   "notes": "frees_seat false because the VBC user and its line are not deleted automatically."
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName"
+   ],
+   "cite": [
+    "c22"
+   ]
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "active",
+    "emails[type eq \"work\"].value",
+    "name.givenName",
+    "name.familyName"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": [
+    "c22",
+    "c13"
+   ]
+  },
+  "roles": {
+   "supported": false,
+   "how": "SCIM creates users as End Users without an extension; extensions and roles are assigned by a Super User or Account Admin.",
+   "cite": [
+    "c12"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Google Workspace does not support SCIM with Vonage (SSO only).",
+    "cite": [
+     "c9"
+    ]
+   },
+   {
+    "text": "Usernames must be 6-50 characters with no spaces; first, last name and email are required.",
+    "cite": [
+     "c17",
+     "c23"
+    ]
+   },
+   {
+    "text": "Entra changes take about 40 minutes to reach the Vonage Admin Portal.",
+    "cite": [
+     "c19"
+    ]
+   },
+   {
+    "text": "Deprovisioning does not revoke the active session or delete the user.",
+    "cite": [
+     "c18"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c26"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": null,
+  "docs_url": "https://developer.vonage.com/en/vonage-business-cloud/overview",
+  "auth": {
+   "methods": [],
+   "scopes": [],
+   "cite": []
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c26"
+   ],
+   "notes": "The VBC Provisioning API is described as getting details on Users, Accounts and Extensions; the reference page is JavaScript-rendered and could not be loaded, so write operations and paths are unverified."
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": [],
+   "notes": "An in-portal audit log exists on the SSO page (c28); no audit-log API seen."
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/vonage/",
+   "cite": [
+    "c24",
+    "c10",
+    "c16"
+   ],
+   "notes": "OIN page marks SAML, SWA and SCIM, and Create/Update/Deactivate as checked (read from page markup); Group Push not checked."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/vonage-provisioning-tutorial",
+   "cite": [
+    "c21",
+    "c22"
+   ]
+  },
+  "google": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://businesssupport.vonage.com/articles/answer/Google-Workspace-SSO",
+   "cite": [
+    "c25",
+    "c9"
+   ],
+   "notes": "Listing in Google's catalogue not checked; Vonage documents Google Workspace SAML SSO and says Google Workspace does not support SCIM."
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://businesssupport.vonage.com/articles/answer/OneLogin-SSO-SCIM",
+   "cite": [
+    "c20"
+   ],
+   "notes": "From Vonage's own OneLogin guide; OneLogin's connector page not loaded."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c6",
+   "c10"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.vonage.com/unified-communications/pricing/",
+   "title": "Vonage Business Phone Plans | Affordable Unified Comms",
+   "quote": "Mobile A reliable, easy-to-use phone service app to meet your business communications needs",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.vonage.com/unified-communications/pricing/",
+   "title": "Vonage Business Phone Plans | Affordable Unified Comms",
+   "quote": "12-MONTH PROMOTION $19.99 SAVE 30% $13.99 per month/per line plus taxes & fees",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.vonage.com/unified-communications/pricing/",
+   "title": "Vonage Business Phone Plans | Affordable Unified Comms",
+   "quote": "Team Messaging VBC App Center3 Single Sign-On 12-MONTH PROMOTION $29.99 SAVE 30% $20.99 per month/per line",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.vonage.com/unified-communications/pricing/",
+   "title": "Vonage Business Phone Plans | Affordable Unified Comms",
+   "quote": "On-demand call recording (15 hours per month) Visual Voicemail (with transcription) Call groups 12-MONTH PROMOTION $39.99 SAVE 30% $27.99 per month/per line",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.vonage.com/unified-communications/pricing/",
+   "title": "Vonage Business Phone Plans | Affordable Unified Comms",
+   "quote": "Single Sign-On Simplify and secure access with the same authentication workflow as other apps",
+   "accessed": "2026-10-05",
+   "notes": "Compare-plans table: the Single Sign-On row is ticked for Premium and Advanced, not Mobile (read from the rendered table markup)."
+  },
+  {
+   "id": "c6",
+   "url": "https://businesssupport.vonage.com/articles/answer/Single-Sign-On-SSO-for-VBC",
+   "title": "Single Sign-On (SSO) / User Provisioning (SCIM) for VBC",
+   "quote": "The System for Cross-domain Identity Management (SCIM) API is a free SSO add-on that automatically provisions User Profiles on an Identity Provider (IDP) into Vonage Business or other cloud-based applications.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://businesssupport.vonage.com/articles/answer/Single-Sign-On-SSO-for-VBC",
+   "title": "Single Sign-On (SSO) / User Provisioning (SCIM) for VBC",
+   "quote": "Single Sign-On (SSO) is a free service that allows you to use a single username and password across other SSO-enabled applications and VBC.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://businesssupport.vonage.com/articles/answer/Single-Sign-On-SSO-for-VBC",
+   "title": "Single Sign-On (SSO) / User Provisioning (SCIM) for VBC",
+   "quote": "SSO uses a common standard (SAML 2.0) and supports the following Identity Providers (IDP): Azure AD , Okta , OneLogin , and Google Workspace .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://businesssupport.vonage.com/articles/answer/Single-Sign-On-SSO-for-VBC",
+   "title": "Single Sign-On (SSO) / User Provisioning (SCIM) for VBC",
+   "quote": "Google Workspace does not support SCIM.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://businesssupport.vonage.com/articles/answer/Okta-SSO-SCIM",
+   "title": "Okta Single Sign-On (SSO) and User Provisioning (SCIM)",
+   "quote": "Go to Account > User Provisionin g > Step 1 - Service ID for SCIM Integration . Click Set Up Now ; the Generate Credentials pop-up displays.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://businesssupport.vonage.com/articles/answer/Okta-SSO-SCIM",
+   "title": "Okta Single Sign-On (SSO) and User Provisioning (SCIM)",
+   "quote": "When enabled, One Way Provisioning is active, and user profiles can only be edited using the IDP, not the VBC Admin Portal.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://businesssupport.vonage.com/articles/answer/Okta-SSO-SCIM",
+   "title": "Okta Single Sign-On (SSO) and User Provisioning (SCIM)",
+   "quote": "Create Users Adds the user as an End User in the Admin Portal but does not assign an extension.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://businesssupport.vonage.com/articles/answer/Okta-SSO-SCIM",
+   "title": "Okta Single Sign-On (SSO) and User Provisioning (SCIM)",
+   "quote": "Update User Attributes Updates the First and Last name, Email, and Username. Changes are reflected immediately in the customer's Vonage Business service.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://businesssupport.vonage.com/articles/answer/Okta-SSO-SCIM",
+   "title": "Okta Single Sign-On (SSO) and User Provisioning (SCIM)",
+   "quote": "Deactivate Users The user’s profile in the Admin Portal is unlinked from automatic provisioning. All user profile fields become editable in the Admin Portal. The user is not automatically deleted from VBC.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://businesssupport.vonage.com/articles/answer/Okta-SSO-SCIM",
+   "title": "Okta Single Sign-On (SSO) and User Provisioning (SCIM)",
+   "quote": "The external IDP deactivated the user, and they are unable to sign in to our systems",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://businesssupport.vonage.com/articles/answer/Okta-SSO-SCIM",
+   "title": "Okta Single Sign-On (SSO) and User Provisioning (SCIM)",
+   "quote": "Mark the checkbox for Enable API Integration and then click Authenticate with Vonage . Log into the Vonage Admin Portal with the SCIM Provisioning Service credentials you created earlier.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://businesssupport.vonage.com/articles/answer/Okta-SSO-SCIM",
+   "title": "Okta Single Sign-On (SSO) and User Provisioning (SCIM)",
+   "quote": "Usernames do not contain spaces, less than 6 characters, or more than 50 characters.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://businesssupport.vonage.com/articles/answer/Azure-SSO-SCIM",
+   "title": "Azure Single Sign-On (SSO) and User Provisioning (SCIM)",
+   "quote": "The user is not automatically deleted from VBC. NOTE : The user’s session is NOT revoked. The user can continue working with the application until the session expires.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://businesssupport.vonage.com/articles/answer/Azure-SSO-SCIM",
+   "title": "Azure Single Sign-On (SSO) and User Provisioning (SCIM)",
+   "quote": "NOTE : It takes about 40 minutes to sync changes with the Vonage Admin Portal.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://businesssupport.vonage.com/articles/answer/OneLogin-SSO-SCIM",
+   "title": "OneLogin Single Sign-On (SSO) and User Provisioning (SCIM)",
+   "quote": "Verify that your OneLogin plan includes Identity Lifecycle Management; contact your OneLogin Account Manager if you want to add this functionality. Go to Account > User Provisioning , toggle Enable SCIM User Provisioning on, then click Save .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/vonage-provisioning-tutorial",
+   "title": "Configure Vonage for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Create users in Vonage. Remove users in Vonage when they don't require access anymore. Keep user attributes synchronized between Microsoft Entra ID and Vonage. Single sign-on to Vonage (recommended). Code Auth Grant flow authentication supported.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/vonage-provisioning-tutorial",
+   "title": "Configure Vonage for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Attribute Type Supported for filtering userName String ✓ active Boolean emails[type eq \"work\"].value String name.givenName String name.familyName String",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/vonage-provisioning-tutorial",
+   "title": "Configure Vonage for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Any user that's added to Vonage must have first name, last name and email. Otherwise the integration will fail.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://www.okta.com/integrations/vonage/",
+   "title": "Vonage | Okta Integration Network",
+   "quote": "The Okta Vonage agent enables you to integrate your VBC account with your Okta account. Vonage integration provides delegated authentication support, user provisioning and de-provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://businesssupport.vonage.com/articles/answer/Google-Workspace-SSO",
+   "title": "Google Workspace Single Sign-On (SSO)",
+   "quote": "Single Sign-On (SSO) support for VBC allows you to use your Google Workspace username and password across other single sign-on-enabled apps and VBC.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://developer.vonage.com/en/vonage-business-cloud/overview",
+   "title": "Vonage Business Communications APIs",
+   "quote": "Provisioning API - The Vonage Business Communications Provisioning API enables you to get details on Users, Accounts, and Extensions",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://businesssupport.vonage.com/articles/answer/Okta-SSO-SCIM",
+   "title": "Okta Single Sign-On (SSO) and User Provisioning (SCIM)",
+   "quote": "Check Users can only be added via SCIM , if applicable. Enabling this option removes the ability to add users through Admin Portal.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://businesssupport.vonage.com/articles/answer/Okta-SSO-SCIM",
+   "title": "Okta Single Sign-On (SSO) and User Provisioning (SCIM)",
+   "quote": "View the Audit Log on the SSO page in the VBC Admin Portal for additional information.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "Vonage's SSO support article says SSO is 'a free service', but the pricing page's compare table ticks Single Sign-On only for Premium and Advanced (not Mobile). Pricing page used for the plan gate.",
+   "cite": [
+    "c7",
+    "c5"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.vonage.com/unified-communications/pricing/",
+  "https://businesssupport.vonage.com/articles/answer/Single-Sign-On-SSO-for-VBC",
+  "https://businesssupport.vonage.com/articles/answer/Okta-SSO-SCIM",
+  "https://businesssupport.vonage.com/articles/answer/Azure-SSO-SCIM",
+  "https://businesssupport.vonage.com/articles/answer/OneLogin-SSO-SCIM",
+  "https://businesssupport.vonage.com/articles/answer/Google-Workspace-SSO",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/vonage-provisioning-tutorial",
+  "https://www.okta.com/integrations/vonage/",
+  "https://developer.vonage.com/en/vonage-business-cloud/overview",
+  "https://developer.vonage.com/en/api/vonage-business-cloud/provisioning (JS-rendered, render.cjs ERR_TOO_MANY_RETRIES)"
+ ],
+ "open_questions": [
+  "Pricing page does not name SCIM; the Premium gate is inferred from SSO being Premium+ and SCIM being an SSO add-on.",
+  "SCIM base URL, version and whether a generic SCIM client can connect are not documented.",
+  "VBC Provisioning API endpoints and whether it can create/update users could not be verified (reference page needs JavaScript; renderer failed).",
+  "Whether updates use PUT or PATCH is not documented.",
+  "JumpCloud catalogue not checked; JIT on SAML login not documented."
+ ]
+}

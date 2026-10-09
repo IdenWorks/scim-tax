@@ -1,0 +1,600 @@
+{
+ "slug": "reachdesk",
+ "vendor": "Reachdesk",
+ "vendor_url": "https://www.reachdesk.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Reachdesk",
+  "slug": "reachdesk",
+  "category": "Marketing & Advertising",
+  "status": "gated",
+  "scim_plan": "Custom quote (plan not stated)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Core",
+  "team_price_text": "Plans start at $20,000/year (custom quote; Core includes 5 users)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "sso_only",
+   "google": null,
+   "onelogin": "sso_only",
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.reachdesk.com/pricing",
+  "docs_url": "https://support.reachdesk.com/hc/en-gb/articles/29322223500689-How-to-enable-SCIM-user-provisioning-in-Okta",
+  "evidence": "Reachdesk's pricing page says \"Plans start at $20,000/year. Request a custom quote\", and its help centre documents SCIM 2.0 provisioning at https://app.reachdesk.com/scim_v2 with an API token, set up through Okta's generic SCIM app.",
+  "notes": "Quote-only: Reachdesk publishes no prices beyond 'Plans start at $20,000/year'; Core, Plus and Premium packages (5, 10, 15 users) are sold by custom quote and the pricing page does not say which package includes SSO or SCIM. SCIM 2.0 (bearer API token from Organization > Settings > API Tokens) is documented only for Okta via Okta's generic SCIM 2.0 Test App; it creates users (default Sender role), updates names/emails, deactivates users and pushes Okta groups as Reachdesk teams. The Reachdesk OIN app itself is SAML only; Entra and OneLogin are documented for SAML SSO only. The JIT help article contradicts the SCIM guide by saying SCIM deprovisioning is not supported (see conflicts). The public REST API (sends, contacts, organization, transactions) has no user-management endpoints.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": false,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Core",
+   "price_text": "Custom quote (plans start at $20,000/year)",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2"
+   ],
+   "notes": "~50 gifts/month, 5 users, 1 team gifting."
+  },
+  {
+   "name": "Plus",
+   "price_text": "Custom quote",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1"
+   ],
+   "notes": "Up to 10 users, 2 teams gifting."
+  },
+  {
+   "name": "Premium",
+   "price_text": "Custom quote",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1"
+   ],
+   "notes": "15 users, multiple teams gifting."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c1",
+   "c3",
+   "c4",
+   "c9"
+  ],
+  "plan": "Custom quote (plan not stated)",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://app.reachdesk.com/scim_v2",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Organization > Settings > API Tokens",
+   "token_expiry": null,
+   "cite": [
+    "c5",
+    "c9"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c3",
+    "c8"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": null,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c3",
+    "c6",
+    "c7",
+    "c8",
+    "c12",
+    "c13"
+   ],
+   "notes": "Updates documented (name, email) but not whether Reachdesk accepts PUT or PATCH. Unlinking a pushed group can delete the Reachdesk team."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Inactivation keeps the account record; unspent funds in the user's wallet return to the organization wallet.",
+   "cite": [
+    "c6",
+    "c12",
+    "c19",
+    "c20"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "name",
+    "emails"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c7",
+    "c8",
+    "c11",
+    "c27"
+   ],
+   "notes": "Docs only say names and emails sync and that some Okta user/team fields don't exist in Reachdesk; no attribute list is published. Group attributes inferred from Okta group push creating/renaming teams with members."
+  },
+  "roles": {
+   "supported": false,
+   "how": "SCIM-created users get the Sender role; change it in Reachdesk afterwards.",
+   "cite": [
+    "c10"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Only an Okta setup guide is published, using Okta's generic SCIM 2.0 test app; no Entra, OneLogin, Google or JumpCloud provisioning guide.",
+    "cite": [
+     "c9",
+     "c17"
+    ]
+   },
+   {
+    "text": "New SCIM users always start as Sender; role is not mapped from the IdP.",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "text": "Some Okta user and team fields have no Reachdesk equivalent and are not synced.",
+    "cite": [
+     "c11"
+    ]
+   }
+  ],
+  "notes": "Only documented for Okta, via Okta's generic 'SCIM 2.0 Test App (OAuth Bearer Token)' rather than the Reachdesk OIN app (which is SAML only). The Okta guide also sets up SAML in the same app, but does not say SSO must be enabled before SCIM."
+ },
+ "user_api": {
+  "available": false,
+  "cite": [
+   "c23",
+   "c24"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://app.reachdesk.com/api/v2",
+  "docs_url": "https://reachdesk.readme.io/reference/trigger-campaign",
+  "auth": {
+   "methods": [
+    "api_key"
+   ],
+   "scopes": [],
+   "cite": [
+    "c23",
+    "c5"
+   ]
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": []
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "The public REST API (sends, bulk send, contacts, organization, transactions, GDPR requests) has no user, team or role endpoints; 'false' is by absence in the API reference index."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/reachdesk/",
+   "cite": [
+    "c16",
+    "c25",
+    "c9"
+   ],
+   "notes": "OIN app ticks SAML only (read from page markup). Provisioning is set up separately with Okta's generic SCIM 2.0 Test App against the Reachdesk SCIM endpoint."
+  },
+  "entra": {
+   "listed": null,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c17"
+   ],
+   "notes": "Vendor guide configures SSO with a non-gallery enterprise app; no provisioning guide."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c18"
+   ],
+   "notes": "From Reachdesk's own OneLogin guide (SAML); provisioning not mentioned."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c14",
+   "c28"
+  ],
+  "notes": "JIT creates users with the Sender role and assigns a team when the IdP group name matches; no updates or deprovisioning via JIT. Bulk user adds go through support or the CSM."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.reachdesk.com/pricing",
+   "title": "Pricing | Reachdesk",
+   "quote": "Plans start at $20,000/year. Request a custom quote tailored to your team size, needs, and gifting strategy.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.reachdesk.com/pricing",
+   "title": "Pricing | Reachdesk",
+   "quote": "You want to send ~50 gifts per month, need 5 users and have 1 team gifting",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://support.reachdesk.com/api/v2/help_center/en-gb/articles/29322223500689.json",
+   "title": "How to enable SCIM user provisioning in Okta – Reachdesk Knowledge base",
+   "quote": "Users are automatically created in Reachdesk when they are added to a group assigned to the Reachdesk app",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.reachdesk.com/hc/en-gb/articles/29322223500689-How-to-enable-SCIM-user-provisioning-in-Okta"
+  },
+  {
+   "id": "c4",
+   "url": "https://support.reachdesk.com/api/v2/help_center/en-gb/articles/29322223500689.json",
+   "title": "How to enable SCIM user provisioning in Okta – Reachdesk Knowledge base",
+   "quote": "SCIM 2.0 Base Url: https://app.reachdesk.com/scim_v2",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.reachdesk.com/hc/en-gb/articles/29322223500689-How-to-enable-SCIM-user-provisioning-in-Okta"
+  },
+  {
+   "id": "c5",
+   "url": "https://support.reachdesk.com/api/v2/help_center/en-gb/articles/29322223500689.json",
+   "title": "How to enable SCIM user provisioning in Okta – Reachdesk Knowledge base",
+   "quote": "In the Reachdesk platform, go to Organization > Settings > API Tokens and create a new API Token.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.reachdesk.com/hc/en-gb/articles/29322223500689-How-to-enable-SCIM-user-provisioning-in-Okta"
+  },
+  {
+   "id": "c6",
+   "url": "https://support.reachdesk.com/api/v2/help_center/en-gb/articles/29322223500689.json",
+   "title": "How to enable SCIM user provisioning in Okta – Reachdesk Knowledge base",
+   "quote": "Users are automatically deactivated in Reachdesk when they are deactivated in Okta",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.reachdesk.com/hc/en-gb/articles/29322223500689-How-to-enable-SCIM-user-provisioning-in-Okta"
+  },
+  {
+   "id": "c7",
+   "url": "https://support.reachdesk.com/api/v2/help_center/en-gb/articles/29322223500689.json",
+   "title": "How to enable SCIM user provisioning in Okta – Reachdesk Knowledge base",
+   "quote": "User names and emails are automatically updated in Reachdesk when this changes in Okta",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.reachdesk.com/hc/en-gb/articles/29322223500689-How-to-enable-SCIM-user-provisioning-in-Okta"
+  },
+  {
+   "id": "c8",
+   "url": "https://support.reachdesk.com/api/v2/help_center/en-gb/articles/29322223500689.json",
+   "title": "How to enable SCIM user provisioning in Okta – Reachdesk Knowledge base",
+   "quote": "Teams are automatically created and updated in Reachdesk when they are created updated in Okta (as long as the correct teams are pushed as groups)",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.reachdesk.com/hc/en-gb/articles/29322223500689-How-to-enable-SCIM-user-provisioning-in-Okta"
+  },
+  {
+   "id": "c9",
+   "url": "https://support.reachdesk.com/api/v2/help_center/en-gb/articles/29322223500689.json",
+   "title": "How to enable SCIM user provisioning in Okta – Reachdesk Knowledge base",
+   "quote": "search for \" SCIM 2.0 Test App (OAuth Bearer Token) \" and select the app",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.reachdesk.com/hc/en-gb/articles/29322223500689-How-to-enable-SCIM-user-provisioning-in-Okta"
+  },
+  {
+   "id": "c10",
+   "url": "https://support.reachdesk.com/api/v2/help_center/en-gb/articles/29322223500689.json",
+   "title": "How to enable SCIM user provisioning in Okta – Reachdesk Knowledge base",
+   "quote": "Users will have a sender role by default, but this can be updated after they are created",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.reachdesk.com/hc/en-gb/articles/29322223500689-How-to-enable-SCIM-user-provisioning-in-Okta"
+  },
+  {
+   "id": "c11",
+   "url": "https://support.reachdesk.com/api/v2/help_center/en-gb/articles/29322223500689.json",
+   "title": "How to enable SCIM user provisioning in Okta – Reachdesk Knowledge base",
+   "quote": "Note that some User and Team fields don't exist in Reachdesk so it will not be synced.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.reachdesk.com/hc/en-gb/articles/29322223500689-How-to-enable-SCIM-user-provisioning-in-Okta"
+  },
+  {
+   "id": "c12",
+   "url": "https://support.reachdesk.com/api/v2/help_center/en-gb/articles/29322223500689.json",
+   "title": "How to enable SCIM user provisioning in Okta – Reachdesk Knowledge base",
+   "quote": "What happens if the Okta group is removed from the Assignments tab? This will deactivate the users within that group in Reachdesk, but the team will remain in Reachdesk.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.reachdesk.com/hc/en-gb/articles/29322223500689-How-to-enable-SCIM-user-provisioning-in-Okta"
+  },
+  {
+   "id": "c13",
+   "url": "https://support.reachdesk.com/api/v2/help_center/en-gb/articles/29322223500689.json",
+   "title": "How to enable SCIM user provisioning in Okta – Reachdesk Knowledge base",
+   "quote": "If you click \"Unlink pushed group\" in the Push groups tab, you will have the option to the delete the team in Reachdesk.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.reachdesk.com/hc/en-gb/articles/29322223500689-How-to-enable-SCIM-user-provisioning-in-Okta"
+  },
+  {
+   "id": "c14",
+   "url": "https://support.reachdesk.com/api/v2/help_center/en-gb/articles/4420374592017.json",
+   "title": "Just-in-Time (JIT) Provisioning (SAML) – Reachdesk Knowledge base",
+   "quote": "Just-in-Time (JIT) Provisioning automatically creates Reachdesk users the first time they log in via Single Sign-On",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.reachdesk.com/hc/en-gb/articles/4420374592017-Just-in-Time-JIT-Provisioning-SAML"
+  },
+  {
+   "id": "c15",
+   "url": "https://support.reachdesk.com/api/v2/help_center/en-gb/articles/4420374592017.json",
+   "title": "Just-in-Time (JIT) Provisioning (SAML) – Reachdesk Knowledge base",
+   "quote": "Reachdesk does not currently support automatic user de-provisioning via SCIM",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.reachdesk.com/hc/en-gb/articles/4420374592017-Just-in-Time-JIT-Provisioning-SAML"
+  },
+  {
+   "id": "c16",
+   "url": "https://support.reachdesk.com/api/v2/help_center/en-gb/articles/4410345605265.json",
+   "title": "Set up Okta SSO for Reachdesk – Reachdesk Knowledge base",
+   "quote": "Reachdesk is available in the Okta app catalog.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.reachdesk.com/hc/en-gb/articles/4410345605265-Set-up-Okta-SSO-for-Reachdesk"
+  },
+  {
+   "id": "c17",
+   "url": "https://support.reachdesk.com/api/v2/help_center/en-gb/articles/4405394106641.json",
+   "title": "Set up Microsoft Entra ID (formerly Azure AD) SSO for Reachdesk – Reachdesk Knowledge base",
+   "quote": "Create a non-gallery application in your Entra ID portal",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.reachdesk.com/hc/en-gb/articles/4405394106641-Set-up-Microsoft-Entra-ID-formerly-Azure-AD-SSO-for-Reachdesk"
+  },
+  {
+   "id": "c18",
+   "url": "https://support.reachdesk.com/api/v2/help_center/en-gb/articles/4409892344337.json",
+   "title": "Set up OneLogin SSO for Reachdesk – Reachdesk Knowledge base",
+   "quote": "Find and select the Reachdesk application.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.reachdesk.com/hc/en-gb/articles/4409892344337-Set-up-OneLogin-SSO-for-Reachdesk"
+  },
+  {
+   "id": "c19",
+   "url": "https://support.reachdesk.com/api/v2/help_center/en-gb/articles/4405053015441.json",
+   "title": "Manage Teams, Users, and Campaign Access in Reachdesk – Reachdesk Knowledge base",
+   "quote": "Inactivation removes platform access without permanently deleting the account record",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.reachdesk.com/hc/en-gb/articles/4405053015441-Manage-Teams-Users-and-Campaign-Access-in-Reachdesk"
+  },
+  {
+   "id": "c20",
+   "url": "https://support.reachdesk.com/api/v2/help_center/en-gb/articles/4405053015441.json",
+   "title": "Manage Teams, Users, and Campaign Access in Reachdesk – Reachdesk Knowledge base",
+   "quote": "When a user is deactivated, an automatic balance allocation returns any unspent funds from their individual user wallet back to the organization wallet",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.reachdesk.com/hc/en-gb/articles/4405053015441-Manage-Teams-Users-and-Campaign-Access-in-Reachdesk"
+  },
+  {
+   "id": "c21",
+   "url": "https://support.reachdesk.com/api/v2/help_center/en-gb/articles/4405053015441.json",
+   "title": "Manage Teams, Users, and Campaign Access in Reachdesk – Reachdesk Knowledge base",
+   "quote": "The number of contract seats refers to the total number of active users allowed on your Reachdesk account.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.reachdesk.com/hc/en-gb/articles/4405053015441-Manage-Teams-Users-and-Campaign-Access-in-Reachdesk"
+  },
+  {
+   "id": "c22",
+   "url": "https://support.reachdesk.com/api/v2/help_center/en-gb/articles/4411892276241.json",
+   "title": "Roles and Permissions – Reachdesk Knowledge base",
+   "quote": "Campaign Managers – Can create and manage campaigns and have limited organization management access.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.reachdesk.com/hc/en-gb/articles/4411892276241-Roles-and-Permissions"
+  },
+  {
+   "id": "c23",
+   "url": "https://reachdesk.readme.io/reference/authentication.md",
+   "title": "Authentication - Reachdesk API",
+   "quote": "API calls must be authenticated by providing an API Token in the Authorization header of each request.",
+   "accessed": "2026-10-05",
+   "page_url": "https://reachdesk.readme.io/reference/authentication"
+  },
+  {
+   "id": "c24",
+   "url": "https://reachdesk.readme.io/llms.txt",
+   "title": "Reachdesk Documentation (API reference index)",
+   "quote": "Retrieve the basic information about the Organization associated to the given API Token.",
+   "accessed": "2026-10-05",
+   "page_url": "https://reachdesk.readme.io/reference/trigger-campaign"
+  },
+  {
+   "id": "c25",
+   "url": "https://www.okta.com/integrations/reachdesk/",
+   "title": "Reachdesk | Okta Integration Network",
+   "quote": "A single platform to source, warehouse, send and track ROI for B2B direct mail campaigns",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://support.reachdesk.com/api/v2/help_center/en-gb/articles/4410345605265.json",
+   "title": "Set up Okta SSO for Reachdesk – Reachdesk Knowledge base",
+   "quote": "Once SSO is enabled, password authentication is automatically disabled for all users in your organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.reachdesk.com/hc/en-gb/articles/4410345605265-Set-up-Okta-SSO-for-Reachdesk"
+  },
+  {
+   "id": "c27",
+   "url": "https://support.reachdesk.com/api/v2/help_center/en-gb/articles/29322223500689.json",
+   "title": "How to enable SCIM user provisioning in Okta – Reachdesk Knowledge base",
+   "quote": "Groups in Okta will represent the \"teams\" you have in Reachdesk.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.reachdesk.com/hc/en-gb/articles/29322223500689-How-to-enable-SCIM-user-provisioning-in-Okta"
+  },
+  {
+   "id": "c28",
+   "url": "https://support.reachdesk.com/api/v2/help_center/en-gb/articles/4405053015441.json",
+   "title": "Manage Teams, Users, and Campaign Access in Reachdesk – Reachdesk Knowledge base",
+   "quote": "If you need to add many users simultaneously:",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.reachdesk.com/hc/en-gb/articles/4405053015441-Manage-Teams-Users-and-Campaign-Access-in-Reachdesk"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The Okta SCIM guide says users are deactivated in Reachdesk when deactivated or unassigned in Okta, while the JIT article says Reachdesk does not currently support automatic user de-provisioning via SCIM. The SCIM guide (more specific to SCIM) is used.",
+   "cite": [
+    "c6",
+    "c12",
+    "c15"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.reachdesk.com/pricing (rendered; packages and FAQ: no SSO/SCIM mention)",
+  "https://www.reachdesk.com/sitemap.xml",
+  "support.reachdesk.com help-centre search API: scim, sso, saml, okta, provisioning, user management, api",
+  "https://reachdesk.readme.io/llms.txt (API reference index)",
+  "https://www.okta.com/integrations/reachdesk/ (SAML only)",
+  "https://trust.reachdesk.com (Vanta trust page, JS only)"
+ ],
+ "open_questions": [
+  "Which package (Core, Plus, Premium) includes SSO and SCIM, and is either an extra charge?",
+  "Does SCIM work with Entra ID, OneLogin, Google or JumpCloud, or only Okta?",
+  "Does SCIM deactivation free a contract seat?",
+  "Does the SCIM endpoint accept PUT, PATCH and DELETE, filtering and pagination, and which attributes are mapped?",
+  "Does the API token used for SCIM expire?"
+ ]
+}

@@ -1,0 +1,732 @@
+{
+ "slug": "ironclad",
+ "vendor": "Ironclad",
+ "vendor_url": "https://ironcladapp.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Ironclad",
+  "slug": "ironclad",
+  "category": "Legal, Contracts & Compliance",
+  "status": "gated",
+  "scim_plan": "Custom quote",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Custom quote",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": "via_generic",
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://ironcladapp.com/pricing",
+  "docs_url": "https://support.ironcladapp.com/hc/en-us/articles/12286072096407-Use-Okta-SCIM-in-Ironclad",
+  "evidence": "Ironclad's pricing page only offers 'a tailored quote', and its help centre documents SCIM 2.0 at https://ironcladapp.com/scim/v2 with a SCIM-scoped token, requiring a SAML SSO connector first.",
+  "notes": "Quote-only: no public plans or prices; every package is a custom quote, so SCIM can only be bought through sales. SCIM 2.0 is documented (Users, Groups, Schemas; create, PUT/PATCH update, deactivate via active=false, DELETE) with Okta (OIN app: SAML + SCIM create/update/deactivate/group push), Entra ID (non-gallery app plus tenant URL) and OneLogin (generic SCIM Provisioner app). SAML SSO must be configured before SCIM; SSO's plan gate is not published. JIT on SAML sign-in is available. The non-SCIM public API is a paid add-on and has no user endpoints; the Audit Log and Data Export API are part of the paid Security & Data Pro add-on.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": false,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Custom quote",
+   "price_text": "Get a tailored quote",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": true,
+   "user_api": false,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c3"
+   ],
+   "notes": "No tiers are published. API and integrations are listed as extras; audit log API needs the Security & Data Pro add-on."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c1",
+   "c3",
+   "c4",
+   "c10"
+  ],
+  "plan": "Custom quote",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://ironcladapp.com/scim/v2 (EU: https://eu1.ironcladapp.com/scim/v2; demo: https://demo.ironcladapp.com/scim/v2)",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Company Settings > Integrations > SAML > SCIM Configuration tab > Token Generation (SCIM-scoped token)",
+   "token_expiry": null,
+   "cite": [
+    "c8",
+    "c10"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": true,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c24",
+    "c27",
+    "c30",
+    "c31",
+    "c37"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c5",
+    "c9",
+    "c24",
+    "c26",
+    "c30",
+    "c37",
+    "c38"
+   ],
+   "notes": "Group DELETE is documented but deprecated/disabled (c27). Reactivation is inferred from the writable active attribute plus the UI reactivate feature; not documented as a SCIM operation."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": true,
+   "revokes_sessions": null,
+   "data_retained": "Deactivated users are blocked from logging in and hidden from user pickers; the user record is kept. A SCIM DELETE removes the user and reassigns their active workflows to the admin group's default user; a company setting can require deactivation before deletion.",
+   "cite": [
+    "c19",
+    "c24",
+    "c25",
+    "c26"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName"
+   ],
+   "cite": [
+    "c28"
+   ],
+   "notes": "RFC 7644 filter syntax; documented example filters on userName. Groups list also takes a filter."
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": 1000,
+   "cite": [
+    "c29"
+   ],
+   "notes": "startIndex/count; count defaults to 25, schema maximum 1000 (OpenAPI spec on the same page)."
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.formatted",
+    "name.familyName",
+    "name.givenName",
+    "name.middleName",
+    "name.honorificSuffix",
+    "displayName",
+    "nickName",
+    "profileUrl",
+    "title",
+    "userType",
+    "preferredLanguage",
+    "locale",
+    "timezone",
+    "active",
+    "password",
+    "emails (value, display, type, primary)",
+    "phoneNumbers",
+    "ims",
+    "photos",
+    "addresses",
+    "groups",
+    "entitlements",
+    "role"
+   ],
+   "enterprise": [
+    "employeeNumber",
+    "costCenter",
+    "organization",
+    "division",
+    "department",
+    "manager"
+   ],
+   "custom": {
+    "supported": true,
+    "how": "urn:ietf:params:scim:schemas:extension:ironclad:2.0:User (e.g. departmentHead, allowProviderConversion); new custom attributes need the SCIM Custom User Attributes feature enabled by Support"
+   },
+   "group": [
+    "displayName",
+    "externalId",
+    "members"
+   ],
+   "cite": [
+    "c14",
+    "c15",
+    "c16",
+    "c17",
+    "c18",
+    "c30"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "Groups pushed via SCIM; permissions are then configured on the groups in Ironclad",
+   "cite": [
+    "c5",
+    "c30"
+   ]
+  },
+  "rate_limits": {
+   "text": "Per-company buckets: SCIM users read/PUT/POST 600 RPM, users PATCH/DELETE 50 RPM, groups read 200 RPM, groups write 50 RPM, other SCIM 800 RPM; plus a 4,500 RPM company-wide cap across all APIs including SCIM.",
+   "cite": [
+    "c32",
+    "c39"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Pushing users with SCIM is only supported when a single SAML configuration is in place.",
+    "cite": [
+     "c6"
+    ]
+   },
+   {
+    "text": "Ironclad asks customers to contact Support before deprovisioning users, as it may block workflows.",
+    "cite": [
+     "c7"
+    ]
+   },
+   {
+    "text": "Group deletion via SCIM is disabled; delete groups on the Admin Group page.",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "text": "OneLogin cannot update or delete groups in Ironclad via SCIM.",
+    "cite": [
+     "c13"
+    ]
+   }
+  ],
+  "notes": "Quote-only vendor: no plan table, so the SCIM plan is the custom quote. Whether SCIM needs the paid API add-on is not stated; the SCIM token is generated from the SAML integration page, not the API tab."
+ },
+ "user_api": {
+  "available": false,
+  "cite": [
+   "c33"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://ironcladapp.com/public/api/v1",
+  "docs_url": "https://developer.ironcladapp.com/",
+  "auth": {
+   "methods": [
+    "oauth2"
+   ],
+   "scopes": [
+    "scim.users.readUsers",
+    "scim.users.createUsers",
+    "scim.users.updateUsers",
+    "scim.users.deleteUsers",
+    "scim.groups.readGroups",
+    "scim.groups.createGroups",
+    "scim.groups.updateGroups",
+    "scim.schemas.readSchemas"
+   ],
+   "cite": [
+    "c34"
+   ],
+   "notes": "Scopes listed are the SCIM API's OAuth scopes from the reference index; client-credentials tokens last 6 hours."
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": []
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": [],
+   "notes": "Documented webhook event types are workflow events only; no user events listed."
+  },
+  "audit_log_api": {
+   "supported": "addon",
+   "plan": "Security & Data Pro add-on",
+   "cite": [
+    "c22",
+    "c35"
+   ]
+  },
+  "rate_limits": {
+   "text": "Per-company, per-bucket RPM limits; 4,500 RPM company-wide cap.",
+   "cite": [
+    "c32"
+   ]
+  },
+  "limitations": [],
+  "notes": "The public CLM API (workflows, records, entities, obligations, webhooks) needs the paid API add-on and lists no user, group or role endpoints in its full reference index (llms.txt); user management is only through the SCIM API. Marked unavailable by absence."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/ironclad/",
+   "cite": [
+    "c36",
+    "c5"
+   ],
+   "notes": "OIN app capabilities read from page markup: SAML, SCIM, Create, Update, Deactivate, Group Push, Group Linking (last updated Nov. 18 2021). Ironclad's guide calls it the Ironclad OIN connector; who built it is not stated."
+  },
+  "entra": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://support.ironcladapp.com/hc/en-us/articles/12286102334615-Provision-Users-with-Microsoft-Entra-ID-Azure-SCIM",
+   "cite": [
+    "c9",
+    "c10",
+    "c23"
+   ],
+   "notes": "Ironclad's guides use a non-gallery Entra enterprise app for SAML and point its provisioning at the generic SCIM tenant URL; no Microsoft Learn tutorial found (ironclad-tutorial 404)."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://support.ironcladapp.com/hc/en-us/articles/12286124794007-Provision-Users-with-OneLogin-SCIM",
+   "cite": [
+    "c11",
+    "c12"
+   ],
+   "notes": "Ironclad's guide uses OneLogin's generic 'SCIM Provisioner with SAML (SCIM V2)' app; OneLogin catalogue page not checked."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "jumpcloud.com/integrations/ironclad returned 404."
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c21",
+   "c4"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://ironcladapp.com/pricing",
+   "title": "Ironclad pricing",
+   "quote": "Build the right Ironclad solution for your team, with pricing shaped by your products, users, workflows, and growth. Get a tailored quote based on what you need today and where you’re going next.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://ironcladapp.com/pricing",
+   "title": "Ironclad pricing",
+   "quote": "Connect to your favorite apps with our API and integrations; unlock additional instances; or enhance your team’s success plan.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://support.ironcladapp.com/api/v2/help_center/articles/12286072096407.json",
+   "title": "Use Okta SCIM in Ironclad",
+   "quote": "You must have a SAML SSO connector configured in your Ironclad company before provisioning users with SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ironcladapp.com/hc/en-us/articles/12286072096407-Use-Okta-SCIM-in-Ironclad"
+  },
+  {
+   "id": "c4",
+   "url": "https://support.ironcladapp.com/api/v2/help_center/articles/12286072096407.json",
+   "title": "Use Okta SCIM in Ironclad",
+   "quote": "In a production Ironclad instance, this URL is https://ironcladapp.com/scim/v2",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ironcladapp.com/hc/en-us/articles/12286072096407-Use-Okta-SCIM-in-Ironclad"
+  },
+  {
+   "id": "c5",
+   "url": "https://support.ironcladapp.com/api/v2/help_center/articles/12286072096407.json",
+   "title": "Use Okta SCIM in Ironclad",
+   "quote": "Supported Okta Features Create Users Update User Attributes Deactivate Users Push Groups",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ironcladapp.com/hc/en-us/articles/12286072096407-Use-Okta-SCIM-in-Ironclad"
+  },
+  {
+   "id": "c6",
+   "url": "https://support.ironcladapp.com/api/v2/help_center/articles/12286072096407.json",
+   "title": "Use Okta SCIM in Ironclad",
+   "quote": "Pushing users into Ironclad with SCIM is only supported when a single SAML configuration is in place in your Ironclad company.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ironcladapp.com/hc/en-us/articles/12286072096407-Use-Okta-SCIM-in-Ironclad"
+  },
+  {
+   "id": "c7",
+   "url": "https://support.ironcladapp.com/api/v2/help_center/articles/12286072096407.json",
+   "title": "Use Okta SCIM in Ironclad",
+   "quote": "Also submit a request with our Support Team before deprovisioning any users as this may block your ability to continue your workflows.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ironcladapp.com/hc/en-us/articles/12286072096407-Use-Okta-SCIM-in-Ironclad"
+  },
+  {
+   "id": "c8",
+   "url": "https://support.ironcladapp.com/api/v2/help_center/articles/23134913235991.json",
+   "title": "Create a SCIM Scoped Token",
+   "quote": "In Ironclad, navigate to Company Settings > Integrations > SAML At the top, select the SCIM Configuration tab . Under Token Generation , enter a descriptive name for the token.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ironcladapp.com/hc/en-us/articles/23134913235991-Create-a-SCIM-Scoped-Token"
+  },
+  {
+   "id": "c9",
+   "url": "https://support.ironcladapp.com/api/v2/help_center/articles/12286102334615.json",
+   "title": "Provision Users with Microsoft Entra ID (Azure) SCIM",
+   "quote": "Supported Microsoft Entra ID Active Directory Features Create Users Update User Attributes Deactivate Users Create Groups Update Groups Delete Groups",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ironcladapp.com/hc/en-us/articles/12286102334615-Provision-Users-with-Microsoft-Entra-ID-Azure-SCIM"
+  },
+  {
+   "id": "c10",
+   "url": "https://support.ironcladapp.com/api/v2/help_center/articles/12286102334615.json",
+   "title": "Provision Users with Microsoft Entra ID (Azure) SCIM",
+   "quote": "Select Bearer Authentication as the authentication method. In the Tenant URL field, enter https://ironcladapp.com/scim/v2",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ironcladapp.com/hc/en-us/articles/12286102334615-Provision-Users-with-Microsoft-Entra-ID-Azure-SCIM"
+  },
+  {
+   "id": "c11",
+   "url": "https://support.ironcladapp.com/api/v2/help_center/articles/12286124794007.json",
+   "title": "Provision Users with OneLogin SCIM",
+   "quote": "Supported OneLogin Features Create Users Update User Attributes Deactivate Users Create Groups",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ironcladapp.com/hc/en-us/articles/12286124794007-Provision-Users-with-OneLogin-SCIM"
+  },
+  {
+   "id": "c12",
+   "url": "https://support.ironcladapp.com/api/v2/help_center/articles/12286124794007.json",
+   "title": "Provision Users with OneLogin SCIM",
+   "quote": "search for SCIM and select SCIM Provisioner with SAML (SCIM V2) either Core or Enterprise",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ironcladapp.com/hc/en-us/articles/12286124794007-Provision-Users-with-OneLogin-SCIM"
+  },
+  {
+   "id": "c13",
+   "url": "https://support.ironcladapp.com/api/v2/help_center/articles/12286124794007.json",
+   "title": "Provision Users with OneLogin SCIM",
+   "quote": "OneLogin does not support updating or deleting groups in third-party applications via SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ironcladapp.com/hc/en-us/articles/12286124794007-Provision-Users-with-OneLogin-SCIM"
+  },
+  {
+   "id": "c14",
+   "url": "https://support.ironcladapp.com/api/v2/help_center/articles/12286070700183.json",
+   "title": "Supported User Attributes",
+   "quote": "Singular Attributes userName name (formatted, familyName, givenName, middleName, honorificSuffix)",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ironcladapp.com/hc/en-us/articles/12286070700183-Supported-User-Attributes"
+  },
+  {
+   "id": "c15",
+   "url": "https://support.ironcladapp.com/api/v2/help_center/articles/12286070700183.json",
+   "title": "Supported User Attributes",
+   "quote": "displayName nickName profileUrl title userType preferredLanguage locale timezone active password Attributes with Multiple Values emails (value, display, type, primary) phoneNumbers (value, display, type, primary)",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ironcladapp.com/hc/en-us/articles/12286070700183-Supported-User-Attributes"
+  },
+  {
+   "id": "c16",
+   "url": "https://support.ironcladapp.com/api/v2/help_center/articles/12286070700183.json",
+   "title": "Supported User Attributes",
+   "quote": "groups (value, $ref, display, type) entitlements (value, display, type, primary) role (value, display, type, primary)",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ironcladapp.com/hc/en-us/articles/12286070700183-Supported-User-Attributes"
+  },
+  {
+   "id": "c17",
+   "url": "https://support.ironcladapp.com/api/v2/help_center/articles/12286070700183.json",
+   "title": "Supported User Attributes",
+   "quote": "Attributes employeeNumber costCenter organization division department manager (value, $ref, displayName)",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ironcladapp.com/hc/en-us/articles/12286070700183-Supported-User-Attributes"
+  },
+  {
+   "id": "c18",
+   "url": "https://support.ironcladapp.com/api/v2/help_center/articles/12286070700183.json",
+   "title": "Supported User Attributes",
+   "quote": "To add or modify custom attributes, please contact Support or your Implementation team to enable the SCIM Custom User Attributes feature.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ironcladapp.com/hc/en-us/articles/12286070700183-Supported-User-Attributes"
+  },
+  {
+   "id": "c19",
+   "url": "https://support.ironcladapp.com/api/v2/help_center/articles/12286629823127.json",
+   "title": "Deactivate and Reactivate Users",
+   "quote": "Admins can revoke access and free up licenses without deleting users or immediately reassigning all of their workflows.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ironcladapp.com/hc/en-us/articles/12286629823127-Deactivate-and-Reactivate-Users"
+  },
+  {
+   "id": "c20",
+   "url": "https://support.ironcladapp.com/api/v2/help_center/articles/42030958769815.json",
+   "title": "Remove Users from Ironclad",
+   "quote": "The only way to remove users in bulk is by using SCIM",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ironcladapp.com/hc/en-us/articles/42030958769815-Remove-Users-from-Ironclad"
+  },
+  {
+   "id": "c21",
+   "url": "https://support.ironcladapp.com/api/v2/help_center/articles/40161623671063.json",
+   "title": "Enable or Disable Just-In-Time (JIT) Provisioning",
+   "quote": "Just-In-Time (JIT) provisioning lets Ironclad automatically create a new user the first time they successfully sign in with SAML/SSO",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ironcladapp.com/hc/en-us/articles/40161623671063-Enable-or-Disable-Just-In-Time-JIT-Provisioning"
+  },
+  {
+   "id": "c22",
+   "url": "https://support.ironcladapp.com/api/v2/help_center/articles/33834526166807.json",
+   "title": "Audit Log Overview",
+   "quote": "The Audit Log feature is available as part of the paid Security & Data Pro add-on.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ironcladapp.com/hc/en-us/articles/33834526166807-Audit-Log-Overview"
+  },
+  {
+   "id": "c23",
+   "url": "https://support.ironcladapp.com/api/v2/help_center/articles/12285954825239.json",
+   "title": "Set Up Microsoft Entra ID (Azure) SSO/SAML Integration",
+   "quote": "Select Integrate any other application you don’t find in the gallery (Non-gallery) .",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.ironcladapp.com/hc/en-us/articles/12285954825239-Set-Up-Microsoft-Entra-ID-Azure-SSO-SAML-Integration"
+  },
+  {
+   "id": "c24",
+   "url": "https://developer.ironcladapp.com/reference/delete-a-user.md",
+   "title": "Delete a User (Ironclad SCIM API)",
+   "quote": "If the company has enabled the setting that prevents deleting non-deactivated users, the user must be deactivated (via `active: false`) before they can be deleted.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.ironcladapp.com/reference/delete-a-user"
+  },
+  {
+   "id": "c25",
+   "url": "https://developer.ironcladapp.com/reference/delete-a-user.md",
+   "title": "Delete a User (Ironclad SCIM API)",
+   "quote": "all active workflows associated with the deleted user should be automatically reassigned to the default user within the admin group",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.ironcladapp.com/reference/delete-a-user"
+  },
+  {
+   "id": "c26",
+   "url": "https://developer.ironcladapp.com/reference/create-a-user.md",
+   "title": "Create a User (Ironclad SCIM API)",
+   "quote": "A value of `false` means the user has been deactivated — deactivated users are blocked from logging in and are hidden from user-pickers and search results.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.ironcladapp.com/reference/create-a-user"
+  },
+  {
+   "id": "c27",
+   "url": "https://developer.ironcladapp.com/reference/delete-a-group.md",
+   "title": "Delete a Group (Ironclad SCIM API)",
+   "quote": "Group deletion via SCIM is disabled. This action must be performed via the Admin Group page.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.ironcladapp.com/reference/delete-a-group"
+  },
+  {
+   "id": "c28",
+   "url": "https://developer.ironcladapp.com/reference/retrieve-all-users.md",
+   "title": "List all Users (Ironclad SCIM API)",
+   "quote": "Filters for identifying subsets of users. Filters must comply with the SCIM protocol's convention.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.ironcladapp.com/reference/retrieve-all-users"
+  },
+  {
+   "id": "c29",
+   "url": "https://developer.ironcladapp.com/reference/retrieve-all-users.md",
+   "title": "List all Users (Ironclad SCIM API)",
+   "quote": "Specifies the maximum number of resources to return in a single page of results.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.ironcladapp.com/reference/retrieve-all-users"
+  },
+  {
+   "id": "c30",
+   "url": "https://developer.ironcladapp.com/llms.txt",
+   "title": "Ironclad Developer Hub index (llms.txt)",
+   "quote": "Documentation on updating a Group via SCIM. This includes updating group membership.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.ironcladapp.com/reference/update-group-membership"
+  },
+  {
+   "id": "c31",
+   "url": "https://developer.ironcladapp.com/llms.txt",
+   "title": "Ironclad Developer Hub index (llms.txt)",
+   "quote": "Documentation on listing all Schemas via SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.ironcladapp.com/reference/list-all-schemas"
+  },
+  {
+   "id": "c32",
+   "url": "https://developer.ironcladapp.com/reference/clm-api-rate-limits.md",
+   "title": "Rate Limits",
+   "quote": "In addition to the per-bucket limits above, Ironclad enforces a company-wide cap of 4,500 requests per minute across all API requests combined — including SCIM — regardless of bucket.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.ironcladapp.com/reference/clm-api-rate-limits"
+  },
+  {
+   "id": "c33",
+   "url": "https://developer.ironcladapp.com/reference/register-oauth-client.md",
+   "title": "Register an OAuth Client",
+   "quote": "The “API” tab will only be visible if you have the API add-on enabled for your instance.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.ironcladapp.com/reference/register-oauth-client"
+  },
+  {
+   "id": "c34",
+   "url": "https://developer.ironcladapp.com/reference/client-credentials-grant.md",
+   "title": "Client Credentials Grant",
+   "quote": "Issued access tokens expire after 6 hours.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.ironcladapp.com/reference/client-credentials-grant"
+  },
+  {
+   "id": "c35",
+   "url": "https://developer.ironcladapp.com/reference/export.md",
+   "title": "Submit a request to generate a new data export",
+   "quote": "The Data Export feature is part of the paid Security & Data Pro add-on.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.ironcladapp.com/reference/export"
+  },
+  {
+   "id": "c36",
+   "url": "https://www.okta.com/integrations/ironclad/",
+   "title": "Okta Integration Network: Ironclad",
+   "quote": "Okta's Ironclad integration streamlines the user management process from user and group provisioning to single sign-on.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c37",
+   "url": "https://developer.ironcladapp.com/reference/replace-a-user.md",
+   "title": "Replace a User (Ironclad SCIM API)",
+   "quote": "Documentation on replacing a User via SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.ironcladapp.com/reference/replace-a-user"
+  },
+  {
+   "id": "c38",
+   "url": "https://developer.ironcladapp.com/reference/update-user-data.md",
+   "title": "Update User Data (Ironclad SCIM API)",
+   "quote": "Documentation on updating a User via SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.ironcladapp.com/reference/update-user-data"
+  },
+  {
+   "id": "c39",
+   "url": "https://developer.ironcladapp.com/reference/clm-api-rate-limits.md",
+   "title": "Rate Limits",
+   "quote": "These API limits are set on a per-company basis.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.ironcladapp.com/reference/clm-api-rate-limits"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "Ironclad's Entra guide lists 'Delete Groups' as a supported Entra feature, but the SCIM API reference says group deletion via SCIM is disabled and must be done on the Admin Group page.",
+   "cite": [
+    "c9",
+    "c27"
+   ]
+  }
+ ],
+ "searched": [
+  "https://ironcladapp.com/pricing (curl; render.cjs ERR_TOO_MANY_RETRIES)",
+  "https://ironcladapp.com/llms.txt",
+  "https://developer.ironcladapp.com/llms.txt (full API and SCIM reference index)",
+  "support.ironcladapp.com help-centre search API: scim, azure sso, google sso, csv users, audit log",
+  "Okta OIN: okta.com/integrations/ironclad/",
+  "Microsoft Learn: ironclad-tutorial, ironclad-provisioning-tutorial (404)",
+  "jumpcloud.com/integrations/ironclad (404)"
+ ],
+ "open_questions": [
+  "Which package or add-on includes SCIM and SAML SSO is not published (quote-only).",
+  "Whether SCIM requires the paid API add-on is not stated.",
+  "SCIM token expiry is not documented.",
+  "Whether SCIM deactivation ends active sessions is not documented.",
+  "ServiceProviderConfig and ResourceTypes endpoints are not listed in the reference."
+ ]
+}

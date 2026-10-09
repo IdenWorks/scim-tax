@@ -1,0 +1,986 @@
+{
+ "slug": "retool",
+ "vendor": "Retool",
+ "vendor_url": "https://retool.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Retool",
+  "slug": "retool",
+  "category": "Developer Tools & CI/CD",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Team",
+  "team_price_text": "Team: $10/builder/mo + $5/internal user/mo (annual)",
+  "team_price_per_user_mo": 10,
+  "price_multiplier": null,
+  "sso_plan": "Enterprise",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://retool.com/pricing",
+  "docs_url": "https://docs.retool.com/sso/guides/scim-user-provisioning",
+  "evidence": "Retool's pricing lists \"SAML/OpenID Connect SSO, SCIM provisioning\" only under Enterprise (custom pricing), and the docs return \"SCIM is only available for Enterprise organizations\" on other plans.",
+  "notes": "Status unchanged (gated). Plan change since June: the June row put SAML SSO on Business, but the current pricing page shows Custom SSO (SAML/OIDC) on Enterprise only, alongside SCIM, and says Enterprise is required for SSO. Prices unchanged: Team $10/builder + $5/internal user per month annual ($12/$7 monthly); Business $50/builder + $15/internal user annual. Pricing is split by builder and internal-user seats; team_price_per_user_mo uses the builder seat. Retool API exists on Business with limited access, but the user and group endpoints are badged Enterprise in the API reference, so the user API is effectively Enterprise (api_tax). SCIM deactivation disables the user, logs them out and frees the billable seat. SCIM has no pagination and supports only userName eq filtering.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Enterprise",
+  "api_tax": true,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "$0 (up to 5 users)",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c7",
+    "c8"
+   ]
+  },
+  {
+   "name": "Team",
+   "price_text": "$10/builder/mo + $5/internal user/mo (annual); $12 + $7 monthly",
+   "price_per_user_mo": 10,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c9",
+    "c7"
+   ]
+  },
+  {
+   "name": "Business",
+   "price_text": "$50/builder/mo + $15/internal user/mo (annual); $65 + $18 monthly",
+   "price_per_user_mo": 50,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c3",
+    "c7",
+    "c8"
+   ],
+   "notes": "Retool API with 'Limited access' (user invites and user attributes endpoints are badged Business; users and groups endpoints are Enterprise). Audit logs UI included."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Contact Sales",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c4",
+    "c5",
+    "c6"
+   ],
+   "notes": "Audit logs with streaming on Enterprise; no audit-log REST endpoint seen in the API reference."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c4",
+   "c10",
+   "c11",
+   "c20",
+   "c27",
+   "c17"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://{instance}/api/scim/v2",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Settings > Retool API > Create new (token with SCIM API scope, permissions:scim); self-hosted may also set SCIM_AUTH_TOKEN env var (deprecated for child spaces)",
+   "token_expiry": null,
+   "cite": [
+    "c12",
+    "c10"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": true,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c20",
+    "c24",
+    "c26",
+    "c16"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": false,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c11",
+    "c13",
+    "c14",
+    "c23",
+    "c24",
+    "c25",
+    "c26"
+   ],
+   "notes": "No PUT on /Users in the spec; PATCH supports only 'replace' on name.givenName, name.familyName, active and user_type. Groups support GET, POST, PUT (replace members), PATCH and DELETE."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": true,
+   "revokes_sessions": true,
+   "data_retained": "The account is disabled but left in place; on reactivation the user keeps all previously specified access controls.",
+   "cite": [
+    "c13",
+    "c33"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName"
+   ],
+   "cite": [
+    "c22"
+   ]
+  },
+  "pagination": {
+   "supported": false,
+   "max_page_size": null,
+   "cite": [
+    "c21"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "emails",
+    "active",
+    "displayName",
+    "nickName",
+    "title",
+    "timezone",
+    "profileUrl",
+    "profilePhotoUrl",
+    "photos",
+    "externalId",
+    "groups"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": true,
+    "how": "'metadata' object on the SCIM user maps to Retool user attributes (Okta custom attributes with External namespace 'metadata'); capped at 1 MB. 'seatType' can set the seat type on plans with Named Seats; 'user_type' is PATCH-able."
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c28",
+    "c29",
+    "c19",
+    "c32",
+    "c30",
+    "c23",
+    "c25"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "Group push; custom IdP groups can be mapped to Retool's default admin/editor/viewer/All Users groups",
+   "cite": [
+    "c18",
+    "c14"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "No pagination: count and startIndex are ignored.",
+    "cite": [
+     "c21"
+    ]
+   },
+   {
+    "text": "Only userName eq filtering; users not provisioned via SCIM may have a null userName.",
+    "cite": [
+     "c22"
+    ]
+   },
+   {
+    "text": "Entra ID needs the aadOptscim062020 flag on the Tenant URL to be SCIM 2.0 compliant.",
+    "cite": [
+     "c15"
+    ]
+   },
+   {
+    "text": "Groups are matched by name, so a renamed IdP group appears as a new group in Retool.",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "text": "User metadata payloads over 1 MB are rejected.",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "text": "Self-hosted requires version 2.32.1 or later.",
+    "cite": [
+     "c17"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c34",
+   "c35",
+   "c6",
+   "c7"
+  ],
+  "plan": "Enterprise",
+  "api_tax": true,
+  "style": "REST",
+  "base_url": "https://{instance}/api/v2",
+  "docs_url": "https://docs.retool.com/api",
+  "auth": {
+   "methods": [
+    "bearer_api_token"
+   ],
+   "scopes": [
+    "users:read",
+    "users:write",
+    "groups:read",
+    "groups:write",
+    "permissions:read",
+    "permissions:write"
+   ],
+   "cite": [
+    "c35",
+    "c37",
+    "c38",
+    "c39",
+    "c43",
+    "c44"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c38",
+    "c39",
+    "c40",
+    "c41",
+    "c43",
+    "c44",
+    "c45",
+    "c48"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/users",
+    "purpose": "List users",
+    "cite": [
+     "c38"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/users",
+    "purpose": "Create a user",
+    "cite": [
+     "c39"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/users/{userId}",
+    "purpose": "Get a user",
+    "cite": [
+     "c48"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/users/{userId}",
+    "purpose": "Update a user (JSON Patch)",
+    "cite": [
+     "c40"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/users/{userId}",
+    "purpose": "Disable a user from the organization",
+    "cite": [
+     "c41"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/users/{userId}/logout",
+    "purpose": "Terminate all active sessions for a user",
+    "cite": [
+     "c42"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/user_invites",
+    "purpose": "Create a user invite (Business and Enterprise)",
+    "cite": [
+     "c45"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/groups",
+    "purpose": "List permission groups",
+    "cite": [
+     "c43"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/groups/{groupId}/members",
+    "purpose": "Add users to a group",
+    "cite": [
+     "c46"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/groups/{groupId}/members/{userId}",
+    "purpose": "Remove a user from a group",
+    "cite": [
+     "c47"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/role_permissions/role_grants",
+    "purpose": "Assign a role to a user or group",
+    "cite": [
+     "c44"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "Point system: up to 300 points per 60 seconds; Users endpoints cost 2 points, Groups and User Invite 5, Permissions 10; over the limit blocks API calls for 60 seconds.",
+   "cite": [
+    "c36"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Business plan has 'Limited access' to the platform API; users and groups endpoints are badged Enterprise in the API reference.",
+    "cite": [
+     "c7"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/retool/",
+   "cite": [
+    "c52",
+    "c11",
+    "c13",
+    "c14"
+   ],
+   "notes": "OIN page markup marks SAML, SCIM, Create, Update, Deactivate, Group Push and Group Linking as checked."
+  },
+  "entra": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c15",
+    "c50"
+   ],
+   "notes": "No Microsoft Learn gallery tutorial found (retool-tutorial and retool-provisioning-tutorial URLs return 404); Retool documents Entra SAML/OIDC SSO and SCIM via the generic endpoint with the aadOptscim062020 flag."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c51"
+   ],
+   "notes": "Retool has a OneLogin OIDC SSO tutorial; provisioning with OneLogin is not documented. OneLogin's own catalogue not checked (bot challenge)."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "both",
+  "csv_import": null,
+  "other_sync": "Google Groups sync via LDAP with Sign in with Google; SAML group sync and OIDC role mapping at login",
+  "docs_public": true,
+  "cite": [
+   "c49",
+   "c50"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://retool.com/pricing",
+   "title": "Pricing | Retool",
+   "quote": "Custom SSO Integrate with Okta, Active Directory, or any other SAML or OpenID SSO provider.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://retool.com/md/pricing",
+   "title": "Retool Pricing (markdown)",
+   "quote": "Builder: $10/mo (annual) · $12/mo (monthly)",
+   "accessed": "2026-10-05",
+   "page_url": "https://retool.com/pricing"
+  },
+  {
+   "id": "c3",
+   "url": "https://retool.com/md/pricing",
+   "title": "Retool Pricing (markdown)",
+   "quote": "Builder: $50/mo (annual) · $65/mo (monthly)",
+   "accessed": "2026-10-05",
+   "page_url": "https://retool.com/pricing"
+  },
+  {
+   "id": "c4",
+   "url": "https://retool.com/md/pricing",
+   "title": "Retool Pricing (markdown)",
+   "quote": "SAML/OpenID Connect SSO, SCIM provisioning",
+   "accessed": "2026-10-05",
+   "page_url": "https://retool.com/pricing"
+  },
+  {
+   "id": "c5",
+   "url": "https://retool.com/md/pricing",
+   "title": "Retool Pricing (markdown)",
+   "quote": "Enterprise is required for unlimited users, SSO, and advanced self-host features.",
+   "accessed": "2026-10-05",
+   "page_url": "https://retool.com/pricing"
+  },
+  {
+   "id": "c6",
+   "url": "https://retool.com/md/pricing",
+   "title": "Retool Pricing (markdown)",
+   "quote": "Full platform APIs, incl. write access and Terraform",
+   "accessed": "2026-10-05",
+   "page_url": "https://retool.com/pricing"
+  },
+  {
+   "id": "c7",
+   "url": "https://retool.com/md/pricing",
+   "title": "Retool Pricing (markdown)",
+   "quote": "Versatile platform APIs (Programmatically manage your Retool projects.) | — | — | Limited access | Full access to all API scopes",
+   "accessed": "2026-10-05",
+   "page_url": "https://retool.com/pricing"
+  },
+  {
+   "id": "c8",
+   "url": "https://retool.com/md/pricing",
+   "title": "Retool Pricing (markdown)",
+   "quote": "Audit logs (Track every query run against your databases and APIs, as well as user actions taken in Retool.) | — | — | Yes | Yes",
+   "accessed": "2026-10-05",
+   "page_url": "https://retool.com/pricing"
+  },
+  {
+   "id": "c9",
+   "url": "https://retool.com/md/pricing",
+   "title": "Retool Pricing (markdown)",
+   "quote": "Internal user: $5/mo (annual) · $7/mo (monthly)",
+   "accessed": "2026-10-05",
+   "page_url": "https://retool.com/pricing"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.retool.com/org-users/guides/troubleshooting.md",
+   "title": "Troubleshooting users and organizations | Retool Docs",
+   "quote": "`SCIM is only available for Enterprise organizations` | The organization's plan doesn't include SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.retool.com/org-users/guides/troubleshooting"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.retool.com/sso/guides/scim-user-provisioning",
+   "title": "Provision users with SCIM | Retool Docs",
+   "quote": "It's useful when using a third-party SSO provider for authentication, such as Okta, because it allows you to automatically create, update, and deactivate user accounts in applications such as Retool.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.retool.com/sso/guides/scim-user-provisioning",
+   "title": "Provision users with SCIM | Retool Docs",
+   "quote": "You can create API tokens with the **SCIM API** scope in the **Retool API** settings for your organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.retool.com/sso/guides/scim-user-provisioning",
+   "title": "Provision users with SCIM | Retool Docs",
+   "quote": "**Deactivate Users:** Users deactivated in Okta are automatically disabled in Retool. They are immediately logged out and do not count towards the billable user count. If a user is reactivated, they regain access to Retool and keep all previously specified access controls.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.retool.com/sso/guides/scim-user-provisioning",
+   "title": "Provision users with SCIM | Retool Docs",
+   "quote": "**Group Push:** Group Push lets you take existing Okta groups and their memberships and push them to Retool.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.retool.com/sso/guides/scim-user-provisioning",
+   "title": "Provision users with SCIM | Retool Docs",
+   "quote": "In Microsoft Entra ID, you must add `aadOptscim062020` to your **Tenant URL** for your requests to be SCIM 2.0 compliant and work in Retool.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.retool.com/sso/guides/scim-user-provisioning",
+   "title": "Provision users with SCIM | Retool Docs",
+   "quote": "After creating your token, test it by opening `https://yourRetoolAppDomain/api/scim/v2/Schemas`.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.retool.com/sso/guides/scim-user-provisioning",
+   "title": "Provision users with SCIM | Retool Docs",
+   "quote": "You can use SCIM provisioning on cloud instances or self-hosted instances on versions **2.32.1** and later.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.retool.com/sso/guides/scim-user-provisioning",
+   "title": "Provision users with SCIM | Retool Docs",
+   "quote": "You cannot rename Retool's default groups using SCIM group mapping, but you can map your custom groups to the four default Retool groups (`admin`, `editor`, `viewer`, `All Users`).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.retool.com/sso/guides/scim-user-provisioning",
+   "title": "Provision users with SCIM | Retool Docs",
+   "quote": "connect Okta custom attributes to the **metadata** user attribute, set **External namespace** to **metadata** on the Okta custom attribute.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.retool.com/specs/scim20.spec.yaml",
+   "title": "Retool SCIM 2.0 API (OpenAPI spec)",
+   "quote": "All SCIM API endpoints are available at `/api/scim/v2/`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.retool.com/scim"
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.retool.com/specs/scim20.spec.yaml",
+   "title": "Retool SCIM 2.0 API (OpenAPI spec)",
+   "quote": "The SCIM 2.0 API does not support pagination. Parameters such as `count` and `startIndex` are ignored.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.retool.com/scim"
+  },
+  {
+   "id": "c22",
+   "url": "https://docs.retool.com/specs/scim20.spec.yaml",
+   "title": "Retool SCIM 2.0 API (OpenAPI spec)",
+   "quote": "Only `userName` is supported as a filter attribute and only the `eq` operator is supported",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.retool.com/scim"
+  },
+  {
+   "id": "c23",
+   "url": "https://docs.retool.com/specs/scim20.spec.yaml",
+   "title": "Retool SCIM 2.0 API (OpenAPI spec)",
+   "quote": "Only the `replace` operation is supported. The following fields are updatable: `name.givenName` (first name), `name.familyName` (last name), `active`, and `user_type`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.retool.com/scim"
+  },
+  {
+   "id": "c24",
+   "url": "https://docs.retool.com/specs/scim20.spec.yaml",
+   "title": "Retool SCIM 2.0 API (OpenAPI spec)",
+   "quote": "Delete the specified SCIM user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.retool.com/scim"
+  },
+  {
+   "id": "c25",
+   "url": "https://docs.retool.com/specs/scim20.spec.yaml",
+   "title": "Retool SCIM 2.0 API (OpenAPI spec)",
+   "quote": "Replace the members of a group with a specified list of users.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.retool.com/scim"
+  },
+  {
+   "id": "c26",
+   "url": "https://docs.retool.com/specs/scim20.spec.yaml",
+   "title": "Retool SCIM 2.0 API (OpenAPI spec)",
+   "quote": "Create a new SCIM group.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.retool.com/scim"
+  },
+  {
+   "id": "c27",
+   "url": "https://docs.retool.com/specs/scim20.spec.yaml",
+   "title": "Retool SCIM 2.0 API (OpenAPI spec)",
+   "quote": "Retool implements a subset of the SCIM 2.0 REST API that is required to work with IDP vendors like Okta.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.retool.com/scim"
+  },
+  {
+   "id": "c28",
+   "url": "https://docs.retool.com/specs/scim20.spec.yaml",
+   "title": "Retool SCIM 2.0 API (OpenAPI spec)",
+   "quote": "\"userName\": \"jenny\", \"name\": { \"givenName\": \"Jenny\", \"familyName\": \"Appleseed\" }, \"active\": true, \"emails\": [ { \"value\": \"jenny@example.com\" } ], \"profileUrl\": \"https://example.com/jenny.png\", \"metadata\": { \"color\": \"orange\" }",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.retool.com/scim"
+  },
+  {
+   "id": "c29",
+   "url": "https://docs.retool.com/specs/scim20.spec.yaml",
+   "title": "Retool SCIM 2.0 API (OpenAPI spec)",
+   "quote": "The timezone for the user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.retool.com/scim"
+  },
+  {
+   "id": "c30",
+   "url": "https://docs.retool.com/org-users/guides/troubleshooting.md",
+   "title": "Troubleshooting users and organizations | Retool Docs",
+   "quote": "**SCIM:** The `seatType` field on the SCIM request, if your identity provider sends one.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.retool.com/org-users/guides/troubleshooting"
+  },
+  {
+   "id": "c31",
+   "url": "https://docs.retool.com/org-users/guides/troubleshooting.md",
+   "title": "Troubleshooting users and organizations | Retool Docs",
+   "quote": "A group that was renamed in your identity provider appears in Retool as a new group rather than a rename, because matching is by name.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.retool.com/org-users/guides/troubleshooting"
+  },
+  {
+   "id": "c32",
+   "url": "https://docs.retool.com/org-users/guides/troubleshooting.md",
+   "title": "Troubleshooting users and organizations | Retool Docs",
+   "quote": "Retool caps user metadata at 1 MB and rejects larger payloads with `metadata must be under 1 MB`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.retool.com/org-users/guides/troubleshooting"
+  },
+  {
+   "id": "c33",
+   "url": "https://docs.retool.com/org-users/guides/troubleshooting.md",
+   "title": "Troubleshooting users and organizations | Retool Docs",
+   "quote": "Disabling a user leaves the account in place but blocks sign-in.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.retool.com/org-users/guides/troubleshooting"
+  },
+  {
+   "id": "c34",
+   "url": "https://docs.retool.com/org-users/concepts/retool-api.md",
+   "title": "Retool API | Retool Docs",
+   "quote": "The Retool API is available to both cloud- and self-hosted organizations on a Business or an Enterprise plan. The endpoints available depend on your organization's pricing plan.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.retool.com/org-users/concepts/retool-api"
+  },
+  {
+   "id": "c35",
+   "url": "https://docs.retool.com/org-users/concepts/retool-api.md",
+   "title": "Retool API | Retool Docs",
+   "quote": "The Retool API uses HTTP Bearer authentication scheme with API tokens to authenticate requests.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.retool.com/org-users/concepts/retool-api"
+  },
+  {
+   "id": "c36",
+   "url": "https://docs.retool.com/org-users/guides/retool-api/authentication.md",
+   "title": "Configure Retool API authentication | Retool Docs",
+   "quote": "You can use up to 300 points in a 60 second window. If you exceed this, Retool blocks API calls for 60 seconds.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.retool.com/org-users/guides/retool-api/authentication"
+  },
+  {
+   "id": "c37",
+   "url": "https://docs.retool.com/org-users/guides/retool-api/authentication.md",
+   "title": "Configure Retool API authentication | Retool Docs",
+   "quote": "| Users | Write | Grants access to write Users data with the Retool API. |",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.retool.com/org-users/guides/retool-api/authentication"
+  },
+  {
+   "id": "c38",
+   "url": "https://docs.retool.com/api-spec",
+   "title": "Retool API reference (OpenAPI JSON)",
+   "quote": "Returns a list of users. Requires the `users:read` scope.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.retool.com/api"
+  },
+  {
+   "id": "c39",
+   "url": "https://docs.retool.com/api-spec",
+   "title": "Retool API reference (OpenAPI JSON)",
+   "quote": "Creates a user and returns the created user. Requires the `users:write` scope.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.retool.com/api"
+  },
+  {
+   "id": "c40",
+   "url": "https://docs.retool.com/api-spec",
+   "title": "Retool API reference (OpenAPI JSON)",
+   "quote": "Updates a user and returns the updated user. Requires the `users:write` scope.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.retool.com/api"
+  },
+  {
+   "id": "c41",
+   "url": "https://docs.retool.com/api-spec",
+   "title": "Retool API reference (OpenAPI JSON)",
+   "quote": "Disables a user from the organization. Requires the `users:write` scope.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.retool.com/api"
+  },
+  {
+   "id": "c42",
+   "url": "https://docs.retool.com/api-spec",
+   "title": "Retool API reference (OpenAPI JSON)",
+   "quote": "Terminates all active Retool sessions for the specified user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.retool.com/api"
+  },
+  {
+   "id": "c43",
+   "url": "https://docs.retool.com/api-spec",
+   "title": "Retool API reference (OpenAPI JSON)",
+   "quote": "Returns a list of permission groups for an organization or space. Requires the `groups:read` scope.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.retool.com/api"
+  },
+  {
+   "id": "c44",
+   "url": "https://docs.retool.com/api-spec",
+   "title": "Retool API reference (OpenAPI JSON)",
+   "quote": "Creates a role grant that assigns a role to a subject (user or group). Requires the `permissions:write` scope.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.retool.com/api"
+  },
+  {
+   "id": "c45",
+   "url": "https://docs.retool.com/api-spec",
+   "title": "Retool API reference (OpenAPI JSON)",
+   "quote": "Creates a user invite and returns the created user invite. User invite link expires 7 days after generation. Requires the `users:write` scope.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.retool.com/api"
+  },
+  {
+   "id": "c46",
+   "url": "https://docs.retool.com/api-spec",
+   "title": "Retool API reference (OpenAPI JSON)",
+   "quote": "Adds specified user(s) to a group and returns the updated group.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.retool.com/api"
+  },
+  {
+   "id": "c47",
+   "url": "https://docs.retool.com/api-spec",
+   "title": "Retool API reference (OpenAPI JSON)",
+   "quote": "Removes the specified user from the group and returns the updated group. Requires the `groups:write` scope.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.retool.com/api"
+  },
+  {
+   "id": "c48",
+   "url": "https://docs.retool.com/api-spec",
+   "title": "Retool API reference (OpenAPI JSON)",
+   "quote": "Returns the specified user. Requires the `users:read` scope.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.retool.com/api"
+  },
+  {
+   "id": "c49",
+   "url": "https://docs.retool.com/sso/guides/jit-provisioning.md",
+   "title": "Enable JIT user provisioning for SSO | Retool Docs",
+   "quote": "When you enable this setting, Retool provisions user accounts when users sign in over SSO for the first time.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.retool.com/sso/guides/jit-provisioning"
+  },
+  {
+   "id": "c50",
+   "url": "https://docs.retool.com/sso/quickstart.md",
+   "title": "SSO quickstart | Retool Docs",
+   "quote": "Retool supports OpenID Connect (OIDC) and Security Assertion Markup Language (SAML) identity providers.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.retool.com/sso/quickstart"
+  },
+  {
+   "id": "c51",
+   "url": "https://docs.retool.com/sso/quickstart.md",
+   "title": "SSO quickstart | Retool Docs",
+   "quote": "| [OneLogin](https://www.onelogin.com/) | [OIDC](/sso/tutorials/onelogin) |",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.retool.com/sso/quickstart"
+  },
+  {
+   "id": "c52",
+   "url": "https://www.okta.com/integrations/retool/",
+   "title": "Integrate Retool with Okta",
+   "quote": "Through Okta’s Retool integration, tools are easy to share with your teammates and stakeholders.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c53",
+   "url": "https://docs.retool.com/org-users/guides/monitoring/audit-logs.md",
+   "title": "View user audit logs | Retool Docs",
+   "quote": "Audit logs are retained for one year. You can see the past three months of data using the **Date range** selector on the **Audit logs** page",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.retool.com/org-users/guides/monitoring/audit-logs"
+  },
+  {
+   "id": "c54",
+   "url": "https://retool.com/md/pricing",
+   "title": "Retool Pricing (markdown)",
+   "quote": "Audit logs with streaming",
+   "accessed": "2026-10-05",
+   "page_url": "https://retool.com/pricing"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The June 2026 row said SAML SSO was available on Business; the current pricing page lists Custom SSO for Enterprise only and says Enterprise is required for SSO.",
+   "cite": [
+    "c1",
+    "c5"
+   ]
+  }
+ ],
+ "searched": [
+  "https://retool.com/pricing",
+  "https://retool.com/md/pricing",
+  "https://docs.retool.com/llms.txt",
+  "https://docs.retool.com/scim (spec /specs/scim20.spec.yaml)",
+  "https://docs.retool.com/api (spec /api-spec)",
+  "https://www.okta.com/integrations/retool/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/retool-tutorial (404)"
+ ],
+ "open_questions": [
+  "SCIM token expiry is not documented.",
+  "ServiceProviderConfig, ResourceTypes, Bulk and /Me endpoints are not in the SCIM spec.",
+  "SCIM-specific rate limits are not documented.",
+  "Whether SSO must be configured before SCIM is not stated.",
+  "No audit-log REST endpoint seen; Enterprise has audit log streaming but its API surface was not checked.",
+  "Whether 'Orchestrated governance' event triggers (org invitations, password resets) count as user-event webhooks was not verified.",
+  "No Microsoft Entra gallery app or Google Workspace / JumpCloud catalogue entry was found or checked.",
+  "Whether DELETE /Users permanently deletes or only disables the account is not stated in the SCIM spec.",
+  "CSV bulk user import is not documented in the pages read."
+ ]
+}

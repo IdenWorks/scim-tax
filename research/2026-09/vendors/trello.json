@@ -1,0 +1,982 @@
+{
+ "slug": "trello",
+ "vendor": "Trello",
+ "vendor_url": "https://trello.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Trello",
+  "slug": "trello",
+  "category": "Project & Work Management",
+  "status": "gated",
+  "scim_plan": "Enterprise (includes Atlassian Guard Standard)",
+  "scim_price_text": "$17.50/u/mo billed annually",
+  "scim_price_per_user_mo": 17.5,
+  "team_plan": "Standard",
+  "team_price_text": "Standard: $5/u/mo (annual)",
+  "team_price_per_user_mo": 5,
+  "price_multiplier": 3.5,
+  "sso_plan": "Enterprise",
+  "sso_price_per_user_mo": 17.5,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": "directory_sync",
+   "onelogin": "native",
+   "jumpcloud": "native",
+   "generic": true
+  },
+  "pricing_page_url": "https://trello.com/pricing",
+  "docs_url": "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+  "evidence": "Trello's pricing page lists Enterprise at $17.50/user/month billed annually and says 'This plan includes Atlassian Guard Standard', with 'Free SSO and user provisioning with Atlassian Guard'.",
+  "notes": "Still gated, but the price changed: Enterprise now includes Atlassian Guard Standard at no extra cost, so SCIM costs $17.50/u/mo vs June's $21.50 (Enterprise + ~$4 Guard). Multiplier 3.5 (was 4.3). The pricing page comparison table still says Guard is a separate subscription from $4/month/user. June's 50-seat minimum is not on the current pricing page, so it is dropped. SCIM is Atlassian's org-level SCIM 2.0 (api.atlassian.com/scim/directory/{id}); it creates Atlassian accounts with free Trello access, and an Enterprise license is only granted when an admin adds the user to an Enterprise Workspace. Trello's own SCIM API is being retired, and Trello-only orgs must ask support to fully enable SCIM. SCIM keys expire after one year. JumpCloud and OneLogin come from Atlassian's own guide list.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Free",
+  "api_tax": false,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "$0, up to 10 collaborators per Workspace",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c1",
+    "c4",
+    "c46"
+   ]
+  },
+  {
+   "name": "Standard",
+   "price_text": "$5 per user/month billed annually ($6 monthly)",
+   "price_per_user_mo": 5,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c2",
+    "c4",
+    "c46"
+   ]
+  },
+  {
+   "name": "Premium",
+   "price_text": "$10 per user/month billed annually ($12.50 monthly)",
+   "price_per_user_mo": 10,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c3",
+    "c4",
+    "c46"
+   ]
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "$17.50 per user/month billed annually ($210 per user per year); includes Atlassian Guard Standard",
+   "price_per_user_mo": 17.5,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c4",
+    "c5",
+    "c22",
+    "c51"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c7",
+   "c5",
+   "c22",
+   "c25",
+   "c34",
+   "c35"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://api.atlassian.com/scim/directory/{directoryId}",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Atlassian Administration > organization > Security > Identity providers > directory > User provisioning (SCIM base URL and API key)",
+   "token_expiry": "1 year",
+   "cite": [
+    "c25",
+    "c27"
+   ],
+   "notes": "Token source path paraphrased from the Atlassian configure page; the OpenAPI file also declares an OAuth client-credentials scheme."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": true,
+   "Schemas": true,
+   "ResourceTypes": true,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c35",
+    "c36",
+    "c37",
+    "c38",
+    "c39"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c43",
+    "c44",
+    "c42",
+    "c12",
+    "c16",
+    "c17",
+    "c11"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "DELETE or IdP removal deactivates the Atlassian account rather than deleting it; deactivated users can be reactivated in Atlassian Administration.",
+   "cite": [
+    "c13",
+    "c42",
+    "c33"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName",
+    "externalId",
+    "displayName (Groups)"
+   ],
+   "cite": [
+    "c40",
+    "c45"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c41",
+    "c40"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "emails",
+    "externalId",
+    "name.formatted",
+    "name.givenName",
+    "name.familyName",
+    "name.middleName",
+    "name.honorificPrefix",
+    "name.honorificSuffix",
+    "displayName",
+    "nickName",
+    "title",
+    "preferredLanguage",
+    "department",
+    "organization",
+    "timezone",
+    "phoneNumbers",
+    "active",
+    "groups"
+   ],
+   "enterprise": [
+    "organization",
+    "department"
+   ],
+   "custom": {
+    "supported": false,
+    "how": "Only the Atlassian extension urn:scim:schemas:extension:atlassian-external:1.0 (atlassianAccountId) is defined; no customer-defined attributes."
+   },
+   "group": [
+    "displayName",
+    "members",
+    "externalId"
+   ],
+   "cite": [
+    "c14",
+    "c15",
+    "c35",
+    "c36"
+   ],
+   "notes": "Attribute list read from the ScimUser, ScimUserName, EnterpriseUserExtension and ScimGroup schemas in the OpenAPI file; IdP-updatable attributes per the support page."
+  },
+  "roles": {
+   "supported": true,
+   "how": "Group-to-app-access mapping: synced groups are assigned to apps and admin roles in Atlassian Administration; a Trello Enterprise license is granted by inviting the user to an Enterprise Workspace.",
+   "cite": [
+    "c17",
+    "c29"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SCIM provisions Atlassian accounts, not Trello seats: provisioned users get a free managed Trello account and no Enterprise license until an admin grants one (for most organizations).",
+    "cite": [
+     "c9",
+     "c10",
+     "c29"
+    ]
+   },
+   {
+    "text": "Trello's own SCIM API is being retired; provisioning goes through the Atlassian organization SCIM API.",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "text": "Trello-only organizations must contact Atlassian support to fully enable SCIM.",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "text": "SCIM API keys expire one year after creation.",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "text": "Atlassian pages disagree on whether group sync works for Trello (see conflicts).",
+    "cite": [
+     "c11",
+     "c23"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c46",
+   "c47",
+   "c56"
+  ],
+  "plan": "Free",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://api.trello.com/1",
+  "docs_url": "https://developer.atlassian.com/cloud/trello/rest/",
+  "auth": {
+   "methods": [
+    "api_key + token",
+    "oauth2"
+   ],
+   "scopes": [],
+   "cite": [
+    "c56"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": false,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": null,
+   "reactivate_user": true,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": true,
+   "cite": [
+    "c47",
+    "c52",
+    "c54",
+    "c49",
+    "c50",
+    "c55",
+    "c53"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/enterprises/{id}/members",
+    "purpose": "Get members of an Enterprise",
+    "cite": [
+     "c47"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/enterprises/{id}/members/{idMember}/deactivated",
+    "purpose": "Deactivate a member of an Enterprise (not for AdminHub-managed enterprises)",
+    "cite": [
+     "c49",
+     "c48"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/enterprises/{id}/members/{idMember}/licensed",
+    "purpose": "Grant or revoke an Enterprise license",
+    "cite": [
+     "c50"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/enterprises/{id}/admins/{idMember}",
+    "purpose": "Make a member an Enterprise admin",
+    "cite": [
+     "c55"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/enterprises/{id}/auditlog",
+    "purpose": "Enterprise audit log actions",
+    "cite": [
+     "c51"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/organizations/{id}/members",
+    "purpose": "Update a Workspace's members (invite by email)",
+    "cite": [
+     "c52"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/organizations/{id}/members/{idMember}",
+    "purpose": "Remove a member from a Workspace",
+    "cite": [
+     "c53"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/organizations/{id}/members/{idMember}/deactivated",
+    "purpose": "Deactivate or reactivate a Workspace member",
+    "cite": [
+     "c54"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Enterprise",
+   "cite": [
+    "c51"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Enterprise member deactivation and admin endpoints are unavailable for enterprises that moved user management to Atlassian Administration (AdminHub).",
+    "cite": [
+     "c48"
+    ]
+   }
+  ],
+  "notes": "Trello REST API is usable on every plan; enterprise-member endpoints need an Enterprise. Atlassian's organization admin API is a separate product not researched here."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/atlassian-cloud/",
+   "cite": [
+    "c58",
+    "c57",
+    "c19"
+   ],
+   "notes": "'Atlassian Cloud' OIN app markup checks SAML, SWA, SCIM, Create, Update, Deactivate, Group Push, Group Linking. Separate 'Trello' OIN app checks SAML, SCIM, Create, Update, Deactivate and describes SSO and JIT."
+  },
+  "entra": {
+   "listed": true,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/atlassian-cloud-provisioning-tutorial",
+   "cite": [
+    "c59"
+   ],
+   "notes": "Microsoft Learn tutorial for the Atlassian Cloud gallery app; prerequisites still say Atlassian Access."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": true,
+   "kind": "directory_sync",
+   "built_by": "vendor",
+   "url": null,
+   "cite": [
+    "c21",
+    "c18"
+   ],
+   "notes": "Atlassian runs its own Google Workspace user sync; Google Marketplace page not checked."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c19"
+   ],
+   "notes": "From Atlassian's own provisioning guide list; OneLogin catalogue page not loaded."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c20"
+   ],
+   "notes": "From Atlassian's own provisioning guide list; JumpCloud catalogue page not loaded."
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": "Atlassian-run Google Workspace user sync; Azure AD nested-group sync",
+  "docs_public": true,
+  "cite": [
+   "c21",
+   "c18"
+  ],
+  "notes": "Okta's Trello app mentions JIT, but no Atlassian page confirms JIT for Trello."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://trello.com/pricing",
+   "title": "Which Trello Plan Is Best for You? Our Pricing Guide Can Help",
+   "quote": "Free $ 0 USD Free for up to 10 collaborators per Workspace",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://trello.com/pricing",
+   "title": "Which Trello Plan Is Best for You? Our Pricing Guide Can Help",
+   "quote": "Standard $ 5 USD Per user/month if billed annually ($6 billed monthly)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://trello.com/pricing",
+   "title": "Which Trello Plan Is Best for You? Our Pricing Guide Can Help",
+   "quote": "Premium $ 10 USD Per user/month if billed annually ($12.50 billed monthly)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://trello.com/pricing",
+   "title": "Which Trello Plan Is Best for You? Our Pricing Guide Can Help",
+   "quote": "Enterprise $ 17.50 USD Per user/month - billed annually ($210.00 annual price per user) Add enterprise-grade security and controls. This plan includes Atlassian Guard Standard and 24/7 Enterprise Admin support.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://trello.com/pricing",
+   "title": "Which Trello Plan Is Best for You? Our Pricing Guide Can Help",
+   "quote": "Free SSO and user provisioning with Atlassian Guard",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://trello.com/pricing",
+   "title": "Which Trello Plan Is Best for You? Our Pricing Guide Can Help",
+   "quote": "SAML SSO via Atlassian Guard Atlassian Guard is a separate subscription that your company can enable across all your Atlassian products and starts at $4/month/user.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+   "title": "Understand user provisioning | Atlassian Support",
+   "quote": "We support user provisioning using the System for Cross-domain Identity Management (SCIM), and this feature uses the SCIM 2.0 version of the protocol.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+   "title": "Understand user provisioning | Atlassian Support",
+   "quote": "Role: Organization admin Atlassian Cloud: Atlassian Guard Standard",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+   "title": "Understand user provisioning | Atlassian Support",
+   "quote": "When a Trello Enterprise is linked to an Atlassian organization, any users who were already provisioned to the organization via SCIM, as well as any users provisioned this way going forward, will have a free Trello account provisioned.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+   "title": "Understand user provisioning | Atlassian Support",
+   "quote": "The account will be managed by the Trello Enterprise but will not have an Enterprise license unless granted one by an admin.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+   "title": "Understand user provisioning | Atlassian Support",
+   "quote": "Syncing groups is only currently available for Jira app instances, Confluence, Trello and not yet available for Bitbucket.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+   "title": "Understand user provisioning | Atlassian Support",
+   "quote": "Deactivate a user account You can deactivate the Atlassian account for users from your verified domain in the identity provider.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+   "title": "Understand user provisioning | Atlassian Support",
+   "quote": "When you delete a user from your identity provider, we deactivate the user account.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+   "title": "Understand user provisioning | Atlassian Support",
+   "quote": "Email address Organization Job title Timezone Department Preferred language",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+   "title": "Understand user provisioning | Atlassian Support",
+   "quote": "SCIM attribute AtlassianCloud attribute nickName Publicname",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+   "title": "Understand user provisioning | Atlassian Support",
+   "quote": "Activate a user account You can activate a user's Atlassian account from your identity provider.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+   "title": "Understand user provisioning | Atlassian Support",
+   "quote": "The group gets created as a read-only group in the organization's directory. You can only edit groups from your identity provider.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+   "title": "Understand user provisioning | Atlassian Support",
+   "quote": "We don’t send users an invitation when they’re provisioned from an identity provider through SCIM or synced from Google Workspace.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+   "title": "Understand user provisioning | Atlassian Support",
+   "quote": "Okta: Learn how to configure user provisioning with Okta OneLogin: Learn how to configure user provisioning for OneLogin Azure AD: Learn how to configure user provisioning for Azure AD",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+   "title": "Understand user provisioning | Atlassian Support",
+   "quote": "JumpCloud: Learn how to configure user provisioning for JumpCloud",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://support.atlassian.com/provisioning-users/docs/understand-user-provisioning/",
+   "title": "Understand user provisioning | Atlassian Support",
+   "quote": "Google Workspace: Learn how to set up user provisioning for Google Workspace",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://support.atlassian.com/provisioning-users/docs/supported-identity-providers/",
+   "title": "Supported identity providers | Atlassian Support",
+   "quote": "An Enterprise plan allows you to connect multiple identity providers. Atlassian Guard Standard is included with your Enterprise plan at no extra cost.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://support.atlassian.com/provisioning-users/docs/supported-identity-providers/",
+   "title": "Supported identity providers | Atlassian Support",
+   "quote": "User provisioning is available for most app , but syncing group memberships is only available for Jira app instances and Confluence.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://support.atlassian.com/provisioning-users/docs/supported-identity-providers/",
+   "title": "Supported identity providers | Atlassian Support",
+   "quote": "You can’t use OpenID Connect for single sign-on.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://support.atlassian.com/provisioning-users/docs/configure-user-provisioning-with-an-identity-provider/",
+   "title": "Configure user provisioning with an identity provider | Atlassian Support",
+   "quote": "Copy the values for  SCIM base URL  and  API key .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://support.atlassian.com/provisioning-users/docs/configure-user-provisioning-with-an-identity-provider/",
+   "title": "Configure user provisioning with an identity provider | Atlassian Support",
+   "quote": "Subscribe to Atlassian Guard Standard from your organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://support.atlassian.com/provisioning-users/docs/manage-scim-api-key-expiration/",
+   "title": "Manage API key expiration for SCIM | Atlassian Support",
+   "quote": "When you set up user provisioning or regenerate an API key, we automatically set it to expire in one year.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://support.atlassian.com/trello/docs/linking-a-trello-enterprise-to-an-atlassian-organization/",
+   "title": "Linking a Trello Enterprise to an Atlassian organization | Trello | Atlassian Support",
+   "quote": "Trello's SCIM API is in the process of being retired. The best way to provision access to Trello is to provision an Atlassian Account for a user using the  Atlassian SCIM API  or  integration with your identity provider , then invite them to the appropriate Trello Workspace",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://support.atlassian.com/trello/docs/linking-a-trello-enterprise-to-an-atlassian-organization/",
+   "title": "Linking a Trello Enterprise to an Atlassian organization | Trello | Atlassian Support",
+   "quote": "For most organizations, users provisioned to an Atlassian Org will not be granted a Trello Enterprise license automatically. A license can be granted by inviting that user to an Enterprise workspace.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://support.atlassian.com/trello/docs/linking-a-trello-enterprise-to-an-atlassian-organization/",
+   "title": "Linking a Trello Enterprise to an Atlassian organization | Trello | Atlassian Support",
+   "quote": "If you'd like to set up SSO, you'll need to do so in your Atlassian organization. Requires Atlassian Guard Standard (formerly known as Atlassian Access)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://support.atlassian.com/trello/docs/linking-a-trello-enterprise-to-an-atlassian-organization/",
+   "title": "Linking a Trello Enterprise to an Atlassian organization | Trello | Atlassian Support",
+   "quote": "For organizations that can manage their users on admin.atlassian.com , your experience may be different and you can use SCIM to provision your users.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://support.atlassian.com/trello/docs/manage-enterprise-members-and-licenses-on-atlassian-admin/",
+   "title": "Manage Enterprise members on Atlassian Admin | Trello | Atlassian Support",
+   "quote": "If your organization only uses Trello and no other Atlassian app, please reach out to support here to fully enable SCIM.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://support.atlassian.com/trello/docs/manage-enterprise-members-and-licenses-on-atlassian-admin/",
+   "title": "Manage Enterprise members on Atlassian Admin | Trello | Atlassian Support",
+   "quote": "To prevent a user from accessing any Atlassian services, deactivate the user’s managed account .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/swagger.v3.json",
+   "title": "User provisioning REST API (OpenAPI)",
+   "quote": "\"url\": \"https://api.atlassian.com/\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/intro/"
+  },
+  {
+   "id": "c35",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/swagger.v3.json",
+   "title": "User provisioning REST API (OpenAPI)",
+   "quote": "\"/scim/directory/{directoryId}/Users\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/intro/"
+  },
+  {
+   "id": "c36",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/swagger.v3.json",
+   "title": "User provisioning REST API (OpenAPI)",
+   "quote": "\"/scim/directory/{directoryId}/Groups\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/intro/"
+  },
+  {
+   "id": "c37",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/swagger.v3.json",
+   "title": "User provisioning REST API (OpenAPI)",
+   "quote": "\"/scim/directory/{directoryId}/ServiceProviderConfig\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/intro/"
+  },
+  {
+   "id": "c38",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/swagger.v3.json",
+   "title": "User provisioning REST API (OpenAPI)",
+   "quote": "\"/scim/directory/{directoryId}/Schemas\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/intro/"
+  },
+  {
+   "id": "c39",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/swagger.v3.json",
+   "title": "User provisioning REST API (OpenAPI)",
+   "quote": "\"/scim/directory/{directoryId}/ResourceTypes\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/intro/"
+  },
+  {
+   "id": "c40",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/swagger.v3.json",
+   "title": "User provisioning REST API (OpenAPI)",
+   "quote": "Get users from the specified directory. Filtering is supported with a single exact match  (`eq`) against the `userName` and `externalId` attributes.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/intro/"
+  },
+  {
+   "id": "c41",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/swagger.v3.json",
+   "title": "User provisioning REST API (OpenAPI)",
+   "quote": "A 1-based index of the first query result.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/intro/"
+  },
+  {
+   "id": "c42",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/swagger.v3.json",
+   "title": "User provisioning REST API (OpenAPI)",
+   "quote": "Deleting a user via the SCIM APIs will unlink the user from your identity provider and deactivate the user within Atlassian if they are managed by your organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/intro/"
+  },
+  {
+   "id": "c43",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/swagger.v3.json",
+   "title": "User provisioning REST API (OpenAPI)",
+   "quote": "Creates a user in the directory.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/intro/"
+  },
+  {
+   "id": "c44",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/swagger.v3.json",
+   "title": "User provisioning REST API (OpenAPI)",
+   "quote": "Updates a user's information in the directory based on their `userId` via `PATCH`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/intro/"
+  },
+  {
+   "id": "c45",
+   "url": "https://developer.atlassian.com/cloud/admin/user-provisioning/swagger.v3.json",
+   "title": "User provisioning REST API (OpenAPI)",
+   "quote": "Filter for `displayName`. Example: `displayName eq \\\"SCIM_GROUP\\\"`",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.atlassian.com/cloud/admin/user-provisioning/rest/intro/"
+  },
+  {
+   "id": "c46",
+   "url": "https://developer.atlassian.com/cloud/trello/swagger.v3.json",
+   "title": "Trello REST API (OpenAPI)",
+   "quote": "\"url\": \"https://api.trello.com/1\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.atlassian.com/cloud/trello/rest/"
+  },
+  {
+   "id": "c47",
+   "url": "https://developer.atlassian.com/cloud/trello/swagger.v3.json",
+   "title": "Trello REST API (OpenAPI)",
+   "quote": "Get the members of an enterprise.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.atlassian.com/cloud/trello/rest/"
+  },
+  {
+   "id": "c48",
+   "url": "https://developer.atlassian.com/cloud/trello/swagger.v3.json",
+   "title": "Trello REST API (OpenAPI)",
+   "quote": "Deactivation is not possible for enterprises that have opted in to user management via AdminHub.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.atlassian.com/cloud/trello/rest/"
+  },
+  {
+   "id": "c49",
+   "url": "https://developer.atlassian.com/cloud/trello/swagger.v3.json",
+   "title": "Trello REST API (OpenAPI)",
+   "quote": "\"summary\": \"Deactivate a Member of an Enterprise.\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.atlassian.com/cloud/trello/rest/"
+  },
+  {
+   "id": "c50",
+   "url": "https://developer.atlassian.com/cloud/trello/swagger.v3.json",
+   "title": "Trello REST API (OpenAPI)",
+   "quote": "This endpoint is used to update whether the provided Member should use one of the Enterprise's available licenses or not. Revoking a license will deactivate a Member of an Enterprise.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.atlassian.com/cloud/trello/rest/"
+  },
+  {
+   "id": "c51",
+   "url": "https://developer.atlassian.com/cloud/trello/swagger.v3.json",
+   "title": "Trello REST API (OpenAPI)",
+   "quote": "Returns an array of Actions related to the Enterprise object.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.atlassian.com/cloud/trello/rest/"
+  },
+  {
+   "id": "c52",
+   "url": "https://developer.atlassian.com/cloud/trello/swagger.v3.json",
+   "title": "Trello REST API (OpenAPI)",
+   "quote": "Update an Organization's Members",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.atlassian.com/cloud/trello/rest/"
+  },
+  {
+   "id": "c53",
+   "url": "https://developer.atlassian.com/cloud/trello/swagger.v3.json",
+   "title": "Trello REST API (OpenAPI)",
+   "quote": "Remove a member from a Workspace",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.atlassian.com/cloud/trello/rest/"
+  },
+  {
+   "id": "c54",
+   "url": "https://developer.atlassian.com/cloud/trello/swagger.v3.json",
+   "title": "Trello REST API (OpenAPI)",
+   "quote": "Deactivate or reactivate a member of a Workspace",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.atlassian.com/cloud/trello/rest/"
+  },
+  {
+   "id": "c55",
+   "url": "https://developer.atlassian.com/cloud/trello/swagger.v3.json",
+   "title": "Trello REST API (OpenAPI)",
+   "quote": "Make Member an admin of Enterprise.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.atlassian.com/cloud/trello/rest/"
+  },
+  {
+   "id": "c56",
+   "url": "https://developer.atlassian.com/cloud/trello/swagger.v3.json",
+   "title": "Trello REST API (OpenAPI)",
+   "quote": "\"APIKey\": {",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.atlassian.com/cloud/trello/rest/"
+  },
+  {
+   "id": "c57",
+   "url": "https://www.okta.com/integrations/trello/",
+   "title": "Integrate Trello with Okta",
+   "quote": "Okta partners with Trello to provide Single Sign-On (SSO) and Just in Time (JIT) provisioning for your users.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c58",
+   "url": "https://www.okta.com/integrations/atlassian-cloud/",
+   "title": "Integrate Atlassian Cloud with Okta",
+   "quote": "Okta Identity Cloud and Atlassian Access combine to provide seamless identity and access management to your Atlassian cloud applications.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c59",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/atlassian-cloud-provisioning-tutorial",
+   "title": "Configure Atlassian Cloud for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Create users in Atlassian Cloud Remove users in Atlassian Cloud when they don't require access anymore Keep user attributes synchronized between Microsoft Entra ID and Atlassian Cloud",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "Pricing plan card says Enterprise includes Atlassian Guard Standard (and Atlassian's IdP page says Guard Standard is included with Enterprise at no extra cost); the pricing comparison table still calls Guard a separate subscription from $4/month/user.",
+   "cite": [
+    "c4",
+    "c22",
+    "c6"
+   ]
+  },
+  {
+   "text": "'Understand user provisioning' says group sync works for Jira, Confluence and Trello; 'Supported identity providers' says group membership sync is only for Jira and Confluence.",
+   "cite": [
+    "c11",
+    "c23"
+   ]
+  }
+ ],
+ "searched": [
+  "https://trello.com/pricing",
+  "https://support.atlassian.com/trello.xml (Trello docs sitemap)",
+  "https://support.atlassian.com/provisioning-users/docs/",
+  "https://developer.atlassian.com/cloud/admin/user-provisioning/swagger.v3.json",
+  "https://developer.atlassian.com/cloud/trello/swagger.v3.json",
+  "https://www.okta.com/integrations/trello/",
+  "https://www.okta.com/integrations/atlassian-cloud/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/atlassian-cloud-provisioning-tutorial"
+ ],
+ "open_questions": [
+  "Whether SCIM deactivation frees the Trello Enterprise seat is not stated.",
+  "Trello REST API rate limits page could not be loaded in this run.",
+  "Whether Guard can be bought on Standard/Premium for SAML (comparison table ambiguous).",
+  "Seat minimum for Enterprise not published on the current pricing page."
+ ]
+}

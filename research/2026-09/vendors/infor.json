@@ -1,0 +1,511 @@
+{
+ "slug": "infor",
+ "vendor": "Infor (Infor OS / CloudSuite)",
+ "vendor_url": "https://www.infor.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Infor (Infor OS / CloudSuite)",
+  "slug": "infor",
+  "category": "Finance, Accounting & Spend",
+  "status": "gated",
+  "scim_plan": "Infor CloudSuite / Infor OS (Contact Sales)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales (no public pricing)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Infor CloudSuite / Infor OS (Contact Sales)",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.infor.com/about/contact",
+  "docs_url": "https://docs.infor.com/inforos/latest/en-us/useradminlib_cloud/inforos_security/jho1449382121585.html",
+  "evidence": "Infor OS Security's SCIM Accounts page \"shows the URLs for the System for Cross-domain Identity Management (SCIM) service and SCIM user identifiers\" so a third-party SCIM application can \"load users to Infor OS Portal automatically\"; Infor publishes no prices (sales contact only).",
+  "notes": "Quote-only: Infor publishes no price list (infor.com/pricing is 404; the contact page routes buyers to sales), so SCIM is gated per rule 6a. Researched Infor OS (the identity/security layer under every Infor CloudSuite: Infor OS Portal, Security, Infor Federation Services), not the individual ERP/HCM/SCM apps. SCIM 2.0 is enabled per tenant (Manage Features > Enable SCIM Service); admins create SCIM user identifiers and passwords in Security > Manage > SCIM Accounts, and the bearer token is base64(identifier:password). SCIM groups map automatically to security roles, functional roles, accounting entities, locations and groups. Okta OIN 'Infor CloudSuite' app supports SAML and SCIM (Create, Update, Deactivate, Group Push, Group Linking; checked items read from page markup); the Entra gallery app provisions users and groups (Microsoft Learn tutorial), including Infor extension attributes. Users can also be imported by CSV/XML.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Infor CloudSuite (Infor OS)",
+   "price_text": "Contact Sales",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c17",
+    "c20"
+   ],
+   "notes": "No public price list; Infor OS (portal, security, IFS) is the platform under every CloudSuite."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c2",
+   "c3",
+   "c9",
+   "c6"
+  ],
+  "plan": "Infor CloudSuite / Infor OS (Contact Sales)",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": null,
+  "auth": {
+   "method": "bearer",
+   "token_source": "Infor OS Portal > Security > Manage > SCIM Accounts > Add new item (SCIM password; User Identifier generated); token = base64(User Identifier:SCIM Password)",
+   "token_expiry": null,
+   "cite": [
+    "c2",
+    "c5",
+    "c10",
+    "c11"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c3",
+    "c8",
+    "c12"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": null,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c12",
+    "c7",
+    "c8"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c12",
+    "c19"
+   ],
+   "notes": "Entra 'disables' users in Infor CloudSuite; disabled users can be re-activated in Security. Infor's SCIM protocol page says deprovisioning 'removes access when users leave'."
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName",
+    "displayName (Groups)"
+   ],
+   "cite": [
+    "c12"
+   ]
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "active",
+    "displayName",
+    "externalId",
+    "name.familyName",
+    "name.givenName",
+    "title",
+    "emails[type eq \"work\"].value"
+   ],
+   "enterprise": [
+    "manager",
+    "department"
+   ],
+   "custom": {
+    "supported": true,
+    "how": "Infor extension schema urn:ietf:params:scim:schemas:extension:infor:2.0:User with actorId, federationId, ifsPersonId, lnUser, userAlias"
+   },
+   "group": [
+    "displayName",
+    "members",
+    "externalId"
+   ],
+   "cite": [
+    "c12",
+    "c13"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "SCIM groups map to security roles, functional security roles, accounting entities, LN user data defaults sets, groups and locations; members get them automatically.",
+   "cite": [
+    "c7"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Entra users with the Default Access role are excluded from provisioning.",
+    "cite": [
+     "c15"
+    ]
+   },
+   {
+    "text": "Deleting a SCIM user identifier breaks any SCIM application configured with it.",
+    "cite": [
+     "c4"
+    ]
+   }
+  ],
+  "notes": "Base URL is shown per tenant on the SCIM Accounts page (Microsoft's tutorial shows an Infor dev example host ending /v2/scim); not recorded as a pattern. Attribute list and filtering come from Microsoft's Entra tutorial, not Infor's docs."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c20",
+   "c21"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": null,
+  "docs_url": "https://docs.infor.com/inforos/latest/en-us/useradminlib_cloud/inforos_security/sff1761747626317.html",
+  "auth": {
+   "methods": [
+    "oauth2"
+   ],
+   "scopes": [],
+   "cite": [
+    "c20"
+   ]
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c20"
+   ]
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "Infor OS Security APIs (REST via the ION API gateway; bearer tokens, OAuth2 scopes, service accounts, client credentials) are used to create and manage users, roles and service accounts. Endpoint paths are not in the public admin guide (API catalogue sits inside the tenant)."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/infor-cloudsuite/",
+   "cite": [
+    "c16"
+   ],
+   "notes": "OIN checked items: SAML, SCIM, Create, Update, Deactivate, Group Push, Group Linking (read from page markup)."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/infor-cloudsuite-provisioning-tutorial",
+   "cite": [
+    "c14",
+    "c12"
+   ],
+   "notes": "Gallery app 'Infor CloudSuite'; provisioning tutorial on Microsoft Learn."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": true,
+  "other_sync": "Okta Active Mode (credential validation against Okta for e-signatures, by support ticket); service users and ION-based security sync.",
+  "docs_public": true,
+  "cite": [
+   "c18",
+   "c17"
+  ],
+  "notes": "Users can be imported and updated by CSV or XML (XML needed for roles). SAML 2.0 federated security is configured in Infor OS."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.infor.com/about/contact",
+   "title": "Global Contact & Support Information | Infor",
+   "quote": "Reach sales, ask questions, get support, explore partnership.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://docs.infor.com/inforos/latest/en-us/useradminlib_cloud/inforos_security/jho1449382121585.html",
+   "title": "SCIM Accounts | Infor OS Security Administration Guide (Cloud)",
+   "quote": "The SCIM Accounts page shows the URLs for the System for Cross-domain Identity Management (SCIM) service and SCIM user identifiers.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://docs.infor.com/inforos/latest/en-us/useradminlib_cloud/inforos_security/jho1449382121585.html",
+   "title": "SCIM Accounts | Infor OS Security Administration Guide (Cloud)",
+   "quote": "Using a third-party SCIM application enables you to load users to Infor OS Portal automatically.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://docs.infor.com/inforos/latest/en-us/useradminlib_cloud/inforos_security/jho1449382121585.html",
+   "title": "SCIM Accounts | Infor OS Security Administration Guide (Cloud)",
+   "quote": "Upon deletion, any third-party SCIM application that is configured to use this SCIM user identifier no longer works.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://docs.infor.com/inforos/latest/en-us/useradminlib_cloud/inforos_security/lsm1436532884298.html",
+   "title": "Adding an SCIM user identifier | Infor OS Security Administration Guide (Cloud)",
+   "quote": "Specify an SCIM password and confirm it.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://docs.infor.com/inforos/latest/en-us/useradminlib_cloud/inforos_security/nmc1761822706318.html",
+   "title": "SCIM protocol | Infor OS Security Administration Guide (Cloud)",
+   "quote": "This enables seamless integration between systems like Okta, Microsoft Entra ID, and the Security application.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://docs.infor.com/inforos/latest/en-us/useradminlib_cloud/inforos_security/szq1531254449510.html",
+   "title": "SCIM groups | Infor OS Security Administration Guide (Cloud)",
+   "quote": "Automatic association means that users joining an SCIM group automatically receive associated security roles and permissions.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.infor.com/inforos/latest/en-us/useradminlib_cloud/inforos_security/szq1531254449510.html",
+   "title": "SCIM groups | Infor OS Security Administration Guide (Cloud)",
+   "quote": "The SCIM Agent is a component of the system. These read-only fields are provisioned by the SCIM Agent:",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.infor.com/inforos/latest/en-us/useradminlib_cloud/inforos_security/sbz1764772775892.html",
+   "title": "Manage Features | Infor OS Security Administration Guide (Cloud)",
+   "quote": "Select the Enable SCIM Service check box in the Manage Features section to enable or disable SCIM accounts.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/infor-cloudsuite-provisioning-tutorial",
+   "title": "Configure Infor CloudSuite for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Navigate to SCIM Accounts.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c11",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/infor-cloudsuite-provisioning-tutorial",
+   "title": "Configure Infor CloudSuite for automatic user provisioning with Microsoft Entra ID",
+   "quote": "To generate the bearer token, copy the User Identifier and SCIM Password. Paste them in notepad++ separated by a colon.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/infor-cloudsuite-provisioning-tutorial",
+   "title": "Configure Infor CloudSuite for automatic user provisioning with Microsoft Entra ID",
+   "quote": "This section guides you through the steps to configure the Microsoft Entra provisioning service to create, update, and disable users and/or groups in Infor CloudSuite based on user and/or group assignments in Microsoft Entra ID.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/infor-cloudsuite-provisioning-tutorial",
+   "title": "Configure Infor CloudSuite for automatic user provisioning with Microsoft Entra ID",
+   "quote": "urn:ietf:params:scim:schemas:extension:infor:2.0:User:actorId",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c14",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/infor-cloudsuite-provisioning-tutorial",
+   "title": "Configure Infor CloudSuite for automatic user provisioning with Microsoft Entra ID",
+   "quote": "In the Add from the gallery section, type Infor CloudSuite , select Infor CloudSuite in the search box.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/infor-cloudsuite-provisioning-tutorial",
+   "title": "Configure Infor CloudSuite for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Users with the Default Access role are excluded from provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://www.okta.com/integrations/infor-cloudsuite/",
+   "title": "Integrate Infor CloudSuite with Okta",
+   "quote": "Okta's integration with Infor CloudSuite allows for seamless single sign-on and enhanced user provisioning providing a robust IAM solution that can facilitate all your SSO and onboarding needs. Last updated: Jul. 2 2026",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.infor.com/inforos/latest/en-us/useradminlib_cloud/inforos_security/dhp1617425328992.html",
+   "title": "SAML 2.0 | Infor OS Security Administration Guide (Cloud)",
+   "quote": "This flag enables or disables federated security using SAML 2.0.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.infor.com/inforos/latest/en-us/useradminlib_cloud/inforos_security/gcs1763652487699.html",
+   "title": "Import Users | Infor OS Security Administration Guide (Cloud)",
+   "quote": "The import process supports CSV and XML file formats with their specific capabilities and requirements:",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.infor.com/inforos/latest/en-us/useradminlib_cloud/inforos_security/lsm1436532877882.html",
+   "title": "Applying actions to users | Infor OS Security Administration Guide (Cloud)",
+   "quote": "The Action menu consists of these options: Activate Draft User Activate Disable Copy Delete",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.infor.com/inforos/latest/en-us/useradminlib_cloud/inforos_security/sff1761747626317.html",
+   "title": "Security APIs | Infor OS Security Administration Guide (Cloud)",
+   "quote": "Create and manage users, roles, and service accounts.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.infor.com/inforos/latest/en-us/useradminlib_cloud/inforos_security/sff1761747626317.html",
+   "title": "Security APIs | Infor OS Security Administration Guide (Cloud)",
+   "quote": "Support SCIM (System for Cross-domain Identity Management), registry services, and session management.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.infor.com/pricing (404); https://www.infor.com/sitemaps/en-us_sitemap.xml (no pricing page); https://www.infor.com/about/contact",
+  "https://docs.infor.com/inforos/latest/en-us/useradminlib_cloud/sitemap.html; all 340 inforospag and inforos_security topics fetched and searched for SCIM",
+  "Infor OS Security Administration Guide (Cloud): SCIM Accounts, Adding an SCIM user identifier, SCIM protocol, SCIM groups, Manage Features, Security APIs, Import Users, SAML 2.0",
+  "Microsoft Learn: infor-cloudsuite-provisioning-tutorial",
+  "Okta OIN: okta.com/integrations/infor-cloudsuite/ (SAML + SCIM); /infor/ (404)"
+ ],
+ "open_questions": [
+  "Exact SCIM base URL pattern, token expiry, PATCH vs PUT support and hard delete behaviour are not in Infor's public docs.",
+  "Whether disabling a user frees a licence is not documented.",
+  "Infor OS Security API endpoint paths are not public.",
+  "Google, OneLogin and JumpCloud catalogue entries not checked.",
+  "Which Infor contracts include Infor OS SCIM (all multi-tenant CloudSuites or only some) is not stated."
+ ]
+}

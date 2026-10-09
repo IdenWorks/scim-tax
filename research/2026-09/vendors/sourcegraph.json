@@ -1,0 +1,565 @@
+{
+ "slug": "sourcegraph",
+ "vendor": "Sourcegraph",
+ "vendor_url": "https://sourcegraph.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Sourcegraph",
+  "slug": "sourcegraph",
+  "category": "Developer Tools & CI/CD",
+  "status": "free",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "From $16K/yr minimum annual contract",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Enterprise",
+  "team_price_text": "Enterprise: from $16K minimum annual contract",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Enterprise",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": null
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://sourcegraph.com/pricing",
+  "docs_url": "https://sourcegraph.com/docs/admin/scim",
+  "evidence": "Sourcegraph sells a single Enterprise plan ('Starting at $16K Minimum annual contract'), and its docs say 'Sourcegraph supports SCIM 2.0 for provisioning and de-provisioning users.'",
+  "notes": "New row. The pricing page lists only one plan, Enterprise, starting at a $16K minimum annual contract (Contact sales, single-tenant cloud or self-hosted), so SCIM sits on the only paid plan with no upcharge (rule 1a: single paid plan). Reviewers may prefer gated since that plan is Enterprise/contact-sales only. Per-user price is not published, so per-user fields are null. SCIM 2.0 (beta) is Users-only, at {instance}/.api/scim/v2/ with a static bearer token set in site config; tested only with Okta and Microsoft Entra ID; one SCIM client at a time; no bulk, sorting or ETags. Requires an existing IdP auth provider (SAML/OIDC). The SAML page still says 'Work is planned to support SCIM on SAML auth providers' (stale, see conflicts). No Okta OIN or Entra gallery app found (both 404), so IdPs use the generic endpoint. User management otherwise via the GraphQL debug API (deleteUser soft or hard delete).",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Enterprise",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Enterprise",
+   "price_text": "Starting at $16K minimum annual contract",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c19"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c4",
+   "c5",
+   "c8",
+   "c17"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://{sourcegraph-instance}/.api/scim/v2/",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Admin-generated random token (max 255 chars) set as scim.authToken in site configuration",
+   "token_expiry": null,
+   "cite": [
+    "c6",
+    "c7"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": false,
+   "Me": null,
+   "cite": [
+    "c9",
+    "c14"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": true,
+   "group_push": null,
+   "group_membership": null,
+   "cite": [
+    "c9",
+    "c10"
+   ]
+  },
+  "deprovision": {
+   "action": null,
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [],
+   "notes": "Okta is set to 'Deactivate Users' and DELETE is supported, but the docs do not say what Sourcegraph does on deactivation. Admin 'Delete' soft-deletes the user and all associated data."
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [],
+   "cite": [
+    "c13"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c12"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "userName (preferred username)",
+    "name",
+    "emails"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": [
+    "c11",
+    "c18"
+   ]
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SCIM is in beta and only validated with Okta and Microsoft Entra ID.",
+    "cite": [
+     "c16",
+     "c17"
+    ]
+   },
+   {
+    "text": "No bulk operations, sorting or ETags; only one SCIM client can be configured at a time.",
+    "cite": [
+     "c14",
+     "c15"
+    ]
+   },
+   {
+    "text": "Users only: the User endpoint syncs only username, name and email addresses.",
+    "cite": [
+     "c4",
+     "c18"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c22",
+   "c23",
+   "c3"
+  ],
+  "plan": "Enterprise",
+  "api_tax": false,
+  "style": "GraphQL",
+  "base_url": "https://{sourcegraph-instance}/.api/graphql",
+  "docs_url": "https://sourcegraph.com/docs/api/graphql",
+  "auth": {
+   "methods": [
+    "api_key",
+    "oauth2"
+   ],
+   "scopes": [],
+   "cite": [
+    "c23"
+   ],
+   "notes": "Access tokens (personal or service account) or OAuth access tokens."
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c24"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/.api/graphql",
+    "purpose": "GraphQL debug API; admin mutations include updateUser and deleteUser (soft, or hard: true)",
+    "cite": [
+     "c22",
+     "c24"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": [],
+   "notes": "Audit events are emitted to structured logs (docs/admin/audit-log), not a query API."
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "The GraphQL API is a debug API with no backwards-compatibility guarantees.",
+    "cite": [
+     "c22"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": false,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c26",
+    "c16"
+   ],
+   "notes": "Custom SAML 2.0 app integration with SCIM provisioning per Sourcegraph's guide; okta.com/integrations/sourcegraph/ returns 404."
+  },
+  "entra": {
+   "listed": false,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c16"
+   ],
+   "notes": "Generic SCIM with scim.identityProvider set to 'Azure AD'; Entra gallery tutorials return 404."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c19"
+  ],
+  "notes": "SAML allowSignup defaults to true (accounts created on first sign-in); OIDC and other providers also exist."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://sourcegraph.com/pricing",
+   "title": "Pricing | Sourcegraph",
+   "quote": "Starting at $16K Minimum annual contract. Includes credits for AI features; scales with team size",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://sourcegraph.com/pricing",
+   "title": "Pricing | Sourcegraph",
+   "quote": "Enterprise-grade security and admin controls",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://sourcegraph.com/pricing",
+   "title": "Pricing | Sourcegraph",
+   "quote": "GraphQL and REST APIs",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://sourcegraph.com/docs/admin/scim",
+   "title": "SCIM - Sourcegraph docs",
+   "quote": "Sourcegraph supports SCIM 2.0 for provisioning and de-provisioning users.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://sourcegraph.com/docs/admin/scim",
+   "title": "SCIM - Sourcegraph docs",
+   "quote": "To use SCIM, you must have an existing IdP configured as an auth provider on your Sourcegraph instance.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://sourcegraph.com/docs/admin/scim",
+   "title": "SCIM - Sourcegraph docs",
+   "quote": "For authenticating SCIM requests, we currently support Bearer token authentication.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://sourcegraph.com/docs/admin/scim",
+   "title": "SCIM - Sourcegraph docs",
+   "quote": "Generate a random alphanumeric bearer token of maximum 255 characters.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://sourcegraph.com/docs/admin/scim",
+   "title": "SCIM - Sourcegraph docs",
+   "quote": "https://sourcegraph.example.com/.api/scim/v2/",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://sourcegraph.com/docs/admin/scim",
+   "title": "SCIM - Sourcegraph docs",
+   "quote": "Creating users (POST) Updating users (PATCH) Replacing users (PUT) Deleting users (DELETE) Listing users (GET) Getting users (GET)",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://sourcegraph.com/docs/admin/scim",
+   "title": "SCIM - Sourcegraph docs",
+   "quote": "Enable \"Create Users\", \"Update User Attributes\" and \"Deactivate Users\".",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c11",
+   "url": "https://sourcegraph.com/docs/admin/scim",
+   "title": "SCIM - Sourcegraph docs",
+   "quote": "We sync the following attributes: preferred username name email addresses",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://sourcegraph.com/docs/admin/scim",
+   "title": "SCIM - Sourcegraph docs",
+   "quote": "Pagination for listing users",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://sourcegraph.com/docs/admin/scim",
+   "title": "SCIM - Sourcegraph docs",
+   "quote": "Filtering for listing users",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c14",
+   "url": "https://sourcegraph.com/docs/admin/scim",
+   "title": "SCIM - Sourcegraph docs",
+   "quote": "Bulk operations – need to add users one by one",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://sourcegraph.com/docs/admin/scim",
+   "title": "SCIM - Sourcegraph docs",
+   "quote": "Multi-tenancy – you can only have 1 SCIM client configured at a time.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://sourcegraph.com/docs/admin/scim",
+   "title": "SCIM - Sourcegraph docs",
+   "quote": "we’ve only tested it against two IdPs: Okta and Microsoft Entra ID.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c17",
+   "url": "https://sourcegraph.com/docs/admin/scim",
+   "title": "SCIM - Sourcegraph docs",
+   "quote": "This feature is in beta while we're testing it with more IdPs.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c18",
+   "url": "https://sourcegraph.com/docs/admin/scim",
+   "title": "SCIM - Sourcegraph docs",
+   "quote": "The User endpoint only synchronizes attributes needed to create a Sourcegraph account.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c19",
+   "url": "https://sourcegraph.com/docs/admin/auth/saml",
+   "title": "SAML - Sourcegraph docs",
+   "quote": "Allows new users to creating their accounts via SAML authentication",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c20",
+   "url": "https://sourcegraph.com/docs/admin/auth/saml",
+   "title": "SAML - Sourcegraph docs",
+   "quote": "Work is planned to support SCIM on SAML auth providers",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c21",
+   "url": "https://sourcegraph.com/docs/admin/user-data-deletion",
+   "title": "User data deletion - Sourcegraph docs",
+   "quote": "\"Delete\": the user and ALL associated data is marked as deleted in the DB and never served again.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c22",
+   "url": "https://sourcegraph.com/docs/api/graphql",
+   "title": "Sourcegraph GraphQL debug API - Sourcegraph docs",
+   "quote": "The GraphQL API is intended primarily for debugging use cases.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c23",
+   "url": "https://sourcegraph.com/docs/api/graphql",
+   "title": "Sourcegraph GraphQL debug API - Sourcegraph docs",
+   "quote": "There are two ways to authenticate with the Sourcegraph GraphQL API:",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c24",
+   "url": "https://sourcegraph.com/docs/admin/how-to/mutate-user-api",
+   "title": "Admin Level GraphQL Mutations - Sourcegraph docs",
+   "quote": "There are two different options for removing a user:",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c25",
+   "url": "https://sourcegraph.com/docs/admin/audit-log",
+   "title": "Audit Log - Sourcegraph docs",
+   "quote": "User creation, modification, deletion, and email verification",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c26",
+   "url": "https://sourcegraph.com/docs/admin/scim",
+   "title": "SCIM - Sourcegraph docs",
+   "quote": "Set \"Provisioning\" to \"SCIM\". This creates a new tab called \"Provisioning\".",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The SAML page says 'Work is planned to support SCIM on SAML auth providers', while the SCIM page documents SCIM provisioning on an Okta SAML 2.0 app integration.",
+   "cite": [
+    "c20",
+    "c26"
+   ]
+  }
+ ],
+ "searched": [
+  "https://sourcegraph.com/pricing",
+  "https://sourcegraph.com/docs/admin/scim",
+  "https://sourcegraph.com/docs/admin/auth/saml",
+  "https://sourcegraph.com/docs/sitemap.xml",
+  "https://www.okta.com/integrations/sourcegraph/ (404)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/sourcegraph-tutorial (404)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/sourcegraph-provisioning-tutorial (404)"
+ ],
+ "open_questions": [
+  "What SCIM deactivation does in Sourcegraph (soft delete vs suspend) and whether it frees a licence seat is not documented.",
+  "Whether SCIM supports Groups, ServiceProviderConfig, Schemas or ResourceTypes is not stated.",
+  "Per-user Enterprise price is not published.",
+  "Whether SCIM is licence-gated on self-hosted free licences is not stated."
+ ]
+}

@@ -1,0 +1,902 @@
+{
+ "slug": "cloudflare",
+ "vendor": "Cloudflare",
+ "vendor_url": "https://www.cloudflare.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Cloudflare",
+  "slug": "cloudflare",
+  "category": "Cloud, Infrastructure & Observability",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Pro",
+  "team_price_text": "Pro: $20/mo per domain (flat)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Free",
+  "sso_price_per_user_mo": 0,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": false,
+   "deactivate": true,
+   "delete": null,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.cloudflare.com/plans/",
+  "docs_url": "https://developers.cloudflare.com/fundamentals/account/account-security/scim-setup/",
+  "evidence": "Cloudflare's docs say \"Cloudflare dashboard SCIM provisioning is only available to Enterprise customers using Okta, Microsoft Entra, or Authentik\", while dashboard SSO \"is available for free to all plans\".",
+  "notes": "New row. Scored on the Cloudflare dashboard (account members). Application-services plans are flat per domain, not per user: Free $0, Pro $20/mo annual ($25 monthly), Business $200/mo annual ($250 monthly), Enterprise (shown as Contract, custom, billed annually); the SCIM doc says Enterprise, the pricing page now labels that tier Contract. Dashboard SSO (via a Zero Trust IdP connector) is free on all plans. SCIM uses an account API token with SCIM Provisioning Edit; Okta is set up with the generic SCIM 2.0 Test App and Entra with a non-gallery app (Authentik also documented). SCIM creates members with Minimal Account Access, pushes User Groups that carry permission policies, and removes the account membership on active:false; profile attribute updates are not supported. Separately, Cloudflare Zero Trust has its own SCIM for any SCIM 2.0 IdP on all Zero Trust plans (Free up to 50 users, $7/user/mo pay-as-you-go), but it only deprovisions and syncs groups; it does not create users. Members, user groups and audit-log APIs are on all plans.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Free",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "$0/month",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": true,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c4",
+    "c5",
+    "c6",
+    "c26",
+    "c38"
+   ]
+  },
+  {
+   "name": "Pro",
+   "price_text": "$20/mo billed annually, or $25/mo billed monthly (per domain)",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c1",
+    "c5",
+    "c6",
+    "c26",
+    "c38"
+   ],
+   "notes": "Flat per-domain price, not per user."
+  },
+  {
+   "name": "Business",
+   "price_text": "$200/mo billed annually, or $250/mo billed monthly (per domain)",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c2",
+    "c5",
+    "c6",
+    "c26",
+    "c38"
+   ]
+  },
+  {
+   "name": "Enterprise (Contract)",
+   "price_text": "Custom, billed annually",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c3",
+    "c5",
+    "c6",
+    "c26",
+    "c38"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c6",
+   "c7",
+   "c15"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/scim/v2",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Cloudflare API token (account-owned recommended) with Account > SCIM Provisioning > Edit",
+   "token_expiry": null,
+   "cite": [
+    "c13",
+    "c14",
+    "c16"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c8",
+    "c19"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": null,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c8",
+    "c9",
+    "c10",
+    "c17",
+    "c18",
+    "c19",
+    "c23"
+   ],
+   "notes": "PATCH/PUT are used to send active:false (removes the account membership); profile attribute updates (firstName, lastName, email) are not applied, and Okta's Update User Attributes is unsupported, so row.scim_ops.update is false."
+  },
+  "deprovision": {
+   "action": "remove_from_org",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c8",
+    "c9"
+   ],
+   "notes": "Unassigning the user removes them as an account member; removing a user from all role groups leaves them a member with Minimal Account Access. Seats do not apply to per-domain plans."
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "firstName",
+    "lastName",
+    "email",
+    "active"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c8",
+    "c21",
+    "c23"
+   ],
+   "notes": "Attribute names as written in Cloudflare's docs; no SCIM schema or attribute list is published. Group attributes inferred from Push Groups only, so group list is the minimum; Entra requires UPN and email to match."
+  },
+  "roles": {
+   "supported": true,
+   "how": "Pushed IdP groups become Cloudflare User Groups; permission policies (roles and scopes) are attached to the group in Cloudflare. Legacy CF-<accountID>-<Role> Virtual Groups are deprecated.",
+   "cite": [
+    "c10",
+    "c24",
+    "c25"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Only Okta, Microsoft Entra and Authentik are supported IdPs.",
+    "cite": [
+     "c6"
+    ]
+   },
+   {
+    "text": "User profile fields (firstName, lastName, email) are set only at initial provisioning; email-domain changes are rejected.",
+    "cite": [
+     "c22",
+     "c23"
+    ]
+   },
+   {
+    "text": "The sole Super Administrator on an Enterprise account is not deprovisioned; misconfigured groups can remove all Super Administrators.",
+    "cite": [
+     "c11"
+    ]
+   },
+   {
+    "text": "SCIM group names cannot begin with CF; SCIM-managed User Groups cannot be edited in the dashboard or API.",
+    "cite": [
+     "c12",
+     "c24"
+    ]
+   },
+   {
+    "text": "Removing a user from a SCIM group does not remove account membership; only active:false does.",
+    "cite": [
+     "c47"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c26",
+   "c38",
+   "c15"
+  ],
+  "plan": "Free",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://api.cloudflare.com/client/v4",
+  "docs_url": "https://developers.cloudflare.com/api/resources/accounts/subresources/members/",
+  "auth": {
+   "methods": [
+    "api_token",
+    "api_key"
+   ],
+   "scopes": [
+    "SCIM Provisioning",
+    "Account Settings Write",
+    "Account Settings Read"
+   ],
+   "cite": [
+    "c26"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": false,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c26",
+    "c27",
+    "c28",
+    "c29",
+    "c30",
+    "c31",
+    "c33",
+    "c34",
+    "c35",
+    "c40",
+    "c41"
+   ],
+   "notes": "Add Member invites an email to the account (Enterprise can skip email confirmation for existing Cloudflare users); Remove Member revokes access. Cloudflare user profiles are owned by the user, not the account."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/accounts/{account_id}/members",
+    "purpose": "List members",
+    "cite": [
+     "c26"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/accounts/{account_id}/members",
+    "purpose": "Add member",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/accounts/{account_id}/members/{member_id}",
+    "purpose": "Member details",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/accounts/{account_id}/members/{member_id}",
+    "purpose": "Update member (roles/policies)",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/accounts/{account_id}/members/{member_id}",
+    "purpose": "Remove member",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/accounts/{account_id}/roles",
+    "purpose": "List roles (deprecated in favour of iam/permission_groups)",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/accounts/{account_id}/iam/user_groups",
+    "purpose": "List user groups",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/accounts/{account_id}/iam/user_groups",
+    "purpose": "Create user group",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/accounts/{account_id}/iam/user_groups/{user_group_id}/members",
+    "purpose": "Add user group members",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/accounts/{account_id}/iam/user_groups/{user_group_id}/members/{member_id}",
+    "purpose": "Remove user group member",
+    "cite": [
+     "c35"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/accounts/{account_id}/audit_logs",
+    "purpose": "Account audit logs (v1)",
+    "cite": [
+     "c36"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/accounts/{account_id}/logs/audit",
+    "purpose": "Account audit logs (v2)",
+    "cite": [
+     "c37"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Free",
+   "cite": [
+    "c36",
+    "c37",
+    "c38"
+   ]
+  },
+  "rate_limits": {
+   "text": "1,200 requests per five minutes per user (global Client API limit); members list max 50 per page.",
+   "cite": [
+    "c39",
+    "c46"
+   ]
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": false,
+   "provisioning": false,
+   "kind": "swa",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/cloudflare/",
+   "cite": [
+    "c42",
+    "c16"
+   ],
+   "notes": "The OIN 'Cloudflare' app (last updated 2018) has only SWA checked. Cloudflare's own guide provisions through Okta's generic SCIM 2.0 Test App, so row.idp.okta is via_generic. built_by not stated on the page; idp assumed for an SWA template."
+  },
+  "entra": {
+   "listed": null,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c20"
+   ],
+   "notes": "No gallery app (cloudflare-tutorial 404); Cloudflare documents a non-gallery Entra app pointed at the SCIM endpoint."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": "Cloudflare Zero Trust SCIM (separate integration, any SCIM 2.0 IdP) deprovisions Zero Trust users and syncs groups for Access/Gateway policies, but does not create dashboard members.",
+  "docs_public": true,
+  "cite": [
+   "c43",
+   "c44"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.cloudflare.com/plans/",
+   "title": "Cloudflare pricing",
+   "quote": "$20 /mo billed annually, or $25/mo billed monthly",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://www.cloudflare.com/plans/",
+   "title": "Cloudflare pricing",
+   "quote": "$200 /mo billed annually, or $250/mo billed monthly",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://www.cloudflare.com/plans/",
+   "title": "Cloudflare pricing",
+   "quote": "For mission-critical applications that are core to your business.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://www.cloudflare.com/plans/",
+   "title": "Cloudflare pricing",
+   "quote": "For personal or hobby projects that aren't business-critical.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://developers.cloudflare.com/fundamentals/manage-members/dashboard-sso/index.md",
+   "title": "Set up dashboard SSO",
+   "quote": "Cloudflare Dashboard SSO is available for free to all plans.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.cloudflare.com/fundamentals/manage-members/dashboard-sso/"
+  },
+  {
+   "id": "c6",
+   "url": "https://developers.cloudflare.com/fundamentals/account/account-security/scim-setup/",
+   "title": "SCIM provisioning",
+   "quote": "Cloudflare dashboard SCIM provisioning is only available to Enterprise customers using Okta, Microsoft Entra, or Authentik.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://developers.cloudflare.com/fundamentals/account/account-security/scim-setup/index.md",
+   "title": "SCIM provisioning",
+   "quote": "Cloudflare supports bulk provisioning of users into the Cloudflare dashboard by using the System for Cross-domain Identity Management (SCIM) protocol.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.cloudflare.com/fundamentals/account/account-security/scim-setup/"
+  },
+  {
+   "id": "c8",
+   "url": "https://developers.cloudflare.com/fundamentals/account/account-security/scim-setup/index.md",
+   "title": "SCIM provisioning",
+   "quote": "Account membership removal requires the identity provider to send `active: false` in a `PATCH /Users` or `PUT /Users` request.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.cloudflare.com/fundamentals/account/account-security/scim-setup/"
+  },
+  {
+   "id": "c9",
+   "url": "https://developers.cloudflare.com/fundamentals/account/account-security/scim-setup/index.md",
+   "title": "SCIM provisioning",
+   "quote": "Assign the user to a SCIM application. They will be assigned the Minimal Account Access role so that their dash experience is not broken.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.cloudflare.com/fundamentals/account/account-security/scim-setup/"
+  },
+  {
+   "id": "c10",
+   "url": "https://developers.cloudflare.com/fundamentals/account/account-security/scim-setup/index.md",
+   "title": "SCIM provisioning",
+   "quote": "Add the user to a group in the IdP which is pushed via SCIM. They must also be assigned to the SCIM application and exist as an account member.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.cloudflare.com/fundamentals/account/account-security/scim-setup/"
+  },
+  {
+   "id": "c11",
+   "url": "https://developers.cloudflare.com/fundamentals/account/account-security/scim-setup/index.md",
+   "title": "SCIM provisioning",
+   "quote": "If a user is the only Super Administrator on an Enterprise account, they will not be deprovisioned.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.cloudflare.com/fundamentals/account/account-security/scim-setup/"
+  },
+  {
+   "id": "c12",
+   "url": "https://developers.cloudflare.com/fundamentals/account/account-security/scim-setup/index.md",
+   "title": "SCIM provisioning",
+   "quote": "SCIM group names cannot begin with the reserved prefix `CF`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.cloudflare.com/fundamentals/account/account-security/scim-setup/"
+  },
+  {
+   "id": "c13",
+   "url": "https://developers.cloudflare.com/fundamentals/account/account-security/scim-setup/index.md",
+   "title": "SCIM provisioning",
+   "quote": "Account API tokens are recommended for SCIM Provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.cloudflare.com/fundamentals/account/account-security/scim-setup/"
+  },
+  {
+   "id": "c14",
+   "url": "https://developers.cloudflare.com/fundamentals/account/account-security/scim-setup/index.md",
+   "title": "SCIM provisioning",
+   "quote": "| Account | SCIM Provisioning | Edit |",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.cloudflare.com/fundamentals/account/account-security/scim-setup/"
+  },
+  {
+   "id": "c15",
+   "url": "https://developers.cloudflare.com/fundamentals/account/account-security/scim-setup/okta/index.md",
+   "title": "Provision with Okta",
+   "quote": "In SCIM 2.0 Base URL, enter: `https://api.cloudflare.com/client/v4/accounts/<accountID>/scim/v2`",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.cloudflare.com/fundamentals/account/account-security/scim-setup/okta/"
+  },
+  {
+   "id": "c16",
+   "url": "https://developers.cloudflare.com/fundamentals/account/account-security/scim-setup/okta/index.md",
+   "title": "Provision with Okta",
+   "quote": "Locate and select SCIM 2.0 Test App (OAuth Bearer Token).",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.cloudflare.com/fundamentals/account/account-security/scim-setup/okta/"
+  },
+  {
+   "id": "c17",
+   "url": "https://developers.cloudflare.com/fundamentals/account/account-security/scim-setup/okta/index.md",
+   "title": "Provision with Okta",
+   "quote": "The Update User Attributes option is not supported.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.cloudflare.com/fundamentals/account/account-security/scim-setup/okta/"
+  },
+  {
+   "id": "c18",
+   "url": "https://developers.cloudflare.com/fundamentals/account/account-security/scim-setup/okta/index.md",
+   "title": "Provision with Okta",
+   "quote": "Enable Create Users and Deactivate Users.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.cloudflare.com/fundamentals/account/account-security/scim-setup/okta/"
+  },
+  {
+   "id": "c19",
+   "url": "https://developers.cloudflare.com/fundamentals/account/account-security/scim-setup/okta/index.md",
+   "title": "Provision with Okta",
+   "quote": "In the Push Groups tab, add the Okta groups you want to synchronize with Cloudflare dashboard.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.cloudflare.com/fundamentals/account/account-security/scim-setup/okta/"
+  },
+  {
+   "id": "c20",
+   "url": "https://developers.cloudflare.com/fundamentals/account/account-security/scim-setup/entra/index.md",
+   "title": "Provision with Microsoft Entra",
+   "quote": "Select Integrate any other application you don't find in the gallery (Non-gallery).",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.cloudflare.com/fundamentals/account/account-security/scim-setup/entra/"
+  },
+  {
+   "id": "c21",
+   "url": "https://developers.cloudflare.com/fundamentals/account/account-security/scim-setup/entra/index.md",
+   "title": "Provision with Microsoft Entra",
+   "quote": "To successfully synchronize the group details into Cloudflare the `User Principal Name` (of `Identity`) and `Email` (of `Contact Information`) fields of each user must be identical.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.cloudflare.com/fundamentals/account/account-security/scim-setup/entra/"
+  },
+  {
+   "id": "c22",
+   "url": "https://developers.cloudflare.com/fundamentals/account/account-security/scim-setup/troubleshooting/index.md",
+   "title": "SCIM troubleshooting",
+   "quote": "any SCIM `PATCH`/`PUT` operations that change email domains will be rejected.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.cloudflare.com/fundamentals/account/account-security/scim-setup/troubleshooting/"
+  },
+  {
+   "id": "c23",
+   "url": "https://developers.cloudflare.com/fundamentals/manage-members/user-groups/",
+   "title": "User Groups",
+   "quote": "Cloudflare does not currently support updating user profile fields ( `firstName`, `lastName`, or `email`) via SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.cloudflare.com/fundamentals/manage-members/user-groups/"
+  },
+  {
+   "id": "c24",
+   "url": "https://developers.cloudflare.com/fundamentals/manage-members/user-groups/",
+   "title": "User Groups",
+   "quote": "You cannot change the name, members, or delete the group manually from the Cloudflare dashboard or API.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.cloudflare.com/fundamentals/manage-members/user-groups/"
+  },
+  {
+   "id": "c25",
+   "url": "https://developers.cloudflare.com/fundamentals/reference/migration-guides/scim-virtual-groups-migration/index.md",
+   "title": "SCIM v1 to v2 Migration",
+   "quote": "Virtual Groups are now deprecated.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.cloudflare.com/fundamentals/reference/migration-guides/scim-virtual-groups-migration/"
+  },
+  {
+   "id": "c26",
+   "url": "https://developers.cloudflare.com/api/resources/accounts/subresources/members/methods/list/",
+   "title": "List Members",
+   "quote": "List all members of an account.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c27",
+   "url": "https://developers.cloudflare.com/api/resources/accounts/subresources/members/methods/create/",
+   "title": "Add Member",
+   "quote": "Add a user to the list of members for this account.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c28",
+   "url": "https://developers.cloudflare.com/api/resources/accounts/subresources/members/methods/update/",
+   "title": "Update Member",
+   "quote": "Modify an account member.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c29",
+   "url": "https://developers.cloudflare.com/api/resources/accounts/subresources/members/methods/delete/",
+   "title": "Remove Member",
+   "quote": "Remove a member from an account.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c30",
+   "url": "https://developers.cloudflare.com/api/resources/accounts/subresources/members/methods/get/",
+   "title": "Member Details",
+   "quote": "Get information about a specific member of an account.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c31",
+   "url": "https://developers.cloudflare.com/api/resources/accounts/subresources/roles/methods/list/",
+   "title": "List Roles",
+   "quote": "Get all available roles for an account.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c32",
+   "url": "https://developers.cloudflare.com/api/resources/iam/subresources/user_groups/methods/list/",
+   "title": "List User Groups",
+   "quote": "List all the user groups for an account.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c33",
+   "url": "https://developers.cloudflare.com/api/resources/iam/subresources/user_groups/methods/create/",
+   "title": "Create User Group",
+   "quote": "Create a new user group under the specified account.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c34",
+   "url": "https://developers.cloudflare.com/api/resources/iam/subresources/user_groups/subresources/members/methods/create/",
+   "title": "Add User Group Members",
+   "quote": "Add members to a User Group.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c35",
+   "url": "https://developers.cloudflare.com/api/resources/iam/subresources/user_groups/subresources/members/methods/delete/",
+   "title": "Remove User Group Member",
+   "quote": "Remove a member from User Group",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c36",
+   "url": "https://developers.cloudflare.com/api/resources/audit_logs/methods/list/",
+   "title": "Get account audit logs",
+   "quote": "Gets a list of audit logs for an account. Can be filtered by who made the change, on which zone, and the timeframe of the change.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c37",
+   "url": "https://developers.cloudflare.com/api/resources/accounts/subresources/logs/subresources/audit/methods/list/",
+   "title": "Get account audit logs (Version 2)",
+   "quote": "GET /accounts/{account_id}/logs/audit",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c38",
+   "url": "https://developers.cloudflare.com/fundamentals/account/account-security/review-audit-logs/index.md",
+   "title": "Review audit logs - v1",
+   "quote": "Audit Logs are available on all plan types and are captured for both individual users and for multi-user organizations.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.cloudflare.com/fundamentals/account/account-security/review-audit-logs/"
+  },
+  {
+   "id": "c39",
+   "url": "https://developers.cloudflare.com/fundamentals/api/reference/limits/index.md",
+   "title": "API rate limits",
+   "quote": "The global rate limit for the Cloudflare API is 1,200 requests per five minute period per user",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.cloudflare.com/fundamentals/api/reference/limits/"
+  },
+  {
+   "id": "c40",
+   "url": "https://developers.cloudflare.com/fundamentals/manage-members/manage/index.md",
+   "title": "Manage members",
+   "quote": "To revoke a member's access to your account using the API, send a DELETE request.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.cloudflare.com/fundamentals/manage-members/manage/"
+  },
+  {
+   "id": "c41",
+   "url": "https://developers.cloudflare.com/fundamentals/manage-members/manage/index.md",
+   "title": "Manage members",
+   "quote": "If a user already has an account with Cloudflare and you have an Enterprise account, you can also select Skip email confirmation",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.cloudflare.com/fundamentals/manage-members/manage/"
+  },
+  {
+   "id": "c42",
+   "url": "https://www.okta.com/integrations/cloudflare/",
+   "title": "Cloudflare | Okta Integration Network",
+   "quote": "Cloudflare provides content delivery network services, DDoS mitigation, Internet security and distributed domain name server services",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c43",
+   "url": "https://developers.cloudflare.com/cloudflare-one/team-and-resources/users/scim/index.md",
+   "title": "Zero Trust SCIM provisioning",
+   "quote": "Cloudflare does not provision new users in Zero Trust when they are added to the identity provider",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.cloudflare.com/cloudflare-one/team-and-resources/users/scim/"
+  },
+  {
+   "id": "c44",
+   "url": "https://developers.cloudflare.com/cloudflare-one/team-and-resources/users/scim/index.md",
+   "title": "Zero Trust SCIM provisioning",
+   "quote": "Cloudflare One supports SCIM provisioning for all SAML and OIDC identity providers that use SCIM version `2.0`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.cloudflare.com/cloudflare-one/team-and-resources/users/scim/"
+  },
+  {
+   "id": "c45",
+   "url": "https://www.cloudflare.com/plans/",
+   "title": "Cloudflare pricing",
+   "quote": "Teams under 50 users or enterprise proof-of-concept tests.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c46",
+   "url": "https://developers.cloudflare.com/api/resources/accounts/subresources/members/methods/list/",
+   "title": "List Members",
+   "quote": "Maximum number of results per page. maximum 50 minimum 5",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c47",
+   "url": "https://developers.cloudflare.com/fundamentals/account/account-security/scim-setup/index.md",
+   "title": "SCIM provisioning",
+   "quote": "Removing a user from a SCIM group updates their group membership in Cloudflare but has no effect on their account membership.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.cloudflare.com/fundamentals/account/account-security/scim-setup/"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.cloudflare.com/plans/",
+  "https://developers.cloudflare.com/fundamentals/llms.txt",
+  "https://developers.cloudflare.com/fundamentals/account/account-security/scim-setup/ (+ okta, entra, troubleshooting)",
+  "https://developers.cloudflare.com/api/resources/accounts/subresources/members/",
+  "https://www.okta.com/integrations/cloudflare/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/cloudflare-tutorial (404)"
+ ],
+ "open_questions": [
+  "Cloudflare does not publish its SCIM schema: supported filters, pagination, ServiceProviderConfig/Schemas endpoints and the exact attribute names are undocumented.",
+  "Whether SCIM deprovisioning ends active dashboard sessions is not stated.",
+  "Whether SCIM DELETE /Users is supported (vs active:false) is not stated.",
+  "Google Workspace, OneLogin and JumpCloud dashboard SCIM are not documented (only Okta, Entra, Authentik)."
+ ]
+}

@@ -4,12 +4,12 @@ An open dataset of SaaS vendor SCIM (user provisioning) availability and pricing
 
 **Live site:** https://scimtax.org/
 **License:** [CC-BY 4.0](LICENSE)
-**Last updated:** April 2026
+**Last updated:** October 2026
 **Next update:** Q1 2027
 
 ## What this is
 
-SCIM (System for Cross-domain Identity Management) is the protocol IT teams use to automate user provisioning and deprovisioning across the SaaS stack. Most SaaS vendors support it. Most lock it behind an Enterprise plan or a paid add-on. This dataset surveys ~300 of the most-deployed SaaS apps to document who gates SCIM and what it costs.
+SCIM (System for Cross-domain Identity Management) is the protocol IT teams use to automate user provisioning and deprovisioning across the SaaS stack. Most SaaS vendors support it. Most lock it behind an Enterprise plan or a paid add-on. This dataset surveys 849 of the most-deployed SaaS apps to document who gates SCIM and what it costs.
 
 The result is sometimes called the "SCIM tax": the systematic premium paid across a SaaS portfolio for the right to manage your own users.
 
@@ -17,13 +17,16 @@ The result is sometimes called the "SCIM tax": the systematic premium paid acros
 
 | File | Purpose |
 |---|---|
-| `index.html` | The published site. Self-contained, no build step required. |
-| `data.csv` | Full dataset as CSV. CC-BY 4.0. |
-| `data.json` | Full dataset as JSON. CC-BY 4.0. |
+| `data.json` | The dataset, schema v3. Source of truth. CC-BY 4.0. |
+| `data.csv` | The same dataset flattened to CSV. Generated. CC-BY 4.0. |
+| `index.html` | The published site. Generated table, otherwise hand-written. |
+| `llms.txt` | Plain-text summary of the dataset and who maintains it, for language models and AI search. Generated. |
+| `badge/{slug}.svg` | One embeddable status badge per vendor, plus `badge/index.json`. Generated. |
+| `research/2026-09/` | Schema v3 definition, the merge scripts, and one research file per vendor (`vendors/{slug}.json`) with SCIM and user-API depth and a citation for every fact. |
 | `METHODOLOGY.md` | How vendors were selected and how each row was recorded. |
 | `LICENSE` | CC-BY 4.0 terms. |
 | `CHANGELOG.md` | Version-to-version changes. |
-| `build.js` | Extracts `data.csv` and `data.json` from `index.html`. Run after editing the vendor list. |
+| `build.js` | Reads `data.json` and regenerates the table in `index.html`, `data.csv` and `badge/`. Run after editing the dataset. |
 | `scim-tax-master.md` | Long-form research notes (raw source). |
 | `notsosso-scim-pricing.md` | Source extract: notsosso.com. |
 | `ssotax-scim-pricing.md` | Source extract: sso.tax. |
@@ -39,6 +42,12 @@ curl -O https://scimtax.org/data.csv
 curl -O https://scimtax.org/data.json
 ```
 
+Embed a vendor badge (one SVG per vendor, rebuilt with every release):
+
+```html
+<a href="https://scimtax.org/#v-notion"><img src="https://scimtax.org/badge/notion.svg" alt="Notion: SCIM gated"></a>
+```
+
 Cite as:
 
 ```
@@ -50,13 +59,13 @@ SCIM Tax Index (Iden, 2026). https://scimtax.org/
 Found a vendor we missed? Pricing changed? Status wrong?
 
 - Open an issue: https://github.com/IdenWorks/scim-tax/issues
-- Or open a pull request modifying `index.html` (the `const V = [...]` array) and run `node build.js` to regenerate `data.csv` and `data.json`.
+- Or open a pull request modifying `data.json` and run `node build.js` to regenerate `index.html`, `data.csv` and `badge/`. Field definitions: `research/2026-09/SCHEMA.md`.
 
 All changes need a public source URL. Private quotes are not accepted.
 
 ## Why we made this
 
-We are [Iden](https://idenhq.com). We build identity governance for SaaS stacks that include vendors charging extra for SCIM. We have a commercial interest in seeing the SCIM tax discussed in the open. We do not have a commercial interest in skewing the dataset, and the data is auditable against the linked pricing pages on every row.
+We are [Iden](https://www.idenhq.com). We build identity governance that automates fine-grained access in every app a company uses, SaaS or internal, whether the app has SCIM, an API or neither. An app we do not cover yet gets a custom connector in 48 hours. We have a commercial interest in seeing the SCIM tax discussed in the open. We do not have a commercial interest in skewing the dataset, and the data is auditable against the linked pricing pages on every row.
 
 If you find a row that misrepresents a vendor, open an issue. We will fix it.
 
@@ -69,7 +78,7 @@ python3 -m http.server 8000
 # open http://localhost:8000
 ```
 
-To regenerate the raw data files after editing the vendor list:
+To regenerate the site, CSV and badges after editing `data.json`:
 
 ```bash
 node build.js

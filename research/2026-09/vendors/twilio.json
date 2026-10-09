@@ -1,0 +1,793 @@
+{
+ "slug": "twilio",
+ "vendor": "Twilio",
+ "vendor_url": "https://www.twilio.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Twilio",
+  "slug": "twilio",
+  "category": "Communications (UCaaS/CCaaS)",
+  "status": "free",
+  "scim_plan": "Pay as you go (no Edition required)",
+  "scim_price_text": "Included (usage-based account)",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Pay-as-you-go (usage-based)",
+  "team_price_text": "Usage-based",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Twilio Editions (Administration Edition and up)",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": false,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": false,
+   "groups": false
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.twilio.com/en-us/pricing",
+  "docs_url": "https://www.twilio.com/docs/iam/scim/api-reference",
+  "evidence": "Twilio's SCIM API (https://iam.twilio.com/scim/v2) is authenticated with Organization OAuth apps, which 'are available to all accounts at no additional cost'; the SCIM guides list only an Organization Owner/Admin role and a verified domain as prerequisites, while SSO alone is limited to Twilio Editions.",
+  "notes": "Status changed from gated to free. June said SCIM needed Enterprise plus the paid SSO Edition, but no current Twilio page says that: the SCIM overview, API reference and Okta/Entra guides name no Edition, SCIM does not need SSO, and OAuth apps are free for all accounts (US1 region only). SAML SSO is the part limited to Twilio Editions (Contact sales). Pricing is usage-based, so per-user fields are null. SCIM covers Users only (no Groups, no pagination); DELETE deactivates. Roles go through the OAuth-only Role Assignment API. SSO has no JIT. Confidence is medium because the docs show the absence of a gate rather than stating there is none.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Pay as you go",
+  "api_tax": false,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Pay as you go (usage-based)",
+   "price_text": "Free trial, then usage-based pricing per product",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": false,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c1",
+    "c2",
+    "c28",
+    "c33",
+    "c5",
+    "c43"
+   ],
+   "notes": "SCIM availability on base accounts inferred from the docs listing no Edition prerequisite and OAuth apps being free for all accounts."
+  },
+  {
+   "name": "Twilio Editions (Administration, Security, Enterprise)",
+   "price_text": "Contact sales",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c3",
+    "c4",
+    "c28",
+    "c43"
+   ],
+   "notes": "Editions extend audit-event retention from 30 to 400 days."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c5",
+   "c7",
+   "c8",
+   "c22",
+   "c33"
+  ],
+  "plan": "Pay as you go (no Edition required per docs)",
+  "addon_price_text": null,
+  "sso_required": false,
+  "version": "2.0",
+  "base_url": "https://iam.twilio.com/scim/v2",
+  "auth": {
+   "method": "oauth2",
+   "token_source": "Admin Center > Applications > OAuth apps (Organization OAuth app with managed-users scopes; authorization code or client credentials)",
+   "token_expiry": "Access token 1 minute to 30 days, default 1 hour; refreshed via refresh token or client credentials",
+   "cite": [
+    "c6",
+    "c27",
+    "c35",
+    "c36"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": false,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c10",
+    "c11",
+    "c26"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": false,
+   "group_push": false,
+   "group_membership": false,
+   "cite": [
+    "c10",
+    "c11",
+    "c14",
+    "c15",
+    "c16",
+    "c17",
+    "c26"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "DELETE deactivates the user instead of deleting it; the Organization Owner cannot be deactivated via SCIM.",
+   "cite": [
+    "c17",
+    "c18"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName",
+    "externalId"
+   ],
+   "cite": [
+    "c13"
+   ]
+  },
+  "pagination": {
+   "supported": false,
+   "max_page_size": null,
+   "cite": [
+    "c12"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "emails (primary, value, type)",
+    "externalId",
+    "displayName",
+    "name.givenName",
+    "name.familyName",
+    "active",
+    "locale",
+    "timezone"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": [
+    "c16",
+    "c21",
+    "c20"
+   ]
+  },
+  "roles": {
+   "supported": false,
+   "how": "Not through SCIM; roles are assigned with the separate Role Assignment API or in the Console/Admin Center.",
+   "cite": [
+    "c32",
+    "c40"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "No SCIM Groups support.",
+    "cite": [
+     "c26"
+    ]
+   },
+   {
+    "text": "Users' email domains must be verified; userName must equal the primary email.",
+    "cite": [
+     "c9",
+     "c20"
+    ]
+   },
+   {
+    "text": "No pagination (startIndex/itemsPerPage unsupported); filter only eq on userName/externalId.",
+    "cite": [
+     "c12",
+     "c13"
+    ]
+   },
+   {
+    "text": "Suspended users and the Organization Owner can't be updated or deactivated via SCIM.",
+    "cite": [
+     "c19",
+     "c18"
+    ]
+   },
+   {
+    "text": "OAuth apps (SCIM auth) supported only in the US1 region; with SSO enforced, a non-SSO Organization Admin is needed to authorize the Okta connection.",
+    "cite": [
+     "c34",
+     "c24"
+    ]
+   },
+   {
+    "text": "Entra provisioning uses a custom non-gallery app.",
+    "cite": [
+     "c25"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c38",
+   "c39"
+  ],
+  "plan": "Pay as you go",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://iam.twilio.com/v2/Organizations",
+  "docs_url": "https://www.twilio.com/docs/iam/access-control/role-assignment-resource",
+  "auth": {
+   "methods": [
+    "oauth2"
+   ],
+   "scopes": [
+    "managed-users/read",
+    "managed-users/list",
+    "managed-users/create",
+    "managed-users/update",
+    "managed-users/delete",
+    "role-assignments/list",
+    "role-assignments/create",
+    "role-assignments/delete",
+    "roles/list"
+   ],
+   "cite": [
+    "c38",
+    "c36",
+    "c37"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": false,
+   "reactivate_user": true,
+   "manage_groups": false,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c36",
+    "c17",
+    "c40",
+    "c26"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/v2/Organizations/RoleAssignments",
+    "purpose": "List role assignments",
+    "cite": [
+     "c39"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v2/Organizations/RoleAssignments",
+    "purpose": "Create a role assignment",
+    "cite": [
+     "c40"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v2/Organizations/RoleAssignments/{RoleAssignmentSid}",
+    "purpose": "Delete a role assignment",
+    "cite": [
+     "c41"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Pay as you go (30-day retention; 400 days with Editions)",
+   "cite": [
+    "c43"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Organization user management is only through SCIM endpoints and the OAuth-only Role Assignment API; account Auth Tokens and API keys are not accepted.",
+    "cite": [
+     "c38"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/twilio/",
+   "cite": [
+    "c44"
+   ],
+   "notes": "OIN markup checks SAML, SWA, SCIM, Create, Update, Deactivate. Twilio's own Okta SCIM guide instead builds a custom SWA app with SCIM."
+  },
+  "entra": {
+   "listed": null,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c25"
+   ],
+   "notes": "Twilio documents Entra SCIM with a custom non-gallery app; no Learn gallery tutorial for Twilio (only Twilio SendGrid)."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": false,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": "Bulk User Import of existing Twilio users on verified domains",
+  "docs_public": true,
+  "cite": [
+   "c30",
+   "c31",
+   "c42"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.twilio.com/en-us/pricing",
+   "title": "Twilio Pricing",
+   "quote": "Start for free. Then pay as you go.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.twilio.com/en-us/pricing",
+   "title": "Twilio Pricing",
+   "quote": "Pay as you go with usage-based pricing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.twilio.com/en-us/editions",
+   "title": "Editions | Twilio",
+   "quote": "Administration Edition Security Edition Enterprise Edition Single Sign-On (SSO) Use any SAML 2.0 Identity Provider to control user authentication and usage of Twilio.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.twilio.com/en-us/editions",
+   "title": "Editions | Twilio",
+   "quote": "Run enterprise communications at scale using Twilio’s suite of access management controls, administration tools, and security features. Contact sales",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.twilio.com/docs/iam/scim.md",
+   "title": "SCIM API overview | Twilio",
+   "quote": "Use the System for Cross-Domain Identity Management (SCIM) API to automate user provisioning and deprovisioning within your organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twilio.com/docs/iam/scim"
+  },
+  {
+   "id": "c6",
+   "url": "https://www.twilio.com/docs/iam/scim.md",
+   "title": "SCIM API overview | Twilio",
+   "quote": "The SCIM API uses the OAuth 2.0 Authorization Code grant for authentication.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twilio.com/docs/iam/scim"
+  },
+  {
+   "id": "c7",
+   "url": "https://www.twilio.com/docs/iam/scim/api-reference.md",
+   "title": "SCIM API reference | Twilio",
+   "quote": "Base URL: `https://iam.twilio.com/scim/v2`",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twilio.com/docs/iam/scim/api-reference"
+  },
+  {
+   "id": "c8",
+   "url": "https://www.twilio.com/docs/iam/scim/api-reference",
+   "title": "SCIM API reference | Twilio",
+   "quote": "All endpoints are compliant with SCIM 2.0 standards and are for organization-managed users only.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://www.twilio.com/docs/iam/scim/api-reference.md",
+   "title": "SCIM API reference | Twilio",
+   "quote": "Verify users' email domains in your organization before managing them through the SCIM API.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twilio.com/docs/iam/scim/api-reference"
+  },
+  {
+   "id": "c10",
+   "url": "https://www.twilio.com/docs/iam/scim/api-reference.md",
+   "title": "SCIM API reference | Twilio",
+   "quote": "Create a user using the SCIM core user schema. `POST /scim/v2/Users`",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twilio.com/docs/iam/scim/api-reference"
+  },
+  {
+   "id": "c11",
+   "url": "https://www.twilio.com/docs/iam/scim/api-reference.md",
+   "title": "SCIM API reference | Twilio",
+   "quote": "Retrieve detailed information about a user by providing their user SID. `GET /scim/v2/Users/{id}`",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twilio.com/docs/iam/scim/api-reference"
+  },
+  {
+   "id": "c12",
+   "url": "https://www.twilio.com/docs/iam/scim/api-reference.md",
+   "title": "SCIM API reference | Twilio",
+   "quote": "SCIM pagination parameters (`startIndex`, `itemsPerPage`) are not supported.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twilio.com/docs/iam/scim/api-reference"
+  },
+  {
+   "id": "c13",
+   "url": "https://www.twilio.com/docs/iam/scim/api-reference.md",
+   "title": "SCIM API reference | Twilio",
+   "quote": "Filter by `userName` or `externalId`. Only the `eq` operator is supported.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twilio.com/docs/iam/scim/api-reference"
+  },
+  {
+   "id": "c14",
+   "url": "https://www.twilio.com/docs/iam/scim/api-reference.md",
+   "title": "SCIM API reference | Twilio",
+   "quote": "Update an existing user's SCIM user information. This operation replaces all user attributes. `PUT /scim/v2/Users/{id}`",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twilio.com/docs/iam/scim/api-reference"
+  },
+  {
+   "id": "c15",
+   "url": "https://www.twilio.com/docs/iam/scim/api-reference.md",
+   "title": "SCIM API reference | Twilio",
+   "quote": "Partially update an existing user's SCIM user information. This operation modifies only the specified attributes. `PATCH /scim/v2/Users/{id}`",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twilio.com/docs/iam/scim/api-reference"
+  },
+  {
+   "id": "c16",
+   "url": "https://www.twilio.com/docs/iam/scim/api-reference.md",
+   "title": "SCIM API reference | Twilio",
+   "quote": "* `active` * `name.givenName` * `name.familyName` * `displayName` * `timezone` * `locale` * `emails` * `userName`",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twilio.com/docs/iam/scim/api-reference"
+  },
+  {
+   "id": "c17",
+   "url": "https://www.twilio.com/docs/iam/scim/api-reference.md",
+   "title": "SCIM API reference | Twilio",
+   "quote": "Deactivate a user. Users aren't deleted; they're deactivated in response to delete requests.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twilio.com/docs/iam/scim/api-reference"
+  },
+  {
+   "id": "c18",
+   "url": "https://www.twilio.com/docs/iam/scim/api-reference.md",
+   "title": "SCIM API reference | Twilio",
+   "quote": "You can't deactivate the Organization Owner through this endpoint.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twilio.com/docs/iam/scim/api-reference"
+  },
+  {
+   "id": "c19",
+   "url": "https://www.twilio.com/docs/iam/scim/api-reference.md",
+   "title": "SCIM API reference | Twilio",
+   "quote": "Only active and inactive users can be updated. Suspended users can't be updated.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twilio.com/docs/iam/scim/api-reference"
+  },
+  {
+   "id": "c20",
+   "url": "https://www.twilio.com/docs/iam/scim/api-reference.md",
+   "title": "SCIM API reference | Twilio",
+   "quote": "The `userName` must match the primary email address (`emails[primary=true].value`).",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twilio.com/docs/iam/scim/api-reference"
+  },
+  {
+   "id": "c21",
+   "url": "https://www.twilio.com/docs/iam/scim/api-reference.md",
+   "title": "SCIM API reference | Twilio",
+   "quote": "\"externalId\": \"36d02f84-1c1a-4409\",",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twilio.com/docs/iam/scim/api-reference"
+  },
+  {
+   "id": "c22",
+   "url": "https://www.twilio.com/docs/iam/scim/okta-integration.md",
+   "title": "Okta SCIM integration | Twilio",
+   "quote": "A Twilio user account with the Organization Owner or Organization Admin role",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twilio.com/docs/iam/scim/okta-integration"
+  },
+  {
+   "id": "c23",
+   "url": "https://www.twilio.com/docs/iam/scim/okta-integration.md",
+   "title": "Okta SCIM integration | Twilio",
+   "quote": "For **Sign-in method**, select **SWA - Secure Web Authentication**.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twilio.com/docs/iam/scim/okta-integration"
+  },
+  {
+   "id": "c24",
+   "url": "https://www.twilio.com/docs/iam/scim/okta-integration.md",
+   "title": "Okta SCIM integration | Twilio",
+   "quote": "You need this user to authenticate the SCIM connection because the OAuth authorization page doesn't support SSO login.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twilio.com/docs/iam/scim/okta-integration"
+  },
+  {
+   "id": "c25",
+   "url": "https://www.twilio.com/docs/iam/scim/entra-integration.md",
+   "title": "Microsoft Entra ID SCIM integration | Twilio",
+   "quote": "This integration works with custom (non-gallery) applications in Entra ID.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twilio.com/docs/iam/scim/entra-integration"
+  },
+  {
+   "id": "c26",
+   "url": "https://www.twilio.com/docs/iam/scim/entra-integration.md",
+   "title": "Microsoft Entra ID SCIM integration | Twilio",
+   "quote": "Disable **Provision Microsoft Entra ID Groups** as we don't support SCIM groups right now.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twilio.com/docs/iam/scim/entra-integration"
+  },
+  {
+   "id": "c27",
+   "url": "https://www.twilio.com/docs/iam/scim/entra-integration.md",
+   "title": "Microsoft Entra ID SCIM integration | Twilio",
+   "quote": "On the **Scopes & permissions** step, check all the **managed-users** permissions.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twilio.com/docs/iam/scim/entra-integration"
+  },
+  {
+   "id": "c28",
+   "url": "https://www.twilio.com/docs/iam/single-sign-on.md",
+   "title": "Single Sign On | Twilio",
+   "quote": "Single Sign-On is available to all Twilio Editions customers.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twilio.com/docs/iam/single-sign-on"
+  },
+  {
+   "id": "c29",
+   "url": "https://www.twilio.com/docs/iam/single-sign-on.md",
+   "title": "Single Sign On | Twilio",
+   "quote": "A Twilio Edition that includes Single Sign-On, with the feature turned on for your Twilio Organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twilio.com/docs/iam/single-sign-on"
+  },
+  {
+   "id": "c30",
+   "url": "https://www.twilio.com/docs/iam/single-sign-on.md",
+   "title": "Single Sign On | Twilio",
+   "quote": "Just-in-time (JIT) user provisioning. Use the SCIM API for automated provisioning instead.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twilio.com/docs/iam/single-sign-on"
+  },
+  {
+   "id": "c31",
+   "url": "https://www.twilio.com/docs/iam/single-sign-on.md",
+   "title": "Single Sign On | Twilio",
+   "quote": "You must create a user in Twilio before they can log in with SSO.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twilio.com/docs/iam/single-sign-on"
+  },
+  {
+   "id": "c32",
+   "url": "https://www.twilio.com/docs/iam/single-sign-on.md",
+   "title": "Single Sign On | Twilio",
+   "quote": "Twilio SSO handles authentication only. It doesn't manage account access or user roles.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twilio.com/docs/iam/single-sign-on"
+  },
+  {
+   "id": "c33",
+   "url": "https://www.twilio.com/docs/iam/oauth-apps/faqs.md",
+   "title": "OAuth apps FAQs | Twilio",
+   "quote": "OAuth apps are available to all accounts at no additional cost.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twilio.com/docs/iam/oauth-apps/faqs"
+  },
+  {
+   "id": "c34",
+   "url": "https://www.twilio.com/docs/iam/oauth-apps/faqs.md",
+   "title": "OAuth apps FAQs | Twilio",
+   "quote": "This feature is supported only in the US1 region.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twilio.com/docs/iam/oauth-apps/faqs"
+  },
+  {
+   "id": "c35",
+   "url": "https://www.twilio.com/docs/iam/oauth-apps/faqs.md",
+   "title": "OAuth apps FAQs | Twilio",
+   "quote": "Access tokens are valid for the Token expiration time configured on your OAuth app (between 1 minute and 30 days, defaulting to 1 hour).",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twilio.com/docs/iam/oauth-apps/faqs"
+  },
+  {
+   "id": "c36",
+   "url": "https://www.twilio.com/docs/iam/oauth-apps/org-oauth-apps.md",
+   "title": "Organization OAuth apps | Twilio",
+   "quote": "managed-users/create | POST | `https://iam.twilio.com/scim/v2/Users`",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twilio.com/docs/iam/oauth-apps/org-oauth-apps"
+  },
+  {
+   "id": "c37",
+   "url": "https://www.twilio.com/docs/iam/oauth-apps/org-oauth-apps.md",
+   "title": "Organization OAuth apps | Twilio",
+   "quote": "role-assignments/create | POST | `https://iam.twilio.com/v2/Organizations/RoleAssignments`",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twilio.com/docs/iam/oauth-apps/org-oauth-apps"
+  },
+  {
+   "id": "c38",
+   "url": "https://www.twilio.com/docs/iam/access-control/role-assignment-resource.md",
+   "title": "Role Assignment API reference | Twilio",
+   "quote": "The Role Assignment API is an organization-level API. You can only access it using OAuth credentials. Account Auth Tokens and API Keys aren't supported.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twilio.com/docs/iam/access-control/role-assignment-resource"
+  },
+  {
+   "id": "c39",
+   "url": "https://www.twilio.com/docs/iam/access-control/role-assignment-resource.md",
+   "title": "Role Assignment API reference | Twilio",
+   "quote": "GET /v2/Organizations/RoleAssignments",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twilio.com/docs/iam/access-control/role-assignment-resource"
+  },
+  {
+   "id": "c40",
+   "url": "https://www.twilio.com/docs/iam/access-control/role-assignment-resource.md",
+   "title": "Role Assignment API reference | Twilio",
+   "quote": "POST /v2/Organizations/RoleAssignments",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twilio.com/docs/iam/access-control/role-assignment-resource"
+  },
+  {
+   "id": "c41",
+   "url": "https://www.twilio.com/docs/iam/access-control/role-assignment-resource.md",
+   "title": "Role Assignment API reference | Twilio",
+   "quote": "DELETE /v2/Organizations/RoleAssignments/{RoleAssignmentSid}",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twilio.com/docs/iam/access-control/role-assignment-resource"
+  },
+  {
+   "id": "c42",
+   "url": "https://www.twilio.com/docs/iam/organizations/managed-users.md",
+   "title": "Managed users | Twilio",
+   "quote": "You can bulk import existing Twilio users belonging to your verified domain into your organization",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twilio.com/docs/iam/organizations/managed-users"
+  },
+  {
+   "id": "c43",
+   "url": "https://www.twilio.com/docs/iam/twilio-editions.md",
+   "title": "Twilio Editions | Twilio",
+   "quote": "All Twilio customers have access to the Audit Events API. With an Editions purchase, Twilio extends log retention from 30 days to 400 days",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twilio.com/docs/iam/twilio-editions"
+  },
+  {
+   "id": "c44",
+   "url": "https://www.okta.com/integrations/twilio/",
+   "title": "Integrate Twilio with Okta",
+   "quote": "The Okta Twilio integration provides secure SSO access to the Twilio admin console.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "Twilio's Okta SCIM guide has customers build a custom SWA app with SCIM, while the Okta Integration Network lists a Twilio app with SAML and SCIM provisioning.",
+   "cite": [
+    "c23",
+    "c44"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.twilio.com/en-us/pricing",
+  "https://www.twilio.com/en-us/editions",
+  "https://www.twilio.com/docs/llms.txt (IAM section)",
+  "https://www.twilio.com/docs/iam/scim (overview, API reference, Okta and Entra guides)",
+  "https://www.twilio.com/docs/iam/single-sign-on",
+  "https://www.twilio.com/docs/iam/oauth-apps/faqs",
+  "https://www.okta.com/integrations/twilio/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/toc.json (only Twilio SendGrid)"
+ ],
+ "open_questions": [
+  "No page states outright that SCIM is available without an Edition; confirm with Twilio whether Organizations SCIM is gated by contract.",
+  "SCIM rate limits are not documented.",
+  "Whether SCIM deactivation ends active Console sessions is not documented."
+ ]
+}

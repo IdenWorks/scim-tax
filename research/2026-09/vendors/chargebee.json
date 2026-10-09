@@ -1,0 +1,530 @@
+{
+ "slug": "chargebee",
+ "vendor": "Chargebee",
+ "vendor_url": "https://www.chargebee.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Chargebee",
+  "slug": "chargebee",
+  "category": "Finance, Accounting & Spend",
+  "status": "gated",
+  "scim_plan": "Enterprise + Enterprise access controls add-on",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Flow",
+  "team_price_text": "Flow: $0 + 0.80% of invoicing volume (or $99/mo + 0.65%)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Enterprise",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": "Enterprise access controls (SAML, SCIM, JIT provisioning): paid add-on, price not listed",
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "sso_only",
+   "google": null,
+   "onelogin": "sso_only",
+   "jumpcloud": null,
+   "generic": false
+  },
+  "pricing_page_url": "https://www.chargebee.com/pricing/",
+  "docs_url": "https://www.chargebee.com/docs/billing/2.0/data-privacy-security/scim",
+  "evidence": "Chargebee's Billing pricing table lists 'Enterprise access controls: SAML, SCIM, JIT provisioning' as not included on Flow and a paid add-on ($) on Enterprise; its SCIM doc requires SAML first and Chargebee support to enable provisioning.",
+  "notes": "Status changed from none to gated: the June row said 'no native SCIM', but Chargebee now documents SCIM provisioning (Okta) and its pricing page sells SCIM inside the paid 'Enterprise access controls' add-on on the Enterprise Billing plan. Billing plans are now Flow (usage-priced: $0 + 0.80% of invoicing volume, or $99/mo + 0.65%) and Enterprise (Schedule a demo); the June Starter/Performance tiers and prices no longer appear on the pricing page and were dropped. The pricing table also lists SAML as included on Enterprise while the add-on bundles SAML, SCIM and JIT (see conflicts). The SCIM doc covers only Okta (bearer token from Settings > Team Members > User Identity Management); the pricing page lists 'Directory integrations: Okta, Azure' on Enterprise but no Entra provisioning guide exists, and Entra SSO is a non-gallery app. Roles map from Okta groups named CB/<domain>/ROLE/<role_name>. No team-member management API is in the API reference.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": null,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": null,
+  "status_prev": "none"
+ },
+ "plans": [
+  {
+   "name": "Flow",
+   "price_text": "$0 + 0.80% of monthly invoicing volume, or $99/mo + 0.65%",
+   "price_per_user_mo": null,
+   "billing": "monthly",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c3",
+    "c5"
+   ],
+   "notes": "Usage-priced; billing basis shown monthly with a $66K breakeven between the two Flow options."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Schedule a demo (Contact Sales); Enterprise access controls is a paid add-on",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c3",
+    "c5",
+    "c6"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c3",
+   "c6",
+   "c7"
+  ],
+  "plan": "Enterprise (Enterprise access controls add-on)",
+  "addon_price_text": "Paid add-on, price not listed",
+  "sso_required": true,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": "bearer",
+   "token_source": "Settings > Team Members > User Identity Management > SCIM > Okta + Bearer",
+   "token_expiry": null,
+   "cite": [
+    "c10",
+    "c11"
+   ]
+  },
+  "endpoints": {
+   "Users": null,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": []
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": null,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c8",
+    "c14"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c8",
+    "c14"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": []
+  },
+  "roles": {
+   "supported": true,
+   "how": "Okta groups named CB/<domain>/ROLE/<role_name> map to Chargebee access roles; business entities via CB/<domain>/BE/<name>; Owner group not supported",
+   "cite": [
+    "c12",
+    "c13"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SAML must be enabled first, then Chargebee support must enable Provisioning on the site.",
+    "cite": [
+     "c7"
+    ]
+   },
+   {
+    "text": "Only Okta is documented as the SCIM client; import of users or groups from Chargebee to Okta is not supported.",
+    "cite": [
+     "c9",
+     "c11"
+    ]
+   },
+   {
+    "text": "Owner group creation is not supported; owner transfer through SCIM is restricted.",
+    "cite": [
+     "c13"
+    ]
+   },
+   {
+    "text": "Only one IdP can be configured per Chargebee site.",
+    "cite": [
+     "c16"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": null,
+  "cite": [],
+  "plan": null,
+  "api_tax": null,
+  "style": null,
+  "base_url": null,
+  "docs_url": null,
+  "auth": {
+   "methods": [],
+   "scopes": [],
+   "cite": []
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": []
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": [
+    "c21"
+   ],
+   "notes": "The Events API records billing events with source admin_console and the acting user's email; it is not a dedicated audit-log API."
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "The API reference (llms.txt index and 1,166-URL sitemap) has no team-member, user or role resource; only customer and billing resources."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/chargebee/",
+   "cite": [
+    "c20",
+    "c8",
+    "c14"
+   ],
+   "notes": "OIN page markup checks SAML, SCIM, Create, Update, Deactivate and Group Push."
+  },
+  "entra": {
+   "listed": false,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c18",
+    "c15"
+   ],
+   "notes": "Chargebee's guide adds Chargebee in Entra as a non-gallery application for SAML; no Entra provisioning guide."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c19",
+    "c15"
+   ],
+   "notes": "From Chargebee's own OneLogin SAML guide; provisioning not documented."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c7",
+   "c17"
+  ],
+  "notes": "The pricing add-on name includes 'JIT provisioning', but the SAML doc says the team member's email must already exist in Chargebee and the IdP; JIT behaviour is not documented."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.chargebee.com/pricing/",
+   "title": "Chargebee Pricing",
+   "quote": "$0 + 0.80% $99 + 0.65%",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://www.chargebee.com/pricing/",
+   "title": "Chargebee Pricing",
+   "quote": "Built for companies running billing at global scale, operating multiple business entities, managing parent-child account hierarchies, and handling high-spike billing events.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://www.chargebee.com/pricing/",
+   "title": "Chargebee Pricing",
+   "quote": "Enterprise access controls: SAML, SCIM, JIT provisioning Not included $",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://www.chargebee.com/pricing/",
+   "title": "Chargebee Pricing",
+   "quote": "Directory integrations: Okta, Azure Not included Included",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://www.chargebee.com/pricing/",
+   "title": "Chargebee Pricing",
+   "quote": "SAML Not included Included",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://www.chargebee.com/pricing/",
+   "title": "Chargebee Pricing",
+   "quote": "Paid add-ons Ingest up to 500M usage events/mo Enterprise access controls",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://www.chargebee.com/docs/billing/2.0/data-privacy-security/scim",
+   "title": "System for Cross-Domain Identity Management (SCIM) | Chargebee Docs",
+   "quote": "must be enabled before configuring Provisioning for Chargebee.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://www.chargebee.com/docs/billing/2.0/data-privacy-security/scim.md",
+   "title": "System for Cross-Domain Identity Management (SCIM) | Chargebee Docs",
+   "quote": "Push New Users Push Profile Updates Push User Deactivation Reactivate Users Push Groups Unlink Groups",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.chargebee.com/docs/billing/2.0/data-privacy-security/scim"
+  },
+  {
+   "id": "c9",
+   "url": "https://www.chargebee.com/docs/billing/2.0/data-privacy-security/scim.md",
+   "title": "System for Cross-Domain Identity Management (SCIM) | Chargebee Docs",
+   "quote": "Import of Users or Groups from Chargebee to Okta is not supported.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.chargebee.com/docs/billing/2.0/data-privacy-security/scim"
+  },
+  {
+   "id": "c10",
+   "url": "https://www.chargebee.com/docs/billing/2.0/data-privacy-security/scim.md",
+   "title": "System for Cross-Domain Identity Management (SCIM) | Chargebee Docs",
+   "quote": "Under Chargebee Credentials, copy the values of the Chargebee Site URL and Bearer Token.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.chargebee.com/docs/billing/2.0/data-privacy-security/scim"
+  },
+  {
+   "id": "c11",
+   "url": "https://www.chargebee.com/docs/billing/2.0/data-privacy-security/scim.md",
+   "title": "System for Cross-Domain Identity Management (SCIM) | Chargebee Docs",
+   "quote": "Select OKTA and Bearer as authentication type and click Next.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.chargebee.com/docs/billing/2.0/data-privacy-security/scim"
+  },
+  {
+   "id": "c12",
+   "url": "https://www.chargebee.com/docs/billing/2.0/data-privacy-security/scim.md",
+   "title": "System for Cross-Domain Identity Management (SCIM) | Chargebee Docs",
+   "quote": "Chargebee requires the okta group name to be in the following format:",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.chargebee.com/docs/billing/2.0/data-privacy-security/scim"
+  },
+  {
+   "id": "c13",
+   "url": "https://www.chargebee.com/docs/billing/2.0/data-privacy-security/scim.md",
+   "title": "System for Cross-Domain Identity Management (SCIM) | Chargebee Docs",
+   "quote": "Currently, we do not support the creation of the Owner group, as we have restricted the transfer of owners through SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.chargebee.com/docs/billing/2.0/data-privacy-security/scim"
+  },
+  {
+   "id": "c14",
+   "url": "https://www.chargebee.com/docs/billing/2.0/data-privacy-security/scim.md",
+   "title": "System for Cross-Domain Identity Management (SCIM) | Chargebee Docs",
+   "quote": "Create Users 2. Update User Attributes 3. Deactivate Users",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.chargebee.com/docs/billing/2.0/data-privacy-security/scim"
+  },
+  {
+   "id": "c15",
+   "url": "https://www.chargebee.com/docs/billing/2.0/data-privacy-security/saml.md",
+   "title": "SAML Single Sign-On | Chargebee Docs",
+   "quote": "Okta, OneLogin and Microsoft Entra ID are the supported IdPs.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.chargebee.com/docs/billing/2.0/data-privacy-security/saml"
+  },
+  {
+   "id": "c16",
+   "url": "https://www.chargebee.com/docs/billing/2.0/data-privacy-security/saml.md",
+   "title": "SAML Single Sign-On | Chargebee Docs",
+   "quote": "Only one IdP can be configured per Chargebee site.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.chargebee.com/docs/billing/2.0/data-privacy-security/saml"
+  },
+  {
+   "id": "c17",
+   "url": "https://www.chargebee.com/docs/billing/2.0/data-privacy-security/saml.md",
+   "title": "SAML Single Sign-On | Chargebee Docs",
+   "quote": "The team member's email address must be present in Chargebee and IdP.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.chargebee.com/docs/billing/2.0/data-privacy-security/saml"
+  },
+  {
+   "id": "c18",
+   "url": "https://www.chargebee.com/docs/billing/2.0/data-privacy-security/saml.md",
+   "title": "SAML Single Sign-On | Chargebee Docs",
+   "quote": "Non-gallery application** and add an application by naming it as \"Chargebee\".",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.chargebee.com/docs/billing/2.0/data-privacy-security/saml"
+  },
+  {
+   "id": "c19",
+   "url": "https://www.chargebee.com/docs/billing/2.0/data-privacy-security/saml.md",
+   "title": "SAML Single Sign-On | Chargebee Docs",
+   "quote": "Log in to your Onelogin account and search for \"Chargebee\" under **Add Apps**.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.chargebee.com/docs/billing/2.0/data-privacy-security/saml"
+  },
+  {
+   "id": "c20",
+   "url": "https://www.okta.com/integrations/chargebee/",
+   "title": "Integrate Chargebee with Okta | Okta Integration Network",
+   "quote": "The Okta Chargebee integration enables users to securely authenticate via Single Sign-On (SSO) using SAML, while also providing user provisioning capabilities through SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c21",
+   "url": "https://apidocs.chargebee.com/docs/api/events.md",
+   "title": "Events | Chargebee API Reference",
+   "quote": "When `source` is `admin_console`: the email address of the user that triggered the event.",
+   "accessed": "2026-10-05",
+   "page_url": "https://apidocs.chargebee.com/docs/api/events"
+  },
+  {
+   "id": "c22",
+   "url": "https://www.chargebee.com/docs/billing/2.0/data-privacy-security/saml.md",
+   "title": "SAML Single Sign-On | Chargebee Docs",
+   "quote": "Enabling SAML will mandate all users to sign in only via SAML.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.chargebee.com/docs/billing/2.0/data-privacy-security/saml"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The Billing feature table marks SAML as included on Enterprise, while the same table sells 'Enterprise access controls: SAML, SCIM, JIT provisioning' as a paid add-on on Enterprise.",
+   "cite": [
+    "c5",
+    "c3"
+   ]
+  },
+  {
+   "text": "Pricing lists 'Directory integrations: Okta, Azure' on Enterprise, but Chargebee's SCIM doc only covers Okta and its Entra guide is SAML-only via a non-gallery app.",
+   "cite": [
+    "c4",
+    "c11",
+    "c18"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.chargebee.com/pricing/",
+  "https://www.chargebee.com/docs/billing/2.0/data-privacy-security/scim (.md)",
+  "https://www.chargebee.com/docs/billing/2.0/data-privacy-security/saml (.md)",
+  "https://apidocs.chargebee.com/llms.txt and sitemap.xml (no team-member resource)",
+  "https://www.okta.com/integrations/chargebee/"
+ ],
+ "open_questions": [
+  "Price of the Enterprise access controls add-on is not published.",
+  "SCIM base URL, version, attribute list, filtering and pagination are not documented (Okta app handles it).",
+  "Whether deactivation frees a seat or ends sessions is not documented.",
+  "Whether Entra, Google or JumpCloud can provision via SCIM is not documented.",
+  "JIT provisioning appears in the add-on name but is not described in the SAML doc."
+ ]
+}

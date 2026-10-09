@@ -1,0 +1,530 @@
+{
+ "slug": "tanium",
+ "vendor": "Tanium",
+ "vendor_url": "https://www.tanium.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Tanium",
+  "slug": "tanium",
+  "category": "IT Management & Endpoint",
+  "status": "gated",
+  "scim_plan": "Tanium Cloud (Contact Sales)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Tanium Cloud (Contact Sales)",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "native",
+   "google": "sso_only",
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.tanium.com/see-a-demo",
+  "docs_url": "https://help.tanium.com/bundle/ug_cloud_cloud/page/cloud/user_provisioning.html",
+  "evidence": "Tanium's Cloud user guide says \"Tanium Cloud supports SCIM 2.0 and supports Microsoft Entra ID and Okta as SCIM providers\"; Tanium publishes no pricing and sells through a demo/contact-sales process.",
+  "notes": "Quote-only: no public pricing (tanium.com/pricing is 404; buyers request a demo), so SCIM is gated per rule 6a. SCIM 2.0 is documented for Tanium Cloud with Entra ID (gallery app 'Tanium SSO' with a provisioning tutorial) and Okta; other SCIM clients need Tanium Support. SCIM token expires after one year. JIT on SAML is available but must be off when SCIM is used. Roles map via Tanium user groups. On-premises Tanium has SAML docs but no SCIM page found. Tanium licenses by endpoint, so per-user prices do not apply.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": null,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Tanium Cloud",
+   "price_text": "Contact Sales (no public pricing; demo request)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c17"
+   ],
+   "notes": "https://www.tanium.com/pricing returns 404; no public plan table."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c2",
+   "c7",
+   "c14"
+  ],
+  "plan": "Tanium Cloud (Contact Sales)",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "SCIM API URL shown per Tanium Cloud instance in Tanium Account > Cloud Instances > Administration > Configure SCIM (pattern not published)",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Tanium Account > Cloud Instances > Administration > Identity Provider Settings > Actions > Configure SCIM > Enable SCIM; token shown once (copy within five minutes); Rotate Token available",
+   "token_expiry": "1 year",
+   "cite": [
+    "c6",
+    "c8",
+    "c9"
+   ],
+   "notes": "'bearer' inferred from token pasted as the IdP secret token."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c4",
+    "c5",
+    "c23"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": null,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c25",
+    "c24",
+    "c22",
+    "c10",
+    "c23"
+   ],
+   "notes": "Entra tutorial: create, remove, keep attributes in sync, groups and memberships. Tanium docs: removing a user from the IdP group removes their access."
+  },
+  "deprovision": {
+   "action": null,
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Disabling SCIM entirely deletes all SCIM-managed users and groups and their RBAC configuration; deleting a user stops scheduled content they own.",
+   "cite": [
+    "c10",
+    "c12",
+    "c20"
+   ],
+   "notes": "Whether IdP deprovisioning deletes or locks the Tanium user is not stated."
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "displayName",
+    "externalId",
+    "active"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "displayName",
+    "externalId",
+    "members"
+   ],
+   "cite": [
+    "c4",
+    "c5",
+    "c23"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "Group-to-role mapping: assign roles, computer groups and personas to SCIM-provisioned Tanium user groups in Tanium Console",
+   "cite": [
+    "c11"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Only Microsoft Entra ID and Okta are supported SCIM providers; others need Tanium Support.",
+    "cite": [
+     "c2"
+    ]
+   },
+   {
+    "text": "JIT provisioning must be disabled on all domains; existing JIT or locally created users must be deleted before SCIM can manage them.",
+    "cite": [
+     "c3",
+     "c13"
+    ]
+   },
+   {
+    "text": "SCIM token is shown once, must be copied within five minutes, and expires after one year.",
+    "cite": [
+     "c8",
+     "c9"
+    ]
+   },
+   {
+    "text": "Disabling SCIM deletes all SCIM-managed users and groups and their RBAC configuration.",
+    "cite": [
+     "c12"
+    ]
+   },
+   {
+    "text": "Documented for Tanium Cloud; no SCIM page found for Tanium on-premises.",
+    "cite": [
+     "c2"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": null,
+  "cite": [],
+  "plan": null,
+  "api_tax": null,
+  "style": null,
+  "base_url": null,
+  "docs_url": null,
+  "auth": {
+   "methods": [],
+   "scopes": [],
+   "cite": []
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": []
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c2",
+    "c16"
+   ],
+   "notes": "https://www.okta.com/integrations/tanium/ returns 404; Tanium's Okta guide uses a manually created SAML app integration."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/tanium-sso-provisioning-tutorial",
+   "cite": [
+    "c21",
+    "c22",
+    "c23",
+    "c25",
+    "c14"
+   ]
+  },
+  "google": {
+   "listed": null,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c18",
+    "c2"
+   ]
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c15",
+   "c21",
+   "c2"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.tanium.com/see-a-demo",
+   "title": "See a Demo | Tanium",
+   "quote": "Register now for a live, personalized demo—and see the power of Autonomous IT.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://help.tanium.com/bundle/ug_cloud_cloud/page/cloud/user_provisioning.html",
+   "title": "Configuring user provisioning | Tanium Cloud User Guide",
+   "quote": "Tanium Cloud supports SCIM 2.0 and supports Microsoft Entra ID and Okta as SCIM providers. Contact Tanium Support if you require support for another SCIM provider.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://help.tanium.com/bundle/ug_cloud_cloud/page/cloud/user_provisioning.html",
+   "title": "Configuring user provisioning | Tanium Cloud User Guide",
+   "quote": "You must disable JIT provisioning for all domains in the identity provider settings if you configure SCIM provisioning so that SCIM provisioning can successfully manage users.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://help.tanium.com/bundle/ug_cloud_cloud/page/cloud/user_provisioning.html",
+   "title": "Configuring user provisioning | Tanium Cloud User Guide",
+   "quote": "Make sure your identity provider is configured to provide the following attributes for users: userName displayName externalId active",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://help.tanium.com/bundle/ug_cloud_cloud/page/cloud/user_provisioning.html",
+   "title": "Configuring user provisioning | Tanium Cloud User Guide",
+   "quote": "Make sure your identity provider is configured to provide the displayName attribute for groups.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://help.tanium.com/bundle/ug_cloud_cloud/page/cloud/user_provisioning.html",
+   "title": "Configuring user provisioning | Tanium Cloud User Guide",
+   "quote": "to copy the Token and paste it into the identity provider settings for your organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://help.tanium.com/bundle/ug_cloud_cloud/page/cloud/user_provisioning.html",
+   "title": "Configuring user provisioning | Tanium Cloud User Guide",
+   "quote": "to copy the SCIM API URL and paste it into the identity provider settings for your organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://help.tanium.com/bundle/ug_cloud_cloud/page/cloud/user_provisioning.html",
+   "title": "Configuring user provisioning | Tanium Cloud User Guide",
+   "quote": "SCIM tokens expire after one year.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://help.tanium.com/bundle/ug_cloud_cloud/page/cloud/user_provisioning.html",
+   "title": "Configuring user provisioning | Tanium Cloud User Guide",
+   "quote": "You must copy the SCIM token to your identity provider within five minutes and before the page is refreshed.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://help.tanium.com/bundle/ug_cloud_cloud/page/cloud/user_provisioning.html",
+   "title": "Configuring user provisioning | Tanium Cloud User Guide",
+   "quote": "When access is no longer needed, remove users from the group. SCIM removes their access in Tanium.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://help.tanium.com/bundle/ug_cloud_cloud/page/cloud/user_provisioning.html",
+   "title": "Configuring user provisioning | Tanium Cloud User Guide",
+   "quote": "Assign the roles, computer groups, and personas you want to the provisioned Tanium user group in Tanium Console.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://help.tanium.com/bundle/ug_cloud_cloud/page/cloud/user_provisioning.html",
+   "title": "Configuring user provisioning | Tanium Cloud User Guide",
+   "quote": "Disabling SCIM deletes all users and groups that were created and are managed by the configured SCIM provider.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://help.tanium.com/bundle/ug_cloud_cloud/page/cloud/user_provisioning.html",
+   "title": "Configuring user provisioning | Tanium Cloud User Guide",
+   "quote": "Configure your identity provider (see Configuring your identity provider for your Tanium Cloud service instance), and make sure that JIT provisioning is disabled for all domains.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://help.tanium.com/bundle/ug_cloud_cloud/page/cloud/user_provisioning.html",
+   "title": "Configuring user provisioning | Tanium Cloud User Guide",
+   "quote": "For Entra ID, configure the Token and SCIM API URL values in the Tanium SSO app.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://help.tanium.com/bundle/ug_cloud_cloud/page/cloud/configuring_okta.html",
+   "title": "Configuring Okta for your Tanium Cloud service instance",
+   "quote": "Select whether you want to enable JIT user provisioning for the domain by selecting Yes or No for Auto-Provision Users.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://help.tanium.com/bundle/ug_cloud_cloud/page/cloud/configuring_okta.html",
+   "title": "Configuring Okta for your Tanium Cloud service instance",
+   "quote": "Manually create and configure a SAML app integration in the Okta Admin Console.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://help.tanium.com/bundle/ug_cloud_cloud/page/cloud/configuring_identity_providers_cloud.html",
+   "title": "Configuring your identity provider for your Tanium Cloud service instance",
+   "quote": "Each of the following topics provides complete end-to-end configuration steps for a supported identity provider",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://help.tanium.com/bundle/ug_cloud_cloud/page/cloud/configuring_identity_providers_cloud.html",
+   "title": "Configuring your identity provider for your Tanium Cloud service instance",
+   "quote": "Configuring Google Cloud Identity for Tanium Cloud",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://help.tanium.com/bundle/ug_console_cloud/page/platform_user/console_users.html",
+   "title": "Managing users | Tanium Console User Guide",
+   "quote": "The following attributes apply only if System for Cross-domain Identity Management (SCIM) is configured in your environment.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://help.tanium.com/bundle/ug_console_cloud/page/platform_user/console_users.html",
+   "title": "Managing users | Tanium Console User Guide",
+   "quote": "When you delete a user or persona, scheduled content that the user or persona owns stops running",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/tanium-sso-tutorial",
+   "title": "Microsoft Entra SSO integration with Tanium SSO",
+   "quote": "Tanium SSO supports both SP and IDP initiated single sign-on and also Just In Time user provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/tanium-sso-provisioning-tutorial",
+   "title": "Configure Tanium SSO for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Remove users in Tanium SSO when they don't require access anymore.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/tanium-sso-provisioning-tutorial",
+   "title": "Configure Tanium SSO for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Provision groups and group memberships in Tanium SSO.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/tanium-sso-provisioning-tutorial",
+   "title": "Configure Tanium SSO for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Keep user attributes synchronized between Microsoft Entra ID and Tanium SSO.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/tanium-sso-provisioning-tutorial",
+   "title": "Configure Tanium SSO for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Create users in Tanium SSO.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.tanium.com/pricing (404)",
+  "https://www.tanium.com/sitemap.xml (no pricing page)",
+  "https://www.tanium.com/see-a-demo",
+  "https://help.tanium.com/sitemap.xml (5938 URLs; grep scim/saml/idp/gateway/audit)",
+  "https://help.tanium.com/bundle/ug_cloud_cloud/page/cloud/user_provisioning.html",
+  "https://help.tanium.com/bundle/ug_cloud_cloud/page/cloud/configuring_identity_providers_cloud.html",
+  "https://help.tanium.com/bundle/ug_cloud_cloud/page/cloud/configuring_okta.html",
+  "https://help.tanium.com/bundle/ug_console_cloud/page/platform_user/console_users.html",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/tanium-sso-tutorial",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/tanium-sso-provisioning-tutorial",
+  "https://www.okta.com/integrations/tanium/ (404)"
+ ],
+ "open_questions": [
+  "Whether SCIM deprovisioning deletes or locks out the Tanium user is not stated.",
+  "SCIM base URL pattern, PUT vs PATCH, pagination and rate limits are not published.",
+  "User-management capabilities of the Tanium API Gateway / REST API were not checked; user_api left null.",
+  "Whether SCIM is limited to particular Tanium Cloud packages is not stated (quote-only).",
+  "OneLogin and JumpCloud catalogue status not checked."
+ ]
+}

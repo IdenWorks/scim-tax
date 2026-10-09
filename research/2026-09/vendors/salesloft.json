@@ -1,0 +1,732 @@
+{
+ "slug": "salesloft",
+ "vendor": "Salesloft",
+ "vendor_url": "https://www.salesloft.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Salesloft",
+  "slug": "salesloft",
+  "category": "Sales & CRM",
+  "status": "partial",
+  "scim_plan": "Advanced",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Advanced",
+  "team_price_text": "Contact Sales",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Advanced",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": false
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "sso_only",
+   "google": "sso_only",
+   "onelogin": "sso_only",
+   "jumpcloud": "sso_only",
+   "generic": false
+  },
+  "pricing_page_url": "https://www.salesloft.com/pricing",
+  "docs_url": "https://help.salesloft.com/s/article/Auto-User-Provisioning-with-Okta-Salesloft-Enterprise?language=en_US",
+  "evidence": "Salesloft sells two packages, Advanced and Elite (no public prices; /pricing redirects to Talk to Sales), and its Okta provisioning article ('Adheres to the SCIM 2.0 specifications with the core user schema') carries a Package Availability icon checking both Advanced and Elite.",
+  "notes": "Changed from June gated to partial: Salesloft now sells only Advanced and Elite (legacy Essentials/Premier/Enterprise packages ran Feb 2020 to Aug 2025), and the help centre's Package Availability icon (an image, read visually) shows SCIM provisioning and SSO on both packages, so there is no Enterprise gate. SCIM is documented only through Okta's Salesloft app; Entra, Google and OneLogin are SAML-only via custom apps and no generic SCIM endpoint is published, hence partial. No public prices: the June third-party estimates (~$125 and ~$180/u/mo) have no first-party source and are dropped. Drift Email (a Salesloft product) has a separate Okta SCIM integration with create/update/delete.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Advanced",
+   "price_text": "Contact Sales",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c3",
+    "c5",
+    "c16"
+   ],
+   "notes": "Package Availability icon (an image) on the Okta provisioning and SSO help articles shows a check for Advanced and Elite."
+  },
+  {
+   "name": "Elite",
+   "price_text": "Contact Sales",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c3",
+    "c5",
+    "c16"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c5",
+   "c7",
+   "c13",
+   "c3"
+  ],
+  "plan": "Advanced",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": null,
+  "notes": "SCIM is only documented through Okta's Salesloft app (the 'Salesloft Enterprise' integration, which replaced the legacy SCIM app). No SCIM base URL or generic SCIM docs are published. Plan read from the Package Availability icon image (Advanced and Elite both checked, Add On dash).",
+  "auth": {
+   "method": "bearer",
+   "token_source": "accounts.salesloft.com > Your Applications > API Key (scopes groups:write, team:delete, team:read, team:write), pasted into Okta as the API token",
+   "token_expiry": null,
+   "cite": [
+    "c8",
+    "c11"
+   ],
+   "notes": "Method recorded as bearer: Okta's provisioning tab takes the Salesloft API key as an API token."
+  },
+  "endpoints": {
+   "Users": null,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": []
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": null,
+   "group_push": false,
+   "group_membership": true,
+   "cite": [
+    "c6",
+    "c9"
+   ],
+   "notes": "Update of user attributes supported via Okta (method not documented); email/username updates not supported. Group membership is set by a Salesloft Group ID attribute; Okta group push is not allowed."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c6"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": true,
+    "how": "Okta app attributes for Custom Roles, License assignment and Group assignment (Salesloft Group ID)."
+   },
+   "group": [],
+   "cite": [
+    "c6",
+    "c7"
+   ],
+   "notes": "Docs only say the integration uses the SCIM 2.0 core user schema and SCIM enterprise endpoints; the attribute list is not published."
+  },
+  "roles": {
+   "supported": true,
+   "how": "Custom Roles set as a user attribute in the Okta app.",
+   "cite": [
+    "c6"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Email address / username cannot be updated through the integration.",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "text": "Groups cannot be pushed from Okta; only a Salesloft Group ID is assigned.",
+    "cite": [
+     "c9"
+    ]
+   },
+   {
+    "text": "Only one Okta app version (legacy or Salesloft Enterprise) can be used at a time.",
+    "cite": [
+     "c12"
+    ]
+   },
+   {
+    "text": "Legacy Okta app does not include roles or groups.",
+    "cite": [
+     "c14"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c21",
+   "c35",
+   "c36"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": null,
+  "docs_url": "https://developers.salesloft.com/docs/api/users-index/",
+  "auth": {
+   "methods": [
+    "api_key",
+    "oauth2"
+   ],
+   "scopes": [
+    "team:read",
+    "team:write",
+    "team:delete",
+    "groups:write"
+   ],
+   "cite": [
+    "c35",
+    "c36",
+    "c8"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c21",
+    "c22",
+    "c23",
+    "c24",
+    "c25",
+    "c26",
+    "c27"
+   ],
+   "notes": "No create or delete user endpoint is listed in the public API reference."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/v2/users",
+    "purpose": "List users",
+    "cite": [
+     "c21"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v2/users/:id",
+    "purpose": "Fetch a user by User ID or GUID",
+    "cite": [
+     "c22"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/v2/users/:id",
+    "purpose": "Update a user",
+    "cite": [
+     "c23"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v2/groups",
+    "purpose": "List groups",
+    "cite": [
+     "c24"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v2/groups",
+    "purpose": "Create a group",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/v2/groups/:id",
+    "purpose": "Update a group",
+    "cite": [
+     "c26"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v2/groups/:id",
+    "purpose": "Delete a group",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v2/custom_roles",
+    "purpose": "List custom roles",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v2/team",
+    "purpose": "Fetch current team",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v2/audit_reports",
+    "purpose": "Request an audit report",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v2/audit_reports",
+    "purpose": "List generated audit reports",
+    "cite": [
+     "c31"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": true,
+   "events": [
+    "user_created",
+    "user_updated"
+   ],
+   "cite": [
+    "c32",
+    "c33"
+   ]
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": null,
+   "cite": [
+    "c30",
+    "c31"
+   ]
+  },
+  "rate_limits": {
+   "text": "600 cost per minute per team (default endpoint cost 1; higher cost for page > 100).",
+   "cite": [
+    "c34"
+   ]
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/salesloft/",
+   "cite": [
+    "c15",
+    "c5",
+    "c7"
+   ],
+   "notes": "OIN page marks SAML, SCIM, Create, Update, Deactivate as checked (read from page markup)."
+  },
+  "entra": {
+   "listed": false,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c16",
+    "c17"
+   ],
+   "notes": "Salesloft's Entra SSO guide uses a non-gallery application; no Entra provisioning documented."
+  },
+  "google": {
+   "listed": false,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c16",
+    "c18"
+   ],
+   "notes": "Custom SAML app in Google Admin; no Google provisioning documented."
+  },
+  "onelogin": {
+   "listed": false,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c16",
+    "c19"
+   ],
+   "notes": "Salesloft's OneLogin guide uses the generic SAML Test Connector (IdP)."
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://jumpcloud.com/support/integrate-with-salesloft",
+   "cite": [
+    "c20"
+   ],
+   "notes": "JumpCloud's article covers SAML SSO only."
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c5",
+   "c21"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.salesloft.com/pricing",
+   "title": "Talk to Sales | Salesloft",
+   "quote": "Book time with us. Start with your email — we'll take it from there.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://help.salesloft.com/s/article/Salesloft-Packages-and-Availability?language=en_US",
+   "title": "Salesloft Packages and Availability",
+   "quote": "There are currently two types of Salesloft pricing packages: Advanced Elite",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://help.salesloft.com/s/article/Salesloft-Packages-and-Availability?language=en_US",
+   "title": "Salesloft Packages and Availability",
+   "quote": "At the top of each Knowledge article, you will see the Package Availability icon. This icon shows which packages include the feature explained in the article. If an X icon is seen next to the package name, the feature is not included in that package.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://help.salesloft.com/s/article/Salesloft-Packages-and-Availability?language=en_US",
+   "title": "Salesloft Packages and Availability",
+   "quote": "The plans listed in this article are the standard offerings. Features and modules may vary. Please speak to your Salesloft Sales Executive for more information.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://help.salesloft.com/s/article/Auto-User-Provisioning-with-Okta-Salesloft-Enterprise?language=en_US",
+   "title": "User Provisioning with Okta - Salesloft Enterprise",
+   "quote": "The Salesloft Enterprise integration connects Salesloft and Okta– enabling you to perform enhanced capabilities such as adding and deactivating Salesloft users, updating user attributes, assigning users to groups, and more via an application in Okta.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://help.salesloft.com/s/article/Auto-User-Provisioning-with-Okta-Salesloft-Enterprise?language=en_US",
+   "title": "User Provisioning with Okta - Salesloft Enterprise",
+   "quote": "Push new users: New users created through Okta will also be created in Salesloft Push user deactivation: Deactivating the user in Okta will deactivate the user in Salesloft Update user attributes: Custom Roles License assignment Group assignment",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://help.salesloft.com/s/article/Auto-User-Provisioning-with-Okta-Salesloft-Enterprise?language=en_US",
+   "title": "User Provisioning with Okta - Salesloft Enterprise",
+   "quote": "Adheres to the SCIM 2.0 specifications with the core user schema Leverages SCIM enterprise endpoints",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://help.salesloft.com/s/article/Auto-User-Provisioning-with-Okta-Salesloft-Enterprise?language=en_US",
+   "title": "User Provisioning with Okta - Salesloft Enterprise",
+   "quote": "Team Administration> groups:write Team Administration> team:delete Team Administration> team:read Team Administration> team:write",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://help.salesloft.com/s/article/Auto-User-Provisioning-with-Okta-Salesloft-Enterprise?language=en_US",
+   "title": "User Provisioning with Okta - Salesloft Enterprise",
+   "quote": "Okta does not support nested groups. For that reason, the Salesloft Okta app does not allow pushing groups from Okta into Salesloft.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://help.salesloft.com/s/article/Auto-User-Provisioning-with-Okta-Salesloft-Enterprise?language=en_US",
+   "title": "User Provisioning with Okta - Salesloft Enterprise",
+   "quote": "The Salesloft Enterprise Integration does not support updating email addresses.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://help.salesloft.com/s/article/Auto-User-Provisioning-with-Okta-Salesloft-Enterprise?language=en_US",
+   "title": "User Provisioning with Okta - Salesloft Enterprise",
+   "quote": "Go to accounts.salesloft.com. Select Your Applications. You will be directed to the Salesloft OAuth Applications page. Click API Key.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://help.salesloft.com/s/article/Auto-User-Provisioning-with-Okta-Salesloft-Enterprise?language=en_US",
+   "title": "User Provisioning with Okta - Salesloft Enterprise",
+   "quote": "The Salesloft Enterprise integration replaces the legacy Salesloft application in Okta. You can only use one version of the application (app) at a time.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://help.salesloft.com/s/article/Auto-User-Provisioning-Integration-with-Okta?language=en_US",
+   "title": "Auto-User Provisioning Integration with Okta",
+   "quote": "Auto-User Provisioning Integration, aka the SCIM standard, within Okta allows for a User Provisioning Integration. This feature automatically triggers a user account creation in Salesloft when a user identity is created in Okta.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://help.salesloft.com/s/article/Auto-User-Provisioning-Integration-with-Okta?language=en_US",
+   "title": "Auto-User Provisioning Integration with Okta",
+   "quote": "Things to Note: Auto-provisioning does not include roles/groups.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://www.okta.com/integrations/salesloft/",
+   "title": "Integrate Salesloft with Okta",
+   "quote": "Salesloft delivers a performance force multiplier for the world's most demanding companies.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://help.salesloft.com/s/article/Manage-Single-Sign-On?language=en_US",
+   "title": "Manage Single Sign-On",
+   "quote": "Salesloft currently has single sign-on via SAML setup capabilities with the following IdPs: Single Sign-On: Okta Instructions Single Sign-On: OneLogin Instructions Single Sign-On: Google SSO through SAML Single Sign-On: Microsoft Entra Instructions",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://help.salesloft.com/s/article/Single-Sign-On-Microsoft-Azure-Instructions?language=en_US",
+   "title": "Single Sign-On: Microsoft Azure Instructions",
+   "quote": "Select Non-gallery application.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://help.salesloft.com/s/article/Single-Sign-On-Google-SSO-through-SAML?language=en_US",
+   "title": "Single Sign-On: Google SSO through SAML",
+   "quote": "Select Setup my own custom app.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://help.salesloft.com/s/article/Single-Sign-On-OneLogin-Instructions?language=en_US",
+   "title": "Single Sign-On: OneLogin Instructions",
+   "quote": "Search for Test connector and select SAML Test Connector (IdP).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://jumpcloud.com/support/integrate-with-salesloft",
+   "title": "Integrate with SalesLoft | JumpCloud",
+   "quote": "Use JumpCloud SAML Single Sign On (SSO) to give your users convenient but secure access to all their web applications with a single set of credentials. Read this article to learn how to integrate with SalesLoft.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://developers.salesloft.com/docs/api/users-index/",
+   "title": "List users | Salesloft Developers",
+   "quote": "List users GET /v2/users Non Admin: Lists only your user, or all on team depending on group visibility policy Team Admin: Lists users associated with your team",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://developers.salesloft.com/docs/api/users-show/",
+   "title": "Fetch a user | Salesloft Developers",
+   "quote": "Fetch a user, by User ID or User GUID GET /v2/users/:id Fetches a user.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://developers.salesloft.com/docs/api/users-update/",
+   "title": "Update a user | Salesloft Developers",
+   "quote": "Update a user, by User ID or User GUID PUT /v2/users/:id Updates a user.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://developers.salesloft.com/docs/api/groups-index/",
+   "title": "List groups | Salesloft Developers",
+   "quote": "List groups GET /v2/groups Fetches multiple group records.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://developers.salesloft.com/docs/api/groups-create/",
+   "title": "Create a group | Salesloft Developers",
+   "quote": "Create a group POST /v2/groups Creates a group.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://developers.salesloft.com/docs/api/groups-update/",
+   "title": "Update a group | Salesloft Developers",
+   "quote": "Update a group PUT /v2/groups/:id Updates a group by ID.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://developers.salesloft.com/docs/api/groups-destroy/",
+   "title": "Deletes a Group by ID | Salesloft Developers",
+   "quote": "Deletes a Group by ID DELETE /v2/groups/:id",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://developers.salesloft.com/docs/api/custom-roles-index/",
+   "title": "List custom roles | Salesloft Developers",
+   "quote": "List custom roles GET /v2/custom_roles Fetches multiple custom role records.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://developers.salesloft.com/docs/api/team-index/",
+   "title": "Fetch current team | Salesloft Developers",
+   "quote": "Fetch current team GET /v2/team Fetches the team of the authenticated user.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://developers.salesloft.com/docs/api/audit-reports-create/",
+   "title": "Create a new audit report | Salesloft Developers",
+   "quote": "Create a new audit report POST /v2/audit_reports Creates a request for a new audit report.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://developers.salesloft.com/docs/api/audit-reports-index/",
+   "title": "List generated audit reports | Salesloft Developers",
+   "quote": "GET /v2/audit_reports Returns all reports that have been requested by user's tenant_id, paged by 25 records",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://developers.salesloft.com/docs/platform/webhooks/event-types/",
+   "title": "Event Types | Salesloft Developers",
+   "quote": "user_created When a user is created, receive the new user object",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://developers.salesloft.com/docs/platform/webhooks/event-types/",
+   "title": "Event Types | Salesloft Developers",
+   "quote": "user_updated When a user is updated, receive the updated user object",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://developers.salesloft.com/docs/platform/api-basics/rate-limits/",
+   "title": "Rate Limits | Salesloft Developers",
+   "quote": "The current rate limit is 600 cost per minute. This rate limit can be adjusted by Salesloft on a customer-wide basis, or on a per-team basis.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c35",
+   "url": "https://developers.salesloft.com/docs/platform/api-basics/api-key-authentication/",
+   "title": "API Key Authentication | Salesloft Developers",
+   "quote": "Using an API key is a way outside of the OAuth. flow to gain access to the Salesloft Public API. API Keys can be used to access the API on behalf of the issuing user.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://developers.salesloft.com/docs/platform/api-basics/api-key-authentication/",
+   "title": "API Key Authentication | Salesloft Developers",
+   "quote": "This method is exclusively for customers,if you are current or future partner you will need to create an OAuth app to use our API endpoints.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://help.salesloft.com/s/article/Okta-SCIM-Setup?language=en_US",
+   "title": "Drift - Okta SCIM Setup",
+   "quote": "Okta SCIM can manage these actions for Drift Email: Create users Update users Delete users Password sync",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.salesloft.com/pricing (redirects to /see-it-live)",
+  "https://www.salesloft.com/sitemap_index.xml",
+  "https://help.salesloft.com/s/sitemap-topicarticle-1.xml (scim, sso, provision, okta, entra)",
+  "https://developers.salesloft.com/sitemap.xml (no SCIM reference)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/salesloft-tutorial (404)"
+ ],
+ "open_questions": [
+  "Plan availability comes from an image icon on the help articles, not text; confirm with Salesloft that SCIM is on Advanced.",
+  "SCIM base URL, endpoints, attributes, filtering and pagination are not publicly documented.",
+  "Whether deactivation frees the license or ends sessions is not documented.",
+  "Which packages include the public REST API and audit reports is not documented.",
+  "Whether SCIM works with any IdP other than Okta (no generic SCIM documentation)."
+ ]
+}

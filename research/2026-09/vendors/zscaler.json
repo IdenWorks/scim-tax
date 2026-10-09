@@ -1,0 +1,980 @@
+{
+ "slug": "zscaler",
+ "vendor": "Zscaler",
+ "vendor_url": "https://www.zscaler.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Zscaler",
+  "slug": "zscaler",
+  "category": "Security & Identity",
+  "status": "gated",
+  "scim_plan": "Contact Sales (quote-only)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Essentials Platform",
+  "team_price_text": "Contact Sales (no public price)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Essentials Platform",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": "native",
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.zscaler.com/pricing-and-plans",
+  "docs_url": "https://help.zscaler.com/zia/understanding-scim",
+  "evidence": "Zscaler's pricing page lists the Essentials Platform and Zscaler Platform bundles with no prices (contact experts for bundle pricing), and its ZIA help says Zscaler supports only SCIM version 2.0 and SAML must be used as your authentication method to use SCIM for provisioning.",
+  "notes": "Quote-only: Zscaler names two platform bundles (Essentials Platform, Zscaler Platform) with SAML and 'Multiple IdP, API Access' ticked on both, but publishes no prices and does not list SCIM on the pricing page, so under rule 6a the row is gated at low confidence. Microsoft's Entra tutorial for the Zscaler ZNet gallery app says the SCIM API is for accounts with the Enterprise package (IdP page, possibly outdated). New row. Researched for Zscaler Internet Access (ZIA): SCIM 2.0 needs SAML; Users, Groups, Bulk, Schemas, ResourceTypes, ServiceProviderConfig; PUT and PATCH; active=false disables and DELETE removes; 5 requests/second; usernames must use a preregistered domain. Okta OIN, Entra gallery and Google Workspace apps provision; Google has no group push. ZIA cloud service API (users, groups, departments, admin audit logs) must be enabled by Zscaler Support.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Essentials Platform",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Essentials Platform",
+   "price_text": "Contact sales (no public price)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": null,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c3",
+    "c4",
+    "c5"
+   ]
+  },
+  {
+   "name": "Zscaler Platform",
+   "price_text": "Contact sales (no public price)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": null,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c3",
+    "c4",
+    "c5"
+   ],
+   "notes": "Marked RECOMMENDED on the pricing page."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c6",
+   "c7",
+   "c28",
+   "c29"
+  ],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://scim.<Zscaler Cloud>/<Organization ID>/<IdP ID>/scim",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Zscaler Admin Console > Administration > Identity > Internet & SaaS > Internet Authentication Settings > Identity Providers > Edit IdP > Enable SCIM Provisioning (Generate Token)",
+   "token_expiry": null,
+   "cite": [
+    "c30",
+    "c31"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": true,
+   "Schemas": true,
+   "ResourceTypes": true,
+   "Bulk": true,
+   "Me": null,
+   "cite": [
+    "c12",
+    "c26",
+    "c15",
+    "c16",
+    "c17",
+    "c18"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c24",
+    "c25",
+    "c10",
+    "c11",
+    "c19",
+    "c26",
+    "c37",
+    "c14"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c10",
+    "c9",
+    "c19"
+   ],
+   "notes": "active=false disables the user; DELETE /Users removes the user from the Zscaler user database (used when users are deleted in the directory)."
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName",
+    "externalId",
+    "id",
+    "meta.lastModified",
+    "displayName (Groups)",
+    "members.value (Groups)"
+   ],
+   "cite": [
+    "c27",
+    "c13",
+    "c14"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": 1000,
+   "cite": [
+    "c12"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "id",
+    "externalId",
+    "userName",
+    "displayName",
+    "groups",
+    "active",
+    "name.givenName",
+    "name.familyName",
+    "emails.value"
+   ],
+   "enterprise": [
+    "department"
+   ],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "id",
+    "externalId",
+    "displayName"
+   ],
+   "cite": [
+    "c22",
+    "c23",
+    "c10",
+    "c36"
+   ]
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "5 requests per second",
+   "cite": [
+    "c35"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "The username's domain must be preregistered with Zscaler before users can be created.",
+    "cite": [
+     "c21"
+    ]
+   },
+   {
+    "text": "A user can be in at most 128 groups.",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "text": "SCIM requires SAML authentication and is not supported with Active Directory or OpenLDAP user repositories; SAML auto-provisioning (JIT) must be turned off.",
+    "cite": [
+     "c28",
+     "c32",
+     "c33"
+    ]
+   },
+   {
+    "text": "Google Workspace provisioning does not support Group Push.",
+    "cite": [
+     "c45",
+     "c44"
+    ]
+   }
+  ],
+  "notes": "Researched for Zscaler Internet Access (ZIA), the main product. ZPA and ZIdentity (Authentication Service) have their own SCIM docs on help.zscaler.com that were not researched in depth."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c49",
+   "c4",
+   "c65"
+  ],
+  "plan": "Essentials Platform",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": null,
+  "docs_url": "https://help.zscaler.com/legacy-apis/user-management",
+  "auth": {
+   "methods": [
+    "oauth2",
+    "api_key"
+   ],
+   "scopes": [],
+   "cite": [
+    "c63",
+    "c64"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c51",
+    "c52",
+    "c53",
+    "c54",
+    "c55",
+    "c58",
+    "c59"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/users",
+    "purpose": "List users (filter by name, department or group)",
+    "cite": [
+     "c51"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/users",
+    "purpose": "Add a user",
+    "cite": [
+     "c52"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/users/{userId}",
+    "purpose": "Get a user",
+    "cite": [
+     "c53"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/users/{userId}",
+    "purpose": "Update a user (email read-only)",
+    "cite": [
+     "c54"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/users/{userId}",
+    "purpose": "Delete a user",
+    "cite": [
+     "c55"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/users/bulkDelete",
+    "purpose": "Bulk delete up to 500 users",
+    "cite": [
+     "c56"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/users/auditors",
+    "purpose": "List auditors",
+    "cite": [
+     "c62"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/groups",
+    "purpose": "List groups",
+    "cite": [
+     "c57"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/groups",
+    "purpose": "Add a group",
+    "cite": [
+     "c58"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/groups/{groupId}",
+    "purpose": "Update a group",
+    "cite": [
+     "c59"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/groups/{groupId}",
+    "purpose": "Delete a group",
+    "cite": [
+     "c60"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/departments",
+    "purpose": "List departments",
+    "cite": [
+     "c61"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": null,
+   "cite": [
+    "c50"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Cloud service API availability is limited and must be enabled by Zscaler Support; the API-key method needs an API subscription.",
+    "cite": [
+     "c49",
+     "c65"
+    ]
+   }
+  ],
+  "notes": "Both bundles list 'API Access' on the pricing page, but the API docs say the cloud service API must be enabled by Zscaler Support. Per-endpoint rate limits are in a separate API Rate Limit Summary that was not read. Newer OneAPI endpoints were not researched."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/zscaler-internet-access/",
+   "cite": [
+    "c46",
+    "c37",
+    "c39"
+   ],
+   "notes": "OIN app 'Zscaler Internet Access' ticks SAML, SWA, SCIM, Create, Update, Deactivate, Group Push and Group Linking."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/zscaler-provisioning-tutorial",
+   "cite": [
+    "c40",
+    "c41",
+    "c48"
+   ],
+   "notes": "Gallery app (Microsoft's tutorial is titled Zscaler ZNet)."
+  },
+  "google": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c42",
+    "c43"
+   ],
+   "notes": "Create, Update and Deactivate; no Group Push."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c34"
+   ],
+   "notes": "Zscaler publishes only a SAML configuration guide for OneLogin."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": "Directory sync from Active Directory/LDAP (migration to SCIM documented)",
+  "docs_public": true,
+  "cite": [
+   "c38",
+   "c32"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.zscaler.com/pricing-and-plans",
+   "title": "Pricing and Plans | Zscaler",
+   "quote": "Start your zero trust journey with secure, reliable internet access and limited private access, with other Zscaler innovations.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.zscaler.com/pricing-and-plans",
+   "title": "Pricing and Plans | Zscaler",
+   "quote": "Unlock the complete SASE/SSE solution, including full internet access, private access, and data security.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.zscaler.com/pricing-and-plans",
+   "title": "Pricing and Plans | Zscaler",
+   "quote": "Authentication - SAML, Secure LDAP, Kerberos",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.zscaler.com/pricing-and-plans",
+   "title": "Pricing and Plans | Zscaler",
+   "quote": "Multiple Identity Providers (IdP), API Access, Device Posture",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.zscaler.com/pricing-and-plans",
+   "title": "Pricing and Plans | Zscaler",
+   "quote": "Connect with our product experts to see the Zscaler platform in action, discuss your unique challenges and use cases, and learn more about specific bundle pricing.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://help.zscaler.com/zia/understanding-scim",
+   "title": "Understanding SCIM | Zscaler",
+   "quote": "Zscaler provides an easy and consistent mechanism for customers to use SCIM to manage the lifecycle of user and group accounts in the Zscaler cloud.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://help.zscaler.com/zia/understanding-scim",
+   "title": "Understanding SCIM | Zscaler",
+   "quote": "Zscaler supports only SCIM version 2.0 and SAML must be used as your authentication method to use SCIM for provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://help.zscaler.com/zia/understanding-scim",
+   "title": "Understanding SCIM | Zscaler",
+   "quote": "Firstly, you can use custom SCIM clients to make REST API calls to Zscaler.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://help.zscaler.com/zia/understanding-scim",
+   "title": "Understanding SCIM | Zscaler",
+   "quote": "Deprovisioning users from the Zscaler database when users are deleted from your user directory.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://help.zscaler.com/zia/understanding-scim",
+   "title": "Understanding SCIM | Zscaler",
+   "quote": "When \"active=false,\" Zscaler disables this user",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://help.zscaler.com/zia/understanding-scim",
+   "title": "Understanding SCIM | Zscaler",
+   "quote": "When \"active=true,\" Zscaler enables this user",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://help.zscaler.com/zia/understanding-scim",
+   "title": "Understanding SCIM | Zscaler",
+   "quote": "Retrieve All Users (up to 1,000 entries)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://help.zscaler.com/zia/understanding-scim",
+   "title": "Understanding SCIM | Zscaler",
+   "quote": "Filter Users by Date Created After",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://help.zscaler.com/zia/understanding-scim",
+   "title": "Understanding SCIM | Zscaler",
+   "quote": "Filter by Group's Display Name and Members",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://help.zscaler.com/zia/understanding-scim",
+   "title": "Understanding SCIM | Zscaler",
+   "quote": "Bulk Modify Resources",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://help.zscaler.com/zia/understanding-scim",
+   "title": "Understanding SCIM | Zscaler",
+   "quote": "Retrieve the Service Provider's Configuration",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://help.zscaler.com/zia/understanding-scim",
+   "title": "Understanding SCIM | Zscaler",
+   "quote": "Retrieve All Resource Types",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://help.zscaler.com/zia/understanding-scim",
+   "title": "Understanding SCIM | Zscaler",
+   "quote": "Retrieve All Resource Schemas",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://help.zscaler.com/zia/understanding-scim",
+   "title": "Understanding SCIM | Zscaler",
+   "quote": "Delete User\tDELETE /Users/{UserID}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://help.zscaler.com/zia/understanding-scim",
+   "title": "Understanding SCIM | Zscaler",
+   "quote": "In addition, the total number of groups associated with a single user cannot exceed 128.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://help.zscaler.com/zia/understanding-scim",
+   "title": "Understanding SCIM | Zscaler",
+   "quote": "When creating users, the domain included in the username must be preregistered with Zscaler.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://help.zscaler.com/zia/understanding-scim",
+   "title": "Understanding SCIM | Zscaler",
+   "quote": "The department the user belongs to",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://help.zscaler.com/zia/understanding-scim",
+   "title": "Understanding SCIM | Zscaler",
+   "quote": "External ID provided by the client populates onto the Zscaler user database",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://help.zscaler.com/zia/understanding-scim",
+   "title": "Understanding SCIM | Zscaler",
+   "quote": "Update User\tPUT /Users/{UserID}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://help.zscaler.com/zia/understanding-scim",
+   "title": "Understanding SCIM | Zscaler",
+   "quote": "PATCH /Users/{UserID}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://help.zscaler.com/zia/understanding-scim",
+   "title": "Understanding SCIM | Zscaler",
+   "quote": "Create Group\tPOST /Groups",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://help.zscaler.com/zia/understanding-scim",
+   "title": "Understanding SCIM | Zscaler",
+   "quote": "Filter Users by External ID\tGET /Users?filter=externalID eq <value>",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://help.zscaler.com/zia/configuring-scim",
+   "title": "Configuring SCIM | Zscaler",
+   "quote": "If you wish to use SCIM for provisioning, you must also use SAML for authentication and obtain and implement a SCIM client.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://help.zscaler.com/zia/configuring-scim",
+   "title": "Configuring SCIM | Zscaler",
+   "quote": "https://scim.<Zscaler Cloud>/<Organization ID>/<IdP ID>/scim",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://help.zscaler.com/zia/configuring-scim",
+   "title": "Configuring SCIM | Zscaler",
+   "quote": "Go to Administration > Identity > Internet & SaaS > Internet Authentication Settings > Identity Providers.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://help.zscaler.com/zia/configuring-scim",
+   "title": "Configuring SCIM | Zscaler",
+   "quote": "Bearer Token: Copy the bearer token.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://help.zscaler.com/zia/configuring-scim",
+   "title": "Configuring SCIM | Zscaler",
+   "quote": "SCIM provisioning isn't supported with Active Directory or OpenLDAP user repositories.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://help.zscaler.com/zia/configuring-scim",
+   "title": "Configuring SCIM | Zscaler",
+   "quote": "Enable SAML Auto-Provisioning: Disable this option when enabling SCIM-based provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://help.zscaler.com/zia/configuring-scim",
+   "title": "Configuring SCIM | Zscaler",
+   "quote": "SAML Configuration Guide for OneLogin",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c35",
+   "url": "https://help.zscaler.com/zia/scim-api-examples",
+   "title": "SCIM API Examples | Zscaler",
+   "quote": "Zscaler SCIM servers have a rate limit of 5 requests per second.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://help.zscaler.com/zia/scim-api-examples",
+   "title": "SCIM API Examples | Zscaler",
+   "quote": "\"urn:ietf:params:scim:schemas:extension:enterprise:2.0:User\": {",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://help.zscaler.com/zia/saml-scim-configuration-guide-okta",
+   "title": "SAML & SCIM Configuration Guide for Okta | Zscaler",
+   "quote": "The SCIM features supported by the Zscaler and Okta integration are:",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c38",
+   "url": "https://help.zscaler.com/zia/saml-scim-configuration-guide-okta",
+   "title": "SAML & SCIM Configuration Guide for Okta | Zscaler",
+   "quote": "Just-in-Time (JIT) Provisioning (SAML auto-provisioning)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c39",
+   "url": "https://help.zscaler.com/zia/saml-scim-configuration-guide-okta",
+   "title": "SAML & SCIM Configuration Guide for Okta | Zscaler",
+   "quote": "2. Add the Internet & SaaS app in Okta.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c40",
+   "url": "https://help.zscaler.com/zia/saml-scim-configuration-guide-microsoft-entra-id",
+   "title": "SAML & SCIM Configuration Guide for Microsoft Entra ID | Zscaler",
+   "quote": "1. Add the Zscaler cloud application in the Microsoft Entra admin center.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c41",
+   "url": "https://help.zscaler.com/zia/saml-scim-configuration-guide-microsoft-entra-id",
+   "title": "SAML & SCIM Configuration Guide for Microsoft Entra ID | Zscaler",
+   "quote": "6. Configure SCIM provisioning in the Microsoft Entra admin center.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c42",
+   "url": "https://help.zscaler.com/zia/saml-scim-configuration-guide-google-workspace",
+   "title": "SAML & SCIM Configuration Guide for Google Workspace | Zscaler",
+   "quote": "The SCIM features supported by the Zscaler and Google Workspace integration are:",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c43",
+   "url": "https://help.zscaler.com/zia/saml-scim-configuration-guide-google-workspace",
+   "title": "SAML & SCIM Configuration Guide for Google Workspace | Zscaler",
+   "quote": "1. Configure the Zscaler app in the Google Admin console.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c44",
+   "url": "https://help.zscaler.com/zia/saml-scim-configuration-guide-google-workspace",
+   "title": "SAML & SCIM Configuration Guide for Google Workspace | Zscaler",
+   "quote": "Group Push",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c45",
+   "url": "https://help.zscaler.com/zia/saml-scim-configuration-guide-google-workspace",
+   "title": "SAML & SCIM Configuration Guide for Google Workspace | Zscaler",
+   "quote": "Google Workspace does not support the following features:",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c46",
+   "url": "https://www.okta.com/integrations/zscaler-internet-access/",
+   "title": "Integrate Zscaler Internet Access with Okta",
+   "quote": "Zscaler provides its customers the capability to authenticate to its \"Zscaler Internet Access\" service using SAML and provisioning and deprovisioning capabilities through SCIM API calls.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c47",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/zscaler-provisioning-tutorial",
+   "title": "Configure Zscaler ZNet for automatic user provisioning with Microsoft Entra ID",
+   "quote": "The Microsoft Entra provisioning integration relies on the Zscaler ZNet SCIM API, which is available to Zscaler ZNet developers for accounts with the Enterprise package.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c48",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/zscaler-provisioning-tutorial",
+   "title": "Configure Zscaler ZNet for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Before configuring Zscaler ZNet for automatic user provisioning with Microsoft Entra ID, you need to add Zscaler ZNet from the Microsoft Entra application gallery to your list of managed SaaS applications.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c49",
+   "url": "https://help.zscaler.com/legacy-apis/understanding-zia-api",
+   "title": "Understanding ZIA APIs | Zscaler",
+   "quote": "Availability of the cloud service API is limited. To enable this API for your organization, contact Zscaler Support.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c50",
+   "url": "https://help.zscaler.com/legacy-apis/understanding-zia-api",
+   "title": "Understanding ZIA APIs | Zscaler",
+   "quote": "Admin Audit Logs",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c51",
+   "url": "https://help.zscaler.com/legacy-apis/user-management",
+   "title": "User Management | Zscaler",
+   "quote": "Gets a list of all users and allows user filtering by name, department, or group.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c52",
+   "url": "https://help.zscaler.com/legacy-apis/user-management",
+   "title": "User Management | Zscaler",
+   "quote": "Adds a new user. A user can belong to multiple groups, but can only belong to one department.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c53",
+   "url": "https://help.zscaler.com/legacy-apis/user-management",
+   "title": "User Management | Zscaler",
+   "quote": "Gets the user information for the specified ID.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c54",
+   "url": "https://help.zscaler.com/legacy-apis/user-management",
+   "title": "User Management | Zscaler",
+   "quote": "Updates the user information for the specified ID. However, the email attribute is read-only.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c55",
+   "url": "https://help.zscaler.com/legacy-apis/user-management",
+   "title": "User Management | Zscaler",
+   "quote": "Deletes the user for the specified ID.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c56",
+   "url": "https://help.zscaler.com/legacy-apis/user-management",
+   "title": "User Management | Zscaler",
+   "quote": "Bulk delete users up to a maximum of 500 users per request. The response returns the user IDs that were successfully deleted.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c57",
+   "url": "https://help.zscaler.com/legacy-apis/user-management",
+   "title": "User Management | Zscaler",
+   "quote": "Retrieves a list of groups. The search parameters find matching values in the name or comments attributes.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c58",
+   "url": "https://help.zscaler.com/legacy-apis/user-management",
+   "title": "User Management | Zscaler",
+   "quote": "Adds a new group. To learn more, see Adding Groups.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c59",
+   "url": "https://help.zscaler.com/legacy-apis/user-management",
+   "title": "User Management | Zscaler",
+   "quote": "Updates an existing group based on the specified ID.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c60",
+   "url": "https://help.zscaler.com/legacy-apis/user-management",
+   "title": "User Management | Zscaler",
+   "quote": "Deletes the group based on the specified ID.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c61",
+   "url": "https://help.zscaler.com/legacy-apis/user-management",
+   "title": "User Management | Zscaler",
+   "quote": "Retrieves a list of departments. The search parameters find matching values within the name or comments fields.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c62",
+   "url": "https://help.zscaler.com/legacy-apis/user-management",
+   "title": "User Management | Zscaler",
+   "quote": "Gets a list of auditors. To learn more, see About Auditors.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c63",
+   "url": "https://help.zscaler.com/legacy-apis/getting-started-zia-api",
+   "title": "Getting Started | Zscaler (ZIA API)",
+   "quote": "Zscaler recommends the OAuth 2.0 authentication method for accessing the cloud service API.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c64",
+   "url": "https://help.zscaler.com/legacy-apis/getting-started-zia-api",
+   "title": "Getting Started | Zscaler (ZIA API)",
+   "quote": "In this method, API authentication is based on a combination of the API key and ZIA admin credentials (i.e., username and password).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c65",
+   "url": "https://help.zscaler.com/legacy-apis/getting-started-zia-api",
+   "title": "Getting Started | Zscaler (ZIA API)",
+   "quote": "Before getting started, make sure that your organization has an API subscription and an API key/token enabled.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The pricing page shows SAML and multiple-IdP support on both bundles with no SCIM plan named, while Microsoft's Entra tutorial says the Zscaler ZNet SCIM API is available for accounts with the Enterprise package.",
+   "cite": [
+    "c3",
+    "c47"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.zscaler.com/pricing-and-plans",
+  "https://www.zscaler.com/sitemap_index.xml",
+  "https://help.zscaler.com/sitemap.xml",
+  "https://help.zscaler.com/legacy-apis/understanding-zia-api",
+  "https://www.okta.com/integrations/zscaler-internet-access/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/zscaler-provisioning-tutorial"
+ ],
+ "open_questions": [
+  "Which bundle or SKU includes SCIM is not on the pricing page; Microsoft's tutorial says Enterprise package.",
+  "Whether disabling or deleting a user frees a licence or ends sessions is not documented.",
+  "SCIM token expiry is not documented.",
+  "ZIA cloud service API base URL and per-endpoint rate limits were not captured (API Rate Limit Summary not read).",
+  "ZPA and ZIdentity SCIM behaviour may differ and was not researched in depth; JumpCloud and OneLogin provisioning not checked."
+ ]
+}

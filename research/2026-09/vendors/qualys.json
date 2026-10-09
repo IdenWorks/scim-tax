@@ -1,0 +1,155 @@
+{
+ "slug": "qualys",
+ "vendor": "Qualys",
+ "vendor_url": "https://www.qualys.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Qualys",
+  "slug": "qualys",
+  "category": "Security & Identity",
+  "status": "none",
+  "scim_plan": "—",
+  "scim_price_text": "—",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales (quote based on apps, IPs, web apps and user licences)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": null,
+  "idp": {
+   "okta": "none",
+   "entra": "directory_sync",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": false
+  },
+  "pricing_page_url": "https://www.qualys.com/subscriptions",
+  "docs_url": "https://docs.qualys.com/en/admin/latest/azure_ad_sync/overview_of_azure_ad_sync.htm",
+  "evidence": "Qualys documents no SCIM endpoint; instead its Azure AD/Entra ID Sync connector synchronises users and roles from Azure AD on an hourly schedule, automatically creating, updating and deactivating Qualys users.",
+  "notes": "New row. Quote-only: Qualys pricing depends on the Cloud Platform apps, number of IPs, web applications and user licences ('Want a quote or have questions?'). No SCIM endpoint is documented in the Administration help or the Qualys API (VM, PC) user guide. User lifecycle automation is a vendor-run Microsoft Entra ID Directory Sync connector (Connectors app; group-to-role mapping; hourly sync that creates, updates and deactivates users; users then sign in via SAML SSO with a qualysguard_external_id claim). It needs the RBAC unified user management, which the Administration help still calls a Beta feature enabled through the TAM. The legacy XML API (/msp/user.php, /msp/user_list.php) lets Managers add, edit, list, activate and deactivate users; all user roles except Contact can use the API. Okta OIN 'Qualys Guard' app is SAML/SWA only; no Entra gallery app found.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Qualys Cloud Platform subscription (Enterprise, SMB, Government)",
+   "price_text": "Contact Sales (quote)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": ["c1", "c2", "c10"],
+   "notes": "Price depends on selected apps, IP count, web applications and user licences. Express Lite subscriptions can use the user API (max 3 users)."
+  }
+ ],
+ "scim": {
+  "available": false,
+  "cite": ["c3", "c4"],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": null,
+  "base_url": null,
+  "auth": { "method": null, "token_source": null, "token_expiry": null, "cite": [] },
+  "endpoints": { "Users": false, "Groups": false, "ServiceProviderConfig": null, "Schemas": null, "ResourceTypes": null, "Bulk": null, "Me": null, "cite": ["c3"] },
+  "operations": { "create": null, "read": null, "update_put": null, "update_patch": null, "deactivate": null, "reactivate": null, "delete": null, "group_push": null, "group_membership": null, "cite": [] },
+  "deprovision": { "action": null, "frees_seat": null, "revokes_sessions": null, "data_retained": null, "cite": [] },
+  "filtering": { "supported": null, "attributes": [], "cite": [] },
+  "pagination": { "supported": null, "max_page_size": null, "cite": [] },
+  "attributes": { "core": [], "enterprise": [], "custom": { "supported": null, "how": null }, "group": [], "cite": [] },
+  "roles": { "supported": null, "how": null, "cite": [] },
+  "rate_limits": { "text": null, "cite": [] },
+  "limitations": [],
+  "notes": "available=false by absence: no SCIM in the Administration help or the API guide; the documented IdP integration is a vendor-run Entra ID directory sync connector (see fallbacks.other_sync)."
+ },
+ "user_api": {
+  "available": true,
+  "cite": ["c7", "c8"],
+  "plan": null,
+  "api_tax": null,
+  "style": "other",
+  "base_url": "https://qualysapi.qualys.com",
+  "docs_url": "https://cdn2.qualys.com/docs/qualys-api-vmpc-user-guide.pdf",
+  "auth": { "methods": ["basic", "session", "idp_token"], "scopes": [], "cite": ["c11"], "notes": "Basic or session auth with a Qualys user account; IdP-based API authentication can be enabled by Qualys Support. Permissions follow the caller's user role." },
+  "capabilities": {
+   "list_users": true, "get_user": null, "create_user": true, "invite_user": null, "update_user": true,
+   "deactivate_user": true, "delete_user": null, "reactivate_user": true, "manage_groups": null,
+   "assign_roles": true, "assign_licenses": null, "cite": ["c7", "c8", "c9"],
+   "notes": "user.php add takes user_role; activate/deactivate keeps account settings. No delete action is documented in this guide."
+  },
+  "endpoints": [
+   { "method": "GET", "path": "/msp/user_list.php", "purpose": "List users in the subscription (GET or POST)", "cite": ["c7"] },
+   { "method": "POST", "path": "/msp/user.php?action=add", "purpose": "Add a user (GET or POST)", "cite": ["c8"] },
+   { "method": "POST", "path": "/msp/user.php?action=edit", "purpose": "Edit a user (GET or POST)", "cite": ["c8"] },
+   { "method": "POST", "path": "/msp/user.php?action=activate|deactivate", "purpose": "Activate or deactivate a user (GET or POST)", "cite": ["c9"] },
+   { "method": "POST", "path": "/msp/password_change.php", "purpose": "User password change", "cite": ["c7"] },
+   { "method": "GET", "path": "/api/2.0/fo/activity_log/", "purpose": "Export user activity log (CSV)", "cite": ["c10"] }
+  ],
+  "webhooks_user_events": { "supported": null, "events": [], "cite": [] },
+  "audit_log_api": { "supported": true, "plan": null, "cite": ["c10"] },
+  "rate_limits": { "text": "Per-subscription concurrency limit and rate limit per API (1-hour or 1-day window), set by service level and customisable by Qualys Support.", "cite": ["c12"] },
+  "limitations": [
+   { "text": "Activate/deactivate does not support session-based authentication; accounts in Pending Activation cannot be activated or deactivated.", "cite": ["c9"] }
+  ]
+ },
+ "idp_apps": {
+  "okta": { "listed": true, "sso": true, "provisioning": false, "kind": "sso_only", "built_by": null, "url": "https://www.okta.com/integrations/qualys-guard/", "cite": ["c13"], "notes": "OIN 'Qualys Guard' app ticks SAML and SWA only (last updated Jan. 29 2020)." },
+  "entra": { "listed": null, "sso": true, "provisioning": true, "kind": "directory_sync", "built_by": "vendor", "url": "https://docs.qualys.com/en/admin/latest/azure_ad_sync/overview_of_azure_ad_sync.htm", "cite": ["c4", "c5", "c6"], "notes": "Vendor-run Microsoft Entra ID Directory Sync connector plus a SAML enterprise app configured per Qualys's guide; no Entra gallery tutorial found." },
+  "google": { "listed": null, "sso": null, "provisioning": null, "kind": null, "built_by": null, "url": null, "cite": [] },
+  "onelogin": { "listed": null, "sso": null, "provisioning": null, "kind": null, "built_by": null, "url": null, "cite": [] },
+  "jumpcloud": { "listed": null, "sso": null, "provisioning": null, "kind": null, "built_by": null, "url": null, "cite": [] }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": "Vendor-run Microsoft Entra ID (Azure AD) Directory Sync connector: hourly sync of group members, create/update/deactivate users, AD group to Qualys role mapping",
+  "docs_public": true,
+  "cite": ["c4", "c5", "c6", "c14"]
+ },
+ "citations": [
+  { "id": "c1", "url": "https://www.qualys.com/subscriptions", "title": "Qualys Subscriptions", "quote": "Pricing depends on your selection of Cloud Platform Apps, the number of network addresses (IPs), web applications, and user licenses.", "accessed": "2026-10-05" },
+  { "id": "c2", "url": "https://www.qualys.com/subscriptions", "title": "Qualys Subscriptions", "quote": "Want a quote or have questions?", "accessed": "2026-10-05" },
+  { "id": "c3", "url": "https://docs.qualys.com/en/admin/latest/get_started/welcome.htm", "title": "Get Started - Administration Utility", "quote": "The Qualys Administration utility primarily takes care of a unified user management experience and captures activities or actions from various modules", "accessed": "2026-10-05" },
+  { "id": "c4", "url": "https://docs.qualys.com/en/admin/latest/azure_ad_sync/overview_of_azure_ad_sync.htm", "title": "Overview of Azure AD Sync", "quote": "Automated User Lifecycle Management: Automatically create, update, and deactivate Qualys users based on Azure AD data, eliminating manual administration.", "accessed": "2026-10-05" },
+  { "id": "c5", "url": "https://docs.qualys.com/en/admin/latest/azure_ad_sync/overview_of_azure_ad_sync.htm", "title": "Overview of Azure AD Sync", "quote": "User creation, updates, and deactivation are managed automatically through periodic (hourly) synchronization.", "accessed": "2026-10-05" },
+  { "id": "c6", "url": "https://docs.qualys.com/en/admin/latest/azure_ad_sync/connector_configuration.htm", "title": "Connector Configuration", "quote": "The Microsoft Entra ID Sync Connector enables automated integration between your Microsoft Azure Active Directory and the Qualys Admin application.", "accessed": "2026-10-05" },
+  { "id": "c7", "url": "https://cdn2.qualys.com/docs/qualys-api-vmpc-user-guide.pdf", "title": "Qualys API (VM, PC) User Guide", "quote": "Add, update, and list users in your subscription and also change password.", "accessed": "2026-10-05" },
+  { "id": "c8", "url": "https://cdn2.qualys.com/docs/qualys-api-vmpc-user-guide.pdf", "title": "Qualys API (VM, PC) User Guide", "quote": "Add a user account or edit an existing account. You can add users to the “Unassigned” business unit or an existing, custom business unit.", "accessed": "2026-10-05" },
+  { "id": "c9", "url": "https://cdn2.qualys.com/docs/qualys-api-vmpc-user-guide.pdf", "title": "Qualys API (VM, PC) User Guide", "quote": "Activate and deactivate user accounts. A user with inactivate status can be activated. A user with active status can be deactivated. Session based authentication is not supported using this API.", "accessed": "2026-10-05" },
+  { "id": "c10", "url": "https://cdn2.qualys.com/docs/qualys-api-vmpc-user-guide.pdf", "title": "Qualys API (VM, PC) User Guide", "quote": "Export the user activity log for a subscription to CSV format.", "accessed": "2026-10-05" },
+  { "id": "c11", "url": "https://cdn2.qualys.com/docs/qualys-api-vmpc-user-guide.pdf", "title": "Qualys API (VM, PC) User Guide", "quote": "When a subscription has multiple users, all users with any user role (except Contact) can use the Qualys API. Each user’s permissions correspond to their assigned user role.", "accessed": "2026-10-05" },
+  { "id": "c12", "url": "https://cdn2.qualys.com/docs/qualys-api-vmpc-user-guide.pdf", "title": "Qualys API (VM, PC) User Guide", "quote": "API controls are applied per subscription based on your subscription’s service level.", "accessed": "2026-10-05" },
+  { "id": "c13", "url": "https://www.okta.com/integrations/qualys-guard/", "title": "Integrate Qualys Guard with Okta", "quote": "Provider of on demand IT security risk and compliance management solutions.", "accessed": "2026-10-05" },
+  { "id": "c14", "url": "https://docs.qualys.com/en/admin/latest/get_started/welcome.htm", "title": "Get Started - Administration Utility", "quote": "This Users tab has been introduced as part of a new Beta feature, Role Based Access Control (RBAC). This feature is in an early preview. Contact your Technical Account Manager (TAM) for more information.", "accessed": "2026-10-05" }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.qualys.com/sitemap.xml (no pricing or SCIM page; /subscriptions found)",
+  "https://www.qualys.com/subscriptions",
+  "https://docs.qualys.com/sitemap.xml (per-module help sitemaps; admin sitemap not machine-readable)",
+  "Qualys Administration help table of contents: users, roles, Azure AD sync, FAQs (no SCIM)",
+  "https://cdn2.qualys.com/docs/qualys-api-vmpc-user-guide.pdf (Version 10.40; no SCIM)",
+  "https://www.okta.com/integrations/qualys-guard/ (also /qualys/, /qualysguard/ 404)",
+  "learn.microsoft.com Entra tutorials qualys-tutorial, qualysguard-tutorial, qualys-guard-tutorial (404)"
+ ],
+ "open_questions": [
+  "Which Qualys subscriptions include SAML SSO and the Entra ID Directory Sync connector is not stated publicly (the RBAC user management it relies on is described as a Beta feature via the TAM).",
+  "Whether the user API is included in every subscription or limited by service level is not stated; no user delete endpoint was found in the VM/PC API guide.",
+  "Whether Qualys creates users just-in-time on SAML sign-in is not documented on the pages read."
+ ]
+}

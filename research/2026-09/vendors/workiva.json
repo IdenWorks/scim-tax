@@ -1,0 +1,1091 @@
+{
+ "slug": "workiva",
+ "vendor": "Workiva",
+ "vendor_url": "https://www.workiva.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Workiva",
+  "slug": "workiva",
+  "category": "Finance, Accounting & Spend",
+  "status": "gated",
+  "scim_plan": "Contact Sales",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": "via_generic",
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.workiva.com/pricing",
+  "docs_url": "https://support.workiva.com/hc/en-us/articles/360040824152-Manage-and-provision-users-with-SCIM",
+  "evidence": "Workiva's pricing page has no public plans (\"Please reach out to a sales representative\"), and its SCIM help article documents SCIM 2.0 provisioning that creates, suspends, reactivates and deletes users and manages roles and workspaces through IdP groups.",
+  "notes": "Quote-only: no public tiers or prices; pricing is customised per organisation and all offerings include unlimited seats/users, so per-user prices are null. SCIM 2.0 is documented in the help centre (Org Security Admin sets it up under Organization Admin > Identity & access management > Provisioning) with no plan named; SAML SSO is likewise documented without a plan. Okta's OIN app provisions with Basic Auth; Entra needs a custom non-gallery app with a bearer token because the gallery app does not support SCIM. Deprovisioning suspends the user; Entra should not be set to Delete. The Workiva REST API (OAuth2 client credentials, 10-minute tokens) has organization user, role, workspace and group endpoints plus an activities (audit) API; the pricing page lists Open APIs as included with every plan.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "All plans",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Workiva platform (custom quote)",
+   "price_text": "Contact sales",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c4",
+    "c5",
+    "c3"
+   ],
+   "notes": "No public tier table. The FAQ mentions good/better/best packaging for some solutions; every offering includes unlimited seats or users. Open APIs are listed under 'Included with every plan'."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c6",
+   "c7",
+   "c14",
+   "c1"
+  ],
+  "plan": "Contact Sales",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": null,
+  "auth": {
+   "method": "bearer",
+   "token_source": "Organization Admin > Identity & access management > Identities > Provisioning > Add Identity or API (Identity Provider); the SCIM API user then regenerates the Basic Auth secret / Bearer token under My Profile > Security",
+   "token_expiry": null,
+   "cite": [
+    "c17",
+    "c18",
+    "c15",
+    "c16"
+   ],
+   "notes": "Two credential types: Basic Auth (ID + secret; the only type the Okta OIN app supports) and Bearer Token (Entra, custom Okta apps). The base URL is the per-provisioning URL shown in Organization Admin; no pattern is published."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c8",
+    "c13",
+    "c26"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c8",
+    "c10",
+    "c9",
+    "c11",
+    "c12",
+    "c13",
+    "c30"
+   ],
+   "notes": "'Import new users' lets the IdP read existing Workiva users (read). PUT vs PATCH is not documented."
+  },
+  "deprovision": {
+   "action": "suspend",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "User is suspended, not deleted; Workiva says it will not delete user profiles from Entra and only deactivates them. Separately, the Okta 'Delete users' feature removes users from the platform.",
+   "cite": [
+    "c9",
+    "c23",
+    "c12"
+   ],
+   "notes": "Seats are unlimited on every offering, so seat release is moot."
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [],
+   "cite": [
+    "c36"
+   ]
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "displayName",
+    "emails[type eq \"work\"].value",
+    "title",
+    "preferredLanguage",
+    "externalId",
+    "active"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "displayName",
+    "externalId",
+    "members"
+   ],
+   "cite": [
+    "c21",
+    "c24",
+    "c25",
+    "c26",
+    "c33"
+   ],
+   "notes": "From the Okta and Entra mapping tables. The error-message table also mentions timezone, locale and office phone values."
+  },
+  "roles": {
+   "supported": true,
+   "how": "SCIM groups named by convention: role:<role name> (organization role), workspace:<name> (membership), workspace:<name>:role:<role> (workspace role), workspace:<name>:group:<group> (workspace group). The SCIM API user can only grant roles it already holds.",
+   "cite": [
+    "c28",
+    "c13",
+    "c20"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Entra ID: the Workiva gallery app does not support SCIM; a custom non-gallery application is required.",
+    "cite": [
+     "c22"
+    ]
+   },
+   {
+    "text": "The Okta OIN app only supports Basic Auth; only linking Okta groups to existing SCIM groups is supported.",
+    "cite": [
+     "c15",
+     "c29"
+    ]
+   },
+   {
+    "text": "Password sync is not supported.",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "text": "Users invited from another Workiva organization (auditors, external counsel) cannot be managed by SCIM.",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "text": "First name, last name, display name and email are required; diacritics are not allowed in name fields.",
+    "cite": [
+     "c33",
+     "c34"
+    ]
+   },
+   {
+    "text": "Workspace role/group assignment fails if the user is not a workspace member within about 30 seconds.",
+    "cite": [
+     "c35"
+    ]
+   },
+   {
+    "text": "Workiva only supports commercially or freely available SCIM clients.",
+    "cite": [
+     "c40"
+    ]
+   },
+   {
+    "text": "Very large user counts (10,000+) make SCIM and bulk user operations significantly slower.",
+    "cite": [
+     "c42"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c43",
+   "c45",
+   "c5",
+   "c49"
+  ],
+  "plan": "All plans",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://api.app.wdesk.com",
+  "docs_url": "https://developers.workiva.com/2026-01-01/admin.html",
+  "auth": {
+   "methods": [
+    "oauth2_client_credentials"
+   ],
+   "scopes": [
+    "organization:read",
+    "organization:write",
+    "activity:read"
+   ],
+   "cite": [
+    "c43",
+    "c44",
+    "c46",
+    "c49",
+    "c51",
+    "c68"
+   ],
+   "notes": "API grants are created by an Org Security Administrator (Organization Admin > Identity & access management > Provisioning > Api Grant) or a workspace owner; bearer tokens last 10 minutes. EU, APAC and Canada have separate base URLs."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c49",
+    "c50",
+    "c51",
+    "c53",
+    "c55",
+    "c61",
+    "c63",
+    "c57"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/organizations/{organizationId}/users",
+    "purpose": "List organization users",
+    "cite": [
+     "c49"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/organizations/{organizationId}/users/{userId}",
+    "purpose": "Get an organization user",
+    "cite": [
+     "c50"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/organizations/{organizationId}/users",
+    "purpose": "Create an organization user",
+    "cite": [
+     "c51"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/organizations/{organizationId}/users/assignment",
+    "purpose": "Assign an existing user to the organization",
+    "cite": [
+     "c52"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/organizations/{organizationId}/users/{userId}",
+    "purpose": "Partially update a user (givenName, familyName, displayName, username, email)",
+    "cite": [
+     "c54"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/organizations/{organizationId}/users/{userId}",
+    "purpose": "Delete a user from the organization",
+    "cite": [
+     "c55"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/organizations/{organizationId}/users/{userId}/roles",
+    "purpose": "List a user's organization roles",
+    "cite": [
+     "c56"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/organizations/{organizationId}/users/{userId}/roles/assignment",
+    "purpose": "Assign organization roles",
+    "cite": [
+     "c57"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/organizations/{organizationId}/users/{userId}/roles/revocation",
+    "purpose": "Revoke organization roles",
+    "cite": [
+     "c58"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/organizations/{organizationId}/roles",
+    "purpose": "List organization roles",
+    "cite": [
+     "c59"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/organizations/{organizationId}/workspaces/{workspaceId}/groups",
+    "purpose": "List workspace groups",
+    "cite": [
+     "c60"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/organizations/{organizationId}/workspaces/{workspaceId}/groups",
+    "purpose": "Create a workspace group",
+    "cite": [
+     "c61"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/organizations/{organizationId}/workspaces/{workspaceId}/groups/{groupId}",
+    "purpose": "Delete a workspace group",
+    "cite": [
+     "c62"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/organizations/{organizationId}/workspaces/{workspaceId}/groups/{groupId}/members/modification",
+    "purpose": "Add or remove group members",
+    "cite": [
+     "c63"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/organizations/{organizationId}/workspaces/{workspaceId}/memberships",
+    "purpose": "Add a user to a workspace",
+    "cite": [
+     "c64"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/organizations/{organizationId}/workspaces/{workspaceId}/memberships/{workspaceMembershipId}",
+    "purpose": "Remove a workspace membership",
+    "cite": [
+     "c65"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/organizations/{organizationId}/workspaces/{workspaceId}/memberships/{workspaceMembershipId}/roles/assignment",
+    "purpose": "Assign workspace roles",
+    "cite": [
+     "c66"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/organizations/{organizationId}/activities",
+    "purpose": "Organization activity (audit) log",
+    "cite": [
+     "c68"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": null,
+   "cite": [
+    "c67",
+    "c68"
+   ]
+  },
+  "rate_limits": {
+   "text": "Load-based rate limiting with HTTP 429 and Retry-After; 10 MB payload limit; 29-second request timeout.",
+   "cite": [
+    "c47",
+    "c48"
+   ]
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/workiva/",
+   "cite": [
+    "c69",
+    "c15"
+   ],
+   "notes": "OIN page markup marks SAML, SWA, SCIM, Create, Update, Deactivate and Group Push as checked."
+  },
+  "entra": {
+   "listed": true,
+   "sso": null,
+   "provisioning": false,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c22"
+   ],
+   "notes": "Workiva says its Entra gallery app does not support SCIM; provisioning works through a custom non-gallery app against the generic endpoint. No Microsoft Learn tutorial was found for Workiva."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c6"
+   ],
+   "notes": "Workiva names OneLogin among SCIM-enabled IdPs; OneLogin's own catalogue was not checked (bot protection)."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "jumpcloud.com returned 403 to curl."
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c6",
+   "c43"
+  ],
+  "notes": "SAML SSO setup supports mapping existing users to SSO IDs through a .csv file, but a CSV user import was not confirmed."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.workiva.com/pricing",
+   "title": "Workiva Pricing",
+   "quote": "How do I purchase Workiva? Please reach out to a sales representative today for more information based on your specific needs.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.workiva.com/pricing",
+   "title": "Workiva Pricing",
+   "quote": "Workiva’s pricing model is a reflection of the value and needs of each organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.workiva.com/pricing",
+   "title": "Workiva Pricing",
+   "quote": "All Workiva offerings provide unlimited seats or users, making it easier to expand across stakeholders and collaborate without additional administration burdens.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.workiva.com/pricing",
+   "title": "Workiva Pricing",
+   "quote": "Included with every plan",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.workiva.com/pricing",
+   "title": "Workiva Pricing",
+   "quote": "Open APIs allow you to connect to thousands of other systems",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://support.workiva.com/api/v2/help_center/en-us/articles/360040824152.json",
+   "title": "Manage and provision users with SCIM (Workiva Support)",
+   "quote": "Using SCIM, you can manage the creation and suspension of Workiva users automatically through SCIM-enabled identity providers, such as Okta, SailPoint IdentityIQ, PingFederate, OneLogin, Azure Active Directory, and more.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.workiva.com/hc/en-us/articles/360040824152-Manage-and-provision-users-with-SCIM"
+  },
+  {
+   "id": "c7",
+   "url": "https://support.workiva.com/api/v2/help_center/en-us/articles/360040824152.json",
+   "title": "Manage and provision users with SCIM (Workiva Support)",
+   "quote": "Ensure you are setting up a connection with SCIM 2.0, as we do not support previous versions of the SCIM protocol.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.workiva.com/hc/en-us/articles/360040824152-Manage-and-provision-users-with-SCIM"
+  },
+  {
+   "id": "c8",
+   "url": "https://support.workiva.com/api/v2/help_center/en-us/articles/360040824152.json",
+   "title": "Manage and provision users with SCIM (Workiva Support)",
+   "quote": "New users assigned in the identity provider will also be created in the Workiva platform",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.workiva.com/hc/en-us/articles/360040824152-Manage-and-provision-users-with-SCIM"
+  },
+  {
+   "id": "c9",
+   "url": "https://support.workiva.com/api/v2/help_center/en-us/articles/360040824152.json",
+   "title": "Manage and provision users with SCIM (Workiva Support)",
+   "quote": "Unassigning users in the identity provider will suspend the user in the Workiva platform",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.workiva.com/hc/en-us/articles/360040824152-Manage-and-provision-users-with-SCIM"
+  },
+  {
+   "id": "c10",
+   "url": "https://support.workiva.com/api/v2/help_center/en-us/articles/360040824152.json",
+   "title": "Manage and provision users with SCIM (Workiva Support)",
+   "quote": "Updates made to a user's profile through the identity provider will be updated in the Workiva platform",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.workiva.com/hc/en-us/articles/360040824152-Manage-and-provision-users-with-SCIM"
+  },
+  {
+   "id": "c11",
+   "url": "https://support.workiva.com/api/v2/help_center/en-us/articles/360040824152.json",
+   "title": "Manage and provision users with SCIM (Workiva Support)",
+   "quote": "Reactivating a user or reassigning a user in the identity provider will activate that user in the Workiva platform",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.workiva.com/hc/en-us/articles/360040824152-Manage-and-provision-users-with-SCIM"
+  },
+  {
+   "id": "c12",
+   "url": "https://support.workiva.com/api/v2/help_center/en-us/articles/360040824152.json",
+   "title": "Manage and provision users with SCIM (Workiva Support)",
+   "quote": "Remove users from the Workiva platform",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.workiva.com/hc/en-us/articles/360040824152-Manage-and-provision-users-with-SCIM"
+  },
+  {
+   "id": "c13",
+   "url": "https://support.workiva.com/api/v2/help_center/en-us/articles/360040824152.json",
+   "title": "Manage and provision users with SCIM (Workiva Support)",
+   "quote": "including Organization Roles, Workspace Memberships, Workspace Roles, and Workspace Group Memberships, can be managed by existing identity provider groups.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.workiva.com/hc/en-us/articles/360040824152-Manage-and-provision-users-with-SCIM"
+  },
+  {
+   "id": "c14",
+   "url": "https://support.workiva.com/api/v2/help_center/en-us/articles/360040824152.json",
+   "title": "Manage and provision users with SCIM (Workiva Support)",
+   "quote": "SCIM should be used in conjunction with SAML-based single sign-on (SSO), which provides access to Workiva through your identity provider (IdP).",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.workiva.com/hc/en-us/articles/360040824152-Manage-and-provision-users-with-SCIM"
+  },
+  {
+   "id": "c15",
+   "url": "https://support.workiva.com/api/v2/help_center/en-us/articles/360040824152.json",
+   "title": "Manage and provision users with SCIM (Workiva Support)",
+   "quote": "The Workiva application in OIN only supports Basic Auth",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.workiva.com/hc/en-us/articles/360040824152-Manage-and-provision-users-with-SCIM"
+  },
+  {
+   "id": "c16",
+   "url": "https://support.workiva.com/api/v2/help_center/en-us/articles/360040824152.json",
+   "title": "Manage and provision users with SCIM (Workiva Support)",
+   "quote": "If using Azure, select Bearer Token",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.workiva.com/hc/en-us/articles/360040824152-Manage-and-provision-users-with-SCIM"
+  },
+  {
+   "id": "c17",
+   "url": "https://support.workiva.com/api/v2/help_center/en-us/articles/360040824152.json",
+   "title": "Manage and provision users with SCIM (Workiva Support)",
+   "quote": "Identity & access management > Identities > Provisioning",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.workiva.com/hc/en-us/articles/360040824152-Manage-and-provision-users-with-SCIM"
+  },
+  {
+   "id": "c18",
+   "url": "https://support.workiva.com/api/v2/help_center/en-us/articles/360040824152.json",
+   "title": "Manage and provision users with SCIM (Workiva Support)",
+   "quote": "You’ll see the Basic Auth Secret and Bearer Token Secret. Copy these secrets down in a secure place, as you won’t be able to see these secrets again.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.workiva.com/hc/en-us/articles/360040824152-Manage-and-provision-users-with-SCIM"
+  },
+  {
+   "id": "c19",
+   "url": "https://support.workiva.com/api/v2/help_center/en-us/articles/360040824152.json",
+   "title": "Manage and provision users with SCIM (Workiva Support)",
+   "quote": "Org User Admin (required to create, deactivate, and update users)",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.workiva.com/hc/en-us/articles/360040824152-Manage-and-provision-users-with-SCIM"
+  },
+  {
+   "id": "c20",
+   "url": "https://support.workiva.com/api/v2/help_center/en-us/articles/360040824152.json",
+   "title": "Manage and provision users with SCIM (Workiva Support)",
+   "quote": "SCIM can only assign and manage roles that this user already has.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.workiva.com/hc/en-us/articles/360040824152-Manage-and-provision-users-with-SCIM"
+  },
+  {
+   "id": "c21",
+   "url": "https://support.workiva.com/api/v2/help_center/en-us/articles/360040824152.json",
+   "title": "Manage and provision users with SCIM (Workiva Support)",
+   "quote": "userName userName givenName user.firstName familyName user.lastName email user.email displayName user.displayName",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.workiva.com/hc/en-us/articles/360040824152-Manage-and-provision-users-with-SCIM"
+  },
+  {
+   "id": "c22",
+   "url": "https://support.workiva.com/api/v2/help_center/en-us/articles/360040824152.json",
+   "title": "Manage and provision users with SCIM (Workiva Support)",
+   "quote": "Create a custom application for provisioning, as the Workiva gallery app doesn’t support SCIM at this time.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.workiva.com/hc/en-us/articles/360040824152-Manage-and-provision-users-with-SCIM"
+  },
+  {
+   "id": "c23",
+   "url": "https://support.workiva.com/api/v2/help_center/en-us/articles/360040824152.json",
+   "title": "Manage and provision users with SCIM (Workiva Support)",
+   "quote": "Do not select Delete, as Workiva won’t delete user profiles, but will only deactivate them.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.workiva.com/hc/en-us/articles/360040824152-Manage-and-provision-users-with-SCIM"
+  },
+  {
+   "id": "c24",
+   "url": "https://support.workiva.com/api/v2/help_center/en-us/articles/360040824152.json",
+   "title": "Manage and provision users with SCIM (Workiva Support)",
+   "quote": "displayName displayName title jobTitle",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.workiva.com/hc/en-us/articles/360040824152-Manage-and-provision-users-with-SCIM"
+  },
+  {
+   "id": "c25",
+   "url": "https://support.workiva.com/api/v2/help_center/en-us/articles/360040824152.json",
+   "title": "Manage and provision users with SCIM (Workiva Support)",
+   "quote": "preferredLanguage preferredLanguage name.givenName givenName name.familyName surname externalId mailNickname",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.workiva.com/hc/en-us/articles/360040824152-Manage-and-provision-users-with-SCIM"
+  },
+  {
+   "id": "c26",
+   "url": "https://support.workiva.com/api/v2/help_center/en-us/articles/360040824152.json",
+   "title": "Manage and provision users with SCIM (Workiva Support)",
+   "quote": "displayName description* externalId objectId members members",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.workiva.com/hc/en-us/articles/360040824152-Manage-and-provision-users-with-SCIM"
+  },
+  {
+   "id": "c27",
+   "url": "https://support.workiva.com/api/v2/help_center/en-us/articles/360040824152.json",
+   "title": "Manage and provision users with SCIM (Workiva Support)",
+   "quote": "The provisioning interval is set to 40 minutes",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.workiva.com/hc/en-us/articles/360040824152-Manage-and-provision-users-with-SCIM"
+  },
+  {
+   "id": "c28",
+   "url": "https://support.workiva.com/api/v2/help_center/en-us/articles/360040824152.json",
+   "title": "Manage and provision users with SCIM (Workiva Support)",
+   "quote": "Persons assigned to a group with this name will be assigned the organizational role specified.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.workiva.com/hc/en-us/articles/360040824152-Manage-and-provision-users-with-SCIM"
+  },
+  {
+   "id": "c29",
+   "url": "https://support.workiva.com/api/v2/help_center/en-us/articles/360040824152.json",
+   "title": "Manage and provision users with SCIM (Workiva Support)",
+   "quote": "Only linking Okta groups to SCIM groups is supported.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.workiva.com/hc/en-us/articles/360040824152-Manage-and-provision-users-with-SCIM"
+  },
+  {
+   "id": "c30",
+   "url": "https://support.workiva.com/api/v2/help_center/en-us/articles/360040824152.json",
+   "title": "Manage and provision users with SCIM (Workiva Support)",
+   "quote": "Workiva supports Import Groups.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.workiva.com/hc/en-us/articles/360040824152-Manage-and-provision-users-with-SCIM"
+  },
+  {
+   "id": "c31",
+   "url": "https://support.workiva.com/api/v2/help_center/en-us/articles/360040824152.json",
+   "title": "Manage and provision users with SCIM (Workiva Support)",
+   "quote": "Password sync isn’t supported.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.workiva.com/hc/en-us/articles/360040824152-Manage-and-provision-users-with-SCIM"
+  },
+  {
+   "id": "c32",
+   "url": "https://support.workiva.com/api/v2/help_center/en-us/articles/360040824152.json",
+   "title": "Manage and provision users with SCIM (Workiva Support)",
+   "quote": "Users invited into the organization from another organization (e.g. auditors or external counsel) can’t be managed by SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.workiva.com/hc/en-us/articles/360040824152-Manage-and-provision-users-with-SCIM"
+  },
+  {
+   "id": "c33",
+   "url": "https://support.workiva.com/api/v2/help_center/en-us/articles/360040824152.json",
+   "title": "Manage and provision users with SCIM (Workiva Support)",
+   "quote": "First name, last name, display name, and email address fields are required for all users.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.workiva.com/hc/en-us/articles/360040824152-Manage-and-provision-users-with-SCIM"
+  },
+  {
+   "id": "c34",
+   "url": "https://support.workiva.com/api/v2/help_center/en-us/articles/360040824152.json",
+   "title": "Manage and provision users with SCIM (Workiva Support)",
+   "quote": "Diacritics aren’t allowed in the name fields.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.workiva.com/hc/en-us/articles/360040824152-Manage-and-provision-users-with-SCIM"
+  },
+  {
+   "id": "c35",
+   "url": "https://support.workiva.com/api/v2/help_center/en-us/articles/360040824152.json",
+   "title": "Manage and provision users with SCIM (Workiva Support)",
+   "quote": "our system will hold for up to 30 seconds before failing while we wait for your identity provider to request the user be added to the workspace",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.workiva.com/hc/en-us/articles/360040824152-Manage-and-provision-users-with-SCIM"
+  },
+  {
+   "id": "c36",
+   "url": "https://support.workiva.com/api/v2/help_center/en-us/articles/360040824152.json",
+   "title": "Manage and provision users with SCIM (Workiva Support)",
+   "quote": "The provided filter expression is invalid",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.workiva.com/hc/en-us/articles/360040824152-Manage-and-provision-users-with-SCIM"
+  },
+  {
+   "id": "c37",
+   "url": "https://support.workiva.com/api/v2/help_center/en-us/articles/360040824152.json",
+   "title": "Manage and provision users with SCIM (Workiva Support)",
+   "quote": "The provided timezone is invalid",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.workiva.com/hc/en-us/articles/360040824152-Manage-and-provision-users-with-SCIM"
+  },
+  {
+   "id": "c38",
+   "url": "https://support.workiva.com/api/v2/help_center/en-us/articles/360040824152.json",
+   "title": "Manage and provision users with SCIM (Workiva Support)",
+   "quote": "If SAML SSO is required , you’ll need to add this SCIM user as a SAML SSO bypass user in order to log in with username and password.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.workiva.com/hc/en-us/articles/360040824152-Manage-and-provision-users-with-SCIM"
+  },
+  {
+   "id": "c39",
+   "url": "https://support.workiva.com/api/v2/help_center/en-us/articles/360040824152.json",
+   "title": "Manage and provision users with SCIM (Workiva Support)",
+   "quote": "You tried using an HTTP method that is not supported by the endpoint",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.workiva.com/hc/en-us/articles/360040824152-Manage-and-provision-users-with-SCIM"
+  },
+  {
+   "id": "c40",
+   "url": "https://support.workiva.com/api/v2/help_center/en-us/articles/360040824152.json",
+   "title": "Manage and provision users with SCIM (Workiva Support)",
+   "quote": "Workiva only supports and helps troubleshoot configurations for commercially or freely-available SCIM clients.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.workiva.com/hc/en-us/articles/360040824152-Manage-and-provision-users-with-SCIM"
+  },
+  {
+   "id": "c41",
+   "url": "https://support.workiva.com/api/v2/help_center/en-us/articles/360036006131.json",
+   "title": "Configure SAML single sign-on (Workiva Support)",
+   "quote": "select Import SSO IDs via file to map users to the SSO IDs in a .csv mapping file",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.workiva.com/hc/en-us/articles/360036006131-Configure-SAML-single-sign-on"
+  },
+  {
+   "id": "c42",
+   "url": "https://support.workiva.com/api/v2/help_center/en-us/articles/28283850764564.json",
+   "title": "Best practices for efficient user management for large enterprises (Workiva Support)",
+   "quote": "Importing over 10,000 users can strain system resources and lead to longer load times. Tasks like running SCIM (System for Cross-domain Identity Management) and bulk user operations can become significantly slower.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.workiva.com/hc/en-us/articles/28283850764564-Best-practices-for-efficient-user-management-for-large-enterprises"
+  },
+  {
+   "id": "c43",
+   "url": "https://developers.workiva.com/2026-01-01/authentication.html",
+   "title": "Authentication (Workiva API)",
+   "quote": "To authenticate requests, the Workiva API uses an OAuth 2.0 Client Credentials Grant implementation.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c44",
+   "url": "https://developers.workiva.com/2026-01-01/authentication.html",
+   "title": "Authentication (Workiva API)",
+   "quote": "Workiva bearer tokens expire after 10 minutes.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c45",
+   "url": "https://developers.workiva.com/2026-01-01/details.html",
+   "title": "API Details (Workiva API)",
+   "quote": "For US, use https://api.app.wdesk.com",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c46",
+   "url": "https://developers.workiva.com/2026-01-01/setup.html",
+   "title": "Setup (Workiva API)",
+   "quote": "Every endpoint has their required OAuth scopes documented. A client can only access an endpoint if they have all of the endpoint’s required scopes in their OAuth grant.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c47",
+   "url": "https://developers.workiva.com/2026-01-01/limits.html",
+   "title": "Limits (Workiva API)",
+   "quote": "The Workiva API may rate limit clients based on the current system load or an excessive request frequency.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c48",
+   "url": "https://developers.workiva.com/2026-01-01/limits.html",
+   "title": "Limits (Workiva API)",
+   "quote": "The Workiva API currently limits the length of any request to 29 seconds.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c49",
+   "url": "https://developers.workiva.com/2026-01-01/getorganizationusers.html",
+   "title": "Retrieve list of an organizations users",
+   "quote": "Retrieve users in an organization. GET /organizations/{organizationId}/users Required OAuth Scopes organization:read",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c50",
+   "url": "https://developers.workiva.com/2026-01-01/getorganizationuserbyid.html",
+   "title": "Retrieve a single user in an organization",
+   "quote": "GET /organizations/{organizationId}/users/{userId}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c51",
+   "url": "https://developers.workiva.com/2026-01-01/createorganizationuser.html",
+   "title": "Create a new organization User",
+   "quote": "Creates a new OrganizationUser resource POST /organizations/{organizationId}/users Required OAuth Scopes organization:write",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c52",
+   "url": "https://developers.workiva.com/2026-01-01/assignusertoorganization.html",
+   "title": "Assign existing user to organization",
+   "quote": "POST /organizations/{organizationId}/users/assignment",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c53",
+   "url": "https://developers.workiva.com/2026-01-01/partiallyupdateorganizationuserbyid.html",
+   "title": "Partially update a single user in an organization",
+   "quote": "Partially update the properties of a User within an Organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c54",
+   "url": "https://developers.workiva.com/2026-01-01/partiallyupdateorganizationuserbyid.html",
+   "title": "Partially update a single user in an organization",
+   "quote": "PATCH /organizations/{organizationId}/users/{userId}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c55",
+   "url": "https://developers.workiva.com/2026-01-01/deleteorganizationuserbyid.html",
+   "title": "Delete an organization user",
+   "quote": "Delete a user from an organization DELETE /organizations/{organizationId}/users/{userId}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c56",
+   "url": "https://developers.workiva.com/2026-01-01/getorganizationuserrolelist.html",
+   "title": "List Roles assigned to an Organization User",
+   "quote": "GET /organizations/{organizationId}/users/{userId}/roles",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c57",
+   "url": "https://developers.workiva.com/2026-01-01/assignorganizationuserroles.html",
+   "title": "Assign roles for an Organization User",
+   "quote": "POST /organizations/{organizationId}/users/{userId}/roles/assignment",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c58",
+   "url": "https://developers.workiva.com/2026-01-01/revokeorganizationuserroles.html",
+   "title": "Revoke roles for an Organization User",
+   "quote": "POST /organizations/{organizationId}/users/{userId}/roles/revocation",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c59",
+   "url": "https://developers.workiva.com/2026-01-01/getorganizationroles.html",
+   "title": "Retrieve available roles within an organization",
+   "quote": "GET /organizations/{organizationId}/roles",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c60",
+   "url": "https://developers.workiva.com/2026-01-01/getworkspacegroups.html",
+   "title": "Retrieve list of groups",
+   "quote": "GET /organizations/{organizationId}/workspaces/{workspaceId}/groups",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c61",
+   "url": "https://developers.workiva.com/2026-01-01/createworkspacegroup.html",
+   "title": "Create a new group in a workspace",
+   "quote": "POST /organizations/{organizationId}/workspaces/{workspaceId}/groups",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c62",
+   "url": "https://developers.workiva.com/2026-01-01/deleteworkspacegroupbyid.html",
+   "title": "Delete a single group",
+   "quote": "DELETE /organizations/{organizationId}/workspaces/{workspaceId}/groups/{groupId}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c63",
+   "url": "https://developers.workiva.com/2026-01-01/modifyworkspacegroupmembers.html",
+   "title": "Modify members in a group",
+   "quote": "POST /organizations/{organizationId}/workspaces/{workspaceId}/groups/{groupId}/members/modification",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c64",
+   "url": "https://developers.workiva.com/2026-01-01/createworkspacemembership.html",
+   "title": "Create a new workspace membership",
+   "quote": "POST /organizations/{organizationId}/workspaces/{workspaceId}/memberships",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c65",
+   "url": "https://developers.workiva.com/2026-01-01/deleteworkspacemembershipbyid.html",
+   "title": "Delete a workspace membership",
+   "quote": "DELETE /organizations/{organizationId}/workspaces/{workspaceId}/memberships/{workspaceMembershipId}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c66",
+   "url": "https://developers.workiva.com/2026-01-01/assignworkspacemembershiproles.html",
+   "title": "Assign roles for a Workspace Membership",
+   "quote": "POST /organizations/{organizationId}/workspaces/{workspaceId}/memberships/{workspaceMembershipId}/roles/assignment",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c67",
+   "url": "https://developers.workiva.com/2026-01-01/getorganizationactivities.html",
+   "title": "Retrieve a list of activities for an organization",
+   "quote": "Returns a paginated list of activities for a given organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c68",
+   "url": "https://developers.workiva.com/2026-01-01/getorganizationactivities.html",
+   "title": "Retrieve a list of activities for an organization",
+   "quote": "GET /organizations/{organizationId}/activities Required OAuth Scopes activity:read",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c69",
+   "url": "https://www.okta.com/integrations/workiva/",
+   "title": "Integrate Workiva with Okta",
+   "quote": "the Workiva app integration for Okta simplifies the setup of single sign-on and automatic user provisioning for the Workiva platform",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The SCIM article lists 'Delete users: Remove users from the Workiva platform' as a supported feature, while its Entra section says Workiva won't delete user profiles and will only deactivate them.",
+   "cite": [
+    "c12",
+    "c23"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.workiva.com/pricing",
+  "https://support.workiva.com/hc/en-us/articles/360040824152-Manage-and-provision-users-with-SCIM",
+  "https://support.workiva.com help-centre search API: scim, user api",
+  "https://developers.workiva.com/2026-01-01/overview.html",
+  "https://www.okta.com/integrations/workiva/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/workiva-tutorial (404)"
+ ],
+ "open_questions": [
+  "Which Workiva packages include SCIM and SAML SSO is not published (quote-only).",
+  "SCIM base URL pattern, ServiceProviderConfig/Schemas support, PUT vs PATCH, pagination and SCIM rate limits are not documented publicly.",
+  "Whether a SCIM suspension ends active sessions is not documented.",
+  "Whether the Workiva API exposes user-event webhooks is not documented in the Admin API reference.",
+  "Google Workspace and JumpCloud catalogue entries were not verified."
+ ]
+}

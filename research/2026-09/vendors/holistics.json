@@ -1,0 +1,784 @@
+{
+ "slug": "holistics",
+ "vendor": "Holistics",
+ "vendor_url": "https://www.holistics.io",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Holistics",
+  "slug": "holistics",
+  "category": "Data, Analytics & BI",
+  "status": "gated",
+  "scim_plan": "Security Compliance Suite",
+  "scim_price_text": "$2000/month for the first 10 users (billed yearly), additional users $15/month",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Entry",
+  "team_price_text": "Entry: $800/month for the first 10 users (billed yearly), additional users $12.5/month",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Security Compliance Suite",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": false,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.holistics.io/pricing/",
+  "docs_url": "https://docs.holistics.io/docs/authentication/sso/scim",
+  "evidence": "Holistics' pricing page lists 'Enterprise SSO/SAML' and 'SCIM account provisioning' on the Security Compliance Suite plan ($2000/month for the first 10 users), two tiers above Entry ($800/month).",
+  "notes": "New row. Flat platform pricing: Entry $800, Standard $1000 and Security Compliance Suite $2000 per month on yearly billing (monthly billing $960 / $1200 / $2400), each covering the first 10 users, with additional users at $12.5/month (Entry, Standard) or $15/month (SCS); per-user fields stay null. SCIM shipped in April 2026. The pricing page puts SAML SSO and SCIM on the Security Compliance Suite plan, while the SAML/SSO docs and the SCIM release note say both are on the Custom Plan (see conflicts); either way SCIM is above the team tier. Standard's 'Google SSO' is social sign-in and does not count. SAML SSO must be configured before SCIM. SCIM deprovisioning soft-deletes (user shown as Deleted, data and resource ownership kept, can be restored); roles come only from group-to-role mapping and user attributes cannot be synced. Okta and Entra are configured with the SCIM base URL and token (no catalogue app found). The REST API v2 (users, groups) is available per user via 'Allow API access'; the docs do not tie it to a plan.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Entry",
+   "price_text": "$800/month (billed yearly; $960 billed monthly), first 10 users, additional user $12.5/month",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1"
+   ]
+  },
+  {
+   "name": "Standard",
+   "price_text": "$1000/month (billed yearly; $1200 billed monthly), first 10 users, additional user $12.5/month",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c2"
+   ],
+   "notes": "Includes Google SSO (social sign-in, not SAML)."
+  },
+  {
+   "name": "Security Compliance Suite",
+   "price_text": "$2000/month (billed yearly; $2400 billed monthly), first 10 users, additional user $15/month",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c3"
+   ]
+  },
+  {
+   "name": "Custom Plan",
+   "price_text": "Contact us",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c4",
+    "c7",
+    "c8"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c3",
+   "c5",
+   "c8"
+  ],
+  "plan": "Security Compliance Suite",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": "bearer",
+   "token_source": "Settings > Single sign-on > Enable SCIM Provisioning (SCIM API Token, shown once)",
+   "token_expiry": null,
+   "cite": [
+    "c6",
+    "c10"
+   ],
+   "notes": "Okta sends the token in the Authorization HTTP header; Entra uses it as the Secret Token. Generating a new token invalidates the previous one."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c9"
+   ],
+   "notes": "Holistics documents user and group sync but not the individual SCIM resource paths."
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": false,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c9",
+    "c11"
+   ],
+   "notes": "Profile updates are supported; the docs do not say whether PUT or PATCH is used. Removal deactivates rather than erases."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "User shown as Deleted; data, activity history and resource ownership kept; API key stops working but is kept and works again if the user is restored.",
+   "cite": [
+    "c11",
+    "c12"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "email",
+    "displayName"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": false,
+    "how": "User attributes cannot be synced via SCIM; they are managed manually in Holistics."
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c10",
+    "c13"
+   ],
+   "notes": "Okta mapping documented as email (unique identifier) and displayName; group attributes inferred from group push and membership sync, not listed by name."
+  },
+  "roles": {
+   "supported": true,
+   "how": "Group-to-role mapping in Holistics (Viewer < Explorer < Analyst < Admin); default role Viewer; least-privileged role wins when a user is in several mapped groups. Roles cannot be provisioned directly via SCIM.",
+   "cite": [
+    "c14",
+    "c13"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Provisioning fails when it would exceed the plan's seat limit; existing users with the same email are linked without using extra seats.",
+    "cite": [
+     "c15"
+    ]
+   },
+   {
+    "text": "Synced users and groups are read-only in Holistics; changes must be made in the IdP.",
+    "cite": [
+     "c16"
+    ]
+   },
+   {
+    "text": "Existing Admin or Analyst users are downgraded to Viewer if group-to-role mapping is not set up before enabling SCIM.",
+    "cite": [
+     "c17"
+    ]
+   },
+   {
+    "text": "User attributes cannot be synced via SCIM.",
+    "cite": [
+     "c13"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c18"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://secure.holistics.io/api/v2 (APAC), https://eu.holistics.io/api/v2 (EU), https://us.holistics.io/api/v2 (US)",
+  "docs_url": "https://docs.holistics.io/api/v2/getting-started",
+  "auth": {
+   "methods": [
+    "api_key"
+   ],
+   "scopes": [],
+   "cite": [
+    "c18",
+    "c19"
+   ],
+   "notes": "Per-user API key sent in the X-Holistics-Key header; an admin must tick 'Allow API access' for the user. No scopes documented."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": null,
+   "reactivate_user": true,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c20",
+    "c21",
+    "c22",
+    "c23",
+    "c24",
+    "c25",
+    "c26"
+   ],
+   "notes": "DELETE /users/{id} is a soft delete (revokes access, keeps resources), so it is recorded as deactivate. Role is set at invite."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/users",
+    "purpose": "List Users",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/users/me",
+    "purpose": "Get currently authorized User",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/users/invite",
+    "purpose": "Invite Users (role, API access, groups)",
+    "cite": [
+     "c21",
+     "c26"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/users/:id",
+    "purpose": "Update a User",
+    "cite": [
+     "c22"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/users/:id",
+    "purpose": "Delete a User (soft-delete)",
+    "cite": [
+     "c23"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/users/:id/restore",
+    "purpose": "Restore a Deleted User",
+    "cite": [
+     "c24"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/users/:id/resend_invite",
+    "purpose": "Resend invitation to User",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/users/:id/revoke_authentication_token",
+    "purpose": "Revoke User API Key",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/users/check_holistics_user",
+    "purpose": "Check if email address is used",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/groups",
+    "purpose": "List Groups",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/groups",
+    "purpose": "Create a Group",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/groups/:id",
+    "purpose": "Get a Group",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/groups/:id",
+    "purpose": "Update a Group",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/groups/:id",
+    "purpose": "Delete a Group",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/groups/:id/add_user/:user_id",
+    "purpose": "Add a User to a Group",
+    "cite": [
+     "c35"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/groups/:id/remove_user/:user_id",
+    "purpose": "Remove a User from a Group",
+    "cite": [
+     "c36"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": [],
+   "notes": "Activity Logs are an in-app dashboard; no audit-log API endpoint found in the API v2 reference."
+  },
+  "rate_limits": {
+   "text": "Per user and endpoint: Level 1 120 requests/minute (standard), Level 2 60 (resource-intensive), Level 3 20 (heavy); 429 with Retry-After when exceeded.",
+   "cite": [
+    "c37"
+   ]
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "okta.com/integrations/holistics/ returns 404. Holistics' Okta guide creates a custom SAML app integration and enables SCIM on it."
+  },
+  "entra": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "learn.microsoft.com holistics-tutorial and holistics-provisioning-tutorial return 404. Holistics documents Entra provisioning with Tenant URL and Secret Token."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c5"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.holistics.io/pricing/",
+   "title": "Holistics Pricing",
+   "quote": "Entry Basic features. $800 /month Start free trial 100 reports First 10 users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.holistics.io/pricing/",
+   "title": "Holistics Pricing",
+   "quote": "$1000 /month Start free trial Unlimited reports First 10 users Everything in Entry plan",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.holistics.io/pricing/",
+   "title": "Holistics Pricing",
+   "quote": "SCS plan with granular identity and access control for sensitive data. $2000 /month Start free trial Unlimited reports First 10 users Everything in Standard plan Records-based access control (RBAC) Pass-through authentication Enterprise SSO/SAML SCIM account provisioning",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.holistics.io/pricing/",
+   "title": "Holistics Pricing",
+   "quote": "Custom Plan Get personalized pricing and features built specifically for your analytics needs. Contact us",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://docs.holistics.io/docs/authentication/sso/scim",
+   "title": "Auto-provisioning Holistics users with SCIM",
+   "quote": "SCIM automatically syncs users and groups from your identity provider (Okta, Microsoft Entra ID, etc.) to Holistics.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://docs.holistics.io/docs/authentication/sso/scim",
+   "title": "Auto-provisioning Holistics users with SCIM",
+   "quote": "SAML SSO configured: Your organization must have SAML Single Sign-On set up before enabling SCIM.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://docs.holistics.io/docs/authentication/sso/",
+   "title": "SAML/SSO authentication",
+   "quote": "SAML/SSO Authentication is only available for companies on our Custom Plans.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.holistics.io/release-notes/scim-provisioning",
+   "title": "Automate user provisioning with SCIM",
+   "quote": "SCIM provisioning and SSO enforcement are now available on the Custom Plan.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.holistics.io/docs/authentication/sso/scim",
+   "title": "Auto-provisioning Holistics users with SCIM",
+   "quote": "Push new users ✓ You assign a new user to the Holistics app in your identity provider Update user profiles ✓ You update a user's name or email in your identity provider Deactivate users ✓ You remove a user from the Holistics app in your identity provider Push groups ✓",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.holistics.io/docs/authentication/sso/scim-okta",
+   "title": "Set up SCIM with Okta",
+   "quote": "Under HTTP Header, paste the SCIM API Token from Holistics into the Authorization field.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.holistics.io/docs/authentication/sso/scim",
+   "title": "Auto-provisioning Holistics users with SCIM",
+   "quote": "When you remove or deactivate a user in your identity provider, Holistics deactivates the account instead of erasing it. The user appears as Deleted in the User Management page, but their data and activity history are preserved.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.holistics.io/docs/admin/manage-users",
+   "title": "Manage users",
+   "quote": "They can no longer log in, and their API key stops working right away. The key itself is kept rather than revoked, so if you restore the user, their existing API key becomes valid again.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.holistics.io/docs/authentication/sso/scim",
+   "title": "Auto-provisioning Holistics users with SCIM",
+   "quote": "User attributes cannot be synced via SCIM. User attributes must be manually created and managed in Holistics for all users, whether synced or manually created. Roles cannot be provisioned directly via SCIM, only through group-to-role mapping.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.holistics.io/docs/authentication/sso/scim",
+   "title": "Auto-provisioning Holistics users with SCIM",
+   "quote": "If a user belongs to multiple mapped groups, they receive the least privileged role.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.holistics.io/docs/authentication/sso/scim",
+   "title": "Auto-provisioning Holistics users with SCIM",
+   "quote": "When syncing, existing users (same email) get linked without using extra seats, but new users consume seats. Provisioning fails if it exceeds your seat limit.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.holistics.io/docs/authentication/sso/scim",
+   "title": "Auto-provisioning Holistics users with SCIM",
+   "quote": "Synced users are automatically created and managed through your identity provider. They cannot be edited directly in Holistics.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.holistics.io/docs/authentication/sso/scim",
+   "title": "Auto-provisioning Holistics users with SCIM",
+   "quote": "Existing users with Admin or Analyst roles will be downgraded to Viewer if you don't set up group-to-role mapping first.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.holistics.io/api/v2/getting-started.md",
+   "title": "Getting Started with Holistics API",
+   "quote": "Before a user can use the API, an admin must grant them API access.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.holistics.io/api/v2/getting-started"
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.holistics.io/api/v2/getting-started.md",
+   "title": "Getting Started with Holistics API",
+   "quote": "-H \"X-Holistics-Key: YOUR_API_KEY\" \\\n  https://secure.holistics.io/api/v2/users/me",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.holistics.io/api/v2/getting-started"
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.holistics.io/api/v2/reference/users-list",
+   "title": "List Users",
+   "quote": "GET https://secure.holistics.io/api/v2/users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.holistics.io/api/v2/reference/users-invite",
+   "title": "Invite Users",
+   "quote": "Invite Users POST https://secure.holistics.io/api/v2/users/invite",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://docs.holistics.io/api/v2/reference/users-update",
+   "title": "Update a User",
+   "quote": "PUT https://secure.holistics.io/api/v2/users/:id",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://docs.holistics.io/api/v2/reference/users-delete.md",
+   "title": "Delete a User (soft-delete)",
+   "quote": "Revoke a User from accessing and using Holistics. <br/>Note: The soft-deleted User will still retain ownership of their resources.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.holistics.io/api/v2/reference/users-delete"
+  },
+  {
+   "id": "c24",
+   "url": "https://docs.holistics.io/api/v2/reference/users-restore",
+   "title": "Restore a Deleted User",
+   "quote": "POST https://secure.holistics.io/api/v2/users/:id/restore",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://docs.holistics.io/api/v2/reference/groups-list",
+   "title": "List Groups",
+   "quote": "GET https://secure.holistics.io/api/v2/groups",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://docs.holistics.io/api/v2/reference/users-invite",
+   "title": "Invite Users",
+   "quote": "Role that will be applied to specified Users. Possible values: [user, explorer, analyst, admin, growth_admin, it_admin]",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://docs.holistics.io/api/v2/reference/users-me",
+   "title": "Get currently authorized User",
+   "quote": "GET https://secure.holistics.io/api/v2/users/me",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://docs.holistics.io/api/v2/reference/users-resend-invite",
+   "title": "Resend invitation to User",
+   "quote": "POST https://secure.holistics.io/api/v2/users/:id/resend_invite",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://docs.holistics.io/api/v2/reference/users-revoke-authentication-token",
+   "title": "Revoke User API Key",
+   "quote": "POST https://secure.holistics.io/api/v2/users/:id/revoke_authentication_token",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://docs.holistics.io/api/v2/reference/users-check-holistics-user",
+   "title": "Check if email address is used",
+   "quote": "GET https://secure.holistics.io/api/v2/users/check_holistics_user",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://docs.holistics.io/api/v2/reference/groups-create",
+   "title": "Create a Group",
+   "quote": "POST https://secure.holistics.io/api/v2/groups",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://docs.holistics.io/api/v2/reference/groups-get",
+   "title": "Get a Group",
+   "quote": "GET https://secure.holistics.io/api/v2/groups/:id",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://docs.holistics.io/api/v2/reference/groups-update",
+   "title": "Update a Group",
+   "quote": "PUT https://secure.holistics.io/api/v2/groups/:id",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://docs.holistics.io/api/v2/reference/groups-delete",
+   "title": "Delete a Group",
+   "quote": "DELETE https://secure.holistics.io/api/v2/groups/:id",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c35",
+   "url": "https://docs.holistics.io/api/v2/reference/groups-add-user",
+   "title": "Add a User to a Group",
+   "quote": "POST https://secure.holistics.io/api/v2/groups/:id/add_user/:user_id",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://docs.holistics.io/api/v2/reference/groups-remove-user",
+   "title": "Remove a User from a Group",
+   "quote": "POST https://secure.holistics.io/api/v2/groups/:id/remove_user/:user_id",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://docs.holistics.io/api/v2/rate-limiting.md",
+   "title": "Rate Limiting",
+   "quote": "To ensure service stability, API requests are rate-limited per user and endpoint.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.holistics.io/api/v2/rate-limiting"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The pricing page lists Enterprise SSO/SAML and SCIM account provisioning on the Security Compliance Suite plan ($2000/month), while the SAML/SSO docs say SAML is only on Custom Plans and the April 2026 release note says SCIM is available on the Custom Plan. The row follows the pricing page.",
+   "cite": [
+    "c3",
+    "c7",
+    "c8"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.holistics.io/pricing/",
+  "https://docs.holistics.io/sitemap.xml",
+  "https://docs.holistics.io/docs/authentication/sso/scim",
+  "https://docs.holistics.io/docs/authentication/sso/scim-okta",
+  "https://docs.holistics.io/docs/authentication/sso/ (and okta, entra-id)",
+  "https://docs.holistics.io/api/v2/reference/users (and users-*, groups-* pages)",
+  "https://docs.holistics.io/docs/monitoring/activity-logs",
+  "https://www.okta.com/integrations/holistics/ (404)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/holistics-tutorial (404)"
+ ],
+ "open_questions": [
+  "SCIM version, base URL pattern, resource endpoints, filtering and pagination are not documented (the base URL is only shown in-app).",
+  "Docs do not say whether a SCIM-deactivated (Deleted) user frees a paid seat or whether active sessions are ended.",
+  "Pricing page (Security Compliance Suite) and docs/release note (Custom Plan) disagree on which plan carries SAML and SCIM.",
+  "The API docs do not say which plans include REST API access.",
+  "No Google Workspace, OneLogin or JumpCloud SCIM guidance is published."
+ ]
+}

@@ -1,0 +1,593 @@
+{
+ "slug": "mintlify",
+ "vendor": "Mintlify",
+ "vendor_url": "https://www.mintlify.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Mintlify",
+  "slug": "mintlify",
+  "category": "Developer Tools & CI/CD",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Pro",
+  "team_price_text": "Pro: $450/mo flat, billed annually (unlimited editor seats)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Enterprise",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": null,
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.mintlify.com/pricing",
+  "docs_url": "https://www.mintlify.com/docs/dashboard/scim",
+  "evidence": "Mintlify's pricing page lists \"SSO, SCIM & RBAC\" only under Enterprise (\"Contact us\"), and the SCIM docs say \"SCIM requires an Enterprise plan.\"",
+  "notes": "Starter is free (5 editor seats); Pro is a flat $450/mo billed annually ($540 monthly) with unlimited editor seats, so per-user prices are null. Dashboard SSO, SCIM, RBAC and audit logs are Enterprise-only. SCIM is a generic SCIM 2.0 bearer-token endpoint; Okta setup uses Okta's SCIM 2.0 Test App (Header Auth), other IdPs via support. Groups map to viewer/editor/admin roles. The REST API (Pro+) has no user-management endpoints.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": false,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Starter",
+   "price_text": "$0/mo",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": false,
+   "cite": [
+    "c1",
+    "c2",
+    "c7",
+    "c17",
+    "c25"
+   ],
+   "notes": "Free tier with 5 editor seats; the platform REST API needs Pro or Enterprise."
+  },
+  {
+   "name": "Pro",
+   "price_text": "$450/mo billed annually ($540/mo monthly)",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": false,
+   "cite": [
+    "c3",
+    "c4",
+    "c5",
+    "c7",
+    "c17",
+    "c25"
+   ],
+   "notes": "Flat price with unlimited editor seats. REST API included but it has no member-management endpoints."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Contact us",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": false,
+   "audit_log_api": false,
+   "cite": [
+    "c6",
+    "c7",
+    "c17",
+    "c23",
+    "c24"
+   ],
+   "notes": "Audit logs (dashboard, CSV export, streaming to S3/Datadog) are Enterprise; no audit-log REST endpoint is documented."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c6",
+   "c7",
+   "c8",
+   "c9"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": null,
+  "auth": {
+   "method": "bearer",
+   "token_source": "Dashboard > Settings > Security > SCIM > Configure SCIM (token shown once; Rotate token available)",
+   "token_expiry": null,
+   "cite": [
+    "c9",
+    "c10",
+    "c15"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c8",
+    "c12",
+    "c13"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": null,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c12",
+    "c13",
+    "c14"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c12"
+   ],
+   "notes": "Okta 'deactivate' is enabled; the docs do not say whether Mintlify removes the member or only deactivates them. Manual removal deletes access and the member's keys."
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": []
+  },
+  "roles": {
+   "supported": true,
+   "how": "Group-to-role mappings in the dashboard: each IdP group name pushed over SCIM maps to viewer, editor or admin; highest-privilege role wins.",
+   "cite": [
+    "c13",
+    "c14",
+    "c20"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Only Okta has step-by-step instructions (via Okta's SCIM 2.0 Test App (Header Auth)); other IdPs must contact Mintlify support.",
+    "cite": [
+     "c8",
+     "c11"
+    ]
+   },
+   {
+    "text": "Disabling SCIM leaves existing members with their current access until removed manually.",
+    "cite": [
+     "c16"
+    ]
+   },
+   {
+    "text": "Group names are case-sensitive and must match the Mintlify mapping exactly.",
+    "cite": [
+     "c13"
+    ]
+   }
+  ],
+  "notes": "Docs say SCIM manages who has access and SSO controls sign-in; they do not make SSO a prerequisite. Base URL is generated per organization in the dashboard and not published."
+ },
+ "user_api": {
+  "available": false,
+  "cite": [
+   "c25",
+   "c26",
+   "c27"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": null,
+  "docs_url": "https://www.mintlify.com/docs/api/introduction",
+  "auth": {
+   "methods": [],
+   "scopes": [],
+   "cite": []
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": []
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": false,
+   "plan": "Enterprise",
+   "cite": [
+    "c23",
+    "c24"
+   ],
+   "notes": "Audit logs are viewable/exportable to CSV and streamable to Amazon S3 or Datadog on Enterprise; no REST endpoint is listed."
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "Mintlify's platform REST API (Pro or Enterprise) covers deployments, agent jobs, assistant and analytics exports; its endpoint list has no member, group or role management."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": false,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": "idp",
+   "url": null,
+   "cite": [
+    "c11"
+   ],
+   "notes": "No Mintlify OIN app (okta.com/integrations/mintlify returned 404); Mintlify documents Okta's generic SCIM 2.0 Test App (Header Auth) and a custom SAML 2.0 app."
+  },
+  "entra": {
+   "listed": false,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c18",
+    "c19"
+   ],
+   "notes": "Mintlify's SSO guide creates a non-gallery Entra app for SAML; no Entra SCIM steps documented (Learn tutorial URL 404)."
+  },
+  "google": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c29"
+   ],
+   "notes": "Google Workspace SAML is set up via Mintlify support; no Google provisioning."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "jumpcloud.com/support pages returned 403."
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": true,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c21",
+   "c7"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.mintlify.com/pricing",
+   "title": "Pricing - Mintlify",
+   "quote": "Starter $0",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.mintlify.com/pricing",
+   "title": "Pricing - Mintlify",
+   "quote": "For individuals and small teams 5 editor seats Full platform",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.mintlify.com/pricing",
+   "title": "Pricing - Mintlify",
+   "quote": "Pro Monthly Annual $450",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.mintlify.com/pricing",
+   "title": "Pricing - Mintlify",
+   "quote": "Pro Monthly Annual $540",
+   "accessed": "2026-10-05",
+   "interaction": "click the Monthly billing toggle"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.mintlify.com/pricing",
+   "title": "Pricing - Mintlify",
+   "quote": "For startups and growing teams Unlimited editor seats Everything in Starter Agent Assistant Automations Preview deployments Admin APIs",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://www.mintlify.com/pricing",
+   "title": "Pricing - Mintlify",
+   "quote": "Enterprise Contact us For scaling and global teams Unlimited editor seats Everything in Pro SSO, SCIM & RBAC",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://www.mintlify.com/docs/dashboard/scim.md",
+   "title": "SCIM user provisioning - Mintlify",
+   "quote": "SCIM requires an [Enterprise plan](https://mintlify.com/pricing?ref=scim).",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.mintlify.com/docs/dashboard/scim"
+  },
+  {
+   "id": "c8",
+   "url": "https://www.mintlify.com/docs/dashboard/scim.md",
+   "title": "SCIM user provisioning - Mintlify",
+   "quote": "Mintlify's SCIM endpoint works with any SCIM 2.0-compliant identity provider that authenticates with a bearer token. Step-by-step instructions below cover Okta.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.mintlify.com/docs/dashboard/scim"
+  },
+  {
+   "id": "c9",
+   "url": "https://www.mintlify.com/docs/dashboard/scim.md",
+   "title": "SCIM user provisioning - Mintlify",
+   "quote": "Click **Configure SCIM**. Mintlify generates a **SCIM base URL** and a **bearer token**.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.mintlify.com/docs/dashboard/scim"
+  },
+  {
+   "id": "c10",
+   "url": "https://www.mintlify.com/docs/dashboard/scim.md",
+   "title": "SCIM user provisioning - Mintlify",
+   "quote": "Securely store the bearer token. Mintlify shows it only once and cannot display it again.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.mintlify.com/docs/dashboard/scim"
+  },
+  {
+   "id": "c11",
+   "url": "https://www.mintlify.com/docs/dashboard/scim.md",
+   "title": "SCIM user provisioning - Mintlify",
+   "quote": "In Okta, under **Applications**, click **Browse App Catalog** and search for **SCIM 2.0 Test App (Header Auth)**.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.mintlify.com/docs/dashboard/scim"
+  },
+  {
+   "id": "c12",
+   "url": "https://www.mintlify.com/docs/dashboard/scim.md",
+   "title": "SCIM user provisioning - Mintlify",
+   "quote": "Under **Provisioning to app**, enable the create, update, and deactivate options you want Okta to manage.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.mintlify.com/docs/dashboard/scim"
+  },
+  {
+   "id": "c13",
+   "url": "https://www.mintlify.com/docs/dashboard/scim.md",
+   "title": "SCIM user provisioning - Mintlify",
+   "quote": "In Okta, use your existing groups or create new ones for each set of users you want to provision, then push those groups to the SCIM app under **Push groups**.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.mintlify.com/docs/dashboard/scim"
+  },
+  {
+   "id": "c14",
+   "url": "https://www.mintlify.com/docs/dashboard/scim.md",
+   "title": "SCIM user provisioning - Mintlify",
+   "quote": "When a user belongs to multiple mapped groups, Mintlify assigns the highest-privilege role among them.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.mintlify.com/docs/dashboard/scim"
+  },
+  {
+   "id": "c15",
+   "url": "https://www.mintlify.com/docs/dashboard/scim.md",
+   "title": "SCIM user provisioning - Mintlify",
+   "quote": "Rotating the token immediately invalidates the previous token.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.mintlify.com/docs/dashboard/scim"
+  },
+  {
+   "id": "c16",
+   "url": "https://www.mintlify.com/docs/dashboard/scim.md",
+   "title": "SCIM user provisioning - Mintlify",
+   "quote": "Disabling SCIM stops new provisioning and deprovisioning events from your identity provider. Existing dashboard members keep their current access until removed manually or through another method.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.mintlify.com/docs/dashboard/scim"
+  },
+  {
+   "id": "c17",
+   "url": "https://www.mintlify.com/docs/dashboard/sso.md",
+   "title": "Single sign-on (SSO) - Mintlify",
+   "quote": "SSO is available on [Enterprise plans](https://mintlify.com/pricing?ref=sso).",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.mintlify.com/docs/dashboard/sso"
+  },
+  {
+   "id": "c18",
+   "url": "https://www.mintlify.com/docs/dashboard/sso.md",
+   "title": "Single sign-on (SSO) - Mintlify",
+   "quote": "Enterprise admins can configure Security Assertion Markup Language (SAML) SSO for Okta or Microsoft Entra directly from the Mintlify dashboard.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.mintlify.com/docs/dashboard/sso"
+  },
+  {
+   "id": "c19",
+   "url": "https://www.mintlify.com/docs/dashboard/sso.md",
+   "title": "Single sign-on (SSO) - Mintlify",
+   "quote": "Select \"Integrate any other application you don't find in the gallery (Non-gallery).\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.mintlify.com/docs/dashboard/sso"
+  },
+  {
+   "id": "c20",
+   "url": "https://www.mintlify.com/docs/dashboard/roles.md",
+   "title": "Roles - Mintlify",
+   "quote": "Mintlify provides three dashboard access levels: viewer, editor, and admin.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.mintlify.com/docs/dashboard/roles"
+  },
+  {
+   "id": "c21",
+   "url": "https://www.mintlify.com/docs/dashboard/roles.md",
+   "title": "Roles - Mintlify",
+   "quote": "Pro and Enterprise plans can upload a CSV of emails.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.mintlify.com/docs/dashboard/roles"
+  },
+  {
+   "id": "c22",
+   "url": "https://www.mintlify.com/docs/dashboard/roles.md",
+   "title": "Roles - Mintlify",
+   "quote": "Admins can remove a member from the organization entirely, which deletes their access and any keys they created.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.mintlify.com/docs/dashboard/roles"
+  },
+  {
+   "id": "c23",
+   "url": "https://www.mintlify.com/docs/dashboard/audit-logs.md",
+   "title": "Audit logs - Mintlify",
+   "quote": "Audit logs are available on [Enterprise plans](https://mintlify.com/pricing?ref=audit-logs).",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.mintlify.com/docs/dashboard/audit-logs"
+  },
+  {
+   "id": "c24",
+   "url": "https://www.mintlify.com/docs/dashboard/audit-logs.md",
+   "title": "Audit logs - Mintlify",
+   "quote": "Stream audit logs to Amazon S3 or Datadog in near real time.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.mintlify.com/docs/dashboard/audit-logs"
+  },
+  {
+   "id": "c25",
+   "url": "https://www.mintlify.com/docs/api/introduction.md",
+   "title": "Mintlify REST API introduction",
+   "quote": "The platform REST API requires a [Pro or Enterprise plan](https://mintlify.com/pricing?ref=api).",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.mintlify.com/docs/api/introduction"
+  },
+  {
+   "id": "c26",
+   "url": "https://www.mintlify.com/docs/api/introduction.md",
+   "title": "Mintlify REST API introduction",
+   "quote": "Use the Mintlify REST API to trigger deployments, embed an AI assistant, export analytics data, and manage documentation programmatically.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.mintlify.com/docs/api/introduction"
+  },
+  {
+   "id": "c27",
+   "url": "https://www.mintlify.com/docs/api/introduction.md",
+   "title": "Mintlify REST API introduction",
+   "quote": "| Admin API key | `mint_` | Updates, agent jobs, and analytics exports. Server-side only. |",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.mintlify.com/docs/api/introduction"
+  },
+  {
+   "id": "c28",
+   "url": "https://www.mintlify.com/docs/dashboard/roles.md",
+   "title": "Roles - Mintlify",
+   "quote": "Role-based access control (RBAC) is available on [Enterprise plans](https://mintlify.com/pricing?ref=rbac).",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.mintlify.com/docs/dashboard/roles"
+  },
+  {
+   "id": "c29",
+   "url": "https://www.mintlify.com/docs/dashboard/sso.md",
+   "title": "Single sign-on (SSO) - Mintlify",
+   "quote": "To set up SSO for other providers, such as Google Workspace or Okta OpenID Connect (OIDC), [contact us](mailto:support@mintlify.com).",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.mintlify.com/docs/dashboard/sso"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.mintlify.com/pricing",
+  "https://www.mintlify.com/docs/llms.txt",
+  "https://www.mintlify.com/docs/sitemap.xml",
+  "https://www.mintlify.com/docs/dashboard/scim",
+  "https://www.mintlify.com/docs/api/introduction",
+  "https://www.okta.com/integrations/mintlify/ (404)"
+ ],
+ "open_questions": [
+  "SCIM attribute list, filtering, pagination and whether PATCH or PUT is used are not documented.",
+  "Whether SCIM deactivation removes the member or frees a seat is not documented (seats are unlimited on paid plans).",
+  "Whether SSO must be configured before SCIM is not stated.",
+  "Setup for Entra, Google, OneLogin and JumpCloud is not documented; JIT on SSO is not stated."
+ ]
+}

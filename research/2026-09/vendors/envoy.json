@@ -1,0 +1,970 @@
+{
+ "slug": "envoy",
+ "vendor": "Envoy",
+ "vendor_url": "https://envoy.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Envoy",
+  "slug": "envoy",
+  "category": "Vertical SaaS (Healthcare, Education, Real Estate, Construction, Field Service)",
+  "status": "free",
+  "scim_plan": "Premium",
+  "scim_price_text": "Visitors Premium: $362/location/mo (annual)",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Premium",
+  "team_price_text": "Visitors Premium: $362/location/mo (annual)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Premium",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": "directory_sync",
+   "onelogin": "native",
+   "jumpcloud": "native",
+   "generic": true
+  },
+  "pricing_page_url": "https://envoy.com/pricing/",
+  "docs_url": "https://envoy.help/en/articles/3450115-setting-up-the-directory",
+  "evidence": "Envoy's help centre lists Directory Sync (Okta, Entra, OneLogin, Centrify and Sailpoint, all \"SCIM standard\") as \"Premium & Enterprise Plans only\", and the pricing page puts \"SSO & employee directory integrations\" on Premium, the cheapest paid Visitors plan; SCIM provisioning of admin roles is Enterprise-only.",
+  "notes": "Status changed from gated (June) to free because the pricing model changed: envoy.com/pricing no longer shows the June Workplace Standard $3 / Premium $5 / Premium Plus $7 per-active-user tiers (those prices are dropped, no first-party source now). Visitors is now Basic (free, up to 50 employees), Premium $362/location/mo billed annually and Enterprise (custom pricing); employee directory SCIM sync is on Premium and Enterprise, so it sits on the cheapest paid tier. SCIM-based admin role provisioning is Enterprise-only (help articles still say 'Visitors Enterprise and Workplace Premium Plus'). Per-location pricing, so per-user fields are null. Other products are single-tier and exclude a platform fee: Response $2/user/mo, Reservations $5/bookable resource/mo, Screens $12/device/mo, Deliveries $250/delivery location/mo.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Basic",
+  "api_tax": false,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Basic",
+   "price_text": "Free (limited features, up to 50 employees, 100 entries/month)",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c5",
+    "c3",
+    "c4",
+    "c58",
+    "c9"
+   ]
+  },
+  {
+   "name": "Premium",
+   "price_text": "$362 per location/month billed annually",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c3",
+    "c4",
+    "c58",
+    "c9"
+   ],
+   "notes": "Per-location pricing. Employee directory SCIM sync included; SCIM admin-role provisioning is not."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Custom pricing",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c6",
+    "c2",
+    "c4",
+    "c58",
+    "c9"
+   ],
+   "notes": "Adds SCIM provisioning of admin roles and custom admin roles."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c9",
+   "c10",
+   "c3",
+   "c25",
+   "c47"
+  ],
+  "plan": "Premium",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://app.envoy.com/scim/v2",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Envoy dashboard > Integrations > Directory and SSO > Directory settings > Install (IdP) > OAuth Bearer Token (Regenerate available)",
+   "token_expiry": null,
+   "cite": [
+    "c14",
+    "c34",
+    "c35",
+    "c36"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c13",
+    "c44",
+    "c46"
+   ],
+   "notes": "Users and Groups inferred from the documented user and group-push provisioning; no SCIM endpoint reference is published."
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": null,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c13",
+    "c44",
+    "c46",
+    "c38",
+    "c32",
+    "c41"
+   ],
+   "notes": "Envoy's Entra article describes PATCH update requests. OneLogin guide sets the deprovision action to 'Delete User'."
+  },
+  "deprovision": {
+   "action": null,
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [],
+   "notes": "Okta/Sailpoint 'deactivate' and OneLogin 'Delete User' are documented, but not what Envoy does with the employee record."
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "displayName",
+    "emails[type eq \"work\"].value",
+    "phoneNumbers",
+    "title",
+    "addresses[type eq \"work\"].locality",
+    "locale"
+   ],
+   "enterprise": [
+    "department",
+    "manager.value"
+   ],
+   "custom": {
+    "supported": true,
+    "how": "Envoy extension urn:scim:schemas:extension:envoy:core:1.0:User (Entra: urn:ietf:params:scim:schemas:extension:envoy:core:1.0:User) with defaultLocationName (primary location), remoteStatus and managerDisplayName (manager email; Okta/Sailpoint); assistants via an Okta expression mapping."
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c26",
+    "c27",
+    "c28",
+    "c37",
+    "c17",
+    "c18",
+    "c46"
+   ],
+   "notes": "Group attribute names are not listed by Envoy; group push is documented."
+  },
+  "roles": {
+   "supported": true,
+   "how": "Enterprise only: IdP groups pushed to Envoy are mapped in Employee directory > Admin roles > Sync settings to one location role (Location admin, Front desk admin, Deliveries, Security admin) and one company role (Global admin, Billing admin).",
+   "cite": [
+    "c15",
+    "c16",
+    "c24",
+    "c2"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SCIM admin-role provisioning is Enterprise-only (help articles also name 'Workplace Premium Plus').",
+    "cite": [
+     "c2",
+     "c15",
+     "c30",
+     "c40"
+    ]
+   },
+   {
+    "text": "Okta app must be set to the US region even for EU accounts or SCIM will not work.",
+    "cite": [
+     "c22"
+    ]
+   },
+   {
+    "text": "Users without a primary email are not synced; matching is on primary email; SCIM sync takes over and deletes manual directory entries.",
+    "cite": [
+     "c19",
+     "c20",
+     "c21"
+    ]
+   },
+   {
+    "text": "Entra ID does not support nested groups for SCIM provisioning or Envoy's assistant feature.",
+    "cite": [
+     "c29",
+     "c33"
+    ]
+   },
+   {
+    "text": "Regenerating the bearer token invalidates the old token immediately.",
+    "cite": [
+     "c36"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c56",
+   "c48",
+   "c50",
+   "c58"
+  ],
+  "plan": "Basic",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://api.envoy.com",
+  "docs_url": "https://developers.envoy.com/hub/reference/employees-2",
+  "auth": {
+   "methods": [
+    "oauth2",
+    "api_key"
+   ],
+   "scopes": [
+    "employees.read",
+    "locations.read"
+   ],
+   "cite": [
+    "c55",
+    "c54"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c48",
+    "c51"
+   ],
+   "notes": "Current API is read-only for employees; a legacy CSV import endpoint replaces the directory."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/v1/employees",
+    "purpose": "Fetch a list of Employees (filter by name/email)",
+    "cite": [
+     "c48",
+     "c49"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/employees/{id}",
+    "purpose": "Look up an Employee by ID",
+    "cite": [
+     "c51"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/configuration/employee_list",
+    "purpose": "Import Employees Records via CSV (app.envoy.com, legacy)",
+    "cite": [
+     "c52",
+     "c53"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/a/visitors/api/v3/employees",
+    "purpose": "Retrieve employees (legacy, deprecated)",
+    "cite": [
+     "c59"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": [],
+   "notes": "Event catalogue covers entries, invites and blocklists (e.g. employee_entry_sign_in, employee_invite_created); no directory create/delete events listed."
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "No documented endpoints to create, update or delete individual employees; webhooks cover visitor/employee entries and invites.",
+    "cite": [
+     "c57"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/envoy-scim-2-0/",
+   "cite": [
+    "c45",
+    "c13",
+    "c12"
+   ],
+   "notes": "Envoy (SCIM 2.0) OIN app; SAML 2.0 sign-on per Envoy's guide."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/envoy-provisioning-tutorial",
+   "cite": [
+    "c44"
+   ]
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": true,
+   "kind": "directory_sync",
+   "built_by": "vendor",
+   "url": null,
+   "cite": [
+    "c42"
+   ],
+   "notes": "Envoy-run Google Workspace directory sync every 24 hours; Google catalogue page not checked."
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c39"
+   ],
+   "notes": "From Envoy's own OneLogin guide (Envoy (SAML2.0, provisioning) app)."
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://jumpcloud.com/support/integrate-with-envoy",
+   "cite": [
+    "c46",
+    "c47"
+   ]
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": true,
+  "other_sync": "Google Workspace directory sync (every 24h), Active Directory cron script, LDAP, HRIS",
+  "docs_public": true,
+  "cite": [
+   "c11",
+   "c8",
+   "c42",
+   "c43"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://envoy.com/pricing/",
+   "title": "Plans & Pricing - Envoy",
+   "quote": "Premium $362 per location/month billed annually",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://envoy.com/pricing/",
+   "title": "Plans & Pricing - Envoy",
+   "quote": "Automatically provision admin and employee roles via SCIM",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://envoy.com/pricing/",
+   "title": "Plans & Pricing - Envoy",
+   "quote": "SSO & employee directory integrations",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://envoy.com/pricing/",
+   "title": "Plans & Pricing - Envoy",
+   "quote": "SAML single sign-on",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://envoy.com/pricing/",
+   "title": "Plans & Pricing - Envoy",
+   "quote": "Basic Free With limited features",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://envoy.com/pricing/",
+   "title": "Plans & Pricing - Envoy",
+   "quote": "Enterprise Custom pricing",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://envoy.com/pricing/",
+   "title": "Plans & Pricing - Envoy",
+   "quote": "Price excludes platform fee",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://envoy.com/pricing/",
+   "title": "Plans & Pricing - Envoy",
+   "quote": "Upload a CSV of employee records",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://envoy.help/en/articles/3450115-setting-up-the-directory",
+   "title": "Setting up the directory",
+   "quote": "Directory Sync ( Premium & Enterprise Plans only)",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://envoy.help/en/articles/3450115-setting-up-the-directory",
+   "title": "Setting up the directory",
+   "quote": "Okta - SCIM standard",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c11",
+   "url": "https://envoy.help/en/articles/3450115-setting-up-the-directory",
+   "title": "Setting up the directory",
+   "quote": "CSV Upload (All plans)",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://envoy.help/en/articles/3453325-okta",
+   "title": "Okta",
+   "quote": "The SCIM push-based system treats the Okta directory as your source of truth. When changes are made in Okta, they push immediately to Envoy",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://envoy.help/en/articles/3453325-okta",
+   "title": "Okta",
+   "quote": "Create users Update user attributes Deactivate users Group push Optional attributes: Manager, Primary Location, In-person/remote",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c14",
+   "url": "https://envoy.help/en/articles/3453325-okta",
+   "title": "Okta",
+   "quote": "Take note of your OAuth Bearer Token . You will need to add this to Okta in the next step. You can always Regenerate a new token if needed.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://envoy.help/en/articles/3453325-okta",
+   "title": "Okta",
+   "quote": "Envoy makes it easy for Enterprise customers to automatically provision their admin users from Okta using SCIM groups.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://envoy.help/en/articles/3453325-okta",
+   "title": "Okta",
+   "quote": "Admins can only have one location role and one company role using SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c17",
+   "url": "https://envoy.help/en/articles/3453325-okta",
+   "title": "Okta",
+   "quote": "External namespace: urn:scim:schemas:extension:envoy:core:1.0:User",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c18",
+   "url": "https://envoy.help/en/articles/3453325-okta",
+   "title": "Okta",
+   "quote": "Envoy only looks at the managerDisplayName attribute.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c19",
+   "url": "https://envoy.help/en/articles/3453325-okta",
+   "title": "Okta",
+   "quote": "When updating or adding employees, Envoy will match based on the primary email address listed for the Okta user.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c20",
+   "url": "https://envoy.help/en/articles/3453325-okta",
+   "title": "Okta",
+   "quote": "If an Okta user does not have a primary email address, they will not be synced to the Envoy employee directory.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c21",
+   "url": "https://envoy.help/en/articles/3453325-okta",
+   "title": "Okta",
+   "quote": "If you already have manual entries in the directory and sync with a SCIM, this will take over and delete the manual entries.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c22",
+   "url": "https://envoy.help/en/articles/3453325-okta",
+   "title": "Okta",
+   "quote": "Only choose the US region even if located in the EU or the SCIM integration will not work .",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c23",
+   "url": "https://envoy.help/en/articles/3453325-okta",
+   "title": "Okta",
+   "quote": "Employees can by sorted by Locale (<locale>) or City (<locality>)",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c24",
+   "url": "https://envoy.help/en/articles/3453325-okta",
+   "title": "Okta",
+   "quote": "Location admin Front desk admin Deliveries Security admin Company roles: Global admin Billing admin",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c25",
+   "url": "https://envoy.help/en/articles/3453335-microsoft-entra-id-integration",
+   "title": "Microsoft Entra ID Integration",
+   "quote": "Copy Envoy’s SCIM endpoint https://app.envoy.com/scim/v2 and paste it into the Tenant URL field.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c26",
+   "url": "https://envoy.help/en/articles/3453335-microsoft-entra-id-integration",
+   "title": "Microsoft Entra ID Integration",
+   "quote": "userName userPrincipalName title jobTitle emails[type eq \"work\"].value mail addresses[type eq \"work\"].locality city locale city department department",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c27",
+   "url": "https://envoy.help/en/articles/3453335-microsoft-entra-id-integration",
+   "title": "Microsoft Entra ID Integration",
+   "quote": "Name = urn:ietf:params:scim:schemas:extension:enterprise:2.0:User:manager.value",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c28",
+   "url": "https://envoy.help/en/articles/3453335-microsoft-entra-id-integration",
+   "title": "Microsoft Entra ID Integration",
+   "quote": "Name = urn:ietf:params:scim:schemas:extension:envoy:core:1.0:User:remoteStatus",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c29",
+   "url": "https://envoy.help/en/articles/3453335-microsoft-entra-id-integration",
+   "title": "Microsoft Entra ID Integration",
+   "quote": "Entra ID does not support nested groups for SCIM provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c30",
+   "url": "https://envoy.help/en/articles/3453335-microsoft-entra-id-integration",
+   "title": "Microsoft Entra ID Integration",
+   "quote": "Envoy makes it easy for our Visitors Enterprise and Workplace Premium Plus customers to automatically provision their admin users using Entra ID.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c31",
+   "url": "https://envoy.help/en/articles/3453335-microsoft-entra-id-integration",
+   "title": "Microsoft Entra ID Integration",
+   "quote": "In addition to the required user attributes (name, email, phone number), Envoy uses optional user information",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c32",
+   "url": "https://envoy.help/en/articles/3453335-microsoft-entra-id-integration",
+   "title": "Microsoft Entra ID Integration",
+   "quote": "(though they currently will send the custom attributes on subsequent PATCH update requests)",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c33",
+   "url": "https://envoy.help/en/articles/3453335-microsoft-entra-id-integration",
+   "title": "Microsoft Entra ID Integration",
+   "quote": "Please be aware that Entra ID does not support the assistant feature of Envoy.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c34",
+   "url": "https://envoy.help/en/articles/15525081-sailpoint-scim",
+   "title": "Sailpoint SCIM",
+   "quote": "Enter the Host URL : https://app.envoy.com/scim/v2 Set Authentication Type to API Token .",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c35",
+   "url": "https://envoy.help/en/articles/15525081-sailpoint-scim",
+   "title": "Sailpoint SCIM",
+   "quote": "Only bearer tokens are supported.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c36",
+   "url": "https://envoy.help/en/articles/15525081-sailpoint-scim",
+   "title": "Sailpoint SCIM",
+   "quote": "If you regenerate the OAuth Bearer Token in Envoy, the old token stops working immediately.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c37",
+   "url": "https://envoy.help/en/articles/15525081-sailpoint-scim",
+   "title": "Sailpoint SCIM",
+   "quote": "Email (primary, used to match employees) userName First name name.givenName Last name name.familyName Display name displayName Phone number phoneNumbers",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c38",
+   "url": "https://envoy.help/en/articles/15525081-sailpoint-scim",
+   "title": "Sailpoint SCIM",
+   "quote": "To let SailPoint create, update, and deactivate employees in Envoy, you must enable provisioning",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c39",
+   "url": "https://envoy.help/en/articles/3453393-onelogin",
+   "title": "OneLogin",
+   "quote": "Find Envoy (SAML2.0, provisioning) in your app directory and add the app.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c40",
+   "url": "https://envoy.help/en/articles/3453393-onelogin",
+   "title": "OneLogin",
+   "quote": "Envoy makes it easy for our customers on Visitors Enterprise and Workplace Premium Plus to automatically provision their admin users from OneLogin using SCIM groups.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c41",
+   "url": "https://envoy.help/en/articles/3453393-onelogin",
+   "title": "OneLogin",
+   "quote": "Select “Delete User” on the dropdown field.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c42",
+   "url": "https://envoy.help/en/articles/3450146-google-workspace-directory-sync",
+   "title": "Google Workspace Directory Sync",
+   "quote": "With the Envoy + Google Workspace integration, your Google Workspace directory will sync to Envoy every 24 hours.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c43",
+   "url": "https://envoy.help/en/articles/3450163-setting-up-saml",
+   "title": "Setting up SAML",
+   "quote": "The SAML NameID value must match the user’s email address in the Envoy employee directory.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c44",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/envoy-provisioning-tutorial",
+   "title": "Configure Envoy for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Create users in Envoy Remove users in Envoy when they don't require access anymore Keep user attributes synchronized between Microsoft Entra ID and Envoy Provision groups and group memberships in Envoy",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c45",
+   "url": "https://www.okta.com/integrations/envoy-scim-2-0/",
+   "title": "Integrate Envoy (SCIM 2.0) with Okta",
+   "quote": "From single sign-on to enhanced user provisioning, Okta's Envoy integration gives your team the ability to sync users and their fields with Envoy’s Employee Directory.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c46",
+   "url": "https://jumpcloud.com/support/integrate-with-envoy",
+   "title": "Integrate with Envoy | JumpCloud Documentation",
+   "quote": "Automatically provision, update and deprovision users and groups in Envoy from JumpCloud using the SCIM integration.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c47",
+   "url": "https://jumpcloud.com/support/integrate-with-envoy",
+   "title": "Integrate with Envoy | JumpCloud Documentation",
+   "quote": "Envoy SCIM API is based on version 2.0 of the SCIM standard",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c48",
+   "url": "https://developers.envoy.com/hub/reference/employees-2.md",
+   "title": "Fetch a list of Employees",
+   "quote": "Finds employees based on the provided criteria.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.envoy.com/hub/reference/employees-2"
+  },
+  {
+   "id": "c49",
+   "url": "https://developers.envoy.com/hub/reference/employees-2.md",
+   "title": "Fetch a list of Employees",
+   "quote": "\"/v1/employees\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.envoy.com/hub/reference/employees-2"
+  },
+  {
+   "id": "c50",
+   "url": "https://developers.envoy.com/hub/reference/employees-2.md",
+   "title": "Fetch a list of Employees",
+   "quote": "\"url\": \"https://api.envoy.com\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.envoy.com/hub/reference/employees-2"
+  },
+  {
+   "id": "c51",
+   "url": "https://developers.envoy.com/hub/reference/employee.md",
+   "title": "Look up an Employee by ID",
+   "quote": "\"/v1/employees/{id}\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.envoy.com/hub/reference/employee"
+  },
+  {
+   "id": "c52",
+   "url": "https://developers.envoy.com/hub/reference/csvuploademployees.md",
+   "title": "Import Employees Records",
+   "quote": "Import employee records to the Employee Directory. The file headers must be in the following order, Full Name, Email, Mobile Number, Assistants Email.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.envoy.com/hub/reference/csvuploademployees"
+  },
+  {
+   "id": "c53",
+   "url": "https://developers.envoy.com/hub/reference/csvuploademployees.md",
+   "title": "Import Employees Records",
+   "quote": "\"/api/configuration/employee_list\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.envoy.com/hub/reference/csvuploademployees"
+  },
+  {
+   "id": "c54",
+   "url": "https://developers.envoy.com/hub/docs/scopes.md",
+   "title": "API scopes",
+   "quote": "User records in the employee directory",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.envoy.com/hub/docs/scopes"
+  },
+  {
+   "id": "c55",
+   "url": "https://developers.envoy.com/hub/docs/authenticate-overview.md",
+   "title": "Overview",
+   "quote": "All apps must authenticate using [OAuth 2](https://www.oauth.com/) in order to use the API",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.envoy.com/hub/docs/authenticate-overview"
+  },
+  {
+   "id": "c56",
+   "url": "https://developers.envoy.com/hub/reference/overview-1.md",
+   "title": "Introduction",
+   "quote": "The Envoy API is REST-based.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.envoy.com/hub/reference/overview-1"
+  },
+  {
+   "id": "c57",
+   "url": "https://developers.envoy.com/hub/reference/events.md",
+   "title": "Event Types",
+   "quote": "Webhooks are particularly useful for asynchronous events like when a user signs in, an invite is sent, or a block rule is triggered.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.envoy.com/hub/reference/events"
+  },
+  {
+   "id": "c58",
+   "url": "https://envoy.com/pricing/",
+   "title": "Plans & Pricing - Envoy",
+   "quote": "Webhooks and \\\"build your own\\\" integrations",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c59",
+   "url": "https://developers.envoy.com/hub/reference/retrieve-employees.md",
+   "title": "Retrieve employees",
+   "quote": "Note, this endpoint is deprecated and will be replaced by the new endpoint in the Protect API.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.envoy.com/hub/reference/retrieve-employees"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The pricing comparison lists SCIM only in the Enterprise-only row 'Automatically provision admin and employee roles via SCIM', while help articles say SCIM directory sync is on Premium & Enterprise and the pricing page gives 'SSO & employee directory integrations' to Premium.",
+   "cite": [
+    "c2",
+    "c3",
+    "c9"
+   ]
+  },
+  {
+   "text": "Help articles say admin-role SCIM provisioning is for 'Visitors Enterprise and Workplace Premium Plus', but the pricing page no longer lists Workplace tiers.",
+   "cite": [
+    "c30",
+    "c1"
+   ]
+  }
+ ],
+ "searched": [
+  "https://envoy.com/pricing/",
+  "https://envoy.help/en/?q=scim",
+  "https://envoy.help/en/articles/3450115-setting-up-the-directory",
+  "https://envoy.help/en/articles/3453325-okta",
+  "https://envoy.help/en/articles/3453335-microsoft-entra-id-integration",
+  "https://envoy.help/en/articles/3453393-onelogin",
+  "https://envoy.help/en/articles/15525081-sailpoint-scim",
+  "https://envoy.help/en/articles/3450146-google-workspace-directory-sync",
+  "https://envoy.help/en/articles/3450163-setting-up-saml",
+  "https://developers.envoy.com/hub/llms.txt",
+  "https://developers.envoy.com/hub/reference/employees-2",
+  "https://developers.envoy.com/hub/reference/events",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/envoy-provisioning-tutorial",
+  "https://www.okta.com/integrations/envoy-scim-2-0/",
+  "https://jumpcloud.com/support/integrate-with-envoy"
+ ],
+ "open_questions": [
+  "What deprovisioning does to the Envoy employee record (deactivate vs delete), and whether it ends sessions or frees anything billable, is not documented.",
+  "Whether SAML must be set up before SCIM is not stated.",
+  "SCIM endpoint reference (ServiceProviderConfig, filtering, pagination, rate limits) is not published.",
+  "Whether SAML sign-in creates users just-in-time is not documented (NameID must match an existing directory email).",
+  "No audit-log API found; dashboard activity log exists on Enterprise.",
+  "Workplace (Premium Plus) tiers named in help articles are absent from the pricing page; their current prices are unknown.",
+  "Google Workspace catalogue entry for Envoy not checked."
+ ]
+}

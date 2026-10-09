@@ -1,0 +1,567 @@
+{
+ "slug": "6sense",
+ "vendor": "6sense",
+ "vendor_url": "https://6sense.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "6sense",
+  "slug": "6sense",
+  "category": "Marketing & Advertising",
+  "status": "gated",
+  "scim_plan": "Advanced Security (optional feature)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales (no public prices)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": false,
+   "groups": false
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": "via_generic",
+   "jumpcloud": "via_generic",
+   "generic": true
+  },
+  "pricing_page_url": "https://6sense.com/pricing/",
+  "docs_url": "https://support.6sense.com/docs/enable-saml-scim.md",
+  "evidence": "6sense's Enable SAML SCIM article says SCIM is included in Advanced Security as an optional feature, not enabled by default, and must be requested through your Customer Success Manager.",
+  "notes": "New row. 6sense publishes no prices: the pricing page shows Sales Intelligence packages with 'Book a demo' only, so every tier is Contact Sales. SCIM 2.0 (bearer token, no expiry) sits in the optional Advanced Security feature set (with audit logs, custom roles and SAML group-to-role mapping), enabled via the CSM; whether Advanced Security costs extra is not stated publicly, so the gate is 'Contact Sales'. SSO must be configured first (Descope-powered SSO portal, JIT on by default). New SCIM setups go through the Descope portal with IdP-tailored steps or a generic IdP; a legacy pre-integrated Okta OIN app supports SCIM only for customers who set up SSO before 13 Nov 2025. Deleting a user in the IdP disables them in 6sense. The pricing page blocks scripted fetches (Cloudflare); it was read via WebFetch.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": false,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Sales Intelligence packages (Data Credits and/or Predictive AI)",
+   "price_text": "Book a demo (no public price)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": false,
+   "audit_log_api": null,
+   "cite": [
+    "c1"
+   ],
+   "notes": "SCIM, audit logs, custom roles and role mapping are 'Advanced Security' optional features enabled through the CSM; not tied to a named package publicly."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c2",
+   "c5",
+   "c7",
+   "c10"
+  ],
+  "plan": "Advanced Security (optional feature, enabled via CSM)",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": null,
+  "auth": {
+   "method": "bearer",
+   "token_source": "Settings > Security and Compliance > Identity and Access > Open setup portal (Descope self-serve portal) > SCIM configuration",
+   "token_expiry": "never",
+   "cite": [
+    "c7",
+    "c9",
+    "c14"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": false,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c3",
+    "c17"
+   ],
+   "notes": "Groups=false is documented for the legacy Okta OIN app (no Group Push); the Descope-portal SCIM setup does not say."
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": false,
+   "group_push": false,
+   "group_membership": null,
+   "cite": [
+    "c3",
+    "c12",
+    "c16",
+    "c17",
+    "c19"
+   ],
+   "notes": "Update is documented (\"keep user attributes in sync\"); PUT vs PATCH not stated. An IdP delete disables the user rather than deleting it, so delete=false."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c3",
+    "c12"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "email (unique identifier)",
+    "first name",
+    "last name",
+    "status"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": [
+    "c4",
+    "c6"
+   ],
+   "notes": "Docs name the synced fields in plain language (first name, last name, email, status) without SCIM attribute paths; the unique identifier must be email."
+  },
+  "roles": {
+   "supported": false,
+   "how": "A default role is assigned at creation; roles are not updated through SCIM afterwards. SAML group-to-role mapping (Advanced Security) can assign roles at login.",
+   "cite": [
+    "c11",
+    "c23"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Once SCIM is on, users can only be created, updated and disabled from the IdP (except pre-SSO users not in the IdP); JIT must be turned off.",
+    "cite": [
+     "c13",
+     "c28"
+    ]
+   },
+   {
+    "text": "Legacy Okta OIN app: no Group Push and no import; provisioning is one-way Okta to 6sense; only for customers who set up SSO before 13 Nov 2025.",
+    "cite": [
+     "c15",
+     "c17",
+     "c18"
+    ]
+   },
+   {
+    "text": "Email is the only supported unique identifier.",
+    "cite": [
+     "c6"
+    ]
+   }
+  ],
+  "notes": "The SCIM connector base URL is shown in the Descope setup portal and is not published."
+ },
+ "user_api": {
+  "available": false,
+  "cite": [
+   "c26"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": null,
+  "docs_url": "https://api.6sense.com/docs",
+  "auth": {
+   "methods": [],
+   "scopes": [],
+   "cite": []
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": []
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "The public 6sense API reference covers data APIs (Company Identification, Firmographics, Lead Scoring, People Enrichment, People Search) with no user or seat management endpoints. Audit logs (Advanced Security) are viewed in the UI (last 30 days); no audit-log API is documented."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": "vendor",
+   "url": null,
+   "cite": [
+    "c15",
+    "c16",
+    "c19"
+   ],
+   "notes": "Legacy pre-integrated 6sense OIN app (create, update, deactivate, reactivate; no Group Push or import), only for customers with SSO before 13 Nov 2025. OIN page URL not found (okta.com/integrations/6sense/ 404). New customers use the Descope portal flow."
+  },
+  "entra": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c22",
+    "c8"
+   ],
+   "notes": "Entra is listed for SSO in the Descope portal; SCIM uses portal-tailored steps or generic IdP. No Entra gallery tutorial found (6sense-tutorial 404)."
+  },
+  "google": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c22"
+   ],
+   "notes": "Google Workspace listed for SSO in the portal; SCIM not stated."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c22"
+   ],
+   "notes": "Listed for SSO in the portal."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c22"
+   ],
+   "notes": "Listed for SSO in the portal."
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c20",
+   "c27"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://6sense.com/pricing/",
+   "title": "6sense Pricing",
+   "quote": "Sales Intelligence + Data Credits + Predictive AI",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://support.6sense.com/docs/enable-saml-scim.md",
+   "title": "Enable SAML SCIM",
+   "quote": "SCIM is included in Advanced Security as an optional feature and is not enabled by default. To request enablement, please contact your Customer Success Manager (CSM).",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.6sense.com/docs/enable-saml-scim"
+  },
+  {
+   "id": "c3",
+   "url": "https://support.6sense.com/docs/enable-saml-scim.md",
+   "title": "Enable SAML SCIM",
+   "quote": "Automatically deprovision (disable) users when they leave your organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.6sense.com/docs/enable-saml-scim"
+  },
+  {
+   "id": "c4",
+   "url": "https://support.6sense.com/docs/enable-saml-scim.md",
+   "title": "Enable SAML SCIM",
+   "quote": "Keep user attributes (such as first name, last name, email, and status) in sync.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.6sense.com/docs/enable-saml-scim"
+  },
+  {
+   "id": "c5",
+   "url": "https://support.6sense.com/docs/enable-saml-scim.md",
+   "title": "Enable SAML SCIM",
+   "quote": "has already been configured and tested successfully.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.6sense.com/docs/enable-saml-scim"
+  },
+  {
+   "id": "c6",
+   "url": "https://support.6sense.com/docs/enable-saml-scim.md",
+   "title": "Enable SAML SCIM",
+   "quote": "6sense supports email-based identifiers only.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.6sense.com/docs/enable-saml-scim"
+  },
+  {
+   "id": "c7",
+   "url": "https://support.6sense.com/docs/enable-saml-scim.md",
+   "title": "Enable SAML SCIM",
+   "quote": "Follow the step-by-step instructions for your selected IdP to generate the SCIM bearer token, copy the SCIM connector base URL into your IdP",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.6sense.com/docs/enable-saml-scim"
+  },
+  {
+   "id": "c8",
+   "url": "https://support.6sense.com/docs/enable-saml-scim.md",
+   "title": "Enable SAML SCIM",
+   "quote": "If your IdP is not listed, then select generic IdP.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.6sense.com/docs/enable-saml-scim"
+  },
+  {
+   "id": "c9",
+   "url": "https://support.6sense.com/docs/enable-saml-scim.md",
+   "title": "Enable SAML SCIM",
+   "quote": "No, there is no expiration date for the SCIM key.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.6sense.com/docs/enable-saml-scim"
+  },
+  {
+   "id": "c10",
+   "url": "https://support.6sense.com/docs/enable-saml-scim.md",
+   "title": "Enable SAML SCIM",
+   "quote": "The version we use is SCIM 2.0 and yes, it is compliant.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.6sense.com/docs/enable-saml-scim"
+  },
+  {
+   "id": "c11",
+   "url": "https://support.6sense.com/docs/enable-saml-scim.md",
+   "title": "Enable SAML SCIM",
+   "quote": "When a user is first provisioned via SCIM, a default role is assigned at user account creation. After provisioning, roles and permissions are managed within the application and are not updated through SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.6sense.com/docs/enable-saml-scim"
+  },
+  {
+   "id": "c12",
+   "url": "https://support.6sense.com/docs/enable-saml-scim.md",
+   "title": "Enable SAML SCIM",
+   "quote": "The user will be disabled in user management automatically.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.6sense.com/docs/enable-saml-scim"
+  },
+  {
+   "id": "c13",
+   "url": "https://support.6sense.com/docs/enable-saml-scim.md",
+   "title": "Enable SAML SCIM",
+   "quote": "It is very important that you disable JIT provisioning after enabling SCIM in the IdP",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.6sense.com/docs/enable-saml-scim"
+  },
+  {
+   "id": "c14",
+   "url": "https://support.6sense.com/docs/enable-saml-scim.md",
+   "title": "Enable SAML SCIM",
+   "quote": "This will navigate you to Descope‘s self-serve portal to set up SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.6sense.com/docs/enable-saml-scim"
+  },
+  {
+   "id": "c15",
+   "url": "https://support.6sense.com/docs/set-up-saml-scim-for-6sense-legacy-okta-oin-app.md",
+   "title": "Set Up SAML SCIM for 6sense Legacy Okta OIN App",
+   "quote": "Only customers who installed the 6sense Okta OIN app **before November 13, 2025,** should follow this guide.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.6sense.com/docs/set-up-saml-scim-for-6sense-legacy-okta-oin-app"
+  },
+  {
+   "id": "c16",
+   "url": "https://support.6sense.com/docs/set-up-saml-scim-for-6sense-legacy-okta-oin-app.md",
+   "title": "Set Up SAML SCIM for 6sense Legacy Okta OIN App",
+   "quote": "**Reactivate:** Re-enable users when reassigned.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.6sense.com/docs/set-up-saml-scim-for-6sense-legacy-okta-oin-app"
+  },
+  {
+   "id": "c17",
+   "url": "https://support.6sense.com/docs/set-up-saml-scim-for-6sense-legacy-okta-oin-app.md",
+   "title": "Set Up SAML SCIM for 6sense Legacy Okta OIN App",
+   "quote": "Group Push is not supported; groups cannot be pushed from Okta to 6sense.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.6sense.com/docs/set-up-saml-scim-for-6sense-legacy-okta-oin-app"
+  },
+  {
+   "id": "c18",
+   "url": "https://support.6sense.com/docs/set-up-saml-scim-for-6sense-legacy-okta-oin-app.md",
+   "title": "Set Up SAML SCIM for 6sense Legacy Okta OIN App",
+   "quote": "User provisioning is **unidirectional**, from **Okta to 6sense only**.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.6sense.com/docs/set-up-saml-scim-for-6sense-legacy-okta-oin-app"
+  },
+  {
+   "id": "c19",
+   "url": "https://support.6sense.com/docs/set-up-saml-scim-for-6sense-legacy-okta-oin-app.md",
+   "title": "Set Up SAML SCIM for 6sense Legacy Okta OIN App",
+   "quote": "**Create:** Automatically provision new users when assigned in Okta.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.6sense.com/docs/set-up-saml-scim-for-6sense-legacy-okta-oin-app"
+  },
+  {
+   "id": "c20",
+   "url": "https://support.6sense.com/docs/set-up-single-sign-on-saml-sso.md",
+   "title": "Set Up and Manage SAML 2.0 SSO for 6sense via the SSO Portal",
+   "quote": "6sense creates a user when they initially log in to the 6sense platform.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.6sense.com/docs/set-up-single-sign-on-saml-sso"
+  },
+  {
+   "id": "c21",
+   "url": "https://support.6sense.com/docs/set-up-single-sign-on-saml-sso.md",
+   "title": "Set Up and Manage SAML 2.0 SSO for 6sense via the SSO Portal",
+   "quote": "We’ve introduced a new, streamlined way to set up SAML 2.0 Single Sign-On (SSO) via our SSO Portal, powered by Descope.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.6sense.com/docs/set-up-single-sign-on-saml-sso"
+  },
+  {
+   "id": "c22",
+   "url": "https://support.6sense.com/docs/set-up-single-sign-on-saml-sso.md",
+   "title": "Set Up and Manage SAML 2.0 SSO for 6sense via the SSO Portal",
+   "quote": "The portal supports major IdPs including:",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.6sense.com/docs/set-up-single-sign-on-saml-sso"
+  },
+  {
+   "id": "c23",
+   "url": "https://support.6sense.com/docs/saml-sso-default-role-and-group-mapping.md",
+   "title": "SAML SSO Default Role and Group Mapping",
+   "quote": "Default role and role mapping settings are included in Advanced Security as an optional feature and not enabled by default.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.6sense.com/docs/saml-sso-default-role-and-group-mapping"
+  },
+  {
+   "id": "c24",
+   "url": "https://support.6sense.com/docs/audit-logs.md",
+   "title": "Audit Logs",
+   "quote": "The audit logs feature allows admin users to track and monitor the actions performed by users across the 6sense platform.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.6sense.com/docs/audit-logs"
+  },
+  {
+   "id": "c25",
+   "url": "https://support.6sense.com/docs/audit-logs.md",
+   "title": "Audit Logs",
+   "quote": "This feature is included in Advanced Security as an optional feature and is not enabled by default.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.6sense.com/docs/audit-logs"
+  },
+  {
+   "id": "c26",
+   "url": "https://api.6sense.com/docs",
+   "title": "6sense API Docs",
+   "quote": "People Enrichment API",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://support.6sense.com/docs/set-up-single-sign-on-saml-sso.md",
+   "title": "Set Up and Manage SAML 2.0 SSO for 6sense via the SSO Portal",
+   "quote": "The integration uses JIT provisioning *upon user login*.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.6sense.com/docs/set-up-single-sign-on-saml-sso"
+  },
+  {
+   "id": "c28",
+   "url": "https://support.6sense.com/docs/enable-saml-scim.md",
+   "title": "Enable SAML SCIM",
+   "quote": "After SCIM is enabled, user lifecycle management activities such as user creation, deprovisioning, and profile updates must be performed through your IdP.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.6sense.com/docs/enable-saml-scim"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://6sense.com/pricing/",
+  "https://support.6sense.com/llms.txt",
+  "https://support.6sense.com/sitemap-en.xml",
+  "https://support.6sense.com/docs/enable-saml-scim.md",
+  "https://support.6sense.com/docs/set-up-saml-scim-for-6sense-legacy-okta-oin-app.md",
+  "https://support.6sense.com/docs/set-up-single-sign-on-saml-sso.md",
+  "https://support.6sense.com/docs/saml-sso-default-role-and-group-mapping.md",
+  "https://support.6sense.com/docs/audit-logs.md",
+  "https://api.6sense.com/docs",
+  "https://www.okta.com/integrations/6sense/ (404)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/6sense-tutorial (404)"
+ ],
+ "open_questions": [
+  "Whether Advanced Security (and so SCIM) is a paid add-on or included in some packages; no public pricing.",
+  "Which plans include SAML SSO.",
+  "SCIM base URL, endpoints beyond Users, PUT/PATCH, filtering, pagination and rate limits are not published.",
+  "Whether SCIM disable frees the seat or ends sessions.",
+  "Which IdPs the Descope portal lists for SCIM (only SSO IdPs are listed)."
+ ]
+}

@@ -1,0 +1,911 @@
+{
+  "slug": "workramp",
+  "vendor": "Learn:Up (Confirm)",
+  "vendor_url": "https://www.confirm.com/scale-up/products/learn-up",
+  "researched_at": "2026-10-05",
+  "row": {
+    "vendor": "Learn:Up (Confirm)",
+    "slug": "workramp",
+    "category": "Learning & Development",
+    "status": "unknown",
+    "scim_plan": "—",
+    "scim_price_text": "Not disclosed",
+    "scim_price_per_user_mo": null,
+    "team_plan": "Learn:Up",
+    "team_price_text": "Learn:Up: from $9/u/mo billed annually (based on a 200-person company)",
+    "team_price_per_user_mo": 9,
+    "price_multiplier": null,
+    "sso_plan": null,
+    "sso_price_per_user_mo": null,
+    "sso_required_for_scim": null,
+    "scim_addon_price_text": null,
+    "min_seats": null,
+    "scim_ops": {
+      "create": true,
+      "update": true,
+      "deactivate": true,
+      "delete": false,
+      "groups": true
+    },
+    "idp": {
+      "okta": "native",
+      "entra": "via_generic",
+      "google": null,
+      "onelogin": "via_generic",
+      "jumpcloud": null,
+      "generic": true
+    },
+    "pricing_page_url": "https://www.confirm.com/scale-up/pricing",
+    "docs_url": "https://help.workramp.com/en/articles/3454015-configuring-scim-provisioning-with-okta",
+    "evidence": "WorkRamp's help centre documents SCIM 2.0 provisioning (base URL https://app.workramp.com/scim/v2) for Okta, OneLogin and Entra, but Confirm's pricing page lists only a 'Starting from $9 per user per month' Learn:Up price with a quote and never says which deals include SCIM.",
+    "notes": "WorkRamp now sells as Learn:Up under Confirm (www.workramp.com redirects to confirm.com). The pricing page shows one 'starting from' price per product ($9/user/mo billed annually, based on a 200-person company) and quotes everything else; it names no tiers and does not mention SSO or SCIM. The help centre says SAML SSO is supported 'for select accounts', which suggests SSO and SCIM are not on every deal, but no plan gate is published, so the status stays unknown. SCIM uses the same admin-owned API key as the REST API, and the REST API is described as a private API that customers must request access to. SAML sign-in auto-provisions (JIT) users. HRIS connectors (HiBob, BambooHR, Workday) and CSV bulk upload are also offered.",
+    "confidence": "low",
+    "last_verified": "2026-10-05",
+    "api_provisioning": false,
+    "user_api_available": true,
+    "user_api_plan": null,
+    "api_tax": null,
+    "first_added": "2026-09",
+    "status_prev": null
+  },
+  "plans": [
+    {
+      "name": "Learn:Up",
+      "price_text": "Starting from $9 / £7 per user per month, billed annually, based on a 200-person company",
+      "price_per_user_mo": 9,
+      "billing": "annual",
+      "sso": null,
+      "scim": null,
+      "user_api": null,
+      "audit_log_api": null,
+      "cite": [
+        "c1",
+        "c2",
+        "c3"
+      ],
+      "notes": "Single 'starting from' price with a 'Get a quote' button; Academy (customer training, also formerly WorkRamp) is quote-only."
+    }
+  ],
+  "scim": {
+    "available": true,
+    "cite": [
+      "c20",
+      "c26",
+      "c5",
+      "c57",
+      "c61"
+    ],
+    "plan": null,
+    "addon_price_text": null,
+    "sso_required": null,
+    "version": "2.0",
+    "base_url": "https://app.workramp.com/scim/v2 (EU: https://app.eu.workramp.com/scim/v2)",
+    "auth": {
+      "method": "bearer",
+      "token_source": "Admin > Integrations > API (API key management page); the key belongs to an admin user",
+      "token_expiry": null,
+      "cite": [
+        "c19",
+        "c15",
+        "c42",
+        "c44"
+      ],
+      "notes": "Keys stop working if the owning user is deactivated, so a dedicated admin service account is recommended."
+    },
+    "endpoints": {
+      "Users": true,
+      "Groups": true,
+      "ServiceProviderConfig": null,
+      "Schemas": null,
+      "ResourceTypes": null,
+      "Bulk": null,
+      "Me": null,
+      "cite": [
+        "c57",
+        "c27",
+        "c11"
+      ]
+    },
+    "operations": {
+      "create": true,
+      "read": true,
+      "update_put": null,
+      "update_patch": null,
+      "deactivate": true,
+      "reactivate": true,
+      "delete": false,
+      "group_push": true,
+      "group_membership": true,
+      "cite": [
+        "c6",
+        "c7",
+        "c8",
+        "c9",
+        "c10",
+        "c11",
+        "c18"
+      ],
+      "notes": "Deleting a user in Okta only deactivates them in WorkRamp ('but not permanently delete them')."
+    },
+    "deprovision": {
+      "action": "deactivate",
+      "frees_seat": null,
+      "revokes_sessions": null,
+      "data_retained": "User is marked deactivated, not permanently deleted; an admin can reactivate the account in WorkRamp.",
+      "cite": [
+        "c8",
+        "c18"
+      ]
+    },
+    "filtering": {
+      "supported": null,
+      "attributes": [],
+      "cite": []
+    },
+    "pagination": {
+      "supported": null,
+      "max_page_size": null,
+      "cite": []
+    },
+    "attributes": {
+      "core": [
+        "userName",
+        "name.givenName",
+        "name.familyName",
+        "displayName",
+        "externalId",
+        "active",
+        "groups",
+        "manager",
+        "managerName",
+        "startDate"
+      ],
+      "enterprise": [],
+      "custom": {
+        "supported": true,
+        "how": "Custom attributes must first exist in WorkRamp; they are sent with the extension urn:ietf:params:scim:schemas:extension:workramp:2.0:User:<API name> (Entra) or as Okta profile attributes whose variable name equals the WorkRamp API name."
+      },
+      "group": [
+        "displayName",
+        "members"
+      ],
+      "cite": [
+        "c57",
+        "c58",
+        "c59",
+        "c60",
+        "c22",
+        "c16",
+        "c28",
+        "c29",
+        "c30",
+        "c13"
+      ],
+      "notes": "userName (email) and schemas are the only required fields. managerName is sent in the core namespace from Okta and OneLogin; Entra uses the WorkRamp extension for manager and externalId. Group attribute names are not documented beyond group push."
+    },
+    "roles": {
+      "supported": null,
+      "how": null,
+      "cite": []
+    },
+    "rate_limits": {
+      "text": null,
+      "cite": []
+    },
+    "limitations": [
+      {
+        "text": "Existing users created before SCIM was enabled must be unassigned and reassigned in Okta (with Deactivate Users temporarily off) before they receive SCIM updates.",
+        "cite": [
+          "c17"
+        ]
+      },
+      {
+        "text": "Only the primary SSO provider can sync groups.",
+        "cite": [
+          "c33"
+        ]
+      },
+      {
+        "text": "The Integrations hub says the SCIM documentation requires login, though the per-IdP setup articles are public.",
+        "cite": [
+          "c35"
+        ]
+      }
+    ]
+  },
+  "user_api": {
+    "available": true,
+    "cite": [
+      "c38",
+      "c39",
+      "c43",
+      "c45"
+    ],
+    "plan": null,
+    "api_tax": null,
+    "style": "REST",
+    "base_url": "https://app.workramp.com/api/v1",
+    "docs_url": "https://developers.workramp.com/reference/getting-started",
+    "auth": {
+      "methods": [
+        "api_key"
+      ],
+      "scopes": [],
+      "cite": [
+        "c42",
+        "c43"
+      ],
+      "notes": "Bearer API keys created by any admin on the Integrations > API page; no scopes, the key has the owning admin's full access."
+    },
+    "capabilities": {
+      "list_users": true,
+      "get_user": null,
+      "create_user": true,
+      "invite_user": null,
+      "update_user": true,
+      "deactivate_user": true,
+      "delete_user": true,
+      "reactivate_user": true,
+      "manage_groups": true,
+      "assign_roles": true,
+      "assign_licenses": null,
+      "cite": [
+        "c45",
+        "c48",
+        "c49",
+        "c50",
+        "c51",
+        "c52",
+        "c54",
+        "c56"
+      ],
+      "notes": "Deactivate/reactivate via the isDeleted field on Update User; the only role setting is the isAdmin flag. A single user is fetched by filtering the list endpoint by email."
+    },
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/api/v1/users",
+        "purpose": "List users (filters: email, name, custom_attributes, includeDeleted; limit/page)",
+        "cite": [
+          "c45",
+          "c47"
+        ]
+      },
+      {
+        "method": "POST",
+        "path": "/api/v1/users",
+        "purpose": "Create a user",
+        "cite": [
+          "c48"
+        ]
+      },
+      {
+        "method": "POST",
+        "path": "/api/v1/users/{user_id}",
+        "purpose": "Update a user (email, name, isAdmin, isDeleted, managers, custom attributes)",
+        "cite": [
+          "c49",
+          "c50"
+        ]
+      },
+      {
+        "method": "DELETE",
+        "path": "/api/v1/users/{user_id}",
+        "purpose": "Delete a user",
+        "cite": [
+          "c52"
+        ]
+      },
+      {
+        "method": "GET",
+        "path": "/api/v1/groups",
+        "purpose": "List groups",
+        "cite": [
+          "c53"
+        ]
+      },
+      {
+        "method": "POST",
+        "path": "/api/v1/groups",
+        "purpose": "Create a group",
+        "cite": [
+          "c54"
+        ]
+      },
+      {
+        "method": "POST",
+        "path": "/api/v1/groups/{GroupID}",
+        "purpose": "Update a group",
+        "cite": [
+          "c55"
+        ]
+      },
+      {
+        "method": "POST",
+        "path": "/api/v1/groups/{GroupID}/users",
+        "purpose": "Assign a user to a group",
+        "cite": [
+          "c56"
+        ]
+      }
+    ],
+    "webhooks_user_events": {
+      "supported": null,
+      "events": [],
+      "cite": [],
+      "notes": "Documented webhooks cover assignments and event-session attendees, not user lifecycle events."
+    },
+    "audit_log_api": {
+      "supported": null,
+      "plan": null,
+      "cite": []
+    },
+    "rate_limits": {
+      "text": "Burst up to 13,000 calls/hour, hourly rate up to 3,000 calls/hour; Get All Users is limited to 10 requests per 60 seconds when paging (page size up to 100).",
+      "cite": [
+        "c40",
+        "c41",
+        "c46"
+      ]
+    },
+    "limitations": [
+      {
+        "text": "Described as a private API: customers contact support to check eligibility and request access.",
+        "cite": [
+          "c38"
+        ]
+      }
+    ]
+  },
+  "idp_apps": {
+    "okta": {
+      "listed": true,
+      "sso": true,
+      "provisioning": true,
+      "kind": "scim",
+      "built_by": null,
+      "url": "https://www.okta.com/integrations/workramp/",
+      "cite": [
+        "c62",
+        "c14",
+        "c6"
+      ],
+      "notes": "OIN page markup marks SAML, SCIM, Create, Update, Deactivate and Group Push as checked; WorkRamp's guide adds the app from the Okta catalog."
+    },
+    "entra": {
+      "listed": false,
+      "sso": true,
+      "provisioning": true,
+      "kind": null,
+      "built_by": null,
+      "url": null,
+      "cite": [
+        "c25",
+        "c26"
+      ],
+      "notes": "No gallery app: WorkRamp's guide has admins create a custom (non-gallery) enterprise app for SAML and then point automatic provisioning at the generic SCIM tenant URL."
+    },
+    "google": {
+      "listed": null,
+      "sso": null,
+      "provisioning": null,
+      "kind": null,
+      "built_by": null,
+      "url": null,
+      "cite": [],
+      "notes": "WorkRamp documents SAML SSO with Google Workspace but no Google provisioning."
+    },
+    "onelogin": {
+      "listed": null,
+      "sso": true,
+      "provisioning": true,
+      "kind": "scim",
+      "built_by": null,
+      "url": null,
+      "cite": [
+        "c24",
+        "c19"
+      ],
+      "notes": "WorkRamp's own guide uses OneLogin's generic 'SCIM Provisioner with SAML (SCIM v2 Core)' app; OneLogin's catalogue page was not checked."
+    },
+    "jumpcloud": {
+      "listed": null,
+      "sso": null,
+      "provisioning": null,
+      "kind": null,
+      "built_by": null,
+      "url": null,
+      "cite": []
+    }
+  },
+  "fallbacks": {
+    "jit": true,
+    "jit_protocol": "saml",
+    "csv_import": true,
+    "other_sync": "HRIS connectors for HiBob (daily S3 file transfer), BambooHR and Workday",
+    "docs_public": true,
+    "cite": [
+      "c31",
+      "c34",
+      "c36",
+      "c37"
+    ]
+  },
+  "citations": [
+    {
+      "id": "c1",
+      "url": "https://www.confirm.com/scale-up/pricing",
+      "title": "Scale-Up Pricing | Confirm",
+      "quote": "Learn:Up Formerly WorkRamp. The LMS – everything you need to deliver, track, and prove learning across your growing team.",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c2",
+      "url": "https://www.confirm.com/scale-up/pricing",
+      "title": "Scale-Up Pricing | Confirm",
+      "quote": "Starting from $9 / £7 per user per month. Billed annually. Based on a 200-person company.",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c3",
+      "url": "https://www.confirm.com/scale-up/pricing",
+      "title": "Scale-Up Pricing | Confirm",
+      "quote": "Pick what you need today – add the rest when you’re ready.",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c4",
+      "url": "https://www.confirm.com/scale-up/products/learn-up",
+      "title": "AI Powered Learning Management Platform | Learn:Up",
+      "quote": "AI-POWERED LMS | FORMERLY WORKRAMP",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c5",
+      "url": "https://help.workramp.com/en/articles/3454015-configuring-scim-provisioning-with-okta",
+      "title": "Configuring SCIM provisioning with Okta (WorkRamp Help Center)",
+      "quote": "Have an enterprise account set up in WorkRamp and have access to an admin user account.",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c6",
+      "url": "https://help.workramp.com/en/articles/3454015-configuring-scim-provisioning-with-okta",
+      "title": "Configuring SCIM provisioning with Okta (WorkRamp Help Center)",
+      "quote": "New users created in Okta that have been assigned the WorkRamp application will also be created in WorkRamp",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c7",
+      "url": "https://help.workramp.com/en/articles/3454015-configuring-scim-provisioning-with-okta",
+      "title": "Configuring SCIM provisioning with Okta (WorkRamp Help Center)",
+      "quote": "Updates made to a user's profile in Okta will be reflected in WorkRamp",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c8",
+      "url": "https://help.workramp.com/en/articles/3454015-configuring-scim-provisioning-with-okta",
+      "title": "Configuring SCIM provisioning with Okta (WorkRamp Help Center)",
+      "quote": "Removing a user's access to the WorkRamp application in Okta can deactivate the user in WorkRamp (but not permanently delete them)",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c9",
+      "url": "https://help.workramp.com/en/articles/3454015-configuring-scim-provisioning-with-okta",
+      "title": "Configuring SCIM provisioning with Okta (WorkRamp Help Center)",
+      "quote": "Giving a user access to the WorkRamp application (when you had previously removed their access) will activate the user in WorkRamp",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c10",
+      "url": "https://help.workramp.com/en/articles/3454015-configuring-scim-provisioning-with-okta",
+      "title": "Configuring SCIM provisioning with Okta (WorkRamp Help Center)",
+      "quote": "Users can be imported from WorkRamp to Okta",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c11",
+      "url": "https://help.workramp.com/en/articles/3454015-configuring-scim-provisioning-with-okta",
+      "title": "Configuring SCIM provisioning with Okta (WorkRamp Help Center)",
+      "quote": "Groups and users within groups on Okta can be kept in sync with WorkRamp",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c12",
+      "url": "https://help.workramp.com/en/articles/3454015-configuring-scim-provisioning-with-okta",
+      "title": "Configuring SCIM provisioning with Okta (WorkRamp Help Center)",
+      "quote": "A user's manager in Okta can be kept in sync with WorkRamp",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c13",
+      "url": "https://help.workramp.com/en/articles/3454015-configuring-scim-provisioning-with-okta",
+      "title": "Configuring SCIM provisioning with Okta (WorkRamp Help Center)",
+      "quote": "Arbitrary attributes can be set in a user's profile in WorkRamp based on values in Okta",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c14",
+      "url": "https://help.workramp.com/en/articles/3454015-configuring-scim-provisioning-with-okta",
+      "title": "Configuring SCIM provisioning with Okta (WorkRamp Help Center)",
+      "quote": "Navigate to the \"Applications\" tab in your Okta admin dashboard, then the \"Applications\" subtab, then click \"Browse App Catalog\".",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c15",
+      "url": "https://help.workramp.com/en/articles/3454015-configuring-scim-provisioning-with-okta",
+      "title": "Configuring SCIM provisioning with Okta (WorkRamp Help Center)",
+      "quote": "Enter the API token that you received from the integrations tab.",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c16",
+      "url": "https://help.workramp.com/en/articles/3454015-configuring-scim-provisioning-with-okta",
+      "title": "Configuring SCIM provisioning with Okta (WorkRamp Help Center)",
+      "quote": "Variable name: managerName External name: managerName External namespace: urn:ietf:params:scim:schemas:core:2.0:User",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c17",
+      "url": "https://help.workramp.com/en/articles/3454015-configuring-scim-provisioning-with-okta",
+      "title": "Configuring SCIM provisioning with Okta (WorkRamp Help Center)",
+      "quote": "If SCIM is being set up after the initial deployment of WorkRamp (and users already exist in the WorkRamp application), we will need to take a few additional steps in order for SCIM to work for existing users.",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c18",
+      "url": "https://help.workramp.com/en/articles/3454015-configuring-scim-provisioning-with-okta",
+      "title": "Configuring SCIM provisioning with Okta (WorkRamp Help Center)",
+      "quote": "When deleting a user in Okta or removing their access from the WorkRamp application, the user will be marked as deactivated in the WorkRamp application. However, an Admin will still be able to manually reactivate the user's account from within WorkRamp.",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c19",
+      "url": "https://help.workramp.com/en/articles/5236710-setting-up-scim-provisioning-with-onelogin",
+      "title": "Setting up SCIM provisioning with OneLogin (WorkRamp Help Center)",
+      "quote": "enter the WorkRamp API token in the SCIM Bearer Token field",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c20",
+      "url": "https://help.workramp.com/en/articles/5236710-setting-up-scim-provisioning-with-onelogin",
+      "title": "Setting up SCIM provisioning with OneLogin (WorkRamp Help Center)",
+      "quote": "SCIM Base URL: https://app.workramp.com/scim/v2",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c21",
+      "url": "https://help.workramp.com/en/articles/5236710-setting-up-scim-provisioning-with-onelogin",
+      "title": "Setting up SCIM provisioning with OneLogin (WorkRamp Help Center)",
+      "quote": "SCIM Base URL: https://app.eu.workramp.com/scim/v2",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c22",
+      "url": "https://help.workramp.com/en/articles/5236710-setting-up-scim-provisioning-with-onelogin",
+      "title": "Setting up SCIM provisioning with OneLogin (WorkRamp Help Center)",
+      "quote": "\"userName\": \"{$parameters.scimusername}\", \"active\": \"{$user.status}\", \"externalId\": \"{$user.external_id}\", \"displayName\": \"{$user.display_name}\"",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c23",
+      "url": "https://help.workramp.com/en/articles/5236710-setting-up-scim-provisioning-with-onelogin",
+      "title": "Setting up SCIM provisioning with OneLogin (WorkRamp Help Center)",
+      "quote": "with the exception of “schemas” and “userName” as those are our required fields",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c24",
+      "url": "https://help.workramp.com/en/articles/3424096-setting-up-sso-with-onelogin",
+      "title": "Setting up SSO with OneLogin (WorkRamp Help Center)",
+      "quote": "search for “ SCIM Provisioner with SAML (SCIM v2 Core) ”. This is the type of application we’ll be looking to set up.",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c25",
+      "url": "https://help.workramp.com/en/articles/3791086-setting-up-sso-with-azure",
+      "title": "Setting up SSO with Azure (WorkRamp Help Center)",
+      "quote": "Click on “Create your own application”",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c26",
+      "url": "https://help.workramp.com/en/articles/3791086-setting-up-sso-with-azure",
+      "title": "Setting up SSO with Azure (WorkRamp Help Center)",
+      "quote": "Tenant URL: https://app.workramp.com/scim/v2",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c27",
+      "url": "https://help.workramp.com/en/articles/3791086-setting-up-sso-with-azure",
+      "title": "Setting up SSO with Azure (WorkRamp Help Center)",
+      "quote": "By default, Groups and Users will be enabled.",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c28",
+      "url": "https://help.workramp.com/en/articles/3791086-setting-up-sso-with-azure",
+      "title": "Setting up SSO with Azure (WorkRamp Help Center)",
+      "quote": "urn:ietf:params:scim:schemas:extension:workramp:2.0:User:WORKRAMP_CUSTOM_ATTR_API_NAME",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c29",
+      "url": "https://help.workramp.com/en/articles/3791086-setting-up-sso-with-azure",
+      "title": "Setting up SSO with Azure (WorkRamp Help Center)",
+      "quote": "urn:ietf:params:scim:schemas:extension:workramp:2.0:User:manager",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c30",
+      "url": "https://help.workramp.com/en/articles/3791086-setting-up-sso-with-azure",
+      "title": "Setting up SSO with Azure (WorkRamp Help Center)",
+      "quote": "Source attribute = objectId Target attribute = externalId",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c31",
+      "url": "https://help.workramp.com/en/articles/2260753-setting-up-single-sign-on-sso",
+      "title": "Setting up Single Sign-On (SSO) (WorkRamp Help Center)",
+      "quote": "Accounts will be automatically provisioned for users signing in via SSO (SAML) if they don't already exist.",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c32",
+      "url": "https://help.workramp.com/en/articles/2260753-setting-up-single-sign-on-sso",
+      "title": "Setting up Single Sign-On (SSO) (WorkRamp Help Center)",
+      "quote": "WorkRamp will support SAML 2.0 based Single Sign On for select accounts.",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c33",
+      "url": "https://help.workramp.com/en/articles/2260753-setting-up-single-sign-on-sso",
+      "title": "Setting up Single Sign-On (SSO) (WorkRamp Help Center)",
+      "quote": "Only the Primary SSO provider allows syncing of groups.",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c34",
+      "url": "https://help.workramp.com/en/articles/12598985-integrations",
+      "title": "Integrations (WorkRamp Help Center)",
+      "quote": "Steps to take to add users manually or in bulk via CSV.",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c35",
+      "url": "https://help.workramp.com/en/articles/12598985-integrations",
+      "title": "Integrations (WorkRamp Help Center)",
+      "quote": "Requires you to be logged-in to access documentation.",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c36",
+      "url": "https://help.workramp.com/en/articles/12598985-integrations",
+      "title": "Integrations (WorkRamp Help Center)",
+      "quote": "The HiBob integration allows you to sync user data directly from your HiBob instance to your WorkRamp instance via a daily S3 file transfer.",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c37",
+      "url": "https://help.workramp.com/en/articles/12598985-integrations",
+      "title": "Integrations (WorkRamp Help Center)",
+      "quote": "HRIS Connector HiBob BambooHR Workday",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c38",
+      "url": "https://developers.workramp.com/reference/getting-started.md",
+      "title": "Confirm Learn:Up & Academy API",
+      "quote": "This is a private API.",
+      "accessed": "2026-10-05",
+      "page_url": "https://developers.workramp.com/reference/getting-started"
+    },
+    {
+      "id": "c39",
+      "url": "https://developers.workramp.com/reference/getting-started.md",
+      "title": "Confirm Learn:Up & Academy API",
+      "quote": "To get started, you must have an enterprise account provisioned for Learn:Up.",
+      "accessed": "2026-10-05",
+      "page_url": "https://developers.workramp.com/reference/getting-started"
+    },
+    {
+      "id": "c40",
+      "url": "https://developers.workramp.com/reference/getting-started.md",
+      "title": "Confirm Learn:Up & Academy API",
+      "quote": "Burst rates up to 13,000 API calls / hour",
+      "accessed": "2026-10-05",
+      "page_url": "https://developers.workramp.com/reference/getting-started"
+    },
+    {
+      "id": "c41",
+      "url": "https://developers.workramp.com/reference/getting-started.md",
+      "title": "Confirm Learn:Up & Academy API",
+      "quote": "Hourly rate up to 3,000 API calls / hour",
+      "accessed": "2026-10-05",
+      "page_url": "https://developers.workramp.com/reference/getting-started"
+    },
+    {
+      "id": "c42",
+      "url": "https://developers.workramp.com/reference/basic-auth.md",
+      "title": "HTTP Bearer Token",
+      "quote": "You must choose a user who is an admin to associate the key with.",
+      "accessed": "2026-10-05",
+      "page_url": "https://developers.workramp.com/reference/basic-auth"
+    },
+    {
+      "id": "c43",
+      "url": "https://developers.workramp.com/reference/basic-auth.md",
+      "title": "HTTP Bearer Token",
+      "quote": "curl https://app.workramp.com/api/v1/users",
+      "accessed": "2026-10-05",
+      "page_url": "https://developers.workramp.com/reference/basic-auth"
+    },
+    {
+      "id": "c44",
+      "url": "https://developers.workramp.com/reference/basic-auth.md",
+      "title": "HTTP Bearer Token",
+      "quote": "They'll stop working if the user who owns the key is deactivated",
+      "accessed": "2026-10-05",
+      "page_url": "https://developers.workramp.com/reference/basic-auth"
+    },
+    {
+      "id": "c45",
+      "url": "https://developers.workramp.com/reference/get-all-users-in-enterprise.md",
+      "title": "Get All Users",
+      "quote": "Gets all users within the enterprise.",
+      "accessed": "2026-10-05",
+      "page_url": "https://developers.workramp.com/reference/get-all-users-in-enterprise"
+    },
+    {
+      "id": "c46",
+      "url": "https://developers.workramp.com/reference/get-all-users-in-enterprise.md",
+      "title": "Get All Users",
+      "quote": "you may make up to 10 requests to this endpoint within 60 seconds.",
+      "accessed": "2026-10-05",
+      "page_url": "https://developers.workramp.com/reference/get-all-users-in-enterprise"
+    },
+    {
+      "id": "c47",
+      "url": "https://developers.workramp.com/reference/get-all-users-in-enterprise.md",
+      "title": "Get All Users",
+      "quote": "\"/api/v1/users\": {",
+      "accessed": "2026-10-05",
+      "page_url": "https://developers.workramp.com/reference/get-all-users-in-enterprise"
+    },
+    {
+      "id": "c48",
+      "url": "https://developers.workramp.com/reference/create-user.md",
+      "title": "Create User",
+      "quote": "Create a user within the enterprise",
+      "accessed": "2026-10-05",
+      "page_url": "https://developers.workramp.com/reference/create-user"
+    },
+    {
+      "id": "c49",
+      "url": "https://developers.workramp.com/reference/update-user-1.md",
+      "title": "Update User",
+      "quote": "Updates a user's attributes",
+      "accessed": "2026-10-05",
+      "page_url": "https://developers.workramp.com/reference/update-user-1"
+    },
+    {
+      "id": "c50",
+      "url": "https://developers.workramp.com/reference/update-user-1.md",
+      "title": "Update User",
+      "quote": "\"isDeleted\": {",
+      "accessed": "2026-10-05",
+      "page_url": "https://developers.workramp.com/reference/update-user-1"
+    },
+    {
+      "id": "c51",
+      "url": "https://developers.workramp.com/reference/update-user-1.md",
+      "title": "Update User",
+      "quote": "\"isAdmin\": {",
+      "accessed": "2026-10-05",
+      "page_url": "https://developers.workramp.com/reference/update-user-1"
+    },
+    {
+      "id": "c52",
+      "url": "https://developers.workramp.com/reference/delete-user.md",
+      "title": "Delete User",
+      "quote": "Delete an existing user",
+      "accessed": "2026-10-05",
+      "page_url": "https://developers.workramp.com/reference/delete-user"
+    },
+    {
+      "id": "c53",
+      "url": "https://developers.workramp.com/reference/get-all-groups.md",
+      "title": "Get all Groups",
+      "quote": "Get all groups within the enterprise",
+      "accessed": "2026-10-05",
+      "page_url": "https://developers.workramp.com/reference/get-all-groups"
+    },
+    {
+      "id": "c54",
+      "url": "https://developers.workramp.com/reference/create-group.md",
+      "title": "Create Group",
+      "quote": "Create a group in the enterprise",
+      "accessed": "2026-10-05",
+      "page_url": "https://developers.workramp.com/reference/create-group"
+    },
+    {
+      "id": "c55",
+      "url": "https://developers.workramp.com/reference/update-group.md",
+      "title": "Update Group",
+      "quote": "Update a group within the enterprise",
+      "accessed": "2026-10-05",
+      "page_url": "https://developers.workramp.com/reference/update-group"
+    },
+    {
+      "id": "c56",
+      "url": "https://developers.workramp.com/reference/assign-a-user-to-a-group-1.md",
+      "title": "Assign a User to a Group",
+      "quote": "id of the user you want to assign to a group",
+      "accessed": "2026-10-05",
+      "page_url": "https://developers.workramp.com/reference/assign-a-user-to-a-group-1"
+    },
+    {
+      "id": "c57",
+      "url": "https://developers.workramp.com/reference/scim-create-user.md",
+      "title": "SCIM: Create User",
+      "quote": "\"/scim/v2/Users\": {",
+      "accessed": "2026-10-05",
+      "page_url": "https://developers.workramp.com/reference/scim-create-user"
+    },
+    {
+      "id": "c58",
+      "url": "https://developers.workramp.com/reference/scim-create-user.md",
+      "title": "SCIM: Create User",
+      "quote": "Custom attributes to create for the user. Note that the custom attribute should already exists on the enterprise.",
+      "accessed": "2026-10-05",
+      "page_url": "https://developers.workramp.com/reference/scim-create-user"
+    },
+    {
+      "id": "c59",
+      "url": "https://developers.workramp.com/reference/scim-create-user.md",
+      "title": "SCIM: Create User",
+      "quote": "Email of the user's manager",
+      "accessed": "2026-10-05",
+      "page_url": "https://developers.workramp.com/reference/scim-create-user"
+    },
+    {
+      "id": "c60",
+      "url": "https://developers.workramp.com/reference/scim-create-user.md",
+      "title": "SCIM: Create User",
+      "quote": "List of group ids that the user is a part of",
+      "accessed": "2026-10-05",
+      "page_url": "https://developers.workramp.com/reference/scim-create-user"
+    },
+    {
+      "id": "c61",
+      "url": "https://developers.workramp.com/llms.txt",
+      "title": "Confirm Learn:Up & Academy API (llms.txt)",
+      "quote": "## API Reference: SCIM (Private API)",
+      "accessed": "2026-10-05",
+      "page_url": "https://developers.workramp.com/reference/scim-create-user"
+    },
+    {
+      "id": "c62",
+      "url": "https://www.okta.com/integrations/workramp/",
+      "title": "Integrate WorkRamp with Okta",
+      "quote": "WorkRamp builds training software for the modern workforce.",
+      "accessed": "2026-10-05"
+    }
+  ],
+  "conflicts": [],
+  "searched": [
+    "https://www.confirm.com/scale-up/pricing",
+    "https://www.confirm.com/scale-up/products/learn-up",
+    "https://help.workramp.com/en/?q=scim",
+    "https://help.workramp.com/en/?q=provisioning",
+    "https://help.workramp.com/en/?q=sso",
+    "https://developers.workramp.com/llms.txt",
+    "https://www.okta.com/integrations/workramp/"
+  ],
+  "open_questions": [
+    "Which Learn:Up deals include SCIM and SAML SSO is not published ('for select accounts').",
+    "Whether the private REST API costs extra or is limited to some contracts is not stated.",
+    "SCIM PUT vs PATCH support, filtering, pagination, ServiceProviderConfig and rate limits are not documented publicly.",
+    "Whether SCIM deactivation frees a paid seat or ends active sessions is not documented.",
+    "Google Workspace and JumpCloud catalogue entries were not checked."
+  ]
+}

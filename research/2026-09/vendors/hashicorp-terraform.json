@@ -1,0 +1,1138 @@
+{
+ "slug": "hashicorp-terraform",
+ "vendor": "HCP Terraform (HashiCorp)",
+ "vendor_url": "https://www.hashicorp.com/en/products/terraform",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "HCP Terraform (HashiCorp)",
+  "slug": "hashicorp-terraform",
+  "category": "Cloud, Infrastructure & Observability",
+  "status": "free",
+  "scim_plan": "Essentials",
+  "scim_price_text": "Starting at $0.10 per month per resource",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Essentials",
+  "team_price_text": "Essentials: starting at $0.10/managed resource/mo (pay-as-you-go)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Free",
+  "sso_price_per_user_mo": 0,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.hashicorp.com/en/pricing?product_intent=terraform",
+  "docs_url": "https://developer.hashicorp.com/terraform/cloud-docs/scim/configure",
+  "evidence": "HCP Terraform's SCIM setup guide says \"Your HCP Terraform organization must be on an Essentials, Standard, or Premium plan\", and Essentials is the entry paid plan (starting at $0.10 per month per resource).",
+  "notes": "Usage-priced per managed resource, not per user: Essentials $0.10, Standard $0.47, Premium $0.99 per resource/month on the pricing page; Enterprise (self-managed IBM Terraform Enterprise) is custom. The docs list a Free plan (500 managed resources) that the pricing page no longer shows. SCIM 2.0 is on every paid HCP Terraform plan (not Free) with no upcharge, so status is free; SAML SSO is on all plans including Free and must be configured first. SCIM is documented for Okta and Microsoft Entra ID only, through custom/non-gallery SAML apps (the Terraform Cloud gallery apps in OIN and Entra do not support it), and only for standalone HCP Terraform accounts (not HCP-integrated or HCP Europe). Tokens expire after 30 days to one year with no alert. Deactivation marks the member inactive (still an org member); delete removes the user and deletes SCIM-managed accounts. Name fields are accepted but not stored. The self-managed Terraform Enterprise product has its own SCIM docs. Audit trails API: Standard and Premium per the API page, Premium only per the plan table (see conflicts).",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Free",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "No charge for up to 500 managed resources",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": true,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c6",
+    "c7",
+    "c8",
+    "c12",
+    "c14",
+    "c74",
+    "c76"
+   ],
+   "notes": "Listed in the docs but not shown on the current pricing page. Team management limited to the owners team."
+  },
+  {
+   "name": "Essentials",
+   "price_text": "Starting at $0.10 per month per resource",
+   "price_per_user_mo": null,
+   "billing": "monthly",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c1",
+    "c2",
+    "c11",
+    "c12",
+    "c14",
+    "c69",
+    "c76"
+   ],
+   "notes": "Pay-as-you-go, billed hourly per managed resource."
+  },
+  {
+   "name": "Standard",
+   "price_text": "Starting at $0.47 per month per resource",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c3",
+    "c12",
+    "c14",
+    "c69",
+    "c76"
+   ],
+   "notes": "Audit trails API listed for Standard on the API page but not in the plan comparison table (see conflicts)."
+  },
+  {
+   "name": "Premium",
+   "price_text": "Starting at $0.99 per month per resource",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c4",
+    "c9",
+    "c12",
+    "c14",
+    "c69",
+    "c76"
+   ]
+  },
+  {
+   "name": "Enterprise (self-managed Terraform Enterprise)",
+   "price_text": "Custom Pricing",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c5",
+    "c77"
+   ],
+   "notes": "Self-managed product with separate SCIM docs; not researched in depth."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c14",
+   "c19",
+   "c20",
+   "c21",
+   "c53",
+   "c24"
+  ],
+  "plan": "Essentials",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://app.terraform.io/scim/v2/{scim_configuration_id}",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Organization settings > SCIM provisioning > Generate SCIM token (owners team only)",
+   "token_expiry": "30 days to one year (mandatory, set at creation)",
+   "cite": [
+    "c36",
+    "c17",
+    "c18",
+    "c34",
+    "c35"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": true,
+   "Schemas": true,
+   "ResourceTypes": true,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c44",
+    "c51",
+    "c37",
+    "c38",
+    "c39"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c44",
+    "c48",
+    "c45",
+    "c46",
+    "c47",
+    "c26",
+    "c27",
+    "c51",
+    "c52",
+    "c56"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "active=false sets the user's team membership status to inactive (still an org member); DELETE removes the user from the org and deletes SCIM-managed accounts, while manually-managed accounts are kept for other orgs.",
+   "cite": [
+    "c26",
+    "c28",
+    "c29"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName",
+    "externalId",
+    "displayName (Groups)"
+   ],
+   "cite": [
+    "c41"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": 200,
+   "cite": [
+    "c40"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "externalId",
+    "displayName",
+    "emails[].value",
+    "emails[].primary",
+    "active",
+    "name.givenName (accepted, not stored)",
+    "name.familyName (accepted, not stored)"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "displayName",
+    "externalId",
+    "members[].value"
+   ],
+   "cite": [
+    "c49",
+    "c50",
+    "c30",
+    "c54"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "SCIM groups create teams of the same name and sync team membership; team permissions are set in HCP Terraform. The owners team cannot be SCIM-managed.",
+   "cite": [
+    "c33",
+    "c25",
+    "c22"
+   ]
+  },
+  "rate_limits": {
+   "text": "30 requests per second shared across SCIM endpoints; 1 MB max request body",
+   "cite": [
+    "c42",
+    "c43"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Only Okta and Microsoft Entra ID are supported, and both need a custom/non-gallery app; the Terraform Cloud gallery apps do not support SCIM.",
+    "cite": [
+     "c16",
+     "c55",
+     "c57"
+    ]
+   },
+   {
+    "text": "Only standalone HCP Terraform accounts; organizations integrated with HCP are not supported.",
+    "cite": [
+     "c15"
+    ]
+   },
+   {
+    "text": "Updates to the primary email of a linked existing user are ignored; change email in the HCP Terraform UI.",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "text": "With SCIM on, users are not created at SAML login; they must be provisioned first.",
+    "cite": [
+     "c23"
+    ]
+   },
+   {
+    "text": "Tokens expire (30 days to 1 year) and no alert is sent before expiry.",
+    "cite": [
+     "c17",
+     "c35"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c58",
+   "c60",
+   "c74"
+  ],
+  "plan": "Free",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://app.terraform.io/api/v2",
+  "docs_url": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs",
+  "auth": {
+   "methods": [
+    "bearer_token (user, team or organization API token)"
+   ],
+   "scopes": [],
+   "cite": [
+    "c58"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": null,
+   "invite_user": true,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c61",
+    "c62",
+    "c60",
+    "c64",
+    "c63",
+    "c66",
+    "c67",
+    "c70"
+   ],
+   "notes": "delete_user = remove an organization membership; roles are team permissions."
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/organizations/:organization_name/organization-memberships",
+    "purpose": "Invite a user to an organization",
+    "cite": [
+     "c60",
+     "c64"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/organizations/:organization_name/organization-memberships",
+    "purpose": "List memberships for an organization",
+    "cite": [
+     "c61"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/organization-memberships/:organization_membership_id",
+    "purpose": "Show a membership",
+    "cite": [
+     "c62"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/organization-memberships/:organization_membership_id",
+    "purpose": "Remove a user from an organization",
+    "cite": [
+     "c63"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "organizations/:organization_name/teams",
+    "purpose": "List teams",
+    "cite": [
+     "c65"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/organizations/:organization_name/teams",
+    "purpose": "Create a team",
+    "cite": [
+     "c66"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/teams/:team_id",
+    "purpose": "Update a team (permissions)",
+    "cite": [
+     "c67"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/teams/:team_id",
+    "purpose": "Delete a team",
+    "cite": [
+     "c68"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/teams/:team_id/relationships/users",
+    "purpose": "Add users to a team",
+    "cite": [
+     "c70"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/teams/:team_id/relationships/organization-memberships",
+    "purpose": "Add org memberships to a team",
+    "cite": [
+     "c71"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/teams/:team_id/relationships/users",
+    "purpose": "Remove users from a team",
+    "cite": [
+     "c72"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/teams/:team_id/relationships/organization-memberships",
+    "purpose": "Remove org memberships from a team",
+    "cite": [
+     "c73"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/organization/audit-trail",
+    "purpose": "List audit trail events",
+    "cite": [
+     "c75"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Standard",
+   "cite": [
+    "c75",
+    "c76"
+   ]
+  },
+  "rate_limits": {
+   "text": "Up to 30 requests per second to most endpoints, per user",
+   "cite": [
+    "c59"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Free organizations can only manage membership of the owners team.",
+    "cite": [
+     "c74"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c55",
+    "c16"
+   ],
+   "notes": "OIN has a Terraform Cloud app (per HashiCorp's docs) that does not support SCIM; SCIM uses a custom SAML app with Push New Users, Push Profile Updates and Push Groups. OIN page not loaded."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c57"
+   ],
+   "notes": "Entra gallery has a Terraform Cloud app (per HashiCorp's docs) that does not support SCIM; SCIM uses a custom non-gallery enterprise app. Gallery page not loaded."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": false,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": "SAML team membership via MemberOf attribute (ignored when SCIM is on)",
+  "docs_public": true,
+  "cite": [
+   "c13",
+   "c20",
+   "c23"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.hashicorp.com/en/pricing?product_intent=terraform",
+   "title": "HashiCorp Terraform pricing",
+   "quote": "Starting at $0.10 per month per resource",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.hashicorp.com/en/pricing?product_intent=terraform",
+   "title": "HashiCorp Terraform pricing",
+   "quote": "For professional individuals or teams adopting infrastructure as code provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.hashicorp.com/en/pricing?product_intent=terraform",
+   "title": "HashiCorp Terraform pricing",
+   "quote": "Starting at $0.47 per month per resource",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.hashicorp.com/en/pricing?product_intent=terraform",
+   "title": "HashiCorp Terraform pricing",
+   "quote": "Starting at $0.99 per month per resource",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.hashicorp.com/en/pricing?product_intent=terraform",
+   "title": "HashiCorp Terraform pricing",
+   "quote": "For enterprises requiring self-managed IBM Terraform to meet security, compliance, and operational needs.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/overview",
+   "title": "HCP Terraform plans and features",
+   "quote": "HCP Terraform offers free, Essentials, Standard, and Premium subscription plans.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/overview",
+   "title": "HCP Terraform plans and features",
+   "quote": "Free organizations are limited to 500 managed resources. This plan supports individuals, small teams, and organizations evaluating HCP Terraform.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/overview",
+   "title": "HCP Terraform plans and features",
+   "quote": "Teams getting started with infrastructure-as-code can use most HCP Terraform's features for free, including remote Terraform execution, VCS integration, the private module registry, single-sign-on, policy enforcement, and run tasks.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/overview",
+   "title": "HCP Terraform plans and features",
+   "quote": "The Premium plan includes all Standard plan features plus enterprise-grade capabilities such as audit logging, custom RBAC, and priority support.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/overview",
+   "title": "HCP Terraform plans and features",
+   "quote": "Standard and Premium plans: Contact HashiCorp Sales for pricing information.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/overview",
+   "title": "HCP Terraform plans and features",
+   "quote": "Essentials plan: Pay-as-you-go billing per managed resource per hour.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/users-teams-organizations/single-sign-on",
+   "title": "Configure and manage single sign-on",
+   "quote": "SSO is available to all HCP Terraform organizations",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/users-teams-organizations/single-sign-on",
+   "title": "Configure and manage single sign-on",
+   "quote": "SSO does not automatically provision HCP Terraform user accounts. The first time you sign in with SSO, you must either provide a password to create a new HCP Terraform user account (using your SSO email address as the username), or link your SSO identity to an existing HCP Terraform user account.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/scim/configure",
+   "title": "Configure SCIM provisioning in HCP Terraform",
+   "quote": "Your HCP Terraform organization must be on an Essentials, Standard, or Premium plan.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/scim/configure",
+   "title": "Configure SCIM provisioning in HCP Terraform",
+   "quote": "Your organization must be in a standalone HCP Terraform account. Organizations in accounts integrated with HCP are not supported.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/scim/configure",
+   "title": "Configure SCIM provisioning in HCP Terraform",
+   "quote": "You must use either Okta or Microsoft Entra ID as your identity provider. Okta requires a custom application because the Okta integration network gallery application for HCP Terraform is incompatible with SCIM for HCP Terraform.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/scim/configure",
+   "title": "Configure SCIM provisioning in HCP Terraform",
+   "quote": "Set an expiration date between 30 days and one year from the creation date. SCIM tokens in HCP Terraform have mandatory expiration dates.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/scim/configure",
+   "title": "Configure SCIM provisioning in HCP Terraform",
+   "quote": "Click Organization settings and then SCIM provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/scim/configure",
+   "title": "Configure SCIM provisioning in HCP Terraform",
+   "quote": "You must have already configured SAML SSO for your identity provider in your organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/scim",
+   "title": "SCIM provisioning overview",
+   "quote": "You must enable SAML single sign-on (SSO) before configuring SCIM.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/scim",
+   "title": "SCIM provisioning overview",
+   "quote": "This topic provides an overview of SCIM 2.0 provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/scim",
+   "title": "SCIM provisioning overview",
+   "quote": "You cannot configure the owners team as a SCIM-managed team.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/scim",
+   "title": "SCIM provisioning overview",
+   "quote": "When SCIM is enabled, HCP Terraform does not create users on login. You must provision users through SCIM before they can authenticate with SAML.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/scim",
+   "title": "SCIM provisioning overview",
+   "quote": "You can enable SCIM with the following identity providers and provider configurations: Okta Microsoft Entra ID Supported generic SAML provider configurations",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/scim",
+   "title": "SCIM provisioning overview",
+   "quote": "Link SCIM groups from your IdP to teams in HCP Terraform to enable automatic team membership management.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/scim/users",
+   "title": "SCIM user lifecycle",
+   "quote": "When your IdP sets active=false for a user or removes them from the organization, HCP Terraform changes the user's team membership status to inactive. Inactive users are still members of the organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/scim/users",
+   "title": "SCIM user lifecycle",
+   "quote": "You can reactivate users by provisioning them again in your IdP with active=true.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/scim/users",
+   "title": "SCIM user lifecycle",
+   "quote": "For SCIM-managed users, deletes the user account",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/scim/users",
+   "title": "SCIM user lifecycle",
+   "quote": "For manually-managed users, HCP Terraform removes them from the organization but preserves their account for access to other organizations",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/scim/users",
+   "title": "SCIM user lifecycle",
+   "quote": "HCP Terraform does not store SCIM name fields, such as givenName, familyName, middleName. These attributes are accepted in requests but not persisted.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/scim/users",
+   "title": "SCIM user lifecycle",
+   "quote": "HCP Terraform ingores updates to the emails[primary=true].value attribute because it represents global objects that can be associated with multiple organizations.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/scim/users",
+   "title": "SCIM user lifecycle",
+   "quote": "Remove for externalId.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/scim/groups",
+   "title": "SCIM group synchronization",
+   "quote": "When you provision a group through SCIM, HCP Terraform automatically creates a team with the same name as the IdP group.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/scim/manage/tokens",
+   "title": "Manage SCIM Tokens",
+   "quote": "Tokens are valid only for /scim/v2/* endpoints. They cannot access other HCP Terraform APIs.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c35",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/scim/manage/tokens",
+   "title": "Manage SCIM Tokens",
+   "quote": "No alerts are sent before a SCIM token expires.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/scim",
+   "title": "SCIM provisioning API endpoints",
+   "quote": "SCIM provisioning endpoints require a SCIM bearer token in the Authorization header",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/scim",
+   "title": "SCIM provisioning API endpoints",
+   "quote": "/scim/v2/:scim_configuration_id/ServiceProviderConfig GET Returns the SCIM service provider capabilities supported by HCP Terraform.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c38",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/scim",
+   "title": "SCIM provisioning API endpoints",
+   "quote": "/scim/v2/:scim_configuration_id/Schemas GET Returns the SCIM schemas supported by HCP Terraform.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c39",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/scim",
+   "title": "SCIM provisioning API endpoints",
+   "quote": "/scim/v2/:scim_configuration_id/ResourceTypes GET Returns the supported SCIM resource types.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c40",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/scim",
+   "title": "SCIM provisioning API endpoints",
+   "quote": "The maximum number of records to return. HCP Terraform caps this value at 200.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c41",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/scim",
+   "title": "SCIM provisioning API endpoints",
+   "quote": "userName eq \"value\", externalId eq \"value\"",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c42",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/scim",
+   "title": "SCIM provisioning API endpoints",
+   "quote": "The SCIM provisioning endpoints share a default rate limit of 30 requests per second.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c43",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/scim",
+   "title": "SCIM provisioning API endpoints",
+   "quote": "HCP Terraform applies a maximum request body size of 1 MB to SCIM POST, PUT, and PATCH requests on the Users and Groups endpoints.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c44",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/scim/users",
+   "title": "SCIM Users API",
+   "quote": "POST /scim/v2/:scim_configuration_id/Users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c45",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/scim/users",
+   "title": "SCIM Users API",
+   "quote": "PUT /scim/v2/:scim_configuration_id/Users/:id",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c46",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/scim/users",
+   "title": "SCIM Users API",
+   "quote": "PATCH /scim/v2/:scim_configuration_id/Users/:id",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c47",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/scim/users",
+   "title": "SCIM Users API",
+   "quote": "DELETE /scim/v2/:scim_configuration_id/Users/:id",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c48",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/scim/users",
+   "title": "SCIM Users API",
+   "quote": "GET /scim/v2/:scim_configuration_id/Users/:id",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c49",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/scim/users",
+   "title": "SCIM Users API",
+   "quote": "displayName string The user's human-readable name. HCP Terraform presents displayName value in the UI.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c50",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/scim/users",
+   "title": "SCIM Users API",
+   "quote": "externalId string Optional identity-provider identifier for the user.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c51",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/scim/groups",
+   "title": "SCIM Groups API",
+   "quote": "POST /scim/v2/:scim_configuration_id/Groups",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c52",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/scim/groups",
+   "title": "SCIM Groups API",
+   "quote": "PATCH /scim/v2/:scim_configuration_id/Groups/:id",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c53",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/scim/groups",
+   "title": "SCIM Groups API",
+   "quote": "https://app.terraform.io/scim/v2/$SCIM_CONFIGURATION_ID/Groups",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c54",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/scim/groups",
+   "title": "SCIM Groups API",
+   "quote": "Optional initial group membership list.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c55",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/scim/configure/okta",
+   "title": "Configure Okta for SCIM",
+   "quote": "You cannot use the Terraform Cloud application from the Okta Integration Network gallery for SCIM. You must create a custom application to complete this configuration.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c56",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/scim/configure/okta",
+   "title": "Configure Okta for SCIM",
+   "quote": "Supported provisioning actions: Enable Push New Users, Push Profile Updates, and Push Groups.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c57",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/scim/configure/entra-id",
+   "title": "Configure Microsoft Entra ID for SCIM",
+   "quote": "You cannot use the Terraform Cloud gallery application from the Entra ID gallery for SCIM. You must create a custom, non-gallery enterprise application to complete this configuration.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c58",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs",
+   "title": "HCP Terraform API documentation",
+   "quote": "All requests must be authenticated with a bearer token. Use the HTTP header Authorization with the value Bearer <token>.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c59",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs",
+   "title": "HCP Terraform API documentation",
+   "quote": "You can make up to 30 requests per second to most API endpoints as an authenticated or unauthenticated request.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c60",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/organization-memberships",
+   "title": "Organization Memberships API",
+   "quote": "POST /organizations/:organization_name/organization-memberships",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c61",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/organization-memberships",
+   "title": "Organization Memberships API",
+   "quote": "GET /organizations/:organization_name/organization-memberships",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c62",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/organization-memberships",
+   "title": "Organization Memberships API",
+   "quote": "GET /organization-memberships/:organization_membership_id",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c63",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/organization-memberships",
+   "title": "Organization Memberships API",
+   "quote": "DELETE /organization-memberships/:organization_membership_id",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c64",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/organization-memberships",
+   "title": "Organization Memberships API",
+   "quote": "You can invite users who already have an account, as well as new users.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c65",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/teams",
+   "title": "Teams API",
+   "quote": "GET organizations/:organization_name/teams",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c66",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/teams",
+   "title": "Teams API",
+   "quote": "POST /organizations/:organization_name/teams",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c67",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/teams",
+   "title": "Teams API",
+   "quote": "PATCH /teams/:team_id",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c68",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/teams",
+   "title": "Teams API",
+   "quote": "DELETE /teams/:team_id",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c69",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/teams",
+   "title": "Teams API",
+   "quote": "Team management is available in HCP Terraform Essentials, Standard, and Premium editions.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c70",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/team-members",
+   "title": "Team Membership API",
+   "quote": "POST /teams/:team_id/relationships/users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c71",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/team-members",
+   "title": "Team Membership API",
+   "quote": "POST /teams/:team_id/relationships/organization-memberships",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c72",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/team-members",
+   "title": "Team Membership API",
+   "quote": "DELETE /teams/:team_id/relationships/users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c73",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/team-members",
+   "title": "Team Membership API",
+   "quote": "DELETE /teams/:team_id/relationships/organization-memberships",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c74",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/team-members",
+   "title": "Team Membership API",
+   "quote": "Free organizations can also use this API, but can only manage membership of their owners team.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c75",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/audit-trails",
+   "title": "Audit Trails API",
+   "quote": "GET /organization/audit-trail",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c76",
+   "url": "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/audit-trails",
+   "title": "Audit Trails API",
+   "quote": "Audit trails are available in HCP Terraform Standard and Premium editions.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c77",
+   "url": "https://developer.hashicorp.com/terraform/enterprise/scim",
+   "title": "Terraform Enterprise SCIM provisioning overview",
+   "quote": "This topic provides an overview of SCIM 2.0 provisioning in Terraform Enterprise.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The Audit Trails API page says audit trails are on Standard and Premium; the plan comparison table and plan descriptions list audit logging on Premium only.",
+   "cite": [
+    "c76",
+    "c9"
+   ]
+  },
+  {
+   "text": "The docs overview says Standard and Premium pricing is Contact Sales; the pricing page lists Standard from $0.47 and Premium from $0.99 per resource/month. The docs overview also lists a Free plan that the pricing page does not show.",
+   "cite": [
+    "c10",
+    "c3",
+    "c4",
+    "c6"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.hashicorp.com/en/pricing?product_intent=terraform (Vercel checkpoint to curl and render.cjs; read with WebFetch)",
+  "https://developer.hashicorp.com/sitemap-0.xml",
+  "https://developer.hashicorp.com/terraform/cloud-docs/scim",
+  "https://developer.hashicorp.com/terraform/cloud-docs/api-docs/scim",
+  "https://developer.hashicorp.com/terraform/cloud-docs/overview"
+ ],
+ "open_questions": [
+  "Whether SCIM deactivation frees billing or ends sessions is not documented (billing is per managed resource, not per user).",
+  "Custom SCIM attributes and the enterprise extension are not documented.",
+  "OIN and Entra gallery pages for the Terraform Cloud app were not loaded; listing facts come from HashiCorp's docs.",
+  "Whether the self-managed Terraform Enterprise SCIM has a different plan gate was not researched.",
+  "Pricing page billing basis (annual vs monthly) for Standard and Premium is not stated."
+ ]
+}

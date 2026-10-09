@@ -1,0 +1,569 @@
+{
+ "slug": "hippo-video",
+ "vendor": "Hippo Video",
+ "vendor_url": "https://www.hippovideo.io",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Hippo Video",
+  "slug": "hippo-video",
+  "category": "Sales & CRM",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Enterprise: $80/u/mo billed annually, minimum 10 seats",
+  "scim_price_per_user_mo": 80,
+  "team_plan": "Pro",
+  "team_price_text": "Pro: $20/u/mo billed annually ($30 monthly)",
+  "team_price_per_user_mo": 20,
+  "price_multiplier": 4.0,
+  "sso_plan": "Enterprise",
+  "sso_price_per_user_mo": 80,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": 10,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": null
+  },
+  "idp": {
+   "okta": "sso_only",
+   "entra": "sso_only",
+   "google": null,
+   "onelogin": "via_generic",
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.hippovideo.io/pricing.html",
+  "docs_url": "https://help.hippovideo.io/support/solutions/articles/19000157942-configure-onelogin-scim",
+  "evidence": "Hippo Video's OneLogin SCIM guide says 'To activate de=provisioning you need a Hippo Video Enterprise plan', and the pricing page lists Enterprise at $80/month/user (annually) with a 10-seat minimum.",
+  "notes": "New in 2026-09. Plans (sales pricing page): Free $0, Pro $20/u/mo annual ($30 monthly), Teams $60/u/mo annual ($75 monthly), Enterprise $80/u/mo annual, minimum 10 seats (adds SSO and role-based access); a separate pricing link covers marketing/support/SDK use cases. SCIM v2 is Enterprise-only and documented only for OneLogin's generic 'SCIM Provisioner with SAML (SCIM v2)' app: the SCIM URL is shown on the SSO Configuration page once 'Enable de-provisioning' is on, and the bearer token must be requested from support. Price gate decides status (rule 1); with only one IdP documented it would otherwise be partial. Okta and Entra are documented as custom SAML apps only; no OIN app. Deactivated users lose access but their assets are kept.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": "partner_only",
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "$0",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c5"
+   ]
+  },
+  {
+   "name": "Pro",
+   "price_text": "$20/month/user billed annually; $30/user billed monthly",
+   "price_per_user_mo": 20,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c5"
+   ]
+  },
+  {
+   "name": "Teams",
+   "price_text": "$60/month/user billed annually; $75/month/user billed monthly",
+   "price_per_user_mo": 60,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c5"
+   ]
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "$80/month/user billed annually, minimum 10 seats",
+   "price_per_user_mo": 80,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c4",
+    "c5",
+    "c7",
+    "c13"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c6",
+   "c7",
+   "c8",
+   "c12"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": null,
+  "auth": {
+   "method": "bearer",
+   "token_source": "Requested from support@hippovideo.io",
+   "token_expiry": null,
+   "cite": [
+    "c9"
+   ]
+  },
+  "endpoints": {
+   "Users": null,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": []
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": null,
+   "group_push": null,
+   "group_membership": null,
+   "cite": [
+    "c6",
+    "c10",
+    "c11"
+   ],
+   "notes": "OneLogin is set to create, update and delete without admin approval; the guide's stated purpose is automatic de-provisioning of licenses. Whether a OneLogin 'delete' deactivates or deletes the Hippo Video user is not stated, so delete stays null and update is not split into PUT/PATCH."
+  },
+  "deprovision": {
+   "action": null,
+   "frees_seat": true,
+   "revokes_sessions": null,
+   "data_retained": "Deactivated users keep their assets (UI deactivation)",
+   "cite": [
+    "c6",
+    "c17"
+   ],
+   "notes": "frees_seat from 'automatic de-provisioning of licenses'. The data-retention text describes UI deactivation; the guide does not say whether SCIM deprovisioning deactivates or deletes."
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": []
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Only a OneLogin setup is documented; the SCIM URL appears on the SSO Configuration page and the bearer token must be requested from support.",
+    "cite": [
+     "c9",
+     "c12"
+    ]
+   }
+  ],
+  "notes": "The SCIM base URL is shown in the app (SSO Configuration card) and is not published; endpoints, attributes, filtering and rate limits are not documented."
+ },
+ "user_api": {
+  "available": "partner_only",
+  "cite": [
+   "c19",
+   "c20",
+   "c21"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://www.hippovideo.io/api/v1",
+  "docs_url": "https://help.hippovideo.io/support/solutions/articles/19000095977-sign-up-api",
+  "auth": {
+   "methods": [
+    "api_key",
+    "other"
+   ],
+   "scopes": [],
+   "cite": [
+    "c19",
+    "c21",
+    "c22"
+   ],
+   "notes": "Sign-up API needs a client ID and client secret issued on request. Other APIs use a per-user API key (profile settings) exchanged for an authentication token at /api/v1/me/auth, default expiry 1 month."
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c19",
+    "c20"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/api/v1/auth/new",
+    "purpose": "Sign-up API: create a user account (client_id, client_secret, email, optional password)",
+    "cite": [
+     "c20"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "The documented API covers sign-up, video library, reports and personalisation; no list/update/deactivate user endpoints are documented. Marked partner_only because user creation needs client credentials obtained from Hippo Video."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": false,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/?search=hippovideo",
+   "cite": [
+    "c23",
+    "c14",
+    "c24"
+   ],
+   "notes": "No OIN app; Hippo Video's guide creates a custom SAML 2.0 app integration (Enterprise plan)."
+  },
+  "entra": {
+   "listed": false,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c15"
+   ],
+   "notes": "Custom non-gallery SAML app per Hippo Video's guide; hippo-video-tutorial on Learn returns 404."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": "idp",
+   "url": null,
+   "cite": [
+    "c8",
+    "c11"
+   ],
+   "notes": "Uses OneLogin's generic 'SCIM Provisioner with SAML (SCIM v2)' template, from Hippo Video's own guide (OneLogin catalogue not loaded)."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "jumpcloud.com/support/integrate-with-hippo-video returned 403."
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": true,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c18",
+   "c25"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.hippovideo.io/pricing.html",
+   "title": "Hippo Video Pricing Plans: Grow Your Business With Video",
+   "quote": "Easiest way to record and share engaging videos on your sales pages $0",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://www.hippovideo.io/pricing.html",
+   "title": "Hippo Video Pricing Plans: Grow Your Business With Video",
+   "quote": "$20 /month/user (Annually) $30/user billed monthly",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://www.hippovideo.io/pricing.html",
+   "title": "Hippo Video Pricing Plans: Grow Your Business With Video",
+   "quote": "$60 /month/user (Annually) $75/month/user billed monthly",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://www.hippovideo.io/pricing.html",
+   "title": "Hippo Video Pricing Plans: Grow Your Business With Video",
+   "quote": "$80 /month/user (Annually) minimum 10 seats",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://www.hippovideo.io/pricing.html",
+   "title": "Hippo Video Pricing Plans: Grow Your Business With Video",
+   "quote": "Role Based Access and Controls Single Sign-On Dedicated Account Manager",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://help.hippovideo.io/support/solutions/articles/19000157942-configure-onelogin-scim",
+   "title": "Configure OneLogin SCIM",
+   "quote": "This doc will help you quickly walk through the steps to create an SCIM app with OneLogin to facilitate automatic de=provsioning of licenses.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://help.hippovideo.io/support/solutions/articles/19000157942-configure-onelogin-scim",
+   "title": "Configure OneLogin SCIM",
+   "quote": "To activate de=provisioning you need a Hippo Video Enterprise plan",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://help.hippovideo.io/support/solutions/articles/19000157942-configure-onelogin-scim",
+   "title": "Configure OneLogin SCIM",
+   "quote": "SCIM Provisioner with SAML (SCIM v2)",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://help.hippovideo.io/support/solutions/articles/19000157942-configure-onelogin-scim",
+   "title": "Configure OneLogin SCIM",
+   "quote": "In the “SCIM Bearer Token,” enter the bearer token shared with you. Please reach out to support@hippovideo.io to get the token.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://help.hippovideo.io/support/solutions/articles/19000157942-configure-onelogin-scim",
+   "title": "Configure OneLogin SCIM",
+   "quote": "Ensure the Enable de-provisioning checkbox is turned on.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c11",
+   "url": "https://help.hippovideo.io/support/solutions/articles/19000157942-configure-onelogin-scim",
+   "title": "Configure OneLogin SCIM",
+   "quote": "uncheck the “Create,” “Delete,” and “Update” checkboxes to have OneLogin provision new users and update users to the SCIM app without requiring administrative approval.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://help.hippovideo.io/support/solutions/articles/19000157942-configure-onelogin-scim",
+   "title": "Configure OneLogin SCIM",
+   "quote": "Note: Before starting with the configuration, ensure your SSO Configuration page is kept open inside Hippo Video.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://help.hippovideo.io/support/solutions/articles/19000124492-configure-saml-sso-with-hippo-video",
+   "title": "Configure SAML SSO with Hippo Video",
+   "quote": "Note: This is applicable only for Admin users and only for the Enterprise plan.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c14",
+   "url": "https://help.hippovideo.io/support/solutions/articles/19000126055-configure-sso-with-okta",
+   "title": "Configure SSO with Okta",
+   "quote": "Click on Create App Integration at the top left.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://help.hippovideo.io/support/solutions/articles/19000126054-configure-sso-with-azure-ad",
+   "title": "Configure SSO with Azure AD",
+   "quote": "Then, click on Create your own application from the top.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://help.hippovideo.io/support/solutions/articles/19000074691-activate-or-deactivate-users",
+   "title": "Activate or deactivate users",
+   "quote": "Once a user is deactivated, he/she will not have access to the features or the account anymore.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c17",
+   "url": "https://help.hippovideo.io/support/solutions/articles/19000138137-what-should-i-do-if-a-team-member-has-left-",
+   "title": "What should I do if a team member has left?",
+   "quote": "When the user is deactivated, they can no longer log in; however, their assets are still intact and easily accessible.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c18",
+   "url": "https://help.hippovideo.io/support/solutions/articles/19000122137-import-or-add-multiple-team-members",
+   "title": "Import or add multiple team members",
+   "quote": "Supported file formats - XLS, XLSX & CSV and Maximum File Size - 5MB.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c19",
+   "url": "https://help.hippovideo.io/support/solutions/articles/19000095977-sign-up-api",
+   "title": "Sign-up API",
+   "quote": "To call the sign-up API you’ll need the client ID and client secret key, please contact us to get the details.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c20",
+   "url": "https://help.hippovideo.io/support/solutions/articles/19000095977-sign-up-api",
+   "title": "Sign-up API",
+   "quote": "POST https://www.hippovideo.io/api/v1/auth/new",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c21",
+   "url": "https://help.hippovideo.io/support/solutions/articles/19000095978-api-authorization",
+   "title": "API Authorization",
+   "quote": "If you want to gain access to our API, you will need an API key. In case you don’t have one, you can find it inside your Hippo Video profile settings",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c22",
+   "url": "https://help.hippovideo.io/support/solutions/articles/19000095978-api-authorization",
+   "title": "API Authorization",
+   "quote": "Default expiry for Authentication token in 1 Month.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c23",
+   "url": "https://www.okta.com/integrations/?search=hippovideo",
+   "title": "Okta Integration Network search",
+   "quote": "No results found for: “hippovideo”",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c24",
+   "url": "https://help.hippovideo.io/support/solutions/articles/19000126055-configure-sso-with-okta",
+   "title": "Configure SSO with Okta",
+   "quote": "To activate SSO you need Hippo Video Enterprise plan",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c25",
+   "url": "https://help.hippovideo.io/support/solutions/articles/19000122137-import-or-add-multiple-team-members",
+   "title": "Import or add multiple team members",
+   "quote": "By clicking on the More icon near the user, you will have an option to Edit, Enable/Disable Sales Addon, Deactivate, Reset Password, and Resend invite.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.hippovideo.io/pricing.html",
+  "https://www.hippovideo.io/sitemap.xml",
+  "help-centre search (help.hippovideo.io/support/search/solutions): scim, sso, okta, provisioning, api, de-provisioning, deactivate, csv, jit (0), audit (0)",
+  "https://help.hippovideo.io/support/solutions/articles/19000157942-configure-onelogin-scim",
+  "https://www.okta.com/integrations/?search=hippovideo (no results; 'hippo' finds only Hippo CMMS)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/hippo-video-tutorial (404)",
+  "https://jumpcloud.com/support/integrate-with-hippo-video (403)"
+ ],
+ "open_questions": [
+  "SCIM base URL pattern, endpoints, supported attributes, groups and filtering are not documented publicly.",
+  "Does SCIM deprovisioning deactivate or delete the user, and does it end active sessions?",
+  "Whether SCIM requires SAML SSO to be configured first is implied (SCIM URL lives on the SSO Configuration page) but not stated.",
+  "Is SCIM supported with Okta or Entra (only OneLogin is documented)?",
+  "Does SAML sign-in create users just-in-time?"
+ ]
+}

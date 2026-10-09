@@ -1,0 +1,769 @@
+{
+ "slug": "sana",
+ "vendor": "Sana (Sana Labs)",
+ "vendor_url": "https://sanalabs.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Sana (Sana Labs)",
+  "slug": "sana",
+  "category": "AI & LLM Tools",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Enterprise",
+  "team_price_text": "Custom pricing (Contact Sales)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Enterprise",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": "directory_sync",
+   "onelogin": "via_generic",
+   "jumpcloud": "via_generic",
+   "generic": true
+  },
+  "pricing_page_url": "https://sanalabs.com/products/sana/pricing",
+  "docs_url": "https://support.sana.ai/en/articles/322837-guide-to-setup-scim-for-sana-agents-enterprise-accounts",
+  "evidence": "Sana's pricing page shows a single Enterprise plan with \"Custom pricing\" that includes \"Domain verification, SAML-based SSO, and SCIM\".",
+  "notes": "Quote-only: Sana Agents (the product sold as \"Sana\") publishes one Enterprise plan with custom pricing that lists SAML SSO and SCIM; Sana Learn (the LMS) is also custom-priced, with plans starting at 300 users. Both products document SCIM 2.0 and require SAML SSO first. Sana Agents SCIM uses a bearer token generated per SAML configuration; Sana Learn SCIM uses an API client (Basic auth for Okta) or a SCIM token valid one year (Entra), base https://DOMAIN.sana.ai/scim/v2. Okta and Entra are set up as custom/non-gallery apps; no Okta OIN or Entra gallery app was found. Sana Learn also has a REST user API (users, groups, invites, roles, deactivate/reactivate) and vendor-run HR/Google Workspace sync; Sana Agents only exposes a public Chat API. Sana Labs is now part of Workday.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Enterprise",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Sana Agents Enterprise",
+   "price_text": "Custom pricing",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2"
+   ],
+   "notes": "The only plan on the Sana Agents pricing page."
+  },
+  {
+   "name": "Sana Learn",
+   "price_text": "Custom pricing; plans start at 300 users; price based on 3-year contract",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c4"
+   ],
+   "notes": "Single all-in-one plan; SCIM is documented in the Sana Learn help centre but not named on the pricing page."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c2",
+   "c5",
+   "c6",
+   "c12"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://DOMAIN.sana.ai/scim/v2",
+  "notes": "Sana Agents shows its SCIM base URL per SAML configuration in Workspace settings; the base URL pattern is from the Sana Learn guide.",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Sana Agents: Settings > Workspace settings > General > Sign in methods > SAML SSO configuration > SCIM > Generate token. Sana Learn: Settings > API (API client) and Generate new SCIM token.",
+   "token_expiry": "1 year (Sana Learn SCIM token); Sana Agents not stated",
+   "cite": [
+    "c6",
+    "c7",
+    "c13",
+    "c14"
+   ],
+   "notes": "Sana Learn's Okta setup uses Basic auth with the API client ID and secret; its Entra setup uses the SCIM bearer token."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c7",
+    "c11"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": null,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c8",
+    "c11"
+   ],
+   "notes": "Sana Learn: 'Push User Activation / Deactivation' and 'Push Groups'. Sana Agents: users and groups sync; Okta setup enables Create, Update and Deactivate."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Sana Learn: deactivated (paused) users lose access but their data is kept in case they are reactivated.",
+   "cite": [
+    "c11",
+    "c17",
+    "c19"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "givenName",
+    "familyName"
+   ],
+   "enterprise": [
+    "userType",
+    "employeeNumber",
+    "costCenter",
+    "organization",
+    "division",
+    "department",
+    "manager.value"
+   ],
+   "custom": {
+    "supported": true,
+    "how": "Custom attributes agreed with the Sana representative, all String type, under the namespace urn:sanalabs:scim:schemas:CustomAttributes (Okta guide) or urn:ietf:params:scim:schemas:extension:SanaLabs:2.0:CustomAttributes (Entra guide)."
+   },
+   "group": [],
+   "cite": [
+    "c15",
+    "c16"
+   ],
+   "notes": "Attribute list is from the Sana Learn SCIM guide, which files all of them under the enterprise extension; Sana Agents docs do not list attributes beyond userName as identifier."
+  },
+  "roles": {
+   "supported": null,
+   "how": "Not documented for SCIM. Sana Agents can set the workspace role (viewer, editor, owner) through a SAML 'role' assertion on login; otherwise roles are managed in the product.",
+   "cite": [
+    "c10"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Sana Agents SCIM needs Domain Control Validation for each synced user's email domain and a non-legacy SAML SSO configuration.",
+    "cite": [
+     "c5"
+    ]
+   },
+   {
+    "text": "Sana Learn SCIM is one-way: Sana receives updates from the IdP and does not push back.",
+    "cite": [
+     "c11"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c24",
+   "c29"
+  ],
+  "plan": "Enterprise",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://<domain>.sana.ai/api/v0",
+  "docs_url": "https://docs.sana.ai/api-docs/",
+  "notes": "This is the Sana Learn API. Sana Agents' public developer docs list only a Chat API. Each Sana product has a single custom-priced plan, so the API is not gated above a cheaper tier.",
+  "auth": {
+   "methods": [
+    "oauth2_client_credentials"
+   ],
+   "scopes": [
+    "read",
+    "write"
+   ],
+   "cite": [
+    "c24",
+    "c25"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": true,
+   "reactivate_user": true,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c26",
+    "c27",
+    "c28",
+    "c29"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/api/token",
+    "purpose": "Request access token (client credentials)",
+    "cite": [
+     "c24"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v0/users",
+    "purpose": "List all users",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v0/users/<userId>",
+    "purpose": "Get a user",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v0/users",
+    "purpose": "Create a user",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v0/users/<userId>/send-invite",
+    "purpose": "Send invite",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v0/users/<userId>/invite-link",
+    "purpose": "Generate new invite link",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v0/users/<userId>",
+    "purpose": "Update a user (incl. disabled, role)",
+    "cite": [
+     "c26",
+     "c27"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v0/users/<userId>",
+    "purpose": "Delete a user",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v0/users/<userId>/groups",
+    "purpose": "List all groups for a user",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/v0/users/<userId>/manager/<managerId>",
+    "purpose": "Set user's manager",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v0/users/<userId>/manager",
+    "purpose": "Delete user's manager",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v0/users/attributes-schema",
+    "purpose": "List user attribute schema",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v0/groups",
+    "purpose": "List all groups",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v0/groups",
+    "purpose": "Create a group",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v0/groups/<groupId>",
+    "purpose": "Update a group",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v0/groups/<groupId>",
+    "purpose": "Delete a group",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v0/groups/<groupId>/users",
+    "purpose": "List all users in a group",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v0/groups/<groupId>/users",
+    "purpose": "Add users to a group",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v0/groups/<groupId>/users/<userId>",
+    "purpose": "Delete a user from a group",
+    "cite": [
+     "c32"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Sana Agents' developer docs list only the Chat API as publicly available; no user-management API is documented for Sana Agents.",
+    "cite": [
+     "c33"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c8",
+    "c9",
+    "c22"
+   ],
+   "notes": "Both Sana guides set Okta up as a custom SAML app (Create App Integration / 'internal app'), then enable SCIM on it. No OIN listing found (okta.com/integrations/sana*/ return 404)."
+  },
+  "entra": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c8",
+    "c9"
+   ],
+   "notes": "Sana Agents guide uses a Non-gallery enterprise app; no Entra Learn tutorial found (sana-tutorial / sana-provisioning-tutorial 404)."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": true,
+   "kind": "directory_sync",
+   "built_by": "vendor",
+   "url": null,
+   "cite": [
+    "c20",
+    "c23"
+   ],
+   "notes": "Sana Learn runs its own Google Workspace user sync through a Google Cloud service account."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c18"
+   ],
+   "notes": "Sana Learn lists OneLogin among SCIM-compatible IdPs it supports; no OneLogin-specific SCIM steps are published."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c18"
+   ],
+   "notes": "Sana Learn lists JumpCloud among SCIM-compatible IdPs it supports; no JumpCloud-specific SCIM steps are published."
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": "Sana Learn: vendor-run hourly HR-system sync (HiBob, Personio, BambooHR, Google Workspace, SuccessFactors, Workday, Salesforce and others) built on the Sana Open API.",
+  "docs_public": true,
+  "cite": [
+   "c20",
+   "c21"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://sanalabs.com/products/sana/pricing",
+   "title": "Simple pricing for powerful AI agents | Sana",
+   "quote": "Enterprise Custom pricing Unlimited members per workspace and documents per integration",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://sanalabs.com/products/sana/pricing",
+   "title": "Simple pricing for powerful AI agents | Sana",
+   "quote": "Domain verification, SAML-based SSO, and SCIM",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://sanalabs.com/products/sana-learn/pricing",
+   "title": "Flexible plans that grow with your learning needs | Sana Learn",
+   "quote": "Plans start at 300 users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://sanalabs.com/products/sana-learn/pricing",
+   "title": "Flexible plans that grow with your learning needs | Sana Learn",
+   "quote": "SSO & enterprise integrations Secure sign-on and connections to your HR and business tools",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://support.sana.ai/en/articles/322837-guide-to-setup-scim-for-sana-agents-enterprise-accounts",
+   "title": "Guide to setup SCIM for Sana Agents Enterprise accounts",
+   "quote": "Domain Control Validation for the email domain of each synced user. SAML SSO should already be configured in Sana Agents.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://support.sana.ai/en/articles/322837-guide-to-setup-scim-for-sana-agents-enterprise-accounts",
+   "title": "Guide to setup SCIM for Sana Agents Enterprise accounts",
+   "quote": "Under the SCIM heading you can find the Base url. Click the Generate token button and copy the SCIM token to your clipboard.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://support.sana.ai/en/articles/322837-guide-to-setup-scim-for-sana-agents-enterprise-accounts",
+   "title": "Guide to setup SCIM for Sana Agents Enterprise accounts",
+   "quote": "The token is an Authorization header bearer token. Use userName as the user identifier field. Assign users and groups that you want to synchronize.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://support.sana.ai/en/articles/322837-guide-to-setup-scim-for-sana-agents-enterprise-accounts",
+   "title": "Guide to setup SCIM for Sana Agents Enterprise accounts",
+   "quote": "Check the boxes Create Users , Update User Attributes , and Deactivate Users . Then click Save .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://support.sana.ai/en/articles/169062-guide-to-setup-sso-for-sana-agents-enterprise-accounts",
+   "title": "Guide to setup SSO for Sana Agents Enterprise accounts",
+   "quote": "Make sure the third \"Non-gallery\" option is selected.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://support.sana.ai/en/articles/169062-guide-to-setup-sso-for-sana-agents-enterprise-accounts",
+   "title": "Guide to setup SSO for Sana Agents Enterprise accounts",
+   "quote": "This denotes the user's role within the product. If provided, it will override the user's default role upon login. Should you opt not to include the role field, access roles will need to be managed within the product.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://help.sana.ai/en/articles/23062-how-to-configure-scim",
+   "title": "How to configure SCIM | Sana Help Center",
+   "quote": "Sana SCIM API currently only works one way where Sana gets the updates from the Identity Provider. Sana does not push updates to the Identity Provider. Sana SCIM API supports: Push new users Push Profile Updates Push User Activation / Deactivation Push Groups",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://help.sana.ai/en/articles/23062-how-to-configure-scim",
+   "title": "How to configure SCIM | Sana Help Center",
+   "quote": "Change SCIM connector base URL to https://DOMAIN.sana.ai/scim/v2 where “DOMAIN” is your actual domain at Sana.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://help.sana.ai/en/articles/23062-how-to-configure-scim",
+   "title": "How to configure SCIM | Sana Help Center",
+   "quote": "Select “BasicAuth” as the Authentication Mode and use Sana Client ID as the Username and Sana Client Secret as the Password in the Basic Auth settings",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://help.sana.ai/en/articles/23062-how-to-configure-scim",
+   "title": "How to configure SCIM | Sana Help Center",
+   "quote": "This will generate a SCIM Token which is valid for one year.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://help.sana.ai/en/articles/23062-how-to-configure-scim",
+   "title": "How to configure SCIM | Sana Help Center",
+   "quote": "userName givenName familyName userType employeeNumber costCenter organization division department manager.value",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://help.sana.ai/en/articles/23062-how-to-configure-scim",
+   "title": "How to configure SCIM | Sana Help Center",
+   "quote": "Provide your Sana account representatives with the custom attributes you want to use. All custom attributes have value type “String” at Sana.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://help.sana.ai/en/articles/107863-managing-users",
+   "title": "Managing users | Sana Help Center",
+   "quote": "Deleted users will lose all data and be removed from the system. Deactived ( Paused ) users will lose access to Sana, but their data will be kept in case they're reactivated.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://help.sana.ai/en/articles/153672-sana-integration-capabilities",
+   "title": "Sana Integration Capabilities | Sana Help Center",
+   "quote": "We support Identity Providers such as Okta, Azure Active Directory/Entra, Google Workspace, OneLogin, ADFS, Auth0, CyberArk, Idaptive, JumpCloud, Ping Identity.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://help.sana.ai/en/articles/153672-sana-integration-capabilities",
+   "title": "Sana Integration Capabilities | Sana Help Center",
+   "quote": "when they are removed from your Identity Provider (if they leave your company), they are also deactivated or removed from Sana.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://help.sana.ai/en/articles/40193-synching-your-hr-system-with-sana",
+   "title": "Synching your HR system with Sana | Sana Help Center",
+   "quote": "All our integrations are built using the Sana Open API and the APIs exposed by the target HR system. They perform the data synchronization every hour by default",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://help.sana.ai/en/articles/172300-setting-up-sso-with-okta",
+   "title": "Setting up SSO with Okta | Sana Help Center",
+   "quote": "The attribute statements must exactly match the above settings, otherwise accounts will not be created in Sana when a SAML request is sent.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://help.sana.ai/en/articles/172300-setting-up-sso-with-okta",
+   "title": "Setting up SSO with Okta | Sana Help Center",
+   "quote": "In the feedback form, select “I'm an Okta customer adding an internal app”",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://help.sana.ai/en/articles/157023-user-provisioning-with-google-workspace",
+   "title": "User provisioning with Google Workspace | Sana Help Center",
+   "quote": "This guide outlines the essential steps to set up this integration, from creating a Google Cloud project to generating keys for secure data exchange between Google Workspace and Sana LMS.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://docs.sana.ai/api-docs/",
+   "title": "Sana API Reference",
+   "quote": "Use client credentials to request access tokens. All requests need to be authenticated using an access token.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://docs.sana.ai/api-docs/",
+   "title": "Sana API Reference",
+   "quote": "GET requests require read scope. POST , PATCH , and DELETE requests require write scope.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://docs.sana.ai/api-docs/",
+   "title": "Sana API Reference",
+   "quote": "If set to true the account is deactivated. If set to false the account is reactivated.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://docs.sana.ai/api-docs/",
+   "title": "Sana API Reference",
+   "quote": "role String No - One of learner , group-admin or admin",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://docs.sana.ai/api-docs/",
+   "title": "Sana API Reference",
+   "quote": "This endpoint deletes a specific user. HTTP Request DELETE https://<domain>.sana.ai/api/v0/users/<userId>",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://docs.sana.ai/api-docs/",
+   "title": "Sana API Reference",
+   "quote": "Users List All Users Get a User Create a User Send invite Generate new invite link Update a User Delete a User List All Groups for a User Set user's manager Delete user's manager List User Attribute Schema",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://docs.sana.ai/api-docs/",
+   "title": "Sana API Reference",
+   "quote": "This endpoint retrieves all users HTTP Request GET https://<domain>.sana.ai/api/v0/users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://docs.sana.ai/api-docs/",
+   "title": "Sana API Reference",
+   "quote": "This endpoint creates a user HTTP Request POST https://<domain>.sana.ai/api/v0/users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://docs.sana.ai/api-docs/",
+   "title": "Sana API Reference",
+   "quote": "Groups List All Groups Get a Group Create a Group Update a Group Delete a Group List All Users in a Group Add Users to a Group Update a User in a Group Delete a User from a Group",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://developers.sana.ai/",
+   "title": "Introduction | Sana Agents",
+   "quote": "Publicly available APIs: Chat API",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The Sana Learn SCIM guide gives two different custom-attribute namespaces: urn:sanalabs:scim:schemas:CustomAttributes in the Okta section and urn:ietf:params:scim:schemas:extension:SanaLabs:2.0:CustomAttributes in the Entra section.",
+   "cite": [
+    "c16"
+   ]
+  }
+ ],
+ "searched": [
+  "https://sanalabs.com/sitemap.xml",
+  "https://sanalabs.com/products/sana/pricing",
+  "https://sanalabs.com/products/sana-learn/pricing",
+  "https://support.sana.ai/sitemap.xml (Sana Agents help centre)",
+  "https://help.sana.ai/sitemap.xml (Sana Learn help centre)",
+  "https://docs.sana.ai/api-docs/",
+  "https://developers.sana.ai/",
+  "https://www.okta.com/integrations/sana/ (404)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/sana-tutorial (404)"
+ ],
+ "open_questions": [
+  "Which IdP catalogue apps exist: no Okta OIN or Entra gallery page found by URL; WebSearch budget was exhausted so catalogue search was not possible.",
+  "Whether SCIM deprovisioning frees a seat, revokes sessions, or can hard-delete users.",
+  "Supported SCIM filters, pagination, PUT vs PATCH, and discovery endpoints (ServiceProviderConfig, Schemas) are not documented.",
+  "Sana Agents SCIM token expiry and attribute list are not documented.",
+  "No user-event webhooks or audit-log API documented."
+ ]
+}

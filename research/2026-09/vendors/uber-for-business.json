@@ -1,0 +1,709 @@
+{
+ "slug": "uber-for-business",
+ "vendor": "Uber for Business",
+ "vendor_url": "https://www.uber.com/us/en/business/",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Uber for Business",
+  "slug": "uber-for-business",
+  "category": "Finance, Accounting & Spend",
+  "status": "free",
+  "scim_plan": "Uber for Business",
+  "scim_price_text": "Free to sign up; pay per ride and meal",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Uber for Business",
+  "team_price_text": "Free to sign up; pay per ride and meal",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": false,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": null,
+   "onelogin": "native",
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.uber.com/us/en/business/platform/pricing/",
+  "docs_url": "https://developer.uber.com/docs/scim/introduction",
+  "evidence": "Uber's pricing page says \"Uber for Business is free to signup\" with no paid tiers, and the SCIM onboarding guide asks only that you \"be onboarded to a Uber for Business organization and have admin access to it\".",
+  "notes": "No plans or seats: organisations pay for rides and meals, and the pricing footnote says use via API or integration partners may incur additional fees, which may cover SCIM. SCIM 2.0 has pre-built Okta, OneLogin and Entra apps; other IdPs need the account manager to assign SCIM scopes, and Okta provisioning must be activated by Uber support. SCIM creates an employee record and emails an invitation to link the person's own Uber account; deprovisioning unlinks it. SAML SSO is a separate onboarding done with Uber support, and no plan or price is published for it, so sso_plan is null. The SCIM and Employees API pages are public on developer.uber.com but are rendered client-side, so quotes are cited from the docs JS bundle, with page_url pointing to each page. Also offers SFTP CSV employee sync.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Uber for Business",
+   "price_text": "Free to sign up; pay for rides and meals (pay per trip or monthly bill)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c3",
+    "c5",
+    "c25"
+   ],
+   "notes": "Single platform with no paid tiers; API or integration-partner use may incur additional fees (c2)."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c1",
+   "c4",
+   "c5",
+   "c9"
+  ],
+  "plan": "Uber for Business",
+  "addon_price_text": null,
+  "sso_required": false,
+  "version": "2.0",
+  "base_url": "https://api.uber.com/v1/scim/organizations/{org_id}/v2",
+  "auth": {
+   "method": "oauth2",
+   "token_source": "OAuth 2.0 via auth.uber.com; IdP apps authenticate with a U4B admin account (no service accounts); custom apps use a developer.uber.com app with SCIM scopes assigned by the account manager",
+   "token_expiry": null,
+   "cite": [
+    "c8",
+    "c13",
+    "c14",
+    "c23",
+    "c24"
+   ],
+   "notes": "The SCIM authentication guide says application tokens are needed again every 30 days and cannot be refreshed; the Okta and OneLogin apps use an authorisation-code flow tied to an admin account, whose expiry is not stated."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c9",
+    "c12"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c9",
+    "c12",
+    "c33",
+    "c21",
+    "c28"
+   ],
+   "notes": "Groups support POST, PATCH, GET, DELETE and list (no PUT)."
+  },
+  "deprovision": {
+   "action": "remove_from_org",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "The employee's personal Uber account remains; only the link to the business organization is removed. OneLogin suspend keeps the account so it can be restored.",
+   "cite": [
+    "c7",
+    "c21"
+   ],
+   "notes": "No seat pricing, so frees_seat does not apply."
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName"
+   ],
+   "cite": [
+    "c29"
+   ],
+   "notes": "From the Entra gallery mapping (userName supported for filtering)."
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "active",
+    "externalId",
+    "phoneNumbers[type eq \"mobile\"].value"
+   ],
+   "enterprise": [
+    "employeeNumber",
+    "manager"
+   ],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c10",
+    "c11",
+    "c29"
+   ],
+   "notes": "userName maps to the user's email; only mobile numbers with country code are supported."
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": [],
+   "notes": "Groups map to Uber for Business groups (policy groups); users with no group land in the General group. No admin-role mapping documented."
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SCIM does not create an Uber account; it creates an employee record and emails an invitation to link the employee's own Uber account.",
+    "cite": [
+     "c16",
+     "c6"
+    ]
+   },
+   {
+    "text": "No service accounts: SCIM authenticates as a U4B admin account.",
+    "cite": [
+     "c8"
+    ]
+   },
+   {
+    "text": "Create-group requests cannot include members; patch-group is limited to 100 members per request.",
+    "cite": [
+     "c17",
+     "c18"
+    ]
+   },
+   {
+    "text": "Okta provisioning has to be activated by Uber support.",
+    "cite": [
+     "c15"
+    ]
+   }
+  ],
+  "notes": "Any Uber for Business organization admin can set up SCIM; the platform has no paid tiers. Okta provisioning needs Uber support to activate it, and other IdPs need the account manager to assign SCIM scopes. SSO onboarding is a separate process and is not required."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c25",
+   "c2"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://api.uber.com/v1/business/organizations/{organization_id}",
+  "docs_url": "https://developer.uber.com/docs/employees/introduction",
+  "auth": {
+   "methods": [
+    "oauth2"
+   ],
+   "scopes": [
+    "business.employees"
+   ],
+   "cite": [
+    "c13"
+   ],
+   "notes": "Scope name read from the endpoint reference pages in the docs bundle."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c25",
+    "c26"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/v1/business/organizations/{}/employees",
+    "purpose": "Create a new employee",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/business/organizations/{}/employees/update",
+    "purpose": "Update an existing employee",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/business/organizations/{}/employee",
+    "purpose": "Get an employee of an organization",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/business/organizations/{}/employees",
+    "purpose": "Get a paginated list of employees",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/business/organizations/{}/employees/search",
+    "purpose": "Search for employees",
+    "cite": [
+     "c26"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v1/business/organizations/{}/employees",
+    "purpose": "Delete an existing employee",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/business/organizations/{}/groups",
+    "purpose": "Get groups of an organization",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/business/organizations/{}/group",
+    "purpose": "Upsert group of an organization",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v1/business/organizations/{}/group",
+    "purpose": "Delete a group of an organization",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v1/business/organizations/{}/employees/invite",
+    "purpose": "Invite employees of an organization",
+    "cite": [
+     "c25"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "Employees API (scope business.employees). The pricing page footnote says use via API or integration partners may incur additional fees, so whether it costs extra is unclear."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/uber-for-business/",
+   "cite": [
+    "c27",
+    "c33"
+   ],
+   "notes": "Uber for Business app (provisioning). A separate older \"Uber\" Okta app is SSO only."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/uber-provisioning-tutorial",
+   "cite": [
+    "c28",
+    "c30"
+   ]
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": "vendor",
+   "url": null,
+   "cite": [
+    "c22"
+   ],
+   "notes": "From Uber's own OneLogin guide; OneLogin catalogue page not loaded."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": true,
+  "other_sync": "SFTP CSV employee roster sync (add, remove, replace)",
+  "docs_public": true,
+  "cite": [
+   "c32"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.uber.com/us/en/business/platform/pricing/",
+   "title": "Uber for Business Pricing",
+   "quote": "Uber for Business is free to signup You just pay for the cost of your teams' rides and meals.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://www.uber.com/us/en/business/platform/pricing/",
+   "title": "Uber for Business Pricing",
+   "quote": "Applicable for organizations that sign up for a new Uber for Business corporate account via Uber's website or by contacting Sales. Use via API or integration partners may incur in additional fees.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://www.uber.com/us/en/business/platform/pricing/",
+   "title": "Uber for Business Pricing",
+   "quote": "Your business can choose to pay per trip or food order, or request a monthly bill. There are no upfront costs or minimum spending.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://d3i4yxtzktqr9n.cloudfront.net/developer-docs/client-main-329e8b3957168ed0.js",
+   "title": "Onboarding to SCIM Provisioning (docs content bundle served to developer.uber.com)",
+   "quote": "Uber supports SCIM 2.0, that is published as IETF RFC 7643 and RFC 7644",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.uber.com/docs/scim/introduction"
+  },
+  {
+   "id": "c5",
+   "url": "https://d3i4yxtzktqr9n.cloudfront.net/developer-docs/client-main-329e8b3957168ed0.js",
+   "title": "Onboarding to SCIM Provisioning (docs content bundle served to developer.uber.com)",
+   "quote": "You must be onboarded to a Uber for Business organization and have admin access to it at business.uber.com",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.uber.com/docs/scim/introduction"
+  },
+  {
+   "id": "c6",
+   "url": "https://d3i4yxtzktqr9n.cloudfront.net/developer-docs/client-main-329e8b3957168ed0.js",
+   "title": "Onboarding to SCIM Provisioning (docs content bundle served to developer.uber.com)",
+   "quote": "Provisioning: When an employee joins your company, SCIM provisioning flow will create an employee record in your Uber for Business organization and automate an email invitation asking them to link their Uber account to your Uber for Business organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.uber.com/docs/scim/introduction"
+  },
+  {
+   "id": "c7",
+   "url": "https://d3i4yxtzktqr9n.cloudfront.net/developer-docs/client-main-329e8b3957168ed0.js",
+   "title": "Onboarding to SCIM Provisioning (docs content bundle served to developer.uber.com)",
+   "quote": "De-provisioning: When an employee leaves your company, SCIM will unlink their Uber account from your Uber for Business organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.uber.com/docs/scim/introduction"
+  },
+  {
+   "id": "c8",
+   "url": "https://d3i4yxtzktqr9n.cloudfront.net/developer-docs/client-main-329e8b3957168ed0.js",
+   "title": "Onboarding to SCIM Provisioning (docs content bundle served to developer.uber.com)",
+   "quote": "Uber currently doesn’t support service accounts for SCIM provisioning. So you are recommended to create a separate account to do the same as detailed below.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.uber.com/docs/scim/introduction"
+  },
+  {
+   "id": "c9",
+   "url": "https://d3i4yxtzktqr9n.cloudfront.net/developer-docs/client-main-329e8b3957168ed0.js",
+   "title": "SCIM APIs Overview (docs content bundle served to developer.uber.com)",
+   "quote": "https://api.uber.com/v1/scim/organizations/{org_id}/v2/Users",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.uber.com/docs/scim/api/overview"
+  },
+  {
+   "id": "c10",
+   "url": "https://d3i4yxtzktqr9n.cloudfront.net/developer-docs/client-main-329e8b3957168ed0.js",
+   "title": "SCIM APIs Overview (docs content bundle served to developer.uber.com)",
+   "quote": "Required Fields: schemas, id, username, givenName, familyName",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.uber.com/docs/scim/api/overview"
+  },
+  {
+   "id": "c11",
+   "url": "https://d3i4yxtzktqr9n.cloudfront.net/developer-docs/client-main-329e8b3957168ed0.js",
+   "title": "SCIM APIs Overview (docs content bundle served to developer.uber.com)",
+   "quote": "Optional Fields active, externalId, phoneNumbers, employeeNumber, manager",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.uber.com/docs/scim/api/overview"
+  },
+  {
+   "id": "c12",
+   "url": "https://d3i4yxtzktqr9n.cloudfront.net/developer-docs/client-main-329e8b3957168ed0.js",
+   "title": "SCIM APIs Overview (docs content bundle served to developer.uber.com)",
+   "quote": "Below SCIM APIs are supported as of now. Refer to the SCIM RFC and JSON template below for API definitions",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.uber.com/docs/scim/api/overview"
+  },
+  {
+   "id": "c13",
+   "url": "https://d3i4yxtzktqr9n.cloudfront.net/developer-docs/client-main-329e8b3957168ed0.js",
+   "title": "Authentication (SCIM) (docs content bundle served to developer.uber.com)",
+   "quote": "The token will authenticate API requests as an application, not as a user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.uber.com/docs/scim/guides/authentication"
+  },
+  {
+   "id": "c14",
+   "url": "https://d3i4yxtzktqr9n.cloudfront.net/developer-docs/client-main-329e8b3957168ed0.js",
+   "title": "Authentication (SCIM) (docs content bundle served to developer.uber.com)",
+   "quote": "The token can not be “refreshed”, but new tokens can be created as often or as many times as needed.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.uber.com/docs/scim/guides/authentication"
+  },
+  {
+   "id": "c15",
+   "url": "https://d3i4yxtzktqr9n.cloudfront.net/developer-docs/client-main-329e8b3957168ed0.js",
+   "title": "Okta SCIM app (docs content bundle served to developer.uber.com)",
+   "quote": "Initial activation of Okta provisioning for Uber requires contacting Uber support",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.uber.com/docs/scim/idp/okta"
+  },
+  {
+   "id": "c16",
+   "url": "https://d3i4yxtzktqr9n.cloudfront.net/developer-docs/client-main-329e8b3957168ed0.js",
+   "title": "Okta SCIM app (docs content bundle served to developer.uber.com)",
+   "quote": "This provisioning app will NOT create an Uber account for you, it will only send out email invitation to your employees.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.uber.com/docs/scim/idp/okta"
+  },
+  {
+   "id": "c17",
+   "url": "https://d3i4yxtzktqr9n.cloudfront.net/developer-docs/client-main-329e8b3957168ed0.js",
+   "title": "Okta SCIM app (docs content bundle served to developer.uber.com)",
+   "quote": "For create group API, we don’t support attach members in this request",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.uber.com/docs/scim/idp/okta"
+  },
+  {
+   "id": "c18",
+   "url": "https://d3i4yxtzktqr9n.cloudfront.net/developer-docs/client-main-329e8b3957168ed0.js",
+   "title": "Okta SCIM app (docs content bundle served to developer.uber.com)",
+   "quote": "For patch group API, we limit 100 members in one request",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.uber.com/docs/scim/idp/okta"
+  },
+  {
+   "id": "c19",
+   "url": "https://d3i4yxtzktqr9n.cloudfront.net/developer-docs/client-main-329e8b3957168ed0.js",
+   "title": "Okta SCIM app (docs content bundle served to developer.uber.com)",
+   "quote": "If a user is not mapped to any group in the identity provider and is synced to Uber for Business via SCIM, the user will be automatically added to the General group, which serves as the default group.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.uber.com/docs/scim/idp/okta"
+  },
+  {
+   "id": "c20",
+   "url": "https://d3i4yxtzktqr9n.cloudfront.net/developer-docs/client-main-329e8b3957168ed0.js",
+   "title": "Okta SCIM app (docs content bundle served to developer.uber.com)",
+   "quote": "Note: Make sure to check “Do not display application icon to users”. Onboarding to SSO is a separate process as of now.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.uber.com/docs/scim/idp/okta"
+  },
+  {
+   "id": "c21",
+   "url": "https://d3i4yxtzktqr9n.cloudfront.net/developer-docs/client-main-329e8b3957168ed0.js",
+   "title": "Onelogin SCIM app (docs content bundle served to developer.uber.com)",
+   "quote": "Suspend is for employees who go inactive and temporarily loose the eligibility for the program. When they become eligible again, Uber restores their existing account instead of recreating new accounts",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.uber.com/docs/scim/idp/onelogin"
+  },
+  {
+   "id": "c22",
+   "url": "https://d3i4yxtzktqr9n.cloudfront.net/developer-docs/client-main-329e8b3957168ed0.js",
+   "title": "Onelogin SCIM app (docs content bundle served to developer.uber.com)",
+   "quote": "We have pre-built a SCIM provisioner app for Uber. Select this app (make sure you are selecting the right app with provisioning connector) and follow the below steps",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.uber.com/docs/scim/idp/onelogin"
+  },
+  {
+   "id": "c23",
+   "url": "https://d3i4yxtzktqr9n.cloudfront.net/developer-docs/client-main-329e8b3957168ed0.js",
+   "title": "Custom SCIM app (docs content bundle served to developer.uber.com)",
+   "quote": "scim.users, scim.groups scope for read-write access",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.uber.com/docs/scim/idp/custom"
+  },
+  {
+   "id": "c24",
+   "url": "https://d3i4yxtzktqr9n.cloudfront.net/developer-docs/client-main-329e8b3957168ed0.js",
+   "title": "Custom SCIM app (docs content bundle served to developer.uber.com)",
+   "quote": "To do this, create an app on developer.uber.com and reach out to your U4B account manager to get SCIM scopes assigned to your app’s client ID.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.uber.com/docs/scim/idp/custom"
+  },
+  {
+   "id": "c25",
+   "url": "https://d3i4yxtzktqr9n.cloudfront.net/developer-docs/client-main-329e8b3957168ed0.js",
+   "title": "Introduction to Business Employees Management (docs content bundle served to developer.uber.com)",
+   "quote": "Employees management provide set of APIs for easy onboarding of employees to an organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.uber.com/docs/employees/introduction"
+  },
+  {
+   "id": "c26",
+   "url": "https://d3i4yxtzktqr9n.cloudfront.net/developer-docs/client-main-329e8b3957168ed0.js",
+   "title": "Introduction to Business Employees Management (docs content bundle served to developer.uber.com)",
+   "quote": "/v1/business/organizations/{}/employees/search",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.uber.com/docs/employees/introduction"
+  },
+  {
+   "id": "c27",
+   "url": "https://www.okta.com/integrations/uber-for-business/",
+   "title": "Uber for Business | Okta Integration Network",
+   "quote": "Okta's Uber integration allows admins to automate the provisioning/de-provisioning flow throughout the employee's lifecycle.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c28",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/uber-provisioning-tutorial",
+   "title": "Configure Uber for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Create users in Uber. Remove users in Uber when they don't require access anymore. Keep user attributes synchronized between Microsoft Entra ID and Uber.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c29",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/uber-provisioning-tutorial",
+   "title": "Configure Uber for automatic user provisioning with Microsoft Entra ID",
+   "quote": "userName String ✓ ✓ active Boolean ✓ name.givenName String ✓ name.familyName String ✓ externalId String ✓ urn:ietf:params:scim:schemas:extension:enterprise:2.0:User:employeeNumber String",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c30",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/uber-tutorial",
+   "title": "Configure Uber for Single sign-on with Microsoft Entra ID",
+   "quote": "Uber supports IDP initiated single sign-on and Automated user provisioning",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c31",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/uber-tutorial",
+   "title": "Configure Uber for Single sign-on with Microsoft Entra ID",
+   "quote": "To configure single sign-on on Uber side, you need to send the downloaded Certificate (PEM) and appropriate copied URLs from the application configuration to Uber support team",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c32",
+   "url": "https://d3i4yxtzktqr9n.cloudfront.net/developer-docs/client-main-329e8b3957168ed0.js",
+   "title": "Managing Employees (SFTP) (docs content bundle served to developer.uber.com)",
+   "quote": "Through SFTP you can manage your company’s employee list by uploading a comma-delimited CSV file with all active employees.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.uber.com/docs/businesses/data-automation/employees"
+  },
+  {
+   "id": "c33",
+   "url": "https://d3i4yxtzktqr9n.cloudfront.net/developer-docs/client-main-329e8b3957168ed0.js",
+   "title": "Okta SCIM app (docs content bundle served to developer.uber.com)",
+   "quote": "Create Users Update Users Deactivate Users Reactivate Users Group Push",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.uber.com/docs/scim/idp/okta"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.uber.com/us/en/business/platform/pricing/",
+  "https://www.uber.com/us/en/business/",
+  "https://developer.uber.com/docs/scim/introduction",
+  "https://developer.uber.com/docs/employees/introduction",
+  "https://www.okta.com/integrations/uber-for-business/"
+ ],
+ "open_questions": [
+  "Does SCIM or the Employees API trigger the \"additional fees\" the pricing footnote mentions for API or integration-partner use?",
+  "Which organisations can get SAML SSO and at what price is not published (it is set up through Uber support).",
+  "SCIM token lifetime for the Okta/OneLogin admin-account authorisation is not stated.",
+  "Google Workspace and JumpCloud catalogue entries were not checked.",
+  "No user-event webhooks or audit-log API documented for the business admin side."
+ ]
+}

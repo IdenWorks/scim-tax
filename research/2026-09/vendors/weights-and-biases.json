@@ -1,0 +1,704 @@
+{
+  "slug": "weights-and-biases",
+  "vendor": "CoreWeave Forge",
+  "vendor_url": "https://wandb.ai",
+  "researched_at": "2026-10-05",
+  "row": {
+    "vendor": "CoreWeave Forge",
+    "slug": "weights-and-biases",
+    "category": "AI & LLM Tools",
+    "status": "gated",
+    "scim_plan": "Enterprise",
+    "scim_price_text": "Contact Sales",
+    "scim_price_per_user_mo": null,
+    "team_plan": "Pro",
+    "team_price_text": "Pro: starts at $60/month, billed monthly (teams under 50 employees)",
+    "team_price_per_user_mo": null,
+    "price_multiplier": null,
+    "sso_plan": "Enterprise",
+    "sso_price_per_user_mo": null,
+    "sso_required_for_scim": null,
+    "scim_addon_price_text": null,
+    "min_seats": null,
+    "scim_ops": {
+      "create": true,
+      "update": true,
+      "deactivate": true,
+      "delete": true,
+      "groups": true
+    },
+    "idp": {
+      "okta": "via_generic",
+      "entra": "via_generic",
+      "google": null,
+      "onelogin": null,
+      "jumpcloud": null,
+      "generic": true
+    },
+    "pricing_page_url": "https://coreweave.com/forge-pricing",
+    "docs_url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim.md",
+    "evidence": "The CoreWeave Forge pricing page lists Single Sign On, \"Automated user provisioning\" and \"User and role management using SCIM API\" only on the custom-priced Enterprise plan.",
+    "notes": "Still gated. Weights & Biases is now sold as CoreWeave Forge: wandb.ai/site/pricing redirects to coreweave.com/forge-pricing and the docs moved to docs.coreweave.com. Plans are Free ($0), Pro ('Starts at $60/month, billed monthly', for teams under 50 employees, up to 10 Models seats) and Enterprise (custom, invoiced annually). June's $50/u/mo Pro price no longer appears; the page gives a $60/month starting price without saying it is per user, so per-user fields are null. SCIM is a documented SCIM 2.0-style API with Users, Groups (W&B Teams) and non-standard Roles endpoints; behaviour differs between Multi-tenant Cloud (deactivate removes the user from the org, no reactivation) and Dedicated/Self-Managed (active=false, reactivation supported). The audit-log API is Enterprise-only on Multi-tenant Cloud.",
+    "confidence": "high",
+    "last_verified": "2026-10-05",
+    "api_provisioning": false,
+    "user_api_available": true,
+    "user_api_plan": null,
+    "api_tax": null,
+    "first_added": null,
+    "status_prev": "gated"
+  },
+  "plans": [
+    {
+      "name": "Free",
+      "price_text": "$0/mo",
+      "price_per_user_mo": 0,
+      "billing": "monthly",
+      "sso": false,
+      "scim": false,
+      "user_api": null,
+      "audit_log_api": false,
+      "cite": [
+        "c1",
+        "c5",
+        "c6"
+      ]
+    },
+    {
+      "name": "Pro",
+      "price_text": "Starts at $60/month, billed monthly; for teams under 50 employees; up to 10 Models seats",
+      "price_per_user_mo": null,
+      "billing": "monthly",
+      "sso": false,
+      "scim": false,
+      "user_api": null,
+      "audit_log_api": false,
+      "cite": [
+        "c2",
+        "c3",
+        "c7",
+        "c8"
+      ],
+      "notes": "Pricing table marks Single sign-on, SCIM API and Audit Logs with a cross for Pro."
+    },
+    {
+      "name": "Enterprise",
+      "price_text": "Custom plans; invoiced annually upfront",
+      "price_per_user_mo": null,
+      "billing": "annual",
+      "sso": true,
+      "scim": true,
+      "user_api": true,
+      "audit_log_api": true,
+      "cite": [
+        "c4",
+        "c5",
+        "c6",
+        "c33"
+      ]
+    }
+  ],
+  "scim": {
+    "available": true,
+    "cite": [
+      "c6",
+      "c9",
+      "c14"
+    ],
+    "plan": "Enterprise",
+    "addon_price_text": null,
+    "sso_required": null,
+    "version": "2.0",
+    "base_url": "[HOST-URL]/scim",
+    "auth": {
+      "method": "bearer",
+      "token_source": "API key of an organization admin user or an organization-scoped service account (Bearer, or HTTP Basic username:API-KEY)",
+      "token_expiry": null,
+      "cite": [
+        "c13"
+      ]
+    },
+    "endpoints": {
+      "Users": true,
+      "Groups": true,
+      "ServiceProviderConfig": null,
+      "Schemas": null,
+      "ResourceTypes": null,
+      "Bulk": null,
+      "Me": null,
+      "cite": [
+        "c27",
+        "c28"
+      ],
+      "notes": "Non-standard /scim/Roles endpoints for custom roles."
+    },
+    "operations": {
+      "create": true,
+      "read": true,
+      "update_put": null,
+      "update_patch": true,
+      "deactivate": true,
+      "reactivate": true,
+      "delete": true,
+      "group_push": true,
+      "group_membership": true,
+      "cite": [
+        "c12",
+        "c18",
+        "c19",
+        "c20",
+        "c27",
+        "c28"
+      ],
+      "notes": "Reactivation only on Dedicated Cloud / Self-Managed. Teams cannot be deleted via SCIM."
+    },
+    "deprovision": {
+      "action": "deactivate",
+      "frees_seat": null,
+      "revokes_sessions": null,
+      "data_retained": "Dedicated Cloud and Self-Managed keep the user record (active=false); Multi-tenant Cloud removes the user from the organization. DELETE fully deletes the user.",
+      "cite": [
+        "c18",
+        "c19",
+        "c20"
+      ]
+    },
+    "filtering": {
+      "supported": true,
+      "attributes": [
+        "userName",
+        "emails.value"
+      ],
+      "cite": [
+        "c11",
+        "c39"
+      ]
+    },
+    "pagination": {
+      "supported": null,
+      "max_page_size": 9999,
+      "cite": [
+        "c22"
+      ],
+      "notes": "Docs state a maximum of 9,999 items per request."
+    },
+    "attributes": {
+      "core": [
+        "userName",
+        "emails[type eq \"work\"].value",
+        "displayName",
+        "active"
+      ],
+      "enterprise": [],
+      "custom": {
+        "supported": true,
+        "how": "W&B extension attributes modelsSeat (full/viewer/none), weaveRole and registryAccess on create/update"
+      },
+      "group": [
+        "displayName",
+        "members"
+      ],
+      "cite": [
+        "c15",
+        "c16",
+        "c17",
+        "c29",
+        "c30"
+      ]
+    },
+    "roles": {
+      "supported": true,
+      "how": "PATCH /scim/Users/{id} assigns organization and team roles; /scim/Roles creates and manages custom roles",
+      "cite": [
+        "c23",
+        "c26"
+      ]
+    },
+    "rate_limits": {
+      "text": null,
+      "cite": []
+    },
+    "limitations": [
+      {
+        "text": "Teams cannot be deleted through SCIM.",
+        "cite": [
+          "c21"
+        ]
+      },
+      {
+        "text": "Multi-tenant Cloud does not support updating displayName or email, or reactivating users, through SCIM.",
+        "cite": [
+          "c25",
+          "c20"
+        ]
+      },
+      {
+        "text": "Operations may fail when organization seat limits are reached; deprovisioning can remove the last admin.",
+        "cite": [
+          "c24",
+          "c31"
+        ]
+      }
+    ]
+  },
+  "user_api": {
+    "available": true,
+    "cite": [
+      "c32",
+      "c35"
+    ],
+    "plan": null,
+    "api_tax": null,
+    "style": "other",
+    "base_url": null,
+    "docs_url": "https://docs.coreweave.com/products/wandb/ref/python/public-api/team",
+    "auth": {
+      "methods": [
+        "api_key"
+      ],
+      "scopes": [],
+      "cite": [
+        "c13"
+      ]
+    },
+    "capabilities": {
+      "list_users": null,
+      "get_user": null,
+      "create_user": true,
+      "invite_user": true,
+      "update_user": null,
+      "deactivate_user": null,
+      "delete_user": null,
+      "reactivate_user": null,
+      "manage_groups": true,
+      "assign_roles": null,
+      "assign_licenses": null,
+      "cite": [
+        "c35",
+        "c36",
+        "c37"
+      ],
+      "notes": "Python SDK (wandb.Api): create_user, Team.invite, Member.delete (remove from team)."
+    },
+    "endpoints": [],
+    "webhooks_user_events": {
+      "supported": null,
+      "events": [],
+      "cite": []
+    },
+    "audit_log_api": {
+      "supported": true,
+      "plan": "Enterprise",
+      "cite": [
+        "c33",
+        "c34"
+      ]
+    },
+    "rate_limits": {
+      "text": null,
+      "cite": []
+    },
+    "limitations": [
+      {
+        "text": "Non-SCIM user management is exposed through the Python SDK, not a documented REST user API.",
+        "cite": [
+          "c32"
+        ]
+      }
+    ]
+  },
+  "idp_apps": {
+    "okta": {
+      "listed": null,
+      "sso": true,
+      "provisioning": true,
+      "kind": "scim",
+      "built_by": null,
+      "url": null,
+      "cite": [
+        "c10",
+        "c38"
+      ],
+      "notes": "Docs say the SCIM API works with Okta; no OIN catalogue page found at okta.com/integrations (weights-and-biases, wandb, weights-biases all 404)."
+    },
+    "entra": {
+      "listed": null,
+      "sso": true,
+      "provisioning": true,
+      "kind": "scim",
+      "built_by": null,
+      "url": null,
+      "cite": [
+        "c10",
+        "c14",
+        "c38"
+      ],
+      "notes": "Docs give Entra custom-app tenant URL and attribute mappings; no Entra gallery tutorial found."
+    },
+    "google": {
+      "listed": null,
+      "sso": null,
+      "provisioning": null,
+      "kind": null,
+      "built_by": null,
+      "url": null,
+      "cite": []
+    },
+    "onelogin": {
+      "listed": null,
+      "sso": null,
+      "provisioning": null,
+      "kind": null,
+      "built_by": null,
+      "url": null,
+      "cite": []
+    },
+    "jumpcloud": {
+      "listed": null,
+      "sso": null,
+      "provisioning": null,
+      "kind": null,
+      "built_by": null,
+      "url": null,
+      "cite": []
+    }
+  },
+  "fallbacks": {
+    "jit": null,
+    "jit_protocol": null,
+    "csv_import": null,
+    "other_sync": null,
+    "docs_public": true,
+    "cite": [
+      "c9"
+    ]
+  },
+  "citations": [
+    {
+      "id": "c1",
+      "url": "https://coreweave.com/forge-pricing",
+      "title": "CoreWeave Forge Pricing",
+      "quote": "Designed for personal development of AI applications and models $0/mo",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c2",
+      "url": "https://coreweave.com/forge-pricing",
+      "title": "CoreWeave Forge Pricing",
+      "quote": "Professionals working to optimize AI applications and models Starts at $60/month, billed monthly",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c3",
+      "url": "https://coreweave.com/forge-pricing",
+      "title": "CoreWeave Forge Pricing",
+      "quote": "For early-stage teams fewer than 50 employees. Customers who exceed these guidelines will be required to transition to CoreWeave Forge Enterprise.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c4",
+      "url": "https://coreweave.com/forge-pricing",
+      "title": "CoreWeave Forge Pricing",
+      "quote": "Companies prioritizing security and compliance for AI applications and models Custom plans",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c5",
+      "url": "https://coreweave.com/forge-pricing",
+      "title": "CoreWeave Forge Pricing",
+      "quote": "Customer-managed encryption key Single Sign On Automated user provisioning Custom roles Audit logs",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c6",
+      "url": "https://coreweave.com/forge-pricing",
+      "title": "CoreWeave Forge Pricing",
+      "quote": "User and role management using SCIM API",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c7",
+      "url": "https://coreweave.com/forge-pricing",
+      "title": "CoreWeave Forge Pricing",
+      "quote": "The Pro plan is billed monthly upfront, depending on your selection. Model seats are prorated if added mid-term, though we don’t issue credits for removed seats.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c8",
+      "url": "https://coreweave.com/forge-pricing",
+      "title": "CoreWeave Forge Pricing",
+      "quote": "Unlimited teams for collaboration Team-based access controls Service Accounts",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c9",
+      "url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim.md",
+      "page_url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim",
+      "title": "Manage users, groups, and roles with SCIM",
+      "quote": "With the SCIM API, you can provision and deprovision users, manage team membership, and define custom roles programmatically through an identity provider or CI/CD pipeline instead of clicking through the",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c10",
+      "url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim.md",
+      "page_url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim",
+      "title": "Manage users, groups, and roles with SCIM",
+      "quote": "SCIM API is compatible with identity providers such as Okta and Microsoft Entra.",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c11",
+      "url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim.md",
+      "page_url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim",
+      "title": "Manage users, groups, and roles with SCIM",
+      "quote": "The API supports filtering for `/Users` and `/Groups` endpoints.",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c12",
+      "url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim.md",
+      "page_url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim",
+      "title": "Manage users, groups, and roles with SCIM",
+      "quote": "Supports `PATCH` for partial resource updates.",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c13",
+      "url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim.md",
+      "page_url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim",
+      "title": "Manage users, groups, and roles with SCIM",
+      "quote": "Organization admins can authenticate with a **Bearer token** or **HTTP Basic** credentials.",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c14",
+      "url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim.md",
+      "page_url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim",
+      "title": "Manage users, groups, and roles with SCIM",
+      "quote": "[HOST-URL]/scim?aadOptscim062020",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c15",
+      "url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim.md",
+      "page_url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim",
+      "title": "Manage users, groups, and roles with SCIM",
+      "quote": "`emails[type eq \"work\"].value` | `mail` | Always | Yes |",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c16",
+      "url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim.md",
+      "page_url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim",
+      "title": "Manage users, groups, and roles with SCIM",
+      "quote": "`userName` | `displayName` | Only on object creation |",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c17",
+      "url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim.md",
+      "page_url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim",
+      "title": "Manage users, groups, and roles with SCIM",
+      "quote": "Models seat level. One of `full`, `viewer`, or `none`. Defaults to `full`.",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c18",
+      "url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim.md",
+      "page_url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim",
+      "title": "Manage users, groups, and roles with SCIM",
+      "quote": "Fully deletes a user from your organization.",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c19",
+      "url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim.md",
+      "page_url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim",
+      "title": "Manage users, groups, and roles with SCIM",
+      "quote": "Sets the user's `active` field to `false`. To restore a deactivated user's access to your organization, see [Reactivate user](#reactivate-user).",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c20",
+      "url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim.md",
+      "page_url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim",
+      "title": "Manage users, groups, and roles with SCIM",
+      "quote": "Removes the user from the organization. To restore the user's access, re-add them to your organization.",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c21",
+      "url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim.md",
+      "page_url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim",
+      "title": "Manage users, groups, and roles with SCIM",
+      "quote": "The SCIM API doesn't support deleting teams because additional data is linked to teams.",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c22",
+      "url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim.md",
+      "page_url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim",
+      "title": "Manage users, groups, and roles with SCIM",
+      "quote": "Maximum results**: 9,999 items per request.",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c23",
+      "url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim.md",
+      "page_url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim",
+      "title": "Manage users, groups, and roles with SCIM",
+      "quote": "The `/Roles` endpoints aren't part of the official SCIM schema.",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c24",
+      "url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim.md",
+      "page_url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim",
+      "title": "Manage users, groups, and roles with SCIM",
+      "quote": "Operations may fail if organization seat limits are reached.",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c25",
+      "url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim.md",
+      "page_url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim",
+      "title": "Manage users, groups, and roles with SCIM",
+      "quote": "Weights & Biases doesn't support updating `displayName` through SCIM on Multi-tenant Cloud.",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c26",
+      "url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim.md",
+      "page_url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim",
+      "title": "Manage users, groups, and roles with SCIM",
+      "quote": "Assigns an organization-level role to a user.",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c27",
+      "url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim.md",
+      "page_url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim",
+      "title": "Manage users, groups, and roles with SCIM",
+      "quote": "`[HOST-URL]/scim/Groups/{id}`",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c28",
+      "url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim.md",
+      "page_url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim",
+      "title": "Manage users, groups, and roles with SCIM",
+      "quote": "`[HOST-URL]/scim/Users/{id}`",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c29",
+      "url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim.md",
+      "page_url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim",
+      "title": "Manage users, groups, and roles with SCIM",
+      "quote": "`displayName` | `displayName` | Only on object creation | Yes |",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c30",
+      "url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim.md",
+      "page_url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim",
+      "title": "Manage users, groups, and roles with SCIM",
+      "quote": "`members` | `members` | Always |",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c31",
+      "url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim.md",
+      "page_url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim",
+      "title": "Manage users, groups, and roles with SCIM",
+      "quote": "Ensure that at least one admin user always exists in your instance or organization.",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c32",
+      "url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/automate_iam.md",
+      "page_url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/automate_iam",
+      "title": "Automate user and team management",
+      "quote": "Use the W\\&B SCIM API to manage your organization's users and teams at scale through an identity provider (IdP) like Okta or Microsoft Entra.",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c33",
+      "url": "https://docs.coreweave.com/products/wandb/platform/hosting/monitoring-usage/audit-logging.md",
+      "page_url": "https://docs.coreweave.com/products/wandb/platform/hosting/monitoring-usage/audit-logging",
+      "title": "Audit logs",
+      "quote": "Multi-tenant audit logs are available only for Enterprise plans. The Audit Logging API endpoint is:",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c34",
+      "url": "https://docs.coreweave.com/products/wandb/platform/hosting/monitoring-usage/audit-logging.md",
+      "page_url": "https://docs.coreweave.com/products/wandb/platform/hosting/monitoring-usage/audit-logging",
+      "title": "Audit logs",
+      "quote": "https://api.wandb.ai/audit_logs",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c35",
+      "url": "https://docs.coreweave.com/products/wandb/ref/python/public-api/team.md",
+      "page_url": "https://docs.coreweave.com/products/wandb/ref/python/public-api/team",
+      "title": "Team | Python SDK",
+      "quote": "Invite a user to a team.",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c36",
+      "url": "https://docs.coreweave.com/products/wandb/ref/python/public-api/member.md",
+      "page_url": "https://docs.coreweave.com/products/wandb/ref/python/public-api/member",
+      "title": "Member | Python SDK",
+      "quote": "Remove a member from a team.",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c37",
+      "url": "https://docs.coreweave.com/products/wandb/ref/python/public-api/user.md",
+      "page_url": "https://docs.coreweave.com/products/wandb/ref/python/public-api/user",
+      "title": "User | Python SDK",
+      "quote": "This is an internal method. Use the `create_user()` method of",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c38",
+      "url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/sso.md",
+      "page_url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/sso",
+      "title": "Configure SSO with OIDC",
+      "quote": "Configure Weights & Biases SSO with OpenID Connect providers such as Okta, Azure AD, and AWS Cognito.",
+      "accessed": "2026-10-05"
+    },
+    {
+      "id": "c39",
+      "url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim.md",
+      "page_url": "https://docs.coreweave.com/products/wandb/platform/hosting/iam/scim",
+      "title": "Manage users, groups, and roles with SCIM",
+      "quote": "Filter by email address.",
+      "accessed": "2026-10-05"
+    }
+  ],
+  "conflicts": [],
+  "searched": [
+    "https://wandb.ai/site/pricing/ (redirects to https://coreweave.com/forge-pricing)",
+    "https://docs.coreweave.com/llms.txt",
+    "https://docs.coreweave.com/sitemap.xml",
+    "https://www.okta.com/integrations/weights-and-biases/ (404)",
+    "https://learn.microsoft.com/en-us/entra/identity/saas-apps/weights-and-biases-tutorial (404)"
+  ],
+  "open_questions": [
+    "Whether the Pro starting price of $60/month is per seat is not stated on the pricing page.",
+    "Whether deactivation frees the Models seat or ends sessions is not documented.",
+    "ServiceProviderConfig, Schemas and pagination parameters are not documented.",
+    "Whether SSO must be configured before SCIM is not stated."
+  ]
+}

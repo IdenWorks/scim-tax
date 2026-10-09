@@ -1,0 +1,737 @@
+{
+ "slug": "anaplan",
+ "vendor": "Anaplan",
+ "vendor_url": "https://www.anaplan.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Anaplan",
+  "slug": "anaplan",
+  "category": "Finance, Accounting & Spend",
+  "status": "gated",
+  "scim_plan": "Anaplan subscription (Contact Sales)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales (no public pricing)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Anaplan subscription (Contact Sales)",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": false,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": false,
+   "groups": false
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.anaplan.com/pricing/",
+  "docs_url": "https://help.anaplan.com/f6a801cd-c253-4ab9-ba03-dac09fd71f7c",
+  "evidence": "Anaplan publishes no prices (anaplan.com/pricing redirects to a contact form), and Anapedia documents a SCIM 2.0 API (\"uses version 2.0 of the SCIM standard\") as an alternative to Centralized Identity Management for any tenant's User Admin.",
+  "notes": "New row. Anaplan sells only by quote: /pricing redirects to the contact form and no editions or prices are public (Anapedia mentions editions only for audit-log retention), so SCIM, like everything else, sits behind Contact Sales; no page says SCIM needs a particular edition or add-on, hence confidence low. SCIM 2.0 at https://api.anaplan.com/scim/1/0/v2 covers Users only (no Groups resource; workspace access is pushed as entitlements), with Basic auth, AnaplanAuthToken or API keys (max 365 days) for a non-SSO User Admin. Deprovisioning is active=false (disable; frees the licence); DELETE is not supported. Okta's catalogue app is SAML/SWA only and Entra's gallery app is SSO only, so both provision through a custom app against the generic endpoint; Anaplan says it tested thoroughly with Okta. Visiting users are out of scope for SCIM. Non-SCIM user management: Administration API CSV import/export of users and licences; Audit API needs Audit enabled.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Anaplan platform (quote only)",
+   "price_text": "Contact Sales (no public pricing)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c34",
+    "c2",
+    "c35",
+    "c32"
+   ],
+   "notes": "No public tier table. Anapedia says audit-log retention is 30 or 90 days 'depending on your edition', so editions exist but are not published."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c2",
+   "c4",
+   "c5",
+   "c13"
+  ],
+  "plan": "Anaplan subscription (Contact Sales)",
+  "addon_price_text": null,
+  "sso_required": false,
+  "version": "2.0",
+  "base_url": "https://api.anaplan.com/scim/1/0/v2",
+  "auth": {
+   "method": "other",
+   "token_source": "Basic auth of a non-SSO User Admin, an AnaplanAuthToken from the authentication service, or an API key (Administration > Security settings) sent as Bearer",
+   "token_expiry": "API keys: admin-set expiry, maximum 365 days; no rotation",
+   "cite": [
+    "c6",
+    "c12",
+    "c30",
+    "c31"
+   ],
+   "notes": "Docs recommend a non-SSO account with the USER_ADMIN role; SCIM works without SSO configured. Key rotation isn't supported (revoke, delete and recreate)."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": false,
+   "ServiceProviderConfig": true,
+   "Schemas": true,
+   "ResourceTypes": true,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c18",
+    "c19",
+    "c20",
+    "c21",
+    "c17"
+   ],
+   "notes": "Users is the only resource; workspace access is managed through the entitlements attribute, not Groups."
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": false,
+   "group_push": false,
+   "group_membership": false,
+   "cite": [
+    "c22",
+    "c23",
+    "c7",
+    "c14",
+    "c28",
+    "c17"
+   ],
+   "notes": "PATCH requires a path on every operation. Reactivation is active=true (enable)."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": true,
+   "revokes_sessions": null,
+   "data_retained": "User is disabled and can no longer log in via basic auth or SSO; the account remains and can be re-enabled.",
+   "cite": [
+    "c7",
+    "c28",
+    "c10"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "id",
+    "externalId",
+    "userName",
+    "name.familyName",
+    "name.givenName",
+    "active"
+   ],
+   "cite": [
+    "c8",
+    "c26"
+   ],
+   "notes": "Operators eq, ne, pr, gt, ge, lt, le; co/sw/ew, complex attribute filters and POST /.search are not supported."
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": 100,
+   "cite": [
+    "c11",
+    "c18"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "externalId",
+    "name.givenName",
+    "name.familyName",
+    "name.formatted",
+    "displayName",
+    "active",
+    "entitlements (type WORKSPACE, WORKSPACE_IDS, WORKSPACE_NAMES)"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": false,
+    "how": "Only workspace entitlements are supported beyond core attributes."
+   },
+   "group": [],
+   "cite": [
+    "c22",
+    "c24",
+    "c25",
+    "c17",
+    "c7"
+   ],
+   "notes": "name.formatted and displayName are accepted but not stored or searchable. Up to 50 workspaces per call."
+  },
+  "roles": {
+   "supported": false,
+   "how": null,
+   "cite": [
+    "c17"
+   ],
+   "notes": "Workspace is the only entitlement; roles are assigned in Administration."
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SCIM does not support visiting users.",
+    "cite": [
+     "c13"
+    ]
+   },
+   {
+    "text": "DELETE is not supported (501); deprovision by setting active false.",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "text": "Entitlement updates are not atomic; user data may save while entitlements fail (207 partial success).",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "text": "Maximum 50 workspaces per call and 100 users per GET page.",
+    "cite": [
+     "c9",
+     "c18"
+    ]
+   },
+   {
+    "text": "Anaplan says it tested thoroughly only with Okta; other IdPs connect via API keys.",
+    "cite": [
+     "c15",
+     "c16"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c35",
+   "c36",
+   "c38"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://api.anaplan.com/admin/1/0",
+  "docs_url": "https://help.anaplan.com/administration-api-34c09687-9110-4672-b31b-0f959f67ea32",
+  "auth": {
+   "methods": [
+    "anaplan_auth_token"
+   ],
+   "scopes": [],
+   "cite": [
+    "c36"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": null,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": true,
+   "cite": [
+    "c36",
+    "c38"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "PUT",
+    "path": "/admin/1/0/users/import",
+    "purpose": "Create or update users (and licences) from a CSV upload, max 500 rows",
+    "cite": [
+     "c36",
+     "c37"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/admin/1/0/users/export",
+    "purpose": "Export users as CSV (username, first name, last name, licenses)",
+    "cite": [
+     "c38"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Audit enabled in tenant (retention 30 or 90 days by edition)",
+   "cite": [
+    "c32",
+    "c33"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "The Integration API v2.0 is for model data and actions, not user administration.",
+    "cite": [
+     "c42"
+    ]
+   }
+  ],
+  "notes": "Separate Financial Consolidation API has its own user and role endpoints for that product only (not recorded)."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/anaplan/",
+   "cite": [
+    "c39",
+    "c43"
+   ],
+   "notes": "OIN page marks only SAML and SWA as checked (read from page markup). Anaplan's SCIM guide has admins create a separate Okta app with SCIM provisioning against the generic endpoint."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/anaplan-tutorial",
+   "cite": [
+    "c40",
+    "c41",
+    "c16"
+   ],
+   "notes": "Gallery tutorial covers SSO only; Anaplan docs say Azure can use the SCIM API with API keys."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": false,
+  "jit_protocol": null,
+  "csv_import": true,
+  "other_sync": "Administration API bulk CSV import/export; Centralized Identity Management in the Administration console",
+  "docs_public": true,
+  "cite": [
+   "c40",
+   "c36",
+   "c4"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.anaplan.com/pricing/",
+   "title": "Contact Anaplan (anaplan.com/pricing redirects here)",
+   "quote": "Fill out the form and one of our Anaplan experts will connect with you shortly.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://help.anaplan.com/f6a801cd-c253-4ab9-ba03-dac09fd71f7c",
+   "title": "SCIM API | Anapedia",
+   "quote": "This API package is separate from Anaplan’s user interface and uses version 2.0 of the SCIM standard.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://help.anaplan.com/f6a801cd-c253-4ab9-ba03-dac09fd71f7c",
+   "title": "SCIM API | Anapedia",
+   "quote": "Automate management: Automate the creation, updates, and deletion of user identity records.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://help.anaplan.com/09d4fcff-cfaf-402a-8fcc-ba64ffb97a2e",
+   "title": "Centralized Identity Management | Anapedia",
+   "quote": "With Centralized Identity Management (CIM), you can manage and provision the users in your Anaplan tenant.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://help.anaplan.com/09d4fcff-cfaf-402a-8fcc-ba64ffb97a2e",
+   "title": "Centralized Identity Management | Anapedia",
+   "quote": "You can also use the SCIM API package as an alternative to CIM.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://help.anaplan.com/7352b06c-d843-4efc-9906-d91d53ffcd9c",
+   "title": "Get started with the Anaplan SCIM API | Anapedia",
+   "quote": "Anaplan recommends using an active, non-SSO user account with the User Admin role to call the SCIM API.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://help.anaplan.com/7352b06c-d843-4efc-9906-d91d53ffcd9c",
+   "title": "Get started with the Anaplan SCIM API | Anapedia",
+   "quote": "Use PATCH /Users/{id} for targeted updates, such as changing a name, setting active status, or adding or removing specific workspace entitlements.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://help.anaplan.com/7352b06c-d843-4efc-9906-d91d53ffcd9c",
+   "title": "Get started with the Anaplan SCIM API | Anapedia",
+   "quote": "Supported filter fields include id, externalId, userName, name.familyName, name.givenName, and active.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://help.anaplan.com/7352b06c-d843-4efc-9906-d91d53ffcd9c",
+   "title": "Get started with the Anaplan SCIM API | Anapedia",
+   "quote": "There is a limit of 50 workspaces per call, so large entitlement updates may need to be split across multiple requests.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://help.anaplan.com/6f127888-9b62-4ff1-8c5b-7a91be0f2d66",
+   "title": "How to implement SCIM | Anapedia",
+   "quote": "Once your tests succeed, disable or deactivate the test users to free up license counts.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://help.anaplan.com/6f127888-9b62-4ff1-8c5b-7a91be0f2d66",
+   "title": "How to implement SCIM | Anapedia",
+   "quote": "Use the GET /Users endpoint to search for users. You can pagination-limit results to 100 users per call using the count parameter.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://help.anaplan.com/6f127888-9b62-4ff1-8c5b-7a91be0f2d66",
+   "title": "How to implement SCIM | Anapedia",
+   "quote": "Generate the Key: Generate an API Key in the Anaplan Administration panel under Security settings.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://jsapi.apiary.io/apis/scimapi/blueprint",
+   "title": "Anaplan SCIM API (Apiary)",
+   "quote": "SCIM does not support Visiting users",
+   "accessed": "2026-10-05",
+   "page_url": "https://scimapi.docs.apiary.io/"
+  },
+  {
+   "id": "c14",
+   "url": "https://jsapi.apiary.io/apis/scimapi/blueprint",
+   "title": "Anaplan SCIM API (Apiary)",
+   "quote": "The requested operation is not supported by the service provider. For example, an capability not supported by the service provider such as DELETE.",
+   "accessed": "2026-10-05",
+   "page_url": "https://scimapi.docs.apiary.io/"
+  },
+  {
+   "id": "c15",
+   "url": "https://jsapi.apiary.io/apis/scimapi/blueprint",
+   "title": "Anaplan SCIM API (Apiary)",
+   "quote": "Anaplan has tested thoroughly with Okta, specifically.",
+   "accessed": "2026-10-05",
+   "page_url": "https://scimapi.docs.apiary.io/"
+  },
+  {
+   "id": "c16",
+   "url": "https://jsapi.apiary.io/apis/scimapi/blueprint",
+   "title": "Anaplan SCIM API (Apiary)",
+   "quote": "Authorized users can use API keys to integrate with Microsoft Azure (or other Identity Providers that support API Keys).",
+   "accessed": "2026-10-05",
+   "page_url": "https://scimapi.docs.apiary.io/"
+  },
+  {
+   "id": "c17",
+   "url": "https://jsapi.apiary.io/apis/scimapi/blueprint",
+   "title": "Anaplan SCIM API (Apiary)",
+   "quote": "Workspace is the only entitlement supported.",
+   "accessed": "2026-10-05",
+   "page_url": "https://scimapi.docs.apiary.io/"
+  },
+  {
+   "id": "c18",
+   "url": "https://jsapi.apiary.io/apis/scimapi/blueprint",
+   "title": "Anaplan SCIM API (Apiary)",
+   "quote": "Use this endpoint to search for users and associated workspaces. Note that the limit is 100 users per call.",
+   "accessed": "2026-10-05",
+   "page_url": "https://scimapi.docs.apiary.io/"
+  },
+  {
+   "id": "c19",
+   "url": "https://jsapi.apiary.io/apis/scimapi/blueprint",
+   "title": "Anaplan SCIM API (Apiary)",
+   "quote": "Use this call to obtain the supported attributes for resources ( e.g., User) and the attribute meta-data.",
+   "accessed": "2026-10-05",
+   "page_url": "https://scimapi.docs.apiary.io/"
+  },
+  {
+   "id": "c20",
+   "url": "https://jsapi.apiary.io/apis/scimapi/blueprint",
+   "title": "Anaplan SCIM API (Apiary)",
+   "quote": "Use this call to retrieve the supported SCIM capabilities.",
+   "accessed": "2026-10-05",
+   "page_url": "https://scimapi.docs.apiary.io/"
+  },
+  {
+   "id": "c21",
+   "url": "https://jsapi.apiary.io/apis/scimapi/blueprint",
+   "title": "Anaplan SCIM API (Apiary)",
+   "quote": "Use this call to retrieve all of the resource types supported.",
+   "accessed": "2026-10-05",
+   "page_url": "https://scimapi.docs.apiary.io/"
+  },
+  {
+   "id": "c22",
+   "url": "https://jsapi.apiary.io/apis/scimapi/blueprint",
+   "title": "Anaplan SCIM API (Apiary)",
+   "quote": "Use this call to add a user, their name details, and their workspace entitlements. There is a limit of 50 workspaces per call.",
+   "accessed": "2026-10-05",
+   "page_url": "https://scimapi.docs.apiary.io/"
+  },
+  {
+   "id": "c23",
+   "url": "https://jsapi.apiary.io/apis/scimapi/blueprint",
+   "title": "Anaplan SCIM API (Apiary)",
+   "quote": "Use this API request to replace user details, such as removing workspace entitlements.",
+   "accessed": "2026-10-05",
+   "page_url": "https://scimapi.docs.apiary.io/"
+  },
+  {
+   "id": "c24",
+   "url": "https://jsapi.apiary.io/apis/scimapi/blueprint",
+   "title": "Anaplan SCIM API (Apiary)",
+   "quote": "The displayName (for informational purposes only. It is not stored or searchable).",
+   "accessed": "2026-10-05",
+   "page_url": "https://scimapi.docs.apiary.io/"
+  },
+  {
+   "id": "c25",
+   "url": "https://jsapi.apiary.io/apis/scimapi/blueprint",
+   "title": "Anaplan SCIM API (Apiary)",
+   "quote": "Your unique id for this user (as stored in your company systems).",
+   "accessed": "2026-10-05",
+   "page_url": "https://scimapi.docs.apiary.io/"
+  },
+  {
+   "id": "c26",
+   "url": "https://jsapi.apiary.io/apis/scimapi/blueprint",
+   "title": "Anaplan SCIM API (Apiary)",
+   "quote": "Complex attribute filtering, for instance searching in a complex array with the [] notation, is not supported.",
+   "accessed": "2026-10-05",
+   "page_url": "https://scimapi.docs.apiary.io/"
+  },
+  {
+   "id": "c27",
+   "url": "https://jsapi.apiary.io/apis/scimapi/blueprint",
+   "title": "Anaplan SCIM API (Apiary)",
+   "quote": "Anaplan stores entitlements in a separate datastore from User data.",
+   "accessed": "2026-10-05",
+   "page_url": "https://scimapi.docs.apiary.io/"
+  },
+  {
+   "id": "c28",
+   "url": "https://help.anaplan.com/30f96ca9-8de7-40ab-9dfd-ba61bb65a164",
+   "title": "Enable or disable internal users | Anapedia",
+   "quote": "When you disable a user in your tenant, they can no longer log in to Anaplan, either via basic authentication or single sign-on (SSO).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://help.anaplan.com/aaf12b66-e782-4aba-a35b-d0e8e66aba85",
+   "title": "User administrator | Anapedia",
+   "quote": "The user administrator role enables you to centrally create and update user accounts.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://help.anaplan.com/c853f749-8766-4cc0-84a5-a6897dd4d1cb",
+   "title": "API keys | Anapedia",
+   "quote": "Authorized users can use API keys to integrate SCIM APIs to identity providers that support API keys, such as the Microsoft's Azure Active Directory (Azure AD).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://help.anaplan.com/b6814bec-4ce8-43bc-966a-b09f7cabbef6",
+   "title": "Edit the default expiration length for API keys | Anapedia",
+   "quote": "The maximum number of days you can set is 365 days.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://help.anaplan.com/034cf52f-8ccf-49e0-a545-96861b12a645",
+   "title": "Audit | Anapedia",
+   "quote": "Anaplan Audit provides you with up to 30 or 90 days worth of logs (depending on your edition).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://help.anaplan.com/034cf52f-8ccf-49e0-a545-96861b12a645",
+   "title": "Audit | Anapedia",
+   "quote": "To use Audit, including the Audit API , you must have Audit enabled in your tenant and you must be assigned the tenant auditor role.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://help.anaplan.com/6296fe72-2d23-47ae-94e3-579ec8d41332",
+   "title": "Single Sign-on (SSO) | Anapedia",
+   "quote": "Anaplan fully supports SAML 2.0 for SSO.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c35",
+   "url": "https://help.anaplan.com/administration-api-34c09687-9110-4672-b31b-0f959f67ea32",
+   "title": "Administration API | Anapedia",
+   "quote": "The Administration API enables you to manage user details and settings from an administration level. The APIs support bulk user import and export endpoints.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://help.anaplan.com/bulk-create-or-update-users-with-a-csv-20e16ec3-af9e-4e23-a960-088d00ce45df",
+   "title": "Bulk create or update users with a CSV | Anapedia",
+   "quote": "Create or update users in an Anaplan tenant by uploading a CSV file. Users are matched by username (email address).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://help.anaplan.com/bulk-create-or-update-users-with-a-csv-20e16ec3-af9e-4e23-a960-088d00ce45df",
+   "title": "Bulk create or update users with a CSV | Anapedia",
+   "quote": "Invalid CSV Resource. Maximum number of rows allowed is 500.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c38",
+   "url": "https://help.anaplan.com/export-users-to-csv-d297283b-17ba-4830-883f-60e1883d2e2b",
+   "title": "Export users to CSV | Anapedia",
+   "quote": "Returns a CSV file with username, first name, last name, and licenses columns.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c39",
+   "url": "https://www.okta.com/integrations/anaplan/",
+   "title": "Integrate Anaplan with Okta",
+   "quote": "Anaplans connected planning platform enables organizations to accelerate decision making by connecting data, people, and plans across the business",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c40",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/anaplan-tutorial",
+   "title": "Microsoft Entra SSO integration with Anaplan",
+   "quote": "Work with Anaplan support team to add the users in the Anaplan platform. Users must be created and activated before you use single sign-on.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c41",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/anaplan-tutorial",
+   "title": "Microsoft Entra SSO integration with Anaplan",
+   "quote": "Enable your users to be automatically signed-in to Anaplan with their Microsoft Entra accounts.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c42",
+   "url": "https://help.anaplan.com/integration-api-v20-3107aa54-d12b-4c48-9550-3561c84adbb2",
+   "title": "Integration API v2.0 | Anapedia",
+   "quote": "The Anaplan Integration API v2.0 provides a set of secure REST endpoints to move data into and out of Anaplan models, run model actions, and read or update selected model metadata and transactional data.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c43",
+   "url": "https://jsapi.apiary.io/apis/scimapi/blueprint",
+   "title": "Anaplan SCIM API (Apiary)",
+   "quote": "Okta provides a rich set of capabilities to manage enterprise users. Supported features with Anaplan SCIM are:",
+   "accessed": "2026-10-05",
+   "page_url": "https://scimapi.docs.apiary.io/"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "Anapedia's SCIM API overview says the API automates 'deletion of user identity records', but the Apiary reference gives DELETE as an example of an unsupported (501) operation and documents no DELETE /Users endpoint; recorded delete as false and deprovisioning as deactivate.",
+   "cite": [
+    "c3",
+    "c14"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.anaplan.com/pricing/ (redirects to /contact/)",
+  "https://www.anaplan.com/sitemap.xml",
+  "https://help.anaplan.com/sitemap.xml (titles of all 2,817 English pages)",
+  "https://scimapi.docs.apiary.io/",
+  "https://anaplanbulkapi20.docs.apiary.io/ (deprecated stub)",
+  "https://www.okta.com/integrations/anaplan/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/anaplan-tutorial"
+ ],
+ "open_questions": [
+  "No public pricing or edition table; whether SCIM or the Administration API is limited to particular editions is not documented.",
+  "Whether disabling a user ends active sessions is not documented.",
+  "SCIM rate limits are not documented.",
+  "No Google Workspace, OneLogin or JumpCloud catalogue entry was checked successfully (JumpCloud returned 403; OneLogin blocks bots).",
+  "Plan for the Administration API is not stated."
+ ]
+}

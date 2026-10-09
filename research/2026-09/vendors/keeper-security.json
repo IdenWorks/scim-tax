@@ -1,0 +1,898 @@
+{
+ "slug": "keeper-security",
+ "vendor": "Keeper Security",
+ "vendor_url": "https://www.keepersecurity.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Keeper Security",
+  "slug": "keeper-security",
+  "category": "Security & Identity",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Enterprise: $6.00/user/mo billed annually",
+  "scim_price_per_user_mo": 6,
+  "team_plan": "Business Starter",
+  "team_price_text": "Business Starter: $2.00/user/mo billed annually (5-10 users)",
+  "team_price_per_user_mo": 2,
+  "price_multiplier": 3.0,
+  "sso_plan": "Enterprise",
+  "sso_price_per_user_mo": 6,
+  "sso_required_for_scim": false,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": false,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": "native",
+   "onelogin": "native",
+   "jumpcloud": "native",
+   "generic": true
+  },
+  "pricing_page_url": "https://www.keepersecurity.com/pricing/business-and-enterprise.html",
+  "docs_url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/automated-provisioning-with-scim.md",
+  "evidence": "Keeper's pricing page lists \"Advanced provisioning (SCIM, AD/LDAP, SSO/SAML)\" only under Enterprise ($6.00/user/month billed annually); Business Starter ($2.00) and Business ($4.00) do not include SCIM.",
+  "notes": "Pricing page now lists Enterprise at $6.00/user/month billed annually (June: ~$6, Contact Sales); a 'Request a Quote' button remains. Team plan changed from Business ($4) to Business Starter ($2, 'Protection for 5–10 users') under the v3 rule that team_plan is the cheapest paid multi-user tier, so the multiplier is 3.0 (6/2); against Business it would be 1.5. SSO (SAML 2.0), SCIM, AD/LDAP Bridge, CLI and the Developer SDKs/REST API are all Enterprise-only in the comparison table (tier mapping read from the table's check-mark cells; icons are not quotable). SCIM 2.0 endpoint per Keeper node with a Keeper-generated bearer token; SCIM DELETE and active=false lock the user rather than deleting. SCIM requires a reserved email domain. SCIM can be used without SSO (JumpCloud guide). New users arrive as 'invited' and teams as 'pending' until approved by an admin login, Commander or Keeper Automator (zero-knowledge key sharing).",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": null,
+  "user_api_available": true,
+  "user_api_plan": "Enterprise",
+  "api_tax": true,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Business Starter",
+   "price_text": "$2.00 user/month billed annually (5-10 users)",
+   "price_per_user_mo": 2,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c5"
+   ]
+  },
+  {
+   "name": "Business",
+   "price_text": "$4.00 user/month billed annually",
+   "price_per_user_mo": 4,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c5"
+   ]
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "$6.00 user/month billed annually (Request a Quote)",
+   "price_per_user_mo": 6,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c4",
+    "c5",
+    "c6",
+    "c7",
+    "c8",
+    "c57"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c5",
+   "c6",
+   "c7",
+   "c10",
+   "c11"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": false,
+  "version": "2.0",
+  "base_url": "https://keepersecurity.com/api/rest/scim/v2/{node_id}",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Admin Console > node > Provisioning > Add Method > SCIM > Generate (token shown once)",
+   "token_expiry": null,
+   "cite": [
+    "c12"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": true,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": true,
+   "Me": null,
+   "cite": [
+    "c10",
+    "c15",
+    "c18"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": false,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c10",
+    "c13",
+    "c14",
+    "c22",
+    "c24",
+    "c27",
+    "c29"
+   ],
+   "notes": "SCIM DELETE /Users/{id} locks the user instead of deleting; permanent deletion only in the Admin Console or Commander. Groups map to Keeper Teams; Groups DELETE deletes the team."
+  },
+  "deprovision": {
+   "action": "suspend",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Account is locked; the user's owned records are retained and shared records stay accessible to other users and teams",
+   "cite": [
+    "c13",
+    "c14",
+    "c40",
+    "c53"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": 1000,
+   "cite": [
+    "c16",
+    "c17"
+   ],
+   "notes": "Default response capped at 1000 entries; startIndex/count pagination on Users and Groups GET."
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "displayName",
+    "externalId",
+    "name.givenName",
+    "name.familyName",
+    "emails[].value",
+    "groups[].value",
+    "active"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c24",
+    "c23",
+    "c26",
+    "c21"
+   ],
+   "notes": "Attribute list taken from Keeper's documented POST/PUT example bodies, which declare the enterprise extension schema but set no enterprise attributes; 'roles' is accepted but not used by Keeper. Username must be a valid email."
+  },
+  "roles": {
+   "supported": false,
+   "how": "SCIM roles attribute is ignored; roles are assigned via Team-to-Role mapping on SCIM-provisioned teams (not for administrative roles)",
+   "cite": [
+    "c23",
+    "c30",
+    "c33"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SCIM provisioning only accepted for email domains reserved to the Keeper tenant.",
+    "cite": [
+     "c19"
+    ]
+   },
+   {
+    "text": "Users are created in an 'invited' state and teams/team memberships in a 'pending' state until approved by an admin login, Keeper Commander team-approve or the Keeper Automator service.",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "text": "One node per identity provider; SCIM on a node does not control its sub-nodes.",
+    "cite": [
+     "c59"
+    ]
+   },
+   {
+    "text": "Entra connector: emails and userName must share the same source value; user deletes not supported, only disable (lock).",
+    "cite": [
+     "c58",
+     "c53"
+    ]
+   },
+   {
+    "text": "Provisioning beyond purchased seats is rejected with HTTP 428.",
+    "cite": [
+     "c25"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c8",
+   "c41",
+   "c48",
+   "c49"
+  ],
+  "plan": "Enterprise",
+  "api_tax": true,
+  "style": "other",
+  "base_url": "http://localhost:<port>/api/v2/ (self-hosted Commander Service Mode)",
+  "docs_url": "https://docs.keeper.io/enterprise-guide/developer-tools",
+  "auth": {
+   "methods": [
+    "api_key"
+   ],
+   "scopes": [],
+   "cite": [
+    "c50",
+    "c56"
+   ],
+   "notes": "Commander logs in as a Keeper admin account; Service Mode exposes the session behind an api-key header with configurable expiry and per-key command allow-lists."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": null,
+   "create_user": true,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": true,
+   "reactivate_user": true,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c42",
+    "c43",
+    "c44",
+    "c45",
+    "c46",
+    "c47"
+   ],
+   "notes": "Capabilities are Commander CLI/SDK commands (enterprise-user, create-user, enterprise-team, enterprise-role), not REST resources; Service Mode runs these commands over HTTP."
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/api/v2/executecommand-async",
+    "purpose": "Commander Service Mode: queue any allowed Commander command (e.g. enterprise-user --add/--lock/--delete)",
+    "cite": [
+     "c50"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/executecommand",
+    "purpose": "Commander Service Mode v1: run an allowed Commander command synchronously",
+    "cite": [
+     "c51"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": "addon",
+   "plan": "ARAM add-on (all business plans)",
+   "cite": [
+    "c9",
+    "c52"
+   ],
+   "notes": "Event export to SIEMs requires the Advanced Reporting & Alerts Module add-on."
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "No hosted vendor REST user API: the documented REST interface is a self-hosted wrapper around the Commander CLI session.",
+    "cite": [
+     "c49"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/keeper-password-manager-and-digital-vault/",
+   "cite": [
+    "c54",
+    "c28",
+    "c27",
+    "c29"
+   ]
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/keeper-password-manager-digitalvault-provisioning-tutorial",
+   "cite": [
+    "c31",
+    "c53"
+   ]
+  },
+  "google": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c34",
+    "c36",
+    "c35"
+   ],
+   "notes": "Google Admin 'Keeper Web (SAML)' app; Google's SCIM provisions users only, groups need Keeper's Google Cloud Function."
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c38"
+   ],
+   "notes": "Per Keeper's guide; OneLogin's own connector page not loaded."
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://jumpcloud.com/support/integrate-with-keeper",
+   "cite": [
+    "c55",
+    "c37"
+   ]
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": "Keeper Bridge AD/LDAP sync (Enterprise); Google Workspace Cloud Function sync; email auto-provisioning",
+  "docs_public": true,
+  "cite": [
+   "c39",
+   "c5"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.keepersecurity.com/pricing/business-and-enterprise.html",
+   "title": "Keeper Enterprise Password Manager Plans and Pricing",
+   "quote": "Protects sole proprietors and small teams $2.00 user / month billed annually",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.keepersecurity.com/pricing/business-and-enterprise.html",
+   "title": "Keeper Enterprise Password Manager Plans and Pricing",
+   "quote": "Protection for 5–10 users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.keepersecurity.com/pricing/business-and-enterprise.html",
+   "title": "Keeper Enterprise Password Manager Plans and Pricing",
+   "quote": "Company-wide security, visibility and administration $4.00 user / month billed annually",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.keepersecurity.com/pricing/business-and-enterprise.html",
+   "title": "Keeper Enterprise Password Manager Plans and Pricing",
+   "quote": "Advanced provisioning, RBAC and governance $6.00 user / month billed annually",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.keepersecurity.com/pricing/business-and-enterprise.html",
+   "title": "Keeper Enterprise Password Manager Plans and Pricing",
+   "quote": "Advanced provisioning (SCIM, AD/LDAP, SSO/SAML)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://www.keepersecurity.com/pricing/business-and-enterprise.html",
+   "title": "Keeper Enterprise Password Manager Plans and Pricing",
+   "quote": "Support provided for direct SCIM API user and team provisioning for any 3rd party identity provider",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://www.keepersecurity.com/pricing/business-and-enterprise.html",
+   "title": "Keeper Enterprise Password Manager Plans and Pricing",
+   "quote": "Adds advanced features like Single Sign-On (SAML 2.0), SCIM provisioning and advanced MFA options.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://www.keepersecurity.com/pricing/business-and-enterprise.html",
+   "title": "Keeper Enterprise Password Manager Plans and Pricing",
+   "quote": "SDKs and secrets management tools for DevOps, IT Security and software development teams to access Keeper",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://www.keepersecurity.com/pricing/business-and-enterprise.html",
+   "title": "Keeper Enterprise Password Manager Plans and Pricing",
+   "quote": "Delivers real-time event monitoring, customizable reports and compliance-ready audit trails",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/automated-provisioning-with-scim.md",
+   "title": "API Provisioning with SCIM",
+   "quote": "Keeper supports SCIM 2.0, a REST-based API using JSON message structure. The Keeper SCIM endpoint supports Users and Groups (Teams) resources",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/automated-provisioning-with-scim"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/automated-provisioning-with-scim.md",
+   "title": "API Provisioning with SCIM",
+   "quote": "Keeper SCIM Rest endpoint is a resource available at <https://keepersecurity.com/api/rest/scim/v2/>\\<node\\_id>, where node\\_id identifies the Keeper Enterprise node used in the SCIM protocol sync.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/automated-provisioning-with-scim"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/automated-provisioning-with-scim.md",
+   "title": "API Provisioning with SCIM",
+   "quote": "The authentication is Bearer token authentication, with the token generated by Keeper when setting up the node.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/automated-provisioning-with-scim"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/automated-provisioning-with-scim.md",
+   "title": "API Provisioning with SCIM",
+   "quote": "Locks user 456 from the node 123. Returns 404 if user is not found.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/automated-provisioning-with-scim"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/automated-provisioning-with-scim.md",
+   "title": "API Provisioning with SCIM",
+   "quote": "Note: Keeper locks the account instead of deletion to prevent data loss. Admin can perform permanent user deletion within the Admin Console interface or Commander API.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/automated-provisioning-with-scim"
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/automated-provisioning-with-scim.md",
+   "title": "API Provisioning with SCIM",
+   "quote": "Returns SCIM Service Provider Configuration for Keeper SCIM service",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/automated-provisioning-with-scim"
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/automated-provisioning-with-scim.md",
+   "title": "API Provisioning with SCIM",
+   "quote": "By default, Keeper SCIM API will only return the first 1000 entries for queries that yield large result sets.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/automated-provisioning-with-scim"
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/automated-provisioning-with-scim.md",
+   "title": "API Provisioning with SCIM",
+   "quote": "Pagination requires use of the `startIndex` and `count` parameters in the request.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/automated-provisioning-with-scim"
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/automated-provisioning-with-scim.md",
+   "title": "API Provisioning with SCIM",
+   "quote": "bulk\": { \"supported\": true, \"maxOperations\": 1000, \"maxPayloadSize\": 1048576 }",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/automated-provisioning-with-scim"
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/automated-provisioning-with-scim.md",
+   "title": "API Provisioning with SCIM",
+   "quote": "For security reasons, SCIM provisioning is only accepted by Keeper when the enterprise tenant has the affected email domain reserved.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/automated-provisioning-with-scim"
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/automated-provisioning-with-scim.md",
+   "title": "API Provisioning with SCIM",
+   "quote": "New users added by the SCIM sync are created in the “invited” state and will receive an invite to join Keeper. New teams created by the SCIM sync are created in the “pending” state",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/automated-provisioning-with-scim"
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/automated-provisioning-with-scim.md",
+   "title": "API Provisioning with SCIM",
+   "quote": "Keeper supports the “excludedAttributes” for “members” attribute.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/automated-provisioning-with-scim"
+  },
+  {
+   "id": "c22",
+   "url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/automated-provisioning-with-scim.md",
+   "title": "API Provisioning with SCIM",
+   "quote": "Deletes team 789 from the node 123. Returns 404 if team is not found.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/automated-provisioning-with-scim"
+  },
+  {
+   "id": "c23",
+   "url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/automated-provisioning-with-scim/using-scim-api-provisioning.md",
+   "title": "Using SCIM API Provisioning",
+   "quote": "\"roles\": [], // SCIM definition not used in Keeper",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/automated-provisioning-with-scim/using-scim-api-provisioning"
+  },
+  {
+   "id": "c24",
+   "url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/automated-provisioning-with-scim/using-scim-api-provisioning.md",
+   "title": "Using SCIM API Provisioning",
+   "quote": "Changing the \"active\" flag to false will lock the user account, changing it to true will unlock the account",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/automated-provisioning-with-scim/using-scim-api-provisioning"
+  },
+  {
+   "id": "c25",
+   "url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/automated-provisioning-with-scim/using-scim-api-provisioning.md",
+   "title": "Using SCIM API Provisioning",
+   "quote": "Number of licensed seats was exceeded.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/automated-provisioning-with-scim/using-scim-api-provisioning"
+  },
+  {
+   "id": "c26",
+   "url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/automated-provisioning-with-scim/using-scim-api-provisioning.md",
+   "title": "Using SCIM API Provisioning",
+   "quote": "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/automated-provisioning-with-scim/using-scim-api-provisioning"
+  },
+  {
+   "id": "c27",
+   "url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/okta-integration-with-saml-and-scim.md",
+   "title": "Okta Provisioning",
+   "quote": "Activates or deactivates users (locks or unlocks them in Keeper)",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/okta-integration-with-saml-and-scim"
+  },
+  {
+   "id": "c28",
+   "url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/okta-integration-with-saml-and-scim.md",
+   "title": "Okta Provisioning",
+   "quote": "If you haven't added Keeper to your Okta Administrator Console, Select the Applications tab and then select Browse App Catalog and search for \"Keeper\".",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/okta-integration-with-saml-and-scim"
+  },
+  {
+   "id": "c29",
+   "url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/okta-integration-with-saml-and-scim.md",
+   "title": "Okta Provisioning",
+   "quote": "Keeper supports Team provisioning through Okta \"Push Groups\".",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/okta-integration-with-saml-and-scim"
+  },
+  {
+   "id": "c30",
+   "url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/okta-integration-with-saml-and-scim.md",
+   "title": "Okta Provisioning",
+   "quote": "Keeper Teams can be mapped to Role Policies through Team-to-Role Mapping",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/okta-integration-with-saml-and-scim"
+  },
+  {
+   "id": "c31",
+   "url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/azure-ad-provisioning-scim.md",
+   "title": "Microsoft Entra ID / Azure AD Provisioning",
+   "quote": "Search for Keeper and select Keeper Password Manager & Digital Vault.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/azure-ad-provisioning-scim"
+  },
+  {
+   "id": "c32",
+   "url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/azure-ad-provisioning-scim.md",
+   "title": "Microsoft Entra ID / Azure AD Provisioning",
+   "quote": "Deletes users (locks users in Keeper)",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/azure-ad-provisioning-scim"
+  },
+  {
+   "id": "c33",
+   "url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/azure-ad-provisioning-scim.md",
+   "title": "Microsoft Entra ID / Azure AD Provisioning",
+   "quote": "SCIM-provisioned teams and users are applied to the default role, without the ability for a team provisioned from SCIM to be mapped into an alternative, pre-defined role.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/azure-ad-provisioning-scim"
+  },
+  {
+   "id": "c34",
+   "url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/google-g-suite-scim.md",
+   "title": "Google Workspace Provisioning",
+   "quote": "Keeper Enterprise is available for Google Workspace with automated user provisioning using the SCIM (System for Cross-Domain Identity Management) protocol.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/google-g-suite-scim"
+  },
+  {
+   "id": "c35",
+   "url": "https://docs.keeper.io/sso-connect-cloud/identity-provider-setup/g-suite-keeper.md",
+   "title": "Google Workspace Setup",
+   "quote": "Since Google Workspace doesn't natively support SCIM Groups, Keeper has developed a Google Cloud Function that integrates with Google Workspace for automated user and group provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/sso-connect-cloud/identity-provider-setup/g-suite-keeper"
+  },
+  {
+   "id": "c36",
+   "url": "https://docs.keeper.io/sso-connect-cloud/identity-provider-setup/g-suite-keeper.md",
+   "title": "Google Workspace Setup",
+   "quote": "search for \"Keeper\" and select the \"Keeper Web (SAML)\" app.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/sso-connect-cloud/identity-provider-setup/g-suite-keeper"
+  },
+  {
+   "id": "c37",
+   "url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/jumpcloud-provisioning-with-scim.md",
+   "title": "JumpCloud Provisioning",
+   "quote": "You can configure SCIM without SSO or SSO+SCIM",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/jumpcloud-provisioning-with-scim"
+  },
+  {
+   "id": "c38",
+   "url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/onelogin-provisioning-with-scim.md",
+   "title": "OneLogin Provisioning",
+   "quote": "OneLogin has a built-in Keeper application in their catalog that supports both SSO + SCIM integration.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/onelogin-provisioning-with-scim"
+  },
+  {
+   "id": "c39",
+   "url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/single-sign-on-saml-2.0-authentication.md",
+   "title": "SSO JIT (Just-in-Time) Provisioning",
+   "quote": "Keeper supports just-in-time automatic provisioning and seamless authentication with any identity provider",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/single-sign-on-saml-2.0-authentication"
+  },
+  {
+   "id": "c40",
+   "url": "https://docs.keeper.io/enterprise-guide/user-management-and-lifecycle.md",
+   "title": "User Management and Lifecycle",
+   "quote": "To suspend an account and prevent the user from accessing their Vault, you can simply lock their account. This retains the user's owned records but blocks their access to their Keeper Vault.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/enterprise-guide/user-management-and-lifecycle"
+  },
+  {
+   "id": "c41",
+   "url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/cli-provisioning-with-commander-sdk.md",
+   "title": "CLI Provisioning with Commander SDK",
+   "quote": "Keeper supports API-based provisioning through the use of our Python-based Keeper Commander SDK.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/cli-provisioning-with-commander-sdk"
+  },
+  {
+   "id": "c42",
+   "url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/cli-provisioning-with-commander-sdk.md",
+   "title": "CLI Provisioning with Commander SDK",
+   "quote": "Invite users to an enterprise with the `enterprise-user --add` command",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/cli-provisioning-with-commander-sdk"
+  },
+  {
+   "id": "c43",
+   "url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/cli-provisioning-with-commander-sdk.md",
+   "title": "CLI Provisioning with Commander SDK",
+   "quote": "Create new user accounts and vaults with the `create-user` command",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/cli-provisioning-with-commander-sdk"
+  },
+  {
+   "id": "c44",
+   "url": "https://docs.keeper.io/keeperpam/commander-cli/command-reference/enterprise-management-commands.md",
+   "title": "Enterprise Management Commands",
+   "quote": "`--lock` lock the user's account",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/keeperpam/commander-cli/command-reference/enterprise-management-commands"
+  },
+  {
+   "id": "c45",
+   "url": "https://docs.keeper.io/keeperpam/commander-cli/command-reference/enterprise-management-commands.md",
+   "title": "Enterprise Management Commands",
+   "quote": "`--delete` delete the user from the enterprise. Be careful as this will also delete all of their records,",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/keeperpam/commander-cli/command-reference/enterprise-management-commands"
+  },
+  {
+   "id": "c46",
+   "url": "https://docs.keeper.io/keeperpam/commander-cli/command-reference/enterprise-management-commands.md",
+   "title": "Enterprise Management Commands",
+   "quote": "`--add-role` \\<ROLE NAME OR UID> add the user to a role with the specified name or UID.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/keeperpam/commander-cli/command-reference/enterprise-management-commands"
+  },
+  {
+   "id": "c47",
+   "url": "https://docs.keeper.io/keeperpam/commander-cli/command-reference/enterprise-management-commands.md",
+   "title": "Enterprise Management Commands",
+   "quote": "`--add-team` \\<TEAM NAME OR UID> add the user to the team with the specified name or UID.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/keeperpam/commander-cli/command-reference/enterprise-management-commands"
+  },
+  {
+   "id": "c48",
+   "url": "https://docs.keeper.io/enterprise-guide/developer-tools.md",
+   "title": "Developer APIs and SDKs",
+   "quote": "Keeper Commander provides a REST Service Mode capability, which allows communication to the Commander CLI through a standard REST API interface",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/enterprise-guide/developer-tools"
+  },
+  {
+   "id": "c49",
+   "url": "https://docs.keeper.io/keeperpam/commander-cli/service-mode-rest-api.md",
+   "title": "Service Mode REST API",
+   "quote": "The Keeper Commander Service Mode feature is a self-hosted middleware that wraps an existing Commander session with a REST API.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/keeperpam/commander-cli/service-mode-rest-api"
+  },
+  {
+   "id": "c50",
+   "url": "https://docs.keeper.io/keeperpam/commander-cli/service-mode-rest-api/api-usage.md",
+   "title": "Service Mode API Usage",
+   "quote": "curl -X POST 'http://localhost:<port>/api/v2/executecommand-async'",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/keeperpam/commander-cli/service-mode-rest-api/api-usage"
+  },
+  {
+   "id": "c51",
+   "url": "https://docs.keeper.io/keeperpam/commander-cli/service-mode-rest-api/api-usage.md",
+   "title": "Service Mode API Usage",
+   "quote": "curl --location 'http://localhost:<port>/api/v1/executecommand'",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/keeperpam/commander-cli/service-mode-rest-api/api-usage"
+  },
+  {
+   "id": "c52",
+   "url": "https://docs.keeper.io/enterprise-guide/event-reporting.md",
+   "title": "Advanced Reporting, Alerts & SIEM",
+   "quote": "Custom reporting and alerts is a feature of the Advanced Reporting and Alerts Module (ARAM).",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/enterprise-guide/event-reporting"
+  },
+  {
+   "id": "c53",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/keeper-password-manager-digitalvault-provisioning-tutorial",
+   "title": "Configure Keeper Password Manager & Digital Vault for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Keeper Password Manager & Digital Vault doesn't support user deletes, only disable. Disabled users appear as locked in the Keeper Admin Console UI.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c54",
+   "url": "https://www.okta.com/integrations/keeper-password-manager-and-digital-vault/",
+   "title": "Integrate Keeper Password Manager and Digital Vault with Okta",
+   "quote": "The Leading Secure Password Manager and Digital Vault for Businesses and Individuals.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c55",
+   "url": "https://jumpcloud.com/support/integrate-with-keeper",
+   "title": "Integrate with Keeper | JumpCloud Documentation",
+   "quote": "Automatically provision, update and deprovision users and groups in Keeper from JumpCloud using the SCIM integration.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c56",
+   "url": "https://docs.keeper.io/keeperpam/commander-cli/service-mode-rest-api.md",
+   "title": "Service Mode REST API",
+   "quote": "Configurable token expiration (minutes/hours/days)",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/keeperpam/commander-cli/service-mode-rest-api"
+  },
+  {
+   "id": "c57",
+   "url": "https://www.keepersecurity.com/pricing/business-and-enterprise.html",
+   "title": "Keeper Enterprise Password Manager Plans and Pricing",
+   "quote": "Federate login to Keeper with any SAML 2.0 compatible identity provider",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c58",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/keeper-password-manager-digitalvault-provisioning-tutorial",
+   "title": "Configure Keeper Password Manager & Digital Vault for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Keeper Password Manager & Digital Vault requires emails and userName to have the same source value",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c59",
+   "url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/automated-provisioning-with-scim.md",
+   "title": "API Provisioning with SCIM",
+   "quote": "One node per identity provider, parent-child relationship is not supported",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.keeper.io/enterprise-guide/user-and-team-provisioning/automated-provisioning-with-scim"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.keepersecurity.com/pricing/business-and-enterprise.html",
+  "https://docs.keeper.io/llms.txt",
+  "https://docs.keeper.io/sitemap.xml"
+ ],
+ "open_questions": [
+  "Whether a locked (SCIM-deprovisioned) user still consumes a paid seat is not documented.",
+  "SCIM token expiry is not documented.",
+  "SCIM filter support (e.g. userName eq) is not documented.",
+  "Whether locking ends active vault sessions is not documented."
+ ]
+}

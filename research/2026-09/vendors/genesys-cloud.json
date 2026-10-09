@@ -1,0 +1,990 @@
+{
+ "slug": "genesys-cloud",
+ "vendor": "Genesys Cloud",
+ "vendor_url": "https://www.genesys.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Genesys Cloud",
+  "slug": "genesys-cloud",
+  "category": "Communications (UCaaS/CCaaS)",
+  "status": "free",
+  "scim_plan": "Genesys Cloud CX 1",
+  "scim_price_text": "Genesys Cloud CX 1: $75/u/mo",
+  "scim_price_per_user_mo": 75,
+  "team_plan": "Genesys Cloud CX 1",
+  "team_price_text": "Genesys Cloud CX 1: $75/u/mo",
+  "team_price_per_user_mo": 75,
+  "price_multiplier": 1.0,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": false,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": null,
+   "onelogin": "native",
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.genesys.com/pricing",
+  "docs_url": "https://help.genesys.cloud/articles/about-genesys-cloud-scim-identity-management/",
+  "evidence": "Genesys Cloud SCIM (Identity Management) uses SCIM APIs to sync user entities from identity management systems (Entra ID, Okta, OneLogin) to Genesys Cloud; the SCIM docs and the CX 1-4 pricing matrix set no licence tier or add-on for it.",
+  "notes": "New in 2026-09. Plans: CX 1 $75, CX 2 $115, CX 3 $155, CX 4 $240 per user/month billed annually (named-user; concurrent and hourly models also offered). SCIM is a platform API feature with no documented licence gate or add-on, so it is recorded on CX 1; the gate is inferred from that absence (no page says 'all plans'), hence medium confidence. SSO also has no documented tier, so sso_plan stays null. SCIM is one-way, cannot create groups, and IdP unassignment sets users inactive (hard delete deletes them). sso_required_for_scim is false because the SCIM token comes from an OAuth client, not from SSO configuration.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Genesys Cloud CX 1",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Genesys Cloud CX 1",
+   "price_text": "$75 per user/month billed annually",
+   "price_per_user_mo": 75,
+   "billing": "annual",
+   "sso": null,
+   "scim": null,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c5"
+   ],
+   "notes": "SSO and SCIM are not rows in the pricing comparison matrix; no licence gate for either is documented in the help centre."
+  },
+  {
+   "name": "Genesys Cloud CX 2",
+   "price_text": "$115 per user/month billed annually",
+   "price_per_user_mo": 115,
+   "billing": "annual",
+   "sso": null,
+   "scim": null,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c5"
+   ]
+  },
+  {
+   "name": "Genesys Cloud CX 3",
+   "price_text": "$155 per user/month billed annually",
+   "price_per_user_mo": 155,
+   "billing": "annual",
+   "sso": null,
+   "scim": null,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c5"
+   ]
+  },
+  {
+   "name": "Genesys Cloud CX 4",
+   "price_text": "$240 per user/month billed annually",
+   "price_per_user_mo": 240,
+   "billing": "annual",
+   "sso": null,
+   "scim": null,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c4",
+    "c5"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c6",
+   "c8",
+   "c9"
+  ],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://{domain}/api/v2/scim/v2/",
+  "auth": {
+   "method": "oauth2",
+   "token_source": "Genesys Cloud OAuth client (Client Credentials grant); the access token is pasted into the IdP as the bearer token",
+   "token_expiry": null,
+   "cite": [
+    "c11",
+    "c32"
+   ],
+   "notes": "Entra's tutorial says long-lived bearer tokens are supported; the OAuth token lifetime is not stated in the SCIM docs."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": true,
+   "Schemas": true,
+   "ResourceTypes": true,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c15",
+    "c19",
+    "c20",
+    "c21",
+    "c22",
+    "c23"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c10",
+    "c12",
+    "c15",
+    "c23",
+    "c28",
+    "c30",
+    "c31"
+   ],
+   "notes": "Groups cannot be created or deleted over SCIM; only membership of existing public groups with matching names is synced (Okta Push Groups, Entra group provisioning)."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Inactive users keep their assigned roles and are restored on reactivation; a hard delete in the IdP deletes the Genesys Cloud user, and re-enabling a deleted user does not restore its roles.",
+   "cite": [
+    "c28",
+    "c29",
+    "c30"
+   ],
+   "notes": "Unassigning (Okta) or removing from scope / soft-deleting (Entra) sets the user inactive; Entra's later hard delete deletes the user. Both inactive and deleted users cannot access the org."
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "id",
+    "userName",
+    "manager",
+    "email",
+    "division",
+    "externalId",
+    "active",
+    "employeeNumber"
+   ],
+   "cite": [
+    "c18",
+    "c16"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c17"
+   ],
+   "notes": "startIndex/count; default count 25, and pages over 25 may hit internal limits and return 429 unless attributes are excluded."
+  },
+  "attributes": {
+   "core": [
+    "id",
+    "userName",
+    "active",
+    "displayName",
+    "title",
+    "emails[type eq \"other\"].value",
+    "emails[type eq \"work\"].value",
+    "phoneNumbers[type eq \"work\"].value",
+    "phoneNumbers[type eq \"work2\"].value",
+    "phoneNumbers[type eq \"work3\"].value",
+    "phoneNumbers[type eq \"work4\"].value",
+    "phoneNumbers[type eq \"home\"].value",
+    "phoneNumbers[type eq \"other\"].value",
+    "phoneNumbers[type eq \"mobile\"].value",
+    "emails[type eq \"{type}\"].primary",
+    "phoneNumbers[type eq \"{type}\"].primary",
+    "externalId",
+    "roles.[].value",
+    "groups",
+    "password",
+    "meta.location",
+    "meta.version",
+    "meta.lastModified"
+   ],
+   "enterprise": [
+    "manager",
+    "dateHire",
+    "department",
+    "division",
+    "employeeNumber"
+   ],
+   "custom": {
+    "supported": null,
+    "how": "No arbitrary custom attributes are documented; a Genesys extension (urn:ietf:params:scim:schemas:extension:genesys:purecloud:2.0:User) carries routingSkills and routingLanguages (name, proficiency)."
+   },
+   "group": [],
+   "cite": [
+    "c24",
+    "c25",
+    "c26",
+    "c27"
+   ],
+   "notes": "name.givenName, name.familyName and addresses are listed as not supported by Genesys Cloud. Entra's mapping also uses a Microsoft Teams externalIds extension attribute."
+  },
+  "roles": {
+   "supported": true,
+   "how": "roles attribute (roles.[].value) maps to the user roles API; Genesys also recommends assigning roles to groups and syncing group membership.",
+   "cite": [
+    "c26",
+    "c30"
+   ]
+  },
+  "rate_limits": {
+   "text": "List requests with a page size over 25 may exceed internal resource limits and return 429.",
+   "cite": [
+    "c17"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "One-way only: changes made in Genesys Cloud are not synced back and may be overwritten.",
+    "cite": [
+     "c7"
+    ]
+   },
+   {
+    "text": "Cannot create or delete groups; only public groups with names matching the IdP group are synced.",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "text": "Blocks any single action that removes more than 1000 members from a group (Okta Push Now behaviour).",
+    "cite": [
+     "c13"
+    ]
+   },
+   {
+    "text": "name.givenName, name.familyName and address attributes are not supported.",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "text": "Re-enabling a user deleted in Genesys Cloud does not restore the default employee role or manually added roles.",
+    "cite": [
+     "c30"
+    ]
+   }
+  ],
+  "notes": "SCIM is a platform feature configured with an OAuth client; neither the SCIM docs nor the pricing matrix tie it to a CX tier, so scim.plan stays null. A legacy path without /v2 (/api/v2/scim/users) is also listed in the SDK docs. {domain} is the region API host, e.g. api.mypurecloud.com."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c5",
+   "c37",
+   "c38"
+  ],
+  "plan": "Genesys Cloud CX 1",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://{region API host}/api/v2",
+  "docs_url": "https://github.com/MyPureCloud/platform-client-sdk-javascript/blob/master/build/docs/UsersApi.md",
+  "auth": {
+   "methods": [
+    "oauth2"
+   ],
+   "scopes": [],
+   "cite": [
+    "c11"
+   ],
+   "notes": "OAuth clients (client credentials and user grants). SCIM calls use the 'scim' / 'scim:readonly' scopes; Platform API permissions such as directory:user:delete are role-based."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": true,
+   "cite": [
+    "c37",
+    "c38",
+    "c39",
+    "c40",
+    "c41",
+    "c42",
+    "c43",
+    "c45",
+    "c46",
+    "c48"
+   ],
+   "notes": "Users have states active, inactive and deleted; the docs list state as a filter, but a documented deactivate call outside SCIM was not confirmed."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/api/v2/users",
+    "purpose": "Get the list of available users",
+    "cite": [
+     "c37",
+     "c44"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v2/users",
+    "purpose": "Create user",
+    "cite": [
+     "c38"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v2/users/{userId}",
+    "purpose": "Get user",
+    "cite": [
+     "c41"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v2/users/{userId}",
+    "purpose": "Update user",
+    "cite": [
+     "c39"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v2/users/{userId}",
+    "purpose": "Delete user",
+    "cite": [
+     "c40"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v2/users/{userId}/invite",
+    "purpose": "Send an activation email to the user",
+    "cite": [
+     "c42"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/v2/users/{subjectId}/roles",
+    "purpose": "Set the user's roles",
+    "cite": [
+     "c43"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v2/authorization/roles",
+    "purpose": "List roles defined for the organization",
+    "cite": [
+     "c47"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v2/groups",
+    "purpose": "Create a group",
+    "cite": [
+     "c46"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v2/groups/{groupId}/members",
+    "purpose": "Add group members",
+    "cite": [
+     "c45"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v2/groups/{groupId}/members",
+    "purpose": "Remove group members",
+    "cite": [
+     "c52"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v2/license/users",
+    "purpose": "Get a page of users and their licenses",
+    "cite": [
+     "c49"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v2/license/organization",
+    "purpose": "Update the organization's license assignments in a batch",
+    "cite": [
+     "c48"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v2/audits/query",
+    "purpose": "Create audit query execution",
+    "cite": [
+     "c50"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": null,
+   "cite": [
+    "c50"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "Plan inferred from the pricing page's fair-use allowance, which includes API calls on all plans."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/genesys-cloud/",
+   "cite": [
+    "c33",
+    "c12",
+    "c14"
+   ],
+   "notes": "OIN page marks SAML, SWA, SCIM with Create, Update, Deactivate, Sync Password, Group Push and Group Linking (read from page markup)."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/purecloud-by-genesys-provisioning-tutorial",
+   "cite": [
+    "c31",
+    "c32"
+   ],
+   "notes": "Gallery app 'Genesys Cloud for Azure' (formerly PureCloud by Genesys)."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "No Google Workspace provisioning documented."
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c34"
+   ],
+   "notes": "From Genesys's own OneLogin SCIM guide (OneLogin app named 'PureCloud'); OneLogin catalogue page not loaded."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "Not listed among the identity management systems known to work with Genesys Cloud SCIM; not checked in JumpCloud's catalogue."
+  }
+ },
+ "fallbacks": {
+  "jit": false,
+  "jit_protocol": null,
+  "csv_import": true,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c36",
+   "c51"
+  ],
+  "notes": "SSO requires the user's email to already exist in Genesys Cloud, so SSO does not create users."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.genesys.com/pricing",
+   "title": "Genesys Cloud pricing",
+   "quote": "Genesys Cloud CX 1 For voice contact centers and associate users $75 USD per user/month billed annually",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://www.genesys.com/pricing",
+   "title": "Genesys Cloud pricing",
+   "quote": "Genesys Cloud CX 2 For omnichannel contact centers and associate users with quality assurance and compliance built in $115 USD per user/month billed annually",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://www.genesys.com/pricing",
+   "title": "Genesys Cloud pricing",
+   "quote": "Genesys Cloud CX 3 For omnichannel contact centers and associate users with full WEM capabilities $155 USD per user/month billed annually",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://www.genesys.com/pricing",
+   "title": "Genesys Cloud pricing",
+   "quote": "Genesys Cloud CX 4 For omnichannel contact centers and associate users that want more AI experience at the best value $240 USD per user/month billed annually",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://www.genesys.com/pricing",
+   "title": "Genesys Cloud pricing",
+   "quote": "This includes minutes when bringing your own carrier, data storage, basic routing/IVR minutes, API calls, voice transcription minutes and SMS messages when using third-party SMS services.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://help.genesys.cloud/articles/about-genesys-cloud-scim-identity-management/",
+   "title": "About Genesys Cloud SCIM (Identity Management)",
+   "quote": "Genesys Cloud SCIM (Identity Management) uses SCIM APIs to sync user entities from cloud or on-premises identity management systems to Genesys Cloud.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://help.genesys.cloud/articles/about-genesys-cloud-scim-identity-management/",
+   "title": "About Genesys Cloud SCIM (Identity Management)",
+   "quote": "Genesys Cloud currently only supports unidirectional syncing from identity management systems to Genesys Cloud. Any changes made in Genesys Cloud will not be synced to the identity management systems and may be overwritten.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://help.genesys.cloud/articles/about-genesys-cloud-scim-identity-management/",
+   "title": "About Genesys Cloud SCIM (Identity Management)",
+   "quote": "These identity management systems are known to work with the SCIM API implementation.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://help.genesys.cloud/articles/configure-microsoft-entra-id-for-genesys-cloud-scim-identity-management/",
+   "title": "Configure Microsoft Entra ID for Genesys Cloud SCIM (Identity Management)",
+   "quote": "https://{domain}/api/v2/scim/v2/",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://help.genesys.cloud/articles/configure-microsoft-entra-id-for-genesys-cloud-scim-identity-management/",
+   "title": "Configure Microsoft Entra ID for Genesys Cloud SCIM (Identity Management)",
+   "quote": "Provisioning can create, update, and delete users in Genesys Cloud. Provisioning can add users to a public group or remove users from a public group in Genesys Cloud, but cannot create or delete groups in Genesys Cloud.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c11",
+   "url": "https://help.genesys.cloud/articles/configure-okta-for-genesys-cloud-scim-identity-management/",
+   "title": "Configure Okta for Genesys Cloud SCIM (Identity Management)",
+   "quote": "Enter the Client ID from the Genesys Cloud OAuth client you created.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://help.genesys.cloud/articles/configure-okta-for-genesys-cloud-scim-identity-management/",
+   "title": "Configure Okta for Genesys Cloud SCIM (Identity Management)",
+   "quote": "Create Users Update User Attributes Deactivate Users Sync Password Push Groups To App",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://help.genesys.cloud/articles/configure-okta-for-genesys-cloud-scim-identity-management/",
+   "title": "Configure Okta for Genesys Cloud SCIM (Identity Management)",
+   "quote": "Genesys Cloud SCIM blocks any single action that tries to remove more than 1000 members from a group",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c14",
+   "url": "https://help.genesys.cloud/articles/configure-okta-for-genesys-cloud-scim-identity-management/",
+   "title": "Configure Okta for Genesys Cloud SCIM (Identity Management)",
+   "quote": "Search for and click Genesys Cloud",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://raw.githubusercontent.com/MyPureCloud/platform-client-sdk-javascript/master/build/docs/SCIMApi.md",
+   "title": "SCIMApi (Genesys Cloud Platform API JavaScript SDK docs)",
+   "quote": "DELETE /api/v2/scim/v2/users/{userId} | Delete a user",
+   "accessed": "2026-10-05",
+   "page_url": "https://github.com/MyPureCloud/platform-client-sdk-javascript/blob/master/build/docs/SCIMApi.md"
+  },
+  {
+   "id": "c16",
+   "url": "https://raw.githubusercontent.com/MyPureCloud/platform-client-sdk-javascript/master/build/docs/SCIMApi.md",
+   "title": "SCIMApi (Genesys Cloud Platform API JavaScript SDK docs)",
+   "quote": "To return inactive users, set the filter parameter to \"active eq false\".",
+   "accessed": "2026-10-05",
+   "page_url": "https://github.com/MyPureCloud/platform-client-sdk-javascript/blob/master/build/docs/SCIMApi.md"
+  },
+  {
+   "id": "c17",
+   "url": "https://raw.githubusercontent.com/MyPureCloud/platform-client-sdk-javascript/master/build/docs/SCIMApi.md",
+   "title": "SCIMApi (Genesys Cloud Platform API JavaScript SDK docs)",
+   "quote": "A page size over 25 may exceed internal resource limits and return a 429 error.",
+   "accessed": "2026-10-05",
+   "page_url": "https://github.com/MyPureCloud/platform-client-sdk-javascript/blob/master/build/docs/SCIMApi.md"
+  },
+  {
+   "id": "c18",
+   "url": "https://raw.githubusercontent.com/MyPureCloud/platform-client-sdk-javascript/master/build/docs/SCIMApi.md",
+   "title": "SCIMApi (Genesys Cloud Platform API JavaScript SDK docs)",
+   "quote": "Examples of valid values: id eq 857449b0-d9e7-4cd0-acbf-a6adfb9ef1e9, userName eq search@sample.org, manager eq 16e10e2f-1136-43fe-bb84-eac073168a49, email eq search@sample.org, division eq divisionName, externalId eq 167844, active eq false, employeeNumber eq 9876543210.",
+   "accessed": "2026-10-05",
+   "page_url": "https://github.com/MyPureCloud/platform-client-sdk-javascript/blob/master/build/docs/SCIMApi.md"
+  },
+  {
+   "id": "c19",
+   "url": "https://raw.githubusercontent.com/MyPureCloud/platform-client-sdk-javascript/master/build/docs/SCIMApi.md",
+   "title": "SCIMApi (Genesys Cloud Platform API JavaScript SDK docs)",
+   "quote": "GET /api/v2/scim/v2/serviceproviderconfig",
+   "accessed": "2026-10-05",
+   "page_url": "https://github.com/MyPureCloud/platform-client-sdk-javascript/blob/master/build/docs/SCIMApi.md"
+  },
+  {
+   "id": "c20",
+   "url": "https://raw.githubusercontent.com/MyPureCloud/platform-client-sdk-javascript/master/build/docs/SCIMApi.md",
+   "title": "SCIMApi (Genesys Cloud Platform API JavaScript SDK docs)",
+   "quote": "GET /api/v2/scim/v2/schemas",
+   "accessed": "2026-10-05",
+   "page_url": "https://github.com/MyPureCloud/platform-client-sdk-javascript/blob/master/build/docs/SCIMApi.md"
+  },
+  {
+   "id": "c21",
+   "url": "https://raw.githubusercontent.com/MyPureCloud/platform-client-sdk-javascript/master/build/docs/SCIMApi.md",
+   "title": "SCIMApi (Genesys Cloud Platform API JavaScript SDK docs)",
+   "quote": "GET /api/v2/scim/v2/resourcetypes",
+   "accessed": "2026-10-05",
+   "page_url": "https://github.com/MyPureCloud/platform-client-sdk-javascript/blob/master/build/docs/SCIMApi.md"
+  },
+  {
+   "id": "c22",
+   "url": "https://raw.githubusercontent.com/MyPureCloud/platform-client-sdk-javascript/master/build/docs/SCIMApi.md",
+   "title": "SCIMApi (Genesys Cloud Platform API JavaScript SDK docs)",
+   "quote": "PATCH /api/v2/scim/v2/groups/{groupId}",
+   "accessed": "2026-10-05",
+   "page_url": "https://github.com/MyPureCloud/platform-client-sdk-javascript/blob/master/build/docs/SCIMApi.md"
+  },
+  {
+   "id": "c23",
+   "url": "https://raw.githubusercontent.com/MyPureCloud/platform-client-sdk-javascript/master/build/docs/SCIMApi.md",
+   "title": "SCIMApi (Genesys Cloud Platform API JavaScript SDK docs)",
+   "quote": "POST /api/v2/scim/v2/users",
+   "accessed": "2026-10-05",
+   "page_url": "https://github.com/MyPureCloud/platform-client-sdk-javascript/blob/master/build/docs/SCIMApi.md"
+  },
+  {
+   "id": "c24",
+   "url": "https://help.genesys.cloud/articles/scim-and-genesys-cloud-field-mappings/",
+   "title": "SCIM and Genesys Cloud field mappings",
+   "quote": "This table shows the SCIM fields that Genesys Cloud SCIM (Identity Management) maps to Genesys Cloud fields.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c25",
+   "url": "https://help.genesys.cloud/articles/scim-and-genesys-cloud-field-mappings/",
+   "title": "SCIM and Genesys Cloud field mappings",
+   "quote": "name.givenName — Not currently supported by Genesys Cloud.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c26",
+   "url": "https://help.genesys.cloud/articles/scim-and-genesys-cloud-field-mappings/",
+   "title": "SCIM and Genesys Cloud field mappings",
+   "quote": "roles.[].value {user roles API}",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c27",
+   "url": "https://help.genesys.cloud/articles/scim-and-genesys-cloud-field-mappings/",
+   "title": "SCIM and Genesys Cloud field mappings",
+   "quote": "routingSkills.[].proficiency {user routing skills API}",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c28",
+   "url": "https://help.genesys.cloud/faqs/what-happens-if-i-unassign-a-user-from-the-genesys-cloud-application-in-okta/",
+   "title": "What happens if I unassign a user from the Genesys Cloud application in Okta?",
+   "quote": "When you unassign a user from the Genesys Cloud application in Okta, Okta changes the status of the user to inactive. The user in Genesys Cloud retains assigned roles if the user is reactivated. Both inactive and deleted users cannot access your Genesys Cloud organization.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c29",
+   "url": "https://help.genesys.cloud/faqs/what-causes-genesys-cloud-to-change-the-status-of-a-microsoft-entra-id-user-to-inactive-or-to-delete-a-user/",
+   "title": "What causes Genesys Cloud to change the status of a Microsoft Entra ID user to inactive or to delete a user?",
+   "quote": "notifies Genesys Cloud to change the user’s status to inactive.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c30",
+   "url": "https://help.genesys.cloud/faqs/what-happens-when-i-delete-a-user-in-genesys-cloud-and-later-reenable-the-user-in-okta/",
+   "title": "What happens when I delete a user in Genesys Cloud and later reenable the user in Okta?",
+   "quote": "When you delete a user in Genesys Cloud and later reenable the user in Okta, Genesys Cloud changes the user’s status to Active. However, unlike when you create a new user, Genesys Cloud does not automatically restore the default employee role",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c31",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/purecloud-by-genesys-provisioning-tutorial",
+   "title": "Configure Genesys Cloud for Azure for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Create users in Genesys Cloud for Azure Remove users in Genesys Cloud for Azure when they don't require access anymore Keep user attributes synchronized between Microsoft Entra ID and Genesys Cloud for Azure Provision groups and group memberships in Genesys Cloud for Azure",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c32",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/purecloud-by-genesys-provisioning-tutorial",
+   "title": "Configure Genesys Cloud for Azure for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Long lived bearer token authentication supported.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c33",
+   "url": "https://www.okta.com/integrations/genesys-cloud/",
+   "title": "Genesys Cloud | Okta Integration Network",
+   "quote": "Okta's integration provides single sign on and user provisioning capabilities, giving your team immediate access to the Genesys Cloud platform",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c34",
+   "url": "https://help.genesys.cloud/articles/configure-onelogin-for-genesys-cloud-scim-identity-management/",
+   "title": "Configure OneLogin for Genesys Cloud SCIM (Identity Management)",
+   "quote": "To use Genesys Cloud SCIM (Identity Management) with OneLogin, configure OneLogin to sync user entities to Genesys Cloud. In OneLogin, add an application that you configure to work with the SCIM APIs.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c35",
+   "url": "https://help.genesys.cloud/articles/single-sign-on-overview/",
+   "title": "Single sign-on overview",
+   "quote": "Genesys Cloud supports various third-party identity providers for single sign-on integrations.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c36",
+   "url": "https://help.genesys.cloud/articles/single-sign-on-overview/",
+   "title": "Single sign-on overview",
+   "quote": "The user’s single sign-on email address must match the configured email address for that user in Genesys Cloud.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c37",
+   "url": "https://raw.githubusercontent.com/MyPureCloud/platform-client-sdk-javascript/master/build/docs/UsersApi.md",
+   "title": "UsersApi (Genesys Cloud Platform API JavaScript SDK docs)",
+   "quote": "GET** /api/v2/users | Get the list of available users.",
+   "accessed": "2026-10-05",
+   "page_url": "https://github.com/MyPureCloud/platform-client-sdk-javascript/blob/master/build/docs/UsersApi.md"
+  },
+  {
+   "id": "c38",
+   "url": "https://raw.githubusercontent.com/MyPureCloud/platform-client-sdk-javascript/master/build/docs/UsersApi.md",
+   "title": "UsersApi (Genesys Cloud Platform API JavaScript SDK docs)",
+   "quote": "POST** /api/v2/users | Create user",
+   "accessed": "2026-10-05",
+   "page_url": "https://github.com/MyPureCloud/platform-client-sdk-javascript/blob/master/build/docs/UsersApi.md"
+  },
+  {
+   "id": "c39",
+   "url": "https://raw.githubusercontent.com/MyPureCloud/platform-client-sdk-javascript/master/build/docs/UsersApi.md",
+   "title": "UsersApi (Genesys Cloud Platform API JavaScript SDK docs)",
+   "quote": "PATCH** /api/v2/users/{userId} | Update user",
+   "accessed": "2026-10-05",
+   "page_url": "https://github.com/MyPureCloud/platform-client-sdk-javascript/blob/master/build/docs/UsersApi.md"
+  },
+  {
+   "id": "c40",
+   "url": "https://raw.githubusercontent.com/MyPureCloud/platform-client-sdk-javascript/master/build/docs/UsersApi.md",
+   "title": "UsersApi (Genesys Cloud Platform API JavaScript SDK docs)",
+   "quote": "DELETE** /api/v2/users/{userId} | Delete user",
+   "accessed": "2026-10-05",
+   "page_url": "https://github.com/MyPureCloud/platform-client-sdk-javascript/blob/master/build/docs/UsersApi.md"
+  },
+  {
+   "id": "c41",
+   "url": "https://raw.githubusercontent.com/MyPureCloud/platform-client-sdk-javascript/master/build/docs/UsersApi.md",
+   "title": "UsersApi (Genesys Cloud Platform API JavaScript SDK docs)",
+   "quote": "GET** /api/v2/users/{userId} | Get user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://github.com/MyPureCloud/platform-client-sdk-javascript/blob/master/build/docs/UsersApi.md"
+  },
+  {
+   "id": "c42",
+   "url": "https://raw.githubusercontent.com/MyPureCloud/platform-client-sdk-javascript/master/build/docs/UsersApi.md",
+   "title": "UsersApi (Genesys Cloud Platform API JavaScript SDK docs)",
+   "quote": "POST** /api/v2/users/{userId}/invite | Send an activation email to the user",
+   "accessed": "2026-10-05",
+   "page_url": "https://github.com/MyPureCloud/platform-client-sdk-javascript/blob/master/build/docs/UsersApi.md"
+  },
+  {
+   "id": "c43",
+   "url": "https://raw.githubusercontent.com/MyPureCloud/platform-client-sdk-javascript/master/build/docs/UsersApi.md",
+   "title": "UsersApi (Genesys Cloud Platform API JavaScript SDK docs)",
+   "quote": "PUT** /api/v2/users/{subjectId}/roles | Sets the user's roles",
+   "accessed": "2026-10-05",
+   "page_url": "https://github.com/MyPureCloud/platform-client-sdk-javascript/blob/master/build/docs/UsersApi.md"
+  },
+  {
+   "id": "c44",
+   "url": "https://raw.githubusercontent.com/MyPureCloud/platform-client-sdk-javascript/master/build/docs/UsersApi.md",
+   "title": "UsersApi (Genesys Cloud Platform API JavaScript SDK docs)",
+   "quote": "Only list users of this state | [optional] [default to active]<br />**Values**: active, inactive, deleted, any",
+   "accessed": "2026-10-05",
+   "page_url": "https://github.com/MyPureCloud/platform-client-sdk-javascript/blob/master/build/docs/UsersApi.md"
+  },
+  {
+   "id": "c45",
+   "url": "https://raw.githubusercontent.com/MyPureCloud/platform-client-sdk-javascript/master/build/docs/GroupsApi.md",
+   "title": "GroupsApi (Genesys Cloud Platform API JavaScript SDK docs)",
+   "quote": "POST** /api/v2/groups/{groupId}/members | Add members",
+   "accessed": "2026-10-05",
+   "page_url": "https://github.com/MyPureCloud/platform-client-sdk-javascript/blob/master/build/docs/GroupsApi.md"
+  },
+  {
+   "id": "c46",
+   "url": "https://raw.githubusercontent.com/MyPureCloud/platform-client-sdk-javascript/master/build/docs/GroupsApi.md",
+   "title": "GroupsApi (Genesys Cloud Platform API JavaScript SDK docs)",
+   "quote": "POST** /api/v2/groups | Create a group",
+   "accessed": "2026-10-05",
+   "page_url": "https://github.com/MyPureCloud/platform-client-sdk-javascript/blob/master/build/docs/GroupsApi.md"
+  },
+  {
+   "id": "c47",
+   "url": "https://raw.githubusercontent.com/MyPureCloud/platform-client-sdk-javascript/master/build/docs/AuthorizationApi.md",
+   "title": "AuthorizationApi (Genesys Cloud Platform API JavaScript SDK docs)",
+   "quote": "GET** /api/v2/authorization/roles | Retrieve a list of all roles defined for the organization",
+   "accessed": "2026-10-05",
+   "page_url": "https://github.com/MyPureCloud/platform-client-sdk-javascript/blob/master/build/docs/AuthorizationApi.md"
+  },
+  {
+   "id": "c48",
+   "url": "https://raw.githubusercontent.com/MyPureCloud/platform-client-sdk-javascript/master/build/docs/LicenseApi.md",
+   "title": "LicenseApi (Genesys Cloud Platform API JavaScript SDK docs)",
+   "quote": "POST** /api/v2/license/organization | Update the organization's license assignments in a batch.",
+   "accessed": "2026-10-05",
+   "page_url": "https://github.com/MyPureCloud/platform-client-sdk-javascript/blob/master/build/docs/LicenseApi.md"
+  },
+  {
+   "id": "c49",
+   "url": "https://raw.githubusercontent.com/MyPureCloud/platform-client-sdk-javascript/master/build/docs/LicenseApi.md",
+   "title": "LicenseApi (Genesys Cloud Platform API JavaScript SDK docs)",
+   "quote": "GET** /api/v2/license/users | Get a page of users and their licenses",
+   "accessed": "2026-10-05",
+   "page_url": "https://github.com/MyPureCloud/platform-client-sdk-javascript/blob/master/build/docs/LicenseApi.md"
+  },
+  {
+   "id": "c50",
+   "url": "https://raw.githubusercontent.com/MyPureCloud/platform-client-sdk-javascript/master/build/docs/AuditApi.md",
+   "title": "AuditApi (Genesys Cloud Platform API JavaScript SDK docs)",
+   "quote": "POST** /api/v2/audits/query | Create audit query execution",
+   "accessed": "2026-10-05",
+   "page_url": "https://github.com/MyPureCloud/platform-client-sdk-javascript/blob/master/build/docs/AuditApi.md"
+  },
+  {
+   "id": "c51",
+   "url": "https://help.genesys.cloud/articles/add-people-csv-file-import/",
+   "title": "Add people with a .csv file import",
+   "quote": "file to bulk upload people and their details to your organization.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c52",
+   "url": "https://raw.githubusercontent.com/MyPureCloud/platform-client-sdk-javascript/master/build/docs/GroupsApi.md",
+   "title": "GroupsApi (Genesys Cloud Platform API JavaScript SDK docs)",
+   "quote": "DELETE** /api/v2/groups/{groupId}/members | Remove members",
+   "accessed": "2026-10-05",
+   "page_url": "https://github.com/MyPureCloud/platform-client-sdk-javascript/blob/master/build/docs/GroupsApi.md"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.genesys.com/pricing (incl. comparison matrix)",
+  "https://help.genesys.cloud/server-sitemap.xml?articles and ?faqs",
+  "https://help.genesys.cloud/articles/genesys-cloud-licenses-and-billing/",
+  "https://help.genesys.cloud/articles/genesys-cloud-add-ons-and-pricing/",
+  "https://developer.genesys.cloud/useragentmanagement/scim/ (JS app; render.cjs ERR_TOO_MANY_RETRIES)",
+  "MyPureCloud JavaScript SDK docs: SCIMApi, UsersApi, GroupsApi, AuthorizationApi, LicenseApi, AuditApi"
+ ],
+ "open_questions": [
+  "No Genesys page states which CX licences include SCIM or SSO; recorded as CX 1 because no gate or add-on is documented.",
+  "Whether deactivation frees a named licence and whether it ends active sessions is not documented.",
+  "The OAuth access token lifetime used for SCIM is not stated in the SCIM docs.",
+  "Platform API rate limits were not loaded (Developer Center is a JS app that the renderer could not open).",
+  "Google Workspace and JumpCloud support for SCIM or SSO is not documented."
+ ]
+}

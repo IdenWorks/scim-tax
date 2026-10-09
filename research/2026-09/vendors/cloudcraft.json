@@ -1,0 +1,746 @@
+{
+ "slug": "cloudcraft",
+ "vendor": "Cloudcraft (Datadog)",
+ "vendor_url": "https://www.cloudcraft.co",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Cloudcraft (Datadog)",
+  "slug": "cloudcraft",
+  "category": "Cloud, Infrastructure & Observability",
+  "status": "free",
+  "scim_plan": "Datadog Infrastructure Pro",
+  "scim_price_text": "Infrastructure Pro: $15/host/mo (annual)",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Datadog Infrastructure Pro",
+  "team_price_text": "Infrastructure Pro: $15/host/mo (annual)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Datadog Infrastructure Pro",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": false,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.cloudcraft.co/pricing",
+  "docs_url": "https://docs.datadoghq.com/account_management/scim/",
+  "evidence": "Cloudcraft's pricing page says 'Cloudcraft is free in Datadog' with any Datadog subscription, and Datadog's pricing page and SCIM docs put SCIM on Infrastructure Pro, the cheapest paid Infrastructure tier.",
+  "notes": "Status changed none -> free. Cloudcraft's pricing page no longer sells standalone plans: it says Cloudcraft is free in Datadog with any Datadog subscription, unlimited users. Row renamed Cloudcraft (Datadog) under the rebrand rule; users are Datadog users (access needs the cloudcraft_read permission, in the Read Only role by default), so provisioning follows Datadog's SCIM, which Datadog's pricing page and docs put on Infrastructure Pro ($15/host/month annual, $18 on-demand) and Enterprise ($23). Pricing is per host, so per-user fields are null. Caveats: a Datadog subscription without Infrastructure Pro or Enterprise (e.g. logs only) gets Cloudcraft but not SCIM; Datadog SCIM supports Okta and Entra explicitly; SCIM Teams provisioning is only for select organizations. June's standalone prices (Pro $99/u/mo, Enterprise $120) are no longer on any Cloudcraft page and are dropped. Standalone Cloudcraft docs still exist: SAML SSO on Pro and Enterprise with JIT, no SCIM, and the Okta Cloudcraft app is SWA only. Datadog itself is researched as its own row.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": null,
+  "status_prev": "none"
+ },
+ "plans": [
+  {
+   "name": "Datadog Infrastructure Free (Cloudcraft included)",
+   "price_text": "$0, up to 5 hosts",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c9",
+    "c7",
+    "c8",
+    "c3"
+   ]
+  },
+  {
+   "name": "Datadog Infrastructure Pro (Cloudcraft included)",
+   "price_text": "$15 per host/month billed annually ($18 on-demand)",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c4",
+    "c5",
+    "c7",
+    "c8",
+    "c10",
+    "c3"
+   ],
+   "notes": "Per-host pricing; unlimited user accounts."
+  },
+  {
+   "name": "Datadog Infrastructure Enterprise (Cloudcraft included)",
+   "price_text": "$23 per host/month billed annually",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c6",
+    "c7",
+    "c8",
+    "c10",
+    "c3"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c7",
+   "c10",
+   "c11",
+   "c17"
+  ],
+  "plan": "Datadog Infrastructure Pro",
+  "addon_price_text": null,
+  "sso_required": false,
+  "version": null,
+  "base_url": "https://api.datadoghq.com/api/v2/scim",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Datadog application key, ideally from a service account (Organization Settings > Application Keys)",
+   "token_expiry": null,
+   "cite": [
+    "c15"
+   ],
+   "notes": "Method inferred from the IdP token fields; Datadog calls it an application key."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": true,
+   "ResourceTypes": true,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c17",
+    "c20",
+    "c21",
+    "c22"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c25",
+    "c17",
+    "c24",
+    "c18",
+    "c19",
+    "c26",
+    "c13"
+   ]
+  },
+  "deprovision": {
+   "action": null,
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [],
+   "notes": "Docs say SCIM removes users and Okta 'Deactivate Users'; the resulting Datadog user state is not described here."
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName"
+   ],
+   "cite": [
+    "c38"
+   ],
+   "notes": "Entra tutorial marks userName as supported for filtering."
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "active",
+    "title",
+    "emails[type eq \"work\"].value",
+    "name.formatted",
+    "roles"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": [
+    "c38",
+    "c14"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "SCIM roles multi-valued attribute (role UUID as value) maps built-in or custom Datadog roles; unmatched roles fall back to Standard.",
+   "cite": [
+    "c14"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Datadog explicitly supports only Okta and Microsoft Entra ID for SCIM.",
+    "cite": [
+     "c11"
+    ]
+   },
+   {
+    "text": "SCIM provisioning of Datadog Teams is only available for select organizations.",
+    "cite": [
+     "c23"
+    ]
+   },
+   {
+    "text": "Datadog recommends disabling SAML JIT when SCIM is used.",
+    "cite": [
+     "c16"
+    ]
+   },
+   {
+    "text": "Cloudcraft Standalone (legacy) has no SCIM; only SAML SSO with JIT on Pro and Enterprise.",
+    "cite": [
+     "c28",
+     "c29",
+     "c39"
+    ]
+   }
+  ],
+  "notes": "SCIM is Datadog's organization-level SCIM; Cloudcraft in Datadog uses Datadog users and RBAC (c27)."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c33",
+   "c34",
+   "c35"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://api.cloudcraft.co",
+  "docs_url": "https://docs.datadoghq.com/cloudcraft/api/",
+  "auth": {
+   "methods": [
+    "api_key (Bearer)"
+   ],
+   "scopes": [],
+   "cite": [
+    "c33"
+   ]
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": true,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c34",
+    "c35"
+   ],
+   "notes": "Cloudcraft Standalone API exposes the caller's profile and team listing only; user management for Cloudcraft in Datadog is Datadog's user API (researched under the Datadog row)."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/user/me",
+    "purpose": "Retrieve your user profile",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/team",
+    "purpose": "List all teams linked to your Cloudcraft account (with members)",
+    "cite": [
+     "c35"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "20 requests / 10 seconds (120 per minute) per API key.",
+   "cite": [
+    "c32"
+   ]
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/datadog/",
+   "cite": [
+    "c37"
+   ],
+   "notes": "Datadog OIN app (SAML, SCIM, Create, Update, Deactivate, Group Push). The separate Cloudcraft OIN app (https://www.okta.com/integrations/cloudcraft/) is SWA only (c36)."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/datadog-provisioning-tutorial",
+   "cite": [
+    "c38",
+    "c41"
+   ],
+   "notes": "Datadog gallery app."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c29",
+   "c16",
+   "c10"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.cloudcraft.co/pricing",
+   "title": "Cloudcraft Pricing",
+   "quote": "Cloudcraft is free in Datadog",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://www.cloudcraft.co/pricing",
+   "title": "Cloudcraft Pricing",
+   "quote": "Unlimited users · Unlimited diagrams",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://www.cloudcraft.co/pricing",
+   "title": "Cloudcraft Pricing",
+   "quote": "Diagram your entire infrastructure with any Datadog subscription",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://www.datadoghq.com/pricing/?product=infrastructure-monitoring",
+   "title": "Datadog Pricing: Infrastructure Monitoring",
+   "quote": "Pro Starting At $ 15 Per host, per month*",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://www.datadoghq.com/pricing/?product=infrastructure-monitoring",
+   "title": "Datadog Pricing: Infrastructure Monitoring",
+   "quote": "*Billed annually or $ 18 on-demand",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://www.datadoghq.com/pricing/?product=infrastructure-monitoring",
+   "title": "Datadog Pricing: Infrastructure Monitoring",
+   "quote": "Enterprise Starting At $ 23 Per host, per month*",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://www.datadoghq.com/pricing/?product=infrastructure-monitoring",
+   "title": "Datadog Pricing: Infrastructure Monitoring",
+   "quote": "Advanced Administrative Features SCIM",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://www.datadoghq.com/pricing/?product=infrastructure-monitoring",
+   "title": "Datadog Pricing: Infrastructure Monitoring",
+   "quote": "Single Sign-On with SAML",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://www.datadoghq.com/pricing/?product=infrastructure-monitoring",
+   "title": "Datadog Pricing: Infrastructure Monitoring",
+   "quote": "Core collection and visualization features 1-day metric retention Up to 5 hosts",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.datadoghq.com/account_management/scim/",
+   "title": "User Provisioning with SCIM",
+   "quote": "SCIM is available with the Infrastructure Pro, Infrastructure Enterprise, and Startup plans.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.datadoghq.com/account_management/scim/",
+   "title": "User Provisioning with SCIM",
+   "quote": "Datadog supports using SCIM with the Microsoft Entra ID and Okta identity providers. Other identity providers may work, but are not explicitly supported.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.datadoghq.com/account_management/scim/",
+   "title": "User Provisioning with SCIM",
+   "quote": "Remove users in Datadog when they no longer require access",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.datadoghq.com/account_management/scim/",
+   "title": "User Provisioning with SCIM",
+   "quote": "Managed Teams: Create Datadog Teams from identity provider groups and keep membership of the Datadog Teams synchronized with group membership in the identity provider.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.datadoghq.com/account_management/scim/",
+   "title": "User Provisioning with SCIM",
+   "quote": "Role provisioning: Provision a user's Datadog role (built-in or custom) from an identity provider attribute, and keep it synchronized.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.datadoghq.com/account_management/scim/",
+   "title": "User Provisioning with SCIM",
+   "quote": "To enable SCIM, you must use an application key to secure the connection between your identity provider and your Datadog account.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.datadoghq.com/account_management/scim/",
+   "title": "User Provisioning with SCIM",
+   "quote": "When using SAML and SCIM together, Datadog strongly recommends disabling SAML just-in-time (JIT) provisioning to avoid discrepancies in access.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.datadoghq.com/api/latest/scim.md",
+   "title": "SCIM API Reference",
+   "quote": "GET https://api.datadoghq.com/api/v2/scim/Users",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.datadoghq.com/api/latest/scim/"
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.datadoghq.com/api/latest/scim.md",
+   "title": "SCIM API Reference",
+   "quote": "PATCH https://api.datadoghq.com/api/v2/scim/Users/{user_uuid}",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.datadoghq.com/api/latest/scim/"
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.datadoghq.com/api/latest/scim.md",
+   "title": "SCIM API Reference",
+   "quote": "DELETE https://api.datadoghq.com/api/v2/scim/Users/{user_uuid}",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.datadoghq.com/api/latest/scim/"
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.datadoghq.com/api/latest/scim.md",
+   "title": "SCIM API Reference",
+   "quote": "GET https://api.datadoghq.com/api/v2/scim/Groups",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.datadoghq.com/api/latest/scim/"
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.datadoghq.com/api/latest/scim.md",
+   "title": "SCIM API Reference",
+   "quote": "GET https://api.datadoghq.com/api/v2/scim/Schemas",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.datadoghq.com/api/latest/scim/"
+  },
+  {
+   "id": "c22",
+   "url": "https://docs.datadoghq.com/api/latest/scim.md",
+   "title": "SCIM API Reference",
+   "quote": "GET https://api.datadoghq.com/api/v2/scim/ResourceTypes",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.datadoghq.com/api/latest/scim/"
+  },
+  {
+   "id": "c23",
+   "url": "https://docs.datadoghq.com/api/latest/scim.md",
+   "title": "SCIM API Reference",
+   "quote": "SCIM provisioning for Datadog teams is only available for select organizations at this point.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.datadoghq.com/api/latest/scim/"
+  },
+  {
+   "id": "c24",
+   "url": "https://docs.datadoghq.com/api/latest/scim.md",
+   "title": "SCIM API Reference",
+   "quote": "PUT https://api.datadoghq.com/api/v2/scim/Users/{user_uuid}",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.datadoghq.com/api/latest/scim/"
+  },
+  {
+   "id": "c25",
+   "url": "https://docs.datadoghq.com/api/latest/scim.md",
+   "title": "SCIM API Reference",
+   "quote": "POST https://api.datadoghq.com/api/v2/scim/Users",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.datadoghq.com/api/latest/scim/"
+  },
+  {
+   "id": "c26",
+   "url": "https://docs.datadoghq.com/account_management/scim/okta/",
+   "title": "Configure SCIM with Okta",
+   "quote": "Create Users Update User Attributes Deactivate Users",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c27",
+   "url": "https://docs.datadoghq.com/datadog_cloudcraft/",
+   "title": "Cloudcraft in Datadog",
+   "quote": "To access Cloudcraft in Datadog, you need the cloudcraft_read permission. This permission is included in the Datadog Read Only Role by default.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c28",
+   "url": "https://docs.datadoghq.com/cloudcraft/account-management/enable-sso/",
+   "title": "Enable SSO (Cloudcraft Standalone)",
+   "quote": "SAML SSO: Available for Cloudcraft Pro and Enterprise accounts",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c29",
+   "url": "https://docs.datadoghq.com/cloudcraft/account-management/enable-sso/",
+   "title": "Enable SSO (Cloudcraft Standalone)",
+   "quote": "With Just-in-Time User Provisioning, Cloudcraft automatically creates user accounts when users sign in for the first time with a company email address, without requiring an invitation.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c30",
+   "url": "https://docs.datadoghq.com/cloudcraft/account-management/manage-teams/",
+   "title": "Manage Your Team (Cloudcraft Standalone)",
+   "quote": "Team features are available with Cloudcraft Pro and Enterprise plans.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c31",
+   "url": "https://docs.datadoghq.com/cloudcraft/account-management/manage-teams/",
+   "title": "Manage Your Team (Cloudcraft Standalone)",
+   "quote": "Team access to data of removed users can also be restored if requested within our 30-day data retention period.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c32",
+   "url": "https://docs.datadoghq.com/cloudcraft/api/",
+   "title": "Cloudcraft API Reference",
+   "quote": "The current API limits are 20 requests / 10 seconds (120 req / minute).",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c33",
+   "url": "https://docs.datadoghq.com/cloudcraft/api/",
+   "title": "Cloudcraft API Reference",
+   "quote": "Authentication to the API is performed via the Bearer Authorization header over HTTPS.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c34",
+   "url": "https://docs.datadoghq.com/cloudcraft/api/users/",
+   "title": "Cloudcraft API: Users",
+   "quote": "Retrieve your user profile.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c35",
+   "url": "https://docs.datadoghq.com/cloudcraft/api/teams/",
+   "title": "Cloudcraft API: Teams",
+   "quote": "List all teams linked to your Cloudcraft account.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c36",
+   "url": "https://www.okta.com/integrations/cloudcraft/",
+   "title": "Cloudcraft | Okta Integration Network",
+   "quote": "This app integration supports Single Sign-On. See Capabilities for more details.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c37",
+   "url": "https://www.okta.com/integrations/datadog/",
+   "title": "Datadog | Okta Integration Network",
+   "quote": "This Datadog app enables Single Sign-On and User Provisioning with SAML and SCIM",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c38",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/datadog-provisioning-tutorial",
+   "title": "Configure Datadog for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Keep user attributes synchronized between Microsoft Entra ID and Datadog.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c39",
+   "url": "https://docs.datadoghq.com/cloudcraft/",
+   "title": "Cloudcraft (Standalone)",
+   "quote": "This documentation applies to the Standalone Cloudcraft product.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c40",
+   "url": "https://www.datadoghq.com/pricing/?product=infrastructure-monitoring",
+   "title": "Datadog Pricing: Infrastructure Monitoring",
+   "quote": "Unlimited User Accounts",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c41",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/datadog-provisioning-tutorial",
+   "title": "Configure Datadog for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Remove users in Datadog when they don't require access anymore.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "Cloudcraft's pricing page says Cloudcraft comes with any Datadog subscription, but Datadog SCIM needs Infrastructure Pro or Enterprise, so not every Cloudcraft-in-Datadog customer has SCIM.",
+   "cite": [
+    "c3",
+    "c10"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.cloudcraft.co/pricing",
+  "https://www.datadoghq.com/pricing/?product=infrastructure-monitoring",
+  "https://docs.datadoghq.com/account_management/scim/",
+  "https://docs.datadoghq.com/api/latest/scim.md",
+  "https://docs.datadoghq.com/account_management/scim/okta/",
+  "https://docs.datadoghq.com/datadog_cloudcraft/",
+  "https://docs.datadoghq.com/cloudcraft/",
+  "https://docs.datadoghq.com/cloudcraft/account-management/enable-sso/",
+  "https://docs.datadoghq.com/cloudcraft/account-management/manage-teams/",
+  "https://docs.datadoghq.com/cloudcraft/api/",
+  "https://docs.datadoghq.com/cloudcraft_standalone/llms.txt",
+  "https://www.okta.com/integrations/cloudcraft/",
+  "https://www.okta.com/integrations/datadog/"
+ ],
+ "open_questions": [
+  "What SCIM deactivation does to a Datadog user (disable vs delete, seat) is not covered here; see the Datadog row.",
+  "Whether Cloudcraft Standalone subscriptions are still sold to new customers is not stated; the pricing page only offers Cloudcraft in Datadog.",
+  "SCIM version and pagination are not stated on the pages loaded."
+ ]
+}

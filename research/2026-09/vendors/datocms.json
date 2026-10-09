@@ -1,0 +1,1100 @@
+{
+ "slug": "datocms",
+ "vendor": "DatoCMS",
+ "vendor_url": "https://www.datocms.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "DatoCMS",
+  "slug": "datocms",
+  "category": "Developer Tools & CI/CD",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Professional",
+  "team_price_text": "Professional: €149/mo flat (billed annually; €199 monthly)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Enterprise",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": "native",
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.datocms.com/pricing",
+  "docs_url": "https://www.datocms.com/marketplace/enterprise/okta-sso",
+  "evidence": "DatoCMS's plan comparison shows 'SCIM provisioning via IdP' and Single Sign-On only on Enterprise ('Contact us'), not on Professional (from €149/month), and its Okta guide says 'Single Sign-On is only available for Enterprise plans.'",
+  "notes": "Unchanged from June: SCIM and SAML SSO are Enterprise-only (Contact Sales). Pricing is listed only in EUR: Professional is a flat €149/month billed annually (€199 monthly) with 10 collaborators per project, extra collaborators €9/mo; no per-user price. June's '~$499+/mo' Enterprise figure has no first-party source and was dropped. SCIM base URL https://sso.datocms.com/scim with a bearer token generated under Settings > Single Sign-On > SCIM Settings; Okta and OneLogin catalogue apps provision; Entra uses a custom (non-gallery) app pointed at the SCIM URL. Deprovisioning deactivates the SSO user (cannot log in). SAML JIT supported. Audit Log API is Enterprise-only.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Free",
+  "api_tax": false,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "Free (2 editors, 300 records)",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c1",
+    "c5",
+    "c6"
+   ],
+   "notes": "Free plan has the Professional features with lower limits; SSO/SCIM rows show Enterprise only."
+  },
+  {
+   "name": "Professional",
+   "price_text": "From €149/month billed annually, or €199/month",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c2",
+    "c5",
+    "c6"
+   ],
+   "notes": "Flat project price in EUR including 10 collaborators; extra collaborators €9/mo each."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Custom, Contact us",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c3",
+    "c4",
+    "c5",
+    "c41"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c5",
+   "c13",
+   "c33",
+   "c21"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": null,
+  "base_url": "https://sso.datocms.com/scim",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Project Settings > Single Sign-On > Settings > SCIM Settings > Generate API Token",
+   "token_expiry": null,
+   "cite": [
+    "c14",
+    "c29",
+    "c21"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c21",
+    "c7",
+    "c11"
+   ],
+   "notes": "SCIM endpoints are not listed individually; Users and Groups are implied by the documented user create and group push flows against the SCIM base URL."
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": null,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c7",
+    "c10",
+    "c8",
+    "c9",
+    "c11",
+    "c12",
+    "c23"
+   ],
+   "notes": "read inferred from Okta 'Import Users'. Update is documented without saying PUT or PATCH. Groups pushed from Okta can be deleted via SCIM."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "SSO user is marked inactive and cannot log in; the record remains (it can be reactivated from Okta).",
+   "cite": [
+    "c8",
+    "c9",
+    "c35"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": false,
+    "how": "Entra guide: any attribute other than the recognised ones is ignored (the recognised list is shown only as an image)."
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c25",
+    "c11"
+   ],
+   "notes": "The SCIM attribute table is an image in the Entra guide; the SSO User object exposes username (email), external_id, first_name, last_name, is_active, groups and role."
+  },
+  "roles": {
+   "supported": true,
+   "how": "IdP groups pushed via SCIM become DatoCMS SSO groups; an admin maps each group to a role, the first group in priority order wins, and users in no group get the default role from SSO settings.",
+   "cite": [
+    "c17",
+    "c15",
+    "c16",
+    "c34"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "OneLogin cannot push its groups to DatoCMS; groups must be created in DatoCMS (Sync with roles) and imported into OneLogin.",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "text": "Groups imported from DatoCMS into Okta cannot be changed or deleted in Okta.",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "text": "Known Okta issue: removing a user from their only group deactivates the user but leaves them in the group.",
+    "cite": [
+     "c19"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c37",
+   "c6",
+   "c43"
+  ],
+  "plan": "Free",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://site-api.datocms.com",
+  "docs_url": "https://www.datocms.com/docs/content-management-api/resources/user",
+  "auth": {
+   "methods": [
+    "api_token"
+   ],
+   "scopes": [],
+   "cite": [
+    "c37",
+    "c38"
+   ],
+   "notes": "Bearer API token per project; token permissions are defined by roles (e.g. can_manage_users, can_manage_sso, can_access_audit_log) rather than OAuth scopes."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": false,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": true,
+   "reactivate_user": true,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c43",
+    "c44",
+    "c46",
+    "c47",
+    "c48",
+    "c59",
+    "c64"
+   ],
+   "notes": "Collaborators are added by invitation, not created directly. Update a collaborator takes is_active and role. SSO groups (created by the IdP) can be updated or deleted, not created, via the CMA."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/users",
+    "purpose": "List all collaborators",
+    "cite": [
+     "c43"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/users/:user_id",
+    "purpose": "Retrieve a collaborator",
+    "cite": [
+     "c44"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/users/me",
+    "purpose": "Retrieve current signed-in user",
+    "cite": [
+     "c45"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/users/:user_id",
+    "purpose": "Update a collaborator (is_active, role)",
+    "cite": [
+     "c46"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/users/:user_id",
+    "purpose": "Delete a collaborator",
+    "cite": [
+     "c47"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/site-invitations",
+    "purpose": "Invite a new user",
+    "cite": [
+     "c48"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/site-invitations",
+    "purpose": "List all invitations",
+    "cite": [
+     "c49"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/site-invitations/:site_invitation_id",
+    "purpose": "Retrieve an invitation",
+    "cite": [
+     "c50"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/site-invitations/:site_invitation_id",
+    "purpose": "Update an invitation",
+    "cite": [
+     "c51"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/site-invitations/:site_invitation_id",
+    "purpose": "Delete an invitation",
+    "cite": [
+     "c52"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/site-invitations/:site_invitation_id/resend",
+    "purpose": "Resend an invitation",
+    "cite": [
+     "c53"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/sso-users",
+    "purpose": "List all SSO users",
+    "cite": [
+     "c54"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/sso-users/:user_id",
+    "purpose": "Retrieve an SSO user",
+    "cite": [
+     "c55"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/sso-users/copy-users",
+    "purpose": "Copy editors as SSO users",
+    "cite": [
+     "c56"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/sso-users/:user_id",
+    "purpose": "Delete an SSO user",
+    "cite": [
+     "c57"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/sso-groups",
+    "purpose": "List all SSO groups",
+    "cite": [
+     "c58"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/sso-groups/:sso_group_id",
+    "purpose": "Update an SSO group (role, priority)",
+    "cite": [
+     "c59"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/sso-groups/:sso_group_id",
+    "purpose": "Delete an SSO group",
+    "cite": [
+     "c60"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/sso-groups/:sso_group_id/copy-roles",
+    "purpose": "Sync SSO provider groups to DatoCMS roles",
+    "cite": [
+     "c61"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/roles",
+    "purpose": "List all roles",
+    "cite": [
+     "c62"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/roles/:role_id",
+    "purpose": "Retrieve a role",
+    "cite": [
+     "c63"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/roles",
+    "purpose": "Create a role",
+    "cite": [
+     "c64"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/roles/:role_id",
+    "purpose": "Update a role",
+    "cite": [
+     "c65"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/roles/:role_id",
+    "purpose": "Delete a role",
+    "cite": [
+     "c66"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/roles/:role_id/duplicate",
+    "purpose": "Duplicate a role",
+    "cite": [
+     "c67"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/audit-log-events/query",
+    "purpose": "List Audit Log events (Enterprise)",
+    "cite": [
+     "c68"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": true,
+   "events": [],
+   "cite": [
+    "c42"
+   ],
+   "notes": "Webhook entity_type enum includes sso_user; the event names for it are not listed on the page."
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Enterprise",
+   "cite": [
+    "c41",
+    "c68",
+    "c4"
+   ]
+  },
+  "rate_limits": {
+   "text": "Content Management API: 60 requests every 3 seconds; 429 with x-ratelimit-reset.",
+   "cite": [
+    "c39"
+   ]
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/datocms/",
+   "cite": [
+    "c32",
+    "c7"
+   ],
+   "notes": "OIN page marks SAML, SCIM, Create, Update, Deactivate, Group Push and Group Linking as checked (read from the --checked classes in page markup); SWA is not checked."
+  },
+  "entra": {
+   "listed": false,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c22",
+    "c21"
+   ],
+   "notes": "DatoCMS's Entra guide uses 'Create your own application' (non-gallery) with the generic SCIM tenant URL; no Entra gallery tutorial found."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c27",
+    "c26",
+    "c29"
+   ],
+   "notes": "From DatoCMS's own OneLogin guide (search for DatoCMS in the OneLogin app catalogue); OneLogin's connector page not loaded."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c18"
+  ]
+ },
+ "conflicts": [],
+ "searched": [
+  "https://www.datocms.com/pricing",
+  "https://www.datocms.com/marketplace/enterprise/okta-sso",
+  "https://www.datocms.com/marketplace/enterprise/azure-active-directory",
+  "https://www.datocms.com/marketplace/enterprise/onelogin-sso",
+  "https://www.datocms.com/docs/content-management-api/resources/sso-settings",
+  "https://www.datocms.com/docs/content-management-api/resources/sso-user.md",
+  "https://www.datocms.com/docs/content-management-api/authentication.md",
+  "https://www.datocms.com/docs/content-management-api/technical-limits.md",
+  "https://www.datocms.com/docs/content-management-api/pagination.md",
+  "https://www.datocms.com/docs/content-management-api/resources/audit-log-event/query.md",
+  "https://www.datocms.com/docs/content-management-api/resources/webhook.md",
+  "https://www.okta.com/integrations/datocms/",
+  "https://www.datocms.com/docs/content-management-api/resources/user",
+  "https://www.datocms.com/docs/content-management-api/resources/site-invitation",
+  "https://www.datocms.com/docs/content-management-api/resources/sso-group",
+  "https://www.datocms.com/docs/content-management-api/resources/role",
+  "web search: DatoCMS Microsoft Entra gallery / JumpCloud"
+ ],
+ "open_questions": [
+  "SCIM version is not stated (base URL https://sso.datocms.com/scim has no version segment).",
+  "SCIM attribute list in the Entra guide is an image; exact SCIM attribute names are not available as text.",
+  "Docs do not say whether a deactivated SSO user frees a collaborator seat or whether active sessions end.",
+  "Whether SCIM DELETE /Users is supported is not documented.",
+  "SCIM filtering, pagination, ServiceProviderConfig/Schemas endpoints and SCIM token expiry are not documented.",
+  "Whether SSO must be configured before SCIM is not stated explicitly (both live in the same SSO settings).",
+  "No Microsoft Entra gallery app, Google Workspace or JumpCloud catalogue entry was found or checked.",
+  "Enterprise price and seat minimum are not public."
+ ],
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.datocms.com/pricing",
+   "title": "DatoCMS Pricing",
+   "quote": "Free plan comes with 2 editors and 300 records, with 10GB of traffic and 100k API calls each month.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.datocms.com/pricing",
+   "title": "DatoCMS Pricing",
+   "quote": "Start at €149 /month (billed annually) or €199/month",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.datocms.com/pricing",
+   "title": "DatoCMS Pricing",
+   "quote": "Enterprise Premium features, high-touch support and advanced compliance for scaled experiences Custom payable by credit card or wire transfer Contact us",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.datocms.com/pricing",
+   "title": "DatoCMS Pricing",
+   "quote": "SSO, Audit logs and Static webhook IPs for enhanced security",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.datocms.com/pricing",
+   "title": "DatoCMS Pricing",
+   "quote": "SCIM provisioning via IdP Streamline user provisioning and management with SCIM (System for Cross-domain Identity Management) via your Identity Provider, ensuring a seamless user experience.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://www.datocms.com/pricing",
+   "title": "DatoCMS Pricing",
+   "quote": "Custom API tokens with granular permissions",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://www.datocms.com/marketplace/enterprise/okta-sso",
+   "title": "Okta Single Sign-On — DatoCMS",
+   "quote": "Create User - Creating a new user in Okta and assigning them to the DatoCMS application will create a new user in DatoCMS.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://www.datocms.com/marketplace/enterprise/okta-sso",
+   "title": "Okta Single Sign-On — DatoCMS",
+   "quote": "Deactivate Users - Deactivating the user or disabling the user's access to DatoCMS within OKTA will deactivate the user in DatoCMS.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://www.datocms.com/marketplace/enterprise/okta-sso",
+   "title": "Okta Single Sign-On — DatoCMS",
+   "quote": "Reactivate Users - User accounts can be reactivated from Okta.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://www.datocms.com/marketplace/enterprise/okta-sso",
+   "title": "Okta Single Sign-On — DatoCMS",
+   "quote": "Update User Attributes - Updates to a user in Okta will be pushed to DatoCMS.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://www.datocms.com/marketplace/enterprise/okta-sso",
+   "title": "Okta Single Sign-On — DatoCMS",
+   "quote": "Push Groups - Groups created in Okta can be pushed to DatoCMS. Attributes pushed include name and group members.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://www.datocms.com/marketplace/enterprise/okta-sso",
+   "title": "Okta Single Sign-On — DatoCMS",
+   "quote": "Delete Groups - Groups deleted or removed from the DatoCMS application within Okta will be deleted within DatoCMS.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://www.datocms.com/marketplace/enterprise/okta-sso",
+   "title": "Okta Single Sign-On — DatoCMS",
+   "quote": "Single Sign-On is only available for Enterprise plans.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://www.datocms.com/marketplace/enterprise/okta-sso",
+   "title": "Okta Single Sign-On — DatoCMS",
+   "quote": "Now in DatoCMS press the Generate API Token button under the SCIM Settings section",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://www.datocms.com/marketplace/enterprise/okta-sso",
+   "title": "Okta Single Sign-On — DatoCMS",
+   "quote": "In case a user belongs to multiple groups, the first group in the list will be the one to win.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://www.datocms.com/marketplace/enterprise/okta-sso",
+   "title": "Okta Single Sign-On — DatoCMS",
+   "quote": "In case a user does not belong to any group, the default role specified in the SSO Settings will be used",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://www.datocms.com/marketplace/enterprise/okta-sso",
+   "title": "Okta Single Sign-On — DatoCMS",
+   "quote": "In the Groups section in DatoCMS, you can now assign a specific role to each Group.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://www.datocms.com/marketplace/enterprise/okta-sso",
+   "title": "Okta Single Sign-On — DatoCMS",
+   "quote": "DatoCMS application supports Just-in-Time (JIT) provisioning. The SAML assertion will create an SSO user on the fly the first time they try to log in from the identity provider.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://www.datocms.com/marketplace/enterprise/okta-sso",
+   "title": "Okta Single Sign-On — DatoCMS",
+   "quote": "If a user belongs to just a single group, and you remove this user from the group, the user will be successfully deactivated, but it will still remain in the group.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://www.datocms.com/marketplace/enterprise/okta-sso",
+   "title": "Okta Single Sign-On — DatoCMS",
+   "quote": "While it's technically possible to import DatoCMS Groups into Okta, it's not advisable to do so, as groups created in DatoCMS and imported into Okta cannot be deleted or changed in Okta.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://www.datocms.com/marketplace/enterprise/azure-active-directory",
+   "title": "Microsoft Entra ID (formerly Azure AD) — DatoCMS",
+   "quote": "Tenant URL : https://sso.datocms.com/scim Secret Token : use the API token we generated in the previous step",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://www.datocms.com/marketplace/enterprise/azure-active-directory",
+   "title": "Microsoft Entra ID (formerly Azure AD) — DatoCMS",
+   "quote": "Select Create your own application",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://www.datocms.com/marketplace/enterprise/azure-active-directory",
+   "title": "Microsoft Entra ID (formerly Azure AD) — DatoCMS",
+   "quote": "Push Groups - Groups created in Microsoft Entra can be pushed to DatoCMS. Attributes pushed include name and group members.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://www.datocms.com/marketplace/enterprise/azure-active-directory",
+   "title": "Microsoft Entra ID (formerly Azure AD) — DatoCMS",
+   "quote": "Deactivate Users - Deactivating the user or disabling the user's access to DatoCMS within Microsoft Entra will deactivate the user in DatoCMS.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://www.datocms.com/marketplace/enterprise/azure-active-directory",
+   "title": "Microsoft Entra ID (formerly Azure AD) — DatoCMS",
+   "quote": "DatoCMS recognizes the following attributes for users (any other attribute will be ignored)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://www.datocms.com/marketplace/enterprise/onelogin-sso",
+   "title": "OneLogin Single Sign-On — DatoCMS",
+   "quote": "Deactivating the user or disabling the user's access to the application through OneLogin will deactivate the user in DatoCMS.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://www.datocms.com/marketplace/enterprise/onelogin-sso",
+   "title": "OneLogin Single Sign-On — DatoCMS",
+   "quote": "On the new page search for DatoCMS",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://www.datocms.com/marketplace/enterprise/onelogin-sso",
+   "title": "OneLogin Single Sign-On — DatoCMS",
+   "quote": "Groups created within OneLogin (at https://subdomain.onelogin.com/groups ) cannot be pushed to DatoCMS. Instead, in order for user membership to be managed via SCIM, groups must be created in DatoCMS and imported into OneLogin.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://www.datocms.com/marketplace/enterprise/onelogin-sso",
+   "title": "OneLogin Single Sign-On — DatoCMS",
+   "quote": "SCIM Bearer Token : Press the Generate API Token button under the SCIM Settings section in DatoCMS and paste it here",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://www.datocms.com/marketplace/enterprise/onelogin-sso",
+   "title": "OneLogin Single Sign-On — DatoCMS",
+   "quote": "You can also change the default settings to control what action must be performed in DatoCMS when users are deleted or suspended in OneLogin.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://www.datocms.com/marketplace/enterprise/onelogin-sso",
+   "title": "OneLogin Single Sign-On — DatoCMS",
+   "quote": "Update select fields in users’ profile information in DatoCMS",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://www.okta.com/integrations/datocms/",
+   "title": "Integrate DatoCMS with Okta",
+   "quote": "From single sign-on to enhanced user provisioning and de-provisioning, Okta's DatoCMS integration gives your team the ability to securely collaborate, on any device.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://www.datocms.com/docs/content-management-api/resources/sso-settings",
+   "title": "SSO Settings — Content Management API — DatoCMS Docs",
+   "quote": "scim_base_url string DatoCMS SCIM base URL Example: \"https://sso.datocms.com/scim\"",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://www.datocms.com/docs/content-management-api/resources/sso-settings",
+   "title": "SSO Settings — Content Management API — DatoCMS Docs",
+   "quote": "The default role assigned to SSO users that do not belong to any SSO group",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c35",
+   "url": "https://www.datocms.com/docs/content-management-api/resources/sso-user.md",
+   "title": "SSO User — DatoCMS Docs",
+   "quote": "Whether this user is active on the identity provider. De-activated users won't be able to login.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.datocms.com/docs/content-management-api/resources/sso-user"
+  },
+  {
+   "id": "c36",
+   "url": "https://www.datocms.com/docs/content-management-api/resources/sso-user.md",
+   "title": "SSO User — DatoCMS Docs",
+   "quote": "An SSO user will not use the standard login procedure but has to go through SAML authentication. It can also be linked to one or more IdP groups.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.datocms.com/docs/content-management-api/resources/sso-user"
+  },
+  {
+   "id": "c37",
+   "url": "https://www.datocms.com/docs/content-management-api/authentication.md",
+   "title": "Authentication — DatoCMS Docs",
+   "quote": "Once you have the API Token, you need to pass it as an `Authorization` header in each HTTP request you perform",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.datocms.com/docs/content-management-api/authentication"
+  },
+  {
+   "id": "c38",
+   "url": "https://www.datocms.com/docs/content-management-api/authentication.md",
+   "title": "Authentication — DatoCMS Docs",
+   "quote": "you can create a custom API token with the appropriate permissions. You can use roles to define granular access levels and control exactly what each token can do.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.datocms.com/docs/content-management-api/authentication"
+  },
+  {
+   "id": "c39",
+   "url": "https://www.datocms.com/docs/content-management-api/technical-limits.md",
+   "title": "CMA Technical Limits & Rate Limits — DatoCMS Docs",
+   "quote": "The Content Management API is limited to **60 requests every 3 seconds**.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.datocms.com/docs/content-management-api/technical-limits"
+  },
+  {
+   "id": "c40",
+   "url": "https://www.datocms.com/docs/content-management-api/pagination.md",
+   "title": "Pagination — DatoCMS Docs",
+   "quote": "The pagination that the API offers is offset-based: this means that you can control the results that are returned with the parameters `page[limit]` and `page[offset]`",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.datocms.com/docs/content-management-api/pagination"
+  },
+  {
+   "id": "c41",
+   "url": "https://www.datocms.com/docs/content-management-api/resources/audit-log-event/query.md",
+   "title": "List Audit Log events — DatoCMS Docs",
+   "quote": "The Audit Logs API allows to monitor events happening in an Enterprise project.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.datocms.com/docs/content-management-api/resources/audit-log-event/query"
+  },
+  {
+   "id": "c42",
+   "url": "https://www.datocms.com/docs/content-management-api/resources/webhook.md",
+   "title": "Webhook — DatoCMS Docs",
+   "quote": "The subject of webhook triggering",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.datocms.com/docs/content-management-api/resources/webhook"
+  },
+  {
+   "id": "c43",
+   "url": "https://www.datocms.com/docs/content-management-api/resources/user/instances?language=http",
+   "title": "List all collaborators — DatoCMS CMA",
+   "quote": "GET https://site-api.datocms.com/users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c44",
+   "url": "https://www.datocms.com/docs/content-management-api/resources/user/self?language=http",
+   "title": "Retrieve a collaborator — DatoCMS CMA",
+   "quote": "GET https://site-api.datocms.com/users/:user_id",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c45",
+   "url": "https://www.datocms.com/docs/content-management-api/resources/user/me?language=http",
+   "title": "Retrieve current signed-in user — DatoCMS CMA",
+   "quote": "GET https://site-api.datocms.com/users/me",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c46",
+   "url": "https://www.datocms.com/docs/content-management-api/resources/user/update?language=http",
+   "title": "Update a collaborator (is_active, role) — DatoCMS CMA",
+   "quote": "PUT https://site-api.datocms.com/users/:user_id",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c47",
+   "url": "https://www.datocms.com/docs/content-management-api/resources/user/destroy?language=http",
+   "title": "Delete a collaborator — DatoCMS CMA",
+   "quote": "DELETE https://site-api.datocms.com/users/:user_id",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c48",
+   "url": "https://www.datocms.com/docs/content-management-api/resources/site-invitation/create?language=http",
+   "title": "Invite a new user — DatoCMS CMA",
+   "quote": "POST https://site-api.datocms.com/site-invitations",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c49",
+   "url": "https://www.datocms.com/docs/content-management-api/resources/site-invitation/instances?language=http",
+   "title": "List all invitations — DatoCMS CMA",
+   "quote": "GET https://site-api.datocms.com/site-invitations",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c50",
+   "url": "https://www.datocms.com/docs/content-management-api/resources/site-invitation/self?language=http",
+   "title": "Retrieve an invitation — DatoCMS CMA",
+   "quote": "GET https://site-api.datocms.com/site-invitations/:site_invitation_id",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c51",
+   "url": "https://www.datocms.com/docs/content-management-api/resources/site-invitation/update?language=http",
+   "title": "Update an invitation — DatoCMS CMA",
+   "quote": "PUT https://site-api.datocms.com/site-invitations/:site_invitation_id",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c52",
+   "url": "https://www.datocms.com/docs/content-management-api/resources/site-invitation/destroy?language=http",
+   "title": "Delete an invitation — DatoCMS CMA",
+   "quote": "DELETE https://site-api.datocms.com/site-invitations/:site_invitation_id",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c53",
+   "url": "https://www.datocms.com/docs/content-management-api/resources/site-invitation/resend?language=http",
+   "title": "Resend an invitation — DatoCMS CMA",
+   "quote": "POST https://site-api.datocms.com/site-invitations/:site_invitation_id/resend",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c54",
+   "url": "https://www.datocms.com/docs/content-management-api/resources/sso-user/instances?language=http",
+   "title": "List all SSO users — DatoCMS CMA",
+   "quote": "GET https://site-api.datocms.com/sso-users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c55",
+   "url": "https://www.datocms.com/docs/content-management-api/resources/sso-user/self?language=http",
+   "title": "Retrieve an SSO user — DatoCMS CMA",
+   "quote": "GET https://site-api.datocms.com/sso-users/:user_id",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c56",
+   "url": "https://www.datocms.com/docs/content-management-api/resources/sso-user/copy_users?language=http",
+   "title": "Copy editors as SSO users — DatoCMS CMA",
+   "quote": "POST https://site-api.datocms.com/sso-users/copy-users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c57",
+   "url": "https://www.datocms.com/docs/content-management-api/resources/sso-user/destroy?language=http",
+   "title": "Delete an SSO user — DatoCMS CMA",
+   "quote": "DELETE https://site-api.datocms.com/sso-users/:user_id",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c58",
+   "url": "https://www.datocms.com/docs/content-management-api/resources/sso-group/instances?language=http",
+   "title": "List all SSO groups — DatoCMS CMA",
+   "quote": "GET https://site-api.datocms.com/sso-groups",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c59",
+   "url": "https://www.datocms.com/docs/content-management-api/resources/sso-group/update?language=http",
+   "title": "Update an SSO group (role, priority) — DatoCMS CMA",
+   "quote": "PUT https://site-api.datocms.com/sso-groups/:sso_group_id",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c60",
+   "url": "https://www.datocms.com/docs/content-management-api/resources/sso-group/destroy?language=http",
+   "title": "Delete an SSO group — DatoCMS CMA",
+   "quote": "DELETE https://site-api.datocms.com/sso-groups/:sso_group_id",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c61",
+   "url": "https://www.datocms.com/docs/content-management-api/resources/sso-group/copy_roles?language=http",
+   "title": "Sync SSO provider groups to DatoCMS roles — DatoCMS CMA",
+   "quote": "POST https://site-api.datocms.com/sso-groups/:sso_group_id/copy-roles",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c62",
+   "url": "https://www.datocms.com/docs/content-management-api/resources/role/instances?language=http",
+   "title": "List all roles — DatoCMS CMA",
+   "quote": "GET https://site-api.datocms.com/roles",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c63",
+   "url": "https://www.datocms.com/docs/content-management-api/resources/role/self?language=http",
+   "title": "Retrieve a role — DatoCMS CMA",
+   "quote": "GET https://site-api.datocms.com/roles/:role_id",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c64",
+   "url": "https://www.datocms.com/docs/content-management-api/resources/role/create?language=http",
+   "title": "Create a role — DatoCMS CMA",
+   "quote": "POST https://site-api.datocms.com/roles",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c65",
+   "url": "https://www.datocms.com/docs/content-management-api/resources/role/update?language=http",
+   "title": "Update a role — DatoCMS CMA",
+   "quote": "PUT https://site-api.datocms.com/roles/:role_id",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c66",
+   "url": "https://www.datocms.com/docs/content-management-api/resources/role/destroy?language=http",
+   "title": "Delete a role — DatoCMS CMA",
+   "quote": "DELETE https://site-api.datocms.com/roles/:role_id",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c67",
+   "url": "https://www.datocms.com/docs/content-management-api/resources/role/duplicate?language=http",
+   "title": "Duplicate a role — DatoCMS CMA",
+   "quote": "POST https://site-api.datocms.com/roles/:role_id/duplicate",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c68",
+   "url": "https://www.datocms.com/docs/content-management-api/resources/audit-log-event/query?language=http",
+   "title": "List Audit Log events (Enterprise) — DatoCMS CMA",
+   "quote": "POST https://site-api.datocms.com/audit-log-events/query",
+   "accessed": "2026-10-05"
+  }
+ ]
+}

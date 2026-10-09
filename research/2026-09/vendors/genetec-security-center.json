@@ -1,0 +1,545 @@
+{
+ "slug": "genetec-security-center",
+ "vendor": "Genetec Security Center SaaS",
+ "vendor_url": "https://www.genetec.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Genetec Security Center SaaS",
+  "slug": "genetec-security-center",
+  "category": "Security & Identity",
+  "status": "gated",
+  "scim_plan": "Premium",
+  "scim_price_text": "Premium: $149–$199 USD per connection/year",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Standard",
+  "team_price_text": "Standard: $99 USD per access-control connection/year ($149 video/intrusion/intercom)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Premium",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": null,
+   "deactivate": null,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": "sso_only",
+   "onelogin": "sso_only",
+   "jumpcloud": null,
+   "generic": null
+  },
+  "pricing_page_url": "https://www.genetec.com/products/unified-security/security-center-saas/saas-pricing",
+  "docs_url": "https://techdocs.genetec.com/r/en-US/Security-Center-SaaS-Setup-Guide/About-user-provisioning-in-Security-Center-SaaS",
+  "evidence": "Genetec's Security Center SaaS Setup Guide says 'Automatic user provisioning is only available for customers with a Security Center SaaS Premium Plan', and the pricing page shows Corporate single sign-on and Rest API only in Premium.",
+  "notes": "Priced per connection per year (door reader, camera, intrusion panel, intercom), not per user: Standard $99 (access control) / $149 (video, intrusion, intercom); Premium $149 / $199; 1-year minimum term. June recorded 'Standard: $149/yr/device', which now matches only the Standard video/intrusion/intercom price; Standard access-control connections are $99. SCIM 2.0 provisioning works with Entra ID (P1+) and Okta, configured with Genetec GTAC on a call; SSO (OIDC only, no SAML) must be set up first. Removal from the IdP removes the user; roles are assigned in Security Center SaaS. Pricing page does not list SCIM itself, so the gate comes from the docs.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": null,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Standard",
+   "price_text": "$99 USD per connection/year (access control); $149 (video, intrusion, intercom or speaker)",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c3",
+    "c4"
+   ]
+  },
+  {
+   "name": "Premium",
+   "price_text": "$149 USD per connection/year (access control); $199 (video, intrusion, intercom or speaker)",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c3",
+    "c4",
+    "c22"
+   ],
+   "notes": "Includes 'Rest API' per the pricing table; whether it covers user management is undocumented."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c4",
+   "c5",
+   "c26"
+  ],
+  "plan": "Premium",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": null,
+  "auth": {
+   "method": null,
+   "token_source": "SCIM connection information is configured by Genetec GTAC during a setup call",
+   "token_expiry": null,
+   "cite": [
+    "c13",
+    "c15"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c7",
+    "c18"
+   ],
+   "notes": "Inferred from documented user and group provisioning; endpoint paths are not public."
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": null,
+   "reactivate": null,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c6",
+    "c7",
+    "c18"
+   ],
+   "notes": "Docs say users added to IdP groups are added and users removed from the IdP are removed; groups are provisioned. Updates and deactivation are not described separately."
+  },
+  "deprovision": {
+   "action": "remove_from_org",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c6"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": []
+  },
+  "roles": {
+   "supported": true,
+   "how": "Roles are not set via SCIM; admins assign roles to SCIM-provisioned users and groups in the Security Center SaaS Configuration task.",
+   "cite": [
+    "c17",
+    "c18"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Only Microsoft Entra ID (P1 or higher) or Okta are supported; setup is done with Genetec GTAC, not self-service.",
+    "cite": [
+     "c4",
+     "c10",
+     "c11"
+    ]
+   },
+   {
+    "text": "Only one SCIM connection per system.",
+    "cite": [
+     "c8"
+    ]
+   },
+   {
+    "text": "Only direct-group provisioning; no nested groups, indirect membership, guests or external users.",
+    "cite": [
+     "c9"
+    ]
+   },
+   {
+    "text": "Invitation emails aren't sent to provisioned users; users without a role have no access.",
+    "cite": [
+     "c14",
+     "c17"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": null,
+  "cite": [],
+  "plan": null,
+  "api_tax": null,
+  "style": null,
+  "base_url": null,
+  "docs_url": null,
+  "auth": {
+   "methods": [],
+   "scopes": [],
+   "cite": []
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": []
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "Pricing page lists 'Rest API' on Premium only; no public reference for user-management endpoints was found (Genetec ClearID has a separate identity API for cardholder data)."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": false,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/?search=genetec",
+   "cite": [
+    "c24",
+    "c15"
+   ],
+   "notes": "OIN search for 'genetec' returns only the Genetec Technical Assistance Portal (SWA). Provisioning uses a new Okta application configured with GTAC."
+  },
+  "entra": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c13",
+    "c12"
+   ],
+   "notes": "A new Entra Enterprise application is configured with GTAC; no gallery app page found."
+  },
+  "google": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c20"
+   ],
+   "notes": "Google Workspace listed as an OIDC identity provider for sign-in only."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c20"
+   ],
+   "notes": "OneLogin listed as an OIDC identity provider for sign-in only."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c5"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.genetec.com/products/unified-security/security-center-saas/saas-pricing",
+   "title": "Security Center SaaS pricing | Genetec",
+   "quote": "Security Center SaaS is priced per connection. Whether that’s a door reader, camera, intrusion panel, or federation - you’ll always pay the same yearly subscription fee.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.genetec.com/products/unified-security/security-center-saas/saas-pricing",
+   "title": "Security Center SaaS pricing | Genetec",
+   "quote": "Access control $99 USD per connection/year $149 USD per connection/year Video $149 USD per connection/year $199 USD per connection/year",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.genetec.com/products/unified-security/security-center-saas/saas-pricing",
+   "title": "Security Center SaaS pricing | Genetec",
+   "quote": "Corporate single sign-on ✓ Rest API ✓",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://techdocs.genetec.com/api/khub/maps/0kXerSCvy6Ncg8YICuPlDQ/topics/qV1ijce_sHFVjhdZ7VXoiw/content",
+   "title": "About user provisioning in Security Center SaaS",
+   "quote": "Automatic user provisioning is only available for customers with a Security Center SaaS Premium Plan, and one of the following:",
+   "accessed": "2026-10-05",
+   "page_url": "https://techdocs.genetec.com/r/en-US/Security-Center-SaaS-Setup-Guide/About-user-provisioning-in-Security-Center-SaaS"
+  },
+  {
+   "id": "c5",
+   "url": "https://techdocs.genetec.com/api/khub/maps/0kXerSCvy6Ncg8YICuPlDQ/topics/qV1ijce_sHFVjhdZ7VXoiw/content",
+   "title": "About user provisioning in Security Center SaaS",
+   "quote": "In Security Center SaaS, automatic user provisioning uses System for Cross-domain Identity Management (SCIM) 2.0 protocols to optimize user onboarding and offboarding:",
+   "accessed": "2026-10-05",
+   "page_url": "https://techdocs.genetec.com/r/en-US/Security-Center-SaaS-Setup-Guide/About-user-provisioning-in-Security-Center-SaaS"
+  },
+  {
+   "id": "c6",
+   "url": "https://techdocs.genetec.com/api/khub/maps/0kXerSCvy6Ncg8YICuPlDQ/topics/qV1ijce_sHFVjhdZ7VXoiw/content",
+   "title": "About user provisioning in Security Center SaaS",
+   "quote": "Users removed from Microsoft Entra ID or Okta are automatically removed from Security Center SaaS.",
+   "accessed": "2026-10-05",
+   "page_url": "https://techdocs.genetec.com/r/en-US/Security-Center-SaaS-Setup-Guide/About-user-provisioning-in-Security-Center-SaaS"
+  },
+  {
+   "id": "c7",
+   "url": "https://techdocs.genetec.com/api/khub/maps/0kXerSCvy6Ncg8YICuPlDQ/topics/qV1ijce_sHFVjhdZ7VXoiw/content",
+   "title": "About user provisioning in Security Center SaaS",
+   "quote": "Users added to your Microsoft Entra ID or Okta user groups are automatically added to Security Center SaaS.",
+   "accessed": "2026-10-05",
+   "page_url": "https://techdocs.genetec.com/r/en-US/Security-Center-SaaS-Setup-Guide/About-user-provisioning-in-Security-Center-SaaS"
+  },
+  {
+   "id": "c8",
+   "url": "https://techdocs.genetec.com/api/khub/maps/0kXerSCvy6Ncg8YICuPlDQ/topics/qV1ijce_sHFVjhdZ7VXoiw/content",
+   "title": "About user provisioning in Security Center SaaS",
+   "quote": "Only one SCIM connection per Security Center SaaS system is supported.",
+   "accessed": "2026-10-05",
+   "page_url": "https://techdocs.genetec.com/r/en-US/Security-Center-SaaS-Setup-Guide/About-user-provisioning-in-Security-Center-SaaS"
+  },
+  {
+   "id": "c9",
+   "url": "https://techdocs.genetec.com/api/khub/maps/0kXerSCvy6Ncg8YICuPlDQ/topics/qV1ijce_sHFVjhdZ7VXoiw/content",
+   "title": "About user provisioning in Security Center SaaS",
+   "quote": "Only direct-group user provisioning is supported. Group nesting, indirect user membership, or automatic provisioning for guests or external Entra ID or Okta users is not supported.",
+   "accessed": "2026-10-05",
+   "page_url": "https://techdocs.genetec.com/r/en-US/Security-Center-SaaS-Setup-Guide/About-user-provisioning-in-Security-Center-SaaS"
+  },
+  {
+   "id": "c10",
+   "url": "https://techdocs.genetec.com/api/khub/maps/0kXerSCvy6Ncg8YICuPlDQ/topics/qV1ijce_sHFVjhdZ7VXoiw/content",
+   "title": "About user provisioning in Security Center SaaS",
+   "quote": "A Microsoft Entra ID instance with (at minimum) a P1 plan",
+   "accessed": "2026-10-05",
+   "page_url": "https://techdocs.genetec.com/r/en-US/Security-Center-SaaS-Setup-Guide/About-user-provisioning-in-Security-Center-SaaS"
+  },
+  {
+   "id": "c11",
+   "url": "https://techdocs.genetec.com/api/khub/maps/0kXerSCvy6Ncg8YICuPlDQ/topics/KdavKmmnU4DB5DeVjn3~2Q/content",
+   "title": "Setting up automatic user provisioning for Microsoft Azure",
+   "quote": "To synchronize user management in Security Center SaaS with Microsoft Entra ID, you can set up automatic user provisioning with help from the Genetec™ Technical Assistance Center (GTAC).",
+   "accessed": "2026-10-05",
+   "page_url": "https://techdocs.genetec.com/r/en-US/Security-Center-SaaS-Setup-Guide/Setting-up-automatic-user-provisioning-for-Microsoft-Azure"
+  },
+  {
+   "id": "c12",
+   "url": "https://techdocs.genetec.com/api/khub/maps/0kXerSCvy6Ncg8YICuPlDQ/topics/KdavKmmnU4DB5DeVjn3~2Q/content",
+   "title": "Setting up automatic user provisioning for Microsoft Azure",
+   "quote": "Set up Microsoft Entra ID with Security Center SaaS for SSO.",
+   "accessed": "2026-10-05",
+   "page_url": "https://techdocs.genetec.com/r/en-US/Security-Center-SaaS-Setup-Guide/Setting-up-automatic-user-provisioning-for-Microsoft-Azure"
+  },
+  {
+   "id": "c13",
+   "url": "https://techdocs.genetec.com/api/khub/maps/0kXerSCvy6Ncg8YICuPlDQ/topics/KdavKmmnU4DB5DeVjn3~2Q/content",
+   "title": "Setting up automatic user provisioning for Microsoft Azure",
+   "quote": "Genetec helps you configure the following Provisioning settings in a new Microsoft Entra ID Enterprise application:",
+   "accessed": "2026-10-05",
+   "page_url": "https://techdocs.genetec.com/r/en-US/Security-Center-SaaS-Setup-Guide/Setting-up-automatic-user-provisioning-for-Microsoft-Azure"
+  },
+  {
+   "id": "c14",
+   "url": "https://techdocs.genetec.com/api/khub/maps/0kXerSCvy6Ncg8YICuPlDQ/topics/KdavKmmnU4DB5DeVjn3~2Q/content",
+   "title": "Setting up automatic user provisioning for Microsoft Azure",
+   "quote": "Invitation emails aren’t sent to automatically provisioned users.",
+   "accessed": "2026-10-05",
+   "page_url": "https://techdocs.genetec.com/r/en-US/Security-Center-SaaS-Setup-Guide/Setting-up-automatic-user-provisioning-for-Microsoft-Azure"
+  },
+  {
+   "id": "c15",
+   "url": "https://techdocs.genetec.com/api/khub/maps/0kXerSCvy6Ncg8YICuPlDQ/topics/rdDzy3fL8ix16wQLZ3xLjA/content",
+   "title": "Setting up automatic user provisioning for Okta",
+   "quote": "Genetec helps you configure the following provisioning settings in a new Okta application:",
+   "accessed": "2026-10-05",
+   "page_url": "https://techdocs.genetec.com/r/en-US/Security-Center-SaaS-Setup-Guide/Setting-up-automatic-user-provisioning-for-Okta"
+  },
+  {
+   "id": "c16",
+   "url": "https://techdocs.genetec.com/api/khub/maps/0kXerSCvy6Ncg8YICuPlDQ/topics/rdDzy3fL8ix16wQLZ3xLjA/content",
+   "title": "Setting up automatic user provisioning for Okta",
+   "quote": "Set up Okta with Security Center SaaS for SSO.",
+   "accessed": "2026-10-05",
+   "page_url": "https://techdocs.genetec.com/r/en-US/Security-Center-SaaS-Setup-Guide/Setting-up-automatic-user-provisioning-for-Okta"
+  },
+  {
+   "id": "c17",
+   "url": "https://techdocs.genetec.com/api/khub/maps/0kXerSCvy6Ncg8YICuPlDQ/topics/bWpXIxmCQP0NQ7PN9odetg/content",
+   "title": "Assigning roles to users and groups imported from Microsoft Entra ID",
+   "quote": "Users who do not have an assigned role or do not belong to a group with an assigned role do not have access to your system.",
+   "accessed": "2026-10-05",
+   "page_url": "https://techdocs.genetec.com/r/en-US/Security-Center-SaaS-Setup-Guide/Assigning-roles-to-users-and-groups-imported-from-Microsoft-Entra-ID"
+  },
+  {
+   "id": "c18",
+   "url": "https://techdocs.genetec.com/api/khub/maps/0kXerSCvy6Ncg8YICuPlDQ/topics/bWpXIxmCQP0NQ7PN9odetg/content",
+   "title": "Assigning roles to users and groups imported from Microsoft Entra ID",
+   "quote": "Groups that are automatically provisioned list SCIM provisioning in the Source column.",
+   "accessed": "2026-10-05",
+   "page_url": "https://techdocs.genetec.com/r/en-US/Security-Center-SaaS-Setup-Guide/Assigning-roles-to-users-and-groups-imported-from-Microsoft-Entra-ID"
+  },
+  {
+   "id": "c19",
+   "url": "https://techdocs.genetec.com/api/khub/maps/0kXerSCvy6Ncg8YICuPlDQ/topics/cfcUlWof6O~VYJ5QJ7tmow/content",
+   "title": "Integrating your corporate identity provider with Security Center SaaS for SSO",
+   "quote": "To enable single sign-on (SSO) for Security Center SaaS, GTAC must coordinate with your corporate identity provider to configure the integration.",
+   "accessed": "2026-10-05",
+   "page_url": "https://techdocs.genetec.com/r/en-US/Security-Center-SaaS-Setup-Guide/Integrating-your-corporate-identity-provider-with-Security-Center-SaaS-for-SSO"
+  },
+  {
+   "id": "c20",
+   "url": "https://techdocs.genetec.com/api/khub/maps/0kXerSCvy6Ncg8YICuPlDQ/topics/Qqoxaf7DwKVx8HCNlkunGg/content",
+   "title": "Understanding third-party authentication in Security Center SaaS",
+   "quote": "OpenID Connect (OIDC) compliant identity providers (such as Okta, OneLogin, Google Workspace, PingFederate, and so on)",
+   "accessed": "2026-10-05",
+   "page_url": "https://techdocs.genetec.com/r/en-US/Security-Center-SaaS-Setup-Guide/Understanding-third-party-authentication-in-Security-Center-SaaS"
+  },
+  {
+   "id": "c21",
+   "url": "https://techdocs.genetec.com/api/khub/maps/0kXerSCvy6Ncg8YICuPlDQ/topics/Qqoxaf7DwKVx8HCNlkunGg/content",
+   "title": "Understanding third-party authentication in Security Center SaaS",
+   "quote": "NOTE: Security Assertion Markup Language (SAML) is not supported.",
+   "accessed": "2026-10-05",
+   "page_url": "https://techdocs.genetec.com/r/en-US/Security-Center-SaaS-Setup-Guide/Understanding-third-party-authentication-in-Security-Center-SaaS"
+  },
+  {
+   "id": "c22",
+   "url": "https://techdocs.genetec.com/api/khub/maps/Q9nD25aXWih8H76m9GfkyQ/topics/tTlfJYvwcJxo6qqDXsUkLQ/content",
+   "title": "About subscription plans in Security Center SaaS",
+   "quote": "This plan includes day-to-day security monitoring and site management, plus enterprise-level capabilities such as identity management, work management, corporate single sign-on, and API integrations.",
+   "accessed": "2026-10-05",
+   "page_url": "https://techdocs.genetec.com/r/en-US/Security-Center-SaaS-Pre-Deployment-Guide/About-subscription-plans-in-Security-Center-SaaS"
+  },
+  {
+   "id": "c23",
+   "url": "https://techdocs.genetec.com/api/khub/maps/Q9nD25aXWih8H76m9GfkyQ/topics/tTlfJYvwcJxo6qqDXsUkLQ/content",
+   "title": "About subscription plans in Security Center SaaS",
+   "quote": "The minimum subscription term is 1 year. Subscriptions are also available for 3-year and 5-year terms. Monthly subscription terms are not supported.",
+   "accessed": "2026-10-05",
+   "page_url": "https://techdocs.genetec.com/r/en-US/Security-Center-SaaS-Pre-Deployment-Guide/About-subscription-plans-in-Security-Center-SaaS"
+  },
+  {
+   "id": "c24",
+   "url": "https://www.okta.com/integrations/?search=genetec",
+   "title": "Okta Integration Network",
+   "quote": "The GTAP is a portal that was designed as an extension of Genetecs Technical Assistance Center to pr",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://www.genetec.com/products/unified-security/security-center-saas/saas-pricing",
+   "title": "Security Center SaaS pricing | Genetec",
+   "quote": "*Pricing is subject to change without notice. For the most accurate and up-to-date pricing information, please contact your sales representative for an official quote.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://techdocs.genetec.com/r/en-US/Security-Center-SaaS-Setup-Guide/About-user-provisioning-in-Security-Center-SaaS",
+   "title": "About user provisioning in Security Center SaaS",
+   "quote": "Automatic user provisioning is only available for customers with a Security Center SaaS Premium Plan, and one of the following:",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.genetec.com/products/unified-security/security-center-saas/saas-pricing",
+  "https://techdocs.genetec.com/api/khub/clustered-search (query: SCIM)",
+  "https://techdocs.genetec.com/r/en-US/Security-Center-SaaS-Setup-Guide/About-user-provisioning-in-Security-Center-SaaS",
+  "https://www.okta.com/integrations/?search=genetec"
+ ],
+ "open_questions": [
+  "SCIM base URL, auth method and token handling are not public (GTAC configures them).",
+  "Whether SCIM updates attributes or only adds/removes users is not documented; attribute list is not public.",
+  "Whether removal frees a connection/seat is not applicable or documented (pricing is per connection, not per user).",
+  "No public user-management REST API reference found; Premium 'Rest API' scope is unclear.",
+  "Whether OIDC sign-in creates users just-in-time is not documented.",
+  "Audit-log API and user webhooks not documented.",
+  "No Entra gallery or JumpCloud catalogue entry was found."
+ ]
+}

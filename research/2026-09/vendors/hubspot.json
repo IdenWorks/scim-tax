@@ -1,0 +1,814 @@
+{
+ "slug": "hubspot",
+ "vendor": "HubSpot",
+ "vendor_url": "https://www.hubspot.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "HubSpot",
+  "slug": "hubspot",
+  "category": "Sales & CRM",
+  "status": "gated",
+  "scim_plan": "Professional",
+  "scim_price_text": "Sales Hub Professional: $90/seat/mo (billed annually) + $1,500 one-time onboarding",
+  "scim_price_per_user_mo": 90,
+  "team_plan": "Starter",
+  "team_price_text": "Starter: $7/seat/mo (billed annually; $20/seat/mo list)",
+  "team_price_per_user_mo": 7,
+  "price_multiplier": 12.9,
+  "sso_plan": "Professional",
+  "sso_price_per_user_mo": 90,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": false
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "via_generic",
+   "google": "native",
+   "onelogin": "via_generic",
+   "jumpcloud": "via_generic",
+   "generic": true
+  },
+  "pricing_page_url": "https://www.hubspot.com/pricing/sales",
+  "docs_url": "https://knowledge.hubspot.com/user-management/provision-hubspot-users-with-scim-through-okta",
+  "evidence": "HubSpot's developer SCIM guide says 'This feature requires a HubSpot Professional or Enterprise account' and that SSO must be enabled; the Okta and Google SCIM articles and the SSO article are all marked 'Professional, Enterprise'.",
+  "notes": "Status stays gated, but the gate moved down from Enterprise to Professional: SSO (required for SCIM) is now available on Professional and Enterprise of every hub, so June's 'SSO is Enterprise-only, effective requirement Enterprise at $150/seat/mo' no longer holds. Prices are taken from the Sales Hub page (the /pricing URL redirects to Marketing Hub): Starter $7/seat/mo billed annually (list $20 struck through), Professional $90/seat/mo billed annually ($100 monthly) plus a required one-time $1,500 Professional Onboarding, Enterprise $150/seat/mo plus $3,500 onboarding. Starter dropped from June's $20. Marketing Hub Professional is seat-bundled instead ($800/mo with 3 core seats). June's 'min 10 seats' Enterprise figure was not found on any first-party page and was dropped. Okta and Google have catalogue SCIM apps; Entra, OneLogin and JumpCloud use the generic SCIM endpoint (https://api.hubspot.com/scim/v2) via a private developer-platform app with a static token. SCIM deactivates users when removed or deactivated in the IdP; teams cannot be assigned. The user provisioning REST API (create, update, delete users, roles, seats, teams) is on every tier including Free; the audit-log API is Enterprise-only.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Free",
+  "api_tax": false,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "$0/mo, free for up to 2 users",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c1",
+    "c13",
+    "c14",
+    "c22",
+    "c27"
+   ]
+  },
+  {
+   "name": "Starter",
+   "price_text": "Starts at $7/mo/seat billed annually ($20/mo/seat list)",
+   "price_per_user_mo": 7,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c2",
+    "c13",
+    "c14",
+    "c22",
+    "c27"
+   ]
+  },
+  {
+   "name": "Professional",
+   "price_text": "Starts at $90/mo/seat billed annually ($100 monthly) + $1,500 one-time Professional Onboarding",
+   "price_per_user_mo": 90,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c3",
+    "c4",
+    "c13",
+    "c14",
+    "c22",
+    "c27"
+   ]
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Starts at $150/mo/seat + $3,500 one-time Enterprise Onboarding",
+   "price_per_user_mo": 150,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c5",
+    "c6",
+    "c13",
+    "c14",
+    "c22",
+    "c27"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c7",
+   "c8",
+   "c9",
+   "c10"
+  ],
+  "plan": "Professional",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://api.hubspot.com/scim/v2",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Okta/Google: OAuth connection from the IdP's HubSpot app; other IdPs: access token on the Distribution tab of a private developer-platform SCIM app",
+   "token_expiry": null,
+   "cite": [
+    "c11",
+    "c12"
+   ],
+   "notes": "The custom-app token is a 'static' auth app token; expiry is not documented."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": false,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c11",
+    "c15",
+    "c19"
+   ],
+   "notes": "HubSpot does not publish a SCIM endpoint list; Users is implied by the Tenant URL and user provisioning; group sync must be disabled for Entra and teams cannot be assigned."
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": null,
+   "group_push": false,
+   "group_membership": false,
+   "cite": [
+    "c16",
+    "c17",
+    "c18",
+    "c19"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c17"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": []
+  },
+  "roles": {
+   "supported": true,
+   "how": "IdP roles (Okta Roles, a Google custom attribute, or roles from other IdPs with roleSyncEnabled) are matched by exact name to HubSpot permission sets once Permission Set Management is turned on.",
+   "cite": [
+    "c20",
+    "c21"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Teams cannot be assigned by the IdP; Microsoft Entra must have group sync disabled or provisioning goes into quarantine.",
+    "cite": [
+     "c18",
+     "c19"
+    ]
+   },
+   {
+    "text": "Only one SCIM app is allowed per HubSpot account.",
+    "cite": [
+     "c23"
+    ]
+   },
+   {
+    "text": "SCIM users can only have permissions edited in HubSpot (and only without permission set management); name and email are IdP-managed.",
+    "cite": [
+     "c24"
+    ]
+   },
+   {
+    "text": "A verified email domain (DNS TXT record) is required.",
+    "cite": [
+     "c25"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c26",
+   "c27"
+  ],
+  "plan": "Free",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://api.hubapi.com",
+  "docs_url": "https://developers.hubspot.com/docs/api-reference/latest/account/settings/user-provisioning/guide",
+  "auth": {
+   "methods": [
+    "oauth2",
+    "private_app_token"
+   ],
+   "scopes": [
+    "crm.objects.users.read",
+    "crm.objects.users.write",
+    "settings.users.read",
+    "settings.users.teams.read",
+    "settings.users.write"
+   ],
+   "cite": [
+    "c26",
+    "c28"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": true,
+   "assign_licenses": true,
+   "cite": [
+    "c26",
+    "c28",
+    "c29",
+    "c30",
+    "c31",
+    "c32",
+    "c33",
+    "c34"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/settings/users/2026-09",
+    "purpose": "Retrieves users",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/settings/users/2026-09",
+    "purpose": "Create a user (optionally send welcome email)",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/settings/users/2026-09/{userId}",
+    "purpose": "Retrieves a user",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/settings/users/2026-09/{userId}",
+    "purpose": "Modifies a user",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/settings/users/2026-09/{userId}",
+    "purpose": "Removes a user",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/settings/users/2026-09/roles",
+    "purpose": "Retrieves the roles on an account",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/settings/users/2026-09/seats",
+    "purpose": "Retrieves the seats on this account",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/settings/users/2026-09/teams",
+    "purpose": "See details about this account's teams",
+    "cite": [
+     "c35"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/account-info/2026-09/activity/audit-logs",
+    "purpose": "Retrieve an audit log of user actions (Enterprise only)",
+    "cite": [
+     "c36"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Enterprise",
+   "cite": [
+    "c36"
+   ]
+  },
+  "rate_limits": {
+   "text": "Privately distributed apps: Free/Starter 100 requests per 10 seconds per app and 250,000/day per account; Professional 190 per 10 s and 625,000/day; Enterprise 190 per 10 s and 1,000,000/day.",
+   "cite": [
+    "c37"
+   ]
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/hubspot/",
+   "cite": [
+    "c38",
+    "c7"
+   ],
+   "notes": "OIN page has SAML, SCIM, Create, Update and Deactivate checked; Group Push not checked (read from page markup)."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/hubspot-tutorial",
+   "cite": [
+    "c39",
+    "c40",
+    "c10"
+   ],
+   "notes": "Gallery app covers SSO only; HubSpot documents Entra provisioning through its generic SCIM endpoint."
+  },
+  "google": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://knowledge.workspace.google.com/admin/users/advanced/configure-hubspot-user-provisioning?hl=en",
+   "cite": [
+    "c41",
+    "c8"
+   ]
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": true,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c10"
+   ],
+   "notes": "HubSpot names OneLogin as a custom SCIM integration; OneLogin's catalogue page not checked (bot block)."
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://jumpcloud.com/support/integrate-with-hubspot",
+   "cite": [
+    "c42",
+    "c10"
+   ],
+   "notes": "JumpCloud's article covers SAML SSO only; HubSpot lists JumpCloud as a custom SCIM integration."
+  }
+ },
+ "fallbacks": {
+  "jit": false,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c40"
+  ],
+  "notes": "Microsoft's tutorial says provisioning in HubSpot is a manual task for SSO users (no JIT)."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.hubspot.com/pricing/sales",
+   "title": "Sales Software Pricing | HubSpot",
+   "quote": "Free for up to 2 users. No credit card required.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.hubspot.com/pricing/sales",
+   "title": "Sales Software Pricing | HubSpot",
+   "quote": "Essential marketing, sales, service, content, and data management software Starts at $7/mo/seat $20/mo/seat",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.hubspot.com/pricing/sales",
+   "title": "Sales Software Pricing | HubSpot",
+   "quote": "Comprehensive sales software to automate and scale your sales processes Starts at $90/mo/seat $100/mo/seat",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.hubspot.com/pricing/sales",
+   "title": "Sales Software Pricing | HubSpot",
+   "quote": "Cost shown does not include the required, one-time Professional Onboarding for a fee of $1,500.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.hubspot.com/pricing/sales",
+   "title": "Sales Software Pricing | HubSpot",
+   "quote": "Our most powerful sales software for advanced control and flexibility Starts at $150/mo/seat",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://www.hubspot.com/pricing/sales",
+   "title": "Sales Software Pricing | HubSpot",
+   "quote": "Cost shown does not include the required, one-time Enterprise Onboarding for a fee of $3,500.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://knowledge.hubspot.com/user-management/provision-hubspot-users-with-scim-through-okta",
+   "title": "Provision HubSpot users with SCIM through Okta",
+   "quote": "Sales Hub Professional, Enterprise Service Hub Professional, Enterprise Content Hub Professional, Enterprise Revenue Hub Professional, Enterprise Provisioning users through SCIM",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://knowledge.hubspot.com/account-security/provision-hubspot-users-with-scim-through-google",
+   "title": "Provision HubSpot users with SCIM through Google",
+   "quote": "Provisioning users through SCIM (the System for Cross-domain Identity Management) provides a secure and automated way to create and manage HubSpot users through Google.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://developers.hubspot.com/docs/apps/developer-platform/add-features/scim.md",
+   "title": "Set up SCIM for your app | HubSpot Developers",
+   "quote": "This feature requires a HubSpot *Professional* or *Enterprise* account.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hubspot.com/docs/apps/developer-platform/add-features/scim"
+  },
+  {
+   "id": "c10",
+   "url": "https://knowledge.hubspot.com/user-management/provision-hubspot-users-with-scim-through-okta",
+   "title": "Provision HubSpot users with SCIM through Okta",
+   "quote": "This allows you to set up SCIM to provision users from providers like Microsoft Entra ID, PingFederate, OneLogin, and JumpCloud.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://developers.hubspot.com/docs/apps/developer-platform/add-features/scim.md",
+   "title": "Set up SCIM for your app | HubSpot Developers",
+   "quote": "You can use this token, along with the *Tenant URL* of `https://api.hubspot.com/scim/v2` in your identity provider settings to connect your new SCIM app.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hubspot.com/docs/apps/developer-platform/add-features/scim"
+  },
+  {
+   "id": "c12",
+   "url": "https://knowledge.hubspot.com/user-management/provision-hubspot-users-with-scim-through-okta",
+   "title": "Provision HubSpot users with SCIM through Okta",
+   "quote": "Select the Enable API integration checkbox, then click Authenticate with HubSpot . A new window will open where you can give Okta access to your HubSpot account.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://knowledge.hubspot.com/account-security/set-up-single-sign-on-sso",
+   "title": "Set up single sign-on (SSO)",
+   "quote": "Data Hub Professional, Enterprise Content Hub Professional, Enterprise Smart CRM Professional, Enterprise Revenue Hub Professional, Enterprise",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://developers.hubspot.com/docs/apps/developer-platform/add-features/scim.md",
+   "title": "Set up SCIM for your app | HubSpot Developers",
+   "quote": "must be enabled in your HubSpot account.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hubspot.com/docs/apps/developer-platform/add-features/scim"
+  },
+  {
+   "id": "c15",
+   "url": "https://developers.hubspot.com/docs/apps/developer-platform/add-features/scim.md",
+   "title": "Set up SCIM for your app | HubSpot Developers",
+   "quote": "By setting up SCIM in your app, you can provision and de-provision users in your HubSpot account from your Identity Provider (IdP).",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hubspot.com/docs/apps/developer-platform/add-features/scim"
+  },
+  {
+   "id": "c16",
+   "url": "https://knowledge.hubspot.com/user-management/provision-hubspot-users-with-scim-through-okta",
+   "title": "Provision HubSpot users with SCIM through Okta",
+   "quote": "Select the Enable checkboxes next to Create Users , Update User Attributes , and Deactivate Users to configure the integration.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://developers.hubspot.com/docs/apps/developer-platform/add-features/scim.md",
+   "title": "Set up SCIM for your app | HubSpot Developers",
+   "quote": "However, if you remove a user's access to HubSpot from your identity provider, or deactivate the user in your identity provider, the user will be deactivated in HubSpot as well.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hubspot.com/docs/apps/developer-platform/add-features/scim"
+  },
+  {
+   "id": "c18",
+   "url": "https://developers.hubspot.com/docs/apps/developer-platform/add-features/scim.md",
+   "title": "Set up SCIM for your app | HubSpot Developers",
+   "quote": "Your identity provider can't automatically assign users to teams",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hubspot.com/docs/apps/developer-platform/add-features/scim"
+  },
+  {
+   "id": "c19",
+   "url": "https://developers.hubspot.com/docs/apps/developer-platform/add-features/scim.md",
+   "title": "Set up SCIM for your app | HubSpot Developers",
+   "quote": "if you're setting up SCIM with Microsoft Entra, you should disable group sync in the",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hubspot.com/docs/apps/developer-platform/add-features/scim"
+  },
+  {
+   "id": "c20",
+   "url": "https://knowledge.hubspot.com/user-management/provision-hubspot-users-with-scim-through-okta",
+   "title": "Provision HubSpot users with SCIM through Okta",
+   "quote": "Okta can then assign permissions to a user if their Roles in Okta matches the exact name of the HubSpot permission set, including spaces and caps.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://developers.hubspot.com/docs/apps/developer-platform/add-features/scim.md",
+   "title": "Set up SCIM for your app | HubSpot Developers",
+   "quote": "which determines whether to sync user role data (if supported by your provider).",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hubspot.com/docs/apps/developer-platform/add-features/scim"
+  },
+  {
+   "id": "c22",
+   "url": "https://knowledge.hubspot.com/user-management/provision-hubspot-users-with-scim-through-okta",
+   "title": "Provision HubSpot users with SCIM through Okta",
+   "quote": "If you're using the seats-based pricing model: when a permission set is assigned through SCIM/API, HubSpot automatically assigns the user to the best available seat that supports all permissions in that set.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://developers.hubspot.com/docs/apps/developer-platform/add-features/scim.md",
+   "title": "Set up SCIM for your app | HubSpot Developers",
+   "quote": "there's a limit of one SCIM app in your HubSpot account.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hubspot.com/docs/apps/developer-platform/add-features/scim"
+  },
+  {
+   "id": "c24",
+   "url": "https://knowledge.hubspot.com/user-management/provision-hubspot-users-with-scim-through-okta",
+   "title": "Provision HubSpot users with SCIM through Okta",
+   "quote": "Only user permissions can be edited in HubSpot, and only if permission set management is not configured.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://knowledge.hubspot.com/user-management/provision-hubspot-users-with-scim-through-okta",
+   "title": "Provision HubSpot users with SCIM through Okta",
+   "quote": "After adding the HubSpot app through Okta, you'll need to verify your domain in HubSpot by updating your DNS records.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://developers.hubspot.com/docs/api-reference/settings-user-provisioning-v3/guide.md",
+   "title": "Settings API | User Provisioning",
+   "quote": "Use the user provisioning API to create and manage users in the account, along with their permissions.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hubspot.com/docs/api-reference/latest/account/settings/user-provisioning/guide"
+  },
+  {
+   "id": "c27",
+   "url": "https://developers.hubspot.com/docs/api-reference/latest/account/settings/user-provisioning/create-user.md",
+   "title": "Create a user | HubSpot Developers",
+   "quote": "x-hubspot-product-tier-requirements: marketing: FREE sales: FREE service: FREE cms: FREE",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hubspot.com/docs/api-reference/latest/account/settings/user-provisioning/create-user"
+  },
+  {
+   "id": "c28",
+   "url": "https://developers.hubspot.com/docs/api-reference/latest/account/settings/user-provisioning/create-user.md",
+   "title": "Create a user | HubSpot Developers",
+   "quote": "This endpoint requires a JSON request body with user information such as email, first name, last name, role, and seats. A welcome email can be optionally sent to the new user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hubspot.com/docs/api-reference/latest/account/settings/user-provisioning/create-user"
+  },
+  {
+   "id": "c29",
+   "url": "https://developers.hubspot.com/docs/api-reference/latest/account/settings/user-provisioning/get-users.md",
+   "title": "Retrieves users | HubSpot Developers",
+   "quote": "GET /settings/users/2026-09",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hubspot.com/docs/api-reference/latest/account/settings/user-provisioning/get-users"
+  },
+  {
+   "id": "c30",
+   "url": "https://developers.hubspot.com/docs/api-reference/latest/account/settings/user-provisioning/users/get-user.md",
+   "title": "Retrieves a user | HubSpot Developers",
+   "quote": "GET /settings/users/2026-09/{userId}",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hubspot.com/docs/api-reference/latest/account/settings/user-provisioning/users/get-user"
+  },
+  {
+   "id": "c31",
+   "url": "https://developers.hubspot.com/docs/api-reference/latest/account/settings/user-provisioning/users/update-user.md",
+   "title": "Modifies a user | HubSpot Developers",
+   "quote": "PUT /settings/users/2026-09/{userId}",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hubspot.com/docs/api-reference/latest/account/settings/user-provisioning/users/update-user"
+  },
+  {
+   "id": "c32",
+   "url": "https://developers.hubspot.com/docs/api-reference/latest/account/settings/user-provisioning/users/delete-user.md",
+   "title": "Removes a user | HubSpot Developers",
+   "quote": "DELETE /settings/users/2026-09/{userId}",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hubspot.com/docs/api-reference/latest/account/settings/user-provisioning/users/delete-user"
+  },
+  {
+   "id": "c33",
+   "url": "https://developers.hubspot.com/docs/api-reference/latest/account/settings/user-provisioning/roles/get-roles.md",
+   "title": "Retrieves the roles on an account | HubSpot Developers",
+   "quote": "GET /settings/users/2026-09/roles",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hubspot.com/docs/api-reference/latest/account/settings/user-provisioning/roles/get-roles"
+  },
+  {
+   "id": "c34",
+   "url": "https://developers.hubspot.com/docs/api-reference/latest/account/settings/user-provisioning/seats/get-seats.md",
+   "title": "Retrieves the seats on this account | HubSpot Developers",
+   "quote": "GET /settings/users/2026-09/seats",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hubspot.com/docs/api-reference/latest/account/settings/user-provisioning/seats/get-seats"
+  },
+  {
+   "id": "c35",
+   "url": "https://developers.hubspot.com/docs/api-reference/latest/account/settings/user-provisioning/teams/get-teams.md",
+   "title": "See details about this account's teams | HubSpot Developers",
+   "quote": "GET /settings/users/2026-09/teams",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hubspot.com/docs/api-reference/latest/account/settings/user-provisioning/teams/get-teams"
+  },
+  {
+   "id": "c36",
+   "url": "https://developers.hubspot.com/docs/api-reference/latest/account/audit-logs/guide.md",
+   "title": "Account activity API | HubSpot Developers",
+   "quote": "This endpoint is available for *Enterprise* accounts only.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hubspot.com/docs/api-reference/latest/account/audit-logs/guide"
+  },
+  {
+   "id": "c37",
+   "url": "https://developers.hubspot.com/docs/developer-tooling/platform/usage-guidelines.md",
+   "title": "API usage guidelines and limits | HubSpot Developers",
+   "quote": "| Privately distributed apps | (Any Hub) <br /> Free and Starter | 100 / app | 250,000 / account |",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hubspot.com/docs/developer-tooling/platform/usage-guidelines"
+  },
+  {
+   "id": "c38",
+   "url": "https://www.okta.com/integrations/hubspot/",
+   "title": "HubSpot | Okta",
+   "quote": "Enable SSO to securely access software that helps your business grow without compromise",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c39",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/hubspot-tutorial",
+   "title": "Configure HubSpot for Single sign-on with Microsoft Entra ID",
+   "quote": "HubSpot supports the following features: SP-initiated single sign-on . IDP-initiated single sign-on .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c40",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/hubspot-tutorial",
+   "title": "Configure HubSpot for Single sign-on with Microsoft Entra ID",
+   "quote": "In HubSpot, provisioning is a manual task.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c41",
+   "url": "https://knowledge.workspace.google.com/admin/users/advanced/configure-hubspot-user-provisioning?hl=en",
+   "title": "Configure HubSpot user provisioning | Google Workspace Help",
+   "quote": "You can set up automated user provisioning (autoprovisioning) so that any changes you make to user accounts in Google Workspace are automatically synced with this third-party app.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c42",
+   "url": "https://jumpcloud.com/support/integrate-with-hubspot",
+   "title": "Integrate with Hubspot | JumpCloud Documentation",
+   "quote": "On the Login tab, locate the Configure single sign-on (SSO) section and click Set up .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c43",
+   "url": "https://developers.hubspot.com/docs/apps/developer-platform/add-features/scim.md",
+   "title": "Set up SCIM for your app | HubSpot Developers",
+   "quote": "you cannot assign seats such as core seats, Sales or Service Hub seats, or view-only seats, based on permission sets assigned in your IdP.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developers.hubspot.com/docs/apps/developer-platform/add-features/scim"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "On the seats-based pricing model, the Okta KB article says HubSpot automatically assigns the best available seat when a permission set is assigned through SCIM, while the developer SCIM guide says seats cannot be assigned from IdP permission sets and must be set in HubSpot first.",
+   "cite": [
+    "c22",
+    "c43"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.hubspot.com/pricing/sales",
+  "https://knowledge.hubspot.com/sitemap.xml",
+  "https://developers.hubspot.com/docs/sitemap.xml"
+ ],
+ "open_questions": [
+  "HubSpot does not publish the SCIM resource list, supported attributes, filtering, pagination or PATCH/PUT support.",
+  "Whether SCIM deactivation frees the paid seat or ends active sessions is not documented.",
+  "Expiry of the custom SCIM app's static access token is not documented.",
+  "Whether a seat minimum applies on Professional or Enterprise is not stated on the pricing page."
+ ]
+}

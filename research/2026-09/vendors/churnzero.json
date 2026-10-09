@@ -1,0 +1,411 @@
+{
+ "slug": "churnzero",
+ "vendor": "ChurnZero",
+ "vendor_url": "https://churnzero.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "ChurnZero",
+  "slug": "churnzero",
+  "category": "Customer Support & Success",
+  "status": "unknown",
+  "scim_plan": "—",
+  "scim_price_text": "—",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Not published",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": null,
+  "idp": {
+   "okta": "sso_only",
+   "entra": "sso_only",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": false
+  },
+  "pricing_page_url": "https://app.churnzero.net/developers",
+  "docs_url": "https://support.churnzero.com/api/v2/help_center/en-us/articles/12460686532109.json",
+  "evidence": "ChurnZero's public help articles document SAML SSO for Okta and Azure only (users must already exist: the Okta email must match \"a user account in ChurnZero\"), and the REST API is a read-only add-on; no SCIM is documented publicly, but most of the help centre and the pricing page could not be read.",
+  "notes": "New row. Unknown rather than none: churnzero.com (including /pricing/, which first returned a 404 page) then served a 'Checking your browser' bot challenge to every request and the headless renderer failed (ERR_TOO_MANY_RETRIES), and only 127 help-centre articles are public (the rest need login). In what is public: SAML 2.0 SSO via a custom Okta app or an Azure non-gallery app (the Okta OIN app is SAML only), SSO matches existing ChurnZero users (no JIT documented), and no SCIM or provisioning article. docs_url is the help-centre JSON export of the Okta SSO article (the HTML page blocks automated checks). pricing_page_url points to the developer reference because it holds the only first-party pricing statement found (the REST API is an add-on priced via the CSM). The REST API (OData v4, Basic auth with username:API key) only reads UserAccounts.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "REST API add-on",
+  "api_tax": true,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "REST API add-on",
+   "price_text": "Contact your Customer Success Manager",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2"
+   ],
+   "notes": "No public plan table could be loaded; this is the only priced item found on a first-party page."
+  }
+ ],
+ "scim": {
+  "available": null,
+  "cite": [],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": null,
+   "token_source": null,
+   "token_expiry": null,
+   "cite": []
+  },
+  "endpoints": {
+   "Users": null,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": []
+  },
+  "operations": {
+   "create": null,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": null,
+   "reactivate": null,
+   "delete": null,
+   "group_push": null,
+   "group_membership": null,
+   "cite": []
+  },
+  "deprovision": {
+   "action": null,
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": []
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": []
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": []
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c1",
+   "c3",
+   "c4"
+  ],
+  "plan": "REST API add-on",
+  "api_tax": true,
+  "style": "REST",
+  "base_url": "https://{instance}.us1app.churnzero.net/public/v1",
+  "docs_url": "https://app.churnzero.net/developers",
+  "auth": {
+   "methods": [
+    "basic"
+   ],
+   "scopes": [],
+   "cite": [
+    "c4",
+    "c13"
+   ],
+   "notes": "HTTP Basic with ChurnZero username and the user's API key; the user needs the Developer Tools permission and the 'Bulk Read - User Accounts' permission for UserAccount."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c7",
+    "c8"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/UserAccount",
+    "purpose": "Get all UserAccounts",
+    "cite": [
+     "c7"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/UserAccount({Id})",
+    "purpose": "Get an UserAccount",
+    "cite": [
+     "c8"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "Per instance per minute: 1-100 requests normal, 101-200 delayed, above 200 returns 429.",
+   "cite": [
+    "c5",
+    "c6"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "The REST API documents only GET operations on UserAccount; no user create, update or deactivate.",
+    "cite": [
+     "c7",
+     "c8"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/churnzero/",
+   "cite": [
+    "c12",
+    "c9"
+   ],
+   "notes": "OIN page markup marks only SAML as checked. ChurnZero's own guide builds a custom SAML app instead."
+  },
+  "entra": {
+   "listed": false,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c11"
+   ],
+   "notes": "ChurnZero says to create a non-gallery app; learn.microsoft.com churnzero-tutorial returned 404."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": false,
+  "cite": [
+   "c9"
+  ],
+  "notes": "Most help-centre articles require login; SSO signs in existing users."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://app.churnzero.net/developers",
+   "title": "ChurnZero REST API Reference",
+   "quote": "The ChurnZero REST API is an add-on feature that must be enabled and correctly configured with the necessary permissions to be used.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://app.churnzero.net/developers",
+   "title": "ChurnZero REST API Reference",
+   "quote": "If not already enabled, please contact your ChurnZero Customer Success Manager for pricing and feature activation.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://app.churnzero.net/developers",
+   "title": "ChurnZero REST API Reference",
+   "quote": "The ChurnZero REST API is an OData v4 implementation",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://app.churnzero.net/developers",
+   "title": "ChurnZero REST API Reference",
+   "quote": "To successfully make a request you will need to pass your ChurnZero username and an API Key associated with your user as an authorization header with each request.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://app.churnzero.net/developers",
+   "title": "ChurnZero REST API Reference",
+   "quote": "Rate limits are applied to a specific ChurnZero instance on a per minute basis.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://app.churnzero.net/developers",
+   "title": "ChurnZero REST API Reference",
+   "quote": "Requests above the hard max will result in a 429 Too Many Requests response.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://app.churnzero.net/developers",
+   "title": "ChurnZero REST API Reference",
+   "quote": "Get all UserAccounts",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://app.churnzero.net/developers",
+   "title": "ChurnZero REST API Reference",
+   "quote": "Get an UserAccount",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://support.churnzero.com/api/v2/help_center/en-us/articles/12460686532109.json",
+   "title": "Setting Up Your OKTA SSO",
+   "quote": "If everything was set up correctly and the email address of your Okta account matches a user account in ChurnZero, you’ll automatically be logged in to ChurnZero.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.churnzero.com/hc/en-us/articles/12460686532109-Setting-Up-Your-OKTA-SSO"
+  },
+  {
+   "id": "c10",
+   "url": "https://support.churnzero.com/api/v2/help_center/en-us/articles/12460686532109.json",
+   "title": "Setting Up Your OKTA SSO",
+   "quote": "Note: If you do not see this option, please contact your ChurnZero representative.",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.churnzero.com/hc/en-us/articles/12460686532109-Setting-Up-Your-OKTA-SSO"
+  },
+  {
+   "id": "c11",
+   "url": "https://support.churnzero.com/api/v2/help_center/en-us/articles/360043199911.json",
+   "title": "Azure SSO",
+   "quote": "You can now use your Azure account for single sign-on into ChurnZero. To configure this, you'll need to create a non-gallery application in Azure",
+   "accessed": "2026-10-05",
+   "page_url": "https://support.churnzero.com/hc/en-us/articles/360043199911-Azure-SSO"
+  },
+  {
+   "id": "c12",
+   "url": "https://www.okta.com/integrations/churnzero/",
+   "title": "Integrate ChurnZero with Okta",
+   "quote": "ChurnZero is a real-time Customer Success platform that helps subscription businesses fight churn, expand current accounts, increase product adoption, and optimize the customer experience.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://app.churnzero.net/developers",
+   "title": "ChurnZero REST API Reference",
+   "quote": "Bulk Read - User Accounts",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://churnzero.com/pricing/ (404 page on first request, then bot challenge 403)",
+  "https://churnzero.com/ (bot challenge 403; renderer ERR_TOO_MANY_RETRIES)",
+  "https://churnzero.com/sitemap_index.xml",
+  "https://churnzero.com/page-sitemap.xml (bot challenge)",
+  "support.churnzero.com help-centre search API: scim (0), provisioning (0), okta, sso, api",
+  "support.churnzero.com public article list (127 articles, all scanned for scim/provision/okta/saml)",
+  "https://support.churnzero.com/hc/en-us/articles/12460686532109-Setting-Up-Your-OKTA-SSO",
+  "https://support.churnzero.com/hc/en-us/articles/360043199911-Azure-SSO",
+  "https://app.churnzero.net/developers (REST API reference, no SCIM)",
+  "https://www.okta.com/integrations/churnzero/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/churnzero-tutorial (404)"
+ ],
+ "open_questions": [
+  "Does ChurnZero offer SCIM or IdP provisioning behind its login-only help centre?",
+  "Which ChurnZero plan includes SAML SSO (Okta article says to contact your representative if the SAML option is missing)?",
+  "No public pricing page could be read; plans and prices unknown."
+ ]
+}

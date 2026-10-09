@@ -1,0 +1,637 @@
+{
+ "slug": "cribl",
+ "vendor": "Cribl",
+ "vendor_url": "https://cribl.io",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Cribl",
+  "slug": "cribl",
+  "category": "Cloud, Infrastructure & Observability",
+  "status": "none",
+  "scim_plan": "—",
+  "scim_price_text": "—",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Standard",
+  "team_price_text": "Usage-based (Cribl Credits, $1 = 1 Credit; up to 5TB/day)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Enterprise",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": null,
+  "idp": {
+   "okta": "sso_only",
+   "entra": null,
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": false
+  },
+  "pricing_page_url": "https://cribl.io/pricing/plan/",
+  "docs_url": "https://docs.cribl.io/iam/members-teams",
+  "evidence": "Cribl's Members docs say 'When you remove a Member in the IdP, they are still listed as a Member on Cribl.Cloud', and admins must remove them manually. SSO (OIDC/SAML) is Enterprise-only and no SCIM endpoint is documented.",
+  "notes": "None by absence: the IAM docs index, the full docs sitemap and the API reference have no SCIM. Cribl.Cloud SSO (OIDC or SAML) is on Enterprise ('RBAC & Federated Auth'). SSO members appear to be created at sign-in and get permissions from IdP group names mapped to Teams, but IdP removals do not reach Cribl. The Okta OIN app (Cribl Cloud) is SAML-only. Cribl does publish a REST user-management API (control plane /system/users, /system/teams) using OAuth client-credentials API Credentials. An IdP connector could use it, but none is documented. Pricing is usage-based in Cribl Credits, with no per-user price.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "All plans (API Credentials; Organization Permissions on some tiers)",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "Free, up to 1TB/day",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": false,
+   "scim": null,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c3",
+    "c13"
+   ]
+  },
+  {
+   "name": "Standard",
+   "price_text": "Usage-based in Cribl Credits, up to 5TB/day",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": false,
+   "scim": null,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c3",
+    "c13"
+   ]
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Usage-based in Cribl Credits, unlimited TB/day",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": null,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c3",
+    "c13"
+   ],
+   "notes": "Enterprise adds 'RBAC & Federated Auth'. The feature table marks External Auth (OpenID & SAML) for Enterprise only."
+  }
+ ],
+ "scim": {
+  "available": null,
+  "cite": [],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": null,
+  "base_url": null,
+  "notes": "No SCIM endpoint is documented. Removing a user in the IdP does not remove the Cribl.Cloud Member (c6).",
+  "auth": {
+   "method": null,
+   "token_source": null,
+   "token_expiry": null,
+   "cite": []
+  },
+  "endpoints": {
+   "Users": null,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": []
+  },
+  "operations": {
+   "create": null,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": null,
+   "reactivate": null,
+   "delete": null,
+   "group_push": null,
+   "group_membership": null,
+   "cite": []
+  },
+  "deprovision": {
+   "action": null,
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": []
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": []
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": []
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c8",
+   "c9",
+   "c10",
+   "c13"
+  ],
+  "plan": "All plans",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://{workspaceName}-{organizationId}.cribl.cloud/api/v1 (control plane, leader context); https://gateway.cribl.cloud (management plane)",
+  "docs_url": "https://docs.cribl.io/cribl-as-code/api-reference/control-plane/cribl-core/user-management",
+  "notes": "The plan is inferred: the API docs gate only Organization Permissions on API Credentials by tier ('Without a proper license, all API Credentials are granted the Admin Permission'), not API access itself. The user payload has username, email, first/last name, disabled, roles and Cribl.Cloud workspaceRoles. Several Roles endpoints are on-prem only.",
+  "auth": {
+   "methods": [
+    "oauth2"
+   ],
+   "scopes": [],
+   "cite": [
+    "c13",
+    "c14"
+   ],
+   "notes": "API Credential Client ID and Secret exchanged at https://login.cribl.cloud/oauth/token (client_credentials) for a 24-hour Bearer JWT. On-prem uses POST /auth/login, with a default TTL of 3600 seconds. The token's scope is the credential's Permissions."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": true,
+   "reactivate_user": true,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c8",
+    "c9",
+    "c10",
+    "c11"
+   ],
+   "notes": "Deactivate and reactivate use the 'disabled' boolean on PATCH /system/users/{id}. Groups are Cribl Teams."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/products/{product}/users",
+    "purpose": "List all users who have access to a Cribl product",
+    "cite": [
+     "c8"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/products/{product}/users/{id}/acl",
+    "purpose": "Get the access control list for a user of a Cribl product",
+    "cite": [
+     "c8"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/system/users",
+    "purpose": "List all users",
+    "cite": [
+     "c8"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/system/users",
+    "purpose": "Create a user",
+    "cite": [
+     "c8"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/system/users/{id}",
+    "purpose": "Get a user",
+    "cite": [
+     "c8"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/system/users/{id}",
+    "purpose": "Update a user (including disabled)",
+    "cite": [
+     "c8",
+     "c9"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/system/users/{id}/info",
+    "purpose": "Update user profile information",
+    "cite": [
+     "c8"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/system/users/{id}",
+    "purpose": "Delete a user",
+    "cite": [
+     "c8"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/system/teams",
+    "purpose": "List all Teams",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/system/teams",
+    "purpose": "Create a Team",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/system/teams/{id}",
+    "purpose": "Get a Team",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/system/teams/{id}",
+    "purpose": "Update a Team",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/system/teams/{id}",
+    "purpose": "Delete a Team",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/system/teams/{id}/acl",
+    "purpose": "Get the Access Control List for a Team",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/system/teams/{id}/users",
+    "purpose": "List Team Members",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/system/teams/{id}/users",
+    "purpose": "Add or remove Team Members",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/system/teams/users/{id}/roles",
+    "purpose": "List Roles for a user",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/authorize/roles",
+    "purpose": "List authorization roles",
+    "cite": [
+     "c11"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/system/policies",
+    "purpose": "List all Policies",
+    "cite": [
+     "c11"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/system/roles",
+    "purpose": "List all Roles (on-prem only)",
+    "cite": [
+     "c11"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/system/roles",
+    "purpose": "Create a Role (on-prem only)",
+    "cite": [
+     "c11"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v1/organizations/{organizationId}/api-credentials",
+    "purpose": "List API Credentials (management plane)",
+    "cite": [
+     "c12"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Assigning the Organization 'User' Permission (workspace-scoped access) requires an Enterprise plan.",
+    "cite": [
+     "c7"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/cribl-cloud/",
+   "cite": [
+    "c15"
+   ],
+   "notes": "The OIN page ticks SAML only; SCIM and the provisioning functions are not ticked. Cribl's own Okta guides use a custom app integration (Create App Integration)."
+  },
+  "entra": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": "https://docs.cribl.io/iam/sso-microsoft-entra-id-cloud",
+   "cite": [
+    "c16"
+   ],
+   "notes": "Cribl documents a custom SAML 2.0 enterprise application. There is no Microsoft Learn tutorial in the saas-apps table of contents."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "both",
+  "csv_import": null,
+  "other_sync": "IdP group names in SSO assertions map to Cribl Teams and Permissions at sign-in (Mapping IDs)",
+  "docs_public": true,
+  "cite": [
+   "c4",
+   "c5",
+   "c6"
+  ],
+  "notes": "JIT is inferred: with SSO, 'the identity provider (IdP) admin manages Members in the IdP system', and SAML assertions carry email, given_name, family_name and groups 'to correctly provision and authorize users'. Removal still has to be done in Cribl.Cloud."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://cribl.io/pricing/plan/",
+   "title": "Cribl Pricing",
+   "quote": "Looking for more robust Support, additional data capacity, and more features? Check out our Standard and Enterprise offerings.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://cribl.io/pricing/plan/",
+   "title": "Cribl Pricing",
+   "quote": "RBAC & Federated Auth",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://cribl.io/pricing/plan/",
+   "title": "Cribl Pricing",
+   "quote": "You can track credits and usage history directly on Cribl's cloud platform. $1 = 1 Credit.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://docs.cribl.io/iam/sso-cloud/",
+   "title": "SSO on Cribl.Cloud",
+   "quote": "With a Cribl.Cloud account on certain plan/license tiers, you can use an identity provider (IdP) to configure Single Sign-On (SSO) using OpenID Connect (OIDC) or Security Assertion Markup Language (SAML) in Cribl.Cloud.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://docs.cribl.io/iam/sso-cloud.md",
+   "title": "SSO on Cribl.Cloud",
+   "quote": "SAML Assertion Mappings define the attribute names that Cribl.Cloud must receive in the SAML assertions from the IdP to correctly provision and authorize users",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.cribl.io/iam/sso-cloud"
+  },
+  {
+   "id": "c6",
+   "url": "https://docs.cribl.io/iam/members-teams.md",
+   "title": "Members and Teams",
+   "quote": "the identity provider (IdP) admin manages Members in the IdP system. When you remove a Member in the IdP, they are still listed as a Member on Cribl.Cloud.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.cribl.io/iam/members-teams"
+  },
+  {
+   "id": "c7",
+   "url": "https://docs.cribl.io/iam/members-teams.md",
+   "title": "Members and Teams",
+   "quote": "Assigning the User Permission requires an Enterprise plan.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.cribl.io/iam/members-teams"
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.cribl.io/cribl-as-code/api-reference/control-plane/cribl-core/user-management.md",
+   "title": "Cribl Core API - User Management",
+   "quote": "Get a list of all users.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.cribl.io/cribl-as-code/api-reference/control-plane/cribl-core/user-management"
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.cribl.io/cribl-as-code/api-reference/control-plane/cribl-core/user-management.md",
+   "title": "Cribl Core API - User Management",
+   "quote": "If true, the account is disabled and cannot authenticate.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.cribl.io/cribl-as-code/api-reference/control-plane/cribl-core/user-management"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.cribl.io/cribl-as-code/api-reference/control-plane/cribl-core/team-management.md",
+   "title": "Cribl Core API - Team Management",
+   "quote": "Add or remove Team Members",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.cribl.io/cribl-as-code/api-reference/control-plane/cribl-core/team-management"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.cribl.io/cribl-as-code/api-reference/control-plane/cribl-core/access-management-roles-and-policies.md",
+   "title": "Cribl Core API - Access Management (Roles and Policies)",
+   "quote": "Get a list of all Roles (on-prem only).",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.cribl.io/cribl-as-code/api-reference/control-plane/cribl-core/access-management-roles-and-policies"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.cribl.io/cribl-as-code/api-reference/management-plane.md",
+   "title": "Cribl Management Plane API",
+   "quote": "GET /v1/organizations/{organizationId}/api-credentials",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.cribl.io/cribl-as-code/api-reference/management-plane"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.cribl.io/cribl-as-code/api-auth.md",
+   "title": "Authenticate with the Cribl API",
+   "quote": "Without a proper license, all API Credentials are granted the Admin Permission.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.cribl.io/cribl-as-code/api-auth"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.cribl.io/cribl-as-code/api-auth.md",
+   "title": "Authenticate with the Cribl API",
+   "quote": "In Cribl.Cloud and hybrid deployments, Bearer tokens are valid for 24 hours.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.cribl.io/cribl-as-code/api-auth"
+  },
+  {
+   "id": "c15",
+   "url": "https://www.okta.com/integrations/cribl-cloud/",
+   "title": "Cribl Cloud | Okta Integration Network",
+   "quote": "The Okta Cribl Cloud integration enables secure federated authentication via SAML based Single Sign-On (SSO)",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.cribl.io/iam/sso-microsoft-entra-id-cloud.md",
+   "title": "SSO with Microsoft Entra ID (Cribl.Cloud)",
+   "quote": "Configuring SSO in Cribl.Cloud requires a SAML 2.0 application in Microsoft Entra ID.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.cribl.io/iam/sso-microsoft-entra-id-cloud"
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.cribl.io/iam/members-teams",
+   "title": "Members and Teams",
+   "quote": "After removing the Member in the IdP, you must also manually remove them on Cribl.Cloud to completely remove their access.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://cribl.io/pricing/plan/ (Free/Standard/Enterprise; SSO via 'External Auth (OpenID & SAML)' on Enterprise; no SCIM)",
+  "https://docs.cribl.io/llms.txt and https://docs.cribl.io/iam/llms.txt (IAM index: SSO, Members and Teams, Local Users; no SCIM or provisioning page)",
+  "https://docs.cribl.io/sitemap.xml (no SCIM or provisioning URLs)",
+  "https://docs.cribl.io/cribl-as-code/llms.txt and the Cribl Core and Management Plane API references (users, teams, roles; no SCIM)",
+  "https://www.okta.com/integrations/?search=cribl (Cribl Cloud, SAML only)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/toc.json (no Cribl tutorial)"
+ ],
+ "open_questions": [
+  "Docs do not say outright that SSO users are created just-in-time; this is inferred from the Members page.",
+  "Whether an audit-log API exists is not documented in the API index.",
+  "API rate limits are not documented in the pages checked.",
+  "Google Workspace, OneLogin and JumpCloud catalogue listings not checked."
+ ]
+}

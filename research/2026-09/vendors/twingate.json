@@ -1,0 +1,889 @@
+{
+ "slug": "twingate",
+ "vendor": "Twingate",
+ "vendor_url": "https://www.twingate.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Twingate",
+  "slug": "twingate",
+  "category": "Security & Identity",
+  "status": "gated",
+  "scim_plan": "Business",
+  "scim_price_text": "Business: $10/u/mo (billed yearly)",
+  "scim_price_per_user_mo": 10,
+  "team_plan": "Teams",
+  "team_price_text": "Teams: $5/u/mo (billed yearly)",
+  "team_price_per_user_mo": 5,
+  "price_multiplier": 2.0,
+  "sso_plan": "Business",
+  "sso_price_per_user_mo": 10,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": "directory_sync",
+   "onelogin": "native",
+   "jumpcloud": "native",
+   "generic": true
+  },
+  "pricing_page_url": "https://www.twingate.com/pricing",
+  "docs_url": "https://www.twingate.com/docs/scim-provisioning-api",
+  "evidence": "Twingate's pricing page lists \"User provisioning & management via IdP\" and \"SSO via Okta, Entra ID, and more\" under Business ($10 per user per month), and the Okta, Entra ID and JumpCloud SCIM integrations are checked only for Business and Enterprise.",
+  "notes": "SCIM (Okta, Entra ID, OneLogin, JumpCloud) starts at Business, $10/user/mo on the page's yearly view, versus Teams at $5. Google Workspace sign-in plus Directory-API user and group sync is on every plan including free Starter (Twingate-run, not SCIM); it is treated as Google sign-in, not SAML/OIDC SSO, so sso_plan is Business. Twingate documents its SCIM 2.0 endpoint but says it is not meant for self-serve use, so idp.generic is true with that caveat. Disabled users keep counting toward billing. The GraphQL Admin API (all plans, including Starter) can create, disable and delete users. Monthly prices are about 15% higher; the comparison table's monthly view shows $12 for both Teams and Business, which looks like a page error.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Starter",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Starter",
+   "price_text": "Free (up to 5 users)",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c4",
+    "c6",
+    "c7",
+    "c8"
+   ],
+   "notes": "Google Workspace sign-in and directory sync included."
+  },
+  {
+   "name": "Home",
+   "price_text": "$15 per month (up to 7 users, non-commercial use)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c6",
+    "c7"
+   ],
+   "notes": "Homelab plan limited to non-commercial use; flat price."
+  },
+  {
+   "name": "Teams",
+   "price_text": "$5 per user per month (yearly), up to 100 users",
+   "price_per_user_mo": 5,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c6",
+    "c7",
+    "c8"
+   ]
+  },
+  {
+   "name": "Business",
+   "price_text": "$10 per user per month (yearly), up to 500 users",
+   "price_per_user_mo": 10,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c3",
+    "c6",
+    "c7",
+    "c8"
+   ]
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Custom (Talk to Sales)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c5",
+    "c6",
+    "c7",
+    "c8"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c1",
+   "c6",
+   "c8",
+   "c9",
+   "c22",
+   "c24"
+  ],
+  "plan": "Business",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://{network}.twingate.com/api/scim/v2/",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Twingate Admin Console (Settings > Identity Provider); only the most recently generated token is valid",
+   "token_expiry": "never",
+   "cite": [
+    "c10",
+    "c11"
+   ],
+   "notes": "Docs call it a long-lived bearer token; no expiry is stated, so \"never\" means long-lived until replaced."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": false,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": false,
+   "Me": false,
+   "cite": [
+    "c13",
+    "c15",
+    "c19",
+    "c20"
+   ],
+   "notes": "ServiceProviderConfig is listed as \"Coming soon\"; /.search is also unsupported."
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c13",
+    "c14",
+    "c15",
+    "c21",
+    "c44"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c21",
+    "c14"
+   ],
+   "notes": "Okta deactivation deactivates the Twingate user; SCIM DELETE deletes the user. The offboarding guide says users disabled in the Admin Console keep counting towards billable users, but it does not say whether an IdP deactivation via SCIM is billed the same way (c31)."
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "externalId"
+   ],
+   "cite": [
+    "c13",
+    "c45"
+   ],
+   "notes": "Entra mapping marks externalId as supported for filtering; sorting is not supported."
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c13"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "id",
+    "externalId",
+    "emails[primary eq true]",
+    "name.givenName",
+    "name.lastName",
+    "active",
+    "userName"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "id",
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c16",
+    "c17",
+    "c45"
+   ],
+   "notes": "Twingate documents the last name as name.lastName; the Entra gallery mapping uses name.familyName and emails[type eq \"work\"].value."
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "25 requests per second per Twingate account",
+   "cite": [
+    "c18"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "No /.search, /Bulk or /Me endpoints, and no sorting on filter queries.",
+    "cite": [
+     "c19"
+    ]
+   },
+   {
+    "text": "SCIM endpoints are documented only to support the existing IdP integrations, not for self-serve use.",
+    "cite": [
+     "c12"
+    ]
+   },
+   {
+    "text": "Users synced from an IdP cannot be modified in the Twingate Admin Console.",
+    "cite": [
+     "c32"
+    ]
+   }
+  ],
+  "notes": "Twingate documents the SCIM API but says the endpoints are for its supported IdP integrations (Okta, Entra ID, OneLogin, JumpCloud), not for self-serve use. Each IdP integration must first be connected for sign-in (OIDC/SAML) before SCIM is configured."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c7",
+   "c33"
+  ],
+  "plan": "Starter",
+  "api_tax": false,
+  "style": "GraphQL",
+  "base_url": "https://{subdomain}.twingate.com/api/graphql/",
+  "docs_url": "https://www.twingate.com/docs/api-overview",
+  "auth": {
+   "methods": [
+    "api_key"
+   ],
+   "scopes": [
+    "Read only",
+    "Read & Write",
+    "Read, Write & Provision"
+   ],
+   "cite": [
+    "c34"
+   ],
+   "notes": "X-API-KEY header; tokens are generated under Settings > API with one of three permission levels and optional IP allow-ranges."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": true,
+   "reactivate_user": true,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c36",
+    "c37",
+    "c38",
+    "c39",
+    "c40",
+    "c41"
+   ],
+   "notes": "userDetailsUpdate takes state ACTIVE or DISABLED, which covers deactivate and reactivate."
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/api/graphql/",
+    "purpose": "users query (list users) / user query (get one user)",
+    "cite": [
+     "c36"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/graphql/",
+    "purpose": "userCreate mutation",
+    "cite": [
+     "c37"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/graphql/",
+    "purpose": "userDetailsUpdate mutation (name, state ACTIVE/DISABLED)",
+    "cite": [
+     "c39"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/graphql/",
+    "purpose": "userDelete mutation",
+    "cite": [
+     "c38"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/graphql/",
+    "purpose": "userRoleUpdate mutation (admin roles)",
+    "cite": [
+     "c40"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/graphql/",
+    "purpose": "groupUpdate mutation (add/remove users and resources); groupCreate, groupDelete",
+    "cite": [
+     "c41"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": [],
+   "notes": "Audit logs are exported from the Admin Console or synced to S3 (c42); no audit-log query appears in the GraphQL schema."
+  },
+  "rate_limits": {
+   "text": "60 reads and 20 writes per minute per account by default; 429 when exceeded",
+   "cite": [
+    "c35"
+   ]
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": "vendor",
+   "url": "https://www.okta.com/integrations/twingate/",
+   "cite": [
+    "c43",
+    "c21",
+    "c22"
+   ],
+   "notes": "OIDC sign-in plus SCIM; needs Okta Lifecycle Management for SCIM."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/twingate-provisioning-tutorial",
+   "cite": [
+    "c44",
+    "c24"
+   ]
+  },
+  "google": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "directory_sync",
+   "built_by": "vendor",
+   "url": null,
+   "cite": [
+    "c30",
+    "c8"
+   ],
+   "notes": "Twingate-run sync over the Google Workspace Directory API; all plans."
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c28",
+    "c29"
+   ],
+   "notes": "From Twingate's own OneLogin guide; OneLogin catalogue page not loaded."
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://jumpcloud.com/support/integrate-with-twingate",
+   "cite": [
+    "c46",
+    "c27"
+   ]
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "oidc",
+  "csv_import": null,
+  "other_sync": "Google Workspace Directory API user and group sync (all plans)",
+  "docs_public": true,
+  "cite": [
+   "c23",
+   "c25",
+   "c30"
+  ],
+  "notes": "Users are created at first sign-in when Okta is used without Lifecycle Management, or when Entra assignment is not required (both OIDC)."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.twingate.com/pricing",
+   "title": "Twingate Pricing",
+   "quote": "Everything in Teams, plus: Up to 500 users User provisioning & management via IdP SSO via Okta, Entra ID, and more",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://www.twingate.com/pricing",
+   "title": "Twingate Pricing",
+   "quote": "Teams Modern network access for teams looking to retire their legacy VPN. $5 per user per month Yearly -15%",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://www.twingate.com/pricing",
+   "title": "Twingate Pricing",
+   "quote": "Business Most Popular Integrated and automated security controls for growing teams. $10 per user per month Yearly -15%",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://www.twingate.com/pricing",
+   "title": "Twingate Pricing",
+   "quote": "Starter Remote access essentials for personal projects and small startups. Free per user / month Get Started Up to 5 users",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://www.twingate.com/pricing",
+   "title": "Twingate Pricing",
+   "quote": "Enterprise Comprehensive network security for organizations operating at scale. Custom per user / month Talk to Sales",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://www.twingate.com/pricing",
+   "title": "Twingate Pricing",
+   "quote": "Okta integration Integration with Okta for user and group management (SCIM) Microsoft Entra ID integration Integration with Microsoft Entra ID for user and group management (SCIM)",
+   "accessed": "2026-10-05",
+   "page_url": null,
+   "notes": "Comparison table: Dash for Starter, Home and Teams; Check for Business and Enterprise (read from the rendered markup)."
+  },
+  {
+   "id": "c7",
+   "url": "https://www.twingate.com/pricing",
+   "title": "Twingate Pricing",
+   "quote": "Admin API For programmatically administering Twingate",
+   "accessed": "2026-10-05",
+   "page_url": null,
+   "notes": "Check on all five plan columns in the rendered markup."
+  },
+  {
+   "id": "c8",
+   "url": "https://www.twingate.com/docs/identity-providers",
+   "title": "Identity Providers",
+   "quote": "Twingate supports Google Workspace for all product plans, as well as a number of popular identity providers in our Business and Enterprise product plans.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://www.twingate.com/docs/scim-provisioning-api",
+   "title": "SCIM Provisioning API",
+   "quote": "The base URL for SCIM endpoints is https://{network}.twingate.com/api/scim/v2/ where {network} is your Twingate network name.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://www.twingate.com/docs/scim-provisioning-api",
+   "title": "SCIM Provisioning API",
+   "quote": "A long-lived bearer token is required to access any SCIM endpoints.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c11",
+   "url": "https://www.twingate.com/docs/scim-provisioning-api",
+   "title": "SCIM Provisioning API",
+   "quote": "This token can be created and replaced in the Twingate Admin console. Only the most recently generated token is valid at any point of time.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://www.twingate.com/docs/scim-provisioning-api",
+   "title": "SCIM Provisioning API",
+   "quote": "The following endpoints are not meant for self-serve use. See here for our supported identity provider integrations.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://www.twingate.com/docs/scim-provisioning-api",
+   "title": "SCIM Provisioning API",
+   "quote": "GET /Users - to search and filter users. Pagination is supported. POST /Users - to create a new user.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c14",
+   "url": "https://www.twingate.com/docs/scim-provisioning-api",
+   "title": "SCIM Provisioning API",
+   "quote": "PUT /Users/{id} - to replace a single user. PATCH /Users/{id} - to modify a single user. DELETE /Users/{id} - to delete a single user. This deletes the user in Twingate.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://www.twingate.com/docs/scim-provisioning-api",
+   "title": "SCIM Provisioning API",
+   "quote": "GET /Groups - to search and filter groups. Pagination is supported. POST /Groups - to create a new group.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://www.twingate.com/docs/scim-provisioning-api",
+   "title": "SCIM Provisioning API",
+   "quote": "Origin ID externalId True True Singular Email emails[primary eq true] False False Multi-valued First name name.givenName False False Singular Last name name.lastName False False Singular Active active False False Singular Username userName",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c17",
+   "url": "https://www.twingate.com/docs/scim-provisioning-api",
+   "title": "SCIM Provisioning API",
+   "quote": "Group name displayName True False Singular Members members False False Multi-valued",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c18",
+   "url": "https://www.twingate.com/docs/scim-provisioning-api",
+   "title": "SCIM Provisioning API",
+   "quote": "Requests are rate-limited to 25 requests per second per Twingate account.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c19",
+   "url": "https://www.twingate.com/docs/scim-provisioning-api",
+   "title": "SCIM Provisioning API",
+   "quote": "/Bulk endpoint for bulk operations (RFC-7644 section 3.7) /Me endpoint (RFC-7644 section 3.11) Sorting for filtering queries as specified in RFC-7644 section 3.4.2.3 is not supported.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c20",
+   "url": "https://www.twingate.com/docs/scim-provisioning-api",
+   "title": "SCIM Provisioning API",
+   "quote": "Service Provider Configuration Coming soon",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c21",
+   "url": "https://www.twingate.com/docs/okta-scim-configuration",
+   "title": "Okta SCIM User & Group Sync Configuration",
+   "quote": "Deactivate users in Twingate that have been deactivated in Okta or removed from the Okta Twingate app Group push from Okta to Twingate",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c22",
+   "url": "https://www.twingate.com/docs/okta-scim-configuration",
+   "title": "Okta SCIM User & Group Sync Configuration",
+   "quote": "Okta SCIM-based provisioning is supported for Twingate customers on the Business and Enterprise plans.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c23",
+   "url": "https://www.twingate.com/docs/okta-configuration",
+   "title": "Okta Configuration",
+   "quote": "Users will only be visible in the Twingate Admin panel once they have logged into the Twingate Client and have authenticated against Okta.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c24",
+   "url": "https://www.twingate.com/docs/entra-id-configuration",
+   "title": "Entra ID (formerly Azure AD) Configuration",
+   "quote": "Before proceeding with the Twingate Entra ID gallery app configuration, you need to sign in with Entra ID in the Twingate Admin Console.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c25",
+   "url": "https://www.twingate.com/docs/entra-id-configuration",
+   "title": "Entra ID (formerly Azure AD) Configuration",
+   "quote": "This will create a user within Twingate at time of login that is not managed by Entra ID.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c26",
+   "url": "https://www.twingate.com/docs/jumpcloud-configuration",
+   "title": "JumpCloud Configuration",
+   "quote": "Note that our JumpCloud integration is limited to the Business and Enterprise product plans.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c27",
+   "url": "https://www.twingate.com/docs/jumpcloud-configuration",
+   "title": "JumpCloud Configuration",
+   "quote": "User authentication via SAML User and group synchronization via SCIM",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c28",
+   "url": "https://www.twingate.com/docs/onelogin-configuration-scim",
+   "title": "Configure SCIM User & Group Sync (OneLogin)",
+   "quote": "OneLogin SCIM-based provisioning is supported for Twingate customers on the Business and Enterprise plans.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c29",
+   "url": "https://www.twingate.com/docs/onelogin-configuration-scim",
+   "title": "Configure SCIM User & Group Sync (OneLogin)",
+   "quote": "To do this, you must first set up the Twingate application from OneLogin’s application catalog.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c30",
+   "url": "https://www.twingate.com/docs/google-workspace-configuration",
+   "title": "Google Workspace Configuration",
+   "quote": "User and group synchronization are performed using the Google Workspace Directory API, authorized via OAuth.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c31",
+   "url": "https://www.twingate.com/docs/offboarding-users",
+   "title": "How to Offboard Users",
+   "quote": "Disabled users will not be able to log in to Twingate, but their account information will be retained. They will also continue to count towards billable users.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c32",
+   "url": "https://www.twingate.com/docs/users",
+   "title": "Users",
+   "quote": "If you choose to connect a third party Identify Provider (IdP), then users are automatically synchronized from your Identity Provider and cannot be modified in the Twingate Admin Console.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c33",
+   "url": "https://www.twingate.com/docs/api-overview",
+   "title": "API Overview",
+   "quote": "Twingate provides an Admin API that is GraphQL-based, allowing you to manage your Twingate network programmatically.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c34",
+   "url": "https://www.twingate.com/docs/api-overview",
+   "title": "API Overview",
+   "quote": "You will also need to set a custom HTTP header, X-API-KEY with the value of your API key.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c35",
+   "url": "https://www.twingate.com/docs/api-overview",
+   "title": "API Overview",
+   "quote": "Request type Request Limit (per minute) Reads 60 Writes 20",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c36",
+   "url": "https://www.twingate.com/docs/api",
+   "title": "API Schema",
+   "quote": "users Description Fetches a list of Users. Response Returns a UserConnection!",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c37",
+   "url": "https://www.twingate.com/docs/api",
+   "title": "API Schema",
+   "quote": "userCreate Response Returns a UserCreateMutation! Arguments Name Description email - String! The User's email.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c38",
+   "url": "https://www.twingate.com/docs/api",
+   "title": "API Schema",
+   "quote": "userDelete Response Returns a UserDeleteMutation!",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c39",
+   "url": "https://www.twingate.com/docs/api",
+   "title": "API Schema",
+   "quote": "state - UserStateUpdateInput The User's state. Default = null",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c40",
+   "url": "https://www.twingate.com/docs/api",
+   "title": "API Schema",
+   "quote": "userRoleUpdate Response Returns a UserRoleUpdateMutation!",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c41",
+   "url": "https://www.twingate.com/docs/api",
+   "title": "API Schema",
+   "quote": "groupUpdate Response Returns a GroupUpdateMutation!",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c42",
+   "url": "https://www.twingate.com/docs/audit-logs",
+   "title": "Audit Logs",
+   "quote": "This JSON report can be manually exported via the Admin Console or synced in JSON format to an AWS S3 bucket as a JSON file.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c43",
+   "url": "https://www.okta.com/integrations/twingate/",
+   "title": "Twingate | Okta Integration Network",
+   "quote": "This application is used to sync your users and groups from Okta to Twingate.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c44",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/twingate-provisioning-tutorial",
+   "title": "Configure Twingate for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Create users in Twingate Remove users in Twingate when they don't require access anymore Keep user attributes synchronized between Microsoft Entra ID and Twingate Provision groups and group memberships in Twingate",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c45",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/twingate-provisioning-tutorial",
+   "title": "Configure Twingate for automatic user provisioning with Microsoft Entra ID",
+   "quote": "externalId String ✓ userName String active Boolean emails[type eq \"work\"].value String name.givenName String name.familyName String",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c46",
+   "url": "https://jumpcloud.com/support/integrate-with-twingate",
+   "title": "Integrate with Twingate (JumpCloud)",
+   "quote": "Automatically provision, update and deprovision users and groups in Twingate from JumpCloud using the SCIM integration.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c47",
+   "url": "https://www.twingate.com/llms.txt",
+   "title": "Twingate llms.txt",
+   "quote": "Teams ($5/user/mo, up to 100 users), Business ($10/user/mo, up to 500 users), Enterprise (custom). 15% discount billed yearly.",
+   "accessed": "2026-10-05",
+   "page_url": "https://www.twingate.com/pricing"
+  },
+  {
+   "id": "c48",
+   "url": "https://www.twingate.com/docs/users",
+   "title": "Users",
+   "quote": "You are billed for all of your synchronized users and any service accounts you create.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The pricing page cards show Teams $5 and Business $10 per user per month in the yearly view (\"Yearly -15%\"), while llms.txt lists the same prices with \"15% discount billed yearly\", implying they are monthly list prices. The pricing page is used.",
+   "cite": [
+    "c2",
+    "c3",
+    "c47"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.twingate.com/pricing",
+  "https://www.twingate.com/llms.txt",
+  "https://www.twingate.com/sitemap/sitemap-0.xml",
+  "https://www.twingate.com/docs/identity-providers",
+  "https://www.twingate.com/docs/scim-provisioning-api",
+  "https://www.twingate.com/docs/api"
+ ],
+ "open_questions": [
+  "Docs do not say whether a SCIM deactivation stops billing for the user (Admin Console disabled users still count).",
+  "Whether SCIM deactivation ends active client sessions is not documented.",
+  "No audit-log API is documented; audit logs are console export or S3 sync only.",
+  "Custom SCIM attributes and enterprise-extension attributes are not documented."
+ ]
+}

@@ -1,0 +1,686 @@
+{
+ "slug": "braze",
+ "vendor": "Braze",
+ "vendor_url": "https://www.braze.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Braze",
+  "slug": "braze",
+  "category": "Marketing & Advertising",
+  "status": "gated",
+  "scim_plan": "Braze Select",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Braze Go",
+  "team_price_text": "Contact Sales (priced by Monthly Active Users)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Braze Go",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": null,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": "sso_only",
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.braze.com/pricing",
+  "docs_url": "https://www.braze.com/docs/user_guide/administer/global/user_management/automated_user_provisioning/",
+  "evidence": "Braze's pricing page lists \"Enhanced security features and user provisioning\" as what Braze Select adds over Braze Go, and the provisioning docs say \"SCIM provisioning availability depends on your platform edition.\"",
+  "notes": "New row. Braze sells four Platform Editions (Braze Go, Select, Pro, Enterprise), all quote-based and priced by Monthly Active Users plus message credits, so no per-user prices. User provisioning first appears on Braze Select, the second edition, so SCIM sits above the entry edition and behind Contact Sales (gated). The pricing page lists SAML SSO in every tier; the older SSO doc says Pro and Enterprise only (see conflicts). SCIM options: a custom SCIM 2.0 API (bearer token, X-Request-Origin header, optional IP allowlist; POST/GET/PUT/DELETE on /scim/v2/Users, no PATCH and no Groups endpoint documented) or Okta / Entra ID integrations (early access) that create and delete users and push groups for group-to-custom-role mapping (early access). Only one SCIM integration per company. Deprovisioning permanently deletes the dashboard user. SAML JIT (IdP-initiated only, enabled by Braze) is also available. The Braze REST API manages end-customer profiles, not dashboard users; the only dashboard-user API is SCIM.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": false,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Braze Go",
+   "price_text": "Contact Sales (MAU-based)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c3"
+   ],
+   "notes": "Core features; SSO listed under features included in every tier. User provisioning is first listed on Braze Select."
+  },
+  {
+   "name": "Braze Select",
+   "price_text": "Contact Sales (MAU-based)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c3",
+    "c4"
+   ]
+  },
+  {
+   "name": "Braze Pro",
+   "price_text": "Contact Sales (MAU-based)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c3"
+   ],
+   "notes": "Everything in Braze Select plus expanded dashboard user group administration."
+  },
+  {
+   "name": "Braze Enterprise",
+   "price_text": "Contact Sales (MAU-based)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c3"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c1",
+   "c5",
+   "c22",
+   "c13"
+  ],
+  "plan": "Braze Select",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://rest.{instance}.braze.com/scim/v2 (e.g. https://rest.iad-01.braze.com/scim/v2)",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Settings > Company Settings > Admin Settings > SCIM Provisioning > Configure SCIM integration > Generate SCIM token",
+   "token_expiry": null,
+   "cite": [
+    "c8",
+    "c9"
+   ],
+   "notes": "Requests also need an X-Request-Origin header matching the configured service origin; optional IP allowlist. Token shown once."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c13",
+    "c17",
+    "c30",
+    "c19"
+   ],
+   "notes": "Custom SCIM API documents only /scim/v2/Users. The Okta/Entra integrations sync groups over SCIM /Groups, but no Groups endpoint is documented for the custom API."
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": null,
+   "deactivate": null,
+   "reactivate": null,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c13",
+    "c30",
+    "c16",
+    "c17",
+    "c6",
+    "c19",
+    "c20"
+   ],
+   "notes": "Group push and membership only through the Okta / Entra integrations with SCIM group role mapping (early access)."
+  },
+  "deprovision": {
+   "action": "delete",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c6",
+    "c17",
+    "c21"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName"
+   ],
+   "cite": [
+    "c18"
+   ],
+   "notes": "Exact match with eq on userName only."
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "department"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": true,
+    "how": "Braze-specific top-level 'permissions' object (companyPermissions, roles, appGroup workspace permissions, permission sets, teams); read-only createdAt and lastSignInAt"
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c13",
+    "c19",
+    "c31",
+    "c33"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "permissions object on the user (company, workspace, team permissions and custom roles by roleName/roleId); with Okta/Entra, IdP groups map to custom roles (early access)",
+   "cite": [
+    "c13",
+    "c15",
+    "c19"
+   ]
+  },
+  "rate_limits": {
+   "text": "20,000 requests per day per company, shared across the /scim/v2/Users endpoints.",
+   "cite": [
+    "c14"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Only one SCIM integration per company; with the Okta or Entra ID integration the custom SCIM API endpoints cannot be used.",
+    "cite": [
+     "c6"
+    ]
+   },
+   {
+    "text": "Okta and Entra ID SCIM integrations are in early access.",
+    "cite": [
+     "c7",
+     "c32"
+    ]
+   },
+   {
+    "text": "userName (email) cannot be changed over SCIM.",
+    "cite": [
+     "c16"
+    ]
+   },
+   {
+    "text": "Users created manually before SCIM are not converted to IdP-managed users.",
+    "cite": [
+     "c12"
+    ]
+   },
+   {
+    "text": "Legacy SCIM permission values stop being accepted in December 2026.",
+    "cite": [
+     "c31"
+    ]
+   }
+  ],
+  "notes": "Edition gate from the pricing page ('user provisioning' on Braze Select); docs only say availability depends on platform edition."
+ },
+ "user_api": {
+  "available": false,
+  "cite": [
+   "c22",
+   "c23"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": null,
+  "base_url": null,
+  "docs_url": null,
+  "auth": {
+   "methods": [],
+   "scopes": [],
+   "cite": []
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": []
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": [
+    "c23"
+   ],
+   "notes": "Security events are a dashboard report download; no audit-log API found."
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "The Braze REST API manages end-customer profiles. For dashboard users the docs point to SCIM and a Security Event report download (no list-users API). 'false' is by absence."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/braze/",
+   "cite": [
+    "c27",
+    "c10",
+    "c7"
+   ],
+   "notes": "OIN page ticks SAML and SWA only. Braze's docs describe enabling SCIM on the Braze Okta app or a custom app with Braze's SCIM endpoint (early access)."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/braze-tutorial",
+   "cite": [
+    "c28",
+    "c11"
+   ],
+   "notes": "Gallery tutorial covers SSO only; Braze's SCIM guide uses a non-gallery Entra app (early access)."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c29"
+   ],
+   "notes": "Braze documents OneLogin SAML SSO; no OneLogin SCIM guide."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c25",
+   "c26"
+  ],
+  "notes": "JIT is IdP-initiated only and must be enabled by Braze."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.braze.com/pricing",
+   "title": "Braze pricing and packaging",
+   "quote": "Enhanced security features and user provisioning",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://www.braze.com/pricing",
+   "title": "Braze pricing and packaging",
+   "quote": "Pricing scales with your Monthly Active Users (MAU), the customers who actively interact with your brand across your digital experiences.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://www.braze.com/pricing",
+   "title": "Braze pricing and packaging",
+   "quote": "Two-Factor Authentication (2FA) SAML & Single-Sign On (SSO) Security settings & event logs Granular permissions",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://www.braze.com/pricing",
+   "title": "Braze pricing and packaging",
+   "quote": "For companies scaling their engagement across more channels and team members while strengthening their governance and security.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://www.braze.com/docs/user_guide/administer/global/user_management/automated_user_provisioning/",
+   "title": "Automated user provisioning",
+   "quote": "SCIM provisioning availability depends on your platform edition. If this feature isn’t in your workspace, contact your customer success manager for information.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://www.braze.com/docs/user_guide/administer/global/user_management/automated_user_provisioning/",
+   "title": "Automated user provisioning",
+   "quote": "You can only set up one SCIM integration per company. If you use an identity provider (IdP) integration (Okta or Entra ID), you can’t use the custom SCIM API endpoints. The IdP integrations create and delete user accounts automatically.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://www.braze.com/docs/user_guide/administer/global/user_management/automated_user_provisioning/",
+   "title": "Automated user provisioning",
+   "quote": "The Okta integration is currently in early access. Contact your Braze account manager if you’re interested in participating in the early access.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://www.braze.com/docs/user_guide/administer/global/user_management/automated_user_provisioning/",
+   "title": "Automated user provisioning",
+   "quote": "After completing the required fields, press Generate SCIM token to generate a SCIM token and see your SCIM API endpoint. Make sure to copy the SCIM token before you navigate away. This token appears only once.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://www.braze.com/docs/user_guide/administer/global/user_management/automated_user_provisioning/",
+   "title": "Automated user provisioning",
+   "quote": "IP Allowlisting (optional): You can restrict SCIM requests to specific IP addresses.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://www.braze.com/docs/user_guide/administer/global/user_management/automated_user_provisioning/",
+   "title": "Automated user provisioning",
+   "quote": "Use the Okta - Braze app option if you set up the Braze app for SAML SSO in Okta.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c11",
+   "url": "https://www.braze.com/docs/user_guide/administer/global/user_management/automated_user_provisioning/",
+   "title": "Automated user provisioning",
+   "quote": "select Integrate application you don’t find in the gallery (Non-gallery)",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://www.braze.com/docs/user_guide/administer/global/user_management/automated_user_provisioning/",
+   "title": "Automated user provisioning",
+   "quote": "Users who were manually provisioned in Braze before SCIM was enabled won’t be automatically converted to IdP-managed users, even if they’re added to the SCIM application.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://www.braze.com/docs/api/endpoints/scim/post_create_user_account/",
+   "title": "Create new dashboard user account",
+   "quote": "Use this endpoint to create a new dashboard user account by specifying email, given and family names, permissions (for setting permissions at the company, workspace, and team level).",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c14",
+   "url": "https://www.braze.com/docs/api/endpoints/scim/post_create_user_account/",
+   "title": "Create new dashboard user account",
+   "quote": "This endpoint has a rate limit of 20,000 requests per day, per company.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://www.braze.com/docs/api/endpoints/scim/post_create_user_account/",
+   "title": "Create new dashboard user account",
+   "quote": "When omitted or empty, Braze assigns default read-only workspace permissions on the default workspace configured in SCIM Provisioning",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://www.braze.com/docs/api/endpoints/scim/put_update_existing_user_account/",
+   "title": "Update dashboard user account",
+   "quote": "For security reasons, userName (email address) cannot be updated through this endpoint.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c17",
+   "url": "https://www.braze.com/docs/api/endpoints/scim/delete_existing_dashboard_user/",
+   "title": "Remove dashboard user account",
+   "quote": "Use this endpoint to permanently delete an existing dashboard user by specifying the resource id returned by the SCIM POST method.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c18",
+   "url": "https://www.braze.com/docs/api/endpoints/scim/get_search_existing_dashboard_user/",
+   "title": "Search existing dashboard user account by email",
+   "quote": "Braze only supports exact-match filters on userName using the eq operator. Other SCIM filter fields or operators return a 400 response.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c19",
+   "url": "https://www.braze.com/docs/user_guide/administer/global/user_management/scim_group_role_mapping/",
+   "title": "SCIM group role mapping",
+   "quote": "Your IdP pushes groups and their members to Braze over SCIM, you map each group to a custom role, and every member of that group inherits the role’s permissions.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c20",
+   "url": "https://www.braze.com/docs/user_guide/administer/global/user_management/scim_group_role_mapping/",
+   "title": "SCIM group role mapping",
+   "quote": "SCIM group role mapping is currently in early access.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c21",
+   "url": "https://www.braze.com/docs/user_guide/administer/global/user_management/scim_group_role_mapping/",
+   "title": "SCIM group role mapping",
+   "quote": "removing them from the group (or removing the group) deletes the user in Braze.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c22",
+   "url": "https://www.braze.com/docs/api/endpoints/scim/",
+   "title": "SCIM endpoints",
+   "quote": "Use the Braze SCIM endpoints to manage automated user provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c23",
+   "url": "https://www.braze.com/docs/api/endpoints/scim/",
+   "title": "SCIM endpoints",
+   "quote": "Download the Security Event report from Settings > Admin Settings > Security Settings > Security Event Download",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c24",
+   "url": "https://www.braze.com/docs/user_guide/administer/global/saml_single_sign_on/",
+   "title": "SAML and Single Sign-On",
+   "quote": "Google SSO and SAML SSO support are available for Pro and Enterprise customers. For other customers, contact your Braze account manager for more details.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c25",
+   "url": "https://www.braze.com/docs/user_guide/administer/global/saml_single_sign_on/saml_just_in_time_provisioning/",
+   "title": "SAML just-in-time provisioning",
+   "quote": "Just-in-time provisioning works with SAML SSO to allow new company users to create a Braze account on their first sign in.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c26",
+   "url": "https://www.braze.com/docs/user_guide/administer/global/saml_single_sign_on/saml_just_in_time_provisioning/",
+   "title": "SAML just-in-time provisioning",
+   "quote": "SAML just-in-time provisioning must be enabled for your company by Braze.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c27",
+   "url": "https://www.okta.com/integrations/braze/",
+   "title": "Integrate Braze with Okta",
+   "quote": "Braze is an engagement platform that empowers growth by helping marketing teams to build customer loyalty through mobile, omni channel customer experiences",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c28",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/braze-tutorial",
+   "title": "Configure Braze for Single sign-on with Microsoft Entra ID",
+   "quote": "Braze supports SP and IDP initiated SSO.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c29",
+   "url": "https://www.braze.com/docs/user_guide/administer/global/saml_single_sign_on/onelogin/",
+   "title": "OneLogin (Braze SAML SSO)",
+   "quote": "Upon setup, you will be asked to provide a sign-on URL and an Assertion Consumer Service (ACS) URL.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c30",
+   "url": "https://www.braze.com/docs/api/endpoints/scim/get_see_user_account_information/",
+   "title": "Look up an existing dashboard user account by resource ID",
+   "quote": "Use this endpoint to look up an existing dashboard user account by specifying the resource id returned by the SCIM POST method.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c31",
+   "url": "https://www.braze.com/docs/api/objects_filters/scim_api_appendix/",
+   "title": "SCIM API objects and appendix",
+   "quote": "Existing SCIM integrations and legacy SCIM API objects continue to work after the granular permissions migration, but Braze will stop accepting legacy SCIM API values in December 2026.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c32",
+   "url": "https://www.braze.com/docs/user_guide/administer/global/user_management/automated_user_provisioning/",
+   "title": "Automated user provisioning",
+   "quote": "The Entra ID integration is currently in early access.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c33",
+   "url": "https://www.braze.com/docs/user_guide/administer/global/user_management/scim_group_role_mapping/",
+   "title": "SCIM group role mapping",
+   "quote": "Entra ID matches groups by display name, so each group name must be unique in your workspace.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The pricing page lists SAML & SSO among features included in every tier, while the SSO doc says Google SSO and SAML SSO are available for Pro and Enterprise customers.",
+   "cite": [
+    "c3",
+    "c24"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.braze.com/pricing",
+  "https://www.braze.com/docs/ (site index)",
+  "https://www.braze.com/docs/user_guide/administer/global/user_management/automated_user_provisioning/",
+  "https://www.braze.com/docs/api/endpoints/scim/",
+  "https://www.braze.com/docs/user_guide/administer/global/user_management/scim_group_role_mapping/",
+  "https://www.braze.com/docs/user_guide/administer/global/saml_single_sign_on/",
+  "https://www.braze.com/docs/user_guide/administer/global/saml_single_sign_on/saml_just_in_time_provisioning/",
+  "https://www.okta.com/integrations/braze/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/braze-tutorial",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/braze-provisioning-tutorial (404)"
+ ],
+ "open_questions": [
+  "Docs do not say whether the Okta / Entra integrations use PATCH or support deactivation without deletion.",
+  "SCIM token expiry is not documented.",
+  "Google Workspace and JumpCloud are not documented for SSO or SCIM.",
+  "Whether Braze Select alone (vs. also Pro) unlocks SCIM is from the pricing page's 'user provisioning' wording; docs only say it depends on edition."
+ ]
+}

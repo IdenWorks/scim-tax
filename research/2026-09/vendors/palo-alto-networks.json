@@ -1,0 +1,661 @@
+{
+ "slug": "palo-alto-networks",
+ "vendor": "Palo Alto Networks (Strata Cloud Manager)",
+ "vendor_url": "https://www.paloaltonetworks.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Palo Alto Networks (Strata Cloud Manager)",
+  "slug": "palo-alto-networks",
+  "category": "Security & Identity",
+  "status": "gated",
+  "scim_plan": "Strata Cloud Manager Essentials (with NGFW / Prisma Access, Contact Sales)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Strata Cloud Manager Essentials",
+  "team_price_text": "Included at no cost with NGFW, software firewall and SASE (all quote-only)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Strata Cloud Manager Essentials",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": null,
+   "delete": null,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "sso_only",
+   "google": "sso_only",
+   "onelogin": "sso_only",
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.paloaltonetworks.com/network-security/strata-cloud-manager",
+  "docs_url": "https://docs.paloaltonetworks.com/common-services/identity-and-access-access-management/manage-third-party-identity-provider-integrations/scim-config",
+  "evidence": "Palo Alto Networks documents SCIM for Strata Cloud Manager access management (\"Strata Cloud Manager supports integration with the following SCIM providers: Sailpoint OCI Okta\"), but publishes no prices; Strata Cloud Manager Essentials is \"free with the purchase of NGFW and Prisma Access\".",
+  "notes": "Quote-only: Palo Alto Networks publishes no prices; Strata Cloud Manager (the common admin console for NGFW and Prisma Access, with Common Services: Identity & Access) comes free as Essentials with NGFW, software firewall and SASE purchases, with Pro as a paid upgrade. SCIM is configured in Common Services for the tenant and documented for SailPoint, OCI and Okta (Okta via a custom SWA app with SCIM, base https://api.sase.paloaltonetworks.com/iam/v1/scim, OAuth 2.0 client credentials from a service account); the SCIM page does not tie it to Pro. Once SCIM is enabled, access changes are allowed only through the SCIM provider. Groups link to existing predefined roles (no group creation); removing a user needs a manual Okta group push. Entra ID, Google Workspace, OneLogin, Ping and other SAML IdPs are documented for SSO only. Research covers Strata Cloud Manager / Common Services; other products (Prisma Cloud / Cortex Cloud, Cortex XSIAM/XDR) have separate user management not researched here.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Strata Cloud Manager Essentials",
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Strata Cloud Manager Essentials",
+   "price_text": "Included at no cost for all NGFW, software firewall and SASE customers (products quote-only)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c3",
+    "c4",
+    "c25",
+    "c26"
+   ],
+   "notes": "SCIM and SAML are Common Services features; docs do not tie them to Essentials or Pro."
+  },
+  {
+   "name": "Strata Cloud Manager Pro",
+   "price_text": "Paid upgrade (Contact Sales)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c3",
+    "c4",
+    "c25",
+    "c26"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c4",
+   "c5",
+   "c10",
+   "c22"
+  ],
+  "plan": "Strata Cloud Manager Essentials (with NGFW / Prisma Access, Contact Sales)",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": null,
+  "base_url": "https://api.sase.paloaltonetworks.com/iam/v1/scim",
+  "auth": {
+   "method": "oauth2",
+   "token_source": "Common Services > Identity & Access: service account (IAM Administrator or Superuser role) in a Tenant Service Group; client ID and secret used with the client-credentials token endpoint https://auth.apps.paloaltonetworks.com/am/oauth2/access_token",
+   "token_expiry": null,
+   "cite": [
+    "c9",
+    "c12",
+    "c18",
+    "c19",
+    "c8"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c11",
+    "c13",
+    "c16"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": null,
+   "reactivate": null,
+   "delete": null,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c11",
+    "c13",
+    "c14",
+    "c15",
+    "c23"
+   ],
+   "notes": "Okta actions: Import New Users, Push New Users, Push Profile Updates, Push Groups (Link Group only), Import Groups. Deactivate is not among the documented actions; removal happens through group membership."
+  },
+  "deprovision": {
+   "action": "remove_from_org",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c14",
+    "c20",
+    "c21",
+    "c24"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "roles (predefined access policies) imported as groups"
+   ],
+   "cite": [
+    "c16",
+    "c23"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "IdP groups are linked (not created) to predefined Strata Cloud Manager roles imported from the tenant; membership assigns the role",
+   "cite": [
+    "c13",
+    "c15",
+    "c23"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "No group creation over SCIM; groups must be linked to existing predefined roles.",
+    "cite": [
+     "c13"
+    ]
+   },
+   {
+    "text": "Removing a user from an Okta group needs a manual Push Now, or the user keeps access.",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "text": "With SCIM enabled, all access-management changes must go through the SCIM provider; IdP-managed users cannot be removed in the console.",
+    "cite": [
+     "c6",
+     "c24"
+    ]
+   },
+   {
+    "text": "SailPoint connector XML is supplied by the account representative.",
+    "cite": [
+     "c7"
+    ]
+   }
+  ],
+  "notes": "Users' email domains must be verified by a Strata Cloud Manager Identity Federation (OCI guide). SCIM version is not stated."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c26",
+   "c28"
+  ],
+  "plan": "Strata Cloud Manager Essentials",
+  "api_tax": null,
+  "style": "REST",
+  "base_url": null,
+  "docs_url": "https://pan.dev/sase/api/iam/",
+  "auth": {
+   "methods": [
+    "oauth2 client credentials (service account) bearer token"
+   ],
+   "scopes": [],
+   "cite": [
+    "c26",
+    "c28"
+   ]
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c27",
+    "c29",
+    "c30",
+    "c32",
+    "c33",
+    "c34"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/iam/v1/sso_users",
+    "purpose": "Verify a user account exists",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/iam/v1/sso_users",
+    "purpose": "Create an SSO (login) account",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/iam/v1/access_policies",
+    "purpose": "List access policies (role assignments)",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/iam/v1/access_policies",
+    "purpose": "Assign an access policy to a user or service account",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/iam/v1/access_policies/:id",
+    "purpose": "Delete an access policy",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/iam/v1/roles",
+    "purpose": "List roles",
+    "cite": [
+     "c34"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": null,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c9",
+    "c17"
+   ],
+   "notes": "Palo Alto's guide builds a custom SWA app with SCIM provisioning enabled, not an OIN catalogue app."
+  },
+  "entra": {
+   "listed": null,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c25"
+   ],
+   "notes": "Common Services documents Entra ID SAML for authentication and authorization; no SCIM."
+  },
+  "google": {
+   "listed": null,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c25"
+   ]
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c25"
+   ]
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c4",
+   "c26"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.paloaltonetworks.com/network-security/strata-cloud-manager",
+   "title": "Strata Cloud Manager | Palo Alto Networks",
+   "quote": "Essentials Included for all NGFW, software firewall and SASE customers at no cost",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.paloaltonetworks.com/network-security/strata-cloud-manager",
+   "title": "Strata Cloud Manager | Palo Alto Networks",
+   "quote": "Contact our team to get a demo or a free trial and learn more about unified network security management with AIOps, ADEM and Copilot capabilities.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://docs.paloaltonetworks.com/strata-cloud-manager/activation-and-onboarding/strata-cloud-manager-licenses-and-support",
+   "title": "Strata Cloud Manager Licenses",
+   "quote": "Strata Cloud Manager supports two licensing tiers—Strata Cloud Manager Essentials, which is free with the purchase of NGFW and Prisma Access, and Strata Cloud Manager Pro, which is available as an upgrade.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://docs.paloaltonetworks.com/common-services/identity-and-access-access-management/manage-third-party-identity-provider-integrations/scim-config",
+   "title": "SCIM | Common Services: Identity and Access",
+   "quote": "Integrating a third-party System for Cross-Domain Identity Management (SCIM) enables you to streamline identity and access management for Strata Cloud Manager.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://docs.paloaltonetworks.com/common-services/identity-and-access-access-management/manage-third-party-identity-provider-integrations/scim-config",
+   "title": "SCIM | Common Services: Identity and Access",
+   "quote": "Strata Cloud Manager supports integration with the following SCIM providers: Sailpoint OCI Okta",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://docs.paloaltonetworks.com/common-services/identity-and-access-access-management/manage-third-party-identity-provider-integrations/scim-config",
+   "title": "SCIM | Common Services: Identity and Access",
+   "quote": "After the SCIM integration is enabled for Strata Cloud Manager, all access management changes will only be allowed through the SCIM provider.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://docs.paloaltonetworks.com/common-services/identity-and-access-access-management/manage-third-party-identity-provider-integrations/scim-config",
+   "title": "SCIM | Common Services: Identity and Access",
+   "quote": "Import the XML file containing the Strata Cloud Manager SCIM Connector configuration into Sailpoint (this XML file will be provided by your account representative).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.paloaltonetworks.com/common-services/identity-and-access-access-management/manage-third-party-identity-provider-integrations/scim-config",
+   "title": "SCIM | Common Services: Identity and Access",
+   "quote": "To set up an integration with a third-party SCIM, you configure a Tenant Service Group (TSG) and service account in your system, followed by setting up the SCIM connector in the third-party provider.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.paloaltonetworks.com/common-services/identity-and-access-access-management/okta-scim-config",
+   "title": "Okta | Common Services: Identity and Access",
+   "quote": "This integration uses OAuth 2.0 Client Credentials for authentication between Okta and the Strata Cloud Manager SCIM endpoint, with a dedicated service account providing the required API access.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.paloaltonetworks.com/common-services/identity-and-access-access-management/okta-scim-config",
+   "title": "Okta | Common Services: Identity and Access",
+   "quote": "Set the value to https://api.sase.paloaltonetworks.com/iam/v1/scim.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.paloaltonetworks.com/common-services/identity-and-access-access-management/okta-scim-config",
+   "title": "Okta | Common Services: Identity and Access",
+   "quote": "Supported provisioning actions — Select Import New Users, Push New Users, Push Profile Updates, Push Groups, and Import Groups.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.paloaltonetworks.com/common-services/identity-and-access-access-management/okta-scim-config",
+   "title": "Okta | Common Services: Identity and Access",
+   "quote": "Set this value to https://auth.apps.paloaltonetworks.com/am/oauth2/access_token.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.paloaltonetworks.com/common-services/identity-and-access-access-management/okta-scim-config",
+   "title": "Okta | Common Services: Identity and Access",
+   "quote": "Selecting Create Group causes recurring synchronization errors because Strata Cloud Manager does not support group creation through SCIM — only linking to existing predefined roles.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.paloaltonetworks.com/common-services/identity-and-access-access-management/okta-scim-config",
+   "title": "Okta | Common Services: Identity and Access",
+   "quote": "Removing a user from the Okta group does not automatically remove them from Strata Cloud Manager. You must manually push the group to synchronize the removal. If you skip the Push Now step, the user retains access in Strata Cloud Manager.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.paloaltonetworks.com/common-services/identity-and-access-access-management/okta-scim-config",
+   "title": "Okta | Common Services: Identity and Access",
+   "quote": "Users added to a linked group are automatically provisioned to the corresponding Strata Cloud Manager role without any additional push action.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.paloaltonetworks.com/common-services/identity-and-access-access-management/okta-scim-config",
+   "title": "Okta | Common Services: Identity and Access",
+   "quote": "Unique identifier field for users — Specify the SCIM user attribute that uniquely identifies each user. Set this value to userName.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.paloaltonetworks.com/common-services/identity-and-access-access-management/okta-scim-config",
+   "title": "Okta | Common Services: Identity and Access",
+   "quote": "Choose SWA - Secure Web Authentication as the sign-in method and click Next.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.paloaltonetworks.com/common-services/identity-and-access-access-management/okta-scim-config",
+   "title": "Okta | Common Services: Identity and Access",
+   "quote": "The service account must have the IAM Administrator role to perform SCIM operations.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.paloaltonetworks.com/common-services/identity-and-access-access-management/okta-scim-config",
+   "title": "Okta | Common Services: Identity and Access",
+   "quote": "The Client Secret is shown only once during creation. Store it securely.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.paloaltonetworks.com/common-services/identity-and-access-access-management/okta-scim-config",
+   "title": "Okta | Common Services: Identity and Access",
+   "quote": "This process removes all users in the group from the Strata Cloud Manager tenant and disconnects the group mapping.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.paloaltonetworks.com/common-services/identity-and-access-access-management/okta-scim-config",
+   "title": "Okta | Common Services: Identity and Access",
+   "quote": "Verify that the removed user no longer appears in the Strata Cloud Manager tenant.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://docs.paloaltonetworks.com/common-services/identity-and-access-access-management/manage-third-party-identity-provider-integrations/scim-config/oci-scim",
+   "title": "OCI | Common Services: Identity and Access",
+   "quote": "Note: Ensure that these users email domains are verified by the Strata Cloud Manager Identity Federation.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://docs.paloaltonetworks.com/common-services/identity-and-access-access-management/manage-third-party-identity-provider-integrations/scim-config/oci-scim",
+   "title": "OCI | Common Services: Identity and Access",
+   "quote": "Select Refresh Application Data to retrieve available Strata Cloud Manager access policies (roles or groups) from Strata Cloud Manager.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://docs.paloaltonetworks.com/common-services/identity-and-access-access-management/manage-identity-and-access/delete-users",
+   "title": "Remove User Access Through Common Services",
+   "quote": "If you integrate with a third party IDP for your enterprise, you cannot remove user access directly from the tenant. You need to remove the access from the third party portal.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://docs.paloaltonetworks.com/common-services/identity-and-access-access-management/manage-third-party-identity-provider-integrations/add-identity-federations",
+   "title": "Add an Identity Federation Through Common Services",
+   "quote": "Common Services supports SAML and the following IDPs: Okta Azure Ping Onelogin SecureAuth Google Workspace Microsoft Active Directory Federation Service (AD FS) Any other IDPs that follow the SAML standard",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://pan.dev/sase/api/iam/",
+   "title": "Identity and Access Management APIs | Develop with Palo Alto Networks",
+   "quote": "You use Identity and Access Management (IAM) APIs to create Service Accounts, and to manage access policies for users and service accounts.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://pan.dev/sase/api/iam/user-accounts/",
+   "title": "User Accounts | Develop with Palo Alto Networks",
+   "quote": "Create Palo Alto Networks SSO accounts, and verify login accounts.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://pan.dev/sase/api/iam/user-accounts/",
+   "title": "User Accounts | Develop with Palo Alto Networks",
+   "quote": "HTTP: Bearer Auth Security Scheme Type: http HTTP Authorization Scheme: bearer",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://pan.dev/sase/api/iam/get-iam-v-1-sso-users/",
+   "title": "Verify a user account | Develop with Palo Alto Networks",
+   "quote": "Verify a user account GET /iam/v1/sso_users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://pan.dev/sase/api/iam/post-iam-v-1-sso-users/",
+   "title": "Create an SSO account | Develop with Palo Alto Networks",
+   "quote": "Create an SSO account POST /iam/v1/sso_users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://pan.dev/sase/api/iam/get-iam-v-1-access-policies/",
+   "title": "List all access policies | Develop with Palo Alto Networks",
+   "quote": "List all access policies GET /iam/v1/access_policies",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://pan.dev/sase/api/iam/post-iam-v-1-access-policies/",
+   "title": "Assign an access policy | Develop with Palo Alto Networks",
+   "quote": "Assign an access policy POST /iam/v1/access_policies Assign an access policy to a user or a service account.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://pan.dev/sase/api/iam/delete-iam-v-1-access-policies-id/",
+   "title": "Delete an access policy | Develop with Palo Alto Networks",
+   "quote": "Delete an access policy DELETE /iam/v1/access_policies/:id",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://pan.dev/sase/api/iam/get-iam-v-1-roles/",
+   "title": "List all roles | Develop with Palo Alto Networks",
+   "quote": "List all roles GET /iam/v1/roles Retrieve a list of all roles.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.paloaltonetworks.com/pricing (404)",
+  "https://www.paloaltonetworks.com/network-security/strata-cloud-manager",
+  "https://docs.paloaltonetworks.com/sitemap.xml",
+  "https://pan.dev/sitemap.xml",
+  "https://docs.paloaltonetworks.com/common-services/identity-and-access-access-management/manage-third-party-identity-provider-integrations/scim-config",
+  "https://docs.paloaltonetworks.com/common-services/identity-and-access-access-management/okta-scim-config",
+  "https://docs.paloaltonetworks.com/common-services/identity-and-access-access-management/manage-third-party-identity-provider-integrations/scim-config/oci-scim"
+ ],
+ "open_questions": [
+  "No public prices; whether SCIM needs Strata Cloud Manager Pro rather than Essentials is not stated.",
+  "SCIM version, token lifetime, filtering, pagination and supported user attributes beyond userName are not documented.",
+  "Whether SCIM supports deactivate (active=false) or DELETE, and whether removal ends sessions, is not documented.",
+  "Entra and JumpCloud provisioning are not documented; Okta OIN listing for Strata Cloud Manager was not checked.",
+  "Prisma Cloud / Cortex Cloud and Cortex XSIAM/XDR have their own user management and may document SCIM separately; not researched."
+ ]
+}

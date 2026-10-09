@@ -1,0 +1,882 @@
+{
+ "slug": "datadog",
+ "vendor": "Datadog",
+ "vendor_url": "https://www.datadoghq.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Datadog",
+  "slug": "datadog",
+  "category": "Cloud, Infrastructure & Observability",
+  "status": "free",
+  "scim_plan": "Pro",
+  "scim_price_text": "Infrastructure Pro: $15/host/mo (annual)",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Pro",
+  "team_price_text": "Infrastructure Pro: $15/host/mo (annual)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Pro",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": false,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": "sso_only",
+   "onelogin": null,
+   "jumpcloud": "sso_only",
+   "generic": true
+  },
+  "pricing_page_url": "https://www.datadoghq.com/pricing/?product=infrastructure-monitoring",
+  "docs_url": "https://docs.datadoghq.com/account_management/scim/",
+  "evidence": "Datadog's Infrastructure pricing table checks SCIM for Pro and Enterprise (not Free), and the SCIM docs say \"SCIM is available with the Infrastructure Pro, Infrastructure Enterprise, and Startup plans.\"",
+  "notes": "Status changed gated -> free: SCIM is on Infrastructure Pro, the first paid tier above Free, with no upcharge (June's own row had multiplier 1.0). Pricing is per host ($15/host/mo annual, $18 on-demand; Enterprise $23), with unlimited user accounts, so per-user fields and the multiplier are now null (June's 15 per-user value dropped). SAML SSO also starts at Pro. Okta and Entra are the supported IdPs; Entra Team provisioning is blocked by a Microsoft app-update freeze and group mapping is unsupported, but users still provision. Deprovisioning disables users (they cannot be permanently removed).",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "$0 (up to 5 hosts)",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c5",
+    "c6"
+   ]
+  },
+  {
+   "name": "Pro",
+   "price_text": "$15 per host per month billed annually ($18 on-demand)",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c3",
+    "c5",
+    "c6",
+    "c7"
+   ],
+   "notes": "Per-host pricing; unlimited user accounts."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "$23 per host per month billed annually ($27 on-demand)",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c4",
+    "c5",
+    "c6",
+    "c7"
+   ],
+   "notes": "Adds Multiple SAML Providers and Governance Console."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c5",
+   "c7",
+   "c8",
+   "c24",
+   "c26"
+  ],
+  "plan": "Pro",
+  "addon_price_text": null,
+  "sso_required": false,
+  "version": "2.0",
+  "base_url": "https://api.datadoghq.com/api/v2/scim (site-specific API host, e.g. api.datadoghq.eu)",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Organization settings > Application Keys (service account application key recommended)",
+   "token_expiry": null,
+   "cite": [
+    "c12",
+    "c13"
+   ],
+   "notes": "Key tied to a user is revoked if that user is deprovisioned, breaking SCIM."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": true,
+   "ResourceTypes": true,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c26",
+    "c27",
+    "c28",
+    "c29"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c9",
+    "c10",
+    "c22",
+    "c23",
+    "c26",
+    "c29",
+    "c35",
+    "c36"
+   ],
+   "notes": "Group push creates Managed Teams (Okta). Teams via SCIM unavailable with Entra and 'only available for select organizations' per API reference."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Users cannot be permanently removed; disabled users keep authored dashboards/monitors and can be re-enabled.",
+   "cite": [
+    "c9",
+    "c39",
+    "c40"
+   ],
+   "notes": "Pricing is per host with unlimited user accounts, so seats are not a factor."
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName"
+   ],
+   "cite": [
+    "c30",
+    "c31"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c30"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "active",
+    "emails[type eq \"work\"].value",
+    "emails.primary",
+    "name.formatted",
+    "title",
+    "roles"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "displayName",
+    "externalId",
+    "members"
+   ],
+   "cite": [
+    "c19",
+    "c32",
+    "c33",
+    "c34",
+    "c37",
+    "c38"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "SCIM 'roles' multi-valued attribute with Datadog role UUIDs (Okta profile attribute; Entra app roles via AppRoleAssignmentsComplex); unmatched roles fall back to the default role.",
+   "cite": [
+    "c11",
+    "c15",
+    "c33",
+    "c35"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Only Okta and Microsoft Entra ID are explicitly supported.",
+    "cite": [
+     "c8"
+    ]
+   },
+   {
+    "text": "Entra: Team provisioning via SCIM unavailable due to a Microsoft freeze; group mapping not supported. Users still provision.",
+    "cite": [
+     "c16",
+     "c17",
+     "c20"
+    ]
+   },
+   {
+    "text": "SCIM team provisioning is limited to select organizations per the API reference.",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "text": "Datadog recommends disabling SAML JIT when using SCIM.",
+    "cite": [
+     "c14"
+    ]
+   }
+  ],
+  "notes": "Entra Tenant URL adds ?aadOptscim062020. Infrastructure Startup plan also includes SCIM. SSO is recommended, not required."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c41",
+   "c44",
+   "c52"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://api.datadoghq.com/api/v2",
+  "docs_url": "https://docs.datadoghq.com/api/latest/users/",
+  "auth": {
+   "methods": [
+    "api_key",
+    "oauth2"
+   ],
+   "scopes": [
+    "user_access_manage"
+   ],
+   "cite": [
+    "c44",
+    "c45"
+   ],
+   "notes": "DD-API-KEY + DD-APPLICATION-KEY headers (application key of an admin) or OAuth apps with scopes."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": false,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c39",
+    "c41",
+    "c42",
+    "c44",
+    "c52"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/api/v2/users",
+    "purpose": "List all users",
+    "cite": [
+     "c52"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v2/users",
+    "purpose": "Create a user",
+    "cite": [
+     "c52"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v2/users/{user_id}",
+    "purpose": "Get user details",
+    "cite": [
+     "c41"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v2/users/{user_id}",
+    "purpose": "Update a user",
+    "cite": [
+     "c41"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v2/users/{user_id}",
+    "purpose": "Disable a user",
+    "cite": [
+     "c41",
+     "c44"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v2/users/{user_id}/permissions",
+    "purpose": "Get a user's permissions",
+    "cite": [
+     "c41"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v2/users/{user_id}/orgs",
+    "purpose": "Get a user's organization",
+    "cite": [
+     "c43"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v2/user_invitations",
+    "purpose": "Send invitation emails",
+    "cite": [
+     "c42"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v2/audit/events/search",
+    "purpose": "Search Audit Logs events",
+    "cite": [
+     "c46"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": null,
+   "cite": [
+    "c46"
+   ],
+   "notes": "Audit Trail events API (GET /api/v2/audit/events, POST /api/v2/audit/events/search); plan requirement not checked."
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "Users API paths copied from the API reference. The pages loaded do not state which plan includes API access, so plan and api_tax are null."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/datadog/",
+   "cite": [
+    "c49",
+    "c21",
+    "c22"
+   ],
+   "notes": "OIN page marks SAML, SCIM, Create, Update, Deactivate and Group Push as checked (read from page markup)."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/datadog-provisioning-tutorial",
+   "cite": [
+    "c18",
+    "c50",
+    "c16"
+   ],
+   "notes": "Microsoft tutorial lists user create/remove/sync only; Team (group) provisioning unavailable."
+  },
+  "google": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c48"
+   ],
+   "notes": "Datadog lists Google among SAML IdPs; no Google provisioning documented."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://jumpcloud.com/support/integrate-with-datadog",
+   "cite": [
+    "c51"
+   ],
+   "notes": "JumpCloud documents a Datadog SSO connector; no SCIM described."
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c47"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.datadoghq.com/pricing/?product=infrastructure-monitoring",
+   "title": "Pricing | Datadog",
+   "quote": "Free STARTING AT $ 0 Core collection and visualization features 1-day metric retention Up to 5 hosts",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.datadoghq.com/pricing/?product=infrastructure-monitoring",
+   "title": "Pricing | Datadog",
+   "quote": "Pro STARTING AT $ 15 Per host, per month* Centralize your monitoring of systems, services, and serverless functions",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.datadoghq.com/pricing/?product=infrastructure-monitoring",
+   "title": "Pricing | Datadog",
+   "quote": "*Billed annually or $18 on-demand",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.datadoghq.com/pricing/?product=infrastructure-monitoring",
+   "title": "Pricing | Datadog",
+   "quote": "Enterprise STARTING AT $ 23 Per host, per month* Advanced features and administrative controls",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.datadoghq.com/pricing/?product=infrastructure-monitoring",
+   "title": "Pricing | Datadog",
+   "quote": "ADVANCED ADMINISTRATIVE FEATURES SCIM Multiple SAML Providers IP Allowlist",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://www.datadoghq.com/pricing/?product=infrastructure-monitoring",
+   "title": "Pricing | Datadog",
+   "quote": "Single Sign-On with SAML",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://docs.datadoghq.com/account_management/scim/",
+   "title": "User Provisioning with SCIM",
+   "quote": "SCIM is available with the Infrastructure Pro, Infrastructure Enterprise, and Startup plans.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.datadoghq.com/account_management/scim/",
+   "title": "User Provisioning with SCIM",
+   "quote": "Datadog implements the SCIM server protocol. Datadog supports using SCIM with the Microsoft Entra ID and Okta identity providers. Other identity providers may work, but are not explicitly supported.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.datadoghq.com/account_management/scim/",
+   "title": "User Provisioning with SCIM",
+   "quote": "Create users in Datadog Remove users in Datadog when they no longer require access Single sign-on to Datadog (recommended)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.datadoghq.com/account_management/scim/",
+   "title": "User Provisioning with SCIM",
+   "quote": "Managed Teams: Create Datadog Teams from identity provider groups and keep membership of the Datadog Teams synchronized with group membership in the identity provider.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.datadoghq.com/account_management/scim/",
+   "title": "User Provisioning with SCIM",
+   "quote": "Role provisioning: Provision a user’s Datadog role (built-in or custom) from an identity provider attribute, and keep it synchronized.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.datadoghq.com/account_management/scim/",
+   "title": "User Provisioning with SCIM",
+   "quote": "To enable SCIM, you must use an application key to secure the connection between your identity provider and your Datadog account. A specific user or service account controls each application key.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.datadoghq.com/account_management/scim/",
+   "title": "User Provisioning with SCIM",
+   "quote": "The service account requires at minimum the user_access_invite and user_access_manage permissions.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.datadoghq.com/account_management/scim/",
+   "title": "User Provisioning with SCIM",
+   "quote": "When using SAML and SCIM together, Datadog strongly recommends disabling SAML just-in-time (JIT) provisioning to avoid discrepancies in access.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.datadoghq.com/account_management/scim/",
+   "title": "User Provisioning with SCIM",
+   "quote": "If none of the roles match, the user falls back to your organization’s default role (Standard).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.datadoghq.com/account_management/scim/azure/",
+   "title": "Configure SCIM with Microsoft Entra ID",
+   "quote": "Due to a Microsoft freeze on third-party app updates in Entra following a security incident in late 2024, Team provisioning via SCIM is unavailable.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.datadoghq.com/account_management/scim/azure/",
+   "title": "Configure SCIM with Microsoft Entra ID",
+   "quote": "SCIM can still be used to provision users.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.datadoghq.com/account_management/scim/azure/",
+   "title": "Configure SCIM with Microsoft Entra ID",
+   "quote": "Select the Datadog application from the gallery",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.datadoghq.com/account_management/scim/azure/",
+   "title": "Configure SCIM with Microsoft Entra ID",
+   "quote": "userPrincipalName userName Not([IsSoftDeleted]) active jobTitle title mail emails[type eq \"work\"].value displayName name.formatted AppRoleAssignmentsComplex([appRoleAssignments]) roles",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.datadoghq.com/account_management/scim/azure/",
+   "title": "Configure SCIM with Microsoft Entra ID",
+   "quote": "Group mapping is not supported.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.datadoghq.com/account_management/scim/okta/",
+   "title": "Configure SCIM with Okta",
+   "quote": "Select the Datadog application in the Okta application gallery",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://docs.datadoghq.com/account_management/scim/okta/",
+   "title": "Configure SCIM with Okta",
+   "quote": "Next to Provisioning to App , select Edit to enable the features: Create Users Update User Attributes Deactivate Users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://docs.datadoghq.com/account_management/scim/okta/",
+   "title": "Configure SCIM with Okta",
+   "quote": "In your Datadog application in Okta, navigate to the Push Groups tab.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://docs.datadoghq.com/account_management/scim/okta/",
+   "title": "Configure SCIM with Okta",
+   "quote": "Note: Use the API host for your site, not the app host. For the SCIM endpoints for each site, see the SCIM API reference .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://docs.datadoghq.com/api/latest/scim/",
+   "title": "SCIM",
+   "quote": "Note: SCIM provisioning for Datadog teams is only available for select organizations at this point. Request access by contacting Datadog support, or see the SCIM page for more information.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://docs.datadoghq.com/api/latest/scim/",
+   "title": "SCIM",
+   "quote": "https://api.datadoghq.com/api/v2/scim/Users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://docs.datadoghq.com/api/latest/scim/",
+   "title": "SCIM",
+   "quote": "https://api.datadoghq.com/api/v2/scim/ResourceTypes",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://docs.datadoghq.com/api/latest/scim/",
+   "title": "SCIM",
+   "quote": "https://api.datadoghq.com/api/v2/scim/Schemas",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://docs.datadoghq.com/api/latest/scim/",
+   "title": "SCIM",
+   "quote": "https://api.datadoghq.com/api/v2/scim/Groups/{group_id}",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://docs.datadoghq.com/api/latest/scim/list-users/",
+   "title": "List users",
+   "quote": "Results are paginated by startIndex and count parameters. Results can be narrowed down by the filter parameter.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://docs.datadoghq.com/api/latest/scim/list-users/",
+   "title": "List users",
+   "quote": "Filter should be of the form userName eq <user name> .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://docs.datadoghq.com/api/latest/scim/create-user/",
+   "title": "Create user",
+   "quote": "The full name, including all middle names, titles, and suffixes as appropriate, formatted for display.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://docs.datadoghq.com/api/latest/scim/create-user/",
+   "title": "Create user",
+   "quote": "Datadog roles assigned to the user. Provide the role UUID in value when provisioning or updating roles through SCIM.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://docs.datadoghq.com/api/latest/scim/create-user/",
+   "title": "Create user",
+   "quote": "The user's title.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c35",
+   "url": "https://docs.datadoghq.com/api/latest/scim/patch-user/",
+   "title": "Patch user",
+   "quote": "To update Datadog roles, send an operation with path set to roles and value set to an array of role objects containing role UUIDs.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://docs.datadoghq.com/api/latest/scim/delete-user/",
+   "title": "Delete user",
+   "quote": "Delete the group with the given user_uuid .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://docs.datadoghq.com/api/latest/scim/get-group/",
+   "title": "Get group",
+   "quote": "An identifier for the resource as defined by the provisioning client.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c38",
+   "url": "https://docs.datadoghq.com/api/latest/scim/get-group/",
+   "title": "Get group",
+   "quote": "A human-readable name for the group.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c39",
+   "url": "https://docs.datadoghq.com/account_management/users/",
+   "title": "User Management",
+   "quote": "You cannot permanently remove users, as they might have authored dashboards or monitors, and their user ID is used to keep a record of their actions.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c40",
+   "url": "https://docs.datadoghq.com/account_management/users/",
+   "title": "User Management",
+   "quote": "By default, disabled users are filtered out from the list of users in the User Management Page. If you have the correct permissions, you can filter by users with the status Disabled and re-enable them.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c41",
+   "url": "https://docs.datadoghq.com/api/latest/users/",
+   "title": "Users",
+   "quote": "https://api.datadoghq.com/api/v2/users/{user_id}/permissions",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c42",
+   "url": "https://docs.datadoghq.com/api/latest/users/",
+   "title": "Users",
+   "quote": "https://api.datadoghq.com/api/v2/user_invitations",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c43",
+   "url": "https://docs.datadoghq.com/api/latest/users/",
+   "title": "Users",
+   "quote": "https://api.datadoghq.com/api/v2/users/{user_id}/orgs",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c44",
+   "url": "https://docs.datadoghq.com/api/latest/users/disable-a-user/",
+   "title": "Disable a user",
+   "quote": "Disable a user. Can only be used with an application key belonging to an administrator user.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c45",
+   "url": "https://docs.datadoghq.com/api/latest/users/disable-a-user/",
+   "title": "Disable a user",
+   "quote": "OAuth apps require the user_access_manage authorization scope to access this endpoint.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c46",
+   "url": "https://docs.datadoghq.com/api/latest/audit/",
+   "title": "Audit",
+   "quote": "https://api.datadoghq.com/api/v2/audit/events/search",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c47",
+   "url": "https://docs.datadoghq.com/account_management/saml/",
+   "title": "Single Sign On With SAML",
+   "quote": "With JIT provisioning, a user is created within Datadog the first time they try to log in.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c48",
+   "url": "https://docs.datadoghq.com/account_management/saml/",
+   "title": "Single Sign On With SAML",
+   "quote": "there are several IdPs that have integrations with Datadog such as Active Directory , Auth0 , Google , LastPass , Microsoft Entra ID , Okta , and SafeNet .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c49",
+   "url": "https://www.okta.com/integrations/datadog/",
+   "title": "Integrate Datadog with Okta",
+   "quote": "Integrate Datadog with Okta",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c50",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/datadog-provisioning-tutorial",
+   "title": "Configure Datadog for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Create users in Datadog. Remove users in Datadog when they don't require access anymore. Keep user attributes synchronized between Microsoft Entra ID and Datadog.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c51",
+   "url": "https://jumpcloud.com/support/integrate-with-datadog",
+   "title": "Integrate with Datadog | JumpCloud Documentation",
+   "quote": "Read this article to learn how to configure the Datadog SSO connector.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c52",
+   "url": "https://docs.datadoghq.com/api/latest/users/",
+   "title": "Users",
+   "quote": "https://api.datadoghq.com/api/v2/users",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The Okta SCIM guide documents Managed Teams via Push Groups as a general capability, while the SCIM API reference says SCIM team provisioning is only available for select organizations.",
+   "cite": [
+    "c10",
+    "c23",
+    "c25"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.datadoghq.com/pricing/?product=infrastructure-monitoring",
+  "https://docs.datadoghq.com/account_management/scim/",
+  "https://docs.datadoghq.com/account_management/scim/azure/",
+  "https://docs.datadoghq.com/account_management/scim/okta/",
+  "https://docs.datadoghq.com/api/latest/scim/",
+  "https://docs.datadoghq.com/api/latest/scim/list-users/",
+  "https://docs.datadoghq.com/api/latest/scim/create-user/",
+  "https://docs.datadoghq.com/api/latest/scim/delete-user/",
+  "https://docs.datadoghq.com/api/latest/scim/patch-user/",
+  "https://docs.datadoghq.com/api/latest/scim/get-group/",
+  "https://docs.datadoghq.com/api/latest/users/",
+  "https://docs.datadoghq.com/api/latest/users/disable-a-user/",
+  "https://docs.datadoghq.com/account_management/users/",
+  "https://docs.datadoghq.com/api/latest/audit/",
+  "https://docs.datadoghq.com/account_management/saml/",
+  "https://www.okta.com/integrations/datadog/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/datadog-provisioning-tutorial",
+  "https://jumpcloud.com/support/integrate-with-datadog"
+ ],
+ "open_questions": [
+  "SCIM max page size, ServiceProviderConfig and rate limits are not stated on the pages loaded.",
+  "Whether SCIM DELETE disables or removes the user is not stated (API text says 'Delete the group with the given user_uuid', apparently a copy error); UI docs say users cannot be permanently removed.",
+  "Plan needed for the Users API and the Audit Trail events API is not stated.",
+  "OneLogin support not documented."
+ ]
+}

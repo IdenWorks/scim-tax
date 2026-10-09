@@ -1,0 +1,758 @@
+{
+ "slug": "encompass",
+ "vendor": "Encompass (ICE Mortgage Technology)",
+ "vendor_url": "https://mortgagetech.ice.com/products/encompass",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Encompass (ICE Mortgage Technology)",
+  "slug": "encompass",
+  "category": "Vertical SaaS (Healthcare, Education, Real Estate, Construction, Field Service)",
+  "status": "gated",
+  "scim_plan": "Encompass (Contact Sales)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": false,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": false,
+   "groups": false
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://mortgagetech.ice.com/products/encompass",
+  "docs_url": "https://developer.icemortgagetechnology.com/developer-connect/docs/scim-user-provisioning-user-guide",
+  "evidence": "ICE's developer guide says the Encompass SCIM APIs are compliant with SCIM 2.0 and that Encompass on the Web and Encompass Desktop support user provisioning via the ICE Mortgage Technology SCIM Interface; Encompass itself has no public pricing (Contact us).",
+  "notes": "Quote-only: Encompass (ICE Mortgage Technology loan origination system) publishes no plans or prices, so SCIM can only be bought through sales. SCIM 2.0 lives at https://api.elliemae.com/scim2/v1 with an OAuth 2.0 bearer token from a Super Admin or Administrator persona. DELETE is a soft delete (disable); hard delete is not supported over SCIM; users can be re-enabled with PATCH. Groups are read-only except for member add/remove; group creation is not supported. Users use ICE's own extension schema (urn:ietf:params:scim:schemas:extension:ice:2.0:EncompassInternalUser) rather than the enterprise extension, and calls require a schema parameter, so a generic IdP connector may need customising. No Okta OIN or Entra gallery SCIM app was found; the Entra gallery 'Encompass' app is a different product (Vox Mobile). A separate non-SCIM V3 Internal Users REST API (Encompass 24.2+) supports create, update, disable and hard delete, and webhooks fire on internal-user create/update/delete.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Encompass",
+   "price_text": "Contact us",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c3",
+    "c34"
+   ],
+   "notes": "No public tiers or prices."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c3",
+   "c4",
+   "c6"
+  ],
+  "plan": "Encompass (Contact Sales)",
+  "addon_price_text": null,
+  "sso_required": false,
+  "version": "2.0",
+  "base_url": "https://api.elliemae.com/scim2/v1",
+  "notes": "UAT server: https://concept.api.elliemae.com. SCIM also provisions ICE DDA (AIQ) users and links them by a SCIM globalUserId. Users can be created as SSO or non-SSO users, so SSO is not a prerequisite.",
+  "auth": {
+   "method": "oauth2",
+   "token_source": "Encompass Platform OAuth 2.0 token endpoint (API key from the Encompass super administrator); caller must hold a Super Admin or Administrator persona",
+   "token_expiry": "30 minutes (max 24 hours)",
+   "cite": [
+    "c7",
+    "c8",
+    "c9"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c10",
+    "c11",
+    "c37"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": null,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": false,
+   "group_push": false,
+   "group_membership": true,
+   "cite": [
+    "c5",
+    "c10",
+    "c12",
+    "c13",
+    "c14",
+    "c15",
+    "c21",
+    "c37",
+    "c38"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "DELETE disables the user profile; the user record stays in the database and can be re-enabled via PATCH.",
+   "cite": [
+    "c13",
+    "c14",
+    "c16"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": [],
+   "notes": "The guide's Get Users sample passes filter=enc_isRecursive eq true, but filtering is not otherwise documented."
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": 100,
+   "cite": [
+    "c17"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "name.middleName",
+    "name.honorificSuffix",
+    "emails[type eq \"work\"].value",
+    "phoneNumbers (work, mobile, fax)",
+    "password"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": true,
+    "how": "ICE extension schema urn:ietf:params:scim:schemas:extension:ice:2.0:EncompassInternalUser carries all user attributes, including: jobTitle, employeeId, apiUser, chumId, nmlsOriginatorId, nmlsExpirationDate, requirePasswordChange, isSsoOnly, ssoDisconnectedFromOrg, allowImpersonation, licenses, compensationPlans, oAuthClientId, subordinateLoanAccess, peerLoanAccess, loginEnabled, accountEnabled, comments, workingFolder, personas, ccSite, emailSignature, organization"
+   },
+   "group": [
+    "displayName",
+    "members.value",
+    "members.type (User or Organization)",
+    "members.orgLevel"
+   ],
+   "cite": [
+    "c18",
+    "c19"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "personas attribute (Encompass persona entityId); persona IDs come from GET encompass/v3/settings/personas",
+   "cite": [
+    "c19",
+    "c20"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Hard delete is not supported over SCIM (DELETE only disables).",
+    "cite": [
+     "c13",
+     "c15"
+    ]
+   },
+   {
+    "text": "Group set-up and maintenance beyond member add/remove must be done in Encompass Admin.",
+    "cite": [
+     "c12"
+    ]
+   },
+   {
+    "text": "Adding and managing standalone DDA users is not supported.",
+    "cite": [
+     "c21"
+    ]
+   },
+   {
+    "text": "Only Super Admin or Administrator personas can call SCIM.",
+    "cite": [
+     "c9"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c23",
+   "c36",
+   "c7"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://api.elliemae.com",
+  "docs_url": "https://developer.icemortgagetechnology.com/developer-connect/reference/v3-internal-users",
+  "auth": {
+   "methods": [
+    "oauth2"
+   ],
+   "scopes": [],
+   "cite": [
+    "c7"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c23",
+    "c24",
+    "c25",
+    "c26",
+    "c27",
+    "c15",
+    "c30"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/encompass/v3/users",
+    "purpose": "List internal users",
+    "cite": [
+     "c23"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/encompass/v3/users",
+    "purpose": "Create internal user",
+    "cite": [
+     "c24"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/encompass/v3/users",
+    "purpose": "Bulk update internal users (e.g. move)",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/encompass/v3/users/{userId}",
+    "purpose": "Get internal user profile",
+    "cite": [
+     "c25"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/encompass/v3/users/{userId}",
+    "purpose": "Update or disable internal user",
+    "cite": [
+     "c26"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/encompass/v3/users/{userId}",
+    "purpose": "Delete internal user profile",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/encompass/v1/company/users/{userId}/groups",
+    "purpose": "List groups a user belongs to",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/encompass/v3/settings/personas",
+    "purpose": "List personas (roles)",
+    "cite": [
+     "c30"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": true,
+   "events": [
+    "InternalUsers create",
+    "InternalUsers update",
+    "InternalUsers delete"
+   ],
+   "cite": [
+    "c31",
+    "c32",
+    "c33"
+   ]
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": [],
+   "notes": "SCIM calls update the Encompass system audit trail; no audit-log API was checked."
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c35"
+   ],
+   "notes": "ICE publishes an Okta SSO setup guide; no OIN app found at okta.com/integrations/encompass/ (404)."
+  },
+  "entra": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c35",
+    "c40"
+   ],
+   "notes": "ICE publishes a Microsoft Azure SSO setup guide. The Entra gallery 'Encompass' tutorial uses a voxmobile.com reply URL, i.e. a different product."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c3"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://mortgagetech.ice.com/products/encompass",
+   "title": "Encompass - Loan Origination Software System",
+   "quote": "Mortgage Loan Origination Software, with proven ROI",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://mortgagetech.ice.com/products/encompass",
+   "title": "Encompass - Loan Origination Software System",
+   "quote": "Contact us",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://developer.icemortgagetechnology.com/developer-connect/docs/scim-user-provisioning-user-guide.md",
+   "title": "SCIM User Provisioning User Guide",
+   "quote": "The Encompass SCIM APIs are compliant with version 2.0 of the SCIM specification, which supports standard CRUD (Create, Retrieve, Update, Delete) operations.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.icemortgagetechnology.com/developer-connect/docs/scim-user-provisioning-user-guide"
+  },
+  {
+   "id": "c4",
+   "url": "https://developer.icemortgagetechnology.com/developer-connect/docs/user-management.md",
+   "title": "User Management",
+   "quote": "The following ICE Mortgage Technology products currently support user provisioning via the ICE Mortgage Technology SCIM Interface.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.icemortgagetechnology.com/developer-connect/docs/user-management"
+  },
+  {
+   "id": "c5",
+   "url": "https://developer.icemortgagetechnology.com/developer-connect/reference/create-user.md",
+   "title": "Create a User",
+   "quote": "The SCIM globalUserId (GUID) is generated when the user is created using the POST /scim2/v1/users API.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.icemortgagetechnology.com/developer-connect/reference/create-user"
+  },
+  {
+   "id": "c6",
+   "url": "https://developer.icemortgagetechnology.com/developer-connect/reference/create-user.md",
+   "title": "Create a User",
+   "quote": "https://api.elliemae.com",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.icemortgagetechnology.com/developer-connect/reference/create-user"
+  },
+  {
+   "id": "c7",
+   "url": "https://developer.icemortgagetechnology.com/developer-connect/docs/authentication.md",
+   "title": "Authorization",
+   "quote": "The Encompass Platform uses OAuth 2.0 for authentication and authorization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.icemortgagetechnology.com/developer-connect/docs/authentication"
+  },
+  {
+   "id": "c8",
+   "url": "https://developer.icemortgagetechnology.com/developer-connect/docs/authentication.md",
+   "title": "Authorization",
+   "quote": "The access token is active for 30 minutes, up to a maximum of 24 hours.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.icemortgagetechnology.com/developer-connect/docs/authentication"
+  },
+  {
+   "id": "c9",
+   "url": "https://developer.icemortgagetechnology.com/developer-connect/docs/scim-user-provisioning-user-guide.md",
+   "title": "SCIM User Provisioning User Guide",
+   "quote": "SCIM calls can only be made by users that have Super Admin, or Administrator personas.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.icemortgagetechnology.com/developer-connect/docs/scim-user-provisioning-user-guide"
+  },
+  {
+   "id": "c10",
+   "url": "https://developer.icemortgagetechnology.com/developer-connect/docs/scim-user-provisioning-user-guide.md",
+   "title": "SCIM User Provisioning User Guide",
+   "quote": "Create User API provides the ability to create a standalone Encompass or DDA User.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.icemortgagetechnology.com/developer-connect/docs/scim-user-provisioning-user-guide"
+  },
+  {
+   "id": "c11",
+   "url": "https://developer.icemortgagetechnology.com/developer-connect/docs/scim-user-provisioning-user-guide.md",
+   "title": "SCIM User Provisioning User Guide",
+   "quote": "GET User Groups associated with the realm for a given schema. This feature is supported only for Encompass product.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.icemortgagetechnology.com/developer-connect/docs/scim-user-provisioning-user-guide"
+  },
+  {
+   "id": "c12",
+   "url": "https://developer.icemortgagetechnology.com/developer-connect/docs/scim-user-provisioning-user-guide.md",
+   "title": "SCIM User Provisioning User Guide",
+   "quote": "PATCH user group members for a given group id. This feature is supported only for Encompass product. Any changes to user group outside of members list must be done within the Encompass Admin.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.icemortgagetechnology.com/developer-connect/docs/scim-user-provisioning-user-guide"
+  },
+  {
+   "id": "c13",
+   "url": "https://developer.icemortgagetechnology.com/developer-connect/reference/delete-user.md",
+   "title": "Delete User",
+   "quote": "This API enables a \"soft delete\" of the user profile. When executed, the user profile is disabled, however, the user record is not permanently deleted from the database.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.icemortgagetechnology.com/developer-connect/reference/delete-user"
+  },
+  {
+   "id": "c14",
+   "url": "https://developer.icemortgagetechnology.com/developer-connect/reference/delete-user.md",
+   "title": "Delete User",
+   "quote": "If deactivated in error, the user profile can be re-enabled using the PATCH scim2/v1/users/{globalUserId} API.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.icemortgagetechnology.com/developer-connect/reference/delete-user"
+  },
+  {
+   "id": "c15",
+   "url": "https://developer.icemortgagetechnology.com/developer-connect/docs/supported-use-cases-and-solutions-matrix.md",
+   "title": "Supported Use Cases and Solutions Matrix",
+   "quote": "Delete a user (hard delete)",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.icemortgagetechnology.com/developer-connect/docs/supported-use-cases-and-solutions-matrix"
+  },
+  {
+   "id": "c16",
+   "url": "https://developer.icemortgagetechnology.com/developer-connect/docs/scim-user-provisioning-user-guide.md",
+   "title": "SCIM User Provisioning User Guide",
+   "quote": "Suspending user access by “disabling” the user account. The user account remains in the system but is inactive, preventing them from logging in or accessing resources.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.icemortgagetechnology.com/developer-connect/docs/scim-user-provisioning-user-guide"
+  },
+  {
+   "id": "c17",
+   "url": "https://developer.icemortgagetechnology.com/developer-connect/docs/scim-user-provisioning-user-guide.md",
+   "title": "SCIM User Provisioning User Guide",
+   "quote": "itemsPerPage = Default is 10. Or, if “count” parameter is provided, is equal to the number of user records requested. Max is 100.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.icemortgagetechnology.com/developer-connect/docs/scim-user-provisioning-user-guide"
+  },
+  {
+   "id": "c18",
+   "url": "https://developer.icemortgagetechnology.com/developer-connect/docs/scim-user-provisioning-user-guide.md",
+   "title": "SCIM User Provisioning User Guide",
+   "quote": "Encompass Internal User Request Schema - urn:ietf:params:scim:schemas:extension:ice:2.0:EncompassInternalUser",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.icemortgagetechnology.com/developer-connect/docs/scim-user-provisioning-user-guide"
+  },
+  {
+   "id": "c19",
+   "url": "https://developer.icemortgagetechnology.com/developer-connect/docs/scim-user-provisioning-user-guide.md",
+   "title": "SCIM User Provisioning User Guide",
+   "quote": "\"nmlsOriginatorId\": \"1122334455\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.icemortgagetechnology.com/developer-connect/docs/scim-user-provisioning-user-guide"
+  },
+  {
+   "id": "c20",
+   "url": "https://developer.icemortgagetechnology.com/developer-connect/docs/scim-user-provisioning-user-guide.md",
+   "title": "SCIM User Provisioning User Guide",
+   "quote": "Use these existing APIs to get a list of Encompass Persona IDs and Organization IDs. These Ids are needed when creating or updating users via SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.icemortgagetechnology.com/developer-connect/docs/scim-user-provisioning-user-guide"
+  },
+  {
+   "id": "c21",
+   "url": "https://developer.icemortgagetechnology.com/developer-connect/docs/scim-user-provisioning-user-guide.md",
+   "title": "SCIM User Provisioning User Guide",
+   "quote": "Adding and managing Standalone DDA users.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.icemortgagetechnology.com/developer-connect/docs/scim-user-provisioning-user-guide"
+  },
+  {
+   "id": "c22",
+   "url": "https://developer.icemortgagetechnology.com/developer-connect/docs/scim-user-provisioning-user-guide.md",
+   "title": "SCIM User Provisioning User Guide",
+   "quote": "SCIM calls will update the Encompass system audit trail.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.icemortgagetechnology.com/developer-connect/docs/scim-user-provisioning-user-guide"
+  },
+  {
+   "id": "c23",
+   "url": "https://developer.icemortgagetechnology.com/developer-connect/reference/v3-get-list-internal-users.md",
+   "title": "V3 Get a List of Internal Users",
+   "quote": "Returns a list of Encompass internal users in the organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.icemortgagetechnology.com/developer-connect/reference/v3-get-list-internal-users"
+  },
+  {
+   "id": "c24",
+   "url": "https://developer.icemortgagetechnology.com/developer-connect/reference/v3-create-internal-user.md",
+   "title": "V3 Create Internal User",
+   "quote": "Creates an Encompass internal user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.icemortgagetechnology.com/developer-connect/reference/v3-create-internal-user"
+  },
+  {
+   "id": "c25",
+   "url": "https://developer.icemortgagetechnology.com/developer-connect/reference/v3-get-internal-user-profile.md",
+   "title": "V3 Get Internal User Profile",
+   "quote": "Retrieves the Encompass internal user profile for the specified user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.icemortgagetechnology.com/developer-connect/reference/v3-get-internal-user-profile"
+  },
+  {
+   "id": "c26",
+   "url": "https://developer.icemortgagetechnology.com/developer-connect/reference/v3-update-internal-user.md",
+   "title": "V3 Update Internal User",
+   "quote": "Update an Encompass internal user. Also, use this call to disable an Encompass user account.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.icemortgagetechnology.com/developer-connect/reference/v3-update-internal-user"
+  },
+  {
+   "id": "c27",
+   "url": "https://developer.icemortgagetechnology.com/developer-connect/reference/v3-delete-internal-user-profile.md",
+   "title": "V3 Delete Internal User Profile",
+   "quote": "Delete an Encompass internal user profile from the system.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.icemortgagetechnology.com/developer-connect/reference/v3-delete-internal-user-profile"
+  },
+  {
+   "id": "c28",
+   "url": "https://developer.icemortgagetechnology.com/developer-connect/reference/v3-update-internal-users.md",
+   "title": "V3 Bulk Update Internal Users",
+   "quote": "Use this API to perform an update in bulk to list of Encompass internal users or an update to a single Encompass internal user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.icemortgagetechnology.com/developer-connect/reference/v3-update-internal-users"
+  },
+  {
+   "id": "c29",
+   "url": "https://developer.icemortgagetechnology.com/developer-connect/reference/get-list-of-user-groups.md",
+   "title": "V1 Get List of User Groups",
+   "quote": "Returns a list of groups to which the specified user belongs.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.icemortgagetechnology.com/developer-connect/reference/get-list-of-user-groups"
+  },
+  {
+   "id": "c30",
+   "url": "https://developer.icemortgagetechnology.com/developer-connect/reference/get-a-list-of-personas-1.md",
+   "title": "V3 Get a List of Personas",
+   "quote": "Returns the list of all personas on the Encompass instance.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.icemortgagetechnology.com/developer-connect/reference/get-a-list-of-personas-1"
+  },
+  {
+   "id": "c31",
+   "url": "https://developer.icemortgagetechnology.com/developer-connect/reference/wbhks-re-cat-orgs-users.md",
+   "title": "Orgs and Users",
+   "quote": "When a new internal user is created.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.icemortgagetechnology.com/developer-connect/reference/wbhks-re-cat-orgs-users"
+  },
+  {
+   "id": "c32",
+   "url": "https://developer.icemortgagetechnology.com/developer-connect/reference/wbhks-re-cat-orgs-users.md",
+   "title": "Orgs and Users",
+   "quote": "When the user profile for an internal user is updated.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.icemortgagetechnology.com/developer-connect/reference/wbhks-re-cat-orgs-users"
+  },
+  {
+   "id": "c33",
+   "url": "https://developer.icemortgagetechnology.com/developer-connect/reference/wbhks-re-cat-orgs-users.md",
+   "title": "Orgs and Users",
+   "quote": "When an internal user is deleted.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.icemortgagetechnology.com/developer-connect/reference/wbhks-re-cat-orgs-users"
+  },
+  {
+   "id": "c34",
+   "url": "https://developer.icemortgagetechnology.com/developer-connect/docs/federated-sso.md",
+   "title": "Federated SAML SSO",
+   "quote": "ICE Mortgage Technology identity federation services supports a Service Provider (SP) initiated authentication flow with SAML 2.0.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.icemortgagetechnology.com/developer-connect/docs/federated-sso"
+  },
+  {
+   "id": "c35",
+   "url": "https://developer.icemortgagetechnology.com/developer-connect/docs/federated-sso.md",
+   "title": "Federated SAML SSO",
+   "quote": "The configuration settings required by ICE Mortgage Technology are provided in the SSO Setup guide for each supported IdP: Okta, Salesforce, and Microsoft Azure.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.icemortgagetechnology.com/developer-connect/docs/federated-sso"
+  },
+  {
+   "id": "c36",
+   "url": "https://developer.icemortgagetechnology.com/developer-connect/docs/user-management.md",
+   "title": "User Management",
+   "quote": "user management can be handled either at the application level via admin UI or application APIs (available for Encompass product) or using the ICE Mortgage Technology System for Cross-Domain Identity Management (SCIM) interface",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.icemortgagetechnology.com/developer-connect/docs/user-management"
+  },
+  {
+   "id": "c37",
+   "url": "https://developer.icemortgagetechnology.com/developer-connect/reference/get-users.md",
+   "title": "Get Users",
+   "quote": "Retrieve all user profiles for the specified ICE MT product schema.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.icemortgagetechnology.com/developer-connect/reference/get-users"
+  },
+  {
+   "id": "c38",
+   "url": "https://developer.icemortgagetechnology.com/developer-connect/reference/update-user.md",
+   "title": "Update User",
+   "quote": "Update user profiles associated with the SCIM Global User ID. Also, use this call to re-enable a user profile.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.icemortgagetechnology.com/developer-connect/reference/update-user"
+  },
+  {
+   "id": "c39",
+   "url": "https://developer.icemortgagetechnology.com/developer-connect/docs/scim-user-provisioning-user-guide.md",
+   "title": "SCIM User Provisioning User Guide",
+   "quote": "Create an Encompass SSO User.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.icemortgagetechnology.com/developer-connect/docs/scim-user-provisioning-user-guide"
+  },
+  {
+   "id": "c40",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/encompass-tutorial",
+   "title": "Configure Encompass for Single sign-on with Microsoft Entra ID",
+   "quote": "https://<SUBDOMAIN>.voxmobile.com/voxportal/ws/saml/consume",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://mortgagetech.ice.com/products/encompass",
+  "https://developer.icemortgagetechnology.com/developer-connect/docs/welcome",
+  "https://developer.icemortgagetechnology.com/developer-connect/docs/scim-user-provisioning-user-guide",
+  "https://developer.icemortgagetechnology.com/developer-connect/docs/user-management",
+  "https://developer.icemortgagetechnology.com/developer-connect/docs/federated-sso",
+  "https://www.okta.com/integrations/encompass/ (404)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/encompass-tutorial",
+  "https://jumpcloud.com/support/integrate-with-encompass (403)"
+ ],
+ "open_questions": [
+  "Encompass pricing and whether SCIM or the API needs a specific licence are not public.",
+  "Docs do not say whether disabling a user frees a licence or ends active sessions.",
+  "ServiceProviderConfig, Schemas and ResourceTypes endpoints and SCIM filtering are not documented.",
+  "Rate limits for SCIM and V3 user APIs were not found.",
+  "No Okta, Entra, Google, OneLogin or JumpCloud catalogue app for Encompass SCIM was found; whether IdPs provision it via their generic SCIM app is inferred from the generic endpoint only."
+ ]
+}

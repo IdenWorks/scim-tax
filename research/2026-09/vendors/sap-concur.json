@@ -1,0 +1,709 @@
+{
+ "slug": "sap-concur",
+ "vendor": "SAP Concur",
+ "vendor_url": "https://www.concur.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "SAP Concur",
+  "slug": "sap-concur",
+  "category": "Finance, Accounting & Spend",
+  "status": "unknown",
+  "scim_plan": "—",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Base",
+  "team_price_text": "Base: starting at $7 per report, unlimited users",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": null
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "directory_sync",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.concur.com/about/pricing",
+  "docs_url": "https://developer.concur.com/api-reference/user-provisioning/v4.user-provisioning.html",
+  "evidence": "SAP Concur's developer docs describe a SCIM 2.0-based User Provisioning Service and Identity v4.1 API for Expense, Travel, Invoice and Request (Standard and Professional editions), but the pricing page (Base $7/report, Plus $11/report, Premium custom) does not say which plan includes provisioning.",
+  "notes": "Per-report pricing: Base from $7 per report and Plus from $11 per report (both unlimited users, 'Buy now'), Premium custom. Neither the pricing page nor the plan comparison mentions SSO, SCIM or APIs, so the SCIM plan is unknown. Provisioning is through SAP Concur's SCIM 2.0-shaped Identity v4.1 and User Provisioning Service (UPS) v4 APIs (Users, Bulk, ServiceProviderConfig, Schemas, ResourceTypes, PATCH/PUT, filter), authenticated with company-level OAuth tokens; generating your own Client ID needs the OAuth 2.0 Application Management tool, which must be enabled by SAP Concur Client Web Services. UPS also writes Spend and Travel extensions and roles. Hard DELETE is not recommended and only for users with no transaction history. The Okta OIN app marks SCIM Create/Update/Deactivate; Microsoft Entra provisions via SAP Cloud Identity Services rather than directly.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Base",
+   "price_text": "Starting at $7 per report, unlimited users",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1"
+   ]
+  },
+  {
+   "name": "Plus",
+   "price_text": "Starting at $11 per report, unlimited users",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1"
+   ]
+  },
+  {
+   "name": "Premium",
+   "price_text": "Custom pricing, unlimited users",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c3",
+   "c4",
+   "c5"
+  ],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://{datacenterURI}/profile/identity/v4.1 (Identity) and https://{datacenterURI}/profile/v4 (User Provisioning Service)",
+  "notes": "Not a toggle-and-token SCIM endpoint: it is SAP Concur's SCIM 2.0-shaped platform API, called with company-level OAuth access tokens. UPS needs Concur Expense and/or Concur Travel.",
+  "auth": {
+   "method": "oauth2",
+   "token_source": "Administration > Company > Authentication Admin > Company Request Token (with an App ID / Client ID); Client IDs come from the OAuth 2.0 Application Management tool once Client Web Services enables it",
+   "token_expiry": null,
+   "cite": [
+    "c6",
+    "c7",
+    "c8"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": null,
+   "ServiceProviderConfig": true,
+   "Schemas": true,
+   "ResourceTypes": true,
+   "Bulk": true,
+   "Me": null,
+   "cite": [
+    "c9",
+    "c10",
+    "c11"
+   ],
+   "notes": "No Groups resource is documented in Identity v4.1 or UPS v4; roles are written through the Spend extension."
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": true,
+   "group_push": null,
+   "group_membership": null,
+   "cite": [
+    "c9",
+    "c10",
+    "c12",
+    "c13"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Users with transaction history fall under the Data Retention policy; hard DELETE is only for users with no transaction history.",
+   "cite": [
+    "c12",
+    "c13"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "any User schema attribute (booleans, strings, numbers, dates, lists) via POST /Users/.search"
+   ],
+   "cite": [
+    "c14"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": 1000,
+   "cite": [
+    "c15"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "active",
+    "displayName",
+    "name.givenName",
+    "name.familyName",
+    "name.middleName",
+    "name.middleInitial",
+    "name.honorificPrefix",
+    "name.honorificSuffix",
+    "name.academicTitle",
+    "name.familyNamePrefix",
+    "name.legalName",
+    "name.formatted",
+    "nickName",
+    "title",
+    "emails",
+    "emails.verified",
+    "phoneNumbers",
+    "addresses",
+    "dateOfBirth",
+    "emergencyContacts",
+    "entitlements",
+    "externalId",
+    "preferredLanguage",
+    "timezone",
+    "localeOverrides"
+   ],
+   "enterprise": [
+    "companyId",
+    "costCenter",
+    "department",
+    "division",
+    "employeeNumber",
+    "manager",
+    "organization",
+    "startDate",
+    "terminationDate",
+    "leavesOfAbsence"
+   ],
+   "custom": {
+    "supported": true,
+    "how": "SAP Concur Spend (urn:ietf:params:scim:schemas:extension:spend:2.0:User) and Travel (urn:ietf:params:scim:schemas:extension:travel:2.0:User) extensions through UPS."
+   },
+   "group": [],
+   "cite": [
+    "c16",
+    "c17",
+    "c18"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "UPS provisions a user's roles (Spend role codes) along with the profile.",
+   "cite": [
+    "c4"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Access to this documentation does not provide access to the API.",
+    "cite": [
+     "c3"
+    ]
+   },
+   {
+    "text": "UPS requires the customer to have purchased Concur Expense or Concur Travel.",
+    "cite": [
+     "c19"
+    ]
+   },
+   {
+    "text": "UPS is asynchronous: each request returns a provisionId to poll; /Bulk/ takes up to 100 operations.",
+    "cite": [
+     "c11"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c3",
+   "c4"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://us.api.concursolutions.com/profile/identity/v4.1",
+  "docs_url": "https://developer.concur.com/api-reference/profile/v4.1.identity.html",
+  "notes": "The user-management API is the same SCIM-shaped Identity v4.1 / UPS v4 surface. Plan and price of Client Web Services access are not published.",
+  "auth": {
+   "methods": [
+    "oauth2"
+   ],
+   "scopes": [
+    "identity.user.ids.read",
+    "identity.user.core.read",
+    "identity.user.coresensitive.read",
+    "identity.user.enterprise.read",
+    "identity.user.coreenterprise.writeonly",
+    "identity.user.externalID.writeonly",
+    "identity.user.emails.verified.writeonly",
+    "identity.user.sap.read",
+    "identity.user.sap.writeonly",
+    "identity.user.delete",
+    "user.provision.write",
+    "user.provision.read"
+   ],
+   "cite": [
+    "c3",
+    "c4",
+    "c13"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c4",
+    "c9",
+    "c10",
+    "c12",
+    "c13"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/profile/identity/v4.1/Users",
+    "purpose": "Retrieve all users",
+    "cite": [
+     "c15"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/profile/identity/v4.1/Users/.search",
+    "purpose": "Search users with a filter",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/profile/identity/v4.1/Users/{id}",
+    "purpose": "Retrieve a user's identity profile",
+    "cite": [
+     "c9"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/profile/identity/v4.1/Users",
+    "purpose": "Create a user's identity profile",
+    "cite": [
+     "c9"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/profile/identity/v4.1/Users/{id}",
+    "purpose": "Replace a user's identity profile",
+    "cite": [
+     "c9"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/profile/identity/v4.1/Users/{id}",
+    "purpose": "Update a user's identity profile",
+    "cite": [
+     "c9"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/profile/identity/v4.1/ServiceProviderConfig/",
+    "purpose": "SCIM service provider config",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/profile/identity/v4.1/Schemas/",
+    "purpose": "Fetch all schemas",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/profile/identity/v4.1/ResourceTypes/",
+    "purpose": "Fetch resource types",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/profile/v4/Users/",
+    "purpose": "UPS: provision a user (identity, spend, travel)",
+    "cite": [
+     "c11"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/profile/v4/Users/<Concur UUID>",
+    "purpose": "UPS: update a user",
+    "cite": [
+     "c11",
+     "c12"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/profile/v4/Users/<Concur UUID>",
+    "purpose": "UPS: replace a user",
+    "cite": [
+     "c11"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/profile/v4/Bulk/",
+    "purpose": "UPS: bulk operations (up to 100)",
+    "cite": [
+     "c11"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/profile/v4/provisions/{provision-id}/status",
+    "purpose": "UPS: provisioning request status",
+    "cite": [
+     "c20"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Company-level access tokens only.",
+    "cite": [
+     "c5"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/sap-concur-solutions/",
+   "cite": [
+    "c21"
+   ],
+   "notes": "OIN page marks SAML, SWA, SCIM, Entitlement Management and Create/Update/Deactivate/Schema Discovery as checked (read from page markup); Group Push not checked."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "directory_sync",
+   "built_by": "vendor",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/sap-concur-provisioning-tutorial",
+   "cite": [
+    "c22",
+    "c23",
+    "c24"
+   ],
+   "notes": "Entra gallery app 'Concur' does SAML SSO with just-in-time user creation; Entra provisioning goes to SAP Cloud Identity Services, whose Identity Provisioning then provisions SAP Concur."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": "SAP Cloud Identity Services Identity Provisioning (SAP IPS) as an intermediary from Entra and other sources; HR feeds through the UPS /Bulk/ endpoint.",
+  "docs_public": true,
+  "cite": [
+   "c11",
+   "c23"
+  ],
+  "notes": "Microsoft's Entra tutorial says Concur supports just-in-time user provisioning on SSO; no SAP Concur page confirming this was loaded."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.concur.com/about/pricing",
+   "title": "SAP Concur Pricing for Expense, Travel, Invoice Solutions",
+   "quote": "Base Starting at $7 per report Unlimited users For smaller businesses with basic expense reporting needs.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.concur.com/about/pricing",
+   "title": "SAP Concur Pricing for Expense, Travel, Invoice Solutions",
+   "quote": "Premium Custom pricing Unlimited users For businesses that need the most advanced capabilities.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://developer.concur.com/api-reference/profile/v4.1.identity.html",
+   "title": "SAP Concur Developer Center | Identity v4.1",
+   "quote": "The Identity v4.1 service is built to create, update, and read user’s core identity profile. This service includes advanced search functionality that enable clients to filter based on user identity attributes. Limitations Access to this documentation does not provide access to the API.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://developer.concur.com/api-reference/user-provisioning/v4.user-provisioning.html",
+   "title": "SAP Concur Developer Center | User Provisioning Service",
+   "quote": "The User Provisioning Service (UPS) allows callers to provision and update a user’s profile including a user’s roles .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://developer.concur.com/api-reference/profile/v4.1.identity.html",
+   "title": "SAP Concur Developer Center | Identity v4.1",
+   "quote": "Access Token Usage This API supports only company level access tokens.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://developer.concur.com/api-reference/authentication/company-refresh-tool.html",
+   "title": "SAP Concur Developer Center | Company Request Token Self-Service Tool",
+   "quote": "A Company Request Token is required by some integrations, and can also be used to request an Access/Refresh Token (JSON web token or JWT) for connecting to APIs in the SAP Concur platform.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://developer.concur.com/api-reference/authentication/company-refresh-tool.html",
+   "title": "SAP Concur Developer Center | Company Request Token Self-Service Tool",
+   "quote": "Click Administration > Company > Authentication Admin . The Authentication Administration page appears. Click Company Request Token .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://developer.concur.com/api-reference/authentication/oauth2-app-mgmt-tool.html",
+   "title": "SAP Concur Developer Center | OAuth 2.0 Application Management Tool",
+   "quote": "In order to complete the workflow, you must first contact Client Web Services to request that the OAuth 2.0 Application Management tool be enabled for your entity.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://developer.concur.com/api-reference/profile/v4.1.identity.html",
+   "title": "SAP Concur Developer Center | Identity v4.1",
+   "quote": "Update a User’s Identity Profile with PATCH This method is recommended for updating single or multiple data attributes for a single user",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://developer.concur.com/api-reference/profile/v4.1.identity.html",
+   "title": "SAP Concur Developer Center | Identity v4.1",
+   "quote": "Fetch All Schemas Fetch all supported schemas. Scopes None. URI GET https://us.api.concursolutions.com/profile/identity/v4.1/Schemas/",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://developer.concur.com/api-reference/user-provisioning/v4.user-provisioning.html",
+   "title": "SAP Concur Developer Center | User Provisioning Service",
+   "quote": "Use the /Bulk/ endpoint for batch operations (up to 100 operations per request) and /Users/ for single-user operations.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://developer.concur.com/api-reference/user-provisioning/v4.user-provisioning.html",
+   "title": "SAP Concur Developer Center | User Provisioning Service",
+   "quote": "\"op\" : \"replace\" , \"path\" : \"active\" , \"value\" : false",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://developer.concur.com/api-reference/profile/v4.1.identity.html",
+   "title": "SAP Concur Developer Center | Identity v4.1",
+   "quote": "Note: The DELETE operation should only be used for users that have no transaction history. For users with transaction history, see the Data Retention policy .",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://developer.concur.com/api-reference/profile/v4.1.identity.html",
+   "title": "SAP Concur Developer Center | Identity v4.1",
+   "quote": "The filter parameter supports all data types inside of the User schema including: booleans, strings, numbers, dates, and lists.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://developer.concur.com/api-reference/profile/v4.1.identity.html",
+   "title": "SAP Concur Developer Center | Identity v4.1",
+   "quote": "count integer The desired maximum number of query results per page. Maximum count: 1000 . Default: 100",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://developer.concur.com/api-reference/profile/v4.1.identity.html",
+   "title": "SAP Concur Developer Center | Identity v4.1",
+   "quote": "userName string user@domain Required The name that can be used to login to Concur Travel and Expense.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://developer.concur.com/api-reference/profile/v4.1.identity.html",
+   "title": "SAP Concur Developer Center | Identity v4.1",
+   "quote": "terminationDate string YYYY-MM-DD'T'hh:mm:ss'Z The user’s termination date.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://developer.concur.com/api-reference/user-provisioning/v4.user-provisioning.html",
+   "title": "SAP Concur Developer Center | User Provisioning Service",
+   "quote": "UPS supports the provisioning of identity, spend, and travel profile data where Identity API only supports the provisioning of identity profile data.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://developer.concur.com/api-reference/user-provisioning/v4.user-provisioning.html",
+   "title": "SAP Concur Developer Center | User Provisioning Service",
+   "quote": "SAP Concur users must purchase either Concur Expense or Concur Travel or both in order to use this API.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://developer.concur.com/api-reference/user-provisioning/v4.user-provisioning.html",
+   "title": "SAP Concur Developer Center | User Provisioning Service",
+   "quote": "Track provision completion using the provisionId returned in the response, either via polling (with exponential backoff) or webhook notifications.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://www.okta.com/integrations/sap-concur-solutions/",
+   "title": "SAP Concur Solutions | Okta Integration Network",
+   "quote": "SAP Concur simplifies travel, expense and invoice management for total visibility and greater control",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/concur-tutorial",
+   "title": "Configure Concur for Single sign-on with Microsoft Entra ID",
+   "quote": "Concur supports SP initiated SSO. Concur supports Just In Time user provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/sap-concur-provisioning-tutorial",
+   "title": "Configure SAP Concur for automatic user provisioning with Microsoft Entra ID",
+   "quote": "When configured, Microsoft Entra ID automatically provisions and deprovisions users to SAP Concur using the Microsoft Entra provisioning service and SAP Cloud Identity Services.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/sap-concur-provisioning-tutorial",
+   "title": "Configure SAP Concur for automatic user provisioning with Microsoft Entra ID",
+   "quote": "At this step, use SAP Cloud Identity Services Identity Provisioning to configure SAP Concur as a target system, where you can provision users and group members.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.concur.com/about/pricing (plan comparison table)",
+  "https://www.concur.com/sitemap.xml",
+  "https://developer.concur.com/api-reference/profile/v4.1.identity.html",
+  "https://developer.concur.com/api-reference/profile/v4.identity.html",
+  "https://developer.concur.com/api-reference/user-provisioning/v4.user-provisioning.html",
+  "https://developer.concur.com/api-reference/authentication/company-refresh-tool.html",
+  "https://developer.concur.com/api-reference/authentication/oauth2-app-mgmt-tool.html",
+  "https://www.okta.com/integrations/sap-concur-solutions/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/concur-tutorial",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/sap-concur-provisioning-tutorial"
+ ],
+ "open_questions": [
+  "Which plan (Base, Plus, Premium) includes SSO and API/provisioning access, and whether Client Web Services access costs extra.",
+  "Whether deactivation (active=false) frees a licence or ends sessions; Concur prices per report, so seats may not apply.",
+  "Token lifetime of company-level access/refresh tokens is not stated on the pages loaded.",
+  "Rate limits for Identity v4.1 / UPS are not stated.",
+  "Google Workspace, OneLogin and JumpCloud catalogue apps were not checked (WebSearch budget exhausted; OneLogin blocks bots).",
+  "SAP Concur's own SSO and JIT documentation sits in the customer help portal and was not loaded."
+ ]
+}

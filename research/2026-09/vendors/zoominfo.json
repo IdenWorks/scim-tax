@@ -1,0 +1,704 @@
+{
+ "slug": "zoominfo",
+ "vendor": "ZoomInfo",
+ "vendor_url": "https://www.zoominfo.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "ZoomInfo",
+  "slug": "zoominfo",
+  "category": "Sales & CRM",
+  "status": "gated",
+  "scim_plan": "Contact Sales (quote-only)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales (no public pricing)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": null
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.zoominfo.com/pricing",
+  "docs_url": "https://help.zoominfo.com/s/article/How-to-Set-Up-Auto-Provisioning-for-Admins",
+  "evidence": "ZoomInfo's pricing page offers packages only through a Get Pricing form, and its help centre says IdP auto-provisioning uses SCIM 2.0 to sync users between your identity provider and ZoomInfo.",
+  "notes": "Quote-only: ZoomInfo lists Professional, Copilot Advanced and Copilot Enterprise (plus Marketing and Talent packages) with no prices; pricing depends on licences, credits and features, so under rule 6a the row is gated at low confidence and which packages include SSO or SCIM is not public. ZoomInfo Lite is free. New row. SCIM 2.0 needs SAML SSO first; tokens expire (90/180/365 days in the IdP guides, 30 to 365 days in the help article). Okta uses the OIN ZoomInfo app (Create, Update, Deactivate, import); Entra uses a non-gallery app with groups mapped to subscription sets; any other SCIM IdP can use 'SCIM User with Subscription Group' with a custom ziSubscriptionGroup attribute. Unassigning frees the product seat. Salesforce-driven CRM auto provisioning and CSV bulk add are alternatives. No public admin user-management API.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": null,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "ZoomInfo Lite",
+   "price_text": "Free",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c7"
+   ]
+  },
+  {
+   "name": "ZoomInfo Professional",
+   "price_text": "Contact sales (Get Pricing form; priced by licenses, credits and features)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c1",
+    "c2"
+   ]
+  },
+  {
+   "name": "Copilot Advanced",
+   "price_text": "Contact sales",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c4",
+    "c1"
+   ]
+  },
+  {
+   "name": "Copilot Enterprise",
+   "price_text": "Contact sales",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c5",
+    "c1"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c8",
+   "c9",
+   "c16",
+   "c34"
+  ],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": null,
+  "auth": {
+   "method": "bearer",
+   "token_source": "Admin Portal > User Management > Users > Auto Provisioning > IdP tab > Generate API Token (Base URL shown alongside)",
+   "token_expiry": "Admin-chosen: 90 days, 180 days or 1 year per the IdP guides (help article says 30 to 365 days)",
+   "cite": [
+    "c27",
+    "c29",
+    "c10",
+    "c39"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c8",
+    "c34"
+   ],
+   "notes": "Endpoint list is not published; the guides only give an auto-populated Base URL. Users is implied by the user provisioning features. The SCIM User with Subscription Group mode does not support SCIM groups."
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": null,
+   "group_push": null,
+   "group_membership": null,
+   "cite": [
+    "c17",
+    "c18",
+    "c11",
+    "c12",
+    "c40",
+    "c24"
+   ],
+   "notes": "Okta supports Create, Update, Deactivate and user import (read). PUT vs PATCH is not documented. The Entra setup maps Entra groups to subscription sets, but the guides never say SCIM Groups are pushed; the Subscription Group mode explicitly does not support SCIM groups."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": true,
+   "revokes_sessions": null,
+   "data_retained": "Deactivated users keep their Lists, Searches and Tags, which return on reactivation (manual deactivation article).",
+   "cite": [
+    "c17",
+    "c38",
+    "c30",
+    "c43"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "emails.value (single email, no type)",
+    "externalId",
+    "id",
+    "active"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": true,
+    "how": "urn:ietf:params:scim:schemas:extension:zoominfo:2.0:User:ziSubscriptionGroup (required in Subscription Group mode); the Okta OIN app adds ziRole, ziUserCredit, ziCreditLimit, ziResetUsage and ziProduct"
+   },
+   "group": [],
+   "cite": [
+    "c24",
+    "c25",
+    "c22",
+    "c21",
+    "c37",
+    "c33"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "Okta app ziRole attribute; Entra subscription sets can grant the Admin role to every user in the set; product licences via ziProduct or the subscription group/set",
+   "cite": [
+    "c21",
+    "c31"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Provisioning fails when there are more assigned users than available product seats.",
+    "cite": [
+     "c23"
+    ]
+   },
+   {
+    "text": "A user cannot be in more than one Entra group mapped to a subscription set.",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "text": "SCIM User with Subscription Group mode does not support SCIM groups.",
+    "cite": [
+     "c36"
+    ]
+   },
+   {
+    "text": "The SCIM 'active' attribute reflects SCIM assignment only, not whether the user holds a product seat.",
+    "cite": [
+     "c26"
+    ]
+   }
+  ],
+  "notes": "Three IdP modes in Admin Portal: Okta (OIN app), Microsoft Entra ID (Azure type), and 'SCIM User with Subscription Group' for any SCIM-capable IdP. A separate Salesforce-based CRM auto-provisioning mode needs no IdP or SSO."
+ },
+ "user_api": {
+  "available": null,
+  "cite": [],
+  "plan": null,
+  "api_tax": null,
+  "style": null,
+  "base_url": null,
+  "docs_url": null,
+  "auth": {
+   "methods": [],
+   "scopes": [],
+   "cite": []
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": []
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "The public GTM.AI developer API (docs.gtm.ai) covers data, enrichment, audiences and agents; its only user endpoint is GET /data/v1/users/usage (the caller's own API usage), and no admin user-management endpoints are listed."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/zoominfo/",
+   "cite": [
+    "c41",
+    "c16"
+   ],
+   "notes": "OIN page ticks SAML, SWA, SCIM, Create, Update, Deactivate; Group Push not ticked."
+  },
+  "entra": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c14",
+    "c28"
+   ],
+   "notes": "No Microsoft Learn tutorial found for ZoomInfo; the vendor's Subscription Group guide says to create an integration app in Entra."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": true,
+  "other_sync": "Salesforce CRM auto provisioning (users and ZoomInfo subscriptions driven by Salesforce profiles, roles or users; no IdP or SSO needed)",
+  "docs_public": true,
+  "cite": [
+   "c42",
+   "c13",
+   "c15"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.zoominfo.com/pricing",
+   "title": "Pricing | ZoomInfo",
+   "quote": "ZoomInfo offers flexible packages across a variety of solutions, from B2B contact and company data to premium GTM applications",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.zoominfo.com/pricing",
+   "title": "Pricing | ZoomInfo",
+   "quote": "Packaging is based on the number of licenses our customers require and the desired level of access to data and features.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.zoominfo.com/pricing",
+   "title": "Pricing | ZoomInfo",
+   "quote": "Take prospecting to the next level with best in class contact & company data.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.zoominfo.com/pricing",
+   "title": "Pricing | ZoomInfo",
+   "quote": "AI driven account prioritization based on unique B2B signals & deeper insights.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.zoominfo.com/pricing",
+   "title": "Pricing | ZoomInfo",
+   "quote": "Scale your GTM strategy through AI-generated account summaries, advanced signals & more.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://www.zoominfo.com/pricing",
+   "title": "Pricing | ZoomInfo",
+   "quote": "Our sales team will work with you on payment frequency and options.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://www.zoominfo.com/llms.txt",
+   "title": "ZoomInfo LLM Information",
+   "quote": "Pricing: Free to start with consumption credits based on usage; ZoomInfo Lite is free, no credit card, no commitment",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://help.zoominfo.com/s/article/How-to-Set-Up-Auto-Provisioning-for-Admins",
+   "title": "How to Manage Auto Provisioning in the Admin Portal",
+   "quote": "Identity Provider (IdP) auto-provisioning uses SCIM 2.0 to sync users between your identity provider and ZoomInfo.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://help.zoominfo.com/s/article/How-to-Set-Up-Auto-Provisioning-for-Admins",
+   "title": "How to Manage Auto Provisioning in the Admin Portal",
+   "quote": "SCIM User with Subscription Group: For organizations configuring SCIM 2.0 auto provisioning with an identity provider that supports SCIM user provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://help.zoominfo.com/s/article/How-to-Set-Up-Auto-Provisioning-for-Admins",
+   "title": "How to Manage Auto Provisioning in the Admin Portal",
+   "quote": "In the pop-up window, select a token expiration period. You can choose an expiration period from 30 days to 365 days based on your organization’s security preferences.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://help.zoominfo.com/s/article/How-to-Set-Up-Auto-Provisioning-for-Admins",
+   "title": "How to Manage Auto Provisioning in the Admin Portal",
+   "quote": "Create new users in ZoomInfo",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://help.zoominfo.com/s/article/How-to-Set-Up-Auto-Provisioning-for-Admins",
+   "title": "How to Manage Auto Provisioning in the Admin Portal",
+   "quote": "Deactivate users when access is removed",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://help.zoominfo.com/s/article/How-to-Set-Up-Auto-Provisioning-for-Admins",
+   "title": "How to Manage Auto Provisioning in the Admin Portal",
+   "quote": "CRM auto provisioning is available when you use Salesforce as your connected CRM for user and subscription management.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://help.zoominfo.com/s/article/Overview-of-Single-Sign-On-SSO-Setup-for-Admins",
+   "title": "Overview of Single Sign-On (SSO) Setup for Admins",
+   "quote": "ZoomInfo supports SSO with Okta or Microsoft Azure (Microsoft Entra ID) as the identity provider (IdP).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://help.zoominfo.com/s/article/Overview-of-Single-Sign-On-SSO-Setup-for-Admins",
+   "title": "Overview of Single Sign-On (SSO) Setup for Admins",
+   "quote": "CRM Auto Provisioning: If your organization uses Salesforce, you can choose to set up CRM auto provisioning. This option does not require an IdP or SSO connection.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://tech-docs.zoominfo.com/zoominfo-sso-scim-provisioning-implementation-guide.pdf",
+   "title": "Auto Provisioning with ZoomInfo and Okta Integration Guide",
+   "quote": "This document describes how to configure SCIM 2.0 auto provisioning in Okta for ZoomInfo apps.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://tech-docs.zoominfo.com/zoominfo-sso-scim-provisioning-implementation-guide.pdf",
+   "title": "Auto Provisioning with ZoomInfo and Okta Integration Guide",
+   "quote": "Deactivates a user's ZoomInfo account when it is unassigned in",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://tech-docs.zoominfo.com/zoominfo-sso-scim-provisioning-implementation-guide.pdf",
+   "title": "Auto Provisioning with ZoomInfo and Okta Integration Guide",
+   "quote": "Okta or their Okta account is deactivated. Accounts can be",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://tech-docs.zoominfo.com/zoominfo-sso-scim-provisioning-implementation-guide.pdf",
+   "title": "Auto Provisioning with ZoomInfo and Okta Integration Guide",
+   "quote": "To configure SCIM auto provisioning you must have already configured SSO using the ZoomInfo Okta",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://tech-docs.zoominfo.com/zoominfo-sso-scim-provisioning-implementation-guide.pdf",
+   "title": "Auto Provisioning with ZoomInfo and Okta Integration Guide",
+   "quote": "Groups: The ZoomInfo Okta app does not support the import of groups.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://tech-docs.zoominfo.com/zoominfo-sso-scim-provisioning-implementation-guide.pdf",
+   "title": "Auto Provisioning with ZoomInfo and Okta Integration Guide",
+   "quote": "These attributes include ziRole, ziUserCredit, ziCreditLimit, ziResetUsage, and",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://tech-docs.zoominfo.com/zoominfo-sso-scim-provisioning-implementation-guide.pdf",
+   "title": "Auto Provisioning with ZoomInfo and Okta Integration Guide",
+   "quote": "However, ZoomInfo's system only supports a single email address per user",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://tech-docs.zoominfo.com/zoominfo-sso-scim-provisioning-implementation-guide.pdf",
+   "title": "Auto Provisioning with ZoomInfo and Okta Integration Guide",
+   "quote": "For any product(s), if there are more users than the seats available, user provisioning will fail.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://tech-docs.zoominfo.com/zoominfo-sso-scim-provisioning-implementation-guide.pdf",
+   "title": "Auto Provisioning with ZoomInfo and Okta Integration Guide",
+   "quote": "The Okta app supports the import of the following People-type attributes:",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://tech-docs.zoominfo.com/zoominfo-sso-scim-provisioning-implementation-guide.pdf",
+   "title": "Auto Provisioning with ZoomInfo and Okta Integration Guide",
+   "quote": "userName, givenName, familyName, and email.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://tech-docs.zoominfo.com/zoominfo-sso-scim-provisioning-implementation-guide.pdf",
+   "title": "Auto Provisioning with ZoomInfo and Okta Integration Guide",
+   "quote": "'active' attribute in SCIM requests and responses pertains only to scim-active status.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://tech-docs.zoominfo.com/zoominfo-sso-scim-provisioning-implementation-guide.pdf",
+   "title": "Auto Provisioning with ZoomInfo and Okta Integration Guide",
+   "quote": "c. Click Generate API Token. Both the Base URL and API Token are now available to copy.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://tech-docs.zoominfo.com/microsoft-entra-id-auto-provisioning-guide.pdf",
+   "title": "Auto Provisioning with ZoomInfo and Microsoft Entra ID Integration Guide",
+   "quote": "SCIM auto provisioning requires an existing Single Sign-On (SSO) configuration using Microsoft Entra",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://tech-docs.zoominfo.com/microsoft-entra-id-auto-provisioning-guide.pdf",
+   "title": "Auto Provisioning with ZoomInfo and Microsoft Entra ID Integration Guide",
+   "quote": "(90 days, 180 days, or 1 year).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://tech-docs.zoominfo.com/microsoft-entra-id-auto-provisioning-guide.pdf",
+   "title": "Auto Provisioning with ZoomInfo and Microsoft Entra ID Integration Guide",
+   "quote": "As users are added to or removed from Entra ID groups, our system automatically assigns or revokes",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://tech-docs.zoominfo.com/microsoft-entra-id-auto-provisioning-guide.pdf",
+   "title": "Auto Provisioning with ZoomInfo and Microsoft Entra ID Integration Guide",
+   "quote": "Optionally, select Give Admin role",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://tech-docs.zoominfo.com/microsoft-entra-id-auto-provisioning-guide.pdf",
+   "title": "Auto Provisioning with ZoomInfo and Microsoft Entra ID Integration Guide",
+   "quote": "Important: Before you create groups, note that a user cannot exist in more than one group.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://tech-docs.zoominfo.com/microsoft-entra-id-auto-provisioning-guide.pdf",
+   "title": "Auto Provisioning with ZoomInfo and Microsoft Entra ID Integration Guide",
+   "quote": "2. By default, the externalId attribute is mapped to mailNickname. Update the mapping so that",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://tech-docs-library.zoominfo.com/zoominfo-subscription-group-scim-provisioning-guide.pdf",
+   "title": "Auto Provisioning with ZoomInfo Using SCIM User with Subscription Group Integration Guide",
+   "quote": "This document describes how to configure SCIM 2.0 auto provisioning in any IdP",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c35",
+   "url": "https://tech-docs-library.zoominfo.com/zoominfo-subscription-group-scim-provisioning-guide.pdf",
+   "title": "Auto Provisioning with ZoomInfo Using SCIM User with Subscription Group Integration Guide",
+   "quote": "To configure SCIM auto provisioning you must have already configured SSO using SAML",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://tech-docs-library.zoominfo.com/zoominfo-subscription-group-scim-provisioning-guide.pdf",
+   "title": "Auto Provisioning with ZoomInfo Using SCIM User with Subscription Group Integration Guide",
+   "quote": "When you select IdP type SCIM User with Subscription Group Zoominfo SCIM service does not",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://tech-docs-library.zoominfo.com/zoominfo-subscription-group-scim-provisioning-guide.pdf",
+   "title": "Auto Provisioning with ZoomInfo Using SCIM User with Subscription Group Integration Guide",
+   "quote": "urn:ietf:params:scim:schemas:extension:zoominfo:2.0:User:ziSubscriptionGroup",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c38",
+   "url": "https://tech-docs-library.zoominfo.com/zoominfo-subscription-group-scim-provisioning-guide.pdf",
+   "title": "Auto Provisioning with ZoomInfo Using SCIM User with Subscription Group Integration Guide",
+   "quote": "As users are added to or removed from the SCIM app, our system automatically assigns",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c39",
+   "url": "https://tech-docs-library.zoominfo.com/zoominfo-subscription-group-scim-provisioning-guide.pdf",
+   "title": "Auto Provisioning with ZoomInfo Using SCIM User with Subscription Group Integration Guide",
+   "quote": "The API Token and Base URL for your IdP’s SCIM configuration is auto-populated",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c40",
+   "url": "https://tech-docs-library.zoominfo.com/zoominfo-subscription-group-scim-provisioning-guide.pdf",
+   "title": "Auto Provisioning with ZoomInfo Using SCIM User with Subscription Group Integration Guide",
+   "quote": "Remove assignment of users from SCIM app and deactivate",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c41",
+   "url": "https://www.okta.com/integrations/zoominfo/",
+   "title": "Integrate ZoomInfo with Okta",
+   "quote": "With Okta, you can easily deploy ZoomInfo across your organization with Single Sign-On and seamless user onboarding, off-boarding and management through SCIM.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c42",
+   "url": "https://help.zoominfo.com/s/article/How-to-Manage-Users-from-the-Admin-Portal",
+   "title": "How to Manage Users from the Admin Portal",
+   "quote": "To add users in bulk, select Bulk Add User from the Add User dropdown menu and upload a CSV file containing the required user information using the provided template.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c43",
+   "url": "https://help.zoominfo.com/s/article/How-to-Manage-Users-from-the-Admin-Portal",
+   "title": "How to Manage Users from the Admin Portal",
+   "quote": "Once reactivated, the user will regain access to their account, including their Lists, Searches, and Tags.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c44",
+   "url": "https://docs.gtm.ai/llms.txt",
+   "title": "GTM.AI developer docs llms.txt",
+   "quote": "Returns current user's API usage and limits.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.gtm.ai/reference/userinterface_userusage"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "Token expiry choices differ: the help article says 30 to 365 days; the Entra and Subscription Group PDF guides say 90 days, 180 days or 1 year.",
+   "cite": [
+    "c10",
+    "c29"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.zoominfo.com/pricing",
+  "https://www.zoominfo.com/llms.txt",
+  "https://www.zoominfo.com/cws/general-sitemap.xml",
+  "https://docs.gtm.ai/sitemap.xml",
+  "https://docs.gtm.ai/llms.txt",
+  "help-centre search: scim (help.zoominfo.com)",
+  "https://www.okta.com/integrations/zoominfo/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/zoominfo-tutorial (404)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/zoominfo-provisioning-tutorial (404)"
+ ],
+ "open_questions": [
+  "Which ZoomInfo packages include SSO and SCIM is not published (quote-only).",
+  "SCIM endpoint list, PUT vs PATCH, filtering, pagination and rate limits are not documented.",
+  "Whether SCIM DELETE is supported, and whether Entra pushes SCIM Groups or only group-scoped users, is not stated.",
+  "Whether deactivation ends active sessions is not documented.",
+  "No public admin user-management or audit-log API was found; the Google Workspace, OneLogin and JumpCloud catalogues were not checked."
+ ]
+}

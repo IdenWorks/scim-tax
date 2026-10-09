@@ -1,0 +1,794 @@
+{
+ "slug": "spacelift",
+ "vendor": "Spacelift",
+ "vendor_url": "https://spacelift.io",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Spacelift",
+  "slug": "spacelift",
+  "category": "Developer Tools & CI/CD",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Starter+",
+  "team_price_text": "Starter+: $20,000 (annual subscription, unlimited users)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Starter+",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": "via_generic",
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://spacelift.io/pricing",
+  "docs_url": "https://docs.spacelift.io/integrations/single-sign-on/scim",
+  "evidence": "Spacelift's SCIM docs say \"This feature is only available to Enterprise plan\"; the pricing page lists Enterprise as \"Request a quote\" with \"SSO integration with SAML 2.0\".",
+  "notes": "Flat platform pricing, not per user: Free (2 users), Starter+ $20,000 annual subscription with unlimited users, Business/Enterprise/Enterprise+ Request a quote, all with unlimited users. SCIM 2.0 (Users, Groups, discovery endpoints; OAuth 2.0 client credentials) and SAML are Enterprise-only; OIDC SSO is on any paid account per the SSO docs, so sso_plan is Starter+ (OIDC), while SAML is Enterprise. SCIM needs SSO configured first. SCIM does not assign permissions; roles are bound to SCIM groups via UI, Terraform or login policies, and group membership must also be sent on the login assertion. IdP deactivation deactivates the user and revokes sessions; delete hard-deletes and revokes sessions. The GraphQL API (all paid accounts per docs; API keys billed as users) has no documented user-management mutations in the docs; audit trail (log + webhook) is Enterprise-only.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "Always free for small teams (2 users, 1 public worker)",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": false,
+   "cite": [
+    "c1",
+    "c2",
+    "c10",
+    "c33",
+    "c40"
+   ],
+   "notes": "SSO docs say OIDC is only on paid accounts; SAML, SCIM and audit trail are Enterprise-only."
+  },
+  {
+   "name": "Starter+",
+   "price_text": "$20,000 (annual subscription)",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c3",
+    "c4",
+    "c10",
+    "c33",
+    "c35",
+    "c40"
+   ],
+   "notes": "Unlimited users. sso true = OIDC (paid accounts); SAML is Enterprise. The pricing page FAQ and admin docs also mention a Starter plan with a seat limit that is not shown as a card."
+  },
+  {
+   "name": "Business",
+   "price_text": "Request a quote",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": false,
+   "cite": [
+    "c5",
+    "c10",
+    "c33",
+    "c35",
+    "c40"
+   ],
+   "notes": "Unlimited users; OIDC SSO only."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Request a quote",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c6",
+    "c7",
+    "c10",
+    "c35",
+    "c39",
+    "c40"
+   ],
+   "notes": "audit_log_api true = audit trail with webhook delivery (no documented REST audit-log query endpoint)."
+  },
+  {
+   "name": "Enterprise+",
+   "price_text": "Request a quote",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c8",
+    "c6",
+    "c10",
+    "c35",
+    "c40"
+   ],
+   "notes": "Everything in Enterprise plus self-hosted/FedRAMP options."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c9",
+   "c10",
+   "c11",
+   "c12"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://<account-name>.app.spacelift.io/scim/v2",
+  "auth": {
+   "method": "oauth2",
+   "token_source": "Organization Settings > Single Sign-On > SCIM > Activate (client ID and client secret, OAuth 2.0 client credentials grant)",
+   "token_expiry": null,
+   "cite": [
+    "c13",
+    "c14",
+    "c15"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": true,
+   "Schemas": true,
+   "ResourceTypes": true,
+   "Bulk": false,
+   "Me": null,
+   "cite": [
+    "c16",
+    "c17",
+    "c18",
+    "c25"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c16",
+    "c17",
+    "c19",
+    "c20"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": true,
+   "data_retained": "On IdP deactivation the user record remains in Spacelift and can be reactivated if the IdP reprovisions the user; DELETE hard-deletes the user.",
+   "cite": [
+    "c19",
+    "c20"
+   ],
+   "notes": "Admin docs say revoking access frees the seat on seat-limited plans (Free, Starter); SCIM is Enterprise-only, where users are unlimited (c41, c6)."
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName (eq, co)",
+    "active (eq)",
+    "emails (eq, co)",
+    "displayName (Groups; eq, co)"
+   ],
+   "cite": [
+    "c24"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c23"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "externalId",
+    "displayName",
+    "name.givenName",
+    "name.familyName",
+    "name.formatted",
+    "emails",
+    "active"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": false,
+    "how": "Custom schema extensions are listed as unsupported"
+   },
+   "group": [
+    "displayName",
+    "externalId",
+    "members"
+   ],
+   "cite": [
+    "c21",
+    "c22",
+    "c26",
+    "c29"
+   ]
+  },
+  "roles": {
+   "supported": false,
+   "how": "SCIM does not assign permissions and the roles attribute is ignored; roles are bound to SCIM-provisioned groups or users via the UI, the Terraform provider or login policies.",
+   "cite": [
+    "c27",
+    "c29",
+    "c31"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SCIM-provisioned users get no permissions; users without roles are denied at login.",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "text": "Group-based authorization uses the groups sent on the SAML/OIDC login assertion, not SCIM-stored group membership.",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "text": "Bulk operations, password changes, sorting and custom schema extensions are not supported; many optional core attributes (title, phoneNumbers, addresses, roles, entitlements, etc.) are silently ignored.",
+    "cite": [
+     "c25",
+     "c26",
+     "c29"
+    ]
+   },
+   {
+    "text": "Okta does not expose SCIM on OIDC apps; Okta OIDC customers need a second SWA app for provisioning.",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "text": "Under the Login Policy management strategy, deactivating a user in Spacelift does not block their login.",
+    "cite": [
+     "c42"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c35",
+   "c36",
+   "c33"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "GraphQL",
+  "base_url": "https://<account-name>.app.spacelift.io/graphql",
+  "docs_url": "https://docs.spacelift.io/integrations/api",
+  "auth": {
+   "methods": [
+    "api_key",
+    "jwt_bearer"
+   ],
+   "scopes": [],
+   "cite": [
+    "c36",
+    "c37"
+   ]
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": []
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/graphql",
+    "purpose": "Single GraphQL endpoint for all queries and mutations",
+    "cite": [
+     "c36"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Enterprise",
+   "cite": [
+    "c39",
+    "c40"
+   ],
+   "notes": "Built-in audit log plus audit webhook delivery; Enterprise-only."
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "API keys are virtual users billed like regular users.",
+    "cite": [
+     "c37"
+    ]
+   },
+   {
+    "text": "OIDC-based API keys are Enterprise-only.",
+    "cite": [
+     "c38"
+    ]
+   }
+  ],
+  "notes": "The docs describe the GraphQL schema as self-documenting but do not document user-management queries or mutations, so capabilities are null. The plan for secret-based API keys is not stated."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c9",
+    "c44"
+   ],
+   "notes": "Spacelift's Okta guide creates a custom app integration (Create App Integration), not an OIN app; okta.com/integrations/spacelift/ returned 404."
+  },
+  "entra": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c9",
+    "c32"
+   ],
+   "notes": "Spacelift documents Entra ID via an OIDC app registration plus generic SCIM; no Entra gallery tutorial found (learn.microsoft.com spacelift-tutorial 404)."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c9",
+    "c32"
+   ],
+   "notes": "Vendor docs name OneLogin for SCIM and have a OneLogin OIDC guide; catalogue listing not checked (OneLogin blocks bots)."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": "GitHub/GitLab/Google default login with login policies granting access by GitHub org/team membership",
+  "docs_public": true,
+  "cite": [
+   "c34",
+   "c43"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://spacelift.io/pricing",
+   "title": "Plans and Pricing | Spacelift",
+   "quote": "Always free for small teams",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://spacelift.io/pricing",
+   "title": "Plans and Pricing | Spacelift",
+   "quote": "The Free plan includes 2 users and 1 public worker",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://spacelift.io/pricing",
+   "title": "Plans and Pricing | Spacelift",
+   "quote": "For growing teams looking to optimize team workflows with infrastructure automation. $20,000",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://spacelift.io/pricing",
+   "title": "Plans and Pricing | Spacelift",
+   "quote": "The Starter + plan is offered either as an annual subscription and includes unlimited users, 2 public workers and 1 or 2 private workers.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://spacelift.io/pricing",
+   "title": "Plans and Pricing | Spacelift",
+   "quote": "The Business plan is offered as an annual subscription and includes unlimited users and 3 private workers.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://spacelift.io/pricing",
+   "title": "Plans and Pricing | Spacelift",
+   "quote": "The Enterprise plan is offered as an annual subscription and includes unlimited users and 5 to 30 private workers.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://spacelift.io/pricing",
+   "title": "Plans and Pricing | Spacelift",
+   "quote": "SSO integration with SAML 2.0",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://spacelift.io/pricing",
+   "title": "Plans and Pricing | Spacelift",
+   "quote": "The Enterprise + plan is offered as an annual subscription and includes unlimited users and 12 to 30 private workers.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.spacelift.io/integrations/single-sign-on/scim",
+   "title": "SCIM Provisioning - Spacelift Documentation",
+   "quote": "Spacelift supports SCIM 2.0, allowing you to automatically sync users and groups from providers like Okta, Microsoft Entra ID, or OneLogin directly into your Spacelift organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.spacelift.io/integrations/single-sign-on/scim",
+   "title": "SCIM Provisioning - Spacelift Documentation",
+   "quote": "This feature is only available to Enterprise plan.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.spacelift.io/integrations/single-sign-on/scim",
+   "title": "SCIM Provisioning - Spacelift Documentation",
+   "quote": "SSO already configured for your organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.spacelift.io/integrations/single-sign-on/scim",
+   "title": "SCIM Provisioning - Spacelift Documentation",
+   "quote": "Base URL: https://<account-name>.app.spacelift.io/scim/v2",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.spacelift.io/integrations/single-sign-on/scim",
+   "title": "SCIM Provisioning - Spacelift Documentation",
+   "quote": "Authentication type: OAuth 2.0 (client credentials grant)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.spacelift.io/integrations/single-sign-on/scim",
+   "title": "SCIM Provisioning - Spacelift Documentation",
+   "quote": "Navigate to Organization Settings > Single Sign-On",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.spacelift.io/integrations/single-sign-on/scim",
+   "title": "SCIM Provisioning - Spacelift Documentation",
+   "quote": "The client secret is only shown once. If you lose it, you'll need to reset the credentials, which generates a new client ID and client secret.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.spacelift.io/integrations/single-sign-on/scim",
+   "title": "SCIM Provisioning - Spacelift Documentation",
+   "quote": "PATCH /Users/{id} Update specific user attributes DELETE /Users/{id} Delete a user",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.spacelift.io/integrations/single-sign-on/scim",
+   "title": "SCIM Provisioning - Spacelift Documentation",
+   "quote": "PATCH supports adding/removing members and updating displayName and externalId.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.spacelift.io/integrations/single-sign-on/scim",
+   "title": "SCIM Provisioning - Spacelift Documentation",
+   "quote": "GET /ServiceProviderConfig Capabilities and supported features",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.spacelift.io/integrations/single-sign-on/scim",
+   "title": "SCIM Provisioning - Spacelift Documentation",
+   "quote": "Deleting a user (hard-delete) revokes all their active sessions.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.spacelift.io/integrations/single-sign-on/scim",
+   "title": "SCIM Provisioning - Spacelift Documentation",
+   "quote": "Spacelift deactivates the user and revokes their sessions, preventing them from logging in. The user record remains in Spacelift and can be reactivated if the IdP reprovisions them later.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.spacelift.io/integrations/single-sign-on/scim",
+   "title": "SCIM Provisioning - Spacelift Documentation",
+   "quote": "Supported attributes: userName (required), externalId, displayName, name (givenName, familyName, formatted), emails, active.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://docs.spacelift.io/integrations/single-sign-on/scim",
+   "title": "SCIM Provisioning - Spacelift Documentation",
+   "quote": "Supported attributes: displayName (required), externalId, members.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://docs.spacelift.io/integrations/single-sign-on/scim",
+   "title": "SCIM Provisioning - Spacelift Documentation",
+   "quote": "Pagination is supported via startIndex and count parameters.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://docs.spacelift.io/integrations/single-sign-on/scim",
+   "title": "SCIM Provisioning - Spacelift Documentation",
+   "quote": "userName (eq, co)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://docs.spacelift.io/integrations/single-sign-on/scim",
+   "title": "SCIM Provisioning - Spacelift Documentation",
+   "quote": "Bulk operations",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://docs.spacelift.io/integrations/single-sign-on/scim",
+   "title": "SCIM Provisioning - Spacelift Documentation",
+   "quote": "Custom schema extensions",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://docs.spacelift.io/integrations/single-sign-on/scim",
+   "title": "SCIM Provisioning - Spacelift Documentation",
+   "quote": "SCIM provisioning creates user and group records in Spacelift, but does not assign any permissions.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://docs.spacelift.io/integrations/single-sign-on/scim",
+   "title": "SCIM Provisioning - Spacelift Documentation",
+   "quote": "group-based authorization is evaluated against what the IdP sends on the login assertion",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://docs.spacelift.io/integrations/single-sign-on/scim",
+   "title": "SCIM Provisioning - Spacelift Documentation",
+   "quote": "nickName, profileUrl, title, userType, preferredLanguage, locale, timezone, password, phoneNumbers, ims, photos, addresses, entitlements, roles, x509Certificates",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://docs.spacelift.io/integrations/single-sign-on/scim",
+   "title": "SCIM Provisioning - Spacelift Documentation",
+   "quote": "Okta does not expose SCIM on OIDC apps",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://docs.spacelift.io/integrations/single-sign-on/scim",
+   "title": "SCIM Provisioning - Spacelift Documentation",
+   "quote": "Use the Spacelift Terraform provider to look up the SCIM-provisioned groups",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://docs.spacelift.io/integrations/single-sign-on",
+   "title": "Single Sign-On - Spacelift Documentation",
+   "quote": "Spacelift supports Single Sign-On using SAML 2.0 or OIDC.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://docs.spacelift.io/integrations/single-sign-on",
+   "title": "Single Sign-On - Spacelift Documentation",
+   "quote": "This feature is only available to paid Spacelift accounts.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://docs.spacelift.io/integrations/single-sign-on",
+   "title": "Single Sign-On - Spacelift Documentation",
+   "quote": "By default, Spacelift supports logging in using GitHub, GitLab, or Google.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c35",
+   "url": "https://docs.spacelift.io/integrations/api",
+   "title": "GraphQL API - Spacelift Documentation",
+   "quote": "Spacelift provides a GraphQL API for you to control your Spacelift account programmatically",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://docs.spacelift.io/integrations/api",
+   "title": "GraphQL API - Spacelift Documentation",
+   "quote": "The API can be accessed at the /graphql endpoint of your account using POST HTTPS method.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://docs.spacelift.io/integrations/api",
+   "title": "GraphQL API - Spacelift Documentation",
+   "quote": "API keys are virtual users and are billed like regular users, too.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c38",
+   "url": "https://docs.spacelift.io/integrations/api",
+   "title": "GraphQL API - Spacelift Documentation",
+   "quote": "This feature is only available on our Enterprise plan.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c39",
+   "url": "https://docs.spacelift.io/integrations/audit-trail",
+   "title": "Audit trail - Spacelift Documentation",
+   "quote": "We provide a built-in audit log as well as webhook functionality to allow you to optionally store your audit logs in a third party system.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c40",
+   "url": "https://docs.spacelift.io/integrations/audit-trail",
+   "title": "Audit trail - Spacelift Documentation",
+   "quote": "This feature is only available to Enterprise plan.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c41",
+   "url": "https://docs.spacelift.io/concepts/identity-access-management/admin",
+   "title": "Admin / Owner - Spacelift Documentation",
+   "quote": "On plans with a seat limit (Free and Starter), revoking access immediately frees the user's seat, making it available for a new user right away.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c42",
+   "url": "https://docs.spacelift.io/concepts/identity-access-management/admin",
+   "title": "Admin / Owner - Spacelift Documentation",
+   "quote": "Deactivating a user in Spacelift does not block their login. Remove the user's access in the login policy.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c43",
+   "url": "https://docs.spacelift.io/concepts/identity-access-management/admin",
+   "title": "Admin / Owner - Spacelift Documentation",
+   "quote": "To invite new users to your account, click Invite user in the top right corner.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c44",
+   "url": "https://docs.spacelift.io/integrations/single-sign-on/okta-saml-setup-guide",
+   "title": "Okta SAML setup guide - Spacelift Documentation",
+   "quote": "navigate to Applications, then click Create App Integration.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The pricing page shows Free, Starter+, Business, Enterprise and Enterprise+ cards, while the pricing FAQ and admin docs refer to a seat-limited Starter plan that has no card.",
+   "cite": [
+    "c4",
+    "c41"
+   ]
+  }
+ ],
+ "searched": [
+  "https://spacelift.io/pricing",
+  "https://docs.spacelift.io/llms.txt",
+  "https://docs.spacelift.io/integrations/single-sign-on/scim",
+  "https://docs.spacelift.io/integrations/single-sign-on",
+  "https://docs.spacelift.io/integrations/api",
+  "https://docs.spacelift.io/integrations/audit-trail",
+  "https://docs.spacelift.io/concepts/identity-access-management/admin",
+  "https://www.okta.com/integrations/spacelift/ (404)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/spacelift-tutorial (404)"
+ ],
+ "open_questions": [
+  "SCIM token/credential expiry is not documented.",
+  "SCIM rate limits are not documented.",
+  "GraphQL user-management mutations (invite, revoke, list users) are not documented in the docs; schema is self-documenting via introspection only.",
+  "Whether JIT user creation happens on first SSO login is not stated explicitly.",
+  "Whether Okta OIN, Entra gallery, Google, OneLogin or JumpCloud catalogue apps exist for Spacelift could not be confirmed (no web search available)."
+ ]
+}

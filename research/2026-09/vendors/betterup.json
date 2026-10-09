@@ -1,0 +1,754 @@
+{
+ "slug": "betterup",
+ "vendor": "BetterUp",
+ "vendor_url": "https://www.betterup.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "BetterUp",
+  "slug": "betterup",
+  "category": "Learning & Development",
+  "status": "gated",
+  "scim_plan": "Enterprise agreement (enabled per organization by BetterUp)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": false,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": "via_generic",
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.betterup.com/contact-sales",
+  "docs_url": "https://betterup.zendesk.com/api/v2/help_center/en-us/articles/54584210939675.json",
+  "evidence": "BetterUp sells only through sales (\"fill out the form and our sales team will be in touch\"), and its help centre says \"SCIM provisioning is enabled on a per-organization basis by BetterUp. Talk to your BetterUp account team before you begin.\"",
+  "notes": "New row. BetterUp (enterprise coaching) publishes no prices; every agreement is Contact Sales, and SCIM 2.0 must be switched on per organization by the account team, so gated follows the Contact Sales rule. SCIM uses OAuth 2.0 client credentials (scim:user/group read/write scopes) at api.betterup.co/scim/v2; DELETE and active=false both soft-deactivate (records kept, reactivation keeps history); groups map to roles and programs. The public OpenAPI spec is still titled \"SCIM API (Coming Soon)\" v0.0.1 while the August 2026 help article describes SCIM as live (see conflicts). No Okta OIN or Entra gallery app was found; IdPs connect to the generic endpoint. Licences are driven by the HCM/SFTP feed, not SCIM. The Partner API (OAuth client credentials) exposes read-only user listing, licence summaries and a security audit-log API. support.betterup.com HTML returns 403 to bots, so help-centre quotes cite the Zendesk JSON API with page_url set.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Enterprise agreement (Contact Sales)",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "BetterUp enterprise agreement",
+   "price_text": "Contact Sales",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c1",
+    "c2",
+    "c28",
+    "c30",
+    "c36"
+   ],
+   "notes": "Products (leadership development, manager effectiveness, AI coaching) are sold by quote; Enterprise Flex vs seat-based agreements are mentioned in the SCIM article."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c2",
+   "c3",
+   "c4",
+   "c22"
+  ],
+  "plan": "Enterprise agreement (enabled per organization by BetterUp)",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://api.betterup.co/scim/v2",
+  "auth": {
+   "method": "oauth2",
+   "token_source": "Partner admin settings: create an API credential with SCIM scopes (OAuth 2.0 client credentials)",
+   "token_expiry": "optional (admin-set expiry)",
+   "cite": [
+    "c5"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": true,
+   "Schemas": true,
+   "ResourceTypes": true,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c18",
+    "c23",
+    "c20"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": false,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c6",
+    "c15",
+    "c19",
+    "c39",
+    "c3"
+   ],
+   "notes": "DELETE on /Users soft-deactivates rather than deleting; group DELETE soft-discards the group and revokes its role bindings."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Member record and history are retained for audit and reporting; the account can be reactivated.",
+   "cite": [
+    "c7",
+    "c19",
+    "c6"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "id",
+    "userName",
+    "externalId",
+    "name.givenName",
+    "name.familyName",
+    "active",
+    "emails.value",
+    "displayName"
+   ],
+   "cite": [
+    "c20"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c20"
+   ]
+  },
+  "attributes": {
+   "core": [
+    "id",
+    "externalId",
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "emails[].value",
+    "active",
+    "title",
+    "meta.*"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": false,
+    "how": "Attributes outside the documented core lists are ignored"
+   },
+   "group": [
+    "id",
+    "externalId",
+    "displayName",
+    "members[].value",
+    "members[].type",
+    "meta.*"
+   ],
+   "cite": [
+    "c13",
+    "c14",
+    "c15"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "Group-to-role mapping on the SCIM Groups page; groups can also assign programs",
+   "cite": [
+    "c9",
+    "c40"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Group-driven program assignment has no seat-limit enforcement; BetterUp recommends other methods for seat-based agreements.",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "text": "Groups created in BetterUp do not sync back to the IdP; nested groups are not supported.",
+    "cite": [
+     "c11",
+     "c12"
+    ]
+   },
+   {
+    "text": "No webhooks or event callbacks for provisioning events.",
+    "cite": [
+     "c8"
+    ]
+   },
+   {
+    "text": "Licence and eligibility changes come from the HCM feed, not SCIM.",
+    "cite": [
+     "c16"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c29",
+   "c30",
+   "c32"
+  ],
+  "plan": "Enterprise agreement (Contact Sales)",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://api.betterup.co/partner",
+  "docs_url": "https://api.betterup.co/docs/partner",
+  "auth": {
+   "methods": [
+    "oauth2"
+   ],
+   "scopes": [
+    "api:partner:organizations:read",
+    "api:partner:organizations:write",
+    "api:partner:accounts:read",
+    "api:partner:accounts:write",
+    "api:partner:entitlements:read",
+    "api:partner:entitlements:write",
+    "api:partner:reporting:read",
+    "api:partner:reporting:write",
+    "api:partner:organizations:audit_logs:read"
+   ],
+   "cite": [
+    "c32",
+    "c37"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c33",
+    "c34"
+   ],
+   "notes": "The published Partner API spec has read-only user endpoints; write scopes exist but no user write endpoints are documented."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/partner/accounts/users",
+    "purpose": "List all users",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/partner/accounts/users/{id}",
+    "purpose": "Show a specific user",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/partner/entitlements/license_summaries",
+    "purpose": "List licence utilization summaries",
+    "cite": [
+     "c35"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/partner/organizations/program_memberships",
+    "purpose": "List program memberships",
+    "cite": [
+     "c38"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/partner/organizations/audit_logs",
+    "purpose": "List security audit-log events",
+    "cite": [
+     "c36"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": false,
+   "events": [],
+   "cite": [
+    "c8"
+   ]
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Enterprise agreement (Contact Sales)",
+   "cite": [
+    "c36"
+   ]
+  },
+  "rate_limits": {
+   "text": "They vary by endpoint and plan - ask your BetterUp representative before building high-volume integrations.",
+   "cite": [
+    "c31"
+   ]
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "okta.com/integrations/betterup/ and variants return 404; the vendor says Okta connects via SCIM 2.0."
+  },
+  "entra": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "No Learn tutorial at betterup-tutorial or betterup-provisioning-tutorial (404)."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": true,
+  "other_sync": "HCM integration (Workday, SAP SuccessFactors, Oracle, UKG API pull or SFTP file feed)",
+  "docs_public": true,
+  "cite": [
+   "c25",
+   "c26",
+   "c27",
+   "c28"
+  ],
+  "notes": "CSV upload is handled by BetterUp, not self-serve."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.betterup.com/contact-sales",
+   "title": "Contact Sales | BetterUp",
+   "quote": "Simply fill out the form and our sales team will be in touch soon.",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://betterup.zendesk.com/api/v2/help_center/en-us/articles/54584210939675.json",
+   "title": "Automating user and group management with SCIM",
+   "quote": "SCIM provisioning is enabled on a per-organization basis by BetterUp. Talk to your BetterUp account team before you begin configuration in your identity provider.",
+   "page_url": "https://support.betterup.com/hc/en-us/articles/54584210939675-Automating-user-and-group-management-with-SCIM",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://betterup.zendesk.com/api/v2/help_center/en-us/articles/54584210939675.json",
+   "title": "Automating user and group management with SCIM",
+   "quote": "BetterUp supports automated user and group management through SCIM 2.0, the provisioning standard your identity provider already uses across your application portfolio. Any identity provider that implements SCIM 2.0 can connect.",
+   "page_url": "https://support.betterup.com/hc/en-us/articles/54584210939675-Automating-user-and-group-management-with-SCIM",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://betterup.zendesk.com/api/v2/help_center/en-us/articles/54584210939675.json",
+   "title": "Automating user and group management with SCIM",
+   "quote": "Once SCIM is enabled on your account and you’ve set up SSO in your IdP",
+   "page_url": "https://support.betterup.com/hc/en-us/articles/54584210939675-Automating-user-and-group-management-with-SCIM",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://betterup.zendesk.com/api/v2/help_center/en-us/articles/54584210939675.json",
+   "title": "Automating user and group management with SCIM",
+   "quote": "Authentication uses the OAuth 2.0 client credentials grant. Available scopes are scim:user:read, scim:user:write, scim:group:read, and scim:group:write.",
+   "page_url": "https://support.betterup.com/hc/en-us/articles/54584210939675-Automating-user-and-group-management-with-SCIM",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://betterup.zendesk.com/api/v2/help_center/en-us/articles/54584210939675.json",
+   "title": "Automating user and group management with SCIM",
+   "quote": "Deactivates the account when you unassign or offboard them. Reactivates a previously deactivated account, with the member’s history intact.",
+   "page_url": "https://support.betterup.com/hc/en-us/articles/54584210939675-Automating-user-and-group-management-with-SCIM",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://betterup.zendesk.com/api/v2/help_center/en-us/articles/54584210939675.json",
+   "title": "Automating user and group management with SCIM",
+   "quote": "It does not delete personal data. Deactivation preserves the member record so the account can be reactivated.",
+   "page_url": "https://support.betterup.com/hc/en-us/articles/54584210939675-Automating-user-and-group-management-with-SCIM",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://betterup.zendesk.com/api/v2/help_center/en-us/articles/54584210939675.json",
+   "title": "Automating user and group management with SCIM",
+   "quote": "It does not notify you of provisioning events. There are no webhooks or event callbacks.",
+   "page_url": "https://support.betterup.com/hc/en-us/articles/54584210939675-Automating-user-and-group-management-with-SCIM",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://betterup.zendesk.com/api/v2/help_center/en-us/articles/54584210939675.json",
+   "title": "Automating user and group management with SCIM",
+   "quote": "Grants and revokes BetterUp role(s) based on group membership, so access follows your IdP instead of someone clicking through an admin panel.",
+   "page_url": "https://support.betterup.com/hc/en-us/articles/54584210939675-Automating-user-and-group-management-with-SCIM",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://betterup.zendesk.com/api/v2/help_center/en-us/articles/54584210939675.json",
+   "title": "Automating user and group management with SCIM",
+   "quote": "There is currently no seat-limit enforcement in this flow.",
+   "page_url": "https://support.betterup.com/hc/en-us/articles/54584210939675-Automating-user-and-group-management-with-SCIM",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://betterup.zendesk.com/api/v2/help_center/en-us/articles/54584210939675.json",
+   "title": "Automating user and group management with SCIM",
+   "quote": "Groups you create in BetterUp do not sync to your IdP. Groups must originate in your IdP.",
+   "page_url": "https://support.betterup.com/hc/en-us/articles/54584210939675-Automating-user-and-group-management-with-SCIM",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://betterup.zendesk.com/api/v2/help_center/en-us/articles/54584210939675.json",
+   "title": "Automating user and group management with SCIM",
+   "quote": "Nested groups are not supported.",
+   "page_url": "https://support.betterup.com/hc/en-us/articles/54584210939675-Automating-user-and-group-management-with-SCIM",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://betterup.zendesk.com/api/v2/help_center/en-us/articles/54584210939675.json",
+   "title": "Automating user and group management with SCIM",
+   "quote": "Attributes outside these lists are ignored rather than rejected, so extra mappings in your IdP will not break your sync.",
+   "page_url": "https://support.betterup.com/hc/en-us/articles/54584210939675-Automating-user-and-group-management-with-SCIM",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://betterup.zendesk.com/api/v2/help_center/en-us/articles/54584210939675.json",
+   "title": "Automating user and group management with SCIM",
+   "quote": "Required. Must be the member’s primary email address",
+   "page_url": "https://support.betterup.com/hc/en-us/articles/54584210939675-Automating-user-and-group-management-with-SCIM",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://betterup.zendesk.com/api/v2/help_center/en-us/articles/54584210939675.json",
+   "title": "Automating user and group management with SCIM",
+   "quote": "false deactivates, true reactivates. DELETE has the same effect",
+   "page_url": "https://support.betterup.com/hc/en-us/articles/54584210939675-Automating-user-and-group-management-with-SCIM",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://betterup.zendesk.com/api/v2/help_center/en-us/articles/54584210939675.json",
+   "title": "Automating user and group management with SCIM",
+   "quote": "Your HCM feed drives eligibility and license changes.",
+   "page_url": "https://support.betterup.com/hc/en-us/articles/54584210939675-Automating-user-and-group-management-with-SCIM",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://api.betterup.co/docs/scim/spec",
+   "title": "SCIM API (Coming Soon) spec",
+   "quote": "title: SCIM API (Coming Soon) version: 0.0.1",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://api.betterup.co/docs/scim/spec",
+   "title": "SCIM API (Coming Soon) spec",
+   "quote": "Discovery endpoints (`ServiceProviderConfig`, `Schemas`, `ResourceTypes`) are unauthenticated per RFC 7644",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://api.betterup.co/docs/scim/spec",
+   "title": "SCIM API (Coming Soon) spec",
+   "quote": "Soft-deactivates the user. RFC 7644 §3.6 specifies hard delete, but BetterUp retains user records for audit and historical reporting",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://api.betterup.co/docs/scim/spec",
+   "title": "SCIM API (Coming Soon) spec",
+   "quote": "Supports `id`, `userName`, `externalId`, `name.givenName`, `name.familyName`, `active`, and `emails.value`.",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://api.betterup.co/docs/scim/spec",
+   "title": "SCIM API (Coming Soon) spec",
+   "quote": "Soft-discards the group and revokes any role bindings from its members",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://api.betterup.co/docs/scim/spec",
+   "title": "SCIM API (Coming Soon) spec",
+   "quote": "default: api.betterup.co",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://api.betterup.co/docs/scim/spec",
+   "title": "SCIM API (Coming Soon) spec",
+   "quote": "\"/scim/v2/Users/{id}\":",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://betterup.zendesk.com/api/v2/help_center/en-us/articles/55226432105115.json",
+   "title": "BetterUp Platform Identity and Provisioning",
+   "quote": "The customer connects BetterUp as an application in their identity provider (Okta, Microsoft Entra ID) and user create, update, and deactivate flow to BetterUp automatically.",
+   "page_url": "https://support.betterup.com/hc/en-us/articles/55226432105115-BetterUp-Platform-Identity-and-Provisioning",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://betterup.zendesk.com/api/v2/help_center/en-us/articles/55226432105115.json",
+   "title": "BetterUp Platform Identity and Provisioning",
+   "quote": "The account is created the first time a person signs in through the customer's SSO.",
+   "page_url": "https://support.betterup.com/hc/en-us/articles/55226432105115-BetterUp-Platform-Identity-and-Provisioning",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://betterup.zendesk.com/api/v2/help_center/en-us/articles/55226432105115.json",
+   "title": "BetterUp Platform Identity and Provisioning",
+   "quote": "A one-time or occasional CSV upload handled by BetterUp. Supports a dry run before committing.",
+   "page_url": "https://support.betterup.com/hc/en-us/articles/55226432105115-BetterUp-Platform-Identity-and-Provisioning",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://betterup.zendesk.com/api/v2/help_center/en-us/articles/55226432105115.json",
+   "title": "BetterUp Platform Identity and Provisioning",
+   "quote": "BetterUp connects directly to relevant systems and pulls on a schedule. Typically, this includes your HR system (Workday, SAP SuccessFactors, Oracle, UKG, etc.)",
+   "page_url": "https://support.betterup.com/hc/en-us/articles/55226432105115-BetterUp-Platform-Identity-and-Provisioning",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://betterup.zendesk.com/api/v2/help_center/en-us/articles/30766210667291.json",
+   "title": "How to configure Single Sign-On (SSO)",
+   "quote": "SSO requirements include support for Service Provider-initiated SSO and SAML 2.0.",
+   "page_url": "https://support.betterup.com/hc/en-us/articles/30766210667291-How-to-configure-Single-Sign-On-SSO",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://betterup.zendesk.com/api/v2/help_center/en-us/articles/55087452843291.json",
+   "title": "Getting Started with BetterUp's Partner API",
+   "quote": "Connected systems can read, and with the right permissions write, your org structure, accounts, entitlements, and reporting data.",
+   "page_url": "https://support.betterup.com/hc/en-us/articles/55087452843291-Getting-Started-with-BetterUp-s-Partner-API",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://betterup.zendesk.com/api/v2/help_center/en-us/articles/55087452843291.json",
+   "title": "Getting Started with BetterUp's Partner API",
+   "quote": "Self-service API credentials enabled for your organization - on by default for most partners.",
+   "page_url": "https://support.betterup.com/hc/en-us/articles/55087452843291-Getting-Started-with-BetterUp-s-Partner-API",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://betterup.zendesk.com/api/v2/help_center/en-us/articles/55087452843291.json",
+   "title": "Getting Started with BetterUp's Partner API",
+   "quote": "They vary by endpoint and plan - ask your BetterUp representative before building high-volume integrations.",
+   "page_url": "https://support.betterup.com/hc/en-us/articles/55087452843291-Getting-Started-with-BetterUp-s-Partner-API",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://api.betterup.co/docs/partner/spec",
+   "title": "Partner API spec",
+   "quote": "The BetterUp Partner API provides programmatic access to organization management, user provisioning, and reporting. Authenticate using OAuth 2.0 client credentials with the `api:partner:*` scopes.",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://api.betterup.co/docs/partner/spec",
+   "title": "Partner API spec",
+   "quote": "\"/partner/accounts/users\": get: summary: List all users",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://api.betterup.co/docs/partner/spec",
+   "title": "Partner API spec",
+   "quote": "summary: Show a specific user",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c35",
+   "url": "https://api.betterup.co/docs/partner/spec",
+   "title": "Partner API spec",
+   "quote": "summary: List license utilization summaries",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://api.betterup.co/docs/partner/spec",
+   "title": "Partner API spec",
+   "quote": "\"/partner/organizations/audit_logs\": get: summary: List security audit-log events",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://api.betterup.co/docs/partner/spec",
+   "title": "Partner API spec",
+   "quote": "api:partner:accounts:read: Read partner account/member resources",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c38",
+   "url": "https://api.betterup.co/docs/partner/spec",
+   "title": "Partner API spec",
+   "quote": "summary: List program memberships",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c39",
+   "url": "https://api.betterup.co/docs/scim/spec",
+   "title": "SCIM API (Coming Soon) spec",
+   "quote": "Accepts add / replace / remove operations on `displayName`, `externalId`, and `members`.",
+   "page_url": null,
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c40",
+   "url": "https://betterup.zendesk.com/api/v2/help_center/en-us/articles/54584210939675.json",
+   "title": "Automating user and group management with SCIM",
+   "quote": "Places members in a BetterUp program based on group membership, applied when they join the group and revoked when they leave.",
+   "page_url": "https://support.betterup.com/hc/en-us/articles/54584210939675-Automating-user-and-group-management-with-SCIM",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The help-centre SCIM article (updated 2026) describes SCIM as available per organization, while the public OpenAPI spec is titled \"SCIM API (Coming Soon)\" version 0.0.1. The help centre is used for availability.",
+   "cite": [
+    "c2",
+    "c17"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.betterup.com/pricing (404)",
+  "https://www.betterup.com/sitemap.xml (2,799 URLs; no pricing page)",
+  "https://www.betterup.com/contact-sales",
+  "https://www.betterup.com/trust-and-security (no SSO/SCIM text)",
+  "support.betterup.com help-centre search API: scim, sso, provisioning, user management, api",
+  "https://api.betterup.co/docs (Partner, OAuth, Health, SCIM specs)",
+  "https://www.okta.com/integrations/betterup/ (404)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/betterup-tutorial (404)"
+ ],
+ "open_questions": [
+  "Whether SCIM is included in every enterprise agreement or priced separately is not public.",
+  "Whether deactivation frees a licence or ends sessions is not documented.",
+  "Which SSO plan/contract includes SAML is not stated; SSO appears to be available to all enterprise customers.",
+  "SCIM page-size maximum and rate limits are not documented."
+ ]
+}

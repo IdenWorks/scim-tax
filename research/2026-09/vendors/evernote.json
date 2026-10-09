@@ -1,0 +1,673 @@
+{
+ "slug": "evernote",
+ "vendor": "Evernote",
+ "vendor_url": "https://evernote.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Evernote",
+  "slug": "evernote",
+  "category": "Productivity & Docs",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Enterprise",
+  "team_price_text": "Contact Sales",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Enterprise",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": null,
+   "deactivate": true,
+   "delete": false,
+   "groups": null
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "sso_only",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": "sso_only",
+   "generic": true
+  },
+  "pricing_page_url": "https://evernote.com/compare-plans",
+  "docs_url": "https://help.evernote.com/hc/en-us/articles/115010419308-Configure-SCIM-with-your-Evernote-Enterprise-account",
+  "evidence": "Evernote's Enterprise page says Enterprise administrators can set up SSO and SCIM; the compare-plans table only ticks SSO on the Enterprise columns (Flexible, Unlimited), and upgrading to Enterprise is via contact sales.",
+  "notes": "Starter ($99/yr, about $8.25/mo) and Advanced ($249.99/yr, about $20.83/mo) are individual (single-user) plans, so the only multi-user tier is Enterprise (Contact Sales; the compare-plans table shows it as Flexible and Unlimited columns). team_plan is therefore Enterprise and the row is gated because SCIM, SAML SSO and user admin all need that Contact Sales tier. SCIM 1.1 and 2.0 base URLs are documented; SSO must be enabled first; SCIM deletes are ignored (users are deactivated) and deactivated users cannot be reactivated via SCIM. Okta's Evernote Business app ticks SAML, SWA, SCIM, Create and Deactivate; Entra and JumpCloud apps are SSO-only. The legacy EDAM (Thrift) UserStore API has invite/remove/list business-user calls but is deprecated.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Enterprise",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "Free",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": false,
+   "cite": [
+    "c1"
+   ]
+  },
+  {
+   "name": "Starter",
+   "price_text": "$99.00/year or $14.99/month (individual plan)",
+   "price_per_user_mo": 8.25,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": false,
+   "cite": [
+    "c1",
+    "c3",
+    "c4"
+   ],
+   "notes": "Individual plan; not a team tier."
+  },
+  {
+   "name": "Advanced",
+   "price_text": "$249.99/year or $24.99/month (individual plan)",
+   "price_per_user_mo": 20.83,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": false,
+   "cite": [
+    "c1",
+    "c3",
+    "c5"
+   ],
+   "notes": "Individual plan; not a team tier."
+  },
+  {
+   "name": "Enterprise (Flexible / Unlimited)",
+   "price_text": "Contact sales",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c6",
+    "c18"
+   ],
+   "notes": "Compare-plans table shows two Enterprise columns, Flexible and Unlimited; both tick SSO, centralized user management and user activity history (read from page markup)."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c6",
+   "c7",
+   "c8",
+   "c9",
+   "c10"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://m1.svc.evernote.com/scim/v2/",
+  "notes": "SCIM 1.1 is also offered at https://m1.svc.evernote.com/scim/v1/.",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Admin console > SCIM page",
+   "token_expiry": null,
+   "cite": [
+    "c11",
+    "c17"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c7",
+    "c12"
+   ],
+   "notes": "Only the base URLs are documented; Users is implied by the documented user create/deactivate behaviour."
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": false,
+   "delete": false,
+   "group_push": null,
+   "group_membership": null,
+   "cite": [
+    "c12",
+    "c13",
+    "c14",
+    "c25"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Users are deactivated, never deleted; team content stays in the Enterprise account and admins can export a deactivated user's notebooks one at a time.",
+   "cite": [
+    "c12",
+    "c15"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": []
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "DELETE requests are ignored; users are only deactivated.",
+    "cite": [
+     "c12"
+    ]
+   },
+   {
+    "text": "Deactivated users cannot be reactivated via SCIM.",
+    "cite": [
+     "c13"
+    ]
+   },
+   {
+    "text": "A new user cannot reuse the username of a previously deactivated user.",
+    "cite": [
+     "c14"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c18",
+   "c23",
+   "c24"
+  ],
+  "plan": "Enterprise",
+  "api_tax": false,
+  "style": "other",
+  "base_url": null,
+  "docs_url": "https://dev.evernote.com/doc/reference/UserStore.html",
+  "notes": "Legacy EDAM Cloud API (Thrift RPC), marked deprecated. Business-membership calls need an auth token with privileges to manage Evernote Business membership, so they only apply to Enterprise accounts, which is also the only multi-user tier (hence api_tax false).",
+  "auth": {
+   "methods": [
+    "oauth1",
+    "developer_token"
+   ],
+   "scopes": [],
+   "cite": [
+    "c23"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c18",
+    "c19",
+    "c20",
+    "c21"
+   ],
+   "notes": "removeFromBusiness removes a user from the business (only users invited via external provisioning); update is limited to the identifying email address."
+  },
+  "endpoints": [
+   {
+    "method": "RPC",
+    "path": "UserStore.inviteToBusiness",
+    "purpose": "Invite a user to join an Evernote Business account",
+    "cite": [
+     "c18"
+    ]
+   },
+   {
+    "method": "RPC",
+    "path": "UserStore.removeFromBusiness",
+    "purpose": "Remove a user from an Evernote Business account",
+    "cite": [
+     "c19"
+    ]
+   },
+   {
+    "method": "RPC",
+    "path": "UserStore.listBusinessUsers",
+    "purpose": "List active business users",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "method": "RPC",
+    "path": "UserStore.updateBusinessUserIdentifier",
+    "purpose": "Change the email address that identifies a business user",
+    "cite": [
+     "c21"
+    ]
+   },
+   {
+    "method": "RPC",
+    "path": "UserStore.listBusinessInvitations",
+    "purpose": "List outstanding business invitations",
+    "cite": [
+     "c22"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "The EDAM API and SDKs are deprecated and no longer actively developed.",
+    "cite": [
+     "c24"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/evernote-business/",
+   "cite": [
+    "c25"
+   ],
+   "notes": "OIN 'Evernote Business' app: SAML, SWA, SCIM, Create and Deactivate are checked (read from page markup). A separate OIN 'Evernote' app is SWA-only."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/evernote-tutorial",
+   "cite": [
+    "c26",
+    "c27"
+   ]
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "Evernote's SSO article names OneLogin as a SAML partner but no OneLogin provisioning guide was found."
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://jumpcloud.com/support/integrate-with-evernote",
+   "cite": [
+    "c28"
+   ]
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c7",
+   "c30"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://evernote.com/compare-plans",
+   "title": "Compare plans and get started for free | Evernote",
+   "quote": "Single Sign-On (SSO) Use existing credentials for a faster log in experience",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://evernote.com/compare-plans",
+   "title": "Compare plans and get started for free | Evernote",
+   "quote": "To upgrade to Enterprise, please contact sales",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://help.evernote.com/api/v2/help_center/en-us/articles/46317642175763.json",
+   "title": "Discontinuing Evernote Personal & Professional / Introducing Starter & Advanced — FAQ",
+   "quote": "introduced two new individual plans",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.evernote.com/hc/en-us/articles/46317642175763-Discontinuing-Evernote-Personal-Professional-Introducing-Starter-Advanced-FAQ"
+  },
+  {
+   "id": "c4",
+   "url": "https://help.evernote.com/api/v2/help_center/en-us/articles/46317642175763.json",
+   "title": "Discontinuing Evernote Personal & Professional / Introducing Starter & Advanced — FAQ",
+   "quote": "Yearly subscription 99.00 124.90 199.99",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.evernote.com/hc/en-us/articles/46317642175763-Discontinuing-Evernote-Personal-Professional-Introducing-Starter-Advanced-FAQ"
+  },
+  {
+   "id": "c5",
+   "url": "https://help.evernote.com/api/v2/help_center/en-us/articles/46317642175763.json",
+   "title": "Discontinuing Evernote Personal & Professional / Introducing Starter & Advanced — FAQ",
+   "quote": "Yearly subscription 249.99 309.99 509.99",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.evernote.com/hc/en-us/articles/46317642175763-Discontinuing-Evernote-Personal-Professional-Introducing-Starter-Advanced-FAQ"
+  },
+  {
+   "id": "c6",
+   "url": "https://evernote.com/enterprise",
+   "title": "Evernote Enterprise",
+   "quote": "Enterprise administrators can easily set up advanced solutions like Single Sign-on (SSO) and Systems for Cross-domain Identity Management (SCIM) to verify and manage users.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://help.evernote.com/api/v2/help_center/en-us/articles/115010419308.json",
+   "title": "Configure SCIM with your Evernote Enterprise account",
+   "quote": "is used to help Evernote Enterprise account admins provision and manage identity data with third-party identity providers (IdPs).",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.evernote.com/hc/en-us/articles/115010419308-Configure-SCIM-with-your-Evernote-Enterprise-account"
+  },
+  {
+   "id": "c8",
+   "url": "https://help.evernote.com/api/v2/help_center/en-us/articles/115010419308.json",
+   "title": "Configure SCIM with your Evernote Enterprise account",
+   "quote": "Enable single sign-on (SSO) for your organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.evernote.com/hc/en-us/articles/115010419308-Configure-SCIM-with-your-Evernote-Enterprise-account"
+  },
+  {
+   "id": "c9",
+   "url": "https://help.evernote.com/api/v2/help_center/en-us/articles/115010419308.json",
+   "title": "Configure SCIM with your Evernote Enterprise account",
+   "quote": "SCIM 2.0 protocol: https://m1.svc.evernote.com/scim/v2/",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.evernote.com/hc/en-us/articles/115010419308-Configure-SCIM-with-your-Evernote-Enterprise-account"
+  },
+  {
+   "id": "c10",
+   "url": "https://help.evernote.com/api/v2/help_center/en-us/articles/115010419308.json",
+   "title": "Configure SCIM with your Evernote Enterprise account",
+   "quote": "SCIM 1.1 protocol: https://m1.svc.evernote.com/scim/v1/",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.evernote.com/hc/en-us/articles/115010419308-Configure-SCIM-with-your-Evernote-Enterprise-account"
+  },
+  {
+   "id": "c11",
+   "url": "https://help.evernote.com/api/v2/help_center/en-us/articles/115010419308.json",
+   "title": "Configure SCIM with your Evernote Enterprise account",
+   "quote": "Enter your provisioning (bearer) token in the IdP configuration.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.evernote.com/hc/en-us/articles/115010419308-Configure-SCIM-with-your-Evernote-Enterprise-account"
+  },
+  {
+   "id": "c12",
+   "url": "https://help.evernote.com/api/v2/help_center/en-us/articles/115010419308.json",
+   "title": "Configure SCIM with your Evernote Enterprise account",
+   "quote": "Users are never deleted from Evernote, they are deactivated. Delete requests to the SCIM server are ignored.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.evernote.com/hc/en-us/articles/115010419308-Configure-SCIM-with-your-Evernote-Enterprise-account"
+  },
+  {
+   "id": "c13",
+   "url": "https://help.evernote.com/api/v2/help_center/en-us/articles/115010419308.json",
+   "title": "Configure SCIM with your Evernote Enterprise account",
+   "quote": "Once a user is deactivated, they cannot be reactivated via SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.evernote.com/hc/en-us/articles/115010419308-Configure-SCIM-with-your-Evernote-Enterprise-account"
+  },
+  {
+   "id": "c14",
+   "url": "https://help.evernote.com/api/v2/help_center/en-us/articles/115010419308.json",
+   "title": "Configure SCIM with your Evernote Enterprise account",
+   "quote": "New users cannot be created with the same username as a previously deactivated user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.evernote.com/hc/en-us/articles/115010419308-Configure-SCIM-with-your-Evernote-Enterprise-account"
+  },
+  {
+   "id": "c15",
+   "url": "https://help.evernote.com/api/v2/help_center/en-us/articles/209005527.json",
+   "title": "FAQ for Evernote Enterprise admins",
+   "quote": "When an employee leaves a company the Enterprise admin can deactivate them from the Admin Console. This user will immediately lose access to team notes and notebooks, since all team content remains within the Evernote Enterprise account.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.evernote.com/hc/en-us/articles/209005527-FAQ-for-Evernote-Enterprise-admins"
+  },
+  {
+   "id": "c16",
+   "url": "https://help.evernote.com/api/v2/help_center/en-us/articles/209005217.json",
+   "title": "Configure SSO for your Evernote Teams account",
+   "quote": "Evernote uses the secure and widely adopted industry standard Security Assertion Markup Language 2.0 (SAML 2.0).",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.evernote.com/hc/en-us/articles/209005217-Configure-SSO-for-your-Evernote-Teams-account"
+  },
+  {
+   "id": "c17",
+   "url": "https://help.evernote.com/api/v2/help_center/en-us/articles/209005497.json",
+   "title": "Evernote Enterprise Admin Console Overview",
+   "quote": "page is where you can set up automated user provisioning for your team.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.evernote.com/hc/en-us/articles/209005497-Evernote-Enterprise-Admin-Console-Overview"
+  },
+  {
+   "id": "c18",
+   "url": "https://dev.evernote.com/doc/reference/UserStore.html",
+   "title": "Evernote API: Service: UserStore",
+   "quote": "Invite a user to join an Evernote Business account.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c19",
+   "url": "https://dev.evernote.com/doc/reference/UserStore.html",
+   "title": "Evernote API: Service: UserStore",
+   "quote": "Remove a user from an Evernote Business account. Once removed, the user will no longer be able to access content within the Evernote Business account.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c20",
+   "url": "https://dev.evernote.com/doc/reference/UserStore.html",
+   "title": "Evernote API: Service: UserStore",
+   "quote": "Returns a list of active business users in a given business.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c21",
+   "url": "https://dev.evernote.com/doc/reference/UserStore.html",
+   "title": "Evernote API: Service: UserStore",
+   "quote": "Update the email address used to uniquely identify an Evernote Business user.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c22",
+   "url": "https://dev.evernote.com/doc/reference/UserStore.html",
+   "title": "Evernote API: Service: UserStore",
+   "quote": "Returns a list of outstanding invitations to join an Evernote Business account.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c23",
+   "url": "https://dev.evernote.com/doc/reference/UserStore.html",
+   "title": "Evernote API: Service: UserStore",
+   "quote": "auth token with privileges to manage Evernote Business membership.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c24",
+   "url": "https://dev.evernote.com/doc/",
+   "title": "Evernote Developers",
+   "quote": "The classic Evernote Developer API (EDAM) and its SDKs are deprecated and no longer actively developed.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c25",
+   "url": "https://www.okta.com/integrations/evernote-business/",
+   "title": "Integrate Evernote Business with Okta",
+   "quote": "Collect, nurture, and share ideas across desktop and mobile platforms with Evernote.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c26",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/evernote-tutorial",
+   "title": "Configure Evernote for Single sign-on with Microsoft Entra ID",
+   "quote": "In the case of Evernote, provisioning is a manual task.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c27",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/evernote-tutorial",
+   "title": "Configure Evernote for Single sign-on with Microsoft Entra ID",
+   "quote": "Evernote supports SP and IDP initiated SSO.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c28",
+   "url": "https://jumpcloud.com/support/integrate-with-evernote",
+   "title": "Integrate with Evernote | JumpCloud Documentation",
+   "quote": "Use JumpCloud SAML Single Sign On (SSO) to give your users convenient but secure access to all their web applications with a single set of credentials.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c29",
+   "url": "https://help.evernote.com/api/v2/help_center/en-us/articles/208313968.json",
+   "title": "Subscribe to Evernote Enterprise",
+   "quote": "Fast on-boarding and SSO",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.evernote.com/hc/en-us/articles/208313968-Subscribe-to-Evernote-Enterprise"
+  },
+  {
+   "id": "c30",
+   "url": "https://help.evernote.com/api/v2/help_center/en-us/articles/209005497.json",
+   "title": "Evernote Enterprise Admin Console Overview",
+   "quote": "Enter email addresses of individual users, then click",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.evernote.com/hc/en-us/articles/209005497-Evernote-Enterprise-Admin-Console-Overview"
+  },
+  {
+   "id": "c31",
+   "url": "https://www.okta.com/integrations/evernote/",
+   "title": "Integrate Evernote with Okta",
+   "quote": "Evernote is the app that keeps notes organized.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://evernote.com/compare-plans",
+  "https://evernote.com/enterprise",
+  "help.evernote.com search API: scim, provisioning, single sign-on, okta, api",
+  "https://dev.evernote.com/doc/",
+  "https://dev.evernote.com/doc/reference/UserStore.html",
+  "https://www.okta.com/integrations/evernote-business/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/evernote-tutorial",
+  "https://jumpcloud.com/support/integrate-with-evernote"
+ ],
+ "open_questions": [
+  "SCIM attribute list, Groups support, PATCH/PUT updates, filtering and pagination are not documented.",
+  "Docs do not say whether a SCIM-deactivated user frees the Enterprise seat or ends active sessions.",
+  "Enterprise (Flexible / Unlimited) per-seat pricing is not public.",
+  "No audit-log API is documented; the admin console has a user activity history page only.",
+  "Google Workspace and OneLogin catalogue entries were not verified."
+ ]
+}

@@ -1,0 +1,567 @@
+{
+ "slug": "userpilot",
+ "vendor": "Userpilot",
+ "vendor_url": "https://userpilot.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Userpilot",
+  "slug": "userpilot",
+  "category": "Data, Analytics & BI",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Starter",
+  "team_price_text": "Starter: $299/mo (3 seats, up to 2,000 MAU)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Enterprise",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": null,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": null
+  },
+  "pricing_page_url": "https://userpilot.com/pricing/",
+  "docs_url": "https://docs.userpilot.com/configure/team-and-roles/scim",
+  "evidence": "Userpilot's SCIM guide says 'This feature is available on the Enterprise plan and requires SSO to be enabled'; the pricing page lists SAML 2.0 SSO and Advanced User Management only on Enterprise (Let's Talk).",
+  "notes": "SCIM (directory sync via an SSO setup portal, group-to-role mapping) is Enterprise only and requires SSO, also Enterprise only; JIT is Enterprise too. SCIM 'User deleted' removes the teammate from the organization; removal from all mapped groups removes them from that application. While SCIM is on, SSO is mandatory and manual invites/CSV import are disabled. No SCIM base URL, token or endpoint list is published (set up through the portal), so generic is null. Pricing is flat per account by MAU: Starter $299/mo (3 seats), Growth from $849/mo (15 seats), Enterprise custom (unlimited); the page shows no annual/monthly toggle. The public HTTP API covers end-users, companies and events, not teammates. No Okta OIN or Entra gallery app found.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": false,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Starter",
+   "price_text": "$299/mo; up to 2,000 MAU; 3 seats",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c5",
+    "c6",
+    "c7",
+    "c8"
+   ]
+  },
+  {
+   "name": "Growth",
+   "price_text": "From $849/mo; 15 seats",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c5",
+    "c6",
+    "c8"
+   ]
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Let's Talk",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": false,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c4",
+    "c5",
+    "c8",
+    "c22",
+    "c25"
+   ],
+   "notes": "Access and activity logs in the UI; no audit-log API documented."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c8",
+   "c9",
+   "c11"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": null,
+   "token_source": "Settings > Team > Authentication > Directory sync (SCIM) card, Setup SCIM (setup portal)",
+   "token_expiry": null,
+   "cite": [
+    "c11"
+   ]
+  },
+  "endpoints": {
+   "Users": null,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": []
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": null,
+   "reactivate": null,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c9",
+    "c12",
+    "c13",
+    "c14",
+    "c15",
+    "c20"
+   ],
+   "notes": "Documented as directory events (user added to/removed from group, user updated, user deleted, group created/deleted), not as SCIM HTTP operations; update_put/patch unknown."
+  },
+  "deprovision": {
+   "action": "remove_from_org",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c12",
+    "c13",
+    "c19"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": []
+  },
+  "roles": {
+   "supported": true,
+   "how": "Map IdP groups to built-in or custom Userpilot roles per application; highest-privilege role wins when a user is in several groups; IdP-owned, hybrid or Userpilot-owned role management modes.",
+   "cite": [
+    "c10",
+    "c16"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Requires SSO; once SCIM is on, SSO login is mandatory and SSO cannot be disabled until SCIM is disabled.",
+    "cite": [
+     "c8",
+     "c17"
+    ]
+   },
+   {
+    "text": "While SCIM is active, manual invites and CSV import of teammates are disabled.",
+    "cite": [
+     "c18"
+    ]
+   },
+   {
+    "text": "The last remaining Account Owner is never removed by a sync.",
+    "cite": [
+     "c19"
+    ]
+   },
+   {
+    "text": "Disabling SCIM leaves already-provisioned teammates with access.",
+    "cite": [
+     "c30"
+    ]
+   }
+  ],
+  "notes": "SCIM is configured through a hosted setup portal from the Authentication page; the docs list the IdPs (Okta, Microsoft Entra ID and others) but publish no SCIM base URL, token type, endpoints or attribute list."
+ },
+ "user_api": {
+  "available": false,
+  "cite": [
+   "c27",
+   "c28"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": null,
+  "docs_url": "https://docs.userpilot.com/api-references/overview",
+  "auth": {
+   "methods": [],
+   "scopes": [],
+   "cite": []
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": []
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "Userpilot's HTTP API identifies end-users and companies of the customer's product and tracks events; the API reference index has no teammate, role or invite endpoints."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "https://www.okta.com/integrations/userpilot/ returned 404; Userpilot's docs name Okta as a supported SSO and SCIM IdP via its setup portal."
+  },
+  "entra": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "Entra tutorial URLs (userpilot-tutorial, userpilot-provisioning-tutorial) returned 404."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "both",
+  "csv_import": true,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c21",
+   "c23",
+   "c24"
+  ],
+  "notes": "JIT (Enterprise, requires SSO over SAML or OIDC) creates teammates on first SSO login with a default role; CSV teammate import is on every plan."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://userpilot.com/pricing/",
+   "title": "Userpilot Pricing",
+   "quote": "Starter Perfect for small teams starting their product growth journey. $299 /mo",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://userpilot.com/pricing/",
+   "title": "Userpilot Pricing",
+   "quote": "Growth For growing teams accelerating product growth with advanced tools. From $849 /mo",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://userpilot.com/pricing/",
+   "title": "Userpilot Pricing",
+   "quote": "Enterprise Empowering large teams with custom growth solutions. Let's Talk",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://userpilot.com/pricing/",
+   "title": "Userpilot Pricing",
+   "quote": "Advanced User Management Security Audit & Compliance Custom Contract & SLA",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://userpilot.com/pricing/",
+   "title": "Userpilot Pricing",
+   "quote": "Seats 3 Seats 15 Seats Unlimited",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://userpilot.com/pricing/",
+   "title": "Userpilot Pricing",
+   "quote": "SAML 2.0 SSO - - Roles & Permissions - - Activity Logs - -",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://userpilot.com/pricing/",
+   "title": "Userpilot Pricing",
+   "quote": "Up to 2,000 Monthly Active Users",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.userpilot.com/configure/team-and-roles/scim",
+   "title": "SCIM Integration - Userpilot Docs",
+   "quote": "This feature is available on the Enterprise plan and requires SSO to be enabled.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.userpilot.com/configure/team-and-roles/scim",
+   "title": "SCIM Integration - Userpilot Docs",
+   "quote": "Automatically create, update, and remove Userpilot teammates as your IdP changes.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.userpilot.com/configure/team-and-roles/scim",
+   "title": "SCIM Integration - Userpilot Docs",
+   "quote": "Keep roles consistent by mapping IdP groups (from Okta, Microsoft Entra ID, and others) to Userpilot roles.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.userpilot.com/configure/team-and-roles/scim",
+   "title": "SCIM Integration - Userpilot Docs",
+   "quote": "In the Directory sync (SCIM) card, click Setup SCIM and follow your IdP's instructions for adding SCIM provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.userpilot.com/configure/team-and-roles/scim",
+   "title": "SCIM Integration - Userpilot Docs",
+   "quote": "User deleted Removes the teammate from the organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.userpilot.com/configure/team-and-roles/scim",
+   "title": "SCIM Integration - Userpilot Docs",
+   "quote": "User removed from a group Removes the teammate from that application if they are no longer in any mapped group.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.userpilot.com/configure/team-and-roles/scim",
+   "title": "SCIM Integration - Userpilot Docs",
+   "quote": "User updated Updates the teammate's profile.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.userpilot.com/configure/team-and-roles/scim",
+   "title": "SCIM Integration - Userpilot Docs",
+   "quote": "Group created Surfaces the new group so you can map it.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.userpilot.com/configure/team-and-roles/scim",
+   "title": "SCIM Integration - Userpilot Docs",
+   "quote": "If a teammate belongs to several mapped groups, Userpilot resolves their role automatically by granting the highest-privilege role among those groups.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.userpilot.com/configure/team-and-roles/scim",
+   "title": "SCIM Integration - Userpilot Docs",
+   "quote": "After SCIM is successfully configured, SSO Mandatory Login is enforced for everyone in the organization. While SCIM is enabled, SSO cannot be disabled.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.userpilot.com/configure/team-and-roles/scim",
+   "title": "SCIM Integration - Userpilot Docs",
+   "quote": "Whenever SCIM is active, inviting or importing teammates directly in Userpilot is disabled in every role-management mode",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.userpilot.com/configure/team-and-roles/scim",
+   "title": "SCIM Integration - Userpilot Docs",
+   "quote": "The last remaining Account Owner is always protected and is never removed by a sync.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.userpilot.com/configure/team-and-roles/scim",
+   "title": "SCIM Integration - Userpilot Docs",
+   "quote": "User added to a group Provisions the teammate, or updates their role, for the mapped application.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.userpilot.com/configure/team-and-roles/sso",
+   "title": "SSO - Userpilot Docs",
+   "quote": "Userpilot's SSO supports more than 12 identity providers across both SAML and OIDC, including Okta, Microsoft Entra ID (Azure AD), Google, OneLogin, and Ping.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://docs.userpilot.com/configure/team-and-roles/sso",
+   "title": "SSO - Userpilot Docs",
+   "quote": "An active Userpilot subscription on the Enterprise plan.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://docs.userpilot.com/configure/team-and-roles/jit",
+   "title": "Just-in-Time (JIT) Provisioning - Userpilot Docs",
+   "quote": "Just-in-Time (JIT) provisioning creates a Userpilot account for a teammate the first time they sign in through SSO.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://docs.userpilot.com/configure/team-and-roles/csv-import",
+   "title": "Bulk Teammate Import (CSV) - Userpilot Docs",
+   "quote": "Unlike SCIM and JIT, importing is an invite action and is available on every plan.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://docs.userpilot.com/configure/team-and-roles/access-and-activity-logs",
+   "title": "Access and activity logs - Userpilot Docs",
+   "quote": "Activity logs are available with Enterprise plan.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://docs.userpilot.com/configure/team-and-roles/access-and-activity-logs",
+   "title": "Access and activity logs - Userpilot Docs",
+   "quote": "Provisioning activity - Records teammates being added, removed, or having their role changed, whether through SCIM directory sync, JIT provisioning, CSV import, or a manual invite.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://docs.userpilot.com/llms.txt",
+   "title": "Userpilot Docs llms.txt",
+   "quote": "[Userpilot API Documentation](https://docs.userpilot.com/api-references/overview.md): Welcome to Userpilot's comprehensive API suite!",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.userpilot.com/api-references/overview"
+  },
+  {
+   "id": "c28",
+   "url": "https://docs.userpilot.com/llms.txt",
+   "title": "Userpilot Docs llms.txt",
+   "quote": "[Identify User](https://docs.userpilot.com/api-references/real-time/identify-user.md): The Identify User API allows you to create or update user profiles in real time, either individually or in bulk",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.userpilot.com/api-references/overview"
+  },
+  {
+   "id": "c29",
+   "url": "https://userpilot.com/product/enterprise/",
+   "title": "Userpilot for Enterprise",
+   "quote": "Set custom user roles, enable SAML SSO, and track user activity with detailed logs",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://docs.userpilot.com/configure/team-and-roles/scim",
+   "title": "SCIM Integration - Userpilot Docs",
+   "quote": "Teammates already provisioned through SCIM keep their access.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://userpilot.com/pricing/",
+  "https://userpilot.com/product/enterprise/",
+  "https://userpilot.com/security/",
+  "https://docs.userpilot.com/llms.txt",
+  "https://docs.userpilot.com/configure/team-and-roles/ (scim, sso, jit, csv-import, access-and-activity-logs, managing-your-team-in-userpilot)",
+  "https://www.okta.com/integrations/userpilot/ (404)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/userpilot-tutorial (404)"
+ ],
+ "open_questions": [
+  "SCIM base URL, auth token type and expiry, endpoints, filtering, pagination and supported attributes are not published.",
+  "Whether SCIM 'deactivate' (active=false) is handled differently from delete.",
+  "Whether removing a teammate frees a seat or ends active sessions.",
+  "Whether Starter/Growth prices are monthly or annual; the page shows no billing toggle."
+ ]
+}

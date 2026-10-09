@@ -1,104 +1,210 @@
 #!/usr/bin/env node
-// Generate data.csv and data.json from the V array in index.html.
-// Run after editing the vendor list in index.html.
+// SCIM Tax Index build.
 //
-// V tuple shape (12 elements):
-//   [0] vendor name
-//   [1] status              (free | gated | partial | none | unknown)
-//   [2] scim_plan_label     (the plan name required for SCIM)
-//   [3] scim_price_text     (free-text price for that plan, may say "Contact Sales")
-//   [4] team_price_text     (free-text price for the lowest paid team plan)
-//   [5] pricing_page_url
-//   [6] team_plan           (the plan name for the lowest paid tier; may be null)
-//   [7] team_price_per_user_mo   (numeric or null)
-//   [8] scim_price_per_user_mo   (numeric or null)
-//   [9] price_multiplier         (numeric or null, scim/team ratio)
-//   [10] notes
-//   [11] last_verified           (YYYY-MM-DD)
+// Source of truth: data.json (schema v3, see research/2026-09/SCHEMA.md).
+// Generates:
+//   - the `const V = [...]` block inside index.html (between the BEGIN/END markers)
+//   - data.csv (all v3 columns)
+//   - badge/{slug}.svg (one embeddable status badge per vendor) + badge/index.json
+//   - llms.txt (a plain-text summary for language models, with the current counts)
+//
+// Run: node build.js
+//
+// V tuple shape written into index.html (positions 0-11 unchanged from v2):
+//   [0] vendor  [1] status  [2] scim_plan  [3] scim_price_text  [4] team_price_text
+//   [5] pricing_page_url  [6] team_plan  [7] team_price_per_user_mo  [8] scim_price_per_user_mo
+//   [9] price_multiplier  [10] notes  [11] last_verified
+//   [12] category  [13] sso_plan  [14] sso_price_per_user_mo  [15] docs_url
+//   [16] status_prev  [17] confidence  [18] slug
 
 const fs = require('fs');
 const path = require('path');
 
 const ROOT = __dirname;
-const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
-
-const arrayMatch = html.match(/const V = (\[[\s\S]*?\n\]);/);
-if (!arrayMatch) {
-  console.error('Could not find `const V = [...]` block in index.html.');
+const data = JSON.parse(fs.readFileSync(path.join(ROOT, 'data.json'), 'utf8'));
+const rows = data.vendors;
+if (!Array.isArray(rows) || rows.length === 0) {
+  console.error('data.json has no vendors');
   process.exit(1);
 }
 
-// Safely parse the V array literal as JS.
-let V;
-try {
-  V = new Function('return ' + arrayMatch[1])();
-} catch (e) {
-  console.error('Failed to parse V array as JS:', e.message);
-  process.exit(1);
-}
+const slug = (s) => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 
-const slug = (s) => s.toLowerCase()
-  .replace(/&/g, 'and')
-  .replace(/[^a-z0-9]+/g, '-')
-  .replace(/^-+|-+$/g, '');
-
-const rows = V.map((r) => ({
-  vendor: r[0],
-  slug: slug(r[0]),
-  status: r[1],
-  scim_plan: r[2],
-  scim_price_text: r[3],
-  team_price_text: r[4],
-  pricing_page_url: r[5],
-  team_plan: r[6] ?? null,
-  team_price_per_user_mo: r[7] ?? null,
-  scim_price_per_user_mo: r[8] ?? null,
-  price_multiplier: r[9] ?? null,
-  notes: r[10] ?? '',
-  last_verified: r[11] ?? '',
-}));
-
-if (rows.length === 0) {
-  console.error('Parsed zero rows. Check the V array formatting in index.html.');
-  process.exit(1);
-}
-
-// data.json
-const json = {
-  name: 'The SCIM Tax Index',
-  source: 'https://scimtax.org/',
-  license: 'CC-BY 4.0',
-  last_updated: '2026-06',
-  count: rows.length,
-  vendors: rows,
-};
-fs.writeFileSync(path.join(ROOT, 'data.json'), JSON.stringify(json, null, 2) + '\n');
-
-// data.csv
-const header = [
-  'vendor',
-  'slug',
-  'status',
-  'scim_plan',
-  'scim_price_text',
-  'team_price_text',
-  'pricing_page_url',
-  'team_plan',
-  'team_price_per_user_mo',
-  'scim_price_per_user_mo',
-  'price_multiplier',
-  'notes',
-  'last_verified',
-];
-const csvLines = [header.join(',')];
+// ---- sanity checks -------------------------------------------------------
+const STATUS = new Set(['free', 'gated', 'partial', 'none', 'unknown']);
+const seen = new Set();
 for (const r of rows) {
-  csvLines.push(header.map((h) => {
-    const v = r[h];
-    if (v === null || v === undefined) return '';
-    const s = String(v);
-    return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
-  }).join(','));
+  if (!r.slug) r.slug = slug(r.vendor);
+  if (!STATUS.has(r.status)) { console.error(`bad status for ${r.vendor}: ${r.status}`); process.exit(1); }
+  if (seen.has(r.slug)) { console.error(`duplicate slug ${r.slug}`); process.exit(1); }
+  seen.add(r.slug);
+  if (!/^https?:\/\//.test(r.pricing_page_url || '')) { console.error(`missing pricing_page_url for ${r.vendor}`); process.exit(1); }
 }
-fs.writeFileSync(path.join(ROOT, 'data.csv'), csvLines.join('\n') + '\n');
+rows.sort((a, b) => a.vendor.localeCompare(b.vendor, 'en', { sensitivity: 'base' }));
 
-console.log(`Wrote data.json and data.csv (${rows.length} vendors).`);
+// ---- counts --------------------------------------------------------------
+const counts = { free: 0, gated: 0, partial: 0, none: 0, unknown: 0 };
+rows.forEach((r) => counts[r.status]++);
+const withScim = counts.free + counts.gated + counts.partial;
+const gatedShare = Math.round((counts.gated / withScim) * 100);
+const changed = rows.filter((r) => r.status_prev && r.status_prev !== r.status).length;
+const maxMult = rows.filter((r) => r.price_multiplier != null).sort((a, b) => b.price_multiplier - a.price_multiplier)[0];
+
+// ---- index.html: inject V ------------------------------------------------
+const htmlPath = path.join(ROOT, 'index.html');
+let html = fs.readFileSync(htmlPath, 'utf8');
+const esc = (v) => JSON.stringify(v == null ? null : v);
+const tuple = (r) => '  [' + [
+  r.vendor, r.status, r.scim_plan ?? '—', r.scim_price_text ?? '—', r.team_price_text ?? '—',
+  r.pricing_page_url, r.team_plan ?? null, r.team_price_per_user_mo ?? null, r.scim_price_per_user_mo ?? null,
+  r.price_multiplier ?? null, r.notes ?? '', r.last_verified ?? '',
+  r.category ?? null, r.sso_plan ?? null, r.sso_price_per_user_mo ?? null, r.docs_url ?? null,
+  r.status_prev ?? null, r.confidence ?? null, r.slug,
+].map(esc).join(',') + ']';
+const vBlock = `// BEGIN V (generated by build.js from data.json, do not edit by hand)\nconst V = [\n${rows.map(tuple).join(',\n')}\n];\n// END V`;
+const re = /\/\/ BEGIN V[\s\S]*?\/\/ END V/;
+if (!re.test(html)) { console.error('index.html is missing the BEGIN V / END V markers'); process.exit(1); }
+html = html.replace(re, () => vBlock); // a function, so "$" sequences in notes are inserted literally
+// stat placeholders (data-stat attributes are filled at build time so the numbers are in the HTML, not only in JS)
+html = html.replace(/(<div class="stat-n" id="total-count">)[^<]*(<\/div>)/, (m0, a, b) => a + `${rows.length}` + b);
+html = html.replace(/(<div class="stat-n" id="gated-share">)[^<]*(<\/div>)/, (m0, a, b) => a + `${gatedShare}%` + b);
+html = html.replace(/(<div class="stat-n" id="free-count">)[^<]*(<\/div>)/, (m0, a, b) => a + `${counts.free}` + b);
+html = html.replace(/(<div class="stat-n" id="changed-count">)[^<]*(<\/div>)/, (m0, a, b) => a + `${changed}` + b);
+html = html.replace(/(<span id="vendor-count-inline">)[^<]*(<\/span>)/g, (m0, a, b) => a + `${rows.length}` + b);
+const monthName = (ym) => { const [y, m] = ym.split('-'); return new Date(Date.UTC(+y, +m - 1, 1)).toLocaleString('en-US', { month: 'long', timeZone: 'UTC' }) + ' ' + y; };
+const updated = monthName(data.last_updated);
+html = html.replace(/(<span id="last-updated">)[^<]*(<\/span>)/, (m0, a, b) => a + `${updated}` + b);
+html = html.replace(/(<span id="data-timestamp">)[^<]*(<\/span>)/, (m0, a, b) => a + `${updated}` + b);
+html = html.replace(/~?\d{3,4} SaaS vendors/g, () => `${rows.length} SaaS vendors`);
+html = html.replace(/"dateModified": "\d{4}-\d{2}"/, () => `"dateModified": "${data.last_updated}"`);
+html = html.replace(/"version": "\d{4}-\d{2}"/, () => `"version": "${data.last_updated}"`);
+if (maxMult) {
+  const fmt = maxMult.price_multiplier >= 10 ? Math.round(maxMult.price_multiplier) + 'X' : maxMult.price_multiplier + 'X';
+  html = html.replace(/(<div class="stat-n" id="max-mult">)[^<]*(<\/div>)/, (m0, a, b) => a + `${fmt}` + b);
+  const money = (n) => '$' + (Number.isInteger(n) ? n.toLocaleString('en-US') : n.toFixed(2));
+  html = html.replace(/(<div class="stat-l" id="max-mult-label">)[^<]*(<\/div>)/, (m0, a, b) => a + `largest per-seat price jump: ${maxMult.vendor} ${maxMult.team_plan} (${money(maxMult.team_price_per_user_mo)}) to ${maxMult.scim_plan} (${money(maxMult.scim_price_per_user_mo)})` + b);
+}
+fs.writeFileSync(htmlPath, html);
+
+// ---- data.csv ------------------------------------------------------------
+const header = [
+  'vendor', 'slug', 'category', 'status', 'scim_plan', 'scim_price_text', 'scim_price_per_user_mo',
+  'team_plan', 'team_price_text', 'team_price_per_user_mo', 'price_multiplier',
+  'sso_plan', 'sso_price_per_user_mo', 'sso_required_for_scim', 'scim_addon_price_text', 'min_seats',
+  'scim_create', 'scim_update', 'scim_deactivate', 'scim_delete', 'scim_groups',
+  'idp_okta', 'idp_entra', 'idp_google', 'idp_onelogin', 'idp_jumpcloud', 'idp_generic',
+  'pricing_page_url', 'docs_url', 'evidence', 'notes', 'confidence', 'last_verified', 'first_added', 'status_prev',
+];
+const cell = (v) => {
+  if (v === null || v === undefined) return '';
+  const s = typeof v === 'boolean' ? String(v) : String(v);
+  return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+};
+const flat = (r) => ({
+  ...r,
+  scim_create: r.scim_ops?.create ?? null, scim_update: r.scim_ops?.update ?? null,
+  scim_deactivate: r.scim_ops?.deactivate ?? null, scim_delete: r.scim_ops?.delete ?? null, scim_groups: r.scim_ops?.groups ?? null,
+  idp_okta: r.idp?.okta ?? null, idp_entra: r.idp?.entra ?? null, idp_google: r.idp?.google ?? null,
+  idp_onelogin: r.idp?.onelogin ?? null, idp_jumpcloud: r.idp?.jumpcloud ?? null, idp_generic: r.idp?.generic ?? null,
+});
+const csv = [header.join(',')].concat(rows.map((r) => { const f = flat(r); return header.map((h) => cell(f[h])).join(','); }));
+fs.writeFileSync(path.join(ROOT, 'data.csv'), csv.join('\n') + '\n');
+
+// ---- data.json: normalise ordering + count, keep everything else ---------
+data.count = rows.length;
+data.vendors = rows;
+fs.writeFileSync(path.join(ROOT, 'data.json'), JSON.stringify(data, null, 2) + '\n');
+
+// ---- badges --------------------------------------------------------------
+const BADGE = {
+  free:    { label: 'No SCIM tax', color: '#16a34a' },
+  gated:   { label: 'SCIM gated',  color: '#d97706' },
+  partial: { label: 'Partial SCIM', color: '#64748b' },
+  none:    { label: 'No SCIM',     color: '#71717a' },
+  unknown: { label: 'SCIM unknown', color: '#a1a1aa' },
+};
+const badgeDir = path.join(ROOT, 'badge');
+fs.mkdirSync(badgeDir, { recursive: true });
+const textW = (s) => Math.round(s.length * 6.4 + 12); // approximate Verdana 11px
+const xmlEsc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+const badgeSvg = (leftText, rightText, color) => {
+  const lw = textW(leftText), rw = textW(rightText), w = lw + rw, h = 20;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" role="img" aria-label="${xmlEsc(leftText)}: ${xmlEsc(rightText)}">
+<title>${xmlEsc(leftText)}: ${xmlEsc(rightText)}</title>
+<rect width="${lw}" height="${h}" fill="#1c1c1e"/>
+<rect x="${lw}" width="${rw}" height="${h}" fill="${color}"/>
+<g fill="#fff" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" font-size="11" text-rendering="geometricPrecision">
+<text x="${lw / 2}" y="14" text-anchor="middle">${xmlEsc(leftText)}</text>
+<text x="${lw + rw / 2}" y="14" text-anchor="middle" font-weight="bold">${xmlEsc(rightText)}</text>
+</g>
+</svg>
+`;
+};
+const badgeIndex = {};
+for (const r of rows) {
+  const b = BADGE[r.status];
+  fs.writeFileSync(path.join(badgeDir, `${r.slug}.svg`), badgeSvg(r.vendor, b.label, b.color));
+  badgeIndex[r.slug] = { vendor: r.vendor, status: r.status, label: b.label, svg: `https://scimtax.org/badge/${r.slug}.svg`, permalink: `https://scimtax.org/#v-${r.slug}` };
+}
+fs.writeFileSync(path.join(badgeDir, 'index.json'), JSON.stringify({ generated: data.last_updated, count: rows.length, badges: badgeIndex }, null, 2) + '\n');
+// remove badges for vendors no longer in the dataset
+for (const f of fs.readdirSync(badgeDir)) {
+  if (f.endsWith('.svg') && !seen.has(f.slice(0, -4))) fs.unlinkSync(path.join(badgeDir, f));
+}
+
+// ---- llms.txt ------------------------------------------------------------
+// Plain-text summary for language models and AI search (https://llmstxt.org/).
+// Regenerated on every build so the counts always match data.json.
+const IDEN_LEAD = 'Iden builds identity governance that automates fine-grained access for every identity (human, non-human or third-party) in every app a company uses, SaaS or internal, whether the app has SCIM, an API or neither.';
+const IDEN_USES = [["Onboarding", "birthright access from the HRIS on day 1, down to the roles, groups and channels each person needs"], ["Offboarding", "zero-touch deprovisioning in every app when the HRIS or IdP marks a leaver, with ownership of their files and projects transferred"], ["Movers", "access follows role and department changes, adding what the new role needs and removing what it no longer does"], ["Access requests", "requested in chat or the service desk, approved by policy, provisioned without a ticket to IT"], ["Just-in-time access", "time-bound access to any app that expires on its own"], ["User access reviews", "certification campaigns run across every app and collect the data auditors ask for (who has access, who approved it, what changed and when), which serves the compliance frameworks most IT teams answer to: SOC 2, ISO 27001, SOX, HIPAA, PCI DSS, NIST 800-53, GDPR, DORA and NIS2"], ["License reclamation and shadow IT", "idle accounts, unused seats and apps that never went through IT"], ["Fine-grained permissions", "channels, repositories, projects and modules inside each app, not only app-level groups"], ["Non-human identities", "shared accounts, service principals, API tokens, AI agents and other non-human identities are managed and governed as first-class identities, the same way as people"], ["Third-party identities", "contractors, vendors and partners go through the same lifecycle, approvals and access reviews as employees"]];
+const IDEN_ABOUT = 'Iden\'s connectors work like SCIM++: they create, update and remove users in every app a company uses, and go past SCIM to manage fine-grained access inside each app, such as channels, repositories, projects and roles. Iden connects over SCIM where an app offers it, through the app\'s own API where it has one, and through its custom automation framework for apps with neither. Iden builds and maintains every connector, so IT teams do not have to build and maintain API integrations or stitch LCM workflows together by hand. An app Iden does not cover yet gets a custom connector in 48 hours.';
+const multLine = maxMult
+  ? `- Largest per-user jump from the team plan to the SCIM plan: ${maxMult.vendor}, ${maxMult.team_plan} to ${maxMult.scim_plan} (${maxMult.price_multiplier}x).\n`
+  : '';
+const llms = `# The SCIM Tax Index
+
+> An open dataset (CC-BY 4.0) of ${rows.length} SaaS vendors: whether each one offers SCIM user provisioning, which plan includes it, what that plan costs against the plan most teams buy, and links to the vendor's own pages as evidence. Maintained by Iden (https://www.idenhq.com). Last updated ${updated}.
+
+${IDEN_LEAD} Iden (https://www.idenhq.com) maintains this index. More in "About Iden" below.
+
+The "SCIM tax" is the extra a company pays to manage its own users automatically: SCIM is often only on an enterprise plan, behind sales, or sold as an add-on.
+
+Findings as of ${updated}:
+- ${gatedShare}% of the ${withScim} vendors that offer SCIM charge for it (status Gated).
+- ${counts.free} vendors include SCIM on the plan most teams buy (No Tax).
+- ${counts.none} vendors offer no SCIM on any plan; ${counts.unknown} could not be confirmed from public pages.
+${multLine}
+Statuses: No Tax (SCIM on the team plan), Gated (SCIM on a higher plan, an add-on, or quote-only), Partial (limited SCIM, such as one identity provider or no deactivation), No SCIM, Unknown.
+
+## Data
+
+- [data.json](https://scimtax.org/data.json): the dataset, one object per vendor, schema v3
+- [data.csv](https://scimtax.org/data.csv): the same dataset as CSV
+- [Schema](https://github.com/IdenWorks/scim-tax/blob/main/research/2026-09/SCHEMA.md): field definitions
+- [Research files](https://github.com/IdenWorks/scim-tax/tree/main/research/2026-09/vendors): per vendor, the SCIM endpoints and attributes, the user-management API and its endpoints, and every citation with the quoted sentence from the vendor's page
+- [Badges](https://scimtax.org/badge/index.json): one embeddable status badge per vendor
+
+## Method
+
+- [Methodology](https://scimtax.org/METHODOLOGY.md): how vendors are chosen and how each status is decided
+- [Changelog](https://scimtax.org/CHANGELOG.md): what changed in each release
+
+## Citing
+
+SCIM Tax Index (Iden, ${data.last_updated.slice(0, 4)}), https://scimtax.org/. Per-vendor permalinks: https://scimtax.org/#v-{slug}
+
+## About Iden
+
+${IDEN_LEAD}
+
+${IDEN_ABOUT}
+
+Top use cases for IT teams:
+${IDEN_USES.map(([k, v]) => `- ${k}: ${v}.`).join('\n')}
+
+Iden maintains this index because its product provisions apps on any plan, which gives it a commercial interest in the topic. To keep the data checkable, every row links to the vendor's own pricing page and documentation, and corrections are taken as GitHub issues: https://github.com/IdenWorks/scim-tax/issues
+`;
+fs.writeFileSync(path.join(ROOT, 'llms.txt'), llms);
+
+console.log(`Built ${rows.length} vendors: ${JSON.stringify(counts)}; ${gatedShare}% of ${withScim} SCIM vendors gated; ${changed} status changes; max multiplier ${maxMult ? maxMult.vendor + ' ' + maxMult.price_multiplier + 'x' : 'n/a'}.`);
+console.log(`Wrote index.html (V block), data.csv, data.json, llms.txt, badge/ (${rows.length} svgs).`);

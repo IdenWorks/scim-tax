@@ -1,0 +1,734 @@
+{
+ "slug": "planhat",
+ "vendor": "Planhat",
+ "vendor_url": "https://www.planhat.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Planhat",
+  "slug": "planhat",
+  "category": "Customer Support & Success",
+  "status": "gated",
+  "scim_plan": "Contact Sales (quote-only)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales (Enquire; no public prices)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": false,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": "sso_only",
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.planhat.com/pricing",
+  "docs_url": "https://help.planhat.com/en/articles/12690162-setting-up-scim-provisioning-into-planhat",
+  "evidence": "Planhat's help centre says to \"Use SCIM 2.0 to automatically provision, update, and deactivate users in Planhat directly from your identity provider\", while every pricing package is \"Enquire\" with no public price.",
+  "notes": "Quote-only: Planhat publishes no prices; the CRM, CSP and PSA packages all say \"Enquire\", and the pricing page lists Advanced Security, User Management, Open API and Audit Logs as \"Included in all plans\" without naming SSO or SCIM. SCIM 2.0 (Users, Groups) launched with help articles dated Sept 2026; it may need the CSM/TDS to enable the SCIM permission. Deleting a user in the IdP deactivates them in Planhat. SAML SSO (Okta, Azure AD, Google, ADFS, custom) must be enabled by Planhat staff and does not create users (no JIT). REST user API (create, update, list, delete, bulk upsert) on all plans.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "All plans (quote-only)",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "All packages (CRM, CSP, PSA)",
+   "price_text": "Enquire",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "c6"
+   ],
+   "notes": "Pricing page shows no plan names or prices in its static HTML; \"Included in all plans\" lists Advanced Security, User Management, Open API, Advanced Permissions and Audit Logs."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c7",
+   "c8",
+   "c14",
+   "c1",
+   "c2"
+  ],
+  "plan": "Contact Sales (quote-only)",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://api.planhat.com/integrations/scim/v2",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Settings (Global Tool) > Security > User Provisioning > generate a new Bearer Token",
+   "token_expiry": null,
+   "cite": [
+    "c15"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c10",
+    "c11"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": false,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c7",
+    "c9",
+    "c10",
+    "c17",
+    "c25"
+   ],
+   "notes": "A user deleted in the IdP is deactivated in Planhat, not deleted."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "Deactivated (inactive) users cannot log in or get notifications but remain available for assigning accounts; on manual removal, emails, notes, chats and tickets stay owned by the removed user while companies, workflows and tasks are reassigned.",
+   "cite": [
+    "c9",
+    "c16",
+    "c36",
+    "c33",
+    "c34"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "emails (read-only; mirrors userName)",
+    "externalId",
+    "name.givenName",
+    "name.familyName",
+    "displayName",
+    "active"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "displayName (group name matched exactly to a mapped Planhat Role)",
+    "members"
+   ],
+   "cite": [
+    "c24",
+    "c18",
+    "c11",
+    "c12",
+    "c26"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "IdP group-to-role mapping in Planhat (Security > User Provisioning); users assigned directly get the configured Default User Role; leaving a mapped group removes that role.",
+   "cite": [
+    "c12",
+    "c13"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Existing VIEW users cannot receive roles that need CORE user type via SCIM; the mapping fails silently until the user type is upgraded manually. SCIM-created users are CORE.",
+    "cite": [
+     "c19",
+     "c22"
+    ]
+   },
+   {
+    "text": "Okta \"Push Now\" fully overwrites the Planhat role membership, removing users assigned manually in Planhat.",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "text": "First and last name are required; PATCH with only unsupported fields returns 400.",
+    "cite": [
+     "c26",
+     "c25"
+    ]
+   },
+   {
+    "text": "SCIM permission may need to be enabled by the Planhat CSM/TDS.",
+    "cite": [
+     "c8"
+    ]
+   }
+  ],
+  "notes": "SCIM must first be switched on in Roles > Workflow Permission > SCIM User Provisioning; if that permission is missing the customer has to ask their CSM/TDS."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c1",
+   "c5",
+   "c35",
+   "c42"
+  ],
+  "plan": "All plans (quote-only)",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://api.planhat.com",
+  "docs_url": "https://www.planhat.com/developers/api/user",
+  "auth": {
+   "methods": [
+    "api_access_token (bearer, from a Private App)"
+   ],
+   "scopes": [
+    "Private App permissions"
+   ],
+   "cite": [
+    "c42",
+    "c43"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": true,
+   "reactivate_user": true,
+   "manage_groups": null,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c35",
+    "c36",
+    "c37",
+    "c38",
+    "c39",
+    "c41"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/users",
+    "purpose": "Create user",
+    "cite": [
+     "c35"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/users/{_id}",
+    "purpose": "Update user (incl. inactive flag and roles)",
+    "cite": [
+     "c36",
+     "c37"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/users/{_id}",
+    "purpose": "Get user by ID (or externalId with prefix)",
+    "cite": [
+     "c41"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/users",
+    "purpose": "List users (limit, offset, sort, select)",
+    "cite": [
+     "c40"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/users/{_id}",
+    "purpose": "Delete user",
+    "cite": [
+     "c38"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/users",
+    "purpose": "Bulk upsert users (max 5,000 per request)",
+    "cite": [
+     "c39"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": [],
+   "notes": "Pricing lists Audit Logs in all plans; no audit-log API endpoint was found."
+  },
+  "rate_limits": {
+   "text": "Soft quota 200 calls/minute on the main API; hard limit 150 requests/second with bursts up to 50 parallel requests.",
+   "cite": [
+    "c44"
+   ]
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": "vendor",
+   "url": "https://www.okta.com/integrations/planhat/",
+   "cite": [
+    "c45",
+    "c21",
+    "c31"
+   ],
+   "notes": "OIN page checks SAML, SCIM, Create, Update, Deactivate and Group Push. built_by inferred from Planhat documenting its own OIN app."
+  },
+  "entra": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://help.planhat.com/en/articles/12810917-how-to-set-up-the-scim-integration-in-microsoft-entra-id",
+   "cite": [
+    "c23"
+   ],
+   "notes": "No gallery tutorial (planhat-tutorial 404); Planhat tells admins to create their own (non-gallery) enterprise application with the generic SCIM URL."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "Planhat documents Google Workspace (GSuite) SAML SSO; no Google catalogue page checked."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": "https://help.planhat.com/en/articles/9587322-sso-setting-up-onelogin",
+   "cite": [
+    "c32"
+   ],
+   "notes": "Planhat's own OneLogin guide uses OneLogin's generic SAML Custom Connector (Advanced); no SCIM setup for OneLogin is documented."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": false,
+  "jit_protocol": null,
+  "csv_import": true,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c29",
+   "c35"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.planhat.com/pricing",
+   "title": "Planhat | Pricing Packages",
+   "quote": "Included in all plans",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.planhat.com/pricing",
+   "title": "Planhat | Pricing Packages",
+   "quote": "Enquire",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.planhat.com/pricing",
+   "title": "Planhat | Pricing Packages",
+   "quote": "Advanced Security",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.planhat.com/pricing",
+   "title": "Planhat | Pricing Packages",
+   "quote": "User Management",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.planhat.com/pricing",
+   "title": "Planhat | Pricing Packages",
+   "quote": "Open API",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://www.planhat.com/pricing",
+   "title": "Planhat | Pricing Packages",
+   "quote": "Audit Logs",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://help.planhat.com/en/articles/12690162-setting-up-scim-provisioning-into-planhat",
+   "title": "Setting up SCIM Provisioning into Planhat",
+   "quote": "Use SCIM 2.0 to automatically provision, update, and deactivate users in Planhat directly from your identity provider (IdP), such as Okta or Microsoft Entra ID",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://help.planhat.com/en/articles/12690162-setting-up-scim-provisioning-into-planhat",
+   "title": "Setting up SCIM Provisioning into Planhat",
+   "quote": "If you cannot see the SCIM User Provisioning in the Permissions, please speak to your CSM/TDS.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://help.planhat.com/en/articles/12690162-setting-up-scim-provisioning-into-planhat",
+   "title": "Setting up SCIM Provisioning into Planhat",
+   "quote": "Planhat automatically provisions, updates, or deactivates the corresponding user record",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://help.planhat.com/en/articles/12690162-setting-up-scim-provisioning-into-planhat",
+   "title": "Setting up SCIM Provisioning into Planhat",
+   "quote": "/Users — for create, update, deactivate",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://help.planhat.com/en/articles/12690162-setting-up-scim-provisioning-into-planhat",
+   "title": "Setting up SCIM Provisioning into Planhat",
+   "quote": "/Groups — for group-based Role mapping",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://help.planhat.com/en/articles/12690162-setting-up-scim-provisioning-into-planhat",
+   "title": "Setting up SCIM Provisioning into Planhat",
+   "quote": "Manage Planhat Roles and permissions through group assignments in your IdP — group membership automatically defines User Roles in Planhat",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://help.planhat.com/en/articles/12690162-setting-up-scim-provisioning-into-planhat",
+   "title": "Setting up SCIM Provisioning into Planhat",
+   "quote": "If a User is no longer part of a Group, i.e., she’s removed from it, the User Role from that group will be removed",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://help.planhat.com/en/articles/12809315-how-to-set-up-the-scim-integration-in-okta",
+   "title": "How to set up the SCIM integration in Okta",
+   "quote": "https://api.planhat.com/integrations/scim/v2",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://help.planhat.com/en/articles/12809315-how-to-set-up-the-scim-integration-in-okta",
+   "title": "How to set up the SCIM integration in Okta",
+   "quote": "Generate a new Bearer Token in Planhat",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://help.planhat.com/en/articles/12809315-how-to-set-up-the-scim-integration-in-okta",
+   "title": "How to set up the SCIM integration in Okta",
+   "quote": "If the User no longer belongs to any mapped Group, they will be deactivated in Planhat",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://help.planhat.com/en/articles/12809315-how-to-set-up-the-scim-integration-in-okta",
+   "title": "How to set up the SCIM integration in Okta",
+   "quote": "For Group management, Okta supports Push Groups, which let you synchronize Group memberships between Okta and Planhat.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://help.planhat.com/en/articles/12809315-how-to-set-up-the-scim-integration-in-okta",
+   "title": "How to set up the SCIM integration in Okta",
+   "quote": "The emails attribute is read-only in Planhat.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://help.planhat.com/en/articles/12809315-how-to-set-up-the-scim-integration-in-okta",
+   "title": "How to set up the SCIM integration in Okta",
+   "quote": "these existing VIEW users cannot be assigned roles that require CORE user type even if the SCIM group mapping is valid",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://help.planhat.com/en/articles/12809315-how-to-set-up-the-scim-integration-in-okta",
+   "title": "How to set up the SCIM integration in Okta",
+   "quote": "Using the “Push Now” action in Okta performs a full overwrite of the group membership, making Okta the master for that group.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://help.planhat.com/en/articles/12809315-how-to-set-up-the-scim-integration-in-okta",
+   "title": "How to set up the SCIM integration in Okta",
+   "quote": "In Okta, go to Applications → Browse App Catalog",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://help.planhat.com/en/articles/12809315-how-to-set-up-the-scim-integration-in-okta",
+   "title": "How to set up the SCIM integration in Okta",
+   "quote": "By default, all users provisioned via SCIM are now created as User Type = CORE, regardless of the role mapped through SCIM Group Assignments.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://help.planhat.com/en/articles/12810917-how-to-set-up-the-scim-integration-in-microsoft-entra-id",
+   "title": "How to set up the SCIM integration in Microsoft Entra ID",
+   "quote": "Create your own application (or use existing if you use Entra ID for SSO in Planhat)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://help.planhat.com/en/articles/12810917-how-to-set-up-the-scim-integration-in-microsoft-entra-id",
+   "title": "How to set up the SCIM integration in Microsoft Entra ID",
+   "quote": "userName emails externalId name.givenName name.familyName displayName active",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://help.planhat.com/en/articles/12810917-how-to-set-up-the-scim-integration-in-microsoft-entra-id",
+   "title": "How to set up the SCIM integration in Microsoft Entra ID",
+   "quote": "If PATCH contains only unsupported fields: the request will return a 400",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://help.planhat.com/en/articles/12810917-how-to-set-up-the-scim-integration-in-microsoft-entra-id",
+   "title": "How to set up the SCIM integration in Microsoft Entra ID",
+   "quote": "Planhat requires all users to specify the First and Last name, but Entra ID only requires the Display name.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://help.planhat.com/en/articles/12810917-how-to-set-up-the-scim-integration-in-microsoft-entra-id",
+   "title": "How to set up the SCIM integration in Microsoft Entra ID",
+   "quote": "Microsoft Entra ID checks for user updates around every 40 minutes",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://help.planhat.com/en/articles/9587188-how-to-set-up-single-sign-on-sso",
+   "title": "How to set up Single Sign-On (SSO)",
+   "quote": "We utilise the SAML 2.0 standard with the following providers:",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://help.planhat.com/en/articles/9587188-how-to-set-up-single-sign-on-sso",
+   "title": "How to set up Single Sign-On (SSO)",
+   "quote": "You can not (yet) create users via SSO, so each user who tries to log-in must first be",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://help.planhat.com/en/articles/9587188-how-to-set-up-single-sign-on-sso",
+   "title": "How to set up Single Sign-On (SSO)",
+   "quote": "First, a Planhat \"Super Admin\" (Planhat staff member - e.g. your CSM) must enable SSO for your account.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://help.planhat.com/en/articles/9587295-sso-setting-up-okta",
+   "title": "SSO: Setting up Okta",
+   "quote": "Integration is made more accessible with Planhat being part of the Okta Integration Network (OIN).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://help.planhat.com/en/articles/9587322-sso-setting-up-onelogin",
+   "title": "SSO: Setting up OneLogin",
+   "quote": "SAML Custom Connector (Advanced)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://help.planhat.com/en/articles/9587182-what-happens-when-i-remove-a-team-member-user-from-planhat",
+   "title": "What happens when I remove a team member (User) from Planhat?",
+   "quote": "When you remove a team member (User) from Planhat, a dialogue box appears, asking you to reassign the removed User",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://help.planhat.com/en/articles/9587182-what-happens-when-i-remove-a-team-member-user-from-planhat",
+   "title": "What happens when I remove a team member (User) from Planhat?",
+   "quote": "those will all remain under the ownership of the removed team member",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c35",
+   "url": "https://www.planhat.com/developers/api/user",
+   "title": "Planhat API: User",
+   "quote": "Users are all your team members that need access to Planhat. Users can be created in the app, using spreadsheet upload or over API.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://www.planhat.com/developers/api/user",
+   "title": "Planhat API: User",
+   "quote": "If a user is flagged as inactive, they will not be able to login to Planhat and they will not get notifications, but they will be available for assigning accounts etc.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://www.planhat.com/developers/api/user",
+   "title": "Planhat API: User",
+   "quote": "Array of role ids assigned to the user.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c38",
+   "url": "https://www.planhat.com/developers/api/user",
+   "title": "Planhat API: User",
+   "quote": "To delete a user it's required to pass the _id in the request URL as a parameter.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c39",
+   "url": "https://www.planhat.com/developers/api/user",
+   "title": "Planhat API: User",
+   "quote": "Since this is a bulk upsert operation it's possible to create and/or update multiple users with the same payload.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c40",
+   "url": "https://www.planhat.com/developers/api/user",
+   "title": "Planhat API: User",
+   "quote": "limit : Limit the list length. Default is 10000, max. 10000.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c41",
+   "url": "https://www.planhat.com/developers/api/user",
+   "title": "Planhat API: User",
+   "quote": "To get a specific user it's required to pass the _id in the request URL as a parameter.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c42",
+   "url": "https://www.planhat.com/developers/api/authentication-limits",
+   "title": "Planhat | Authentication & Limits",
+   "quote": "Most end-points require authentication by an API Access Token that can be generated using",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c43",
+   "url": "https://www.planhat.com/developers/api/authentication-limits",
+   "title": "Planhat | Authentication & Limits",
+   "quote": "Once a token is created, it will appear once and last forever.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c44",
+   "url": "https://www.planhat.com/developers/api/authentication-limits",
+   "title": "Planhat | Authentication & Limits",
+   "quote": "Planhat comes with a quota (soft limit) of 200 API calls per minute to our main API. The hard limit is 150 requests per second with bursts of up to 50 parallel requests.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c45",
+   "url": "https://www.okta.com/integrations/planhat/",
+   "title": "Integrate Planhat with Okta",
+   "quote": "Using Okta, organizations can centrally manage user provisioning and deprovisioning in Planhat with SCIM, and securely access the platform through Single Sign-On (SSO) and Multi-Factor Authentication (MFA).",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.planhat.com/pricing (curl; render.cjs ERR_TOO_MANY_RETRIES)",
+  "https://help.planhat.com/sitemap.xml (453 English articles; SCIM, SSO and user articles read)",
+  "https://www.planhat.com/developers/api/user and /authentication-limits",
+  "Okta OIN okta.com/integrations/planhat/; Entra planhat-tutorial and planhat-provisioning-tutorial (404)"
+ ],
+ "open_questions": [
+  "Pricing page does not say whether SSO or SCIM sits in every package or needs a higher package; FAQ answers are not in the static HTML.",
+  "Docs do not say whether deactivation frees a paid seat or ends active sessions.",
+  "No audit-log API endpoint found although Audit Logs are listed in all plans.",
+  "SCIM filtering, pagination, ServiceProviderConfig/Schemas and token expiry are not documented."
+ ]
+}

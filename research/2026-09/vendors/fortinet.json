@@ -1,0 +1,485 @@
+{
+ "slug": "fortinet",
+ "vendor": "Fortinet (FortiGate / FortiOS)",
+ "vendor_url": "https://www.fortinet.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Fortinet (FortiGate / FortiOS)",
+  "slug": "fortinet",
+  "category": "Security & Identity",
+  "status": "gated",
+  "scim_plan": "FortiGate (Contact Sales)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "FortiGate (Contact Sales)",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": null,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "none",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": "sso_only",
+   "generic": true
+  },
+  "pricing_page_url": "https://www.fortinet.com/corporate/about-us/contact-us",
+  "docs_url": "https://docs.fortinet.com/document/fortigate/8.0.1/administration-guide/206019/scim-servers",
+  "evidence": "FortiOS docs: \"With SCIM servers, FortiGate can communicate with an Identity Provider (IdP) using the SCIM 2.0 protocol, which facilitates the automatic provisioning of users and groups on FortiGate\"; Fortinet publishes no prices, buying is through a sales contact form.",
+  "notes": "Quote-only: Fortinet publishes no price list (how-to-buy redirects to a Contact Us form), so SCIM can only be bought through sales or partners. Row researched on FortiGate/FortiOS 8.0, the main admin product: FortiGate runs a SCIM 2.0 server (HTTPS port 44559 by default) that receives users and groups from an IdP or FortiAuthenticator for SAML firewall/VPN authentication; it is a FortiOS feature, not a separate add-on. Other Fortinet products with their own SCIM endpoints (not split into rows): FortiAuthenticator, FortiIdentity Cloud, FortiSAT, FortiPhish, FortiPAM and FortiClient EMS/FortiEndpoint. Okta lists only a RADIUS MFA integration and a password-vaulting (SWA) FortiCloud app; Entra has an SSO-only FortiGate SSL VPN gallery app, and FortiOS docs mention Azure as a SCIM client.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "FortiGate (hardware/VM, via sales or partners)",
+   "price_text": "Contact Sales",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c3",
+    "c12"
+   ],
+   "notes": "No public tiers; FortiGate is sold per appliance/VM with FortiGuard subscriptions."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c2",
+   "c4",
+   "c5"
+  ],
+  "plan": "FortiGate (Contact Sales)",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": null,
+  "auth": {
+   "method": "bearer",
+   "token_source": "CLI: execute gen-token <cert|key> <name> <algorithm> <expire>, verified via config user scim (auth-method token); basic auth also supported",
+   "token_expiry": "1-32767 hours, or 0 = long lived",
+   "cite": [
+    "c6",
+    "c7",
+    "c21"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c2",
+    "c11"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": null,
+   "reactivate": null,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c5",
+    "c9",
+    "c2",
+    "c10"
+   ]
+  },
+  "deprovision": {
+   "action": null,
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": []
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "displayName",
+    "externalId",
+    "email",
+    "active"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "displayName",
+    "externalId"
+   ],
+   "cite": [
+    "c11",
+    "c22"
+   ]
+  },
+  "roles": {
+   "supported": null,
+   "how": "SCIM groups are referenced in FortiGate user groups / firewall policies (group-type scim) for access decisions; no role attribute documented.",
+   "cite": [
+    "c10"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Provisioned users and groups are used for SAML firewall/VPN/proxy authentication; FortiGate admin accounts are not provisioned this way.",
+    "cite": [
+     "c3",
+     "c10"
+    ]
+   },
+   {
+    "text": "Expired bearer tokens must be regenerated manually on FortiGate and copied to the SCIM client.",
+    "cite": [
+     "c21"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c12",
+   "c13",
+   "c14"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": null,
+  "docs_url": "https://docs.fortinet.com/document/fortigate/8.0.1/administration-guide/940602/using-apis",
+  "auth": {
+   "methods": [
+    "api_token (Bearer, REST API administrator)"
+   ],
+   "scopes": [],
+   "cite": [
+    "c12"
+   ]
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": []
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Full FortiOS REST API reference is on the Fortinet KYC Network (FKYC), which requires an account; endpoints not recorded.",
+    "cite": [
+     "c14"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": false,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/?search=fortinet",
+   "cite": [
+    "c17",
+    "c18"
+   ],
+   "notes": "OIN search for \"fortinet\" returns only \"Fortinet Fortigate (RADIUS)\" MFA support; a separate Forticloud OIN app has only SWA checked in page markup (password vaulting), so no SAML/SCIM app for FortiGate."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/fortigate-ssl-vpn-tutorial",
+   "cite": [
+    "c15",
+    "c8"
+   ],
+   "notes": "Gallery app is SSO-only (FortiGate SSL VPN; also FortiSASE and FortiWeb tutorials). FortiOS docs name Azure as a SCIM client using a FortiGate-generated secret token, i.e. provisioning via a generic non-gallery SCIM app."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://jumpcloud.com/support/integrate-with-fortinet",
+   "cite": [
+    "c16"
+   ]
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": "FortiAuthenticator can act as the SCIM client that pushes users and groups to FortiGate; LDAP/RADIUS remote servers are also supported.",
+  "docs_public": true,
+  "cite": [
+   "c9",
+   "c2"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.fortinet.com/corporate/about-us/contact-us",
+   "title": "Contact Us | Fortinet",
+   "quote": "Please fill out the form and a knowledgeable representative will get in touch with you soon.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://docs.fortinet.com/document/fortigate/8.0.1/administration-guide/206019/scim-servers",
+   "title": "SCIM servers | FortiGate / FortiOS 8.0.1",
+   "quote": "With SCIM servers, FortiGate can communicate with an Identity Provider (IdP) using the SCIM 2.0 protocol, which facilitates the automatic provisioning of users and groups on FortiGate.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://docs.fortinet.com/document/fortigate/8.0.1/administration-guide/206019/scim-servers",
+   "title": "SCIM servers | FortiGate / FortiOS 8.0.1",
+   "quote": "Once users and groups are provisioned on FortiGate, they can be used with SAML to provide user authentication.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://docs.fortinet.com/document/fortigate/8.0.1/administration-guide/206019/scim-servers",
+   "title": "SCIM servers | FortiGate / FortiOS 8.0.1",
+   "quote": "Specify the port on which the SCIM server will listen for HTTPS requests (default = 44559).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://docs.fortinet.com/document/fortigate/8.0.1/administration-guide/206019/scim-servers",
+   "title": "SCIM servers | FortiGate / FortiOS 8.0.1",
+   "quote": "Server URL to receive SCIM create, read, update, delete (CRUD) requests.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://docs.fortinet.com/document/fortigate/8.0.1/administration-guide/214472/bearer-token-authentication-for-scim-servers",
+   "title": "Bearer token authentication for SCIM servers",
+   "quote": "Bearer tokens generated by FortiOS can be temporary or long lived, and the SCIM client can verify the token.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://docs.fortinet.com/document/fortigate/8.0.1/administration-guide/214472/bearer-token-authentication-for-scim-servers",
+   "title": "Bearer token authentication for SCIM servers",
+   "quote": "Expire interval, in hours (1 - 32767, 0 = long lived).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.fortinet.com/document/fortigate/8.0.1/administration-guide/214472/bearer-token-authentication-for-scim-servers",
+   "title": "Bearer token authentication for SCIM servers",
+   "quote": "For Azure, the generated token is called a secret token.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.fortinet.com/document/fortigate/8.0.1/administration-guide/209548/fortigate-as-scim-server-and-fac-as-scim-client",
+   "title": "FortiGate as SCIM server and FAC as SCIM client",
+   "quote": "However, when alterations to identities occur in the IdP, including creation, updating, and deletion, these changes are automatically synchronized with SP in accordance with the SCIM protocol.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.fortinet.com/document/fortigate/8.0.1/administration-guide/712894/using-saml-with-a-scim-group-in-a-firewall-policy",
+   "title": "Using SAML with a SCIM group in a firewall policy",
+   "quote": "SCIM groups can now be used in firewall policies, eliminating the need for local group mapping and simplifying identity-based access control.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.fortinet.com/document/fortigate/8.0.1/administration-guide/712894/using-saml-with-a-scim-group-in-a-firewall-policy",
+   "title": "Using SAML with a SCIM group in a firewall policy",
+   "quote": "userName displayName externalId email active",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.fortinet.com/document/fortigate/8.0.1/administration-guide/940602/using-apis",
+   "title": "Using APIs | FortiGate / FortiOS 8.0.1",
+   "quote": "FortiGate supports only token-based authentication for API calls.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.fortinet.com/document/fortigate/8.0.1/administration-guide/940602/using-apis",
+   "title": "Using APIs | FortiGate / FortiOS 8.0.1",
+   "quote": "Retrieve, create, update, and delete configuration settings",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.fortinet.com/document/fortigate/8.0.1/administration-guide/399023/rest-api-administrator",
+   "title": "REST API administrator | FortiGate / FortiOS 8.0.1",
+   "quote": "For more information about the REST API, see the Fortinet KYC Network (FKYC). Note that an account is required to access the FKYC.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/fortigate-ssl-vpn-tutorial",
+   "title": "Microsoft Entra SSO integration with FortiGate SSL VPN",
+   "quote": "FortiGate SSL VPN supports SP-initiated SSO.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://jumpcloud.com/support/integrate-with-fortinet",
+   "title": "Integrate with Fortinet | JumpCloud Documentation",
+   "quote": "Use JumpCloud SAML Single Sign On (SSO) to give your users convenient but secure access to all their web applications with a single set of credentials.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://www.okta.com/integrations/?search=fortinet",
+   "title": "Okta Integration Network search: fortinet",
+   "quote": "MFA support for Fortinet Fortigate (RADIUS)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://www.okta.com/integrations/forticloud/",
+   "title": "Forticloud | Okta Integration Network",
+   "quote": "FortiCloud is a suite of cloud portals and services enabling customers to access and manage a range of Fortinet solutions and services—all from an easily accessible site.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.fortinet.com/search?q=SCIM",
+   "title": "SCIM | Search | Fortinet Document Library",
+   "quote": "FortiIdentity Cloud has integrated with SCIM client applications.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.fortinet.com/search?q=SCIM",
+   "title": "SCIM | Search | Fortinet Document Library",
+   "quote": "The User Management > User Sync > SCIM Provisioning page allows you to create and manage the bearer tokens required to authenticate and secure user provisioning",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.fortinet.com/document/fortigate/8.0.1/administration-guide/214472/bearer-token-authentication-for-scim-servers",
+   "title": "Bearer token authentication for SCIM servers",
+   "quote": "When the token expires, administrators must manually generate another token on FortiGate and copy it to the SCIM client.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://docs.fortinet.com/document/fortigate/8.0.1/administration-guide/712894/using-saml-with-a-scim-group-in-a-firewall-policy",
+   "title": "Using SAML with a SCIM group in a firewall policy",
+   "quote": "User attribute type used to match SCIM users (default = user-name):",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.fortinet.com/how-to-buy (redirects to contact-us)",
+  "https://docs.fortinet.com/search?q=SCIM (pages 1-2)",
+  "https://www.okta.com/integrations/?search=fortinet",
+  "https://www.okta.com/integrations/?search=fortigate",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/toc.json"
+ ],
+ "open_questions": [
+  "Which FortiOS release first shipped the SCIM server (docs read for 8.0.1).",
+  "Whether unassigning a user in the IdP deactivates (active=false) or deletes the FortiGate SCIM user, and whether active sessions end.",
+  "Exact SCIM base URL path on FortiGate, supported filters, pagination and PATCH/PUT behaviour.",
+  "FortiOS REST API user endpoints (reference behind FKYC login)."
+ ]
+}

@@ -1,0 +1,1119 @@
+{
+ "slug": "egnyte",
+ "vendor": "Egnyte",
+ "vendor_url": "https://www.egnyte.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Egnyte",
+  "slug": "egnyte",
+  "category": "Productivity & Docs",
+  "status": "gated",
+  "scim_plan": "Enterprise (per JumpCloud; not named on Egnyte pricing)",
+  "scim_price_text": "Not stated (Enterprise Lite $39/user/mo is the lowest current plan with Enterprise in its name)",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Team",
+  "team_price_text": "Team: $10/user/mo billed annually (1-10 users)",
+  "team_price_per_user_mo": 10,
+  "price_multiplier": null,
+  "sso_plan": "Enterprise Lite",
+  "sso_price_per_user_mo": 39,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "native",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": "native",
+   "generic": true
+  },
+  "pricing_page_url": "https://www.egnyte.com/pricing",
+  "docs_url": "https://helpdesk.egnyte.com/hc/en-us/articles/360029231571-Okta-SSO-Configuration-Guide-SCIM-2-0",
+  "evidence": "Egnyte documents SCIM 2.0 provisioning (Okta 'Egnyte SCIM 2.0' app, Entra connector), and JumpCloud's Egnyte guide requires 'an Egnyte user account with administrator permissions with an Enterprise subscription'.",
+  "notes": "Plan gate comes from JumpCloud's IdP page, not Egnyte: Egnyte's pricing page and help centre never name a SCIM plan, so confidence is low and the 'Enterprise' plan is not mapped to a current tier (Business $22, Enterprise Lite $39, Elite $48, Ultimate quote; Team $10 for 1-10 users). SSO/SAML shows a check from Enterprise Lite up; the Business column shows an unexplained '$' marker in that row (likely a paid option). SCIM tokens come from Egnyte's token generator (scim-20.egnyte.com); the Entra endpoint /pubapi/scim/v2/azure-connector is Entra-only. Okta/Entra deprovisioning deactivates (Entra hard-deletes after permanent deletion). Public API (incl. SCIM-style /pubapi/v2/users and SCIM 1.1-style groups API) is not available on Trial, Legacy Office or Team plans, so api_tax is true.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Business",
+  "api_tax": true,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Team",
+   "price_text": "$10/user/month paid annually, 1-10 users",
+   "price_per_user_mo": 10,
+   "billing": "annual",
+   "sso": null,
+   "scim": null,
+   "user_api": false,
+   "audit_log_api": false,
+   "cite": [
+    "c6",
+    "c60"
+   ]
+  },
+  {
+   "name": "Business",
+   "price_text": "$22/user/month paid annually",
+   "price_per_user_mo": 22,
+   "billing": "annual",
+   "sso": null,
+   "scim": null,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c1",
+    "c5",
+    "c60"
+   ],
+   "notes": "SSO row shows a '$' marker rather than a check; meaning not explained on the page. API eligibility inferred from the Getting Started exclusion list (Trial, Legacy Office, Team)."
+  },
+  {
+   "name": "Enterprise Lite",
+   "price_text": "$39/user/month paid annually",
+   "price_per_user_mo": 39,
+   "billing": "annual",
+   "sso": true,
+   "scim": null,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c2",
+    "c5",
+    "c60"
+   ]
+  },
+  {
+   "name": "Elite",
+   "price_text": "$48/user/month paid annually",
+   "price_per_user_mo": 48,
+   "billing": "annual",
+   "sso": true,
+   "scim": null,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c3",
+    "c5",
+    "c60"
+   ]
+  },
+  {
+   "name": "Ultimate",
+   "price_text": "Contact us for a custom quote",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": null,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c4",
+    "c5",
+    "c60"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c7",
+   "c11",
+   "c16",
+   "c33",
+   "c34"
+  ],
+  "plan": "Enterprise (per JumpCloud)",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://{domain}.egnyte.com/pubapi/scim/v2/azure-connector (Entra only); https://{domain}.egnytegov.com/pubapi/scim/v2 (EgnyteGov)",
+  "notes": "JumpCloud's guide says SSO must be configured before SCIM; Egnyte's own docs do not state it generally.",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Egnyte SCIM token generator at https://scim-20.egnyte.com/ (sign in with domain admin)",
+   "token_expiry": null,
+   "cite": [
+    "c18",
+    "c15"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c10",
+    "c29",
+    "c30"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": null,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c8",
+    "c10",
+    "c19",
+    "c20",
+    "c21",
+    "c28"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "User is deactivated, not deleted, and can be reactivated manually; Entra deletes the user only after permanent deletion in Entra (default 30 days after soft delete).",
+   "cite": [
+    "c8",
+    "c19",
+    "c20"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName",
+    "externalId"
+   ],
+   "cite": [
+    "c29"
+   ]
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "externalId",
+    "active",
+    "emails[type eq \"work\"].value",
+    "name.givenName",
+    "name.familyName",
+    "title",
+    "userType"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": true,
+    "how": "Custom attributes cannot be set on create but can be sent with PATCH (Entra)."
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c29",
+    "c30",
+    "c24",
+    "c21",
+    "c13"
+   ]
+  },
+  "roles": {
+   "supported": true,
+   "how": "userType attribute (admin, power, standard); defaults to power. Power-user custom roles cannot be set via Okta or Entra SCIM.",
+   "cite": [
+    "c12",
+    "c9",
+    "c23"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Entra connector URL (/pubapi/scim/v2/azure-connector) cannot be used with other identity providers.",
+    "cite": [
+     "c17"
+    ]
+   },
+   {
+    "text": "Nested groups and users in nested groups are ignored by Entra provisioning.",
+    "cite": [
+     "c22"
+    ]
+   },
+   {
+    "text": "Username changes are not supported for SAML/SSO users.",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "text": "Okta and Entra SCIM cannot assign custom Power User roles.",
+    "cite": [
+     "c9",
+     "c23"
+    ]
+   },
+   {
+    "text": "Entra setup requires contacting Egnyte support first (per Microsoft tutorial).",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "text": "Entra sync is one way and runs every 40 minutes.",
+    "cite": [
+     "c26",
+     "c27"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c40",
+   "c41",
+   "c42",
+   "c60"
+  ],
+  "plan": "Business",
+  "api_tax": true,
+  "style": "REST",
+  "base_url": "https://{domain}.egnyte.com/pubapi/v2",
+  "docs_url": "https://us-partner-integrations.egnyte.com/integration/cfs/api-docs/user-management-api",
+  "auth": {
+   "methods": [
+    "oauth2"
+   ],
+   "scopes": [
+    "Egnyte.user",
+    "Egnyte.group",
+    "Egnyte.audit"
+   ],
+   "cite": [
+    "c42",
+    "c59",
+    "c61"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": true,
+   "update_user": true,
+   "deactivate_user": true,
+   "delete_user": true,
+   "reactivate_user": true,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c40",
+    "c45",
+    "c46",
+    "c48",
+    "c51",
+    "c52"
+   ],
+   "notes": "Deactivate/reactivate via PATCH active; invite via sendInvite on create; roles via userType/role fields."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/pubapi/v2/users",
+    "purpose": "List users (startIndex/count, filter)",
+    "cite": [
+     "c44"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/pubapi/v2/users/{id}",
+    "purpose": "Get a user",
+    "cite": [
+     "c43"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/pubapi/v2/users",
+    "purpose": "Create a user",
+    "cite": [
+     "c45"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/pubapi/v2/users/{id}",
+    "purpose": "Partially update a user (incl. active, userType, role)",
+    "cite": [
+     "c46",
+     "c47"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/pubapi/v2/users/{id}",
+    "purpose": "Delete a user",
+    "cite": [
+     "c48"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/pubapi/v2/groups",
+    "purpose": "List custom groups",
+    "cite": [
+     "c53"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/pubapi/v2/groups/{group_id}",
+    "purpose": "Get a group with members",
+    "cite": [
+     "c54"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/pubapi/v2/groups",
+    "purpose": "Create a group",
+    "cite": [
+     "c55"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/pubapi/v2/groups/{group_id}",
+    "purpose": "Replace a group incl. membership",
+    "cite": [
+     "c56"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/pubapi/v2/groups/{group_id}",
+    "purpose": "Rename group or add/remove members",
+    "cite": [
+     "c57"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/pubapi/v2/groups/{group_id}",
+    "purpose": "Delete a group",
+    "cite": [
+     "c58"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/pubapi/v2/audit/stream",
+    "purpose": "Stream audit events (last 7 days)",
+    "cite": [
+     "c65"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/pubapi/v2/audit/stream",
+    "purpose": "Stream audit events (last 7 days)",
+    "cite": [
+     "c65"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": false,
+   "events": [],
+   "cite": [
+    "c67"
+   ],
+   "notes": "Webhook event list has group events (group:create, group:delete, group:rename, group:add_members, group:remove_members, group:add_owner, group:remove_owner) but no user lifecycle events."
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": null,
+   "cite": [
+    "c64",
+    "c65"
+   ]
+  },
+  "rate_limits": {
+   "text": "Standard API calls: 1,000 calls per day and 2 calls per second per token; Audit Reporting v2: 10 requests/minute, 100/hour.",
+   "cite": [
+    "c62",
+    "c63",
+    "c66"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "API keys only for domain administrators; not available on Trial, Legacy Office or Team plans.",
+    "cite": [
+     "c60",
+     "c61"
+    ]
+   },
+   {
+    "text": "List Groups returns only custom groups, not Egnyte default groups.",
+    "cite": [
+     "c53"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/egnyte-scim-2-0/",
+   "cite": [
+    "c32",
+    "c7",
+    "c10"
+   ],
+   "notes": "OIN page marks SAML, SWA, SCIM, Create, Update, Deactivate, Group Push and Group Linking as checked (read from page markup)."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/egnyte-provisioning-tutorial",
+   "cite": [
+    "c28",
+    "c29"
+   ]
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c38"
+   ],
+   "notes": "Egnyte's SSO article lists OneLogin as a supported SAML provider (no 'Import Existing Users' check); OneLogin's own page not loaded."
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://jumpcloud.com/support/integrate-with-egnyte",
+   "cite": [
+    "c34",
+    "c33"
+   ]
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": true,
+  "other_sync": "Active Directory via Egnyte AD Kit",
+  "docs_public": true,
+  "cite": [
+   "c39",
+   "c5"
+  ],
+  "notes": "AD sync named on the pricing page (User Authentication (AD and SSO/SAML))."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.egnyte.com/pricing",
+   "title": "Egnyte Pricing",
+   "quote": "M365 co-editing (online and desktop) Start Free Trial $22 / User / Month Paid annually*",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://www.egnyte.com/pricing",
+   "title": "Egnyte Pricing",
+   "quote": "Advanced workflows Secure collaboration Start Free Trial $39 / User / Month Paid annually*",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://www.egnyte.com/pricing",
+   "title": "Egnyte Pricing",
+   "quote": "Dynamic watermarking Auto-remediation Start Free Trial $48 / User / Month Paid annually*",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://www.egnyte.com/pricing",
+   "title": "Egnyte Pricing",
+   "quote": "Bulk metadata extraction Contact Us Contact us for a custom quote",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://www.egnyte.com/pricing",
+   "title": "Egnyte Pricing",
+   "quote": "User Authentication (AD and SSO/SAML) Integrate with any major Single Sign-On (SSO) providers or Active Directory Domain Controller.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://www.egnyte.com/pricing-team",
+   "title": "Team Pricing Plans | Egnyte",
+   "quote": "Plan for Smaller Teams Team 1 - 10 Users Start Free Trial $10 / user / month paid annually",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://helpdesk.egnyte.com/api/v2/help_center/en-us/articles/360029231571.json",
+   "title": "Okta SSO Configuration Guide (SCIM 2.0)",
+   "quote": "Navigate to Applications -> Add Applications and search for Egnyte in the search field. Select Egnyte SCIM 2.0 from the search results.",
+   "accessed": "2026-10-05",
+   "page_url": "https://helpdesk.egnyte.com/hc/en-us/articles/360029231571-Okta-SSO-Configuration-Guide-SCIM-2-0"
+  },
+  {
+   "id": "c8",
+   "url": "https://helpdesk.egnyte.com/api/v2/help_center/en-us/articles/360029231571.json",
+   "title": "Okta SSO Configuration Guide (SCIM 2.0)",
+   "quote": "Deactivating the user or disabling the user's access to the Egnyte application through Okta will result in deactivating the user's account on the associated Egnyte domain. The user will not be deleted in Egnyte and can be reactivated manually if required.",
+   "accessed": "2026-10-05",
+   "page_url": "https://helpdesk.egnyte.com/hc/en-us/articles/360029231571-Okta-SSO-Configuration-Guide-SCIM-2-0"
+  },
+  {
+   "id": "c9",
+   "url": "https://helpdesk.egnyte.com/api/v2/help_center/en-us/articles/360029231571.json",
+   "title": "Okta SSO Configuration Guide (SCIM 2.0)",
+   "quote": "Okta SCIM 2.0 does not support role modification for power users and always creates new Power Users with default role",
+   "accessed": "2026-10-05",
+   "page_url": "https://helpdesk.egnyte.com/hc/en-us/articles/360029231571-Okta-SSO-Configuration-Guide-SCIM-2-0"
+  },
+  {
+   "id": "c10",
+   "url": "https://helpdesk.egnyte.com/api/v2/help_center/en-us/articles/360029231571.json",
+   "title": "Okta SSO Configuration Guide (SCIM 2.0)",
+   "quote": "Create Groups: Groups and their members can be assigned and pushed from Okta to Egnyte. Groups can also be linked to an existing Group in Egnyte.",
+   "accessed": "2026-10-05",
+   "page_url": "https://helpdesk.egnyte.com/hc/en-us/articles/360029231571-Okta-SSO-Configuration-Guide-SCIM-2-0"
+  },
+  {
+   "id": "c11",
+   "url": "https://helpdesk.egnyte.com/api/v2/help_center/en-us/articles/360029231571.json",
+   "title": "Okta SSO Configuration Guide (SCIM 2.0)",
+   "quote": "SCIM connector base URL: https://<domain_name>.egnytegov.com/pubapi/scim/v2",
+   "accessed": "2026-10-05",
+   "page_url": "https://helpdesk.egnyte.com/hc/en-us/articles/360029231571-Okta-SSO-Configuration-Guide-SCIM-2-0"
+  },
+  {
+   "id": "c12",
+   "url": "https://helpdesk.egnyte.com/api/v2/help_center/en-us/articles/360029231571.json",
+   "title": "Okta SSO Configuration Guide (SCIM 2.0)",
+   "quote": "The user type in Okta is case-sensitive and accepts only the following values. admin power standard",
+   "accessed": "2026-10-05",
+   "page_url": "https://helpdesk.egnyte.com/hc/en-us/articles/360029231571-Okta-SSO-Configuration-Guide-SCIM-2-0"
+  },
+  {
+   "id": "c13",
+   "url": "https://helpdesk.egnyte.com/api/v2/help_center/en-us/articles/360029231571.json",
+   "title": "Okta SSO Configuration Guide (SCIM 2.0)",
+   "quote": "Scroll down to Attribute Mappings and delete all the attributes listed except for userName , givenName , familyName , email , and userType .",
+   "accessed": "2026-10-05",
+   "page_url": "https://helpdesk.egnyte.com/hc/en-us/articles/360029231571-Okta-SSO-Configuration-Guide-SCIM-2-0"
+  },
+  {
+   "id": "c14",
+   "url": "https://helpdesk.egnyte.com/api/v2/help_center/en-us/articles/360029231571.json",
+   "title": "Okta SSO Configuration Guide (SCIM 2.0)",
+   "quote": "Egnyte does not currently support username changes with SAML/SSO.",
+   "accessed": "2026-10-05",
+   "page_url": "https://helpdesk.egnyte.com/hc/en-us/articles/360029231571-Okta-SSO-Configuration-Guide-SCIM-2-0"
+  },
+  {
+   "id": "c15",
+   "url": "https://helpdesk.egnyte.com/api/v2/help_center/en-us/articles/360029231571.json",
+   "title": "Okta SSO Configuration Guide (SCIM 2.0)",
+   "quote": "Authentication Mode: HTTP Header",
+   "accessed": "2026-10-05",
+   "page_url": "https://helpdesk.egnyte.com/hc/en-us/articles/360029231571-Okta-SSO-Configuration-Guide-SCIM-2-0"
+  },
+  {
+   "id": "c16",
+   "url": "https://helpdesk.egnyte.com/api/v2/help_center/en-us/articles/360046781331.json",
+   "title": "Microsoft Entra ID Integration with Egnyte",
+   "quote": "https://<domain>.egnyte.com/pubapi/scim/v2/azure-connector",
+   "accessed": "2026-10-05",
+   "page_url": "https://helpdesk.egnyte.com/hc/en-us/articles/360046781331-Microsoft-Entra-ID-Integration-with-Egnyte"
+  },
+  {
+   "id": "c17",
+   "url": "https://helpdesk.egnyte.com/api/v2/help_center/en-us/articles/360046781331.json",
+   "title": "Microsoft Entra ID Integration with Egnyte",
+   "quote": "This URL can not be used with other identity providers",
+   "accessed": "2026-10-05",
+   "page_url": "https://helpdesk.egnyte.com/hc/en-us/articles/360046781331-Microsoft-Entra-ID-Integration-with-Egnyte"
+  },
+  {
+   "id": "c18",
+   "url": "https://helpdesk.egnyte.com/api/v2/help_center/en-us/articles/360046781331.json",
+   "title": "Microsoft Entra ID Integration with Egnyte",
+   "quote": "Go to https://scim-20.egnyte.com/ or https://scim-20.egnytegov.com/ (for EgnyteGov customers) to generate a Secret Token for the domain.",
+   "accessed": "2026-10-05",
+   "page_url": "https://helpdesk.egnyte.com/hc/en-us/articles/360046781331-Microsoft-Entra-ID-Integration-with-Egnyte"
+  },
+  {
+   "id": "c19",
+   "url": "https://helpdesk.egnyte.com/api/v2/help_center/en-us/articles/360046781331.json",
+   "title": "Microsoft Entra ID Integration with Egnyte",
+   "quote": "Users will be deactivated in Egnyte when: They are removed from the application scope They are soft deleted in Microsoft Entra ID",
+   "accessed": "2026-10-05",
+   "page_url": "https://helpdesk.egnyte.com/hc/en-us/articles/360046781331-Microsoft-Entra-ID-Integration-with-Egnyte"
+  },
+  {
+   "id": "c20",
+   "url": "https://helpdesk.egnyte.com/api/v2/help_center/en-us/articles/360046781331.json",
+   "title": "Microsoft Entra ID Integration with Egnyte",
+   "quote": "Users will be deleted in Egnyte when: They are permanently deleted in Microsoft Entra ID (by default 30 days after soft delete)",
+   "accessed": "2026-10-05",
+   "page_url": "https://helpdesk.egnyte.com/hc/en-us/articles/360046781331-Microsoft-Entra-ID-Integration-with-Egnyte"
+  },
+  {
+   "id": "c21",
+   "url": "https://helpdesk.egnyte.com/api/v2/help_center/en-us/articles/360046781331.json",
+   "title": "Microsoft Entra ID Integration with Egnyte",
+   "quote": "Currently usage of any custom attributes is not possible upon user creation. However it is possible to send custom attributes with PATCH.",
+   "accessed": "2026-10-05",
+   "page_url": "https://helpdesk.egnyte.com/hc/en-us/articles/360046781331-Microsoft-Entra-ID-Integration-with-Egnyte"
+  },
+  {
+   "id": "c22",
+   "url": "https://helpdesk.egnyte.com/api/v2/help_center/en-us/articles/360046781331.json",
+   "title": "Microsoft Entra ID Integration with Egnyte",
+   "quote": "Keep in mind that only explicitly added groups will be created in Egnyte. Nested groups will be ignored. Users in nested groups will also be ignored.",
+   "accessed": "2026-10-05",
+   "page_url": "https://helpdesk.egnyte.com/hc/en-us/articles/360046781331-Microsoft-Entra-ID-Integration-with-Egnyte"
+  },
+  {
+   "id": "c23",
+   "url": "https://helpdesk.egnyte.com/api/v2/help_center/en-us/articles/360046781331.json",
+   "title": "Microsoft Entra ID Integration with Egnyte",
+   "quote": "Microsoft Entra ID SCIM provisioning does not support setting newly created users into a custom role.",
+   "accessed": "2026-10-05",
+   "page_url": "https://helpdesk.egnyte.com/hc/en-us/articles/360046781331-Microsoft-Entra-ID-Integration-with-Egnyte"
+  },
+  {
+   "id": "c24",
+   "url": "https://helpdesk.egnyte.com/api/v2/help_center/en-us/articles/360046781331.json",
+   "title": "Microsoft Entra ID Integration with Egnyte",
+   "quote": "jobTitle title Always Direct Optional",
+   "accessed": "2026-10-05",
+   "page_url": "https://helpdesk.egnyte.com/hc/en-us/articles/360046781331-Microsoft-Entra-ID-Integration-with-Egnyte"
+  },
+  {
+   "id": "c25",
+   "url": "https://helpdesk.egnyte.com/api/v2/help_center/en-us/articles/360046781331.json",
+   "title": "Microsoft Entra ID Integration with Egnyte",
+   "quote": "Groups will be deleted in Egnyte when: They are removed from the application scope They are deleted in Microsoft Entra ID",
+   "accessed": "2026-10-05",
+   "page_url": "https://helpdesk.egnyte.com/hc/en-us/articles/360046781331-Microsoft-Entra-ID-Integration-with-Egnyte"
+  },
+  {
+   "id": "c26",
+   "url": "https://helpdesk.egnyte.com/api/v2/help_center/en-us/articles/360046781331.json",
+   "title": "Microsoft Entra ID Integration with Egnyte",
+   "quote": "The sync is one way. No changes to Egnyte will be reflected in Azure.",
+   "accessed": "2026-10-05",
+   "page_url": "https://helpdesk.egnyte.com/hc/en-us/articles/360046781331-Microsoft-Entra-ID-Integration-with-Egnyte"
+  },
+  {
+   "id": "c27",
+   "url": "https://helpdesk.egnyte.com/api/v2/help_center/en-us/articles/360046781331.json",
+   "title": "Microsoft Entra ID Integration with Egnyte",
+   "quote": "Provisioning is an automated process from Azure's side, which runs every 40 minutes, and there is no control over this period.",
+   "accessed": "2026-10-05",
+   "page_url": "https://helpdesk.egnyte.com/hc/en-us/articles/360046781331-Microsoft-Entra-ID-Integration-with-Egnyte"
+  },
+  {
+   "id": "c28",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/egnyte-provisioning-tutorial",
+   "title": "Configure Egnyte for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Create users in Egnyte. Remove users in Egnyte when they don't require access anymore. Keep user attributes synchronized between Microsoft Entra ID and Egnyte. Single sign-on to Egnyte (recommended).",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c29",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/egnyte-provisioning-tutorial",
+   "title": "Configure Egnyte for automatic user provisioning with Microsoft Entra ID",
+   "quote": "userName String ✓ ✓ externalId String ✓ ✓ active Boolean ✓ emails[type eq \"work\"].value String ✓ name.givenName String name.familyName String userType String",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c30",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/egnyte-provisioning-tutorial",
+   "title": "Configure Egnyte for automatic user provisioning with Microsoft Entra ID",
+   "quote": "displayName String ✓ ✓ members Reference",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c31",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/egnyte-provisioning-tutorial",
+   "title": "Configure Egnyte for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Contact Egnyte support to configure Egnyte to support provisioning with Microsoft Entra ID.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c32",
+   "url": "https://www.okta.com/integrations/egnyte-scim-2-0/",
+   "title": "Integrate Egnyte SCIM 2.0 with Okta",
+   "quote": "Add this integration to enable authentication and provisioning capabilities.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c33",
+   "url": "https://jumpcloud.com/support/integrate-with-egnyte",
+   "title": "Integrate with Egnyte | JumpCloud Documentation",
+   "quote": "An Egnyte user account with administrator permissions with an Enterprise subscription",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c34",
+   "url": "https://jumpcloud.com/support/integrate-with-egnyte",
+   "title": "Integrate with Egnyte | JumpCloud Documentation",
+   "quote": "Automatically provision, update and deprovision users and groups in Egnyte from JumpCloud using the SCIM integration.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c35",
+   "url": "https://jumpcloud.com/support/integrate-with-egnyte",
+   "title": "Integrate with Egnyte | JumpCloud Documentation",
+   "quote": "SSO must be configured for Egnyte prior to creating a SCIM integration",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c36",
+   "url": "https://helpdesk.egnyte.com/api/v2/help_center/en-us/articles/201638954.json",
+   "title": "Single Sign-On (SSO) Configuration",
+   "quote": "Egnyte can integrate with all major Single Sign-On (SSO) providers. Any identity provider using SAML 2.0 can be configured to provide access to Egnyte's Web UI",
+   "accessed": "2026-10-05",
+   "page_url": "https://helpdesk.egnyte.com/hc/en-us/articles/201638954-Single-Sign-On-SSO-Configuration"
+  },
+  {
+   "id": "c37",
+   "url": "https://helpdesk.egnyte.com/api/v2/help_center/en-us/articles/201638954.json",
+   "title": "Single Sign-On (SSO) Configuration",
+   "quote": "External authentication via SSO is only available for Admins and Power Users",
+   "accessed": "2026-10-05",
+   "page_url": "https://helpdesk.egnyte.com/hc/en-us/articles/201638954-Single-Sign-On-SSO-Configuration"
+  },
+  {
+   "id": "c38",
+   "url": "https://helpdesk.egnyte.com/api/v2/help_center/en-us/articles/201638954.json",
+   "title": "Single Sign-On (SSO) Configuration",
+   "quote": "Web UI Mobile Desktop App Office Add-in Import Existing Users to Egnyte OneLogin",
+   "accessed": "2026-10-05",
+   "page_url": "https://helpdesk.egnyte.com/hc/en-us/articles/201638954-Single-Sign-On-SSO-Configuration"
+  },
+  {
+   "id": "c39",
+   "url": "https://helpdesk.egnyte.com/api/v2/help_center/en-us/articles/360029136811.json",
+   "title": "Import Users and Groups",
+   "quote": "Admins can quickly add new users or groups by importing a CSV file containing all the necessary information, simplifying the process of setting up entire teams at once.",
+   "accessed": "2026-10-05",
+   "page_url": "https://helpdesk.egnyte.com/hc/en-us/articles/360029136811-Import-Users-and-Groups"
+  },
+  {
+   "id": "c40",
+   "url": "https://us-partner-integrations.egnyte.com/integration/cfs/api-docs/user-management-api",
+   "title": "User Management - Egnyte Developer Portal",
+   "quote": "The User Management API allows you to create, read, update, and delete users in your Egnyte domain.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c41",
+   "url": "https://us-partner-integrations.egnyte.com/integration/cfs/api-docs/user-management-api",
+   "title": "User Management - Egnyte Developer Portal",
+   "quote": "This API adheres to the SCIM (System for Cross-domain Identity Management) standard for user management.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c42",
+   "url": "https://us-partner-integrations.egnyte.com/integration/cfs/api-docs/user-management-api",
+   "title": "User Management - Egnyte Developer Portal",
+   "quote": "Base URL https://{domain}.egnyte.com/pubapi/v2/users Authentication All requests require an OAuth 2.0 Bearer token in the Authorization header",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c43",
+   "url": "https://us-partner-integrations.egnyte.com/integration/cfs/api-docs/user-management-api",
+   "title": "User Management - Egnyte Developer Portal",
+   "quote": "Get Single User Retrieves details for a specific user by ID. Request GET /pubapi/v2/users/{id}",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c44",
+   "url": "https://us-partner-integrations.egnyte.com/integration/cfs/api-docs/user-management-api",
+   "title": "User Management - Egnyte Developer Portal",
+   "quote": "Get User List Retrieves all users or a filtered subset. Supports pagination and filtering. Request GET /pubapi/v2/users",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c45",
+   "url": "https://us-partner-integrations.egnyte.com/integration/cfs/api-docs/user-management-api",
+   "title": "User Management - Egnyte Developer Portal",
+   "quote": "Create Single User Creates a new user in the Egnyte domain. Request POST /pubapi/v2/users",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c46",
+   "url": "https://us-partner-integrations.egnyte.com/integration/cfs/api-docs/user-management-api",
+   "title": "User Management - Egnyte Developer Portal",
+   "quote": "Update Single User Updates an existing user. Supports partial updates",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c47",
+   "url": "https://us-partner-integrations.egnyte.com/integration/cfs/api-docs/user-management-api",
+   "title": "User Management - Egnyte Developer Portal",
+   "quote": "PATCH /pubapi/v2/users/{id}",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c48",
+   "url": "https://us-partner-integrations.egnyte.com/integration/cfs/api-docs/user-management-api",
+   "title": "User Management - Egnyte Developer Portal",
+   "quote": "Delete Single User Deletes a user from the Egnyte domain. Request DELETE /pubapi/v2/users/{id}",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c49",
+   "url": "https://us-partner-integrations.egnyte.com/integration/cfs/api-docs/user-management-api",
+   "title": "User Management - Egnyte Developer Portal",
+   "quote": "The filter expression supports the eq operator (case-insensitive) with the following attributes: email externalId userName",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c50",
+   "url": "https://us-partner-integrations.egnyte.com/integration/cfs/api-docs/user-management-api",
+   "title": "User Management - Egnyte Developer Portal",
+   "quote": "Maximum number of results per page (max: 100)",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c51",
+   "url": "https://us-partner-integrations.egnyte.com/integration/cfs/api-docs/user-management-api",
+   "title": "User Management - Egnyte Developer Portal",
+   "quote": "userType string Yes User type: admin, power, or standard",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c52",
+   "url": "https://us-partner-integrations.egnyte.com/integration/cfs/api-docs/group-management",
+   "title": "Group Management - Egnyte Developer Portal",
+   "quote": "The Group Management API allows you to list groups, view group details, manage group membership, create groups, rename groups, and delete groups. This API is designed to comply with SCIM 1.1.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c53",
+   "url": "https://us-partner-integrations.egnyte.com/integration/cfs/api-docs/group-management",
+   "title": "Group Management - Egnyte Developer Portal",
+   "quote": "List Groups Returns all custom groups in your domain. Request GET /pubapi/v2/groups",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c54",
+   "url": "https://us-partner-integrations.egnyte.com/integration/cfs/api-docs/group-management",
+   "title": "Group Management - Egnyte Developer Portal",
+   "quote": "Show Single Group Returns details of a specific group, including its members. Request GET /pubapi/v2/groups/{group_id}",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c55",
+   "url": "https://us-partner-integrations.egnyte.com/integration/cfs/api-docs/group-management",
+   "title": "Group Management - Egnyte Developer Portal",
+   "quote": "Create a Group Creates a new group with optional initial members. Request POST /pubapi/v2/groups",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c56",
+   "url": "https://us-partner-integrations.egnyte.com/integration/cfs/api-docs/group-management",
+   "title": "Group Management - Egnyte Developer Portal",
+   "quote": "Full Update to a Group Overwrites all attributes of a group. This replaces the entire group configuration, including membership. Request PUT /pubapi/v2/groups/{group_id}",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c57",
+   "url": "https://us-partner-integrations.egnyte.com/integration/cfs/api-docs/group-management",
+   "title": "Group Management - Egnyte Developer Portal",
+   "quote": "Use this to rename a group, add members, or remove members incrementally. Request PATCH /pubapi/v2/groups/{group_id}",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c58",
+   "url": "https://us-partner-integrations.egnyte.com/integration/cfs/api-docs/group-management",
+   "title": "Group Management - Egnyte Developer Portal",
+   "quote": "Delete a Group Permanently deletes a group. Request DELETE /pubapi/v2/groups/{group_id}",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c59",
+   "url": "https://us-partner-integrations.egnyte.com/integration/cfs/api-docs/authentication",
+   "title": "Authentication - Egnyte Developer Portal",
+   "quote": "Egnyte.user User Management Egnyte.group Group Management Egnyte.audit Audit Reporting",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c60",
+   "url": "https://us-partner-integrations.egnyte.com/integration/cfs/api-docs/getting-started",
+   "title": "Getting Started - Egnyte Developer Portal",
+   "quote": "Eligible Plan: API access is only available to active Egnyte customers on eligible plans. Egnyte domains on Trial, Legacy Office, or Team plans are not supported.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c61",
+   "url": "https://us-partner-integrations.egnyte.com/integration/cfs/api-docs/getting-started",
+   "title": "Getting Started - Egnyte Developer Portal",
+   "quote": "API keys are restricted to Egnyte domain administrators.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c62",
+   "url": "https://us-partner-integrations.egnyte.com/integration/cfs/api-docs/best-practices",
+   "title": "Best Practices - Egnyte Developer Portal",
+   "quote": "Rate limits are enforced per access token, not per API key.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c63",
+   "url": "https://us-partner-integrations.egnyte.com/integration/cfs/api-docs/best-practices",
+   "title": "Best Practices - Egnyte Developer Portal",
+   "quote": "1,000 calls per day per token 2 calls per second per token",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c64",
+   "url": "https://us-partner-integrations.egnyte.com/integration/cfs/api-docs/audit-reporting-api/v2",
+   "title": "Audit Reporting API v2 - Egnyte Developer Portal",
+   "quote": "The Audit Reporting API v2 lets you retrieve audit records for login activity, file actions, permission changes, configuration changes, and more.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c65",
+   "url": "https://us-partner-integrations.egnyte.com/integration/cfs/api-docs/audit-reporting-api/v2",
+   "title": "Audit Reporting API v2 - Egnyte Developer Portal",
+   "quote": "GET /pubapi/v2/audit/stream POST /pubapi/v2/audit/stream",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c66",
+   "url": "https://us-partner-integrations.egnyte.com/integration/cfs/api-docs/audit-reporting-api/v2",
+   "title": "Audit Reporting API v2 - Egnyte Developer Portal",
+   "quote": "10 requests per minute 100 requests per hour",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c67",
+   "url": "https://us-partner-integrations.egnyte.com/integration/cfs/api-docs/webhooks-api",
+   "title": "Webhooks - Egnyte Developer Portal",
+   "quote": "group:create, group:delete, group:rename, group:add_members, group:remove_members, group:add_owner, group:remove_owner",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.egnyte.com/pricing",
+  "https://www.egnyte.com/pricing-team",
+  "helpdesk.egnyte.com help-centre search API: scim, provisioning, SCIM plan, Enterprise Lite SSO, user provisioning plan, billing plan SSO",
+  "https://developers.egnyte.com/sitemap.xml",
+  "https://us-partner-integrations.egnyte.com/integration/cfs/api-docs/overview",
+  "https://www.okta.com/integrations/egnyte-scim-2-0/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/egnyte-provisioning-tutorial",
+  "https://jumpcloud.com/support/integrate-with-egnyte"
+ ],
+ "open_questions": [
+  "Which current Egnyte plan JumpCloud's 'Enterprise subscription' maps to (Enterprise Lite or above); Egnyte does not publish a SCIM plan.",
+  "What the '$' marker in the Business column of the pricing table's SSO row means (paid add-on?).",
+  "Whether SCIM deprovisioning frees the license seat or ends active sessions.",
+  "SCIM token expiry, pagination limits and ServiceProviderConfig/Schemas support are not documented.",
+  "Whether a Google Workspace or OneLogin provisioning connector exists."
+ ]
+}

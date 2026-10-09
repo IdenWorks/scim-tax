@@ -1,0 +1,876 @@
+{
+ "slug": "surveymonkey",
+ "vendor": "SurveyMonkey",
+ "vendor_url": "https://www.surveymonkey.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "SurveyMonkey",
+  "slug": "surveymonkey",
+  "category": "Marketing & Advertising",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Team Advantage",
+  "team_price_text": "Team Advantage: $30/u/mo (3+ users, annual)",
+  "team_price_per_user_mo": 30,
+  "price_multiplier": null,
+  "sso_plan": "Enterprise",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": 5,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": false
+  },
+  "idp": {
+   "okta": "sso_only",
+   "entra": "native",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": "sso_only",
+   "generic": true
+  },
+  "pricing_page_url": "https://www.surveymonkey.com/pricing/",
+  "docs_url": "https://help.surveymonkey.com/en/surveymonkey/teams/scim/",
+  "evidence": "SurveyMonkey's help centre says SCIM (a beta feature) is only for Enterprise teams that have SSO set up, and the pricing page lists SSO under the Enterprise plan (Get a demo, 5+ users).",
+  "notes": "Unchanged from June: SCIM is Enterprise-only (Contact Sales) and needs SSO; Team Advantage $30 and Team Premier $92 per user/mo billed annually, 3-user minimum. SCIM is labelled beta and limited to one IdP per Enterprise team; Users only (no Groups endpoint); deactivated users keep their seat until an admin deletes them; roles, seats and deletion stay manual in SurveyMonkey. Okta's OIN app is SAML/SWA only and JumpCloud's is SAML only; Microsoft's Entra gallery app provisions. Deployed private API apps need Enterprise (drafts on any plan for 90 days). The June Vendr deal-size figure was dropped (no first-party source).",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Enterprise",
+  "api_tax": true,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Team Advantage",
+   "price_text": "$30/user/month, starting at 3 users, billed annually",
+   "price_per_user_mo": 30,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c4",
+    "c5",
+    "c25"
+   ],
+   "notes": "user_api false = no deployed private app (Enterprise required); 90-day draft apps on any plan."
+  },
+  {
+   "name": "Team Premier",
+   "price_text": "$92/user/month, starting at 3 users, billed annually",
+   "price_per_user_mo": 92,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": false,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c4",
+    "c5",
+    "c25"
+   ]
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Get a demo (Contact Sales), 5+ users",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c4",
+    "c5",
+    "c25"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c5",
+   "c14",
+   "c15"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://api.surveymonkey.com/scim/v2",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Settings > User provisioning with SCIM > Generate token (Primary Admin only)",
+   "token_expiry": null,
+   "cite": [
+    "c7",
+    "c14",
+    "c24",
+    "c42"
+   ],
+   "notes": "Entra describes it as a long-lived bearer token; it can be revoked in Settings."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": null,
+   "ServiceProviderConfig": true,
+   "Schemas": true,
+   "ResourceTypes": true,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c16",
+    "c17",
+    "c20",
+    "c21"
+   ],
+   "notes": "The SCIM API reference documents Users, Schemas, ResourceTypes and ServiceProviderConfig only; no Groups section."
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": true,
+   "group_push": null,
+   "group_membership": null,
+   "cite": [
+    "c16",
+    "c17",
+    "c9",
+    "c41"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": false,
+   "revokes_sessions": null,
+   "data_retained": "Deactivated account stays on the team and keeps its seat until an admin deletes it; account reassignment and deletion are done in SurveyMonkey.",
+   "cite": [
+    "c9",
+    "c10",
+    "c8"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName"
+   ],
+   "cite": [
+    "c22",
+    "c41"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": 1000,
+   "cite": [
+    "c22",
+    "c23"
+   ],
+   "notes": "ListResponse uses startIndex/itemsPerPage; ServiceProviderConfig filter.maxResults is 1000."
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "emails[type eq \"work\"].value",
+    "emails.primary",
+    "active",
+    "externalId"
+   ],
+   "enterprise": [
+    "employeeNumber",
+    "costCenter",
+    "department",
+    "division"
+   ],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": [
+    "c12",
+    "c16",
+    "c18",
+    "c19",
+    "c41"
+   ],
+   "notes": "division maps to SurveyMonkey Divisions; only work emails are stored."
+  },
+  "roles": {
+   "supported": false,
+   "how": "Role and seat assignments stay manual in SurveyMonkey.",
+   "cite": [
+    "c8"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SCIM is a beta feature for Enterprise teams with SSO set up.",
+    "cite": [
+     "c5"
+    ]
+   },
+   {
+    "text": "Only one IdP per Enterprise team; Primary Admin must check fit with the CSM first.",
+    "cite": [
+     "c6"
+    ]
+   },
+   {
+    "text": "Deactivated users still take a seat until an admin deletes them; only deactivated members can be deleted.",
+    "cite": [
+     "c9",
+     "c10"
+    ]
+   },
+   {
+    "text": "SCIM does not deactivate users removed from the IdP before SCIM was enabled.",
+    "cite": [
+     "c11"
+    ]
+   },
+   {
+    "text": "Roles, seats, account reassignment and deletion are managed in SurveyMonkey, not via SCIM.",
+    "cite": [
+     "c8"
+    ]
+   },
+   {
+    "text": "Calling the SCIM API without one of SurveyMonkey's IdP integrations is not recommended.",
+    "cite": [
+     "c15"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c25",
+   "c26"
+  ],
+  "plan": "Enterprise",
+  "api_tax": true,
+  "style": "REST",
+  "base_url": "https://api.surveymonkey.com/v3",
+  "docs_url": "https://api.surveymonkey.com/v3/docs",
+  "auth": {
+   "methods": [
+    "oauth2",
+    "access_token"
+   ],
+   "scopes": [
+    "users_read",
+    "groups_read",
+    "workgroups_read",
+    "workgroups_write",
+    "workgroups_members_read",
+    "workgroups_members_write",
+    "roles_read",
+    "roles_write"
+   ],
+   "cite": [
+    "c38",
+    "c39"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": false,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c26",
+    "c28",
+    "c29",
+    "c30",
+    "c31",
+    "c32",
+    "c33"
+   ],
+   "notes": "Team members are listed via GET /groups/{id}/members; PATCH only updates a member's email. Workgroup membership (sub-teams) can be added/removed. No REST endpoint to add or remove team seats was seen; create_user false = no such endpoint in the REST reference (SCIM only)."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/users/me",
+    "purpose": "Current user's account details including plan",
+    "cite": [
+     "c26"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/groups",
+    "purpose": "List teams (groups)",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/groups/{group_id}/members",
+    "purpose": "List team members",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/groups/{group_id}/members/{member_id}",
+    "purpose": "Get a member's details including role and status",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/groups/{group_id}/members/{member_id}",
+    "purpose": "Update a member's email address",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/groups/{group_id}/activities",
+    "purpose": "Team activity data (admin)",
+    "cite": [
+     "c34"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/workgroups",
+    "purpose": "List workgroups",
+    "cite": [
+     "c48"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/workgroups/{workgroup_id}/members",
+    "purpose": "List workgroup members",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/workgroups/{workgroup_id}/members",
+    "purpose": "Add a workgroup member",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/workgroups/{workgroup_id}/members/{member_id}",
+    "purpose": "Remove a member from a workgroup",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/roles",
+    "purpose": "List roles in the organization",
+    "cite": [
+     "c33"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": false,
+   "events": [],
+   "cite": [
+    "c35"
+   ],
+   "notes": "Webhook event types cover responses, collectors, surveys and app install/uninstall only."
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": null,
+   "cite": [
+    "c34"
+   ],
+   "notes": "GET /groups/{group_id}/activities returns team activity data for admins; plan not stated."
+  },
+  "rate_limits": {
+   "text": "Draft and private apps: 120 calls/minute and from 500 calls/day; public App Directory apps up to 500,000 requests/day.",
+   "cite": [
+    "c36",
+    "c37"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "Deploying a private app requires Enterprise; draft apps on other plans are disabled after 90 days.",
+    "cite": [
+     "c25"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/surveymonkey/",
+   "cite": [
+    "c40"
+   ],
+   "notes": "OIN page markup marks only SAML and SWA as checked; SCIM and Create/Update/Deactivate are unchecked."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/surveymonkey-enterprise-provisioning-tutorial",
+   "cite": [
+    "c41",
+    "c42"
+   ]
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "OneLogin connector pages block bots; SurveyMonkey docs do not mention OneLogin."
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://jumpcloud.com/support/integrate-with-surveymonkey",
+   "cite": [
+    "c43"
+   ],
+   "notes": "JumpCloud article covers SAML SSO only; no SCIM section."
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c44",
+   "c46",
+   "c47"
+  ],
+  "notes": "Anyone allowed by the IdP can create or convert an account on first SSO sign-in (shown as invited users)."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.surveymonkey.com/pricing/",
+   "title": "SurveyMonkey Plans and Pricing",
+   "quote": "$30 / user / month Starting at 3 users, billed annually Sign up 3+ users Unlimited surveys Unlimited questions 50,000 responses per year",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.surveymonkey.com/pricing/",
+   "title": "SurveyMonkey Plans and Pricing",
+   "quote": "$92 / user / month Starting at 3 users, billed annually Sign up 3+ users Unlimited surveys Unlimited questions 100,000 responses per year",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.surveymonkey.com/pricing/",
+   "title": "SurveyMonkey Plans and Pricing",
+   "quote": "custom role management. Get a demo 5+ users Unlimited surveys Unlimited questions Custom response limit Everything in Team Premier User management and reports",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.surveymonkey.com/pricing/",
+   "title": "SurveyMonkey Plans and Pricing",
+   "quote": "Premium onboarding Customer Success access Single sign-on (SSO)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://help.surveymonkey.com/en/surveymonkey/teams/scim/",
+   "title": "Manage Accounts with SCIM",
+   "quote": "Beta Feature: This feature is only for Enterprise teams that have Single Sign-On (SSO) set up.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://help.surveymonkey.com/en/surveymonkey/teams/scim/",
+   "title": "Manage Accounts with SCIM",
+   "quote": "Only the Primary Admin can set up SCIM provisioning for your organization. To make sure SCIM is a good fit for your IdP, the Primary Admin should check in with their SurveyMonkey Customer Success Manager (CSM) and their organization's IT department—only 1 IdP per Enterprise team.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://help.surveymonkey.com/en/surveymonkey/teams/scim/",
+   "title": "Manage Accounts with SCIM",
+   "quote": "Copy the SCIM endpoint link and provide it to your IT partner. Select Generate token. Treat this unique token as you would your Primary Admin password and only give it to your IT partner.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://help.surveymonkey.com/en/surveymonkey/teams/scim/",
+   "title": "Manage Accounts with SCIM",
+   "quote": "Primary Admins and Admins will continue to manage the following within SurveyMonkey: Account reassignment Role and seat assignments Accounts that don't have SSO enabled Account deletion",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://help.surveymonkey.com/en/surveymonkey/teams/scim/",
+   "title": "Manage Accounts with SCIM",
+   "quote": "With SCIM enabled accounts, only deactivated team members can be deleted.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://help.surveymonkey.com/en/surveymonkey/teams/scim/",
+   "title": "Manage Accounts with SCIM",
+   "quote": "Do deactivated accounts take up a license (seat)? Yes. An admin must delete a deactivated account to free up a seat.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://help.surveymonkey.com/en/surveymonkey/teams/scim/",
+   "title": "Manage Accounts with SCIM",
+   "quote": "User deactivation only begins once SCIM is enabled, and so it won't deactivate users that were removed (former employees) before SCIM was applied.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://help.surveymonkey.com/en/surveymonkey/teams/scim/",
+   "title": "Manage Accounts with SCIM",
+   "quote": "mailNickname externalId n/a employeeId urn:ietf:params:scim:schemas:extension:enterprise:2.0:User:employeeNumber Employee ID",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://help.surveymonkey.com/en/surveymonkey/teams/scim/",
+   "title": "Manage Accounts with SCIM",
+   "quote": "As long as SSO is enabled, there will be no impact to users who have already been synced.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://api.surveymonkey.com/v3/docs",
+   "title": "SurveyMonkey API – API Documentation",
+   "quote": "SCIM version 2.0 is supported. To use SCIM API, you will need to generate a separate access token from the rest of the standard SurveyMonkey APIs.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://api.surveymonkey.com/v3/docs",
+   "title": "SurveyMonkey API – API Documentation",
+   "quote": "Accessing the SurveyMonkey SCIM API without one of our IDP integrations is not recommended. Base URLs: https://api.surveymonkey.com/scim/v2",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://api.surveymonkey.com/v3/docs",
+   "title": "SurveyMonkey API – API Documentation",
+   "quote": "GET: Returns a list of Users managed by SCIM POST: Creates a User",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://api.surveymonkey.com/v3/docs",
+   "title": "SurveyMonkey API – API Documentation",
+   "quote": "GET: Returns a User PUT: Replaces all provided attributes of a User DELETE: Deletes a User PATCH: Updates provided attributes of a User",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://api.surveymonkey.com/v3/docs",
+   "title": "SurveyMonkey API – API Documentation",
+   "quote": "Only emails with type “work” will be stored in SurveyMonkey",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://api.surveymonkey.com/v3/docs",
+   "title": "SurveyMonkey API – API Documentation",
+   "quote": "division string The division for the User. This maps to Divisions in SurveyMonkey.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://api.surveymonkey.com/v3/docs",
+   "title": "SurveyMonkey API – API Documentation",
+   "quote": "GET: Returns a list of Schemas supported by the SCIM API",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://api.surveymonkey.com/v3/docs",
+   "title": "SurveyMonkey API – API Documentation",
+   "quote": "GET: Returns the SCIM API Service Provider configuration",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://api.surveymonkey.com/v3/docs",
+   "title": "SurveyMonkey API – API Documentation",
+   "quote": "\"filter\": { \"supported\": true, \"maxResults\": 1000 }",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://api.surveymonkey.com/v3/docs",
+   "title": "SurveyMonkey API – API Documentation",
+   "quote": "startIndex integer The 1-based index of the returned page",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://api.surveymonkey.com/v3/docs",
+   "title": "SurveyMonkey API – API Documentation",
+   "quote": "Authentication scheme using the OAuth Bearer Token Standard",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://help.surveymonkey.com/en/surveymonkey/integrations/surveymonkey-api/",
+   "title": "SurveyMonkey API",
+   "quote": "An Enterprise plan is required to deploy a private app. While any user on any plan can create a draft app which can be used during the 90-day draft period, the app will be disabled after the 90-day draft period if it's not deployed.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://api.surveymonkey.com/v3/docs",
+   "title": "SurveyMonkey API – API Documentation",
+   "quote": "GET: Returns the current user’s account details including their plan. Public App users need access to the View Users scope",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://api.surveymonkey.com/v3/docs",
+   "title": "SurveyMonkey API – API Documentation",
+   "quote": "GET: Returns a list of groups. Public App users need access to the View Teams scope",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://api.surveymonkey.com/v3/docs",
+   "title": "SurveyMonkey API – API Documentation",
+   "quote": "GET: Returns a list of users who have been added as members of the specified group. Public App users need access to the View Teams scope",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://api.surveymonkey.com/v3/docs",
+   "title": "SurveyMonkey API – API Documentation",
+   "quote": "GET: Returns a group member’s details including their role and status. Public App users need access to the View Teams scope",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://api.surveymonkey.com/v3/docs",
+   "title": "SurveyMonkey API – API Documentation",
+   "quote": "PATCH: Update a group members email address",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://api.surveymonkey.com/v3/docs",
+   "title": "SurveyMonkey API – API Documentation",
+   "quote": "GET: Returns the members in a workgroup. Public App users need access to the View Workgroup Members scope POST: Creates a new workgroup member.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c32",
+   "url": "https://api.surveymonkey.com/v3/docs",
+   "title": "SurveyMonkey API – API Documentation",
+   "quote": "DELETE: Deletes a member from a workgroup. Public App users need access to the Create/Modify Workgroup Members scope",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://api.surveymonkey.com/v3/docs",
+   "title": "SurveyMonkey API – API Documentation",
+   "quote": "GET: Returns the list of user roles in an organization. Public App users need access to the View Roles scope",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://api.surveymonkey.com/v3/docs",
+   "title": "SurveyMonkey API – API Documentation",
+   "quote": "GET: Returns a list of activity related data for the specified group. Public App users must be admin.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c35",
+   "url": "https://api.surveymonkey.com/v3/docs",
+   "title": "SurveyMonkey API – API Documentation",
+   "quote": "Event type that the webhook listens to: response_completed, response_updated, response_disqualified, response_created, response_deleted, response_overquota, collector_created, collector_updated, collector_deleted, survey_created, survey_updated, survey_deleted, app_installed, app_uninstalled",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c36",
+   "url": "https://api.surveymonkey.com/v3/docs",
+   "title": "SurveyMonkey API – API Documentation",
+   "quote": "All Draft and Private apps will initially be subject to request limits of 120 calls/minute and starting at 500 calls/day (contact sales).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c37",
+   "url": "https://api.surveymonkey.com/v3/docs",
+   "title": "SurveyMonkey API – API Documentation",
+   "quote": "Public apps published in our App Directory can make up to 500,000 requests per day to our API.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c38",
+   "url": "https://api.surveymonkey.com/v3/docs",
+   "title": "SurveyMonkey API – API Documentation",
+   "quote": "View Users View your user information users_read No View Teams View teams you belong to groups_read Yes",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c39",
+   "url": "https://api.surveymonkey.com/v3/docs",
+   "title": "SurveyMonkey API – API Documentation",
+   "quote": "Create/Modify Workgroup Members Add or remove members from a workgroup workgroups_members_write Yes View Roles View the roles available to assign to members in your team roles_read Yes",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c40",
+   "url": "https://www.okta.com/integrations/surveymonkey/",
+   "title": "Integrate SurveyMonkey with Okta",
+   "quote": "Add this integration to enable authentication and provisioning capabilities.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c41",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/surveymonkey-enterprise-provisioning-tutorial",
+   "title": "Configure SurveyMonkey Enterprise for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Create users in SurveyMonkey Enterprise. Remove users in SurveyMonkey Enterprise when they don't require access anymore. Keep user attributes synchronized between Microsoft Entra ID and SurveyMonkey Enterprise.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c42",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/surveymonkey-enterprise-provisioning-tutorial",
+   "title": "Configure SurveyMonkey Enterprise for automatic user provisioning with Microsoft Entra ID",
+   "quote": "Long lived bearer token authentication supported.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c43",
+   "url": "https://jumpcloud.com/support/integrate-with-surveymonkey",
+   "title": "Integrate with SurveyMonkey | JumpCloud Documentation",
+   "quote": "Use JumpCloud SAML Single Sign On (SSO) to give your users convenient but secure access to all their web applications with a single set of credentials. Read this article to learn how to integrate with SurveyMonkey.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c44",
+   "url": "https://help.surveymonkey.com/en/surveymonkey/teams/single-sign-on/",
+   "title": "Single Sign-On (SSO) | SurveyMonkey",
+   "quote": "SurveyMonkey's SSO solution follows the SAML 2.0 specification and is Service Provider (SP) initiated.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c45",
+   "url": "https://help.surveymonkey.com/en/surveymonkey/teams/single-sign-on/",
+   "title": "Single Sign-On (SSO) | SurveyMonkey",
+   "quote": "After your organization upgrades to an Enterprise plan, you'll be given the option to set up SSO for your team's account—only 1 IdP per Enterprise team.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c46",
+   "url": "https://help.surveymonkey.com/en/surveymonkey/teams/single-sign-on/",
+   "title": "Single Sign-On (SSO) | SurveyMonkey",
+   "quote": "The first time you log in to an SSO enabled SurveyMonkey account, choose to Create a new account or Convert an account.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c47",
+   "url": "https://help.surveymonkey.com/en/surveymonkey/teams/scim/",
+   "title": "Manage Accounts with SCIM",
+   "quote": "With SCIM, an invited user isn't sent an invitation to join the Team, and so don't take up a seat.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c48",
+   "url": "https://api.surveymonkey.com/v3/docs",
+   "title": "SurveyMonkey API – API Documentation",
+   "quote": "GET: Returns a list of all workgroups that are available.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.surveymonkey.com/pricing/",
+  "https://help.surveymonkey.com/sitemap-en.xml",
+  "https://help.surveymonkey.com/en/surveymonkey/teams/scim/",
+  "https://help.surveymonkey.com/en/surveymonkey/teams/single-sign-on/",
+  "https://help.surveymonkey.com/en/surveymonkey/integrations/surveymonkey-api/",
+  "https://api.surveymonkey.com/v3/docs",
+  "https://www.okta.com/integrations/surveymonkey/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/surveymonkey-enterprise-provisioning-tutorial",
+  "https://jumpcloud.com/support/integrate-with-surveymonkey"
+ ],
+ "open_questions": [
+  "Whether SCIM deprovisioning ends active sessions is not documented.",
+  "SCIM token expiry is not stated (Entra calls it long-lived).",
+  "Whether the Groups SCIM endpoint exists is not documented (none in the API reference).",
+  "Plan required for the /groups/{id}/activities endpoint is not stated.",
+  "Google Workspace and OneLogin catalogue apps not verified.",
+  "Whether CSV bulk user import exists was not checked.",
+  "Enterprise price and seat minimum beyond '5+ users' are not public.",
+  "SCIM-specific rate limits are not documented."
+ ]
+}

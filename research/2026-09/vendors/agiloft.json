@@ -1,0 +1,642 @@
+{
+ "slug": "agiloft",
+ "vendor": "Agiloft",
+ "vendor_url": "https://www.agiloft.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Agiloft",
+  "slug": "agiloft",
+  "category": "Legal, Contracts & Compliance",
+  "status": "gated",
+  "scim_plan": "CLM platform (Contact Sales)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales (no public tiers)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "CLM platform (Contact Sales)",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": false,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": false,
+   "groups": false
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.agiloft.com/pricing",
+  "docs_url": "https://help.agiloft.com/space/HELP/778928159.md",
+  "evidence": "Agiloft's help centre says Agiloft CLM integrates with \"any identity provider (IdP) that supports ... (SCIM) 2.0\" to create, update, deactivate and reactivate users, while its pricing page publishes no tiers, only a Get Pricing form.",
+  "notes": "New row. Agiloft sells one quote-based CLM platform (pricing page is a 'Get Pricing' form; licences are Admin, Standard and Requester), so SCIM, like everything else, is Contact Sales; gated follows the rule for quote-only vendors (same as Juro). The docs do not name an edition for SCIM. SCIM 2.0 at https://{kb}.agiloft.com/scim/v2 with bearer tokens from a SCIM profile (Setup > Access > Configure SCIM); requires User Status Management to deploy deactivation. Users only: groups/teams and custom attributes are not synced (default groups/teams per profile instead); a SCIM delete request deactivates rather than deletes. Okta and Entra are documented as custom SCIM apps; Okta's OIN 'Agiloft' app is SWA only (2015) and the Entra gallery app is SAML with JIT. SAML/OAuth SSO and LDAP sync are also available. REST/OpenAPI (Platform edition) exposes the People table, e.g. PUT /contacts/{id}.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Platform edition",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Agiloft CLM (Platform edition)",
+   "price_text": "Contact Sales",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c35",
+    "c2",
+    "c19",
+    "c21"
+   ],
+   "notes": "No public tier table; the pricing page is a quote form. SCIM's edition is not stated in the docs."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c2",
+   "c6",
+   "c9"
+  ],
+  "plan": "CLM platform (Contact Sales)",
+  "addon_price_text": null,
+  "sso_required": false,
+  "version": "2.0",
+  "base_url": "https://{kb}.agiloft.com/scim/v2 (example: https://example.agiloft.com/scim/v2)",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Setup > Access > Configure SCIM > SCIM profile > Bearer Tokens tab > Generate Token",
+   "token_expiry": null,
+   "cite": [
+    "c10",
+    "c15"
+   ],
+   "notes": "Multiple active tokens per profile; tokens can be revoked or deleted. Expiry not documented."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": false,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c2",
+    "c5",
+    "c13"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": false,
+   "group_push": false,
+   "group_membership": false,
+   "cite": [
+    "c3",
+    "c4",
+    "c5",
+    "c7",
+    "c13",
+    "c33",
+    "c34"
+   ],
+   "notes": "Update is supported but the HTTP method (PUT vs PATCH) is not documented. A SCIM delete request deactivates the user rather than deleting the record."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": true,
+   "data_retained": "User record kept with User Is Active = false; the account's activities stay in audit logs and other records.",
+   "cite": [
+    "c7",
+    "c17",
+    "c18"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "externalId",
+    "active"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": false,
+    "how": "Custom attributes are not synchronized through SCIM; only direct attribute values (no expressions) can be mapped."
+   },
+   "group": [],
+   "cite": [
+    "c5",
+    "c7",
+    "c8",
+    "c11",
+    "c14"
+   ],
+   "notes": "The User Attributes tab lists 'the standard SCIM user attributes' mapped to Agiloft fields; the full list is not published. Presence of the enterprise extension decides whether users go to Employees or External Users."
+  },
+  "roles": {
+   "supported": false,
+   "how": "No role or group mapping from the IdP; each SCIM profile assigns default groups, a default primary team and default teams to new users.",
+   "cite": [
+    "c5",
+    "c12"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Group and team synchronization is not supported (planned for a later release).",
+    "cite": [
+     "c5",
+     "c13"
+    ]
+   },
+   {
+    "text": "One-way sync; changes in Agiloft are overwritten by the IdP for mapped fields.",
+    "cite": [
+     "c16"
+    ]
+   },
+   {
+    "text": "Expression-based attribute values are not supported.",
+    "cite": [
+     "c14"
+    ]
+   }
+  ],
+  "notes": "sso_required=false: the docs say SCIM and SSO can be used independently and SCIM can be set up before SSO."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c21",
+   "c23",
+   "c24"
+  ],
+  "plan": "Platform edition (older editions: Advanced or Premium)",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": null,
+  "docs_url": "https://help.agiloft.com/space/HELP/929595396/OpenAPI%20Interface",
+  "notes": "OpenAPI/REST is generated per KB (Swagger UI at Setup > System > View REST documentation); users are records in the People (contacts) table. SOAP is legacy and off by default.",
+  "auth": {
+   "methods": [
+    "oauth2",
+    "bearer_token_via_login"
+   ],
+   "scopes": [],
+   "cite": [
+    "c25",
+    "c31",
+    "c32"
+   ]
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c23",
+    "c24"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/login",
+    "purpose": "Get an access token (expires after 15 minutes by default)",
+    "cite": [
+     "c32",
+     "c25"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/contacts/{id}",
+    "purpose": "Update a record in the People table",
+    "cite": [
+     "c24",
+     "c23"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "No rate limits per user, token, KB, or otherwise.",
+   "cite": [
+    "c22"
+   ]
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": false,
+   "provisioning": false,
+   "kind": "swa",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/agiloft/",
+   "cite": [
+    "c26",
+    "c29"
+   ],
+   "notes": "OIN 'Agiloft' app (last updated Sep. 4 2015) marks only SWA (page markup). Agiloft documents SCIM by enabling SCIM on a SAML app in Okta with the KB base URL, i.e. a custom app."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/agiloft-tutorial",
+   "cite": [
+    "c27",
+    "c28",
+    "c9"
+   ],
+   "notes": "Gallery app 'Agiloft Contract Management Suite' is SAML SSO with JIT; Agiloft documents SCIM via a custom enterprise app's Provisioning tab with the KB SCIM base URL."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": "LDAP directory sync",
+  "docs_public": true,
+  "cite": [
+   "c20",
+   "c27",
+   "c30"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.agiloft.com/pricing",
+   "title": "Agiloft Pricing Options - Contact Us & Get Quote",
+   "quote": "Included Features: Creation, Negotiation, and Execution Document generation Contract repository",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://help.agiloft.com/space/HELP/779649034.md",
+   "title": "Provision Users with SCIM",
+   "quote": "To automate user lifecycle management in your KB, you can integrate Agiloft CLM with any identity provider (IdP) that supports System for Cross-domain Identity Management (SCIM) 2.0.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.agiloft.com/space/HELP/779649034/Provision%20Users%20with%20SCIM"
+  },
+  {
+   "id": "c3",
+   "url": "https://help.agiloft.com/space/HELP/779649034.md",
+   "title": "Provision Users with SCIM",
+   "quote": "Deactivate users in your KB when they’re removed or deactivated in the IdP",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.agiloft.com/space/HELP/779649034/Provision%20Users%20with%20SCIM"
+  },
+  {
+   "id": "c4",
+   "url": "https://help.agiloft.com/space/HELP/779649034.md",
+   "title": "Provision Users with SCIM",
+   "quote": "Reactivate users in your KB when they’re activated again in the IdP",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.agiloft.com/space/HELP/779649034/Provision%20Users%20with%20SCIM"
+  },
+  {
+   "id": "c5",
+   "url": "https://help.agiloft.com/space/HELP/779649034.md",
+   "title": "Provision Users with SCIM",
+   "quote": "At this time, synchronizing groups and teams or custom attributes through SCIM is not supported.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.agiloft.com/space/HELP/779649034/Provision%20Users%20with%20SCIM"
+  },
+  {
+   "id": "c6",
+   "url": "https://help.agiloft.com/space/HELP/779649034.md",
+   "title": "Provision Users with SCIM",
+   "quote": "SCIM is supported with both OAuth 2.0 and SAML 2.0 SSO methods.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.agiloft.com/space/HELP/779649034/Provision%20Users%20with%20SCIM"
+  },
+  {
+   "id": "c7",
+   "url": "https://help.agiloft.com/space/HELP/778928159.md",
+   "title": "Set Up SCIM",
+   "quote": "When the IdP sends a SCIM delete request or an update request where the active attribute is false, Agiloft CLM sets User is Active to false and the user is deactivated.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.agiloft.com/space/HELP/778928159/Set%20Up%20SCIM"
+  },
+  {
+   "id": "c8",
+   "url": "https://help.agiloft.com/space/HELP/778928159.md",
+   "title": "Set Up SCIM",
+   "quote": "Agiloft CLM requires the userName and externalId attributes to be mapped.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.agiloft.com/space/HELP/778928159/Set%20Up%20SCIM"
+  },
+  {
+   "id": "c9",
+   "url": "https://help.agiloft.com/space/HELP/778928159.md",
+   "title": "Set Up SCIM",
+   "quote": "In Tenant URL, enter the KB SCIM Service Base URL from the Agiloft CLM SCIM profile you created. For example: https://example.agiloft.com/scim/v2",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.agiloft.com/space/HELP/778928159/Set%20Up%20SCIM"
+  },
+  {
+   "id": "c10",
+   "url": "https://help.agiloft.com/space/HELP/778928159.md",
+   "title": "Set Up SCIM",
+   "quote": "On the New provisioning configuration screen, leave Bearer authentication selected as the authentication method.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.agiloft.com/space/HELP/778928159/Set%20Up%20SCIM"
+  },
+  {
+   "id": "c11",
+   "url": "https://help.agiloft.com/space/HELP/778928159.md",
+   "title": "Set Up SCIM",
+   "quote": "If the enterprise extension is included in the SCIM request, the user is added to Employees. If it isn’t, the user is added to External Users.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.agiloft.com/space/HELP/778928159/Set%20Up%20SCIM"
+  },
+  {
+   "id": "c12",
+   "url": "https://help.agiloft.com/space/HELP/778928159.md",
+   "title": "Set Up SCIM",
+   "quote": "To assign provisioned users to groups and teams automatically, configure default groups and teams in the SCIM profile.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.agiloft.com/space/HELP/778928159/Set%20Up%20SCIM"
+  },
+  {
+   "id": "c13",
+   "url": "https://help.agiloft.com/space/HELP/778928159.md",
+   "title": "Set Up SCIM",
+   "quote": "You can also select the Group actions for future use, but Agiloft CLM doesn’t support provisioning groups at this time.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.agiloft.com/space/HELP/778928159/Set%20Up%20SCIM"
+  },
+  {
+   "id": "c14",
+   "url": "https://help.agiloft.com/space/HELP/778928159.md",
+   "title": "Set Up SCIM",
+   "quote": "Agiloft CLM supports mapping only direct SCIM attribute values from the IdP. Expression-based values are not supported.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.agiloft.com/space/HELP/778928159/Set%20Up%20SCIM"
+  },
+  {
+   "id": "c15",
+   "url": "https://help.agiloft.com/space/HELP/779091993.md",
+   "title": "Manage SCIM",
+   "quote": "Each SCIM profile can have multiple active tokens, making it possible to rotate credentials without downtime",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.agiloft.com/space/HELP/779091993/Manage%20SCIM"
+  },
+  {
+   "id": "c16",
+   "url": "https://help.agiloft.com/space/HELP/779091993.md",
+   "title": "Manage SCIM",
+   "quote": "This is a one-way synchronization; changes in Agiloft CLM aren't sent to the IdP.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.agiloft.com/space/HELP/779091993/Manage%20SCIM"
+  },
+  {
+   "id": "c17",
+   "url": "https://help.agiloft.com/space/HELP/43717058.md",
+   "title": "Deactivate Users",
+   "quote": "Deactivation prevents the user from logging in, ends active sessions, disables sending them outbound messages, and any inbound emails they send to the system are treated as emails from a non-user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.agiloft.com/space/HELP/43717058/Deactivate%20Users"
+  },
+  {
+   "id": "c18",
+   "url": "https://help.agiloft.com/space/HELP/43717058.md",
+   "title": "Deactivate Users",
+   "quote": "This retains the account's activities in audit logs and other records, while still removing the user's access to the KB and its functions.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.agiloft.com/space/HELP/43717058/Deactivate%20Users"
+  },
+  {
+   "id": "c19",
+   "url": "https://help.agiloft.com/space/HELP/43718160.md",
+   "title": "Single Sign-on",
+   "quote": "Agiloft CLM supports SSO via OAuth 2.0 and SAML 2.0 authentication protocols and integrates with cloud-native solutions like Entra ID and Okta",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.agiloft.com/space/HELP/43718160/Single%20Sign-on"
+  },
+  {
+   "id": "c20",
+   "url": "https://help.agiloft.com/space/HELP/779649034.md",
+   "title": "Provision Users with SCIM",
+   "quote": "With SAML, users are provisioned or updated when they sign in to Agiloft CLM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.agiloft.com/space/HELP/779649034/Provision%20Users%20with%20SCIM"
+  },
+  {
+   "id": "c21",
+   "url": "https://help.agiloft.com/space/HELP/43716366.md",
+   "title": "API Web Services",
+   "quote": "API services are available with the Platform edition of Agiloft CLM, but on older editions, they require either an Advanced or Premium edition of Agiloft CLM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.agiloft.com/space/HELP/43716366/API%20Web%20Services"
+  },
+  {
+   "id": "c22",
+   "url": "https://help.agiloft.com/space/HELP/929595396.md",
+   "title": "OpenAPI Interface",
+   "quote": "Currently, there are no rate limits per user, token, KB, or otherwise.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.agiloft.com/space/HELP/929595396/OpenAPI%20Interface"
+  },
+  {
+   "id": "c23",
+   "url": "https://help.agiloft.com/space/HELP/929595396.md",
+   "title": "OpenAPI Interface",
+   "quote": "This example uses PUT to update a record in the People table.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.agiloft.com/space/HELP/929595396/OpenAPI%20Interface"
+  },
+  {
+   "id": "c24",
+   "url": "https://help.agiloft.com/space/HELP/929595396.md",
+   "title": "OpenAPI Interface",
+   "quote": "Click PUT /contacts/{id}.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.agiloft.com/space/HELP/929595396/OpenAPI%20Interface"
+  },
+  {
+   "id": "c25",
+   "url": "https://help.agiloft.com/space/HELP/929595396.md",
+   "title": "OpenAPI Interface",
+   "quote": "You only need to authorize once, but will need to log in again after the default 15 minute expiration time.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.agiloft.com/space/HELP/929595396/OpenAPI%20Interface"
+  },
+  {
+   "id": "c26",
+   "url": "https://www.okta.com/integrations/agiloft/",
+   "title": "Integrate Agiloft with Okta",
+   "quote": "Agiloft is a trusted provider of agile business process software Last updated: Sep. 4 2015",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/agiloft-tutorial",
+   "title": "Configure Agiloft Contract Management Suite for Single sign-on with Microsoft Entra ID",
+   "quote": "Agiloft Contract Management Suite supports Just In Time user provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/agiloft-tutorial",
+   "title": "Configure Agiloft Contract Management Suite for Single sign-on with Microsoft Entra ID",
+   "quote": "Agiloft Contract Management Suite supports SP and IDP initiated SSO.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://help.agiloft.com/space/HELP/778928159.md",
+   "title": "Set Up SCIM",
+   "quote": "In the SCIM connector base URL field, enter the KB SCIM Service Base URL from the Agiloft CLM SCIM profile you created.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.agiloft.com/space/HELP/778928159/Set%20Up%20SCIM"
+  },
+  {
+   "id": "c30",
+   "url": "https://help.agiloft.com/space/HELP/43714459.md",
+   "title": "Sync Users with LDAP",
+   "quote": "If you maintain user information in an LDAP-compatible directory service, you can connect it to Agiloft CLM and synchronize user records between the two systems.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.agiloft.com/space/HELP/43714459/Sync%20Users%20with%20LDAP"
+  },
+  {
+   "id": "c31",
+   "url": "https://help.agiloft.com/space/HELP/43716464.md",
+   "title": "Use OAuth2 to Access REST API",
+   "quote": "Both mechanisms issue bearer access tokens for the REST API, but they use different endpoints, configuration, and authorization models.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.agiloft.com/space/HELP/43716464/Use%20OAuth2%20to%20Access%20REST%20API"
+  },
+  {
+   "id": "c32",
+   "url": "https://help.agiloft.com/space/HELP/929595396.md",
+   "title": "OpenAPI Interface",
+   "quote": "Open the General section and click POST /login.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.agiloft.com/space/HELP/929595396/OpenAPI%20Interface"
+  },
+  {
+   "id": "c33",
+   "url": "https://help.agiloft.com/space/HELP/778928159.md",
+   "title": "Set Up SCIM",
+   "quote": "Create user: Create user records when new users are added to the IdP.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.agiloft.com/space/HELP/778928159/Set%20Up%20SCIM"
+  },
+  {
+   "id": "c34",
+   "url": "https://help.agiloft.com/space/HELP/778928159.md",
+   "title": "Set Up SCIM",
+   "quote": "Update user attributes: Update user information when it changes in the IdP.",
+   "accessed": "2026-10-05",
+   "page_url": "https://help.agiloft.com/space/HELP/778928159/Set%20Up%20SCIM"
+  },
+  {
+   "id": "c35",
+   "url": "https://www.agiloft.com/pricing",
+   "title": "Agiloft Pricing Options - Contact Us & Get Quote",
+   "quote": "Product interest CLM (Includes Astra) Astra",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.agiloft.com/pricing (quote form)",
+  "https://help.agiloft.com/llms.txt and /space/HELP.md (CLM help index)"
+ ],
+ "open_questions": [
+  "Which edition or contract includes SCIM, and is there any upcharge? The docs and pricing page do not say.",
+  "Does SCIM deactivation release the user's assigned licence?",
+  "Full list of mapped SCIM user attributes (core and enterprise) is not published.",
+  "Does the SCIM endpoint support PATCH, filtering and pagination?",
+  "Is there an audit-log API or user-event webhook?"
+ ]
+}

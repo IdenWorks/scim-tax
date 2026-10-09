@@ -1,0 +1,1015 @@
+{
+ "slug": "sonarqube-cloud",
+ "vendor": "SonarQube Cloud",
+ "vendor_url": "https://www.sonarsource.com/products/sonarcloud/",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "SonarQube Cloud",
+  "slug": "sonarqube-cloud",
+  "category": "Developer Tools & CI/CD",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Contact Sales (custom pricing)",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Team",
+  "team_price_text": "Team: from $34/mo (up to 100k LOC)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Enterprise",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": "via_generic",
+   "generic": true
+  },
+  "pricing_page_url": "https://www.sonarsource.com/plans-and-pricing/",
+  "docs_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/set-up-scim",
+  "evidence": "Sonar's pricing page lists 'SSO and SCIM' in the SonarQube Enterprise plan ('Over 50 developers · one conversation, whole platform. Custom pricing'), and the Set up SCIM docs say the feature requires the SonarQube Cloud Enterprise licence.",
+  "notes": "Unchanged status (gated). The old pricing URL now redirects to sonarsource.com/plans-and-pricing/. Pricing is by lines of code: Team starts at $34 monthly for up to 100k LOC (the page shows no annual price), Enterprise is custom pricing; a free tier covers private projects up to 50k LOC. June's 'annual billing only' note for Enterprise is not stated on the current page and is dropped. SCIM requires SSO (SAML or OIDC) to be set up first, works with any IdP via a custom app and bearer token, and deprovisioning deletes the SSO account and revokes sessions and tokens. Okta's catalogue app is OIDC SSO/JIT only; SCIM needs a custom Okta app.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": null,
+  "status_prev": "gated"
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "Free for private projects up to 50k LOC",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": false,
+   "cite": [
+    "c5",
+    "c7",
+    "c44"
+   ]
+  },
+  {
+   "name": "Team",
+   "price_text": "Starts at $34 monthly for up to 100k LOC; under 50 developers",
+   "price_per_user_mo": null,
+   "billing": "monthly",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": false,
+   "cite": [
+    "c1",
+    "c2",
+    "c6",
+    "c7",
+    "c25",
+    "c44"
+   ]
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Custom pricing; over 50 developers",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": true,
+   "cite": [
+    "c3",
+    "c4",
+    "c7",
+    "c25",
+    "c44"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c4",
+   "c41",
+   "c24",
+   "c25",
+   "c7",
+   "c10",
+   "c28"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": null,
+  "notes": "Base URL is the 'Provisioning Endpoint URL' shown in the setup assistant (not published); JumpCloud setup requires removing the trailing slash.",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Administration > SSO & Provisioning > Provisioning (SCIM) setup assistant > Bearer Token > Generate Token",
+   "token_expiry": null,
+   "cite": [
+    "c27"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c11",
+    "c16",
+    "c30"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c11",
+    "c29",
+    "c30",
+    "c13",
+    "c51",
+    "c15",
+    "c16"
+   ],
+   "notes": "Deactivating or removing a user in the IdP deletes their SonarQube Cloud SSO account; update is enabled via Okta 'Push Profile Updates' / Entra 'Update' actions."
+  },
+  "deprovision": {
+   "action": "delete",
+   "frees_seat": null,
+   "revokes_sessions": true,
+   "data_retained": null,
+   "cite": [
+    "c12",
+    "c13",
+    "c14",
+    "c51"
+   ],
+   "notes": "Pricing is by lines of code, not seats."
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c35",
+    "c40",
+    "c15"
+   ],
+   "notes": "Docs only say userName must match the SSO login attribute and that an 'active' mapping breaks Okta provisioning; the full attribute list lives in the setup assistant. Group attribute names are inferred from group membership sync and not listed explicitly."
+  },
+  "roles": {
+   "supported": false,
+   "how": "Permissions are not provisioned; they are set in SonarQube Cloud on the groups SCIM creates.",
+   "cite": [
+    "c20"
+   ]
+  },
+  "rate_limits": {
+   "text": "IdP connection limited to 25 requests per second; max 10,000 groups and 200,000 members per group (Auth0 constraints).",
+   "cite": [
+    "c19",
+    "c17"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "SSO must be configured first; SCIM groups must be manually mapped to organizations before they provision.",
+    "cite": [
+     "c24",
+     "c33"
+    ]
+   },
+   {
+    "text": "Nested groups are not supported.",
+    "cite": [
+     "c18"
+    ]
+   },
+   {
+    "text": "SSO users cannot be created or removed in SonarQube Cloud itself; all provisioning happens in the IdP.",
+    "cite": [
+     "c23"
+    ]
+   },
+   {
+    "text": "Okta catalogue app (Express Configuration) does not support SCIM; a custom Okta app is needed.",
+    "cite": [
+     "c42",
+     "c31"
+    ]
+   },
+   {
+    "text": "Entra needs the ?aadOptscim062020 flag on the tenant URL and syncs every 40 minutes.",
+    "cite": [
+     "c32",
+     "c36"
+    ]
+   },
+   {
+    "text": "Do not add an 'Active' attribute mapping in Okta or provisioning fails.",
+    "cite": [
+     "c34"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c47",
+   "c50"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://sonarcloud.io/api (v1); https://api.sonarcloud.io (v2); US: sonarqube.us",
+  "docs_url": "https://docs.sonarsource.com/sonarqube-cloud/appendices/web-api",
+  "auth": {
+   "methods": [
+    "personal_access_token (bearer)"
+   ],
+   "scopes": [],
+   "cite": [
+    "c48"
+   ]
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": false,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": false,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c52",
+    "c53",
+    "c54",
+    "c55",
+    "c56",
+    "c60",
+    "c23"
+   ],
+   "notes": "Users are created by DevOps-platform sign-up or SSO, not via API; v2 has a 'Users and roles' API whose endpoints were not loaded (JS-only docs)."
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "api/user_groups/create",
+    "purpose": "Create a group",
+    "cite": [
+     "c53"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "api/user_groups/update",
+    "purpose": "Update a group",
+    "cite": [
+     "c57"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "api/user_groups/delete",
+    "purpose": "Delete a group",
+    "cite": [
+     "c54"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "api/user_groups/search",
+    "purpose": "Search user groups",
+    "cite": [
+     "c56"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "api/user_groups/add_user",
+    "purpose": "Add a user to a group",
+    "cite": [
+     "c52"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "api/user_groups/remove_user",
+    "purpose": "Remove a user from a group",
+    "cite": [
+     "c55"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "api/user_groups/users",
+    "purpose": "List users with group membership info",
+    "cite": [
+     "c58"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "api/users/groups",
+    "purpose": "List groups a user belongs to",
+    "cite": [
+     "c59"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "api/permissions/add_user",
+    "purpose": "Add permission to a user",
+    "cite": [
+     "c60"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "api/permissions/remove_user",
+    "purpose": "Remove permission from a user",
+    "cite": [
+     "c61"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "api/permissions/add_group",
+    "purpose": "Add permission to a group",
+    "cite": [
+     "c62"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Enterprise",
+   "cite": [
+    "c44",
+    "c45",
+    "c46"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/sonarqube-cloud/",
+   "cite": [
+    "c63",
+    "c42",
+    "c43"
+   ],
+   "notes": "OIN app marks OIDC and Partial Universal Logout only; SCIM is done with a custom Okta app (row idp.okta = via_generic)."
+  },
+  "entra": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c30",
+    "c32"
+   ],
+   "notes": "Sonar documents SCIM with the Entra enterprise application created for SSO; no Microsoft gallery tutorial found (sonarcloud-tutorial and sonarqube-cloud-tutorial URLs 404)."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": "https://jumpcloud.com/support/integrate-with-sonarqube",
+   "cite": [
+    "c64",
+    "c37",
+    "c38"
+   ],
+   "notes": "JumpCloud's 'SonarQube' SAML connector page does not say Cloud vs Server or mention SCIM; Sonar documents SCIM 2.0 via the JumpCloud app's Identity Management tab (row idp.jumpcloud = via_generic)."
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "both",
+  "csv_import": null,
+  "other_sync": "GitHub member synchronization for DevOps-platform (non-SSO) organizations",
+  "docs_public": true,
+  "cite": [
+   "c9",
+   "c21",
+   "c8"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.sonarsource.com/plans-and-pricing/",
+   "title": "Plans & Pricing: Enterprise & Team Plans for Developers | Sonar",
+   "quote": "Under 50 developers · set up today, no sales call",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.sonarsource.com/plans-and-pricing/",
+   "title": "Plans & Pricing: Enterprise & Team Plans for Developers | Sonar",
+   "quote": "SonarQube plan pricing starts at $34 monthly for analysis of up to 100k LOC. Other LOC increments are available.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.sonarsource.com/plans-and-pricing/",
+   "title": "Plans & Pricing: Enterprise & Team Plans for Developers | Sonar",
+   "quote": "Over 50 developers · one conversation, whole platform. Custom pricing",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.sonarsource.com/plans-and-pricing/",
+   "title": "Plans & Pricing: Enterprise & Team Plans for Developers | Sonar",
+   "quote": "45+ languages, SSO and SCIM, portfolios, OWASP, MISRA reporting, zero data retention and BYOK with LLMs",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.sonarsource.com/plans-and-pricing/",
+   "title": "Plans & Pricing: Enterprise & Team Plans for Developers | Sonar",
+   "quote": "SonarQube Team Plan, free for your private projects up to 50k LOC. No card, no expiry.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://www.sonarsource.com/plans-and-pricing/",
+   "title": "Plans & Pricing: Enterprise & Team Plans for Developers | Sonar",
+   "quote": "There are two paid plans available: Team and Enterprise.  You pay upfront for a maximum number of private lines of code to be analyzed in your organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/about.md",
+   "title": "About SSO and provisioning | SonarQube Cloud | Sonar Documentation",
+   "quote": "*This feature requires the SonarQube Cloud's* [*Enterprise*](https://www.sonarsource.com/plans-and-pricing/) *licence.*",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/about"
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/about.md",
+   "title": "About SSO and provisioning | SonarQube Cloud | Sonar Documentation",
+   "quote": "You can use the Single Sign-On (SSO) authentication mode in your enterprise with SAML or OIDC.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/about"
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/about.md",
+   "title": "About SSO and provisioning | SonarQube Cloud | Sonar Documentation",
+   "quote": "If you don’t want to use SCIM, Just-in-Time (JIT) user provisioning is supported with the automatic group synchronization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/about"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/about.md",
+   "title": "About SSO and provisioning | SonarQube Cloud | Sonar Documentation",
+   "quote": "SCIM provisioning is supported with any identity provider.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/about"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/about.md",
+   "title": "About SSO and provisioning | SonarQube Cloud | Sonar Documentation",
+   "quote": "When you create a user in your identity provider and add them to a group assigned to your SonarQube Cloud application, the user is automatically provisioned in SonarQube Cloud.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/about"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/about.md",
+   "title": "About SSO and provisioning | SonarQube Cloud | Sonar Documentation",
+   "quote": "All the user’s active sessions are revoked.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/about"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/about.md",
+   "title": "About SSO and provisioning | SonarQube Cloud | Sonar Documentation",
+   "quote": "The user’s SonarQube Cloud’s SSO account is deleted.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/about"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/about.md",
+   "title": "About SSO and provisioning | SonarQube Cloud | Sonar Documentation",
+   "quote": "The user’s personal access tokens are revoked.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/about"
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/about.md",
+   "title": "About SSO and provisioning | SonarQube Cloud | Sonar Documentation",
+   "quote": "When you add or remove a user to/from a group in your identity provider, the membership of the corresponding SCIM group in the relevant SonarQube Cloud organization(s) is updated.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/about"
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/about.md",
+   "title": "About SSO and provisioning | SonarQube Cloud | Sonar Documentation",
+   "quote": "When you remove a group from your identity provider, the group is removed from all SonarQube Cloud’s organizations it was mapped to.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/about"
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/about.md",
+   "title": "About SSO and provisioning | SonarQube Cloud | Sonar Documentation",
+   "quote": "The maximum number of groups is 10,000.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/about"
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/about.md",
+   "title": "About SSO and provisioning | SonarQube Cloud | Sonar Documentation",
+   "quote": "Nested groups are not supported.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/about"
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/about.md",
+   "title": "About SSO and provisioning | SonarQube Cloud | Sonar Documentation",
+   "quote": "In addition, the connection with your identity provider is limited to a maximum of 25 requests per second.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/about"
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/about.md",
+   "title": "About SSO and provisioning | SonarQube Cloud | Sonar Documentation",
+   "quote": "User and group permissions are set in SonarQube Cloud.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/about"
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/about.md",
+   "title": "About SSO and provisioning | SonarQube Cloud | Sonar Documentation",
+   "quote": "This means that a user's SSO account is automatically created in SonarQube Cloud upon their first login using SSO.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/about"
+  },
+  {
+   "id": "c22",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/about.md",
+   "title": "About SSO and provisioning | SonarQube Cloud | Sonar Documentation",
+   "quote": "With SSO, groups are mandatory. Users have access to their SonarQube Cloud organization only if they are members of a group within this organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/about"
+  },
+  {
+   "id": "c23",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/about.md",
+   "title": "About SSO and provisioning | SonarQube Cloud | Sonar Documentation",
+   "quote": "Create or remove an SSO user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/about"
+  },
+  {
+   "id": "c24",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/set-up-scim.md",
+   "title": "Set up SCIM | SonarQube Cloud | Sonar Documentation",
+   "quote": "If Single Sign-On (SSO) is used in your SonarQube Cloud enterprise for user authentication, you can set up SCIM to automate provisioning.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/set-up-scim"
+  },
+  {
+   "id": "c25",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/set-up-scim.md",
+   "title": "Set up SCIM | SonarQube Cloud | Sonar Documentation",
+   "quote": "*This feature requires the SonarQube Cloud* [*Enterprise*](https://www.sonarsource.com/plans-and-pricing/) *licence.*",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/set-up-scim"
+  },
+  {
+   "id": "c26",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/set-up-scim.md",
+   "title": "Set up SCIM | SonarQube Cloud | Sonar Documentation",
+   "quote": "**SCIM connector base URL**: Copy-paste the **Provisioning Endpoint URL** from SonarQube Cloud’s setup assistant.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/set-up-scim"
+  },
+  {
+   "id": "c27",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/set-up-scim.md",
+   "title": "Set up SCIM | SonarQube Cloud | Sonar Documentation",
+   "quote": "In SonarQube Cloud’s SCIM provisioning setup assistant, select **Generate Token** in the **Bearer Token** section.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/set-up-scim"
+  },
+  {
+   "id": "c28",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/set-up-scim.md",
+   "title": "Set up SCIM | SonarQube Cloud | Sonar Documentation",
+   "quote": "**SCIM Version**: `SCIM 2.0`",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/set-up-scim"
+  },
+  {
+   "id": "c29",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/set-up-scim.md",
+   "title": "Set up SCIM | SonarQube Cloud | Sonar Documentation",
+   "quote": "**Push Profile Updates**",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/set-up-scim"
+  },
+  {
+   "id": "c30",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/set-up-scim.md",
+   "title": "Set up SCIM | SonarQube Cloud | Sonar Documentation",
+   "quote": "Ensure the feature is enabled and the **Create**, **Update** and **Delete** actions are selected in **Target Object Actions**.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/set-up-scim"
+  },
+  {
+   "id": "c31",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/set-up-scim.md",
+   "title": "Set up SCIM | SonarQube Cloud | Sonar Documentation",
+   "quote": "The **Provisioning** option in the **General** tab is only available for custom Okta applications.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/set-up-scim"
+  },
+  {
+   "id": "c32",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/set-up-scim.md",
+   "title": "Set up SCIM | SonarQube Cloud | Sonar Documentation",
+   "quote": "Make sure to add `?aadOptscim062020` to the end of the tenant URL.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/set-up-scim"
+  },
+  {
+   "id": "c33",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/set-up-scim.md",
+   "title": "Set up SCIM | SonarQube Cloud | Sonar Documentation",
+   "quote": "Only groups that are both assigned to the SonarQube Cloud application in your identity provider and manually mapped to SonarQube Cloud organizations will be provisioned by SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/set-up-scim"
+  },
+  {
+   "id": "c34",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/set-up-scim.md",
+   "title": "Set up SCIM | SonarQube Cloud | Sonar Documentation",
+   "quote": "Do not add an **Active** attribute mapping; this causes user provisioning to fail.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/set-up-scim"
+  },
+  {
+   "id": "c35",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/set-up-scim.md",
+   "title": "Set up SCIM | SonarQube Cloud | Sonar Documentation",
+   "quote": "**Unique identifier field for users**: Copy-paste the **User ID** attribute value in **Required attributes** from SonarQube Cloud’s setup assistant.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/set-up-scim"
+  },
+  {
+   "id": "c36",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/set-up-scim.md",
+   "title": "Set up SCIM | SonarQube Cloud | Sonar Documentation",
+   "quote": "Microsoft Entra ID runs a SCIM synchronization every 40 minutes.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/set-up-scim"
+  },
+  {
+   "id": "c37",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/set-up-scim.md",
+   "title": "Set up SCIM | SonarQube Cloud | Sonar Documentation",
+   "quote": "**API Type**: `SCIM API`",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/set-up-scim"
+  },
+  {
+   "id": "c38",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/set-up-scim.md",
+   "title": "Set up SCIM | SonarQube Cloud | Sonar Documentation",
+   "quote": "Unselect the **Enable management of User Groups and Group Membership in this application** option, and select **Activate**.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/set-up-scim"
+  },
+  {
+   "id": "c39",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/set-up-scim.md",
+   "title": "Set up SCIM | SonarQube Cloud | Sonar Documentation",
+   "quote": "Note that only user deprovisioning is currently supported in SonarQube Cloud.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/set-up-scim"
+  },
+  {
+   "id": "c40",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/set-up-scim.md",
+   "title": "Set up SCIM | SonarQube Cloud | Sonar Documentation",
+   "quote": "In **Attribute Mappings**, map the `userName` **customappsso Attribute** (target) to the **Microsoft Entra ID Attribute** (source) used as SAML user login attribute in your SAML configuration.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/set-up-scim"
+  },
+  {
+   "id": "c41",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/set-up-scim",
+   "title": "Set up SCIM | SonarQube Cloud | Sonar Documentation",
+   "quote": "If Single Sign-On (SSO) is used in your SonarQube Cloud enterprise for user authentication, you can set up SCIM to automate provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c42",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/using-okta-express-configuration.md",
+   "title": "Using Okta Express Configuration | SonarQube Cloud | Sonar Documentation",
+   "quote": "The SonarQube Cloud catalog app used in this guide does not support SCIM provisioning; only Just-In-Time provisioning is available with it.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/using-okta-express-configuration"
+  },
+  {
+   "id": "c43",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/using-okta-express-configuration.md",
+   "title": "Using Okta Express Configuration | SonarQube Cloud | Sonar Documentation",
+   "quote": "With the Okta Express Configuration, you can set up OpenID Connect (OIDC) Single Sign-On (SSO) in your SonarQube Cloud enterprise with just a few clicks.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/using-okta-express-configuration"
+  },
+  {
+   "id": "c44",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/audit-logs.md",
+   "title": "Audit logs | SonarQube Cloud | Sonar Documentation",
+   "quote": "*This feature is available with the Enterprise plan.*",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/audit-logs"
+  },
+  {
+   "id": "c45",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/audit-logs.md",
+   "title": "Audit logs | SonarQube Cloud | Sonar Documentation",
+   "quote": "Audit logs are retained for 180 days.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/audit-logs"
+  },
+  {
+   "id": "c46",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/audit-logs.md",
+   "title": "Audit logs | SonarQube Cloud | Sonar Documentation",
+   "quote": "| `user.create`                              | An SSO user account is created.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/audit-logs"
+  },
+  {
+   "id": "c47",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/appendices/web-api.md",
+   "title": "Web API | SonarQube Cloud | Sonar Documentation",
+   "quote": "SonarQube Cloud offers a Web API, allowing external applications to access its features.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/appendices/web-api"
+  },
+  {
+   "id": "c48",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/appendices/web-api.md",
+   "title": "Web API | SonarQube Cloud | Sonar Documentation",
+   "quote": "To authenticate to the Web API, use the [bearer authentication scheme]",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/appendices/web-api"
+  },
+  {
+   "id": "c49",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/appendices/web-api.md",
+   "title": "Web API | SonarQube Cloud | Sonar Documentation",
+   "quote": "* Users and roles",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/appendices/web-api"
+  },
+  {
+   "id": "c50",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/appendices/web-api.md",
+   "title": "Web API | SonarQube Cloud | Sonar Documentation",
+   "quote": "V1: <https://sonarcloud.io/web_api>",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/appendices/web-api"
+  },
+  {
+   "id": "c51",
+   "url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/managing-organization/users-and-permissions/user-on-and-offboarding.md",
+   "title": "User on- and offboarding | SonarQube Cloud | Sonar Documentation",
+   "quote": "If you use the SCIM provisioning feature, SonarQube Cloud automatically deprovisions a user as soon as their account is deactivated or removed from your identity provider.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/managing-organization/users-and-permissions/user-on-and-offboarding"
+  },
+  {
+   "id": "c52",
+   "url": "https://sonarcloud.io/api/webservices/list",
+   "title": "SonarQube Cloud Web API v1 web services list",
+   "quote": "Add a user to a group.",
+   "accessed": "2026-10-05",
+   "page_url": "https://sonarcloud.io/web_api"
+  },
+  {
+   "id": "c53",
+   "url": "https://sonarcloud.io/api/webservices/list",
+   "title": "SonarQube Cloud Web API v1 web services list",
+   "quote": "Create a group.",
+   "accessed": "2026-10-05",
+   "page_url": "https://sonarcloud.io/web_api"
+  },
+  {
+   "id": "c54",
+   "url": "https://sonarcloud.io/api/webservices/list",
+   "title": "SonarQube Cloud Web API v1 web services list",
+   "quote": "Delete a group. The default groups cannot be deleted.",
+   "accessed": "2026-10-05",
+   "page_url": "https://sonarcloud.io/web_api"
+  },
+  {
+   "id": "c55",
+   "url": "https://sonarcloud.io/api/webservices/list",
+   "title": "SonarQube Cloud Web API v1 web services list",
+   "quote": "Remove a user from a group.",
+   "accessed": "2026-10-05",
+   "page_url": "https://sonarcloud.io/web_api"
+  },
+  {
+   "id": "c56",
+   "url": "https://sonarcloud.io/api/webservices/list",
+   "title": "SonarQube Cloud Web API v1 web services list",
+   "quote": "Search for user groups.",
+   "accessed": "2026-10-05",
+   "page_url": "https://sonarcloud.io/web_api"
+  },
+  {
+   "id": "c57",
+   "url": "https://sonarcloud.io/api/webservices/list",
+   "title": "SonarQube Cloud Web API v1 web services list",
+   "quote": "Update a group.",
+   "accessed": "2026-10-05",
+   "page_url": "https://sonarcloud.io/web_api"
+  },
+  {
+   "id": "c58",
+   "url": "https://sonarcloud.io/api/webservices/list",
+   "title": "SonarQube Cloud Web API v1 web services list",
+   "quote": "Search for users with membership information with respect to a group.",
+   "accessed": "2026-10-05",
+   "page_url": "https://sonarcloud.io/web_api"
+  },
+  {
+   "id": "c59",
+   "url": "https://sonarcloud.io/api/webservices/list",
+   "title": "SonarQube Cloud Web API v1 web services list",
+   "quote": "Lists the groups a user belongs to.",
+   "accessed": "2026-10-05",
+   "page_url": "https://sonarcloud.io/web_api"
+  },
+  {
+   "id": "c60",
+   "url": "https://sonarcloud.io/api/webservices/list",
+   "title": "SonarQube Cloud Web API v1 web services list",
+   "quote": "Add permission to a user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://sonarcloud.io/web_api"
+  },
+  {
+   "id": "c61",
+   "url": "https://sonarcloud.io/api/webservices/list",
+   "title": "SonarQube Cloud Web API v1 web services list",
+   "quote": "Remove permission from a user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://sonarcloud.io/web_api"
+  },
+  {
+   "id": "c62",
+   "url": "https://sonarcloud.io/api/webservices/list",
+   "title": "SonarQube Cloud Web API v1 web services list",
+   "quote": "Add permission to a group.",
+   "accessed": "2026-10-05",
+   "page_url": "https://sonarcloud.io/web_api"
+  },
+  {
+   "id": "c63",
+   "url": "https://www.okta.com/integrations/sonarqube-cloud/",
+   "title": "SonarQube Cloud | Okta",
+   "quote": "The Okta SonarQube Cloud integration allows customers to sign in to the SonarQube Cloud platform, using Okta as a Single Sign-On provider.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c64",
+   "url": "https://jumpcloud.com/support/integrate-with-sonarqube",
+   "title": "Integrate with SonarQube - JumpCloud",
+   "quote": "Read this article to learn how to integrate with SonarQube.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.sonarsource.com/plans-and-pricing/",
+  "https://docs.sonarsource.com/llms.txt",
+  "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/about",
+  "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/set-up-scim",
+  "https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/enterprise-security/sso-and-provisioning/using-okta-express-configuration",
+  "https://docs.sonarsource.com/sonarqube-cloud/appendices/web-api",
+  "https://sonarcloud.io/api/webservices/list",
+  "https://www.okta.com/integrations/sonarqube-cloud/",
+  "https://jumpcloud.com/support/integrate-with-sonarqube",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/sonarcloud-tutorial (404)"
+ ],
+ "open_questions": [
+  "SCIM base URL pattern is not published (shown only in the setup assistant).",
+  "SCIM token expiry is not documented.",
+  "Filtering, pagination, ServiceProviderConfig/Schemas and the full SCIM attribute list are not documented.",
+  "The Okta test-connector note says 'only user deprovisioning is currently supported', which is unclear next to the documented create/update support.",
+  "Whether the Web API (and its user/group endpoints) is limited by plan is not stated; v2 'Users and roles' endpoints were not loaded.",
+  "Google Workspace and OneLogin SCIM setups are not documented.",
+  "Enterprise price and billing term are not public."
+ ]
+}

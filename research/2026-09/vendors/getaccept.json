@@ -1,0 +1,635 @@
+{
+ "slug": "getaccept",
+ "vendor": "GetAccept",
+ "vendor_url": "https://www.getaccept.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "GetAccept",
+  "slug": "getaccept",
+  "category": "Sales & CRM",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "eSign",
+  "team_price_text": "eSign: $25/u/mo",
+  "team_price_per_user_mo": 25,
+  "price_multiplier": null,
+  "sso_plan": "Enterprise",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": false,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": "sso_only",
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.getaccept.com/pricing",
+  "docs_url": "https://help.getaccept.com/en/articles/3334384-automatic-user-provisioning-in-azure-ad-using-scim",
+  "evidence": "GetAccept's pricing lists Single sign-on (SSO) under Enterprise ('Contact us'; an add-on on Professional), and its Okta SCIM guide says 'Okta requires the SSO to be set up to be able to set up the SCIM.'",
+  "notes": "New in 2026-09. Plans: eSign $25/u/mo, Professional $49/u/mo (min 5 users, annual), Enterprise Contact us. No page states which plan includes SCIM; it is recorded as Enterprise because SCIM (at least via Okta) requires SSO, which is Enterprise-only or a paid add-on on Professional, so confidence is low. A Professional customer buying the SSO add-on may also be able to use SCIM. SCIM supports Okta (catalogue app) and Entra (non-gallery app with tenant URL and token): create, update, inactivate on delete, teams from groups, roles via app roles.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Enterprise",
+  "api_tax": true,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "eSign",
+   "price_text": "$25 per user/month",
+   "price_per_user_mo": 25,
+   "billing": "unknown",
+   "sso": false,
+   "scim": null,
+   "user_api": false,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c4",
+    "c5",
+    "c6"
+   ],
+   "notes": "Monthly or annual payment; the page does not say which the $25 reflects."
+  },
+  {
+   "name": "Professional",
+   "price_text": "$49 per user/month, minimum 5 users (billed annually)",
+   "price_per_user_mo": 49,
+   "billing": "annual",
+   "sso": false,
+   "scim": null,
+   "user_api": false,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c4",
+    "c5",
+    "c6"
+   ],
+   "notes": "SSO/SAML and API read access are paid add-ons on Professional."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Contact us",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": null,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c6"
+   ],
+   "notes": "Includes SSO and API read access; API write access is an add-on."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c7",
+   "c12",
+   "c19"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": "bearer",
+   "token_source": "Settings > Integrations > SCIM User Provisioning > Settings (Access Token)",
+   "token_expiry": null,
+   "cite": [
+    "c12"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c8"
+   ],
+   "notes": "Inferred from the Entra/Okta feature lists (users and teams); endpoint paths are not published."
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": false,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c8",
+    "c21"
+   ],
+   "notes": "Entra lists attribute updates; whether via PUT or PATCH is not stated. A SCIM delete inactivates the user rather than deleting it."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c8"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "phoneNumbers[type eq \"work\"].value",
+    "phoneNumbers[type eq \"mobile\"].value",
+    "title",
+    "externalId",
+    "preferredLanguage",
+    "photos",
+    "roles[primary eq \"True\"].value"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "displayName"
+   ],
+   "cite": [
+    "c13",
+    "c14",
+    "c15",
+    "c16",
+    "c17",
+    "c18"
+   ],
+   "notes": "From the Entra mapping list: userName=email, externalId=Note field, group displayName=Team name."
+  },
+  "roles": {
+   "supported": true,
+   "how": "Entra app roles mapped to roles[primary eq \"True\"].value; Okta user type Administrator, Manager or User.",
+   "cite": [
+    "c9",
+    "c13",
+    "c22"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "A user in more than one IdP group gets no team; a GetAccept user can belong to only one team.",
+    "cite": [
+     "c10"
+    ]
+   },
+   {
+    "text": "Each GetAccept entity needs its own Entra enterprise application.",
+    "cite": [
+     "c11"
+    ]
+   },
+   {
+    "text": "Okta SCIM can only be set up after SSO is configured.",
+    "cite": [
+     "c19"
+    ]
+   }
+  ],
+  "notes": "No page states the SCIM plan. It is recorded on Enterprise because Okta SCIM requires SSO first and SSO is an Enterprise feature (or a paid add-on on Professional). The tenant URL is shown in Settings > Integrations > SCIM User Provisioning and is not published."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c5",
+   "c3",
+   "c25",
+   "c28"
+  ],
+  "plan": "Enterprise",
+  "api_tax": true,
+  "style": "REST",
+  "base_url": "https://api.getaccept.com/v1",
+  "docs_url": "https://app.getaccept.com/api/",
+  "auth": {
+   "methods": [
+    "api_key",
+    "oauth2"
+   ],
+   "scopes": [],
+   "cite": [
+    "c25"
+   ],
+   "notes": "Token-based auth or OAuth 2.0 configured by GetAccept Tech Support (the help centre says GetAccept does not issue 'API keys')."
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": []
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "API reference is only visible after login; credentials are provisioned by GetAccept.",
+    "cite": [
+     "c27",
+     "c26"
+    ]
+   }
+  ],
+  "notes": "API read access is included on Enterprise and an add-on on Professional; API write access is an add-on. The API reference needs a login, so user-management endpoints could not be checked."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c20",
+    "c21"
+   ],
+   "notes": "Vendor's Okta SCIM guide adds GetAccept from the Okta App Catalog; the OIN page URL was not found (okta.com/integrations/getaccept/ 404). Vendor's separate SSO guide uses a custom SAML app."
+  },
+  "entra": {
+   "listed": false,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c23",
+    "c7"
+   ],
+   "notes": "Non-gallery enterprise app with the GetAccept SCIM tenant URL and token; no Entra gallery tutorial found."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": false,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c24"
+   ],
+   "notes": "Vendor guide uses OneLogin's SAML Test Connector; no OneLogin provisioning guide. Provisioning false by absence."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c7"
+  ],
+  "notes": "SCIM guides are public; the REST API reference requires a login."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.getaccept.com/pricing",
+   "title": "Pricing | GetAccept",
+   "quote": "eSign 25 $ per user/month For smaller sales teams looking for an e-signature solution",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://www.getaccept.com/pricing",
+   "title": "Pricing | GetAccept",
+   "quote": "Professional 49 $ per user/month minimum 5 users",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://www.getaccept.com/pricing",
+   "title": "Pricing | GetAccept",
+   "quote": "Everything in Professional plus: CPQ Store your products and create error-free quotes in no time Unlimited product library Single sign-on (SSO) Handle users and logins using SSO with, e.g., Azure",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://www.getaccept.com/pricing",
+   "title": "Pricing | GetAccept",
+   "quote": "SSO/SAML Handle users and logins using SSO with for instance Azure - Add-on",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://www.getaccept.com/pricing",
+   "title": "Pricing | GetAccept",
+   "quote": "API read access Build custom tools and integrations with GetAccept - Add-on",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://www.getaccept.com/pricing",
+   "title": "Pricing | GetAccept",
+   "quote": "Customers on the Professional and Enterprise plans pay for their GetAccept access annually. Customers on the eSign plan have the option to pay monthly or annually.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://help.getaccept.com/en/articles/3334384-automatic-user-provisioning-in-azure-ad-using-scim",
+   "title": "Automatic user provisioning in Azure AD using SCIM",
+   "quote": "GetAccept supports the ability to provision users and teams from your Microsoft Entra ID Active Directory environment.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://help.getaccept.com/en/articles/3334384-automatic-user-provisioning-in-azure-ad-using-scim",
+   "title": "Automatic user provisioning in Azure AD using SCIM",
+   "quote": "Create new users in GetAccept. Updates user attributes from the Active Directory. Deletes users (inactivates users in GetAccept). Creates teams in GetAccept (from the user's Active Directory group name). Adds or removes users to groups (to teams in GetAccepts).",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://help.getaccept.com/en/articles/3334384-automatic-user-provisioning-in-azure-ad-using-scim",
+   "title": "Automatic user provisioning in Azure AD using SCIM",
+   "quote": "Manage access rights based on custom application roles.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://help.getaccept.com/en/articles/3334384-automatic-user-provisioning-in-azure-ad-using-scim",
+   "title": "Automatic user provisioning in Azure AD using SCIM",
+   "quote": "being a member of multiple Active Directory groups is not supported and will result in no teams being created and provisioned to GetAccept.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c11",
+   "url": "https://help.getaccept.com/en/articles/3334384-automatic-user-provisioning-in-azure-ad-using-scim",
+   "title": "Automatic user provisioning in Azure AD using SCIM",
+   "quote": "Each GetAccept entity requires a unique Enterprise application in your Microsoft Entra ID environment. A GetAccept entity can only communicate with one application at a time.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://help.getaccept.com/en/articles/3334384-automatic-user-provisioning-in-azure-ad-using-scim",
+   "title": "Automatic user provisioning in Azure AD using SCIM",
+   "quote": "Copy the Tenant URL and paste it into the Admin Credentials Tenant URL field in Entra ID. Copy the Access Token and paste it into the Admin Credentials Secret Token field in Entra ID.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://help.getaccept.com/en/articles/3334384-automatic-user-provisioning-in-azure-ad-using-scim",
+   "title": "Automatic user provisioning in Azure AD using SCIM",
+   "quote": "In the Target attribute, select the value roles[primary eq \"True\"].value from the dropdown.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c14",
+   "url": "https://help.getaccept.com/en/articles/3334384-automatic-user-provisioning-in-azure-ad-using-scim",
+   "title": "Automatic user provisioning in Azure AD using SCIM",
+   "quote": "First name (GetAccept) equals name.givenName (customappsso Attribute)",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://help.getaccept.com/en/articles/3334384-automatic-user-provisioning-in-azure-ad-using-scim",
+   "title": "Automatic user provisioning in Azure AD using SCIM",
+   "quote": "Phone (GetAccept) equals phoneNumbers[type eq \"work\"].value (customappsso Attribute)",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://help.getaccept.com/en/articles/3334384-automatic-user-provisioning-in-azure-ad-using-scim",
+   "title": "Automatic user provisioning in Azure AD using SCIM",
+   "quote": "Note (GetAccept) equals externalId (customappsso Attribute)",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c17",
+   "url": "https://help.getaccept.com/en/articles/3334384-automatic-user-provisioning-in-azure-ad-using-scim",
+   "title": "Automatic user provisioning in Azure AD using SCIM",
+   "quote": "Team (GetAccept) equals displayName (customappsso Attribute)",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c18",
+   "url": "https://help.getaccept.com/en/articles/3334384-automatic-user-provisioning-in-azure-ad-using-scim",
+   "title": "Automatic user provisioning in Azure AD using SCIM",
+   "quote": "When your SCIM provisioning includes the photos attribute, each user's Microsoft profile picture syncs to GetAccept and becomes their avatar.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c19",
+   "url": "https://help.getaccept.com/en/articles/4450728-automatic-user-provisioning-in-okta-using-scim",
+   "title": "Automatic user provisioning in Okta using SCIM",
+   "quote": "If you haven't configured the steps for Single sign-on, this needs to be done first as Okta requires the SSO to be set up to be able to set up the SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c20",
+   "url": "https://help.getaccept.com/en/articles/4450728-automatic-user-provisioning-in-okta-using-scim",
+   "title": "Automatic user provisioning in Okta using SCIM",
+   "quote": "Go to your Applications, select Applications, and Browse App Catalog. Search for GetAccept.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c21",
+   "url": "https://help.getaccept.com/en/articles/4450728-automatic-user-provisioning-in-okta-using-scim",
+   "title": "Automatic user provisioning in Okta using SCIM",
+   "quote": "Create users in GetAccept Deletes users (inactivates users in GetAccept) Create teams and assign members in GetAccept (from Okta Push Groups) Manage access rights based on custom application roles",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c22",
+   "url": "https://help.getaccept.com/en/articles/4450728-automatic-user-provisioning-in-okta-using-scim",
+   "title": "Automatic user provisioning in Okta using SCIM",
+   "quote": "Set the respective User type to Administrator, Manager, or User depending on the role the group members should have in GetAccept.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c23",
+   "url": "https://help.getaccept.com/en/articles/3325391-azure-active-directory-single-sign-on-sso-integration",
+   "title": "Azure Active Directory single sign-on (SSO) integration",
+   "quote": "Select the option Integrate any other application you don't find in the gallery (Non-gallery) and click Create.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c24",
+   "url": "https://help.getaccept.com/en/articles/3700527-onelogin-single-sign-on-sso-integration",
+   "title": "OneLogin single sign-on (SSO) integration",
+   "quote": "Search for SAML Test Connector, and click that option.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c25",
+   "url": "https://help.getaccept.com/en/articles/2393292-getaccept-rest-api-overview",
+   "title": "GetAccept REST API Overview",
+   "quote": "The GetAccept REST API authenticates using one of two methods: Token-based authentication. OAuth 2.0, which is configured by GetAccept Tech Support.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c26",
+   "url": "https://help.getaccept.com/en/articles/2393314-how-to-use-the-getaccept-public-api",
+   "title": "How to Use the GetAccept Public API",
+   "quote": "To obtain credentials, request the parameter reference, or confirm whether API access is included in your plan, contact your GetAccept representative.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c27",
+   "url": "https://app.getaccept.com/api/",
+   "title": "GetAccept API",
+   "quote": "You must be logged in to access API documentation",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c28",
+   "url": "https://www.getaccept.com/api",
+   "title": "GetAccept API",
+   "quote": "curl https://api.getaccept.com/v1/documents",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c29",
+   "url": "https://help.getaccept.com/en/articles/1273796-manage-user-roles-and-permissions",
+   "title": "Manage user roles and permissions",
+   "quote": "Can add or remove users, assign roles, and manage team structures.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c30",
+   "url": "https://help.getaccept.com/en/articles/2393292-getaccept-rest-api-overview",
+   "title": "GetAccept REST API Overview",
+   "quote": "Webhooks are configured by GetAccept Tech Support, not in the core app.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c31",
+   "url": "https://www.getaccept.com/pricing",
+   "title": "Pricing | GetAccept",
+   "quote": "Everything in Professional plus:",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.getaccept.com/pricing",
+  "https://help.getaccept.com/sitemap.xml",
+  "https://www.getaccept.com/api",
+  "https://app.getaccept.com/api/ (login required)",
+  "https://www.okta.com/integrations/getaccept/ (404)",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/getaccept-tutorial (404)"
+ ],
+ "open_questions": [
+  "Which plan includes SCIM is not stated; is it Enterprise only, or also Professional with the SSO add-on?",
+  "The SSO add-on price for Professional is not published.",
+  "The SCIM tenant URL pattern, SCIM version, filtering and pagination are not documented publicly.",
+  "Whether inactivated users free a seat is not documented.",
+  "User-management, audit-log and rate-limit details of the REST API are behind a login."
+ ]
+}

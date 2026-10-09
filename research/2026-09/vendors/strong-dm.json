@@ -1,0 +1,753 @@
+{
+ "slug": "strong-dm",
+ "vendor": "StrongDM",
+ "vendor_url": "https://www.strongdm.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "StrongDM",
+  "slug": "strong-dm",
+  "category": "Security & Identity",
+  "status": "gated",
+  "scim_plan": "StrongDM (single SKU, Contact Sales)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "StrongDM (single SKU)",
+  "team_price_text": "Per-user, Contact Sales",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "StrongDM (single SKU)",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "via_generic",
+   "google": "directory_sync",
+   "onelogin": "native",
+   "jumpcloud": "native",
+   "generic": true
+  },
+  "pricing_page_url": "https://www.strongdm.com/pricing",
+  "docs_url": "https://docs.strongdm.com/references/scim",
+  "evidence": "StrongDM's pricing page says its single-SKU, per-user pricing includes every feature but gives no price (Talk with Sales), and its docs publish a SCIM 2.0 API that provisions users and groups (as roles) from Okta, Entra ID, OneLogin, JumpCloud or any generic SCIM client.",
+  "notes": "New in 2026-09. Quote-only: StrongDM (now marketed alongside Delinea) sells one per-user SKU that 'includes every feature' with no add-on fees, but publishes no price; buying is via Talk with Sales. Under the quote-only rule this is gated (low), although SCIM is not upcharged relative to any cheaper tier because there is none; reviewers may prefer free. SCIM 2.0 at https://app.strongdm.com/provisioning/{generic|okta|azure}/v2 (UK/EU regional hosts), bearer token from Settings > User Management > Provisioning (Activate SCIM). PATCH/PUT active=false suspends; DELETE deletes; Okta/OneLogin deactivation maps to Suspend. SCIM Groups become StrongDM Roles; permission levels cannot be changed via integrations. Google Workspace uses a StrongDM-run directory sync (service account, read-only Admin SDK scopes), not SCIM. SSO (SAML or OIDC) has no JIT: users must already exist in StrongDM. Separate gRPC admin API (SDKs: Go, Java, Python, Ruby; Terraform) manages accounts, roles and attachments and exposes read-only Activities/history (audit) objects.",
+  "confidence": "low",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "StrongDM (single SKU)",
+  "api_tax": false,
+  "last_verified": "2026-10-05",
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "StrongDM (single SKU)",
+   "price_text": "Per-user pricing, Talk with Sales (no public price)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c1",
+    "c2",
+    "c3",
+    "c34",
+    "c36",
+    "c39"
+   ],
+   "notes": "Single SKU that includes every feature; no add-on fees."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c1",
+   "c3",
+   "c4",
+   "c5",
+   "c22"
+  ],
+  "plan": "StrongDM (single SKU, Contact Sales)",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://app.strongdm.com/provisioning/generic/v2",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Admin UI > Settings > User Management > Provisioning > SCIM Provider (Generic/Okta/Azure/OneLogin) > Activate SCIM",
+   "token_expiry": null,
+   "cite": [
+    "c4",
+    "c30"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": true,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c6",
+    "c15",
+    "c20"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c9",
+    "c10",
+    "c14",
+    "c17",
+    "c18",
+    "c19",
+    "c21",
+    "c25"
+   ],
+   "notes": "reactivate: Replace User sets status active or suspended; the Update example sets active true. PATCH on Users only updates active."
+  },
+  "deprovision": {
+   "action": "suspend",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c8",
+    "c17",
+    "c23",
+    "c35",
+    "c44"
+   ],
+   "notes": "IdP deactivation suspends the user (revokes access to infrastructure); SCIM DELETE deletes the user. A suspended user loses the externally-managed marking."
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "userName (eq)",
+    "displayName (Groups, eq)",
+    "members[value eq ...] (group PATCH)"
+   ],
+   "cite": [
+    "c15",
+    "c20"
+   ]
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c16"
+   ],
+   "notes": "startIndex and count."
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "active",
+    "name.givenName",
+    "name.familyName",
+    "name.formatted",
+    "name.middleName",
+    "name.honorificPrefix",
+    "name.honorificSuffix",
+    "displayName",
+    "nickName",
+    "profileUrl",
+    "title",
+    "preferredLanguage",
+    "locale",
+    "timezone",
+    "emails.value",
+    "emails.display",
+    "emails.primary",
+    "emails.type",
+    "entitlements",
+    "externalId",
+    "roles",
+    "x509Certificates"
+   ],
+   "enterprise": [
+    "costCenter",
+    "department",
+    "division",
+    "employeeNumber",
+    "manager",
+    "organization"
+   ],
+   "custom": {
+    "supported": true,
+    "how": "StrongDM User extension urn:ietf:params:scim:schemas:extension:strongdm:2.0:User with identityAliases (Identity Set, Identity Alias pairs)"
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c11",
+    "c12",
+    "c13",
+    "c19",
+    "c21"
+   ],
+   "notes": "Optional attributes are accepted but have no representation in StrongDM's non-SCIM interfaces. A password attribute is accepted but not stored. The SCIM roles attribute does not map to StrongDM roles."
+  },
+  "roles": {
+   "supported": true,
+   "how": "SCIM Groups are StrongDM Roles (group push / group membership); the user 'roles' attribute is not used; permission levels cannot be changed via integrations.",
+   "cite": [
+    "c7",
+    "c25",
+    "c29"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Entra ID cannot provision nested roles via SCIM.",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "text": "Integrations cannot change or escalate StrongDM permission levels.",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "text": "A suspended user is no longer managed by the IdP (loses external-management marking).",
+    "cite": [
+     "c8"
+    ]
+   }
+  ],
+  "notes": "Provider-specific paths /provisioning/okta/v2 and /provisioning/azure/v2 share the same logic; regional hosts app.uk.strongdm.com and app.eu.strongdm.com."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c36",
+   "c37"
+  ],
+  "plan": "StrongDM (single SKU)",
+  "api_tax": false,
+  "style": "other",
+  "base_url": "app.strongdm.com",
+  "docs_url": "https://docs.strongdm.com/references/api",
+  "auth": {
+   "methods": [
+    "api_key (ID + secret, signed requests)"
+   ],
+   "scopes": [],
+   "cite": [
+    "c37",
+    "c38"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": null,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c36",
+    "c40"
+   ]
+  },
+  "endpoints": [],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "StrongDM (single SKU)",
+   "cite": [
+    "c39"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "gRPC API used through official SDKs (Go, Java, Python, Ruby) and Terraform, with AWS SigV4-style request signatures; no HTTP method/path reference is published, so endpoints are not listed. Domain objects include Accounts, Roles, AccountAttachments, AccountGrants; read-only Activities, AccountsHistory and other history objects serve as audit data. CLI: sdm admin users."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/strongdm/",
+   "cite": [
+    "c24",
+    "c42"
+   ]
+  },
+  "entra": {
+   "listed": null,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c26"
+   ],
+   "notes": "StrongDM's guide uses a non-gallery Entra enterprise app with the /provisioning/azure/v2 endpoint; learn.microsoft.com strongdm-tutorial returns 404."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": true,
+   "kind": "directory_sync",
+   "built_by": "vendor",
+   "url": null,
+   "cite": [
+    "c28"
+   ],
+   "notes": "StrongDM pulls users and groups from Google via a service account with read-only Admin SDK scopes."
+  },
+  "onelogin": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c32"
+   ],
+   "notes": "Per StrongDM's OneLogin guide (OneLogin connector pages not loaded)."
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": null,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c30",
+    "c31"
+   ],
+   "notes": "Per StrongDM's guide the JumpCloud StrongDM app supports Identity Management (bookmark login), using the generic SCIM endpoint. jumpcloud.com/integrations/strongdm returns 404."
+  }
+ },
+ "fallbacks": {
+  "jit": false,
+  "jit_protocol": null,
+  "csv_import": true,
+  "other_sync": "Google Workspace directory sync (StrongDM-run, service account)",
+  "docs_public": true,
+  "cite": [
+   "c28",
+   "c33",
+   "c41"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.strongdm.com/pricing",
+   "title": "StrongDM pricing",
+   "quote": "StrongDM's single SKU, per-user pricing includes every feature, so customers can forecast costs with confidence and avoid surprise add-on fees.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://www.strongdm.com/pricing",
+   "title": "StrongDM pricing",
+   "quote": "One Just-in-Time authorization layer. One Simple Pricing model.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://docs.strongdm.com/references/scim.md",
+   "title": "StrongDM SCIM API Specification | StrongDM Docs",
+   "quote": "The StrongDM SCIM 2.0 API allows apps that conform to the System for Cross-domain Identity Management (SCIM) specification to take advantage of our user and group provisioning capabilities.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/references/scim"
+  },
+  {
+   "id": "c4",
+   "url": "https://docs.strongdm.com/references/scim.md",
+   "title": "StrongDM SCIM API Specification | StrongDM Docs",
+   "quote": "select the **Generic** provider option. Select **activate** and then use the generated bearer token with the integration you are configuring.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/references/scim"
+  },
+  {
+   "id": "c5",
+   "url": "https://docs.strongdm.com/references/scim.md",
+   "title": "StrongDM SCIM API Specification | StrongDM Docs",
+   "quote": "All paths are served from `app.strongdm.com`. StrongDM's SCIM implementation serves different endpoints for different providers.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/references/scim"
+  },
+  {
+   "id": "c6",
+   "url": "https://docs.strongdm.com/references/scim.md",
+   "title": "StrongDM SCIM API Specification | StrongDM Docs",
+   "quote": "Request bodies must follow the appropriate SCIM schemas as returned from `GET /provisioning/generic/v2/Schemas`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/references/scim"
+  },
+  {
+   "id": "c7",
+   "url": "https://docs.strongdm.com/references/scim.md",
+   "title": "StrongDM SCIM API Specification | StrongDM Docs",
+   "quote": "Groups in SCIM are translated to roles within StrongDM, so the two terms are synonymous in these examples.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/references/scim"
+  },
+  {
+   "id": "c8",
+   "url": "https://docs.strongdm.com/references/scim.md",
+   "title": "StrongDM SCIM API Specification | StrongDM Docs",
+   "quote": "When a user is suspended via any action, they lose their external management marking. A user who is suspended cannot be managed by an external party and suspension takes precedence over external management.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/references/scim"
+  },
+  {
+   "id": "c9",
+   "url": "https://docs.strongdm.com/references/scim/users.md",
+   "title": "SCIM Users | StrongDM Docs",
+   "quote": "Replace a user's email, name, and/or status (active or suspended)",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/references/scim/users"
+  },
+  {
+   "id": "c10",
+   "url": "https://docs.strongdm.com/references/scim/users.md",
+   "title": "SCIM Users | StrongDM Docs",
+   "quote": "Update a user's status to suspend the user",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/references/scim/users"
+  },
+  {
+   "id": "c11",
+   "url": "https://docs.strongdm.com/references/scim/users/create.md",
+   "title": "Generic SCIM Endpoint - Create User | StrongDM Docs",
+   "quote": "Optional fields are supported for the User object. Optional fields currently have no exposed representation within StrongDM's non-SCIM interfaces, but they may in the future.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/references/scim/users/create"
+  },
+  {
+   "id": "c12",
+   "url": "https://docs.strongdm.com/references/scim/users/create.md",
+   "title": "Generic SCIM Endpoint - Create User | StrongDM Docs",
+   "quote": "In order to identify the enterprise User extension, these attributes are prefixed with the schema URI `urn:ietf:params:scim:schemas:extension:enterprise:2.0:User:`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/references/scim/users/create"
+  },
+  {
+   "id": "c13",
+   "url": "https://docs.strongdm.com/references/scim/users/create.md",
+   "title": "Generic SCIM Endpoint - Create User | StrongDM Docs",
+   "quote": "In order to identify the StrongDM User extension, this attribute is prefixed with the schema URI `urn:ietf:params:scim:schemas:extension:strongdm:2.0:User:`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/references/scim/users/create"
+  },
+  {
+   "id": "c14",
+   "url": "https://docs.strongdm.com/references/scim/users/delete.md",
+   "title": "Generic SCIM Endpoint - Delete User | StrongDM Docs",
+   "quote": "The Delete User endpoint deletes the requested user from StrongDM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/references/scim/users/delete"
+  },
+  {
+   "id": "c15",
+   "url": "https://docs.strongdm.com/references/scim/users/list.md",
+   "title": "Generic SCIM Endpoint - List Users | StrongDM Docs",
+   "quote": "The List Users endpoint returns either all users within an organization matching the given filter or all users if no filter is provided.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/references/scim/users/list"
+  },
+  {
+   "id": "c16",
+   "url": "https://docs.strongdm.com/references/scim/users/list.md",
+   "title": "Generic SCIM Endpoint - List Users | StrongDM Docs",
+   "quote": "`GET app.strongdm.com/provisioning/generic/v2/Users?startIndex=0&count=1`",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/references/scim/users/list"
+  },
+  {
+   "id": "c17",
+   "url": "https://docs.strongdm.com/references/scim/users/update.md",
+   "title": "Generic SCIM Endpoint - Update User | StrongDM Docs",
+   "quote": "Most attributes are patchable in this way. For example, a user may be suspended by providing the attribute `active: false`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/references/scim/users/update"
+  },
+  {
+   "id": "c18",
+   "url": "https://docs.strongdm.com/references/scim/users/replace.md",
+   "title": "Generic SCIM Endpoint - Replace User | StrongDM Docs",
+   "quote": "The Replace User endpoint completely replaces the requested user's email, name, status (active or suspended), and any other supported attributes in StrongDM with the provided user information.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/references/scim/users/replace"
+  },
+  {
+   "id": "c19",
+   "url": "https://docs.strongdm.com/references/scim/groups/update.md",
+   "title": "Generic SCIM Endpoint - Update Group | StrongDM Docs",
+   "quote": "The Update Group endpoint updates the requested role. Group patching is the most complex operation currently supported in the StrongDM SCIM API.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/references/scim/groups/update"
+  },
+  {
+   "id": "c20",
+   "url": "https://docs.strongdm.com/references/scim/groups/list.md",
+   "title": "Generic SCIM Endpoint - List Groups | StrongDM Docs",
+   "quote": "The List Groups endpoint returns either all groups within an organization matching the given filter or all groups if no filter is provided.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/references/scim/groups/list"
+  },
+  {
+   "id": "c21",
+   "url": "https://docs.strongdm.com/references/scim/groups/create.md",
+   "title": "Generic SCIM Endpoint - Create Group | StrongDM Docs",
+   "quote": "The Create Group endpoint creates the requested role in StrongDM and assigns it to any designated users.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/references/scim/groups/create"
+  },
+  {
+   "id": "c22",
+   "url": "https://docs.strongdm.com/admin/principals/provisioning.md",
+   "title": "Provisioning | StrongDM Docs",
+   "quote": "StrongDM supports the integration of identity providers to provision users and groups within StrongDM through our [SCIM API](/references/scim.md).",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/admin/principals/provisioning"
+  },
+  {
+   "id": "c23",
+   "url": "https://docs.strongdm.com/admin/principals/provisioning/okta-provisioning.md",
+   "title": "Provisioning With Okta | StrongDM Docs",
+   "quote": "**Deactivate Users**: When users are deactivated in Okta or unassigned from the StrongDM application, they will be Suspended within StrongDM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/admin/principals/provisioning/okta-provisioning"
+  },
+  {
+   "id": "c24",
+   "url": "https://docs.strongdm.com/admin/principals/provisioning/okta-provisioning.md",
+   "title": "Provisioning With Okta | StrongDM Docs",
+   "quote": "Search for and select the \"StrongDM\" app, then click **Add**.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/admin/principals/provisioning/okta-provisioning"
+  },
+  {
+   "id": "c25",
+   "url": "https://docs.strongdm.com/admin/principals/provisioning/okta-provisioning.md",
+   "title": "Provisioning With Okta | StrongDM Docs",
+   "quote": "**Push Groups**: Groups and their users in Okta can be pushed to StrongDM as Roles (group information from Okta can be used to map users to StrongDM Roles).",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/admin/principals/provisioning/okta-provisioning"
+  },
+  {
+   "id": "c26",
+   "url": "https://docs.strongdm.com/admin/principals/provisioning/entra-provisioning.md",
+   "title": "Provisioning With Microsoft Entra ID | StrongDM Docs",
+   "quote": "select **Integrate any other application you don't find in the gallery (Non-gallery)** because you’ll be creating your own application instead of using a published gallery app.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/admin/principals/provisioning/entra-provisioning"
+  },
+  {
+   "id": "c27",
+   "url": "https://docs.strongdm.com/admin/principals/provisioning/entra-provisioning.md",
+   "title": "Provisioning With Microsoft Entra ID | StrongDM Docs",
+   "quote": "Azure does not support the provisioning of nested roles via SCIM.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/admin/principals/provisioning/entra-provisioning"
+  },
+  {
+   "id": "c28",
+   "url": "https://docs.strongdm.com/admin/principals/provisioning/google-provisioning.md",
+   "title": "Provisioning With Google Cloud | StrongDM Docs",
+   "quote": "Under **Provisioning**, select **Google** as the provider.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/admin/principals/provisioning/google-provisioning"
+  },
+  {
+   "id": "c29",
+   "url": "https://docs.strongdm.com/admin/principals/provisioning/google-provisioning.md",
+   "title": "Provisioning With Google Cloud | StrongDM Docs",
+   "quote": "StrongDM does not allow the alteration and/or escalation of [permission levels](/admin/access/permission-level.md) within StrongDM via integrated services.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/admin/principals/provisioning/google-provisioning"
+  },
+  {
+   "id": "c30",
+   "url": "https://docs.strongdm.com/admin/principals/provisioning/jumpcloud-provisioning.md",
+   "title": "Provisioning With JumpCloud | StrongDM Docs",
+   "quote": "From the **SCIM Provider** dropdown, select **Generic**.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/admin/principals/provisioning/jumpcloud-provisioning"
+  },
+  {
+   "id": "c31",
+   "url": "https://docs.strongdm.com/admin/principals/provisioning/jumpcloud-provisioning.md",
+   "title": "Provisioning With JumpCloud | StrongDM Docs",
+   "quote": "Search for and then select **StrongDM**.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/admin/principals/provisioning/jumpcloud-provisioning"
+  },
+  {
+   "id": "c32",
+   "url": "https://docs.strongdm.com/admin/principals/provisioning/onelogin-provisioning.md",
+   "title": "Provisioning With OneLogin | StrongDM Docs",
+   "quote": "You can enable provisioning in either of the StrongDM apps listed in the OneLogin portal, depending on which single sign-on (SSO) method you plan on using",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/admin/principals/provisioning/onelogin-provisioning"
+  },
+  {
+   "id": "c33",
+   "url": "https://docs.strongdm.com/admin/principals/sso.md",
+   "title": "SSO | StrongDM Docs",
+   "quote": "For successful SSO authentications, users must exist in the StrongDM Admin UI. They must also exist with the correct access within the SSO provider.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/admin/principals/sso"
+  },
+  {
+   "id": "c34",
+   "url": "https://docs.strongdm.com/admin/principals/sso.md",
+   "title": "SSO | StrongDM Docs",
+   "quote": "StrongDM also allows the use of any OpenID Connect (OIDC)-compliant SSO service or SAML SSO service via our generic OIDC and SAML integrations.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/admin/principals/sso"
+  },
+  {
+   "id": "c35",
+   "url": "https://docs.strongdm.com/admin/principals/users.md",
+   "title": "Users | StrongDM Docs",
+   "quote": "You can revoke a user’s access to infrastructure by suspending their account.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/admin/principals/users"
+  },
+  {
+   "id": "c36",
+   "url": "https://docs.strongdm.com/references/api.md",
+   "title": "API Reference | StrongDM Docs",
+   "quote": "The StrongDM API allows users of StrongDM to programmatically interact with their organization in StrongDM in order to create, remove, or manage users, roles, permissions, gateways, relays, resources, and more.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/references/api"
+  },
+  {
+   "id": "c37",
+   "url": "https://docs.strongdm.com/references/api.md",
+   "title": "API Reference | StrongDM Docs",
+   "quote": "The StrongDM API is constructed with [gRPC](https://cloud.google.com/blog/products/api-management/understanding-grpc-openapi-and-rest-and-when-to-use-them) and a request signature model that requires the use of one of the StrongDM SDKs to interface with the API.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/references/api"
+  },
+  {
+   "id": "c38",
+   "url": "https://docs.strongdm.com/references/api.md",
+   "title": "API Reference | StrongDM Docs",
+   "quote": "Each SDK provides a client that must be constructed with an API `ID` and `Secret` (also referred to as your API key).",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/references/api"
+  },
+  {
+   "id": "c39",
+   "url": "https://docs.strongdm.com/references/api.md",
+   "title": "API Reference | StrongDM Docs",
+   "quote": "The domain objects in the following table are read-only. They primarily allow you to view logs, administrative activities, and historical changes.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/references/api"
+  },
+  {
+   "id": "c40",
+   "url": "https://docs.strongdm.com/references/api.md",
+   "title": "API Reference | StrongDM Docs",
+   "quote": "users = client.accounts.list(\"\")",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/references/api"
+  },
+  {
+   "id": "c41",
+   "url": "https://docs.strongdm.com/admin/principals/import-users.md",
+   "title": "Import Users | StrongDM Docs",
+   "quote": "You can do this either with JSON or with CSV.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/admin/principals/import-users"
+  },
+  {
+   "id": "c42",
+   "url": "https://www.okta.com/integrations/strongdm/",
+   "title": "StrongDM | Okta Integration Network",
+   "quote": "leveraging your user identity information already stored in Okta to enable SSO user and group provisioning activities with StrongDM.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c43",
+   "url": "https://docs.strongdm.com/references/scim/users/delete.md",
+   "title": "Generic SCIM Endpoint - Delete User | StrongDM Docs",
+   "quote": "`DELETE app.strongdm.com/provisioning/generic/v2/Users/a-53fa578c61716688`",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/references/scim/users/delete"
+  },
+  {
+   "id": "c44",
+   "url": "https://docs.strongdm.com/admin/principals/provisioning/onelogin-provisioning.md",
+   "title": "Provisioning With OneLogin | StrongDM Docs",
+   "quote": "For both of the drop-down menus, set the options to **Suspend**.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.strongdm.com/admin/principals/provisioning/onelogin-provisioning"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.strongdm.com/pricing (rendered; single SKU, no price)",
+  "https://docs.strongdm.com/llms.txt (docs index)",
+  "docs.strongdm.com SCIM API reference (users, groups), provisioning guides (Okta, Entra, Google, JumpCloud, OneLogin), SSO, Users, Import Users, API Reference (.md exports)",
+  "Okta OIN https://www.okta.com/integrations/strongdm/ (SSO + provisioning)",
+  "Entra tutorial (404), JumpCloud integration page (404)"
+ ],
+ "open_questions": [
+  "Per-user price is not published; SCIM is included in the single SKU but only via sales.",
+  "Whether suspension frees a billed seat is not documented.",
+  "SCIM rate limits and maximum page size are not documented.",
+  "Whether ServiceProviderConfig and ResourceTypes endpoints exist is not documented.",
+  "Whether suspending a user terminates active StrongDM sessions is not stated (the SSO page only says IdP-side suspension terminates sessions)."
+ ]
+}

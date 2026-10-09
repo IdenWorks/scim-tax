@@ -1,0 +1,730 @@
+{
+ "slug": "apollo",
+ "vendor": "Apollo.io",
+ "vendor_url": "https://www.apollo.io",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Apollo.io",
+  "slug": "apollo",
+  "category": "Sales & CRM",
+  "status": "gated",
+  "scim_plan": "Organization",
+  "scim_price_text": "Organization: $119/seat/mo billed annually (min 3 seats)",
+  "scim_price_per_user_mo": 119,
+  "team_plan": "Basic",
+  "team_price_text": "Basic: $49/seat/mo billed annually",
+  "team_price_per_user_mo": 49,
+  "price_multiplier": 2.4,
+  "sso_plan": "Organization",
+  "sso_price_per_user_mo": 119,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": 3,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": null,
+   "groups": false
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "via_generic",
+   "google": "none",
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.apollo.io/pricing",
+  "docs_url": "https://knowledge.apollo.io/hc/en-us/articles/15570877535757-Configure-SCIM-User-Provisioning-for-SSO",
+  "evidence": "Apollo's help centre says SCIM works with Okta and Microsoft Entra ID \"when SAML single sign-on is active\", and the pricing page lists Single Sign-on (SSO) under Organization ($119 per seat per month, min 3 seats, billed annually).",
+  "notes": "New row (slug 'apollo' is Apollo.io, the sales-intelligence platform; the Okta OIN 'Apollo.io' app is SAML + SCIM, while a separate OIN 'Apollo' app is SWA only; Apollo GraphQL is a different company). SCIM needs an active SAML SSO connection with Okta or Entra (not Google/Microsoft OAuth sign-in), and the pricing cards put SSO on Organization, so the SCIM plan is inferred from that prerequisite (confidence medium); the pricing FAQ instead says SSO is for Custom plans (see conflicts). Team plan Basic $49, Professional $79, Organization $119 per seat/mo billed annually, min 3 seats; multiplier 119/49. SCIM syncs userName, givenName, familyName and active; no Groups, no team or permission-profile assignment, primary email never updated; deactivation keeps data and the seat can be reassigned; provisioning respects seat limits. The REST API is read-only for users (list users, current user profile); API access 'depends on your Apollo plan' and the rate-limit table includes Free.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Free",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "$0",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c32",
+    "c5"
+   ]
+  },
+  {
+   "name": "Basic",
+   "price_text": "$49 per seat per month, billed annually",
+   "price_per_user_mo": 49,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c2",
+    "c32",
+    "c5"
+   ]
+  },
+  {
+   "name": "Professional",
+   "price_text": "$79 per seat per month, billed annually",
+   "price_per_user_mo": 79,
+   "billing": "annual",
+   "sso": false,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c3",
+    "c32",
+    "c5"
+   ]
+  },
+  {
+   "name": "Organization",
+   "price_text": "$119 per seat per month, (min 3 seats) billed annually",
+   "price_per_user_mo": 119,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c4",
+    "c5",
+    "c8",
+    "c32"
+   ],
+   "notes": "SSO listed on the plan card; SCIM inferred from its SAML SSO prerequisite."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c8",
+   "c13",
+   "c5",
+   "c36"
+  ],
+  "plan": "Organization",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": "bearer",
+   "token_source": "Settings > Security > Single sign-on > User Auto Provisioning (SCIM connector base URL and SCIM Token)",
+   "token_expiry": null,
+   "cite": [
+    "c13",
+    "c20"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": false,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c8",
+    "c14"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": null,
+   "group_push": false,
+   "group_membership": false,
+   "cite": [
+    "c8",
+    "c14",
+    "c16"
+   ],
+   "notes": "SCIM remove operations are ignored. Entra may deprovision by inactive status or by deleting the user; what Apollo does on DELETE is not stated."
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": true,
+   "revokes_sessions": null,
+   "data_retained": "Deactivation does not delete the user's data or assets; the seat can be assigned to a new user.",
+   "cite": [
+    "c16",
+    "c24",
+    "c25",
+    "c26"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "id",
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "active"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": false,
+    "how": null
+   },
+   "group": [],
+   "cite": [
+    "c9",
+    "c35"
+   ],
+   "notes": "userName (primary email) is used to create users and is never updated by SCIM."
+  },
+  "roles": {
+   "supported": false,
+   "how": null,
+   "cite": [
+    "c9",
+    "c12"
+   ],
+   "notes": "New SCIM users get the workspace's non-admin permissions; teams and permission profiles are not assigned."
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Requires an active SAML SSO connection with Okta or Entra; not available with Google or Microsoft OAuth sign-in.",
+    "cite": [
+     "c8",
+     "c10"
+    ]
+   },
+   {
+    "text": "No /Groups resource; remove operations ignored; removing a user from a group alone doesn't deactivate them.",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "text": "SCIM never changes a user's primary email.",
+    "cite": [
+     "c17"
+    ]
+   },
+   {
+    "text": "Seat limits apply: if no seat is free the user is not provisioned or reactivated.",
+    "cite": [
+     "c11"
+    ]
+   },
+   {
+    "text": "Users who belong to another Apollo workspace get an invitation instead of being created.",
+    "cite": [
+     "c18"
+    ]
+   },
+   {
+    "text": "Deactivation is blocked for the workspace's last active admin.",
+    "cite": [
+     "c16"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c28",
+   "c30",
+   "c31"
+  ],
+  "plan": "Free",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://api.apollo.io/api/v1",
+  "docs_url": "https://docs.apollo.io/reference/get-a-list-of-users",
+  "auth": {
+   "methods": [
+    "api_key",
+    "oauth2"
+   ],
+   "scopes": [
+    "users_list",
+    "read_user_profile"
+   ],
+   "cite": [
+    "c34",
+    "c29"
+   ]
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c28"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/users/search",
+    "purpose": "List users in the Apollo account (IDs)",
+    "cite": [
+     "c28"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/users/api_profile",
+    "purpose": "Get the API key owner's profile",
+    "cite": [
+     "c29"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": "Per team and per endpoint; general limits Free 50/min, 200/h, 600/day; Basic and Professional 200/min, 400/h, 2,000/day; Organization 200/min, 600/h, 6,000/day.",
+   "cite": [
+    "c31",
+    "c32"
+   ]
+  },
+  "limitations": [
+   {
+    "text": "No documented endpoints to create, update or deactivate users.",
+    "cite": [
+     "c28"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/apollo-io/",
+   "cite": [
+    "c33",
+    "c19",
+    "c23",
+    "c27"
+   ],
+   "notes": "OIN 'Apollo.io' page marks SAML, SCIM, Create, Update and Deactivate as checked (read from page markup). A separate OIN 'Apollo' app is SWA only."
+  },
+  "entra": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c22",
+    "c15"
+   ],
+   "notes": "Apollo's guide adds an enterprise app named Apollo.io and sets SAML and automatic provisioning with the SCIM URL and token; no gallery listing was confirmed."
+  },
+  "google": {
+   "listed": null,
+   "sso": false,
+   "provisioning": false,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c10"
+   ],
+   "notes": "Google sign-in is OAuth only; SCIM is not available with it."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c8"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.apollo.io/pricing",
+   "title": "Apollo.io Pricing Plans",
+   "quote": "Free Explore the Apollo platform to find leads, manage pipeline & close deals. $0",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.apollo.io/pricing",
+   "title": "Apollo.io Pricing Plans",
+   "quote": "Basic Take prospecting, outreach & deal management to the next level. $49 Per seat per month, billed annually",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.apollo.io/pricing",
+   "title": "Apollo.io Pricing Plans",
+   "quote": "Professional Optimize your sales process with multi-touch outreach, AI & automation. $79 Per seat per month, billed annually",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://www.apollo.io/pricing",
+   "title": "Apollo.io Pricing Plans",
+   "quote": "Organization Transform go-to-market with advanced tools, custom solutions & expert help. $119 Per seat per month, (min 3 seats) billed annually",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://www.apollo.io/pricing",
+   "title": "Apollo.io Pricing Plans",
+   "quote": "Advanced Security Configurations Single Sign-on (SSO)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://www.apollo.io/pricing",
+   "title": "Apollo.io Pricing Plans",
+   "quote": "Custom — Teams needing custom volumes, SSO, advanced security, and dedicated support.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://www.apollo.io/pricing",
+   "title": "Apollo.io Pricing Plans",
+   "quote": "For more advanced or custom integrations, API access is available on Custom plans.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://knowledge.apollo.io/api/v2/help_center/en-us/articles/15570877535757.json",
+   "title": "Configure SCIM User Provisioning for SSO",
+   "quote": "SCIM user provisioning lets admins create, update, deactivate, and reactivate Apollo users from an identity provider. Apollo supports SCIM provisioning with Okta and Microsoft Entra ID when SAML single sign-on is active.",
+   "accessed": "2026-10-05",
+   "page_url": "https://knowledge.apollo.io/hc/en-us/articles/15570877535757-Configure-SCIM-User-Provisioning-for-SSO"
+  },
+  {
+   "id": "c9",
+   "url": "https://knowledge.apollo.io/api/v2/help_center/en-us/articles/15570877535757.json",
+   "title": "Configure SCIM User Provisioning for SSO",
+   "quote": "SCIM syncs users' first names, last names, and active statuses. It doesn't update primary email addresses or assign Apollo teams or custom permission profiles.",
+   "accessed": "2026-10-05",
+   "page_url": "https://knowledge.apollo.io/hc/en-us/articles/15570877535757-Configure-SCIM-User-Provisioning-for-SSO"
+  },
+  {
+   "id": "c10",
+   "url": "https://knowledge.apollo.io/api/v2/help_center/en-us/articles/15570877535757.json",
+   "title": "Configure SCIM User Provisioning for SSO",
+   "quote": "SCIM provisioning isn't available with Google or Microsoft OAuth single sign-on.",
+   "accessed": "2026-10-05",
+   "page_url": "https://knowledge.apollo.io/hc/en-us/articles/15570877535757-Configure-SCIM-User-Provisioning-for-SSO"
+  },
+  {
+   "id": "c11",
+   "url": "https://knowledge.apollo.io/api/v2/help_center/en-us/articles/15570877535757.json",
+   "title": "Configure SCIM User Provisioning for SSO",
+   "quote": "Apollo applies your workspace's standard seat limits when SCIM creates or reactivates a user. If Apollo can't assign a seat, it doesn't provision or reactivate the user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://knowledge.apollo.io/hc/en-us/articles/15570877535757-Configure-SCIM-User-Provisioning-for-SSO"
+  },
+  {
+   "id": "c12",
+   "url": "https://knowledge.apollo.io/api/v2/help_center/en-us/articles/15570877535757.json",
+   "title": "Configure SCIM User Provisioning for SSO",
+   "quote": "New SCIM users receive the workspace's non-admin permissions.",
+   "accessed": "2026-10-05",
+   "page_url": "https://knowledge.apollo.io/hc/en-us/articles/15570877535757-Configure-SCIM-User-Provisioning-for-SSO"
+  },
+  {
+   "id": "c13",
+   "url": "https://knowledge.apollo.io/api/v2/help_center/en-us/articles/15570877535757.json",
+   "title": "Configure SCIM User Provisioning for SSO",
+   "quote": "Scroll to User Auto Provisioning, then copy the SCIM connector base URL.",
+   "accessed": "2026-10-05",
+   "page_url": "https://knowledge.apollo.io/hc/en-us/articles/15570877535757-Configure-SCIM-User-Provisioning-for-SSO"
+  },
+  {
+   "id": "c14",
+   "url": "https://knowledge.apollo.io/api/v2/help_center/en-us/articles/15570877535757.json",
+   "title": "Configure SCIM User Provisioning for SSO",
+   "quote": "Apollo doesn't support the SCIM /Groups resource and ignores SCIM remove operations.",
+   "accessed": "2026-10-05",
+   "page_url": "https://knowledge.apollo.io/hc/en-us/articles/15570877535757-Configure-SCIM-User-Provisioning-for-SSO"
+  },
+  {
+   "id": "c15",
+   "url": "https://knowledge.apollo.io/api/v2/help_center/en-us/articles/15570877535757.json",
+   "title": "Configure SCIM User Provisioning for SSO",
+   "quote": "Configure Entra to deprovision individual users by sending an inactive status or deleting the user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://knowledge.apollo.io/hc/en-us/articles/15570877535757-Configure-SCIM-User-Provisioning-for-SSO"
+  },
+  {
+   "id": "c16",
+   "url": "https://knowledge.apollo.io/api/v2/help_center/en-us/articles/15570877535757.json",
+   "title": "Configure SCIM User Provisioning for SSO",
+   "quote": "Apollo deactivates the existing user. Apollo blocks the change if it would deactivate the workspace's last active admin.",
+   "accessed": "2026-10-05",
+   "page_url": "https://knowledge.apollo.io/hc/en-us/articles/15570877535757-Configure-SCIM-User-Provisioning-for-SSO"
+  },
+  {
+   "id": "c17",
+   "url": "https://knowledge.apollo.io/api/v2/help_center/en-us/articles/15570877535757.json",
+   "title": "Configure SCIM User Provisioning for SSO",
+   "quote": "Apollo leaves the user's primary email unchanged, even if the identity provider reports that the update succeeded.",
+   "accessed": "2026-10-05",
+   "page_url": "https://knowledge.apollo.io/hc/en-us/articles/15570877535757-Configure-SCIM-User-Provisioning-for-SSO"
+  },
+  {
+   "id": "c18",
+   "url": "https://knowledge.apollo.io/api/v2/help_center/en-us/articles/15570877535757.json",
+   "title": "Configure SCIM User Provisioning for SSO",
+   "quote": "Provision a user from another workspace Apollo sends the user an invitation to join your workspace instead of automatically moving them.",
+   "accessed": "2026-10-05",
+   "page_url": "https://knowledge.apollo.io/hc/en-us/articles/15570877535757-Configure-SCIM-User-Provisioning-for-SSO"
+  },
+  {
+   "id": "c19",
+   "url": "https://knowledge.apollo.io/api/v2/help_center/en-us/articles/15570877535757.json",
+   "title": "Configure SCIM User Provisioning for SSO",
+   "quote": "In Okta, go to Applications > Applications, then select Apollo.io.",
+   "accessed": "2026-10-05",
+   "page_url": "https://knowledge.apollo.io/hc/en-us/articles/15570877535757-Configure-SCIM-User-Provisioning-for-SSO"
+  },
+  {
+   "id": "c20",
+   "url": "https://knowledge.apollo.io/api/v2/help_center/en-us/articles/15570877535757.json",
+   "title": "Configure SCIM User Provisioning for SSO",
+   "quote": "Copy the SCIM Token.",
+   "accessed": "2026-10-05",
+   "page_url": "https://knowledge.apollo.io/hc/en-us/articles/15570877535757-Configure-SCIM-User-Provisioning-for-SSO"
+  },
+  {
+   "id": "c21",
+   "url": "https://knowledge.apollo.io/api/v2/help_center/en-us/articles/12667892496141.json",
+   "title": "Use Single Sign-On (SSO) on Apollo",
+   "quote": "Apollo supports both SP and IdP-initiated SSO through SAML and SCIM integrations.",
+   "accessed": "2026-10-05",
+   "page_url": "https://knowledge.apollo.io/hc/en-us/articles/12667892496141-Use-Single-Sign-On-SSO-on-Apollo"
+  },
+  {
+   "id": "c22",
+   "url": "https://knowledge.apollo.io/api/v2/help_center/en-us/articles/12667892496141.json",
+   "title": "Use Single Sign-On (SSO) on Apollo",
+   "quote": "Click to add an application, and name it Apollo.io.",
+   "accessed": "2026-10-05",
+   "page_url": "https://knowledge.apollo.io/hc/en-us/articles/12667892496141-Use-Single-Sign-On-SSO-on-Apollo"
+  },
+  {
+   "id": "c23",
+   "url": "https://knowledge.apollo.io/api/v2/help_center/en-us/articles/12667892496141.json",
+   "title": "Use Single Sign-On (SSO) on Apollo",
+   "quote": "In Okta, navigate to Applications, then click Browse App Catalog. Search for and click Apollo.io.",
+   "accessed": "2026-10-05",
+   "page_url": "https://knowledge.apollo.io/hc/en-us/articles/12667892496141-Use-Single-Sign-On-SSO-on-Apollo"
+  },
+  {
+   "id": "c24",
+   "url": "https://knowledge.apollo.io/api/v2/help_center/en-us/articles/4409130537101.json",
+   "title": "Add, Manage, and Deactivate Users",
+   "quote": "Deactivating a user does not delete their data or assets.",
+   "accessed": "2026-10-05",
+   "page_url": "https://knowledge.apollo.io/hc/en-us/articles/4409130537101-Add-Manage-and-Deactivate-Users"
+  },
+  {
+   "id": "c25",
+   "url": "https://knowledge.apollo.io/api/v2/help_center/en-us/articles/4409130537101.json",
+   "title": "Add, Manage, and Deactivate Users",
+   "quote": "As a best practice, you should deactivate an Apollo user's account when that employee leaves your organization and assign their seat to a new user if necessary.",
+   "accessed": "2026-10-05",
+   "page_url": "https://knowledge.apollo.io/hc/en-us/articles/4409130537101-Add-Manage-and-Deactivate-Users"
+  },
+  {
+   "id": "c26",
+   "url": "https://knowledge.apollo.io/api/v2/help_center/en-us/articles/4409130537101.json",
+   "title": "Add, Manage, and Deactivate Users",
+   "quote": "Deactivating a user doesn't affect your Apollo subscription or plan.",
+   "accessed": "2026-10-05",
+   "page_url": "https://knowledge.apollo.io/hc/en-us/articles/4409130537101-Add-Manage-and-Deactivate-Users"
+  },
+  {
+   "id": "c27",
+   "url": "https://knowledge.apollo.io/api/v2/help_center/en-us/articles/15575994677005.json",
+   "title": "Why Are the Users I Assign in Okta Not Created in Apollo?",
+   "quote": "If you've set up SCIM user provisioning , Apollo automatically creates a new user in Apollo when you assign a user in Okta.",
+   "accessed": "2026-10-05",
+   "page_url": "https://knowledge.apollo.io/hc/en-us/articles/15575994677005-Why-Are-the-Users-I-Assign-in-Okta-Not-Created-in-Apollo"
+  },
+  {
+   "id": "c28",
+   "url": "https://docs.apollo.io/reference/get-a-list-of-users.md",
+   "title": "Get a List of Users",
+   "quote": "Use the get a list of users endpoint to retrieve the IDs for all of the users in your Apollo account.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.apollo.io/reference/get-a-list-of-users"
+  },
+  {
+   "id": "c29",
+   "url": "https://docs.apollo.io/reference/get-current-user-profile.md",
+   "title": "Get Current User Profile",
+   "quote": "Use the get current user profile endpoint to retrieve the authenticated profile of the person who owns the API key being used.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.apollo.io/reference/get-current-user-profile"
+  },
+  {
+   "id": "c30",
+   "url": "https://docs.apollo.io/docs/create-api-key.md",
+   "title": "Create an API Key",
+   "quote": "Access to Apollo API depends on your Apollo plan.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.apollo.io/docs/create-api-key"
+  },
+  {
+   "id": "c31",
+   "url": "https://docs.apollo.io/reference/rate-limits.md",
+   "title": "Rate Limits",
+   "quote": "Apollo API rate limits determine how many requests your team can send within a specific period. Your limits depend on your Apollo plan and on the endpoint you call.",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.apollo.io/reference/rate-limits"
+  },
+  {
+   "id": "c32",
+   "url": "https://docs.apollo.io/reference/rate-limits.md",
+   "title": "Rate Limits",
+   "quote": "| Requests per minute | 50   | 200   | 200          | 200          |",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.apollo.io/reference/rate-limits"
+  },
+  {
+   "id": "c33",
+   "url": "https://www.okta.com/integrations/apollo-io/",
+   "title": "Integrate Apollo.io with Okta",
+   "quote": "Integrate Apollo.io with Okta",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c34",
+   "url": "https://docs.apollo.io/reference/get-a-list-of-users.md",
+   "title": "Get a List of Users",
+   "quote": "users_list",
+   "accessed": "2026-10-05",
+   "page_url": "https://docs.apollo.io/reference/get-a-list-of-users"
+  },
+  {
+   "id": "c35",
+   "url": "https://knowledge.apollo.io/api/v2/help_center/en-us/articles/12667892496141.json",
+   "title": "Use Single Sign-On (SSO) on Apollo",
+   "quote": "Apollo doesn't currently support custom SAML claim or attribute mapping.",
+   "accessed": "2026-10-05",
+   "page_url": "https://knowledge.apollo.io/hc/en-us/articles/12667892496141-Use-Single-Sign-On-SSO-on-Apollo"
+  },
+  {
+   "id": "c36",
+   "url": "https://knowledge.apollo.io/hc/en-us/articles/15570877535757-Configure-SCIM-User-Provisioning-for-SSO",
+   "title": "Configure SCIM User Provisioning for SSO (human page; blocks automated fetches)",
+   "quote": "Apollo supports SCIM provisioning with Okta and Microsoft Entra ID when SAML single sign-on is active.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The pricing plan cards list Single Sign-on (SSO) under Organization ($119), but the pricing FAQ says Custom is for 'Teams needing custom volumes, SSO, advanced security'; the plan card is more specific and is used.",
+   "cite": [
+    "c5",
+    "c6"
+   ]
+  },
+  {
+   "text": "The Free plan card lists API Access and the API rate-limit table has a Free column, but the pricing FAQ says advanced or custom integration API access is on Custom plans.",
+   "cite": [
+    "c1",
+    "c32",
+    "c7"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.apollo.io/pricing",
+  "knowledge.apollo.io help-centre search API: SCIM (5 articles)",
+  "https://docs.apollo.io/llms.txt",
+  "https://www.okta.com/integrations/apollo-io/",
+  "https://www.okta.com/integrations/apollo/ (SWA only)"
+ ],
+ "open_questions": [
+  "Pricing page does not state SCIM; plan is inferred from the SAML SSO prerequisite.",
+  "SCIM version, discovery endpoints, filtering and pagination are not documented.",
+  "Whether SCIM deactivation ends active sessions is not documented.",
+  "Whether SAML sign-in creates users just in time is not documented.",
+  "No audit-log API or user webhooks found."
+ ]
+}

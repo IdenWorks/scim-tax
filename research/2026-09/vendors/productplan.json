@@ -1,0 +1,596 @@
+{
+ "slug": "productplan",
+ "vendor": "ProductPlan",
+ "vendor_url": "https://www.productplan.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "ProductPlan",
+  "slug": "productplan",
+  "category": "Project & Work Management",
+  "status": "free",
+  "scim_plan": "Product Intelligence Platform Plan (single plan)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Product Intelligence Platform Plan",
+  "team_price_text": "Contact Sales (tailored, billed annually)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": "Product Intelligence Platform Plan",
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": null,
+   "deactivate": true,
+   "delete": null,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.productplan.com/pricing/",
+  "docs_url": "https://support.productplan.com/scim-provisioning",
+  "evidence": "ProductPlan sells \"One plan, everything and everyone included\" with \"no features locked behind an upgrade\", and its help centre documents SCIM provisioning that admins set up from Account Settings > Security.",
+  "notes": "New row. Single plan, sold by quote: pricing is tailored per use case and billed annually, per editor seat, with unlimited free viewers. SSO is 'available to all' and SCIM is documented with no plan restriction, so there is no SCIM upcharge (rule 1a, single plan). Because the only plan has no public price, rule 6a (quote-only = gated) could also be argued at merge. SCIM: bearer token generated in Security settings; users (userName, displayName, given/family name, active) and groups (displayName, members) mapped to Teams; editor licence via a 'ProductPlan Editors' group or per-team checkbox. Deprovisioning sets the user to Removed (kept, data retained, cannot log in). The help centre mentions Okta and Entra ID; the Okta OIN app is SWA only and the Entra gallery app is SSO/JIT only, so both use the generic endpoint. The REST API v2 (personal token) only lists users and teams.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Product Intelligence Platform Plan",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Product Intelligence Platform Plan",
+   "price_text": "Contact sales (tailored pricing, billed annually)",
+   "price_per_user_mo": null,
+   "billing": "annual",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2",
+    "c4",
+    "c5",
+    "c6",
+    "c19",
+    "c23"
+   ],
+   "notes": "Single plan; priced per editor seat with free viewers; no public price."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c6",
+   "c7",
+   "c8",
+   "c4"
+  ],
+  "plan": "Product Intelligence Platform Plan (single plan)",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": "bearer",
+   "token_source": "Account Settings > Security > SCIM Provisioning subtab, Generate Token (shows SCIM Base URL and Auth Token)",
+   "token_expiry": null,
+   "cite": [
+    "c7",
+    "c8"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c9",
+    "c11"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": null,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c6",
+    "c11",
+    "c13",
+    "c17"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "User kept on the account as Removed (Inactive tab); data stays so admins can transfer roadmaps; team memberships and permissions removed; user cannot log in.",
+   "cite": [
+    "c13",
+    "c14",
+    "c15"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "displayName",
+    "name.givenName",
+    "name.familyName",
+    "active"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "displayName",
+    "members"
+   ],
+   "cite": [
+    "c9",
+    "c10",
+    "c11",
+    "c13"
+   ],
+   "notes": "Help article writes the name attributes as user.givenName and user.familyName."
+  },
+  "roles": {
+   "supported": true,
+   "how": "Editor licence via membership of a group named 'ProductPlan Editors' or the Editors checkbox on a team-to-IdP-group mapping; everyone else is a viewer. Falls back to viewer when no editor licences are left.",
+   "cite": [
+    "c12",
+    "c18"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Editor licences are assigned only while unused editor licences remain; otherwise users come in as viewers.",
+    "cite": [
+     "c18"
+    ]
+   },
+   {
+    "text": "Unmapped IdP group names create new ProductPlan Teams.",
+    "cite": [
+     "c17"
+    ]
+   }
+  ],
+  "notes": "SCIM version and base URL pattern are not stated in the public article; the base URL is shown in the app. The article discusses Okta and Entra ID group behaviour."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c23",
+   "c24",
+   "c28"
+  ],
+  "plan": "Product Intelligence Platform Plan (single plan)",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://app.productplan.com/api/v2",
+  "docs_url": "https://productplan.readme.io/reference/overview",
+  "auth": {
+   "methods": [
+    "api_key"
+   ],
+   "scopes": [],
+   "cite": [
+    "c24"
+   ],
+   "notes": "Personal access token tied to one user, sent as Bearer."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": null,
+   "create_user": false,
+   "invite_user": null,
+   "update_user": false,
+   "deactivate_user": false,
+   "delete_user": false,
+   "reactivate_user": null,
+   "manage_groups": false,
+   "assign_roles": false,
+   "assign_licenses": false,
+   "cite": [
+    "c25",
+    "c27",
+    "c32"
+   ],
+   "notes": "API reference lists only read endpoints for users and teams ('List your teams and users'); false is by absence from the reference."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/api/v2/users",
+    "purpose": "List all users in the account (page, page_size up to 500, q filter)",
+    "cite": [
+     "c25",
+     "c26"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v2/teams",
+    "purpose": "List teams in the account",
+    "cite": [
+     "c27"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": false,
+   "events": [],
+   "cite": [
+    "c33"
+   ],
+   "notes": "Webhooks reference lists only bar events (creates/updates/deletes a bar)."
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": false,
+   "provisioning": false,
+   "kind": "swa",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/productplan/",
+   "cite": [
+    "c29"
+   ],
+   "notes": "OIN app (last updated Mar. 13 2014) ticks SWA only (page markup). ProductPlan's own guide uses a custom SAML app; SCIM article discusses Okta groups, so generic SCIM is used."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/productplan-tutorial",
+   "cite": [
+    "c30"
+   ],
+   "notes": "Gallery tutorial covers SAML SSO with JIT; no provisioning tutorial (productplan-provisioning-tutorial 404)."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": null,
+  "docs_public": true,
+  "cite": [
+   "c21",
+   "c30"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.productplan.com/pricing/",
+   "title": "Pricing | ProductPlan",
+   "quote": "One plan, everything and everyone included. All features, all teams, all viewers, all the time.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.productplan.com/pricing/",
+   "title": "Pricing | ProductPlan",
+   "quote": "Security & Administration Single sign-on (SSO) Advanced admin management",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://www.productplan.com/pricing/",
+   "title": "Pricing | ProductPlan",
+   "quote": "Viewers, that's anyone you share a roadmap with, are always included. You only pay for the people building and managing roadmaps.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://support.productplan.com/how-does-licensing-and-pricing-work",
+   "title": "How does licensing and pricing work?",
+   "quote": "There are no tiers to navigate and no features locked behind an upgrade.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://support.productplan.com/how-does-licensing-and-pricing-work",
+   "title": "How does licensing and pricing work?",
+   "quote": "We tailor pricing based on your use case, billed annually.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://support.productplan.com/scim-provisioning",
+   "title": "SCIM Provisioning",
+   "quote": "SCIM Provisioning allows Account Administrators to manage users in one spot and have ProductPlan handle users automatically.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://support.productplan.com/scim-provisioning",
+   "title": "SCIM Provisioning",
+   "quote": "To set up SCIM, Account Admins can navigate to the Security page under Account Settings, and click on the SCIM Provisioning subtab.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://support.productplan.com/scim-provisioning",
+   "title": "SCIM Provisioning",
+   "quote": "Both of these can be found on the Account/Security Settings page by clicking the Generate Token button.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://support.productplan.com/scim-provisioning",
+   "title": "SCIM Provisioning",
+   "quote": "userName (required) - maps to user email and must be the user's email address",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://support.productplan.com/scim-provisioning",
+   "title": "SCIM Provisioning",
+   "quote": "displayName - maps to user name user.givenName - used to build user name user.familyName - used to build user name",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://support.productplan.com/scim-provisioning",
+   "title": "SCIM Provisioning",
+   "quote": "displayName - maps to a team name members - maps to team memberships",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://support.productplan.com/scim-provisioning",
+   "title": "SCIM Provisioning",
+   "quote": "editor licenses can also be provisioned based on a group with the name \"ProductPlan Editors\" (case insensitive).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://support.productplan.com/scim-provisioning",
+   "title": "SCIM Provisioning",
+   "quote": "User de-provisioning happens when a user's Active status changes to false (this is part of the SCIM specification).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://support.productplan.com/scim-provisioning",
+   "title": "SCIM Provisioning",
+   "quote": "When a user is de-provisioned, the platform sets them as Removed in our system, but the user is kept on the account.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://support.productplan.com/scim-provisioning",
+   "title": "SCIM Provisioning",
+   "quote": "Other side effects: Team memberships and permissions are removed. A removed user is unable to login.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://support.productplan.com/scim-provisioning",
+   "title": "SCIM Provisioning",
+   "quote": "If there's a group within a group in Okta / EntraID, how does that translate over to us?",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://support.productplan.com/scim-provisioning",
+   "title": "SCIM Provisioning",
+   "quote": "If a mapping does not exist and the IdP Group Name is different from all existing ProductPlan Team names, a new Team will be created with the title of that IdP Group Name.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://support.productplan.com/scim-provisioning",
+   "title": "SCIM Provisioning",
+   "quote": "Users will only be given editor's licenses as long as they are available. If all editor's licenses are used, the user will be provisioned as a viewer.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://support.productplan.com/configuring-single-sign-on-sso-with-productplan",
+   "title": "Configuring Single Sign-On (SSO) With ProductPlan",
+   "quote": "Using SSO for your team is available to all.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://support.productplan.com/configuring-single-sign-on-sso-with-productplan",
+   "title": "Configuring Single Sign-On (SSO) With ProductPlan",
+   "quote": "We support most SAML 2.0 identity providers including Okta, Azure Active Directory, Ping, Google Apps, OneLogin, Centrify and more.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://support.productplan.com/configuring-single-sign-on-sso-with-productplan",
+   "title": "Configuring Single Sign-On (SSO) With ProductPlan",
+   "quote": "There will be three ways a user can obtain an automatic license to ProductPlan via SSO.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://support.productplan.com/deleting-or-removing-a-user-from-your-account",
+   "title": "Deleting or Removing a User from your Account",
+   "quote": "Deleting or removing a user does not reduce the license count on your billing cycle, it simply eliminates that user allowing you to replace them with another user.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://support.productplan.com/do-you-have-an-api",
+   "title": "Do you have an API?",
+   "quote": "We do have an API available for you to use as part of your subscription.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://productplan.readme.io/reference/authentication.md",
+   "title": "Authentication - ProductPlan API V2",
+   "quote": "Every request requires a Personal Access Token, or API Token, to authenticate.",
+   "accessed": "2026-10-05",
+   "page_url": "https://productplan.readme.io/reference/authentication"
+  },
+  {
+   "id": "c25",
+   "url": "https://productplan.readme.io/reference/get_api-v2-users.md",
+   "title": "Gets all users that belong to the account",
+   "quote": "Returns a list of all users that belong to the account.",
+   "accessed": "2026-10-05",
+   "page_url": "https://productplan.readme.io/reference/get_api-v2-users"
+  },
+  {
+   "id": "c26",
+   "url": "https://productplan.readme.io/reference/get_api-v2-users.md",
+   "title": "Gets all users that belong to the account",
+   "quote": "The amount of items to return with each page (default: 200, max: 500)",
+   "accessed": "2026-10-05",
+   "page_url": "https://productplan.readme.io/reference/get_api-v2-users"
+  },
+  {
+   "id": "c27",
+   "url": "https://productplan.readme.io/reference/get_api-v2-teams.md",
+   "title": "Gets all teams",
+   "quote": "Returns a list of all teams associated to the account of the authenticated user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://productplan.readme.io/reference/get_api-v2-teams"
+  },
+  {
+   "id": "c28",
+   "url": "https://productplan.readme.io/reference/overview",
+   "title": "Overview - ProductPlan API V2",
+   "quote": "The ProductPlan RESTful API may be used by any current ProductPlan user to access and modify specific application data.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c29",
+   "url": "https://www.okta.com/integrations/productplan/",
+   "title": "Integrate ProductPlan with Okta",
+   "quote": "Last updated: Mar. 13 2014",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c30",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/productplan-tutorial",
+   "title": "Configure ProductPlan for Single sign-on with Microsoft Entra ID",
+   "quote": "ProductPlan supports Just In Time user provisioning.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c31",
+   "url": "https://productplan.readme.io/reference/get_api-v2-users.md",
+   "title": "Gets all users that belong to the account",
+   "quote": "\"default\": \"app.productplan.com\"",
+   "accessed": "2026-10-05",
+   "page_url": "https://productplan.readme.io/reference/get_api-v2-users"
+  },
+  {
+   "id": "c32",
+   "url": "https://productplan.readme.io/reference/overview",
+   "title": "Overview - ProductPlan API V2",
+   "quote": "List your teams and users Check application status",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://productplan.readme.io/llms.txt",
+   "title": "ProductPlan Documentation (llms.txt)",
+   "quote": "API Reference: Webhooks",
+   "accessed": "2026-10-05",
+   "page_url": "https://productplan.readme.io/reference/about-webhooks"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.productplan.com/pricing/ (rendered)",
+  "https://support.productplan.com/sitemap.xml (170 URLs; scim-provisioning, SSO guides, licensing, API)",
+  "https://productplan.readme.io/llms.txt and reference pages (users, teams, authentication, webhooks)",
+  "okta.com/integrations/productplan/",
+  "learn.microsoft.com productplan-tutorial; productplan-provisioning-tutorial (404)"
+ ],
+ "open_questions": [
+  "Which SCIM version and base URL does ProductPlan use (shown only in the app)?",
+  "Does SCIM support attribute updates (PUT/PATCH) and hard delete?",
+  "Does a SCIM-removed user free the editor licence for reuse (manual removal does, without reducing billing)?",
+  "Is ProductPlan listed in the Google, OneLogin or JumpCloud catalogues?",
+  "Is there an audit-log API?"
+ ]
+}

@@ -1,0 +1,618 @@
+{
+ "slug": "azure-devops",
+ "vendor": "Azure DevOps",
+ "vendor_url": "https://azure.microsoft.com/en-us/products/devops",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Azure DevOps",
+  "slug": "azure-devops",
+  "category": "Developer Tools & CI/CD",
+  "status": "none",
+  "scim_plan": "—",
+  "scim_price_text": "—",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Basic",
+  "team_price_text": "Basic: first 5 users free, then $6/user/mo",
+  "team_price_per_user_mo": 6,
+  "price_multiplier": null,
+  "sso_plan": "Basic",
+  "sso_price_per_user_mo": 6,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": null,
+  "idp": {
+   "okta": "none",
+   "entra": "directory_sync",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": false
+  },
+  "pricing_page_url": "https://azure.microsoft.com/en-us/pricing/details/devops/azure-devops-services/",
+  "docs_url": "https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/assign-access-levels-by-group-membership?view=azure-devops",
+  "evidence": "Azure DevOps documents no SCIM endpoint; organizations connect to Microsoft Entra ID, and when a user leaves an Entra group that was their sole source of access, Azure DevOps automatically removes them from the organization.",
+  "notes": "New row. Pricing is per user licence: Stakeholder access is free, Basic is free for the first 5 users then $6/user/month, Basic + Test Plans is $52/user/month; Visual Studio subscribers and GitHub Enterprise Cloud users get access at no extra cost. There is no SCIM endpoint and no Entra gallery provisioning app; identity comes from connecting the organization to Microsoft Entra ID (sign-in with work credentials on any organization), and Entra group rules assign access levels hourly (dynamic groups up to 24h) and remove users whose only access came from the group. Access from a group rule takes effect on first sign-in. Okta and other IdPs reach Azure DevOps only through Entra ID. sso_plan is Basic because the Entra connection is an organization setting with no plan gate. The Member Entitlement Management and Graph REST APIs add, update, disable and delete users and group entitlements on every organization; the Audit Log API needs an Entra-backed organization.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Basic",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Stakeholder",
+   "price_text": "Free, unlimited users (limited access)",
+   "price_per_user_mo": 0,
+   "billing": "monthly",
+   "sso": true,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": null,
+   "cite": [
+    "c11",
+    "c4",
+    "c13"
+   ],
+   "notes": "An access level rather than an organization plan; Entra sign-in and the REST APIs are organization-wide."
+  },
+  {
+   "name": "Basic",
+   "price_text": "First 5 users free, then $6 per user per month",
+   "price_per_user_mo": 6,
+   "billing": "monthly",
+   "sso": true,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c1",
+    "c4",
+    "c13",
+    "c24"
+   ],
+   "notes": "Audit Log API requires the organization to be backed by Microsoft Entra ID. Billing is monthly through Azure (no annual price listed)."
+  },
+  {
+   "name": "Basic + Test Plans",
+   "price_text": "$52 per user per month",
+   "price_per_user_mo": 52,
+   "billing": "monthly",
+   "sso": true,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c2",
+    "c4",
+    "c13",
+    "c24"
+   ]
+  }
+ ],
+ "scim": {
+  "available": null,
+  "cite": [],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": null,
+  "base_url": null,
+  "auth": {
+   "method": null,
+   "token_source": null,
+   "token_expiry": null,
+   "cite": []
+  },
+  "endpoints": {
+   "Users": null,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": []
+  },
+  "operations": {
+   "create": null,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": null,
+   "reactivate": null,
+   "delete": null,
+   "group_push": null,
+   "group_membership": null,
+   "cite": []
+  },
+  "deprovision": {
+   "action": null,
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": []
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": []
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "No SCIM endpoint is documented for Azure DevOps Services. Users come from the connected Microsoft Entra ID tenant (or Microsoft accounts); Entra group rules assign access levels and remove users whose only access came from the group."
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c12",
+   "c13",
+   "c21"
+  ],
+  "plan": "Basic",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://vsaex.dev.azure.com/{organization}/_apis",
+  "docs_url": "https://learn.microsoft.com/en-us/rest/api/azure/devops/memberentitlementmanagement/user-entitlements?view=azure-devops-rest-7.1",
+  "auth": {
+   "methods": [
+    "oauth2"
+   ],
+   "scopes": [
+    "vso.memberentitlementmanagement",
+    "vso.memberentitlementmanagement_write"
+   ],
+   "cite": [
+    "c28"
+   ],
+   "notes": "Scopes shown on the Member Entitlement Management reference pages; personal access tokens and Entra tokens are also used across Azure DevOps but were not separately cited."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": null,
+   "assign_licenses": true,
+   "cite": [
+    "c12",
+    "c14",
+    "c15",
+    "c16",
+    "c17",
+    "c18",
+    "c20",
+    "c22"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "https://vsaex.dev.azure.com/{organization}/_apis/userentitlements?api-version=7.1",
+    "purpose": "Add a user with licence, extensions and project group",
+    "cite": [
+     "c12",
+     "c13"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "https://vsaex.dev.azure.com/{organization}/_apis/userentitlements?api-version=7.1",
+    "purpose": "Search user entitlements (paged, filter, orderBy)",
+    "cite": [
+     "c15"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "https://vsaex.dev.azure.com/{organization}/_apis/userentitlements/{userId}?api-version=7.1",
+    "purpose": "Get a user entitlement",
+    "cite": [
+     "c14"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "https://vsaex.dev.azure.com/{organization}/_apis/userentitlements/{userId}?api-version=7.1",
+    "purpose": "Edit a user's licence, extensions, projects and teams",
+    "cite": [
+     "c16"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "https://vsaex.dev.azure.com/{organization}/_apis/userentitlements/{userId}?api-version=7.1",
+    "purpose": "Delete a user from the organization",
+    "cite": [
+     "c17"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "https://vsaex.dev.azure.com/{organization}/_apis/groupentitlements?api-version=7.1",
+    "purpose": "Create a group entitlement (group rule) with licence rule",
+    "cite": [
+     "c18"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "https://vsaex.dev.azure.com/{organization}/_apis/groupentitlements?api-version=7.1",
+    "purpose": "List group entitlements",
+    "cite": [
+     "c19"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "https://vsaex.dev.azure.com/{organization}/_apis/GroupEntitlements/{groupId}/members/{memberId}?api-version=7.1",
+    "purpose": "Add a member to a group",
+    "cite": [
+     "c20"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "https://vssps.dev.azure.com/{organization}/_apis/graph/users?api-version=7.1-preview.1",
+    "purpose": "Materialize an existing Entra or Microsoft account user (Graph)",
+    "cite": [
+     "c21"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "https://vssps.dev.azure.com/{organization}/_apis/graph/users/{userDescriptor}?api-version=7.1-preview.1",
+    "purpose": "Users - Delete (Graph)",
+    "cite": [
+     "c22"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "https://auditservice.dev.azure.com/{organization}/_apis/audit/auditlog?api-version=7.1-preview.1",
+    "purpose": "Query the audit log",
+    "cite": [
+     "c23"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Basic",
+   "cite": [
+    "c23",
+    "c24",
+    "c25"
+   ],
+   "notes": "Only for organizations backed by Microsoft Entra ID; events kept 90 days."
+  },
+  "rate_limits": {
+   "text": "Global consumption limit: requests are delayed when a user's usage exceeds 200 times a typical user's consumption in a sliding five-minute window (measured in TSTUs).",
+   "cite": [
+    "c26"
+   ]
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": false,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c27"
+   ],
+   "notes": "OIN search for 'azure devops' returns no results."
+  },
+  "entra": {
+   "listed": false,
+   "sso": true,
+   "provisioning": true,
+   "kind": "directory_sync",
+   "built_by": "vendor",
+   "url": null,
+   "cite": [
+    "c4",
+    "c5",
+    "c6",
+    "c8"
+   ],
+   "notes": "Not a gallery app: the organization connects directly to an Entra ID tenant; group rules sync access hourly and remove users whose only access came from the group. No Entra SaaS-app tutorial for Azure DevOps exists in the Entra saas-apps index."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "oidc",
+  "csv_import": null,
+  "other_sync": "Microsoft Entra ID directory-backed organization with Entra group rules (hourly sync) that assign access levels and remove users",
+  "docs_public": true,
+  "cite": [
+   "c4",
+   "c6",
+   "c7",
+   "c8"
+  ],
+  "notes": "Users granted by a group rule are materialized on first sign-in, so the mechanism behaves like JIT on top of directory group sync. jit_protocol is recorded as oidc because sign-in is through Microsoft Entra ID; the docs do not name the protocol."
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://azure.microsoft.com/en-us/pricing/details/devops/azure-devops-services/",
+   "title": "Azure DevOps Services Pricing | Microsoft Azure",
+   "quote": "Additional users are charged $6/user/month",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://azure.microsoft.com/en-us/pricing/details/devops/azure-devops-services/",
+   "title": "Azure DevOps Services Pricing | Microsoft Azure",
+   "quote": "$52 per user per month",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://azure.microsoft.com/en-us/pricing/details/devops/azure-devops-services/",
+   "title": "Azure DevOps Services Pricing | Microsoft Azure",
+   "quote": "Visual Studio subscribers get free access to Azure DevOps.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/connect-organization-to-azure-ad?view=azure-devops",
+   "title": "Connect organization to Microsoft Entra ID - Azure DevOps Services | Microsoft Learn",
+   "quote": "Connect your Azure DevOps organization to Microsoft Entra ID to enable enterprise-grade security, streamlined user management, and unified authentication across your organization's Microsoft services.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/connect-organization-to-azure-ad?view=azure-devops",
+   "title": "Connect organization to Microsoft Entra ID - Azure DevOps Services | Microsoft Learn",
+   "quote": "Single sign-on: Users authenticate with their existing work credentials",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/assign-access-levels-by-group-membership?view=azure-devops",
+   "title": "Add group rule, assign access levels - Azure DevOps Services | Microsoft Learn",
+   "quote": "When a user leaves a Microsoft Entra group, Azure DevOps adjusts their access level according to the group's defined rules. If the group was the user's sole source of access, Azure DevOps automatically removes them from the organization.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/assign-access-levels-by-group-membership?view=azure-devops",
+   "title": "Add group rule, assign access levels - Azure DevOps Services | Microsoft Learn",
+   "quote": "However, access and permissions take effect only after the user signs in to the organization for the first time.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/assign-access-levels-by-group-membership?view=azure-devops",
+   "title": "Add group rule, assign access levels - Azure DevOps Services | Microsoft Learn",
+   "quote": "Azure DevOps updates Microsoft Entra group membership every hour, but Microsoft Entra ID might take up to 24 hours to update dynamic group membership.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/delete-organization-users?view=azure-devops",
+   "title": "Delete, remove users from team, project, organization - Azure DevOps | Microsoft Learn",
+   "quote": "Removing a user from Microsoft Entra ID prevents assigning new artifacts (for example, work items or pull requests) to that user. However, the history of already assigned artifacts is preserved.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/delete-organization-users?view=azure-devops",
+   "title": "Delete, remove users from team, project, organization - Azure DevOps | Microsoft Learn",
+   "quote": "If you deleted paid users with Basic or higher features, reduce the users in Organization settings to avoid charges in your next Azure billing cycle.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://learn.microsoft.com/en-us/azure/devops/organizations/security/access-levels?view=azure-devops",
+   "title": "About access levels - Azure DevOps | Microsoft Learn",
+   "quote": "Stakeholder: Provides free, limited access to private projects.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://learn.microsoft.com/en-us/rest/api/azure/devops/memberentitlementmanagement/user-entitlements/add?view=azure-devops-rest-7.1",
+   "title": "User Entitlements - Add - REST API (Azure DevOps Member Entitlement Management) | Microsoft Learn",
+   "quote": "Add a user, assign license and extensions and make them a member of a project group in an account.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://learn.microsoft.com/en-us/rest/api/azure/devops/memberentitlementmanagement/user-entitlements/add?view=azure-devops-rest-7.1",
+   "title": "User Entitlements - Add - REST API (Azure DevOps Member Entitlement Management) | Microsoft Learn",
+   "quote": "POST https://vsaex.dev.azure.com/{organization}/_apis/userentitlements?api-version=7.1",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://learn.microsoft.com/en-us/rest/api/azure/devops/memberentitlementmanagement/user-entitlements/get?view=azure-devops-rest-7.1",
+   "title": "User Entitlements - Get - REST API (Azure DevOps Member Entitlement Management) | Microsoft Learn",
+   "quote": "GET https://vsaex.dev.azure.com/{organization}/_apis/userentitlements/{userId}?api-version=7.1",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://learn.microsoft.com/en-us/rest/api/azure/devops/memberentitlementmanagement/user-entitlements/search-user-entitlements?view=azure-devops-rest-7.1",
+   "title": "User Entitlements - Search User Entitlements - REST API (Azure DevOps Member Entitlement Management) | Microsoft Learn",
+   "quote": "Get a paged set of user entitlements matching the filter and sort criteria built with properties that match the select input.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://learn.microsoft.com/en-us/rest/api/azure/devops/memberentitlementmanagement/user-entitlements/update-user-entitlement?view=azure-devops-rest-7.1",
+   "title": "User Entitlements - Update User Entitlement - REST API (Azure DevOps Member Entitlement Management) | Microsoft Learn",
+   "quote": "PATCH https://vsaex.dev.azure.com/{organization}/_apis/userentitlements/{userId}?api-version=7.1",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://learn.microsoft.com/en-us/rest/api/azure/devops/memberentitlementmanagement/user-entitlements/delete?view=azure-devops-rest-7.1",
+   "title": "User Entitlements - Delete - REST API (Azure DevOps Member Entitlement Management) | Microsoft Learn",
+   "quote": "DELETE https://vsaex.dev.azure.com/{organization}/_apis/userentitlements/{userId}?api-version=7.1",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://learn.microsoft.com/en-us/rest/api/azure/devops/memberentitlementmanagement/group-entitlements/add?view=azure-devops-rest-7.1",
+   "title": "Group Entitlements - Add - REST API (Azure DevOps Member Entitlement Management) | Microsoft Learn",
+   "quote": "POST https://vsaex.dev.azure.com/{organization}/_apis/groupentitlements?api-version=7.1",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://learn.microsoft.com/en-us/rest/api/azure/devops/memberentitlementmanagement/group-entitlements/list?view=azure-devops-rest-7.1",
+   "title": "Group Entitlements - List - REST API (Azure DevOps Member Entitlement Management) | Microsoft Learn",
+   "quote": "GET https://vsaex.dev.azure.com/{organization}/_apis/groupentitlements?api-version=7.1",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://learn.microsoft.com/en-us/rest/api/azure/devops/memberentitlementmanagement/members/add?view=azure-devops-rest-7.1",
+   "title": "Members - Add - REST API (Azure DevOps Member Entitlement Management) | Microsoft Learn",
+   "quote": "PUT https://vsaex.dev.azure.com/{organization}/_apis/GroupEntitlements/{groupId}/members/{memberId}?api-version=7.1",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://learn.microsoft.com/en-us/rest/api/azure/devops/graph/users/create?view=azure-devops-rest-7.1",
+   "title": "Users - Create - REST API (Azure DevOps Graph) | Microsoft Learn",
+   "quote": "POST https://vssps.dev.azure.com/{organization}/_apis/graph/users?api-version=7.1-preview.1",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c22",
+   "url": "https://learn.microsoft.com/en-us/rest/api/azure/devops/graph/users/delete?view=azure-devops-rest-7.1",
+   "title": "Users - Delete - REST API (Azure DevOps Graph) | Microsoft Learn",
+   "quote": "DELETE https://vssps.dev.azure.com/{organization}/_apis/graph/users/{userDescriptor}?api-version=7.1-preview.1",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c23",
+   "url": "https://learn.microsoft.com/en-us/rest/api/azure/devops/audit/audit-log/query?view=azure-devops-rest-7.1",
+   "title": "Audit Log - Query - REST API (Azure DevOps Audit) | Microsoft Learn",
+   "quote": "GET https://auditservice.dev.azure.com/{organization}/_apis/audit/auditlog?api-version=7.1-preview.1",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c24",
+   "url": "https://learn.microsoft.com/en-us/azure/devops/organizations/audit/azure-devops-auditing?view=azure-devops",
+   "title": "Access Azure DevOps Audit Logs, Export, and Filter - Azure DevOps | Microsoft Learn",
+   "quote": "Auditing is only available for organizations backed by Microsoft Entra ID.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c25",
+   "url": "https://learn.microsoft.com/en-us/azure/devops/organizations/audit/azure-devops-auditing?view=azure-devops",
+   "title": "Access Azure DevOps Audit Logs, Export, and Filter - Azure DevOps | Microsoft Learn",
+   "quote": "Audit events are stored for 90 days, after which they're deleted.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c26",
+   "url": "https://learn.microsoft.com/en-us/azure/devops/integrate/concepts/rate-limits?view=azure-devops",
+   "title": "Rate and usage limits - Azure DevOps | Microsoft Learn",
+   "quote": "Their personal usage exceeds 200 times the consumption of a typical user within a sliding five-minute window.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c27",
+   "url": "https://www.okta.com/integrations/?search=azure%20devops",
+   "title": "Okta Integration Network | Okta",
+   "quote": "No results found for: “azure devops”",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c28",
+   "url": "https://learn.microsoft.com/en-us/rest/api/azure/devops/memberentitlementmanagement/user-entitlements/add?view=azure-devops-rest-7.1",
+   "title": "User Entitlements - Add - REST API (Azure DevOps Member Entitlement Management) | Microsoft Learn",
+   "quote": "vso.memberentitlementmanagement_write",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://azure.microsoft.com/en-us/pricing/details/devops/azure-devops-services/",
+  "https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/connect-organization-to-azure-ad?view=azure-devops",
+  "https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/assign-access-levels-by-group-membership?view=azure-devops",
+  "https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/delete-organization-users?view=azure-devops",
+  "https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/faq-user-and-permissions-management?view=azure-devops (no SCIM)",
+  "https://learn.microsoft.com/en-us/rest/api/azure/devops/memberentitlementmanagement/user-entitlements?view=azure-devops-rest-7.1",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/toc.json (no Azure DevOps tutorial or provisioning tutorial)",
+  "https://www.okta.com/integrations/?search=azure%20devops (no results)"
+ ],
+ "open_questions": [
+  "Whether removal by an Entra group rule frees the paid Basic seat automatically is not stated; the removal guide tells admins to reduce paid users in Organization settings to avoid charges.",
+  "Whether removing a user ends active sessions is not documented.",
+  "No Google Workspace, OneLogin or JumpCloud catalogue app was checked or found; non-Microsoft IdPs reach Azure DevOps only by federating with Entra ID.",
+  "No REST call to suspend or reactivate a user (as opposed to removing their entitlement) was confirmed on the pages read."
+ ]
+}

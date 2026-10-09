@@ -1,0 +1,1005 @@
+{
+ "slug": "hugging-face",
+ "vendor": "Hugging Face",
+ "vendor_url": "https://huggingface.co",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Hugging Face",
+  "slug": "hugging-face",
+  "category": "AI & LLM Tools",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Enterprise: $50/user/mo (from; Talk to sales)",
+  "scim_price_per_user_mo": 50,
+  "team_plan": "Team",
+  "team_price_text": "Team: $20/user/mo",
+  "team_price_per_user_mo": 20,
+  "price_multiplier": 2.5,
+  "sso_plan": "Team",
+  "sso_price_per_user_mo": 20,
+  "sso_required_for_scim": null,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "via_generic",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://huggingface.co/pricing",
+  "docs_url": "https://huggingface.co/docs/hub/enterprise-scim",
+  "evidence": "Hugging Face's pricing page lists 'Automated user management with SCIM provisioning' under Enterprise ($50/month per user, Talk to sales), not under Team ($20/month per user, which has SAML and OIDC SSO).",
+  "notes": "New row. SCIM is Enterprise-only, in two forms: on Enterprise ($50/user/mo, 'from' price, Talk to sales) with Basic SSO it is invitation-based (users need an existing Hugging Face account, receive an invite and must accept; SCIM cannot change their profile), and full-lifecycle SCIM (account creation, profile updates, deactivation) needs Managed SSO on Enterprise Plus (custom price, managed organization set up with Hugging Face). SAML/OIDC Basic SSO is on Team ($20/user/mo). The pricing page does not say whether prices are monthly or annual; the docs plan table repeats 20$/user/Mo and from 50$/user/Mo. SCIM 2.0 endpoints are in the public OpenAPI spec (/api/organizations/{name}/scim/v2 for managed orgs, /scim-provisioning/v2 for invitation-based). Okta and Entra are configured with the tenant URL and bearer token on the vendor's own app; the Okta OIN app is SAML-only. SCIM DELETE on Managed SSO permanently deletes the account and its content. Org members, roles, resource groups and audit-log export are in the Hub API; audit logs are Team and up.",
+  "confidence": "high",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": "Team",
+  "api_tax": false,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Free",
+   "price_text": "Free organization",
+   "price_per_user_mo": 0,
+   "billing": "unknown",
+   "sso": false,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": false,
+   "cite": [
+    "c30",
+    "c6",
+    "c7"
+   ],
+   "notes": "PRO ($9/month) is a personal account upgrade, not an organization plan."
+  },
+  {
+   "name": "Team",
+   "price_text": "$20/month per user",
+   "price_per_user_mo": 20,
+   "billing": "unknown",
+   "sso": true,
+   "scim": false,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c1",
+    "c4",
+    "c6",
+    "c7",
+    "c54",
+    "c48"
+   ]
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "$50/month per user (from), Talk to sales",
+   "price_per_user_mo": 50,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c2",
+    "c3",
+    "c5",
+    "c6",
+    "c54"
+   ],
+   "notes": "SCIM is invitation-based with Basic SSO."
+  },
+  {
+   "name": "Enterprise Plus",
+   "price_text": "custom",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": true,
+   "audit_log_api": true,
+   "cite": [
+    "c5",
+    "c6",
+    "c7",
+    "c30"
+   ],
+   "notes": "Managed SSO and full-lifecycle SCIM."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c3",
+   "c9",
+   "c6",
+   "c20",
+   "c33"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": null,
+  "version": "2.0",
+  "base_url": "https://huggingface.co/api/organizations/{name}/scim/v2 (managed orgs); https://huggingface.co/api/organizations/{name}/scim-provisioning/v2 (invitation-based)",
+  "auth": {
+   "method": "bearer",
+   "token_source": "Organization settings > SSO > SCIM sub-tab > Generate an access token (shown once)",
+   "token_expiry": null,
+   "cite": [
+    "c13",
+    "c23",
+    "c26"
+   ]
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": true,
+   "Schemas": true,
+   "ResourceTypes": true,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c33",
+    "c34",
+    "c35",
+    "c36",
+    "c43"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": true,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c38",
+    "c36",
+    "c41",
+    "c39",
+    "c42",
+    "c17",
+    "c43",
+    "c44",
+    "c21"
+   ]
+  },
+  "deprovision": {
+   "action": "remove_from_org",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "active=false: removed from the org, account and content kept (Managed SSO, reversible) or invitation deactivated (Basic SSO). DELETE: Basic SSO removes membership only; Managed SSO permanently deletes the account and all its content.",
+   "cite": [
+    "c11",
+    "c17",
+    "c18",
+    "c19",
+    "c39"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [
+    "id",
+    "userName",
+    "emails",
+    "externalId"
+   ],
+   "cite": [
+    "c37"
+   ],
+   "notes": "eq operator only."
+  },
+  "pagination": {
+   "supported": true,
+   "max_page_size": null,
+   "cite": [
+    "c36"
+   ],
+   "notes": "startIndex and count parameters."
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "name.givenName",
+    "name.familyName",
+    "emails[type eq \"work\"].value",
+    "externalId",
+    "active"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [
+    "displayName",
+    "members",
+    "externalId"
+   ],
+   "cite": [
+    "c14",
+    "c15",
+    "c16"
+   ],
+   "notes": "With Basic SSO only active and externalId are writable; the others are read-only."
+  },
+  "roles": {
+   "supported": true,
+   "how": "Link a SCIM group to one or more Resource Groups, each with its own role; org-level roles come from SSO role mapping (admin, write, contributor, read).",
+   "cite": [
+    "c21",
+    "c31"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "On Enterprise (Basic SSO) SCIM only invites users who already have a Hugging Face account; they must accept the invite, and SCIM cannot change their name, email or username.",
+    "cite": [
+     "c10",
+     "c15",
+     "c45"
+    ]
+   },
+   {
+    "text": "Full-lifecycle SCIM requires a managed organization (Enterprise Plus), converted by the Hugging Face account team.",
+    "cite": [
+     "c12",
+     "c28",
+     "c6"
+    ]
+   },
+   {
+    "text": "PATCH does not support complex path filters such as emails[type eq 'work'].value; remove works only for externalId.",
+    "cite": [
+     "c40"
+    ]
+   },
+   {
+    "text": "Usernames must be 2-42 characters, regular characters and '-' only, and unique within the org.",
+    "cite": [
+     "c27"
+    ]
+   },
+   {
+    "text": "Resource Groups linked to a SCIM group block manual membership changes for regular users (403).",
+    "cite": [
+     "c22"
+    ]
+   },
+   {
+    "text": "Okta cannot use the same group for app assignment and Group Push.",
+    "cite": [
+     "c25"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c47",
+   "c48"
+  ],
+  "plan": "Team",
+  "api_tax": false,
+  "style": "REST",
+  "base_url": "https://huggingface.co/api",
+  "docs_url": "https://huggingface.co/spaces/huggingface/openapi",
+  "auth": {
+   "methods": [
+    "user_access_token",
+    "service_account_token"
+   ],
+   "scopes": [],
+   "cite": [
+    "c57",
+    "c55"
+   ],
+   "notes": "Scopes not documented in the sections reviewed."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": null,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": true,
+   "assign_licenses": null,
+   "cite": [
+    "c47",
+    "c48",
+    "c49",
+    "c53"
+   ],
+   "notes": "Outside SCIM, no endpoint to invite or remove org members was found in the OpenAPI spec."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/api/organizations/{name}/members",
+    "purpose": "Get organization members",
+    "cite": [
+     "c47"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/organizations/{name}/members/{username}/role",
+    "purpose": "Change member role (paid plan)",
+    "cite": [
+     "c48"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/organizations/{name}/resource-groups",
+    "purpose": "Get resource groups",
+    "cite": [
+     "c52"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/organizations/{name}/resource-groups",
+    "purpose": "Create resource group",
+    "cite": [
+     "c53"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/organizations/{name}/resource-groups/{resourceGroupId}/users",
+    "purpose": "Add users to resource group",
+    "cite": [
+     "c49"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/organizations/{name}/resource-groups/{resourceGroupId}/users/{username}",
+    "purpose": "Remove user from resource group",
+    "cite": [
+     "c50"
+    ]
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/organizations/{name}/resource-groups/{resourceGroupId}/users/{username}",
+    "purpose": "Change user role in resource group",
+    "cite": [
+     "c51"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/organizations/{name}/settings/tokens",
+    "purpose": "Member access tokens",
+    "cite": [
+     "c55"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/organizations/{name}/settings/tokens/{tokenId}/revoke",
+    "purpose": "Revoke member token",
+    "cite": [
+     "c56"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/organizations/{name}/service-accounts",
+    "purpose": "Create service account",
+    "cite": [
+     "c57"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/organizations/{name}/audit-log/export",
+    "purpose": "Export audit log (JSON, last 100,000 events)",
+    "cite": [
+     "c54"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/whoami-v2",
+    "purpose": "Get user info",
+    "cite": [
+     "c58"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": true,
+   "plan": "Team",
+   "cite": [
+    "c54",
+    "c7"
+   ]
+  },
+  "rate_limits": {
+   "text": "API requests per period: Free 1,000, Team 3,000, Enterprise 6,000, Enterprise Plus 10,000 up to 100,000.",
+   "cite": [
+    "c8"
+   ]
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/hugging-face/",
+   "cite": [
+    "c32"
+   ],
+   "notes": "OIN page checks SAML only. Hugging Face's own guide enables SCIM on the Hugging Face app in Okta with the tenant URL and bearer token, so idp.okta is via_generic."
+  },
+  "entra": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "learn.microsoft.com hugging-face-tutorial returns 404; Hugging Face documents Entra provisioning with Tenant URL and Secret Token."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [],
+   "notes": "Google Workspace SSO guides (SAML and OIDC) exist; no Google provisioning documented."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": null,
+  "other_sync": "Basic SSO join link (manual), SSO role mapping and resource-group mapping",
+  "docs_public": true,
+  "cite": [
+   "c29",
+   "c31"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://huggingface.co/pricing",
+   "title": "Hugging Face – Pricing",
+   "quote": "Team Most popular Instant setup for growing teams $20 /month per user Get Team (via credit card) SSO support (SAML & OIDC)",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://huggingface.co/pricing",
+   "title": "Hugging Face – Pricing",
+   "quote": "Enterprise Custom onboarding and enterprise features $50 /month per user Talk to sales",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://huggingface.co/pricing",
+   "title": "Hugging Face – Pricing",
+   "quote": "Automated user management with SCIM provisioning",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://huggingface.co/pricing",
+   "title": "Hugging Face – Pricing",
+   "quote": "Detailed action reviews with Audit Logs",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://huggingface.co/docs/hub/enterprise.md",
+   "title": "Team & Enterprise plans",
+   "quote": "| Pricing            |  -   | 20$/user/Mo | from 50$/user/Mo |     custom      |",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/docs/hub/enterprise"
+  },
+  {
+   "id": "c6",
+   "url": "https://huggingface.co/docs/hub/enterprise.md",
+   "title": "Team & Enterprise plans",
+   "quote": "| SCIM provisioning      |    ❌     |      ❌       | ✅ Invitation-based | ✅ Full lifecycle |",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/docs/hub/enterprise"
+  },
+  {
+   "id": "c7",
+   "url": "https://huggingface.co/docs/hub/enterprise.md",
+   "title": "Team & Enterprise plans",
+   "quote": "| [Audit logs](./audit-logs)                                                             |  ❌  |     ✅      |     ✅      |       ✅        |",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/docs/hub/enterprise"
+  },
+  {
+   "id": "c8",
+   "url": "https://huggingface.co/docs/hub/enterprise.md",
+   "title": "Team & Enterprise plans",
+   "quote": "| API requests / period\\*                               | 1,000       | 3,000                | 6,000                 | 10,000 up to 100,000†  |",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/docs/hub/enterprise"
+  },
+  {
+   "id": "c9",
+   "url": "https://huggingface.co/docs/hub/enterprise-scim.md",
+   "title": "User Provisioning (SCIM)",
+   "quote": "This feature is part of the Enterprise and Enterprise Plus plans.",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/docs/hub/enterprise-scim"
+  },
+  {
+   "id": "c10",
+   "url": "https://huggingface.co/docs/hub/enterprise-scim.md",
+   "title": "User Provisioning (SCIM)",
+   "quote": "Users **must already have a Hugging Face account** before they can be provisioned via SCIM",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/docs/hub/enterprise-scim"
+  },
+  {
+   "id": "c11",
+   "url": "https://huggingface.co/docs/hub/enterprise-scim.md",
+   "title": "User Provisioning (SCIM)",
+   "quote": "When a user is deprovisioned in your IdP, their invitation is deactivated and their access to the organization is revoked",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/docs/hub/enterprise-scim"
+  },
+  {
+   "id": "c12",
+   "url": "https://huggingface.co/docs/hub/enterprise-scim.md",
+   "title": "User Provisioning (SCIM)",
+   "quote": "SCIM **creates a new Hugging Face account** when a user is provisioned — no pre-existing account is needed",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/docs/hub/enterprise-scim"
+  },
+  {
+   "id": "c13",
+   "url": "https://huggingface.co/docs/hub/enterprise-scim.md",
+   "title": "User Provisioning (SCIM)",
+   "quote": "You will find the **SCIM Tenant URL** and a button to generate a **SCIM token**.",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/docs/hub/enterprise-scim"
+  },
+  {
+   "id": "c14",
+   "url": "https://huggingface.co/docs/hub/enterprise-scim.md",
+   "title": "User Provisioning (SCIM)",
+   "quote": "| `externalId` | IdP-assigned identifier | Read/Write | Read/Write |",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/docs/hub/enterprise-scim"
+  },
+  {
+   "id": "c15",
+   "url": "https://huggingface.co/docs/hub/enterprise-scim.md",
+   "title": "User Provisioning (SCIM)",
+   "quote": "With Basic SSO, only `active` and `externalId` can be modified via SCIM",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/docs/hub/enterprise-scim"
+  },
+  {
+   "id": "c16",
+   "url": "https://huggingface.co/docs/hub/enterprise-scim.md",
+   "title": "User Provisioning (SCIM)",
+   "quote": "For group provisioning, the supported attributes are `displayName`, `members`, and `externalId`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/docs/hub/enterprise-scim"
+  },
+  {
+   "id": "c17",
+   "url": "https://huggingface.co/docs/hub/enterprise-scim.md",
+   "title": "User Provisioning (SCIM)",
+   "quote": "With Managed SSO: the user is removed from the organization but their account and content are preserved — this is **reversible** by setting `active` back to `true`",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/docs/hub/enterprise-scim"
+  },
+  {
+   "id": "c18",
+   "url": "https://huggingface.co/docs/hub/enterprise-scim.md",
+   "title": "User Provisioning (SCIM)",
+   "quote": "With Managed SSO: the user's Hugging Face account is **permanently deleted**, along with all content they created.",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/docs/hub/enterprise-scim"
+  },
+  {
+   "id": "c19",
+   "url": "https://huggingface.co/docs/hub/enterprise-scim.md",
+   "title": "User Provisioning (SCIM)",
+   "quote": "With Basic SSO: the user is removed from the organization and all its resource groups. Their Hugging Face account and personal content are **not affected**",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/docs/hub/enterprise-scim"
+  },
+  {
+   "id": "c20",
+   "url": "https://huggingface.co/docs/hub/enterprise-scim.md",
+   "title": "User Provisioning (SCIM)",
+   "quote": "We support SCIM with any IdP that implements the SCIM 2.0 protocol.",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/docs/hub/enterprise-scim"
+  },
+  {
+   "id": "c21",
+   "url": "https://huggingface.co/docs/hub/enterprise-scim.md",
+   "title": "User Provisioning (SCIM)",
+   "quote": "A SCIM group can be linked to multiple Resource Groups, each with its own role.",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/docs/hub/enterprise-scim"
+  },
+  {
+   "id": "c22",
+   "url": "https://huggingface.co/docs/hub/enterprise-scim.md",
+   "title": "User Provisioning (SCIM)",
+   "quote": "Manual membership changes via the Hub UI or API are **blocked** for regular users",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/docs/hub/enterprise-scim"
+  },
+  {
+   "id": "c23",
+   "url": "https://huggingface.co/docs/hub/security-sso-okta-scim.md",
+   "title": "How to configure SCIM with Okta",
+   "quote": "Enter the **Access Token** you generated as the Authorization Bearer Token.",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/docs/hub/security-sso-okta-scim"
+  },
+  {
+   "id": "c24",
+   "url": "https://huggingface.co/docs/hub/security-sso-okta-scim.md",
+   "title": "How to configure SCIM with Okta",
+   "quote": "For the Provisioning option select **SCIM**, click **Save**",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/docs/hub/security-sso-okta-scim"
+  },
+  {
+   "id": "c25",
+   "url": "https://huggingface.co/docs/hub/security-sso-okta-scim.md",
+   "title": "How to configure SCIM with Okta",
+   "quote": "Okta does not support using the same group for app assignment (Step 6) and Group Push.",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/docs/hub/security-sso-okta-scim"
+  },
+  {
+   "id": "c26",
+   "url": "https://huggingface.co/docs/hub/security-sso-entra-id-scim.md",
+   "title": "How to configure SCIM with Microsoft Entra ID (Azure AD)",
+   "quote": "Paste the **SCIM token** from Hugging Face into the **Secret Token** field.",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/docs/hub/security-sso-entra-id-scim"
+  },
+  {
+   "id": "c27",
+   "url": "https://huggingface.co/docs/hub/security-sso-entra-id-scim.md",
+   "title": "How to configure SCIM with Microsoft Entra ID (Azure AD)",
+   "quote": "Minimum length is 2 and maximum length is 42.",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/docs/hub/security-sso-entra-id-scim"
+  },
+  {
+   "id": "c28",
+   "url": "https://huggingface.co/docs/hub/security-sso-entra-id-scim.md",
+   "title": "How to configure SCIM with Microsoft Entra ID (Azure AD)",
+   "quote": "SCIM provisioning for managed users is only available on managed organizations",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/docs/hub/security-sso-entra-id-scim"
+  },
+  {
+   "id": "c29",
+   "url": "https://huggingface.co/docs/hub/enterprise-sso.md",
+   "title": "Single Sign-On (SSO)",
+   "quote": "| **User provisioning** | Manual (SSO join link) — or invitation-based [SCIM](./enterprise-scim) on Enterprise | Full lifecycle ([SCIM](./enterprise-scim)) |",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/docs/hub/enterprise-sso"
+  },
+  {
+   "id": "c30",
+   "url": "https://huggingface.co/docs/hub/enterprise-sso.md",
+   "title": "Single Sign-On (SSO)",
+   "quote": "| **Plan** | Team & Enterprise | Enterprise Plus |",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/docs/hub/enterprise-sso"
+  },
+  {
+   "id": "c31",
+   "url": "https://huggingface.co/docs/hub/security-sso-user-management.md",
+   "title": "User Management",
+   "quote": "When enabled, Role Mapping allows you to dynamically assign [roles](./organizations-security#access-control-in-organizations) to organization members based on data provided by your Identity Provider.",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/docs/hub/security-sso-user-management"
+  },
+  {
+   "id": "c32",
+   "url": "https://www.okta.com/integrations/hugging-face/",
+   "title": "Hugging Face | Okta Integration Network",
+   "quote": "With the Hugging Face Okta integration, enterprises can securely connect their workforce to Hugging Face using SAML-based Single Sign-On (SSO).",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c33",
+   "url": "https://huggingface.co/.well-known/openapi.md",
+   "title": "Hugging Face Hub OpenAPI",
+   "quote": "GET /api/organizations/{name}/scim/v2/ServiceProviderConfig **Get SCIM Configuration**",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/spaces/huggingface/openapi"
+  },
+  {
+   "id": "c34",
+   "url": "https://huggingface.co/.well-known/openapi.md",
+   "title": "Hugging Face Hub OpenAPI",
+   "quote": "GET /api/organizations/{name}/scim/v2/ResourceTypes",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/spaces/huggingface/openapi"
+  },
+  {
+   "id": "c35",
+   "url": "https://huggingface.co/.well-known/openapi.md",
+   "title": "Hugging Face Hub OpenAPI",
+   "quote": "GET /api/organizations/{name}/scim/v2/Schemas **Get SCIM Schemas**",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/spaces/huggingface/openapi"
+  },
+  {
+   "id": "c36",
+   "url": "https://huggingface.co/.well-known/openapi.md",
+   "title": "Hugging Face Hub OpenAPI",
+   "quote": "Retrieves a paginated list of all organization members who have been set up, including disabled users.",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/spaces/huggingface/openapi"
+  },
+  {
+   "id": "c37",
+   "url": "https://huggingface.co/.well-known/openapi.md",
+   "title": "Hugging Face Hub OpenAPI",
+   "quote": "You can filter results using the equals operator (eq) to find items that match specific values like `id`, `userName`, `emails`, and `externalId`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/spaces/huggingface/openapi"
+  },
+  {
+   "id": "c38",
+   "url": "https://huggingface.co/.well-known/openapi.md",
+   "title": "Hugging Face Hub OpenAPI",
+   "quote": "Creates a new user in the organization. If the user already exists, only `active` field will be updated to provision the user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/spaces/huggingface/openapi"
+  },
+  {
+   "id": "c39",
+   "url": "https://huggingface.co/.well-known/openapi.md",
+   "title": "Hugging Face Hub OpenAPI",
+   "quote": "If you set `active` to `false`, the user will be deprovisioned from the organization.",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/spaces/huggingface/openapi"
+  },
+  {
+   "id": "c40",
+   "url": "https://huggingface.co/.well-known/openapi.md",
+   "title": "Hugging Face Hub OpenAPI",
+   "quote": "Complicated SCIM `path` values are not supported like `emails[type eq 'work'].value`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/spaces/huggingface/openapi"
+  },
+  {
+   "id": "c41",
+   "url": "https://huggingface.co/.well-known/openapi.md",
+   "title": "Hugging Face Hub OpenAPI",
+   "quote": "PUT /api/organizations/{name}/scim/v2/Users/{userId}",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/spaces/huggingface/openapi"
+  },
+  {
+   "id": "c42",
+   "url": "https://huggingface.co/.well-known/openapi.md",
+   "title": "Hugging Face Hub OpenAPI",
+   "quote": "DELETE /api/organizations/{name}/scim/v2/Users/{userId}",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/spaces/huggingface/openapi"
+  },
+  {
+   "id": "c43",
+   "url": "https://huggingface.co/.well-known/openapi.md",
+   "title": "Hugging Face Hub OpenAPI",
+   "quote": "POST /api/organizations/{name}/scim/v2/Groups **Create SCIM group**",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/spaces/huggingface/openapi"
+  },
+  {
+   "id": "c44",
+   "url": "https://huggingface.co/.well-known/openapi.md",
+   "title": "Hugging Face Hub OpenAPI",
+   "quote": "PATCH /api/organizations/{name}/scim/v2/Groups/{groupId}",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/spaces/huggingface/openapi"
+  },
+  {
+   "id": "c45",
+   "url": "https://huggingface.co/.well-known/openapi.md",
+   "title": "Hugging Face Hub OpenAPI",
+   "quote": "Creates an invitation for a user to join the organization. The user must have an existing Hugging Face account.",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/spaces/huggingface/openapi"
+  },
+  {
+   "id": "c46",
+   "url": "https://huggingface.co/.well-known/openapi.md",
+   "title": "Hugging Face Hub OpenAPI",
+   "quote": "Retrieves a paginated list of organization members and pending invitations managed by SCIM for non-managed organizations.",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/spaces/huggingface/openapi"
+  },
+  {
+   "id": "c47",
+   "url": "https://huggingface.co/.well-known/openapi.md",
+   "title": "Hugging Face Hub OpenAPI",
+   "quote": "GET /api/organizations/{name}/members **Get organization members**",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/spaces/huggingface/openapi"
+  },
+  {
+   "id": "c48",
+   "url": "https://huggingface.co/.well-known/openapi.md",
+   "title": "Hugging Face Hub OpenAPI",
+   "quote": "Change the role of a member in the organization. Need a paid plan.",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/spaces/huggingface/openapi"
+  },
+  {
+   "id": "c49",
+   "url": "https://huggingface.co/.well-known/openapi.md",
+   "title": "Hugging Face Hub OpenAPI",
+   "quote": "POST /api/organizations/{name}/resource-groups/{resourceGroupId}/users",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/spaces/huggingface/openapi"
+  },
+  {
+   "id": "c50",
+   "url": "https://huggingface.co/.well-known/openapi.md",
+   "title": "Hugging Face Hub OpenAPI",
+   "quote": "DELETE /api/organizations/{name}/resource-groups/{resourceGroupId}/users/{username}",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/spaces/huggingface/openapi"
+  },
+  {
+   "id": "c51",
+   "url": "https://huggingface.co/.well-known/openapi.md",
+   "title": "Hugging Face Hub OpenAPI",
+   "quote": "PATCH /api/organizations/{name}/resource-groups/{resourceGroupId}/users/{username}",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/spaces/huggingface/openapi"
+  },
+  {
+   "id": "c52",
+   "url": "https://huggingface.co/.well-known/openapi.md",
+   "title": "Hugging Face Hub OpenAPI",
+   "quote": "GET /api/organizations/{name}/resource-groups",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/spaces/huggingface/openapi"
+  },
+  {
+   "id": "c53",
+   "url": "https://huggingface.co/.well-known/openapi.md",
+   "title": "Hugging Face Hub OpenAPI",
+   "quote": "POST /api/organizations/{name}/resource-groups **Create resource group**",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/spaces/huggingface/openapi"
+  },
+  {
+   "id": "c54",
+   "url": "https://huggingface.co/.well-known/openapi.md",
+   "title": "Hugging Face Hub OpenAPI",
+   "quote": "Export the audit log events in JSON format for a Team or Enterprise organization. The export is limited to the last 100,000 events.",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/spaces/huggingface/openapi"
+  },
+  {
+   "id": "c55",
+   "url": "https://huggingface.co/.well-known/openapi.md",
+   "title": "Hugging Face Hub OpenAPI",
+   "quote": "GET /api/organizations/{name}/settings/tokens **Member access tokens**",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/spaces/huggingface/openapi"
+  },
+  {
+   "id": "c56",
+   "url": "https://huggingface.co/.well-known/openapi.md",
+   "title": "Hugging Face Hub OpenAPI",
+   "quote": "POST /api/organizations/{name}/settings/tokens/{tokenId}/revoke",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/spaces/huggingface/openapi"
+  },
+  {
+   "id": "c57",
+   "url": "https://huggingface.co/.well-known/openapi.md",
+   "title": "Hugging Face Hub OpenAPI",
+   "quote": "POST /api/organizations/{name}/service-accounts **Create service account**",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/spaces/huggingface/openapi"
+  },
+  {
+   "id": "c58",
+   "url": "https://huggingface.co/.well-known/openapi.md",
+   "title": "Hugging Face Hub OpenAPI",
+   "quote": "GET /api/whoami-v2",
+   "accessed": "2026-10-05",
+   "page_url": "https://huggingface.co/spaces/huggingface/openapi"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://huggingface.co/pricing",
+  "https://huggingface.co/docs/hub/llms.txt",
+  "https://huggingface.co/docs/hub/enterprise",
+  "https://huggingface.co/docs/hub/enterprise-scim",
+  "https://huggingface.co/docs/hub/enterprise-sso",
+  "https://huggingface.co/docs/hub/security-sso-okta-scim",
+  "https://huggingface.co/docs/hub/security-sso-entra-id-scim",
+  "https://huggingface.co/docs/hub/security-sso-user-management",
+  "https://huggingface.co/.well-known/openapi.json (and openapi.md)",
+  "https://www.okta.com/integrations/hugging-face/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/hugging-face-tutorial (404)"
+ ],
+ "open_questions": [
+  "Docs do not say whether SCIM deprovisioning frees a paid seat or ends active sessions.",
+  "Pricing page does not say whether the $20 and $50 per user prices are annual or monthly billing.",
+  "SCIM token expiry and SCIM rate limits are not documented.",
+  "Whether an SSO connection must be configured before SCIM is not stated explicitly."
+ ]
+}

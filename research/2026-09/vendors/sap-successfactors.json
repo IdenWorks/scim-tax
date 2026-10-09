@@ -1,0 +1,523 @@
+{
+ "slug": "sap-successfactors",
+ "vendor": "SAP SuccessFactors",
+ "vendor_url": "https://www.sap.com/products/hcm.html",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "SAP SuccessFactors",
+  "slug": "sap-successfactors",
+  "category": "HR, Payroll & Recruiting",
+  "status": "gated",
+  "scim_plan": "SAP HCM Base package",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "SAP HCM Base package",
+  "team_price_text": "Price upon request",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": false
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "api_connector",
+   "google": null,
+   "onelogin": null,
+   "jumpcloud": null,
+   "generic": true
+  },
+  "pricing_page_url": "https://www.sap.com/products/hcm/pricing.html",
+  "docs_url": "https://help.sap.com/docs/successfactors-platform/managing-user-information/overview-of-sap-successfactors-workforce-system-for-cross-domain-identity-management-api?locale=en-US",
+  "evidence": "SAP's HCM pricing page lists only the SAP HCM Base and Premium packages at \"Price upon request\", and SAP Help documents the SuccessFactors Workforce SCIM API as \"System for Cross-domain Identity Management (SCIM) 2.0 REST APIs\" for users and groups.",
+  "notes": "Quote-only: SAP HCM (SuccessFactors) Base and Premium packages are both 'Price upon request' (blocks of 1 user, 1-5 year contracts). The SCIM plan is recorded as the Base package because SCIM is a platform API and no package gate is published. The Workforce SCIM API (https://<api-server>/rest/iam/scim/v2/Users and /Groups) supports create, replace, modify, search and delete users and static permission-group membership, but SAP says creating users through SCIM isn't recommended and SuccessFactors mainly acts as a source of identities; data purge is preferred over SCIM delete. SCIM needs case-insensitive usernames, which only supports SAML SSO. Okta's OIN app is mainly an HR source (Attribute Sourcing/Writeback, Create/Update, no Deactivate); Entra offers SSO, inbound HR provisioning and an attribute writeback app. Outbound: SuccessFactors feeds IdPs as an HR master. Users can also be managed via the OData v2 User entity and file imports.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "SAP HCM Base package",
+   "price_text": "Price upon request; in blocks of 1 user; contract 1 to 5 years",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1"
+   ]
+  },
+  {
+   "name": "SAP HCM Premium package",
+   "price_text": "Price upon request; in blocks of 1 user; contract 1 to 5 years",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": null,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c2"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c3",
+   "c4"
+  ],
+  "plan": null,
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://<api-server>/rest/iam/scim/v2",
+  "notes": "sso_required: SCIM needs Enable Case-Insensitive Usernames, which only supports SAML SSO. Plan is not published (quote-only).",
+  "auth": {
+   "method": null,
+   "token_source": null,
+   "token_expiry": null,
+   "cite": []
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c4"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": true,
+   "update_put": true,
+   "update_patch": true,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": true,
+   "group_push": false,
+   "group_membership": true,
+   "cite": [
+    "c5",
+    "c6",
+    "c7",
+    "c8"
+   ]
+  },
+  "deprovision": {
+   "action": "deactivate",
+   "frees_seat": null,
+   "revokes_sessions": null,
+   "data_retained": "SAP recommends the data purge tool rather than SCIM delete; the SCIM active attribute maps to the account status.",
+   "cite": [
+    "c9",
+    "c10"
+   ]
+  },
+  "filtering": {
+   "supported": true,
+   "attributes": [],
+   "cite": [
+    "c11"
+   ],
+   "notes": "/Users/.search is documented; filter attributes are not listed."
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "id",
+    "externalId",
+    "userName",
+    "name.formatted",
+    "name.familyName",
+    "name.givenName",
+    "name.middleName",
+    "name.honorificPrefix",
+    "name.honorificSuffix",
+    "displayName",
+    "nickName",
+    "title",
+    "userType",
+    "preferredLanguage",
+    "locale",
+    "timezone",
+    "active",
+    "emails",
+    "phoneNumbers",
+    "groups"
+   ],
+   "enterprise": [
+    "employeeNumber",
+    "department",
+    "division",
+    "manager"
+   ],
+   "custom": {
+    "supported": true,
+    "how": "SAP extensions: urn:ietf:params:scim:schemas:extension:sap:2.0:User (groupDomains, userUuid), urn:ietf:params:scim:schemas:extension:successfactors:2.0:User (perPersonUuid, loginMethod, personIdExternal, customFields custom01-custom15) and sap.workforce (lastDeactivated, empId)."
+   },
+   "group": [
+    "members"
+   ],
+   "cite": [
+    "c12",
+    "c13",
+    "c14",
+    "c5"
+   ],
+   "notes": "Many attributes (names, title, department, division, manager, custom fields) are read-only through SCIM."
+  },
+  "roles": {
+   "supported": true,
+   "how": "Membership of static permission groups through the SCIM Groups PATCH API; dynamic groups are attribute-driven.",
+   "cite": [
+    "c5"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Creating user accounts through SCIM isn't recommended; SuccessFactors works mainly as a source system for workforce identities.",
+    "cite": [
+     "c6"
+    ]
+   },
+   {
+    "text": "Creating or deleting groups via the Groups API isn't supported; only static permission-group membership can be changed (up to 1000 accounts per batch).",
+    "cite": [
+     "c5"
+    ]
+   },
+   {
+    "text": "Customers don't have access to Provisioning; enabling some settings needs the implementation partner or Account Executive.",
+    "cite": [
+     "c15"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c16"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://<API-Server>/odata/v2",
+  "docs_url": "https://help.sap.com/docs/successfactors-platform/managing-user-information/managing-users-with-odata-apis?locale=en-US",
+  "notes": "OData v2 User entity; SFAPI is deprecated.",
+  "auth": {
+   "methods": [],
+   "scopes": [],
+   "cite": []
+  },
+  "capabilities": {
+   "list_users": null,
+   "get_user": null,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": null,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c16",
+    "c17"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/odata/v2/User",
+    "purpose": "Create a user",
+    "cite": [
+     "c17"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/odata/v2/User('acraig')",
+    "purpose": "Update a user (x-http-method: MERGE)",
+    "cite": [
+     "c18"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": []
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/successfactors/",
+   "cite": [
+    "c19"
+   ],
+   "notes": "OIN page (Directory and HR Sync) marks SAML, SWA, SCIM, Create, Update, Attribute Sourcing, Schema Discovery and Attribute Writeback as checked; Deactivate and Group Push not checked (read from page markup). Mainly an HR-source integration."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "api_connector",
+   "built_by": "idp",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/sap-successfactors-writeback-tutorial",
+   "cite": [
+    "c20",
+    "c21"
+   ],
+   "notes": "Gallery SSO app plus inbound HR provisioning from SuccessFactors; outbound to SuccessFactors is the Writeback app, which only writes attributes such as work email, username and phone numbers to Employee Central."
+  },
+  "google": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": null,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": []
+  }
+ },
+ "fallbacks": {
+  "jit": null,
+  "jit_protocol": null,
+  "csv_import": true,
+  "other_sync": "Outbound: SuccessFactors is an HR source for IdPs (Okta, Entra inbound provisioning) and SAP Cloud Identity Services Identity Provisioning, which can also target SuccessFactors through the SCIM connector.",
+  "docs_public": true,
+  "cite": [
+   "c16"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.sap.com/products/hcm/pricing.html",
+   "title": "Packages and Pricing | SAP Human capital management",
+   "quote": "SAP HCM Base package Price upon request In blocks of 1 Users Contract duration 1 to 5 years",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c2",
+   "url": "https://www.sap.com/products/hcm/pricing.html",
+   "title": "Packages and Pricing | SAP Human capital management",
+   "quote": "SAP HCM Premium package Price upon request",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c3",
+   "url": "https://help.sap.com/docs/successfactors-platform/managing-user-information/overview-of-sap-successfactors-workforce-system-for-cross-domain-identity-management-api?locale=en-US",
+   "title": "Overview of SAP SuccessFactors Workforce System for Cross-Domain Identity Management API | SAP Help Portal",
+   "quote": "SAP SuccessFactors Workforce SCIM API provides System for Cross-domain Identity Management (SCIM) 2.0 REST APIs to help you better manage user accounts and user groups.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c4",
+   "url": "https://help.sap.com/docs/successfactors-platform/managing-user-information/overview-of-sap-successfactors-workforce-system-for-cross-domain-identity-management-api?locale=en-US",
+   "title": "Overview of SAP SuccessFactors Workforce System for Cross-Domain Identity Management API | SAP Help Portal",
+   "quote": "Endpoint: https://<api-server>/rest/iam/scim/v2/Users and /rest/iam/scim/v2/Groups",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c5",
+   "url": "https://help.sap.com/docs/successfactors-platform/managing-user-information/overview-of-sap-successfactors-workforce-system-for-cross-domain-identity-management-api?locale=en-US",
+   "title": "Overview of SAP SuccessFactors Workforce System for Cross-Domain Identity Management API | SAP Help Portal",
+   "quote": "You can also add members to or remove members from an existing static permission group. Creating or deleting groups using the Groups APIs isn’t supported.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c6",
+   "url": "https://help.sap.com/docs/successfactors-platform/managing-user-information/overview-of-sap-successfactors-workforce-system-for-cross-domain-identity-management-api?locale=en-US",
+   "title": "Overview of SAP SuccessFactors Workforce System for Cross-Domain Identity Management API | SAP Help Portal",
+   "quote": "Creating user account through SCIM API isn’t recommended. Currently, SAP SuccessFactors works mainly as a source system for identities of workforce persons.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c7",
+   "url": "https://help.sap.com/docs/successfactors-platform/managing-user-information/overview-of-sap-successfactors-workforce-system-for-cross-domain-identity-management-api?locale=en-US",
+   "title": "Overview of SAP SuccessFactors Workforce System for Cross-Domain Identity Management API | SAP Help Portal",
+   "quote": "Users APIs: You can create, replace, search for, and delete users.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c8",
+   "url": "https://help.sap.com/docs/successfactors-platform/managing-user-information/overview-of-sap-successfactors-workforce-system-for-cross-domain-identity-management-api?locale=en-US",
+   "title": "Overview of SAP SuccessFactors Workforce System for Cross-Domain Identity Management API | SAP Help Portal",
+   "quote": "This permission allows you to delete, post, put, and patch user resources.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c9",
+   "url": "https://help.sap.com/docs/successfactors-platform/managing-user-information/overview-of-sap-successfactors-workforce-system-for-cross-domain-identity-management-api?locale=en-US",
+   "title": "Overview of SAP SuccessFactors Workforce System for Cross-Domain Identity Management API | SAP Help Portal",
+   "quote": "For better data consistency, we recommend that you use data purge tool (see Related Information) to purge identity accounts instead of using SCIM APIs.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c10",
+   "url": "https://help.sap.com/docs/successfactors-platform/managing-user-information/mapping-between-scim-users-and-odata-user?locale=en-US",
+   "title": "Mapping Between SCIM Users and ODATA User | SAP Help Portal",
+   "quote": "active personKeyNav/userAccountNav/accountStatus",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c11",
+   "url": "https://help.sap.com/docs/successfactors-platform/managing-user-information/overview-of-sap-successfactors-workforce-system-for-cross-domain-identity-management-api?locale=en-US",
+   "title": "Overview of SAP SuccessFactors Workforce System for Cross-Domain Identity Management API | SAP Help Portal",
+   "quote": "This permission allows you to query user resources. For example, you can make below three queries: /rest/iam/scim/v2/Users/{id} /rest/iam/scim/v2/Users /rest/iam/scim/v2/Users/.search",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c12",
+   "url": "https://help.sap.com/docs/successfactors-platform/managing-user-information/mapping-between-scim-users-and-odata-user?locale=en-US",
+   "title": "Mapping Between SCIM Users and ODATA User | SAP Help Portal",
+   "quote": "Here's a table of data mapping between SCIM user and ODATA user.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c13",
+   "url": "https://help.sap.com/docs/successfactors-platform/managing-user-information/mapping-between-scim-users-and-odata-user?locale=en-US",
+   "title": "Mapping Between SCIM Users and ODATA User | SAP Help Portal",
+   "quote": "urn:ietf:params:scim:schemas:extension:successfactors:2.0:User.customFields value Y custom01 - custom15",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c14",
+   "url": "https://help.sap.com/docs/successfactors-platform/managing-user-information/mapping-between-scim-users-and-odata-user?locale=en-US",
+   "title": "Mapping Between SCIM Users and ODATA User | SAP Help Portal",
+   "quote": "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User.department Y department Domain: Primary Assignment",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c15",
+   "url": "https://help.sap.com/docs/successfactors-platform/managing-user-information/overview-of-sap-successfactors-workforce-system-for-cross-domain-identity-management-api?locale=en-US",
+   "title": "Overview of SAP SuccessFactors Workforce System for Cross-Domain Identity Management API | SAP Help Portal",
+   "quote": "As a customer, you don't have access to Provisioning. To complete tasks in Provisioning, contact your implementation partner or Account Executive.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c16",
+   "url": "https://help.sap.com/docs/successfactors-platform/managing-user-information/managing-users-with-odata-apis?locale=en-US",
+   "title": "Managing Users with OData APIs | SAP Help Portal",
+   "quote": "Beside managing user information on the UI and using file imports, you can also use the User API to create and update users.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c17",
+   "url": "https://help.sap.com/docs/successfactors-platform/managing-user-information/managing-users-with-odata-apis?locale=en-US",
+   "title": "Managing Users with OData APIs | SAP Help Portal",
+   "quote": "OData Request to Create a User Operation Insert HTTP Method POST URI https://<API-Server>/odata/v2/User",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c18",
+   "url": "https://help.sap.com/docs/successfactors-platform/managing-user-information/managing-users-with-odata-apis?locale=en-US",
+   "title": "Managing Users with OData APIs | SAP Help Portal",
+   "quote": "To update user information, you can use upsert, merge, or replace operations and include the user fields in the payload.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c19",
+   "url": "https://www.okta.com/integrations/successfactors/",
+   "title": "SuccessFactors | Okta Integration Network",
+   "quote": "SAP SuccessFactors Human Experience Management (HXM) Suite helps you to completely reinvent the entire employee experience.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c20",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/sap-successfactors-writeback-tutorial",
+   "title": "Configure SAP SuccessFactors attribute writeback in Microsoft Entra ID",
+   "quote": "You can configure the SAP SuccessFactors Writeback app to write specific attributes from Microsoft Entra ID to SAP SuccessFactors Employee Central.",
+   "accessed": "2026-10-05"
+  },
+  {
+   "id": "c21",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/successfactors-tutorial",
+   "title": "Configure SuccessFactors for Single sign-on with Microsoft Entra ID",
+   "quote": "SuccessFactors supports SP initiated SSO.",
+   "accessed": "2026-10-05"
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://www.sap.com/products/hcm/pricing.html",
+  "help.sap.com search API: SCIM API SuccessFactors users (product SAP_SUCCESSFACTORS_PLATFORM)",
+  "https://help.sap.com/docs/successfactors-platform/managing-user-information/overview-of-sap-successfactors-workforce-system-for-cross-domain-identity-management-api",
+  "https://help.sap.com/docs/successfactors-platform/managing-user-information/mapping-between-scim-users-and-odata-user",
+  "https://help.sap.com/docs/successfactors-platform/managing-user-information/managing-users-with-odata-apis",
+  "https://www.okta.com/integrations/successfactors/",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/successfactors-tutorial",
+  "https://learn.microsoft.com/en-us/entra/identity/saas-apps/sap-successfactors-writeback-tutorial"
+ ],
+ "open_questions": [
+  "SCIM authentication method and token lifetime (help page points to a separate Authentication topic that was not loaded).",
+  "Whether SCIM deactivation (active=false) frees a licence or ends sessions.",
+  "SCIM pagination limits, rate limits and discovery endpoints are not stated on the pages loaded.",
+  "Which SAP HCM package includes SSO (SAP Cloud Identity Services) is not on the pricing page.",
+  "Google Workspace, OneLogin and JumpCloud catalogue apps were not checked (WebSearch budget exhausted)."
+ ]
+}

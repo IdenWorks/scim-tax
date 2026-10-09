@@ -1,0 +1,569 @@
+{
+  "slug": "chorus-ai",
+  "vendor": "Chorus (ZoomInfo)",
+  "vendor_url": "https://www.zoominfo.com/products/chorus",
+  "researched_at": "2026-10-05",
+  "row": {
+    "vendor": "Chorus (ZoomInfo)",
+    "slug": "chorus-ai",
+    "category": "Sales & CRM",
+    "status": "gated",
+    "scim_plan": "Custom plan (Contact Sales)",
+    "scim_price_text": "Contact Sales",
+    "scim_price_per_user_mo": null,
+    "team_plan": null,
+    "team_price_text": "Contact Sales (custom plans only)",
+    "team_price_per_user_mo": null,
+    "price_multiplier": null,
+    "sso_plan": null,
+    "sso_price_per_user_mo": null,
+    "sso_required_for_scim": null,
+    "scim_addon_price_text": null,
+    "min_seats": null,
+    "scim_ops": {
+      "create": true,
+      "update": true,
+      "deactivate": true,
+      "delete": false,
+      "groups": false
+    },
+    "idp": {
+      "okta": "native",
+      "entra": null,
+      "google": null,
+      "onelogin": null,
+      "jumpcloud": null,
+      "generic": false
+    },
+    "pricing_page_url": "https://www.zoominfo.com/products/chorus/pricing",
+    "docs_url": "https://help.zoominfo.com/s/article/How-to-Sync-Chorus-and-Okta",
+    "evidence": "ZoomInfo's help centre documents SCIM provisioning for Chorus through the Okta app (push new users, profile updates, deactivation and reactivation), which Chorus Support must activate; Chorus pricing is \"custom plans\" via Get Pricing only.",
+    "notes": "Quote-only: Chorus (now sold as ZoomInfo Chorus; chorus.ai redirects to zoominfo.com) publishes no plans or prices, so SCIM can only be bought through sales. SCIM is documented only for Okta: the Okta OIN app (marked SAML, SCIM, Create, Update, Deactivate; Group Push unchecked) uses an org-specific API token that Chorus Support issues and Support must switch the feature on. Okta deactivation keeps the user as an inactive user with data retained; permanent deletion needs Support. No generic SCIM endpoint, Entra, Google, OneLogin or JumpCloud provisioning is documented, but since the plan gate is Contact Sales the row is gated, not partial (price gate first); the IdP restriction is recorded in idp. Admins can also bulk add, update and deactivate users by CSV import. The public Chorus API (early access, token via CSM) only reads users and teams.",
+    "confidence": "low",
+    "last_verified": "2026-10-05",
+    "api_provisioning": false,
+    "user_api_available": true,
+    "user_api_plan": null,
+    "api_tax": null,
+    "first_added": "2026-09",
+    "status_prev": null
+  },
+  "plans": [
+    {
+      "name": "Custom plan",
+      "price_text": "Contact Sales (Get Pricing form)",
+      "price_per_user_mo": null,
+      "billing": "unknown",
+      "sso": null,
+      "scim": true,
+      "user_api": null,
+      "audit_log_api": null,
+      "cite": [
+        "c1",
+        "c2"
+      ],
+      "notes": "ZoomInfo lists Chorus only as custom plans; no tiers published."
+    }
+  ],
+  "scim": {
+    "available": true,
+    "cite": [
+      "c2",
+      "c3",
+      "c15",
+      "c24"
+    ],
+    "plan": "Custom plan (Contact Sales)",
+    "addon_price_text": null,
+    "sso_required": null,
+    "version": null,
+    "base_url": null,
+    "auth": {
+      "method": null,
+      "token_source": "Org-specific API token issued by Chorus Support (support@chorus.ai / chorussupport@zoominfo.com), entered in the Okta app's API integration",
+      "token_expiry": null,
+      "cite": [
+        "c8"
+      ]
+    },
+    "endpoints": {
+      "Users": null,
+      "Groups": null,
+      "ServiceProviderConfig": null,
+      "Schemas": null,
+      "ResourceTypes": null,
+      "Bulk": null,
+      "Me": null,
+      "cite": []
+    },
+    "operations": {
+      "create": true,
+      "read": null,
+      "update_put": null,
+      "update_patch": null,
+      "deactivate": true,
+      "reactivate": true,
+      "delete": false,
+      "group_push": false,
+      "group_membership": null,
+      "cite": [
+        "c4",
+        "c6",
+        "c7",
+        "c13",
+        "c15"
+      ],
+      "notes": "Okta 'Push Profile Updates' is documented; whether it uses PUT or PATCH is not. Group Push is unchecked on the OIN page (markup). Delete is not done by provisioning; permanent deletion needs Support."
+    },
+    "deprovision": {
+      "action": "deactivate",
+      "frees_seat": null,
+      "revokes_sessions": null,
+      "data_retained": "User loses login access but their Chorus information stays as an inactive user; permanent deletion of user data requires Chorus Support.",
+      "cite": [
+        "c4",
+        "c5",
+        "c13"
+      ]
+    },
+    "filtering": {
+      "supported": null,
+      "attributes": [],
+      "cite": []
+    },
+    "pagination": {
+      "supported": null,
+      "max_page_size": null,
+      "cite": []
+    },
+    "attributes": {
+      "core": [],
+      "enterprise": [],
+      "custom": {
+        "supported": true,
+        "how": "Okta app attributes Chorus Role and Chorus License Type (required on assignment) and manager_email (sets the user's manager and team)"
+      },
+      "group": [],
+      "cite": [
+        "c9",
+        "c11"
+      ]
+    },
+    "roles": {
+      "supported": true,
+      "how": "Chorus Role and Chorus License Type app attributes selected when assigning users or groups in Okta",
+      "cite": [
+        "c9"
+      ]
+    },
+    "rate_limits": {
+      "text": null,
+      "cite": []
+    },
+    "limitations": [
+      {
+        "text": "Documented for Okta only; no generic SCIM endpoint or other IdP is documented.",
+        "cite": [
+          "c2",
+          "c24"
+        ]
+      },
+      {
+        "text": "Provisioning must be activated by Chorus Support, which issues the API token.",
+        "cite": [
+          "c3",
+          "c8"
+        ]
+      },
+      {
+        "text": "Username and email address changes are not supported.",
+        "cite": [
+          "c12"
+        ]
+      },
+      {
+        "text": "The help article says the SCIM integration requires a higher tier version of Okta.",
+        "cite": [
+          "c10"
+        ]
+      }
+    ]
+  },
+  "user_api": {
+    "available": true,
+    "cite": [
+      "c18",
+      "c19",
+      "c20"
+    ],
+    "plan": null,
+    "api_tax": null,
+    "style": "REST",
+    "base_url": "https://chorus.ai",
+    "docs_url": "https://api-docs.chorus.ai/",
+    "auth": {
+      "methods": [
+        "api_key"
+      ],
+      "scopes": [],
+      "cite": [
+        "c19",
+        "c20"
+      ],
+      "notes": "Per-user API token in the Authorization header; the user's role must be allowed Chorus API access. During early access the token comes from the customer success manager."
+    },
+    "capabilities": {
+      "list_users": true,
+      "get_user": null,
+      "create_user": null,
+      "invite_user": null,
+      "update_user": null,
+      "deactivate_user": null,
+      "delete_user": null,
+      "reactivate_user": null,
+      "manage_groups": null,
+      "assign_roles": null,
+      "assign_licenses": null,
+      "cite": [
+        "c18",
+        "c21"
+      ]
+    },
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/v3/users",
+        "purpose": "Fetch users",
+        "cite": [
+          "c21"
+        ]
+      },
+      {
+        "method": "GET",
+        "path": "/api/v1/users/me",
+        "purpose": "Get details about yourself",
+        "cite": [
+          "c18"
+        ]
+      },
+      {
+        "method": "GET",
+        "path": "/api/v1/teams",
+        "purpose": "Fetch teams",
+        "cite": [
+          "c22"
+        ]
+      },
+      {
+        "method": "GET",
+        "path": "/api/v1/teams/:id",
+        "purpose": "Fetch a specific team",
+        "cite": [
+          "c22"
+        ]
+      }
+    ],
+    "webhooks_user_events": {
+      "supported": null,
+      "events": [],
+      "cite": []
+    },
+    "audit_log_api": {
+      "supported": null,
+      "plan": null,
+      "cite": []
+    },
+    "rate_limits": {
+      "text": null,
+      "cite": []
+    },
+    "limitations": [
+      {
+        "text": "The API only reads users and teams; no user create, update or deactivate endpoints are documented.",
+        "cite": [
+          "c18",
+          "c21"
+        ]
+      }
+    ]
+  },
+  "idp_apps": {
+    "okta": {
+      "listed": true,
+      "sso": true,
+      "provisioning": true,
+      "kind": "scim",
+      "built_by": "vendor",
+      "url": "https://www.okta.com/integrations/chorus-ai/",
+      "cite": [
+        "c15",
+        "c2",
+        "c14"
+      ],
+      "notes": "OIN page markup marks SAML, SCIM, Create, Update, Deactivate as checked; Group Push unchecked. built_by from 'Chorus's Okta app'."
+    },
+    "entra": {
+      "listed": null,
+      "sso": null,
+      "provisioning": null,
+      "kind": null,
+      "built_by": null,
+      "url": null,
+      "cite": []
+    },
+    "google": {
+      "listed": null,
+      "sso": null,
+      "provisioning": null,
+      "kind": null,
+      "built_by": null,
+      "url": null,
+      "cite": []
+    },
+    "onelogin": {
+      "listed": null,
+      "sso": null,
+      "provisioning": null,
+      "kind": null,
+      "built_by": null,
+      "url": null,
+      "cite": []
+    },
+    "jumpcloud": {
+      "listed": null,
+      "sso": null,
+      "provisioning": null,
+      "kind": null,
+      "built_by": null,
+      "url": null,
+      "cite": []
+    }
+  },
+  "fallbacks": {
+    "jit": null,
+    "jit_protocol": null,
+    "csv_import": true,
+    "other_sync": null,
+    "docs_public": true,
+    "cite": [
+      "c16",
+      "c17",
+      "c23"
+    ]
+  },
+  "citations": [
+    {
+      "id": "c1",
+      "url": "https://www.zoominfo.com/products/chorus/pricing",
+      "title": "Pricing | ZoomInfo + Chorus",
+      "quote": "ZoomInfo Chorus offers custom plans to drive team performance, build stronger relationships, and acquire unbiased market intelligence.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c2",
+      "url": "https://help.zoominfo.com/s/article/How-to-Sync-Chorus-and-Okta",
+      "title": "How to Sync Chorus and Okta",
+      "quote": "This also enables your organization to provision and deprovision access to Chorus for individual users in one single platform.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c3",
+      "url": "https://help.zoominfo.com/s/article/How-to-Sync-Chorus-and-Okta",
+      "title": "How to Sync Chorus and Okta",
+      "quote": "Before you configure provisioning for Chorus.ai, you must reach out to the Chorus.ai Support team to activate the feature.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c4",
+      "url": "https://help.zoominfo.com/s/article/How-to-Sync-Chorus-and-Okta",
+      "title": "How to Sync Chorus and Okta",
+      "quote": "Deactivating the user or disabling the user's access to the application through OKTA will deactivate the user in Chorus",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c5",
+      "url": "https://help.zoominfo.com/s/article/How-to-Sync-Chorus-and-Okta",
+      "title": "How to Sync Chorus and Okta",
+      "quote": "Note: For this application, deactivating a user means removing access to login, but maintaining the user's Chorus information as an inactive user",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c6",
+      "url": "https://help.zoominfo.com/s/article/How-to-Sync-Chorus-and-Okta",
+      "title": "How to Sync Chorus and Okta",
+      "quote": "Updates made to the user's profile through OKTA will be pushed to Chorus",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c7",
+      "url": "https://help.zoominfo.com/s/article/How-to-Sync-Chorus-and-Okta",
+      "title": "How to Sync Chorus and Okta",
+      "quote": "User accounts can be reactivated in Chorus",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c8",
+      "url": "https://help.zoominfo.com/s/article/How-to-Sync-Chorus-and-Okta",
+      "title": "How to Sync Chorus and Okta",
+      "quote": "A Support representative will provide you with an API token specific to your organization.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c9",
+      "url": "https://help.zoominfo.com/s/article/How-to-Sync-Chorus-and-Okta",
+      "title": "How to Sync Chorus and Okta",
+      "quote": "When assigning users or groups, Chorus.ai app attributes must be selected for Chorus Role and Chorus License Type.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c10",
+      "url": "https://help.zoominfo.com/s/article/How-to-Sync-Chorus-and-Okta",
+      "title": "How to Sync Chorus and Okta",
+      "quote": "It allows provisioning, more advanced user management through Okta(and requires higher tier version of Okta).",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c11",
+      "url": "https://help.zoominfo.com/s/article/How-to-Sync-Chorus-and-Okta",
+      "title": "How to Sync Chorus and Okta",
+      "quote": "As long as the value returned for “manager_email” is the Manager’s email address",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c12",
+      "url": "https://help.zoominfo.com/s/article/How-to-Sync-Chorus-and-Okta",
+      "title": "How to Sync Chorus and Okta",
+      "quote": "Chorus.ai does not support modifications to the username or email address.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c13",
+      "url": "https://help.zoominfo.com/s/article/How-to-Sync-Chorus-and-Okta",
+      "title": "How to Sync Chorus and Okta",
+      "quote": "To permanently delete user data, contact Chorus.ai Support, (chorussupport@zoominfo.com).",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c14",
+      "url": "https://help.zoominfo.com/s/article/How-to-Sync-Chorus-and-Okta",
+      "title": "How to Sync Chorus and Okta",
+      "quote": "SAML is base SSO (single sign on) functionality for Okta login to Chorus, with basic user management.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c15",
+      "url": "https://www.okta.com/integrations/chorus-ai/",
+      "title": "Integrate Chorus.ai with Okta",
+      "quote": "Chorus's Okta app uses single sign-on and advanced provisioning functionality to enhance how organizations automate their onboarding, off-boarding and general user management processes.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c16",
+      "url": "https://help.zoominfo.com/s/article/How-to-Manage-Chorus-Users-in-Bulk-via-CSV-Import",
+      "title": "How to Manage Users in Bulk through CSV Import in Chorus",
+      "quote": "Chorus admins can use CSV import to add new users or update existing users in bulk from a spreadsheet file.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c17",
+      "url": "https://help.zoominfo.com/s/article/How-to-Manage-Chorus-Users-in-Bulk-via-CSV-Import",
+      "title": "How to Manage Users in Bulk through CSV Import in Chorus",
+      "quote": "Select Deactivate existing users not on the spreadsheet being uploaded if you want to deactivate users who are not included in the current upload.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c18",
+      "url": "https://api-docs.chorus.ai/api/collections/19674985/2sBXcDGLvE?segregateAuth=true&versionTag=latest",
+      "title": "Chorus API",
+      "quote": "Retrieve data about your users in Chorus",
+      "accessed": "2026-10-05",
+      "page_url": "https://api-docs.chorus.ai/"
+    },
+    {
+      "id": "c19",
+      "url": "https://api-docs.chorus.ai/api/collections/19674985/2sBXcDGLvE?segregateAuth=true&versionTag=latest",
+      "title": "Chorus API",
+      "quote": "The Chorus API uses API tokens to authenticate requests.",
+      "accessed": "2026-10-05",
+      "page_url": "https://api-docs.chorus.ai/"
+    },
+    {
+      "id": "c20",
+      "url": "https://api-docs.chorus.ai/api/collections/19674985/2sBXcDGLvE?segregateAuth=true&versionTag=latest",
+      "title": "Chorus API",
+      "quote": "During the early access period, please contact your Chorus customer success manager to obtain your personal API token.",
+      "accessed": "2026-10-05",
+      "page_url": "https://api-docs.chorus.ai/"
+    },
+    {
+      "id": "c21",
+      "url": "https://api-docs.chorus.ai/api/collections/19674985/2sBXcDGLvE?segregateAuth=true&versionTag=latest",
+      "title": "Chorus API",
+      "quote": "This API returns all users.",
+      "accessed": "2026-10-05",
+      "page_url": "https://api-docs.chorus.ai/"
+    },
+    {
+      "id": "c22",
+      "url": "https://api-docs.chorus.ai/api/collections/19674985/2sBXcDGLvE?segregateAuth=true&versionTag=latest",
+      "title": "Chorus API",
+      "quote": "This API fetches all teams.",
+      "accessed": "2026-10-05",
+      "page_url": "https://api-docs.chorus.ai/"
+    },
+    {
+      "id": "c23",
+      "url": "https://help.zoominfo.com/s/article/How-to-Manage-Users-and-Hierarchies-in-Chorus",
+      "title": "How to Manage Users and Hierarchies in Chorus",
+      "quote": "If the invitation was sent in error, clicking Deactivate User will prevent their access to Chorus.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    },
+    {
+      "id": "c24",
+      "url": "https://help.zoominfo.com/s/article/How-to-Sync-Chorus-and-Okta",
+      "title": "How to Sync Chorus and Okta",
+      "quote": "For the secondary (optional) SCIM integration, we'll probably want a short call or to explain the process outlined in our support library.",
+      "accessed": "2026-10-05",
+      "page_url": null
+    }
+  ],
+  "conflicts": [],
+  "searched": [
+    "https://www.chorus.ai/pricing (redirects to zoominfo.com)",
+    "https://www.zoominfo.com/products/chorus/pricing",
+    "help.zoominfo.com global search: chorus scim, chorus azure, chorus sso, chorus add users, chorus onelogin",
+    "https://help.zoominfo.com/s/article/How-to-Sync-Chorus-and-Okta",
+    "https://help.zoominfo.com/s/article/How-to-Manage-Chorus-Users-in-Bulk-via-CSV-Import",
+    "https://help.zoominfo.com/s/article/How-to-Manage-Users-and-Hierarchies-in-Chorus",
+    "https://help.zoominfo.com/s/article/How-to-Configure-Organization-Settings-in-Chorus",
+    "https://help.zoominfo.com/s/article/ZoomInfo-Implementation-and-Integrations (ZoomInfo SCIM PDFs do not mention Chorus)",
+    "https://api-docs.chorus.ai/",
+    "https://www.okta.com/integrations/chorus-ai/",
+    "https://learn.microsoft.com/en-us/entra/identity/saas-apps/chorus-tutorial (404), chorus-provisioning-tutorial (404), chorusai-tutorial (404)"
+  ],
+  "open_questions": [
+    "Which Chorus package includes SAML SSO and Okta SCIM is not published (custom plans only).",
+    "SCIM version, base URL, endpoints and attribute schema are not documented publicly.",
+    "Whether deactivation frees the Recorder/Listener licence is not documented.",
+    "Is Chorus in the Entra, Google, OneLogin or JumpCloud catalogues? Not found.",
+    "Chorus API rate limits and an audit-log API are not documented."
+  ]
+}

@@ -1,0 +1,755 @@
+{
+ "slug": "guru",
+ "vendor": "Guru",
+ "vendor_url": "https://www.getguru.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Guru",
+  "slug": "guru",
+  "category": "Productivity & Docs",
+  "status": "gated",
+  "scim_plan": "Custom package (Contact Sales)",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": null,
+  "team_price_text": "Contact Sales (no public plans)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "via_generic",
+   "google": "sso_only",
+   "onelogin": "via_generic",
+   "jumpcloud": "sso_only",
+   "generic": true
+  },
+  "pricing_page_url": "https://www.getguru.com/pricing",
+  "docs_url": "https://help.getguru.com/docs/setting-up-sso-and-scim",
+  "evidence": "Guru's pricing page now offers only a custom package that lists \"SSO, SCIM, and role-based access\"; the help centre says Guru supports SCIM-based user and group provisioning, which requires SSO to be configured first.",
+  "notes": "Quote-only: getguru.com/pricing no longer shows tiers or prices, only a custom-fit package ('not just a per-seat tool') scoped by sales, which includes SSO, SCIM and role-based access; the billing help page still mentions monthly or annual seat billing. New in 2026-09. SCIM 2.0 at https://api.getguru.com/api/scim/v2 with a SCIM username and token (Basic-style user:token, pasted colon-separated into Entra/OneLogin). Users and groups sync; removing a user in the IdP deletes them in Guru immediately and frees the seat for reassignment; SCIM does not populate profile fields (HRIS sync does). Okta's catalogue app does SAML and SCIM (Create, Update, Deactivate, Group Push) per Guru's guide, although the OIN listing only marks SWA; Entra and OneLogin use non-gallery/generic SCIM apps (the Entra gallery 'Guru' is a different company); Office 365 provisioning is not supported. SAML JIT ('Automatically add users') is an alternative. REST API (Basic auth user token) lists members, reads/updates profiles and manages groups and group membership, with team-member webhooks; no create/remove-user endpoint.",
+  "confidence": "low",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Custom package",
+   "price_text": "Contact Sales (tailored to scale, knowledge complexity and AI maturity)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c2"
+   ],
+   "notes": "Only offering shown on the pricing page; the billing help page says Guru offers monthly and annual billing."
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c1",
+   "c3",
+   "c4",
+   "c12"
+  ],
+  "plan": "Custom package (Contact Sales)",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": "2.0",
+  "base_url": "https://api.getguru.com/api/scim/v2",
+  "auth": {
+   "method": "other",
+   "token_source": "Manage > SSO/SCIM > Authorize SCIM Provisioning (SCIM Username and SCIM Token)",
+   "token_expiry": null,
+   "cite": [
+    "c13",
+    "c20"
+   ],
+   "notes": "Entra and OneLogin take username:token in the Secret/Bearer Token field; Okta uses Username and Token (Password) in API Integration."
+  },
+  "endpoints": {
+   "Users": true,
+   "Groups": true,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": [
+    "c10",
+    "c16"
+   ]
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c16",
+    "c18",
+    "c19",
+    "c10",
+    "c5"
+   ],
+   "notes": "PUT vs PATCH not documented; Okta 'Deactivate Users' and Entra Delete both remove the user."
+  },
+  "deprovision": {
+   "action": "delete",
+   "frees_seat": true,
+   "revokes_sessions": null,
+   "data_retained": "Cards the user verified are reassigned to the Collection owner group, else the top verifier.",
+   "cite": [
+    "c5",
+    "c24",
+    "c18"
+   ]
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "active",
+    "displayName",
+    "emails[type eq \"work\"].value",
+    "name.givenName",
+    "name.familyName",
+    "externalId"
+   ],
+   "enterprise": [
+    "employeeNumber"
+   ],
+   "custom": {
+    "supported": false,
+    "how": "SCIM does not populate Guru profiles; use HRIS sync."
+   },
+   "group": [
+    "displayName",
+    "externalId",
+    "members"
+   ],
+   "cite": [
+    "c14",
+    "c11"
+   ],
+   "notes": "Attribute list from the Entra mapping table on the vendor's Entra guide."
+  },
+  "roles": {
+   "supported": null,
+   "how": "Group-based Collection permissions via linked SCIM groups; OneLogin maps Roles to Guru Groups via rules.",
+   "cite": [
+    "c6",
+    "c21"
+   ]
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Automatic provisioning through Office 365 is not supported.",
+    "cite": [
+     "c7"
+    ]
+   },
+   {
+    "text": "With SCIM on, users cannot be removed or invited from the Guru web app; SCIM must be turned off temporarily to remove a user locally.",
+    "cite": [
+     "c9",
+     "c37"
+    ]
+   },
+   {
+    "text": "OneLogin does not push groups; roles are mapped to Guru groups instead.",
+    "cite": [
+     "c21"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c28",
+   "c29",
+   "c30"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://api.getguru.com/api/v1/",
+  "docs_url": "https://developer.getguru.com/reference/authentication",
+  "auth": {
+   "methods": [
+    "basic"
+   ],
+   "scopes": [],
+   "cite": [
+    "c28",
+    "c36"
+   ],
+   "notes": "User token (read/write, as a specific user) or Collection token (read-only)."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": true,
+   "create_user": null,
+   "invite_user": null,
+   "update_user": true,
+   "deactivate_user": null,
+   "delete_user": null,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c29",
+    "c33",
+    "c39",
+    "c32",
+    "c30",
+    "c31"
+   ],
+   "notes": "No create, invite, deactivate or delete user endpoint appears in the API reference index (llms.txt)."
+  },
+  "endpoints": [
+   {
+    "method": "GET",
+    "path": "/api/v1/members",
+    "purpose": "List team members",
+    "cite": [
+     "c29"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/people/{id}",
+    "purpose": "Get a person's profile",
+    "cite": [
+     "c39"
+    ]
+   },
+   {
+    "method": "PUT",
+    "path": "/api/v1/people/{id}",
+    "purpose": "Update a person's profile",
+    "cite": [
+     "c33"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/groups",
+    "purpose": "List user groups",
+    "cite": [
+     "c32"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/groups",
+    "purpose": "Add a user group",
+    "cite": [
+     "c38"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/groups/{groupId}/members",
+    "purpose": "Add a user group member",
+    "cite": [
+     "c30"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/groups/{groupId}/members/{memberId}",
+    "purpose": "Delete a user group member",
+    "cite": [
+     "c31"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": true,
+   "events": [
+    "team-member-added",
+    "team-member-removed",
+    "usergroup-created",
+    "usergroup-deleted",
+    "usergroup-member-added",
+    "usergroup-member-deleted"
+   ],
+   "cite": [
+    "c34"
+   ]
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "Users cannot be created or removed through the REST API; the reference covers members listing, profiles and groups only.",
+    "cite": [
+     "c29"
+    ]
+   }
+  ]
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/guru/",
+   "cite": [
+    "c27",
+    "c17",
+    "c18"
+   ],
+   "notes": "The OIN listing (last updated 2013) marks only SWA as a capability, but Guru's Okta guide adds this catalogue app with SAML setup instructions and a Provisioning > API Integration tab (Create, Update, Deactivate, Push Groups); the vendor guide is used for behaviour (see conflicts)."
+  },
+  "entra": {
+   "listed": false,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c15",
+    "c12"
+   ],
+   "notes": "Non-gallery app with Guru's SCIM endpoint; the gallery app named Guru belongs to another company."
+  },
+  "google": {
+   "listed": false,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c23"
+   ]
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c20"
+   ],
+   "notes": "Generic 'SCIM Provisioner with SAML' app per vendor guide."
+  },
+  "jumpcloud": {
+   "listed": true,
+   "sso": true,
+   "provisioning": null,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c22"
+   ],
+   "notes": "Vendor guide adds the JumpCloud catalogue app for SSO only; the SCIM overview lists JumpCloud among setup guides but no JumpCloud SCIM steps are given."
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": "HRIS sync for profile data",
+  "docs_public": true,
+  "cite": [
+   "c8",
+   "c11"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://www.getguru.com/pricing",
+   "title": "Guru Pricing",
+   "quote": "SSO, SCIM, and role-based access",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://www.getguru.com/pricing",
+   "title": "Guru Pricing",
+   "quote": "Guru is a platform and expertise solution — not just a per-seat tool. Your investment is tailored to your organization's scale, knowledge complexity, and AI maturity.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://help.getguru.com/docs/setting-up-sso-and-scim",
+   "title": "Single Sign-On (SSO) & SCIM",
+   "quote": "Guru supports Single Sign-On (SSO) and SCIM-based user and group provisioning, which requires SSO to be configured first.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://help.getguru.com/docs/setting-up-sso-and-scim",
+   "title": "Single Sign-On (SSO) & SCIM",
+   "quote": "Guru supports any IdP with SCIM 2.0 support.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://help.getguru.com/docs/setting-up-sso-and-scim",
+   "title": "Single Sign-On (SSO) & SCIM",
+   "quote": "The user is immediately deleted in Guru.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://help.getguru.com/docs/setting-up-sso-and-scim",
+   "title": "Single Sign-On (SSO) & SCIM",
+   "quote": "SCIM Groups link 1:1 with Guru Groups while retaining Collection permissions. If a Group name matches, linking is automatic.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://help.getguru.com/docs/setting-up-sso-and-scim",
+   "title": "Single Sign-On (SSO) & SCIM",
+   "quote": "Guru does not support automatic provisioning through Office 365. Only Google SSO and standard SAML are supported.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://help.getguru.com/docs/setting-up-sso-and-scim",
+   "title": "Single Sign-On (SSO) & SCIM",
+   "quote": "Guru adds users on their first SSO login.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://help.getguru.com/docs/setting-up-sso-and-scim",
+   "title": "Single Sign-On (SSO) & SCIM",
+   "quote": "Once SCIM is enabled, users can not be removed from the Guru web app.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://help.getguru.com/docs/setting-up-sso-and-scim",
+   "title": "Single Sign-On (SSO) & SCIM",
+   "quote": "Users, Groups, and Group assignments sync from your IdP to Guru.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c11",
+   "url": "https://help.getguru.com/docs/setting-up-sso-and-scim",
+   "title": "Single Sign-On (SSO) & SCIM",
+   "quote": "Can SCIM populate Guru profiles? No. Use an HRIS sync to import data into profiles.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://help.getguru.com/docs/setting-up-azure-sso-and-scim-for-guru",
+   "title": "Setting up Microsoft Entra SSO and SCIM",
+   "quote": "In the Tenant URL field, enter https://api.getguru.com/api/scim/v2.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://help.getguru.com/docs/setting-up-azure-sso-and-scim-for-guru",
+   "title": "Setting up Microsoft Entra SSO and SCIM",
+   "quote": "Copy the SCIM Username and SCIM Token from your Guru SSO/SCIM page.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c14",
+   "url": "https://help.getguru.com/docs/setting-up-azure-sso-and-scim-for-guru",
+   "title": "Setting up Microsoft Entra SSO and SCIM",
+   "quote": "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User:employeeNumber",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://help.getguru.com/docs/setting-up-azure-sso-and-scim-for-guru",
+   "title": "Setting up Microsoft Entra SSO and SCIM",
+   "quote": "Integrate any other application you don't find in the gallery (Non-gallery).",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://help.getguru.com/docs/setting-up-azure-sso-and-scim-for-guru",
+   "title": "Setting up Microsoft Entra SSO and SCIM",
+   "quote": "Under Target Object Actions, confirm that Create, Update, and Delete are all checked.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c17",
+   "url": "https://help.getguru.com/docs/setting-up-okta-sso-and-scim-for-guru",
+   "title": "Setting up Okta SSO and SCIM",
+   "quote": "Search for \"Guru\", click on the Guru app, then click +Add Integration",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c18",
+   "url": "https://help.getguru.com/docs/setting-up-okta-sso-and-scim-for-guru",
+   "title": "Setting up Okta SSO and SCIM",
+   "quote": "If Deactivate Users is not enabled, users who are removed from Okta will still exist in Guru and will continue to be billed.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c19",
+   "url": "https://help.getguru.com/docs/setting-up-okta-sso-and-scim-for-guru",
+   "title": "Setting up Okta SSO and SCIM",
+   "quote": "Navigate to the Push Groups tab in Okta. This is where you will add groups from Okta into Guru.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c20",
+   "url": "https://help.getguru.com/docs/setting-up-onelogin-sso-and-scim-for-guru",
+   "title": "Setting up OneLogin SSO and SCIM",
+   "quote": "Search for \"SCIM\" and select SCIM Provisioner with SAML (Core Schema v1.1).",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c21",
+   "url": "https://help.getguru.com/docs/setting-up-onelogin-sso-and-scim-for-guru",
+   "title": "Setting up OneLogin SSO and SCIM",
+   "quote": "OneLogin does not sync “Groups” to external platforms, but you can sync “Roles.”",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c22",
+   "url": "https://help.getguru.com/docs/jumpcloud-sso-for-guru",
+   "title": "Setting up JumpCloud SSO",
+   "quote": "Click on the + button, search for Guru and click configure.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c23",
+   "url": "https://help.getguru.com/docs/google-workspace-ssosaml-for-guru",
+   "title": "Setting up Google Workspace SSO",
+   "quote": "create a custom SAML app in Google Workspace for Guru since Guru is not on Google's app marketplace.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c24",
+   "url": "https://help.getguru.com/docs/guru-subscription-and-billing",
+   "title": "Managing your Guru Subscription",
+   "quote": "Their seat becomes an Available seat.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c25",
+   "url": "https://help.getguru.com/docs/guru-subscription-and-billing",
+   "title": "Managing your Guru Subscription",
+   "quote": "Guru offers two billing options:",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c26",
+   "url": "https://help.getguru.com/docs/inviting-and-removing-guru-users",
+   "title": "Inviting & Removing Users",
+   "quote": "Select Export to CSV.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c27",
+   "url": "https://www.okta.com/integrations/guru/",
+   "title": "Integrate Guru with Okta",
+   "quote": "Add this integration to enable authentication and provisioning capabilities.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c28",
+   "url": "https://developer.getguru.com/reference/authentication.md",
+   "title": "Overview",
+   "quote": "Authentication for the API uses Basic Auth.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.getguru.com/reference/authentication"
+  },
+  {
+   "id": "c29",
+   "url": "https://developer.getguru.com/reference/authentication.md",
+   "title": "Overview",
+   "quote": "The root of all API endpoints is `https://api.getguru.com/api/v1/`.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.getguru.com/reference/authentication"
+  },
+  {
+   "id": "c30",
+   "url": "https://developer.getguru.com/reference/getv1membersgetteammembers.md",
+   "title": "List team members",
+   "quote": "Returns all team members.  A maximum of 50 team members will be returned.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.getguru.com/reference/getv1membersgetteammembers"
+  },
+  {
+   "id": "c31",
+   "url": "https://developer.getguru.com/reference/postv1groupscreateusergroupmember.md",
+   "title": "Add a user group member",
+   "quote": "/api/v1/groups/{groupId}/members",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.getguru.com/reference/postv1groupscreateusergroupmember"
+  },
+  {
+   "id": "c32",
+   "url": "https://developer.getguru.com/reference/deletev1groupsdeleteusergroupmember.md",
+   "title": "Delete a user group member",
+   "quote": "/api/v1/groups/{groupId}/members/{memberId}",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.getguru.com/reference/deletev1groupsdeleteusergroupmember"
+  },
+  {
+   "id": "c33",
+   "url": "https://developer.getguru.com/reference/getv1groupsgetusergroups.md",
+   "title": "List user groups",
+   "quote": "Returns all groups on the team.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.getguru.com/reference/getv1groupsgetusergroups"
+  },
+  {
+   "id": "c34",
+   "url": "https://developer.getguru.com/reference/putv1peopleupdateperson.md",
+   "title": "Update the profile for a person",
+   "quote": "Update the profile for a person",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.getguru.com/reference/putv1peopleupdateperson"
+  },
+  {
+   "id": "c35",
+   "url": "https://developer.getguru.com/docs/getting-started-with-gurus-webhook-services.md",
+   "title": "Webhooks Overview",
+   "quote": "a user was removed from your team",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.getguru.com/docs/getting-started-with-gurus-webhook-services"
+  },
+  {
+   "id": "c36",
+   "url": "https://developer.getguru.com/docs/getting-started.md",
+   "title": "API Quickstart",
+   "quote": "read and write access, authorized as a specific user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.getguru.com/docs/getting-started"
+  },
+  {
+   "id": "c37",
+   "url": "https://help.getguru.com/docs/setting-up-sso-and-scim",
+   "title": "Single Sign-On (SSO) & SCIM",
+   "quote": "When both SSO and SCIM are enabled, a Guru Admin (or relevant custom role cannot invite users from the Guru web app.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c38",
+   "url": "https://developer.getguru.com/reference/postv1groupscreateusergroup.md",
+   "title": "Add a user group",
+   "quote": "Add a user group",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.getguru.com/reference/postv1groupscreateusergroup"
+  },
+  {
+   "id": "c39",
+   "url": "https://developer.getguru.com/reference/getv1peoplegetperson.md",
+   "title": "Get the profile for a person",
+   "quote": "Get the profile for a person",
+   "accessed": "2026-10-05",
+   "page_url": "https://developer.getguru.com/reference/getv1peoplegetperson"
+  }
+ ],
+ "conflicts": [
+  {
+   "text": "The Okta OIN listing for Guru marks only SWA, while Guru's Okta guide documents SAML SSO and SCIM provisioning (Create, Update, Deactivate, Push Groups) in that catalogue app.",
+   "cite": [
+    "c27",
+    "c17",
+    "c18",
+    "c19"
+   ]
+  }
+ ],
+ "searched": [
+  "https://www.getguru.com/pricing (rendered)",
+  "https://help.getguru.com/docs/home sidebar (SSO/SCIM, IdP guides, billing, users)",
+  "https://developer.getguru.com/llms.txt (API reference index)",
+  "https://www.okta.com/integrations/guru/"
+ ],
+ "open_questions": [
+  "SCIM token expiry, PUT vs PATCH, filtering, pagination and rate limits are not documented.",
+  "Whether removal ends active sessions is not stated.",
+  "Which commercial package or seat count is needed for SCIM is not public (quote-only).",
+  "Whether the Okta OIN app was built by Guru or Okta is not stated.",
+  "JumpCloud SCIM steps are not documented despite JumpCloud being listed on the SCIM overview.",
+  "No audit-log API is documented; the analytics events export is usage analytics."
+ ]
+}

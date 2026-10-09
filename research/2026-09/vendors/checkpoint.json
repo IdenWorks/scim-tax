@@ -1,0 +1,647 @@
+{
+ "slug": "checkpoint",
+ "vendor": "Check Point (Harmony SASE)",
+ "vendor_url": "https://www.checkpoint.com",
+ "researched_at": "2026-10-05",
+ "row": {
+  "vendor": "Check Point (Harmony SASE)",
+  "slug": "checkpoint",
+  "category": "Security & Identity",
+  "status": "gated",
+  "scim_plan": "Enterprise",
+  "scim_price_text": "Contact Sales",
+  "scim_price_per_user_mo": null,
+  "team_plan": "Essentials",
+  "team_price_text": "Essentials: price not published (pricing page blocked automated access)",
+  "team_price_per_user_mo": null,
+  "price_multiplier": null,
+  "sso_plan": null,
+  "sso_price_per_user_mo": null,
+  "sso_required_for_scim": true,
+  "scim_addon_price_text": null,
+  "min_seats": null,
+  "scim_ops": {
+   "create": true,
+   "update": true,
+   "deactivate": true,
+   "delete": true,
+   "groups": true
+  },
+  "idp": {
+   "okta": "native",
+   "entra": "via_generic",
+   "google": null,
+   "onelogin": "sso_only",
+   "jumpcloud": "sso_only",
+   "generic": true
+  },
+  "pricing_page_url": "https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/SASE-Admin-Guide//SASE_Security/Topics/licensing/licensing_the_product.html",
+  "docs_url": "https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/SASE-Admin-Guide//SASE_Security/Topics/scim/system_for_cross_domain_identity_management_scim.html",
+  "evidence": "Check Point's SASE admin guide says 'SCIM based user provisioning is available to SASE Enterprise customers only', with SCIM integrations documented for Okta and Microsoft Entra ID.",
+  "notes": "Check Point is a multi-product vendor; this row covers Harmony SASE (formerly Perimeter 81), the per-member SaaS product with SCIM. The Infinity Portal (account console for other Check Point SaaS) is SAML SSO with JIT only (Okta OIN app checks SAML only; Entra tutorial says JIT). SCIM gate comes from the SASE docs (Enterprise only); sase.checkpoint.com/pricing returned an empty bot challenge to curl, the renderer and WebFetch, so plan prices were not verified and the licensing doc ('contact your Check Point sales representative') is used as the pricing evidence. Default plan is Essentials. Okta SCIM requires the Okta SAML app first. SCIM base URL is regional (https://api.perimeter81.com/api/scim for US). Deleting a user in the IdP removes them from the console and frees the licence. Public API v3 (SwaggerHub) also creates, lists and deletes users and manages group membership.",
+  "confidence": "medium",
+  "last_verified": "2026-10-05",
+  "api_provisioning": false,
+  "user_api_available": true,
+  "user_api_plan": null,
+  "api_tax": null,
+  "first_added": "2026-09",
+  "status_prev": null
+ },
+ "plans": [
+  {
+   "name": "Essentials",
+   "price_text": "Not verified (pricing page unreachable)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": null,
+   "scim": false,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c18",
+    "c1",
+    "c20"
+   ],
+   "notes": "Default plan. SAML SSO with JIT is documented without naming a plan; SCIM is Enterprise only."
+  },
+  {
+   "name": "Enterprise",
+   "price_text": "Contact Sales (purchase through a Check Point sales representative)",
+   "price_per_user_mo": null,
+   "billing": "unknown",
+   "sso": true,
+   "scim": true,
+   "user_api": null,
+   "audit_log_api": null,
+   "cite": [
+    "c1",
+    "c17"
+   ]
+  }
+ ],
+ "scim": {
+  "available": true,
+  "cite": [
+   "c1",
+   "c4",
+   "c10",
+   "c11",
+   "c12"
+  ],
+  "plan": "Enterprise",
+  "addon_price_text": null,
+  "sso_required": true,
+  "version": null,
+  "base_url": "https://api.perimeter81.com/api/scim (US); https://api.eu.sase.checkpoint.com/api/scim (EU); also AU and IN regional hosts",
+  "auth": {
+   "method": "bearer",
+   "token_source": "SASE Administrator Portal > Settings > Identity Providers > SCIM Integration > Settings > Generate Token (Entra: Microsoft Azure AD provider > Settings > Generate Token)",
+   "token_expiry": null,
+   "cite": [
+    "c6",
+    "c15",
+    "c16"
+   ]
+  },
+  "endpoints": {
+   "Users": null,
+   "Groups": null,
+   "ServiceProviderConfig": null,
+   "Schemas": null,
+   "ResourceTypes": null,
+   "Bulk": null,
+   "Me": null,
+   "cite": []
+  },
+  "operations": {
+   "create": true,
+   "read": null,
+   "update_put": null,
+   "update_patch": null,
+   "deactivate": true,
+   "reactivate": null,
+   "delete": true,
+   "group_push": true,
+   "group_membership": true,
+   "cite": [
+    "c3",
+    "c5",
+    "c2",
+    "c7",
+    "c14"
+   ]
+  },
+  "deprovision": {
+   "action": "delete",
+   "frees_seat": true,
+   "revokes_sessions": null,
+   "data_retained": null,
+   "cite": [
+    "c2"
+   ],
+   "notes": "Deleting the user in the IdP removes the user from the SASE console; Okta 'Deactivate Users' is the documented Okta action."
+  },
+  "filtering": {
+   "supported": null,
+   "attributes": [],
+   "cite": []
+  },
+  "pagination": {
+   "supported": null,
+   "max_page_size": null,
+   "cite": []
+  },
+  "attributes": {
+   "core": [
+    "userName",
+    "emails[type eq \"work\"].value",
+    "active",
+    "name.givenName",
+    "name.familyName",
+    "nickName"
+   ],
+   "enterprise": [],
+   "custom": {
+    "supported": null,
+    "how": null
+   },
+   "group": [],
+   "cite": [
+    "c13"
+   ],
+   "notes": "Entra mapping: userName <- mail, emails[work] <- userPrincipalName, nickName <- objectId (matching precedence 1); delete all other default mappings."
+  },
+  "roles": {
+   "supported": null,
+   "how": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [
+   {
+    "text": "SCIM integration is documented only for Okta and Microsoft Entra ID.",
+    "cite": [
+     "c4"
+    ]
+   },
+   {
+    "text": "Users previously provisioned through another IdP must be removed individually before enabling Okta SCIM, otherwise deactivation and sync fail.",
+    "cite": [
+     "c8",
+     "c9"
+    ]
+   }
+  ]
+ },
+ "user_api": {
+  "available": true,
+  "cite": [
+   "c22",
+   "c23",
+   "c26"
+  ],
+  "plan": null,
+  "api_tax": null,
+  "style": "REST",
+  "base_url": "https://public-apigw.us.sase.checkpoint.com/ (also EU, AU, IN, CA)",
+  "docs_url": "https://app.swaggerhub.com/apis/Check-Point/SASE-API",
+  "auth": {
+   "methods": [
+    "api_key"
+   ],
+   "scopes": [
+    "Members",
+    "Groups",
+    "Licenses and add-ons"
+   ],
+   "cite": [
+    "c22",
+    "c32"
+   ],
+   "notes": "Key Permissions are selected per key; available permissions depend on account features."
+  },
+  "capabilities": {
+   "list_users": true,
+   "get_user": null,
+   "create_user": true,
+   "invite_user": null,
+   "update_user": null,
+   "deactivate_user": null,
+   "delete_user": true,
+   "reactivate_user": null,
+   "manage_groups": true,
+   "assign_roles": null,
+   "assign_licenses": null,
+   "cite": [
+    "c23",
+    "c24",
+    "c25",
+    "c31"
+   ]
+  },
+  "endpoints": [
+   {
+    "method": "POST",
+    "path": "/v3/users",
+    "purpose": "Create a user",
+    "cite": [
+     "c23"
+    ]
+   },
+   {
+    "method": "GET",
+    "path": "/v3/users",
+    "purpose": "Paginated list of users",
+    "cite": [
+     "c24"
+    ]
+   },
+   {
+    "method": "DELETE",
+    "path": "/v3/users/{id}",
+    "purpose": "Delete a user",
+    "cite": [
+     "c31"
+    ]
+   },
+   {
+    "method": "POST",
+    "path": "/v3/groups/{groupId}/member/{userId}",
+    "purpose": "Add member to group",
+    "cite": [
+     "c25"
+    ]
+   }
+  ],
+  "webhooks_user_events": {
+   "supported": null,
+   "events": [],
+   "cite": []
+  },
+  "audit_log_api": {
+   "supported": null,
+   "plan": null,
+   "cite": []
+  },
+  "rate_limits": {
+   "text": null,
+   "cite": []
+  },
+  "limitations": [],
+  "notes": "SwaggerHub spec 3.0.1 also has POST/GET /v3/groups, DELETE /v3/groups/{id} and DELETE /v3/groups/{groupId}/member/{userId}."
+ },
+ "idp_apps": {
+  "okta": {
+   "listed": true,
+   "sso": true,
+   "provisioning": true,
+   "kind": "scim",
+   "built_by": null,
+   "url": "https://www.okta.com/integrations/harmony-sase/",
+   "cite": [
+    "c27",
+    "c5"
+   ],
+   "notes": "OIN 'Check Point SASE' app (app id perimeter81) checks SAML, SCIM, Create, Update, Deactivate and Group Push. Separate 'Check Point Infinity Portal' OIN app is SAML only (c28)."
+  },
+  "entra": {
+   "listed": true,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/perimeter-81-tutorial",
+   "cite": [
+    "c29",
+    "c11",
+    "c15"
+   ],
+   "notes": "Gallery apps (Perimeter 81, Check Point Harmony Connect, Check Point Infinity Portal) are SAML with JIT; SCIM uses a separately created Entra application pointed at the SCIM URL with a bearer token."
+  },
+  "google": {
+   "listed": null,
+   "sso": true,
+   "provisioning": null,
+   "kind": null,
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c19"
+   ],
+   "notes": "Google Workspace sign-in via a custom SAML app or Google Services; no SCIM."
+  },
+  "onelogin": {
+   "listed": null,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c4"
+   ],
+   "notes": "Check Point's own OneLogin guide is SAML; OneLogin is not among the SCIM IdPs."
+  },
+  "jumpcloud": {
+   "listed": null,
+   "sso": true,
+   "provisioning": false,
+   "kind": "sso_only",
+   "built_by": null,
+   "url": null,
+   "cite": [
+    "c4"
+   ],
+   "notes": "Check Point's own JumpCloud guide is SAML; JumpCloud is not among the SCIM IdPs."
+  }
+ },
+ "fallbacks": {
+  "jit": true,
+  "jit_protocol": "saml",
+  "csv_import": null,
+  "other_sync": "On-premises Active Directory/LDAP connection; Google Services (OAuth with Admin SDK) sign-in",
+  "docs_public": true,
+  "cite": [
+   "c20",
+   "c29",
+   "c19"
+  ]
+ },
+ "citations": [
+  {
+   "id": "c1",
+   "url": "https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/SASE-Admin-Guide//SASE_Security/Topics/okta/okta_scim.html",
+   "title": "Okta (SCIM) | Check Point SASE Administration Guide",
+   "quote": "SCIM based user provisioning is available to SASE Enterprise customers only.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c2",
+   "url": "https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/SASE-Admin-Guide//SASE_Security/Topics/scim/system_for_cross_domain_identity_management_scim.html",
+   "title": "System for Cross-domain Identity Management (SCIM) | Check Point SASE Administration Guide",
+   "quote": "Deleting a user within your IDP, removes the user from the Check Point SASE console, freeing up the user's license.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c3",
+   "url": "https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/SASE-Admin-Guide//SASE_Security/Topics/scim/system_for_cross_domain_identity_management_scim.html",
+   "title": "System for Cross-domain Identity Management (SCIM) | Check Point SASE Administration Guide",
+   "quote": "When creating a new user within your IDP, and provisioning them through the SCIM integration, the user is automatically created in the Check Point SASE console.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c4",
+   "url": "https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/SASE-Admin-Guide//SASE_Security/Topics/scim/system_for_cross_domain_identity_management_scim.html",
+   "title": "System for Cross-domain Identity Management (SCIM) | Check Point SASE Administration Guide",
+   "quote": "Check Point SASE offers SCIM integration with these identity providers:",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c5",
+   "url": "https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/SASE-Admin-Guide//SASE_Security/Topics/okta/okta_scim.html",
+   "title": "Okta (SCIM) | Check Point SASE Administration Guide",
+   "quote": "SASE integrates with Okta using SCIM, ensuring automatic user synchronization, profile updates, and streamlined deactivation when users are removed from the Okta SCIM Application.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c6",
+   "url": "https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/SASE-Admin-Guide//SASE_Security/Topics/okta/okta_scim.html",
+   "title": "Okta (SCIM) | Check Point SASE Administration Guide",
+   "quote": "Click Turn On in the SCIM Integration section.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c7",
+   "url": "https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/SASE-Admin-Guide//SASE_Security/Topics/okta/okta_scim.html",
+   "title": "Okta (SCIM) | Check Point SASE Administration Guide",
+   "quote": "Select the Push group memberships immediately checkbox.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c8",
+   "url": "https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/SASE-Admin-Guide//SASE_Security/Topics/okta/okta_scim.html",
+   "title": "Okta (SCIM) | Check Point SASE Administration Guide",
+   "quote": "Before configuring Okta SCIM, remove all users provisioned through the previous IdP from the SASE console, then reprovision them through Okta.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c9",
+   "url": "https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/SASE-Admin-Guide//SASE_Security/Topics/okta/okta_scim.html",
+   "title": "Okta (SCIM) | Check Point SASE Administration Guide",
+   "quote": "This causes SCIM deactivation and sync failures.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c10",
+   "url": "https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/SASE-Admin-Guide//SASE_Security/Topics/okta/okta_scim.html",
+   "title": "Okta (SCIM) | Check Point SASE Administration Guide",
+   "quote": "Okta application configured for Single Sign-On",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c11",
+   "url": "https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/SASE-Admin-Guide//SASE_Security/Topics/microsoftentraid_scim/configure_scim_provisioning_for_users.html",
+   "title": "Step 5 - Configuring SCIM | Check Point SASE Administration Guide",
+   "quote": "For US based platform - https://api.perimeter81.com/api/scim",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c12",
+   "url": "https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/SASE-Admin-Guide//SASE_Security/Topics/microsoftentraid_scim/configure_scim_provisioning_for_users.html",
+   "title": "Step 5 - Configuring SCIM | Check Point SASE Administration Guide",
+   "quote": "For EU based platform - https://api.eu.sase.checkpoint.com/api/scim",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c13",
+   "url": "https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/SASE-Admin-Guide//SASE_Security/Topics/microsoftentraid_scim/configure_scim_provisioning_for_users.html",
+   "title": "Step 5 - Configuring SCIM | Check Point SASE Administration Guide",
+   "quote": "Retain these attributes and delete other attributes:",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c14",
+   "url": "https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/SASE-Admin-Guide//SASE_Security/Topics/microsoftentraid_scim/configure_scim_provisioning_for_users.html",
+   "title": "Step 5 - Configuring SCIM | Check Point SASE Administration Guide",
+   "quote": "Provision Microsoft Entra ID Groups",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c15",
+   "url": "https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/SASE-Admin-Guide//SASE_Security/Topics/microsoftentraid_scim/configure_harmony_sase_identity_provider.html",
+   "title": "Step 4 - Configuring SASE IDP | Check Point SASE Administration Guide",
+   "quote": "Select the SCIM Integration checkbox.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c16",
+   "url": "https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/SASE-Admin-Guide//SASE_Security/Topics/microsoftentraid_scim/configure_harmony_sase_identity_provider.html",
+   "title": "Step 4 - Configuring SASE IDP | Check Point SASE Administration Guide",
+   "quote": "The Azure AD SCIM Data window appears.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c17",
+   "url": "https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/SASE-Admin-Guide//SASE_Security/Topics/licensing/licensing_the_product.html",
+   "title": "Licensing the Product | Check Point SASE Administration Guide",
+   "quote": "After you create a User Center account, contact your Check Point sales representative to purchase a license.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c18",
+   "url": "https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/SASE-Admin-Guide//SASE_Security/Topics/billing/updating_your_billing_subscription_plan.html",
+   "title": "Updating the Subscription Plan | Check Point SASE Administration Guide",
+   "quote": "Default is the Essentials Plan.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c19",
+   "url": "https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/SASE-Admin-Guide//SASE_Security/Topics/idp/identity_providers.html",
+   "title": "Identity Providers | Check Point SASE Administration Guide",
+   "quote": "Google Applications with SAML 2.0",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c20",
+   "url": "https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/SASE-Admin-Guide//SASE_Security/Topics/okta_with_saml/okta_with_saml_supported_features.html",
+   "title": "Okta with SAML | Check Point SASE Administration Guide",
+   "quote": "JIT (Just In Time) Provisioning",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c21",
+   "url": "https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/SASE-Admin-Guide//SASE_Security/Topics/members/members_overview_and_access_control.html",
+   "title": "Members | Check Point SASE Administration Guide",
+   "quote": "Configured Identity Providers (IdP) for the member.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c22",
+   "url": "https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/SASE-Admin-Guide//SASE_Security/Topics/settings/api_keys.html",
+   "title": "API Keys | Check Point SASE Administration Guide",
+   "quote": "Generate an API key to authenticate services that use the Check Point SASE Public API.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c23",
+   "url": "https://api.swaggerhub.com/apis/Check-Point/SASE-API/3.0.1",
+   "title": "Check Point - SASE Public API (SwaggerHub)",
+   "quote": "Creates a new user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.swaggerhub.com/apis/Check-Point/SASE-API"
+  },
+  {
+   "id": "c24",
+   "url": "https://api.swaggerhub.com/apis/Check-Point/SASE-API/3.0.1",
+   "title": "Check Point - SASE Public API (SwaggerHub)",
+   "quote": "Returns paginated list of users.",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.swaggerhub.com/apis/Check-Point/SASE-API"
+  },
+  {
+   "id": "c25",
+   "url": "https://api.swaggerhub.com/apis/Check-Point/SASE-API/3.0.1",
+   "title": "Check Point - SASE Public API (SwaggerHub)",
+   "quote": "Add member to a group.",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.swaggerhub.com/apis/Check-Point/SASE-API"
+  },
+  {
+   "id": "c26",
+   "url": "https://api.swaggerhub.com/apis/Check-Point/SASE-API/3.0.1",
+   "title": "Check Point - SASE Public API (SwaggerHub)",
+   "quote": "https://public-apigw.us.sase.checkpoint.com/",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.swaggerhub.com/apis/Check-Point/SASE-API"
+  },
+  {
+   "id": "c27",
+   "url": "https://www.okta.com/integrations/harmony-sase/",
+   "title": "Check Point SASE | Okta Integration Network",
+   "quote": "This rich integration provides secure login and policy-based access, offering a safer and more intuitive way for users to connect with the Check Point SASE platform.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c28",
+   "url": "https://www.okta.com/integrations/check-point-infinity-portal/",
+   "title": "Check Point Infinity Portal | Okta Integration Network",
+   "quote": "Use Okta to manage user access and enable single sign-on with Check Point Infinity Portal.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c29",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/perimeter-81-tutorial",
+   "title": "Configure Perimeter 81 for Single sign-on with Microsoft Entra ID",
+   "quote": "Perimeter 81 supports just-in-time user provisioning, which is enabled by default.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c30",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/saas-apps/checkpoint-infinity-portal-tutorial",
+   "title": "Configure Check Point Infinity Portal for Single sign-on with Microsoft Entra ID",
+   "quote": "Check Point Infinity Portal supports just-in-time user provisioning, which is enabled by default.",
+   "accessed": "2026-10-05",
+   "page_url": null
+  },
+  {
+   "id": "c31",
+   "url": "https://api.swaggerhub.com/apis/Check-Point/SASE-API/3.0.1",
+   "title": "Check Point - SASE Public API (SwaggerHub)",
+   "quote": "Deletes a user.",
+   "accessed": "2026-10-05",
+   "page_url": "https://app.swaggerhub.com/apis/Check-Point/SASE-API"
+  },
+  {
+   "id": "c32",
+   "url": "https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/SASE-Admin-Guide//SASE_Security/Topics/settings/api_keys.html",
+   "title": "API Keys | Check Point SASE Administration Guide",
+   "quote": "Licenses and add-ons",
+   "accessed": "2026-10-05",
+   "page_url": null
+  }
+ ],
+ "conflicts": [],
+ "searched": [
+  "https://sase.checkpoint.com/pricing (bot challenge, empty)",
+  "https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/SASE-Admin-Guide/sitemap.xml (682 URLs)",
+  "https://api.swaggerhub.com/apis/Check-Point/SASE-API/3.0.1",
+  "https://www.okta.com/integrations/harmony-sase/",
+  "https://www.okta.com/integrations/check-point-infinity-portal/"
+ ],
+ "open_questions": [
+  "Harmony SASE plan prices (Essentials and higher tiers) could not be read: sase.checkpoint.com/pricing serves a bot challenge.",
+  "Whether the Okta 'Deactivate' action deactivates or deletes the SASE member, and whether it ends active agent sessions, is not documented.",
+  "SCIM version, filtering, pagination and rate limits are not documented.",
+  "Which plan includes the Public API is not documented.",
+  "Whether the SAML SSO plan gate differs from Essentials is not documented."
+ ]
+}
