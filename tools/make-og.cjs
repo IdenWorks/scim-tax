@@ -22,10 +22,10 @@ const page = (w, h, title, date, foot, by) => `<!doctype html><html><head><meta 
 <style>
   * { box-sizing: border-box; margin: 0; }
   body { width: ${w}px; height: ${h}px; background: #fff; color: #0f0f0f; font-family: 'Inter', sans-serif; padding: 0 72px; display: flex; flex-direction: column; }
-  .top { height: ${foot}px; display: flex; align-items: center; justify-content: space-between; font-size: ${by}px; color: #6b7280; }
+  .top { height: ${foot}px; display: flex; align-items: center; justify-content: space-between; font-size: ${by}px; font-weight: 300; color: #6b7280; }
   .main { flex: 1; display: flex; flex-direction: column; justify-content: center; }
   h1 { font-size: ${title}px; line-height: 1; font-weight: 500; letter-spacing: -0.03em; }
-  .foot { height: ${foot}px; border-top: 1px solid #e5e7eb; display: flex; align-items: center; justify-content: space-between; font-size: ${by}px; color: #6b7280; }
+  .foot { height: ${foot}px; border-top: 1px solid #e5e7eb; display: flex; align-items: center; justify-content: space-between; font-size: ${by}px; font-weight: 300; color: #6b7280; }
   .foot .by { display: flex; align-items: center; gap: ${Math.round(by * 0.45)}px; font-weight: 300; }
   .foot .by svg { height: ${Math.round(by * 0.95)}px; width: auto; }
 </style></head><body>
