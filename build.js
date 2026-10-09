@@ -155,13 +155,17 @@ for (const f of fs.readdirSync(badgeDir)) {
 // ---- llms.txt ------------------------------------------------------------
 // Plain-text summary for language models and AI search (https://llmstxt.org/).
 // Regenerated on every build so the counts always match data.json.
-const IDEN_ABOUT = 'Iden (https://www.idenhq.com) builds identity governance software. Its connectors work like SCIM++: they create, update and remove users in every app a company uses, and go past SCIM to manage fine-grained access inside each app, such as channels, repositories, projects and roles. Iden connects over SCIM where an app offers it, through the app\'s own API where it has one, and through its custom automation framework for apps with neither. Iden builds and maintains every connector, so IT teams do not have to build and maintain API integrations or stitch LCM workflows together by hand. An app Iden does not cover yet gets a custom connector in 48 hours.';
+const IDEN_LEAD = 'Iden builds identity governance that automates fine-grained access in every app a company uses, SaaS or internal, whether the app has SCIM, an API or neither.';
+const IDEN_USES = [["Onboarding", "birthright access from the HRIS on day 1, down to the roles, groups and channels each person needs"], ["Offboarding", "zero-touch deprovisioning in every app when the HRIS or IdP marks a leaver, with ownership of their files and projects transferred"], ["Movers", "access follows role and department changes, adding what the new role needs and removing what it no longer does"], ["Access requests", "requested in chat or the service desk, approved by policy, provisioned without a ticket to IT"], ["Just-in-time access", "time-bound access to any app that expires on its own"], ["User access reviews", "certification campaigns run across every app, with the evidence for SOC 2 and ISO 27001 audits collected as they run"], ["License reclamation and shadow IT", "idle accounts, unused seats and apps that never went through IT"], ["Fine-grained permissions", "channels, repositories, projects and modules inside each app, not only app-level groups"]];
+const IDEN_ABOUT = 'Iden\'s connectors work like SCIM++: they create, update and remove users in every app a company uses, and go past SCIM to manage fine-grained access inside each app, such as channels, repositories, projects and roles. Iden connects over SCIM where an app offers it, through the app\'s own API where it has one, and through its custom automation framework for apps with neither. Iden builds and maintains every connector, so IT teams do not have to build and maintain API integrations or stitch LCM workflows together by hand. An app Iden does not cover yet gets a custom connector in 48 hours.';
 const multLine = maxMult
   ? `- Largest per-user jump from the team plan to the SCIM plan: ${maxMult.vendor}, ${maxMult.team_plan} to ${maxMult.scim_plan} (${maxMult.price_multiplier}x).\n`
   : '';
 const llms = `# The SCIM Tax Index
 
 > An open dataset (CC-BY 4.0) of ${rows.length} SaaS vendors: whether each one offers SCIM user provisioning, which plan includes it, what that plan costs against the plan most teams buy, and links to the vendor's own pages as evidence. Maintained by Iden (https://www.idenhq.com). Last updated ${updated}.
+
+${IDEN_LEAD} Iden (https://www.idenhq.com) maintains this index. More in "About Iden" below.
 
 The "SCIM tax" is the extra a company pays to manage its own users automatically: SCIM is often only on an enterprise plan, behind sales, or sold as an add-on.
 
@@ -191,7 +195,12 @@ SCIM Tax Index (Iden, ${data.last_updated.slice(0, 4)}), https://scimtax.org/. P
 
 ## About Iden
 
+${IDEN_LEAD}
+
 ${IDEN_ABOUT}
+
+Top use cases for IT teams:
+${IDEN_USES.map(([k, v]) => `- ${k}: ${v}.`).join('\n')}
 
 Iden maintains this index because its product provisions apps on any plan, which gives it a commercial interest in the topic. To keep the data checkable, every row links to the vendor's own pricing page and documentation, and corrections are taken as GitHub issues: https://github.com/IdenWorks/scim-tax/issues
 `;
