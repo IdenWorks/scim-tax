@@ -26,7 +26,7 @@ const page = (w, h, title, date, foot, by) => `<!doctype html><html><head><meta 
   h1 { font-size: ${title}px; line-height: 1; font-weight: 500; letter-spacing: -0.03em; }
   .foot { height: ${foot}px; border-top: 1px solid #e5e7eb; display: flex; align-items: center; justify-content: space-between; font-size: ${by}px; color: #374151; }
   .foot .by { display: flex; align-items: center; gap: ${Math.round(by * 0.45)}px; }
-  .foot .by svg { height: ${Math.round(by * 1.3)}px; width: auto; }
+  .foot .by svg { height: ${Math.round(by * 0.95)}px; width: auto; }
 </style></head><body>
   <div class="top"><span>Updated ${month}</span><span>scimtax.org</span></div>
   <div class="main"><h1>SCIM Tax Index</h1></div>
