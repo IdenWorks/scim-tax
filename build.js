@@ -70,6 +70,11 @@ html = html.replace(/(<div class="stat-n" id="total-count">)[^<]*(<\/div>)/, (m0
 html = html.replace(/(<div class="stat-n" id="gated-share">)[^<]*(<\/div>)/, (m0, a, b) => a + `${gatedShare}%` + b);
 html = html.replace(/(<div class="stat-n" id="free-count">)[^<]*(<\/div>)/, (m0, a, b) => a + `${counts.free}` + b);
 html = html.replace(/(<div class="stat-n" id="changed-count">)[^<]*(<\/div>)/, (m0, a, b) => a + `${changed}` + b);
+// Gated vendors that publish no price at all for the plan that includes SCIM.
+const unpriced = rows.filter((r) => r.status === 'gated' && !/[$€£]\s?\d|USD\s?\d/.test(r.scim_price_text || '')).length;
+html = html.replace(/(<span id="scim-count-inline">)[^<]*(<\/span>)/, (m0, a, b) => a + `${withScim}` + b);
+html = html.replace(/(<span id="gated-count-inline">)[^<]*(<\/span>)/, (m0, a, b) => a + `${counts.gated}` + b);
+html = html.replace(/(<span id="unpriced-count-inline">)[^<]*(<\/span>)/, (m0, a, b) => a + `${unpriced}` + b);
 html = html.replace(/(<span id="vendor-count-inline">)[^<]*(<\/span>)/g, (m0, a, b) => a + `${rows.length}` + b);
 const monthName = (ym) => { const [y, m] = ym.split('-'); return new Date(Date.UTC(+y, +m - 1, 1)).toLocaleString('en-US', { month: 'long', timeZone: 'UTC' }) + ' ' + y; };
 const updated = monthName(data.last_updated);
@@ -83,7 +88,8 @@ if (maxMult) {
   const fmt = maxMult.price_multiplier >= 10 ? Math.round(maxMult.price_multiplier) + 'X' : maxMult.price_multiplier + 'X';
   html = html.replace(/(<div class="stat-n" id="max-mult">)[^<]*(<\/div>)/, (m0, a, b) => a + `${fmt}` + b);
   const money = (n) => '$' + (Number.isInteger(n) ? n.toLocaleString('en-US') : n.toFixed(2));
-  html = html.replace(/(<div class="stat-l" id="max-mult-label">)[^<]*(<\/div>)/, (m0, a, b) => a + `largest per-seat price jump: ${maxMult.vendor} ${maxMult.team_plan} (${money(maxMult.team_price_per_user_mo)}) to ${maxMult.scim_plan} (${money(maxMult.scim_price_per_user_mo)})` + b);
+  const withMult = rows.filter((r) => r.price_multiplier != null && r.status !== 'free').length;
+  html = html.replace(/(<div class="stat-l" id="max-mult-label">)[^<]*(<\/div>)/, (m0, a, b) => a + `largest per-seat jump to the SCIM plan, of ${withMult} vendors with comparable per-seat prices: ${maxMult.vendor} ${maxMult.team_plan} (${money(maxMult.team_price_per_user_mo)}) to ${maxMult.scim_plan} (${money(maxMult.scim_price_per_user_mo)})` + b);
 }
 fs.writeFileSync(htmlPath, html);
 

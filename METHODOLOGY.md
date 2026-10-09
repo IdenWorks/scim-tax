@@ -22,12 +22,12 @@ The dataset moved to schema v3 in September 2026. The full field list with types
 
 1. **Whether SCIM is offered**, or an equivalent automated provisioning protocol (some vendors use proprietary directory sync, JIT, or IdP-specific bridges; we record what is offered, not what we wish was offered).
 2. **The lowest plan that includes SCIM** (`scim_plan`), as listed publicly. If SCIM is sold as an add-on, we record the add-on name and its price separately (`scim_addon_price_text`).
-3. **The price of that SCIM-bearing plan** (`scim_price_text` for the human-readable string, `scim_price_per_user_mo` for the normalized per-user-per-month numeric where possible). In US dollars, annual billing, publicly listed where available. If gated behind Contact Sales, we record "Contact Sales". Third-party price estimates are not recorded.
+3. **The price of that SCIM-bearing plan** (`scim_price_text` for the human-readable string, `scim_price_per_user_mo` for the normalized per-user-per-month numeric where possible). As the vendor publishes it, in US dollars where listed and usually on annual billing. If gated behind Contact Sales, we record "Contact Sales". Third-party price estimates are not recorded.
 4. **The standard plan** (`team_plan`, `team_price_text`, `team_price_per_user_mo`; the "Standard Plan" column on the site): the cheapest paid plan that more than one person can use. This is what a typical small or mid team would default to.
 5. **The SSO Plan** (`sso_plan`, `sso_price_per_user_mo`): the lowest plan that includes SAML or OIDC single sign-on. Many vendors put SSO one tier below SCIM, and that gap is where most of the SCIM tax sits. New in v3.
 6. **A price-jump multiplier** (`price_multiplier`): the ratio of `scim_price_per_user_mo / team_price_per_user_mo`, rounded to one decimal. Null where either side is non-numeric (Contact Sales, per-host pricing, MAU-based pricing, etc.).
 7. **Seat minimums and prerequisites** (`min_seats`, `sso_required_for_scim`): the gates behind the gate, when the vendor publishes them. New in v3.
-8. **What the SCIM endpoint does** (`scim_ops`: create, update, deactivate, delete, groups) and **which identity providers are supported** (`idp`: Okta, Entra ID, Google Workspace, OneLogin, JumpCloud, and whether a generic SCIM 2.0 endpoint exists). Both come from the vendor's own documentation only; where the docs are silent the value is null, never assumed. New in v3.
+8. **What the SCIM endpoint does** (`scim_ops`: create, update, deactivate, delete, groups) and **which identity providers are supported** (`idp`: Okta, Entra ID, Google Workspace, OneLogin, JumpCloud, and whether a generic SCIM 2.0 endpoint exists). Operations come from the vendor's own documentation; identity-provider support comes from the vendor's documentation and the identity provider's own catalogue pages. Where the pages are silent the value is null, never assumed. New in v3.
 9. **Evidence**: a direct URL to the pricing page (`pricing_page_url`), a URL to the SCIM documentation where one exists (`docs_url`), and one sentence quoted or closely paraphrased from those pages (`evidence`) that supports the status. New in v3.
 10. **A category** from a fixed list of 21 ([research/2026-09/CATEGORIES.md](research/2026-09/CATEGORIES.md)), so category-level statistics are comparable. New in v3.
 11. **Edge-case notes** (`notes`) explaining flat pricing, per-device pricing, IdP restrictions on SCIM, add-on-on-top-of-add-on patterns, and similar non-uniform shapes.
@@ -49,10 +49,10 @@ We avoid promoting "Unknown" rows into "Gated" rows. If a vendor refuses to publ
 
 ## Pricing rules
 
-- Prices are publicly listed prices, US dollars, on annual billing, as of the data timestamp.
+- Prices are the vendor's publicly listed prices as of the data timestamp, usually on annual billing.
 - Where a vendor lists multiple currencies, we use the USD price.
-- Where a vendor only lists a non-USD price (for example, some EU-only vendors), we keep the original currency and flag it.
-- For consumption-priced vendors (Snowflake, Twilio), we record the relevant unit price rather than a flat plan price.
+- Where a vendor only lists a non-USD price (for example, some EU-only vendors), we keep the original currency (10 price fields in the October 2026 release are in euros or pounds).
+- For usage-priced vendors (for example Snowflake), we record the pricing basis instead of a per-seat price, and no multiplier is computed.
 - For add-ons, we record the add-on price separately from the base plan price.
 
 ## Update cadence
