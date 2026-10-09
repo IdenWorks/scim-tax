@@ -14,7 +14,8 @@ const ROOT = path.join(__dirname, '..');
 const data = JSON.parse(fs.readFileSync(path.join(ROOT, 'data.json'), 'utf8'));
 const [y, m] = data.last_updated.split('-');
 const month = new Date(Date.UTC(+y, +m - 1, 1)).toLocaleString('en-US', { month: 'short', timeZone: 'UTC' }) + ' ' + y;
-const logo = fs.readFileSync(path.join(__dirname, 'iden-logo.svg'), 'utf8').replace(/width="\d+" height="\d+"/, 'height="32"');
+const logo = fs.readFileSync(path.join(__dirname, 'iden-logo.svg'), 'utf8').replace(/width="\d+" height="\d+"/, 'height="32"')
+  .replace(/fill="#404040"/g, 'fill="currentColor"'); // logo takes the text colour
 
 const page = (w, h, title, date, foot, by) => `<!doctype html><html><head><meta charset="utf-8">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
@@ -24,7 +25,7 @@ const page = (w, h, title, date, foot, by) => `<!doctype html><html><head><meta 
   .top { height: ${foot}px; display: flex; align-items: center; justify-content: space-between; font-size: ${date}px; color: #6b7280; }
   .main { flex: 1; display: flex; flex-direction: column; justify-content: center; }
   h1 { font-size: ${title}px; line-height: 1; font-weight: 500; letter-spacing: -0.03em; }
-  .foot { height: ${foot}px; border-top: 1px solid #e5e7eb; display: flex; align-items: center; justify-content: space-between; font-size: ${by}px; color: #374151; }
+  .foot { height: ${foot}px; border-top: 1px solid #e5e7eb; display: flex; align-items: center; justify-content: space-between; font-size: ${by}px; color: #6b7280; }
   .foot .by { display: flex; align-items: center; gap: ${Math.round(by * 0.45)}px; }
   .foot .by svg { height: ${Math.round(by * 0.95)}px; width: auto; }
 </style></head><body>
