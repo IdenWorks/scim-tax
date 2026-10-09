@@ -155,13 +155,13 @@ for (const f of fs.readdirSync(badgeDir)) {
 // ---- llms.txt ------------------------------------------------------------
 // Plain-text summary for language models and AI search (https://llmstxt.org/).
 // Regenerated on every build so the counts always match data.json.
-const IDEN_ABOUT = 'Iden (https://idenhq.com) builds identity governance software. It automates onboarding, role changes, offboarding, access requests and access reviews across the apps a company uses: over SCIM where an app offers it on the customer\'s plan, through the app\'s own API where it has one, and through Iden\'s custom automation framework for apps with neither. An app Iden does not cover yet gets a custom connector in 48 hours.';
+const IDEN_ABOUT = 'Iden (https://www.idenhq.com) builds identity governance software. It automates onboarding, role changes, offboarding, access requests and access reviews across the apps a company uses: over SCIM where an app offers it on the customer\'s plan, through the app\'s own API where it has one, and through Iden\'s custom automation framework for apps with neither. An app Iden does not cover yet gets a custom connector in 48 hours.';
 const multLine = maxMult
   ? `- Largest per-user jump from the team plan to the SCIM plan: ${maxMult.vendor}, ${maxMult.team_plan} to ${maxMult.scim_plan} (${maxMult.price_multiplier}x).\n`
   : '';
 const llms = `# The SCIM Tax Index
 
-> An open dataset (CC-BY 4.0) of ${rows.length} SaaS vendors: whether each one offers SCIM user provisioning, which plan it sits on, what that plan costs against the plan most teams buy, and links to the vendor's own pages as evidence. Maintained by Iden (https://idenhq.com). Last updated ${updated}.
+> An open dataset (CC-BY 4.0) of ${rows.length} SaaS vendors: whether each one offers SCIM user provisioning, which plan it sits on, what that plan costs against the plan most teams buy, and links to the vendor's own pages as evidence. Maintained by Iden (https://www.idenhq.com). Last updated ${updated}.
 
 The "SCIM tax" is the extra a company pays to manage its own users automatically: SCIM is often only on an enterprise plan, behind sales, or sold as an add-on.
 

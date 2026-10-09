@@ -65,7 +65,7 @@ All changes need a public source URL. Private quotes are not accepted.
 
 ## Why we made this
 
-We are [Iden](https://idenhq.com). We build identity governance software: it automates onboarding, role changes, offboarding, access requests and access reviews across a company's apps, over SCIM where an app offers it, through the app's API where it has one, and through our custom automation framework for apps with neither. An app we do not cover yet gets a custom connector in 48 hours. We have a commercial interest in seeing the SCIM tax discussed in the open. We do not have a commercial interest in skewing the dataset, and the data is auditable against the linked pricing pages on every row.
+We are [Iden](https://www.idenhq.com). We build identity governance software: it automates onboarding, role changes, offboarding, access requests and access reviews across a company's apps, over SCIM where an app offers it, through the app's API where it has one, and through our custom automation framework for apps with neither. An app we do not cover yet gets a custom connector in 48 hours. We have a commercial interest in seeing the SCIM tax discussed in the open. We do not have a commercial interest in skewing the dataset, and the data is auditable against the linked pricing pages on every row.
 
 If you find a row that misrepresents a vendor, open an issue. We will fix it.
 
