@@ -78,6 +78,13 @@ for fx in plan['rule_fixes']:
 
 # 2. slugs, removals, duplicates
 drop = set(plan['remove']['discontinued'])
+# Duplicates found after the plan was written: (kept slug, dropped slug, reason)
+EXTRA_MERGES = [
+    ('athenahealth', 'athenaone', 'same product: athenaOne is athenahealth\'s suite; Okta evidence folded into athenahealth'),
+]
+for keep, gone, _why in EXTRA_MERGES:
+    if keep in rows:
+        drop.add(gone)
 for group in plan['remove']['merge']:
     present = [s for s in group if s in rows or rename.get(s, s) in rows]
     keep = group[0] if group[0] in rows else None  # a group whose first slug is absent folds into a product outside the index

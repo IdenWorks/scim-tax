@@ -9,7 +9,7 @@ An open dataset of SaaS vendor SCIM (user provisioning) availability and pricing
 
 ## What this is
 
-SCIM (System for Cross-domain Identity Management) is the protocol IT teams use to automate user provisioning and deprovisioning across the SaaS stack. Most SaaS vendors support it. Most lock it behind an Enterprise plan or a paid add-on. This dataset surveys 850 of the most-deployed SaaS apps to document who gates SCIM and what it costs.
+SCIM (System for Cross-domain Identity Management) is the protocol IT teams use to automate user provisioning and deprovisioning across the SaaS stack. Most SaaS vendors support it. Most lock it behind an Enterprise plan or a paid add-on. This dataset surveys 849 of the most-deployed SaaS apps to document who gates SCIM and what it costs.
 
 The result is sometimes called the "SCIM tax": the systematic premium paid across a SaaS portfolio for the right to manage your own users.
 

@@ -58,7 +58,7 @@ We avoid promoting "Unknown" rows into "Gated" rows. If a vendor refuses to publ
 
 ## Update cadence
 
-The dataset was first published in April 2026, refreshed in June 2026, and expanded to 850 vendors and re-verified in October 2026 (the 2026-09 refresh). The next scheduled refresh is Q1 2027. Year-over-year changes will be published in the changelog: which vendors removed the SCIM gate, which added one, which raised the price.
+The dataset was first published in April 2026, refreshed in June 2026, and expanded to 849 vendors and re-verified in October 2026 (the 2026-09 refresh). The next scheduled refresh is Q1 2027. Year-over-year changes will be published in the changelog: which vendors removed the SCIM gate, which added one, which raised the price.
 
 In between scheduled refreshes, individual entries can be corrected via GitHub issue or pull request. See [README.md](README.md).
 
