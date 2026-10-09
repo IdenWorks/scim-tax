@@ -583,7 +583,24 @@
       font: inherit; font-size: 12px; color: var(--n700); background: var(--white);
       border: 1px solid var(--n300); padding: 6px 8px; max-width: 220px;
     }
-    .sso-cell { font-size: 12.5px; color: var(--n700); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .plan-cell .sso-diff {
+      text-decoration: underline dotted var(--n400);
+      text-underline-offset: 3px;
+      cursor: help;
+    }
+    .plan-cell .sso-diff:hover, .plan-cell .sso-diff:focus-visible { text-decoration-color: var(--black); outline: none; }
+    .sso-tip {
+      position: fixed;
+      z-index: 50;
+      max-width: 320px;
+      background: var(--black);
+      color: var(--white);
+      padding: 6px 9px;
+      font-size: 11.5px;
+      line-height: 1.45;
+      white-space: pre-line;
+      pointer-events: none;
+    }
     .changed {
       display: inline-block; font-size: 10px; letter-spacing: .02em; text-transform: uppercase;
       color: var(--n700); border: 1px solid var(--n300); padding: 0 4px; margin-left: 4px; vertical-align: middle;
@@ -696,10 +713,9 @@
         <table id="vendor-table">
           <thead>
             <tr>
-              <th data-col="0" style="width: 23%">Vendor</th>
-              <th data-col="2" style="width: 27%">SCIM Plan</th>
-              <th data-col="13" style="width: 18%" title="Lowest plan that includes SAML or OIDC single sign-on">SSO Plan</th>
-              <th data-col="4" style="width: 23%">Team Plan</th>
+              <th data-col="0" style="width: 26%">Vendor</th>
+              <th data-col="2" style="width: 35%" title="Dotted underline: single sign-on sits on a different plan. Hover to see it.">SCIM Plan</th>
+              <th data-col="4" style="width: 30%">Team Plan</th>
               <th class="mult-col" style="width: 9%">Jump</th>
             </tr>
           </thead>
@@ -1725,33 +1741,37 @@ function multCell(r) {
   return `<span class="mult-green">${fmt}</span>`;
 }
 
+// SSO and SCIM on different plans, ignoring naming noise such as
+// "Acrobat for enterprise" vs "Acrobat for enterprise (Document Cloud for enterprise)".
+function planKey(p) {
+  return p.toLowerCase().replace(/\(.*?\)/g, '')
+    .replace(/\b(plan|plans|tier|edition|editions|add-on|addon|package|packages|all|any|and up|or higher|from)\b/g, '')
+    .replace(/[^a-z0-9]+/g, ' ').trim();
+}
+function ssoDiffers(r) {
+  const scim = r[2], sso = r[13];
+  if (!sso || !scim || scim.trim().startsWith('—') || !['free', 'gated', 'partial'].includes(r[1])) return false;
+  const a = planKey(sso), b = planKey(scim);
+  return !(a === b || (a && scim.toLowerCase().includes(a)) || (b && sso.toLowerCase().includes(b)));
+}
+
 function scimPlanCell(r) {
   const plan = r[2], price = r[3];
   const noPlan = !plan || plan.trim().startsWith('—');
   if (noPlan) return `<span class="price-contact">—</span>`;
+  const name = ssoDiffers(r)
+    ? `<span class="plan-name sso-diff" tabindex="0" data-sso="${attrEsc(scimPlanText(r) + '\nSSO: ' + r[13] + (r[14] != null ? ` ($${r[14]}/u/mo)` : ''))}">${plan}</span>`
+    : `<span class="plan-name">${plan}</span>`;
   const noPrice = !price || price === '—';
-  if (noPrice) return `<span class="plan-name">${plan}</span>`;
-  return `<span class="plan-name">${plan}</span><span class="plan-sep">:</span>${priceCell(price)}`;
+  if (noPrice) return name;
+  return `${name}<span class="plan-sep">:</span>${priceCell(price)}`;
 }
 
 function scimPlanText(r) {
   const plan = r[2], price = r[3];
   if (!plan || plan.trim().startsWith('—')) return '';
-  if (!price || price === '—') return plan;
-  return `${plan}: ${price}`;
-}
-
-function ssoPlanText(r) {
-  const plan = r[13];
-  if (!plan) return '';
-  return r[14] != null ? `${plan}: $${r[14]}/u/mo` : plan;
-}
-
-function ssoPlanCell(r) {
-  const plan = r[13];
-  if (!plan) return `<span class="price-contact">—</span>`;
-  if (r[14] == null) return `<span class="plan-name">${plan}</span>`;
-  return `<span class="plan-name">${plan}</span><span class="plan-sep">:</span><span class="price-cell">$${r[14]}/u/mo</span>`;
+  if (!price || price === '—') return `SCIM: ${plan}`;
+  return `SCIM: ${plan}, ${price}`;
 }
 
 let currentCategory = '';
@@ -1811,7 +1831,7 @@ function render() {
   const meta = document.getElementById('results-meta');
 
   if (ordered.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="5" class="empty">No vendors match your search.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="4" class="empty">No vendors match your search.</td></tr>`;
     meta.textContent = '';
     return;
   }
@@ -1834,8 +1854,7 @@ function render() {
           </a>
         </span>
       </td>
-      <td class="plan-cell" title="${attrEsc(scimPlanText(r))}">${scimPlanCell(r)}</td>
-      <td class="sso-cell" title="${attrEsc(ssoPlanText(r))}">${ssoPlanCell(r)}</td>
+      <td class="plan-cell"${ssoDiffers(r) ? '' : ` title="${attrEsc(scimPlanText(r))}"`}>${scimPlanCell(r)}</td>
       <td class="base-cell" title="${attrEsc(r[4] && r[4] !== '—' ? r[4] : '')}">${priceCell(r[4])}</td>
       <td class="mult-col">${multCell(r)}</td>
     </tr>
@@ -1970,6 +1989,26 @@ document.querySelectorAll('[data-copy]').forEach(btn => {
 // Row lookup by slug (badge copy button)
 const BY_SLUG = {};
 V.forEach(r => { BY_SLUG[slug(r[0])] = r; });
+
+// SSO plan tooltip on the SCIM plan name (hover, keyboard focus, or tap)
+(function ssoTooltip() {
+  const tip = document.createElement('div');
+  tip.className = 'sso-tip'; tip.setAttribute('role', 'tooltip'); tip.hidden = true;
+  document.body.appendChild(tip);
+  const show = (el) => {
+    tip.textContent = el.dataset.sso; tip.hidden = false;
+    const r = el.getBoundingClientRect(), t = tip.getBoundingClientRect();
+    tip.style.left = Math.max(8, Math.min(r.left, window.innerWidth - t.width - 8)) + 'px';
+    tip.style.top = (r.top - t.height - 8 < 8 ? r.bottom + 8 : r.top - t.height - 8) + 'px';
+  };
+  const hide = () => { tip.hidden = true; };
+  const tbody = document.getElementById('tbody');
+  tbody.addEventListener('mouseover', (e) => { const el = e.target.closest('.sso-diff'); if (el) show(el); });
+  tbody.addEventListener('mouseout', (e) => { if (e.target.closest('.sso-diff')) hide(); });
+  tbody.addEventListener('focusin', (e) => { const el = e.target.closest('.sso-diff'); if (el) show(el); });
+  tbody.addEventListener('focusout', hide);
+  window.addEventListener('scroll', hide, { passive: true });
+})();
 
 // Init
 updateCounts();
