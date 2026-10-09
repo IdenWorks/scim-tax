@@ -21,19 +21,20 @@ const page = (w, h, title, date, foot) => `<!doctype html><html><head><meta char
 <style>
   * { box-sizing: border-box; margin: 0; }
   body { width: ${w}px; height: ${h}px; background: #fff; color: #0f0f0f; font-family: 'Inter', sans-serif; padding: 0 72px; display: flex; flex-direction: column; }
-  .main { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 20px; }
+  .top { height: ${foot}px; display: flex; align-items: center; font-size: ${date}px; color: #6b7280; }
+  .main { flex: 1; display: flex; flex-direction: column; justify-content: center; }
   h1 { font-size: ${title}px; line-height: 1; font-weight: 500; letter-spacing: -0.03em; }
-  .date { font-size: ${date}px; color: #6b7280; }
   .foot { height: ${foot}px; border-top: 1px solid #e5e7eb; display: flex; align-items: center; justify-content: space-between; font-size: 26px; color: #6b7280; }
   .foot .by { display: flex; align-items: center; gap: 14px; }
 </style></head><body>
-  <div class="main"><h1>SCIM Tax Index</h1><p class="date">${month}</p></div>
+  <div class="top">Updated ${month}</div>
+  <div class="main"><h1>SCIM Tax Index</h1></div>
   <div class="foot"><span>scimtax.org</span><span class="by">Maintained by ${logo}</span></div>
 </body></html>`;
 
 const SIZES = [
-  ['og.png', page(1200, 630, 96, 32, 112)],
-  ['og-square.png', page(1200, 1200, 132, 40, 150)],
+  ['og.png', page(1200, 630, 104, 26, 112)],
+  ['og-square.png', page(1200, 1200, 140, 30, 150)],
 ];
 
 (async () => {
