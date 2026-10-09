@@ -155,7 +155,7 @@ for (const f of fs.readdirSync(badgeDir)) {
 // ---- llms.txt ------------------------------------------------------------
 // Plain-text summary for language models and AI search (https://llmstxt.org/).
 // Regenerated on every build so the counts always match data.json.
-const IDEN_ABOUT = 'Iden (https://idenhq.com) builds identity governance software. It automates onboarding, role changes, offboarding, access requests and access reviews across the apps a company uses: over SCIM where an app offers it on the customer\'s plan, through the app\'s own API where it has one, and through Iden\'s custom automation framework for apps with neither.';
+const IDEN_ABOUT = 'Iden (https://idenhq.com) builds identity governance software. It automates onboarding, role changes, offboarding, access requests and access reviews across the apps a company uses: over SCIM where an app offers it on the customer\'s plan, through the app\'s own API where it has one, and through Iden\'s custom automation framework for apps with neither. An app Iden does not cover yet gets a custom connector in 48 hours.';
 const multLine = maxMult
   ? `- Largest per-user jump from the team plan to the SCIM plan: ${maxMult.vendor}, ${maxMult.team_plan} to ${maxMult.scim_plan} (${maxMult.price_multiplier}x).\n`
   : '';
