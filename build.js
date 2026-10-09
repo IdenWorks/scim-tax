@@ -89,7 +89,7 @@ if (maxMult) {
   html = html.replace(/(<div class="stat-n" id="max-mult">)[^<]*(<\/div>)/, (m0, a, b) => a + `${fmt}` + b);
   const money = (n) => '$' + (Number.isInteger(n) ? n.toLocaleString('en-US') : n.toFixed(2));
   const withMult = rows.filter((r) => r.price_multiplier != null && r.status !== 'free').length;
-  html = html.replace(/(<div class="stat-l" id="max-mult-label">)[^<]*(<\/div>)/, (m0, a, b) => a + `largest per-seat jump to the SCIM plan, of ${withMult} vendors with comparable per-seat prices` + b);
+  html = html.replace(/(<div class="stat-l" id="max-mult-label">)[^<]*(<\/div>)/, (m0, a, b) => a + `largest per-seat jump to SCIM, among ${withMult} comparable vendors` + b);
 }
 fs.writeFileSync(htmlPath, html);
 
