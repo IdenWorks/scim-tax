@@ -9,6 +9,7 @@
 - Rules applied in this release (see `DEEP_SCHEMA.md`): No Tax needs a page that names the plan; provisioning through a vendor's own non-SCIM API, outbound-only SCIM and sign-in-only account creation do not count as SCIM; quote-only vendors that document SCIM are Gated at low confidence, with notes starting "Quote-only" (67 rows).
 - Removed: Multi, Pivotal Tracker and Rows (discontinued). Merged: Codeium into Devin, Salesloft into Drift (Salesloft), Toggl Plan into Toggl Track.
 - Shopify's 79x is gone: Shopify prices per store, not per user, so no per-user multiplier is computed. Largest per-user jump is now HubSpot at 12.9x.
+- The Jump column and the calculator now use the normalised per-user prices in `data.json` instead of re-reading the price text, which misread flat team prices (1Password's "$24.95/mo for 10 members" showed as 0.4x instead of 3.6x). Rows without two comparable per-user prices show no Jump.
 - IdP catalogue apps that provision through a vendor API, a vendor-run directory sync or a third-party connector have no value in the v3 `idp` enum, so they are `null` in `data.json`. The research files keep the detail.
 - Known gaps: 15 vendors blocked automated checks and are marked for a manual re-check; 72 quotes across 21 vendors were not re-found and are listed in `research/2026-09/run/RECHECK_QUOTES.txt`.
 
