@@ -4,12 +4,12 @@ An open dataset of SaaS vendor SCIM (user provisioning) availability and pricing
 
 **Live site:** https://scimtax.org/
 **License:** [CC-BY 4.0](LICENSE)
-**Last updated:** April 2026
+**Last updated:** October 2026
 **Next update:** Q1 2027
 
 ## What this is
 
-SCIM (System for Cross-domain Identity Management) is the protocol IT teams use to automate user provisioning and deprovisioning across the SaaS stack. Most SaaS vendors support it. Most lock it behind an Enterprise plan or a paid add-on. This dataset surveys ~300 of the most-deployed SaaS apps to document who gates SCIM and what it costs.
+SCIM (System for Cross-domain Identity Management) is the protocol IT teams use to automate user provisioning and deprovisioning across the SaaS stack. Most SaaS vendors support it. Most lock it behind an Enterprise plan or a paid add-on. This dataset surveys 850 of the most-deployed SaaS apps to document who gates SCIM and what it costs.
 
 The result is sometimes called the "SCIM tax": the systematic premium paid across a SaaS portfolio for the right to manage your own users.
 
@@ -21,7 +21,7 @@ The result is sometimes called the "SCIM tax": the systematic premium paid acros
 | `data.csv` | The same dataset flattened to CSV. Generated. CC-BY 4.0. |
 | `index.html` | The published site. Generated table, otherwise hand-written. |
 | `badge/{slug}.svg` | One embeddable status badge per vendor, plus `badge/index.json`. Generated. |
-| `research/2026-09/` | Schema v3 definition, category list, and the merge script used for the September 2026 refresh. |
+| `research/2026-09/` | Schema v3 definition, the merge scripts, and one research file per vendor (`vendors/{slug}.json`) with SCIM and user-API depth and a citation for every fact. |
 | `METHODOLOGY.md` | How vendors were selected and how each row was recorded. |
 | `LICENSE` | CC-BY 4.0 terms. |
 | `CHANGELOG.md` | Version-to-version changes. |
