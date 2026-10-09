@@ -664,8 +664,6 @@
       white-space: pre-line;
       pointer-events: none;
     }
-    .badge-copy { background: none; border: 0; padding: 0; cursor: pointer; color: inherit; }
-    .badge-copy.copied { color: #16a34a; }
   </style>
 </head>
 <body>
@@ -1906,8 +1904,6 @@ function render() {
         <span class="vendor-row">
           <a href="${r[5]}" target="_blank" rel="noopener">${r[0]}</a>
           <span class="dot dot-${r[1]}" data-tip="${STATUS_TIP[r[1]] || ''}"></span>
-          ${r[15] ? `<a class="row-link" href="${r[15]}" target="_blank" rel="noopener" title="SCIM documentation"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></a>` : ''}
-          <button type="button" class="row-link badge-copy" data-badge="${s}" title="Copy badge embed"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="8" rx="1"/><path d="M7 12h4"/></svg></button>
           <a class="row-link" href="${r[5]}" target="_blank" rel="noopener" title="Open pricing page">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
           </a>
@@ -1958,20 +1954,6 @@ document.getElementById('search').addEventListener('input', e => {
   if (cats.length === 0) sel.hidden = true;
   sel.addEventListener('change', () => { currentCategory = sel.value; render(); });
 })();
-
-// Badge embed copy (per row)
-document.getElementById('tbody').addEventListener('click', (e) => {
-  const btn = e.target.closest('.badge-copy');
-  if (!btn) return;
-  const s = btn.dataset.badge;
-  const r = BY_SLUG[s];
-  if (!r) return;
-  const alt = `${r[0]}: ${STATUS_LABEL[r[1]]}`;
-  const markup = `<a href="https://scimtax.org/#v-${s}"><img src="https://scimtax.org/badge/${s}.svg" alt="${alt}"></a>`;
-  copyToClipboard(markup, null);
-  btn.classList.add('copied');
-  setTimeout(() => btn.classList.remove('copied'), 1200);
-});
 
 // Filters
 document.getElementById('filters').addEventListener('click', e => {
@@ -2044,10 +2026,6 @@ document.querySelectorAll('[data-copy]').forEach(btn => {
     copyToClipboard(el.textContent.trim(), btn);
   });
 });
-
-// Row lookup by slug (badge copy button)
-const BY_SLUG = {};
-V.forEach(r => { BY_SLUG[slug(r[0])] = r; });
 
 // SSO plan tooltip on the SCIM plan name (hover, keyboard focus, or tap)
 (function ssoTooltip() {
