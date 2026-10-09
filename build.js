@@ -73,7 +73,8 @@ html = html.replace(/(<div class="stat-n" id="changed-count">)[^<]*(<\/div>)/, (
 html = html.replace(/(<span id="vendor-count-inline">)[^<]*(<\/span>)/g, (m0, a, b) => a + `${rows.length}` + b);
 const monthName = (ym) => { const [y, m] = ym.split('-'); return new Date(Date.UTC(+y, +m - 1, 1)).toLocaleString('en-US', { month: 'long', timeZone: 'UTC' }) + ' ' + y; };
 const updated = monthName(data.last_updated);
-html = html.replace(/(<span id="last-updated">)[^<]*(<\/span>)/, (m0, a, b) => a + `${updated}` + b);
+const shortMonth = (ym) => { const [y, m] = ym.split('-'); return new Date(Date.UTC(+y, +m - 1, 1)).toLocaleString('en-US', { month: 'short', timeZone: 'UTC' }) + ' ' + y; };
+html = html.replace(/(<span id="last-updated">)[^<]*(<\/span>)/, (m0, a, b) => a + shortMonth(data.last_updated) + b);
 html = html.replace(/(<span id="data-timestamp">)[^<]*(<\/span>)/, (m0, a, b) => a + `${updated}` + b);
 html = html.replace(/~?\d{3,4} SaaS vendors/g, () => `${rows.length} SaaS vendors`);
 html = html.replace(/"dateModified": "\d{4}-\d{2}"/, () => `"dateModified": "${data.last_updated}"`);
