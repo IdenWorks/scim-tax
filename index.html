@@ -301,6 +301,7 @@
       color: var(--n500);
       line-height: 1.5;
       margin-top: 6px;
+      max-width: 34ch; /* every label wraps to 2 lines, however wide the card */
     }
 
     /* ─── Section labels (eyebrow) ──────────── */
@@ -633,17 +634,23 @@
     footer a:hover { color: var(--black); text-decoration: underline; }
 
     /* ─── Responsive ────────────────────────── */
-    @media (max-width: 700px) {
+    /* Tablets: 2 cards per row, so each label stays within 2 lines. */
+    @media (max-width: 1200px) {
       .stats { grid-template-columns: repeat(2, 1fr); }
       .stat:nth-child(2n) { border-right: none; }
       .stat:nth-child(-n+2) { border-bottom: 1px solid var(--n200); }
     }
+    @media (max-width: 700px) {
+      .cite-grid { grid-template-columns: 1fr; }
+    }
     /* Phones: one card per row so each label stays within 2 lines. */
-    @media (max-width: 500px) {
+    @media (max-width: 600px) {
       .stats { grid-template-columns: 1fr; }
       .stat { border-right: none; border-bottom: 1px solid var(--n200); }
       .stat:last-child { border-bottom: none; }
-      .cite-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 360px) {
+      .stat { padding: 16px 14px; }
     }
     /* Phones: the table fits the screen. Text wraps instead of overflowing, and the
        column widths are set here because the desktop ones leave too little room. */
@@ -722,7 +729,7 @@
         </div>
         <div class="stat">
           <div class="stat-n" id="gated-share">84%</div>
-          <div class="stat-l">of vendors with SCIM charge extra for it</div>
+          <div class="stat-l">of vendors with SCIM charge extra for it: a higher plan, add-on or sales call</div>
         </div>
         <div class="stat">
           <div class="stat-n" id="max-mult">13X</div>
