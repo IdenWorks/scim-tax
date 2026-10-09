@@ -161,7 +161,7 @@ const multLine = maxMult
   : '';
 const llms = `# The SCIM Tax Index
 
-> An open dataset (CC-BY 4.0) of ${rows.length} SaaS vendors: whether each one offers SCIM user provisioning, which plan it sits on, what that plan costs against the plan most teams buy, and links to the vendor's own pages as evidence. Maintained by Iden (https://www.idenhq.com). Last updated ${updated}.
+> An open dataset (CC-BY 4.0) of ${rows.length} SaaS vendors: whether each one offers SCIM user provisioning, which plan includes it, what that plan costs against the plan most teams buy, and links to the vendor's own pages as evidence. Maintained by Iden (https://www.idenhq.com). Last updated ${updated}.
 
 The "SCIM tax" is the extra a company pays to manage its own users automatically: SCIM is often only on an enterprise plan, behind sales, or sold as an add-on.
 
@@ -193,7 +193,7 @@ SCIM Tax Index (Iden, ${data.last_updated.slice(0, 4)}), https://scimtax.org/. P
 
 ${IDEN_ABOUT}
 
-Iden maintains this index because the SCIM tax is the gap its product closes, so it has a commercial interest in the topic. To keep the data checkable, every row links to the vendor's own pricing page and documentation, and corrections are taken as GitHub issues: https://github.com/IdenWorks/scim-tax/issues
+Iden maintains this index because its product provisions apps on any plan, which gives it a commercial interest in the topic. To keep the data checkable, every row links to the vendor's own pricing page and documentation, and corrections are taken as GitHub issues: https://github.com/IdenWorks/scim-tax/issues
 `;
 fs.writeFileSync(path.join(ROOT, 'llms.txt'), llms);
 
