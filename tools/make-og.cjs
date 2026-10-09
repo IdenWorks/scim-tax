@@ -30,7 +30,7 @@ const page = (w, h, title, date, foot, by) => `<!doctype html><html><head><meta 
 </style></head><body>
   <div class="top"><span>Updated ${month}</span><span>scimtax.org</span></div>
   <div class="main"><h1>SCIM Tax Index</h1></div>
-  <div class="foot"><span></span><span class="by">Maintained by ${logo}</span></div>
+  <div class="foot"><span class="by">Maintained by ${logo}</span></div>
 </body></html>`;
 
 const SIZES = [
