@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Renders the share-preview images for scimtax.org from data.json (the date):
-//   og.png         1200x630, the og:image for link previews
-//   og-square.png  1200x1200, for profiles and posts that want a square
+//   og.png         1200x630 layout rendered at 2x (2400x1260), the og:image for link previews
+//   og-square.png  1200x1200 layout rendered at 2x (2400x2400), for profiles and posts that want a square
 // Run after a data refresh, alongside build.js. Needs Playwright and a local Chrome:
 //   PW_PATH=/path/to/node_modules/playwright node tools/make-og.cjs
 // (PW_PATH is optional when `playwright` resolves from this directory.)
@@ -43,7 +43,7 @@ const SIZES = [
   const browser = await chromium.launch({ headless: true, channel: process.env.PW_CHANNEL || 'chrome' });
   for (const [file, html] of SIZES) {
     const [w, h] = html.match(/width: (\d+)px; height: (\d+)px/).slice(1).map(Number);
-    const p = await browser.newPage({ viewport: { width: w, height: h }, deviceScaleFactor: 1 });
+    const p = await browser.newPage({ viewport: { width: w, height: h }, deviceScaleFactor: 2 });
     await p.setContent(html, { waitUntil: 'networkidle' });
     await p.evaluate(() => document.fonts.ready);
     await p.screenshot({ path: path.join(ROOT, file) });
